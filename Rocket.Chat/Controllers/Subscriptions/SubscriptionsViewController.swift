@@ -132,43 +132,46 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupServerButton() {
         if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
+            let imageViewServer = UIImageView()
+
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                let imageViewServer = UIImageView()
                 imageViewServer.sd_setImage(with: imageURL)
+            } else {
+                imageViewServer.image = UIImage(named: "User")
+            }
 
-                if #available(iOS 11.0, *) {
-                    let buttonView = UIView()
-                    imageViewServer.translatesAutoresizingMaskIntoConstraints = false
-                    buttonView.addSubview(imageViewServer)
+            if #available(iOS 11.0, *) {
+                let buttonView = UIView()
+                imageViewServer.translatesAutoresizingMaskIntoConstraints = false
+                buttonView.addSubview(imageViewServer)
 
-                    let views = ["imageView": imageViewServer]
-                    buttonView.addConstraints(NSLayoutConstraint.constraints(
-                        withVisualFormat: "H:|-[imageView(25)]-|",
-                        options: .alignAllCenterX,
-                        metrics: nil,
-                        views: views)
-                    )
+                let views = ["imageView": imageViewServer]
+                buttonView.addConstraints(NSLayoutConstraint.constraints(
+                    withVisualFormat: "H:|-[imageView(25)]-|",
+                    options: .alignAllCenterX,
+                    metrics: nil,
+                    views: views)
+                )
 
-                    buttonView.addConstraints(NSLayoutConstraint.constraints(
-                        withVisualFormat: "V:|-[imageView(25)]-|",
-                        options: .alignAllCenterY,
-                        metrics: nil,
-                        views: views)
-                    )
+                buttonView.addConstraints(NSLayoutConstraint.constraints(
+                    withVisualFormat: "V:|-[imageView(25)]-|",
+                    options: .alignAllCenterY,
+                    metrics: nil,
+                    views: views)
+                )
 
-                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
-                    buttonView.addGestureRecognizer(tapGesture)
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+                buttonView.addGestureRecognizer(tapGesture)
 
-                    let buttonServer = UIBarButtonItem(customView: buttonView)
-                    navigationItem.leftBarButtonItem = buttonServer
-                } else {
-                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
-                    imageViewServer.addGestureRecognizer(tapGesture)
+                let buttonServer = UIBarButtonItem(customView: buttonView)
+                navigationItem.leftBarButtonItem = buttonServer
+            } else {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+                imageViewServer.addGestureRecognizer(tapGesture)
 
-                    imageViewServer.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-                    let buttonServer = UIBarButtonItem(customView: imageViewServer)
-                    navigationItem.leftBarButtonItem = buttonServer
-                }
+                imageViewServer.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+                let buttonServer = UIBarButtonItem(customView: imageViewServer)
+                navigationItem.leftBarButtonItem = buttonServer
             }
         }
     }

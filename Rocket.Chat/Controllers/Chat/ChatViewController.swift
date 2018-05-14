@@ -197,12 +197,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Channel Info", let controller = segue.destination as? ChannelInfoViewController {
-            if let subscription = self.subscription {
-                controller.subscription = subscription
-            }
-        }
-
         if segue.identifier == "Channel Actions", let controller = segue.destination as? ChannelActionsViewController {
             if let subscription = self.subscription {
                 controller.subscription = subscription
@@ -905,10 +899,6 @@ final class ChatViewController: SLKTextViewController {
         let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
 
         present(searchMessagesNav, animated: true, completion: nil)
-    }
-
-    @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
-        performSegue(withIdentifier: "Channel Info", sender: sender)
     }
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {

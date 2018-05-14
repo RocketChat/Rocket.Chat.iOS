@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate typealias ListSegueData = (title: String, query: String?)
+private typealias ListSegueData = (title: String, query: String?, isListingMentions: Bool)
 
 class ChannelActionsViewController: BaseViewController {
 
@@ -26,6 +26,8 @@ class ChannelActionsViewController: BaseViewController {
         didSet {
             guard let subscription = self.subscription else { return }
 
+            let shouldListMentions = subscription.type != .directMessage
+
             let data = [[
                 ChannelInfoUserCellData(user: subscription.directMessageUser)
             ], [
@@ -33,8 +35,8 @@ class ChannelActionsViewController: BaseViewController {
 //                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", action: nil),
 //                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", action: nil)
             ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: showFilesList),
+                shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: showMentionsList) : nil,
                 ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Search"), title: "Search", action: nil),
@@ -43,7 +45,7 @@ class ChannelActionsViewController: BaseViewController {
                 ChannelInfoActionCellData(icon: UIImage(named: "Snippets"), title: "Snippets", action: nil)
             ]]
 
-            tableViewData = data
+            tableViewData = data.compactMap({ $0 })
         }
     }
 
@@ -125,39 +127,76 @@ extension ChannelActionsViewController {
 extension ChannelActionsViewController {
 
     func showMembersList() {
-        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MembersList") as? MembersListViewController else {
-            return assertionFailure("controller could not be initialized")
-        }
-
-        controller.data.subscription = self.subscription
-        navigationController?.pushViewController(controller, animated: true)
+        self.performSegue(withIdentifier: "toMembersList", sender: self)
     }
 
     func showPinnedList() {
-        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MessagesList") as? MessagesListViewController else {
-            return assertionFailure("controller could not be initialized")
-        }
+        let data = ListSegueData(
+            title: localized("chat.messages.pinned.list.title"),
+            query: "{\"pinned\":true}",
+            isListingMentions: false
+        )
 
-        controller.data.subscription = self.subscription
-        controller.data.title = localized("chat.messages.pinned.list.title")
-        controller.data.query = "{\"pinned\":true}"
-        navigationController?.pushViewController(controller, animated: true)
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
     func showStarredList() {
         guard let userId = AuthManager.currentUser()?.identifier else {
-            alert(title: localized("error.socket.default_error_title"), message: "error.socket.default_error_message")
+            alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message"))
             return
         }
 
-        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MessagesList") as? MessagesListViewController else {
-            return assertionFailure("controller could not be initialized")
+        let data = ListSegueData(
+            title: localized("chat.messages.starred.list.title"),
+            query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}",
+            isListingMentions: false
+        )
+
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
+    }
+
+    func showMentionsList() {
+        let data = ListSegueData(
+            title: localized("chat.messages.mentions.list.title"),
+            query: nil,
+            isListingMentions: true
+        )
+
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
+    }
+
+    func showFilesList() {
+        let data = ListSegueData(
+            title: localized("chat.messages.files.list.title"),
+            query: nil,
+            isListingMentions: false
+        )
+
+        self.performSegue(withIdentifier: "toFilesList", sender: data)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let membersList = segue.destination as? MembersListViewController {
+            membersList.data.subscription = self.subscription
         }
 
-        controller.data.subscription = self.subscription
-        controller.data.title = localized("chat.messages.starred.list.title")
-        controller.data.query = "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}"
-        navigationController?.pushViewController(controller, animated: true)
+        if let messagesList = segue.destination as? MessagesListViewController {
+            messagesList.data.subscription = self.subscription
+
+            if let segueData = sender as? ListSegueData {
+                messagesList.data.title = segueData.title
+                messagesList.data.query = segueData.query
+                messagesList.data.isListingMentions = segueData.isListingMentions
+            }
+        }
+
+        if let filesList = segue.destination as? FilesListViewController {
+            filesList.data.subscription = self.subscription
+
+            if let segueData = sender as? ListSegueData {
+                filesList.data.title = segueData.title
+            }
+        }
     }
 
 }

@@ -260,12 +260,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessage() {
-        guard
-            delegate != nil,
-            let message = message
-        else {
-            return
-        }
+        guard let message = message else { return }
 
         if message.failed {
             statusView.isHidden = false
