@@ -105,6 +105,10 @@ class ChannelActionsViewController: BaseViewController {
 
 extension ChannelActionsViewController {
 
+    @IBAction func buttonCloseDidPressed(sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
     @objc func buttonFavoriteDidPressed(_ sender: Any) {
         guard let subscription = self.subscription else { return }
 

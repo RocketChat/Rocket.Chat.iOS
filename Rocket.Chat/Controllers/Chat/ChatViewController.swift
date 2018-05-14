@@ -142,6 +142,7 @@ final class ChatViewController: SLKTextViewController {
 
         collectionView?.isPrefetchingEnabled = true
         collectionView?.keyboardDismissMode = .interactive
+        collectionView?.showsHorizontalScrollIndicator = false
         enableInteractiveKeyboardDismissal()
 
         isInverted = false
@@ -197,9 +198,11 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Channel Actions", let controller = segue.destination as? ChannelActionsViewController {
-            if let subscription = self.subscription {
-                controller.subscription = subscription
+        if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
+            if let controller = nav.viewControllers.first as? ChannelActionsViewController {
+                if let subscription = self.subscription {
+                    controller.subscription = subscription
+                }
             }
         }
     }
