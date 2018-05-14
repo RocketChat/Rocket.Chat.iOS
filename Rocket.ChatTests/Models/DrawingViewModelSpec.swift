@@ -7,8 +7,6 @@
 //
 
 import XCTest
-import RealmSwift
-import SwiftyJSON
 
 @testable import Rocket_Chat
 
