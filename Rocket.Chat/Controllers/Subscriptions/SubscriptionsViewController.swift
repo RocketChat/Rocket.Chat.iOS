@@ -255,9 +255,16 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func updateSubscriptionsList() {
         DispatchQueue.main.async {
+            let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
+
             self.updateBackButton()
 
-            for indexPath in self.tableView.indexPathsForVisibleRows ?? [] {
+            if visibleRows.count == 0 {
+                self.tableView.reloadData()
+                return
+            }
+
+            for indexPath in visibleRows {
                 if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
                     subscriptionCell.subscription = self.subscriptions?[indexPath.row]
                 }
