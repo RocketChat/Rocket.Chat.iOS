@@ -259,6 +259,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
             self.updateBackButton()
 
+            // If the list were empty, let's just refresh everything.
             if visibleRows.count == 0 {
                 self.tableView.reloadData()
                 return
