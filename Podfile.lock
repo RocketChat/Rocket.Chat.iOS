@@ -64,7 +64,7 @@ DEPENDENCIES:
   - TagListView (~> 1.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
     - Crashlytics
     - Fabric
@@ -136,4 +136,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
