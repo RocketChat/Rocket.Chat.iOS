@@ -48,8 +48,6 @@ final class API: APIFetcher {
     var authToken: String?
     var userId: String?
 
-    var retriesOnError: Int = 0
-
     static let userAgent: String = {
         let info = Bundle.main.infoDictionary
         let appVersion = info?["CFBundleShortVersionString"] as? String ?? "Unknown"
