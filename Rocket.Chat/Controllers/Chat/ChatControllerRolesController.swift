@@ -34,8 +34,9 @@ extension ChatViewController {
                         realm.add(subscription, update: true)
                     })
                 }
-            default:
-                Alert.defaultError.present()
+
+            // Fail silently
+            default: break
             }
         })
     }
