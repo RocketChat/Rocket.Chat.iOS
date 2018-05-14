@@ -19,10 +19,10 @@ protocol ModelMappeable {
 
 extension ModelMappeable where Self: BaseModel {
 
-    static func getOrCreate(realm: Realm, values: JSON, updates: UpdateBlock<Self>?) -> Self {
+    static func getOrCreate(realm: Realm, values: JSON?, updates: UpdateBlock<Self>?) -> Self {
         var object: Self!
 
-        if let primaryKey = values["_id"].string {
+        if let primaryKey = values?["_id"].string {
             if let newObject = realm.object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
                 object = newObject
             }
@@ -32,7 +32,10 @@ extension ModelMappeable where Self: BaseModel {
             object = Self()
         }
 
-        object.map(values, realm: realm)
+        if let values = values {
+            object.map(values, realm: realm)
+        }
+
         updates?(object)
         return object
     }

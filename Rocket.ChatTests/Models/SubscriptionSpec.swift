@@ -107,6 +107,7 @@ class SubscriptionSpec: XCTestCase {
             "muted": [ "username" ],
             "jitsiTimeout": [ "$date": 1480377601 ],
             "ro": true,
+            "broadcast": true,
             "description": "room-description"
         ])
 
@@ -117,7 +118,62 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.roomTopic, "room-topic")
         XCTAssertEqual(subscription.roomDescription, "room-description")
         XCTAssertEqual(subscription.roomReadOnly, true)
+        XCTAssertEqual(subscription.roomBroadcast, true)
         XCTAssertEqual(subscription.roomOwnerId, "user-id")
+    }
+
+    func testMapRoomReadOnlyFalse() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "ro": false
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomReadOnly, false)
+    }
+
+    func testMapRoomReadOnlyEmpty() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name"
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomReadOnly, false)
+    }
+
+    func testMapRoomBroadcastFalse() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "broadcast": false
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomBroadcast, false)
+    }
+
+    func testMapRoomBroadcastEmpty() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name"
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomBroadcast, false)
     }
 
     func testSubscriptionDisplayNameHonorFullnameSettings() {

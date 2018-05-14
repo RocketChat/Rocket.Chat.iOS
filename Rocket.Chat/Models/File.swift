@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class File: BaseModel {
+final class File: BaseModel {
     @objc dynamic var name = ""
     @objc dynamic var rid = ""
     @objc dynamic var size: Double = 0
