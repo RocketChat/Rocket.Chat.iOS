@@ -17,6 +17,10 @@ final class MessageTextCacheManager {
         return NSString(string: "\(identifier)-cachedattrstring")
     }
 
+    internal func cachedSimplifiedKey(for identifier: String) -> NSString {
+        return NSString(string: "\(identifier)-cachedsimplifiedattrstring")
+    }
+
     func clear() {
         cache.removeAllObjects()
     }
@@ -56,6 +60,46 @@ final class MessageTextCacheManager {
 
         cache.setObject(finalText, forKey: key)
         return finalText
+    }
+
+    @discardableResult func updateSimplified(for message: Message) -> NSMutableAttributedString? {
+        guard let identifier = message.identifier else { return nil }
+
+        let key = cachedSimplifiedKey(for: identifier)
+
+        let text = NSMutableAttributedString(attributedString:
+            NSAttributedString(string: message.textNormalized())
+        )
+
+        if !message.isSystemMessage() {
+            text.setLineSpacing(MessageTextFontAttributes.defaultFont)
+        }
+
+        let attributedString = text.transformMarkdown()
+        let finalText = NSMutableAttributedString(attributedString: attributedString)
+        finalText.trimCharacters(in: .whitespaces)
+
+        cache.setObject(finalText, forKey: key)
+        return finalText
+    }
+
+    func messageSimplified(for message: Message) -> NSMutableAttributedString? {
+        guard let identifier = message.identifier else { return nil }
+
+        var resultText: NSAttributedString?
+        let key = cachedSimplifiedKey(for: identifier)
+
+        if let cachedVersion = cache.object(forKey: key) {
+            resultText = cachedVersion
+        } else if let result = updateSimplified(for: message) {
+            resultText = result
+        }
+
+        if let resultText = resultText {
+            return NSMutableAttributedString(attributedString: resultText)
+        }
+
+        return nil
     }
 
     func message(for message: Message) -> NSMutableAttributedString? {

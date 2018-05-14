@@ -10,35 +10,45 @@ import Foundation
 
 extension Subscription {
 
-    func lastMessageText() -> String {
+    func lastMessageText() -> NSAttributedString {
         guard
             let lastMessage = roomLastMessage,
             let userLastMessage = lastMessage.user
-            else {
-                return "No message"
+        else {
+            return NSAttributedString(string: "No message")
         }
 
-        var text = lastMessage.text
+        var text: NSMutableAttributedString = MessageTextCacheManager.shared.messageSimplified(for: lastMessage) ?? NSMutableAttributedString(string: lastMessage.text)
 
         let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
-        let isOnlyAttachment = text.isEmpty && lastMessage.attachments.count > 0
+        let isOnlyAttachment = text.length == 0 && lastMessage.attachments.count > 0
 
         if isOnlyAttachment {
-            text = " sent an attachment"
+            text = NSMutableAttributedString(string: " sent an attachment")
         } else {
             if !isFromCurrentUser {
-                text = ": \(text)"
+                let attributedString = NSMutableAttributedString(string: ": ")
+                attributedString.append(text)
+
+                text = attributedString
             }
         }
 
         if isFromCurrentUser && isOnlyAttachment {
-            text = "You\(text)"
+            let attributedString = NSMutableAttributedString(string: "You")
+            attributedString.append(text)
+
+            text = attributedString
         }
 
         if !isFromCurrentUser {
-            text = "\(userLastMessage.displayName())\(text)"
+            let attributedString = NSMutableAttributedString(string: "\(userLastMessage.displayName())")
+            attributedString.append(text)
+
+            text = attributedString
         }
 
+        text.setFontColor(MessageTextFontAttributes.systemFontColor)
         return text
     }
 
