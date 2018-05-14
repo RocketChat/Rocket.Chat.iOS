@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,8 +41,8 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="V5Z-v1-IZm" secondAttribute="trailing" id="3Yk-h5-BWb"/>
-                    <constraint firstItem="HG4-Ws-W1H" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="96F-8H-XKz"/>
-                    <constraint firstItem="nxf-0n-Miu" firstAttribute="bottom" secondItem="HG4-Ws-W1H" secondAttribute="bottom" id="Ovy-BB-54c"/>
+                    <constraint firstItem="HG4-Ws-W1H" firstAttribute="leading" secondItem="aBh-u0-dTh" secondAttribute="leading" id="96F-8H-XKz"/>
+                    <constraint firstAttribute="bottom" secondItem="HG4-Ws-W1H" secondAttribute="bottom" id="Ovy-BB-54c"/>
                     <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="nxf-0n-Miu" secondAttribute="top" id="XCB-hP-Z9p"/>
                     <constraint firstItem="fcy-bN-E23" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="anX-9X-d1e"/>
                     <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="V5Z-v1-IZm" secondAttribute="bottom" id="erO-yb-Lpw"/>
@@ -50,7 +50,7 @@
                     <constraint firstItem="HG4-Ws-W1H" firstAttribute="top" secondItem="fcy-bN-E23" secondAttribute="bottom" id="iYp-Cm-Xwn"/>
                     <constraint firstItem="V5Z-v1-IZm" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="mfi-XO-MVO"/>
                     <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="fcy-bN-E23" secondAttribute="trailing" id="nCi-dy-Gim"/>
-                    <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="HG4-Ws-W1H" secondAttribute="trailing" id="oDm-MS-eSt"/>
+                    <constraint firstAttribute="trailing" secondItem="HG4-Ws-W1H" secondAttribute="trailing" id="oDm-MS-eSt"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="nxf-0n-Miu"/>
             </view>
