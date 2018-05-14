@@ -64,7 +64,7 @@ final class AuthSettingsManager {
         }
 
         let realm = Realm.current
-        let options = APIRequestOptions.paginated(count: 0, offset: 0)
+        let options: APIRequestOptionSet = [.paginated(count: 0, offset: 0)]
         api?.fetch(PublicSettingsRequest(), options: options) { response in
             switch response {
             case .resource(let resource):
