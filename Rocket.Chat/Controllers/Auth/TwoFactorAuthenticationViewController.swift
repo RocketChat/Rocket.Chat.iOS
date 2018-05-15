@@ -98,18 +98,20 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
         }
 
         AuthManager.auth(username, password: password, code: textFieldCode.text ?? "") { [weak self] (response) in
-            self?.stopLoading()
+            DispatchQueue.main.async {
+                self?.stopLoading()
 
-            switch response {
-            case .resource(let resource):
-                if let error = resource.error {
-                    return presentErrorAlert(message: error)
+                switch response {
+                case .resource(let resource):
+                    if let error = resource.error {
+                        return presentErrorAlert(message: error)
+                    }
+
+                    self?.dismiss(animated: true, completion: nil)
+                    AppManager.reloadApp()
+                case .error:
+                    presentErrorAlert()
                 }
-
-                self?.dismiss(animated: true, completion: nil)
-                AppManager.reloadApp()
-            case .error:
-                presentErrorAlert()
             }
         }
     }

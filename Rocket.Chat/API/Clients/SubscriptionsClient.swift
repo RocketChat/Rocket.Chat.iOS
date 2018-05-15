@@ -100,7 +100,7 @@ struct SubscriptionsClient: APIClient {
                             return
                         }
 
-                        subscription.mapRoom(object)
+                        subscription.mapRoom(object, realm: realm)
                         subscriptions.append(subscription)
                     }
 
@@ -221,7 +221,7 @@ struct SubscriptionsClient: APIClient {
                 list?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }
@@ -230,7 +230,7 @@ struct SubscriptionsClient: APIClient {
                 updated?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }

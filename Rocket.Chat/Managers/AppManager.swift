@@ -131,11 +131,11 @@ extension AppManager {
             // let controller = ChatViewController.shared
             // controller?.subscription = directMessageRoom
 
-            if let identifier = replyMessageIdentifier {
-                if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
-                    controller?.reply(to: message)
-                }
-            }
+//            if let identifier = replyMessageIdentifier {
+//                if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
+//                    controller?.reply(to: message)
+//                }
+//            }
 
             completion?()
 

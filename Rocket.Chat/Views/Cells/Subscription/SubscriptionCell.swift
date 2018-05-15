@@ -49,6 +49,7 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
+    @IBOutlet weak var iconRoom: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLastMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
@@ -119,6 +120,7 @@ final class SubscriptionCell: UITableViewCell {
 
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
+            iconRoom.isHidden = true
 
             if let user = subscription.directMessageUser {
                 switch user.status {
@@ -129,7 +131,14 @@ final class SubscriptionCell: UITableViewCell {
                 }
             }
         } else {
+            iconRoom.isHidden = false
             viewStatus.isHidden = true
+
+            if subscription.type == .channel {
+                iconRoom.image = UIImage(named: "Cell Subscription Hashtag")
+            } else {
+                iconRoom.image = UIImage(named: "Cell Subscription Lock")
+            }
         }
     }
 
