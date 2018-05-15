@@ -7,6 +7,12 @@
 "error.socket.default_error.title" = "Ups!";
 "error.socket.default_error.message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
 
+"error.login.title" = "Ups!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Ups!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
+
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
 "alert.connection.invalid_url.message" = "URL który wprowadziłeś jest niepoprawny. Proszę sprawdzić jego poprawność i spróbować ponownie.";

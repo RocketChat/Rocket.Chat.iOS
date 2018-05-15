@@ -42,7 +42,7 @@ class FilesListViewData {
         if let subscription = subscription {
             isLoadingMoreFiles = true
 
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
             let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {

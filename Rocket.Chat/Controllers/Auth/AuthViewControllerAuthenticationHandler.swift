@@ -9,21 +9,20 @@
 import Foundation
 
 extension AuthViewController {
-    internal func handleAuthenticationResponse(_ response: SocketResponse) {
-        if response.isError() {
-            stopLoading()
+    internal func handleAuthenticationResponse(_ response: LoginResponse) {
+        if case let .resource(resource) = response, let error = resource.error {
+            DispatchQueue.main.async { [weak self] in
+                self?.stopLoading()
 
-            if let error = response.result["error"].dictionary {
-                // User is using 2FA
-                if error["error"]?.string == "totp-required" {
-                    performSegue(withIdentifier: "TwoFactor", sender: nil)
-                    return
+                switch error.lowercased() {
+                case "totp-required":
+                    self?.performSegue(withIdentifier: "TwoFactor", sender: nil)
+                case "unauthorized":
+                    Alert(key: "error.login_unauthorized").present()
+                default:
+                    Alert(key: "error.login").present()
                 }
-
-                Alert(key: "error.socket.default_error").present()
             }
-
-            return
         }
 
         if let publicSettings = serverPublicSettings {

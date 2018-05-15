@@ -45,18 +45,13 @@ extension Subscription: ModelMappeable {
     func mapRoom(_ values: JSON) {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
+        self.roomReadOnly = values["ro"].boolValue
+        self.roomBroadcast = values["broadcast"].boolValue
+        self.roomOwnerId = values["u"]["_id"].stringValue
 
         self.roomMuted.removeAll()
         if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
             self.roomMuted.append(objectsIn: roomMuted)
-        }
-
-        if let readOnly = values["ro"].bool {
-            self.roomReadOnly = readOnly
-        }
-
-        if let ownerId = values["u"]["_id"].string {
-            self.roomOwnerId = ownerId
         }
     }
 }

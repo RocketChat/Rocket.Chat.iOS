@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class LoginRequestSpec: APITestCase {
     func testRequest() {
-        let preRequest = LoginRequest("testUsername", "testPassword")
+        let preRequest = LoginRequest(params: ["username": "testUsername", "password": "testPassword"])
         guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }

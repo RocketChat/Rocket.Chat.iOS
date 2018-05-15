@@ -124,6 +124,25 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
+    func pinMessage(_ message: Message, pin: Bool) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(PinMessageRequest(msgId: id, pin: pin)) { response in
+            switch response {
+            case .resource: break
+            case .error: Alert.defaultError.present()
+            }
+        }
+
+        return true
+    }
+
+    @discardableResult
     func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier, !message.rid.isEmpty else {
             return false

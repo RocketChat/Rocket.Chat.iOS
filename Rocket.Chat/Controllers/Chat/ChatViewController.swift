@@ -568,9 +568,7 @@ final class ChatViewController: SLKTextViewController {
     private func markAsRead() {
         guard let subscription = subscription else { return }
 
-        SubscriptionManager.markAsRead(subscription) { _ in
-            // Nothing, for now
-        }
+        API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
     internal func subscribe(for subscription: Subscription) {
@@ -648,6 +646,7 @@ final class ChatViewController: SLKTextViewController {
             })
         }
 
+        updateSubscriptionRoles()
         updateMessageSendingPermission()
     }
 

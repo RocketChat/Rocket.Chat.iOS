@@ -173,7 +173,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // force-delete-message permission
 
-        let forcePermission = Permission()
+        let forcePermission = Rocket_Chat.Permission()
         forcePermission.identifier = PermissionType.forceDeleteMessage.rawValue
         forcePermission.roles.append("admin")
 
@@ -187,7 +187,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // delete-message permission time elapsed
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.deleteMessage.rawValue
         permission.roles.append("admin")
 
@@ -281,7 +281,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // edit-message
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.editMessage.rawValue
         permission.roles.append("admin")
 
@@ -357,7 +357,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         message.identifier = "mid"
         message.user = user1
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.pinMessage.rawValue
         permission.roles.append("admin")
 

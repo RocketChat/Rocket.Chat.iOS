@@ -203,6 +203,96 @@ extension MessageSpec {
 
 }
 
+// MARK: Broadcast
+
+extension MessageSpec: RealmTestCase {
+
+    func testMessageBroadcastTrue() {
+        let realm = testRealm()
+
+        let auth = Auth()
+        auth.serverURL = "https://foo.com/"
+        auth.token = "123"
+        auth.tokenExpires = Date()
+        auth.lastAccess = Date()
+        auth.userId = "1"
+
+        let user = User()
+        user.identifier = "1"
+
+        let userOther = User()
+        userOther.identifier = "2"
+
+        Realm.executeOnMainThread(realm: realm, { realm in
+            realm.add(auth)
+            realm.add(user)
+        })
+
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.user = userOther
+
+        XCTAssertTrue(message.isBroadcastReplyAvailable(realm: realm))
+    }
+
+    func testMessageSystemBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.internalType = MessageType.roomArchived.rawValue
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageTemporaryBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.temporary = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageFailedBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageCurrentUserBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+}
+
 // MARK: Equatable
 
 extension MessageSpec {

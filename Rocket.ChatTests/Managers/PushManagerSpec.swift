@@ -49,6 +49,8 @@ class PushManagerSpec: XCTestCase {
     }
 
     func testHandleNotificationRaw() {
+        DatabaseManager.removeServersKey()
+
         XCTAssertFalse(PushManager.handleNotification(raw: PushNotification.testRaw()))
 
         DatabaseManager.setupTestServers()
