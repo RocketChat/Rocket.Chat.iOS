@@ -46,16 +46,12 @@ extension Subscription {
 }
 
 extension LinkingObjects where Element == Subscription {
-    func sortedByLastMessageDate() -> [Subscription] {
-        return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
-            guard let aDate = aSubscription.roomUpdatedAt else { return false }
-            guard let bDate = bSubscription.roomUpdatedAt else { return true }
-            return aDate > bDate
-        })
+    func sortedByLastMessageDate() -> Results<Subscription> {
+        return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[cd] %@", name)
+        return filter("name CONTAINS[cd] %@", name)
     }
 }
 
@@ -69,6 +65,6 @@ extension Results where Element == Subscription {
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[cd] %@", name)
+        return filter("name CONTAINS[cd] %@", name)
     }
 }

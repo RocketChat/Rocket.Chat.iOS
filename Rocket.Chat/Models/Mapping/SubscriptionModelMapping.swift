@@ -69,9 +69,14 @@ extension Subscription: ModelMappeable {
         if values["lastMessage"].dictionary != nil {
             let message = Message()
             message.map(values["lastMessage"], realm: realm)
+            message.subscription = self
             realm?.add(message, update: true)
 
             self.roomLastMessage = message
+
+            if let createdAt = values["lastMessage"]["ts"]["$date"].double {
+                self.roomLastMessageDate = Date.dateFromInterval(createdAt)
+            }
         }
     }
 }

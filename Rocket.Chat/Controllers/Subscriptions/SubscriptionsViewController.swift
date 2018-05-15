@@ -65,7 +65,7 @@ final class SubscriptionsViewController: BaseViewController {
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+        subscriptions = auth.subscriptions.sortedByLastMessageDate()
         subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
 
         if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
@@ -200,7 +200,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text).sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: text)
         searchText = text
 
         if text.count == 0 {
@@ -245,12 +245,12 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+        subscriptions = auth.subscriptions.sortedByLastMessageDate()
     }
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: searchText).sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText)
     }
 
     func updateSubscriptionsList() {

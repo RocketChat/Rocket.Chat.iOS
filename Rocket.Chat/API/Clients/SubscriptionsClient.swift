@@ -57,7 +57,7 @@ struct SubscriptionsClient: APIClient {
                         subscriptions.append(subscription)
                     }
 
-                    auth.lastSubscriptionFetch = Date.serverDate
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
@@ -85,7 +85,7 @@ struct SubscriptionsClient: APIClient {
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                     realm.add(auth, update: true)
                 })
 
@@ -174,7 +174,7 @@ struct SubscriptionsClient: APIClient {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date.serverDate
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
@@ -205,7 +205,7 @@ struct SubscriptionsClient: APIClient {
 
             currentRealm?.execute({ realm in
                 guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                 realm.add(auth, update: true)
             })
 
