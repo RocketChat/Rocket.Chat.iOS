@@ -1,5 +1,5 @@
 //
-//  UserUpdateRequest.swift
+//  UpdateUserRequest.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 27/02/18.
@@ -17,11 +17,13 @@ final class UpdateUserRequest: APIRequest {
     let path = "/api/v1/users.updateOwnBasicInfo"
 
     let user: User?
+    let username: String?
     let currentPassword: String?
     let password: String?
 
-    init(user: User? = nil, password: String? = nil, currentPassword: String? = nil) {
+    init(user: User? = nil, username: String? = nil, password: String? = nil, currentPassword: String? = nil) {
         self.user = user
+        self.username = username
         self.password = password
         self.currentPassword = currentPassword
     }
@@ -41,6 +43,10 @@ final class UpdateUserRequest: APIRequest {
             if let email = user.emails.first?.email, !email.isEmpty {
                 body["data"]["email"].string = email
             }
+        }
+
+        if let username = username {
+            body["data"]["username"].string = username
         }
 
         if let password = password, !password.isEmpty {

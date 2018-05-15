@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 extension AuthViewController {
     internal func handleAuthenticationResponse(_ response: LoginResponse) {
@@ -29,30 +30,40 @@ extension AuthViewController {
             AuthSettingsManager.persistPublicSettings(settings: publicSettings)
         }
 
+        if let realm = Realm.current, let auth = AuthManager.isAuthenticated(realm: realm), let version = serverVersion {
+            try? realm.write {
+                auth.serverVersion = version.description
+            }
+        }
+
         API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
-                guard let strongSelf = self else { return }
-
-                SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+                if let token = self?.socketHandlerToken {
+                    SocketManager.removeConnectionHandler(token: token)
+                }
 
                 if let user = resource.user {
                     if user.username != nil {
-                        DispatchQueue.main.async {
-                            strongSelf.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.async { [weak self] in
+                            self?.dismiss(animated: true, completion: nil)
                             AppManager.reloadApp()
                         }
                     } else {
-                        DispatchQueue.main.async {
-                            strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        DispatchQueue.main.async { [weak self] in
+                            self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                         }
                     }
                 } else {
-                    self?.stopLoading()
-                    Alert(key: "error.socket.default_error").present()
+                    DispatchQueue.main.async { [weak self] in
+                        self?.stopLoading()
+                        Alert(key: "error.socket.default_error").present()
+                    }
                 }
             case .error:
-                self?.stopLoading()
+                DispatchQueue.main.async { [weak self] in
+                    self?.stopLoading()
+                }
             }
         }
     }
