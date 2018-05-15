@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import RealmSwift
 
 extension AuthManager {
     /**
      - returns: Current user object, if exists.
      */
-    static func currentUser() -> User? {
-        return isAuthenticated()?.user
+    static func currentUser(realm: Realm? = Realm.current) -> User? {
+        return isAuthenticated(realm: realm)?.user
     }
 }

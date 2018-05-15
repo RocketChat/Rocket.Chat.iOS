@@ -14,7 +14,7 @@ import SwiftyJSON
 class SubscriptionMembersRequestSpec: APITestCase {
     func testRequestWithRoomId() {
         let preRequest = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
-        guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+        guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
             return XCTFail("request is not nil")
         }
         let url = api.host.appendingPathComponent(preRequest.path)
@@ -27,7 +27,7 @@ class SubscriptionMembersRequestSpec: APITestCase {
 
     func testRequestWithRoomName() {
         let preRequest = SubscriptionMembersRequest(roomName: "testing")
-        guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+        guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
             return XCTFail("request is not nil")
         }
         let url = api.host.appendingPathComponent(preRequest.path)

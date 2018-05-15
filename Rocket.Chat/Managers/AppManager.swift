@@ -123,13 +123,19 @@ extension AppManager {
 // MARK: Open Rooms
 
 extension AppManager {
-    static func openDirectMessage(username: String, completion: (() -> Void)? = nil) {
+    static func openDirectMessage(username: String, replyMessageIdentifier: String? = nil, completion: (() -> Void)? = nil) {
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
 
             // TODO: Have to fix here
             // let controller = ChatViewController.shared
             // controller?.subscription = directMessageRoom
+
+            if let identifier = replyMessageIdentifier {
+                if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
+                    controller?.reply(to: message)
+                }
+            }
 
             completion?()
 
@@ -147,7 +153,7 @@ extension AppManager {
 
             guard let auth = AuthManager.isAuthenticated() else { return }
 
-            SubscriptionManager.updateSubscriptions(auth) { _ in
+            SubscriptionManager.updateSubscriptions(auth) {
                 _ = openDirectMessage()
             }
         })

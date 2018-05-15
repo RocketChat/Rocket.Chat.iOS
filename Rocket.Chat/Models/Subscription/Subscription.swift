@@ -48,13 +48,23 @@ final class Subscription: BaseModel {
     @objc dynamic var roomReadOnly = false
     @objc dynamic var roomUpdatedAt: Date?
     @objc dynamic var roomLastMessage: Message?
+    @objc dynamic var roomBroadcast = false
 
-    let roomMuted = RealmSwift.List<String>()
+    let roomMuted = List<String>()
 
     @objc dynamic var roomOwnerId: String?
     @objc dynamic var otherUserId: String?
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
+
+    // User's roles on the subscription, this values
+    // aren't stored in database.
+    let usersRoles = List<SubscriptionRoles>()
+}
+
+final class SubscriptionRoles: Object {
+    @objc dynamic var user: User?
+    var roles = List<String>()
 }
 
 // MARK: Failed Messages

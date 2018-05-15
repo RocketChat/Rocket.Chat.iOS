@@ -42,7 +42,7 @@ class MembersListViewData {
             isLoadingMoreMembers = true
 
             let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
             API.current()?.fetch(request, options: options) { [weak self] response in
                 guard let strongSelf = self else { return }
