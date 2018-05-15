@@ -109,7 +109,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
         let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
@@ -130,7 +130,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
         let request = SubscriptionMentionsRequest(roomId: subscription.rid)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {

@@ -104,7 +104,9 @@ class FileTableViewCell: UITableViewCell {
                     self.filePreview.image = thumbnail
                 }
             } catch {
-                self.filePreview.image = nil
+                DispatchQueue.main.async {
+                    self.filePreview.image = nil
+                }
             }
         }
     }

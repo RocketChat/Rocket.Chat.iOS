@@ -32,3 +32,9 @@ final class User: BaseModel {
 
     var utcOffset: Double?
 }
+
+extension User {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+}

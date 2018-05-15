@@ -145,7 +145,7 @@ extension SocketManager {
 
             infoClient.fetchInfo()
 
-            SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+            SubscriptionManager.updateSubscriptions(auth) {
                 AuthSettingsManager.updatePublicSettings(auth)
 
                 UserManager.userDataChanges()
@@ -162,7 +162,7 @@ extension SocketManager {
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
                 }
-            })
+            }
         })
     }
 

@@ -24,11 +24,6 @@ extension User: ModelMappeable {
             self.name = name
         }
 
-        if let roles = values["roles"].array?.compactMap({ $0.string }) {
-            self.roles.removeAll()
-            self.roles.append(contentsOf: roles)
-        }
-
         if let status = values["status"].string {
             self.status = UserStatus(rawValue: status) ?? .offline
         }
@@ -51,6 +46,15 @@ extension User: ModelMappeable {
 
             self.emails.removeAll()
             self.emails.append(contentsOf: emails)
+        }
+
+        mapRoles(values["roles"])
+    }
+
+    func mapRoles(_ values: JSON) {
+        if let roles = values.array?.compactMap({ $0.string }) {
+            self.roles.removeAll()
+            self.roles.append(contentsOf: roles)
         }
     }
 }

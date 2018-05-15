@@ -631,6 +631,7 @@ final class ChatViewController: SLKTextViewController {
             })
         }
 
+        updateSubscriptionRoles()
         updateMessageSendingPermission()
     }
 
