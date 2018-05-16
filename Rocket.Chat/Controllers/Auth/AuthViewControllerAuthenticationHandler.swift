@@ -44,6 +44,12 @@ extension AuthViewController {
                 }
 
                 if let user = resource.user {
+
+                    let realm = Realm.current
+                    try? realm?.write {
+                        realm?.add(user, update: true)
+                    }
+
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()

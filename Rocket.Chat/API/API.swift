@@ -101,7 +101,13 @@ final class API: APIFetcher {
         }
 
         #if DEBUG
-        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")")
+        var body = ""
+
+        if let data = transformedRequest.body() {
+            body = ": \(String(data: data, encoding: .utf8) ?? "")"
+        }
+
+        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")\(body)")
         #endif
 
         let task = session.dataTask(with: request) { (data, _, error) in
