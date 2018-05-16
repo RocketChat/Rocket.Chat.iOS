@@ -97,6 +97,68 @@ class SubscriptionSpec: XCTestCase {
         })
     }
 
+    func testMapLastSeenDateInteger() {
+        let interval = 123456789
+        let object = JSON([
+            "_id": "identifier",
+            "ls": ["$date": interval]
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromInterval(123456789))
+    }
+
+    func testMapLastSeenDateString() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+        let object = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
+    func testMapLastSeenUpdated() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+        let interval = 123456789
+
+        let object1 = JSON([
+            "_id": "identifier",
+            "ls": ["$date": interval]
+        ])
+
+        let object2 = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object1, realm: nil)
+        subscription.map(object2, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
+    func testMapLastSeenUpdatedEmpty() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+
+        let object1 = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let object2 = JSON([
+            "_id": "identifier"
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object1, realm: nil)
+        subscription.map(object2, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
     func testMapRoom() {
         let object = JSON([
             "_id": "room-id",
