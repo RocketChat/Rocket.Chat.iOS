@@ -1,5 +1,5 @@
 //
-//  SubscriptionFilesRequestSpec.swift
+//  RoomFilesRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Filipe Alvarenga on 02/05/18.
@@ -11,10 +11,10 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionFilesRequestSpec: APITestCase {
+class RoomFilesRequestSpec: APITestCase {
 
     func testRequest() {
-        let preRequest = SubscriptionFilesRequest(roomId: "xyz123", subscriptionType: .channel)
+        let preRequest = RoomFilesRequest(roomId: "xyz123", subscriptionType: .channel)
         guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
@@ -71,14 +71,14 @@ class SubscriptionFilesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionFilesResource(raw: json)
+        let result = RoomFilesResource(raw: json)
         XCTAssertNotNil(result.files)
         XCTAssertEqual(result.count, 1)
         XCTAssertEqual(result.offset, 0)
         XCTAssertEqual(result.total, 1)
         XCTAssertTrue(result.success)
 
-        let nilResult = SubscriptionFilesResource(raw: nil)
+        let nilResult = RoomFilesResource(raw: nil)
         XCTAssertNil(nilResult.files)
     }
 
