@@ -235,16 +235,14 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         tableView.tableFooterView = nil
 
         API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
-            let currentText = self?.textFieldSearch.text ?? ""
+            let currentText = self?.searchBar?.text ?? ""
 
             if currentText.count == 0 {
                 return
             }
 
-            self?.activityViewSearching.stopAnimating()
             self?.isSearchingRemotely = true
             self?.searchResult = result
-            self?.groupSubscription()
             self?.tableView.reloadData()
         }
     }
