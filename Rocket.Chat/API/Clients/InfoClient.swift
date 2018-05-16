@@ -11,13 +11,15 @@ import RealmSwift
 struct InfoClient: APIClient {
     let api: AnyAPIFetcher
 
-    func fetchInfo(realm: Realm? = Realm.current) {
+    func fetchInfo(realm: Realm? = Realm.current, completion: @escaping () -> Void = { }) {
         api.fetch(InfoRequest()) { response in
             switch response {
             case .resource(let resource):
                 guard let version = resource.version else { return }
                 realm?.execute({ realm in
                     AuthManager.isAuthenticated(realm: realm)?.serverVersion = version
+                }, completion: {
+                    completion()
                 })
             case .error:
                 break

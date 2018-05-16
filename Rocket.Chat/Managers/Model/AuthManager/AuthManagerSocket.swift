@@ -222,7 +222,7 @@ extension AuthManager {
             "params": [username]
         ] as [String: Any]
 
-        let req = UpdateUserRequest(user: AuthManager.currentUser(), username: username)
+        let req = UpdateUserRequest(username: username)
         API.current()?.fetch(req) { response in
             switch response {
             case .resource(let resource):

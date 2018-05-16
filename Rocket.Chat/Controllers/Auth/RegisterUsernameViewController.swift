@@ -93,16 +93,17 @@ final class RegisterUsernameViewController: BaseViewController {
         startLoading()
 
         AuthManager.setUsername(textFieldUsername.text ?? "") { [weak self] success, errorMessage in
+            DispatchQueue.main.async {
             self?.stopLoading()
-
-            if !success {
-                Alert(
-                    title: localized("error.socket.default_error.title"),
-                    message: errorMessage ?? localized("error.socket.default_error.message")
-                ).present()
-            } else {
-                self?.dismiss(animated: true, completion: nil)
-                AppManager.reloadApp()
+                if !success {
+                    Alert(
+                        title: localized("error.socket.default_error.title"),
+                        message: errorMessage ?? localized("error.socket.default_error.message")
+                    ).present()
+                } else {
+                    self?.dismiss(animated: true, completion: nil)
+                    AppManager.reloadApp()
+                }
             }
         }
     }

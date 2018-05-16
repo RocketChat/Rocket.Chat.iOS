@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 final class SignupViewController: BaseViewController {
 
@@ -110,7 +111,7 @@ final class SignupViewController: BaseViewController {
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
+        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] response in
             self?.stopLoading()
 
             if response.isError() {
@@ -130,13 +131,28 @@ final class SignupViewController: BaseViewController {
                 }
 
                 AuthManager.auth(email, password: password, completion: { _ in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        guard let user = AuthManager.currentUser() else { return }
-                        if user.username != nil {
-                            self?.dismiss(animated: true, completion: nil)
-                            AppManager.reloadApp()
-                        } else {
-                            self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                    API.current()?.client(InfoClient.self).fetchInfo {
+                        API.current()?.fetch(MeRequest()) { [weak self] response in
+                            switch response {
+                            case .resource(let resource):
+                                let realm = Realm.current
+                                try? realm?.write {
+                                    if let user = resource.user {
+                                        realm?.add(user, update: true)
+                                    }
+                                }
+
+                                DispatchQueue.main.async {
+                                    if resource.user?.username != nil {
+                                        self?.dismiss(animated: true, completion: nil)
+                                        AppManager.reloadApp()
+                                    } else {
+                                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                                    }
+                                }
+                            case .error:
+                                break
+                            }
                         }
                     }
                 })

@@ -21,11 +21,18 @@ final class UpdateUserRequest: APIRequest {
     let currentPassword: String?
     let password: String?
 
-    init(user: User? = nil, username: String? = nil, password: String? = nil, currentPassword: String? = nil) {
+    init(user: User? = nil, password: String? = nil, currentPassword: String? = nil) {
         self.user = user
-        self.username = username
         self.password = password
         self.currentPassword = currentPassword
+        self.username = nil
+    }
+
+    init(username: String) {
+        self.username = username
+        self.user = nil
+        self.currentPassword = nil
+        self.password = nil
     }
 
     func body() -> Data? {
@@ -45,16 +52,16 @@ final class UpdateUserRequest: APIRequest {
             }
         }
 
-        if let username = username {
-            body["data"]["username"].string = username
-        }
-
         if let password = password, !password.isEmpty {
             body["data"]["newPassword"].string = password
         }
 
         if let currentPassword = currentPassword {
             body["data"]["currentPassword"].string = currentPassword.sha256()
+        }
+
+        if let username = username {
+            body["data"] = ["username": username]
         }
 
         let string = body.rawString()
@@ -70,10 +77,10 @@ final class UpdateUserRequest: APIRequest {
 
 final class UpdateUserResource: APIResource {
     var user: User? {
-        guard let rawMessage = raw?["user"] else { return nil }
+        guard let rawUser = raw?["user"] else { return nil }
 
         let user = User()
-        user.map(rawMessage, realm: nil)
+        user.map(rawUser, realm: nil)
         return user
     }
 
