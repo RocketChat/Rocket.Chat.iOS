@@ -144,14 +144,13 @@ final class SignupViewController: BaseViewController {
                                 }
 
                                 if resource.user?.username != nil {
-                                  self?.dismiss(animated: true, completion: nil)
-                                        AppManager.reloadApp()
-                                    } else {
-                                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                                    }
+                                    self?.dismiss(animated: true, completion: nil)
+                                    AppManager.reloadApp()
+                                } else {
+                                    self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                                 }
-                            case .error:
-                                break
+
+                            case .error: break
                             }
                         }
                     }
