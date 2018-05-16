@@ -315,7 +315,7 @@ final class AuthViewController: BaseViewController {
                     Alert(
                         title: localized("auth.forgot_password.title"),
                         message: localized("error.socket.default_error.message")
-                        ).present()
+                    ).present()
                     return
                 }
 

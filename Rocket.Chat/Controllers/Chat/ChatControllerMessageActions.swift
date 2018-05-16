@@ -152,8 +152,8 @@ extension ChatViewController {
             guard
                 let subscription = self.subscription,
                 let client = API.current()?.client(MessagesClient.self)
-                else {
-                    return
+            else {
+                return
             }
 
             var messagesToResend: [(identifier: String, text: String)] = []

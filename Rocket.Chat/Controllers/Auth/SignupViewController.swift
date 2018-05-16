@@ -118,7 +118,7 @@ final class SignupViewController: BaseViewController {
                     Alert(
                         title: "error.socket.default_error",
                         message: error["message"]?.string ?? localized("error.socket.default_error.message")
-                        ).present()
+                    ).present()
                 }
             } else {
 
