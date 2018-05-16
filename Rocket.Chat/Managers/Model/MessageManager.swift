@@ -169,11 +169,7 @@ extension MessageManager {
             }
 
             realm.add(messages, update: true)
-
-            DispatchQueue.main.async {
-                completion()
-            }
-        })
+        }, completion: completion)
     }
 
 }

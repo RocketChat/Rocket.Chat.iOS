@@ -91,11 +91,9 @@ extension ChatViewController {
 
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-                DispatchQueue.main.async {
-                    MessageManager.blockMessagesFrom(messageUser, completion: {
-                        self?.updateSubscriptionInfo()
-                    })
-                }
+                MessageManager.blockMessagesFrom(messageUser, completion: {
+                    self?.updateSubscriptionInfo()
+                })
             })
 
             actions.append(block)
@@ -228,9 +226,7 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            Alert(
-                key: "chat.message.report.success.title"
-            ).present()
+            Alert(key: "chat.message.report.success.title").present()
         }
     }
 }

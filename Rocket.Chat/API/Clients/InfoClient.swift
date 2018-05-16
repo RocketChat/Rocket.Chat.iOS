@@ -29,11 +29,9 @@ struct InfoClient: APIClient {
         api.fetch(LoginServicesRequest()) { response in
             switch response {
             case .resource(let res):
-                DispatchQueue.main.async {
-                    realm?.execute({ realm in
-                        realm.add(res.loginServices, update: true)
-                    })
-                }
+                realm?.execute({ realm in
+                    realm.add(res.loginServices, update: true)
+                })
             case .error(let error):
                 switch error {
                 case .version:
@@ -51,11 +49,9 @@ struct InfoClient: APIClient {
         api.fetch(PermissionsRequest()) { response in
             switch response {
             case .resource(let res):
-                DispatchQueue.main.async {
-                    realm?.execute({ realm in
-                        realm.add(res.permissions, update: true)
-                    })
-                }
+                realm?.execute({ realm in
+                    realm.add(res.permissions, update: true)
+                })
             case .error(let error):
                 switch error {
                 case .version:
