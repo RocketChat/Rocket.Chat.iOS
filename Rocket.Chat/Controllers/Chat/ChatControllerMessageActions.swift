@@ -91,11 +91,9 @@ extension ChatViewController {
 
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-                DispatchQueue.main.async {
-                    MessageManager.blockMessagesFrom(messageUser, completion: {
-                        self?.updateSubscriptionInfo()
-                    })
-                }
+                MessageManager.blockMessagesFrom(messageUser, completion: {
+                    self?.updateSubscriptionInfo()
+                })
             })
 
             actions.append(block)
@@ -154,8 +152,8 @@ extension ChatViewController {
             guard
                 let subscription = self.subscription,
                 let client = API.current()?.client(MessagesClient.self)
-            else {
-                return
+                else {
+                    return
             }
 
             var messagesToResend: [(identifier: String, text: String)] = []
@@ -228,9 +226,7 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            Alert(
-                key: "chat.message.report.success.title"
-            ).present()
+            Alert(key: "chat.message.report.success.title").present()
         }
     }
 }

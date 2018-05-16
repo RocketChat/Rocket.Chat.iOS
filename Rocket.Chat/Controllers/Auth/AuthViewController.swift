@@ -202,13 +202,11 @@ final class AuthViewController: BaseViewController {
     }
 
     func stopLoading() {
-        DispatchQueue.main.async(execute: {
-            self.textFieldUsername.alpha = 1
-            self.textFieldPassword.alpha = 1
-            self.activityIndicator.stopAnimating()
-            self.customAuthButtons.forEach { _, button in button.isEnabled = true }
-            self.navigationItem.hidesBackButton = false
-        })
+        textFieldUsername.alpha = 1
+        textFieldPassword.alpha = 1
+        activityIndicator.stopAnimating()
+        customAuthButtons.forEach { _, button in button.isEnabled = true }
+        navigationItem.hidesBackButton = false
 
         connecting = false
     }
@@ -317,7 +315,7 @@ final class AuthViewController: BaseViewController {
                     Alert(
                         title: localized("auth.forgot_password.title"),
                         message: localized("error.socket.default_error.message")
-                    ).present()
+                        ).present()
                     return
                 }
 

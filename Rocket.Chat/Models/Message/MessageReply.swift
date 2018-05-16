@@ -10,9 +10,10 @@ extension Message {
     var quoteString: String? {
         guard
             let identifier = identifier,
+            let subscription = subscription,
             let url = subscription.auth?.baseURL()
-            else {
-                return nil
+        else {
+            return nil
         }
 
         let path: String
@@ -33,6 +34,7 @@ extension Message {
         guard let quoteString = quoteString else { return nil }
 
         guard
+            let subscription = subscription,
             subscription.type != .directMessage,
             let username = self.user?.username,
             username != AuthManager.currentUser()?.username

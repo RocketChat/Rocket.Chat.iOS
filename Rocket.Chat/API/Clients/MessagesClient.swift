@@ -20,17 +20,15 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    message.temporary = false
-                    message.failed = false
-                    message.updatedAt = Date()
-                    message.map(json, realm: realm)
-                    realm?.add(message, update: true)
-                }
-
-                MessageTextCacheManager.shared.update(for: message)
+            try? realm?.write {
+                message.temporary = false
+                message.failed = false
+                message.updatedAt = Date()
+                message.map(json, realm: realm)
+                realm?.add(message, update: true)
             }
+
+            MessageTextCacheManager.shared.update(for: message)
         }
 
         func setMessageOffline() {
@@ -90,8 +88,8 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
+            else {
+                return false
         }
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
@@ -109,8 +107,8 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
+            else {
+                return false
         }
 
         api.fetch(StarMessageRequest(msgId: id, star: star)) { response in
@@ -128,8 +126,8 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
+            else {
+                return false
         }
 
         api.fetch(PinMessageRequest(msgId: id, pin: pin)) { response in
@@ -157,13 +155,11 @@ struct MessagesClient: APIClient {
                     return Alert.defaultError.present()
                 }
 
-                DispatchQueue.main.async {
-                    try? realm?.write {
-                        realm?.add(message, update: true)
-                    }
-
-                    MessageTextCacheManager.shared.update(for: message)
+                try? realm?.write {
+                    realm?.add(message, update: true)
                 }
+
+                MessageTextCacheManager.shared.update(for: message)
             case .error: Alert.defaultError.present()
             }
         }
