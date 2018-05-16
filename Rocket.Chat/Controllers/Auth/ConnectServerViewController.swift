@@ -204,27 +204,19 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
     var viewControllerToPresentAlerts: UIViewController? { return self }
 
     func urlNotValid() {
-        DispatchQueue.main.async {
-            self.stopConnecting()
-        }
+        self.stopConnecting()
     }
 
     func serverIsValid() {
-        DispatchQueue.main.async {
-            self.connectWebSocket()
-        }
+        self.connectWebSocket()
     }
 
     func serverChangedURL(_ newURL: String?) {
         if let url = newURL {
-            DispatchQueue.main.async {
-                self.textFieldServerURL.text = url
-                self.connect()
-            }
+            self.textFieldServerURL.text = url
+            self.connect()
         } else {
-            DispatchQueue.main.async {
-                self.stopConnecting()
-            }
+            self.stopConnecting()
         }
     }
 

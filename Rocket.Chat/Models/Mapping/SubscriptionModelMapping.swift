@@ -37,6 +37,10 @@ extension Subscription: ModelMappeable {
             self.createdAt = Date.dateFromInterval(createdAt)
         }
 
+        if let lastSeen = values["ls"].string {
+            self.lastSeen = Date.dateFromString(lastSeen)
+        }
+
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
@@ -45,9 +49,18 @@ extension Subscription: ModelMappeable {
     func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
-        self.roomReadOnly = values["ro"].boolValue
-        self.roomBroadcast = values["broadcast"].boolValue
-        self.roomOwnerId = values["u"]["_id"].stringValue
+
+        if let broadcast = values["broadcast"].bool {
+            self.roomBroadcast = broadcast
+        }
+
+        if let readOnly = values["ro"].bool {
+            self.roomReadOnly = readOnly
+        }
+
+        if let ownerId = values["u"]["_id"].string {
+            self.roomOwnerId = ownerId
+        }
 
         self.roomMuted.removeAll()
         if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {

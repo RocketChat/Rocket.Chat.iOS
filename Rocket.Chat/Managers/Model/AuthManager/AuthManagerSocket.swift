@@ -215,14 +215,34 @@ extension AuthManager {
     /**
      Set username of logged in user
      */
-    static func setUsername(_ username: String, completion: @escaping MessageCompletion) {
+    static func setUsername(_ username: String, completion: @escaping (Bool, String?) -> Void) {
         let object = [
             "msg": "method",
             "method": "setUsername",
             "params": [username]
-            ] as [String: Any]
+        ] as [String: Any]
 
-        SocketManager.send(object, completion: completion)
+        let req = UpdateUserRequest(username: username)
+        API.current()?.fetch(req) { response in
+            switch response {
+            case .resource(let resource):
+                if let errorMessage = resource.errorMessage {
+                    return completion(false, errorMessage)
+                }
+                return completion(true, nil)
+            case .error(let error):
+                switch error {
+                case .version:
+                    SocketManager.send(object) { response in
+                        if let message = response.result["error"]["message"].string {
+                            completion(false, message)
+                        }
+                    }
+                default:
+                    completion(false, error.description)
+                }
+            }
+        }
     }
 
     /**

@@ -239,12 +239,14 @@ extension ChatViewController {
             fileName?.placeholder = localized("alert.upload_dialog.placeholder.title")
             fileName?.text = file.name
         }
+
         alert.addTextField { (_ field) -> Void in
             fileDescription = field
             fileDescription?.autocorrectionType = .yes
             fileDescription?.autocapitalizationType = .sentences
             fileDescription?.placeholder = localized("alert.upload_dialog.placeholder.description")
         }
+
         alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.upload"), style: .default, handler: { _ in
             var name = file.name
             if fileName?.text?.isEmpty == false {
@@ -253,6 +255,7 @@ extension ChatViewController {
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
@@ -261,7 +264,9 @@ extension ChatViewController {
 }
 
 extension ChatViewController: DrawingControllerDelegate {
+
     func finishedEditing(with file: FileUpload) {
         uploadDialog(file)
     }
+
 }
