@@ -101,21 +101,36 @@ final class API: APIFetcher {
         }
 
         #if DEBUG
-        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")")
+        var body = ""
+
+        if let data = transformedRequest.body() {
+            body = ": \(String(data: data, encoding: .utf8) ?? "")"
+        }
+
+        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")\(body)")
         #endif
 
         let task = session.dataTask(with: request) { (data, _, error) in
             func completeWithResponse(_ response: APIResponse<R.APIResourceType>) {
                 switch response {
                 case .resource:
-                    completion?(response)
+                    DispatchQueue.main.async {
+                        completion?(response)
+                    }
                 case .error:
                     if options.retries > 0 {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            self.fetch(transformedRequest, options: options.withRetries(options.retries - 1), sessionDelegate: sessionDelegate, completion: completion)
+                            self.fetch(
+                                transformedRequest,
+                                options: options.withRetries(options.retries - 1),
+                                sessionDelegate: sessionDelegate,
+                                completion: completion
+                            )
                         }
                     } else {
-                        completion?(response)
+                        DispatchQueue.main.async {
+                            completion?(response)
+                        }
                     }
                 }
             }

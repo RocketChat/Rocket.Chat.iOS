@@ -22,7 +22,7 @@ extension Message {
             !temporary,
             !failed,
             !markedForDeletion,
-            subscription.roomBroadcast,
+            subscription?.roomBroadcast ?? false,
             !isSystemMessage(),
             let currentUser = AuthManager.currentUser(realm: realm),
             currentUser.identifier != user?.identifier

@@ -45,10 +45,8 @@ final class AuthSettingsManager {
             }
         })
 
-        DispatchQueue.main.async {
-            ServerManager.updateServerInformation(from: unmanagedSettings)
-            completion?(unmanagedSettings)
-        }
+        ServerManager.updateServerInformation(from: unmanagedSettings)
+        completion?(unmanagedSettings)
     }
 
     static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
