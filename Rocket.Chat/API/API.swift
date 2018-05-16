@@ -114,14 +114,23 @@ final class API: APIFetcher {
             func completeWithResponse(_ response: APIResponse<R.APIResourceType>) {
                 switch response {
                 case .resource:
-                    completion?(response)
+                    DispatchQueue.main.async {
+                        completion?(response)
+                    }
                 case .error:
                     if options.retries > 0 {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            self.fetch(transformedRequest, options: options.withRetries(options.retries - 1), sessionDelegate: sessionDelegate, completion: completion)
+                            self.fetch(
+                                transformedRequest,
+                                options: options.withRetries(options.retries - 1),
+                                sessionDelegate: sessionDelegate,
+                                completion: completion
+                            )
                         }
                     } else {
-                        completion?(response)
+                        DispatchQueue.main.async {
+                            completion?(response)
+                        }
                     }
                 }
             }

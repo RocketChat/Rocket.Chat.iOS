@@ -322,4 +322,3 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
     }
 }
-

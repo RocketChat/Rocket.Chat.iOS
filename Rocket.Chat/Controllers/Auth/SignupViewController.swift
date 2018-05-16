@@ -127,6 +127,7 @@ final class SignupViewController: BaseViewController {
                     Alert(key: "alert.email_verification").present { _ in
                         self?.navigationController?.popViewController(animated: true)
                     }
+
                     return
                 }
 
@@ -142,9 +143,8 @@ final class SignupViewController: BaseViewController {
                                     }
                                 }
 
-                                DispatchQueue.main.async {
-                                    if resource.user?.username != nil {
-                                        self?.dismiss(animated: true, completion: nil)
+                                if resource.user?.username != nil {
+                                  self?.dismiss(animated: true, completion: nil)
                                         AppManager.reloadApp()
                                     } else {
                                         self?.performSegue(withIdentifier: "RequestUsername", sender: nil)

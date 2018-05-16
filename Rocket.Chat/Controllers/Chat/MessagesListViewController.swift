@@ -204,11 +204,9 @@ class MessagesListViewController: BaseViewController {
         data.isListingMentions = self.data.isListingMentions
         data.loadMoreMessages {
             self.data = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
-            }
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
         }
     }
 
@@ -231,24 +229,20 @@ class MessagesListViewController: BaseViewController {
 
     func loadMoreMessages() {
         data.loadMoreMessages {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
-            }
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
         }
     }
 
     func searchMessages(withText text: String) {
         data.searchMessages(withText: text) {
-            DispatchQueue.main.async {
-                if self.searchBar.text == nil || self.searchBar.text == "" {
-                    self.data.cellsPages = []
-                }
-
-                self.collectionView.reloadData()
-                self.updateIsEmptyMessage()
+            if self.searchBar.text == nil || self.searchBar.text == "" {
+                self.data.cellsPages = []
             }
+
+            self.collectionView.reloadData()
+            self.updateIsEmptyMessage()
         }
     }
 }
