@@ -18,9 +18,7 @@ struct InfoClient: APIClient {
                 guard let version = resource.version else { return }
                 realm?.execute({ realm in
                     AuthManager.isAuthenticated(realm: realm)?.serverVersion = version
-                }, completion: {
-                    completion()
-                })
+                }, completion: completion)
             case .error:
                 break
             }
