@@ -20,13 +20,20 @@ protocol APIFetcher {
     @discardableResult
     func fetch<R: APIRequest>(_ request: R, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
     @discardableResult
-    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
+    @discardableResult
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
 }
 
 extension APIFetcher {
     @discardableResult
     func fetch<R: APIRequest>(_ request: R, completion: ((APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
-        return fetch(request, options: .none, sessionDelegate: nil, completion: completion)
+        return fetch(request, options: [], sessionDelegate: nil, completion: completion)
+    }
+
+    @discardableResult
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
+        return fetch(request, options: options, sessionDelegate: nil, completion: completion)
     }
 }
 
@@ -65,8 +72,7 @@ final class API: APIFetcher {
     }
 
     @discardableResult
-    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions = .none,
-                              sessionDelegate: URLSessionTaskDelegate? = nil,
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet = [], sessionDelegate: URLSessionTaskDelegate? = nil,
                               completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
         var transformedRequest = request
         for middleware in requestMiddlewares {
@@ -95,19 +101,49 @@ final class API: APIFetcher {
         }
 
         #if DEBUG
-        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")")
+        var body = ""
+
+        if let data = transformedRequest.body() {
+            body = ": \(String(data: data, encoding: .utf8) ?? "")"
+        }
+
+        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")\(body)")
         #endif
 
         let task = session.dataTask(with: request) { (data, _, error) in
+            func completeWithResponse(_ response: APIResponse<R.APIResourceType>) {
+                switch response {
+                case .resource:
+                    DispatchQueue.main.async {
+                        completion?(response)
+                    }
+                case .error:
+                    if options.retries > 0 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                            self.fetch(
+                                transformedRequest,
+                                options: options.withRetries(options.retries - 1),
+                                sessionDelegate: sessionDelegate,
+                                completion: completion
+                            )
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion?(response)
+                        }
+                    }
+                }
+            }
+
             if let error = error as NSError? {
                 #if DEBUG
                 Log.debug("[REST][RESULT][ERROR][\(request.url?.absoluteString ?? "")]: \(error)")
                 #endif
 
                 if NSError.sslErrors.contains(error.code) {
-                    completion?(.error(.notSecured))
+                    completeWithResponse(.error(.notSecured))
                 } else {
-                    completion?(.error(.error(error)))
+                    completeWithResponse(.error(.error(error)))
                 }
 
                 return
@@ -123,7 +159,7 @@ final class API: APIFetcher {
             }
 
             let json = try? JSON(data: data)
-            completion?(APIResponse<R.APIResourceType>.resource(R.APIResourceType(raw: json)))
+            completeWithResponse(APIResponse<R.APIResourceType>.resource(R.APIResourceType(raw: json)))
 
             #if DEBUG
             Log.debug("[REST][RESULT][\(request.url?.absoluteString ?? "")]: \(json?.rawString() ?? "").")

@@ -97,6 +97,68 @@ class SubscriptionSpec: XCTestCase {
         })
     }
 
+    func testMapLastSeenDateInteger() {
+        let interval = 123456789
+        let object = JSON([
+            "_id": "identifier",
+            "ls": ["$date": interval]
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromInterval(123456789))
+    }
+
+    func testMapLastSeenDateString() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+        let object = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
+    func testMapLastSeenUpdated() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+        let interval = 123456789
+
+        let object1 = JSON([
+            "_id": "identifier",
+            "ls": ["$date": interval]
+        ])
+
+        let object2 = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object1, realm: nil)
+        subscription.map(object2, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
+    func testMapLastSeenUpdatedEmpty() {
+        let lastSeen = "2018-05-16T13:08:39.118Z"
+
+        let object1 = JSON([
+            "_id": "identifier",
+            "ls": lastSeen
+        ])
+
+        let object2 = JSON([
+            "_id": "identifier"
+        ])
+
+        let subscription = Subscription()
+        subscription.map(object1, realm: nil)
+        subscription.map(object2, realm: nil)
+        XCTAssertEqual(subscription.lastSeen, Date.dateFromString(lastSeen))
+    }
+
     func testMapRoom() {
         let object = JSON([
             "_id": "room-id",
@@ -107,6 +169,7 @@ class SubscriptionSpec: XCTestCase {
             "muted": [ "username" ],
             "jitsiTimeout": [ "$date": 1480377601 ],
             "ro": true,
+            "broadcast": true,
             "description": "room-description"
         ])
 
@@ -117,7 +180,62 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.roomTopic, "room-topic")
         XCTAssertEqual(subscription.roomDescription, "room-description")
         XCTAssertEqual(subscription.roomReadOnly, true)
+        XCTAssertEqual(subscription.roomBroadcast, true)
         XCTAssertEqual(subscription.roomOwnerId, "user-id")
+    }
+
+    func testMapRoomReadOnlyFalse() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "ro": false
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomReadOnly, false)
+    }
+
+    func testMapRoomReadOnlyEmpty() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name"
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomReadOnly, false)
+    }
+
+    func testMapRoomBroadcastFalse() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "broadcast": false
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomBroadcast, false)
+    }
+
+    func testMapRoomBroadcastEmpty() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name"
+        ])
+
+        let subscription = Subscription()
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomBroadcast, false)
     }
 
     func testSubscriptionDisplayNameHonorFullnameSettings() {
@@ -266,4 +384,3 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
     }
 }
-

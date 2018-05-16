@@ -37,6 +37,10 @@ extension Subscription: ModelMappeable {
             self.createdAt = Date.dateFromInterval(createdAt)
         }
 
+        if let lastSeen = values["ls"].string {
+            self.lastSeen = Date.dateFromString(lastSeen)
+        }
+
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
@@ -46,9 +50,8 @@ extension Subscription: ModelMappeable {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
 
-        self.roomMuted.removeAll()
-        if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
-            self.roomMuted.append(objectsIn: roomMuted)
+        if let broadcast = values["broadcast"].bool {
+            self.roomBroadcast = broadcast
         }
 
         if let readOnly = values["ro"].bool {
@@ -57,6 +60,11 @@ extension Subscription: ModelMappeable {
 
         if let ownerId = values["u"]["_id"].string {
             self.roomOwnerId = ownerId
+        }
+
+        self.roomMuted.removeAll()
+        if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
+            self.roomMuted.append(objectsIn: roomMuted)
         }
     }
 }

@@ -13,8 +13,13 @@ import SwiftyJSON
 
 class RoomMembersRequestSpec: APITestCase {
     func testRequestWithRoomId() {
+<<<<<<< HEAD:Rocket.ChatTests/API/Requests/Room/RoomMembersRequestSpec.swift
         let preRequest = RoomMembersRequest(roomId: "ByehQjC44FwMeiLbX")
         guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+=======
+        let preRequest = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
+        guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
+>>>>>>> 64469aa7435e64208ad8f7e9b8c2d5b4c5ac7eaa:Rocket.ChatTests/API/Requests/Subscription/SubscriptionMembersRequestSpec.swift
             return XCTFail("request is not nil")
         }
         let url = api.host.appendingPathComponent(preRequest.path)
@@ -26,8 +31,13 @@ class RoomMembersRequestSpec: APITestCase {
     }
 
     func testRequestWithRoomName() {
+<<<<<<< HEAD:Rocket.ChatTests/API/Requests/Room/RoomMembersRequestSpec.swift
         let preRequest = RoomMembersRequest(roomName: "testing")
         guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+=======
+        let preRequest = SubscriptionMembersRequest(roomName: "testing")
+        guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
+>>>>>>> 64469aa7435e64208ad8f7e9b8c2d5b4c5ac7eaa:Rocket.ChatTests/API/Requests/Subscription/SubscriptionMembersRequestSpec.swift
             return XCTFail("request is not nil")
         }
         let url = api.host.appendingPathComponent(preRequest.path)

@@ -31,7 +31,7 @@ class PermissionSpec: XCTestCase {
     ])
 
     func testMap() {
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.map(testJSON, realm: nil)
 
         XCTAssertTrue(permission.roles.contains("owner"), "has owner role")

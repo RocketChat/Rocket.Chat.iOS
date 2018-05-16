@@ -23,7 +23,7 @@ fileprivate extension SubscriptionType {
     }
 }
 
-class RoomFilesRequest: APIRequest {
+final class RoomFilesRequest: APIRequest {
     typealias APIResourceType = RoomFilesResource
 
     var path: String {

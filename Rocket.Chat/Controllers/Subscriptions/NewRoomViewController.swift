@@ -179,7 +179,7 @@ class NewRoomViewController: BaseViewController {
                     return
                 }
 
-                SubscriptionManager.updateSubscriptions(auth) { _ in
+                SubscriptionManager.updateSubscriptions(auth) {
                     if let newRoom = Realm.current?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
                         let controller = ChatViewController.shared

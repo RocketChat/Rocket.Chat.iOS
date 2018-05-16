@@ -75,7 +75,9 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
                     self.stopLoadingPreview(thumbnail)
                 }
             } catch {
-                self.stopLoadingPreview(nil)
+                DispatchQueue.main.async {
+                    self.stopLoadingPreview(nil)
+                }
             }
         }
     }

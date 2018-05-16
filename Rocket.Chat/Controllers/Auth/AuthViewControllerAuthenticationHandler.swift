@@ -7,46 +7,54 @@
 //
 
 import Foundation
+import RealmSwift
 
 extension AuthViewController {
-    internal func handleAuthenticationResponse(_ response: SocketResponse) {
-        if response.isError() {
+    internal func handleAuthenticationResponse(_ response: LoginResponse) {
+        if case let .resource(resource) = response, let error = resource.error {
             stopLoading()
 
-            if let error = response.result["error"].dictionary {
-                // User is using 2FA
-                if error["error"]?.string == "totp-required" {
-                    performSegue(withIdentifier: "TwoFactor", sender: nil)
-                    return
-                }
-
-                Alert(key: "error.socket.default_error").present()
+            switch error.lowercased() {
+            case "totp-required":
+                performSegue(withIdentifier: "TwoFactor", sender: nil)
+            case "unauthorized":
+                Alert(key: "error.login_unauthorized").present()
+                return
+            default:
+                Alert(key: "error.login").present()
+                return
             }
 
-            return
-        }
+            if let publicSettings = serverPublicSettings {
+                AuthSettingsManager.persistPublicSettings(settings: publicSettings)
+            }
 
-        if let publicSettings = serverPublicSettings {
-            AuthSettingsManager.persistPublicSettings(settings: publicSettings)
+            if let realm = Realm.current, let auth = AuthManager.isAuthenticated(realm: realm), let version = serverVersion {
+                try? realm.write {
+                    auth.serverVersion = version.description
+                }
+            }
         }
 
         API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
-                guard let strongSelf = self else { return }
-
-                SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+                if let token = self?.socketHandlerToken {
+                    SocketManager.removeConnectionHandler(token: token)
+                }
 
                 if let user = resource.user {
+
+                    let realm = Realm.current
+                    try? realm?.write {
+                        realm?.add(user, update: true)
+                    }
+
                     if user.username != nil {
-                        DispatchQueue.main.async {
-                            strongSelf.dismiss(animated: true, completion: nil)
-                            AppManager.reloadApp()
-                        }
+                        self?.dismiss(animated: true, completion: nil)
+                        AppManager.reloadApp()
                     } else {
-                        DispatchQueue.main.async {
-                            strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                        }
+                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 } else {
                     self?.stopLoading()

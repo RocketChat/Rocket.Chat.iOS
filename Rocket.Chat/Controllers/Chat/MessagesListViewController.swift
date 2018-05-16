@@ -109,7 +109,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
         let request = RoomMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
@@ -130,7 +130,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
         let request = RoomMentionsRequest(roomId: subscription.rid)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
@@ -204,11 +204,9 @@ class MessagesListViewController: BaseViewController {
         data.isListingMentions = self.data.isListingMentions
         data.loadMoreMessages {
             self.data = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
-            }
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
         }
     }
 
@@ -231,24 +229,20 @@ class MessagesListViewController: BaseViewController {
 
     func loadMoreMessages() {
         data.loadMoreMessages {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
-            }
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
         }
     }
 
     func searchMessages(withText text: String) {
         data.searchMessages(withText: text) {
-            DispatchQueue.main.async {
-                if self.searchBar.text == nil || self.searchBar.text == "" {
-                    self.data.cellsPages = []
-                }
-
-                self.collectionView.reloadData()
-                self.updateIsEmptyMessage()
+            if self.searchBar.text == nil || self.searchBar.text == "" {
+                self.data.cellsPages = []
             }
+
+            self.collectionView.reloadData()
+            self.updateIsEmptyMessage()
         }
     }
 }

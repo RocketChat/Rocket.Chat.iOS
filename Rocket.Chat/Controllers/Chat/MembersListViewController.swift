@@ -40,7 +40,7 @@ class MembersListViewData {
             isLoadingMoreMembers = true
 
             let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
             API.current()?.fetch(request, options: options) { [weak self] response in
                 guard let strongSelf = self else { return }
@@ -77,30 +77,26 @@ class MembersListViewController: BaseViewController {
         data.loadMoreMembers { [weak self] in
             self?.data = data
 
-            DispatchQueue.main.async {
-                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
-                    self?.membersTableView?.refreshControl?.endRefreshing()
-                }
+            if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                self?.membersTableView?.refreshControl?.endRefreshing()
+            }
 
-                UIView.performWithoutAnimation {
-                    self?.membersTableView?.reloadData()
-                }
+            UIView.performWithoutAnimation {
+                self?.membersTableView?.reloadData()
             }
         }
     }
 
     func loadMoreMembers() {
         data.loadMoreMembers { [weak self] in
-            DispatchQueue.main.async {
-                self?.title = self?.data.title
+            self?.title = self?.data.title
 
-                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
-                    self?.membersTableView?.refreshControl?.endRefreshing()
-                }
+            if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                self?.membersTableView?.refreshControl?.endRefreshing()
+            }
 
-                UIView.performWithoutAnimation {
-                    self?.membersTableView?.reloadData()
-                }
+            UIView.performWithoutAnimation {
+                self?.membersTableView?.reloadData()
             }
         }
     }
