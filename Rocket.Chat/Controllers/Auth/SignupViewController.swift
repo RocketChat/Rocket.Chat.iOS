@@ -117,7 +117,7 @@ final class SignupViewController: BaseViewController {
             if response.isError() {
                 if let error = response.result["error"].dictionary {
                     Alert(
-                        title: "error.socket.default_error",
+                        title: localized("error.socket.default_error.title"),
                         message: error["message"]?.string ?? localized("error.socket.default_error.message")
                     ).present()
                 }
