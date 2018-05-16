@@ -37,6 +37,10 @@ extension Subscription: ModelMappeable {
             self.createdAt = Date.dateFromInterval(createdAt)
         }
 
+        if let lastSeen = values["ls"].string {
+            self.lastSeen = Date.dateFromString(lastSeen)
+        }
+
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
