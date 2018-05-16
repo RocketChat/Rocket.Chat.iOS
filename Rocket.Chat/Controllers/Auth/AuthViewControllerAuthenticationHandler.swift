@@ -36,24 +36,26 @@ extension AuthViewController {
             }
         }
 
-        API.current()?.fetch(MeRequest()) { response in
+        API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
-                SocketManager.removeConnectionHandler(token: self.socketHandlerToken)
+                if let token = self?.socketHandlerToken {
+                    SocketManager.removeConnectionHandler(token: token)
+                }
 
                 if let user = resource.user {
                     if user.username != nil {
-                        self.dismiss(animated: true, completion: nil)
+                        self?.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
                     } else {
-                        self.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 } else {
-                    self.stopLoading()
+                    self?.stopLoading()
                     Alert(key: "error.socket.default_error").present()
                 }
             case .error:
-                self.stopLoading()
+                self?.stopLoading()
             }
         }
     }
