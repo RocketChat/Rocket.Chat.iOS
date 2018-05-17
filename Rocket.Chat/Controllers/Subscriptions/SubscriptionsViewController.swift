@@ -356,6 +356,12 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            cell.accessoryType = .none
+        } else {
+            cell.accessoryType = .disclosureIndicator
+        }
+
         if let subscription = subscription(for: indexPath) {
             cell.subscription = subscription
         }
