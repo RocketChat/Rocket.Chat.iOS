@@ -7,6 +7,12 @@
 "error.socket.default_error.title" = "Ωπ!";
 "error.socket.default_error.message" = "Συνέβη κάποιο σφάλμα, παρακαλούμε ξαναπροσπαθήστε.";
 
+"error.login.title" = "Ωπ!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Ωπ!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
+
 // Alerts
 "alert.connection.invalid_url.title" = "Ωπ!";
 "alert.connection.invalid_url.message" = "Το URL που εισάγατε είναι άκυρο. Παρακαλούμε ελέγξτε το και ξαναπροσπαθήστε!";
@@ -234,7 +240,7 @@
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.files" = "Arquivos"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "Μέλη";

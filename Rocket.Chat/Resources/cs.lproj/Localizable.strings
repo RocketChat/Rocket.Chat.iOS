@@ -7,6 +7,12 @@
 "error.socket.default_error.title" = "Jejky!";
 "error.socket.default_error.message" = "Něco se pokazilo, zkuste to prosím znovu.";
 
+"error.login.title" = "Jejky!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Jejky!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
+
 // Alerts
 "alert.connection.invalid_url.title" = "Jejky!";
 "alert.connection.invalid_url.message" = "Zadaná adresa URL je neplatná. Zkontrolujte to a zkuste to znovu, prosím!";
@@ -234,7 +240,7 @@
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.files" = "Arquivos"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "Členové";

@@ -18,8 +18,11 @@ protocol RealmTestCase {
 extension RealmTestCase {
 
     func testRealm() -> Realm {
-        // swiftlint:disable:next force_try
-        return try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: String.random(40)))
+        if let realm = try? Realm(configuration: Realm.Configuration(inMemoryIdentifier: String.random(40))) {
+            return realm
+        }
+
+        fatalError("Could not instantiate test realm")
     }
 
 }

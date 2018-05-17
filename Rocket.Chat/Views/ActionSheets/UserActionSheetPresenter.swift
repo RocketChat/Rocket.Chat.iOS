@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UserActionSheetPresenter {
+protocol UserActionSheetPresenter: Closeable {
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?)
 }
 
@@ -23,7 +23,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
 
             AppManager.openDirectMessage(username: username) {
                 controller.dismiss(animated: true, completion: nil)
-                self?.dismiss(animated: true, completion: nil)
+                self?.close(animated: true)
             }
         }))
 

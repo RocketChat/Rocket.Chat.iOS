@@ -40,10 +40,6 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
 
         client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user, realm: realm)
 
-        let messages = realm.objects(Message.self)
-        XCTAssertEqual(messages.count, 1)
-        XCTAssertEqual(realm.objects(Message.self).first?.temporary, true)
-
         let expectation = XCTestExpectation(description: "message updated in realm")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             if realm.objects(Message.self).first?.temporary == false {

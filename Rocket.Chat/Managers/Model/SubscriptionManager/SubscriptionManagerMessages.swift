@@ -23,13 +23,12 @@ extension SubscriptionManager {
     }
 
     static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
-
         let request = [
             "msg": "method",
             "method": "sendMessage",
             "params": [[
                 "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
+                "rid": message.subscription?.rid ?? "",
                 "msg": message.text
             ]]
         ] as [String: Any]

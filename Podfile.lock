@@ -5,22 +5,22 @@ PODS:
   - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
-  - Instabug (7.11.2):
-    - Instabug/Instabug (= 7.11.2)
-    - Instabug/InstabugCore (= 7.11.2)
-  - Instabug/Instabug (7.11.2):
+  - Instabug (7.12.7):
+    - Instabug/Instabug (= 7.12.7)
+    - Instabug/InstabugCore (= 7.12.7)
+  - Instabug/Instabug (7.12.7):
     - Instabug/InstabugCore
-  - Instabug/InstabugCore (7.11.2)
+  - Instabug/InstabugCore (7.12.7)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.6)
   - ReachabilitySwift (4.1.0)
-  - Realm (3.1.1):
-    - Realm/Headers (= 3.1.1)
-  - Realm/Headers (3.1.1)
-  - RealmSwift (3.1.1):
-    - Realm (= 3.1.1)
+  - Realm (3.5.0):
+    - Realm/Headers (= 3.5.0)
+  - Realm/Headers (3.5.0)
+  - RealmSwift (3.5.0):
+    - Realm (= 3.5.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -35,8 +35,8 @@ PODS:
     - SDWebImage/GIF
   - SlackTextViewController (1.9.6)
   - Starscream (2.1.1)
-  - SwiftLint (0.25.0)
-  - SwiftyJSON (4.0.0)
+  - SwiftLint (0.25.1)
+  - SwiftyJSON (4.1.0)
   - TagListView (1.3.0)
 
 DEPENDENCIES:
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - TagListView (~> 1.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
     - Crashlytics
     - Fabric
@@ -115,14 +115,14 @@ SPEC CHECKSUMS:
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  Instabug: 3544cf0d0481af01f659ae50dbe426e5d86c5479
+  Instabug: bd712783b3a2035b4a0b7ce474839b8cc9f3a9c6
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
-  RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
+  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
+  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
@@ -130,10 +130,10 @@ SPEC CHECKSUMS:
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
 PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

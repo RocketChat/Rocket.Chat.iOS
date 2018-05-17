@@ -42,7 +42,7 @@ class FilesListViewData {
         if let subscription = subscription {
             isLoadingMoreFiles = true
 
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
             let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {
@@ -56,7 +56,6 @@ class FilesListViewData {
     }
 
     private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
-        DispatchQueue.main.async {
             self.showing += result.count ?? 0
             self.total = result.total ?? 0
 
@@ -74,7 +73,6 @@ class FilesListViewData {
 
             self.isLoadingMoreFiles = false
             completion?()
-        }
     }
 }
 
@@ -89,11 +87,9 @@ class FilesListViewController: BaseViewController {
         data.subscription = self.data.subscription
         data.loadMoreFiles {
             self.data = data
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
-                self.updateIsEmptyFile()
-            }
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+            self.updateIsEmptyFile()
         }
     }
 
@@ -109,11 +105,9 @@ class FilesListViewController: BaseViewController {
 
     func loadMoreFiles() {
         data.loadMoreFiles {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
-                self.updateIsEmptyFile()
-            }
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+            self.updateIsEmptyFile()
         }
     }
 
@@ -179,6 +173,7 @@ class FilesListViewController: BaseViewController {
         func open() {
             documentController = UIDocumentInteractionController(url: localFileURL)
             documentController?.delegate = self
+
             DispatchQueue.main.async {
                 self.documentController?.presentPreview(animated: true)
             }

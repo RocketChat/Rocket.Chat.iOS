@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class File: BaseModel {
+final class File: BaseModel {
     @objc dynamic var name = ""
     @objc dynamic var rid = ""
     @objc dynamic var size: Double = 0
@@ -31,8 +31,7 @@ extension File {
     }
 
     var isImage: Bool {
-        let imageTypes = ["gif", "jpg", "png", "jpeg", "image"]
-        return imageTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+        return type.range(of: "image", options: .caseInsensitive) != nil
     }
 
     var isGif: Bool {
@@ -41,13 +40,11 @@ extension File {
     }
 
     var isVideo: Bool {
-        let videoTypes = ["mp4", "mov", "video", "flv"]
-        return videoTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+        return type.range(of: "video", options: .caseInsensitive) != nil
     }
 
     var isAudio: Bool {
-        let audioTypes = ["mp3", "wav", "3gp", "audio"]
-        return audioTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+        return type.range(of: "audio", options: .caseInsensitive) != nil
     }
 
     var isDocument: Bool {

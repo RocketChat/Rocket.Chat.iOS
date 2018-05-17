@@ -141,36 +141,6 @@ extension MessageManager {
         }
     }
 
-    static func pin(_ message: Message) {
-        guard let messageIdentifier = message.identifier else { return }
-
-        let request = [
-            "msg": "method",
-            "method": "pinMessage",
-            "params": [[
-                "rid": message.rid,
-                "_id": messageIdentifier
-            ]]
-        ] as [String: Any]
-
-        SocketManager.send(request)
-    }
-
-    static func unpin(_ message: Message) {
-        guard let messageIdentifier = message.identifier else { return }
-
-        let request = [
-            "msg": "method",
-            "method": "unpinMessage",
-            "params": [[
-                "rid": message.rid,
-                "_id": messageIdentifier
-            ]]
-        ] as [String: Any]
-
-        SocketManager.send(request)
-    }
-
     static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
@@ -199,11 +169,7 @@ extension MessageManager {
             }
 
             realm.add(messages, update: true)
-
-            DispatchQueue.main.async {
-                completion()
-            }
-        })
+        }, completion: completion)
     }
 
 }

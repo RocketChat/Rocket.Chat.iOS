@@ -42,7 +42,8 @@ extension ChatViewController {
     func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
         guard
             let messageUser = message.user,
-            let auth = AuthManager.isAuthenticated()
+            let auth = AuthManager.isAuthenticated(),
+            let client = API.current()?.client(MessagesClient.self)
         else {
             return []
         }
@@ -72,11 +73,7 @@ extension ChatViewController {
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
             let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
-                if message.pinned {
-                    MessageManager.unpin(message)
-                } else {
-                    MessageManager.pin(message)
-                }
+                client.pinMessage(message, pin: !message.pinned)
             })
 
             actions.append(pin)
@@ -86,7 +83,7 @@ extension ChatViewController {
             let isStarred = message.starred.contains(userId)
             let starMessage = isStarred ? localized("chat.message.actions.unstar") : localized("chat.message.actions.star")
             let star = UIAlertAction(title: starMessage, style: .default, handler: { (_) in
-                API.current()?.client(MessagesClient.self).starMessage(message, star: !isStarred)
+                client.starMessage(message, star: !isStarred)
             })
 
             actions.append(star)
@@ -94,11 +91,9 @@ extension ChatViewController {
 
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-                DispatchQueue.main.async {
-                    MessageManager.blockMessagesFrom(messageUser, completion: {
-                        self?.updateSubscriptionInfo()
-                    })
-                }
+                MessageManager.blockMessagesFrom(messageUser, completion: {
+                    self?.updateSubscriptionInfo()
+                })
             })
 
             actions.append(block)
@@ -231,9 +226,7 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            Alert(
-                key: "chat.message.report.success.title"
-            ).present()
+            Alert(key: "chat.message.report.success.title").present()
         }
     }
 }

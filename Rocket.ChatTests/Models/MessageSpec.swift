@@ -23,7 +23,7 @@ extension Message {
         message.rid = "\(name)-rid"
         message.subscription = Subscription.testInstance()
         message.identifier = "\(name)-identifier"
-        message.subscription.type = .channel
+        message.subscription?.type = .channel
         message.createdAt = Date()
         return message
     }
@@ -80,7 +80,7 @@ class MessageSpec: XCTestCase {
         message.subscription = subscription
 
         XCTAssert(message.identifier == "message-object-1", "Message relationship with Subscription is OK")
-        XCTAssert(message.subscription.identifier == "message-subscription-1", "Message relationship with Subscription is OK")
+        XCTAssert(message.subscription?.identifier == "message-subscription-1", "Message relationship with Subscription is OK")
         XCTAssert(message.user?.identifier == "message-user-1", "Message relationship with Subscription is OK")
     }
 
@@ -172,33 +172,123 @@ extension MessageSpec {
     func testQuoteString() {
         let message = Message.testInstance()
 
-        message.subscription.type = .channel
+        message.subscription?.type = .channel
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel quoteString is correct")
-        message.subscription.type = .group
+        message.subscription?.type = .group
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group quoteString is correct")
-        message.subscription.type = .directMessage
+        message.subscription?.type = .directMessage
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
 
         message.identifier = nil
         XCTAssertNil(message.quoteString, "quoteString is nil when message identifier is nil")
-        message.subscription.auth?.settings?.siteURL = nil
+        message.subscription?.auth?.settings?.siteURL = nil
         XCTAssertNil(message.quoteString, "quoteString is nil when there's no siteURL")
     }
 
     func testReplyString() {
         let message = Message.testInstance()
 
-        message.subscription.type = .channel
+        message.subscription?.type = .channel
         XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
-        message.subscription.type = .group
+        message.subscription?.type = .group
         XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
-        message.subscription.type = .directMessage
+        message.subscription?.type = .directMessage
         XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
 
         message.identifier = nil
         XCTAssertNil(message.replyString, "replyString is nil when message identifier is nil")
-        message.subscription.auth?.settings?.siteURL = nil
+        message.subscription?.auth?.settings?.siteURL = nil
         XCTAssertNil(message.replyString, "replyString is nil when there's no siteURL")
+    }
+
+}
+
+// MARK: Broadcast
+
+extension MessageSpec: RealmTestCase {
+
+    func testMessageBroadcastTrue() {
+        let realm = testRealm()
+
+        let auth = Auth()
+        auth.serverURL = "https://foo.com/"
+        auth.token = "123"
+        auth.tokenExpires = Date()
+        auth.lastAccess = Date()
+        auth.userId = "1"
+
+        let user = User()
+        user.identifier = "1"
+
+        let userOther = User()
+        userOther.identifier = "2"
+
+        Realm.executeOnMainThread(realm: realm, { realm in
+            realm.add(auth)
+            realm.add(user)
+        })
+
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.user = userOther
+
+        XCTAssertTrue(message.isBroadcastReplyAvailable(realm: realm))
+    }
+
+    func testMessageSystemBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.internalType = MessageType.roomArchived.rawValue
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageTemporaryBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.temporary = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageFailedBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageCurrentUserBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
     }
 
 }
