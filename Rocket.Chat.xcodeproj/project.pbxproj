@@ -108,7 +108,6 @@
 		3370D8BE2095978800EEA225 /* UserActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8BD2095978800EEA225 /* UserActionSheetPresenter.swift */; };
 		3370D8C0209598C100EEA225 /* AuthCanStarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8BF209598C000EEA225 /* AuthCanStarMessage.swift */; };
 		3370D8C22095995900EEA225 /* StarMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C12095995800EEA225 /* StarMessageRequest.swift */; };
-		3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */; };
 		3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */; };
 		3370D8CE2096261F00EEA225 /* NotThemeableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableViews.swift */; };
 		3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */; };
@@ -564,12 +563,7 @@
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManagerCurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* AuthUser.swift */; };
-		80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF5208FC57100034D1F /* PreferencesViewController.swift */; };
-		80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */; };
-		80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DFC2092378400034D1F /* StarMessageRequest.swift */; };
-		80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */; };
 		80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */; };
-		80D41E0520924A8200034D1F /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */; };
 		80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E062099341C00034D1F /* PermissionsRequest.swift */; };
 		80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E082099393600034D1F /* PermissionsRequestSpec.swift */; };
 		80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0A20993CE200034D1F /* PinMessageRequest.swift */; };
@@ -814,7 +808,6 @@
 		3370D8BD2095978800EEA225 /* UserActionSheetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSheetPresenter.swift; sourceTree = "<group>"; };
 		3370D8BF209598C000EEA225 /* AuthCanStarMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessage.swift; sourceTree = "<group>"; };
 		3370D8C12095995800EEA225 /* StarMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequest.swift; sourceTree = "<group>"; };
-		3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
 		3370D8CD2096261F00EEA225 /* NotThemeableViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableViews.swift; sourceTree = "<group>"; };
 		3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
@@ -1264,12 +1257,7 @@
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
-		80D41DF5208FC57100034D1F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionSheetPresenter.swift; sourceTree = "<group>"; };
-		80D41DFC2092378400034D1F /* StarMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarMessageRequest.swift; sourceTree = "<group>"; };
-		80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessage.swift; sourceTree = "<group>"; };
 		80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
-		80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
 		80D41E062099341C00034D1F /* PermissionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequest.swift; sourceTree = "<group>"; };
 		80D41E082099393600034D1F /* PermissionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequestSpec.swift; sourceTree = "<group>"; };
 		80D41E0A20993CE200034D1F /* PinMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequest.swift; sourceTree = "<group>"; };
@@ -2265,6 +2253,7 @@
 				106DAA428B5BF7289FB70C65 /* Frameworks */,
 				EE693BBD0CC2727847214E2D /* Pods */,
 				41DF76E01D2C50710028DBF8 /* Products */,
+				330890A420AB8A3B001BD560 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2643,7 +2632,7 @@
 				80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
 				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
-				3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */,
+				80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
