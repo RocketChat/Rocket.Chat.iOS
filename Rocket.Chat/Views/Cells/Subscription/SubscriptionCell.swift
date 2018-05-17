@@ -85,7 +85,7 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-        labelLastMessage.attributedText = subscription.lastMessageText()
+        labelLastMessage.text = subscription.lastMessageText()
 
         if subscription.displayName() == user.username {
             labelName.text?.append(" (" + localized("subscriptions.you") + ")")
