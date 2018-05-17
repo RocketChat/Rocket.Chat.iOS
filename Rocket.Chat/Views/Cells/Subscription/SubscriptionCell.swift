@@ -17,8 +17,8 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
     internal let defaultBackgroundColor = UIColor.clear
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.1)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.15)
+    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
+    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
     var subscription: Subscription? {
         didSet {
@@ -94,8 +94,10 @@ final class SubscriptionCell: UITableViewCell {
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
 
-        if let roomUpdatedAt = subscription.roomUpdatedAt {
-            labelDate.text = dateFormatted(date: roomUpdatedAt)
+        if let roomLastMessage = subscription.roomLastMessageDate {
+            labelDate.text = dateFormatted(date: roomLastMessage)
+        } else {
+            labelDate.text = nil
         }
 
         if subscription.unread > 0 {

@@ -43,7 +43,6 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         updateData()
-        tableView?.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
@@ -258,20 +257,31 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateSubscriptionsList() {
-        DispatchQueue.main.async {
-            let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
+        let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
 
-            self.updateBackButton()
+        self.updateBackButton()
 
-            // If the list were empty, let's just refresh everything.
-            if visibleRows.count == 0 {
-                self.tableView.reloadData()
-                return
+        // If the list were empty, let's just refresh everything.
+        if visibleRows.count == 0 {
+            self.tableView.reloadData()
+            return
+        }
+
+        var selectedSubscriptionIdentifier: Subscription?
+        if let nav = splitViewController?.detailViewController as? BaseNavigationController {
+            if let controller = nav.viewControllers.first as? ChatViewController {
+                selectedSubscriptionIdentifier = controller.subscription
             }
+        }
 
-            for indexPath in visibleRows {
-                if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
-                    subscriptionCell.subscription = self.subscriptions?[indexPath.row]
+        for indexPath in visibleRows {
+            if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
+                subscriptionCell.subscription = self.subscriptions?[indexPath.row]
+
+                if subscriptionCell.subscription == selectedSubscriptionIdentifier {
+                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                } else if indexPath == tableView.indexPathForSelectedRow {
+                    tableView.deselectRow(at: indexPath, animated: false)
                 }
             }
         }
@@ -330,7 +340,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 71
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -363,7 +373,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         // When using iPads, we override the detail controller creating
         // a new instance.
-        if let _ = splitViewController?.detailViewController as? BaseNavigationController {
+        if splitViewController?.detailViewController as? BaseNavigationController != nil {
             if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
                 controller.subscription = subscription
 

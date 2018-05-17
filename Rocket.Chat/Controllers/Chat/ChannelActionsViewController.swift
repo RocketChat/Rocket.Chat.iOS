@@ -16,7 +16,7 @@ class ChannelActionsViewController: BaseViewController {
 
     weak var buttonFavorite: UIBarButtonItem?
 
-    var tableViewData: [[Any]] = [] {
+    var tableViewData: [[Any?]] = [] {
         didSet {
             tableView?.reloadData()
         }
@@ -28,21 +28,19 @@ class ChannelActionsViewController: BaseViewController {
 
             let shouldListMentions = subscription.type != .directMessage
 
-            let data = [[
-                ChannelInfoUserCellData(user: subscription.directMessageUser)
-            ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", action: nil)
-//                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", action: nil),
-//                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", action: nil)
-            ], [
+            var header: [Any?]? = nil
+
+            if subscription.type == .directMessage {
+                header = [ChannelInfoUserCellData(user: subscription.directMessageUser)]
+            }
+
+            let data = [header, [
                 ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: showFilesList),
                 shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: showMentionsList) : nil,
                 ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Search"), title: "Search", action: nil),
                 ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Snippets"), title: "Snippets", action: nil)
+                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList)
             ]]
 
             tableViewData = data.compactMap({ $0 })
