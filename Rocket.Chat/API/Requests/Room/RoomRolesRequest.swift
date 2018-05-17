@@ -1,5 +1,5 @@
 //
-//  SubscriptionRolesRequest.swift
+//  RoomRolesRequest.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 11/05/18.
@@ -43,10 +43,10 @@ final class RoomRolesRequest: APIRequest {
 }
 
 final class RoomRolesResource: APIResource {
-    var subscriptionRoles: [SubscriptionRoles]? {
+    var roomRoles: [RoomRoles]? {
         guard let realm = Realm.current else { return nil }
         return raw?["roles"].arrayValue.map {
-            let object = SubscriptionRoles()
+            let object = RoomRoles()
             object.user = User.getOrCreate(realm: realm, values: $0["u"], updates: nil)
             object.roles.append(contentsOf: $0["roles"].arrayValue.compactMap({ $0.string }))
             return object

@@ -175,7 +175,7 @@ extension MembersListViewController: UITableViewDataSource {
 extension MembersListViewController: UITableViewDelegate, UserActionSheetPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presentActionSheetForUser(data.member(at: indexPath.row), source: (tableView, tableView.rectForRow(at: indexPath)))
+        presentActionSheetForUser(data.member(at: indexPath.row), subscription: data.subscription, source: (tableView, tableView.rectForRow(at: indexPath)))
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

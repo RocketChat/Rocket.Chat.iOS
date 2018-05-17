@@ -315,3 +315,5 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Konversation";
+"user_action_sheet.remove" = "Remove from room"; // TODO
+

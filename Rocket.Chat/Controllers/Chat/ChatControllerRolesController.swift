@@ -27,7 +27,7 @@ extension ChatViewController {
                 if let subscription = Subscription.find(rid: rid) {
                     Realm.executeOnMainThread({ (realm) in
                         subscription.usersRoles.removeAll()
-                        resource.subscriptionRoles?.forEach({ (role) in
+                        resource.roomRoles?.forEach({ (role) in
                             subscription.usersRoles.append(role)
                         })
 

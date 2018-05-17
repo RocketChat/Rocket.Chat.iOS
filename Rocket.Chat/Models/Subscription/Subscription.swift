@@ -57,10 +57,10 @@ final class Subscription: BaseModel {
 
     // User's roles on the subscription, this values
     // aren't stored in database.
-    let usersRoles = List<SubscriptionRoles>()
+    let usersRoles = List<RoomRoles>()
 }
 
-final class SubscriptionRoles: Object {
+final class RoomRoles: Object {
     @objc dynamic var user: User?
     var roles = List<String>()
 }

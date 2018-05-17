@@ -9,11 +9,11 @@
 import Foundation
 
 protocol UserActionSheetPresenter: Closeable {
-    func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?)
+    func presentActionSheetForUser(_ user: User, subscription: Subscription?, source: (view: UIView?, rect: CGRect?)?)
 }
 
 extension UserActionSheetPresenter where Self: UIViewController {
-    func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)? = nil) {
+    func presentActionSheetForUser(_ user: User, subscription: Subscription? = nil, source: (view: UIView?, rect: CGRect?)? = nil) {
         let controller = UIAlertController(title: user.displayName(), message: nil, preferredStyle: .actionSheet)
         controller.popoverPresentationController?.sourceView = source?.view
         controller.popoverPresentationController?.sourceRect = source?.rect ?? source?.view?.frame ?? .zero
@@ -26,6 +26,12 @@ extension UserActionSheetPresenter where Self: UIViewController {
                 self?.close(animated: true)
             }
         }))
+
+        if let subscription = subscription {
+            if user.hasPermission(.removeUser, subscription: subscription) {
+                controller.addAction(UIAlertAction(title: localized("user_action_sheet.remove"), style: .destructive))
+            }
+        }
 
         controller.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
 

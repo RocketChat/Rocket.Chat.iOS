@@ -527,6 +527,8 @@
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
+		80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1820ACE320009D64DF /* UserPermissions.swift */; };
+		80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80D0CE5C204FFAA50056B17F /* SEServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE5B204FFAA50056B17F /* SEServerCell.xib */; };
@@ -1214,6 +1216,8 @@
 		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80CC8A1820ACE320009D64DF /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
+		80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerUserActionPresenter.swift; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
 		80CFB5731F8DA55C00FC9715 /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		80D0CE5B204FFAA50056B17F /* SEServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEServerCell.xib; sourceTree = "<group>"; };
@@ -2271,6 +2275,7 @@
 				41C45AEE1DFAD42800D9969C /* ChatDataController.swift */,
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 				41B9635F207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift */,
+				80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */,
 				4112BEEB1E7971A400E734CB /* MainChatViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
@@ -2619,6 +2624,7 @@
 				41A79C0E1D2F085F00A1968E /* User.swift */,
 				8076FDD5204864E700114F28 /* UserQueries.swift */,
 				8076FDD72048654F00114F28 /* UserUtils.swift */,
+				80CC8A1820ACE320009D64DF /* UserPermissions.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -3785,6 +3791,7 @@
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
 				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
 				0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */,
+				80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */,
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
@@ -3983,6 +3990,7 @@
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,

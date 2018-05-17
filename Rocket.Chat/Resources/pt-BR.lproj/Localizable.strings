@@ -315,3 +315,4 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversa";
+"user_action_sheet.remove" = "Remover do canal"; // TODO
