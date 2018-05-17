@@ -133,7 +133,7 @@ final class PreferencesViewController: UITableViewController {
     }
 
     // MARK: Navigation
-
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let webBrowser = segue.destination as? WebBrowserTableViewController {
             webBrowser.updateDefaultWebBrowser = { [weak self] in

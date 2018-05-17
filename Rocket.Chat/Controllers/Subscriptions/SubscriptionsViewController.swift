@@ -52,7 +52,17 @@ final class SubscriptionsViewController: BaseViewController {
     // MARK: Storyboard Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        segue.destination.modalPresentationCapturesStatusBarAppearance = true
+        if segue.identifier == "User" {
+            segue.destination.modalPresentationCapturesStatusBarAppearance = true
+
+            if let controller = segue.destination as? UserStatusViewController {
+                controller.delegate = self
+            }
+        }
+
+        if segue.identifier == "Servers" {
+            segue.destination.modalPresentationCapturesStatusBarAppearance = true
+        }
     }
 
     // MARK: Subscriptions
@@ -328,7 +338,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     @objc func openUserContextMenu() {
-        // performSegue(withIdentifier: "User", sender: nil)
+         performSegue(withIdentifier: "User", sender: nil)
     }
 
 }
@@ -424,6 +434,14 @@ extension SubscriptionsViewController {
         searchBy()
         return true
     }
+}
+
+extension SubscriptionsViewController: UserStatusViewControllerDelegate {
+
+    func userDidPressedOption() {
+        dismiss(animated: true, completion: nil)
+    }
+
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
