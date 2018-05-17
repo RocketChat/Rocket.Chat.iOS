@@ -141,7 +141,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84L-Iz-PSG"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84L-Iz-PSG">
+                            <connections>
+                                <segue destination="OzA-tw-YTL" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -149,7 +153,6 @@
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="emf-xZ-ptX"/>
                         <segue destination="WPg-Z4-kP7" kind="presentation" identifier="User" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="lqN-UV-5tm"/>
-                        <segue destination="OzA-tw-YTL" kind="presentation" identifier="New Channel" modalPresentationStyle="formSheet" id="BHC-Tf-sPw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -218,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I9u-cy-3x7">
-                                <rect key="frame" x="0.0" y="24" width="375" height="754"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -230,8 +233,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="I9u-cy-3x7" firstAttribute="leading" secondItem="P6H-8T-r9x" secondAttribute="leading" id="Ja7-G7-eAf"/>
-                            <constraint firstItem="P6H-8T-r9x" firstAttribute="top" secondItem="I9u-cy-3x7" secondAttribute="top" constant="64" id="K1M-md-nQo"/>
-                            <constraint firstItem="P6H-8T-r9x" firstAttribute="bottom" secondItem="I9u-cy-3x7" secondAttribute="bottom" id="St8-mo-oDJ"/>
+                            <constraint firstItem="P6H-8T-r9x" firstAttribute="top" secondItem="I9u-cy-3x7" secondAttribute="top" id="K1M-md-nQo"/>
+                            <constraint firstAttribute="bottom" secondItem="I9u-cy-3x7" secondAttribute="bottom" id="St8-mo-oDJ"/>
                             <constraint firstItem="P6H-8T-r9x" firstAttribute="trailing" secondItem="I9u-cy-3x7" secondAttribute="trailing" id="zoi-BK-UL0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P6H-8T-r9x"/>
