@@ -77,30 +77,26 @@ class MembersListViewController: BaseViewController {
         data.loadMoreMembers { [weak self] in
             self?.data = data
 
-            DispatchQueue.main.async {
-                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
-                    self?.membersTableView?.refreshControl?.endRefreshing()
-                }
+            if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                self?.membersTableView?.refreshControl?.endRefreshing()
+            }
 
-                UIView.performWithoutAnimation {
-                    self?.membersTableView?.reloadData()
-                }
+            UIView.performWithoutAnimation {
+                self?.membersTableView?.reloadData()
             }
         }
     }
 
     func loadMoreMembers() {
         data.loadMoreMembers { [weak self] in
-            DispatchQueue.main.async {
-                self?.title = self?.data.title
+            self?.title = self?.data.title
 
-                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
-                    self?.membersTableView?.refreshControl?.endRefreshing()
-                }
+            if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                self?.membersTableView?.refreshControl?.endRefreshing()
+            }
 
-                UIView.performWithoutAnimation {
-                    self?.membersTableView?.reloadData()
-                }
+            UIView.performWithoutAnimation {
+                self?.membersTableView?.reloadData()
             }
         }
     }

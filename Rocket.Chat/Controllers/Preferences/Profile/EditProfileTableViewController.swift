@@ -139,18 +139,12 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
     func fetchUserData() {
         avatarButton.isHidden = true
 
-        var fetchUserLoader: MBProgressHUD!
-
-        DispatchQueue.main.async {
-            fetchUserLoader = MBProgressHUD.showAdded(to: self.view, animated: true)
-            fetchUserLoader.mode = .indeterminate
-        }
+        let fetchUserLoader = MBProgressHUD.showAdded(to: self.view, animated: true)
+        fetchUserLoader.mode = .indeterminate
 
         let stopLoading = {
-            DispatchQueue.main.async {
-                self.avatarButton.isHidden = false
-                fetchUserLoader.hide(animated: true)
-            }
+            self.avatarButton.isHidden = false
+            fetchUserLoader.hide(animated: true)
         }
 
         let meRequest = MeRequest()
@@ -166,13 +160,12 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
                 } else {
                     self?.user = resource.user
                     self?.isLoading = false
-                    DispatchQueue.main.async {
-                        if self?.canEditAnyInfo ?? false {
-                            self?.navigationItem.rightBarButtonItem = self?.editButton
-                        }
 
-                        self?.tableView.reloadData()
+                    if self?.canEditAnyInfo ?? false {
+                        self?.navigationItem.rightBarButtonItem = self?.editButton
                     }
+
+                    self?.tableView.reloadData()
                 }
             case .error:
                 Alert(key: "alert.load_profile_error").present(handler: { _ in
@@ -183,12 +176,10 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
     }
 
     func bindUserData() {
-        DispatchQueue.main.async {
-            self.avatarView.user = self.user
-            self.name.text = self.user?.name
-            self.username.text = self.user?.username
-            self.email.text = self.user?.emails.first?.email
-        }
+        avatarView.user = user
+        name.text = user?.name
+        username.text = user?.username
+        email.text = user?.emails.first?.email
     }
 
     // MARK: State Management
@@ -461,25 +452,20 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
     }
 
     func startLoading() {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.view.isUserInteractionEnabled = false
-            strongSelf.navigationItem.leftBarButtonItem?.isEnabled = false
-            strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: strongSelf.activityIndicator)
-        }
+        view.isUserInteractionEnabled = false
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
     }
 
     func stopLoading(shouldEndEditing: Bool = true, shouldRefreshAvatar: Bool = false) {
         if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async { [weak self] in
-                self?.view.isUserInteractionEnabled = true
-                self?.navigationItem.leftBarButtonItem?.isEnabled = true
+            view.isUserInteractionEnabled = true
+            navigationItem.leftBarButtonItem?.isEnabled = true
 
-                if shouldEndEditing {
-                    self?.endEditing()
-                } else {
-                    self?.navigationItem.rightBarButtonItem = self?.saveButton
-                }
+            if shouldEndEditing {
+                endEditing()
+            } else {
+                navigationItem.rightBarButtonItem = saveButton
             }
         }
     }

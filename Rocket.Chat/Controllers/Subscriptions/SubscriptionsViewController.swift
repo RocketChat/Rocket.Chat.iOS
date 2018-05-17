@@ -215,19 +215,17 @@ extension SubscriptionsViewController {
         activityViewSearching.startAnimating()
 
         API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
-            DispatchQueue.main.async {
-                let currentText = self?.textFieldSearch.text ?? ""
+            let currentText = self?.textFieldSearch.text ?? ""
 
-                if currentText.count == 0 {
-                    return
-                }
-
-                self?.activityViewSearching.stopAnimating()
-                self?.isSearchingRemotely = true
-                self?.searchResult = result
-                self?.groupSubscription()
-                self?.tableView.reloadData()
+            if currentText.count == 0 {
+                return
             }
+
+            self?.activityViewSearching.stopAnimating()
+            self?.isSearchingRemotely = true
+            self?.searchResult = result
+            self?.groupSubscription()
+            self?.tableView.reloadData()
         }
     }
 
