@@ -100,13 +100,18 @@ final class SubscriptionCell: UITableViewCell {
             labelDate.text = nil
         }
 
-        if subscription.unread > 0 {
+        if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.boldSystemFont(ofSize: nameFontSize)
             labelLastMessage.font = UIFont.boldSystemFont(ofSize: lastMessageFontSize)
             labelDate.textColor = .RCBlue()
 
-            labelUnread.alpha = 1
-            labelUnread.text =  "\(subscription.unread)"
+            if subscription.unread > 0 {
+                labelUnread.alpha = 1
+                labelUnread.text =  "\(subscription.unread)"
+            } else {
+                labelUnread.alpha = 0
+                labelUnread.text =  ""
+            }
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize)
