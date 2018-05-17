@@ -26,7 +26,7 @@ final class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message, with theme: Theme?) -> NSMutableAttributedString? {
+    @discardableResult func update(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
         let key = cachedKey(for: identifier)
@@ -66,7 +66,7 @@ final class MessageTextCacheManager {
         return finalText
     }
 
-    func message(for message: Message, with theme: Theme?) -> NSMutableAttributedString? {
+    func message(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
         var resultText: NSAttributedString?
