@@ -10,7 +10,7 @@ import RealmSwift
 
 extension User {
     func rolesInSubscription(_ subscription: Subscription) -> [String] {
-        if let roles = subscription.usersRoles.flatMap({ $0.user }).first(where: { $0 == self })?.roles {
+        if let roles = subscription.usersRoles.first(where: { $0.user?.identifier == self.identifier })?.roles {
             return Array(roles)
         }
 

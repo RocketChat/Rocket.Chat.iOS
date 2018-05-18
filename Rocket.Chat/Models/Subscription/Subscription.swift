@@ -55,8 +55,6 @@ final class Subscription: BaseModel {
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 
-    // User's roles on the subscription, this values
-    // aren't stored in database.
     let usersRoles = List<RoomRoles>()
 }
 

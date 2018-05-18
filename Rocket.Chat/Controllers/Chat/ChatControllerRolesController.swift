@@ -36,7 +36,8 @@ extension ChatViewController {
                 }
 
             // Fail silently
-            default: break
+            case .error(let error):
+                print(error)
             }
         })
     }

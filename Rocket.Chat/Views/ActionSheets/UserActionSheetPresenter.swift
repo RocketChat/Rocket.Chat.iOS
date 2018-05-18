@@ -28,7 +28,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
         }))
 
         if let subscription = subscription {
-            if user.hasPermission(.removeUser, subscription: subscription) {
+            if AuthManager.currentUser()?.hasPermission(.removeUser, subscription: subscription) == true {
                 controller.addAction(UIAlertAction(title: localized("user_action_sheet.remove"), style: .destructive))
             }
         }
