@@ -11,6 +11,11 @@ import RealmSwift
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerViewSeparatorHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            headerViewSeparatorHeightConstraint.constant = 0.5
+        }
+    }
 
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
@@ -30,7 +35,6 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewDidLoad()
 
         setupSearchBar()
-        setupUserAvatarButton()
         setupTitleView()
         updateBackButton()
 
@@ -68,11 +72,6 @@ final class SubscriptionsViewController: BaseViewController {
 
         subscriptions = auth.subscriptions.sortedByLastMessageDate()
         subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
-
-        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
-            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
-            currentUserToken = query.observe(handleCurrentUserUpdates)
-        }
     }
 
     // MARK: Setup Views
@@ -132,48 +131,6 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
-    func setupUserAvatarButton() {
-        guard let user = AuthManager.currentUser() else { return }
-        guard let avatarView = AvatarView.instantiateFromNib() else { return }
-
-        avatarView.user = user
-        avatarView.backgroundColor = .red
-        avatarView.layer.cornerRadius = 4
-
-        if #available(iOS 11.0, *) {
-            let buttonView = UIView()
-            avatarView.translatesAutoresizingMaskIntoConstraints = false
-            buttonView.addSubview(avatarView)
-
-            let views = ["imageView": avatarView]
-            buttonView.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|-0-[imageView(30)]-|",
-                options: .alignAllCenterX,
-                metrics: nil,
-                views: views
-            ))
-
-            buttonView.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-[imageView(30)]-|",
-                options: .alignAllCenterY,
-                metrics: nil,
-                views: views
-            ))
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPreferences))
-            buttonView.addGestureRecognizer(tapGesture)
-
-            let buttonPreferences = UIBarButtonItem(customView: buttonView)
-            navigationItem.leftBarButtonItem = buttonPreferences
-        } else {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPreferences))
-            avatarView.addGestureRecognizer(tapGesture)
-
-            avatarView.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-            let buttonPreferences = UIBarButtonItem(customView: avatarView)
-            navigationItem.leftBarButtonItem = buttonPreferences
-        }
-    }
 }
 
 extension SubscriptionsViewController: UISearchBarDelegate {
@@ -291,13 +248,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
 
         updateAll()
-        updateCurrentUserInformation()
         updateServerInformation()
         updateSubscriptionsList()
-    }
-
-    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
-        updateCurrentUserInformation()
     }
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
@@ -306,10 +258,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func updateServerInformation() {
         titleView?.updateServerName(name: AuthSettingsManager.settings?.serverName)
-    }
-
-    func updateCurrentUserInformation() {
-        setupUserAvatarButton()
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {
@@ -330,10 +278,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     @objc func openServersList() {
         performSegue(withIdentifier: "Servers", sender: nil)
-    }
-
-    @objc func openPreferences() {
-         performSegue(withIdentifier: "Preferences", sender: nil)
     }
 
 }

@@ -23,9 +23,47 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="MPw-Hy-Au7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by unread" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ch-xw-I4W">
+                                            <rect key="frame" x="16" y="13.333333333333336" width="309" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI3-jt-pfZ">
+                                            <rect key="frame" x="333" y="9" width="26" height="26"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="26" id="b5N-LL-VBq"/>
+                                                <constraint firstAttribute="width" constant="26" id="u3Y-kp-cho"/>
+                                            </constraints>
+                                            <state key="normal" image="Icon Filter"/>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9G-xO-EGZ">
+                                            <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
+                                            <color key="backgroundColor" red="0.79607843137254897" green="0.80784313725490198" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" id="Y6c-tC-qcB"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="4ch-xw-I4W" firstAttribute="centerY" secondItem="MPw-Hy-Au7" secondAttribute="centerY" id="2E8-4u-hEe"/>
+                                        <constraint firstAttribute="bottom" secondItem="n9G-xO-EGZ" secondAttribute="bottom" id="77v-Us-tAW"/>
+                                        <constraint firstItem="n9G-xO-EGZ" firstAttribute="leading" secondItem="MPw-Hy-Au7" secondAttribute="leading" id="Odm-U7-OLp"/>
+                                        <constraint firstItem="4ch-xw-I4W" firstAttribute="leading" secondItem="MPw-Hy-Au7" secondAttribute="leadingMargin" constant="8" id="PoR-iE-Ne1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="gI3-jt-pfZ" secondAttribute="trailing" constant="8" id="RQ0-3K-hkX"/>
+                                        <constraint firstAttribute="trailing" secondItem="n9G-xO-EGZ" secondAttribute="trailing" id="aY9-5X-EjP"/>
+                                        <constraint firstItem="gI3-jt-pfZ" firstAttribute="leading" secondItem="4ch-xw-I4W" secondAttribute="trailing" constant="8" id="bS1-ns-KqN"/>
+                                        <constraint firstItem="gI3-jt-pfZ" firstAttribute="centerY" secondItem="MPw-Hy-Au7" secondAttribute="centerY" id="dUN-Fb-V94"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" rowHeight="75" id="A3x-rd-OY1" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A3x-rd-OY1" id="Wxv-s5-H7g">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="74.666666666666671"/>
@@ -43,11 +81,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6S-q9-3Bj">
-                                                    <rect key="frame" x="93" y="11" width="39.666666666666657" height="20"/>
+                                                    <rect key="frame" x="93" y="11" width="41.333333333333343" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="JFw-TL-zof"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -141,7 +179,12 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
-                        <barButtonItem key="rightBarButtonItem" image="New Message" id="84L-Iz-PSG">
+                        <barButtonItem key="leftBarButtonItem" image="Icon Settings" id="mF7-JJ-yY1">
+                            <connections>
+                                <segue destination="gmk-4H-3s2" kind="presentation" identifier="Preferences" modalPresentationStyle="formSheet" id="Gqr-Om-cVh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Icon New Channel" id="84L-Iz-PSG">
                             <connections>
                                 <segue destination="OzA-tw-YTL" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
                             </connections>
@@ -150,14 +193,14 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="headerViewSeparatorHeightConstraint" destination="Y6c-tC-qcB" id="T4j-Eg-Ubw"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="emf-xZ-ptX"/>
-                        <segue destination="gmk-4H-3s2" kind="presentation" identifier="Preferences" modalPresentationStyle="formSheet" id="ySU-br-Mjm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285" y="255"/>
+            <point key="canvasLocation" x="284" y="254.92610837438426"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="eYa-dh-emv">
@@ -405,6 +448,8 @@
     <resources>
         <image name="Add" width="15" height="15"/>
         <image name="Cell Subscription Hashtag" width="10" height="10"/>
-        <image name="New Message" width="26" height="25"/>
+        <image name="Icon Filter" width="26" height="26"/>
+        <image name="Icon New Channel" width="20" height="20"/>
+        <image name="Icon Settings" width="20" height="21"/>
     </resources>
 </document>

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,36 +15,50 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKY-Ch-wz7" userLabel="User View" customClass="SubscriptionsTitleView" customModule="Rocket_Chat" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
-                    <rect key="frame" x="156.5" y="8" width="62.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                    <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
-                    <rect key="frame" x="142" y="26" width="91" height="18"/>
-                    <color key="backgroundColor" red="0.035294117647058823" green="0.4549019608" blue="0.96078431369999995" alpha="0.089999999999999997" colorSpace="custom" customColorSpace="sRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1EU-Bf-ijR">
+                    <rect key="frame" x="0.0" y="4" width="375" height="36"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
+                            <rect key="frame" x="156.5" y="0.0" width="62.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
+                            <rect key="frame" x="128.5" y="18" width="118" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="f5b-22-pcB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="open.rocket.chat" image="Server Selector">
+                                <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonServerDidPressedWithSender:" destination="dKY-Ch-wz7" eventType="touchUpInside" id="HkY-sj-4yp"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="18" id="f5b-22-pcB"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="1e3-dn-Xdj"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="3cY-6p-zbD"/>
+                        <constraint firstAttribute="height" constant="36" id="Db1-Dl-ho2"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="IJT-0w-7Be"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="dQV-QF-hgL"/>
+                        <constraint firstAttribute="bottom" secondItem="ct8-6x-Vjc" secondAttribute="bottom" id="mDL-TK-eV9"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="rKL-fl-g3g"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" id="rM1-dt-SVm"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Rocket.Chat" image="Server Selector">
-                        <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="buttonServerDidPressedWithSender:" destination="dKY-Ch-wz7" eventType="touchUpInside" id="HkY-sj-4yp"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottomMargin" secondItem="ct8-6x-Vjc" secondAttribute="bottom" id="2uv-d6-p21"/>
-                <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="dKY-Ch-wz7" secondAttribute="centerX" id="Qk0-TG-tS0"/>
-                <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="dKY-Ch-wz7" secondAttribute="centerX" id="e83-0T-Td0"/>
-                <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" constant="2" id="o0s-Yz-MRd"/>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="dVf-qa-uaN"/>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="centerX" secondItem="dKY-Ch-wz7" secondAttribute="centerX" id="hnJ-8y-wUo"/>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="leading" secondItem="6rA-25-euU" secondAttribute="leading" id="pqr-Kf-FRF"/>
+                <constraint firstItem="6rA-25-euU" firstAttribute="trailing" secondItem="1EU-Bf-ijR" secondAttribute="trailing" id="xh2-Cz-1JS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>
