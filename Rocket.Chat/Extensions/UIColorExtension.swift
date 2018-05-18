@@ -90,6 +90,10 @@ extension UIColor {
 
     // MARK: Theme color
 
+    static func RCNavigationBarColor() -> UIColor {
+        return UIColor(rgb: 0xF8F8F8, alphaVal: 1)
+    }
+
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
     }

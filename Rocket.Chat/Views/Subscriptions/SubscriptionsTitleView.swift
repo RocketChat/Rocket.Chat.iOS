@@ -10,21 +10,17 @@ import UIKit
 
 class SubscriptionsTitleView: UIView {
 
-    @IBOutlet weak var labelUser: UILabel!
-    @IBOutlet weak var viewStatus: UIView!
-
-    var user: User? {
+    @IBOutlet weak var labelMessages: UILabel! {
         didSet {
-            guard let user = user else { return }
 
-            labelUser.text = "@\(user.username ?? user.displayName())"
+        }
+    }
 
-            switch user.status {
-            case .online: viewStatus.backgroundColor = .RCOnline()
-            case .busy: viewStatus.backgroundColor = .RCBusy()
-            case .away: viewStatus.backgroundColor = .RCAway()
-            case .offline: viewStatus.backgroundColor = .RCInvisible()
-            }
+    @IBOutlet weak var buttonServer: UIButton! {
+        didSet {
+            buttonServer.semanticContentAttribute = .forceRightToLeft
+            buttonServer.layer.cornerRadius = 4
+            buttonServer.layer.masksToBounds = true
         }
     }
 

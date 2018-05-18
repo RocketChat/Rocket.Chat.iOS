@@ -19,7 +19,7 @@ class BaseNavigationController: UINavigationController {
         let navBar = self.navigationBar
         navBar.isTranslucent = false
         navBar.tintColor = .RCDarkGray()
-        navBar.barTintColor = UIColor(hex: "#F8F8F8")
+        navBar.barTintColor = .RCNavigationBarColor()
     }
 
     func setTransparentTheme() {

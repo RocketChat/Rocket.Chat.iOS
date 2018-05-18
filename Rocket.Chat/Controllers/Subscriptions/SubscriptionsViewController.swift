@@ -30,7 +30,7 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewDidLoad()
 
         setupSearchBar()
-        setupServerButton()
+        setupUserAvatarButton()
         setupTitleView()
         updateBackButton()
 
@@ -52,14 +52,6 @@ final class SubscriptionsViewController: BaseViewController {
     // MARK: Storyboard Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "User" {
-            segue.destination.modalPresentationCapturesStatusBarAppearance = true
-
-            if let controller = segue.destination as? UserStatusViewController {
-                controller.delegate = self
-            }
-        }
-
         if segue.identifier == "Servers" {
             segue.destination.modalPresentationCapturesStatusBarAppearance = true
         }
@@ -129,59 +121,59 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
-            titleView.user = AuthManager.currentUser()
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openUserContextMenu))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
             titleView.addGestureRecognizer(tapGesture)
+
+            if let serverName = AuthSettingsManager.settings?.serverName {
+                titleView.buttonServer.setTitle(serverName, for: .normal)
+                titleView.buttonServer.sizeToFit()
+            }
 
             navigationItem.titleView = titleView
             self.titleView = titleView
         }
     }
 
-    func setupServerButton() {
-        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
-            let imageViewServer = UIImageView()
+    func setupUserAvatarButton() {
+        guard let user = AuthManager.currentUser() else { return }
+        guard let avatarView = AvatarView.instantiateFromNib() else { return }
 
-            if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                imageViewServer.sd_setImage(with: imageURL)
-            } else {
-                imageViewServer.image = UIImage(named: "User")
-            }
+        avatarView.user = user
+        avatarView.backgroundColor = .red
+        avatarView.layer.cornerRadius = 4
 
-            if #available(iOS 11.0, *) {
-                let buttonView = UIView()
-                imageViewServer.translatesAutoresizingMaskIntoConstraints = false
-                buttonView.addSubview(imageViewServer)
+        if #available(iOS 11.0, *) {
+            let buttonView = UIView()
+            avatarView.translatesAutoresizingMaskIntoConstraints = false
+            buttonView.addSubview(avatarView)
 
-                let views = ["imageView": imageViewServer]
-                buttonView.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "H:|-[imageView(25)]-|",
-                    options: .alignAllCenterX,
-                    metrics: nil,
-                    views: views)
-                )
+            let views = ["imageView": avatarView]
+            buttonView.addConstraints(NSLayoutConstraint.constraints(
+                withVisualFormat: "H:|-0-[imageView(28)]-|",
+                options: .alignAllCenterX,
+                metrics: nil,
+                views: views
+            ))
 
-                buttonView.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "V:|-[imageView(25)]-|",
-                    options: .alignAllCenterY,
-                    metrics: nil,
-                    views: views)
-                )
+            buttonView.addConstraints(NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-[imageView(28)]-|",
+                options: .alignAllCenterY,
+                metrics: nil,
+                views: views
+            ))
 
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
-                buttonView.addGestureRecognizer(tapGesture)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPreferences))
+            buttonView.addGestureRecognizer(tapGesture)
 
-                let buttonServer = UIBarButtonItem(customView: buttonView)
-                navigationItem.leftBarButtonItem = buttonServer
-            } else {
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
-                imageViewServer.addGestureRecognizer(tapGesture)
+            let buttonPreferences = UIBarButtonItem(customView: buttonView)
+            navigationItem.leftBarButtonItem = buttonPreferences
+        } else {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPreferences))
+            avatarView.addGestureRecognizer(tapGesture)
 
-                imageViewServer.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-                let buttonServer = UIBarButtonItem(customView: imageViewServer)
-                navigationItem.leftBarButtonItem = buttonServer
-            }
+            avatarView.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+            let buttonPreferences = UIBarButtonItem(customView: avatarView)
+            navigationItem.leftBarButtonItem = buttonPreferences
         }
     }
 }
@@ -314,7 +306,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateCurrentUserInformation() {
-        titleView?.user = AuthManager.currentUser()
+        setupUserAvatarButton()
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {
@@ -337,8 +329,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         performSegue(withIdentifier: "Servers", sender: nil)
     }
 
-    @objc func openUserContextMenu() {
-         performSegue(withIdentifier: "User", sender: nil)
+    @objc func openPreferences() {
+         performSegue(withIdentifier: "Preferences", sender: nil)
     }
 
 }
@@ -434,14 +426,6 @@ extension SubscriptionsViewController {
         searchBy()
         return true
     }
-}
-
-extension SubscriptionsViewController: UserStatusViewControllerDelegate {
-
-    func userDidPressedOption() {
-        dismiss(animated: true, completion: nil)
-    }
-
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
