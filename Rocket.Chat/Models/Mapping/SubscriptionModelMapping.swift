@@ -87,6 +87,10 @@ extension Subscription: ModelMappeable {
 
             self.roomLastMessage = message
 
+            if let createdAt = values["lastMessage"]["ts"].string {
+                self.roomLastMessageDate = Date.dateFromString(createdAt)
+            }
+
             if let createdAt = values["lastMessage"]["ts"]["$date"].double {
                 self.roomLastMessageDate = Date.dateFromInterval(createdAt)
             }

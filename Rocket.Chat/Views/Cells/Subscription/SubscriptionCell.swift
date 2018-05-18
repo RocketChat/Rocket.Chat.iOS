@@ -94,7 +94,7 @@ final class SubscriptionCell: UITableViewCell {
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
 
-        if let roomLastMessage = subscription.roomLastMessageDate {
+        if let roomLastMessage = subscription.roomLastMessage?.createdAt {
             labelDate.text = dateFormatted(date: roomLastMessage)
         } else {
             labelDate.text = nil
