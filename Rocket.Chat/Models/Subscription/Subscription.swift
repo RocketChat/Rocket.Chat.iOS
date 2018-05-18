@@ -16,6 +16,8 @@ enum SubscriptionType: String, Equatable {
     case group = "p"
 }
 
+typealias RoomType = SubscriptionType
+
 final class Subscription: BaseModel {
     @objc dynamic var auth: Auth?
 
