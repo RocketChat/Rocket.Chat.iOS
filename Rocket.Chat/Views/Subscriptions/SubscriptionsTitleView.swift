@@ -25,7 +25,7 @@ final class SubscriptionsTitleView: UIView {
     @IBOutlet weak var buttonServer: UIButton! {
         didSet {
             buttonServer.semanticContentAttribute = .forceRightToLeft
-            buttonServer.layer.cornerRadius = 4
+            buttonServer.layer.cornerRadius = 5
             buttonServer.layer.masksToBounds = true
         }
     }
