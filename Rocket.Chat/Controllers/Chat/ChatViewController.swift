@@ -134,7 +134,7 @@ final class ChatViewController: SLKTextViewController {
 
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
-        navigationController?.navigationBar.tintColor = .RCDarkGray()
+        navigationController?.navigationBar.tintColor = .RCBlue()
 
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never

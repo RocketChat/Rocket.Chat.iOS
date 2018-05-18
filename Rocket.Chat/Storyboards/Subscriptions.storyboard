@@ -72,7 +72,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXd-Jk-yaW">
                                                     <rect key="frame" x="78" y="32" width="230" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5I-Dx-APU">
@@ -141,7 +141,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84L-Iz-PSG">
+                        <barButtonItem key="rightBarButtonItem" image="New Message" id="84L-Iz-PSG">
                             <connections>
                                 <segue destination="OzA-tw-YTL" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
                             </connections>
@@ -405,5 +405,6 @@
     <resources>
         <image name="Add" width="15" height="15"/>
         <image name="Cell Subscription Hashtag" width="10" height="10"/>
+        <image name="New Message" width="26" height="25"/>
     </resources>
 </document>

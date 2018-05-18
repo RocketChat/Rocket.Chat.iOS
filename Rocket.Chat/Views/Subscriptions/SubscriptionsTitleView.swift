@@ -8,11 +8,17 @@
 
 import UIKit
 
-class SubscriptionsTitleView: UIView {
+protocol SubscriptionsTitleViewDelegate: class {
+    func userDidPressServerName()
+}
+
+final class SubscriptionsTitleView: UIView {
+
+    weak var delegate: SubscriptionsTitleViewDelegate?
 
     @IBOutlet weak var labelMessages: UILabel! {
         didSet {
-
+            labelMessages.text = localized("subscriptions.messages")
         }
     }
 
@@ -22,6 +28,18 @@ class SubscriptionsTitleView: UIView {
             buttonServer.layer.cornerRadius = 4
             buttonServer.layer.masksToBounds = true
         }
+    }
+
+    @IBAction func buttonServerDidPressed(sender: Any) {
+        delegate?.userDidPressServerName()
+    }
+
+    func updateServerName(name: String?) {
+        buttonServer.setTitle(name, for: .normal)
+        buttonServer.sizeToFit()
+
+        let desiredWidth = buttonServer.intrinsicContentSize.width + 18
+        buttonServer.widthAnchor.constraint(equalToConstant: desiredWidth).isActive = true
     }
 
     override var intrinsicContentSize: CGSize {

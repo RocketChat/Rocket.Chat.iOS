@@ -121,16 +121,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            navigationItem.titleView = titleView
+            self.titleView = titleView
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
             titleView.addGestureRecognizer(tapGesture)
 
-            if let serverName = AuthSettingsManager.settings?.serverName {
-                titleView.buttonServer.setTitle(serverName, for: .normal)
-                titleView.buttonServer.sizeToFit()
-            }
-
-            navigationItem.titleView = titleView
-            self.titleView = titleView
+            titleView.delegate = self
+            titleView.updateServerName(name: AuthSettingsManager.settings?.serverName)
         }
     }
 
@@ -149,14 +147,14 @@ final class SubscriptionsViewController: BaseViewController {
 
             let views = ["imageView": avatarView]
             buttonView.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|-0-[imageView(28)]-|",
+                withVisualFormat: "H:|-0-[imageView(30)]-|",
                 options: .alignAllCenterX,
                 metrics: nil,
                 views: views
             ))
 
             buttonView.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-[imageView(28)]-|",
+                withVisualFormat: "V:|-[imageView(30)]-|",
                 options: .alignAllCenterY,
                 metrics: nil,
                 views: views
@@ -294,6 +292,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
         updateAll()
         updateCurrentUserInformation()
+        updateServerInformation()
         updateSubscriptionsList()
     }
 
@@ -303,6 +302,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
         updateSubscriptionsList()
+    }
+
+    func updateServerInformation() {
+        titleView?.updateServerName(name: AuthSettingsManager.settings?.serverName)
     }
 
     func updateCurrentUserInformation() {
@@ -426,6 +429,14 @@ extension SubscriptionsViewController {
         searchBy()
         return true
     }
+}
+
+extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
+
+    func userDidPressServerName() {
+        openServersList()
+    }
+
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {

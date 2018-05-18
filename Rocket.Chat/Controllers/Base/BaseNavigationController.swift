@@ -18,7 +18,7 @@ class BaseNavigationController: UINavigationController {
 
         let navBar = self.navigationBar
         navBar.isTranslucent = false
-        navBar.tintColor = .RCDarkGray()
+        navBar.tintColor = .RCBlue()
         navBar.barTintColor = .RCNavigationBarColor()
     }
 
