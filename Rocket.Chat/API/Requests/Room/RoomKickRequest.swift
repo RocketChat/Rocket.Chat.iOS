@@ -1,5 +1,5 @@
 //
-//  RoomRemoveUserRequest.swift
+//  RoomKickRequest.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 5/18/18.
@@ -21,8 +21,8 @@ fileprivate extension RoomType {
     }
 }
 
-final class RoomRemoveUserRequest: APIRequest {
-    typealias APIResourceType = RoomRemoveUserResource
+final class RoomKickRequest: APIRequest {
+    typealias APIResourceType = RoomKickResource
     let requiredVersion = Version(0, 48, 0)
 
     let method: HTTPMethod = .post
@@ -50,7 +50,7 @@ final class RoomRemoveUserRequest: APIRequest {
     }
 }
 
-final class RoomRemoveUserResource: APIResource {
+final class RoomKickResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }
