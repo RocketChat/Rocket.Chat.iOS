@@ -61,10 +61,10 @@ class RoomRolesRequestSpec: APITestCase {
         let json = JSON(parseJSON: jsonString)
 
         let result = RoomRolesResource(raw: json)
-        XCTAssertEqual(result.subscriptionRoles?.count, 2)
-        XCTAssertEqual(result.subscriptionRoles?.first?.user?.username, "john.appleseed")
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.first, Role.owner.rawValue)
+        XCTAssertEqual(result.roomRoles?.count, 2)
+        XCTAssertEqual(result.roomRoles?.first?.user?.username, "john.appleseed")
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertEqual(result.roomRoles?.first?.roles.first, Role.owner.rawValue)
         XCTAssertTrue(result.success)
     }
 
@@ -90,10 +90,10 @@ class RoomRolesRequestSpec: APITestCase {
 
         let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testInvalidUserObject() {
@@ -120,10 +120,10 @@ class RoomRolesRequestSpec: APITestCase {
 
         let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testArrayUserObject() {
@@ -148,10 +148,10 @@ class RoomRolesRequestSpec: APITestCase {
 
         let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testEmtpyRolesObject() {
@@ -176,14 +176,14 @@ class RoomRolesRequestSpec: APITestCase {
 
         let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 0)
-        XCTAssertEqual(result.subscriptionRoles?.first?.user?.username, "john.appleseed")
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 0)
+        XCTAssertEqual(result.roomRoles?.first?.user?.username, "john.appleseed")
     }
 
     func testEmptyResults() {
         let nilResult = RoomRolesResource(raw: nil)
-        XCTAssertNil(nilResult.subscriptionRoles)
+        XCTAssertNil(nilResult.roomRoles)
     }
 
 }
