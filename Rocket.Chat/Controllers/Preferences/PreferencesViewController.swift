@@ -24,9 +24,34 @@ final class PreferencesViewController: UITableViewController {
 
     private let viewModel = PreferencesViewModel()
 
-    @IBOutlet weak var labelProfile: UILabel! {
+    @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            labelProfile.text = viewModel.profile
+            avatarViewContainer.layer.cornerRadius = 4
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+            avatarView.user = viewModel.user
+        }
+    }
+
+    @IBOutlet weak var labelProfileName: UILabel! {
+        didSet {
+            labelProfileName.text = viewModel.userName
+        }
+    }
+
+    @IBOutlet weak var labelProfileStatus: UILabel! {
+        didSet {
+            labelProfileStatus.text = viewModel.userStatus.lowercased()
         }
     }
 
