@@ -385,6 +385,7 @@
 		8039442520B330B2002F317A /* RoomInviteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442420B330B2002F317A /* RoomInviteRequest.swift */; };
 		8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */; };
 		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
+		8039442E20B342BB002F317A /* AddMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddMembersViewController.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
 		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
@@ -1102,6 +1103,7 @@
 		8039442420B330B2002F317A /* RoomInviteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequest.swift; sourceTree = "<group>"; };
 		8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequestSpec.swift; sourceTree = "<group>"; };
 		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
+		8039442D20B342BB002F317A /* AddMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMembersViewController.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
 		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
@@ -2292,6 +2294,7 @@
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
+				8039442D20B342BB002F317A /* AddMembersViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3732,6 +3735,7 @@
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
+				8039442E20B342BB002F317A /* AddMembersViewController.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,

@@ -128,7 +128,7 @@ extension MembersListViewController {
     }
 
     @objc func inviteUsersButtonPressed(sender: Any) {
-        print("yay")
+        performSegue(withIdentifier: "toAddMembers", sender: self)
     }
 
     func registerCells() {

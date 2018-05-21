@@ -373,11 +373,44 @@
                     </view>
                     <connections>
                         <outlet property="membersTableView" destination="hz2-84-IvC" id="29I-J5-lyC"/>
+                        <segue destination="DYD-sh-drR" kind="show" identifier="toAddMembers" id="7Zo-Ff-w6F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jc2-qE-lsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4353" y="300"/>
+        </scene>
+        <!--Add Members View Controller-->
+        <scene sceneID="RgG-OP-6aq">
+            <objects>
+                <viewController id="DYD-sh-drR" customClass="AddMembersViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jkq-fT-Uhv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="obz-HN-hdl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableFooterView" contentMode="redraw" id="Shw-Vb-NcJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hE8-kg-05a" firstAttribute="trailing" secondItem="obz-HN-hdl" secondAttribute="trailing" id="677-5p-lDu"/>
+                            <constraint firstItem="hE8-kg-05a" firstAttribute="bottom" secondItem="obz-HN-hdl" secondAttribute="bottom" id="J7A-xa-cvK"/>
+                            <constraint firstItem="obz-HN-hdl" firstAttribute="leading" secondItem="hE8-kg-05a" secondAttribute="leading" id="hIW-Cl-x6T"/>
+                            <constraint firstItem="obz-HN-hdl" firstAttribute="top" secondItem="hE8-kg-05a" secondAttribute="top" id="nK0-m0-7y6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hE8-kg-05a"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0Z-yW-kL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5060" y="300"/>
         </scene>
         <!--Files-->
         <scene sceneID="fgU-3K-p7j">
