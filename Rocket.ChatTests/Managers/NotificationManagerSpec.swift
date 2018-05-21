@@ -73,7 +73,7 @@ class NotificationManagerSpec: XCTestCase {
         WindowManager.open(.chat)
 
         let subscription = Realm.current?.objects(Subscription.self).first
-        ChatViewController.shared?.subscription = subscription
+//        ChatViewController.shared?.subscription = subscription
 
         var notification = self.notification
         notification.payload.rid = rid
@@ -94,7 +94,7 @@ class NotificationManagerSpec: XCTestCase {
         WindowManager.open(.chat)
 
         let subscription = Realm.current?.objects(Subscription.self).first
-        ChatViewController.shared?.subscription = subscription
+//        ChatViewController.shared?.subscription = subscription
 
         notification.post()
 
@@ -107,7 +107,7 @@ class NotificationManagerSpec: XCTestCase {
         NotificationManager.shared.notification = nil
         NotificationViewController.shared.timer?.fire()
         NotificationViewController.shared.timer = nil
-        ChatViewController.shared?.subscription = nil
+//        ChatViewController.shared?.subscription = nil
         WindowManager.open(.auth(serverUrl: "", credentials: nil))
     }
 }
