@@ -56,23 +56,23 @@ class FilesListViewData {
     }
 
     private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
-            self.showing += result.count ?? 0
-            self.total = result.total ?? 0
+        self.showing += result.count ?? 0
+        self.total = result.total ?? 0
 
-            if let files = result.files {
-                guard !files.isEmpty else {
-                    self.isLoadingMoreFiles = false
-                    completion?()
-                    return
-                }
-
-                self.cells.append(contentsOf: files)
+        if let files = result.files {
+            guard !files.isEmpty else {
+                self.isLoadingMoreFiles = false
+                completion?()
+                return
             }
 
-            self.currentPage += 1
+            self.cells.append(contentsOf: files)
+        }
 
-            self.isLoadingMoreFiles = false
-            completion?()
+        self.currentPage += 1
+
+        self.isLoadingMoreFiles = false
+        completion?()
     }
 }
 
