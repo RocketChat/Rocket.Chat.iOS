@@ -255,7 +255,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
                 return
             }
 
-            if user.rolesInSubscription(subscription).count == 2, user2.rolesInSubscription(subscription).count == 1  {
+            if user.rolesInSubscription(subscription).count == 2, user2.rolesInSubscription(subscription).count == 1 {
                 expectation.fulfill()
             }
         })
