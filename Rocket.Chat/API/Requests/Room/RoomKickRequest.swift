@@ -50,7 +50,7 @@ final class RoomKickRequest: APIRequest {
     }
 }
 
-final class RoomKickResource: APIResource {
+final class RoomKickResource: APIResource, ResourceWithError {
     var success: Bool? {
         return raw?["success"].boolValue
     }

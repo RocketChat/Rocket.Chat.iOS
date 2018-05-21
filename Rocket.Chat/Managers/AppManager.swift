@@ -56,6 +56,43 @@ struct AppManager {
     static var currentRoomId: String? {
         return ChatViewController.shared?.subscription?.rid
     }
+
+    // MARK: Localization
+
+    private static let kAppLanguagesKey = "AppleLanguages"
+
+    /**
+     Reset language for localization
+    */
+    static func resetLanguage() {
+        UserDefaults.standard.removeObject(forKey: kAppLanguagesKey)
+    }
+
+    /**
+     Languages available for localization
+    */
+    static var languages: [String] {
+        return Bundle.main.localizations.filter({ code -> Bool in
+            return code != "Base"
+        })
+    }
+
+    /**
+     Current language for localization
+    */
+    static var language: String {
+        get {
+            return UserDefaults.standard.array(forKey: kAppLanguagesKey)?.first as? String ?? Locale.preferredLanguages[0]
+        }
+        set {
+            UserDefaults.standard.set([newValue], forKey: kAppLanguagesKey)
+        }
+    }
+
+    /**
+      Default language
+    */
+    static var defaultLanguage = "en"
 }
 
 extension AppManager {

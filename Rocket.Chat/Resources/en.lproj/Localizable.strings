@@ -1,5 +1,6 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Yes";
 "global.no" = "No";
 "global.cancel" = "Cancel";
 
@@ -316,3 +317,5 @@
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation";
 "user_action_sheet.remove" = "Remove from room";
+"user_action_sheet.remove_confirm.title" = "Remove this user?";
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";

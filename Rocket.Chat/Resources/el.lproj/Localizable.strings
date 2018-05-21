@@ -1,5 +1,6 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Ναί";
 "global.no" = "Όχι";
 "global.cancel" = "Ακύρωση";
 
@@ -316,3 +317,5 @@
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation"; // TODO
 "user_action_sheet.remove" = "Remove from room"; // TODO
+"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO

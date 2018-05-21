@@ -11,12 +11,27 @@ import MBProgressHUD
 protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
     func alertSuccess(title: String, completion: (() -> Void)?)
+    func alertYesNo(title: String, message: String, handler: @escaping (Bool) -> Void)
 }
 
 extension UIViewController: Alerter {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func alertYesNo(title: String, message: String, handler: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: localized("global.yes"), style: .destructive, handler: { _ in
+            handler(true)
+        }))
+
+        alert.addAction(UIAlertAction(title: localized("global.no"), style: .cancel, handler: { _ in
+            handler(false)
+        }))
+
         present(alert, animated: true, completion: nil)
     }
 

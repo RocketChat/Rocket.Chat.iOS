@@ -10,7 +10,6 @@ import UIKit
 
 final class LanguageViewController: UIViewController {
     private let viewModel = LanguageViewModel()
-    private let kAppLanguagesKey = "AppleLanguages"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +66,9 @@ extension LanguageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let lang = viewModel.languages[indexPath.row]
-
-            UserDefaults.group.set([lang], forKey: kAppLanguagesKey)
+            AppManager.language = lang
         } else {
-            UserDefaults.group.removeObject(forKey: kAppLanguagesKey)
+            AppManager.resetLanguage()
             showMessage()
         }
 
