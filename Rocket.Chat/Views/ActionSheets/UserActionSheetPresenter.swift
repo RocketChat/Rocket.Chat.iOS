@@ -18,7 +18,6 @@ extension UserActionSheetPresenter where Self: UIViewController {
             return
         }
 
-
         let controller = UIAlertController(title: user.displayName(), message: nil, preferredStyle: .actionSheet)
         controller.popoverPresentationController?.sourceView = source?.view
         controller.popoverPresentationController?.sourceRect = source?.rect ?? source?.view?.frame ?? .zero
@@ -56,7 +55,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
                                     case .resource(let resource):
                                         if let error = resource.error {
                                             return Alert(
-                                                title: "Error",
+                                                title: localized("global.error"),
                                                 message: error
                                             ).present()
                                         }

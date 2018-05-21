@@ -1,8 +1,9 @@
 // Global
 "global.ok" = "OK";
-"global.yes" = "Yes"; //TODO
+"global.yes" = "Ano";
 "global.no" = "Ne";
 "global.cancel" = "Zrušit";
+"global.error" = "Chyba";
 
 // Errors
 "error.socket.default_error.title" = "Jejky!";

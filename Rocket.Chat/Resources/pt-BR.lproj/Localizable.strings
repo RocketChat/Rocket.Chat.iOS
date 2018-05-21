@@ -3,6 +3,7 @@
 "global.yes" = "Sim";
 "global.no" = "Não";
 "global.cancel" = "Cancelar";
+"global.error" = "Error";
 
 // Errors
 "error.socket.default_error.title" = "Oops!";

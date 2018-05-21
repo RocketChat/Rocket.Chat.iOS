@@ -3,6 +3,7 @@
 "global.yes" = "Ναί";
 "global.no" = "Όχι";
 "global.cancel" = "Ακύρωση";
+"global.error" = "λάθος";
 
 // Errors
 "error.socket.default_error.title" = "Ωπ!";
