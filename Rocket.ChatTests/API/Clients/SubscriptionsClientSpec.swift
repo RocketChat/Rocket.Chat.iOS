@@ -204,4 +204,61 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         wait(for: [expectation], timeout: 3)
     }
+
+    func testFetchRoles() {
+        let realm = testRealm()
+        let api = MockAPI()
+        let client = SubscriptionsClient(api: api)
+        let subscription = Subscription.testInstance("test-roles")
+        let user = User.testInstance("test-user")
+        let user2 = User.testInstance("test-user2")
+
+        try? realm.write {
+            realm.add(user, update: true)
+            realm.add(user2, update: true)
+            realm.add(subscription, update: true)
+        }
+
+        api.nextResult = JSON([
+            "roles": [
+                [
+                    "u": [
+                        "username": "test-user-username",
+                        "_id": "test-user-identifier"
+                    ],
+                    "_id": "LG62dmF5XySq63GWk",
+                    "rid": "test-roles-rid",
+                    "roles": ["fixer", "moderator"]
+                ],
+                [
+                    "u": [
+                        "username": "test-user2-username",
+                        "_id": "test-user2-identifier"
+                    ],
+                    "_id": "qa62dasdSq63Gak",
+                    "rid": "test-roles-rid",
+                    "roles": ["owner"]
+                ]
+            ],
+            "success": true
+        ])
+
+        client.fetchRoles(subscription: subscription, realm: realm)
+
+        let expectation = XCTestExpectation(description: "subscription has correct roles for user")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+            guard
+                let subscription = realm.objects(Subscription.self).first,
+                let user = User.find(username: "test-user-username", realm: realm),
+                let user2 = User.find(username: "test-user2-username", realm: realm)
+            else {
+                return
+            }
+
+            if user.rolesInSubscription(subscription).count == 2, user2.rolesInSubscription(subscription).count == 1  {
+                expectation.fulfill()
+            }
+        })
+        wait(for: [expectation], timeout: 3)
+    }
 }

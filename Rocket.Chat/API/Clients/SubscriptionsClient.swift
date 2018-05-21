@@ -119,28 +119,35 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    func fetchRoles(subscription: Subscription, realm: Realm? = Realm.current) {
+    func fetchRoles(subscription: Subscription, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
         let rid = subscription.rid
         let rolesRequest = RoomRolesRequest(roomName: subscription.name, subscriptionType: subscription.type)
-        API.current()?.fetch(rolesRequest, completion: { result in
+
+        let currentRealm = realm
+
+        api.fetch(rolesRequest) { result in
             switch result {
             case .resource(let resource):
-                if let subscription = Subscription.find(rid: rid) {
-                    Realm.executeOnMainThread({ (realm) in
-                        subscription.usersRoles.removeAll()
-                        resource.roomRoles?.forEach({ (role) in
-                            subscription.usersRoles.append(role)
-                        })
+                if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
+                    try? currentRealm?.write {
+                        let subscriptionCopy = Subscription(value: subscription)
 
-                        realm.add(subscription, update: true)
-                    })
+                        subscriptionCopy.usersRoles.removeAll()
+                        resource.roomRoles?.forEach { role in
+                            subscriptionCopy.usersRoles.append(role)
+                        }
+
+                        currentRealm?.add(subscriptionCopy, update: true)
+                    }
+
+                    completion?()
                 }
 
             // Fail silently
             case .error(let error):
                 print(error)
             }
-        })
+        }
     }
 
     // fallback for servers < 0.60.0
