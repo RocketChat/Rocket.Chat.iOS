@@ -30,7 +30,10 @@ extension Subscription: ModelMappeable {
 
         if self.type == .directMessage {
             let userId = values["u"]["_id"].stringValue
-            self.otherUserId = self.rid.replacingOccurrences(of: userId, with: "")
+
+            if let range = self.rid.range(of: userId) {
+                self.otherUserId = self.rid.replacingCharacters(in: range, with: userId)
+            }
         }
 
         if let createdAt = values["ts"]["$date"].double {

@@ -91,6 +91,8 @@ final class MemberCell: UITableViewCell {
 extension MemberCell: ReactorPresenter {
     var reactor: String {
         set {
+            guard !reactor.isEmpty else { return }
+
             if let user = User.find(username: newValue) {
                 data = MemberCellData(member: user)
                 return
@@ -98,10 +100,7 @@ extension MemberCell: ReactorPresenter {
 
             User.fetch(by: .username(newValue), completion: { user in
                 guard let user = user else { return }
-
-                DispatchQueue.main.async {
-                    self.data = MemberCellData(member: user)
-                }
+                self.data = MemberCellData(member: user)
             })
         }
 
