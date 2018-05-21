@@ -384,6 +384,7 @@
 		8039441820AF620C002F317A /* ResourceSharedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441720AF620C002F317A /* ResourceSharedProperties.swift */; };
 		8039442520B330B2002F317A /* RoomInviteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442420B330B2002F317A /* RoomInviteRequest.swift */; };
 		8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */; };
+		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
 		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
@@ -1100,6 +1101,7 @@
 		8039441720AF620C002F317A /* ResourceSharedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSharedProperties.swift; sourceTree = "<group>"; };
 		8039442420B330B2002F317A /* RoomInviteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequest.swift; sourceTree = "<group>"; };
 		8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequestSpec.swift; sourceTree = "<group>"; };
+		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
 		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
@@ -2622,6 +2624,7 @@
 				8076FDC62048632300114F28 /* SubscriptionQueries.swift */,
 				8076FDC420485ABB00114F28 /* SubscriptionUser.swift */,
 				8076FDC220485A2200114F28 /* SubscriptionUtils.swift */,
+				8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3856,6 +3859,7 @@
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
+				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				8076FDB92048581F00114F28 /* AuthManagerCurrentUser.swift in Sources */,

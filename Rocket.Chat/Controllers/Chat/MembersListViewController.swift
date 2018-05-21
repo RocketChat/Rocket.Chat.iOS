@@ -23,6 +23,10 @@ class MembersListViewData {
         return showing >= total
     }
 
+    var canInviteUsers: Bool {
+        return subscription?.canInviteUsers() ?? false
+    }
+
     var membersPages: [[User]] = []
     var members: FlattenCollection<[[User]]> {
         return membersPages.joined()
@@ -117,6 +121,14 @@ extension MembersListViewController {
         }
 
         title = data.title
+
+        if data.canInviteUsers {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(inviteUsersButtonPressed(sender:)))
+        }
+    }
+
+    @objc func inviteUsersButtonPressed(sender: Any) {
+        print("yay")
     }
 
     func registerCells() {
