@@ -11,7 +11,7 @@ import MBProgressHUD
 import SwiftyJSON
 
 // swiftlint:disable file_length type_body_length
-class EditProfileTableViewController: UITableViewController, MediaPicker {
+final class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     static let identifier = String(describing: EditProfileTableViewController.self)
 
@@ -72,8 +72,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     var numberOfSections: Int {
         guard !isLoading else { return 0 }
-        guard let authSettings = authSettings else { return 1 }
-        return !authSettings.isAllowedToEditProfile || !authSettings.isAllowedToEditPassword ? 1 : 2
+        guard let authSettings = authSettings else { return 2 }
+        return !authSettings.isAllowedToEditProfile || !authSettings.isAllowedToEditPassword ? 2 : 3
     }
 
     var canEditAnyInfo: Bool {
@@ -490,7 +490,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return viewModel.profileSectionTitle
+        case 1: return viewModel.profileSectionTitle
         default: return ""
         }
     }

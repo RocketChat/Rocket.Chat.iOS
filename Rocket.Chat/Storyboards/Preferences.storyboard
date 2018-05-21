@@ -31,19 +31,19 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nb7-OU-8Qa">
                                                     <rect key="frame" x="16" y="11" width="29" height="28"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Nb7-OU-8Qa" secondAttribute="height" multiplier="1:1" constant="1" id="AUo-Jv-WA8"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-df-YqL">
-                                                    <rect key="frame" x="53" y="7" width="280" height="19.5"/>
+                                                    <rect key="frame" x="53" y="8" width="280" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4p-F0-OV3">
-                                                    <rect key="frame" x="53" y="26.5" width="280" height="16"/>
+                                                    <rect key="frame" x="53" y="27.5" width="280" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                                                 <constraint firstItem="Nb7-OU-8Qa" firstAttribute="bottom" secondItem="AIN-J9-pc9" secondAttribute="bottomMargin" id="by5-3s-dRe"/>
                                                 <constraint firstItem="Nb7-OU-8Qa" firstAttribute="top" secondItem="AIN-J9-pc9" secondAttribute="topMargin" id="fRQ-JS-zkK"/>
                                                 <constraint firstItem="q4p-F0-OV3" firstAttribute="leading" secondItem="Nb7-OU-8Qa" secondAttribute="trailing" constant="8" id="hGO-XB-sel"/>
-                                                <constraint firstItem="KHa-df-YqL" firstAttribute="top" secondItem="AIN-J9-pc9" secondAttribute="top" constant="7" id="ub9-ZJ-aGj"/>
+                                                <constraint firstItem="KHa-df-YqL" firstAttribute="top" secondItem="AIN-J9-pc9" secondAttribute="top" constant="8" id="ub9-ZJ-aGj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -380,7 +380,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktt-zT-6vl">
-                                                    <rect key="frame" x="15" y="11" width="326" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="46.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="4X1-dd-Ga6"/>
                                                     </constraints>
@@ -388,12 +388,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="online" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xj-81-1Z8">
+                                                    <rect key="frame" x="287" y="11.5" width="46" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ktt-zT-6vl" firstAttribute="top" secondItem="Bm0-rK-RT6" secondAttribute="top" constant="11" id="3RU-Qd-jCw"/>
                                                 <constraint firstAttribute="bottom" secondItem="ktt-zT-6vl" secondAttribute="bottom" constant="11.5" id="3wj-eU-HTI"/>
                                                 <constraint firstItem="ktt-zT-6vl" firstAttribute="leading" secondItem="Bm0-rK-RT6" secondAttribute="leading" constant="15" id="RMi-74-tM6"/>
-                                                <constraint firstAttribute="trailing" secondItem="ktt-zT-6vl" secondAttribute="trailing" id="sXl-tZ-bPf"/>
+                                                <constraint firstItem="3Xj-81-1Z8" firstAttribute="centerY" secondItem="Bm0-rK-RT6" secondAttribute="centerY" id="srn-lx-ht0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3Xj-81-1Z8" secondAttribute="trailing" id="wQh-Vd-Ze5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -536,7 +543,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8D-7Z-aMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="-16"/>
+            <point key="canvasLocation" x="1221.5999999999999" y="-16.641679160419791"/>
         </scene>
         <!--New password-->
         <scene sceneID="MSa-AI-0n1">
