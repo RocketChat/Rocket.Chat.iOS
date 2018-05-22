@@ -18,7 +18,7 @@ class AddMembersViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String = localized("chat.add_members.title")
+    var title: String = localized("chat.add_users.title")
 
     var isShowingAllUsers: Bool {
         return showing >= total
@@ -52,7 +52,6 @@ class AddMembersViewData {
 
                 strongSelf.currentPage += 1
 
-                strongSelf.title = "\(localized("chat.add_users.title")) (\(strongSelf.total))"
                 strongSelf.isLoadingMoreUsers = false
                 completion?()
             case .error:
@@ -67,6 +66,12 @@ class AddMembersViewController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+        }
+    }
+
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
         }
     }
 
@@ -147,7 +152,7 @@ class AddMembersViewController: UIViewController {
     }
 }
 
-// MARK: TableView
+// MARK: UITableView
 
 extension AddMembersViewController: UITableViewDelegate {
 
@@ -177,5 +182,13 @@ extension AddMembersViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+}
+
+// MARK: UISearchBar
+
+extension AddMembersViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        refreshUsers(searchText: searchText)
     }
 }
