@@ -27,7 +27,7 @@ final class DirectoryRequest: APIRequest {
     }
 }
 
-final class DirectoryResource: APIResource {
+final class DirectoryResource: APIResource, PagedResource {
     var users: [User] {
         return raw?["result"].arrayValue.map {
             let user = User()

@@ -387,6 +387,7 @@
 		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
 		8039442E20B342BB002F317A /* AddMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddMembersViewController.swift */; };
 		8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442F20B34B12002F317A /* DirectoryRequest.swift */; };
+		8039443220B3988F002F317A /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039443120B3988F002F317A /* PagedResource.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
 		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
@@ -1106,6 +1107,7 @@
 		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
 		8039442D20B342BB002F317A /* AddMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMembersViewController.swift; sourceTree = "<group>"; };
 		8039442F20B34B12002F317A /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
+		8039443120B3988F002F317A /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
 		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
@@ -2547,6 +2549,7 @@
 			isa = PBXGroup;
 			children = (
 				8039441720AF620C002F317A /* ResourceSharedProperties.swift */,
+				8039443120B3988F002F317A /* PagedResource.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3771,6 +3774,7 @@
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
+				8039443220B3988F002F317A /* PagedResource.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */,
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
