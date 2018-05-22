@@ -69,7 +69,15 @@ class MembersListViewController: BaseViewController {
     @IBOutlet weak var membersTableView: UITableView!
     var loaderCell: LoaderTableViewCell!
 
-    var data = MembersListViewData()
+    var data = MembersListViewData() {
+        didSet {
+            UIView.performWithoutAnimation {
+                membersTableView?.reloadData()
+            }
+
+            title = data.title
+        }
+    }
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
         refreshMembers()
@@ -83,10 +91,6 @@ class MembersListViewController: BaseViewController {
 
             if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
                 self?.membersTableView?.refreshControl?.endRefreshing()
-            }
-
-            UIView.performWithoutAnimation {
-                self?.membersTableView?.reloadData()
             }
         }
     }
