@@ -30,7 +30,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchSubscriptions(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = SubscriptionsRequest(updatedSince: updatedSince)
+        let req = SubscriptionsRequest()
 
         let currentRealm = realm
 
@@ -77,7 +77,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = RoomsRequest(updatedSince: updatedSince)
+        let req = RoomsRequest()
 
         let currentRealm = realm
 
