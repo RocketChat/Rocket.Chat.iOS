@@ -247,6 +247,9 @@
 // Members List
 "chat.members.list.title" = "Členové";
 
+// Add Users
+"chat.add_users.title" = "Add Users"; // TODO
+
 // Messages List
 "chat.messages.list.title" = "Zprávy";
 "chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";

@@ -247,6 +247,9 @@
 // Members List
 "chat.members.list.title" = "Μέλη";
 
+// Add Users
+"chat.add_users.title" = "Add Users"; // TODO
+
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
 "chat.messages.list.empty" = "Δεν βρέθηκαν μηνύματα";

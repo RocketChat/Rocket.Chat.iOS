@@ -18,9 +18,11 @@ class AddMembersViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String = localized("chat.users.list.title")
+    var title: String = localized("chat.add_members.title")
 
-    var isShowingAllUsers: Bool = false
+    var isShowingAllUsers: Bool {
+        return showing >= total
+    }
 
     var usersPages: [[User]] = []
     var users: FlattenCollection<[[User]]> {
@@ -50,7 +52,7 @@ class AddMembersViewData {
 
                 strongSelf.currentPage += 1
 
-                strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
+                strongSelf.title = "\(localized("chat.add_users.title")) (\(strongSelf.total))"
                 strongSelf.isLoadingMoreUsers = false
                 completion?()
             case .error:
@@ -89,7 +91,12 @@ class AddMembersViewController: UIViewController {
     }
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        refreshUsers()
+    }
+
+    func refreshUsers(searchText: String = "") {
         let data = AddMembersViewData()
+        data.searchText = searchText
         data.loadMoreUsers { [weak self] in
             self?.data = data
 

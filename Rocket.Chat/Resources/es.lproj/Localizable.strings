@@ -246,6 +246,9 @@
 // Members List
 "chat.members.list.title" = "miembros";
 
+// Add Users
+"chat.add_users.title" = "Add Users"; // TODO
+
 // Messages List
 "chat.messages.list.title" = "Mensajes";
 "chat.messages.list.empty" = "No se han encontrado mensajes";
