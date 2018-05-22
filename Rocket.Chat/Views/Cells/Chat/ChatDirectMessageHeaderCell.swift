@@ -15,15 +15,11 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
 
     var subscription: Subscription? {
         didSet {
-            guard let user = subscription?.directMessageUser else {
+            guard subscription?.directMessageUser != nil else {
                 return fetchUser()
             }
 
-            labelUser.text = user.displayName()
-            avatarView.user = user
-
-            let startText = localized("chat.dm.start_conversation")
-            labelStartConversation.text = String(format: startText, user.displayName())
+            updateUser()
         }
     }
 
@@ -55,13 +51,31 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
         labelStartConversation.text = ""
     }
 
+    func updateUser() {
+        guard let user = subscription?.directMessageUser else {
+            labelUser.text = ""
+            labelStartConversation.text = ""
+            return
+        }
+
+        labelUser.text = user.displayName()
+        avatarView.user = user
+
+        let startText = localized("chat.dm.start_conversation")
+        labelStartConversation.text = String(format: startText, user.displayName())
+    }
+
     func fetchUser() {
-        guard let userId = subscription?.otherUserId else { return }
+        guard
+            let userId = subscription?.otherUserId,
+            !userId.isEmpty
+        else {
+            updateUser()
+            return
+        }
 
         User.fetch(by: .userId(userId), completion: { _ in
-            DispatchQueue.main.async { [weak self] in
-                self?.subscription = self?.subscription
-            }
+            self.updateUser()
         })
     }
 
