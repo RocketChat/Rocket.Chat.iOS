@@ -33,7 +33,6 @@ class RoomsRequestSpec: APITestCase {
         }
 
         XCTAssertEqual(request.url?.path, "/api/v1/rooms.get", "path is correct")
-        XCTAssert(request.url?.query?.contains("updatedSince=") == true, "has updatedSince query parameter")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
     }
