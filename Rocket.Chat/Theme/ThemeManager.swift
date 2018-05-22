@@ -29,7 +29,7 @@ struct ThemeManager {
     static let userDefaultsKey = "RCTheme"
     static let themes: [(title: String, theme: Theme)] = [("light", .light), ("dark", .dark), ("black", .black)]
 
-    private static var observers = [Weak<Themeable>]()
+    static var observers = [Weak<Themeable>]()
 
     /**
      Allows for `applyTheme` to be called automatically on the `observer` when the `ThemeManager.theme` changes.
@@ -45,8 +45,7 @@ struct ThemeManager {
     }
 }
 
-// swiftlint:disable private_over_fileprivate
-fileprivate struct Weak<T: AnyObject> {
+struct Weak<T: AnyObject> {
     weak var value: T?
     init(_ value: T) {
         self.value = value
