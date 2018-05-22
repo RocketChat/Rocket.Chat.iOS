@@ -26,6 +26,11 @@ extension URL {
     }
 
     init?(string: String, scheme: String) {
+        var string = string
+        if !string.contains("://") {
+            string = "https://\(string)"
+        }
+
         guard let url = URL(string: string) else {
             return nil
         }
