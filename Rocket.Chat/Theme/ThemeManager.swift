@@ -9,6 +9,13 @@
 import Foundation
 
 struct ThemeManager {
+
+    /**
+     Stores a default `Theme` for the app.
+
+     Setting a new value will cause the `applyTheme` method to be called on all the `ThemeManager.observers`. The transition is animated by default.
+     */
+
     static var theme = themes.first(where: { $0.title == UserDefaults.standard.string(forKey: userDefaultsKey) })?.theme ?? Theme.light {
         didSet {
             UIView.animate(withDuration: 0.3) {
@@ -22,7 +29,14 @@ struct ThemeManager {
     static let userDefaultsKey = "RCTheme"
     static let themes: [(title: String, theme: Theme)] = [("light", .light), ("dark", .dark), ("black", .black)]
 
-    static var observers = [Weak<Themeable>]()
+    private static var observers = [Weak<Themeable>]()
+
+    /**
+     Allows for `applyTheme` to be called automatically on the `observer` when the `ThemeManager.theme` changes.
+
+     ThemeManager holds a weak reference to the `observer`.
+     */
+
     static func addObserver(_ observer: Themeable?) {
         observers = observers.compactMap { $0 }
         guard let observer = observer else { return }
@@ -31,14 +45,15 @@ struct ThemeManager {
     }
 }
 
-struct Weak<T: AnyObject> {
+// swiftlint:disable private_over_fileprivate
+fileprivate struct Weak<T: AnyObject> {
     weak var value: T?
     init(_ value: T) {
         self.value = value
     }
 }
 
-extension Array where Element == Weak<AnyObject> {
+fileprivate extension Array where Element == Weak<AnyObject> {
     mutating func filterReleasedReferences() {
         self = self.compactMap { $0 }
     }

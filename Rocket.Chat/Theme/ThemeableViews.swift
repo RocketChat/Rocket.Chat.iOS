@@ -9,12 +9,39 @@
 import UIKit
 import SlackTextViewController
 
-extension UIView: Themeable, ThemeProvider {
+extension UIView: Themeable {
+
+    /**
+     Applies theme to the view and all of its `subviews`.
+
+     The `Theme` returned from the `theme` property is used. To exempt a view from getting themed, override the `theme` property and return `nil`.
+
+     The default implementation calls the `applyTheme` method on all of its subviews, and sets the background color of the views.
+
+     Override this method to adapt the components of the view to the theme being applied. The implementation of `super` should be called somewhere in the overridden implementation to apply the theme on all of the subviews, and to adapt the `backgroundColor` of `self`.
+
+     This method should only be called directly if the view or any of its subviews require theming after the first initialization.
+
+     - Important:
+     On first initializaiton, it is recommended that the view controller for the view be added as an observer to the ThemeManager using the `ThemeManager.addObserver(_:)` method. If a view controller does not exist, the view should be added as an observer instead.
+     */
+
     func applyTheme() {
         guard let theme = theme else { return }
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         self.subviews.forEach { $0.applyTheme() }
     }
+}
+
+extension UIView: ThemeProvider {
+
+    /**
+     Returns the theme to be allied to the view.
+
+     By default the `theme` of the `superview` is returned. If a `superview` does not exits, then the value is taken from `ThemeManager.theme`
+
+     Overriding this property and returning `nil` will exempt the view from getting themed.
+     */
 
     var theme: Theme? {
         guard let superview = superview else { return ThemeManager.theme }
