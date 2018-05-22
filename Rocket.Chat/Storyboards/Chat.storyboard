@@ -373,17 +373,17 @@
                     </view>
                     <connections>
                         <outlet property="membersTableView" destination="hz2-84-IvC" id="29I-J5-lyC"/>
-                        <segue destination="DYD-sh-drR" kind="show" identifier="toAddMembers" id="7Zo-Ff-w6F"/>
+                        <segue destination="DYD-sh-drR" kind="show" identifier="toAddUsers" id="7Zo-Ff-w6F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jc2-qE-lsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4353" y="300"/>
         </scene>
-        <!--Add Members View Controller-->
+        <!--Add Users View Controller-->
         <scene sceneID="RgG-OP-6aq">
             <objects>
-                <viewController id="DYD-sh-drR" customClass="AddMembersViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DYD-sh-drR" customClass="AddUsersViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jkq-fT-Uhv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

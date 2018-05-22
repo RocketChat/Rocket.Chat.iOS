@@ -385,7 +385,7 @@
 		8039442520B330B2002F317A /* RoomInviteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442420B330B2002F317A /* RoomInviteRequest.swift */; };
 		8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */; };
 		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
-		8039442E20B342BB002F317A /* AddMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddMembersViewController.swift */; };
+		8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddUsersViewController.swift */; };
 		8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442F20B34B12002F317A /* DirectoryRequest.swift */; };
 		8039443220B3988F002F317A /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039443120B3988F002F317A /* PagedResource.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
@@ -400,6 +400,7 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResponse.swift */; };
+		8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75620B4ADC400B3B0CF /* Debounce.swift */; };
 		805C87D92052AA1900AD0EB0 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */; };
 		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
@@ -1105,7 +1106,7 @@
 		8039442420B330B2002F317A /* RoomInviteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequest.swift; sourceTree = "<group>"; };
 		8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequestSpec.swift; sourceTree = "<group>"; };
 		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
-		8039442D20B342BB002F317A /* AddMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMembersViewController.swift; sourceTree = "<group>"; };
+		8039442D20B342BB002F317A /* AddUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersViewController.swift; sourceTree = "<group>"; };
 		8039442F20B34B12002F317A /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
 		8039443120B3988F002F317A /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
@@ -1113,6 +1114,7 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		8052F75620B4ADC400B3B0CF /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
@@ -2185,6 +2187,7 @@
 				35C7D199202B130400B4BE5A /* RCDateFormatter.swift */,
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
+				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2298,7 +2301,7 @@
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
-				8039442D20B342BB002F317A /* AddMembersViewController.swift */,
+				8039442D20B342BB002F317A /* AddUsersViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3741,7 +3744,7 @@
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
-				8039442E20B342BB002F317A /* AddMembersViewController.swift in Sources */,
+				8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
@@ -3823,6 +3826,7 @@
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
 				80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */,
 				8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */,
+				8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,

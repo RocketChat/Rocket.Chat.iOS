@@ -1,5 +1,5 @@
 //
-//  AddMembersViewController.swift
+//  AddUsersViewController.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 5/21/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddMembersViewData {
+class AddUsersViewData {
     var searchText: String = ""
     var subscription: Subscription?
 
@@ -61,7 +61,7 @@ class AddMembersViewData {
     }
 }
 
-class AddMembersViewController: UIViewController {
+class AddUsersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -76,7 +76,7 @@ class AddMembersViewController: UIViewController {
     }
 
     var loaderCell: LoaderTableViewCell!
-    var data = AddMembersViewData()
+    var data = AddUsersViewData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,8 +100,9 @@ class AddMembersViewController: UIViewController {
     }
 
     func refreshUsers(searchText: String = "") {
-        let data = AddMembersViewData()
+        let data = AddUsersViewData()
         data.searchText = searchText
+        data.subscription = self.data.subscription
         data.loadMoreUsers { [weak self] in
             self?.data = data
 
@@ -113,6 +114,10 @@ class AddMembersViewController: UIViewController {
                 self?.tableView?.reloadData()
             }
         }
+    }
+
+    lazy var debouncedRefreshUsers = debounce(0.5) { [weak self] in
+        self?.refreshUsers(searchText: self?.searchBar?.text ?? "")
     }
 
     func loadMoreMembers() {
@@ -154,11 +159,46 @@ class AddMembersViewController: UIViewController {
 
 // MARK: UITableView
 
-extension AddMembersViewController: UITableViewDelegate {
+extension AddUsersViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
+        guard
+            let roomId = data.subscription?.rid,
+            let roomType = data.subscription?.type,
+            let userId = data.user(at: indexPath.row).identifier,
+            let api = API.current()
+        else {
+            return
+        }
+
+        alertYesNo(
+            title: localized("chat.add_users.confirm.title"),
+            message: localized("chat.add_users.confirm.message"),
+            handler: { yes in
+                guard yes else { return }
+
+                let req = RoomInviteRequest(roomId: roomId, roomType: roomType, userId: userId)
+                api.fetch(req, completion: { [weak self] response in
+                    switch response {
+                    case .resource(let resource):
+                        
+                        print(resource)
+                    case .error:
+                        break
+                    }
+                })
+        })
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == data.users.count - data.pageSize/2 {
+            loadMoreMembers()
+        }
+    }
 }
 
-extension AddMembersViewController: UITableViewDataSource {
+extension AddUsersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.users.count + (data.isShowingAllUsers ? 0 : 1)
     }
@@ -187,8 +227,8 @@ extension AddMembersViewController: UITableViewDataSource {
 
 // MARK: UISearchBar
 
-extension AddMembersViewController: UISearchBarDelegate {
+extension AddUsersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refreshUsers(searchText: searchText)
+        debouncedRefreshUsers()
     }
 }

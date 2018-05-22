@@ -42,6 +42,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
                     self?.alertYesNo(
                         title: localized("user_action_sheet.remove_confirm.title"),
                         message: localized("user_action_sheet.remove_confirm.message"),
+                        yesStyle: .destructive,
                         handler: { yes in
                             if yes {
                                 api?.fetch(

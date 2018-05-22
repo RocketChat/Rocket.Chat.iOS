@@ -128,7 +128,7 @@ extension MembersListViewController {
     }
 
     @objc func inviteUsersButtonPressed(sender: Any) {
-        performSegue(withIdentifier: "toAddMembers", sender: self)
+        performSegue(withIdentifier: "toAddUsers", sender: self)
     }
 
     func registerCells() {
@@ -151,6 +151,17 @@ extension MembersListViewController {
         guard let refreshControl = membersTableView.refreshControl else { return }
         membersTableView.refreshControl?.beginRefreshing()
         membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+    }
+}
+
+// MARK: Prepare for Segue
+extension MembersListViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if let addUsers = segue.destination as? AddUsersViewController {
+            addUsers.data.subscription = data.subscription
+        }
     }
 }
 
