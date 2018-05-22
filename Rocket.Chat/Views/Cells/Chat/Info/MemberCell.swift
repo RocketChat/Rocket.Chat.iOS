@@ -91,7 +91,7 @@ final class MemberCell: UITableViewCell {
 extension MemberCell: ReactorPresenter {
     var reactor: String {
         set {
-            guard !reactor.isEmpty else { return }
+            guard !newValue.isEmpty else { return }
 
             if let user = User.find(username: newValue) {
                 data = MemberCellData(member: user)
