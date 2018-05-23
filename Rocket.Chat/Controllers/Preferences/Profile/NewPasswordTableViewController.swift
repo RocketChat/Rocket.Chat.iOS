@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class NewPasswordTableViewController: UITableViewController {
+final class NewPasswordTableViewController: UITableViewController {
 
     @IBOutlet weak var newPassword: UITextField! {
         didSet {

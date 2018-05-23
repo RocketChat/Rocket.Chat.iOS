@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
             PushManager.handleNotification(raw: notification)
         }
- 
+
         // If user is authenticated, open the chat right away
         // but if not, just open the authentication screen.
         if let auth = AuthManager.isAuthenticated() {

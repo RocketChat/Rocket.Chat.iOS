@@ -15,6 +15,13 @@ final class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     static let identifier = String(describing: EditProfileTableViewController.self)
 
+    @IBOutlet weak var statusValueLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel! {
+        didSet {
+            statusLabel.text = viewModel.statusTitle
+        }
+    }
+
     @IBOutlet weak var name: UITextField! {
         didSet {
             name.placeholder = viewModel.namePlaceholder
@@ -122,6 +129,11 @@ final class EditProfileTableViewController: UITableViewController, MediaPicker {
         fetchUserData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUserStatus()
+    }
+
     // MARK: Setup
 
     func setupAvatarButton() {
@@ -180,6 +192,12 @@ final class EditProfileTableViewController: UITableViewController, MediaPicker {
         name.text = user?.name
         username.text = user?.username
         email.text = user?.emails.first?.email
+
+        updateUserStatus()
+    }
+
+    func updateUserStatus() {
+        statusValueLabel.text = AuthManager.currentUser()?.status.rawValue.capitalized
     }
 
     // MARK: State Management

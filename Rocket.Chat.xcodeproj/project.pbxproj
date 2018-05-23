@@ -134,6 +134,8 @@
 		411498E11FC7A85400D66542 /* ChatTitleViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E01FC7A85400D66542 /* ChatTitleViewModelSpec.swift */; };
 		411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */; };
 		411498E51FC7B8D500D66542 /* AttachmentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E41FC7B8D500D66542 /* AttachmentSpec.swift */; };
+		4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE420B599D9007E7163 /* StatusTableViewController.swift */; };
+		4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE620B599E6007E7163 /* StatusViewModel.swift */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
@@ -827,6 +829,8 @@
 		411498E01FC7A85400D66542 /* ChatTitleViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleViewModelSpec.swift; sourceTree = "<group>"; };
 		411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleViewModel.swift; sourceTree = "<group>"; };
 		411498E41FC7B8D500D66542 /* AttachmentSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentSpec.swift; sourceTree = "<group>"; };
+		4116CBE420B599D9007E7163 /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
+		4116CBE620B599E6007E7163 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManager.swift; sourceTree = "<group>"; };
 		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -2932,6 +2936,8 @@
 				9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */,
 				994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */,
 				996154B0205197E7009B9857 /* NewPasswordViewModel.swift */,
+				4116CBE420B599D9007E7163 /* StatusTableViewController.swift */,
+				4116CBE620B599E6007E7163 /* StatusViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -3781,6 +3787,7 @@
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
+				4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */,
 				418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */,
 				80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */,
 				3330329A20738E1500A9514D /* SubscriptionManagerRooms.swift in Sources */,
@@ -3998,6 +4005,7 @@
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
+				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,

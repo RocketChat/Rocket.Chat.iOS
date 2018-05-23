@@ -300,6 +300,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Status";
 "myaccount.settings.profile.password_required.title" = "Enter your password";
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail.";
 "myaccount.settings.profile.password_required.placeholder" = "Password";
