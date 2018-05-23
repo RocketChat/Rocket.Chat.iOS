@@ -32,9 +32,15 @@ final class NotificationManager {
             return
         }
 
+        let formattedBody = NSMutableAttributedString(string: notification.body)
+            .transformMarkdown().string
+            .components(separatedBy: .newlines)
+            .joined(separator: " ")
+            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+
         NotificationViewController.shared.displayNotification(
             title: notification.title,
-            body: notification.body.trimmingCharacters(in: .newlines),
+            body: formattedBody,
             username: notification.payload.sender.username
         )
 

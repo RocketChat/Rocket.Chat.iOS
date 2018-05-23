@@ -26,16 +26,13 @@ class SubscriptionsRequestSpec: APITestCase {
     }
 
     func testRequestWithUpdatedSince() {
-        let date = Date.dateFromString("2015-03-25T12:00:00.000+0000")
-
-        let subscriptionsRequest = SubscriptionsRequest(updatedSince: date)
+        let subscriptionsRequest = SubscriptionsRequest()
 
         guard let request = subscriptionsRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
         XCTAssertEqual(request.url?.path, "/api/v1/subscriptions.get", "path is correct")
-        XCTAssert(request.url?.query?.contains("updatedSince=") == true, "has updatedSince query parameter")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
     }
