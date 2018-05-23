@@ -30,14 +30,17 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchSubscriptions(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = SubscriptionsRequest(updatedSince: updatedSince)
+        let req = SubscriptionsRequest()
 
         let currentRealm = realm
 
         api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
             case .resource(let resource):
-                guard resource.success == true else { return }
+                guard resource.success == true else {
+                    completion?()
+                    return
+                }
 
                 let subscriptions = List<Subscription>()
 
@@ -67,21 +70,24 @@ struct SubscriptionsClient: APIClient {
                 case .version:
                     self.fetchSubscriptionsFallback(updatedSince: updatedSince, realm: realm, completion: completion)
                 default:
-                    break
+                    completion?()
                 }
             }
         }
     }
 
     func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = RoomsRequest(updatedSince: updatedSince)
+        let req = RoomsRequest()
 
         let currentRealm = realm
 
         api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
             case .resource(let resource):
-                guard resource.success == true else { return }
+                guard resource.success == true else {
+                    completion?()
+                    return
+                }
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
@@ -113,7 +119,7 @@ struct SubscriptionsClient: APIClient {
                 case .version:
                     self.fetchRoomsFallback(updatedSince: updatedSince, realm: realm, completion: completion)
                 default:
-                    break
+                    completion?()
                 }
             }
         }

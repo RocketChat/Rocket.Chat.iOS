@@ -73,9 +73,21 @@ class MembersListViewController: BaseViewController {
     @IBOutlet weak var membersTableView: UITableView!
     var loaderCell: LoaderTableViewCell!
 
-    var data = MembersListViewData()
+    var data = MembersListViewData() {
+        didSet {
+            UIView.performWithoutAnimation {
+                membersTableView?.reloadData()
+            }
+
+            title = data.title
+        }
+    }
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        refreshMembers()
+    }
+
+    func refreshMembers() {
         let data = MembersListViewData()
         data.subscription = self.data.subscription
         data.loadMoreMembers { [weak self] in
@@ -83,10 +95,6 @@ class MembersListViewController: BaseViewController {
 
             if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
                 self?.membersTableView?.refreshControl?.endRefreshing()
-            }
-
-            UIView.performWithoutAnimation {
-                self?.membersTableView?.reloadData()
             }
         }
     }
@@ -198,7 +206,15 @@ extension MembersListViewController: UITableViewDataSource {
 extension MembersListViewController: UITableViewDelegate, UserActionSheetPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presentActionSheetForUser(data.member(at: indexPath.row), subscription: data.subscription, source: (tableView, tableView.rectForRow(at: indexPath)))
+
+        let user = data.member(at: indexPath.row)
+        let subscription = data.subscription
+        let rect = tableView.rectForRow(at: indexPath)
+        presentActionSheetForUser(user, subscription: subscription, source: (tableView, rect)) { [weak self] action in
+            if case .remove = action {
+                self?.refreshMembers()
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

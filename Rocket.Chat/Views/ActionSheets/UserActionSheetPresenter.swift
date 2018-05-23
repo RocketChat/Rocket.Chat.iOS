@@ -8,12 +8,18 @@
 
 import Foundation
 
+enum UserAction {
+    case remove
+    case conversation
+    case none
+}
+
 protocol UserActionSheetPresenter: Closeable {
-    func presentActionSheetForUser(_ user: User, subscription: Subscription?, source: (view: UIView?, rect: CGRect?)?)
+    func presentActionSheetForUser(_ user: User, subscription: Subscription?, source: (view: UIView?, rect: CGRect?)?, completion: ((UserAction) -> Void)?)
 }
 
 extension UserActionSheetPresenter where Self: UIViewController {
-    func presentActionSheetForUser(_ user: User, subscription: Subscription? = nil, source: (view: UIView?, rect: CGRect?)? = nil) {
+    func presentActionSheetForUser(_ user: User, subscription: Subscription? = nil, source: (view: UIView?, rect: CGRect?)? = nil, completion: ((UserAction) -> Void)? = nil) {
         guard let userId = user.identifier else {
             return
         }
@@ -28,6 +34,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
             guard let username = user.username else { return }
 
             AppManager.openDirectMessage(username: username) {
+                completion?(.conversation)
                 controller.dismiss(animated: true, completion: nil)
                 self?.close(animated: true)
             }
@@ -39,33 +46,24 @@ extension UserActionSheetPresenter where Self: UIViewController {
         if let subscription = subscription {
             if AuthManager.currentUser()?.hasPermission(.removeUser, subscription: subscription) == true {
                 controller.addAction(UIAlertAction(title: localized("user_action_sheet.remove"), style: .destructive, handler: { [weak self] _ in
-                    self?.alertYesNo(
-                        title: localized("user_action_sheet.remove_confirm.title"),
-                        message: localized("user_action_sheet.remove_confirm.message"),
-                        yesStyle: .destructive,
-                        handler: { yes in
-                            if yes {
-                                api?.fetch(
-                                    RoomKickRequest(
-                                        roomId: subscription.rid,
-                                        roomType: subscription.type,
-                                        userId: userId
-                                    )
-                                ) { response in
-                                    switch response {
-                                    case .resource(let resource):
-                                        if let error = resource.error {
-                                            return Alert(
-                                                title: localized("global.error"),
-                                                message: error
-                                            ).present()
-                                        }
-                                    case .error(let error):
-                                        print(error)
-                                    }
+                    let message = String(format: localized("user_action_sheet.remove_confirm.message"), user.username ?? "")
+                    self?.alertYesNo(title: localized("user_action_sheet.remove_confirm.title"), message: message, yesStyle: .destructive) { yes in
+                        guard yes else { completion?(.none); return }
+
+                        api?.fetch(RoomKickRequest(roomId: subscription.rid, roomType: subscription.type, userId: userId)) { response in
+                            switch response {
+                            case .resource(let resource):
+                                if let error = resource.error {
+                                    completion?(.none)
+                                    return Alert(title: localized("global.error"), message: error).present()
+                                } else {
+                                    completion?(.remove)
                                 }
+                            case .error:
+                                completion?(.none)
                             }
-                    })
+                        }
+                    }
                 }))
             }
         }
