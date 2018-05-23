@@ -247,6 +247,12 @@ final class AuthViewController: BaseViewController {
             return
         }
 
+        if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
+            try? realm.write {
+                loginService.serverUrl = url
+            }
+        }
+
         switch loginService.type {
         case .cas:
             presentCASViewController(for: loginService)

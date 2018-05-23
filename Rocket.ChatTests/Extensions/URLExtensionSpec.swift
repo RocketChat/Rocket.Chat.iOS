@@ -33,7 +33,9 @@ class URLExtensionSpec: XCTestCase {
 
     func testInitWithStringAndScheme() {
         XCTAssertEqual(URL(string: "open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will add scheme")
+        XCTAssertEqual(URL(string: "open.rocket.chat:3000", scheme: "https")?.absoluteString, "https://open.rocket.chat:3000", "will add scheme & keep port")
         XCTAssertEqual(URL(string: "https://open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will return correct url")
+        XCTAssertEqual(URL(string: "https://open.rocket.chat:3000", scheme: "https")?.absoluteString, "https://open.rocket.chat:3000", "will return correct url & port")
         XCTAssertEqual(URL(string: "http://open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will force https scheme")
         XCTAssertEqual(URL(string: "https://open.rocket.chat", scheme: "wss")?.absoluteString, "wss://open.rocket.chat", "will force wss scheme")
         XCTAssertEqual(URL(string: "http://open.rocket.chat/path", scheme: "https")?.absoluteString, "https://open.rocket.chat/path", "will keep path")

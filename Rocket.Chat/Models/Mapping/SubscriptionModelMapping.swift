@@ -29,10 +29,10 @@ extension Subscription: ModelMappeable {
         }
 
         if self.type == .directMessage {
-            let userId = values["u"]["_id"].stringValue
-
-            if let range = self.rid.range(of: userId) {
-                self.otherUserId = self.rid.replacingCharacters(in: range, with: userId)
+            if let userId = values["u"]["_id"].string {
+                if let range = self.rid.ranges(of: userId).first {
+                    self.otherUserId = self.rid.replacingCharacters(in: range, with: "")
+                }
             }
         }
 
