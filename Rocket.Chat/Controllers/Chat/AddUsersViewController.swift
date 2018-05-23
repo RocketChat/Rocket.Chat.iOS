@@ -163,31 +163,40 @@ extension AddUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
+        let user = data.user(at: indexPath.row)
+
         guard
             let roomId = data.subscription?.rid,
             let roomType = data.subscription?.type,
-            let userId = data.user(at: indexPath.row).identifier,
+            let roomName = data.subscription?.displayName(),
+            let userId = user.identifier,
+            let username = user.username,
             let api = API.current()
         else {
             return
         }
 
+        let message = String(format: localized("chat.add_users.confirm.message"), username, roomName)
+
         alertYesNo(
             title: localized("chat.add_users.confirm.title"),
-            message: localized("chat.add_users.confirm.message"),
+            message: message,
             handler: { yes in
                 guard yes else { return }
 
                 let req = RoomInviteRequest(roomId: roomId, roomType: roomType, userId: userId)
-                api.fetch(req, completion: { [weak self] response in
+                api.fetch(req) { [weak self] response in
                     switch response {
                     case .resource(let resource):
-                        
-                        print(resource)
+                        if let error = resource.error {
+                            Alert(title: localized("global.error"), message: error).present()
+                        } else {
+                            self?.navigationController?.popViewController(animated: true)
+                        }
                     case .error:
                         break
                     }
-                })
+                }
         })
     }
 
