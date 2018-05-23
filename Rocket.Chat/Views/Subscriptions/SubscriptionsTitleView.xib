@@ -25,7 +25,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
-                            <rect key="frame" x="128.5" y="18" width="118" height="18"/>
+                            <rect key="frame" x="0.0" y="18" width="375" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="f5b-22-pcB"/>
                             </constraints>
@@ -45,7 +45,9 @@
                         <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="1e3-dn-Xdj"/>
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="3cY-6p-zbD"/>
                         <constraint firstAttribute="height" constant="36" id="Db1-Dl-ho2"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="leading" secondItem="1EU-Bf-ijR" secondAttribute="leading" id="Fa2-5X-ymp"/>
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="IJT-0w-7Be"/>
+                        <constraint firstAttribute="trailing" secondItem="ct8-6x-Vjc" secondAttribute="trailing" id="J35-gR-SUO"/>
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="dQV-QF-hgL"/>
                         <constraint firstAttribute="bottom" secondItem="ct8-6x-Vjc" secondAttribute="bottom" id="mDL-TK-eV9"/>
                         <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="rKL-fl-g3g"/>

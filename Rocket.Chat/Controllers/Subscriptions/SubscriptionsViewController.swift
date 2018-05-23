@@ -31,6 +31,12 @@ final class SubscriptionsViewController: BaseViewController {
 
     var searchText: String = ""
 
+    let socketHandlerToken = String.random(5)
+
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,6 +47,8 @@ final class SubscriptionsViewController: BaseViewController {
         subscribeModelChanges()
 
         updateData()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -394,3 +402,20 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     }
 
 }
+
+extension SubscriptionsViewController: SocketConnectionHandler {
+
+    func socketDidConnect(socket: SocketManager) {
+
+    }
+
+    func socketDidDisconnect(socket: SocketManager) {
+        SocketManager.reconnect()
+    }
+
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        // Handle errors
+    }
+
+}
+

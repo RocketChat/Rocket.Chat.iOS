@@ -112,10 +112,13 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    let socketHandlerToken = String.random(5)
+
     // MARK: View Life Cycle
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
         messagesToken?.invalidate()
         subscriptionToken?.invalidate()
     }
@@ -131,6 +134,8 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
@@ -1218,4 +1223,20 @@ extension ChatViewController: KeyboardFrameViewDelegate {
     var keyboardProxyView: UIView? {
         return textInputbar.inputAccessoryView.superview
     }
+}
+
+extension ChatViewController: SocketConnectionHandler {
+
+    func socketDidConnect(socket: SocketManager) {
+
+    }
+
+    func socketDidDisconnect(socket: SocketManager) {
+        SocketManager.reconnect()
+    }
+
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        // Handle errors
+    }
+
 }

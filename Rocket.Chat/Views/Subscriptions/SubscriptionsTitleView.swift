@@ -35,17 +35,7 @@ final class SubscriptionsTitleView: UIView {
     }
 
     func updateServerName(name: String?) {
-        // If title is the same, we don't want to mess
-        // with the layout here.
-        if name == buttonServer.titleLabel?.text {
-            return
-        }
-
         buttonServer.setTitle(name, for: .normal)
-        buttonServer.sizeToFit()
-
-        let desiredWidth = buttonServer.intrinsicContentSize.width + 18
-        buttonServer.widthAnchor.constraint(equalToConstant: desiredWidth).isActive = true
     }
 
     override var intrinsicContentSize: CGSize {
