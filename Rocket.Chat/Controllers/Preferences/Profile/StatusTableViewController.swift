@@ -58,9 +58,11 @@ final class StatusTableViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UserManager.setUserStatus(status: viewModel.status(for: indexPath.row)) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }
+        let status = viewModel.status(for: indexPath.row)
+        UserManager.setUserStatus(status: status) { _ in }
+        viewModel.user?.updateStatus(status: status)
+
+        navigationController?.popViewController(animated: true)
     }
 
 }
