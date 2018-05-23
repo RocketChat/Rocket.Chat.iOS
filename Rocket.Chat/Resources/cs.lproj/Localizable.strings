@@ -250,7 +250,7 @@
 // Add Users
 "chat.add_users.title" = "Add Users"; // TODO
 "chat.add_users.confirm.title" = "Add this user?"; // TODO
-"chat.add_users.confirm.message" = "Are you sure you want to add '%@' to #'%@'?"; // TODO
+"chat.add_users.confirm.message" = "Are you sure you want to add '%@' to '%@'?"; // TODO
 
 // Messages List
 "chat.messages.list.title" = "Zprávy";
