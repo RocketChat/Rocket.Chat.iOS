@@ -195,8 +195,8 @@
 "chat.upload.take_photo" = "Prendre une photo";
 "chat.upload.shoot_video" = "Prise Video";
 "chat.upload.choose_from_library" = "Choisir de la librairie";
-"chat.upload.import_file" = "Importer un fichier depuis…";
-"chat.upload.draw" = "Draw a picture"; // TODO
+"chat.upload.import_file" = "Importer un fichier depuis";
+"chat.upload.draw" = "Draw something"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Téléchargement de \"%@\"";

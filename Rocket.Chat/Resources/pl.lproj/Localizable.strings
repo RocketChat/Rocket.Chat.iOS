@@ -194,7 +194,7 @@
 "chat.upload.take_photo" = "Zrób zdjęcie";
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
-"chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.import_file" = "Importuj plik z";
 "chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download

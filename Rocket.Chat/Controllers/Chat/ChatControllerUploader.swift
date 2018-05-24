@@ -14,32 +14,34 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let takeAPhoto = UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
-                self.openCamera()
-            })
-
-            takeAPhoto.setValue(#imageLiteral(resourceName: "TakeAPhoto"), forKey: "image")
-            takeAPhoto.setValue(0, forKey: "titleTextAlignment")
-
-            alert.addAction(takeAPhoto)
-
-            alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
-                self.openCamera(video: true)
-            }))
+        func addAction(_ titleKey: String, image: UIImage, style: UIAlertActionStyle = .default, handler: @escaping (UIAlertAction) -> Void) {
+            let action = UIAlertAction(title: localized(titleKey), style: style, handler: handler)
+            action.image = image
+            action.titleTextAlignment = .left
+            alert.addAction(action)
         }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            addAction("chat.upload.take_photo", image: #imageLiteral(resourceName: "TakeAPhoto")) { _ in
+                self.openCamera()
+            }
+
+            addAction("chat.upload.shoot_video", image: #imageLiteral(resourceName: "RecordVideo")) { _ in
+                self.openCamera(video: true)
+            }
+        }
+
+        addAction("chat.upload.choose_from_library", image: #imageLiteral(resourceName: "ChooseFromLibrary")) { _ in
             self.openPhotosLibrary()
-        }))
+        }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
+        addAction("chat.upload.import_file", image: #imageLiteral(resourceName: "AttachFiles")) { _ in
             self.openDocumentPicker()
-        }))
+        }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.draw"), style: .default, handler: { (_) in
-            self.openDrawing()
-        }))
+        addAction("chat.upload.draw", image: #imageLiteral(resourceName: "DrawSomething")) { _ in
+            self.openDocumentPicker()
+        }
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 

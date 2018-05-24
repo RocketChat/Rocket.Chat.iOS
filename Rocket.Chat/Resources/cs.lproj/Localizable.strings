@@ -192,10 +192,10 @@
 "chat.upload.uploading_video" = "Nahrát video";
 "chat.upload.uploading_file" = "Nahrávání \"%@\"";
 "chat.upload.take_photo" = "Vyfotit fotografii";
-"chat.upload.shoot_video" = "Shoot Video";
+"chat.upload.shoot_video" = "Record video"; // TODO
 "chat.upload.choose_from_library" = "Vybrat z knihovny";
-"chat.upload.import_file" = "Importovat soubor z...";
-"chat.upload.draw" = "Draw a picture"; // TODO
+"chat.upload.import_file" = "Importovat soubor z";
+"chat.upload.draw" = "Draw something"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Stahuji \"%@\"";
