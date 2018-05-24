@@ -74,9 +74,14 @@ final class AvatarView: UIView {
             backgroundColor = .clear
         } else if let avatarURL = avatarURL {
             imageURL = avatarURL
-        } else if let avatarURL = user?.avatarURL() {
-            imageURL = avatarURL
+        } else if let user = user {
+            setAvatarWithInitials(forUsername: user.username)
+
+            if let avatarURL = user.avatarURL() {
+                imageURL = avatarURL
+            }
         } else if let avatarURL = subscription?.avatarURL() {
+            setAvatarWithInitials(forUsername: subscription?.name)
             imageURL = avatarURL
         } else if let username = username, let avatarURL = User.avatarURL(forUsername: username) {
             imageURL = avatarURL
