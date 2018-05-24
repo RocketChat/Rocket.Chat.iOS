@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import SDWebImage
 import FLAnimatedImage
 import SimpleImageViewer
 import MBProgressHUD

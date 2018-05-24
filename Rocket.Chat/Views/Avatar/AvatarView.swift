@@ -9,7 +9,6 @@
 import UIKit
 import FLAnimatedImage
 import Nuke
-//import SDWebImage
 
 final class AvatarView: UIView {
 
