@@ -40,7 +40,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         }
 
         addAction("chat.upload.draw", image: #imageLiteral(resourceName: "DrawSomething")) { _ in
-            self.openDocumentPicker()
+            self.openDrawing()
         }
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
