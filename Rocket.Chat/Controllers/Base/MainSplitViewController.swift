@@ -12,6 +12,22 @@ final class MainSplitViewController: UISplitViewController {
 
     let socketHandlerToken = String.random(5)
 
+    var chatViewController: ChatViewController? {
+        var controller: ChatViewController?
+
+        if let nav = detailViewController as? UINavigationController {
+            if let chatController = nav.viewControllers.first as? ChatViewController {
+                controller = chatController
+            }
+        } else if let nav = viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
+            if let chatController = nav.viewControllers[1] as? ChatViewController {
+                controller = chatController
+            }
+        }
+
+        return controller
+    }
+
     deinit {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
