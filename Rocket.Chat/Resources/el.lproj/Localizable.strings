@@ -119,6 +119,7 @@
 "subscriptions.list.you_initial" = "You"; //TODO
 "subscriptions.list.no_message" = "No message"; //TODO
 "subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";

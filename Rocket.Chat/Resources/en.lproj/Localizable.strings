@@ -120,6 +120,7 @@
 "subscriptions.list.you_initial" = "You";
 "subscriptions.list.no_message" = "No message";
 "subscriptions.list.sent_an_attachment" = "sent an attachment";
+"subscriptions.list.date.yesterday" = "Yesterday";
 
 // Servers
 "servers.add_new_team" = "Add new Team";

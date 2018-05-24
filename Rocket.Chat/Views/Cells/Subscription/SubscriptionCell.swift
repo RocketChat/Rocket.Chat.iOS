@@ -152,7 +152,7 @@ final class SubscriptionCell: UITableViewCell {
         let calendar = NSCalendar.current
 
         if calendar.isDateInYesterday(date) {
-            return "Yesterday"
+            return localized("subscriptions.list.date.yesterday")
         }
 
         if calendar.isDateInToday(date) {

@@ -119,6 +119,7 @@
 "subscriptions.list.you_initial" = "Você";
 "subscriptions.list.no_message" = "Nenhuma mensagem";
 "subscriptions.list.sent_an_attachment" = "enviou um anexo";
+"subscriptions.list.date.yesterday" = "Ontem";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
