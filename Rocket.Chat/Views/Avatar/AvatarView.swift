@@ -8,7 +8,8 @@
 
 import UIKit
 import FLAnimatedImage
-import SDWebImage
+import Nuke
+//import SDWebImage
 
 final class AvatarView: UIView {
 
@@ -16,8 +17,7 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
-                imageView?.sd_setImage(with: imageURL, placeholderImage: avatarPlaceholder, options: options) { [weak self] (_, error, _, _) in
+                Nuke.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
                     guard error == nil else { return }
 
                     self?.labelInitials.text = ""
@@ -154,7 +154,9 @@ final class AvatarView: UIView {
     }
 
     func removeCacheForCurrentURL(forceUpdate: Bool = false) {
-        SDImageCache.shared().removeImage(forKey: imageURL?.absoluteString, fromDisk: true)
+        guard let url = imageURL else { return }
+
+        DataLoader.sharedUrlCache.removeCachedResponse(for: ImageRequest(url: url).urlRequest)
         if forceUpdate { updateAvatar() }
     }
 

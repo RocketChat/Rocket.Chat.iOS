@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SDWebImage
+//import SDWebImage
 
 extension NSAttributedString {
     func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {

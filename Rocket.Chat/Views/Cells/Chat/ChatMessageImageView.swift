@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import SDWebImage
+//import SDWebImage
 import FLAnimatedImage
+import Nuke
 
 protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
@@ -60,7 +61,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             detailText.text = ""
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
             imageView.contentMode = UIViewContentMode.center
-            imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
+            imageView.image =  UIImage(named: "Resource Unavailable")
             return nil
         }
         labelTitle.text = attachment.title
@@ -84,10 +85,9 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
 
         activityIndicatorImageView.startAnimating()
 
-        let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages]
-        imageView.sd_setImage(with: imageURL, placeholderImage: nil, options: options, completed: { [weak self] _, _, _, _ in
+        Nuke.loadImage(with: imageURL, into: imageView) { [weak self] _, _ in
             self?.activityIndicatorImageView.stopAnimating()
-        })
+        }
     }
 
     @objc func didTapView() {

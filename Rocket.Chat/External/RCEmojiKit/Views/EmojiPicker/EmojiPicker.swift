@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+//import SDWebImage
 
 private typealias EmojiCategory = (name: String, emojis: [Emoji])
 

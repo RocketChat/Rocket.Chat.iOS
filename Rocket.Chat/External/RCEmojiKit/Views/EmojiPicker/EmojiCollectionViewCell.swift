@@ -8,6 +8,7 @@
 
 import UIKit
 import FLAnimatedImage
+import Nuke
 
 final class EmojiCollectionViewCell: UICollectionViewCell {
     enum Emoji {
@@ -41,7 +42,8 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
 
             switch emoji {
             case .custom(let url):
-                emojiImageView.sd_setImage(with: url, completed: nil)
+                guard let url = url else { return }
+                Nuke.loadImage(with: url, into: emojiImageView)
                 emojiImageView.isHidden = false
             case .standard(let string):
                 emojiLabel.text = string

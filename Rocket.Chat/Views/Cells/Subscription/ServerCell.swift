@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 final class ServerCell: UITableViewCell {
 
@@ -45,7 +46,7 @@ final class ServerCell: UITableViewCell {
             }
 
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                imageViewServer.sd_setImage(with: imageURL)
+                Nuke.loadImage(with: imageURL, into: imageViewServer)
             }
         }
     }

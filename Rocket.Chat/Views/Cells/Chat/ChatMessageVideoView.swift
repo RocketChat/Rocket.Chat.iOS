@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+//import SDWebImage
 import AVFoundation
 
 protocol ChatMessageVideoViewProtocol: class {
