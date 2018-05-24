@@ -116,6 +116,9 @@
 "subscriptions.channels" = "Kanały";
 "subscriptions.direct_messages" = "Prywatne wiadomości";
 "subscriptions.you" = "Ty";
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
 
 // Servers
 "servers.add_new_team" = "Dodaj nowy Zespół";

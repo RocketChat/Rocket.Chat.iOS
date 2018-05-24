@@ -117,6 +117,9 @@
 "subscriptions.direct_messages" = "Direct Messages";
 "subscriptions.you" = "you";
 "subscriptions.messages" = "Messages";
+"subscriptions.list.you_initial" = "You";
+"subscriptions.list.no_message" = "No message";
+"subscriptions.list.sent_an_attachment" = "sent an attachment";
 
 // Servers
 "servers.add_new_team" = "Add new Team";

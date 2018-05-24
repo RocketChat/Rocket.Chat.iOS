@@ -15,7 +15,7 @@ extension Subscription {
             let lastMessage = roomLastMessage,
             let userLastMessage = lastMessage.user
         else {
-            return "No message"
+            return localized("subscriptions.list.no_message")
         }
 
         var text = MessageTextCacheManager.shared.message(for: lastMessage)?.string ?? lastMessage.text
@@ -24,7 +24,7 @@ extension Subscription {
         let isOnlyAttachment = text.count == 0 && lastMessage.attachments.count > 0
 
         if isOnlyAttachment {
-            text = " sent an attachment"
+            text = " \(localized("subscriptions.list.sent_an_attachment"))"
         } else {
             if !isFromCurrentUser {
                 text = ": \(text)"
@@ -32,7 +32,7 @@ extension Subscription {
         }
 
         if isFromCurrentUser && isOnlyAttachment {
-            text = "You\(text)"
+            text = "\(localized("subscriptions.list.you_initial"))\(text)"
         }
 
         if !isFromCurrentUser {
