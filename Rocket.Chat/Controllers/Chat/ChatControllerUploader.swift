@@ -15,9 +15,14 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
+            let takeAPhoto = UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
                 self.openCamera()
-            }))
+            })
+
+            takeAPhoto.setValue(#imageLiteral(resourceName: "TakeAPhoto"), forKey: "image")
+            takeAPhoto.setValue(0, forKey: "titleTextAlignment")
+
+            alert.addAction(takeAPhoto)
 
             alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
                 self.openCamera(video: true)
