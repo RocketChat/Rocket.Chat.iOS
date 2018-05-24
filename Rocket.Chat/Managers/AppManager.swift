@@ -123,19 +123,51 @@ extension AppManager {
 // MARK: Open Rooms
 
 extension AppManager {
+
+    @discardableResult
+    static func open(room: Subscription) -> ChatViewController? {
+        guard
+            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
+            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
+        else {
+            return nil
+        }
+
+        if mainViewController.detailViewController as? BaseNavigationController != nil {
+            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+                controller.subscription = room
+
+                let nav = BaseNavigationController(rootViewController: controller)
+                mainViewController.showDetailViewController(nav, sender: self)
+                return controller
+            }
+        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            controller.subscription = room
+
+            if let nav = mainViewController.viewControllers.first as? UINavigationController {
+                nav.pushViewController(controller, animated: true)
+                return controller
+            }
+        }
+
+        return nil
+    }
+
     static func openDirectMessage(username: String, replyMessageIdentifier: String? = nil, completion: (() -> Void)? = nil) {
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
 
-            // TODO: Have to fix here
-            // let controller = ChatViewController.shared
-            // controller?.subscription = directMessageRoom
+            let controller = open(room: directMessageRoom)
 
-//            if let identifier = replyMessageIdentifier {
-//                if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
-//                    controller?.reply(to: message)
-//                }
-//            }
+            if controller == nil {
+                return false
+            }
+
+            if let identifier = replyMessageIdentifier {
+                if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
+                    controller?.reply(to: message)
+                }
+            }
 
             completion?()
 
@@ -162,9 +194,7 @@ extension AppManager {
     static func openRoom(name: String, type: SubscriptionType = .channel) {
         func openRoom() -> Bool {
             guard let channel = Subscription.find(name: name, subscriptionType: [type]) else { return false }
-
-            // ChatViewController.shared?.subscription = channel
-
+            open(room: channel)
             return true
         }
 
