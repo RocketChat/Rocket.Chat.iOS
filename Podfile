@@ -4,11 +4,6 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
-def webimage_pods
-  pod 'SDWebImage', '~> 4'
-  pod 'SDWebImage/GIF'
-end
-
 def database_pods
   pod 'RealmSwift'
   pod 'SwiftyJSON'
@@ -42,7 +37,7 @@ def shared_pods
   database_pods
 
   # Network
-  webimage_pods
+  pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
@@ -57,7 +52,7 @@ def shared_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
-  webimage_pods
+  pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
 end
@@ -73,7 +68,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
