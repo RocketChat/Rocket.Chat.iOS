@@ -164,14 +164,12 @@ extension RCTextView: UITextViewDelegate {
                 let user = User.find(username: name),
                 let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
                 let end = textView.position(from: start, offset: characterRange.length),
-                let range = textView.textRange(from: start, to: end),
-                let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
-                let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
+                let range = textView.textRange(from: start, to: end)
             else {
                 return false
             }
 
-            mainViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+            MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
         }
 
         return false
