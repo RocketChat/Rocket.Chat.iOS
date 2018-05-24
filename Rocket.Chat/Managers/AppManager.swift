@@ -137,6 +137,9 @@ extension AppManager {
             if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
                 controller.subscription = room
 
+                // Close all presenting controllers, modals & pushed
+                mainViewController.presentedViewController?.dismiss(animated: true, completion: nil)
+
                 let nav = BaseNavigationController(rootViewController: controller)
                 mainViewController.showDetailViewController(nav, sender: self)
                 return controller
@@ -145,7 +148,13 @@ extension AppManager {
             controller.subscription = room
 
             if let nav = mainViewController.viewControllers.first as? UINavigationController {
+                // Close all presenting controllers, modals & pushed
+                nav.presentedViewController?.dismiss(animated: true, completion: nil)
+                nav.popToRootViewController(animated: true)
+
+                // Push the new controller to the stack
                 nav.pushViewController(controller, animated: true)
+
                 return controller
             }
         }
