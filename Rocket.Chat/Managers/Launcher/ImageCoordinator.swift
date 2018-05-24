@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import Nuke
+
+struct ImageCoordinator: LauncherProtocol {
+    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+        ImagePipeline.Configuration.isAnimatedImageDataEnabled = true
+    }
+}

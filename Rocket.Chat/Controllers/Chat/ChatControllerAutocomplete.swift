@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Nuke
 
 extension ChatViewController {
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {

@@ -3068,6 +3068,7 @@
 				411119B51F680DB00019854B /* NetworkCoordinator.swift */,
 				D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */,
 				41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */,
+				99F8FAEC20B66F210025FEEF /* ImageCoordinator.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -3968,6 +3969,7 @@
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
+				99F8FAED20B66F210025FEEF /* ImageCoordinator.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
 				80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
