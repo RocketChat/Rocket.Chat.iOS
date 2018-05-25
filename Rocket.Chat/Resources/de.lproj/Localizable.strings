@@ -116,6 +116,11 @@
 "subscriptions.channels" = "Kanäle";
 "subscriptions.direct_messages" = "Direktnachrichten";
 "subscriptions.you" = "Du";
+"subscriptions.messages" = "Messages"; //TODO
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Neues Team hinzufügen";
@@ -299,6 +304,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Benutzername";
 "myaccount.settings.profile.email_placeholder" = "E-Mail";
+"myaccount.settings.profile.status.title" = "Status"; // TODO
 "myaccount.settings.profile.password_required.title" = "Passwort eingeben";
 "myaccount.settings.profile.password_required.message" = "Das Passwort wird zum Ändern der E-Mail-Adresse benötigt";
 "myaccount.settings.profile.password_required.placeholder" = "Passwort";

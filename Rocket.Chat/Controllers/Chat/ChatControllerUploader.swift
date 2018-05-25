@@ -183,18 +183,18 @@ extension ChatViewController: UIDocumentPickerDelegate {
 extension ChatViewController {
 
     func startLoadingUpload(_ fileName: String) {
-        showHeaderStatusView()
-
-        let message = String(format: localized("chat.upload.uploading_file"), fileName)
-        chatHeaderViewStatus?.labelTitle.text = message
-        chatHeaderViewStatus?.buttonRefresh.isHidden = true
-        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
-        chatHeaderViewStatus?.activityIndicator.startAnimating()
+//        showHeaderStatusView()
+//
+//        let message = String(format: localized("chat.upload.uploading_file"), fileName)
+//        chatHeaderViewStatus?.labelTitle.text = message
+//        chatHeaderViewStatus?.buttonRefresh.isHidden = true
+//        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
+//        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+//        chatHeaderViewStatus?.activityIndicator.startAnimating()
     }
 
     func stopLoadingUpload() {
-        hideHeaderStatusView()
+//        hideHeaderStatusView()
     }
 
     func upload(_ file: FileUpload, fileName: String, description: String?) {

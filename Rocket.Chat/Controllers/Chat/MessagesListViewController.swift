@@ -346,7 +346,6 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         if let message = cellData.message,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
-            cell.delegate = ChatViewController.shared
             cell.message = message
             return cell
         }

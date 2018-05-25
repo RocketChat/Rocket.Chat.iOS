@@ -60,7 +60,7 @@ struct SubscriptionsClient: APIClient {
                         subscriptions.append(subscription)
                     }
 
-                    auth.lastSubscriptionFetch = Date.serverDate
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
@@ -91,7 +91,7 @@ struct SubscriptionsClient: APIClient {
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                     realm.add(auth, update: true)
                 })
 
@@ -106,7 +106,7 @@ struct SubscriptionsClient: APIClient {
                             return
                         }
 
-                        subscription.mapRoom(object)
+                        subscription.mapRoom(object, realm: realm)
                         subscriptions.append(subscription)
                     }
 
@@ -180,7 +180,7 @@ struct SubscriptionsClient: APIClient {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date.serverDate
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
@@ -211,7 +211,7 @@ struct SubscriptionsClient: APIClient {
 
             currentRealm?.execute({ realm in
                 guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                 realm.add(auth, update: true)
             })
 
@@ -227,7 +227,7 @@ struct SubscriptionsClient: APIClient {
                 list?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }
@@ -236,7 +236,7 @@ struct SubscriptionsClient: APIClient {
                 updated?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }

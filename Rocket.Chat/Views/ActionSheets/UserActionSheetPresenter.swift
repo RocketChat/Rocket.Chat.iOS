@@ -21,9 +21,10 @@ extension UserActionSheetPresenter where Self: UIViewController {
         controller.addAction(UIAlertAction(title: localized("user_action_sheet.conversation"), style: .default, handler: { [weak self] _ in
             guard let username = user.username else { return }
 
+            self?.close(animated: true)
+
             AppManager.openDirectMessage(username: username) {
                 controller.dismiss(animated: true, completion: nil)
-                self?.close(animated: true)
             }
         }))
 

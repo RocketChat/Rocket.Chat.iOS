@@ -169,7 +169,7 @@ extension RCTextView: UITextViewDelegate {
                 return false
             }
 
-            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+            MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
         }
 
         return false

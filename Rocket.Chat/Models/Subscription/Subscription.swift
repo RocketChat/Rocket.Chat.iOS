@@ -46,6 +46,9 @@ final class Subscription: BaseModel {
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomReadOnly = false
+    @objc dynamic var roomUpdatedAt: Date?
+    @objc dynamic var roomLastMessage: Message?
+    @objc dynamic var roomLastMessageDate: Date?
     @objc dynamic var roomBroadcast = false
 
     let roomMuted = List<String>()
@@ -68,6 +71,19 @@ final class SubscriptionRoles: Object {
 // MARK: Failed Messages
 
 extension Subscription {
+
+    func avatarURL(auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
+    }
+
     func setTemporaryMessagesFailed() {
         try? realm?.write {
             messages.filter("temporary = true").forEach {
@@ -76,4 +92,5 @@ extension Subscription {
             }
         }
     }
+
 }
