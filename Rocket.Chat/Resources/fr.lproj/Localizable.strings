@@ -1,11 +1,19 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Oui";
 "global.no" = "Non";
 "global.cancel" = "Annuler";
+"global.error" = "Erreur";
 
 // Errors
 "error.socket.default_error.title" = "Oups!";
 "error.socket.default_error.message" = "Une erreur s'est produite, veuillez réessayer.";
+
+"error.login.title" = "Oups!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Oups!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oups!";
@@ -110,6 +118,11 @@
 "subscriptions.channels" = "Canaux";
 "subscriptions.direct_messages" = "Messages directs";
 "subscriptions.you" = "Toi";
+"subscriptions.messages" = "Messages"; //TODO
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Ajouter une équipe";
@@ -189,8 +202,8 @@
 "chat.upload.take_photo" = "Prendre une photo";
 "chat.upload.shoot_video" = "Prise Video";
 "chat.upload.choose_from_library" = "Choisir de la librairie";
-"chat.upload.import_file" = "Importer un fichier depuis…";
-"chat.upload.draw" = "Draw a picture"; // TODO
+"chat.upload.import_file" = "Importer un fichier depuis";
+"chat.upload.draw" = "Draw something"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Téléchargement de \"%@\"";
@@ -234,6 +247,7 @@
 "chat.info.item.pinned" = "Épinglé";
 "chat.info.item.starred" = "Mis en favoris";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "Membres";
@@ -245,6 +259,8 @@
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
@@ -290,6 +306,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.status.title" = "Status"; // TODO
 "myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
 "myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
@@ -306,4 +323,6 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation"; // TODO
-
+"user_action_sheet.remove" = "Remove from room"; // TODO
+"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO

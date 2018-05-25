@@ -13,9 +13,16 @@ final class LanguageViewModel {
     let resetCellIdentifier = "changeLanguageResetCell"
 
     internal var languages: [String] {
-        return Bundle.main.localizations.filter({ code -> Bool in
-            return code != "Base"
-        })
+        return AppManager.languages
+    }
+
+    internal var language: String {
+        get {
+            return AppManager.language
+        }
+        set {
+            AppManager.language = newValue
+        }
     }
 
     internal var title: String {

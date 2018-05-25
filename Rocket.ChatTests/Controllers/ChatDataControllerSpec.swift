@@ -11,6 +11,44 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class ChatDataControllerSpec: XCTestCase {
+    override func setUp() {
+        super.setUp()
+        let auth = Auth()
+        auth.internalFirstChannelOpened = false
+        auth.lastSubscriptionFetchWithLastMessage = nil
+        auth.lastAccess = Date()
+        auth.serverURL = ""
+        auth.token = "TESTTOKEN"
+        auth.userId = "TESTUSER"
+
+        AuthManager.persistAuthInformation(auth)
+        DatabaseManager.changeDatabaseInstance()
+
+        let user = User()
+        user.identifier = "TESTUSER"
+
+        Realm.executeOnMainThread({ (realm) in
+            realm.add(user)
+            realm.add(auth)
+        })
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        Realm.executeOnMainThread({ (realm) in
+            realm.delete(realm.objects(Auth.self))
+            realm.delete(realm.objects(User.self))
+        })
+    }
+
+    func generateMessage() -> Message {
+        let message = Message()
+        message.identifier = "TESTMESSAGE"
+        message.text = "Foobar"
+        message.user = User()
+        return message
+    }
+
     func testInitilization() {
         let controller = ChatDataController()
         XCTAssertEqual(controller.data.count, 0, "Controller has no data on initialization")
@@ -41,12 +79,15 @@ class ChatDataControllerSpec: XCTestCase {
 
         var obj2 = ChatData(type: .message, timestamp: Date())
         obj2.timestamp = Date().addingTimeInterval(-2.0)
+        obj2.message = generateMessage()
 
         var obj1 = ChatData(type: .message, timestamp: Date())
         obj1.timestamp = Date().addingTimeInterval(-3.0)
+        obj1.message = generateMessage()
 
         var obj3 = ChatData(type: .message, timestamp: Date())
         obj3.timestamp = Date().addingTimeInterval(-1.0)
+        obj3.message = generateMessage()
 
         controller.insert([obj2, obj1, obj3])
 
@@ -213,8 +254,11 @@ class ChatDataControllerSpec: XCTestCase {
         controller.lastSeen = Date().addingTimeInterval(-1)
         controller.loadedAllMessages = true
 
-        let obj1 = ChatData(type: .message, timestamp: Date().addingTimeInterval(-2))
-        let obj2 = ChatData(type: .message, timestamp: Date())
+        var obj1 = ChatData(type: .message, timestamp: Date().addingTimeInterval(-2))
+        obj1.message = generateMessage()
+
+        var obj2 = ChatData(type: .message, timestamp: Date())
+        obj2.message = generateMessage()
 
         let (indexPaths, _) = controller.insert([obj1, obj2])
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")

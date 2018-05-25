@@ -29,12 +29,19 @@ extension Subscription: ModelMappeable {
         }
 
         if self.type == .directMessage {
-            let userId = values["u"]["_id"].stringValue
-            self.otherUserId = self.rid.replacingOccurrences(of: userId, with: "")
+            if let userId = values["u"]["_id"].string {
+                if let range = self.rid.ranges(of: userId).first {
+                    self.otherUserId = self.rid.replacingCharacters(in: range, with: "")
+                }
+            }
         }
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
+        }
+
+        if let lastSeen = values["ls"].string {
+            self.lastSeen = Date.dateFromString(lastSeen)
         }
 
         if let lastSeen = values["ls"]["$date"].double {
@@ -42,9 +49,21 @@ extension Subscription: ModelMappeable {
         }
     }
 
-    func mapRoom(_ values: JSON) {
+    func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
+
+        if let broadcast = values["broadcast"].bool {
+            self.roomBroadcast = broadcast
+        }
+
+        if let readOnly = values["ro"].bool {
+            self.roomReadOnly = readOnly
+        }
+
+        if let ownerId = values["u"]["_id"].string {
+            self.roomOwnerId = ownerId
+        }
 
         self.roomMuted.removeAll()
         if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
@@ -57,6 +76,27 @@ extension Subscription: ModelMappeable {
 
         if let ownerId = values["u"]["_id"].string {
             self.roomOwnerId = ownerId
+        }
+
+        if let updatedAt = values["_updatedAt"]["$date"].double {
+            self.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+        }
+
+        if values["lastMessage"].dictionary != nil {
+            let message = Message()
+            message.map(values["lastMessage"], realm: realm)
+            message.subscription = self
+            realm?.add(message, update: true)
+
+            self.roomLastMessage = message
+
+            if let createdAt = values["lastMessage"]["ts"].string {
+                self.roomLastMessageDate = Date.dateFromString(createdAt)
+            }
+
+            if let createdAt = values["lastMessage"]["ts"]["$date"].double {
+                self.roomLastMessageDate = Date.dateFromInterval(createdAt)
+            }
         }
     }
 }

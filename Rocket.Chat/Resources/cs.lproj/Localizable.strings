@@ -1,11 +1,19 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Ano";
 "global.no" = "Ne";
 "global.cancel" = "Zrušit";
+"global.error" = "Chyba";
 
 // Errors
 "error.socket.default_error.title" = "Jejky!";
 "error.socket.default_error.message" = "Něco se pokazilo, zkuste to prosím znovu.";
+
+"error.login.title" = "Jejky!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Jejky!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
 // Alerts
 "alert.connection.invalid_url.title" = "Jejky!";
@@ -110,6 +118,11 @@
 "subscriptions.channels" = "Kanály";
 "subscriptions.direct_messages" = "Přímé zprávy";
 "subscriptions.you" = "you"; //TODO
+"subscriptions.messages" = "Messages"; //TODO
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Přidat nový tým";
@@ -186,10 +199,10 @@
 "chat.upload.uploading_video" = "Nahrát video";
 "chat.upload.uploading_file" = "Nahrávání \"%@\"";
 "chat.upload.take_photo" = "Vyfotit fotografii";
-"chat.upload.shoot_video" = "Shoot Video";
+"chat.upload.shoot_video" = "Record video"; // TODO
 "chat.upload.choose_from_library" = "Vybrat z knihovny";
-"chat.upload.import_file" = "Importovat soubor z...";
-"chat.upload.draw" = "Draw a picture"; // TODO
+"chat.upload.import_file" = "Importovat soubor z";
+"chat.upload.draw" = "Draw something"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Stahuji \"%@\"";
@@ -221,6 +234,7 @@
 "chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
 "chat.message.type.room_archived" = "Tato místnost byla archivována uživatelem %@";
 "chat.message.type.room_unarchived" = "Tato místnost byla vyndána z archivu uživatelem %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -233,6 +247,7 @@
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "Členové";
@@ -244,6 +259,8 @@
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO
@@ -289,6 +306,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.status.title" = "Status"; // TODO
 "myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
 "myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
@@ -305,3 +323,6 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation"; // TODO
+"user_action_sheet.remove" = "Remove from room"; // TODO
+"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO

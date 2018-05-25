@@ -28,7 +28,7 @@ final class Auth: Object {
     @objc dynamic var token: String?
     @objc dynamic var tokenExpires: Date?
     @objc dynamic var lastAccess: Date?
-    @objc dynamic var lastSubscriptionFetch: Date?
+    @objc dynamic var lastSubscriptionFetchWithLastMessage: Date?
 
     @objc dynamic var userId: String?
 

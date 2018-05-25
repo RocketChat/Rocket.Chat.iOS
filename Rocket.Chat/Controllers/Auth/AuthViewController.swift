@@ -202,13 +202,11 @@ final class AuthViewController: BaseViewController {
     }
 
     func stopLoading() {
-        DispatchQueue.main.async(execute: {
-            self.textFieldUsername.alpha = 1
-            self.textFieldPassword.alpha = 1
-            self.activityIndicator.stopAnimating()
-            self.customAuthButtons.forEach { _, button in button.isEnabled = true }
-            self.navigationItem.hidesBackButton = false
-        })
+        textFieldUsername.alpha = 1
+        textFieldPassword.alpha = 1
+        activityIndicator.stopAnimating()
+        customAuthButtons.forEach { _, button in button.isEnabled = true }
+        navigationItem.hidesBackButton = false
 
         connecting = false
     }
@@ -247,6 +245,12 @@ final class AuthViewController: BaseViewController {
             let loginService = LoginService.find(service: service, realm: realm)
         else {
             return
+        }
+
+        if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
+            try? realm.write {
+                loginService.serverUrl = url
+            }
         }
 
         switch loginService.type {

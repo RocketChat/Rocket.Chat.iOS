@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7rY-JE-lcK" customClass="ChannelInfoActionCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7rY-JE-lcK" id="Vp1-fu-4cY">
+                <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="More" translatesAutoresizingMaskIntoConstraints="NO" id="pFT-DJ-f6P">
+                        <rect key="frame" x="8" y="10" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="GvN-ng-AnI"/>
+                            <constraint firstAttribute="width" constant="24" id="L9X-r1-QRB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoc-6g-Mz5">
+                        <rect key="frame" x="48" y="8" width="286" height="27.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.18431372549019609" green="0.20392156862745098" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xoc-6g-Mz5" firstAttribute="top" secondItem="Vp1-fu-4cY" secondAttribute="topMargin" id="ORo-6a-gGV"/>
+                    <constraint firstItem="pFT-DJ-f6P" firstAttribute="centerY" secondItem="Vp1-fu-4cY" secondAttribute="centerY" id="WsN-aZ-VLz"/>
+                    <constraint firstItem="xoc-6g-Mz5" firstAttribute="leading" secondItem="pFT-DJ-f6P" secondAttribute="trailing" constant="16" id="cKC-bF-gyd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="xoc-6g-Mz5" secondAttribute="trailing" id="epw-4Z-E2I"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="xoc-6g-Mz5" secondAttribute="bottom" id="iHt-Ad-LxK"/>
+                    <constraint firstItem="pFT-DJ-f6P" firstAttribute="leading" secondItem="Vp1-fu-4cY" secondAttribute="leadingMargin" id="k42-b2-bgh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="49" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="imageViewIcon" destination="pFT-DJ-f6P" id="D8K-T0-Djk"/>
+                <outlet property="labelTitle" destination="xoc-6g-Mz5" id="pQI-Gh-JnV"/>
+            </connections>
+            <point key="canvasLocation" x="5.5" y="-46"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="More" width="4" height="16"/>
+    </resources>
+</document>

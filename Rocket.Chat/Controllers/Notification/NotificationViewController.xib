@@ -27,35 +27,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-lk-IxG" customClass="NotificationView" customModule="Rocket_Chat" customModuleProvider="target">
-                    <rect key="frame" x="8" y="-85.5" width="359" height="69.5"/>
+                    <rect key="frame" x="8" y="-76" width="359" height="60"/>
                     <subviews>
                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Sn-Lw-2jc">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="61"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="4JV-l7-f9r">
-                                <rect key="frame" x="0.0" y="0.0" width="359" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="359" height="61"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                             </view>
                             <blurEffect style="extraLight"/>
                         </visualEffectView>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
-                            <rect key="frame" x="69" y="12.5" width="282" height="20.5"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <rect key="frame" x="59" y="12.5" width="292" height="18"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-7t-SFa">
-                            <rect key="frame" x="12" y="12.5" width="45" height="45"/>
+                            <rect key="frame" x="12" y="12.5" width="35" height="35"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="45" id="AsH-aH-Iwh"/>
+                                <constraint firstAttribute="height" constant="35" id="AsH-aH-Iwh"/>
                                 <constraint firstAttribute="width" secondItem="KOK-7t-SFa" secondAttribute="height" multiplier="1:1" id="dcq-yW-PH5"/>
                             </constraints>
                         </view>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-Fj-whL">
-                            <rect key="frame" x="69" y="36.5" width="282" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="59" y="32.5" width="292" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -63,7 +63,7 @@
                     <color key="backgroundColor" white="0.99409537845187712" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstItem="Khg-Fj-whL" firstAttribute="firstBaseline" secondItem="pSR-mg-fTE" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="48X-KW-GjT"/>
+                        <constraint firstItem="Khg-Fj-whL" firstAttribute="firstBaseline" secondItem="pSR-mg-fTE" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="48X-KW-GjT"/>
                         <constraint firstAttribute="trailing" secondItem="pSR-mg-fTE" secondAttribute="trailing" constant="8" id="4QG-mg-IcO"/>
                         <constraint firstAttribute="trailing" secondItem="Khg-Fj-whL" secondAttribute="trailing" constant="8" id="4jL-fR-L6n"/>
                         <constraint firstItem="KOK-7t-SFa" firstAttribute="top" secondItem="PHK-lk-IxG" secondAttribute="top" constant="12" id="7ly-Q4-bZu"/>

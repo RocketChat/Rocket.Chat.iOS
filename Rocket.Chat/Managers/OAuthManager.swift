@@ -90,7 +90,12 @@ final class OAuthManager {
             return nil
         }
 
-        return URL(string: "https://\(host)/_oauth/\(callbackPath)")
+        var portString = ""
+        if let port = server.port {
+            portString = ":\(port)"
+        }
+
+        return URL(string: "https://\(host)\(portString)/_oauth/\(callbackPath)")
     }
 
     static func state() -> String? {

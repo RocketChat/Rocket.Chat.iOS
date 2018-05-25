@@ -15,7 +15,7 @@ class PublicSettingsRequestSpec: APISpec {
 
     func testRequest() {
         let preRequest = PublicSettingsRequest()
-        guard let request = preRequest.request(for: api, options: APIRequestOptions.paginated(count: 0, offset: 0)) else {
+        guard let request = preRequest.request(for: api, options: [.paginated(count: 0, offset: 0)]) else {
             return XCTFail("request is not nil")
         }
 

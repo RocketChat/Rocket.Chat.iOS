@@ -45,10 +45,8 @@ final class AuthSettingsManager {
             }
         })
 
-        DispatchQueue.main.async {
-            ServerManager.updateServerInformation(from: unmanagedSettings)
-            completion?(unmanagedSettings)
-        }
+        ServerManager.updateServerInformation(from: unmanagedSettings)
+        completion?(unmanagedSettings)
     }
 
     static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
@@ -64,7 +62,7 @@ final class AuthSettingsManager {
         }
 
         let realm = Realm.current
-        let options = APIRequestOptions.paginated(count: 0, offset: 0)
+        let options: APIRequestOptionSet = [.paginated(count: 0, offset: 0)]
         api?.fetch(PublicSettingsRequest(), options: options) { response in
             switch response {
             case .resource(let resource):

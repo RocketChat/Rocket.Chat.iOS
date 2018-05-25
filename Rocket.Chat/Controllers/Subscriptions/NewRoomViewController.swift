@@ -109,8 +109,10 @@ class NewRoomViewController: BaseViewController {
         let createPublic = user?.hasPermission(.createPublicChannels) ?? false
 
         if !createPrivate && !createPublic {
-            alert(title: localized("alert.authorization_error.title"),
-                  message: localized("alert.authorization_error.create_channel.description")) { _ in
+            let title = localized("alert.authorization_error.title")
+            let message = localized("alert.authorization_error.create_channel.description")
+
+            alert(title: title, message: message) { _ in
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -139,7 +141,7 @@ class NewRoomViewController: BaseViewController {
             return
         }
 
-        let roomType: SubscriptionCreateType
+        let roomType: RoomCreateType
         if publicRoom {
             roomType = .channel
         } else {
@@ -148,7 +150,6 @@ class NewRoomViewController: BaseViewController {
 
         sender.isEnabled = false
         executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: membersRoom, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
-
             if success {
                 self?.dismiss(animated: true, completion: nil)
             } else {
@@ -158,9 +159,9 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
 
-        let request = SubscriptionCreateRequest(
+        let request = RoomCreateRequest(
             name: roomName,
             type: roomType,
             members: members,
@@ -179,12 +180,9 @@ class NewRoomViewController: BaseViewController {
                     return
                 }
 
-                SubscriptionManager.updateSubscriptions(auth) { _ in
+                SubscriptionManager.updateSubscriptions(auth) {
                     if let newRoom = Realm.current?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
-
-                        let controller = ChatViewController.shared
-                        controller?.subscription = newRoom
-
+                        AppManager.open(room: newRoom)
                         completion(true, nil)
                     } else {
                         completion(false, nil)

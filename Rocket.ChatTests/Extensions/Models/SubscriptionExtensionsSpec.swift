@@ -34,26 +34,6 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssert(objectsUppercase.first == sub1)
     }
 
-    func testSortedByLastSeen() {
-        let realm = testRealm()
-
-        let sub1 = Subscription.testInstance("sub1")
-        sub1.lastSeen = Date() - 1
-        let sub2 = Subscription.testInstance("sub2")
-        sub2.lastSeen = Date()
-
-        try? realm.write {
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
-        }
-
-        let objects = realm.objects(Subscription.self).sortedByLastSeen()
-
-        XCTAssert(objects.count == 2)
-        XCTAssert(objects.first == sub2)
-        XCTAssert(objects.last == sub1)
-    }
-
     func testLinkingObjectsFilterByName() {
         let realm = testRealm()
 
@@ -81,28 +61,34 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssert(objectsUppercase.first == sub1)
     }
 
-    func testLinkingObjectsSortedByLastSeen() {
-        let realm = testRealm()
+}
 
-        let auth = Auth.testInstance()
+// MARK: Information Viewing Options
 
-        let sub1 = Subscription.testInstance("sub1")
-        sub1.lastSeen = Date() - 1
-        sub1.auth = auth
-        let sub2 = Subscription.testInstance("sub2")
-        sub2.lastSeen = Date()
-        sub2.auth = auth
+extension SubscriptionExtensionsSpec {
 
-        try? realm.write {
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
-            realm.add(auth, update: true)
-        }
+    func testCanViewMentionsListDirectMessage() {
+        let subscription = Subscription()
+        subscription.type = .directMessage
+        subscription.identifier = "1"
 
-        let objects = auth.subscriptions.sortedByLastSeen()
-
-        XCTAssert(objects.count == 2)
-        XCTAssert(objects.first == sub2)
-        XCTAssert(objects.last == sub1)
+        XCTAssertFalse(subscription.canViewMentionsList)
     }
+
+    func testCanViewMentionsListChannel() {
+        let subscription = Subscription()
+        subscription.type = .channel
+        subscription.identifier = "1"
+
+        XCTAssertTrue(subscription.canViewMentionsList)
+    }
+
+    func testCanViewMentionsListGroup() {
+        let subscription = Subscription()
+        subscription.type = .group
+        subscription.identifier = "1"
+
+        XCTAssertTrue(subscription.canViewMentionsList)
+    }
+
 }

@@ -10,19 +10,23 @@ import Foundation
 
 class SubscriptionsPageViewController: UIPageViewController {
 
+    var titleView: SubscriptionsTitleView?
+
     var serversController: ServersViewController?
     var subscriptionsController: SubscriptionsViewController?
 
     weak var pageControl: UIPageControl?
 
     static var shared: SubscriptionsPageViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.sideViewController as? UINavigationController {
-                return nav.viewControllers.first as? SubscriptionsPageViewController
-            }
+        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
+            return nav.viewControllers.first as? SubscriptionsPageViewController
         }
 
         return nil
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     override func viewDidLoad() {

@@ -14,7 +14,7 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
     func testRolesForPermission() throws {
         let permissionType = PermissionType.createDirectMessages
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
         permission.roles.append(contentsOf: ["admin", "user"])
 
@@ -35,7 +35,7 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
     func testUserHasPermission() throws {
         let permissionType = PermissionType.createDirectMessages
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
         permission.roles.append(contentsOf: ["admin", "user"])
 
