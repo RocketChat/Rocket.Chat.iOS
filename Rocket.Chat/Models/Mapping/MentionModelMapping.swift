@@ -12,6 +12,8 @@ import RealmSwift
 
 extension Mention: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
+        self.userId = values["_id"].string
+        self.realName = values["name"].string
         self.username = values["username"].stringValue
     }
 }
