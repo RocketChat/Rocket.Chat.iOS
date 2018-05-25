@@ -95,7 +95,7 @@ extension NSMutableAttributedString {
         return MarkdownManager.shared.transformAttributedString(self)
     }
 
-    func highlightMentions(_ mentions: [String], username: String?) {
+    func highlightMentions(_ mentions: [Mention], username: String?) {
         var handledHighlights: [String] = []
 
         mentions.forEach { mention in
