@@ -196,7 +196,7 @@
 "chat.upload.take_photo" = "Τραβήξτε Φωτογραφία";
 "chat.upload.shoot_video" = "Τραβήξτε Video";
 "chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
-"chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
+"chat.upload.import_file" = "Εισαγωγή Αρχείου Από";
 "chat.upload.draw" = "Σχεδιάστε κάτι";
 
 // Chat Download

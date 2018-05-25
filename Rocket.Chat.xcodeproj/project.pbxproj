@@ -394,6 +394,8 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResponse.swift */; };
+		8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */; };
+		8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */; };
 		805C87D92052AA1900AD0EB0 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */; };
 		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
@@ -1101,6 +1103,8 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionImage.swift; sourceTree = "<group>"; };
+		8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionTitleTextAlignment.swift; sourceTree = "<group>"; };
 		805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
@@ -1939,6 +1943,7 @@
 			children = (
 				8013F8631FD5E11100EE1A4E /* API */,
 				414EFF901E54FE35004F001F /* Models */,
+				8052F75A20B7522900B3B0CF /* UIAlertAction */,
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
 				41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
@@ -2529,7 +2534,16 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
-		8039441620AF61ED002F317A /* Base */ = {
+		8052F75A20B7522900B3B0CF /* UIAlertAction */ = {
+			isa = PBXGroup;
+			children = (
+				8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */,
+				8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */,
+			);
+			path = UIAlertAction;
+			sourceTree = "<group>";
+		};
+        8039441620AF61ED002F317A /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				8039441720AF620C002F317A /* ResourceWithError.swift */,
@@ -3797,6 +3811,7 @@
 				8020CCF51FEAD8C9003424F4 /* EmojiPickerController.swift in Sources */,
 				41D701D61E67111E00FED2EE /* MessageTextFontAttributes.swift in Sources */,
 				D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */,
+				8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
 				8013F8651FD5E13600EE1A4E /* APIExtensions.swift in Sources */,
 				4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */,
@@ -3947,6 +3962,7 @@
 				99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */,
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
 				809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */,
+				8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */,
 				3330329820738D4600A9514D /* SubscriptionManagerMessages.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
