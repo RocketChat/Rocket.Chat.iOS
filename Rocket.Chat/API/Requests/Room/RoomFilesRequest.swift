@@ -1,5 +1,5 @@
 //
-//  SubscriptionFilesRequest.swift
+//  RoomFilesRequest.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 11/04/18.
@@ -23,8 +23,8 @@ fileprivate extension SubscriptionType {
     }
 }
 
-final class SubscriptionFilesRequest: APIRequest {
-    typealias APIResourceType = SubscriptionFilesResource
+final class RoomFilesRequest: APIRequest {
+    typealias APIResourceType = RoomFilesResource
 
     var path: String {
         return type.path
@@ -41,7 +41,7 @@ final class SubscriptionFilesRequest: APIRequest {
     }
 }
 
-final class SubscriptionFilesResource: APIResource {
+final class RoomFilesResource: APIResource {
     var files: [File]? {
         let realm = Realm.current
         return raw?["files"].arrayValue.map {

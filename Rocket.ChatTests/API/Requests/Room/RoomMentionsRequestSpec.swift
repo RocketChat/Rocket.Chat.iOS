@@ -1,5 +1,5 @@
 //
-//  SubscriptionMentionsRequestSpec.swift
+//  RoomMentionsRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Filipe Alvarenga on 03/04/18.
@@ -11,10 +11,10 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionMentionsRequestSpec: APISpec {
+class RoomMentionsRequestSpec: APISpec {
 
     func testRequest() {
-        let preRequest = SubscriptionMentionsRequest(roomId: "xyz123")
+        let preRequest = RoomMentionsRequest(roomId: "xyz123")
         guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
@@ -83,14 +83,14 @@ class SubscriptionMentionsRequestSpec: APISpec {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionMentionsResource(raw: json)
+        let result = RoomMentionsResource(raw: json)
         XCTAssertNotNil(result.messages)
         XCTAssertEqual(result.count, 2)
         XCTAssertEqual(result.offset, 10)
         XCTAssertEqual(result.total, 2)
         XCTAssertTrue(result.success)
 
-        let nilResult = SubscriptionMentionsResource(raw: nil)
+        let nilResult = RoomMentionsResource(raw: nil)
         XCTAssertNil(nilResult.messages)
     }
 

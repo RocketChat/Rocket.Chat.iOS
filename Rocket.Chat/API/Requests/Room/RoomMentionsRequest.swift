@@ -1,5 +1,5 @@
 //
-//  SubscriptionMentionsRequest.swift
+//  RoomMentionsRequest.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 03/04/18.
@@ -9,8 +9,8 @@
 import SwiftyJSON
 import Foundation
 
-final class SubscriptionMentionsRequest: APIRequest {
-    typealias APIResourceType = SubscriptionMentionsResource
+final class RoomMentionsRequest: APIRequest {
+    typealias APIResourceType = RoomMentionsResource
 
     let requiredVersion = Version(0, 63, 0)
     let path = "/api/v1/channels.getAllUserMentionsByChannel"
@@ -24,7 +24,7 @@ final class SubscriptionMentionsRequest: APIRequest {
     }
 }
 
-final class SubscriptionMentionsResource: APIResource {
+final class RoomMentionsResource: APIResource {
     var messages: [Message]? {
         return raw?["mentions"].arrayValue.map {
             let message = Message()

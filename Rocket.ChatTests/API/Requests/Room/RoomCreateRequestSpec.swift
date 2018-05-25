@@ -11,13 +11,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionCreateRequestSpec: APITestCase {
+class RoomCreateRequestSpec: APITestCase {
     func testRequest() {
         let paramRoomName = "foo"
         let paramReadOnly = false
         let paramMembers = ["example"]
 
-        let preRequest = SubscriptionCreateRequest(
+        let preRequest = RoomCreateRequest(
             name: paramRoomName,
             type: .channel,
             members: paramMembers,
@@ -41,7 +41,7 @@ class SubscriptionCreateRequestSpec: APITestCase {
         XCTAssertEqual(bodyJson["members"].array?.first?.string, paramMembers.first, "parameter members is correct")
         XCTAssertEqual(bodyJson["readOnly"].bool, paramReadOnly, "read only was set as false")
 
-        let preRequestGroup = SubscriptionCreateRequest(
+        let preRequestGroup = RoomCreateRequest(
             name: paramRoomName,
             type: .group,
             readOnly: paramReadOnly
@@ -81,8 +81,8 @@ class SubscriptionCreateRequestSpec: APITestCase {
             ]
         ])
 
-        let result = SubscriptionCreateResource(raw: mockResult)
-        let resultPrivate = SubscriptionCreateResource(raw: mockResultPrivate)
+        let result = RoomCreateResource(raw: mockResult)
+        let resultPrivate = RoomCreateResource(raw: mockResultPrivate)
 
         XCTAssertEqual(result.success, true, "success is correct")
         XCTAssertEqual(result.error, "error-test", "error is correct")

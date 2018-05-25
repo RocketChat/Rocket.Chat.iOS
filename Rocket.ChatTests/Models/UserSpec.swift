@@ -15,9 +15,10 @@ import SwiftyJSON
 // MARK: Test Instance
 
 extension User {
-    static func testInstance() -> User {
+    static func testInstance(_ name: String = "user") -> User {
         let user = User()
-        user.username = "user-username"
+        user.identifier = "\(name)-identifier"
+        user.username = "\(name)-username"
         return user
     }
 }

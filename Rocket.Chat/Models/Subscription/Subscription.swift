@@ -16,6 +16,8 @@ enum SubscriptionType: String, Equatable {
     case group = "p"
 }
 
+typealias RoomType = SubscriptionType
+
 final class Subscription: BaseModel {
     @objc dynamic var auth: Auth?
 
@@ -58,12 +60,10 @@ final class Subscription: BaseModel {
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 
-    // User's roles on the subscription, this values
-    // aren't stored in database.
-    let usersRoles = List<SubscriptionRoles>()
+    let usersRoles = List<RoomRoles>()
 }
 
-final class SubscriptionRoles: Object {
+final class RoomRoles: Object {
     @objc dynamic var user: User?
     var roles = List<String>()
 }

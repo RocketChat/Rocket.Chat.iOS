@@ -1,5 +1,5 @@
 //
-//  SubscriptionRolesRequest.swift
+//  RoomRolesRequest.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 11/05/18.
@@ -22,8 +22,8 @@ fileprivate extension SubscriptionType {
     }
 }
 
-final class SubscriptionRolesRequest: APIRequest {
-    typealias APIResourceType = SubscriptionRolesResource
+final class RoomRolesRequest: APIRequest {
+    typealias APIResourceType = RoomRolesResource
 
     let requiredVersion = Version(0, 64, 2)
 
@@ -42,11 +42,11 @@ final class SubscriptionRolesRequest: APIRequest {
     }
 }
 
-final class SubscriptionRolesResource: APIResource {
-    var subscriptionRoles: [SubscriptionRoles]? {
+final class RoomRolesResource: APIResource {
+    var roomRoles: [RoomRoles]? {
         guard let realm = Realm.current else { return nil }
         return raw?["roles"].arrayValue.map {
-            let object = SubscriptionRoles()
+            let object = RoomRoles()
             object.user = User.getOrCreate(realm: realm, values: $0["u"], updates: nil)
             object.roles.append(contentsOf: $0["roles"].arrayValue.compactMap({ $0.string }))
             return object

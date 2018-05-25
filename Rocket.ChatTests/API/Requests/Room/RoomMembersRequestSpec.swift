@@ -1,5 +1,5 @@
 //
-//  SubscriptionMembersRequestSpec.swift
+//  RoomMembersRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Matheus Cardoso on 9/21/17.
@@ -11,9 +11,9 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionMembersRequestSpec: APITestCase {
+class RoomMembersRequestSpec: APITestCase {
     func testRequestWithRoomId() {
-        let preRequest = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
+        let preRequest = RoomMembersRequest(roomId: "ByehQjC44FwMeiLbX")
         guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
             return XCTFail("request is not nil")
         }
@@ -26,7 +26,7 @@ class SubscriptionMembersRequestSpec: APITestCase {
     }
 
     func testRequestWithRoomName() {
-        let preRequest = SubscriptionMembersRequest(roomName: "testing")
+        let preRequest = RoomMembersRequest(roomName: "testing")
         guard let request = preRequest.request(for: api, options: [.paginated(count: 20, offset: 100)]) else {
             return XCTFail("request is not nil")
         }
@@ -66,7 +66,7 @@ class SubscriptionMembersRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionMembersResource(raw: json)
+        let result = RoomMembersResource(raw: json)
 
         XCTAssertEqual(result.members?.count, json["members"].count, "members is correct")
         XCTAssertEqual(result.count, 2, "count is correct")

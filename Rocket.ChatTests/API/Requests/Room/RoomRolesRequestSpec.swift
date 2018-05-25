@@ -1,5 +1,5 @@
 //
-//  SubscriptionRolesRequestSpec.swift
+//  RoomRolesRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Rafael Kellermann Streit on 11/05/18.
@@ -11,9 +11,9 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionRolesRequestSpec: APITestCase {
+class RoomRolesRequestSpec: APITestCase {
     func testRequest() {
-        let reactRequest = SubscriptionRolesRequest(roomName: "general", subscriptionType: .channel)
+        let reactRequest = RoomRolesRequest(roomName: "general", subscriptionType: .channel)
 
         guard let request = reactRequest.request(for: api) else {
             return XCTFail("request is not nil")
@@ -60,11 +60,11 @@ class SubscriptionRolesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionRolesResource(raw: json)
-        XCTAssertEqual(result.subscriptionRoles?.count, 2)
-        XCTAssertEqual(result.subscriptionRoles?.first?.user?.username, "john.appleseed")
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.first, Role.owner.rawValue)
+        let result = RoomRolesResource(raw: json)
+        XCTAssertEqual(result.roomRoles?.count, 2)
+        XCTAssertEqual(result.roomRoles?.first?.user?.username, "john.appleseed")
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertEqual(result.roomRoles?.first?.roles.first, Role.owner.rawValue)
         XCTAssertTrue(result.success)
     }
 
@@ -88,12 +88,12 @@ class SubscriptionRolesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionRolesResource(raw: json)
+        let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testInvalidUserObject() {
@@ -118,12 +118,12 @@ class SubscriptionRolesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionRolesResource(raw: json)
+        let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testArrayUserObject() {
@@ -146,12 +146,12 @@ class SubscriptionRolesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionRolesResource(raw: json)
+        let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
-        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
-        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.roomRoles?.first?.user)
+        XCTAssertNil(result.roomRoles?.first?.user?.identifier)
     }
 
     func testEmtpyRolesObject() {
@@ -174,16 +174,16 @@ class SubscriptionRolesRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionRolesResource(raw: json)
+        let result = RoomRolesResource(raw: json)
         XCTAssertTrue(result.success)
-        XCTAssertEqual(result.subscriptionRoles?.count, 1)
-        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 0)
-        XCTAssertEqual(result.subscriptionRoles?.first?.user?.username, "john.appleseed")
+        XCTAssertEqual(result.roomRoles?.count, 1)
+        XCTAssertEqual(result.roomRoles?.first?.roles.count, 0)
+        XCTAssertEqual(result.roomRoles?.first?.user?.username, "john.appleseed")
     }
 
     func testEmptyResults() {
-        let nilResult = SubscriptionRolesResource(raw: nil)
-        XCTAssertNil(nilResult.subscriptionRoles)
+        let nilResult = RoomRolesResource(raw: nil)
+        XCTAssertNil(nilResult.roomRoles)
     }
 
 }

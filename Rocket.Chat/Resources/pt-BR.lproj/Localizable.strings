@@ -1,7 +1,9 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Sim";
 "global.no" = "Não";
 "global.cancel" = "Cancelar";
+"global.error" = "Error";
 
 // Errors
 "error.socket.default_error.title" = "Oops!";
@@ -321,3 +323,6 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversa";
+"user_action_sheet.remove" = "Remover do canal";
+"user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
+"user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";

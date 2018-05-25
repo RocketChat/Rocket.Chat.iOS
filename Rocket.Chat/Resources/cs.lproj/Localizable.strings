@@ -1,7 +1,9 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Ano";
 "global.no" = "Ne";
 "global.cancel" = "Zrušit";
+"global.error" = "Chyba";
 
 // Errors
 "error.socket.default_error.title" = "Jejky!";
@@ -321,3 +323,6 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation"; // TODO
+"user_action_sheet.remove" = "Remove from room"; // TODO
+"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
