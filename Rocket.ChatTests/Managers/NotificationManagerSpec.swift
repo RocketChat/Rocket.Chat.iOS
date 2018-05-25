@@ -63,6 +63,8 @@ class NotificationManagerSpec: XCTestCase {
     }
 
     func testPostNotificationWhenNotifyingRoomIsOnScreen() {
+        WindowManager.open(.chat)
+
         let rid = "UUUUUUUUUU"
         Realm.executeOnMainThread { (realm) in
             let object = Subscription()
@@ -70,15 +72,21 @@ class NotificationManagerSpec: XCTestCase {
             realm.add(object, update: true)
         }
 
-        WindowManager.open(.subscriptions)
-
-        if let subscription = Realm.current?.objects(Subscription.self).first {
-            AppManager.open(room: subscription)
+        var controller: ChatViewController?
+        if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {
+            if let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController {
+                if let chatController = nav.viewControllers.first as? ChatViewController {
+                    chatController.subscription = subscription
+                    controller = chatController
+                }
+            }
         }
+
+        XCTAssertNotNil(controller)
+        XCTAssertNotNil(controller?.subscription?.rid)
 
         var notification = self.notification
         notification.payload.rid = rid
-
         notification.post()
 
         XCTAssertNil(NotificationManager.shared.notification, "The notification should not post, and should not be stored")
@@ -86,19 +94,20 @@ class NotificationManagerSpec: XCTestCase {
     }
 
     func testPostNotificationWhenNotifyingRoomIsNotOnScreen() {
+        WindowManager.open(.subscriptions)
+
+        let rid = "UUUUUUUUUU"
         Realm.executeOnMainThread { (realm) in
             let object = Subscription()
-            object.rid = "UUUUUUUUUU"
+            object.rid = rid
             realm.add(object, update: true)
         }
 
-        WindowManager.open(.chat)
-
-        if let subscription = Realm.current?.objects(Subscription.self).first {
+        if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {
             AppManager.open(room: subscription)
         }
 
-        notification.post()
+        self.notification.post()
 
         XCTAssertNotNil(NotificationManager.shared.notification, "The notification should post, and should be stored")
         XCTAssertFalse(NotificationViewController.shared.notificationViewIsHidden, "The notification should be visible")

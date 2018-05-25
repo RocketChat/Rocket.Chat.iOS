@@ -242,11 +242,9 @@ extension ChannelActionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = tableViewData[indexPath.section][indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        if let selectedIndex = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIndex, animated: true)
-        }
+        let data = tableViewData[indexPath.section][indexPath.row]
 
         if let data = data as? ChannelInfoActionCellData {
             guard let action = data.action else {
