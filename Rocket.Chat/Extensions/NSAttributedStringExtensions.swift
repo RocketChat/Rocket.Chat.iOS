@@ -99,6 +99,8 @@ extension NSMutableAttributedString {
         var handledHighlights: [String] = []
 
         mentions.forEach { mention in
+            var mentionToHighlight = mention
+
             if !handledHighlights.contains(mention) {
                 handledHighlights.append(mention)
 
@@ -107,6 +109,12 @@ extension NSMutableAttributedString {
                 if mention == username {
                     background = .primaryAction
                     font = .white
+
+                    if AuthSettingsManager.shared.settings?.useUserRealName ?? false {
+                        let realName = AuthManager.currentUser()?.displayName() ?? ""
+                        mutableString.setString(string.replacingFirstOccurrence(of: mention, with: realName))
+                        mentionToHighlight = realName
+                    }
                 } else if mention == "all" || mention == "here" {
                     background = .attention
                     font = .white
@@ -115,12 +123,12 @@ extension NSMutableAttributedString {
                     font = .link
                 }
 
-                let ranges = string.ranges(of: "@\(mention)")
+                let ranges = string.ranges(of: "@\(mentionToHighlight)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
 
                     if mention != "all" && mention != "here" && mention != username {
-                        setMention(mention, range: range)
+                        setMention(mentionToHighlight, range: range)
                     }
 
                     setBackgroundColor(background, range: range)
