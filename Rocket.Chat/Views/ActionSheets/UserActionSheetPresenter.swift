@@ -20,7 +20,7 @@ protocol UserActionSheetPresenter: Closeable {
 
 extension UserActionSheetPresenter where Self: UIViewController {
     func presentActionSheetForUser(_ user: User, subscription: Subscription? = nil, source: (view: UIView?, rect: CGRect?)? = nil, completion: ((UserAction) -> Void)? = nil) {
-        guard let userId = user.identifier else {
+        guard let userId = user.identifier, AuthManager.currentUser()?.identifier != userId else {
             return
         }
 
