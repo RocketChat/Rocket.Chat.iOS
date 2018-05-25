@@ -266,14 +266,6 @@
 		41D0DA5820991BAE008649E7 /* UploadMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */; };
 		41D51B0620A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
 		41D51B0720A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
-		41D51B0920A635150073E8E7 /* RoomRolesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0820A635150073E8E7 /* RoomRolesRequestSpec.swift */; };
-		41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D5BC301DAFBEF4009A493A /* UIViewExtentions.swift */; };
-		41D701D61E67111E00FED2EE /* MessageTextFontAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */; };
-		41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */; };
-		41D7CA871E644E47000F38EA /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7CA861E644E47000F38EA /* MessageExtensions.swift */; };
-		41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */; };
-		41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */; };
-		41D51B0920A635150073E8E7 /* SubscriptionRolesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0820A635150073E8E7 /* SubscriptionRolesRequestSpec.swift */; };
 		41D8EC8E1F780C3800764B36 /* ChatControllerTitleViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC8D1F780C3800764B36 /* ChatControllerTitleViewProtocol.swift */; };
 		41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */; };
 		41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93B1D318E280098E068 /* SubscriptionManager.swift */; };
@@ -296,6 +288,7 @@
 		41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA061D41513C00238DFD /* ChatViewController.swift */; };
 		41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E422FF2044216000543877 /* UIColorExtensionSpec.swift */; };
 		41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */; };
+		41E96C3120B88A0000ACBA92 /* RoomRolesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E96C3020B88A0000ACBA92 /* RoomRolesRequestSpec.swift */; };
 		41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* DateExtension.swift */; };
 		41E9BD0D208EA4040084D4D8 /* AuthInternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9BD0C208EA4040084D4D8 /* AuthInternalExtensions.swift */; };
 		41E9BD0F208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */; };
@@ -980,12 +973,6 @@
 		41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageDaySeparator.swift; sourceTree = "<group>"; };
 		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		41D51B0520A62DD60073E8E7 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
-		41D51B0820A635150073E8E7 /* RoomRolesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRolesRequestSpec.swift; sourceTree = "<group>"; };
-		41D5BC301DAFBEF4009A493A /* UIViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
-		41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextFontAttributes.swift; sourceTree = "<group>"; };
-		41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
-		41D7CA861E644E47000F38EA /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
-		41D51B0820A635150073E8E7 /* SubscriptionRolesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRolesRequestSpec.swift; sourceTree = "<group>"; };
 		41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDirectMessageHeaderCell.swift; sourceTree = "<group>"; };
 		41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDirectMessageHeaderCell.xib; sourceTree = "<group>"; };
 		41D8EC8D1F780C3800764B36 /* ChatControllerTitleViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerTitleViewProtocol.swift; sourceTree = "<group>"; };
@@ -1016,6 +1003,7 @@
 		41E2FA061D41513C00238DFD /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		41E422FF2044216000543877 /* UIColorExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionSpec.swift; sourceTree = "<group>"; };
 		41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
+		41E96C3020B88A0000ACBA92 /* RoomRolesRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomRolesRequestSpec.swift; sourceTree = "<group>"; };
 		41E991D31D343A9F00BDDCA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		41E9BD0C208EA4040084D4D8 /* AuthInternalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInternalExtensions.swift; sourceTree = "<group>"; };
 		41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionQueriesSpec.swift; sourceTree = "<group>"; };
@@ -2317,7 +2305,6 @@
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 				41B9635F207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift */,
 				80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */,
-				4112BEEB1E7971A400E734CB /* MainChatViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
@@ -2534,7 +2521,7 @@
 				80235D211F7442F700A56CA5 /* RoomMembersRequestSpec.swift */,
 				990FF6D7207438D4007B4A53 /* RoomMentionsRequestSpec.swift */,
 				992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */,
-				41D51B0820A635150073E8E7 /* RoomRolesRequestSpec.swift */,
+				41E96C3020B88A0000ACBA92 /* RoomRolesRequestSpec.swift */,
 				8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */,
 			);
 			path = Room;
@@ -2567,6 +2554,14 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
+		8039441620AF61ED002F317A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8039441720AF620C002F317A /* ResourceWithError.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		8052F75A20B7522900B3B0CF /* UIAlertAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2574,14 +2569,6 @@
 				8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */,
 			);
 			path = UIAlertAction;
-			sourceTree = "<group>";
-		};
-        8039441620AF61ED002F317A /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				8039441720AF620C002F317A /* ResourceWithError.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		8062E32F20A3A2A30044F407 /* Subscription */ = {
@@ -3841,8 +3828,7 @@
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
 				4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */,
 				418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */,
-				41A1748C1DD9F2F900188E3B /* UIViewControllerExtension.swift in Sources */,
-				80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */,
+				80235D1B1F74070100A56CA5 /* RoomMembersRequest.swift in Sources */,
 				3330329A20738E1500A9514D /* SubscriptionManagerRooms.swift in Sources */,
 				8020CCF51FEAD8C9003424F4 /* EmojiPickerController.swift in Sources */,
 				D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */,
@@ -4090,7 +4076,6 @@
 				77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */,
-				41D51B0920A635150073E8E7 /* RoomRolesRequestSpec.swift in Sources */,
 				805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */,
 				D18675EA1F70A58B00406FB4 /* InfoRequestSpec.swift in Sources */,
 				808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */,
@@ -4178,6 +4163,7 @@
 				80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */,
 				8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */,
 				99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */,
+				41E96C3120B88A0000ACBA92 /* RoomRolesRequestSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
 				80A63C511F719FB300FE5AC4 /* RoomInfoRequestSpec.swift in Sources */,
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
