@@ -14,8 +14,12 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .white
+
         let navBar = self.navigationBar
+        navBar.isTranslucent = false
         navBar.tintColor = .RCBlue()
+        navBar.barTintColor = .RCNavigationBarColor()
     }
 
     func setTransparentTheme() {

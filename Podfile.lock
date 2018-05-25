@@ -29,7 +29,6 @@ PODS:
     - SDWebImage/Core
   - SearchTextField (1.2.0)
   - semver (1.1.0)
-  - SideMenuController (0.2.4.1)
   - SimpleImageViewer (1.0.2):
     - SDWebImage (~> 4)
     - SDWebImage/GIF
@@ -55,7 +54,6 @@ DEPENDENCIES:
   - SDWebImage/GIF
   - SearchTextField
   - semver
-  - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
   - Starscream (~> 2)
@@ -88,8 +86,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
@@ -99,9 +95,6 @@ CHECKOUT OPTIONS:
   RCMarkdownParser:
     :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :commit: 0398657e933c8c8f06831a93d2cc96610e18a4f2
     :git: https://github.com/cardoso/SimpleImageViewer.git
@@ -126,7 +119,6 @@ SPEC CHECKSUMS:
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
-  SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
@@ -134,6 +126,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
+PODFILE CHECKSUM: 1e41a79139eeabea8782f3ff362a40d208cf408b
 
 COCOAPODS: 1.5.2

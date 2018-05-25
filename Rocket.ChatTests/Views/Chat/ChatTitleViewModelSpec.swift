@@ -16,7 +16,7 @@ class ChatTitleViewModelSpec: XCTestCase {
 
         XCTAssertNil(model.subscription, "subscription is nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "default color is gray")
-        XCTAssertEqual(model.imageName, "Hashtag", "default icon is hashtag")
+        XCTAssertEqual(model.imageName, "Channel Small", "default icon is hashtag")
         XCTAssertEqual(model.title, "", "title is empty string")
     }
 
@@ -27,7 +27,7 @@ class ChatTitleViewModelSpec: XCTestCase {
 
         XCTAssertNil(model.subscription, "subscription is nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "default color is gray")
-        XCTAssertEqual(model.imageName, "Hashtag", "default icon is hashtag")
+        XCTAssertEqual(model.imageName, "Channel Small", "default icon is hashtag")
         XCTAssertEqual(model.title, "", "title is empty string")
     }
 
@@ -39,7 +39,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNil(model.user, "user is nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "channel color is gray")
-        XCTAssertEqual(model.imageName, "Hashtag", "channel icon is hashtag")
+        XCTAssertEqual(model.imageName, "Channel Small", "channel icon is hashtag")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -52,7 +52,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNil(model.user, "user is nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "group color is gray")
-        XCTAssertEqual(model.imageName, "Lock", "group icon is lock")
+        XCTAssertEqual(model.imageName, "Group Small", "group icon is lock")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -69,7 +69,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNotNil(model.user, "user isn't nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "color is gray")
-        XCTAssertEqual(model.imageName, "Mention", "icon is mention")
+        XCTAssertEqual(model.imageName, "DM Small", "icon is mention")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -86,7 +86,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNotNil(model.user, "user isn't nil")
         XCTAssertEqual(model.iconColor, .RCOnline(), "color is online")
-        XCTAssertEqual(model.imageName, "Mention", "icon is mention")
+        XCTAssertEqual(model.imageName, "DM Small", "icon is mention")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -103,7 +103,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNotNil(model.user, "user isn't nil")
         XCTAssertEqual(model.iconColor, .RCAway(), "color is online")
-        XCTAssertEqual(model.imageName, "Mention", "icon is mention")
+        XCTAssertEqual(model.imageName, "DM Small", "icon is mention")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -120,7 +120,7 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.subscription, "subscription isn't nil")
         XCTAssertNotNil(model.user, "user isn't nil")
         XCTAssertEqual(model.iconColor, .RCBusy(), "color is busy")
-        XCTAssertEqual(model.imageName, "Mention", "icon is mention")
+        XCTAssertEqual(model.imageName, "DM Small", "icon is mention")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
@@ -138,7 +138,7 @@ class ChatTitleViewModelSpec: XCTestCase {
 
         XCTAssertNotNil(model.subscription, "subscription is nil")
         XCTAssertEqual(model.iconColor, .RCGray(), "default color is gray")
-        XCTAssertEqual(model.imageName, "Hashtag", "default icon is hashtag")
+        XCTAssertEqual(model.imageName, "Channel Small", "default icon is hashtag")
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 

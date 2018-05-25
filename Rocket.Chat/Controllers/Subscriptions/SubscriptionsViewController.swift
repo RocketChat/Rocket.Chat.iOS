@@ -8,101 +8,18 @@
 
 import RealmSwift
 
-// swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var headerViewSeparatorHeightConstraint: NSLayoutConstraint! {
         didSet {
-            // Remove the bottom constraint if we don't support multi server
-            if !AppManager.supportsMultiServer {
-                tableViewBottomConstraint.constant = 0
-            }
+            headerViewSeparatorHeightConstraint.constant = 0.5
         }
     }
 
-    @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
-
-    let defaultButtonCancelSearchWidth = CGFloat(65)
-    @IBOutlet weak var buttonCancelSearch: UIButton! {
-        didSet {
-            buttonCancelSearch.setTitle(localized("global.cancel"), for: .normal)
-        }
-    }
-    @IBOutlet weak var buttonCancelSearchWidthConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var textFieldSearch: UITextField! {
-        didSet {
-            textFieldSearch.placeholder = localized("subscriptions.search")
-
-            if let placeholder = textFieldSearch.placeholder {
-                let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
-            }
-        }
-    }
-
-    @IBOutlet weak var viewTextField: UIView! {
-        didSet {
-            viewTextField.layer.cornerRadius = 4
-            viewTextField.layer.masksToBounds = true
-        }
-    }
-
-    weak var viewUserMenu: SubscriptionUserStatusView?
-    @IBOutlet weak var viewUser: SubscriptionUserView! {
-        didSet {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
-            viewUser.addGestureRecognizer(gesture)
-        }
-    }
-
-    @IBOutlet weak var viewUserStatus: UIView!
-
-    weak var avatarView: AvatarView?
-    @IBOutlet weak var avatarViewContainer: UIView! {
-        didSet {
-            avatarViewContainer.layer.masksToBounds = true
-            avatarViewContainer.layer.cornerRadius = 5
-
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = CGRect(
-                    x: 0,
-                    y: 0,
-                    width: avatarViewContainer.frame.width,
-                    height: avatarViewContainer.frame.height
-                )
-
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
-        }
-    }
-
-    @IBOutlet weak var labelServer: UILabel!
-    @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var buttonAddChannel: UIButton! {
-        didSet {
-            if let image = UIImage(named: "Add") {
-                buttonAddChannel.tintColor = .RCLightBlue()
-                buttonAddChannel.setImage(image, for: .normal)
-            }
-        }
-    }
-    @IBOutlet weak var imageViewArrowDown: UIImageView! {
-        didSet {
-            imageViewArrowDown.image = imageViewArrowDown.image?.withRenderingMode(.alwaysTemplate)
-            imageViewArrowDown.tintColor = .RCLightBlue()
-        }
-    }
-
-    static var shared: SubscriptionsViewController? {
-        if let pageController = SubscriptionsPageViewController.shared {
-            return pageController.subscriptionsController
-        }
-
-        return nil
-    }
+    weak var titleView: SubscriptionsTitleView?
+    weak var searchController: UISearchController?
+    weak var searchBar: UISearchBar?
 
     var assigned = false
     var isSearchingLocally = false
@@ -112,71 +29,143 @@ final class SubscriptionsViewController: BaseViewController {
     var subscriptionsToken: NotificationToken?
     var currentUserToken: NotificationToken?
 
-    var groupInfomation: [[String: String]]?
-    var groupSubscriptions: [[Subscription]]?
-
     var searchText: String = ""
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    let socketHandlerToken = String.random(5)
+
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupSearchBar()
+        setupTitleView()
+        updateBackButton()
+
         subscribeModelChanges()
+
+        updateData()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateCurrentUserInformation()
+
+        updateData()
+
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: animated)
+        }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unregisterKeyboardNotifications()
-        dismissUserMenu()
+    // MARK: Storyboard Segues
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Servers" {
+            segue.destination.modalPresentationCapturesStatusBarAppearance = true
+        }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        registerKeyboardHandlers(tableView)
-    }
-}
+    // MARK: Subscriptions
 
-// MARK: Side Menu callbacks
-extension SubscriptionsViewController {
-    func willHide() {
-        self.textFieldSearch.resignFirstResponder()
-    }
+    func subscribeModelChanges() {
+        guard !assigned else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let realm = Realm.current else { return }
 
-    func didHide() {
-        self.textFieldSearch.resignFirstResponder()
+        assigned = true
+
+        subscriptions = auth.subscriptions.sortedByLastMessageDate()
+        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
     }
 
-    func willReveal() {
-        if searchText.isEmpty {
-            hideCancelSearchButton()
+    // MARK: Setup Views
+
+    func updateBackButton() {
+        var unread = 0
+
+        Realm.execute({ (realm) in
+            for obj in realm.objects(Subscription.self) {
+                unread += obj.unread
+            }
+        }, completion: {
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: unread == 0 ? "" : "\(unread)",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+        })
+    }
+
+    func setupSearchBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
+
+        if #available(iOS 11.0, *) {
+            self.searchBar = searchController.searchBar
+            navigationController?.navigationBar.prefersLargeTitles = false
+            navigationItem.largeTitleDisplayMode = .never
+
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = true
+
+            tableView.contentInsetAdjustmentBehavior = .never
         } else {
-            showCancelSearchButton()
+            let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
+            tableView.tableHeaderView = searchBar
+            self.searchBar = searchBar
         }
 
-        self.textFieldSearch.resignFirstResponder()
-        self.updateData()
+        self.searchController = searchController
+        self.searchBar?.placeholder = localized("subscriptions.search")
+        self.searchBar?.delegate = self
     }
 
-    func didReveal() {
-        self.textFieldSearch.resignFirstResponder()
+    func setupTitleView() {
+        if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            navigationItem.titleView = titleView
+            self.titleView = titleView
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+            titleView.addGestureRecognizer(tapGesture)
+
+            titleView.delegate = self
+            titleView.updateServerName(name: AuthSettingsManager.settings?.serverName)
+        }
     }
+
 }
 
-extension SubscriptionsViewController {
+extension SubscriptionsViewController: UISearchBarDelegate {
 
-    @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
-        textFieldSearch.resignFirstResponder()
-        textFieldSearch.text = ""
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "\n" {
+            if searchText.count > 0 {
+                searchOnSpotlight(searchText)
+            }
+
+            return
+        }
+
+        searchBy(searchText)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
         searchText = ""
         searchBy()
     }
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text)
+        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: text)
+        searchText = text
 
         if text.count == 0 {
             isSearchingLocally = false
@@ -184,11 +173,8 @@ extension SubscriptionsViewController {
             searchResult = []
 
             updateAll()
-            groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
-
-            activityViewSearching.stopAnimating()
 
             return
         }
@@ -201,7 +187,6 @@ extension SubscriptionsViewController {
         isSearchingLocally = true
         isSearchingRemotely = false
 
-        groupSubscription()
         tableView.reloadData()
 
         if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
@@ -212,221 +197,95 @@ extension SubscriptionsViewController {
 
     func searchOnSpotlight(_ text: String = "") {
         tableView.tableFooterView = nil
-        activityViewSearching.startAnimating()
 
         API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
-            let currentText = self?.textFieldSearch.text ?? ""
+            let currentText = self?.searchBar?.text ?? ""
 
             if currentText.count == 0 {
                 return
             }
 
-            self?.activityViewSearching.stopAnimating()
             self?.isSearchingRemotely = true
             self?.searchResult = result
-            self?.groupSubscription()
             self?.tableView.reloadData()
         }
     }
 
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastSeen()
+        subscriptions = auth.subscriptions.sortedByLastMessageDate()
     }
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastSeen()
+        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText)
+    }
+
+    func updateSubscriptionsList() {
+        let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
+
+        self.updateBackButton()
+
+        // If the list were empty, let's just refresh everything.
+        if visibleRows.count == 0 {
+            self.tableView.reloadData()
+            return
+        }
+
+        var selectedSubscriptionIdentifier: Subscription?
+        if let nav = splitViewController?.detailViewController as? BaseNavigationController {
+            if let controller = nav.viewControllers.first as? ChatViewController {
+                selectedSubscriptionIdentifier = controller.subscription
+            }
+        }
+
+        for indexPath in visibleRows {
+            if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
+                subscriptionCell.subscription = self.subscriptions?[indexPath.row]
+
+                if subscriptionCell.subscription == selectedSubscriptionIdentifier {
+                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                } else if indexPath == tableView.indexPathForSelectedRow {
+                    tableView.deselectRow(at: indexPath, animated: false)
+                }
+            }
+        }
     }
 
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        groupSubscription()
-        updateCurrentUserInformation()
-        tableView?.reloadData()
+
+        updateAll()
+        updateServerInformation()
+        updateSubscriptionsList()
     }
 
-    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        updateCurrentUserInformation()
+    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
+        updateSubscriptionsList()
     }
 
-    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        // Update titleView information with subscription, can be
-        // some status changes
-        if let subscription = ChatViewController.shared?.subscription {
-            ChatViewController.shared?.chatTitleView?.subscription = subscription
-        } else {
-            ChatViewController.shared?.subscription = .initialSubscription()
-        }
-
-        // If side panel is visible, reload the data
-        if MainChatViewController.shared?.sidePanelVisible ?? false {
-            if isSearchingLocally || isSearchingRemotely {
-                updateSearched()
-            } else {
-                updateAll()
-            }
-
-            groupSubscription()
-            tableView?.reloadData()
-        }
-    }
-
-    func updateCurrentUserInformation() {
-        guard let user = AuthManager.currentUser() else { return }
-        guard let labelUsername = self.labelUsername else { return }
-        guard let viewUserStatus = self.viewUserStatus else { return }
-        guard let avatarView = self.avatarView else { return }
-
-        if let settings = AuthSettingsManager.settings {
-            labelServer.text = settings.serverName
-        } else {
-            labelServer.text = "Rocket.Chat"
-        }
-
-        labelUsername.text = user.displayName()
-        avatarView.user = user
-
-        switch user.status {
-        case .online:
-            viewUserStatus.backgroundColor = .RCOnline()
-        case .busy:
-            viewUserStatus.backgroundColor = .RCBusy()
-        case .away:
-            viewUserStatus.backgroundColor = .RCAway()
-        case .offline:
-            viewUserStatus.backgroundColor = .RCInvisible()
-        }
-    }
-
-    func subscribeModelChanges() {
-        guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.current else { return }
-
-        assigned = true
-
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe({ [weak self] changes in
-            self?.handleSubscriptionUpdates(changes: changes)
-        })
-
-        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
-            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
-            currentUserToken = query.observe({ [weak self] changes in
-                self?.handleCurrentUserUpdates(changes: changes)
-            })
-        }
-
-        groupSubscription()
-    }
-
-    // swiftlint:disable function_body_length cyclomatic_complexity
-    func groupSubscription() {
-        var unreadGroup: [Subscription] = []
-        var favoriteGroup: [Subscription] = []
-        var channelGroup: [Subscription] = []
-        var directMessageGroup: [Subscription] = []
-        var searchResultsGroup: [Subscription] = []
-
-        guard let subscriptions = subscriptions else { return }
-        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byKeyPath: "name", ascending: true))
-
-        for subscription in orderSubscriptions ?? [] {
-            if isSearchingRemotely {
-                searchResultsGroup.append(subscription)
-            }
-
-            if !isSearchingLocally && !subscription.open {
-                continue
-            }
-
-            if subscription.alert {
-                unreadGroup.append(subscription)
-                continue
-            }
-
-            if subscription.favorite {
-                favoriteGroup.append(subscription)
-                continue
-            }
-
-            switch subscription.type {
-            case .channel, .group:
-                channelGroup.append(subscription)
-            case .directMessage:
-                directMessageGroup.append(subscription)
-            }
-        }
-
-        groupInfomation = [[String: String]]()
-        groupSubscriptions = [[Subscription]]()
-
-        if searchResultsGroup.count > 0 {
-            groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localized("subscriptions.search_results"), searchResultsGroup.count)
-            ])
-
-            searchResultsGroup = searchResultsGroup.sorted {
-                return $0.displayName() < $1.displayName()
-            }
-
-            groupSubscriptions?.append(searchResultsGroup)
-        } else {
-            if unreadGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localized("subscriptions.unreads"), unreadGroup.count)
-                ])
-
-                unreadGroup = unreadGroup.sorted {
-                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
-                }
-
-                groupSubscriptions?.append(unreadGroup)
-            }
-
-            if favoriteGroup.count > 0 {
-                groupInfomation?.append([
-                    "icon": "Star",
-                    "name": String(format: "%@ (%d)", localized("subscriptions.favorites"), favoriteGroup.count)
-                ])
-
-                favoriteGroup = favoriteGroup.sorted {
-                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
-                }
-
-                groupSubscriptions?.append(favoriteGroup)
-            }
-
-            if channelGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localized("subscriptions.channels"), channelGroup.count)
-                ])
-
-                groupSubscriptions?.append(channelGroup)
-            }
-
-            if directMessageGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localized("subscriptions.direct_messages"), directMessageGroup.count)
-                ])
-
-                groupSubscriptions?.append(directMessageGroup)
-            }
-        }
+    func updateServerInformation() {
+        titleView?.updateServerName(name: AuthSettingsManager.settings?.serverName)
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {
-        guard let groups = groupSubscriptions else { return nil }
-        guard groups.count > indexPath.section else { return nil }
-        guard groups[indexPath.section].count > indexPath.row else { return nil }
-        return groups[indexPath.section][indexPath.row]
+        guard let subscriptions = subscriptions else { return nil }
+
+        if subscriptions.count > indexPath.row {
+            return Array(subscriptions)[indexPath.row]
+        }
+
+        return nil
     }
 
     func imageViewServerDidTapped(gesture: UIGestureRecognizer) {
         SubscriptionsPageViewController.shared?.showServersList()
+    }
+
+    // MARK: IBAction
+
+    @objc func openServersList() {
+        performSegue(withIdentifier: "Servers", sender: nil)
     }
 
 }
@@ -434,24 +293,30 @@ extension SubscriptionsViewController {
 extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 71
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 71
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groupInfomation?.count ?? 0
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupSubscriptions?[section].count ?? 0
+        return subscriptions?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as? SubscriptionCell else {
             return UITableViewCell()
+        }
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            cell.accessoryType = .none
+        } else {
+            cell.accessoryType = .disclosureIndicator
         }
 
         if let subscription = subscription(for: indexPath) {
@@ -464,75 +329,36 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
 extension SubscriptionsViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            groupInfomation?.count ?? 0 > section,
-            let group = groupInfomation?[section],
-            let view = SubscriptionSectionView.instantiateFromNib()
-        else {
-            return nil
-        }
-
-        view.setIconName(group["icon"])
-        view.setTitle(group["name"])
-
-        return view
-    }
-
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let selected = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selected, animated: true)
-        }
-        return indexPath
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
 
-        let controller = ChatViewController.shared
-        controller?.closeSidebarAfterSubscriptionUpdate = true
-        controller?.subscription = subscription
-    }
+        searchController?.searchBar.resignFirstResponder()
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? SubscriptionCell else { return }
-        guard let subscription = cell.subscription else { return }
-        guard let selectedSubscription = ChatViewController.shared?.subscription else { return }
+        // When using iPads, we override the detail controller creating
+        // a new instance.
+        if splitViewController?.detailViewController as? BaseNavigationController != nil {
+            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+                controller.subscription = subscription
 
-        if subscription.identifier == selectedSubscription.identifier {
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                let nav = BaseNavigationController(rootViewController: controller)
+                splitViewController?.showDetailViewController(nav, sender: self)
+            }
+        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
+
 }
 
-extension SubscriptionsViewController: UITextFieldDelegate {
+extension SubscriptionsViewController {
 
     func showCancelSearchButton() {
-        buttonCancelSearchWidthConstraint.constant = defaultButtonCancelSearchWidth
+        searchController?.searchBar.setShowsCancelButton(true, animated: true)
     }
 
     func hideCancelSearchButton() {
-        buttonCancelSearchWidthConstraint.constant = 0
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.showCancelSearchButton()
-
-        UIView.animate(withDuration: 0.1) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        hideCancelSearchButton()
-
-        UIView.animate(withDuration: 0.1) {
-            self.view.layoutIfNeeded()
-        }
+        searchController?.searchBar.setShowsCancelButton(false, animated: true)
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -557,74 +383,39 @@ extension SubscriptionsViewController: UITextFieldDelegate {
     }
 }
 
+extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
+
+    func userDidPressServerName() {
+        openServersList()
+    }
+
+}
+
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
     func buttonLoadMoreDidPressed() {
-        searchOnSpotlight(textFieldSearch.text ?? "")
-    }
-}
-
-extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
-    internal var canViewAdminPanel: Bool {
-        guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
-        return user.canViewAdminPanel()
-    }
-
-    func presentUserMenu() {
-        guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
-
-        viewUserMenu.showAdmin = canViewAdminPanel
-
-        var newFrame = view.frame
-        newFrame.origin.y = -newFrame.height
-        viewUserMenu.frame = newFrame
-        viewUserMenu.delegate = self
-        viewUserMenu.parentController = self
-
-        view.addSubview(viewUserMenu)
-        self.viewUserMenu = viewUserMenu
-
-        if #available(iOS 11.0, *) {
-            newFrame.origin.y = 64 + view.safeAreaInsets.top
-        } else {
-            newFrame.origin.y = 84
-        }
-
-        UIView.animate(withDuration: 0.15) {
-            viewUserMenu.frame = newFrame
-            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        }
-    }
-
-    func dismissUserMenu() {
-        guard let viewUserMenu = viewUserMenu else { return }
-
-        var newFrame = viewUserMenu.frame
-        newFrame.origin.y = -newFrame.height
-
-        UIView.animate(withDuration: 0.15, animations: {
-            viewUserMenu.frame = newFrame
-            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-        }, completion: { (_) in
-            viewUserMenu.removeFromSuperview()
-        })
-    }
-
-    @objc func viewUserDidTap(sender: Any) {
-        textFieldSearch.resignFirstResponder()
-
-        if viewUserMenu != nil {
-            dismissUserMenu()
-        } else {
-            presentUserMenu()
-        }
-    }
-
-    func userDidPressedOption() {
-        dismissUserMenu()
+        searchOnSpotlight(searchController?.searchBar.text ?? "")
     }
 
     @IBAction func buttonAddChannelDidTap(sender: Any) {
         performSegue(withIdentifier: "New Channel", sender: sender)
     }
+
 }
+
+extension SubscriptionsViewController: SocketConnectionHandler {
+
+    func socketDidConnect(socket: SocketManager) {
+
+    }
+
+    func socketDidDisconnect(socket: SocketManager) {
+        SocketManager.reconnect()
+    }
+
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        // Handle errors
+    }
+
+}
+

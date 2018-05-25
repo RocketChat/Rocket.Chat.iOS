@@ -152,9 +152,11 @@ extension PushManager {
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
         } else {
-            if let auth = AuthManager.isAuthenticated() {
-                ChatViewController.shared?.subscription = .notificationSubscription(auth: auth)
-            }
+             if let auth = AuthManager.isAuthenticated() {
+                if let subscription = Subscription.notificationSubscription(auth: auth) {
+                    AppManager.open(room: subscription)
+                }
+             }
         }
 
         if let reply = reply {
