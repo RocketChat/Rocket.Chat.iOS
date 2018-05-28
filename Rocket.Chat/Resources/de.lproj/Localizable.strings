@@ -146,7 +146,7 @@
 "new_room.cell.public_channel.description.public_only" = "Du kannst nur öffentliche Räume erstellen";
 "new_room.cell.public_channel.description.private_only" = "Du kannst nur private Räume erstellen";
 "new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
-"new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages"; // TODO
 "new_room.group.channel.name" = "Name des Kanals";
 "new_room.cell.channel_name.title" = "Name des Kanals";
 "new_room.group.invite_users" = "Benutzer einladen";

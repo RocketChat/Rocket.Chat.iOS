@@ -146,7 +146,7 @@
 "new_room.cell.public_channel.description.public_only" = "Możesz utworzyć tylko kanały publiczne";
 "new_room.cell.public_channel.description.private_only" = "Możesz utworzyć tylko kanały prywatne";
 "new_room.cell.read_only.title" = "Kanał tylko do odczytu";
-"new_room.cell.read_only.description" = "Tylko administrator może pisać wiadomości";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages"; // TODO
 "new_room.group.channel.name" = "Nazwa kanału";
 "new_room.cell.channel_name.title" = "Nazwa kanału";
 "new_room.group.invite_users" = "Zaproś użytkowników";
