@@ -8,8 +8,8 @@
 
 import UIKit
 import AVFoundation
-import SDWebImage
 import FLAnimatedImage
+import Nuke
 
 class FileTableViewCell: UITableViewCell {
 
@@ -32,8 +32,6 @@ class FileTableViewCell: UITableViewCell {
         filePreview.layer.cornerRadius = 4
         filePreview.layer.borderWidth = 0.5
         filePreview.layer.borderColor = UIColor.lightGray.cgColor
-        filePreview.sd_setShowActivityIndicatorView(true)
-        filePreview.sd_setIndicatorStyle(.gray)
     }
 
     func updateFileData() {
@@ -69,13 +67,16 @@ class FileTableViewCell: UITableViewCell {
     }
 
     func updateImage(withURL url: URL) {
-        filePreview.sd_setImage(with: url) { (_, error, _, _) in
-            guard error == nil else {
-                self.filePreview.contentMode = .scaleAspectFit
-                self.filePreview.image = #imageLiteral(resourceName: "Resource Unavailable")
-                return
-            }
-        }
+        let options = ImageLoadingOptions(
+            failureImage: #imageLiteral(resourceName: "Resource Unavailable"),
+            contentModes: .init(
+                success: .scaleAspectFill,
+                failure: .scaleAspectFit,
+                placeholder: .scaleAspectFit
+            )
+        )
+
+        ImageManager.loadImage(with: url, options: options, into: filePreview)
     }
 
     func updateVideo(withURL url: URL) {
@@ -132,7 +133,6 @@ class FileTableViewCell: UITableViewCell {
         filePreview.contentMode = .scaleAspectFill
         filePreview.animatedImage = nil
         filePreview.image = nil
-        filePreview.sd_cancelCurrentImageLoad()
-        filePreview.sd_cancelCurrentAnimationImagesLoad()
+        Nuke.cancelRequest(for: filePreview)
     }
 }
