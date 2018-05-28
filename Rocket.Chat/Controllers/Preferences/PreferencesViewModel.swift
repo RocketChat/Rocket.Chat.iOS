@@ -45,6 +45,27 @@ final class PreferencesViewModel {
         return AuthManager.isAuthenticated()?.apiHost?.host ?? ""
     }
 
+    internal var user: User? {
+        return AuthManager.currentUser()
+    }
+
+    internal var userName: String {
+        return AuthManager.currentUser()?.displayName() ?? ""
+    }
+
+    internal var userStatus: String {
+        guard let user = AuthManager.currentUser() else {
+            return localized("user_menu.invisible")
+        }
+
+        switch user.status {
+        case .online: return localized("user_menu.online")
+        case .offline: return localized("user_menu.invisible")
+        case .busy: return localized("user_menu.busy")
+        case .away: return localized("user_menu.away")
+        }
+    }
+
     internal var version: String {
         return appInfo(.version)
     }

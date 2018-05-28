@@ -57,12 +57,12 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
         // on select reactor
 
-        controller.reactorListView.selectedReactor = { username, rect in
+        controller.reactorListView.selectedReactor = { [weak self] username, rect in
             guard let user = User.find(username: username) else {
                 return
             }
 
-            controller.presentActionSheetForUser(user, source: (controller.view, rect))
+            controller.presentActionSheetForUser(user, subscription: self?.subscription, source: (controller.view, rect))
         }
     }
 
@@ -74,7 +74,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         guard let user = message.user else { return }
-        presentActionSheetForUser(user, source: (view, nil))
+        presentActionSheetForUser(user, subscription: subscription, source: (view, nil))
     }
 
     func openURL(url: URL) {

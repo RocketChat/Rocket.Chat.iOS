@@ -5,14 +5,18 @@ PODS:
   - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
-  - Instabug (7.12.7):
-    - Instabug/Instabug (= 7.12.7)
-    - Instabug/InstabugCore (= 7.12.7)
-  - Instabug/Instabug (7.12.7):
+  - Instabug (7.13):
+    - Instabug/Instabug (= 7.13)
+    - Instabug/InstabugCore (= 7.13)
+  - Instabug/Instabug (7.13):
     - Instabug/InstabugCore
-  - Instabug/InstabugCore (7.12.7)
+  - Instabug/InstabugCore (7.13)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
+  - Nuke (7.0.1)
+  - Nuke-FLAnimatedImage-Plugin (5.0):
+    - FLAnimatedImage (~> 1.0)
+    - Nuke (~> 7.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.6)
   - ReachabilitySwift (4.1.0)
@@ -29,7 +33,6 @@ PODS:
     - SDWebImage/Core
   - SearchTextField (1.2.0)
   - semver (1.1.0)
-  - SideMenuController (0.2.4.1)
   - SimpleImageViewer (1.0.2):
     - SDWebImage (~> 4)
     - SDWebImage/GIF
@@ -47,15 +50,13 @@ DEPENDENCIES:
   - Instabug
   - MBProgressHUD (~> 1.1.0)
   - MobilePlayer
+  - Nuke-FLAnimatedImage-Plugin
   - OAuthSwift
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
   - ReachabilitySwift
   - RealmSwift
-  - SDWebImage (~> 4)
-  - SDWebImage/GIF
   - SearchTextField
   - semver
-  - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
   - Starscream (~> 2)
@@ -73,6 +74,8 @@ SPEC REPOS:
     - Instabug
     - MBProgressHUD
     - MobilePlayer
+    - Nuke
+    - Nuke-FLAnimatedImage-Plugin
     - OAuthSwift
     - ReachabilitySwift
     - Realm
@@ -88,8 +91,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
@@ -99,9 +100,6 @@ CHECKOUT OPTIONS:
   RCMarkdownParser:
     :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :commit: 0398657e933c8c8f06831a93d2cc96610e18a4f2
     :git: https://github.com/cardoso/SimpleImageViewer.git
@@ -115,9 +113,11 @@ SPEC CHECKSUMS:
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  Instabug: bd712783b3a2035b4a0b7ce474839b8cc9f3a9c6
+  Instabug: 81ccd646e7fd2e3a243c5e61ae6af69c72328373
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  Nuke: 0944b2e721c8f21857028d980dc3d6a249df8b3e
+  Nuke-FLAnimatedImage-Plugin: 6dfb9335ce298eaff9fdfed8d20d1bbfb2a6c326
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
@@ -126,7 +126,6 @@ SPEC CHECKSUMS:
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
-  SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
@@ -134,6 +133,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
+PODFILE CHECKSUM: d3f668b1a831f795f50a3b1ead0d4d8c9cefc82a
 
 COCOAPODS: 1.5.2

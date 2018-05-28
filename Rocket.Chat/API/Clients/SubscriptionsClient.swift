@@ -60,7 +60,7 @@ struct SubscriptionsClient: APIClient {
                         subscriptions.append(subscription)
                     }
 
-                    auth.lastSubscriptionFetch = Date.serverDate
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
@@ -91,7 +91,7 @@ struct SubscriptionsClient: APIClient {
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                     realm.add(auth, update: true)
                 })
 
@@ -106,7 +106,7 @@ struct SubscriptionsClient: APIClient {
                             return
                         }
 
-                        subscription.mapRoom(object)
+                        subscription.mapRoom(object, realm: realm)
                         subscriptions.append(subscription)
                     }
 
@@ -121,6 +121,37 @@ struct SubscriptionsClient: APIClient {
                 default:
                     completion?()
                 }
+            }
+        }
+    }
+
+    func fetchRoles(subscription: Subscription, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
+        let rid = subscription.rid
+        let rolesRequest = RoomRolesRequest(roomName: subscription.name, subscriptionType: subscription.type)
+
+        let currentRealm = realm
+
+        api.fetch(rolesRequest) { result in
+            switch result {
+            case .resource(let resource):
+                if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
+                    try? currentRealm?.write {
+                        let subscriptionCopy = Subscription(value: subscription)
+
+                        subscriptionCopy.usersRoles.removeAll()
+                        resource.roomRoles?.forEach { role in
+                            subscriptionCopy.usersRoles.append(role)
+                        }
+
+                        currentRealm?.add(subscriptionCopy, update: true)
+                    }
+
+                    completion?()
+                }
+
+            // Fail silently
+            case .error(let error):
+                print(error)
             }
         }
     }
@@ -180,7 +211,7 @@ struct SubscriptionsClient: APIClient {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date.serverDate
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
@@ -211,7 +242,7 @@ struct SubscriptionsClient: APIClient {
 
             currentRealm?.execute({ realm in
                 guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                 realm.add(auth, update: true)
             })
 
@@ -227,7 +258,7 @@ struct SubscriptionsClient: APIClient {
                 list?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }
@@ -236,7 +267,7 @@ struct SubscriptionsClient: APIClient {
                 updated?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }

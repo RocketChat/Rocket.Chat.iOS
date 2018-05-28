@@ -47,6 +47,7 @@ final class API: APIFetcher {
 
     var authToken: String?
     var userId: String?
+    var language: String?
 
     static let userAgent: String = {
         let info = Bundle.main.infoDictionary

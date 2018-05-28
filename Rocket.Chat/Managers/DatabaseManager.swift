@@ -193,6 +193,10 @@ struct DatabaseManager {
             return nil
         }
 
+        #if DEBUG
+        Log.debug("Realm path: \(url.appendingPathComponent(databaseName))")
+        #endif
+
         return Realm.Configuration(
             fileURL: url.appendingPathComponent(databaseName),
             deleteRealmIfMigrationNeeded: true
