@@ -11,7 +11,10 @@ import RealmSwift
 
 extension AuthViewController {
     internal func handleAuthenticationResponse(_ response: LoginResponse) {
-        if case let .resource(resource) = response, let error = resource.error {
+        switch response {
+        case .resource(let resource):
+            guard let error = resource.error else { break }
+
             stopLoading()
 
             switch error.lowercased() {
@@ -34,6 +37,8 @@ extension AuthViewController {
                     auth.serverVersion = version.description
                 }
             }
+        case .error(let error):
+            alert(title: localized("error.login.title"), message: error.description)
         }
 
         API.current()?.fetch(MeRequest()) { [weak self] response in
