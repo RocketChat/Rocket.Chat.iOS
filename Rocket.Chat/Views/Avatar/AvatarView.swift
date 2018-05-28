@@ -151,13 +151,6 @@ final class AvatarView: UIView {
         backgroundColor = color
     }
 
-    func removeCacheForCurrentURL(forceUpdate: Bool = false) {
-        guard let url = imageURL else { return }
-
-        DataLoader.sharedUrlCache.removeCachedResponse(for: ImageRequest(url: url).urlRequest)
-        if forceUpdate { updateAvatar() }
-    }
-
     func prepareForReuse() {
         avatarPlaceholder = nil
         avatarURL = nil
