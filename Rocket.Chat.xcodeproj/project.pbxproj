@@ -4219,6 +4219,7 @@
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
+				99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */,
 				80FE8DF0206587510099170E /* SEFileDetailView.swift in Sources */,
 				805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */,
 				80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */,
@@ -4702,6 +4703,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4727,6 +4730,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-ShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4752,6 +4757,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-ShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
