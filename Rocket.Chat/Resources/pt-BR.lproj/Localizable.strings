@@ -118,6 +118,11 @@
 "subscriptions.channels" = "Canais";
 "subscriptions.direct_messages" = "Mensagens Diretas";
 "subscriptions.you" = "Você";
+"subscriptions.messages" = "Mensagens";
+"subscriptions.list.you_initial" = "Você";
+"subscriptions.list.no_message" = "Nenhuma mensagem";
+"subscriptions.list.sent_an_attachment" = "enviou um anexo";
+"subscriptions.list.date.yesterday" = "Ontem";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
@@ -196,7 +201,7 @@
 "chat.upload.take_photo" = "Tirar uma foto";
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
-"chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.import_file" = "Importar arquivos";
 "chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
@@ -306,6 +311,7 @@
 "myaccount.settings.profile.name_placeholder" = "Nome";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Status";
 "myaccount.settings.profile.password_required.title" = "Insira sua senha";
 "myaccount.settings.profile.password_required.message" = "É necessário inserir sua senha para atualizar seu e-mail.";
 "myaccount.settings.profile.password_required.placeholder" = "Senha";

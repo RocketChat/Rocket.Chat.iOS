@@ -47,11 +47,11 @@ final class ChatMessageURLView: UIView {
         labelURLDescription.text = url.textDescription
 
         if let imageURL = URL(string: url.imageURL ?? "") {
-            imageViewURL.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
+            ImageManager.loadImage(with: imageURL, into: imageViewURL) { [weak self] _, error in
                 let width = error != nil ? 0 : ChatMessageURLView.imageViewDefaultWidth
                 self?.imageViewURLWidthConstraint.constant = width
                 self?.layoutSubviews()
-            })
+            }
         } else {
             imageViewURLWidthConstraint.constant = 0
             layoutSubviews()

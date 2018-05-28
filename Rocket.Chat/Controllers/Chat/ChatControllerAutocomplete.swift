@@ -98,8 +98,8 @@ extension ChatViewController {
         } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
             if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: EmojiAutocompleteCell.identifier) as? EmojiAutocompleteCell {
 
-                if case let .custom(imageUrl) = emoji.type {
-                    cell.emojiView.emojiImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                if case let .custom(imageUrl) = emoji.type, let url = URL(string: imageUrl) {
+                    ImageManager.loadImage(with: url, into: cell.emojiView.emojiImageView)
                 } else {
                     cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
                 }

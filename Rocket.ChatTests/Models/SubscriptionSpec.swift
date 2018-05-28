@@ -175,7 +175,7 @@ class SubscriptionSpec: XCTestCase {
 
         let subscription = Subscription()
 
-        subscription.mapRoom(object)
+        subscription.mapRoom(object, realm: nil)
 
         XCTAssertEqual(subscription.roomTopic, "room-topic")
         XCTAssertEqual(subscription.roomDescription, "room-description")
@@ -193,7 +193,7 @@ class SubscriptionSpec: XCTestCase {
         ])
 
         let subscription = Subscription()
-        subscription.mapRoom(object)
+        subscription.mapRoom(object, realm: nil)
 
         XCTAssertEqual(subscription.roomReadOnly, false)
     }
@@ -206,7 +206,7 @@ class SubscriptionSpec: XCTestCase {
         ])
 
         let subscription = Subscription()
-        subscription.mapRoom(object)
+        subscription.mapRoom(object, realm: nil)
 
         XCTAssertEqual(subscription.roomReadOnly, false)
     }
@@ -220,7 +220,7 @@ class SubscriptionSpec: XCTestCase {
         ])
 
         let subscription = Subscription()
-        subscription.mapRoom(object)
+        subscription.mapRoom(object, realm: nil)
 
         XCTAssertEqual(subscription.roomBroadcast, false)
     }
@@ -233,7 +233,7 @@ class SubscriptionSpec: XCTestCase {
         ])
 
         let subscription = Subscription()
-        subscription.mapRoom(object)
+        subscription.mapRoom(object, realm: nil)
 
         XCTAssertEqual(subscription.roomBroadcast, false)
     }

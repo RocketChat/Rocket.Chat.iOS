@@ -118,6 +118,11 @@
 "subscriptions.channels" = "Kanały";
 "subscriptions.direct_messages" = "Prywatne wiadomości";
 "subscriptions.you" = "Ty";
+"subscriptions.messages" = "Messages"; //TODO
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Dodaj nowy Zespół";
@@ -196,7 +201,7 @@
 "chat.upload.take_photo" = "Zrób zdjęcie";
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
-"chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.import_file" = "Importuj plik z";
 "chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download
@@ -305,6 +310,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.status.title" = "Status"; // TODO
 "myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
 "myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO

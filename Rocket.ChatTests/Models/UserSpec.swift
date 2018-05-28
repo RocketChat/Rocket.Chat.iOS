@@ -124,7 +124,7 @@ class UserSpec: XCTestCase, RealmTestCase {
         let user = User.testInstance()
         let avatarURL = user.avatarURL(auth)
         XCTAssertNotNil(avatarURL, "url is valid")
-        XCTAssertEqual(avatarURL?.absoluteString, "https://open.rocket.chat/avatar/user-username", "avatar url is valid")
+        XCTAssertEqual(avatarURL?.absoluteString, "https://open.rocket.chat/avatar/user-username?format=jpeg", "avatar url is valid")
     }
 
     func testAvatarURLRandomUsername() {
@@ -134,7 +134,7 @@ class UserSpec: XCTestCase, RealmTestCase {
 
         let avatarURL = user.avatarURL(auth)
         XCTAssertNotNil(avatarURL, "url is valid")
-        XCTAssertEqual(avatarURL?.absoluteString, "https://open.rocket.chat/avatar/\(user.username ?? "")", "avatar url is valid")
+        XCTAssertEqual(avatarURL?.absoluteString, "https://open.rocket.chat/avatar/\(user.username ?? "")?format=jpeg", "avatar url is valid")
     }
 
     func testAvatarURLInvalid() {

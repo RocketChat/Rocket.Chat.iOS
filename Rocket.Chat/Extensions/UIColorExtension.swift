@@ -90,6 +90,10 @@ extension UIColor {
 
     // MARK: Theme color
 
+    static func RCNavigationBarColor() -> UIColor {
+        return UIColor(rgb: 0xF8F8F8, alphaVal: 1)
+    }
+
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
     }
@@ -103,7 +107,7 @@ extension UIColor {
     }
 
     static func RCGray() -> UIColor {
-        return UIColor(rgb: 0x999999, alphaVal: 1)
+        return UIColor(rgb: 0x9EA2A8, alphaVal: 1)
     }
 
     static func RCLightGray() -> UIColor {
@@ -123,7 +127,7 @@ extension UIColor {
     }
 
     static func RCBlue() -> UIColor {
-        return UIColor(rgb: 0x0b4c74, alphaVal: 1)
+        return UIColor(rgb: 0x1D74F5, alphaVal: 1)
     }
 
     // MARK: Function color

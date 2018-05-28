@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SDWebImage
 import FLAnimatedImage
 import SimpleImageViewer
 import MBProgressHUD
 import MobilePlayer
+import Nuke
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -128,15 +128,15 @@ class FilesListViewController: BaseViewController {
     private func openRemoteImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView?) {
         guard let fileURL = file.fullFileURL() else { return }
 
-        let open: ((Data?) -> Void) = { [weak self] data in
+        let open: ((Image?) -> Void) = { [weak self] image in
             guard let strongSelf = self else { return }
 
             let configuration = ImageViewerConfiguration { config in
-                if let data = data {
+                if let image = image {
                     if file.isGif {
-                        config.animatedImage = FLAnimatedImage(gifData: data)
+                        config.animatedImage = FLAnimatedImage(gifData: image.animatedImageData)
                     } else {
-                        config.image = UIImage(data: data)
+                        config.image = image
                     }
                 }
                 config.imageView = imageView
@@ -149,9 +149,9 @@ class FilesListViewController: BaseViewController {
         }
 
         MBProgressHUD.showAdded(to: view, animated: true)
-        SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
-            open(data)
-        })
+        ImagePipeline.shared.loadImage(with: fileURL) { response, _ in
+            open(response?.image)
+        }
     }
 
     func openVideo(fromFile file: File) {

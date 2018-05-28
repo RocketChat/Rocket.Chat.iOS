@@ -51,6 +51,6 @@ extension User {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
     }
 }
