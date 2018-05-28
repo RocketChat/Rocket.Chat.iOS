@@ -38,9 +38,14 @@ extension AuthViewController {
                 }
             }
         case .error(let error):
+            stopLoading()
             alert(title: localized("error.login.title"), message: error.description)
         }
 
+        performMeRequest()
+    }
+
+    internal func performMeRequest() {
         API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
