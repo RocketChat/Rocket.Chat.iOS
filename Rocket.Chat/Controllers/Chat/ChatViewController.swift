@@ -8,7 +8,6 @@
 
 import RealmSwift
 import SlackTextViewController
-//import SimpleImageViewer
 
 private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
 private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
