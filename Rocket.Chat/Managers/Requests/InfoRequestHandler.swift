@@ -50,6 +50,7 @@ class InfoRequestHandler: NSObject {
 
     internal func validateServerResponse(result: InfoResource?) {
         guard let version = result?.version else {
+            alertInvalidURL()
             delegate?.urlNotValid()
             return
         }
