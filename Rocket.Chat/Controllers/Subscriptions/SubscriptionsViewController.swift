@@ -285,7 +285,11 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     // MARK: IBAction
 
     @objc func openServersList() {
-        performSegue(withIdentifier: "Servers", sender: nil)
+        if let serversView = ServersListView.instantiateFromNib() {
+            serversView.frame = tableView.frame
+            view?.addSubview(serversView)
+        }
+//        performSegue(withIdentifier: "Servers", sender: nil)
     }
 
 }

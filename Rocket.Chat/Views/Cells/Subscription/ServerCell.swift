@@ -10,6 +10,7 @@ import UIKit
 
 final class ServerCell: UITableViewCell {
 
+    static let cellHeight = 58
     static let identifier = "kServerCellIdentifier"
 
     @IBOutlet weak var imageViewServer: UIImageView! {

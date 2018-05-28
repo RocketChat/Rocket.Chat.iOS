@@ -22,6 +22,7 @@ final class SubscriptionCell: UITableViewCell {
 
     var subscription: Subscription? {
         didSet {
+            guard let subscription = subscription, !subscription.isInvalidated else { return }
             updateSubscriptionInformatin()
         }
     }
@@ -70,9 +71,8 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
-        guard let user = AuthManager.currentUser() else { return }
 
-        updateStatus()
+        updateStatus(subscription: subscription)
 
         if let user = subscription.directMessageUser {
             avatarView.subscription = nil
@@ -84,10 +84,6 @@ final class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.displayName()
         labelLastMessage.text = subscription.lastMessageText()
-
-        if subscription.displayName() == user.username {
-            labelName.text?.append(" (" + localized("subscriptions.you") + ")")
-        }
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
@@ -120,9 +116,7 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    func updateStatus() {
-        guard let subscription = self.subscription else { return }
-
+    fileprivate func updateStatus(subscription: Subscription) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true
