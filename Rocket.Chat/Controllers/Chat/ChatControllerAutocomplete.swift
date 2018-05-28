@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import Nuke
 
 extension ChatViewController {
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
@@ -100,7 +99,7 @@ extension ChatViewController {
             if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: EmojiAutocompleteCell.identifier) as? EmojiAutocompleteCell {
 
                 if case let .custom(imageUrl) = emoji.type, let url = URL(string: imageUrl) {
-                    Nuke.loadImage(with: url, into: cell.emojiView.emojiImageView)
+                    ImageManager.loadImage(with: url, into: cell.emojiView.emojiImageView)
                 } else {
                     cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
                 }

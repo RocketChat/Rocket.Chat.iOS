@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Nuke
 
 struct ReactionViewModel {
     let emoji: String
@@ -48,7 +47,7 @@ final class ReactionView: UIView {
 
     func map(_ model: ReactionViewModel) {
         if let imageUrlString = model.imageUrl, let imageUrl = URL(string: imageUrlString) {
-            Nuke.loadImage(with: imageUrl, into: emojiView.emojiImageView)
+            ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
         } else {
             emojiView.emojiLabel.text = Emojione.transform(string: model.emoji)
         }

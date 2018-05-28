@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nuke
 
 class SEAvatarView: UIView, SEXibInitializable {
     @IBOutlet weak var contentView: UIView! {
@@ -49,7 +48,7 @@ class SEAvatarView: UIView, SEXibInitializable {
 
     func setImageUrl(_ url: String) {
         guard let url = URL(string: url) else { return }
-        Nuke.loadImage(with: url, into: imageView) { [weak self] response, _ in
+        ImageManager.loadImage(with: url, into: imageView) { [weak self] response, _ in
             self?.initialsLabel.isHidden = response?.image != nil
             self?.imageView.isHidden = response?.image == nil
         }

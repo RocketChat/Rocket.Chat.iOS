@@ -8,7 +8,6 @@
 
 import UIKit
 import FLAnimatedImage
-import Nuke
 
 protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
@@ -83,8 +82,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         }
 
         activityIndicatorImageView.startAnimating()
-
-        Nuke.loadImage(with: imageURL, into: imageView) { [weak self] _, _ in
+        ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, _ in
             self?.activityIndicatorImageView.stopAnimating()
         }
     }

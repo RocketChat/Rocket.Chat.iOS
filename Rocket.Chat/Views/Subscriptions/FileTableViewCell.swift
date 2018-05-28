@@ -76,7 +76,7 @@ class FileTableViewCell: UITableViewCell {
             )
         )
 
-        Nuke.loadImage(with: url, options: options, into: filePreview)
+        ImageManager.loadImage(with: url, options: options, into: filePreview)
     }
 
     func updateVideo(withURL url: URL) {

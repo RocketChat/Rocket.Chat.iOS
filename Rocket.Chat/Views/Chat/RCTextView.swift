@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Nuke
 
 class HighlightLayoutManager: NSLayoutManager {
     override func fillBackgroundRectArray(_ rectArray: UnsafePointer<CGRect>, count rectCount: Int, forCharacterRange charRange: NSRange, color: UIColor) {
@@ -93,7 +92,7 @@ class HighlightLayoutManager: NSLayoutManager {
                     if let imageUrlData = attachment.contents,
                             let imageUrlString = String(data: imageUrlData, encoding: .utf8),
                             let imageUrl = URL(string: imageUrlString) {
-                        Nuke.loadImage(with: imageUrl, into: emojiView.emojiImageView)
+                        ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
                         self.customEmojiViews.append(emojiView)
                         self.addSubview(emojiView)
                     }

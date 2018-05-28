@@ -616,8 +616,11 @@
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
-		999F25B7207EEE70002E0F68 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		999F25B7207EEE70002E0F68 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
+		99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
+		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
+		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
@@ -1302,6 +1305,7 @@
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManager.swift; sourceTree = "<group>"; };
+		99B802EC20BC3BD400230109 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
@@ -1922,6 +1926,7 @@
 				B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */,
 				995FEB2E206286D9004EE38F /* WebBrowserManager.swift */,
 				41B554C61FBF0F9D000510B7 /* WindowManager.swift */,
+				99B802EC20BC3BD400230109 /* ImageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -3933,6 +3938,7 @@
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
 				809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */,
 				3330329820738D4600A9514D /* SubscriptionManagerMessages.swift in Sources */,
+				99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
@@ -3961,7 +3967,7 @@
 				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
-				999F25B7207EEE70002E0F68 /* BuildFile in Sources */,
+				999F25B7207EEE70002E0F68 /* (null) in Sources */,
 				35E892CC201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
@@ -4197,6 +4203,7 @@
 				8076FDBC2048596100114F28 /* URLExtension.swift in Sources */,
 				80FA907D2057F4650069038F /* SubmitContent.swift in Sources */,
 				80977AB4204EE41200C41435 /* DataExtension.swift in Sources */,
+				99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */,
 				80D0CE6D205083280056B17F /* SubscriptionUser.swift in Sources */,
 				8076FDB3204856E200114F28 /* Auth.swift in Sources */,
 				8076FDC9204863AF00114F28 /* Mention.swift in Sources */,

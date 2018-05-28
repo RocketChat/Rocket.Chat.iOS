@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nuke
 
 final class ServerCell: UITableViewCell {
 
@@ -46,7 +45,7 @@ final class ServerCell: UITableViewCell {
             }
 
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                Nuke.loadImage(with: imageURL, into: imageViewServer)
+                ImageManager.loadImage(with: imageURL, into: imageViewServer)
             }
         }
     }

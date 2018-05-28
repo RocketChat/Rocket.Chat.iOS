@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nuke
 
 protocol ChatMessageTextViewProtocol: class {
     func viewDidCollapseChange(view: UIView)
@@ -76,7 +75,7 @@ final class ChatMessageTextView: UIView {
         }
 
         if let thumbURL = viewModel?.thumbURL {
-            Nuke.loadImage(with: thumbURL, into: imageViewThumb) { _, error in
+            ImageManager.loadImage(with: thumbURL, into: imageViewThumb) { _, error in
                 let width = error != nil ? 0 : ChatMessageTextView.imageViewDefaultWidth
                 updateConstraint(width)
             }

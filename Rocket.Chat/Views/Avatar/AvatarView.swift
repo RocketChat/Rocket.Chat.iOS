@@ -8,7 +8,6 @@
 
 import UIKit
 import FLAnimatedImage
-import Nuke
 
 final class AvatarView: UIView {
 
@@ -16,7 +15,7 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                Nuke.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
+                ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
                     guard error == nil else { return }
 
                     self?.labelInitials.text = ""
