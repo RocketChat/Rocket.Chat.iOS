@@ -148,7 +148,6 @@
 "new_room.cell.read_only.title" = "Kanál pouze pro čtení";
 "new_room.cell.read_only.description" = "Pouze admin může psát nové zprávy";
 "new_room.group.channel.name" = "Jméno kanálu";
-"new_room.group.channel.footer" = "Názvy musí být malým písmen a kratší než 22 znaků";
 "new_room.cell.channel_name.title" = "Jméno kanálu";
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";

@@ -148,7 +148,6 @@
 "new_room.cell.read_only.title" = "Kanał tylko do odczytu";
 "new_room.cell.read_only.description" = "Tylko administrator może pisać wiadomości";
 "new_room.group.channel.name" = "Nazwa kanału";
-"new_room.group.channel.footer" = "Nazwa musi być z małych liter oraz być krótsza niż 22 znaki";
 "new_room.cell.channel_name.title" = "Nazwa kanału";
 "new_room.group.invite_users" = "Zaproś użytkowników";
 "new_room.cell.invite_users.placeholder" = "Nazwy użytkowników";
