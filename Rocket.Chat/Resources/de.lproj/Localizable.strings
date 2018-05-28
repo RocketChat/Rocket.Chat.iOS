@@ -20,7 +20,7 @@
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
 
 "alert.connection.not_secured.title" = "Oops!";
-"alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Stellen Sie bitte sicherstellen, dass dieser SSL unterstützt.";
+"alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Stellen Sie bitte sicher, dass dieser SSL unterstützt.";
 
 "alert.connection.socket_error.title" = "Oops!";
 "alert.connection.socket_error.message" = "Es konnte keine Verbindung zum Server hergestellt werden!";
