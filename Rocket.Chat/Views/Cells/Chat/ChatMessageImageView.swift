@@ -91,11 +91,10 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         if isLoadable {
             delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
         } else {
-            guard let imageURL = attachment.fullImageURL() else {
-                return
-            }
+            guard let imageURL = attachment.fullImageURL() else { return }
+
             Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                ChatViewController.shared?.openURL(url: imageURL)
+                 MainSplitViewController.chatViewController?.openURL(url: imageURL)
             }).present()
         }
     }

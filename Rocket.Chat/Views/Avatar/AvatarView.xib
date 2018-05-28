@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="wZE-08-RLR" userLabel="Label Initials">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="wZE-08-RLR" userLabel="Label Initials">
                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="TEE-8H-jwA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6bG-yT-I9P"/>
                 <constraint firstAttribute="trailing" secondItem="TEE-8H-jwA" secondAttribute="trailing" id="DSe-yf-aAC"/>

@@ -14,8 +14,18 @@ final class ServersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.frame
+        view.insertSubview(blurEffectView, at: 0)
+        view.backgroundColor = .clear
 
         // Long press to show some actions on cells
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
@@ -25,17 +35,39 @@ final class ServersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         servers = DatabaseManager.servers ?? []
         tableView?.reloadData()
+
+        tableView.alpha = 0
+
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.alpha = 1
+        }
+    }
+
+    // MARK: IBAction
+
+    @objc func close() {
+        dismiss(animated: true, completion: nil)
     }
 
     func selectServer(at indexPath: IndexPath) {
         if indexPath.row == servers.count {
-            MainChatViewController.shared?.openAddNewTeamController()
+            SocketManager.disconnect { (_, _) in
+                self.performSegue(withIdentifier: "Auth", sender: nil)
+            }
         } else {
             if indexPath.row == DatabaseManager.selectedIndex {
-                SubscriptionsPageViewController.shared?.showSubscriptionsList()
+                close()
             } else {
+                DatabaseManager.selectDatabase(at: indexPath.row)
+                DatabaseManager.changeDatabaseInstance(index: indexPath.row)
+
+                SocketManager.disconnect { (_, _) in
+                    WindowManager.open(.subscriptions)
+                }
+
                 AppManager.changeSelectedServer(index: indexPath.row)
             }
         }

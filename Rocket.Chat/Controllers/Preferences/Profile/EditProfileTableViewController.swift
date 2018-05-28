@@ -11,9 +11,16 @@ import MBProgressHUD
 import SwiftyJSON
 
 // swiftlint:disable file_length type_body_length
-class EditProfileTableViewController: UITableViewController, MediaPicker {
+final class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     static let identifier = String(describing: EditProfileTableViewController.self)
+
+    @IBOutlet weak var statusValueLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel! {
+        didSet {
+            statusLabel.text = viewModel.statusTitle
+        }
+    }
 
     @IBOutlet weak var name: UITextField! {
         didSet {
@@ -72,8 +79,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     var numberOfSections: Int {
         guard !isLoading else { return 0 }
-        guard let authSettings = authSettings else { return 1 }
-        return !authSettings.isAllowedToEditProfile || !authSettings.isAllowedToEditPassword ? 1 : 2
+        guard let authSettings = authSettings else { return 2 }
+        return !authSettings.isAllowedToEditProfile || !authSettings.isAllowedToEditPassword ? 2 : 3
     }
 
     var canEditAnyInfo: Bool {
@@ -120,6 +127,11 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         disableUserInteraction()
         setupAvatarButton()
         fetchUserData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUserStatus()
     }
 
     // MARK: Setup
@@ -180,6 +192,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         name.text = user?.name
         username.text = user?.username
         email.text = user?.emails.first?.email
+
+        updateUserStatus()
+    }
+
+    func updateUserStatus() {
+        statusValueLabel.text = AuthManager.currentUser()?.status.rawValue.capitalized
     }
 
     // MARK: State Management
@@ -490,7 +508,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return viewModel.profileSectionTitle
+        case 1: return viewModel.profileSectionTitle
         default: return ""
         }
     }

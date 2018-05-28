@@ -15,7 +15,7 @@ class ChatDataControllerSpec: XCTestCase {
         super.setUp()
         let auth = Auth()
         auth.internalFirstChannelOpened = false
-        auth.lastSubscriptionFetch = nil
+        auth.lastSubscriptionFetchWithLastMessage = nil
         auth.lastAccess = Date()
         auth.serverURL = ""
         auth.token = "TESTTOKEN"

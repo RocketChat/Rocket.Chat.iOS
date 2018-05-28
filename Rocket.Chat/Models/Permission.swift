@@ -27,6 +27,8 @@ enum PermissionType: String {
     case pinMessage = "pin-message"
 
     case postReadOnly = "post-readonly"
+
+    case removeUser = "remove-user"
 }
 
 class Permission: BaseModel {

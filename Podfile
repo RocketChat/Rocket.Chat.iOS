@@ -22,7 +22,6 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'

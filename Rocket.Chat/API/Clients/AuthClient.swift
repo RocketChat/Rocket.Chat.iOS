@@ -21,7 +21,7 @@ struct AuthClient: APIClient {
 
                 let auth = Auth()
                 auth.internalFirstChannelOpened = false
-                auth.lastSubscriptionFetch = nil
+                auth.lastSubscriptionFetchWithLastMessage = nil
                 auth.lastAccess = Date()
                 auth.serverURL = (self.api as? API)?.host.absoluteString ?? ""
                 auth.token = resource.authToken
@@ -70,7 +70,7 @@ struct AuthClient: APIClient {
 
             let auth = Auth()
             auth.internalFirstChannelOpened = false
-            auth.lastSubscriptionFetch = nil
+            auth.lastSubscriptionFetchWithLastMessage = nil
             auth.lastAccess = Date()
             auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string

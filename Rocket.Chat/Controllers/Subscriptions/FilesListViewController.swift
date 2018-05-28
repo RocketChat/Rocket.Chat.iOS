@@ -43,7 +43,7 @@ class FilesListViewData {
             isLoadingMoreFiles = true
 
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
-            let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
+            let filesRequest = RoomFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {
                 case .resource(let resource):
@@ -55,7 +55,7 @@ class FilesListViewData {
         }
     }
 
-    private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
+    private func handle(result: RoomFilesResource, completion: (() -> Void)? = nil) {
         self.showing += result.count ?? 0
         self.total = result.total ?? 0
 

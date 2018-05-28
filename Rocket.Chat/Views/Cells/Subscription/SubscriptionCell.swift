@@ -17,8 +17,8 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
     internal let defaultBackgroundColor = UIColor.clear
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.18)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.27)
+    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
+    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
     var subscription: Subscription? {
         didSet {
@@ -26,68 +26,140 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    @IBOutlet weak var imageViewIcon: UIImageView!
+    @IBOutlet weak var viewStatus: UIView! {
+        didSet {
+            viewStatus.layer.masksToBounds = true
+            viewStatus.layer.cornerRadius = 5
+        }
+    }
+
+    weak var avatarView: AvatarView!
+    @IBOutlet weak var avatarViewContainer: UIView! {
+        didSet {
+            avatarViewContainer.layer.cornerRadius = 4
+            avatarViewContainer.layer.masksToBounds = true
+
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    @IBOutlet weak var iconRoom: UIImageView!
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelLastMessage: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
-            labelUnread.layer.cornerRadius = 2
+            labelUnread.layer.cornerRadius = 4
         }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        avatarView.prepareForReuse()
+
+        labelName.text = ""
+        labelLastMessage.text = ""
+        labelUnread.text = ""
+        labelUnread.alpha = 0
     }
 
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
         guard let user = AuthManager.currentUser() else { return }
 
-        updateIconImage()
+        updateStatus()
+
+        if let user = subscription.directMessageUser {
+            avatarView.subscription = nil
+            avatarView.user = user
+        } else {
+            avatarView.user = nil
+            avatarView.subscription = subscription
+        }
 
         labelName.text = subscription.displayName()
+        labelLastMessage.text = subscription.lastMessageText()
+
         if subscription.displayName() == user.username {
             labelName.text?.append(" (" + localized("subscriptions.you") + ")")
         }
 
-        if subscription.unread > 0 || subscription.alert {
-            labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
-            labelName.textColor = labelUnreadTextColor
+        let nameFontSize = labelName.font.pointSize
+        let lastMessageFontSize = labelLastMessage.font.pointSize
+
+        if let roomLastMessage = subscription.roomLastMessage?.createdAt {
+            labelDate.text = dateFormatted(date: roomLastMessage)
         } else {
-            labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-            labelName.textColor = labelReadTextColor
+            labelDate.text = nil
         }
 
-        labelUnread.alpha = subscription.unread > 0 ? 1 : 0
-        labelUnread.text = "\(subscription.unread)"
+        if subscription.unread > 0 || subscription.alert {
+            labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .semibold)
+            labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .medium)
+            labelDate.textColor = .RCBlue()
+
+            if subscription.unread > 0 {
+                labelUnread.alpha = 1
+                labelUnread.text =  "\(subscription.unread)"
+            } else {
+                labelUnread.alpha = 0
+                labelUnread.text =  ""
+            }
+        } else {
+            labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .medium)
+            labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .regular)
+            labelDate.textColor = .RCGray()
+
+            labelUnread.alpha = 0
+            labelUnread.text =  ""
+        }
     }
 
-    func updateIconImage() {
+    func updateStatus() {
         guard let subscription = self.subscription else { return }
 
-        switch subscription.type {
-        case .channel:
-            imageViewIcon.image = UIImage(named: "Hashtag")?.withRenderingMode(.alwaysTemplate)
-            imageViewIcon.tintColor = .RCInvisible()
-        case .directMessage:
-            var color: UIColor = .RCInvisible()
+        if subscription.type == .directMessage {
+            viewStatus.isHidden = false
+            iconRoom.isHidden = true
 
             if let user = subscription.directMessageUser {
-                color = { _ -> UIColor in
-                    switch user.status {
-                    case .online:
-                        return .RCOnline()
-                    case .offline:
-                        return .RCInvisible()
-                    case .away:
-                        return .RCAway()
-                    case .busy:
-                        return .RCBusy()
-                    }
-                }(())
+                switch user.status {
+                case .online: viewStatus.backgroundColor = .RCOnline()
+                case .busy: viewStatus.backgroundColor = .RCBusy()
+                case .away: viewStatus.backgroundColor = .RCAway()
+                case .offline: viewStatus.backgroundColor = .RCInvisible()
+                }
             }
+        } else {
+            iconRoom.isHidden = false
+            viewStatus.isHidden = true
 
-            imageViewIcon.image = UIImage(named: "Mention")?.withRenderingMode(.alwaysTemplate)
-            imageViewIcon.tintColor = color
-        case .group:
-            imageViewIcon.image = UIImage(named: "Lock")?.withRenderingMode(.alwaysTemplate)
-            imageViewIcon.tintColor = .RCInvisible()
+            if subscription.type == .channel {
+                iconRoom.image = UIImage(named: "Cell Subscription Hashtag")
+            } else {
+                iconRoom.image = UIImage(named: "Cell Subscription Lock")
+            }
         }
+    }
+
+    // Need to localize this formatting
+    func dateFormatted(date: Date) -> String {
+        let calendar = NSCalendar.current
+
+        if calendar.isDateInYesterday(date) {
+            return localized("subscriptions.list.date.yesterday")
+        }
+
+        if calendar.isDateInToday(date) {
+            return RCDateFormatter.time(date)
+        }
+
+        return RCDateFormatter.date(date, dateStyle: .short)
     }
 
 }
