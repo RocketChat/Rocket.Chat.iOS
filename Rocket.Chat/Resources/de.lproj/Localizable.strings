@@ -100,13 +100,13 @@
 "auth.login.password.placeholder" = "Passwort";
 "auth.login.buttonRegister" = "Neues Konto erstellen";
 "auth.login.buttonResetPassword" = "Passwort vergessen";
-"auth.login.agree_label" = "Indem Sie fortfahren, erklären Sie sich einverstanden mit unserer";
+"auth.login.agree_label" = "Indem Sie fortfahren, erklären Sie sich einverstanden mit unseren";
 "auth.login.agree_and" = "und";
 "auth.login.agree_termsofservice" = "Allgemeine Geschäftsbedingungen";
 "auth.login.agree_privacypolicy" = "Datenschutzerklärung";
 
 "auth.forgot_password.title" = "Passwort vergessen?";
-"auth.forgot_password.message" = "Bitte geben Sie Ihre E-Mail-Adresse eingeben";
+"auth.forgot_password.message" = "Bitte geben Sie Ihre E-Mail-Adresse ein";
 "auth.forgot_password.success" = "Wenn diese E-Mail Adresse registriert ist, erhalten Sie eine Anleitung, wie Sie Ihr Passwort zurücksetzen können. Bitte versuchen Sie es erneut, sollten Sie in Kürze keine E-Mail erhalten haben.";
 
 // Subscriptions
@@ -142,7 +142,7 @@
 "new_room.title" = "Neuer Kanal";
 "new_room.buttons.create" = "Erstellen";
 "new_room.cell.public_channel.title" = "Öffentlicher Kanal";
-"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Kanäle beitreten.";
+"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Kanal beitreten";
 "new_room.cell.public_channel.description.public_only" = "Sie können nur öffentliche Kanäle erstellen";
 "new_room.cell.public_channel.description.private_only" = "Sie können nur private Kanäle erstellen";
 "new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
