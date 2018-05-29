@@ -102,7 +102,7 @@
 "auth.login.buttonResetPassword" = "Passwort vergessen";
 "auth.login.agree_label" = "Indem Sie fortfahren, erklären Sie sich einverstanden mit unseren";
 "auth.login.agree_and" = "und";
-"auth.login.agree_termsofservice" = "Allgemeine Geschäftsbedingungen";
+"auth.login.agree_termsofservice" = "Allgemeinen Geschäftsbedingungen";
 "auth.login.agree_privacypolicy" = "Datenschutzerklärung";
 
 "auth.forgot_password.title" = "Passwort vergessen?";
