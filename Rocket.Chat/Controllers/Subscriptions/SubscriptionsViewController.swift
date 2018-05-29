@@ -17,6 +17,7 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
@@ -278,18 +279,14 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         return nil
     }
 
-    func imageViewServerDidTapped(gesture: UIGestureRecognizer) {
-        SubscriptionsPageViewController.shared?.showServersList()
-    }
-
     // MARK: IBAction
 
     @objc func openServersList() {
-        if let serversView = ServersListView.instantiateFromNib() {
-            serversView.frame = tableView.frame
-            view?.addSubview(serversView)
+        if let serversView = self.serversView {
+            serversView.close()
+        } else {
+            self.serversView = ServersListView.showIn(self.view)
         }
-//        performSegue(withIdentifier: "Servers", sender: nil)
     }
 
 }

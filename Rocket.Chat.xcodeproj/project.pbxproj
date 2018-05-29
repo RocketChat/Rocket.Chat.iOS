@@ -169,7 +169,6 @@
 		413FB6DD1FE17E4500F010AA /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6DC1FE17E4500F010AA /* LoaderView.swift */; };
 		413FB6E01FE17EB700F010AA /* SubscriptionsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413FB6DE1FE17EB600F010AA /* SubscriptionsTitleView.xib */; };
 		413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6DF1FE17EB600F010AA /* SubscriptionsTitleView.swift */; };
-		4147CE791F5EA3D000C322C3 /* SubscriptionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE781F5EA3D000C322C3 /* SubscriptionsPageViewController.swift */; };
 		4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */; };
 		4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */; };
 		4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */; };
@@ -303,6 +302,7 @@
 		41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */; };
 		41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBF4E620BC320E0080D00D /* ServersListView.swift */; };
 		41FBF4E920BC321C0080D00D /* ServersListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41FBF4E820BC321C0080D00D /* ServersListView.xib */; };
+		41FBF4EB20BD8C650080D00D /* ServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41FBF4EA20BD8C650080D00D /* ServerCell.xib */; };
 		41FC9E02209B38BE00FED485 /* AutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */; };
 		41FC9E06209B39FE00FED485 /* SubscriptionLastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC9E05209B39FE00FED485 /* SubscriptionLastMessage.swift */; };
 		41FC9E08209B3A6300FED485 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */; };
@@ -506,7 +506,6 @@
 		807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */; };
 		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
-		807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */; };
 		80825F0D207EB2D800C477DE /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA5206D1883005E3369 /* APIResource.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
@@ -876,8 +875,6 @@
 		413FB6DC1FE17E4500F010AA /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		413FB6DE1FE17EB600F010AA /* SubscriptionsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionsTitleView.xib; sourceTree = "<group>"; };
 		413FB6DF1FE17EB600F010AA /* SubscriptionsTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleView.swift; sourceTree = "<group>"; };
-		4147CE781F5EA3D000C322C3 /* SubscriptionsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionsPageViewController.swift; sourceTree = "<group>"; };
-		4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersViewController.swift; sourceTree = "<group>"; };
 		4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddServerCell.swift; sourceTree = "<group>"; };
 		4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManagerSpec.swift; sourceTree = "<group>"; };
@@ -1027,6 +1024,7 @@
 		41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewModelSpec.swift; sourceTree = "<group>"; };
 		41FBF4E620BC320E0080D00D /* ServersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListView.swift; sourceTree = "<group>"; };
 		41FBF4E820BC321C0080D00D /* ServersListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServersListView.xib; sourceTree = "<group>"; };
+		41FBF4EA20BD8C650080D00D /* ServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerCell.xib; sourceTree = "<group>"; };
 		41FC9E05209B39FE00FED485 /* SubscriptionLastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLastMessage.swift; sourceTree = "<group>"; };
 		41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		41FC9E09209B3A9800FED485 /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
@@ -2044,6 +2042,7 @@
 				412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */,
 				412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */,
 				4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */,
+				41FBF4EA20BD8C650080D00D /* ServerCell.xib */,
 				4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */,
 			);
 			path = Subscription;
@@ -2330,8 +2329,6 @@
 			children = (
 				9987B5952093E4BA007D277C /* FilesListViewController.swift */,
 				35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */,
-				4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */,
-				4147CE781F5EA3D000C322C3 /* SubscriptionsPageViewController.swift */,
 				41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */,
 				992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */,
 			);
@@ -3441,6 +3438,7 @@
 				14F8A256202E64B200175FDC /* BnW-83.5@2x.png in Resources */,
 				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
 				14F8A25B202E64B200175FDC /* BnW-60@2x.png in Resources */,
+				41FBF4EB20BD8C650080D00D /* ServerCell.xib in Resources */,
 				14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */,
 				80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */,
 				33A5C9D2206A565800FE1C8F /* nature.json in Resources */,
@@ -3837,7 +3835,6 @@
 				8076FDB52048571200114F28 /* AuthUser.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
-				807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */,
 				806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */,
 				41B96362207E48260068F1A6 /* MessageTextValidator.swift in Sources */,
 				809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */,
@@ -3952,7 +3949,6 @@
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
-				4147CE791F5EA3D000C322C3 /* SubscriptionsPageViewController.swift in Sources */,
 				807371A01F96937100D53ADF /* LoginService.swift in Sources */,
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
