@@ -24,11 +24,26 @@ final class PreferencesViewController: UITableViewController {
 
     private let viewModel = PreferencesViewModel()
 
-    @IBOutlet weak var labelProfile: UILabel! {
+    @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            labelProfile.text = viewModel.profile
+            avatarViewContainer.layer.cornerRadius = 4
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
         }
     }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+        }
+    }
+
+    @IBOutlet weak var labelProfileName: UILabel!
+    @IBOutlet weak var labelProfileStatus: UILabel!
 
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
@@ -105,10 +120,21 @@ final class PreferencesViewController: UITableViewController {
         title = viewModel.title
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUserInformation()
+    }
+
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true) {
             UserReviewManager.shared.requestReview()
         }
+    }
+
+    private func updateUserInformation() {
+        avatarView.user = viewModel.user
+        labelProfileName.text = viewModel.userName
+        labelProfileStatus.text = viewModel.userStatus.lowercased()
     }
 
     private func cellTermsOfServiceDidPressed() {

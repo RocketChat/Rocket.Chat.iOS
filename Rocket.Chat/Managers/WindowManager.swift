@@ -12,15 +12,14 @@ enum Storyboard {
     case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
     case preferences
+    case subscriptions
 
     var name: String {
         switch self {
-        case .auth:
-            return "Auth"
-        case .chat:
-            return "Chat"
-        case .preferences:
-            return "Preferences"
+        case .auth: return "Auth"
+        case .chat: return "Chat"
+        case .preferences: return "Preferences"
+        case .subscriptions: return "Subscriptions"
         }
     }
 

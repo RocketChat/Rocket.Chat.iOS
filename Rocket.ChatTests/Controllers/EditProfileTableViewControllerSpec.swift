@@ -61,10 +61,10 @@ class EditProfileTableViewControllerSpec: XCTestCase {
         XCTAssertEqual(editProfile.numberOfSections, 0, "will show sections even though it is in loading state.")
 
         editProfile.isLoading = false
-        XCTAssertEqual(editProfile.numberOfSections, 2, "will not show password section even though it is allowed to edit password.")
+        XCTAssertEqual(editProfile.numberOfSections, 3, "will not show password section even though it is allowed to edit password.")
 
         authSettings.isAllowedToEditPassword = false
-        XCTAssertEqual(editProfile.numberOfSections, 1, "will show change password section without being able to update it.")
+        XCTAssertEqual(editProfile.numberOfSections, 2, "will show change password section without being able to update it.")
     }
 
     func testUserInteractionWithPermissiveSettings() {

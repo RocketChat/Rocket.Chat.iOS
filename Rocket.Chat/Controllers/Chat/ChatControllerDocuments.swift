@@ -40,19 +40,19 @@ extension ChatViewController {
         if DownloadManager.fileExists(localFileURL) {
             open()
         } else {
-            showHeaderStatusView()
-
-            let message = String(format: localized("chat.download.downloading_file"), filename)
-            chatHeaderViewStatus?.labelTitle.text = message
-            chatHeaderViewStatus?.buttonRefresh.isHidden = true
-            chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-            chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
-            chatHeaderViewStatus?.activityIndicator.startAnimating()
+//            showHeaderStatusView()
+//
+//            let message = String(format: localized("chat.download.downloading_file"), filename)
+//            chatHeaderViewStatus?.labelTitle.text = message
+//            chatHeaderViewStatus?.buttonRefresh.isHidden = true
+//            chatHeaderViewStatus?.backgroundColor = .RCLightGray()
+//            chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+//            chatHeaderViewStatus?.activityIndicator.startAnimating()
 
             // Download file and cache it to be used later
             DownloadManager.download(url: fileURL, to: localFileURL) {
                 DispatchQueue.main.async {
-                    self.hideHeaderStatusView()
+//                    self.hideHeaderStatusView()
                     open()
                 }
             }
@@ -85,7 +85,7 @@ extension ChatViewController {
             // Download file and cache it to be used later
             DownloadManager.download(url: fileURL, to: localFileURL) {
                 DispatchQueue.main.async {
-                    self.hideHeaderStatusView()
+//                    self.hideHeaderStatusView()
                     open()
                 }
             }
