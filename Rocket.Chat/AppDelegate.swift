@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
-        initNotificationWindow()
+//        initNotificationWindow()
 
         return true
     }

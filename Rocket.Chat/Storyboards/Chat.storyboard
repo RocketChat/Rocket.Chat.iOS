@@ -51,9 +51,6 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Stw-bA-gXV" secondAttribute="trailing" constant="12" id="hLW-Z0-cMV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
-                        <connections>
-                            <outlet property="scrollToBottomButton" destination="Stw-bA-gXV" id="Dw5-dz-7IE"/>
-                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>

@@ -59,6 +59,7 @@ extension ChatTitleView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        labelTitle.textColor = theme.titleText
+//        labelTitle.textColor = theme.titleText
+        // TODO
     }
 }
