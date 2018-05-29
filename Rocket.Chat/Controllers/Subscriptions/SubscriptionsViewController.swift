@@ -283,9 +283,11 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     @objc func openServersList() {
         if let serversView = self.serversView {
+            titleView?.updateTitleImage(reverse: false)
             serversView.close()
         } else {
-            self.serversView = ServersListView.showIn(self.view)
+            titleView?.updateTitleImage(reverse: true)
+            serversView = ServersListView.showIn(self.view)
         }
     }
 

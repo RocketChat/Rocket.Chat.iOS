@@ -38,6 +38,16 @@ final class SubscriptionsTitleView: UIView {
         buttonServer.setTitle(name, for: .normal)
     }
 
+    func updateTitleImage(reverse: Bool = false) {
+        var image = UIImage(named: "Server Selector")?.imageWithTint(.RCBlue())
+
+        if reverse {
+            image = image?.rotate(radians: .pi)
+        }
+
+        buttonServer.setImage(image, for: .normal)
+    }
+
     override var intrinsicContentSize: CGSize {
         if #available(iOS 11.0, *) {
             return UILayoutFittingExpandedSize
