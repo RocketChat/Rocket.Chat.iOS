@@ -33,13 +33,9 @@ final class ServersListView: UIView {
 
     static func showIn(_ view: UIView) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
-        instance.alpha = 0
         instance.frame = view.bounds
         view.addSubview(instance)
-
-        UIView.animate(withDuration: 0.15) {
-            instance.alpha = 1
-        }
+        instance.tableView.animate(animation: .top(duration: 0.3))
 
         return instance
     }

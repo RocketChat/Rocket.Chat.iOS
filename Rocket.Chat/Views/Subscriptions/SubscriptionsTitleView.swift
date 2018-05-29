@@ -39,13 +39,14 @@ final class SubscriptionsTitleView: UIView {
     }
 
     func updateTitleImage(reverse: Bool = false) {
-        var image = UIImage(named: "Server Selector")?.imageWithTint(.RCBlue())
-
-        if reverse {
-            image = image?.rotate(radians: .pi)
+        if let image = UIImage(named: "Server Selector")?.imageWithTint(.RCBlue()) {
+            if reverse, let cgImage = image.cgImage {
+                let rotatedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .downMirrored)
+                buttonServer.setImage(rotatedImage, for: .normal)
+            } else {
+                buttonServer.setImage(image, for: .normal)
+            }
         }
-
-        buttonServer.setImage(image, for: .normal)
     }
 
     override var intrinsicContentSize: CGSize {

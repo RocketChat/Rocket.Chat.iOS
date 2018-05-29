@@ -42,10 +42,10 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wT0-Cf-aBX">
-                            <rect key="frame" x="0.0" y="43" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
                             <color key="backgroundColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="Odn-iV-u5r"/>
+                                <constraint firstAttribute="height" constant="0.5" id="Odn-iV-u5r"/>
                             </constraints>
                         </view>
                     </subviews>
