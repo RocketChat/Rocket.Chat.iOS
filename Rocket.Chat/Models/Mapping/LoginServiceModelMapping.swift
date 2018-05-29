@@ -17,7 +17,7 @@ extension LoginService: ModelMappeable {
         }
 
         service = values["name"].string ?? values["service"].string
-        clientId = values["appId"].string ?? values["clientId"].string
+        clientId = values["clientId"].string ?? values["appId"].string ?? values["consumerKey"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -45,6 +45,7 @@ extension LoginService: ModelMappeable {
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
+        case .twitter: mapTwitter()
         case .wordpress: mapWordPress()
         case .saml: break
         case .cas: break
@@ -142,5 +143,20 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "CAS"
         buttonLabelColor = "#ffffff"
         buttonColor = "#13679a"
+    }
+
+    func mapTwitter() {
+        service = "twitter"
+
+        serverUrl = "https://api.twitter.com"
+        requestTokenPath = "/oauth/request_token"
+        tokenPath = "/oauth/access_token"
+        authorizePath = "/oauth/authorize"
+        buttonLabelText = "twitter"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#00aced"
+        callbackPath = "twitter"
+
+        oauth1 = true
     }
 }

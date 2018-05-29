@@ -15,6 +15,7 @@ enum LoginServiceType {
     case facebook
     case linkedin
     case gitlab
+    case twitter
     case wordpress
     case saml
     case cas
@@ -28,6 +29,7 @@ enum LoginServiceType {
         case "github": self = .github
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
+        case "twitter": self = .twitter
         case "wordpress": self = .wordpress
         case "saml": self = .saml
         case "cas": self = .cas
@@ -42,6 +44,8 @@ class LoginService: BaseModel {
     @objc dynamic var custom = false
     @objc dynamic var serverUrl: String?
     @objc dynamic var tokenPath: String?
+    @objc dynamic var requestTokenPath: String?
+    @objc dynamic var consumerSecret: String?
     @objc dynamic var authorizePath: String?
     @objc dynamic var scope: String?
     @objc dynamic var buttonLabelText: String?
@@ -61,6 +65,9 @@ class LoginService: BaseModel {
     @objc dynamic var entryPoint: String?
     @objc dynamic var issuer: String?
     @objc dynamic var provider: String?
+
+    // OAuth1
+    @objc dynamic var oauth1: Bool = false
 
     // true if LoginService has enough information to be used
     var isValid: Bool {
@@ -114,6 +121,16 @@ extension LoginService {
 
         return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
     }
+
+    var requestTokenUrl: String? {
+        guard
+            let serverUrl = serverUrl,
+            let requestPath = requestTokenPath
+        else {
+              return nil
+        }
+        return requestPath.contains("://") ? requestPath : "\(serverUrl)\(requestPath)"
+    }
 }
 
 // MARK: Realm extensions
@@ -165,6 +182,12 @@ extension LoginService {
     static var linkedin: LoginService {
         let service = LoginService()
         service.mapLinkedIn()
+        return service
+    }
+
+    static var twitter: LoginService {
+        let service = LoginService()
+        service.mapTwitter()
         return service
     }
 

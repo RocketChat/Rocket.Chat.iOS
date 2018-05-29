@@ -33,6 +33,7 @@ final class PublicSettingsRequest: APIRequest {
                 "Accounts_OAuth_Gitlab",
                 "Accounts_OAuth_Linkedin",
                 "Accounts_OAuth_Wordpress",
+                "Accounts_OAuth_Twitter",
                 "LDAP_Enable",
                 "CAS_enabled",
                 "CAS_login_url",

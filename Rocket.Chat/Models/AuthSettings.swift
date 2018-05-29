@@ -42,6 +42,7 @@ final class AuthSettings: Object {
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isFacebookAuthenticationEnabled = false
     @objc dynamic var isGitHubAuthenticationEnabled = false
+    @objc dynamic var isTwitterAuthenticationEnabled = false
     @objc dynamic var isGitLabAuthenticationEnabled = false
     @objc dynamic var isLinkedInAuthenticationEnabled = false
     @objc dynamic var isWordPressAuthenticationEnabled = false
