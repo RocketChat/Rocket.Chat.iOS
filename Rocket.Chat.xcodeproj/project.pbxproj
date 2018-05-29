@@ -116,6 +116,9 @@
 		33D08E2720BD5EDC008D03EF /* NotThemeableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2220BD5EDC008D03EF /* NotThemeableViews.swift */; };
 		33D08E2820BD5EDC008D03EF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2320BD5EDC008D03EF /* Theme.swift */; };
 		33D08E2A20BD5F24008D03EF /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2920BD5F24008D03EF /* TopTransparentViewController.swift */; };
+		33D08E2E20BD9267008D03EF /* ThemePreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2C20BD9267008D03EF /* ThemePreferenceController.swift */; };
+		33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */; };
+		33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
@@ -827,6 +830,9 @@
 		33D08E2220BD5EDC008D03EF /* NotThemeableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotThemeableViews.swift; sourceTree = "<group>"; };
 		33D08E2320BD5EDC008D03EF /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		33D08E2920BD5F24008D03EF /* TopTransparentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
+		33D08E2C20BD9267008D03EF /* ThemePreferenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreferenceController.swift; sourceTree = "<group>"; };
+		33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreferenceViewModel.swift; sourceTree = "<group>"; };
+		33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThemePreferenceCell.swift; path = Preferences/ThemePreferenceCell.swift; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
@@ -1660,6 +1666,15 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		33D08E2B20BD9267008D03EF /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				33D08E2C20BD9267008D03EF /* ThemePreferenceController.swift */,
+				33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		33F73B292073BDD800F03F29 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -1685,6 +1700,7 @@
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				99282260204DE0AE005D2067 /* Profile */,
+				33D08E2B20BD9267008D03EF /* Theme */,
 				9960C82E2063F091004A034C /* Web Browser */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
 				80D41DF5208FC57100034D1F /* PreferencesViewController.swift */,
@@ -1810,6 +1826,7 @@
 				4192054A1D52F4E7004EEC5F /* Subscription */,
 				80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */,
 				80235D251F74672D00A56CA5 /* LoaderTableViewCell.xib */,
+				33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3789,6 +3806,7 @@
 				413FB6BF1FE17D7D00F010AA /* UIStoryboardExtensions.swift in Sources */,
 				41E9BD0D208EA4040084D4D8 /* AuthInternalExtensions.swift in Sources */,
 				41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */,
+				33D08E2E20BD9267008D03EF /* ThemePreferenceController.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
@@ -3908,6 +3926,7 @@
 				806EFA62209BF30500D0D650 /* SubscriptionsClient.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
+				33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				80E9DBD6209CA8FE00A48CA9 /* Closeable.swift in Sources */,
 				9987B5962093E4BA007D277C /* FilesListViewController.swift in Sources */,
@@ -4000,6 +4019,7 @@
 				8076FDC320485A2200114F28 /* SubscriptionUtils.swift in Sources */,
 				33D08E2420BD5EDC008D03EF /* ThemeableViewControllers.swift in Sources */,
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
+				33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
