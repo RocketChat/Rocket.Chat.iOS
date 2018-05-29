@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SDWebImage
 import FLAnimatedImage
 import SimpleImageViewer
 import MBProgressHUD
 import MobilePlayer
+import Nuke
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -43,7 +43,7 @@ class FilesListViewData {
             isLoadingMoreFiles = true
 
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
-            let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
+            let filesRequest = RoomFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {
                 case .resource(let resource):
@@ -55,7 +55,7 @@ class FilesListViewData {
         }
     }
 
-    private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
+    private func handle(result: RoomFilesResource, completion: (() -> Void)? = nil) {
         self.showing += result.count ?? 0
         self.total = result.total ?? 0
 
@@ -128,15 +128,15 @@ class FilesListViewController: BaseViewController {
     private func openRemoteImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView?) {
         guard let fileURL = file.fullFileURL() else { return }
 
-        let open: ((Data?) -> Void) = { [weak self] data in
+        let open: ((Image?) -> Void) = { [weak self] image in
             guard let strongSelf = self else { return }
 
             let configuration = ImageViewerConfiguration { config in
-                if let data = data {
+                if let image = image {
                     if file.isGif {
-                        config.animatedImage = FLAnimatedImage(gifData: data)
+                        config.animatedImage = FLAnimatedImage(gifData: image.animatedImageData)
                     } else {
-                        config.image = UIImage(data: data)
+                        config.image = image
                     }
                 }
                 config.imageView = imageView
@@ -149,9 +149,9 @@ class FilesListViewController: BaseViewController {
         }
 
         MBProgressHUD.showAdded(to: view, animated: true)
-        SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
-            open(data)
-        })
+        ImagePipeline.shared.loadImage(with: fileURL) { response, _ in
+            open(response?.image)
+        }
     }
 
     func openVideo(fromFile file: File) {

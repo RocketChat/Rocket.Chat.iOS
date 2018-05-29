@@ -8,19 +8,19 @@
 
 import UIKit
 
+protocol ChatTitleViewProtocol: class {
+    func titleViewButtonChannelDidPressed()
+    func titleViewButtonMoreDidPressed()
+}
+
 final class ChatTitleView: UIView {
 
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel! {
-        didSet {
-            labelTitle.textColor = .RCDarkGray()
-        }
-    }
+    weak var delegate: ChatTitleViewProtocol?
 
-    @IBOutlet weak var imageArrowDown: UIImageView! {
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var buttonTitle: UIButton! {
         didSet {
-            imageArrowDown.image = imageArrowDown.image?.withRenderingMode(.alwaysTemplate)
-            imageArrowDown.tintColor = .RCGray()
+            buttonTitle.titleLabel?.textColor = .RCDarkGray()
         }
     }
 
@@ -33,13 +33,24 @@ final class ChatTitleView: UIView {
     var subscription: Subscription? {
         didSet {
             guard let subscription = subscription, !subscription.isInvalidated else { return }
-
             viewModel.subscription = subscription
-            labelTitle.text = viewModel.title
-            icon.image = UIImage(named: viewModel.imageName)?.withRenderingMode(.alwaysTemplate)
-            icon.tintColor = viewModel.iconColor
+            buttonTitle.setTitle(viewModel.title, for: .normal)
+
+            let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
+            buttonTitle.setImage(image, for: .normal)
         }
     }
+
+    // MARK: IBAction
+
+    @IBAction func buttonChannelDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonChannelDidPressed()
+    }
+
+    @IBAction func buttonMoreDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonMoreDidPressed()
+    }
+
 }
 
 // MARK: Themeable

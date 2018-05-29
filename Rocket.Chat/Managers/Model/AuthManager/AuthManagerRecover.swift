@@ -71,7 +71,7 @@ extension AuthManager {
             realm.deleteAll()
 
             let auth = Auth()
-            auth.lastSubscriptionFetch = nil
+            auth.lastSubscriptionFetchWithLastMessage = nil
             auth.lastAccess = Date()
             auth.serverURL = serverURL
             auth.token = token

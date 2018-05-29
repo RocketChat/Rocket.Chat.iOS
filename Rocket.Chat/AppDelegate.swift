@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
             AuthSettingsManager.shared.updateCachedSettings()
-            WindowManager.open(.chat)
+            WindowManager.open(.subscriptions)
 
             if let user = auth.user {
                 BugTrackingCoordinator.identifyCrashReports(withUser: user)

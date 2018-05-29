@@ -90,12 +90,9 @@ class HighlightLayoutManager: NSLayoutManager {
                     emojiView.isUserInteractionEnabled = false
 
                     if let imageUrlData = attachment.contents,
-                        let imageUrlString = String(data: imageUrlData, encoding: .utf8),
-                        let imageUrl = URL(string: imageUrlString) {
-                        DispatchQueue.global(qos: .background).async {
-                            emojiView.emojiImageView.sd_setImage(with: imageUrl, completed: nil)
-                        }
-
+                            let imageUrlString = String(data: imageUrlData, encoding: .utf8),
+                            let imageUrl = URL(string: imageUrlString) {
+                        ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
                         self.customEmojiViews.append(emojiView)
                         self.addSubview(emojiView)
                     }
@@ -169,7 +166,7 @@ extension RCTextView: UITextViewDelegate {
                 return false
             }
 
-            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+            MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
         }
 
         return false

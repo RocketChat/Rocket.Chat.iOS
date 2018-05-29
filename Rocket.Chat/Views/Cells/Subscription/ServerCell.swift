@@ -45,7 +45,7 @@ final class ServerCell: UITableViewCell {
             }
 
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                imageViewServer.sd_setImage(with: imageURL)
+                ImageManager.loadImage(with: imageURL, into: imageViewServer)
             }
         }
     }

@@ -46,8 +46,8 @@ final class ReactionView: UIView {
     }
 
     func map(_ model: ReactionViewModel) {
-        if let imageUrl = model.imageUrl {
-            emojiView.emojiImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+        if let imageUrlString = model.imageUrl, let imageUrl = URL(string: imageUrlString) {
+            ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
         } else {
             emojiView.emojiLabel.text = Emojione.transform(string: model.emoji)
         }
