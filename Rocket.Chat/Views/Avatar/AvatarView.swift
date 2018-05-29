@@ -8,7 +8,6 @@
 
 import UIKit
 import FLAnimatedImage
-import SDWebImage
 
 final class AvatarView: UIView {
 
@@ -16,8 +15,7 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
-                imageView?.sd_setImage(with: imageURL, placeholderImage: avatarPlaceholder, options: options) { [weak self] (_, error, _, _) in
+                ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
                     guard error == nil else { return }
 
                     self?.labelInitials.text = ""
@@ -164,11 +162,6 @@ final class AvatarView: UIView {
 
         labelInitials?.text = initials.uppercased()
         backgroundColor = color
-    }
-
-    func removeCacheForCurrentURL(forceUpdate: Bool = false) {
-        SDImageCache.shared().removeImage(forKey: imageURL?.absoluteString, fromDisk: true)
-        if forceUpdate { updateAvatar() }
     }
 
     func prepareForReuse() {

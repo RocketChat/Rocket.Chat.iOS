@@ -47,9 +47,10 @@ class SEAvatarView: UIView, SEXibInitializable {
     }
 
     func setImageUrl(_ url: String) {
-        imageView.sd_setImage(with: URL(string: url)) { [weak self] image, _, _, _ in
-            self?.initialsLabel.isHidden = image != nil
-            self?.imageView.isHidden = image == nil
+        guard let url = URL(string: url) else { return }
+        ImageManager.loadImage(with: url, into: imageView) { [weak self] response, _ in
+            self?.initialsLabel.isHidden = response?.image != nil
+            self?.imageView.isHidden = response?.image == nil
         }
     }
 }
