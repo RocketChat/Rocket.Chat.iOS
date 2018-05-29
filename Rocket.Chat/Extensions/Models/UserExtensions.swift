@@ -24,9 +24,8 @@ extension User {
         let namePredicate = NSPredicate(format: "name CONTAINS[c] %@", word)
         let usernamePredicate = NSPredicate(format: "username CONTAINS[c] %@", word)
         let nameOrUsernamePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [namePredicate, usernamePredicate])
-        let roomMembersPredicate = NSPredicate(format: "username IN %@", preference)
         let users = (word.count > 0 ? realm.objects(User.self).filter(nameOrUsernamePredicate)
-            : realm.objects(User.self).filter(roomMembersPredicate))
+            : realm.objects(User.self))
 
         let shouldUseRealName = AuthSettingsManager.settings?.useUserRealName ?? false
         (0..<min(limit, users.count)).forEach {
