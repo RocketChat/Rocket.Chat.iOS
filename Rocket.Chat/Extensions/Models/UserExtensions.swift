@@ -21,17 +21,23 @@ extension User {
 
         var result = [(String, Any)]()
 
-        let users = (word.count > 0 ? realm.objects(User.self).filter("username CONTAINS[c] %@", word)
-            : realm.objects(User.self)).sorted(by: { user, _ in
-                guard let username = user.username else { return false }
-                return preference.contains(username)
-            })
+        let namePredicate = NSPredicate(format: "name CONTAINS[c] %@", word)
+        let usernamePredicate = NSPredicate(format: "username CONTAINS[c] %@", word)
+        let nameOrUsernamePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [namePredicate, usernamePredicate])
+        let roomMembersPredicate = NSPredicate(format: "username IN %@", preference)
+        let users = (word.count > 0 ? realm.objects(User.self).filter(nameOrUsernamePredicate)
+            : realm.objects(User.self).filter(roomMembersPredicate))
 
+        let shouldUseRealName = AuthSettingsManager.settings?.useUserRealName ?? false
         (0..<min(limit, users.count)).forEach {
-            guard let username = users[$0].username else { return }
-            result.append((username, users[$0]))
+            let titleField = shouldUseRealName ? users[$0].name : users[$0].username
+            guard let title = titleField else { return }
+            result.append((title, users[$0]))
         }
 
-        return result
+        return result.sorted(by: { rhs, _ -> Bool in
+            guard let user = rhs.1 as? User, let username = user.username else { return false }
+            return preference.contains(username)
+        })
     }
 }
