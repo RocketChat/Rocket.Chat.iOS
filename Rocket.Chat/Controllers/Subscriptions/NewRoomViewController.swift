@@ -13,7 +13,6 @@ class NewRoomViewController: BaseViewController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         title = localized("new_room.title")
         navigationItem.rightBarButtonItem?.title = localized("new_room.buttons.create")
     }
@@ -46,18 +45,6 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
-                    defaultValue: [],
-                    enabled: true
-                )
-            ]
-        ),
-        SectionForm(
-            name: localized("new_room.group.invite_users"),
-            footer: nil,
-            cells: [
-                FormCell(
-                    cell: .mentionsTextField(placeholder: localized("new_room.cell.invite_users.placeholder"), icon: #imageLiteral(resourceName: "Mention")),
-                    key: "users list",
                     defaultValue: [],
                     enabled: true
                 )
@@ -97,7 +84,6 @@ class NewRoomViewController: BaseViewController {
     override func viewDidLoad() {
         CheckTableViewCell.registerCell(for: tableView)
         TextFieldTableViewCell.registerCell(for: tableView)
-        MentionsTextFieldTableViewCell.registerCell(for: tableView)
 
         tableView.keyboardDismissMode = .interactive
 
@@ -258,14 +244,7 @@ extension NewRoomViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
-
-        if height < 0,
-            let cell = tableView.cellForRow(at: indexPath) as? MentionsTextFieldTableViewCell {
-            return cell.height()
-        }
-
-        return height
+        return CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
