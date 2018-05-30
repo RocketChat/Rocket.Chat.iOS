@@ -12,7 +12,8 @@ import RealmSwift
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var filterSeperator: UIView!
+    
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
@@ -428,3 +429,12 @@ extension SubscriptionsViewController: SocketConnectionHandler {
 
 }
 
+// MARK: Themeable
+
+extension SubscriptionsViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+        filterSeperator.backgroundColor = theme.mutedAccent
+    }
+}
