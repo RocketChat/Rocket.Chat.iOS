@@ -303,7 +303,6 @@
 		41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBF4E620BC320E0080D00D /* ServersListView.swift */; };
 		41FBF4E920BC321C0080D00D /* ServersListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41FBF4E820BC321C0080D00D /* ServersListView.xib */; };
 		41FBF4EB20BD8C650080D00D /* ServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41FBF4EA20BD8C650080D00D /* ServerCell.xib */; };
-		41FBF4ED20BD98450080D00D /* TableViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBF4EC20BD98450080D00D /* TableViewAnimation.swift */; };
 		41FC9E02209B38BE00FED485 /* AutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */; };
 		41FC9E06209B39FE00FED485 /* SubscriptionLastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC9E05209B39FE00FED485 /* SubscriptionLastMessage.swift */; };
 		41FC9E08209B3A6300FED485 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */; };
@@ -1026,7 +1025,6 @@
 		41FBF4E620BC320E0080D00D /* ServersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListView.swift; sourceTree = "<group>"; };
 		41FBF4E820BC321C0080D00D /* ServersListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServersListView.xib; sourceTree = "<group>"; };
 		41FBF4EA20BD8C650080D00D /* ServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerCell.xib; sourceTree = "<group>"; };
-		41FBF4EC20BD98450080D00D /* TableViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAnimation.swift; sourceTree = "<group>"; };
 		41FC9E05209B39FE00FED485 /* SubscriptionLastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLastMessage.swift; sourceTree = "<group>"; };
 		41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		41FC9E09209B3A9800FED485 /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
@@ -1995,7 +1993,6 @@
 				41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */,
 				41BAE3E61D71B26C00C2445A /* URLExtension.swift */,
 				8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */,
-				41FBF4EC20BD98450080D00D /* TableViewAnimation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3918,7 +3915,6 @@
 				8013F86C1FD6B59A00EE1A4E /* APIError.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				41FC9E0A209B3A9800FED485 /* MessageExtensions.swift in Sources */,
-				41FBF4ED20BD98450080D00D /* TableViewAnimation.swift in Sources */,
 				805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */,
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,

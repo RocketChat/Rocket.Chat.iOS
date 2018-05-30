@@ -12,6 +12,14 @@ final class ServersListView: UIView {
 
     lazy var serversList: [[String: String]] = DatabaseManager.servers ?? []
 
+    var viewHeight: CGFloat {
+        return CGFloat(min(serversList.count, 6)) * ServerCell.cellHeight
+    }
+
+    var initialTableViewPosition: CGFloat {
+        return (-viewHeight) - 70
+    }
+
     @IBOutlet weak var headerView: UIView!
 
     @IBOutlet weak var tableView: UITableView! {
@@ -23,9 +31,17 @@ final class ServersListView: UIView {
         }
     }
 
+    // Start the constraint with negative value (view height + headerView height) so we can
+    // animate it later when the view is presented.
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint! {
+        didSet {
+            tableViewTopConstraint.constant = initialTableViewPosition
+        }
+    }
+
     @IBOutlet weak var tableViewHeighConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewHeighConstraint.constant = CGFloat(min(serversList.count, 6)) * ServerCell.cellHeight
+            tableViewHeighConstraint.constant = viewHeight
         }
     }
 
@@ -33,9 +49,23 @@ final class ServersListView: UIView {
 
     static func showIn(_ view: UIView) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
+        instance.backgroundColor = UIColor.black.withAlphaComponent(0)
+        instance.headerView.alpha = 0
         instance.frame = view.bounds
         view.addSubview(instance)
-        instance.tableView.animate(animation: .top(duration: 0.3))
+
+        UIView.animate(withDuration: 0.2) {
+            instance.headerView.alpha = 1
+            instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            instance.tableViewTopConstraint.constant = 0
+
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+                instance.layoutIfNeeded()
+            })
+        }
 
         return instance
     }
@@ -43,8 +73,12 @@ final class ServersListView: UIView {
     // MARK: Hiding the View
 
     func close() {
-        UIView.animate(withDuration: 0.15, delay: 0.1, options: .allowUserInteraction, animations: {
-            self.alpha = 0
+        tableViewTopConstraint.constant = initialTableViewPosition
+
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            self.headerView.alpha = 0
+            self.backgroundColor = UIColor.black.withAlphaComponent(0)
+            self.layoutIfNeeded()
         }, completion: { _ in
             self.removeFromSuperview()
         })
