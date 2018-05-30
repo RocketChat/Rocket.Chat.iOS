@@ -47,3 +47,14 @@ final class SubscriptionsTitleView: UIView {
     }
 
 }
+
+// MARK: Themeable
+
+extension SubscriptionsTitleView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonServer.setTitleColor(theme.hyperlinkText, for: .normal)
+        buttonServer.tintColor = theme.hyperlinkText
+    }
+}

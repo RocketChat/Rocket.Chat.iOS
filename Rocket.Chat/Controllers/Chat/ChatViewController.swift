@@ -127,10 +127,10 @@ final class ChatViewController: SLKTextViewController {
         registerCells()
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .default
+//    }
+// TODO
     override func viewDidLoad() {
         super.viewDidLoad()
 

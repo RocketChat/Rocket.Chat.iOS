@@ -39,11 +39,11 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         setupSearchBar()
         setupTitleView()
         updateBackButton()
+
+        super.viewDidLoad()
 
         subscribeModelChanges()
 

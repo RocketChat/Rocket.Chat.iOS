@@ -49,6 +49,9 @@ final class MainSplitViewController: UISplitViewController {
         SocketManager.reconnect()
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return view.theme?.appearence.statusBarStyle ?? .default
+    }
 }
 
 // MARK: UISplitViewControllerDelegate

@@ -32,9 +32,10 @@ class Theme: NSObject {
     struct Appearence: Equatable {
         let barStyle: UIBarStyle
         let keyboardAppearence: UIKeyboardAppearance
+        let statusBarStyle: UIStatusBarStyle
 
-        static let dark = Appearence(barStyle: .black, keyboardAppearence: .dark)
-        static let light = Appearence(barStyle: .default, keyboardAppearence: .default)
+        static let dark = Appearence(barStyle: .black, keyboardAppearence: .dark, statusBarStyle: .lightContent)
+        static let light = Appearence(barStyle: .default, keyboardAppearence: .default, statusBarStyle: .default)
     }
 
     init(backgroundColor: UIColor,

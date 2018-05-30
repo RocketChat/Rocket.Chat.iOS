@@ -154,11 +154,12 @@ extension UINavigationBar {
         guard let theme = theme else { return }
         tintColor = theme.hyperlinkText
         barStyle = theme.appearence.barStyle
+        barTintColor = theme.focusedBackground
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        applyTheme()
+        view.applyTheme()
     }
 }
 
