@@ -29,7 +29,7 @@ final class ServersListViewModel {
     }
 
     internal func server(for index: Int) -> [String: String]? {
-        if serversList.count < index {
+        if serversList.count <= index {
             return nil
         }
 

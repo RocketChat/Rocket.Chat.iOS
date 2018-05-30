@@ -197,6 +197,7 @@
 		41552F661D30308C0081438D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F671D3035D80081438D /* SocketManagerSpec.swift */; };
 		4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156250720BEDCD100D20576 /* ServersListViewModel.swift */; };
+		4156250B20BEDFA500D20576 /* ServersListViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156250A20BEDFA500D20576 /* ServersListViewModelSpec.swift */; };
 		4159720C1D3DB854002258F4 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720B1D3DB854002258F4 /* Email.swift */; };
 		4159720E1D3DB882002258F4 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720D1D3DB882002258F4 /* Mention.swift */; };
 		41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */; };
@@ -904,6 +905,7 @@
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManagerSpec.swift; sourceTree = "<group>"; };
 		4156250720BEDCD100D20576 /* ServersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListViewModel.swift; sourceTree = "<group>"; };
+		4156250A20BEDFA500D20576 /* ServersListViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListViewModelSpec.swift; sourceTree = "<group>"; };
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -1764,6 +1766,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		4156250920BEDF9200D20576 /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				4156250A20BEDFA500D20576 /* ServersListViewModelSpec.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1874,6 +1884,7 @@
 			children = (
 				D3CFAFBE1E907FC100BADC0A /* Chat */,
 				140C84EA1FC9DB9600032A59 /* CreateChannel */,
+				4156250920BEDF9200D20576 /* Subscriptions */,
 				418C743F1FA3626200499577 /* UIPickerView */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
 				41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */,
@@ -4129,6 +4140,7 @@
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
 				9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */,
+				4156250B20BEDFA500D20576 /* ServersListViewModelSpec.swift in Sources */,
 				8013F87D1FD6B64500EE1A4E /* VersionSpec.swift in Sources */,
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
