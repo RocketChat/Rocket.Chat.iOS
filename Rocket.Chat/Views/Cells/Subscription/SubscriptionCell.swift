@@ -16,12 +16,13 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelReadTextColor = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
-    internal let defaultBackgroundColor = UIColor.clear
+    internal let defaultBackgroundColor = UIColor.white
     internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
     internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
     var subscription: Subscription? {
         didSet {
+            guard let subscription = subscription, !subscription.isInvalidated else { return }
             updateSubscriptionInformatin()
         }
     }
@@ -70,9 +71,8 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
-        guard let user = AuthManager.currentUser() else { return }
 
-        updateStatus()
+        updateStatus(subscription: subscription)
 
         if let user = subscription.directMessageUser {
             avatarView.subscription = nil
@@ -84,10 +84,6 @@ final class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.displayName()
         labelLastMessage.text = subscription.lastMessageText()
-
-        if subscription.displayName() == user.username {
-            labelName.text?.append(" (" + localized("subscriptions.you") + ")")
-        }
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
@@ -120,9 +116,7 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    func updateStatus() {
-        guard let subscription = self.subscription else { return }
-
+    fileprivate func updateStatus(subscription: Subscription) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true

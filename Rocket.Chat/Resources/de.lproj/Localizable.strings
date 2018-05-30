@@ -126,8 +126,12 @@
 
 // Servers
 "servers.add_new_team" = "Neues Team hinzufügen";
-"servers.action.connect" = "Verbinden";
-"servers.action.remove" = "Team entfernen";
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
 // User Menu
 "user_menu.online" = "Online";
