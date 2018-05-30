@@ -146,7 +146,7 @@
 "new_room.cell.public_channel.description.public_only" = "Você só pode criar canais públicos";
 "new_room.cell.public_channel.description.private_only" = "Você só pode criar canais privados";
 "new_room.cell.read_only.title" = "Canal somente leitura";
-"new_room.cell.read_only.description" = "Apenas usuários autorizados podem enviar novas mensagens"; // TODO
+"new_room.cell.read_only.description" = "Apenas usuários autorizados podem enviar novas mensagens";
 "new_room.group.channel.name" = "Nome do canal";
 "new_room.cell.channel_name.title" = "Nome do canal";
 "new_room.group.invite_users" = "Convidar usuários";
