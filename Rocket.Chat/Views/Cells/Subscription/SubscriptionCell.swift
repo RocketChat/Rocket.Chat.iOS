@@ -166,7 +166,7 @@ extension SubscriptionCell {
             case true:
                 self.backgroundColor = self.selectedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -183,7 +183,7 @@ extension SubscriptionCell {
             case true:
                 self.backgroundColor = self.highlightedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
