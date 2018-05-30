@@ -76,9 +76,9 @@ class Theme: NSObject {
 
     static let light = Theme(
         backgroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
-        titleText: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1),
-        bodyText: .darkGray,
-        auxiliaryText: .lightGray,
+        titleText: #colorLiteral(red: 0.05143930763, green: 0.0585193634, blue: 0.07106169313, alpha: 1),
+        bodyText: #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1),
+        auxiliaryText: #colorLiteral(red: 0.6117647059, green: 0.6352941176, blue: 0.6588235294, alpha: 1),
         hyperlinkText: .RCBlue(),
         tintColor: .black,
         focusedBackground: .RCNavigationBarColor(),
@@ -90,9 +90,9 @@ class Theme: NSObject {
 
     static let dark = Theme(
         backgroundColor: #colorLiteral(red: 0.08, green: 0.08, blue: 0.08, alpha: 1),
-        titleText: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-        bodyText: #colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1),
-        auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1),
+        titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
+        bodyText: #colorLiteral(red: 0.9111283446, green: 0.9409677543, blue: 0.9294117647, alpha: 1),
+        auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
         hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.1036974415, green: 0.1036974415, blue: 0.1036974415, alpha: 1),

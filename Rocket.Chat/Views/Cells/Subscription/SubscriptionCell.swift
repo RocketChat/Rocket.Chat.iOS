@@ -97,7 +97,6 @@ final class SubscriptionCell: UITableViewCell {
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .semibold)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .medium)
-            labelDate.textColor = .RCBlue()
 
             if subscription.unread > 0 {
                 labelUnread.alpha = 1
@@ -109,11 +108,12 @@ final class SubscriptionCell: UITableViewCell {
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .medium)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .regular)
-            labelDate.textColor = .RCGray()
 
             labelUnread.alpha = 0
             labelUnread.text =  ""
         }
+
+        applyTheme()
     }
 
     fileprivate func updateStatus(subscription: Subscription) {
@@ -191,6 +191,25 @@ extension SubscriptionCell {
             UIView.animate(withDuration: 0.18, animations: transition)
         } else {
             transition()
+        }
+    }
+}
+
+// MARK: Themeable
+
+extension SubscriptionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelName.textColor = theme.titleText
+        labelUnread.backgroundColor = theme.hyperlinkText
+        labelUnread.textColor = .white
+        labelLastMessage.textColor = theme.auxiliaryText
+
+        if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {
+            labelDate.textColor = theme.hyperlinkText
+        } else {
+            labelDate.textColor = theme.auxiliaryText
         }
     }
 }
