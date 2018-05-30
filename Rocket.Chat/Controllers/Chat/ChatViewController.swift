@@ -136,10 +136,10 @@ final class ChatViewController: SLKTextViewController {
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
-        navigationController?.navigationBar.tintColor = .RCBlue()
-
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
+//        navigationController?.navigationBar.tintColor = .RCBlue()
+// TODO
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
         }

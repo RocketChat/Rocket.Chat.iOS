@@ -15,7 +15,7 @@
         <scene sceneID="aTu-g1-T0C">
             <objects>
                 <viewController storyboardIdentifier="Subscriptions" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

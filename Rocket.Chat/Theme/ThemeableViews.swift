@@ -152,7 +152,7 @@ extension UINavigationBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.bodyText
+        tintColor = theme.hyperlinkText
         barStyle = theme.appearence.barStyle
     }
 
