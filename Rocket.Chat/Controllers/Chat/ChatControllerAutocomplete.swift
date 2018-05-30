@@ -76,7 +76,9 @@ extension ChatViewController {
         let result = searchResult[indexPath.row]
         let key = result.0
 
-        if result.1 as? Emoji == nil {
+        if let user = result.1 as? User, let username = user.username {
+            acceptAutoCompletion(with: "\(username) ", keepPrefix: true)
+        } else if result.1 as? Emoji == nil {
             acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
         } else {
             acceptAutoCompletion(with: "\(key) ", keepPrefix: false)
