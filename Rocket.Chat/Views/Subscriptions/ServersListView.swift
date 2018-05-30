@@ -10,13 +10,13 @@ import UIKit
 
 final class ServersListView: UIView {
 
-    lazy var serversList: [[String: String]] = DatabaseManager.servers ?? []
+    private lazy var serversList: [[String: String]] = DatabaseManager.servers ?? []
 
-    var viewHeight: CGFloat {
+    private var viewHeight: CGFloat {
         return CGFloat(min(serversList.count, 6)) * ServerCell.cellHeight
     }
 
-    var initialTableViewPosition: CGFloat {
+    private var initialTableViewPosition: CGFloat {
         return (-viewHeight) - 80
     }
 
@@ -26,7 +26,6 @@ final class ServersListView: UIView {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-
             tableView.register(ServerCell.nib, forCellReuseIdentifier: ServerCell.identifier)
         }
     }
@@ -45,6 +44,16 @@ final class ServersListView: UIView {
         }
     }
 
+    private func animates(_ animations: @escaping VoidCompletion, completion: VoidCompletion? = nil) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+            animations()
+        }, completion: { finished in
+            if finished {
+                completion?()
+            }
+        })
+    }
+
     // MARK: Showing the View
 
     static func showIn(_ view: UIView) -> ServersListView? {
@@ -56,7 +65,7 @@ final class ServersListView: UIView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             instance.headerViewTopConstraint.constant = 0
 
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+            instance.animates({
                 instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
                 instance.layoutIfNeeded()
             })
@@ -70,10 +79,10 @@ final class ServersListView: UIView {
     func close() {
         headerViewTopConstraint.constant = initialTableViewPosition
 
-        UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+        animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             self.layoutIfNeeded()
-        }, completion: { _ in
+        }, completion: {
             self.removeFromSuperview()
         })
     }
@@ -100,9 +109,18 @@ final class ServersListView: UIView {
     }
 
     func removeServer(at indexPath: IndexPath) {
-        var alert = Alert(title: "Disconnect from server", message: "Are you sure you want to disconnect")
+        var serverName = ""
 
-        alert.actions.append(UIAlertAction(title: "Disconnect", style: .destructive, handler: { _ in
+        if serversList.count > indexPath.row {
+            serverName = serversList[indexPath.row][ServerPersistKeys.serverName] ?? ""
+        }
+
+        var alert = Alert(
+            title: localized("servers.action.disconnect.alert.title"),
+            message: String(format: localized("servers.action.disconnect.alert.message"), serverName)
+        )
+
+        alert.actions.append(UIAlertAction(title: localized("servers.action.disconnect.alert.confirm"), style: .destructive, handler: { _ in
             API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
             DatabaseManager.removeDatabase(at: indexPath.row)
 
@@ -110,12 +128,12 @@ final class ServersListView: UIView {
             self.tableView.reloadData()
             self.tableViewHeighConstraint.constant = self.viewHeight
 
-            UIView.animate(withDuration: 0.2, animations: {
+            self.animates({
                 self.layoutIfNeeded()
             })
         }))
 
-        alert.actions.append(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.actions.append(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
         alert.present()
     }
 
@@ -156,7 +174,7 @@ extension ServersListView: UITableViewDataSource {
             return []
         }
 
-        let disconnectAction = UITableViewRowAction(style: .destructive, title: "Disconnect", handler: { (_, indexPath) in
+        let disconnectAction = UITableViewRowAction(style: .destructive, title: localized("servers.action.disconnect"), handler: { (_, indexPath) in
             self.removeServer(at: indexPath)
         })
 
