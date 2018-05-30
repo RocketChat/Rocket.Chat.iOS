@@ -125,9 +125,10 @@
 "subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
-"servers.add_new_team" = "Ajouter une équipe";
-"servers.action.connect" = "Se connecter";
-"servers.action.remove" = "Supprimer l'équipe";
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
 // User Menu
 "user_menu.online" = "En ligne";

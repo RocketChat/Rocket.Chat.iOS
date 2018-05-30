@@ -125,9 +125,10 @@
 "subscriptions.list.date.yesterday" = "Ontem";
 
 // Servers
-"servers.add_new_team" = "Adicionar novo time";
-"servers.action.connect" = "Conectar";
-"servers.action.remove" = "Remover time";
+"servers.action.disconnect" = "Desconectar";
+"servers.action.disconnect.alert.title" = "Desconectar do Servidor";
+"servers.action.disconnect.alert.message" = "Tem certeza que deseja desconectar de \"%@\"?";
+"servers.action.disconnect.alert.confirm" = "Sim, desconectar";
 
 // User Menu
 "user_menu.online" = "Disponível";
