@@ -10,6 +10,7 @@ import UIKit
 
 final class ServerCell: UITableViewCell {
 
+    static let cellHeight = CGFloat(58)
     static let identifier = "kServerCellIdentifier"
 
     @IBOutlet weak var imageViewServer: UIImageView! {
@@ -22,9 +23,9 @@ final class ServerCell: UITableViewCell {
     @IBOutlet weak var labelServerName: UILabel!
     @IBOutlet weak var labelServerDescription: UILabel!
 
-    internal let defaultBackgroundColor = UIColor.clear
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.18)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.27)
+    internal let defaultBackgroundColor = UIColor.white
+    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
+    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
     override func prepareForReuse() {
         super.prepareForReuse()
