@@ -10,15 +10,7 @@ import UIKit
 
 final class ServersListView: UIView {
 
-    private lazy var serversList: [[String: String]] = DatabaseManager.servers ?? []
-
-    private var viewHeight: CGFloat {
-        return CGFloat(min(serversList.count, 6)) * ServerCell.cellHeight
-    }
-
-    private var initialTableViewPosition: CGFloat {
-        return (-viewHeight) - 80
-    }
+    private let viewModel = ServersListViewModel()
 
     @IBOutlet weak var headerView: UIView!
 
@@ -34,13 +26,13 @@ final class ServersListView: UIView {
     // animate it later when the view is presented.
     @IBOutlet weak var headerViewTopConstraint: NSLayoutConstraint! {
         didSet {
-            headerViewTopConstraint.constant = initialTableViewPosition
+            headerViewTopConstraint.constant = viewModel.initialTableViewPosition
         }
     }
 
     @IBOutlet weak var tableViewHeighConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewHeighConstraint.constant = viewHeight
+            tableViewHeighConstraint.constant = viewModel.viewHeight
         }
     }
 
@@ -77,7 +69,7 @@ final class ServersListView: UIView {
     // MARK: Hiding the View
 
     func close() {
-        headerViewTopConstraint.constant = initialTableViewPosition
+        headerViewTopConstraint.constant = viewModel.initialTableViewPosition
 
         animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
@@ -109,11 +101,7 @@ final class ServersListView: UIView {
     }
 
     func removeServer(at indexPath: IndexPath) {
-        var serverName = ""
-
-        if serversList.count > indexPath.row {
-            serverName = serversList[indexPath.row][ServerPersistKeys.serverName] ?? ""
-        }
+        let serverName = viewModel.serverName(for: indexPath.row)
 
         var alert = Alert(
             title: localized("servers.action.disconnect.alert.title"),
@@ -124,9 +112,9 @@ final class ServersListView: UIView {
             API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
             DatabaseManager.removeDatabase(at: indexPath.row)
 
-            self.serversList = DatabaseManager.servers ?? []
+            self.viewModel.updateServersList()
             self.tableView.reloadData()
-            self.tableViewHeighConstraint.constant = self.viewHeight
+            self.tableViewHeighConstraint.constant = self.viewModel.viewHeight
 
             self.animates({
                 self.layoutIfNeeded()
@@ -144,7 +132,7 @@ final class ServersListView: UIView {
 extension ServersListView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return serversList.count
+        return viewModel.numberOfItems
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,16 +140,8 @@ extension ServersListView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if serversList.count > indexPath.row {
-            cell.server = serversList[indexPath.row]
-        }
-
-        if DatabaseManager.selectedIndex == indexPath.row {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-
+        cell.server = viewModel.server(for: indexPath.row)
+        cell.accessoryType = viewModel.isSelectedServer(indexPath.row) ? .checkmark : .none
         return cell
     }
 
@@ -170,7 +150,7 @@ extension ServersListView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if DatabaseManager.selectedIndex == indexPath.row {
+        if viewModel.isSelectedServer(indexPath.row) {
             return []
         }
 

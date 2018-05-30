@@ -196,6 +196,7 @@
 		4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153E80420504BE700FBC26B /* ReusableViewText.swift */; };
 		41552F661D30308C0081438D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F671D3035D80081438D /* SocketManagerSpec.swift */; };
+		4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156250720BEDCD100D20576 /* ServersListViewModel.swift */; };
 		4159720C1D3DB854002258F4 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720B1D3DB854002258F4 /* Email.swift */; };
 		4159720E1D3DB882002258F4 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720D1D3DB882002258F4 /* Mention.swift */; };
 		41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */; };
@@ -902,6 +903,7 @@
 		4153E80420504BE700FBC26B /* ReusableViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewText.swift; sourceTree = "<group>"; };
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManagerSpec.swift; sourceTree = "<group>"; };
+		4156250720BEDCD100D20576 /* ServersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListViewModel.swift; sourceTree = "<group>"; };
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -2125,6 +2127,7 @@
 				A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */,
 				41FBF4E620BC320E0080D00D /* ServersListView.swift */,
 				41FBF4E820BC321C0080D00D /* ServersListView.xib */,
+				4156250720BEDCD100D20576 /* ServersListViewModel.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -3832,6 +3835,7 @@
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
 				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
+				4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */,
 				8076FDB52048571200114F28 /* AuthUser.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
