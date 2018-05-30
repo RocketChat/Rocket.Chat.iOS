@@ -125,6 +125,8 @@
 "subscriptions.list.date.yesterday" = "Yesterday";
 
 // Servers
+"servers.title" = "Servers";
+"servers.add_new_server" = "Add Server";
 "servers.action.disconnect" = "Disconnect";
 "servers.action.disconnect.alert.title" = "Disconnect from Server";
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?";

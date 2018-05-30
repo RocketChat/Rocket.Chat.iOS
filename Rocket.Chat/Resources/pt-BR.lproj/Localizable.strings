@@ -125,6 +125,8 @@
 "subscriptions.list.date.yesterday" = "Ontem";
 
 // Servers
+"servers.title" = "Servidores";
+"servers.add_new_server" = "Adicionar Servidor";
 "servers.action.disconnect" = "Desconectar";
 "servers.action.disconnect.alert.title" = "Desconectar do Servidor";
 "servers.action.disconnect.alert.message" = "Tem certeza que deseja desconectar de \"%@\"?";

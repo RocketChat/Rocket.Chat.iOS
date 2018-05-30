@@ -125,6 +125,8 @@
 "subscriptions.list.date.yesterday" = "Gestern";
 
 // Servers
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
 "servers.action.disconnect" = "Disconnect"; //TODO
 "servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO

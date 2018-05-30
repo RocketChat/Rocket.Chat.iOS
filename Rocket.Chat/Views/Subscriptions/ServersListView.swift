@@ -12,6 +12,18 @@ final class ServersListView: UIView {
 
     private let viewModel = ServersListViewModel()
 
+    @IBOutlet weak var labelTitle: UILabel! {
+        didSet {
+            labelTitle.text = viewModel.title
+        }
+    }
+
+    @IBOutlet weak var buttonAddNewServer: UIButton! {
+        didSet {
+            buttonAddNewServer.setTitle(viewModel.addNewServer, for: .normal)
+        }
+    }
+
     @IBOutlet weak var headerView: UIView!
 
     @IBOutlet weak var tableView: UITableView! {
