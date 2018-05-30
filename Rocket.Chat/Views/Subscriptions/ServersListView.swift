@@ -106,10 +106,23 @@ final class ServersListView: UIView {
     }
 
     func removeServer(at indexPath: IndexPath) {
-        API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
-        DatabaseManager.removeDatabase(at: indexPath.row)
-        serversList = DatabaseManager.servers ?? []
-        tableView.reloadData()
+        var alert = Alert(title: "Disconnect from server", message: "Are you sure you want to disconnect")
+
+        alert.actions.append(UIAlertAction(title: "Disconnect", style: .destructive, handler: { _ in
+            API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
+            DatabaseManager.removeDatabase(at: indexPath.row)
+
+            self.serversList = DatabaseManager.servers ?? []
+            self.tableView.reloadData()
+            self.tableViewHeighConstraint.constant = self.viewHeight
+
+            UIView.animate(withDuration: 0.2, animations: {
+                self.layoutIfNeeded()
+            })
+        }))
+
+        alert.actions.append(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.present()
     }
 
 }
@@ -142,6 +155,18 @@ extension ServersListView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ServerCell.cellHeight
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if DatabaseManager.selectedIndex == indexPath.row {
+            return []
+        }
+
+        let disconnectAction = UITableViewRowAction(style: .destructive, title: "Disconnect", handler: { (_, indexPath) in
+            self.removeServer(at: indexPath)
+        })
+
+        return [disconnectAction]
     }
 
 }

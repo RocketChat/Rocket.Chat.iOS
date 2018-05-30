@@ -151,7 +151,7 @@ struct DatabaseManager {
         servers.append([
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.serverURL: serverURL
-            ])
+        ])
 
         let index = servers.count - 1
         defaults.set(servers, forKey: ServerPersistKeys.servers)
