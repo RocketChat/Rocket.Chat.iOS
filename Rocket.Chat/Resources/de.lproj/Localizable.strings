@@ -149,7 +149,6 @@
 "new_room.cell.read_only.description" = "Nur Moderatoren oder Administratoren können in schreibgeschützten Kanälen schreiben";
 "new_room.group.channel.name" = "Name des Kanals";
 "new_room.cell.channel_name.title" = "Name des Kanals";
-"new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
 "new_room.group.invite_users" = "Benutzer einladen";
 "new_room.cell.invite_users.placeholder" = "Benutzernamen";
 

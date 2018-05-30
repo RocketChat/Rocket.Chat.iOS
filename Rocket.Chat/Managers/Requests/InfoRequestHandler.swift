@@ -39,6 +39,7 @@ class InfoRequestHandler: NSObject {
     func alert(for error: APIError) {
         switch error {
         case .notSecured: Alert(key: "alert.connection.not_secured").present()
+        case .error(let error): Alert(title: localized("global.error"), message: error.localizedDescription).present()
         default: alertInvalidURL()
         }
     }
@@ -49,6 +50,7 @@ class InfoRequestHandler: NSObject {
 
     internal func validateServerResponse(result: InfoResource?) {
         guard let version = result?.version else {
+            alertInvalidURL()
             delegate?.urlNotValid()
             return
         }
