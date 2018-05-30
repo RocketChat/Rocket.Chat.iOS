@@ -19,6 +19,9 @@ extension Subscription {
         }
 
         var text = MessageTextCacheManager.shared.message(for: lastMessage)?.string ?? lastMessage.text
+        text = text.components(separatedBy: .newlines)
+            .joined(separator: " ")
+            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
 
         let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
         let isOnlyAttachment = text.count == 0 && lastMessage.attachments.count > 0
