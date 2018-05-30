@@ -41,7 +41,7 @@ class NewRoomViewController: BaseViewController {
         ),
         SectionForm(
             name: localized("new_room.group.channel.name"),
-            footer: localized("new_room.group.channel.footer"),
+            footer: nil,
             cells: [
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
