@@ -68,6 +68,8 @@ final class SubscriptionsViewController: BaseViewController {
         updateData()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +98,8 @@ final class SubscriptionsViewController: BaseViewController {
 
         assigned = true
 
-        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
+        let managedSubscriptions = auth.subscriptions.sortedByLastMessageDate()
+        subscriptionsToken = managedSubscriptions.observe(handleSubscriptionUpdates)
     }
 
     // MARK: Setup Views
@@ -227,6 +230,15 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
     }
 
+    func updateSubscriptionsToShow() {
+        switch searchState {
+        case .notSearching:
+            updateAll()
+        case .searchingLocally, .searchingRemotely:
+            updateSearched()
+        }
+    }
+
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
@@ -241,6 +253,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
 
         self.updateBackButton()
+
+        updateSubscriptionsToShow()
 
         // If the list were empty, let's just refresh everything.
         if visibleRows.count == 0 {
