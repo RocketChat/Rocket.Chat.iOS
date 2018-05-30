@@ -48,34 +48,31 @@ final class SubscriptionsViewController: BaseViewController {
 
     let socketHandlerToken = String.random(5)
 
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupSearchBar()
         setupTitleView()
         updateBackButton()
-
-        subscribeModelChanges()
-
-        updateData()
-
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        subscribeModelChanges()
         updateData()
+        tableView.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        subscriptionsToken?.invalidate()
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     // MARK: Storyboard Segues
