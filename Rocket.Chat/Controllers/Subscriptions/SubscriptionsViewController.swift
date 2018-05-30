@@ -11,12 +11,8 @@ import RealmSwift
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var headerViewSeparatorHeightConstraint: NSLayoutConstraint! {
-        didSet {
-            headerViewSeparatorHeightConstraint.constant = 0.5
-        }
-    }
 
+    weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
@@ -135,7 +131,7 @@ final class SubscriptionsViewController: BaseViewController {
             titleView.addGestureRecognizer(tapGesture)
 
             titleView.delegate = self
-            titleView.updateServerName(name: AuthSettingsManager.settings?.serverName)
+            updateServerInformation()
         }
     }
 
@@ -265,7 +261,17 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateServerInformation() {
-        titleView?.updateServerName(name: AuthSettingsManager.settings?.serverName)
+        if let serverName = AuthSettingsManager.settings?.serverName {
+            titleView?.updateServerName(name: serverName)
+        } else if let serverURL = AuthManager.isAuthenticated()?.serverURL {
+            if let host = URL(string: serverURL)?.host {
+                titleView?.updateServerName(name: host)
+            } else {
+                titleView?.updateServerName(name: serverURL)
+            }
+        } else {
+            titleView?.updateServerName(name: "Rocket.Chat")
+        }
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {
@@ -278,14 +284,16 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         return nil
     }
 
-    func imageViewServerDidTapped(gesture: UIGestureRecognizer) {
-        SubscriptionsPageViewController.shared?.showServersList()
-    }
-
     // MARK: IBAction
 
     @objc func openServersList() {
-        performSegue(withIdentifier: "Servers", sender: nil)
+        if let serversView = self.serversView {
+            titleView?.updateTitleImage(reverse: false)
+            serversView.close()
+        } else {
+            titleView?.updateTitleImage(reverse: true)
+            serversView = ServersListView.showIn(self.view)
+        }
     }
 
 }

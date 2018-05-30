@@ -34,13 +34,13 @@ class UserExtensionsSpec: XCTestCase, RealmTestCase {
         }
 
         var users = User.search(usernameContaining: "test_", preference: [], limit: 5, realm: realm)
-        XCTAssert(users.count == 5)
+        XCTAssertEqual(users.count, 5)
 
         users = User.search(usernameContaining: "test_", preference: [], limit: 20, realm: realm)
-        XCTAssert(users.count == 10)
+        XCTAssertEqual(users.count, 10)
 
         users = User.search(usernameContaining: "_", preference: ["testpreference_1", "testpreference_2"], limit: 2, realm: realm)
-        XCTAssert(users.contains(where: { $0.0 == "testpreference_1" }))
-        XCTAssert(users.contains(where: { $0.0 == "testpreference_2" }))
+        XCTAssertTrue(users.contains(where: { $0.0 == "testpreference_1" }))
+        XCTAssertTrue(users.contains(where: { $0.0 == "testpreference_2" }))
     }
 }
