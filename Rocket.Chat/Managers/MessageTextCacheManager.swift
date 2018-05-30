@@ -44,14 +44,14 @@ final class MessageTextCacheManager {
             text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
-        let mentions = Array(message.mentions.compactMap { $0.username })
+        let mentions = Array(message.mentions.compactMap { $0 })
         let channels = Array(message.channels.compactMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
         let attributedString = text.transformMarkdown()
         let finalText = NSMutableAttributedString(attributedString: attributedString)
         finalText.trimCharacters(in: .whitespaces)
-        finalText.highlightMentions(mentions, username: username)
+        finalText.highlightMentions(mentions, currentUsername: username)
         finalText.highlightChannels(channels)
 
         cache.setObject(finalText, forKey: key)

@@ -89,6 +89,11 @@ extension String {
         return NSString(string: self).removingPercentEncoding
     }
 
+    func replacingFirstOccurrence(of string: String, with replacement: String) -> String {
+        guard let range = self.range(of: string) else { return self }
+        return replacingCharacters(in: range, with: replacement)
+    }
+
     func commandAndParams() -> (command: String, params: String)? {
         guard self.first == "/" && self.count > 1 else { return nil }
 

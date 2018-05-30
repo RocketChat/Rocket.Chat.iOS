@@ -95,32 +95,44 @@ extension NSMutableAttributedString {
         return MarkdownManager.shared.transformAttributedString(self)
     }
 
-    func highlightMentions(_ mentions: [String], username: String?) {
+    func highlightMentions(_ mentions: [Mention], currentUsername: String?) {
         var handledHighlights: [String] = []
 
         mentions.forEach { mention in
-            if !handledHighlights.contains(mention) {
-                handledHighlights.append(mention)
+            let shouldUseRealName = AuthSettingsManager.shared.settings?.useUserRealName ?? false
+            let realName = mention.realName ?? ""
+            let username = mention.username ?? ""
+
+            if !handledHighlights.contains(username) {
+                handledHighlights.append(username)
 
                 let background: UIColor
                 let font: UIColor
-                if mention == username {
+                if username == currentUsername {
                     background = .primaryAction
                     font = .white
-                } else if mention == "all" || mention == "here" {
+
+                    if shouldUseRealName {
+                        mutableString.setString(string.replacingFirstOccurrence(of: username, with: realName))
+                    }
+                } else if username == "all" || username == "here" {
                     background = .attention
                     font = .white
                 } else {
                     background = .white
                     font = .link
+
+                    if shouldUseRealName && !realName.isEmpty {
+                        mutableString.setString(string.replacingFirstOccurrence(of: username, with: realName))
+                    }
                 }
 
-                let ranges = string.ranges(of: "@\(mention)")
+                let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
 
-                    if mention != "all" && mention != "here" && mention != username {
-                        setMention(mention, range: range)
+                    if username != "all" && username != "here" && username != currentUsername {
+                        setMention(username, range: range)
                     }
 
                     setBackgroundColor(background, range: range)
