@@ -17,7 +17,7 @@ final class ServersListView: UIView {
     }
 
     var initialTableViewPosition: CGFloat {
-        return (-viewHeight) - 70
+        return (-viewHeight) - 80
     }
 
     @IBOutlet weak var headerView: UIView!
@@ -33,9 +33,9 @@ final class ServersListView: UIView {
 
     // Start the constraint with negative value (view height + headerView height) so we can
     // animate it later when the view is presented.
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var headerViewTopConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewTopConstraint.constant = initialTableViewPosition
+            headerViewTopConstraint.constant = initialTableViewPosition
         }
     }
 
@@ -50,19 +50,14 @@ final class ServersListView: UIView {
     static func showIn(_ view: UIView) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
         instance.backgroundColor = UIColor.black.withAlphaComponent(0)
-        instance.headerView.alpha = 0
         instance.frame = view.bounds
         view.addSubview(instance)
 
-        UIView.animate(withDuration: 0.2) {
-            instance.headerView.alpha = 1
-            instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        }
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            instance.tableViewTopConstraint.constant = 0
+            instance.headerViewTopConstraint.constant = 0
 
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+                instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
                 instance.layoutIfNeeded()
             })
         }
@@ -73,10 +68,9 @@ final class ServersListView: UIView {
     // MARK: Hiding the View
 
     func close() {
-        tableViewTopConstraint.constant = initialTableViewPosition
+        headerViewTopConstraint.constant = initialTableViewPosition
 
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
-            self.headerView.alpha = 0
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             self.layoutIfNeeded()
         }, completion: { _ in

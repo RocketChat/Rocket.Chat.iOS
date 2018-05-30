@@ -84,9 +84,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="headerView" destination="bvu-bb-Zp7" id="j1T-xb-LzJ"/>
+                <outlet property="headerViewTopConstraint" destination="6hk-0Q-G36" id="gsk-7i-xjd"/>
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
-                <outlet property="tableViewTopConstraint" destination="w1v-1D-feW" id="VMf-KF-pFG"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="96.5"/>
         </view>
