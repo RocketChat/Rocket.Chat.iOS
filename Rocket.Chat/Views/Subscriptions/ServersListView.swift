@@ -25,7 +25,7 @@ final class ServersListView: UIView {
 
     @IBOutlet weak var tableViewHeighConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewHeighConstraint.constant = CGFloat(min(serversList.count, 4)) * ServerCell.cellHeight
+            tableViewHeighConstraint.constant = CGFloat(min(serversList.count, 6)) * ServerCell.cellHeight
         }
     }
 
