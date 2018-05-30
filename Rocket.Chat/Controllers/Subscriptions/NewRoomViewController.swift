@@ -125,21 +125,15 @@ class NewRoomViewController: BaseViewController {
         guard
             let roomName = setValues["room name"] as? String,
             let publicRoom = setValues["public room"] as? Bool,
-            let membersRoom = setValues["users list"] as? [String],
             let readOnlyRoom = setValues["read only room"] as? Bool
         else {
             return
         }
 
-        let roomType: RoomCreateType
-        if publicRoom {
-            roomType = .channel
-        } else {
-            roomType = .group
-        }
-
         sender.isEnabled = false
-        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: membersRoom, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
+
+        let roomType: RoomCreateType = publicRoom ? .channel : .group
+        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: [], readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
             if success {
                 self?.dismiss(animated: true, completion: nil)
             } else {
