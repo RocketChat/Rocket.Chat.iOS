@@ -11,7 +11,7 @@ import Foundation
 final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
 
     static let identifier = "kTextFieldTableViewCell"
-    static let defaultHeight: Float = 44.0
+    static let defaultHeight: Float = 50.0
 
     weak var delegate: FormTableViewDelegate?
     var key: String?

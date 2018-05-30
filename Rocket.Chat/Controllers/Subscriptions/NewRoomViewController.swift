@@ -79,13 +79,21 @@ class NewRoomViewController: BaseViewController {
         }
     }()
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.keyboardDismissMode = .interactive
+
+            CheckTableViewCell.registerCell(for: tableView)
+            TextFieldTableViewCell.registerCell(for: tableView)
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
-        CheckTableViewCell.registerCell(for: tableView)
-        TextFieldTableViewCell.registerCell(for: tableView)
-
-        tableView.keyboardDismissMode = .interactive
+        super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -102,10 +110,6 @@ class NewRoomViewController: BaseViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
     fileprivate func showErrorAlert(_ errorMessage: String?) {
@@ -146,7 +150,6 @@ class NewRoomViewController: BaseViewController {
     }
 
     fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
-
         let request = RoomCreateRequest(
             name: roomName,
             type: roomType,
@@ -272,6 +275,7 @@ extension NewRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData[section].cells.count
     }
+
 }
 
 // MARK: Update cell position when the keyboard will show/hide

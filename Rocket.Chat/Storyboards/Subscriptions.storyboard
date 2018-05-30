@@ -381,13 +381,13 @@
             </objects>
             <point key="canvasLocation" x="2020" y="-334"/>
         </scene>
-        <!--New Channel-->
+        <!--New Room-->
         <scene sceneID="yX3-Oa-Zdf">
             <objects>
-                <viewControllerPlaceholder storyboardName="New Channel" id="Yv3-wP-OPQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="New Room" id="Yv3-wP-OPQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUE-tQ-REW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="369"/>
+            <point key="canvasLocation" x="1128" y="368"/>
         </scene>
     </scenes>
     <resources>

@@ -261,7 +261,7 @@
 		41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C45AEE1DFAD42800D9969C /* ChatDataController.swift */; };
 		41C955FA20A3931C00FC8314 /* ChatMessageActionButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F3705320A3917D00C5449E /* ChatMessageActionButtonsView.xib */; };
 		41C955FC20A3937A00FC8314 /* ChatMessageActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */; };
-		41CD52D520BEFA3B00336892 /* New Channel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41CD52D420BEFA3B00336892 /* New Channel.storyboard */; };
+		41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41CD52D420BEFA3B00336892 /* New Room.storyboard */; };
 		41D0DA5820991BAE008649E7 /* UploadMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */; };
 		41D51B0620A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
 		41D51B0720A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
@@ -970,7 +970,7 @@
 		41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageActionButtonsView.swift; sourceTree = "<group>"; };
 		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLoaderCell.xib; sourceTree = "<group>"; };
 		41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoaderCell.swift; sourceTree = "<group>"; };
-		41CD52D420BEFA3B00336892 /* New Channel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "New Channel.storyboard"; sourceTree = "<group>"; };
+		41CD52D420BEFA3B00336892 /* New Room.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "New Room.storyboard"; sourceTree = "<group>"; };
 		41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageDaySeparator.xib; sourceTree = "<group>"; };
 		41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageDaySeparator.swift; sourceTree = "<group>"; };
 		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -1897,7 +1897,7 @@
 				41E2F9FE1D414DE800238DFD /* Chat.storyboard */,
 				140A95E0202F526C003FD564 /* Drawing.storyboard */,
 				41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */,
-				41CD52D420BEFA3B00336892 /* New Channel.storyboard */,
+				41CD52D420BEFA3B00336892 /* New Room.storyboard */,
 				4102E3A91E532323004BAA82 /* Preferences.storyboard */,
 				41E2FA001D414EA100238DFD /* Subscriptions.storyboard */,
 			);
@@ -3413,7 +3413,7 @@
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
 				333032A02073940800A9514D /* RCEmojiKit.strings in Resources */,
-				41CD52D520BEFA3B00336892 /* New Channel.storyboard in Resources */,
+				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4124FCC81F7A6BF5008ED4C3 /* ChannelInfoUserCell.xib in Resources */,
