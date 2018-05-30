@@ -125,6 +125,7 @@
 "subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
+"servers.add_new_team" = "Agregar nuevo equipo";
 "servers.title" = "Servers"; //TODO
 "servers.add_new_server" = "Add Server"; //TODO
 "servers.action.disconnect" = "Disconnect"; //TODO
