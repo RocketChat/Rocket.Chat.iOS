@@ -9,6 +9,11 @@
 import RealmSwift
 
 final class SubscriptionsViewController: BaseViewController {
+    enum SearchState {
+        case searchingLocally
+        case searchingRemotely
+        case notSearching
+    }
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -18,20 +23,30 @@ final class SubscriptionsViewController: BaseViewController {
     weak var searchBar: UISearchBar?
 
     var assigned = false
-    var isSearchingLocally = false
-    var isSearchingRemotely = false
+    var searchState: SearchState = .notSearching
     var searchResult: [Subscription]?
-    var subscriptions: Results<Subscription>?
+    var subscriptions: [Subscription]?
     var subscriptionsToken: NotificationToken?
     var currentUserToken: NotificationToken?
+
+    var subscriptionsToShow: [Subscription] {
+        switch searchState {
+        case .searchingLocally:
+            return searchResult ?? []
+        case .searchingRemotely:
+            return searchResult ?? []
+        case .notSearching:
+            if let subscriptions = subscriptions {
+                return Array(subscriptions)
+            } else {
+                return []
+            }
+        }
+    }
 
     var searchText: String = ""
 
     let socketHandlerToken = String.random(5)
-
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +54,25 @@ final class SubscriptionsViewController: BaseViewController {
         setupSearchBar()
         setupTitleView()
         updateBackButton()
-
-        subscribeModelChanges()
-
-        updateData()
-
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        subscribeModelChanges()
         updateData()
+        tableView.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        subscriptionsToken?.invalidate()
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     // MARK: Storyboard Segues
@@ -70,12 +88,11 @@ final class SubscriptionsViewController: BaseViewController {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.current else { return }
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sortedByLastMessageDate()
-        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+        let managedSubscriptions = auth.subscriptions.sortedByLastMessageDate()
+        subscriptionsToken = managedSubscriptions.observe(handleSubscriptionUpdates)
     }
 
     // MARK: Setup Views
@@ -160,12 +177,11 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: text)
+        subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
         searchText = text
 
         if text.count == 0 {
-            isSearchingLocally = false
-            isSearchingRemotely = false
+            searchState = .notSearching
             searchResult = []
 
             updateAll()
@@ -180,8 +196,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             return
         }
 
-        isSearchingLocally = true
-        isSearchingRemotely = false
+        searchState = .searchingLocally
+        searchResult = subscriptions
 
         tableView.reloadData()
 
@@ -201,26 +217,37 @@ extension SubscriptionsViewController: UISearchBarDelegate {
                 return
             }
 
-            self?.isSearchingRemotely = true
+            self?.searchState = .searchingRemotely
             self?.searchResult = result
             self?.tableView.reloadData()
         }
     }
 
+    func updateSubscriptionsToShow() {
+        switch searchState {
+        case .notSearching:
+            updateAll()
+        case .searchingLocally, .searchingRemotely:
+            updateSearched()
+        }
+    }
+
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastMessageDate()
+        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
     }
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText)
+        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText))
     }
 
     func updateSubscriptionsList() {
         let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
 
         self.updateBackButton()
+
+        updateSubscriptionsToShow()
 
         // If the list were empty, let's just refresh everything.
         if visibleRows.count == 0 {
@@ -249,7 +276,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateData() {
-        guard !isSearchingLocally && !isSearchingRemotely else { return }
+        guard case .notSearching = searchState else { return }
 
         updateAll()
         updateServerInformation()
@@ -275,10 +302,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {
-        guard let subscriptions = subscriptions else { return nil }
-
-        if subscriptions.count > indexPath.row {
-            return Array(subscriptions)[indexPath.row]
+        if subscriptionsToShow.count > indexPath.row {
+            return subscriptionsToShow[indexPath.row]
         }
 
         return nil
@@ -313,7 +338,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subscriptions?.count ?? 0
+        return subscriptionsToShow.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -426,4 +451,3 @@ extension SubscriptionsViewController: SocketConnectionHandler {
     }
 
 }
-
