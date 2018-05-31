@@ -17,6 +17,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
@@ -310,6 +311,14 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     // MARK: IBAction
+
+    @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+        if let sortingView = self.sortingView {
+            sortingView.close()
+        } else {
+            sortingView = SubscriptionsSortingView.showIn(self.view)
+        }
+    }
 
     @objc func openServersList() {
         if let serversView = self.serversView {
