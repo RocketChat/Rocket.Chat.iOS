@@ -17,7 +17,7 @@ final class ChatTitleView: UIView {
 
     weak var delegate: ChatTitleViewProtocol?
 
-    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var buttonMore: UIButton!
     @IBOutlet weak var buttonTitle: UIButton! {
         didSet {
             buttonTitle.titleLabel?.textColor = .RCDarkGray()
@@ -59,7 +59,8 @@ extension ChatTitleView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-//        labelTitle.textColor = theme.titleText
+        buttonMore.tintColor = theme.titleText
+        buttonTitle.setTitleColor(theme.titleText, for: .normal)
         // TODO
     }
 }
