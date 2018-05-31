@@ -184,3 +184,14 @@ extension ServersListView: UITableViewDelegate {
     }
 
 }
+
+// MARK: Themeable
+
+extension ServersListView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonAddNewServer.setTitleColor(theme.hyperlinkText, for: .normal)
+        labelTitle.textColor = theme.auxiliaryText
+    }
+}

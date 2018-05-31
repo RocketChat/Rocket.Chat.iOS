@@ -194,6 +194,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="filterSeperator" destination="n9G-xO-EGZ" id="bGO-bT-EIL"/>
+                        <outlet property="sortDescriptionLabel" destination="4ch-xw-I4W" id="FsJ-HB-bWL"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                     </connections>
                 </viewController>

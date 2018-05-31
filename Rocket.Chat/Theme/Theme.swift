@@ -62,7 +62,7 @@ class Theme: NSObject {
         if let mutedAccent = mutedAccent {
             self.mutedAccent = mutedAccent
         } else {
-            self.mutedAccent = #colorLiteral(red: 0.491, green: 0.4938107133, blue: 0.500592351, alpha: 0.2993471747)
+            self.mutedAccent = #colorLiteral(red: 0.491, green: 0.4938107133, blue: 0.500592351, alpha: 0.3967091182)
         }
 
         if let strongAccent = strongAccent {

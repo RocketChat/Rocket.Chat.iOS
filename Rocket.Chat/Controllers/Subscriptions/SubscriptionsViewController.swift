@@ -13,7 +13,8 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var filterSeperator: UIView!
-    
+    @IBOutlet weak var sortDescriptionLabel: UILabel!
+
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
@@ -295,6 +296,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(self.view)
+            serversView?.applyTheme()
         }
     }
 
@@ -436,5 +438,12 @@ extension SubscriptionsViewController {
         super.applyTheme()
         guard let theme = view.theme else { return }
         filterSeperator.backgroundColor = theme.mutedAccent
+        sortDescriptionLabel.textColor = theme.auxiliaryText
+
+        if serversView != nil {
+            titleView?.updateTitleImage(reverse: true)
+        } else {
+            titleView?.updateTitleImage(reverse: false)
+        }
     }
 }
