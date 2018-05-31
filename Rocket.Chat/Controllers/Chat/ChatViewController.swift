@@ -180,6 +180,7 @@ final class ChatViewController: SLKTextViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         ThemeManager.addObserver(navigationController?.navigationBar)
+        textInputbar.applyTheme()
     }
 
     override func viewWillLayoutSubviews() {
@@ -1152,7 +1153,7 @@ extension ChatViewController {
 
     private func blockMessageSending(reason: String) {
         textInputbar.textView.placeholder = reason
-        textInputbar.backgroundColor = .white
+        textInputbar.backgroundColor = view.theme?.backgroundColor ?? .white
         textInputbar.isUserInteractionEnabled = false
         leftButton.isEnabled = false
         rightButton.isEnabled = false
@@ -1160,7 +1161,7 @@ extension ChatViewController {
 
     private func allowMessageSending() {
         textInputbar.textView.placeholder = ""
-        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.backgroundColor = view.theme?.focusedBackground ?? .backgroundWhite
         textInputbar.isUserInteractionEnabled = true
         leftButton.isEnabled = true
         rightButton.isEnabled = true
@@ -1217,11 +1218,9 @@ extension ChatViewController: SocketConnectionHandler {
 
 // MARK: Themeable
 
-//extension ChatViewController {
-//    override func applyTheme() {
-//        super.applyTheme()
-//        guard let theme = view.theme else { return }
-//        splitViewController?.detailViewController?.navigationController?.navigationBar.applyTheme()
-//        splitViewController?.detailViewController?.navigationController?.navigationBar.barTintColor = theme.focusedBackground
-//    }
-//}
+extension ChatViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        updateMessageSendingPermission()
+    }
+}

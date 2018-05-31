@@ -170,7 +170,7 @@ extension UIToolbar {
         guard let theme = theme else { return }
         isTranslucent = false
         barTintColor = theme.focusedBackground
-        tintColor = theme.tintColor
+        tintColor = theme.hyperlinkText
         barStyle = theme.appearence.barStyle
     }
 
@@ -185,7 +185,7 @@ extension UITabBar {
         super.applyTheme()
         guard let theme = theme else { return }
         barTintColor = theme.focusedBackground
-        tintColor = theme.tintColor
+        tintColor = theme.hyperlinkText
         barStyle = theme.appearence.barStyle
     }
 
