@@ -140,6 +140,7 @@ final class SubscriptionsViewController: BaseViewController {
         self.searchController = searchController
         self.searchBar?.placeholder = localized("subscriptions.search")
         self.searchBar?.delegate = self
+        self.searchBar?.applyTheme()
     }
 
     func setupTitleView() {
