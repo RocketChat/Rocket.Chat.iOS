@@ -222,6 +222,7 @@ final class ChatViewController: SLKTextViewController {
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
+        chatTitleView?.applyTheme()
     }
 
     private func setupScrollToBottomButton() {
