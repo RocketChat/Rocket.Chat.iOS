@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class NewRoomViewController: BaseViewController {
+final class NewRoomViewController: BaseViewController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
