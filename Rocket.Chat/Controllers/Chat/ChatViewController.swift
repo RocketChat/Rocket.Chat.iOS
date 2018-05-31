@@ -127,19 +127,11 @@ final class ChatViewController: SLKTextViewController {
         registerCells()
     }
 
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .default
-//    }
-// TODO
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
-//        navigationController?.navigationBar.tintColor = .RCBlue()
-// TODO
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
         }
@@ -187,6 +179,7 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        ThemeManager.addObserver(navigationController?.navigationBar)
     }
 
     override func viewWillLayoutSubviews() {
@@ -228,7 +221,6 @@ final class ChatViewController: SLKTextViewController {
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
-        ThemeManager.addObserver(chatTitleView)
     }
 
     private func setupScrollToBottomButton() {
@@ -1225,10 +1217,11 @@ extension ChatViewController: SocketConnectionHandler {
 
 // MARK: Themeable
 
-extension ChatViewController {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = view.theme else { return }
-        navigationController?.navigationBar.barTintColor = theme.focusedBackground
-    }
-}
+//extension ChatViewController {
+//    override func applyTheme() {
+//        super.applyTheme()
+//        guard let theme = view.theme else { return }
+//        splitViewController?.detailViewController?.navigationController?.navigationBar.applyTheme()
+//        splitViewController?.detailViewController?.navigationController?.navigationBar.barTintColor = theme.focusedBackground
+//    }
+//}
