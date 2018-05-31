@@ -61,6 +61,5 @@ extension ChatTitleView {
         guard let theme = theme else { return }
         buttonMore.tintColor = theme.titleText
         buttonTitle.setTitleColor(theme.titleText, for: .normal)
-        // TODO
     }
 }
