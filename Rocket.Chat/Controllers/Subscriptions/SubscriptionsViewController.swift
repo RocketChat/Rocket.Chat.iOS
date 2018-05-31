@@ -61,7 +61,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ThemeManager.addObserver(navigationController)
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -466,6 +465,7 @@ extension SubscriptionsViewController {
         guard let theme = view.theme else { return }
         filterSeperator.backgroundColor = theme.mutedAccent
         sortDescriptionLabel.textColor = theme.auxiliaryText
+        navigationController?.view.backgroundColor = view.theme?.backgroundColor
 
         if serversView != nil {
             titleView?.updateTitleImage(reverse: true)

@@ -51,7 +51,9 @@ extension ThemePreferenceController {
 extension ThemePreferenceController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedTheme = viewModel.themes[indexPath.row].theme
-        ThemeManager.theme = selectedTheme
+        if ThemeManager.theme != selectedTheme {
+            ThemeManager.theme = selectedTheme
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
