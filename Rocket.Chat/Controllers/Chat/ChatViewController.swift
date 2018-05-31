@@ -227,6 +227,8 @@ final class ChatViewController: SLKTextViewController {
     private func setupScrollToBottomButton() {
         buttonScrollToBottom.layer.cornerRadius = 25
         buttonScrollToBottom.layer.borderWidth = 1
+        buttonScrollToBottom.layer.borderColor = (view.theme?.bodyText ?? Theme.light.bodyText).cgColor
+        buttonScrollToBottom.tintColor = view.theme?.bodyText ?? Theme.light.bodyText
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -1222,5 +1224,6 @@ extension ChatViewController {
     override func applyTheme() {
         super.applyTheme()
         updateMessageSendingPermission()
+        setupScrollToBottomButton()
     }
 }
