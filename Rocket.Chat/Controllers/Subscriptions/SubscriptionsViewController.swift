@@ -61,6 +61,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ThemeManager.addObserver(navigationController)
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
