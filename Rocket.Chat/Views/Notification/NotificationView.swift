@@ -13,6 +13,12 @@ class NotificationView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
 
+    @IBOutlet weak var grabber: UIView! {
+        didSet {
+            grabber.layer.cornerRadius = grabber.frame.height / 2
+        }
+    }
+
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
@@ -26,14 +32,13 @@ class NotificationView: UIView {
 
     weak var avatarView: AvatarView! {
         didSet {
-            avatarView.layer.cornerRadius = 4
+            avatarView.layer.cornerRadius = 2
             avatarView.layer.masksToBounds = true
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 12
         self.clipsToBounds = true
     }
 
