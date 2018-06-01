@@ -466,6 +466,7 @@ extension SubscriptionsViewController {
         filterSeperator.backgroundColor = theme.mutedAccent
         sortDescriptionLabel.textColor = theme.auxiliaryText
         navigationController?.view.backgroundColor = view.theme?.backgroundColor
+        searchBar?.applyTheme()
 
         if serversView != nil {
             titleView?.updateTitleImage(reverse: true)
