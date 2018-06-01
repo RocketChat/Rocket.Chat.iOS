@@ -42,6 +42,8 @@ final class MainSplitViewController: UISplitViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        ThemeManager.addObserver(self)
+
         delegate = self
         preferredDisplayMode = .allVisible
 
@@ -80,4 +82,14 @@ extension MainSplitViewController: SocketConnectionHandler {
         // Handle errors
     }
 
+}
+
+// MARK: Themeable
+
+extension MainSplitViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+        view.backgroundColor = theme.mutedAccent
+    }
 }
