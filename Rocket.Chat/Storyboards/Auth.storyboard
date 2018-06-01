@@ -50,11 +50,11 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x11-i1-wfS">
                                                 <rect key="frame" x="0.0" y="88" width="325" height="60"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-ze-woy" customClass="VOTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                        <rect key="frame" x="10" y="13" width="305" height="35"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-ze-woy" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                        <rect key="frame" x="10" y="6.5" width="305" height="48"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="auth.connect.urlfield"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="35" id="cIg-44-v6Y"/>
+                                                            <constraint firstAttribute="height" constant="48" id="cIg-44-v6Y"/>
                                                         </constraints>
                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
