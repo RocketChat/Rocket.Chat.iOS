@@ -102,6 +102,14 @@ extension UIColor {
         return UIColor(rgb: 0xEAEAEA, alphaVal: 0.75)
     }
 
+    static func RCTextFieldGray() -> UIColor {
+        return UIColor(rgb: 10396328, alphaVal: 1)
+    }
+
+    static func RCTextFieldBorderGray() -> UIColor {
+        return UIColor(rgb: 15199218, alphaVal: 1)
+    }
+
     static func RCDarkGray() -> UIColor {
         return UIColor(rgb: 0x333333, alphaVal: 1)
     }
