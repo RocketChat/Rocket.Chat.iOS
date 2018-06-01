@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -186,7 +186,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Icon New Channel" id="84L-Iz-PSG">
                             <connections>
-                                <segue destination="OzA-tw-YTL" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
+                                <segue destination="Yv3-wP-OPQ" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -239,69 +239,6 @@
             </objects>
             <point key="canvasLocation" x="-828" y="739"/>
         </scene>
-        <!--Base Navigation Controller-->
-        <scene sceneID="9qh-0x-aF4">
-            <objects>
-                <navigationController id="OzA-tw-YTL" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAx-u8-1ac">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="kyj-uO-wfM" kind="relationship" relationship="rootViewController" id="YSw-8O-sUh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cnb-Di-1oc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1126" y="588"/>
-        </scene>
-        <!--New Channel-->
-        <scene sceneID="1ZO-yT-wYf">
-            <objects>
-                <viewController id="kyj-uO-wfM" customClass="NewRoomViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iMQ-IG-NfN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I9u-cy-3x7">
-                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="kyj-uO-wfM" id="S7X-tB-cdx"/>
-                                    <outlet property="delegate" destination="kyj-uO-wfM" id="Dwd-Ai-9Zt"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="I9u-cy-3x7" firstAttribute="leading" secondItem="P6H-8T-r9x" secondAttribute="leading" id="Ja7-G7-eAf"/>
-                            <constraint firstItem="P6H-8T-r9x" firstAttribute="top" secondItem="I9u-cy-3x7" secondAttribute="top" id="K1M-md-nQo"/>
-                            <constraint firstAttribute="bottom" secondItem="I9u-cy-3x7" secondAttribute="bottom" id="St8-mo-oDJ"/>
-                            <constraint firstItem="P6H-8T-r9x" firstAttribute="trailing" secondItem="I9u-cy-3x7" secondAttribute="trailing" id="zoi-BK-UL0"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="P6H-8T-r9x"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Channel" id="QLT-Wx-pqC">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="ieA-7x-mJd">
-                            <connections>
-                                <action selector="buttonCloseDidPressed:" destination="kyj-uO-wfM" id="0Gi-Fk-VC9"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="2vn-eg-9ZN">
-                            <connections>
-                                <action selector="buttonCreateDidPressed:" destination="kyj-uO-wfM" id="qjv-Sk-AzR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="I9u-cy-3x7" id="bRd-z1-MlV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lc9-Ug-aU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1986" y="587"/>
-        </scene>
         <!--Preferences-->
         <scene sceneID="RJX-cy-LdP">
             <objects>
@@ -309,6 +246,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vB8-Lh-zAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="992" y="-35"/>
+        </scene>
+        <!--New Room-->
+        <scene sceneID="yX3-Oa-Zdf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="New Room" id="Yv3-wP-OPQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WUE-tQ-REW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1128" y="368"/>
         </scene>
     </scenes>
     <resources>
