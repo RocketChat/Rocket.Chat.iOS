@@ -9,11 +9,10 @@
 import UIKit
 import RealmSwift
 
-class NewRoomViewController: BaseViewController {
+final class NewRoomViewController: BaseViewController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         title = localized("new_room.title")
         navigationItem.rightBarButtonItem?.title = localized("new_room.buttons.create")
     }
@@ -50,18 +49,6 @@ class NewRoomViewController: BaseViewController {
                     enabled: true
                 )
             ]
-        ),
-        SectionForm(
-            name: localized("new_room.group.invite_users"),
-            footer: nil,
-            cells: [
-                FormCell(
-                    cell: .mentionsTextField(placeholder: localized("new_room.cell.invite_users.placeholder"), icon: #imageLiteral(resourceName: "Mention")),
-                    key: "users list",
-                    defaultValue: [],
-                    enabled: true
-                )
-            ]
         )
     ]
 
@@ -92,14 +79,21 @@ class NewRoomViewController: BaseViewController {
         }
     }()
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.keyboardDismissMode = .interactive
+
+            CheckTableViewCell.registerCell(for: tableView)
+            TextFieldTableViewCell.registerCell(for: tableView)
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
-        CheckTableViewCell.registerCell(for: tableView)
-        TextFieldTableViewCell.registerCell(for: tableView)
-        MentionsTextFieldTableViewCell.registerCell(for: tableView)
-
-        tableView.keyboardDismissMode = .interactive
+        super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -118,10 +112,6 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     fileprivate func showErrorAlert(_ errorMessage: String?) {
         let errorMessage = errorMessage ?? localized("error.socket.default_error.message")
 
@@ -135,21 +125,15 @@ class NewRoomViewController: BaseViewController {
         guard
             let roomName = setValues["room name"] as? String,
             let publicRoom = setValues["public room"] as? Bool,
-            let membersRoom = setValues["users list"] as? [String],
             let readOnlyRoom = setValues["read only room"] as? Bool
         else {
             return
         }
 
-        let roomType: RoomCreateType
-        if publicRoom {
-            roomType = .channel
-        } else {
-            roomType = .group
-        }
-
         sender.isEnabled = false
-        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: membersRoom, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
+
+        let roomType: RoomCreateType = publicRoom ? .channel : .group
+        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: [], readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
             if success {
                 self?.dismiss(animated: true, completion: nil)
             } else {
@@ -160,7 +144,6 @@ class NewRoomViewController: BaseViewController {
     }
 
     fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
-
         let request = RoomCreateRequest(
             name: roomName,
             type: roomType,
@@ -258,14 +241,7 @@ extension NewRoomViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
-
-        if height < 0,
-            let cell = tableView.cellForRow(at: indexPath) as? MentionsTextFieldTableViewCell {
-            return cell.height()
-        }
-
-        return height
+        return CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -293,6 +269,7 @@ extension NewRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData[section].cells.count
     }
+
 }
 
 // MARK: Update cell position when the keyboard will show/hide
