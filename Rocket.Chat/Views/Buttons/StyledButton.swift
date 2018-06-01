@@ -42,7 +42,11 @@ final class StyledButton: UIButton {
     @IBInspectable var fontSize: CGFloat = 16.0
     @IBInspectable var styleRaw: Int = 0 {
         didSet {
-            style = Style(rawValue: styleRaw)!
+            guard let style = Style(rawValue: styleRaw) else {
+                return assertionFailure("Value inputed on IB doesn't match any valid option")
+            }
+
+            self.style = style
         }
     }
 
