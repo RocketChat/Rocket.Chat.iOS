@@ -126,6 +126,10 @@ extension UIColor {
         return UIColor(rgb: 0xC2C2C2, alphaVal: 0.5)
     }
 
+    static func RCSkyBlue() -> UIColor {
+        return UIColor(rgb: 1930485, alphaVal: 1)
+    }
+
     static func RCDarkBlue() -> UIColor {
         return UIColor(rgb: 0x0a4469, alphaVal: 1)
     }
@@ -190,6 +194,7 @@ extension UIColor {
 }
 
 // MARK: UIKit default colors
+
 extension UIColor {
     static var placeholderGray: UIColor {
         return UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
@@ -197,5 +202,16 @@ extension UIColor {
 
     static var backgroundWhite: UIColor {
         return UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+    }
+}
+
+// MARK: Utils
+
+extension UIColor {
+    func isBrightColor() -> Bool {
+        guard let components = cgColor.components else { return false }
+        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+
+        return brightness < 0.5 ? false : true
     }
 }
