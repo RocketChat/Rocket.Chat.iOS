@@ -25,8 +25,6 @@ def shared_pods
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
-  pod 'TagListView', '~> 1.0'
-  pod 'SearchTextField'
   ui_pods
 
   # Text Processing
