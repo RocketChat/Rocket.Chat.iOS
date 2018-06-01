@@ -29,20 +29,9 @@ final class ConnectServerViewController: BaseViewController {
     var serverPublicSettings: AuthSettings?
 
     @IBOutlet weak var buttonClose: UIBarButtonItem!
-
+    @IBOutlet weak var buttonConnect: StyledButton!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    @IBOutlet weak var viewFields: UIView! {
-        didSet {
-            viewFields.layer.cornerRadius = 4
-            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
-            viewFields.layer.borderWidth = 0.5
-        }
-    }
-
-    @IBOutlet weak var labelSSLRequired: UILabel!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -59,7 +48,6 @@ final class ConnectServerViewController: BaseViewController {
 
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
-        labelSSLRequired.text = localized("auth.connect.ssl_required")
 
         if let nav = navigationController as? BaseNavigationController {
             nav.setTransparentTheme()
@@ -74,7 +62,6 @@ final class ConnectServerViewController: BaseViewController {
 
         if let applicationServerURL = AppManager.applicationServerURL {
             textFieldServerURL.isEnabled = false
-            labelSSLRequired.text = localized("auth.connect.connecting")
             textFieldServerURL.text = applicationServerURL.host
             connect()
         }
@@ -116,7 +103,7 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
+            visibleViewBottomConstraint.constant = keyboardSize.height + 40
         }
     }
 
@@ -137,7 +124,7 @@ final class ConnectServerViewController: BaseViewController {
 
         connecting = true
         textFieldServerURL.alpha = 0.5
-        activityIndicator.startAnimating()
+        buttonConnect.startLoading()
         textFieldServerURL.resignFirstResponder()
 
         if AppManager.changeToServerIfExists(serverUrl: url) {
@@ -182,7 +169,7 @@ final class ConnectServerViewController: BaseViewController {
     func stopConnecting() {
         connecting = false
         textFieldServerURL.alpha = 1
-        activityIndicator.stopAnimating()
+        buttonConnect.stopLoading()
     }
 }
 
@@ -193,6 +180,10 @@ extension ConnectServerViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if buttonConnect.isLoading {
+            return false
+        }
+
         connect()
         return true
     }
