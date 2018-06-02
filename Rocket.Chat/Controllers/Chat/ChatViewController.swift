@@ -850,6 +850,8 @@ final class ChatViewController: SLKTextViewController {
 
             chatPreviewModeView = previewView
             updateChatPreviewModeViewConstraints()
+
+            previewView.applyTheme()
         }
     }
 
