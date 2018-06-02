@@ -46,7 +46,7 @@ class Theme: NSObject {
          tintColor: UIColor,
          focusedBackground: UIColor,
          auxiliaryBackground: UIColor,
-         mutedAccent: UIColor?,
+         mutedAccent: UIColor,
          strongAccent: UIColor?,
          appearence: Appearence) {
 
@@ -58,12 +58,7 @@ class Theme: NSObject {
         self.tintColor = tintColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
-
-        if let mutedAccent = mutedAccent {
-            self.mutedAccent = mutedAccent
-        } else {
-            self.mutedAccent = #colorLiteral(red: 0.491, green: 0.4938107133, blue: 0.500592351, alpha: 0.3967091182)
-        }
+        self.mutedAccent = mutedAccent
 
         if let strongAccent = strongAccent {
             self.strongAccent = strongAccent
@@ -83,7 +78,7 @@ class Theme: NSObject {
         tintColor: .black,
         focusedBackground: .RCNavigationBarColor(),
         auxiliaryBackground: #colorLiteral(red: 0.03921568627, green: 0.2666666667, blue: 0.4117647059, alpha: 1),
-        mutedAccent: nil,
+        mutedAccent: #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.8, alpha: 1),
         strongAccent: nil,
         appearence: .light
     )
@@ -97,7 +92,7 @@ class Theme: NSObject {
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.1036974415, green: 0.1036974415, blue: 0.1036974415, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        mutedAccent: nil,
+        mutedAccent: #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2470588235, alpha: 1),
         strongAccent: nil,
         appearence: .dark
     )
@@ -111,7 +106,7 @@ class Theme: NSObject {
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.04620946944, green: 0.04620946944, blue: 0.04620946944, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        mutedAccent: nil,
+        mutedAccent: #colorLiteral(red: 0.1960784314, green: 0.1960784314, blue: 0.2, alpha: 1),
         strongAccent: nil,
         appearence: .dark
     )

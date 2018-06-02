@@ -51,6 +51,11 @@ final class MainSplitViewController: UISplitViewController {
         SocketManager.reconnect()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        applyTheme()
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return view.theme?.appearence.statusBarStyle ?? .default
     }
@@ -88,8 +93,8 @@ extension MainSplitViewController: SocketConnectionHandler {
 
 extension MainSplitViewController {
     override func applyTheme() {
-        super.applyTheme()
         guard let theme = view.theme else { return }
         view.backgroundColor = theme.mutedAccent
+        view.subviews.first?.backgroundColor = theme.mutedAccent
     }
 }
