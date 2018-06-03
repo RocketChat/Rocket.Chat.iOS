@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ServerListViewDelegate: class {
+    func serverListViewDidClose()
+}
+
 final class ServersListView: UIView {
 
     private let viewModel = ServersListViewModel()
+    weak var delegate: ServerListViewDelegate?
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
@@ -93,6 +98,7 @@ final class ServersListView: UIView {
 
     func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
+        self.delegate?.serverListViewDidClose()
 
         animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
