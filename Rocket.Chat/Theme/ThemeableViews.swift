@@ -62,7 +62,7 @@ extension UITextField {
         super.applyTheme()
         guard let theme = theme else { return }
         textColor = theme.titleText
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
         keyboardAppearance = theme.appearence.keyboardAppearence
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.mutedAccent])
@@ -74,7 +74,7 @@ extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
         let textField = subviews.first?.subviews.first { $0 is UITextField } as? UITextField
         textField?.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
@@ -145,7 +145,7 @@ extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
     }
 }
 
@@ -153,7 +153,7 @@ extension UINavigationBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
         barStyle = theme.appearence.barStyle
         barTintColor = theme.focusedBackground
     }
@@ -170,7 +170,7 @@ extension UIToolbar {
         guard let theme = theme else { return }
         isTranslucent = false
         barTintColor = theme.focusedBackground
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
         barStyle = theme.appearence.barStyle
     }
 
@@ -185,7 +185,7 @@ extension UITabBar {
         super.applyTheme()
         guard let theme = theme else { return }
         barTintColor = theme.focusedBackground
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
         barStyle = theme.appearence.barStyle
     }
 
@@ -215,6 +215,6 @@ extension SLKTextView {
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
         backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
         textColor = theme.bodyText
-        tintColor = theme.hyperlinkText
+        tintColor = theme.tintColor
     }
 }

@@ -21,7 +21,6 @@ class Theme: NSObject {
     let titleText: UIColor
     let bodyText: UIColor
     let auxiliaryText: UIColor
-    let hyperlinkText: UIColor
     let tintColor: UIColor
     let focusedBackground: UIColor
     let auxiliaryBackground: UIColor
@@ -42,7 +41,6 @@ class Theme: NSObject {
          titleText: UIColor,
          bodyText: UIColor,
          auxiliaryText: UIColor,
-         hyperlinkText: UIColor,
          tintColor: UIColor,
          focusedBackground: UIColor,
          auxiliaryBackground: UIColor,
@@ -54,7 +52,6 @@ class Theme: NSObject {
         self.titleText = titleText
         self.bodyText = bodyText
         self.auxiliaryText = auxiliaryText
-        self.hyperlinkText = hyperlinkText
         self.tintColor = tintColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
@@ -74,8 +71,7 @@ class Theme: NSObject {
         titleText: #colorLiteral(red: 0.05143930763, green: 0.0585193634, blue: 0.07106169313, alpha: 1),
         bodyText: #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6117647059, green: 0.6352941176, blue: 0.6588235294, alpha: 1),
-        hyperlinkText: .RCBlue(),
-        tintColor: .black,
+        tintColor: .RCBlue(),
         focusedBackground: .RCNavigationBarColor(),
         auxiliaryBackground: #colorLiteral(red: 0.03921568627, green: 0.2666666667, blue: 0.4117647059, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.8, alpha: 1),
@@ -88,8 +84,7 @@ class Theme: NSObject {
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
-        tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        tintColor: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.1036974415, green: 0.1036974415, blue: 0.1036974415, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2470588235, alpha: 1),
@@ -102,8 +97,7 @@ class Theme: NSObject {
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
-        tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        tintColor: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.04620946944, green: 0.04620946944, blue: 0.04620946944, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.1960784314, green: 0.1960784314, blue: 0.2, alpha: 1),

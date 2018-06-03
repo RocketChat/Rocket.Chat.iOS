@@ -39,7 +39,7 @@ final class SubscriptionsTitleView: UIView {
     }
 
     func updateTitleImage(reverse: Bool = false) {
-        if let image = UIImage(named: "Server Selector")?.imageWithTint(theme?.hyperlinkText ?? .RCBlue()) {
+        if let image = UIImage(named: "Server Selector")?.imageWithTint(theme?.tintColor ?? .RCBlue()) {
             if reverse, let cgImage = image.cgImage {
                 let rotatedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .downMirrored)
                 buttonServer.setImage(rotatedImage, for: .normal)
@@ -65,7 +65,7 @@ extension SubscriptionsTitleView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        buttonServer.setTitleColor(theme.hyperlinkText, for: .normal)
-        buttonServer.tintColor = theme.hyperlinkText
+        buttonServer.setTitleColor(theme.tintColor, for: .normal)
+        buttonServer.tintColor = theme.tintColor
     }
 }

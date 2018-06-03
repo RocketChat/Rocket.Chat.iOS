@@ -202,13 +202,13 @@ extension SubscriptionCell {
         super.applyTheme()
         guard let theme = theme else { return }
         labelName.textColor = theme.titleText
-        labelUnread.backgroundColor = theme.hyperlinkText
+        labelUnread.backgroundColor = theme.tintColor
         labelUnread.textColor = theme.backgroundColor
         labelLastMessage.textColor = theme.auxiliaryText
         iconRoom.tintColor = theme.auxiliaryText
 
         if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {
-            labelDate.textColor = theme.hyperlinkText
+            labelDate.textColor = theme.tintColor
         } else {
             labelDate.textColor = theme.auxiliaryText
         }
