@@ -17,8 +17,8 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
     internal let defaultBackgroundColor = UIColor.white
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
+    internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
+    internal let highlightedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09530179799)
 
     var subscription: Subscription? {
         didSet {
@@ -212,5 +212,8 @@ extension SubscriptionCell {
         } else {
             labelDate.textColor = theme.auxiliaryText
         }
+
+        setSelected(isSelected, animated: false)
+        setHighlighted(isHighlighted, animated: false)
     }
 }
