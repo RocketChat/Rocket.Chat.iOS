@@ -218,7 +218,7 @@
 "chat.drawing.errorTitle" = "Упс!";
 "chat.drawing.messageTitle" = "Вы должны нарисовать что-нибудь перед отправкой.";
 "chat.drawing.fileName" = "Рисование";
-"chat.drawing.settings.opacity" = "Непрозрачность";
+"chat.drawing.settings.opacity" = "Уровень прозрачности";
 "chat.drawing.settings.width" = "Ширина";
 "chat.drawing.settings.color.selected" = "Выбранный цвет";
 "chat.drawing.settings.color.others" = "Выберите цвет ниже:";
