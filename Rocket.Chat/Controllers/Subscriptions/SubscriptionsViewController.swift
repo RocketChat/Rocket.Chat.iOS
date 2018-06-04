@@ -129,8 +129,6 @@ final class SubscriptionsViewController: BaseViewController {
 
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
-
-            tableView.contentInsetAdjustmentBehavior = .never
         } else {
             let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
             tableView.tableHeaderView = searchBar

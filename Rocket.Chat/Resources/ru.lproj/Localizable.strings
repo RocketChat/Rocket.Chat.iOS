@@ -1,0 +1,331 @@
+// Global
+"global.ok" = "OK";
+"global.yes" = "Да";
+"global.no" = "Нет";
+"global.cancel" = "Отмена";
+"global.error" = "Ошибка";
+
+// Errors
+"error.socket.default_error.title" = "Упс!";
+"error.socket.default_error.message" = "Что-то пошло не так, пожалуйста повторите попытку.";
+
+"error.login.title" = "Упс!";
+"error.login.message" = "При попытке входа в систему что-то пошло не так";
+
+"error.login_unauthorized.title" = "Упс!";
+"error.login_unauthorized.message" = "Ваши учетные данные были отклонены! Пожалуйста, попробуйте еще раз.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Упс!";
+"alert.connection.invalid_url.message" = "Указанный URL недействителен. Пожалуйста, проверьте его и повторите попытку!";
+
+"alert.connection.not_secured.title" = "Упс!";
+"alert.connection.not_secured.message" = "Не удалось установить безопасное соединение с сервером. Убедитесь, что сервер поддерживает SSL.";
+
+"alert.connection.socket_error.title" = "Упс!";
+"alert.connection.socket_error.message" = "Не удалось подключиться к этому серверу!";
+
+"alert.connection.invalid_version.title" = "Упс!";
+"alert.connection.invalid_version.message" = "Сервер, к которому вы пытаетесь подключиться использует версию, которая больше не поддерживается приложением: %@.\n\nНам нужна версия %@.";
+
+"alert.settings.set_mail_app.title" = "Упс!";
+"alert.settings.set_mail_app.message" = "Нет учетных записей электронной почты. Пожалуйста, настройте почтовый аккаунт для отправки электронной почты.";
+
+"alert.feature.wip.title" = "Упс!";
+"alert.feature.wip.message" = "Мы все еще работаем над этой функцией, следите за обновлениями!";
+
+"alert.insecure_image.title" = "Небезопасный ресурс";
+"alert.insecure_image.message" = "Ресурс с изображением небезопасен и, следовательно, не загружен. Разрешены только ресурсы SSL.";
+
+"alert.socket_error.invalid_user.title" = "Время сеанса истекло.";
+"alert.socket_error.invalid_user.message" = "Время вашего сеанса истекло. Пожалуйста, войдите снова.";
+
+"alert.login_service_error.title" = "Ошибка аутентификации";
+"alert.login_service_error.message" = "Не удалось аутентифицировать эту службу. Пожалуйста, попробуйте еще раз.";
+
+"alert.authorization_error.title" = "Ошибка авторизации";
+"alert.authorization_error.create_channel.description" = "Вы не можете создавать каналы";
+
+"alert.unsupported_feature.title" = "Функция не поддерживается";
+"alert.unsupported_feature.message" = "Версия этого сервера: %@. Эта функция поддерживается только в версиях %@ и выше.";
+
+"alert.push_token_error.title" = "Предупреждение";
+"alert.push_token_error.message" = "Вы все равно можете получать push-уведомления с этого сервера из-за проблемы с серверами версии ниже 0.60.0.";
+
+"alert.upload_error.title" = "Ошибка загрузки";
+"alert.upload_error.message" = "При загрузке файла произошла ошибка. Пожалуйста, попробуйте еще раз.";
+
+"alert.upload_dialog.title" = "Загрузить файл";
+"alert.upload_dialog.placeholder.title" = "Название";
+"alert.upload_dialog.placeholder.description" = "Описание";
+"alert.upload_dialog.action.upload" = "Загрузить";
+
+"alert.email_verification.title" = "Подтверждение электронной почты";
+"alert.email_verification.message" = "Мы отправили вам электронное письмо, чтобы подтвердить вашу регистрацию. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
+
+"alert.discarding_changes.title" = "Несохраненные изменения";
+"alert.discarding_changes.message" = "Ваши несохраненные изменения были сброшены.";
+"alert.load_profile_error.title" = "Не удалось загрузить ваш профиль";
+"alert.load_profile_error.message" = "При загрузке вашего профиля что-то пошло не так. Пожалуйста, попробуйте еще раз.";
+"alert.password_mismatch_error.title" = "Ваши пароли не совпадают";
+"alert.password_mismatch_error.message" = "Поле подтверждения не соответствует указанному вами паролю. Проверьте его и повторите попытку.";
+"alert.update_profile_error.title" = "Не удалось обновить";
+"alert.update_profile_error.message" = "При обновлении вашего профиля что-то пошло не так. Пожалуйста, попробуйте еще раз.";
+"alert.update_password_error.title" = "Не удалось изменить пароль";
+"alert.update_password_error.message" = "При смене пароля произошла ошибка. Пожалуйста, попробуйте еще раз.";
+"alert.update_profile_empty_fields.title" = "Пожалуйста, заполните пустые поля";
+"alert.update_profile_empty_fields.message" = "Необходимо заполнить всю информацию о профиле";
+"alert.update_profile_invalid_email.title" = "Неверный адрес электронной почты";
+"alert.update_profile_invalid_email.message" = "Похоже, что введенная вами электронная почта недействительна. Пожалуйста, исправьте ее и повторите попытку.";
+"alert.password_empty_fields.title" = "Пожалуйста, заполните пустые поля";
+"alert.password_empty_fields.message" = "Заполните поле пароля и подтверждения, чтобы вы могли обновить свой пароль.";
+"alert.update_profile_success.title" = "Профиль обновлен";
+"alert.update_password_success.title" = "Пароль обновлен";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "Сервер изменил URL-адрес";
+"connection.server.redirect.alert.message" = "Похоже, этот сервер изменил URL-адрес на: \ n \ n% @ \ n \ nВы хотите обновить URL-адрес?";
+"connection.server.redirect.alert.confirm" = "Да, изменить URL-адрес";
+
+// Socket Connection
+"connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
+"connection.connecting.banner.message" = "Соединение...";
+
+// Auth
+"auth.connect.button_connect" = "Соединение";
+"auth.connect.ssl_required" = "Требуется, чтобы ваш сервер поддерживал SSL";
+"auth.connect.connecting" = "Выполняется соединение";
+
+"auth.login.username.placeholder" = "Электронная почта или имя пользователя";
+"auth.login.password.placeholder" = "Пароль";
+"auth.login.buttonRegister" = "Создать новый аккаунт";
+"auth.login.buttonResetPassword" = "Забыли пароль";
+"auth.login.agree_label" = "Продолжая, вы соглашаетесь с нашими";
+"auth.login.agree_and" = "и";
+"auth.login.agree_termsofservice" = "Условиями использования";
+"auth.login.agree_privacypolicy" = "Политикой конфиденциальности";
+
+"auth.forgot_password.title" = "Забыли пароль?";
+"auth.forgot_password.message" = "Введите ваш адрес электронной почты";
+"auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
+
+// Subscriptions
+"subscriptions.search" = "Поиск";
+"subscriptions.search_results" = "Результаты";
+"subscriptions.search.load_more_results" = "Загрузить больше результатов";
+"subscriptions.unreads" = "Непрочитанные";
+"subscriptions.favorites" = "Избранные";
+"subscriptions.channels" = "Каналы";
+"subscriptions.direct_messages" = "Личная переписка";
+"subscriptions.you" = "вы";
+"subscriptions.messages" = "Сообщения";
+"subscriptions.list.you_initial" = "Вы";
+"subscriptions.list.no_message" = "Нет сообщений";
+"subscriptions.list.sent_an_attachment" = "отправить вложение";
+"subscriptions.list.date.yesterday" = "Вчера";
+
+// Servers
+"servers.add_new_team" = "Добавить новую команду";
+"servers.title" = "Серверы";
+"servers.add_new_server" = "Добавить сервер";
+"servers.action.disconnect" = "Отключить";
+"servers.action.disconnect.alert.title" = "Отключиться от сервера";
+"servers.action.disconnect.alert.message" = "Вы хотите отключиться от \"%@\" сервера?";
+"servers.action.disconnect.alert.confirm" = "Да, отключить";
+
+// User Menu
+"user_menu.online" = "Онлайн";
+"user_menu.away" = "Отошел";
+"user_menu.busy" = "Занят";
+"user_menu.invisible" = "Невидимый";
+"user_menu.admin" = "Администрирование";
+"user_menu.preferences" = "Настройки";
+"user_menu.logout" = "Выйти";
+
+// New Room View
+"new_room.title" = "Новый канал";
+"new_room.buttons.create" = "Создать";
+"new_room.cell.public_channel.title" = "Публичный канал";
+"new_room.cell.public_channel.description" = "Каждый может получить доступ к этому каналу";
+"new_room.cell.public_channel.description.public_only" = "Вы можете создавать только общедоступные каналы";
+"new_room.cell.public_channel.description.private_only" = "Вы можете создавать только приватные каналы";
+"new_room.cell.read_only.title" = "Канал только для чтения";
+"new_room.cell.read_only.description" = "Только авторизованные участники могут писать новые сообщения";
+"new_room.group.channel.name" = "Название канала";
+"new_room.cell.channel_name.title" = "Название канала";
+"new_room.group.invite_users" = "Пригласить пользователей";
+"new_room.cell.invite_users.placeholder" = "Пользователи";
+
+// Notifications
+"notifications.action.reply" = "Ответить";
+
+// Chat
+"chat.channel_preview_view.title" = "Это предварительный просмотр #%@";
+"chat.channel_preview_view.join" = "Присоединиться к каналу";
+"chat.dm.start_conversation" = "Это начало вашего разговора с %@";
+"chat.channel.start_conversation" = "Это начало разговора на %@";
+"chat.read_only" = "Эта комната доступна только для чтения";
+"chat.muted" = "Вы были заглушены";
+"chat.loading_messages" = "Загрузка сообщений...";
+"chat.unread_separator" = "новые сообщения";
+
+// Chat Message Actions
+"chat.message.actions.react" = "Добавить реакцию";
+"chat.message.actions.block" = "Блокировать сообщения от пользователя";
+"chat.message.actions.report" = "Передать сообщение";
+"chat.message.actions.edit" = "Редактировать";
+"chat.message.actions.copy" = "Копировать";
+"chat.message.actions.pin" = "Прикрепить сообщение";
+"chat.message.actions.unpin" = "Открепить сообщение";
+"chat.message.actions.star" = "Пометить сообщение"; // TODO
+"chat.message.actions.unstar" = "Снять отметку"; // TODO
+"chat.message.actions.quote" = "Цитата";
+"chat.message.actions.reply" = "Ответить";
+"chat.message.actions.delete" = "Удалить сообщение";
+"chat.message.actions.delete.confirm.title" = "Удалить это сообщение?";
+"chat.message.actions.delete.confirm.message" = "Вы уверены, что хотите удалить это сообщение? Этот процесс необратим.";
+"chat.message.actions.delete.confirm.yes" = "Да, удалить";
+"chat.message.actions.discard" = "Отменить сообщение";
+"chat.message.actions.discard.confirm.title" = "Отменить это сообщение?";
+"chat.message.actions.discard.confirm.message" = "Это сообщение еще не отправлено. Вы хотите отменить его? Этот процесс необратим.";
+"chat.message.actions.discard.confirm.yes" = "Да, отменить";
+"chat.message.actions.resend" = "Отправить повторно";
+"chat.message.actions.resend_all" = "Отправить повторно все";
+"Send" = "Отправить"; //SLKTextInputbar.m
+
+// Chat Message Report
+"chat.message.report.success.title" = "Сообщение передано";
+"chat.message.report.success.message" = "Сообщение передано успешно, спасибо!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Загрузить изображение";
+"chat.upload.uploading_video" = "Загрузить видео";
+"chat.upload.uploading_file" = "Загрузить \"%@\"";
+"chat.upload.take_photo" = "Сделать фото";
+"chat.upload.shoot_video" = "Записать видео";
+"chat.upload.choose_from_library" = "Выбрать из библиотеки";
+"chat.upload.import_file" = "Прикрепить файлы";
+"chat.upload.draw" = "Нарисовать что-нибудь";
+
+// Chat Download
+"chat.download.downloading_file" = "Загрузки \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Нажмите, чтобы открыть файл.";
+"chat.message.open_browser" = "Открыть в браузере";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Упс!";
+"chat.drawing.messageTitle" = "Вы должны нарисовать что-нибудь перед отправкой.";
+"chat.drawing.fileName" = "Рисование";
+"chat.drawing.settings.opacity" = "Непрозрачность";
+"chat.drawing.settings.width" = "Ширина";
+"chat.drawing.settings.color.selected" = "Выбранный цвет";
+"chat.drawing.settings.color.others" = "Выберите цвет ниже:";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Название канала изменено на: %@ by %@";
+"chat.message.type.user_added_by" = "Пользователь %@ добавлен пользователем %@";
+"chat.message.type.user_removed_by" = "Пользователь %@ удален пользователем %@";
+"chat.message.type.user_left" = "Покинул канал";
+"chat.message.type.user_joined" = "Присоединился к каналу";
+"chat.message.type.user_muted" = "Пользователь %@ заглушен пользователем %@";
+"chat.message.type.user_unmuted" = "Пользователь %@ перестал быть заглушенным по решению %@";
+"chat.message.type.welcome" = "Добро пожаловать %@";
+"chat.message.type.message_removed" = "Сообщение удалено";
+"chat.message.type.subscription_role_added" = "%@ был назначен %@ пользователем %@";
+"chat.message.type.subscription_role_removed" = "%@ больше не %@ по решению %@";
+"chat.message.type.room_archived" = "Этот канал был заархивирован пользователем %@";
+"chat.message.type.room_unarchived" = "Этот канал был разархивирован пользователем %@";
+"chat.message.type.message_pinned" = "Прикрепленное сообщение:";
+
+// Chat Information
+"chat.info.title" = "Инфо";
+"chat.info.item.topic" = "Тема";
+"chat.info.item.no_topic" = "Нет темы";
+"chat.info.item.description" = "Описание";
+"chat.info.item.no_description" = "Нет описания";
+"chat.info.item.notifications" = "Уведомления";
+"chat.info.item.members" = "Пользователи";
+"chat.info.item.pinned" = "Прикрепленные";
+"chat.info.item.starred" = "Отмеченные";
+"chat.info.item.mentions" = "Упоминания";
+"chat.info.item.files" = "Файлы";
+
+// Members List
+"chat.members.list.title" = "Пользователи";
+
+// Messages List
+"chat.messages.list.title" = "Сообщения";
+"chat.messages.list.empty" = "Сообщения не найдены";
+"chat.messages.list.search.placeholder" = "Поиск сообщений";
+"chat.messages.pinned.list.title" = "Прикрепленные сообщения";
+"chat.messages.starred.list.title" = "Помеченные сообщения";
+"chat.messages.mentions.list.title" = "Упоминания";
+"chat.messages.files.list.title" = "Файлы";
+"chat.messages.files.list.empty" = "Файлов не найдено";
+
+// Settings
+"myaccount.settings.title" = "Настройки";
+"myaccount.settings.contactus" = "Связаться с нами";
+"myaccount.settings.profile" = "Профиль";
+"myaccount.settings.license" = "Лицензия";
+"myaccount.settings.language" = "Язык";
+"myaccount.settings.appicon" = "Иконка приложения";
+"myaccount.settings.version" = "Версия: %@ (%@)";
+"myaccount.settings.server_version" = "Версия сервера: %@";
+"myaccount.settings.web_browser" = "Веб-браузер";
+"myaccount.settings.tracking.title" = "Отправить отчет об ошибке";
+"myaccount.settings.tracking.footer" = "Мы никогда не отслеживаем содержание ваших чатов. Отчет об ошибке содержит только релевантную информацию для идентификации проблем и их исправления.";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Выберите значок";
+"myaccount.settings.changeicon.header" = "Вы можете изменить вид значка Rocket.Chat на вашем устройстве. Выберите один из понравившихся значков.";
+"myaccount.settings.changeicon.errortitle" = "Невозможно изменить значок";
+"myaccount.settings.changeicon.iosversion" = "Альтернативные значки приложений не поддерживаются в версии iOS ниже 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Изменить язык";
+"myaccount.settings.language.reset" = "Восстановление значений по умолчанию";
+"myaccount.settings.language.message" = "Вы изменили языковые настройки. Вы должны перезапустить Rocket.Chat, прежде чем новые настройки вступят в силу.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "Встроенный браузер";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Веб-браузер";
+"myaccount.settings.web_browser.footer" = "Это приложение будет использоваться для открытия ссылок в Rocket Chat.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Профиль";
+"myaccount.settings.editing_profile.title" = "Редактировать профиль";
+"myaccount.settings.profile.actions.save" = "Сохранить";
+"myaccount.settings.profile.actions.edit" = "Редактировать";
+"myaccount.settings.profile.actions.change_password" = "Изменить свой пароль";
+"myaccount.settings.profile.section.profile" = "Профиль";
+"myaccount.settings.profile.section.password" = "Пароль";
+"myaccount.settings.profile.name_placeholder" = "Имя";
+"myaccount.settings.profile.username_placeholder" = "Имя пользователя";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Статус";
+"myaccount.settings.profile.password_required.title" = "Введите ваш пароль";
+"myaccount.settings.profile.password_required.message" = "При изменении электронного адреса требуется ввести ваш пароль.";
+"myaccount.settings.profile.password_required.placeholder" = "Пароль";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Новый пароль";
+"myaccount.settings.profile.new_password.section.password" = "Пароль";
+"myaccount.settings.profile.new_password.actions.save" = "Сохранить";
+"myaccount.settings.profile.new_password.password_placeholder" = "Новый пароль";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Подтверждение пароля";
+"myaccount.settings.profile.new_password.password_required.title" = "Введите ваш пароль";
+"myaccount.settings.profile.new_password.password_required.message" = "При изменении пароля требуется ввести ваш текущий пароль";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Пароль";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Разговор";
+"user_action_sheet.remove" = "Удалить с канала";
+"user_action_sheet.remove_confirm.title" = "Удалить этого пользователя";
+"user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
