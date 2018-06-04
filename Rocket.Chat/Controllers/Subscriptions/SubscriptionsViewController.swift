@@ -320,6 +320,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(self.view)
+            serversView?.delegate = self
             serversView?.applyTheme()
         }
     }
@@ -453,6 +454,12 @@ extension SubscriptionsViewController: SocketConnectionHandler {
         // Handle errors
     }
 
+}
+
+extension SubscriptionsViewController: ServerListViewDelegate {
+    func serverListViewDidClose() {
+        titleView?.updateTitleImage(reverse: false)
+    }
 }
 
 // MARK: Themeable
