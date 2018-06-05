@@ -31,4 +31,25 @@ class BaseNavigationController: UINavigationController {
         navBar.tintColor = .RCBlue()
         navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.RCBlue()]
     }
+
+    func setWhiteTheme() {
+        let navBar = self.navigationBar
+        navBar.shadowImage = UIImage()
+        navBar.backgroundColor = .white
+        navBar.barTintColor = .white
+        navBar.isTranslucent = false
+        navBar.tintColor = .RCBlue()
+        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.RCBlue()]
+    }
+
+    func setGrayTheme() {
+        let navBar = self.navigationBar
+        navBar.shadowImage = UIImage()
+        navBar.backgroundColor = .gray
+        navBar.barTintColor = .gray
+        navBar.isTranslucent = false
+        navBar.tintColor = .white
+        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
