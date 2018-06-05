@@ -99,8 +99,12 @@ extension SubscriptionsSortingView: UIGestureRecognizerDelegate {
 
 extension SubscriptionsSortingView: UITableViewDataSource {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.numberOfRows(section: section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

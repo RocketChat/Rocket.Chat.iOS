@@ -329,3 +329,10 @@
 "user_action_sheet.remove" = "Remove from room";
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.alphabetical" = "Alphabetical";
+"subscriptions.sorting.activity" = "Activity";
+"subscriptions.grouping.type" = "Group by type";
+"subscriptions.grouping.favorites" = "Group by favorites";
+"subscriptions.grouping.unread_top" = "Unread on top";

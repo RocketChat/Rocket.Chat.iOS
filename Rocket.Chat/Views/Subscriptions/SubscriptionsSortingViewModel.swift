@@ -8,21 +8,10 @@
 
 import Foundation
 
-enum SubscriptionsSortingOption {
-    case activity
-    case alphabetically
-}
-
-enum SubscriptionGroupingOption {
-    case unread
-    case type
-    case favorites
-}
-
 final class SubscriptionsSortingViewModel {
 
     internal let sortingOptions: [SubscriptionsSortingOption] = [.activity, .alphabetically]
-    internal let groupingOptions: [SubscriptionGroupingOption] = [.type, .favorites, .unread]
+    internal let groupingOptions: [SubscriptionsGroupingOption] = [.type, .favorites, .unread]
 
     internal var viewHeight: CGFloat {
         return CGFloat(sortingOptions.count + sortingOptions.count) * ServerCell.cellHeight
@@ -30,6 +19,66 @@ final class SubscriptionsSortingViewModel {
 
     internal var initialTableViewPosition: CGFloat {
         return (-viewHeight) - 80
+    }
+
+    internal let numberOfSections = 2
+
+    internal func numberOfRows(section: Int) -> Int {
+        if section == 0 {
+            return sortingOptions.count
+        }
+
+        return groupingOptions.count
+    }
+
+    // MARK: Titles
+
+    internal func title(for sortingOption: SubscriptionsSortingOption) -> String {
+        switch sortingOption {
+        case .activity: return localized("subscriptions.sorting.activity")
+        case .alphabetically: return localized("subscriptions.sorting.alphabetical")
+        }
+    }
+
+    internal func title(for sortingOption: SubscriptionsGroupingOption) -> String {
+        switch sortingOption {
+        case .favorites: return localized("subscriptions.grouping.favorites")
+        case .type: return localized("subscriptions.grouping.type")
+        case .unread: return localized("subscriptions.grouping.unread_top")
+        }
+    }
+
+    internal func title(for indexPath: IndexPath) -> String {
+        if indexPath.section == 0 {
+            return title(for: sortingOptions[indexPath.row])
+        }
+
+        return title(for: groupingOptions[indexPath.row])
+    }
+
+    // MARK: Images
+
+    internal func image(for sortingOption: SubscriptionsSortingOption) -> UIImage? {
+        switch sortingOption {
+        case .activity: return UIImage(named: "Sort Activity")
+        case .alphabetically: return UIImage(named: "Sort Alphabetically")
+        }
+    }
+
+    internal func image(for sortingOption: SubscriptionsGroupingOption) -> UIImage? {
+        switch sortingOption {
+        case .favorites: return UIImage(named: "Group Favorites")
+        case .type: return UIImage(named: "Group Type")
+        case .unread: return UIImage(named: "Group Unread")
+        }
+    }
+
+    internal func image(for indexPath: IndexPath) -> UIImage? {
+        if indexPath.section == 0 {
+            return image(for: sortingOptions[indexPath.row])
+        }
+
+        return image(for: groupingOptions[indexPath.row])
     }
 
 }
