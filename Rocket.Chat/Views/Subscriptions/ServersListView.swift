@@ -66,6 +66,9 @@ final class ServersListView: UIView {
         instance.frame = view.bounds
         view.addSubview(instance)
 
+        let tapGesture = UITapGestureRecognizer(target: instance, action: #selector(close))
+        instance.addGestureRecognizer(tapGesture)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             instance.headerViewTopConstraint.constant = 0
 
@@ -80,7 +83,7 @@ final class ServersListView: UIView {
 
     // MARK: Hiding the View
 
-    func close() {
+    @objc func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
 
         animates({
