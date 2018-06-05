@@ -75,14 +75,6 @@ final class SubscriptionsViewController: BaseViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
-    // MARK: Storyboard Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Servers" {
-            segue.destination.modalPresentationCapturesStatusBarAppearance = true
-        }
-    }
-
     // MARK: Subscriptions
 
     func subscribeModelChanges() {
@@ -318,6 +310,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(self.view)
+            serversView?.presentAddServer = {
+                let connect = Storyboard.auth(serverUrl: "", credentials: nil).initialViewController() ?? UIViewController()
+                self.present(connect, animated: true, completion: nil)
+            }
         }
     }
 
