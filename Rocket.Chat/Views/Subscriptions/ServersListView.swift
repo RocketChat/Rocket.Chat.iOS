@@ -30,6 +30,12 @@ final class ServersListView: UIView {
     }
 
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tappableView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+            tappableView.addGestureRecognizer(tapGesture)
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -81,9 +87,6 @@ final class ServersListView: UIView {
 
         instance.frame = CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: frameHeight)
         view.addSubview(instance)
-
-        let tapGesture = UITapGestureRecognizer(target: instance, action: #selector(close))
-        instance.addGestureRecognizer(tapGesture)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             instance.headerViewTopConstraint.constant = 0

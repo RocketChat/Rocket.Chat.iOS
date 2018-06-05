@@ -24,12 +24,20 @@
                     </constraints>
                     <inset key="separatorInset" minX="73" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfH-Cs-4wY">
+                    <rect key="frame" x="0.0" y="116" width="375" height="465"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5e5-Re-o67" secondAttribute="trailing" id="9Rt-5r-ljk"/>
                 <constraint firstItem="5e5-Re-o67" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hoz-ej-OnU"/>
                 <constraint firstItem="5e5-Re-o67" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="I3N-Bn-WfO"/>
+                <constraint firstItem="hfH-Cs-4wY" firstAttribute="top" secondItem="5e5-Re-o67" secondAttribute="bottom" id="f3g-kg-wno"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hfH-Cs-4wY" secondAttribute="bottom" id="fvP-d6-Jc8"/>
+                <constraint firstItem="hfH-Cs-4wY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pqv-ME-QP6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hfH-Cs-4wY" secondAttribute="trailing" id="ycI-Zg-HXY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -37,6 +45,7 @@
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
                 <outlet property="tableViewTopConstraint" destination="Hoz-ej-OnU" id="jlu-ZJ-rKc"/>
+                <outlet property="tappableView" destination="hfH-Cs-4wY" id="duc-Uc-RjK"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="96.5"/>
         </view>

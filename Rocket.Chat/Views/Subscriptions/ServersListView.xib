@@ -70,14 +70,22 @@
                         <constraint firstAttribute="trailingMargin" secondItem="Ale-R3-AFg" secondAttribute="trailing" constant="8" id="xRX-pg-TIw"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBY-jZ-ame">
+                    <rect key="frame" x="0.0" y="160" width="375" height="421"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bvu-bb-Zp7" secondAttribute="trailing" id="25k-RA-6hQ"/>
+                <constraint firstItem="LBY-jZ-ame" firstAttribute="top" secondItem="5e5-Re-o67" secondAttribute="bottom" id="5VI-Wa-2Se"/>
                 <constraint firstItem="bvu-bb-Zp7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6hk-0Q-G36"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5e5-Re-o67" secondAttribute="trailing" id="9Rt-5r-ljk"/>
                 <constraint firstItem="bvu-bb-Zp7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CM1-U2-Rqb"/>
                 <constraint firstItem="5e5-Re-o67" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="I3N-Bn-WfO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LBY-jZ-ame" secondAttribute="trailing" id="UAH-rs-gz9"/>
+                <constraint firstItem="LBY-jZ-ame" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="dsO-OJ-oKP"/>
+                <constraint firstAttribute="bottom" secondItem="LBY-jZ-ame" secondAttribute="bottom" id="i36-ms-KAh"/>
                 <constraint firstItem="5e5-Re-o67" firstAttribute="top" secondItem="bvu-bb-Zp7" secondAttribute="bottom" id="w1v-1D-feW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -87,6 +95,7 @@
                 <outlet property="headerViewTopConstraint" destination="6hk-0Q-G36" id="gsk-7i-xjd"/>
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
+                <outlet property="tappableView" destination="LBY-jZ-ame" id="Ibl-jV-PGD"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="96.5"/>
         </view>

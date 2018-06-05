@@ -12,6 +12,13 @@ final class SubscriptionsSortingView: UIView {
 
     private let viewModel = SubscriptionsSortingViewModel()
 
+    @IBOutlet weak var tappableView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+            tappableView.addGestureRecognizer(tapGesture)
+        }
+    }
+
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -51,9 +58,6 @@ final class SubscriptionsSortingView: UIView {
         instance.frame = view.bounds
         view.addSubview(instance)
 
-        let tapGesture = UITapGestureRecognizer(target: instance, action: #selector(close))
-        instance.addGestureRecognizer(tapGesture)
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             instance.tableViewTopConstraint.constant = 0
 
@@ -77,6 +81,16 @@ final class SubscriptionsSortingView: UIView {
         }, completion: {
             self.removeFromSuperview()
         })
+    }
+
+}
+
+// MARK: UITapGestureDelegate
+
+extension SubscriptionsSortingView: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 
 }
