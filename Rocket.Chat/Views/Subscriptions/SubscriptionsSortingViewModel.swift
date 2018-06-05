@@ -14,7 +14,7 @@ final class SubscriptionsSortingViewModel {
     internal let groupingOptions: [SubscriptionsGroupingOption] = [.type, .favorites, .unread]
 
     internal var viewHeight: CGFloat {
-        return CGFloat(sortingOptions.count + sortingOptions.count) * ServerCell.cellHeight
+        return CGFloat(sortingOptions.count + groupingOptions.count) * SubscriptionSortingCell.cellHeight
     }
 
     internal var initialTableViewPosition: CGFloat {

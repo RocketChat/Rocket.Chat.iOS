@@ -23,6 +23,11 @@ final class SubscriptionsSortingView: UIView {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+
+            tableView.register(
+                SubscriptionSortingCell.nib,
+                forCellReuseIdentifier: SubscriptionSortingCell.identifier
+            )
         }
     }
 
@@ -30,7 +35,7 @@ final class SubscriptionsSortingView: UIView {
     // animate it later when the view is presented.
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewHeighConstraint.constant = viewModel.initialTableViewPosition
+            tableViewTopConstraint.constant = viewModel.initialTableViewPosition
         }
     }
 
@@ -85,16 +90,6 @@ final class SubscriptionsSortingView: UIView {
 
 }
 
-// MARK: UITapGestureDelegate
-
-extension SubscriptionsSortingView: UIGestureRecognizerDelegate {
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-
-}
-
 // MARK: UITableViewDataSource
 
 extension SubscriptionsSortingView: UITableViewDataSource {
@@ -108,15 +103,17 @@ extension SubscriptionsSortingView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ServerCell.identifier) as? ServerCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionSortingCell.identifier) as? SubscriptionSortingCell else {
             return UITableViewCell()
         }
 
+        cell.imageViewIcon.image = viewModel.image(for: indexPath)
+        cell.labelTitle.text = viewModel.title(for: indexPath)
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ServerCell.cellHeight
+        return SubscriptionSortingCell.cellHeight
     }
 
 }

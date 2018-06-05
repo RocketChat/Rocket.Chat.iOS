@@ -281,6 +281,8 @@
 		41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */; };
 		41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD6139203D9E6600B02D8A /* UISplitViewControllerExtensions.swift */; };
 		41DE687B20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE687A20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift */; };
+		41DE687D20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DE687C20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift */; };
+		41DE688120C6EBE600AA5EC8 /* SubscriptionSortingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DE688020C6EBE600AA5EC8 /* SubscriptionSortingCell.xib */; };
 		41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF76E21D2C50710028DBF8 /* AppDelegate.swift */; };
 		41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76E91D2C50710028DBF8 /* Assets.xcassets */; };
 		41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */; };
@@ -1000,6 +1002,8 @@
 		41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionSearchMoreView.swift; sourceTree = "<group>"; };
 		41DD6139203D9E6600B02D8A /* UISplitViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISplitViewControllerExtensions.swift; sourceTree = "<group>"; };
 		41DE687A20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsSortingManager.swift; sourceTree = "<group>"; };
+		41DE687C20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSortingCell.swift; sourceTree = "<group>"; };
+		41DE688020C6EBE600AA5EC8 /* SubscriptionSortingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubscriptionSortingCell.xib; sourceTree = "<group>"; };
 		41DF76DF1D2C50710028DBF8 /* Rocket.Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DF76E21D2C50710028DBF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41DF76E91D2C50710028DBF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2056,6 +2060,8 @@
 				4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */,
 				41FBF4EA20BD8C650080D00D /* ServerCell.xib */,
 				4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */,
+				41DE687C20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift */,
+				41DE688020C6EBE600AA5EC8 /* SubscriptionSortingCell.xib */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3455,6 +3461,7 @@
 				14F8A256202E64B200175FDC /* BnW-83.5@2x.png in Resources */,
 				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
 				14F8A25B202E64B200175FDC /* BnW-60@2x.png in Resources */,
+				41DE688120C6EBE600AA5EC8 /* SubscriptionSortingCell.xib in Resources */,
 				41FBF4EB20BD8C650080D00D /* ServerCell.xib in Resources */,
 				14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */,
 				80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */,
@@ -3862,6 +3869,7 @@
 				D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */,
 				8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
+				41DE687D20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift in Sources */,
 				8013F8651FD5E13600EE1A4E /* APIExtensions.swift in Sources */,
 				4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */,
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
