@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ServerListViewDelegate: class {
+    func serverListViewDidClose()
+}
+
 final class ServersListView: UIView {
 
     private let viewModel = ServersListViewModel()
+    weak var delegate: ServerListViewDelegate?
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
@@ -63,7 +68,18 @@ final class ServersListView: UIView {
     static func showIn(_ view: UIView) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
         instance.backgroundColor = UIColor.black.withAlphaComponent(0)
-        instance.frame = view.bounds
+
+        var frameHeight = view.bounds.height
+        var yOffset: CGFloat = 0.0
+        if #available(iOS 11.0, *) {
+            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
+            yOffset = view.safeAreaInsets.top
+        } else {
+            frameHeight -= view.layoutMargins.top - view.layoutMargins.bottom
+            yOffset = view.layoutMargins.top
+        }
+
+        instance.frame = CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: frameHeight)
         view.addSubview(instance)
 
         let tapGesture = UITapGestureRecognizer(target: instance, action: #selector(close))
@@ -85,6 +101,7 @@ final class ServersListView: UIView {
 
     @objc func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
+        self.delegate?.serverListViewDidClose()
 
         animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)

@@ -27,7 +27,7 @@ extension Subscription {
         let isOnlyAttachment = text.count == 0 && lastMessage.attachments.count > 0
 
         if isOnlyAttachment {
-            text = "\(localized("subscriptions.list.sent_an_attachment"))"
+            text = " \(localized("subscriptions.list.sent_an_attachment"))"
         } else {
             if !isFromCurrentUser {
                 text = ": \(text)"

@@ -907,6 +907,8 @@
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
+		415D4B8620C57FF700EB72F2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		415D4B8720C57FF700EB72F2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		415DC7F51F67F5D30039FB4F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		416133311D46CA4E00E09DA2 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		416133331D46CA7200E09DA2 /* ChatMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageCell.xib; sourceTree = "<group>"; };
@@ -1877,7 +1879,6 @@
 			isa = PBXGroup;
 			children = (
 				D3CFAFBE1E907FC100BADC0A /* Chat */,
-				140C84EA1FC9DB9600032A59 /* CreateChannel */,
 				4156250920BEDF9200D20576 /* Subscriptions */,
 				418C743F1FA3626200499577 /* UIPickerView */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
@@ -3330,6 +3331,7 @@
 				fr,
 				el,
 				es,
+				ru,
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -4361,6 +4363,7 @@
 				35D2F140200A45E800B4BE5A /* fr */,
 				1499781C1FA605CE007E013D /* pl */,
 				41EB223A1E5F057F00AA3AE7 /* pt-BR */,
+				415D4B8620C57FF700EB72F2 /* ru */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -4377,6 +4380,7 @@
 				80307E461FD75DD1006AD9EF /* fr */,
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E441FD75DCB006AD9EF /* pt-BR */,
+				415D4B8720C57FF700EB72F2 /* ru */,
 			);
 			name = VoiceOver.strings;
 			path = .;
