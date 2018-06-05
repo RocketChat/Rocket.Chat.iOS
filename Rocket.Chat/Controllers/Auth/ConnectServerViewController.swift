@@ -69,7 +69,6 @@ final class ConnectServerViewController: BaseViewController {
         }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
 
@@ -114,7 +113,7 @@ final class ConnectServerViewController: BaseViewController {
 
     @objc func keyboardWillAppear(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            var viewRect = self.view.frame
+            var viewRect = view.frame
             viewRect.size.height -= keyboardSize.height
 
             if let buttonConnect = buttonConnect {
@@ -130,7 +129,7 @@ final class ConnectServerViewController: BaseViewController {
 
             keyboardConstraint.isActive = true
             keyboardConstraint.constant = -(keyboardSize.height + buttonConnectBottomSpacing)
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
             }
         }
@@ -138,7 +137,7 @@ final class ConnectServerViewController: BaseViewController {
 
     @objc func keyboardWillDisappear(_ notification: Notification) {
         keyboardConstraint.isActive = false
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
     }
