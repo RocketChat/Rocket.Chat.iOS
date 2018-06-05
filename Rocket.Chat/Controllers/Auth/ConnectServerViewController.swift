@@ -15,6 +15,7 @@ final class ConnectServerViewController: BaseViewController {
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
+    internal let buttonConnectBottomSpacing: CGFloat = 40
 
     var deepLinkCredentials: DeepLinkCredentials?
 
@@ -30,12 +31,25 @@ final class ConnectServerViewController: BaseViewController {
 
     @IBOutlet weak var buttonClose: UIBarButtonItem!
     @IBOutlet weak var buttonConnect: StyledButton!
-    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    lazy var keyboardConstraint: NSLayoutConstraint = {
+        var bottomGuide: NSLayoutYAxisAnchor
+
+        if #available(iOS 11.0, *) {
+            bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            bottomGuide = view.bottomAnchor
+        }
+
+        return buttonConnect.bottomAnchor.constraint(equalTo: bottomGuide, constant: 0)
+    }()
+
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +64,13 @@ final class ConnectServerViewController: BaseViewController {
         textFieldServerURL.placeholder = defaultURL
 
         if let nav = navigationController as? BaseNavigationController {
-            nav.setTransparentTheme()
+            nav.setWhiteTheme()
+            nav.navigationBar.isHidden = true
         }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,20 +91,63 @@ final class ConnectServerViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillShow(_:)),
+            selector: #selector(keyboardWillAppear(_:)),
             name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide(_:)),
+            selector: #selector(keyboardWillDisappear(_:)),
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
 
         textFieldServerURL.becomeFirstResponder()
     }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: Keyboard Handling
+
+    @objc func keyboardWillAppear(_ notification: Notification) {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            var viewRect = self.view.frame
+            viewRect.size.height -= keyboardSize.height
+
+            if let buttonConnect = buttonConnect {
+                let buttonVisibleOrigin = CGPoint(
+                    x: buttonConnect.frame.origin.x,
+                    y: buttonConnect.frame.origin.y + buttonConnect.frame.size.height + buttonConnectBottomSpacing
+                )
+
+                if viewRect.contains(buttonVisibleOrigin) {
+                    return
+                }
+            }
+
+            keyboardConstraint.isActive = true
+            keyboardConstraint.constant = -(keyboardSize.height + buttonConnectBottomSpacing)
+            UIView.animate(withDuration: 1) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+
+    @objc func keyboardWillDisappear(_ notification: Notification) {
+        keyboardConstraint.isActive = false
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
@@ -100,18 +162,11 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
-    // MARK: Keyboard Handlers
-    override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height + 40
-        }
-    }
-
-    override func keyboardWillHide(_ notification: Notification) {
-        visibleViewBottomConstraint.constant = 0
-    }
-
     // MARK: IBAction
+
+    @IBAction func buttonConnectDidPressed(_ sender: Any) {
+        connect()
+    }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
