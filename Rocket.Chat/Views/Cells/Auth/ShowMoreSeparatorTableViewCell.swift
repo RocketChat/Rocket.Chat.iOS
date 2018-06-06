@@ -14,8 +14,10 @@ class ShowMoreSeparatorTableViewCell: UITableViewCell {
 
     @IBOutlet weak var showMoreButton: UIButton!
 
-    @IBAction func showMoreButtonDidPressed() {
+    var showOrHideLoginServices: (() -> Void)?
 
+    @IBAction func showMoreButtonDidPressed() {
+        showOrHideLoginServices?()
     }
 
 }

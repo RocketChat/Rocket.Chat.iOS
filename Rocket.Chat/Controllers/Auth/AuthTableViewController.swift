@@ -26,8 +26,6 @@ final class AuthTableViewController: UITableViewController {
         return emailAuthRow
     }()
 
-//    @IBOutlet weak var buttonRegister: StyledButton!
-
     lazy var authSeparatorRow: AuthSeparatorTableViewCell = {
         guard let authSeparatorRow = AuthSeparatorTableViewCell.instantiateFromNib() else {
             return AuthSeparatorTableViewCell()
@@ -39,6 +37,10 @@ final class AuthTableViewController: UITableViewController {
     lazy var collapsibleAuthSeparatorRow: ShowMoreSeparatorTableViewCell = {
         guard let collapsibleAuthSeparatorRow = ShowMoreSeparatorTableViewCell.instantiateFromNib() else {
             return ShowMoreSeparatorTableViewCell()
+        }
+
+        collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
+            self?.showOrHideLoginServices()
         }
 
         return collapsibleAuthSeparatorRow
@@ -65,11 +67,26 @@ final class AuthTableViewController: UITableViewController {
     let socketHandlerToken = String.random(5)
     var loginServicesToken: NotificationToken?
 
+    var isLoginServicesCollapsed = true
     var loginServices: [LoginService] = [] {
         didSet {
             tableView.reloadData()
         }
     }
+
+    lazy var extraLoginServiceIndexPaths: [IndexPath] = {
+        guard loginServices.count > 3 else {
+            return []
+        }
+
+        let extraLoginServices = loginServices[3...loginServices.count - 1]
+        var extraLoginServiceIndexPaths: [IndexPath] = []
+        for index in extraLoginServices.indices {
+            extraLoginServiceIndexPaths.append(IndexPath(row: index, section: 0))
+        }
+
+        return extraLoginServiceIndexPaths
+    }()
 
     // MARK: Life Cycle
 
@@ -146,6 +163,19 @@ final class AuthTableViewController: UITableViewController {
         }
     }
 
+    // MARK: Actions
+
+    func showOrHideLoginServices() {
+//        button.setTitle(openHoursCollapseButtonTitle, for: .normal)  Change image
+        isLoginServicesCollapsed = !isLoginServicesCollapsed
+
+        if isLoginServicesCollapsed {
+            tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
+        } else {
+            tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
+        }
+    }
+
 }
 
 extension AuthTableViewController {
@@ -156,6 +186,10 @@ extension AuthTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            if loginServices.count > 3 && isLoginServicesCollapsed {
+                return 4
+            }
+
             return loginServices.count > 0 ? loginServices.count + 1 : 0
         } else {
             return 1
@@ -165,7 +199,9 @@ extension AuthTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            if indexPath.row == loginServices.count && loginServices.count > 3 {
+            if indexPath.row == 3 && loginServices.count > 3 && isLoginServicesCollapsed {
+                return collapsibleAuthSeparatorRow
+            } else if indexPath.row == loginServices.count && loginServices.count > 3 {
                 return collapsibleAuthSeparatorRow
             } else if indexPath.row == loginServices.count {
                 return authSeparatorRow
@@ -193,7 +229,9 @@ extension AuthTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            if indexPath.row == loginServices.count && loginServices.count > 3 {
+            if indexPath.row == 3 && loginServices.count > 3 && isLoginServicesCollapsed {
+                return ShowMoreSeparatorTableViewCell.rowHeight
+            } else if indexPath.row == loginServices.count && loginServices.count > 3 {
                 return ShowMoreSeparatorTableViewCell.rowHeight
             } else if indexPath.row == loginServices.count {
                 return AuthSeparatorTableViewCell.rowHeight
