@@ -94,4 +94,14 @@ final class SubscriptionsSortingViewModel {
         return SubscriptionsSortingManager.selectedGroupingOptions.contains(option)
     }
 
+    internal func select(indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            SubscriptionsSortingManager.select(option: sortingOptions[indexPath.row])
+        }
+
+        if indexPath.section == 1 {
+            SubscriptionsSortingManager.toggle(option: groupingOptions[indexPath.row].rawValue)
+        }
+    }
+
 }

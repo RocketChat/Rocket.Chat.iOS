@@ -176,6 +176,13 @@ extension SubscriptionsSortingView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.select(indexPath: indexPath)
+
+        if indexPath.section == 0 {
+            tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        } else {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
 
 }
