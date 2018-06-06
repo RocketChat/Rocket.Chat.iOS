@@ -13,9 +13,3 @@ class AuthSeparatorTableViewCell: UITableViewCell {
     static let rowHeight: CGFloat = 23
 
 }
-
-class CollapsibleAuthSeparatorTableViewCell: UITableViewCell {
-
-    static let rowHeight: CGFloat = 38
-
-}

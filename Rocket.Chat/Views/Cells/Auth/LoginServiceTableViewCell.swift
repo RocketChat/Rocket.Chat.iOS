@@ -10,7 +10,10 @@ import UIKit
 
 class LoginServiceTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var loginServiceButton: UIButton!
+    static let identifier = "LoginService"
+    static let rowHeight: CGFloat = 56
+
+    @IBOutlet weak var loginServiceButton: StyledButton!
 
     var loginService: LoginService! {
         didSet {
@@ -25,6 +28,7 @@ class LoginServiceTableViewCell: UITableViewCell {
         combinedString.append(service)
 
         loginServiceButton.setAttributedTitle(combinedString, for: .normal)
+        loginServiceButton.setImage(loginService.type.icon, for: .normal)
     }
 
 }
