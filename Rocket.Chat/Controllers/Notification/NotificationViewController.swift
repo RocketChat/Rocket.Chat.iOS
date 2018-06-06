@@ -51,11 +51,8 @@ final class NotificationViewController: TopTransparentViewController {
     // MARK: - View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowRadius = 1
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.clipsToBounds = true
+
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
