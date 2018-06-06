@@ -29,6 +29,8 @@ final class StyledButton: UIButton {
                 fontWeight = UIFont.Weight.light
             case "Medium":
                 fontWeight = UIFont.Weight.medium
+            case "Bold":
+                fontWeight = UIFont.Weight.bold
             default:
                 fontWeight = UIFont.Weight.regular
             }
@@ -66,6 +68,12 @@ final class StyledButton: UIButton {
         applyStyle()
     }
 
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+        var imageRect = contentRect
+        imageRect.origin.x = 15
+        return imageRect
+    }
+
     // MARK: Style Modifiers
 
     func applyStyle() {
@@ -84,7 +92,7 @@ final class StyledButton: UIButton {
             backgroundColor = UIColor.clear
             layer.borderColor = borderColor.cgColor
             layer.borderWidth = borderWidth
-            setTitleColor(borderColor, for: UIControlState())
+            setTitleColor(textColor, for: UIControlState())
             titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         }
     }

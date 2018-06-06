@@ -620,6 +620,7 @@
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
 		994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */; };
 		994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */; };
+		995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710A20C7822A00B7535F /* AuthTableViewController.swift */; };
 		995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEB2E206286D9004EE38F /* WebBrowserManager.swift */; };
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
@@ -1327,6 +1328,7 @@
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
 		994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModelSpec.swift; sourceTree = "<group>"; };
 		994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
+		995F710A20C7822A00B7535F /* AuthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTableViewController.swift; sourceTree = "<group>"; };
 		995FEB2E206286D9004EE38F /* WebBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManager.swift; sourceTree = "<group>"; };
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -1929,6 +1931,7 @@
 		4174CB101D2D997E0086DAC8 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				995F710A20C7822A00B7535F /* AuthTableViewController.swift */,
 				4174CB161D2D9BB70086DAC8 /* AuthViewController.swift */,
 				806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */,
 				806DB94720695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift */,
@@ -3944,6 +3947,7 @@
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
+				995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
