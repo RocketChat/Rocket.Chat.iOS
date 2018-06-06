@@ -149,7 +149,7 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
+        if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
             controller.serverVersion = infoRequestHandler.version
             controller.serverURL = url
             controller.serverPublicSettings = self.serverPublicSettings
