@@ -70,7 +70,8 @@ final class StyledButton: UIButton {
 
     override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         var imageRect = contentRect
-        imageRect.origin.x = 15
+        imageRect.origin = CGPoint(x: 15, y: 11)
+        imageRect.size = CGSize(width: 24, height: 24)
         return imageRect
     }
 
