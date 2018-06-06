@@ -59,21 +59,14 @@ extension UILabel {
 
 extension UITextField {
     override func applyTheme() {
-        super.applyTheme()
         guard let theme = theme else { return }
         textColor = theme.titleText
         tintColor = theme.tintColor
         keyboardAppearance = theme.appearence.keyboardAppearence
+        leftView?.tintColor = theme.auxiliaryText
         if let placeholder = placeholder {
-            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.mutedAccent])
+            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.auxiliaryText])
         }
-    }
-}
-
-extension UISearchBar {
-    override func applyTheme() {
-        guard let theme = theme else { return }
-        tintColor = theme.tintColor
     }
 }
 
