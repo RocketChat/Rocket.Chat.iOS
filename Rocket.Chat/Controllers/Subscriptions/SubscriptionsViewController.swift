@@ -31,6 +31,9 @@ final class SubscriptionsViewController: BaseViewController {
     var subscriptionsToken: NotificationToken?
     var currentUserToken: NotificationToken?
 
+    var groupInfomation: [[String: String]]?
+    var groupSubscriptions: [[Subscription]]?
+
     var subscriptionsToShow: [Subscription] {
         switch searchState {
         case .searchingLocally:
@@ -95,6 +98,110 @@ final class SubscriptionsViewController: BaseViewController {
 
         let managedSubscriptions = auth.subscriptions.sortedByLastMessageDate()
         subscriptionsToken = managedSubscriptions.observe(handleSubscriptionUpdates)
+    }
+
+    // swiftlint:disable function_body_length cyclomatic_complexity
+    func organizeSubscriptionsGrouped() {
+        var unreadGroup: [Subscription] = []
+        var favoriteGroup: [Subscription] = []
+        var channelGroup: [Subscription] = []
+        var directMessageGroup: [Subscription] = []
+        var searchResultsGroup: [Subscription] = []
+
+        let isSearchingRemotely = searchState == .searchingRemotely
+        let isSearchingLocally = searchState == .searchingLocally
+
+        guard let subscriptions = subscriptions else { return }
+        let orderSubscriptions = isSearchingRemotely ? searchResult : subscriptions
+
+        for subscription in orderSubscriptions ?? [] {
+            if isSearchingRemotely {
+                searchResultsGroup.append(subscription)
+            }
+
+            if !isSearchingLocally && !subscription.open {
+                continue
+            }
+
+            if subscription.alert {
+                unreadGroup.append(subscription)
+                continue
+            }
+
+            if subscription.favorite {
+                favoriteGroup.append(subscription)
+                continue
+            }
+
+            switch subscription.type {
+            case .channel, .group:
+                channelGroup.append(subscription)
+            case .directMessage:
+                directMessageGroup.append(subscription)
+            }
+        }
+
+        groupInfomation = [[String: String]]()
+        groupSubscriptions = [[Subscription]]()
+
+        if searchResultsGroup.count > 0 {
+            groupInfomation?.append([
+                "name": localized("subscriptions.search_results")
+            ])
+
+            searchResultsGroup = searchResultsGroup.sorted {
+                return $0.displayName() < $1.displayName()
+            }
+
+            groupSubscriptions?.append(searchResultsGroup)
+        } else {
+            if unreadGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.unreads")
+                ])
+
+                unreadGroup = unreadGroup.sorted {
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
+                }
+
+                groupSubscriptions?.append(unreadGroup)
+            }
+
+            if favoriteGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.favorites")
+                ])
+
+                favoriteGroup = favoriteGroup.sorted {
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
+                }
+
+                groupSubscriptions?.append(favoriteGroup)
+            }
+
+            if channelGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.channels")
+                ])
+
+                groupSubscriptions?.append(channelGroup)
+            }
+
+            if directMessageGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.direct_messages")
+                ])
+
+                groupSubscriptions?.append(directMessageGroup)
+            }
+        }
+    }
+
+    func subscription(for indexPath: IndexPath) -> Subscription? {
+        guard let groups = groupSubscriptions else { return nil }
+        guard groups.count > indexPath.section else { return nil }
+        guard groups[indexPath.section].count > indexPath.row else { return nil }
+        return groups[indexPath.section][indexPath.row]
     }
 
     // MARK: Setup Views
@@ -235,6 +342,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
+        organizeSubscriptionsGrouped()
     }
 
     func updateSearched() {
@@ -301,14 +409,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
     }
 
-    func subscription(for indexPath: IndexPath) -> Subscription? {
-        if subscriptionsToShow.count > indexPath.row {
-            return subscriptionsToShow[indexPath.row]
-        }
-
-        return nil
-    }
-
     // MARK: IBAction
 
     @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
@@ -335,19 +435,19 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 71
+        return UITableViewAutomaticDimension
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 71
+        return UITableViewAutomaticDimension
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return groupInfomation?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subscriptionsToShow.count
+        return groupSubscriptions?[section].count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -370,6 +470,23 @@ extension SubscriptionsViewController: UITableViewDataSource {
 }
 
 extension SubscriptionsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let view = SubscriptionSectionView.instantiateFromNib()
+        else {
+            return nil
+        }
+
+        view.setTitle(group["name"])
+        return view
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
