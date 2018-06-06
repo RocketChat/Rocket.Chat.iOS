@@ -172,7 +172,7 @@
 // Chat Message Actions
 "chat.message.actions.react" = "Добавить реакцию";
 "chat.message.actions.block" = "Блокировать сообщения от пользователя";
-"chat.message.actions.report" = "Передать сообщение";
+"chat.message.actions.report" = "Пожаловаться на сообщение";
 "chat.message.actions.edit" = "Редактировать";
 "chat.message.actions.copy" = "Копировать";
 "chat.message.actions.pin" = "Прикрепить сообщение";
@@ -194,8 +194,8 @@
 "Send" = "Отправить"; //SLKTextInputbar.m
 
 // Chat Message Report
-"chat.message.report.success.title" = "Сообщение передано";
-"chat.message.report.success.message" = "Сообщение передано успешно, спасибо!";
+"chat.message.report.success.title" = "Жалоба отправлена";
+"chat.message.report.success.message" = "Жалоба на сообщение отправлена успешно, спасибо!";
 
 // Chat Upload
 "chat.upload.uploading_image" = "Загрузить изображение";
@@ -218,7 +218,7 @@
 "chat.drawing.errorTitle" = "Упс!";
 "chat.drawing.messageTitle" = "Вы должны нарисовать что-нибудь перед отправкой.";
 "chat.drawing.fileName" = "Рисование";
-"chat.drawing.settings.opacity" = "Непрозрачность";
+"chat.drawing.settings.opacity" = "Уровень прозрачности";
 "chat.drawing.settings.width" = "Ширина";
 "chat.drawing.settings.color.selected" = "Выбранный цвет";
 "chat.drawing.settings.color.others" = "Выберите цвет ниже:";
