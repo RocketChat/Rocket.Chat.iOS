@@ -112,6 +112,21 @@ extension SubscriptionsSortingView: UITableViewDataSource {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 10))
+            view.backgroundColor = .white
+
+            let separator = UIView(frame: CGRect(x: 0, y: 5, width: tableView.bounds.width, height: 1))
+            separator.backgroundColor = .lightGray
+            view.addSubview(separator)
+
+            return view
+        }
+
+        return UIView()
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SubscriptionSortingCell.cellHeight
     }
