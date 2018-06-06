@@ -39,6 +39,7 @@ final class AuthTableViewController: UITableViewController {
             return ShowMoreSeparatorTableViewCell()
         }
 
+        collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -166,12 +167,19 @@ final class AuthTableViewController: UITableViewController {
     // MARK: Actions
 
     func showOrHideLoginServices() {
-//        button.setTitle(openHoursCollapseButtonTitle, for: .normal)  Change image
         isLoginServicesCollapsed = !isLoginServicesCollapsed
 
         if isLoginServicesCollapsed {
+            UIView.animate(withDuration: 0.5) {
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            }
+
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
+            UIView.animate(withDuration: 0.5) {
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
+            }
+
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
     }
