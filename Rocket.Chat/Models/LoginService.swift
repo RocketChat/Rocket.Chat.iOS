@@ -34,6 +34,18 @@ enum LoginServiceType {
         default: self = .invalid
         }
     }
+
+    var icon: UIImage? {
+        switch self {
+        case .google: return #imageLiteral(resourceName: "google")
+        case .facebook: return #imageLiteral(resourceName: "facebook")
+        case .github: return #imageLiteral(resourceName: "github")
+        case .gitlab: return #imageLiteral(resourceName: "gitlab")
+        case .linkedin: return #imageLiteral(resourceName: "linkedin")
+        case .wordpress: return #imageLiteral(resourceName: "wordpress")
+        default: return nil
+        }
+    }
 }
 
 class LoginService: BaseModel {
