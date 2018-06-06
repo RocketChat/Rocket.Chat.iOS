@@ -65,7 +65,7 @@ final class ConnectServerViewController: BaseViewController {
 
         if let nav = navigationController as? BaseNavigationController {
             nav.setWhiteTheme()
-            nav.navigationBar.isHidden = true
+//            nav.navigationBar.isHidden = true
         }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
