@@ -72,11 +72,8 @@ extension UITextField {
 
 extension UISearchBar {
     override func applyTheme() {
-        super.applyTheme()
         guard let theme = theme else { return }
         tintColor = theme.tintColor
-        let textField = subviews.first?.subviews.first { $0 is UITextField } as? UITextField
-        textField?.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
 }
 
@@ -141,11 +138,18 @@ extension UITableViewCell {
     }
 }
 
+extension UITableViewHeaderFooterView {
+    override func applyTheme() {
+        super.applyTheme()
+        textLabel?.textColor = #colorLiteral(red: 0.431372549, green: 0.431372549, blue: 0.4509803922, alpha: 1)
+    }
+}
+
 extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.tintColor
+        tintColor = theme.hyperlinkColor
     }
 }
 
@@ -213,7 +217,7 @@ extension SLKTextView {
         super.applyTheme()
         guard let theme = theme else { return }
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
-        backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
+        backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1021854048)
         textColor = theme.bodyText
         tintColor = theme.tintColor
     }

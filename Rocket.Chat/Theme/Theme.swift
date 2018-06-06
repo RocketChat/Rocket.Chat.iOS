@@ -22,6 +22,7 @@ class Theme: NSObject {
     let bodyText: UIColor
     let auxiliaryText: UIColor
     let tintColor: UIColor
+    let hyperlinkColor: UIColor
     let focusedBackground: UIColor
     let auxiliaryBackground: UIColor
     let mutedAccent: UIColor
@@ -42,6 +43,7 @@ class Theme: NSObject {
          bodyText: UIColor,
          auxiliaryText: UIColor,
          tintColor: UIColor,
+         hyperlinkColor: UIColor,
          focusedBackground: UIColor,
          auxiliaryBackground: UIColor,
          mutedAccent: UIColor,
@@ -53,6 +55,7 @@ class Theme: NSObject {
         self.bodyText = bodyText
         self.auxiliaryText = auxiliaryText
         self.tintColor = tintColor
+        self.hyperlinkColor = hyperlinkColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
         self.mutedAccent = mutedAccent
@@ -72,6 +75,7 @@ class Theme: NSObject {
         bodyText: #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6117647059, green: 0.6352941176, blue: 0.6588235294, alpha: 1),
         tintColor: .RCBlue(),
+        hyperlinkColor: .RCBlue(),
         focusedBackground: .RCNavigationBarColor(),
         auxiliaryBackground: #colorLiteral(red: 0.03921568627, green: 0.2666666667, blue: 0.4117647059, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.8, alpha: 1),
@@ -80,14 +84,15 @@ class Theme: NSObject {
     )
 
     static let dark = Theme(
-        backgroundColor: #colorLiteral(red: 0.08, green: 0.08, blue: 0.08, alpha: 1),
+        backgroundColor: #colorLiteral(red: 0.06482539596, green: 0.06587358546, blue: 0.06711885095, alpha: 1),
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        tintColor: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
-        focusedBackground: #colorLiteral(red: 0.1036974415, green: 0.1036974415, blue: 0.1036974415, alpha: 1),
+        tintColor: #colorLiteral(red: 0.1176899746, green: 0.6068716645, blue: 0.9971964955, alpha: 1),
+        hyperlinkColor: #colorLiteral(red: 0.4039215686, green: 0.7333333333, blue: 1, alpha: 1),
+        focusedBackground: #colorLiteral(red: 0.08987318066, green: 0.08987318066, blue: 0.1, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        mutedAccent: #colorLiteral(red: 0.2431372549, green: 0.2431372549, blue: 0.2470588235, alpha: 1),
+        mutedAccent: #colorLiteral(red: 0.1672673633, green: 0.1672673633, blue: 0.1769603646, alpha: 1),
         strongAccent: nil,
         appearence: .dark
     )
@@ -97,10 +102,11 @@ class Theme: NSObject {
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        tintColor: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
-        focusedBackground: #colorLiteral(red: 0.04620946944, green: 0.04620946944, blue: 0.04620946944, alpha: 1),
+        tintColor: #colorLiteral(red: 0.1176899746, green: 0.6068716645, blue: 0.9971964955, alpha: 1),
+        hyperlinkColor: #colorLiteral(red: 0.4039215686, green: 0.7333333333, blue: 1, alpha: 1),
+        focusedBackground: #colorLiteral(red: 0.05332512842, green: 0.05332512842, blue: 0.05332512842, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        mutedAccent: #colorLiteral(red: 0.1960784314, green: 0.1960784314, blue: 0.2, alpha: 1),
+        mutedAccent: #colorLiteral(red: 0.156862745, green: 0.156862745, blue: 0.16, alpha: 1),
         strongAccent: nil,
         appearence: .dark
     )
