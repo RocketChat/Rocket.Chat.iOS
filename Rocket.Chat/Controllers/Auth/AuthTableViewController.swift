@@ -10,4 +10,6 @@ import UIKit
 
 class AuthTableViewController: UITableViewController {
 
+    var loginServices: [LoginService] = []
+
 }

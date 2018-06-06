@@ -621,6 +621,8 @@
 		994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */; };
 		994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */; };
 		995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710A20C7822A00B7535F /* AuthTableViewController.swift */; };
+		995F710E20C7837300B7535F /* AuthSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */; };
+		995F711020C7842100B7535F /* LoginServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710F20C7842100B7535F /* LoginServiceTableViewCell.swift */; };
 		995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEB2E206286D9004EE38F /* WebBrowserManager.swift */; };
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
@@ -1329,6 +1331,8 @@
 		994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModelSpec.swift; sourceTree = "<group>"; };
 		994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
 		995F710A20C7822A00B7535F /* AuthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTableViewController.swift; sourceTree = "<group>"; };
+		995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSeparatorTableViewCell.swift; sourceTree = "<group>"; };
+		995F710F20C7842100B7535F /* LoginServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTableViewCell.swift; sourceTree = "<group>"; };
 		995FEB2E206286D9004EE38F /* WebBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManager.swift; sourceTree = "<group>"; };
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -1802,6 +1806,7 @@
 		416133301D46CA3100E09DA2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				995F710C20C7833500B7535F /* Auth */,
 				416133351D46CA7400E09DA2 /* Chat */,
 				4153E80320504BC800FBC26B /* Preferences */,
 				4192054A1D52F4E7004EEC5F /* Subscription */,
@@ -3027,6 +3032,15 @@
 			path = "Web Browser";
 			sourceTree = "<group>";
 		};
+		995F710C20C7833500B7535F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */,
+				995F710F20C7842100B7535F /* LoginServiceTableViewCell.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		9960C82E2063F091004A034C /* Web Browser */ = {
 			isa = PBXGroup;
 			children = (
@@ -3796,8 +3810,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				995F711020C7842100B7535F /* LoginServiceTableViewCell.swift in Sources */,
 				14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */,
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
+				995F710E20C7837300B7535F /* AuthSeparatorTableViewCell.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
 				8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
