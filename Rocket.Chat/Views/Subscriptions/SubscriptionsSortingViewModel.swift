@@ -13,8 +13,9 @@ final class SubscriptionsSortingViewModel {
     internal let sortingOptions: [SubscriptionsSortingOption] = [.activity, .alphabetically]
     internal let groupingOptions: [SubscriptionsGroupingOption] = [.type, .favorites, .unread]
 
+    internal var listSeparatorHeight: CGFloat = 10.0
     internal var viewHeight: CGFloat {
-        return CGFloat(sortingOptions.count + groupingOptions.count) * SubscriptionSortingCell.cellHeight
+        return CGFloat(sortingOptions.count + groupingOptions.count) * SubscriptionSortingCell.cellHeight + listSeparatorHeight
     }
 
     internal var initialTableViewPosition: CGFloat {

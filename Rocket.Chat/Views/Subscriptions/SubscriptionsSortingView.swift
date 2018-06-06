@@ -19,6 +19,7 @@ final class SubscriptionsSortingView: UIView {
         }
     }
 
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -33,9 +34,9 @@ final class SubscriptionsSortingView: UIView {
 
     // Start the constraint with negative value (view height + headerView height) so we can
     // animate it later when the view is presented.
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var headerViewViewTopConstraint: NSLayoutConstraint! {
         didSet {
-            tableViewTopConstraint.constant = viewModel.initialTableViewPosition
+            headerViewViewTopConstraint.constant = viewModel.initialTableViewPosition
         }
     }
 
@@ -64,7 +65,7 @@ final class SubscriptionsSortingView: UIView {
         view.addSubview(instance)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            instance.tableViewTopConstraint.constant = 0
+            instance.headerViewViewTopConstraint.constant = 0
 
             instance.animates({
                 instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -78,7 +79,7 @@ final class SubscriptionsSortingView: UIView {
     // MARK: Hiding the View
 
     @objc func close() {
-        tableViewTopConstraint.constant = viewModel.initialTableViewPosition
+        headerViewViewTopConstraint.constant = viewModel.initialTableViewPosition
 
         animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
@@ -114,17 +115,37 @@ extension SubscriptionsSortingView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 10))
+            let viewHeight = viewModel.listSeparatorHeight
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: viewHeight))
             view.backgroundColor = .white
 
-            let separator = UIView(frame: CGRect(x: 0, y: 5, width: tableView.bounds.width, height: 1))
-            separator.backgroundColor = .lightGray
+            let horizontalSpacing = 16.0
+            let separator = UIView(frame: CGRect(
+                x: horizontalSpacing,
+                y: Double(viewHeight) / 2,
+                width: Double(tableView.bounds.width) - horizontalSpacing * 2,
+                height: 0.5
+            ))
+
+            separator.backgroundColor = .RCLightGray()
             view.addSubview(separator)
 
             return view
         }
 
         return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return viewModel.listSeparatorHeight
+        }
+
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
