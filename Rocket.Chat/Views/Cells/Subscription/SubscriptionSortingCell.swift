@@ -20,12 +20,6 @@ final class SubscriptionSortingCell: UITableViewCell {
     internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
     internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-
-    }
-
 }
 
 extension SubscriptionSortingCell {
@@ -64,4 +58,3 @@ extension SubscriptionSortingCell {
         }
     }
 }
-

@@ -41,8 +41,8 @@ final class SubscriptionsSortingViewModel {
         }
     }
 
-    internal func title(for sortingOption: SubscriptionsGroupingOption) -> String {
-        switch sortingOption {
+    internal func title(for groupingOption: SubscriptionsGroupingOption) -> String {
+        switch groupingOption {
         case .favorites: return localized("subscriptions.grouping.favorites")
         case .type: return localized("subscriptions.grouping.type")
         case .unread: return localized("subscriptions.grouping.unread_top")
@@ -66,8 +66,8 @@ final class SubscriptionsSortingViewModel {
         }
     }
 
-    internal func image(for sortingOption: SubscriptionsGroupingOption) -> UIImage? {
-        switch sortingOption {
+    internal func image(for groupingOption: SubscriptionsGroupingOption) -> UIImage? {
+        switch groupingOption {
         case .favorites: return UIImage(named: "Group Favorites")
         case .type: return UIImage(named: "Group Type")
         case .unread: return UIImage(named: "Group Unread")
@@ -80,6 +80,18 @@ final class SubscriptionsSortingViewModel {
         }
 
         return image(for: groupingOptions[indexPath.row])
+    }
+
+    // MARK: Selection
+
+    internal func isSelected(indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            let option = sortingOptions[indexPath.row]
+            return option == SubscriptionsSortingManager.selectedSortingOption
+        }
+
+        let option = groupingOptions[indexPath.row]
+        return SubscriptionsSortingManager.selectedGroupingOptions.contains(option)
     }
 
 }

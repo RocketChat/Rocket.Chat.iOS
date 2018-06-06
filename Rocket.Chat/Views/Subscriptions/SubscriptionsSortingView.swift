@@ -19,6 +19,7 @@ final class SubscriptionsSortingView: UIView {
         }
     }
 
+    @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -34,9 +35,9 @@ final class SubscriptionsSortingView: UIView {
 
     // Start the constraint with negative value (view height + headerView height) so we can
     // animate it later when the view is presented.
-    @IBOutlet weak var headerViewViewTopConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var tableViewViewTopConstraint: NSLayoutConstraint! {
         didSet {
-            headerViewViewTopConstraint.constant = viewModel.initialTableViewPosition
+            tableViewViewTopConstraint.constant = viewModel.initialTableViewPosition
         }
     }
 
@@ -65,9 +66,10 @@ final class SubscriptionsSortingView: UIView {
         view.addSubview(instance)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            instance.headerViewViewTopConstraint.constant = 0
+            instance.tableViewViewTopConstraint.constant = 0
 
             instance.animates({
+                instance.buttonClose.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
                 instance.layoutIfNeeded()
             })
@@ -79,14 +81,21 @@ final class SubscriptionsSortingView: UIView {
     // MARK: Hiding the View
 
     @objc func close() {
-        headerViewViewTopConstraint.constant = viewModel.initialTableViewPosition
+        tableViewViewTopConstraint.constant = viewModel.initialTableViewPosition
 
         animates({
+            self.buttonClose.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             self.layoutIfNeeded()
         }, completion: {
             self.removeFromSuperview()
         })
+    }
+
+    // MARK: IBAction
+
+    @IBAction func buttonCloseDidPressed(_ sender: Any) {
+        close()
     }
 
 }
@@ -110,6 +119,13 @@ extension SubscriptionsSortingView: UITableViewDataSource {
 
         cell.imageViewIcon.image = viewModel.image(for: indexPath)
         cell.labelTitle.text = viewModel.title(for: indexPath)
+
+        if viewModel.isSelected(indexPath: indexPath) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+
         return cell
     }
 
@@ -159,7 +175,7 @@ extension SubscriptionsSortingView: UITableViewDataSource {
 extension SubscriptionsSortingView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
