@@ -208,6 +208,7 @@
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="labelSortingTitleDescription" destination="4ch-xw-I4W" id="0WA-jc-zI3"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                     </connections>
                 </viewController>

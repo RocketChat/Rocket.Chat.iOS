@@ -34,6 +34,14 @@ final class SubscriptionsSortingViewModel {
 
     // MARK: Titles
 
+    internal var sortingTitleDescription: String {
+        if SubscriptionsSortingManager.selectedSortingOption == .alphabetically {
+            return localized("subscriptions.sorting.title.alphabetical")
+        }
+
+        return localized("subscriptions.sorting.title.activity")
+    }
+
     internal func title(for sortingOption: SubscriptionsSortingOption) -> String {
         switch sortingOption {
         case .activity: return localized("subscriptions.sorting.activity")

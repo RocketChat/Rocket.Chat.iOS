@@ -25,6 +25,12 @@ final class SubscriptionsSortingView: UIView {
         }
     }
 
+    @IBOutlet weak var labelTitle: UILabel! {
+        didSet {
+            labelTitle.text = viewModel.sortingTitleDescription
+        }
+    }
+
     @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView! {
@@ -184,6 +190,7 @@ extension SubscriptionsSortingView: UITableViewDelegate {
 
         if indexPath.section == 0 {
             tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            labelTitle.text = viewModel.sortingTitleDescription
         } else {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }

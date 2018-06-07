@@ -89,6 +89,7 @@
             <connections>
                 <outlet property="buttonClose" destination="iHO-bN-nWC" id="Twv-DO-pv9"/>
                 <outlet property="headerView" destination="ELE-4T-pm3" id="Tq4-Xz-rCj"/>
+                <outlet property="labelTitle" destination="E8U-qO-lbN" id="A4g-Gf-s7l"/>
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
                 <outlet property="tableViewViewTopConstraint" destination="lds-mS-2r4" id="8ff-59-8GV"/>

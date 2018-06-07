@@ -17,6 +17,11 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelSortingTitleDescription: UILabel! {
+        didSet {
+            updateSortingTitleDescription()
+        }
+    }
 
     weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
@@ -591,7 +596,16 @@ extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
 
 extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
+    func updateSortingTitleDescription() {
+        if SubscriptionsSortingManager.selectedSortingOption == .alphabetically {
+            labelSortingTitleDescription.text = localized("subscriptions.sorting.title.alphabetical")
+        } else {
+            labelSortingTitleDescription.text = localized("subscriptions.sorting.title.activity")
+        }
+    }
+
     func userDidChangeSortingOptions() {
+        updateSortingTitleDescription()
         updateAll()
         tableView.reloadData()
     }
