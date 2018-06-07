@@ -259,7 +259,7 @@
                 <viewControllerPlaceholder storyboardName="Preferences" id="gmk-4H-3s2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vB8-Lh-zAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="992" y="-35"/>
+            <point key="canvasLocation" x="973" y="170"/>
         </scene>
         <!--New Room-->
         <scene sceneID="yX3-Oa-Zdf">
@@ -267,7 +267,7 @@
                 <viewControllerPlaceholder storyboardName="New Room" id="Yv3-wP-OPQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUE-tQ-REW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="368"/>
+            <point key="canvasLocation" x="983" y="338"/>
         </scene>
     </scenes>
     <resources>
