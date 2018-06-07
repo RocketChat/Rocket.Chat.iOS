@@ -63,6 +63,19 @@ class NotificationViewControllerSpec: XCTestCase {
         }
         XCTAssert(UIApplication.shared.windows.contains(notificaitonWindow), "Notification window should be added as a window to the application")
         XCTAssert(notificaitonWindow.rootViewController == NotificationViewController.shared, "The shared notification view controller should be the root view controller for the notification window")
-        XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelAlert, "Notification window level should be UIWindowLevelAlert")
+    }
+
+    func testNotificationWindowLevel() {
+        let notificationVC = NotificationViewController.shared
+        guard let notificaitonWindow = (UIApplication.shared.delegate as? AppDelegate)?.notificationWindow else {
+            XCTFail("Notification window should be stored")
+            return
+        }
+
+        if notificationVC.isDeviceWithNotch {
+            XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelStatusBar - 1, "Notification window level should be UIWindowLevelStatusBar - 1")
+        } else {
+            XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelAlert, "Notification window level should be UIWindowLevelAlert")
+        }
     }
 }
