@@ -92,12 +92,10 @@ final class SubscriptionsViewController: BaseViewController {
 
     func subscribeModelChanges() {
         guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let susbcriptions = Subscription.all() else { return }
 
         assigned = true
-
-        let managedSubscriptions = auth.subscriptions.sortedByLastMessageDate()
-        subscriptionsToken = managedSubscriptions.observe(handleSubscriptionUpdates)
+        subscriptionsToken = susbcriptions.observe(handleSubscriptionUpdates)
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -107,9 +105,15 @@ final class SubscriptionsViewController: BaseViewController {
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
         var searchResultsGroup: [Subscription] = []
+        var untitledGroup: [Subscription] = []
 
         let isSearchingRemotely = searchState == .searchingRemotely
         let isSearchingLocally = searchState == .searchingLocally
+
+        let grouping = SubscriptionsSortingManager.selectedGroupingOptions
+        let isGroupByTypeEnabled = grouping.contains(.type)
+        let isGroupFavoritesEnabled = grouping.contains(.favorites)
+        let isGroupUnreadsEnabled = grouping.contains(.unread)
 
         guard let subscriptions = subscriptions else { return }
         let orderSubscriptions = isSearchingRemotely ? searchResult : subscriptions
@@ -123,21 +127,25 @@ final class SubscriptionsViewController: BaseViewController {
                 continue
             }
 
-            if subscription.alert {
+            if isGroupUnreadsEnabled && subscription.alert {
                 unreadGroup.append(subscription)
                 continue
             }
 
-            if subscription.favorite {
+            if isGroupFavoritesEnabled && subscription.favorite {
                 favoriteGroup.append(subscription)
                 continue
             }
 
-            switch subscription.type {
-            case .channel, .group:
-                channelGroup.append(subscription)
-            case .directMessage:
-                directMessageGroup.append(subscription)
+            if isGroupByTypeEnabled {
+                switch subscription.type {
+                case .channel, .group:
+                    channelGroup.append(subscription)
+                case .directMessage:
+                    directMessageGroup.append(subscription)
+                }
+            } else {
+                untitledGroup.append(subscription)
             }
         }
 
@@ -149,20 +157,12 @@ final class SubscriptionsViewController: BaseViewController {
                 "name": localized("subscriptions.search_results")
             ])
 
-            searchResultsGroup = searchResultsGroup.sorted {
-                return $0.displayName() < $1.displayName()
-            }
-
             groupSubscriptions?.append(searchResultsGroup)
         } else {
             if unreadGroup.count > 0 {
                 groupInfomation?.append([
                     "name": localized("subscriptions.unreads")
                 ])
-
-                unreadGroup = unreadGroup.sorted {
-                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
-                }
 
                 groupSubscriptions?.append(unreadGroup)
             }
@@ -171,10 +171,6 @@ final class SubscriptionsViewController: BaseViewController {
                 groupInfomation?.append([
                     "name": localized("subscriptions.favorites")
                 ])
-
-                favoriteGroup = favoriteGroup.sorted {
-                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
-                }
 
                 groupSubscriptions?.append(favoriteGroup)
             }
@@ -193,6 +189,15 @@ final class SubscriptionsViewController: BaseViewController {
                 ])
 
                 groupSubscriptions?.append(directMessageGroup)
+            }
+
+            if untitledGroup.count > 0 {
+                let title = isGroupFavoritesEnabled || isGroupByTypeEnabled || isGroupUnreadsEnabled ? localized("subscriptions.conversations") : ""
+                groupInfomation?.append([
+                    "name": title
+                ])
+
+                groupSubscriptions?.append(untitledGroup)
             }
         }
     }
@@ -236,9 +241,23 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
         } else {
-            let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
-            tableView.tableHeaderView = searchBar
-            self.searchBar = searchBar
+            if let headerView = tableView.tableHeaderView {
+                var frame = headerView.frame
+                frame.size.height = 88
+                headerView.frame = frame
+
+                let searchBar = UISearchBar(frame: CGRect(
+                    x: 0,
+                    y: 44,
+                    width: frame.width,
+                    height: 44
+                ))
+
+                headerView.addSubview(searchBar)
+                self.searchBar = searchBar
+
+                tableView.tableHeaderView = headerView
+            }
         }
 
         self.searchController = searchController
@@ -283,8 +302,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func searchBy(_ text: String = "") {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
+        updateSearched()
         searchText = text
 
         if text.count == 0 {
@@ -340,14 +358,25 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateAll() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
+        guard let allSubscriptions = Subscription.all() else { return }
+
+        if SubscriptionsSortingManager.selectedSortingOption == .activity {
+            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
+        } else {
+            subscriptions = Array(allSubscriptions.sortedByName())
+        }
+
         organizeSubscriptionsGrouped()
     }
 
     func updateSearched() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText))
+        guard let allSubscriptions = Subscription.all()?.filterBy(name: searchText) else { return }
+
+        if SubscriptionsSortingManager.selectedSortingOption == .activity {
+            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
+        } else {
+            subscriptions = Array(allSubscriptions.sortedByName())
+        }
     }
 
     func updateSubscriptionsList() {
@@ -416,6 +445,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             sortingView.close()
         } else {
             sortingView = SubscriptionsSortingView.showIn(self.view)
+            sortingView?.delegate = self
         }
     }
 
@@ -435,11 +465,11 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 71
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 71
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -472,7 +502,16 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let name = group["name"] as String?,
+            !name.isEmpty
+        else {
+            return 0
+        }
+
+        return 55
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -546,6 +585,15 @@ extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
 
     func userDidPressServerName() {
         openServersList()
+    }
+
+}
+
+extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
+
+    func userDidChangeSortingOptions() {
+        updateAll()
+        tableView.reloadData()
     }
 
 }

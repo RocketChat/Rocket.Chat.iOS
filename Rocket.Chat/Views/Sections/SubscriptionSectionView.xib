@@ -17,19 +17,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOj-Q6-yQs">
-                    <rect key="frame" x="16" y="11.5" width="343" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="gjy-6B-B5l"/>
-                    </constraints>
+                    <rect key="frame" x="16" y="9" width="343" height="26.5"/>
                     <viewLayoutGuide key="safeArea" id="zeV-Ws-JNF"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                     <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd8-ny-3Np">
+                    <rect key="frame" x="0.0" y="43.5" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="ord-Ba-Wde"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="gOj-Q6-yQs" firstAttribute="leading" secondItem="SwS-x7-2jR" secondAttribute="leading" constant="16" id="AUa-Lj-XyT"/>
+                <constraint firstItem="gd8-ny-3Np" firstAttribute="bottom" secondItem="SwS-x7-2jR" secondAttribute="bottom" id="BRf-5A-4RT"/>
+                <constraint firstItem="gd8-ny-3Np" firstAttribute="leading" secondItem="SwS-x7-2jR" secondAttribute="leading" id="K5J-CV-6dJ"/>
+                <constraint firstItem="gd8-ny-3Np" firstAttribute="trailing" secondItem="SwS-x7-2jR" secondAttribute="trailing" id="MYk-K7-viX"/>
                 <constraint firstItem="SwS-x7-2jR" firstAttribute="trailing" secondItem="gOj-Q6-yQs" secondAttribute="trailing" constant="16" id="S8t-kq-5ZF"/>
                 <constraint firstItem="gOj-Q6-yQs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZmT-uy-R4W"/>
             </constraints>
@@ -39,7 +46,7 @@
             <connections>
                 <outlet property="labelTitle" destination="gOj-Q6-yQs" id="8Sl-KN-Raw"/>
             </connections>
-            <point key="canvasLocation" x="-5" y="52"/>
+            <point key="canvasLocation" x="-5.5" y="52"/>
         </view>
     </objects>
 </document>

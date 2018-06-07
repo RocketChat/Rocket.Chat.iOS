@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol SubscriptionsSortingViewDelegate: class {
+    func userDidChangeSortingOptions()
+}
+
 final class SubscriptionsSortingView: UIView {
+
+    weak var delegate: SubscriptionsSortingViewDelegate?
 
     private let viewModel = SubscriptionsSortingViewModel()
 
@@ -69,7 +75,6 @@ final class SubscriptionsSortingView: UIView {
             instance.tableViewViewTopConstraint.constant = 0
 
             instance.animates({
-                instance.buttonClose.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
                 instance.layoutIfNeeded()
             })
@@ -84,7 +89,6 @@ final class SubscriptionsSortingView: UIView {
         tableViewViewTopConstraint.constant = viewModel.initialTableViewPosition
 
         animates({
-            self.buttonClose.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
             self.backgroundColor = UIColor.black.withAlphaComponent(0)
             self.layoutIfNeeded()
         }, completion: {
@@ -183,6 +187,8 @@ extension SubscriptionsSortingView: UITableViewDelegate {
         } else {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
+
+        delegate?.userDidChangeSortingOptions()
     }
 
 }

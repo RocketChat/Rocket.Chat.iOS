@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+typealias SortDescriptor<Value> = (Value, Value) -> Bool
+
 // MARK: Information Viewing Options
 
 extension Subscription {
@@ -45,7 +47,20 @@ extension Subscription {
 
 }
 
-extension LinkingObjects where Element == Subscription {
+extension Subscription {
+
+    static func all() -> Results<Subscription>? {
+        return Realm.current?.objects(Subscription.self).filter("auth != NULL")
+    }
+
+}
+
+extension Results where Element == Subscription {
+
+    func sortedByName() -> Results<Subscription> {
+        return sorted(byKeyPath: "name", ascending: true)
+    }
+
     func sortedByLastMessageDate() -> Results<Subscription> {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
@@ -53,18 +68,5 @@ extension LinkingObjects where Element == Subscription {
     func filterBy(name: String) -> Results<Subscription> {
         return filter("name CONTAINS[cd] %@", name)
     }
-}
 
-extension Results where Element == Subscription {
-    func sortedByLastMessageDate() -> [Subscription] {
-        return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
-            guard let aDate = aSubscription.roomUpdatedAt else { return false }
-            guard let bDate = bSubscription.roomUpdatedAt else { return true }
-            return aDate > bDate
-        })
-    }
-
-    func filterBy(name: String) -> Results<Subscription> {
-        return filter("name CONTAINS[cd] %@", name)
-    }
 }
