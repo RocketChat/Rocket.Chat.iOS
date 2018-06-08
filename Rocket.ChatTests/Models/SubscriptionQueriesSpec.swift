@@ -9,7 +9,7 @@
 import XCTest
 @testable import Rocket_Chat
 
-class SubscriptionManagerQueriesSpec: RealmTestCase {
+class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
 
     func testFindByRoomId() throws {
         let realm = testRealm()

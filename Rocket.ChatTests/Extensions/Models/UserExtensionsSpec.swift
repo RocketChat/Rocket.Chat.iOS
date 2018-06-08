@@ -14,6 +14,7 @@ import XCTest
 class UserExtensionsSpec: XCTestCase, RealmTestCase {
     func testSearchUsernameContaining() {
         let realm = testRealm()
+        AuthSettingsManager.settings?.useUserRealName = false
 
         (0..<10).forEach {
             let user = User.testInstance()
