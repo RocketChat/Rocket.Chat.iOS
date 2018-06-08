@@ -50,7 +50,7 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
             realm.add(auth, update: true)
         }
 
-        guard let subscriptions = Subscription.all() else {
+        guard let subscriptions = Subscription.all(realm: realm) else {
             fatalError("subscriptions must return values")
         }
 

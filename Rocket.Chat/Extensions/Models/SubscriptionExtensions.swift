@@ -49,8 +49,8 @@ extension Subscription {
 
 extension Subscription {
 
-    static func all() -> Results<Subscription>? {
-        return Realm.current?.objects(Subscription.self).filter("auth != NULL")
+    static func all(realm: Realm? = Realm.current) -> Results<Subscription>? {
+        return realm?.objects(Subscription.self).filter("auth != NULL")
     }
 
 }

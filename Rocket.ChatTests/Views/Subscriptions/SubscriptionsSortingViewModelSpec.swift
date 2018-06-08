@@ -40,7 +40,7 @@ class SubscriptionsSortingViewModelSpec: XCTestCase {
 
         XCTAssertEqual(instance.numberOfSections, 2)
         XCTAssertEqual(instance.numberOfRows(section: 0), sortingOptions.count)
-        XCTAssertEqual(instance.numberOfRows(section: 0), groupingOptions.count)
+        XCTAssertEqual(instance.numberOfRows(section: 1), groupingOptions.count)
         XCTAssertEqual(instance.viewHeight, CGFloat(groupingOptions.count + sortingOptions.count) * SubscriptionSortingCell.cellHeight + instance.listSeparatorHeight)
         XCTAssertTrue(instance.isSelected(indexPath: IndexPath(row: 0, section: 0)))
         XCTAssertFalse(instance.isSelected(indexPath: IndexPath(row: 1, section: 0)))
