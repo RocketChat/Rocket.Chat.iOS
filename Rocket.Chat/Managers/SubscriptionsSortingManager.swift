@@ -32,7 +32,7 @@ struct SubscriptionsSortingManager {
     /**
      - returns: The generated key to the setting
      */
-    fileprivate static func key(for option: String) -> String {
+    internal static func key(for option: String) -> String {
         return "\(kSortingKeyPrefix)\(option)"
     }
 

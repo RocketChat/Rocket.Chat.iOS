@@ -405,6 +405,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         for indexPath in visibleRows {
+            guard self.subscriptions?.count ?? -1 > indexPath.row else { continue }
+
             if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
                 subscriptionCell.subscription = self.subscriptions?[indexPath.row]
 

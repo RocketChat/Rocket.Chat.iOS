@@ -50,15 +50,17 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
             realm.add(auth, update: true)
         }
 
-        let objects = auth.subscriptions.filterBy(name: "sub1")
+        guard let subscriptions = Subscription.all() else {
+            fatalError("subscriptions must return values")
+        }
 
-        XCTAssert(objects.count == 1)
-        XCTAssert(objects.first == sub1)
+        let objects = subscriptions.filterBy(name: "sub1")
+        XCTAssertEqual(objects.count, 1)
+        XCTAssertEqual(objects.first?.identifier, sub1.identifier)
 
-        let objectsUppercase = auth.subscriptions.filterBy(name: "SUB1")
-
-        XCTAssert(objectsUppercase.count == 1)
-        XCTAssert(objectsUppercase.first == sub1)
+        let objectsUppercase = subscriptions.filterBy(name: "SUB1")
+        XCTAssertEqual(objectsUppercase.count, 1)
+        XCTAssertEqual(objectsUppercase.first?.identifier, sub1.identifier)
     }
 
 }
