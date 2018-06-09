@@ -468,8 +468,8 @@ extension SubscriptionsViewController {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = view.theme else { return }
-        filterSeperator.backgroundColor = theme.mutedAccent
-        sortDescriptionLabel.textColor = theme.auxiliaryText
+        filterSeperator?.backgroundColor = theme.mutedAccent
+        sortDescriptionLabel?.textColor = theme.auxiliaryText
         navigationController?.view.backgroundColor = view.theme?.backgroundColor
         searchBar?.applyTheme()
 

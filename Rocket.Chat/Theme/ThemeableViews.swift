@@ -27,9 +27,11 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-        guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
-        self.subviews.forEach { $0.applyTheme() }
+        if #available(iOS 11, *) {
+            guard let theme = theme else { return }
+            backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+            self.subviews.forEach { $0.applyTheme() }
+        }
     }
 }
 
@@ -44,8 +46,12 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
-        guard let superview = superview else { return ThemeManager.theme }
-        return superview.theme
+        if #available(iOS 11, *) {
+            guard let superview = superview else { return ThemeManager.theme }
+            return superview.theme
+        } else {
+            return nil
+        }
     }
 }
 
