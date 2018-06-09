@@ -12,8 +12,11 @@ class LoginServiceTableViewCell: UITableViewCell {
 
     static let identifier = "LoginService"
     static let rowHeight: CGFloat = 56
+    static let firstRowHeight: CGFloat = 82
+    static let lastRowHeight: CGFloat = 52
 
     @IBOutlet weak var loginServiceButton: StyledButton!
+    @IBOutlet weak var loginServiceBottomConstraint: NSLayoutConstraint!
 
     var loginService: LoginService! {
         didSet {
@@ -22,7 +25,7 @@ class LoginServiceTableViewCell: UITableViewCell {
     }
 
     func updateLoginService() {
-        let suffix = NSAttributedString(string: "Connect with ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)]) // TODO: Localize
+        let suffix = NSAttributedString(string: "Continue with ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)]) // TODO: Localize
         let service = NSAttributedString(string: loginService.service?.capitalized ?? "", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
         let combinedString = NSMutableAttributedString(attributedString: suffix)
         combinedString.append(service)

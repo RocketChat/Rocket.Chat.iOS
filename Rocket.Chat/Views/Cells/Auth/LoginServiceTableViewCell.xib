@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDF-i9-TFi" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="15" y="4" width="345" height="48"/>
+                        <rect key="frame" x="15" y="7.5" width="345" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="c2X-4w-Rpk"/>
                         </constraints>
@@ -42,11 +42,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="fDF-i9-TFi" secondAttribute="trailing" constant="15" id="5Zc-z2-v6x"/>
-                    <constraint firstAttribute="bottom" secondItem="fDF-i9-TFi" secondAttribute="bottom" constant="4" id="8Ha-OU-823"/>
+                    <constraint firstAttribute="bottom" secondItem="fDF-i9-TFi" secondAttribute="bottom" id="8Ha-OU-823"/>
                     <constraint firstItem="fDF-i9-TFi" firstAttribute="leading" secondItem="K9c-fy-sQs" secondAttribute="leading" constant="15" id="Px9-ms-PxJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="loginServiceBottomConstraint" destination="8Ha-OU-823" id="FYk-57-qae"/>
                 <outlet property="loginServiceButton" destination="fDF-i9-TFi" id="Myu-GG-Od7"/>
             </connections>
         </tableViewCell>

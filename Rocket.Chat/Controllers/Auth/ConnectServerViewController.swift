@@ -15,7 +15,7 @@ final class ConnectServerViewController: BaseViewController {
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
-    internal let buttonConnectBottomSpacing: CGFloat = 40
+    internal let buttonConnectBottomSpacing: CGFloat = 24
 
     var deepLinkCredentials: DeepLinkCredentials?
 
@@ -54,18 +54,17 @@ final class ConnectServerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if DatabaseManager.servers?.count ?? 0 > 0 {
-            title = localized("servers.add_new_team")
-        } else {
-            navigationItem.leftBarButtonItem = nil
-        }
+//        if DatabaseManager.servers?.count ?? 0 > 0 {
+//            title = localized("servers.add_new_team")
+//        } else {
+//            navigationItem.leftBarButtonItem = nil
+//        }
 
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
 
         if let nav = navigationController as? BaseNavigationController {
-            nav.setWhiteTheme()
-//            nav.navigationBar.isHidden = true
+            nav.setTransparentTheme()
         }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))

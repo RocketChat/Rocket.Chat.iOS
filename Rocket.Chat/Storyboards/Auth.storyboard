@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,10 +35,6 @@
         <scene sceneID="5Wi-dQ-6MX">
             <objects>
                 <viewController id="hgH-Tx-WGh" customClass="AuthViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="f3J-1q-ulY"/>
-                        <viewControllerLayoutGuide type="bottom" id="lpb-3T-cNi"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JO1-X2-MzO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -253,11 +250,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="YFN-yw-zD6" firstAttribute="leading" secondItem="JO1-X2-MzO" secondAttribute="leading" id="9g9-fg-2tS"/>
+                            <constraint firstItem="YFN-yw-zD6" firstAttribute="leading" secondItem="z4r-tj-SKa" secondAttribute="leading" id="9g9-fg-2tS"/>
                             <constraint firstItem="YFN-yw-zD6" firstAttribute="top" secondItem="JO1-X2-MzO" secondAttribute="top" id="Y2K-iC-Db2"/>
-                            <constraint firstItem="lpb-3T-cNi" firstAttribute="top" secondItem="YFN-yw-zD6" secondAttribute="bottom" id="lUZ-pb-lT4"/>
-                            <constraint firstAttribute="trailing" secondItem="YFN-yw-zD6" secondAttribute="trailing" id="p2v-cl-rmN"/>
+                            <constraint firstItem="z4r-tj-SKa" firstAttribute="bottom" secondItem="YFN-yw-zD6" secondAttribute="bottom" id="lUZ-pb-lT4"/>
+                            <constraint firstItem="z4r-tj-SKa" firstAttribute="trailing" secondItem="YFN-yw-zD6" secondAttribute="trailing" id="p2v-cl-rmN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="z4r-tj-SKa"/>
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="Lfp-fv-5Pu"/>
                     <connections>
@@ -306,10 +304,6 @@
         <scene sceneID="f7f-I8-Vqf">
             <objects>
                 <viewController id="VBo-m1-qNx" customClass="SignupViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hj4-d5-2Sm"/>
-                        <viewControllerLayoutGuide type="bottom" id="xMK-Ku-eUa"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lg9-5C-7wV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -429,11 +423,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qTE-FD-RGC" firstAttribute="leading" secondItem="Lg9-5C-7wV" secondAttribute="leading" id="DW9-Xr-60J"/>
-                            <constraint firstAttribute="trailing" secondItem="qTE-FD-RGC" secondAttribute="trailing" id="EtU-Zf-Ouo"/>
-                            <constraint firstItem="xMK-Ku-eUa" firstAttribute="top" secondItem="qTE-FD-RGC" secondAttribute="bottom" id="VDW-4f-oyR"/>
-                            <constraint firstItem="qTE-FD-RGC" firstAttribute="top" secondItem="hj4-d5-2Sm" secondAttribute="bottom" id="zQr-LV-dxO"/>
+                            <constraint firstItem="qTE-FD-RGC" firstAttribute="leading" secondItem="nVw-8b-CbY" secondAttribute="leading" id="DW9-Xr-60J"/>
+                            <constraint firstItem="nVw-8b-CbY" firstAttribute="trailing" secondItem="qTE-FD-RGC" secondAttribute="trailing" id="EtU-Zf-Ouo"/>
+                            <constraint firstItem="nVw-8b-CbY" firstAttribute="bottom" secondItem="qTE-FD-RGC" secondAttribute="bottom" id="VDW-4f-oyR"/>
+                            <constraint firstItem="qTE-FD-RGC" firstAttribute="top" secondItem="nVw-8b-CbY" secondAttribute="top" id="zQr-LV-dxO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="nVw-8b-CbY"/>
                     </view>
                     <navigationItem key="navigationItem" title="New account" id="YTY-Iz-yS0"/>
                     <connections>
@@ -458,10 +453,6 @@
         <scene sceneID="R2V-YI-hEG">
             <objects>
                 <viewController id="DCX-We-7Nh" customClass="RegisterUsernameViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Cvn-8U-8Yn"/>
-                        <viewControllerLayoutGuide type="bottom" id="82g-Z9-U2L"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KqA-fP-IfF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -545,12 +536,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="etR-dc-dh7" firstAttribute="top" secondItem="Cvn-8U-8Yn" secondAttribute="bottom" id="3eN-zp-jbK"/>
-                            <constraint firstItem="82g-Z9-U2L" firstAttribute="top" secondItem="etR-dc-dh7" secondAttribute="bottom" id="EWG-Ak-q4R"/>
+                            <constraint firstItem="etR-dc-dh7" firstAttribute="top" secondItem="sPi-Du-Oq7" secondAttribute="top" id="3eN-zp-jbK"/>
+                            <constraint firstItem="sPi-Du-Oq7" firstAttribute="bottom" secondItem="etR-dc-dh7" secondAttribute="bottom" id="EWG-Ak-q4R"/>
                             <constraint firstItem="etR-dc-dh7" firstAttribute="top" secondItem="KqA-fP-IfF" secondAttribute="top" id="IJa-1s-25Y"/>
-                            <constraint firstAttribute="trailing" secondItem="etR-dc-dh7" secondAttribute="trailing" id="NLp-3t-tyU"/>
-                            <constraint firstItem="etR-dc-dh7" firstAttribute="leading" secondItem="KqA-fP-IfF" secondAttribute="leading" id="l8E-LV-5Sg"/>
+                            <constraint firstItem="sPi-Du-Oq7" firstAttribute="trailing" secondItem="etR-dc-dh7" secondAttribute="trailing" id="NLp-3t-tyU"/>
+                            <constraint firstItem="etR-dc-dh7" firstAttribute="leading" secondItem="sPi-Du-Oq7" secondAttribute="leading" id="l8E-LV-5Sg"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="sPi-Du-Oq7"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="3eN-zp-jbK"/>
@@ -573,23 +565,19 @@
         <scene sceneID="TgY-mK-uEk">
             <objects>
                 <viewController id="clK-Fu-Ez0" customClass="ConnectServerViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YIK-Je-iyx"/>
-                        <viewControllerLayoutGuide type="bottom" id="NuS-Db-Bcj"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HFb-22-bea">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="server" translatesAutoresizingMaskIntoConstraints="NO" id="gL9-Oa-Vfe">
-                                <rect key="frame" x="83" y="85" width="210" height="171"/>
+                                <rect key="frame" x="83" y="34" width="210" height="171"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gL9-Oa-Vfe" secondAttribute="height" multiplier="70:57" id="AAJ-so-DLF"/>
                                     <constraint firstAttribute="height" constant="171" id="Pb2-HS-CJU"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0ry-Re-0rp" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="312" width="345" height="48"/>
+                                <rect key="frame" x="15" y="261" width="345" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="auth.connect.urlfield"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Mmf-NW-LEw"/>
@@ -602,7 +590,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in your server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W3-Wb-DIA">
-                                <rect key="frame" x="92" y="265" width="191" height="26.5"/>
+                                <rect key="frame" x="92" y="214" width="191" height="26.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="191" id="mqJ-Qf-NbW"/>
                                     <constraint firstAttribute="height" constant="26.5" id="wxA-DQ-r7N"/>
@@ -612,7 +600,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-94-7gd" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="380" width="345" height="48"/>
+                                <rect key="frame" x="15" y="329" width="345" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Cvd-OB-wcp"/>
                                 </constraints>
@@ -624,17 +612,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0cw-94-7gd" firstAttribute="leading" secondItem="HFb-22-bea" secondAttribute="leading" constant="15" id="4Pc-5p-My5"/>
+                            <constraint firstItem="0cw-94-7gd" firstAttribute="leading" secondItem="0PA-dH-46T" secondAttribute="leading" constant="15" id="4Pc-5p-My5"/>
                             <constraint firstItem="9W3-Wb-DIA" firstAttribute="top" secondItem="gL9-Oa-Vfe" secondAttribute="bottom" constant="9" id="51h-AK-RrM"/>
-                            <constraint firstItem="gL9-Oa-Vfe" firstAttribute="top" secondItem="YIK-Je-iyx" secondAttribute="bottom" constant="21" id="91T-pK-brw"/>
-                            <constraint firstItem="0ry-Re-0rp" firstAttribute="leading" secondItem="HFb-22-bea" secondAttribute="leading" constant="15" id="J4b-7H-e2x"/>
-                            <constraint firstItem="gL9-Oa-Vfe" firstAttribute="centerX" secondItem="HFb-22-bea" secondAttribute="centerX" id="PiX-d0-ydg"/>
+                            <constraint firstItem="gL9-Oa-Vfe" firstAttribute="top" secondItem="0PA-dH-46T" secondAttribute="top" constant="-30" id="91T-pK-brw"/>
+                            <constraint firstItem="0ry-Re-0rp" firstAttribute="leading" secondItem="0PA-dH-46T" secondAttribute="leading" constant="15" id="J4b-7H-e2x"/>
+                            <constraint firstItem="gL9-Oa-Vfe" firstAttribute="centerX" secondItem="0PA-dH-46T" secondAttribute="centerX" id="PiX-d0-ydg"/>
                             <constraint firstItem="0ry-Re-0rp" firstAttribute="top" secondItem="9W3-Wb-DIA" secondAttribute="bottom" constant="20" id="Prd-4j-79x"/>
-                            <constraint firstItem="9W3-Wb-DIA" firstAttribute="centerX" secondItem="HFb-22-bea" secondAttribute="centerX" id="jnc-Nr-Mlc"/>
-                            <constraint firstAttribute="trailing" secondItem="0cw-94-7gd" secondAttribute="trailing" constant="15" id="nAf-Jb-EPM"/>
+                            <constraint firstItem="9W3-Wb-DIA" firstAttribute="centerX" secondItem="0PA-dH-46T" secondAttribute="centerX" id="jnc-Nr-Mlc"/>
+                            <constraint firstItem="0PA-dH-46T" firstAttribute="trailing" secondItem="0cw-94-7gd" secondAttribute="trailing" constant="15" id="nAf-Jb-EPM"/>
                             <constraint firstItem="0cw-94-7gd" firstAttribute="top" secondItem="0ry-Re-0rp" secondAttribute="bottom" constant="20" id="qaJ-rf-vhb"/>
-                            <constraint firstAttribute="trailing" secondItem="0ry-Re-0rp" secondAttribute="trailing" constant="15" id="tds-uc-6XW"/>
+                            <constraint firstItem="0PA-dH-46T" firstAttribute="trailing" secondItem="0ry-Re-0rp" secondAttribute="trailing" constant="15" id="tds-uc-6XW"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="0PA-dH-46T"/>
                     </view>
                     <navigationItem key="navigationItem" id="kAP-Jq-h4I">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Ts7-Rl-f2L">
@@ -658,10 +647,6 @@
         <scene sceneID="Owo-VS-jls">
             <objects>
                 <viewController id="Yxu-n9-29o" customClass="TwoFactorAuthenticationViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wwu-n3-bEd"/>
-                        <viewControllerLayoutGuide type="bottom" id="6bu-4I-tQa"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ruc-70-sqZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -745,12 +730,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6bu-4I-tQa" firstAttribute="top" secondItem="y91-0J-hHB" secondAttribute="bottom" id="DzU-sc-dhH"/>
-                            <constraint firstItem="y91-0J-hHB" firstAttribute="leading" secondItem="Ruc-70-sqZ" secondAttribute="leading" id="GVe-Oh-hBf"/>
-                            <constraint firstItem="y91-0J-hHB" firstAttribute="top" secondItem="Wwu-n3-bEd" secondAttribute="bottom" id="dZ2-re-xOv"/>
+                            <constraint firstItem="5ie-ny-qHg" firstAttribute="bottom" secondItem="y91-0J-hHB" secondAttribute="bottom" id="DzU-sc-dhH"/>
+                            <constraint firstItem="y91-0J-hHB" firstAttribute="leading" secondItem="5ie-ny-qHg" secondAttribute="leading" id="GVe-Oh-hBf"/>
+                            <constraint firstItem="y91-0J-hHB" firstAttribute="top" secondItem="5ie-ny-qHg" secondAttribute="top" id="dZ2-re-xOv"/>
                             <constraint firstItem="y91-0J-hHB" firstAttribute="top" secondItem="Ruc-70-sqZ" secondAttribute="top" id="e2q-qy-c8A"/>
-                            <constraint firstAttribute="trailing" secondItem="y91-0J-hHB" secondAttribute="trailing" id="eex-HI-Xnu"/>
+                            <constraint firstItem="5ie-ny-qHg" firstAttribute="trailing" secondItem="y91-0J-hHB" secondAttribute="trailing" id="eex-HI-Xnu"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="5ie-ny-qHg"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="dZ2-re-xOv"/>

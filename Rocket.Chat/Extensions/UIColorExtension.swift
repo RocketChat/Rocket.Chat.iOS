@@ -118,6 +118,10 @@ extension UIColor {
         return UIColor(rgb: 0x9EA2A8, alphaVal: 1)
     }
 
+    static func RCNavBarGray() -> UIColor {
+        return UIColor(rgb: 3355443, alphaVal: 1)
+    }
+
     static func RCLightGray() -> UIColor {
         return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
     }

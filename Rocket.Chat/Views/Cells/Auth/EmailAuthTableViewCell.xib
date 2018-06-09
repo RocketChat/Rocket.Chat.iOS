@@ -54,6 +54,9 @@
                     <constraint firstItem="8iy-Zh-nCb" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" constant="15" id="qBJ-39-FV0"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="registerButton" destination="8iy-Zh-nCb" id="Pir-D3-yVg"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>
