@@ -14,6 +14,9 @@ import RealmSwift
 
 final class AuthTableViewController: UITableViewController {
 
+    internal let kLoginProvidersSection: Int = 0
+    internal let kLoginProvidersCollapsedMax: Int = 3
+    internal let kEmailAuthSection: Int = 1
     internal var shouldShowSeparator: Bool {
         return loginServices.count > 0
     }
@@ -97,17 +100,14 @@ final class AuthTableViewController: UITableViewController {
 
         guard let settings = serverPublicSettings else { return }
 
-//        if !settings.isUsernameEmailAuthenticationEnabled {
-//            buttonRegister.isHidden = true
-//        } else {
-//            buttonRegister.isHidden = settings.registrationForm != .isPublic
-//        }
+        if !settings.isUsernameEmailAuthenticationEnabled {
+            emailAuthRow.registerButton.isHidden = true
+        } else {
+            emailAuthRow.registerButton.isHidden = settings.registrationForm != .isPublic
+        }
 
         updateAuthenticationMethods()
-        tableView.estimatedRowHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.register(LoginServiceTableViewCell.nib, forCellReuseIdentifier: LoginServiceTableViewCell.identifier)
+        setupTableView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +118,11 @@ final class AuthTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setGrayTheme()
+        }
+
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
@@ -129,6 +134,18 @@ final class AuthTableViewController: UITableViewController {
     deinit {
         loginServicesToken?.invalidate()
         NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: Setup
+
+    func setupTableView() {
+        tableView.estimatedRowHeight = 0
+        tableView.estimatedSectionFooterHeight = 0
+        tableView.estimatedSectionHeaderHeight = 0
+        tableView.register(
+            LoginServiceTableViewCell.nib,
+            forCellReuseIdentifier: LoginServiceTableViewCell.identifier
+        )
     }
 
     // MARK: Auth
@@ -193,9 +210,9 @@ extension AuthTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if loginServices.count > 3 && isLoginServicesCollapsed {
-                return 4
+        if section == kLoginProvidersSection {
+            if loginServices.count > kLoginProvidersCollapsedMax && isLoginServicesCollapsed {
+                return kLoginProvidersCollapsedMax + 1
             }
 
             return loginServices.count > 0 ? loginServices.count + 1 : 0
@@ -206,10 +223,12 @@ extension AuthTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
-            if indexPath.row == 3 && loginServices.count > 3 && isLoginServicesCollapsed {
+        case kLoginProvidersSection:
+            if indexPath.row == kLoginProvidersCollapsedMax &&
+                    loginServices.count > kLoginProvidersCollapsedMax &&
+                    isLoginServicesCollapsed {
                 return collapsibleAuthSeparatorRow
-            } else if indexPath.row == loginServices.count && loginServices.count > 3 {
+            } else if indexPath.row == loginServices.count && loginServices.count > kLoginProvidersCollapsedMax {
                 return collapsibleAuthSeparatorRow
             } else if indexPath.row == loginServices.count {
                 return authSeparatorRow
@@ -221,7 +240,7 @@ extension AuthTableViewController {
 
             loginServiceCell.loginService = loginServices[indexPath.row]
             return loginServiceCell
-        case 1:
+        case kEmailAuthSection:
             return emailAuthRow
         default:
             break
@@ -236,17 +255,23 @@ extension AuthTableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            if indexPath.row == 3 && loginServices.count > 3 && isLoginServicesCollapsed {
+        case kLoginProvidersSection:
+            if indexPath.row == kLoginProvidersCollapsedMax &&
+                    loginServices.count > kLoginProvidersCollapsedMax &&
+                    isLoginServicesCollapsed {
                 return ShowMoreSeparatorTableViewCell.rowHeight
-            } else if indexPath.row == loginServices.count && loginServices.count > 3 {
+            } else if indexPath.row == loginServices.count && loginServices.count > kLoginProvidersCollapsedMax {
                 return ShowMoreSeparatorTableViewCell.rowHeight
             } else if indexPath.row == loginServices.count {
                 return AuthSeparatorTableViewCell.rowHeight
             }
 
+            if indexPath.row == 0 {
+                return LoginServiceTableViewCell.firstRowHeight
+            }
+
             return LoginServiceTableViewCell.rowHeight
-        case 1:
+        case kEmailAuthSection:
             return loginServices.count > 0 ? EmailAuthTableViewCell.rowHeightBelowSeparator : EmailAuthTableViewCell.rowHeight
         default:
             return 0

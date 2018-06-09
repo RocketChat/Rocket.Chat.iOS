@@ -153,6 +153,7 @@ extension AuthTableViewController {
                 return ($0.isValid && $0.service != nil) ? $0 : nil
             }
 
+//            self.loginServices = loginServices
             self.loginServices.append(contentsOf: loginServices)
 
             modifications.map { res[$0] }.forEach {
