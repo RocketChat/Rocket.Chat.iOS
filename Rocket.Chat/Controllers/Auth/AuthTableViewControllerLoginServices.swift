@@ -45,13 +45,13 @@ extension AuthTableViewController {
     }
 
     func setupLoginServices() {
-        loginServicesToken?.invalidate()
-
-        loginServicesToken = LoginServiceManager.observe { [weak self] changes in
-            self?.updateLoginServices(changes: changes)
-        }
-
-        api?.client(InfoClient.self).fetchLoginServices()
+//        loginServicesToken?.invalidate()
+//
+//        loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+//            self?.updateLoginServices(changes: changes)
+//        }
+//
+//        api?.client(InfoClient.self).fetchLoginServices()
     }
 
     func presentOAuthViewController(for loginService: LoginService) {

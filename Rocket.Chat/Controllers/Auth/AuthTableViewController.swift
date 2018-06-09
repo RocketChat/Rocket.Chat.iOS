@@ -74,7 +74,7 @@ final class AuthTableViewController: UITableViewController {
     var isLoginServicesCollapsed = true
     var loginServices: [LoginService] = [] {
         didSet {
-            tableView.reloadData()
+//            tableView.reloadData()
         }
     }
 

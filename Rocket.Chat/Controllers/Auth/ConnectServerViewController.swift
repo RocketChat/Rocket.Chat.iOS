@@ -45,10 +45,6 @@ final class ConnectServerViewController: BaseViewController {
         return buttonConnect.bottomAnchor.constraint(equalTo: bottomGuide, constant: 0)
     }()
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
     // MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -148,10 +144,11 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
+        if let loginServices = sender as? [LoginService], let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
             controller.serverVersion = infoRequestHandler.version
             controller.serverURL = url
-            controller.serverPublicSettings = self.serverPublicSettings
+            controller.serverPublicSettings = serverPublicSettings
+            controller.loginServices = loginServices
 
             if let credentials = deepLinkCredentials {
                 _ = controller.view
@@ -211,7 +208,9 @@ final class ConnectServerViewController: BaseViewController {
                 self?.serverPublicSettings = settings
 
                 if connected {
-                    self?.performSegue(withIdentifier: "Auth", sender: nil)
+                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices in
+                        self?.performSegue(withIdentifier: "Auth", sender: loginServices)
+                    })
                 }
 
                 self?.stopConnecting()

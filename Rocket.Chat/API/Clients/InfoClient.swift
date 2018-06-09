@@ -25,10 +25,11 @@ struct InfoClient: APIClient {
         }
     }
 
-    func fetchLoginServices(realm: Realm? = Realm.current) {
+    func fetchLoginServices(realm: Realm? = Realm.current, completion: (([LoginService]) -> Void)? = nil) {
         api.fetch(LoginServicesRequest()) { response in
             switch response {
             case .resource(let res):
+                completion?(res.loginServices)
                 realm?.execute({ realm in
                     realm.add(res.loginServices, update: true)
                 })

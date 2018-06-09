@@ -11,14 +11,15 @@ import RealmSwift
 struct LoginServiceManager {
     let observeTokens: [NotificationToken]
 
-    static func subscribe() {
+    static func subscribe(completion: (([LoginService]) -> Void)? = nil) {
         let object = [
             "msg": "sub",
             "name": "meteor.loginServiceConfiguration",
             "params": []
         ] as [String: Any]
 
-        SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { _ in }
+        SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { result in
+        }
     }
 }
 
