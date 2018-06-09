@@ -109,12 +109,24 @@ final class PreferencesViewModel {
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return (canChangeAppIcon ? 5 : 4)
+        case 1: return numberOfRowsInSectionOne()
         case 2: return 3
         case 3: return 1
         case 4: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
+    }
+
+    private func numberOfRowsInSectionOne() -> Int {
+        var totalCount = 5
+        if #available(iOS 11, *) {
+            // Do nothing
+        } else {
+            totalCount -= 1
+        }
+
+        totalCount -= canChangeAppIcon ? 0 : 1
+        return totalCount
     }
 
     // MARK: Helpers
