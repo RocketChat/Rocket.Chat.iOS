@@ -128,25 +128,6 @@ final class AvatarView: UIView {
         return ""
     }
 
-    private func setAvatarWithInitials() {
-        let subscription = self.subscription?.displayName() ?? "?"
-        let username = self.user?.username ?? "?"
-        let text = subscription == "?" ? username : subscription
-
-        guard let user = user, !user.isInvalidated else {
-            if let username = self.username {
-                setAvatarWithInitials(forUsername: username)
-                return
-            }
-
-            labelInitials?.text = "?"
-            backgroundColor = .black
-            return
-        }
-
-        setAvatarWithInitials(forUsername: user.username)
-    }
-
     private func setAvatarWithInitials(forUsername username: String?) {
         let username = username ?? "?"
         var initials = "?"

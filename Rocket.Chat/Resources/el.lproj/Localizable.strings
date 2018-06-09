@@ -126,8 +126,12 @@
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
-"servers.action.connect" = "Σύνδεση";
-"servers.action.remove" = "Αφαιρέστε ομάδα";
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
 // User Menu
 "user_menu.online" = "Σε σύνδεση";
@@ -146,9 +150,8 @@
 "new_room.cell.public_channel.description.public_only" = "Μπορείτε να δημιουργείτε μόνο δημόσια κανάλια";
 "new_room.cell.public_channel.description.private_only" = "Μπορείτε να δημιουργείτε μόνο ιδιωτικά κανάλια";
 "new_room.cell.read_only.title" = "Κανάλι μόνο ανάγνωσης";
-"new_room.cell.read_only.description" = "Μόνο ο διαχειριστής μπορεί να γράψει νέα μηνύματα";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages"; // TODO
 "new_room.group.channel.name" = "Όνομα Καναλιού";
-"new_room.group.channel.footer" = "Τα ονόματα πρέπει να χρησιμοποιούν πεζά γράμματα και να είναι μικρότερα από 22 χαρακτήρες";
 "new_room.cell.channel_name.title" = "Όνομα Καναλιού";
 "new_room.group.invite_users" = "Προσκαλέστε χρήστες";
 "new_room.cell.invite_users.placeholder" = "Ονόματα χρηστών";

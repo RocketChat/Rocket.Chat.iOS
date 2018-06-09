@@ -15,6 +15,12 @@ protocol Alerter: class {
 }
 
 extension UIViewController: Alerter {
+    func alert(with customActions: [UIAlertAction], title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        customActions.forEach{( alert.addAction($0) )}
+        present(alert, animated: true, completion: nil)
+    }
+
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
@@ -58,6 +64,7 @@ extension UIViewController: Alerter {
 struct Alert {
     let title: String
     let message: String
+    var actions: [UIAlertAction] = []
 
     init(title: String, message: String) {
         self.title = title
@@ -65,15 +72,22 @@ struct Alert {
     }
 
     init(key: String) {
-        self.init(title: NSLocalizedString("\(key).title", comment: ""),
-                  message: NSLocalizedString("\(key).message", comment: ""))
+        self.init(
+            title: localized("\(key).title"),
+            message: localized("\(key).message")
+        )
     }
 
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
             let window = UIWindow.topWindow
             window.windowLevel = UIWindowLevelAlert + 1
-            window.rootViewController?.alert(title: title, message: message, handler: handler)
+
+            if actions.isEmpty {
+                window.rootViewController?.alert(title: title, message: message, handler: handler)
+            } else {
+                window.rootViewController?.alert(with: actions, title: title, message: message)
+            }
         }
 
         if Thread.isMainThread {

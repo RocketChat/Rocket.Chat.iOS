@@ -7,53 +7,53 @@
 
 // Errors
 "error.socket.default_error.title" = "Oops!";
-"error.socket.default_error.message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+"error.socket.default_error.message" = "Es ist ein Problem aufgetreten! Bitte versuchen Sie es noch einmal.";
 
 "error.login.title" = "Oops!";
-"error.login.message" = "Irgendwas ist beim Einloggen schiefgelaufen.";
+"error.login.message" = "Während der Anmeldung ist ein Problem aufgetreten.";
 
 "error.login_unauthorized.title" = "Oops!";
-"error.login_unauthorized.message" = "Die Anmeldedaten wurden abgelehnt! Bitte erneut versuchen.";
+"error.login_unauthorized.message" = "Ihre Anmeldedaten wurden abgelehnt! Bitte versuchen Sie es noch einmal.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
-"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
+"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
 
 "alert.connection.not_secured.title" = "Oops!";
-"alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Bitte sicherstellen, dass dieser SSL unterstützt.";
+"alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Stellen Sie bitte sicher, dass dieser SSL unterstützt.";
 
 "alert.connection.socket_error.title" = "Oops!";
-"alert.connection.socket_error.message" = "Konnte keine Verbindung zum Server herstellen!";
+"alert.connection.socket_error.message" = "Es konnte keine Verbindung zum Server hergestellt werden!";
 
 "alert.connection.invalid_version.title" = "Oops!";
-"alert.connection.invalid_version.message" = "Der Serverversion, mit der du dich verbinden möchtest, wird nicht mehr unterstützt: %@.\n\nWir benötigen Version %@.";
+"alert.connection.invalid_version.message" = "Der Server mit dem Sie sich verbinden möchten benutzt eine Version, die von dieser App nicht mehr unterstützt wird: %@.\n\nWir benötigen Version %@.";
 
 "alert.settings.set_mail_app.title" = "Oops!";
-"alert.settings.set_mail_app.message" = "Es sind keine Mail Accounts konfiguriert. Bitte richte einen Mail Account ein um Emails senden zu können.";
+"alert.settings.set_mail_app.message" = "Bitte richten Sie einen Mail Account ein um Emails versenden zu können.";
 
 "alert.feature.wip.title" = "Oops!";
-"alert.feature.wip.message" = "Entschuldigung, aber diese Funktion ist noch nicht verfügbar.";
+"alert.feature.wip.message" = "Diese Funktion ist leider noch nicht verfügbar.";
 
 "alert.insecure_image.title" = "Unsichere Quelle";
-"alert.insecure_image.message" = "Die Bildquelle is unsicher und wurde daher nicht geladen. Nur SSL Quellen sind erlaubt.";
+"alert.insecure_image.message" = "Die Bildquelle ist unsicher und wurde daher nicht geladen. Nur SSL Quellen sind erlaubt.";
 
 "alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
-"alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";
+"alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte melden Sie sich erneut an.";
 
 "alert.login_service_error.title" = "Authentifizierungsproblem";
-"alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
+"alert.login_service_error.message" = "Die Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche Sie es erneut.";
 
-"alert.authorization_error.title" = "Authentifizierungsproblem";
-"alert.authorization_error.create_channel.description" = "Du kannst keine Kanäle erstellen";
+"alert.authorization_error.title" = "Berechtigungsprobleme";
+"alert.authorization_error.create_channel.description" = "Sie können keine Kanäle erstellen";
 
 "alert.unsupported_feature.title" = "Funktion nicht unterstützt";
-"alert.unsupported_feature.message" = "Die Serverversion ist: %@. Diese Funktion wird nur in Version %@ und höher unterstützt.";
+"alert.unsupported_feature.message" = "Die Version dieses Servers ist: %@. Diese Funktion wird erst ab Version %@ und höher unterstützt.";
 
 "alert.push_token_error.title" = "Warnung";
-"alert.push_token_error.message" = "Es kann aufgrund eines Problems mit Servern älter als 0.60.0 sein, dass trotzdem Push Nachrichten von diesem Server zugestellt werden.";
+"alert.push_token_error.message" = "Möglicherweise erhalten Sie weiterhin Push-Benachrichtigungen von diesem Server, aufgrund eines Problems mit Servern der Version 0.60.0 und älter.";
 
 "alert.upload_error.title" = "Fehler beim Hochladen";
-"alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
+"alert.upload_error.message" = "Während des Hochladens der Datei ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.";
 
 "alert.upload_dialog.title" = "Datei hochladen";
 "alert.upload_dialog.placeholder.title" = "Titel";
@@ -61,73 +61,77 @@
 "alert.upload_dialog.action.upload" = "Hochladen";
 
 "alert.email_verification.title" = "E-Mail Bestätigung";
-"alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
+"alert.email_verification.message" = "Wir haben Ihnen eine E-Mail zur bestätigen Ihrer Anmeldung zugeschickt. Bitte versuchen Sie es erneut, sollten Sie keine E-Mail erhalten haben.";
 
 "alert.discarding_changes.title" = "Ungesicherte Änderungen";
-"alert.discarding_changes.message" = "Die ungesicherten Änderungen wurden verworfen";
-"alert.load_profile_error.title" = "Das Profil konnte nicht geladen werden";
-"alert.load_profile_error.message" = "Etwas hat beim Laden der Profildaten nicht funktioniert. Bitte noch einmal versuchen.";
+"alert.discarding_changes.message" = "Ihre ungesicherten Änderungen wurden verworfen";
+"alert.load_profile_error.title" = "Ihr Profil konnte nicht geladen werden";
+"alert.load_profile_error.message" = "Beim abrufen Ihrer Profildaten ist ein Problem aufgetreten. Bitte versuchen Sie es noch einmal.";
 "alert.password_mismatch_error.title" = "Das Passwort stimmt nicht überein";
-"alert.password_mismatch_error.message" = "Die eingegebenen Passwörter stimmen nicht überein. Bitte prüfen und noch einmal versuchen.";
+"alert.password_mismatch_error.message" = "Die eingegebenen Passwörter stimmen nicht überein. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
 "alert.update_profile_error.title" = "Aktualisieren fehlgeschlagen";
-"alert.update_profile_error.message" = "Etwas hat beim Laden der Profildaten nicht funktioniert. Bitte noch einmal versuchen.";
+"alert.update_profile_error.message" = "Beim aktualisieren Ihrer Profildaten ist ein Problem aufgetreten. Bitte versuchen Sie es noch einmal.";
 "alert.update_password_error.title" = "Passwort konnte nicht geändert werden";
-"alert.update_password_error.message" = "Etwas hat beim Ändern des Passworts nicht geklappt. Bitte noch einmal versuchen";
+"alert.update_password_error.message" = "Beim ändern Ihres Passworts ist ein Problem aufgetreten. Bitte versuchen Sie es noch einmal.";
 "alert.update_profile_empty_fields.title" = "Bitte die leeren Felder ausfüllen";
-"alert.update_profile_empty_fields.message" = "Alle Profilinformationen werden benötigt und können nicht leer bleiben";
+"alert.update_profile_empty_fields.message" = "Alle Ihre Profilinformationen sind erforderlich und können nicht leer bleiben.";
 "alert.update_profile_invalid_email.title" = "Ungültige E-Mail";
-"alert.update_profile_invalid_email.message" = "Es schein, als sei die eingegebene E-Mail-Adresse nicht gültig. Bitte prüfen und erneut versuchen";
+"alert.update_profile_invalid_email.message" = "Es scheint, dass die von Ihnen eingegebene E-Mail ungültig ist. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
 "alert.password_empty_fields.title" = "Bitte die leeren Felder ausfüllen";
-"alert.password_empty_fields.message" = "Zum Aktualisieren des Passworts bitte ein Passwort eingeben.";
-"alert.update_profile_success.title" = "Profil aktualisiert";
-"alert.update_password_success.title" = "Passwort aktualisiert";
+"alert.password_empty_fields.message" = "Füllen Sie das Passwort- und Bestätigungfeld aus, damit Sie Ihr Passwort aktualisieren können.";
+"alert.update_profile_success.title" = "Profil wurde aktualisiert";
+"alert.update_password_success.title" = "Passwort wurde aktualisiert";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
-"connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
+"connection.server.redirect.alert.message" = "Sieht so aus, als ob dieser Server seine URL geändert hat:\n\n%@\n\nMöchten Sie die URL aktualisieren?";
 "connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
 
 // Socket Connection
-"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
+"connection.offline.banner.message" = "Sie sind offline. Versuche neu zu verbinden...";
 "connection.connecting.banner.message" = "Verbinde...";
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
-"auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
+"auth.connect.connecting" = "Verbindung läuft. Bitte warten Sie kurz!";
 
-"auth.login.username.placeholder" = "Email or username";
-"auth.login.password.placeholder" = "Password";
-"auth.login.buttonRegister" = "Create new account";
-"auth.login.buttonResetPassword" = "Forgot password";
-"auth.login.agree_label" = "By proceeding you are agreeing to our";
-"auth.login.agree_and" = "and";
-"auth.login.agree_termsofservice" = "Terms of Service";
-"auth.login.agree_privacypolicy" = "Privacy Policy";
+"auth.login.username.placeholder" = "E-Mail oder Benutzername";
+"auth.login.password.placeholder" = "Passwort";
+"auth.login.buttonRegister" = "Neues Konto erstellen";
+"auth.login.buttonResetPassword" = "Passwort vergessen";
+"auth.login.agree_label" = "Indem Sie fortfahren, erklären Sie sich einverstanden mit unseren";
+"auth.login.agree_and" = "und";
+"auth.login.agree_termsofservice" = "Allgemeinen Geschäftsbedingungen";
+"auth.login.agree_privacypolicy" = "Datenschutzerklärung";
 
 "auth.forgot_password.title" = "Passwort vergessen?";
-"auth.forgot_password.message" = "E-Mail-Adresse eingeben";
-"auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";
+"auth.forgot_password.message" = "Bitte geben Sie Ihre E-Mail-Adresse ein";
+"auth.forgot_password.success" = "Wenn diese E-Mail Adresse registriert ist, erhalten Sie eine Anleitung, wie Sie Ihr Passwort zurücksetzen können. Bitte versuchen Sie es erneut, sollten Sie in Kürze keine E-Mail erhalten haben.";
 
 // Subscriptions
 "subscriptions.search" = "Suche";
 "subscriptions.search_results" = "Ergebnisse";
-"subscriptions.search.load_more_results" = "Mehr Ergebnisse...";
+"subscriptions.search.load_more_results" = "Lade mehr Ergebnisse...";
 "subscriptions.unreads" = "Ungelesen";
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
 "subscriptions.direct_messages" = "Direktnachrichten";
 "subscriptions.you" = "Du";
-"subscriptions.messages" = "Messages"; //TODO
-"subscriptions.list.you_initial" = "You"; //TODO
-"subscriptions.list.no_message" = "No message"; //TODO
-"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
-"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
+"subscriptions.messages" = "Nachrichten";
+"subscriptions.list.you_initial" = "Du";
+"subscriptions.list.no_message" = "Keine Nachricht";
+"subscriptions.list.sent_an_attachment" = "versende einen Anhang";
+"subscriptions.list.date.yesterday" = "Gestern";
 
 // Servers
 "servers.add_new_team" = "Neues Team hinzufügen";
-"servers.action.connect" = "Verbinden";
-"servers.action.remove" = "Team entfernen";
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
 // User Menu
 "user_menu.online" = "Online";
@@ -135,21 +139,20 @@
 "user_menu.busy" = "Beschäftigt";
 "user_menu.invisible" = "Unsichtbar";
 "user_menu.admin" = "Administration";
-"user_menu.preferences" = "Mein Account"; // TODO: new text: Preferences
-"user_menu.logout" = "Logout";
+"user_menu.preferences" = "Einstellungen";
+"user_menu.logout" = "Abmelden";
 
 // New Room View
 "new_room.title" = "Neuer Kanal";
 "new_room.buttons.create" = "Erstellen";
 "new_room.cell.public_channel.title" = "Öffentlicher Kanal";
-"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
-"new_room.cell.public_channel.description.public_only" = "Du kannst nur öffentliche Räume erstellen";
-"new_room.cell.public_channel.description.private_only" = "Du kannst nur private Räume erstellen";
+"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Kanal beitreten";
+"new_room.cell.public_channel.description.public_only" = "Sie können nur öffentliche Kanäle erstellen";
+"new_room.cell.public_channel.description.private_only" = "Sie können nur private Kanäle erstellen";
 "new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
-"new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
+"new_room.cell.read_only.description" = "Nur Moderatoren oder Administratoren können in schreibgeschützten Kanälen schreiben";
 "new_room.group.channel.name" = "Name des Kanals";
 "new_room.cell.channel_name.title" = "Name des Kanals";
-"new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
 "new_room.group.invite_users" = "Benutzer einladen";
 "new_room.cell.invite_users.placeholder" = "Benutzernamen";
 
@@ -159,10 +162,10 @@
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
-"chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
-"chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
+"chat.dm.start_conversation" = "Dies ist der Anfang Ihrer Konversation mit %@";
+"chat.channel.start_conversation" = "Dies ist der Beginn der Konversation in %@";
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
-"chat.muted" = "Du wurdest stummgeschaltet";
+"chat.muted" = "Sie wurden stummgeschaltet";
 "chat.loading_messages" = "Nachrichten werden geladen...";
 "chat.unread_separator" = "ungelesen";
 
@@ -180,7 +183,7 @@
 "chat.message.actions.reply" = "Nachricht beantworten";
 "chat.message.actions.delete" = "Nachricht löschen";
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
-"chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
+"chat.message.actions.delete.confirm.message" = "Sind Sie sicher, dass Sie diese Nachricht löschen möchten? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
 "chat.message.actions.discard" = "Nachricht verwerfen";
 "chat.message.actions.discard.confirm.title" = "Nachricht verwerfen?";
@@ -268,8 +271,8 @@
 "chat.messages.mentions.list.title" = "Erwähnungen";
 
 // Settings
-"myaccount.settings.title" = "Einstellungen"; // TODO: new text: Preferences
-"myaccount.settings.contactus" = "Kontaktiere uns";
+"myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.contactus" = "Kontaktieren Sie uns";
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";
 "myaccount.settings.language" = "Sprache";
@@ -278,13 +281,13 @@
 "myaccount.settings.server_version" = "Server Version: %@";
 "myaccount.settings.web_browser" = "Webbrowser";
 "myaccount.settings.tracking.title" = "Absturzmeldung senden";
-"myaccount.settings.tracking.footer" = "Wir versenden nie Chatinhalte. Der Bericht enthält nur relevante Informationen, um das Problem zu identifizieren und zu beseitigen.";
+"myaccount.settings.tracking.footer" = "Wir versenden niemals den Inhalt Ihres Chats. Der Absturzbericht enthält nur für die Identifizierung und Beseitigung des Problems relevante Informationen.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Icon auswählen";
-"myaccount.settings.changeicon.header" = "Du kannst eines der unterstehenden Icons für die App wählen, welches auf deinem Homescreen angezeigt wird.";
+"myaccount.settings.changeicon.header" = "Sie können ändern, wie das Rocket.Chat Symbol auf Ihrem Gerät aussieht. Bitte wählen Sie eines der untenstehenden Symbole, welches Ihnen am besten gefällt.";
 "myaccount.settings.changeicon.errortitle" = "Konnte App Icon nicht ändern";
-"myaccount.settings.changeicon.iosversion" = "Alternative App Icons werden nicht von iOS älter als 10.3 unterstützt.";
+"myaccount.settings.changeicon.iosversion" = "Alternative Anwendungssymbole werden von iOS-Versionen kleiner 10.3 nicht unterstützt.";
 
 // Change Language
 "myaccount.settings.language.title" = "Sprache ändern";
@@ -311,7 +314,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Benutzername";
 "myaccount.settings.profile.email_placeholder" = "E-Mail";
-"myaccount.settings.profile.status.title" = "Status"; // TODO
+"myaccount.settings.profile.status.title" = "Status";
 "myaccount.settings.profile.password_required.title" = "Passwort eingeben";
 "myaccount.settings.profile.password_required.message" = "Das Passwort wird zum Ändern der E-Mail-Adresse benötigt";
 "myaccount.settings.profile.password_required.placeholder" = "Passwort";
@@ -328,6 +331,6 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Konversation";
-"user_action_sheet.remove" = "Remove from room"; // TODO
-"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
-"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+"user_action_sheet.remove" = "Aus Raum entfernen";
+"user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
+"user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";

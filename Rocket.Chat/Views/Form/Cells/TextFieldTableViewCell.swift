@@ -9,20 +9,18 @@
 import Foundation
 
 final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+
     static let identifier = "kTextFieldTableViewCell"
-    static let xibFileName = "TextFieldTableViewCell"
-    static let defaultHeight: Float = 44
+    static let defaultHeight: Float = 50.0
 
     weak var delegate: FormTableViewDelegate?
     var key: String?
 
     @IBOutlet weak var imgLeftIcon: UIImageView!
-    @IBOutlet weak var textFieldInput: UITextField!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        textFieldInput.clearButtonMode = .whileEditing
+    @IBOutlet weak var textFieldInput: UITextField! {
+        didSet {
+            textFieldInput.clearButtonMode = .whileEditing
+        }
     }
 
     func setPreviousValue(previous: Any) {
@@ -34,4 +32,5 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
+
 }

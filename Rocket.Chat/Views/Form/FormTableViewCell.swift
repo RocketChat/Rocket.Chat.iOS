@@ -16,18 +16,17 @@ protocol FormTableViewDelegate: NSObjectProtocol {
 
 protocol FormTableViewCellProtocol {
     static var identifier: String { get }
-    static var xibFileName: String { get }
     static var defaultHeight: Float { get }
 
     var delegate: FormTableViewDelegate? { get set }
     var key: String? { get set }
+
     func setPreviousValue(previous: Any)
 }
 
-extension FormTableViewCellProtocol {
+extension FormTableViewCellProtocol where Self: UITableViewCell {
     static func registerCell(for table: UITableView) {
-        let cellNib = UINib(nibName: self.xibFileName, bundle: nil)
-        table.register(cellNib, forCellReuseIdentifier: self.identifier)
+        table.register(Self.nib, forCellReuseIdentifier: self.identifier)
     }
 }
 
@@ -47,16 +46,11 @@ struct FormCell {
 enum FormTableViewCell {
     case check(title: String, description: String)
     case textField(placeholder: String?, icon: UIImage?)
-    case mentionsTextField(placeholder: String?, icon: UIImage?)
 
     func getClass() -> FormTableViewCellProtocol.Type {
         switch self {
-        case .check:
-            return CheckTableViewCell.self
-        case .textField:
-            return TextFieldTableViewCell.self
-        case .mentionsTextField:
-            return MentionsTextFieldTableViewCell.self
+        case .check: return CheckTableViewCell.self
+        case .textField: return TextFieldTableViewCell.self
         }
     }
 
@@ -65,8 +59,7 @@ enum FormTableViewCell {
     }
 
     func createCell(table: UITableView, delegate: FormTableViewDelegate, key: String, enabled: Bool = true) -> FormTableViewCellProtocol? {
-        let cellIdentifier = self.getIdentifier()
-        guard var cell = table.dequeueReusableCell(withIdentifier: cellIdentifier) as? FormTableViewCellProtocol else { return nil }
+        guard var cell = table.dequeueReusableCell(withIdentifier: getIdentifier()) as? FormTableViewCellProtocol else { return nil }
 
         switch self {
         case .check(let title, let description):
@@ -78,13 +71,6 @@ enum FormTableViewCell {
 
         case .textField(let placeholder, let icon):
             if let cell = cell as? TextFieldTableViewCell {
-                cell.textFieldInput.placeholder = placeholder
-                cell.imgLeftIcon.image = icon
-                cell.textFieldInput.isEnabled = enabled
-            }
-
-        case .mentionsTextField(let placeholder, let icon):
-            if let cell = cell as? MentionsTextFieldTableViewCell {
                 cell.textFieldInput.placeholder = placeholder
                 cell.imgLeftIcon.image = icon
                 cell.textFieldInput.isEnabled = enabled

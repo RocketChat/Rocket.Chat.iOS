@@ -126,8 +126,12 @@
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
-"servers.action.connect" = "Conectar";
-"servers.action.remove" = "Remover time";
+"servers.title" = "Servidores";
+"servers.add_new_server" = "Adicionar Servidor";
+"servers.action.disconnect" = "Desconectar";
+"servers.action.disconnect.alert.title" = "Desconectar do Servidor";
+"servers.action.disconnect.alert.message" = "Tem certeza que deseja desconectar de \"%@\"?";
+"servers.action.disconnect.alert.confirm" = "Sim, desconectar";
 
 // User Menu
 "user_menu.online" = "Disponível";
@@ -146,11 +150,10 @@
 "new_room.cell.public_channel.description.public_only" = "Você só pode criar canais públicos";
 "new_room.cell.public_channel.description.private_only" = "Você só pode criar canais privados";
 "new_room.cell.read_only.title" = "Canal somente leitura";
-"new_room.cell.read_only.description" = "Somente o admin pode escrever novas mensagens";
+"new_room.cell.read_only.description" = "Apenas usuários autorizados podem enviar novas mensagens";
 "new_room.group.channel.name" = "Nome do canal";
-"new_room.group.channel.footer" = "O nome precisa ser escrito em minúsculo e ter menos que 22 caracteres";
 "new_room.cell.channel_name.title" = "Nome do canal";
-"new_room.group.invite_users" = "Invite users";
+"new_room.group.invite_users" = "Convidar usuários";
 "new_room.cell.invite_users.placeholder" = "Usernames";
 
 // Notifications
@@ -277,8 +280,8 @@
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do servidor: %@";
 "myaccount.settings.web_browser" = "Navegador";
-"myaccount.settings.tracking.title" = "Relatórios de error";
-"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erro contém apenas informações relevantes relacionadas ao erro ocorrido para nos ajudar a corrigi-los.";
+"myaccount.settings.tracking.title" = "Relatórios de erro";
+"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erros contém apenas informações relevantes relacionadas aos erros ocorridos para nos ajudar a corrigi-los.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";

@@ -126,8 +126,12 @@
 
 // Servers
 "servers.add_new_team" = "Agregar nuevo equipo";
-"servers.action.connect" = "Connect";
-"servers.action.remove" = "Conectar";
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
 // User Menu
 "user_menu.online" = "En línea";
@@ -146,9 +150,8 @@
 "new_room.cell.public_channel.description.public_only" = "Solo puedes crear canales públicos";
 "new_room.cell.public_channel.description.private_only" = "Solo puedes crear canales privados";
 "new_room.cell.read_only.title" = "Canal de solo lectura";
-"new_room.cell.read_only.description" = "Solo el administrador puede escribir nuevos mensajes";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages"; // TODO
 "new_room.group.channel.name" = "Nombre del Canal";
-"new_room.group.channel.footer" = "Los nombres deben estar en minúsculas y tener menos de 22 caracteres";
 "new_room.cell.channel_name.title" = "Nombre del Canal";
 "new_room.group.invite_users" = "Invitar usuarios";
 "new_room.cell.invite_users.placeholder" = "Nombres de usuario";
