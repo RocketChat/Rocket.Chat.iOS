@@ -329,7 +329,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
             yOffset = view.safeAreaInsets.top
         } else {
-            let navBarHeight = UIApplication.shared.statusBarFrame.size.height +  (navigationController?.navigationBar.frame.height ?? 0.0)
+            let navBarHeight = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
             frameHeight -= navBarHeight
             yOffset = navBarHeight
         }
