@@ -635,6 +635,7 @@
 		995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEB2E206286D9004EE38F /* WebBrowserManager.swift */; };
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
+		99619B4820CE3E8D00E1ACCA /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */; };
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
@@ -1354,6 +1355,7 @@
 		995FEB2E206286D9004EE38F /* WebBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManager.swift; sourceTree = "<group>"; };
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
+		99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
@@ -1970,6 +1972,7 @@
 				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
 				35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
+				99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -4183,6 +4186,7 @@
 				807C7C12207522EF006B600E /* LoginServicesRequest.swift in Sources */,
 				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,
 				8067DA9B206BC71A005E3369 /* ReactMessageRequest.swift in Sources */,
+				99619B4820CE3E8D00E1ACCA /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
