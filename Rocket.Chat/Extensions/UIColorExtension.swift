@@ -110,6 +110,10 @@ extension UIColor {
         return UIColor(rgb: 15199218, alphaVal: 1)
     }
 
+    static func RCButtonBorderGray() -> UIColor {
+        return UIColor(rgb: 14804456, alphaVal: 1)
+    }
+
     static func RCDarkGray() -> UIColor {
         return UIColor(rgb: 0x333333, alphaVal: 1)
     }
