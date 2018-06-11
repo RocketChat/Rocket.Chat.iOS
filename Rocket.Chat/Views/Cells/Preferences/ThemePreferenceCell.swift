@@ -25,17 +25,12 @@ class ThemePreferenceCell: UITableViewCell {
     func setViewsForTheme() {
         baseColorView.backgroundColor = cellTheme?.backgroundColor
         auxiliaryColorView.backgroundColor = cellTheme?.bodyText
+        tintColor = cellTheme?.tintColor
 
         if ThemeManager.theme == cellTheme {
-            checkLabel.isHidden = false
+            accessoryType = .checkmark
         } else {
-            checkLabel.isHidden = true
-        }
-    }
-
-    @IBOutlet weak var checkLabel: UILabel! {
-        didSet {
-            checkLabel.isHidden = true
+            accessoryType = .none
         }
     }
 

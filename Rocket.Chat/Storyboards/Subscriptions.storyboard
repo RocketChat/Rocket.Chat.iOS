@@ -129,7 +129,7 @@
                                                     <color key="textColor" red="0.3294117647" green="0.34509803919999998" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkA-vH-8he">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkA-vH-8he" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="78" y="16.5" width="9" height="9"/>
                                                     <color key="backgroundColor" red="0.98823529409999999" green="0.56078431370000004" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>

@@ -689,13 +689,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0w-fs-sav">
-                                            <rect key="frame" x="344" y="28" width="15" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUr-oH-BO6">
                                             <rect key="frame" x="80" y="28" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -708,7 +701,6 @@
                                 <connections>
                                     <outlet property="auxiliaryColorView" destination="yp7-EN-rqd" id="hYs-IQ-nPm"/>
                                     <outlet property="baseColorView" destination="P40-IV-5Mz" id="M1S-2v-iPK"/>
-                                    <outlet property="checkLabel" destination="i0w-fs-sav" id="Y2u-bY-wUL"/>
                                     <outlet property="titleLabel" destination="gUr-oH-BO6" id="9Ka-OM-mS1"/>
                                 </connections>
                             </tableViewCell>
