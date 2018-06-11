@@ -30,6 +30,12 @@ final class ServersListView: UIView {
     }
 
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tappableView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+            tappableView.addGestureRecognizer(tapGesture)
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -85,7 +91,7 @@ final class ServersListView: UIView {
 
     // MARK: Hiding the View
 
-    func close() {
+    @objc func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
         self.delegate?.serverListViewDidClose()
 
