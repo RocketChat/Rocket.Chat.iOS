@@ -37,7 +37,7 @@ struct InfoClient: APIClient {
                 switch error {
                 case .version:
                     // version fallback
-                    LoginServiceManager.subscribe()
+                    LoginServiceManager.subscribe(completion: completion)
                 default:
                     break
                 }

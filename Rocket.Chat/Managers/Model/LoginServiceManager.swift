@@ -18,8 +18,7 @@ struct LoginServiceManager {
             "params": []
         ] as [String: Any]
 
-        SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { result in
-        }
+        SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { _ in }
     }
 }
 
