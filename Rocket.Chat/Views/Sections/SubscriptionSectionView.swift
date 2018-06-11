@@ -10,29 +10,10 @@ import UIKit
 
 final class SubscriptionSectionView: UIView {
 
-    fileprivate let defaultIconWidthConstraint = CGFloat(18)
-    fileprivate let defaultTitleLeftConstraint = CGFloat(8)
-
-    @IBOutlet fileprivate weak var icon: UIImageView!
-    @IBOutlet fileprivate weak var iconWidthConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var labelTitle: UILabel!
-    @IBOutlet fileprivate weak var labelTitleLeftSpacingConstraint: NSLayoutConstraint!
-
-    func setIconName(_ iconName: String?) {
-        if let iconName = iconName {
-            icon.image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
-            icon.tintColor = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-            iconWidthConstraint.constant = defaultIconWidthConstraint
-            labelTitleLeftSpacingConstraint.constant = defaultTitleLeftConstraint
-        } else {
-            icon.image = nil
-            iconWidthConstraint.constant = 0
-            labelTitleLeftSpacingConstraint.constant = 0
-        }
-    }
 
     func setTitle(_ title: String?) {
-        labelTitle.text = title?.uppercased()
+        labelTitle.text = title
     }
 
 }

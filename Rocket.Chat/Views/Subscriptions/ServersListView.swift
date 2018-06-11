@@ -31,6 +31,12 @@ final class ServersListView: UIView {
     }
 
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tappableView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+            tappableView.addGestureRecognizer(tapGesture)
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -66,21 +72,10 @@ final class ServersListView: UIView {
 
     // MARK: Showing the View
 
-    static func showIn(_ view: UIView) -> ServersListView? {
+    static func showIn(_ view: UIView, frame: CGRect) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
         instance.backgroundColor = UIColor.black.withAlphaComponent(0)
-
-        var frameHeight = view.bounds.height
-        var yOffset: CGFloat = 0.0
-        if #available(iOS 11.0, *) {
-            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
-            yOffset = view.safeAreaInsets.top
-        } else {
-            frameHeight -= view.layoutMargins.top - view.layoutMargins.bottom
-            yOffset = view.layoutMargins.top
-        }
-
-        instance.frame = CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: frameHeight)
+        instance.frame = frame
         view.addSubview(instance)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -97,7 +92,7 @@ final class ServersListView: UIView {
 
     // MARK: Hiding the View
 
-    func close() {
+    @objc func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
         self.delegate?.serverListViewDidClose()
 

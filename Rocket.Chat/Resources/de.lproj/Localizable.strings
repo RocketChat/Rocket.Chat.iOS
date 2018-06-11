@@ -117,6 +117,7 @@
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
 "subscriptions.direct_messages" = "Direktnachrichten";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "Du";
 "subscriptions.messages" = "Nachrichten";
 "subscriptions.list.you_initial" = "Du";
@@ -340,3 +341,12 @@
 "theme.light" = "Light"; // TODO
 "theme.dark" = "Dark"; // TODO
 "theme.black" = "Black"; // TODO
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

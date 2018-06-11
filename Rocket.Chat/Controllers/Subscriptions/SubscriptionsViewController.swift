@@ -18,8 +18,13 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var filterSeperator: UIView!
-    @IBOutlet weak var sortDescriptionLabel: UILabel!
+    @IBOutlet weak var labelSortingTitleDescription: UILabel! {
+        didSet {
+            updateSortingTitleDescription()
+        }
+    }
 
+    weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
@@ -31,6 +36,9 @@ final class SubscriptionsViewController: BaseViewController {
     var subscriptions: [Subscription]?
     var subscriptionsToken: NotificationToken?
     var currentUserToken: NotificationToken?
+
+    var groupInfomation: [[String: String]]?
+    var groupSubscriptions: [[Subscription]]?
 
     var subscriptionsToShow: [Subscription] {
         switch searchState {
@@ -90,12 +98,121 @@ final class SubscriptionsViewController: BaseViewController {
 
     func subscribeModelChanges() {
         guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let susbcriptions = Subscription.all() else { return }
 
         assigned = true
+        subscriptionsToken = susbcriptions.observe(handleSubscriptionUpdates)
+    }
 
-        let managedSubscriptions = auth.subscriptions.sortedByLastMessageDate()
-        subscriptionsToken = managedSubscriptions.observe(handleSubscriptionUpdates)
+    // swiftlint:disable function_body_length cyclomatic_complexity
+    func organizeSubscriptionsGrouped() {
+        var unreadGroup: [Subscription] = []
+        var favoriteGroup: [Subscription] = []
+        var channelGroup: [Subscription] = []
+        var directMessageGroup: [Subscription] = []
+        var searchResultsGroup: [Subscription] = []
+        var untitledGroup: [Subscription] = []
+
+        let isSearchingRemotely = searchState == .searchingRemotely
+        let isSearchingLocally = searchState == .searchingLocally
+
+        let grouping = SubscriptionsSortingManager.selectedGroupingOptions
+        let isGroupByTypeEnabled = grouping.contains(.type)
+        let isGroupFavoritesEnabled = grouping.contains(.favorites)
+        let isGroupUnreadsEnabled = grouping.contains(.unread)
+
+        guard let subscriptions = subscriptions else { return }
+        let orderSubscriptions = isSearchingRemotely ? searchResult : subscriptions
+
+        for subscription in orderSubscriptions ?? [] {
+            if isSearchingRemotely {
+                searchResultsGroup.append(subscription)
+            }
+
+            if !isSearchingLocally && !subscription.open {
+                continue
+            }
+
+            if isGroupUnreadsEnabled && subscription.alert {
+                unreadGroup.append(subscription)
+                continue
+            }
+
+            if isGroupFavoritesEnabled && subscription.favorite {
+                favoriteGroup.append(subscription)
+                continue
+            }
+
+            if isGroupByTypeEnabled {
+                switch subscription.type {
+                case .channel, .group:
+                    channelGroup.append(subscription)
+                case .directMessage:
+                    directMessageGroup.append(subscription)
+                }
+            } else {
+                untitledGroup.append(subscription)
+            }
+        }
+
+        groupInfomation = [[String: String]]()
+        groupSubscriptions = [[Subscription]]()
+
+        if searchResultsGroup.count > 0 {
+            groupInfomation?.append([
+                "name": localized("subscriptions.search_results")
+            ])
+
+            groupSubscriptions?.append(searchResultsGroup)
+        } else {
+            if unreadGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.unreads")
+                ])
+
+                groupSubscriptions?.append(unreadGroup)
+            }
+
+            if favoriteGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.favorites")
+                ])
+
+                groupSubscriptions?.append(favoriteGroup)
+            }
+
+            if channelGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.channels")
+                ])
+
+                groupSubscriptions?.append(channelGroup)
+            }
+
+            if directMessageGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": localized("subscriptions.direct_messages")
+                ])
+
+                groupSubscriptions?.append(directMessageGroup)
+            }
+
+            if untitledGroup.count > 0 {
+                let title = isGroupFavoritesEnabled || isGroupByTypeEnabled || isGroupUnreadsEnabled ? localized("subscriptions.conversations") : ""
+                groupInfomation?.append([
+                    "name": title
+                ])
+
+                groupSubscriptions?.append(untitledGroup)
+            }
+        }
+    }
+
+    func subscription(for indexPath: IndexPath) -> Subscription? {
+        guard let groups = groupSubscriptions else { return nil }
+        guard groups.count > indexPath.section else { return nil }
+        guard groups[indexPath.section].count > indexPath.row else { return nil }
+        return groups[indexPath.section][indexPath.row]
     }
 
     // MARK: Setup Views
@@ -130,9 +247,23 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
         } else {
-            let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
-            tableView.tableHeaderView = searchBar
-            self.searchBar = searchBar
+            if let headerView = tableView.tableHeaderView {
+                var frame = headerView.frame
+                frame.size.height = 88
+                headerView.frame = frame
+
+                let searchBar = UISearchBar(frame: CGRect(
+                    x: 0,
+                    y: 44,
+                    width: frame.width,
+                    height: 44
+                ))
+
+                headerView.addSubview(searchBar)
+                self.searchBar = searchBar
+
+                tableView.tableHeaderView = headerView
+            }
         }
 
         self.searchController = searchController
@@ -178,8 +309,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func searchBy(_ text: String = "") {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
+        updateSearched()
         searchText = text
 
         if text.count == 0 {
@@ -235,13 +365,25 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateAll() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate())
+        guard let allSubscriptions = Subscription.all() else { return }
+
+        if SubscriptionsSortingManager.selectedSortingOption == .activity {
+            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
+        } else {
+            subscriptions = Array(allSubscriptions.sortedByName())
+        }
+
+        organizeSubscriptionsGrouped()
     }
 
     func updateSearched() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = Array(auth.subscriptions.sortedByLastMessageDate().filterBy(name: searchText))
+        guard let allSubscriptions = Subscription.all()?.filterBy(name: searchText) else { return }
+
+        if SubscriptionsSortingManager.selectedSortingOption == .activity {
+            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
+        } else {
+            subscriptions = Array(allSubscriptions.sortedByName())
+        }
     }
 
     func updateSubscriptionsList() {
@@ -265,6 +407,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         for indexPath in visibleRows {
+            guard self.subscriptions?.count ?? -1 > indexPath.row else { continue }
+
             if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
                 subscriptionCell.subscription = self.subscriptions?[indexPath.row]
 
@@ -303,15 +447,16 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
     }
 
-    func subscription(for indexPath: IndexPath) -> Subscription? {
-        if subscriptionsToShow.count > indexPath.row {
-            return subscriptionsToShow[indexPath.row]
-        }
-
-        return nil
-    }
-
     // MARK: IBAction
+
+    @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+        if let sortingView = self.sortingView {
+            sortingView.close()
+        } else {
+            sortingView = SubscriptionsSortingView.showIn(self.view)
+            sortingView?.delegate = self
+        }
+    }
 
     @objc func openServersList() {
         if let serversView = self.serversView {
@@ -319,10 +464,26 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             serversView.close()
         } else {
             titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(self.view)
+            serversView = ServersListView.showIn(self.view, frame: frameForDropDownOverlay)
             serversView?.delegate = self
             serversView?.applyTheme()
         }
+    }
+
+    private var frameForDropDownOverlay: CGRect {
+        var frameHeight = view.bounds.height
+        var yOffset: CGFloat = 0.0
+
+        if #available(iOS 11.0, *) {
+            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
+            yOffset = view.safeAreaInsets.top
+        } else {
+            let navBarHeight = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+            frameHeight -= navBarHeight
+            yOffset = navBarHeight
+        }
+
+        return CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: view.bounds.height)
     }
 
 }
@@ -338,11 +499,11 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return groupInfomation?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subscriptionsToShow.count
+        return groupSubscriptions?[section].count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -365,6 +526,32 @@ extension SubscriptionsViewController: UITableViewDataSource {
 }
 
 extension SubscriptionsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let name = group["name"] as String?,
+            !name.isEmpty
+        else {
+            return 0
+        }
+
+        return 55
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let view = SubscriptionSectionView.instantiateFromNib()
+        else {
+            return nil
+        }
+
+        view.setTitle(group["name"])
+        return view
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
@@ -428,6 +615,24 @@ extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
 
 }
 
+extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
+
+    func updateSortingTitleDescription() {
+        if SubscriptionsSortingManager.selectedSortingOption == .alphabetically {
+            labelSortingTitleDescription.text = localized("subscriptions.sorting.title.alphabetical")
+        } else {
+            labelSortingTitleDescription.text = localized("subscriptions.sorting.title.activity")
+        }
+    }
+
+    func userDidChangeSortingOptions() {
+        updateSortingTitleDescription()
+        updateAll()
+        tableView.reloadData()
+    }
+
+}
+
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
     func buttonLoadMoreDidPressed() {
@@ -469,7 +674,7 @@ extension SubscriptionsViewController {
         super.applyTheme()
         guard let theme = view.theme else { return }
         filterSeperator?.backgroundColor = theme.mutedAccent
-        sortDescriptionLabel?.textColor = theme.auxiliaryText
+        labelSortingTitleDescription?.textColor = theme.auxiliaryText
         navigationController?.view.backgroundColor = view.theme?.backgroundColor
         searchBar?.applyTheme()
 

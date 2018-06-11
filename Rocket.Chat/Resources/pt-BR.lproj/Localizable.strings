@@ -117,6 +117,7 @@
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
 "subscriptions.direct_messages" = "Mensagens Diretas";
+"subscriptions.conversations" = "Conversas";
 "subscriptions.you" = "Você";
 "subscriptions.messages" = "Mensagens";
 "subscriptions.list.you_initial" = "Você";
@@ -337,3 +338,12 @@
 "theme.light" = "Light"; // TODO
 "theme.dark" = "Dark"; // TODO
 "theme.black" = "Black"; // TODO
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Ordenando por nome";
+"subscriptions.sorting.title.activity" = "Ordenando por atividade";
+"subscriptions.sorting.alphabetical" = "Alfabeticamente";
+"subscriptions.sorting.activity" = "Por atividade";
+"subscriptions.grouping.type" = "Agrupar por tipo";
+"subscriptions.grouping.favorites" = "Agrupar favoritos";
+"subscriptions.grouping.unread_top" = "Não lidos no topo";

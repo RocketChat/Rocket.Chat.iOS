@@ -117,6 +117,7 @@
 "subscriptions.favorites" = "Избранные";
 "subscriptions.channels" = "Каналы";
 "subscriptions.direct_messages" = "Личная переписка";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "вы";
 "subscriptions.messages" = "Сообщения";
 "subscriptions.list.you_initial" = "Вы";
@@ -329,3 +330,12 @@
 "user_action_sheet.remove" = "Удалить с канала";
 "user_action_sheet.remove_confirm.title" = "Удалить этого пользователя";
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO
