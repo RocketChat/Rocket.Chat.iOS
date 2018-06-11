@@ -316,9 +316,25 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             serversView.close()
         } else {
             titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(self.view)
+            serversView = ServersListView.showIn(self.view, frame: frameForDropDownOverlay)
             serversView?.delegate = self
         }
+    }
+
+    private var frameForDropDownOverlay: CGRect {
+        var frameHeight = view.bounds.height
+        var yOffset: CGFloat = 0.0
+
+        if #available(iOS 11.0, *) {
+            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
+            yOffset = view.safeAreaInsets.top
+        } else {
+            let navBarHeight = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+            frameHeight -= navBarHeight
+            yOffset = navBarHeight
+        }
+
+        return CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: view.bounds.height)
     }
 
 }
