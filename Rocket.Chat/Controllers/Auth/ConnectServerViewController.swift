@@ -19,6 +19,7 @@ final class ConnectServerViewController: BaseViewController {
 
     var deepLinkCredentials: DeepLinkCredentials?
 
+    var shouldAutoConnect = false
     var url: URL? {
         guard var urlText = textFieldServerURL.text else { return nil }
         if urlText.isEmpty {
@@ -50,11 +51,9 @@ final class ConnectServerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        if DatabaseManager.servers?.count ?? 0 > 0 {
-//            title = localized("servers.add_new_team")
-//        } else {
-//            navigationItem.leftBarButtonItem = nil
-//        }
+        if !(DatabaseManager.servers?.count ?? 0 > 0) {
+            navigationItem.leftBarButtonItem = nil
+        }
 
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
@@ -65,6 +64,10 @@ final class ConnectServerViewController: BaseViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+
+        if shouldAutoConnect {
+            connect()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +100,9 @@ final class ConnectServerViewController: BaseViewController {
             object: nil
         )
 
-        textFieldServerURL.becomeFirstResponder()
+        if !shouldAutoConnect {
+            textFieldServerURL.becomeFirstResponder()
+        }
     }
 
     deinit {

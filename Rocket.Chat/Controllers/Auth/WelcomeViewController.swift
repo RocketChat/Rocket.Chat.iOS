@@ -8,11 +8,15 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: BaseViewController {
+
+    internal var joinCommunitySegue = "JoinCommunity"
 
     @IBOutlet weak var connectServerContainer: UIView!
     @IBOutlet weak var joinCommunityContainer: UIView!
     @IBOutlet weak var joinCommunityButton: UIButton!
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,5 +49,13 @@ class WelcomeViewController: UIViewController {
         combinedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: combinationRange)
 
         joinCommunityButton.setAttributedTitle(combinedString, for: .normal)
+    }
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let connectServer = segue.destination as? ConnectServerViewController, segue.identifier == joinCommunitySegue {
+            connectServer.shouldAutoConnect = true
+        }
     }
 }

@@ -63,6 +63,9 @@
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Connect with a server"/>
+                                        <connections>
+                                            <segue destination="clK-Fu-Ez0" kind="show" id="Ivf-BH-9zE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,6 +103,9 @@
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Join the community"/>
+                                        <connections>
+                                            <segue destination="clK-Fu-Ez0" kind="show" identifier="JoinCommunity" id="uxe-wj-78g"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -963,6 +969,7 @@
         <image name="server" width="210" height="171"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uxe-wj-78g"/>
         <segue reference="oar-7v-T9W"/>
     </inferredMetricsTieBreakers>
 </document>
