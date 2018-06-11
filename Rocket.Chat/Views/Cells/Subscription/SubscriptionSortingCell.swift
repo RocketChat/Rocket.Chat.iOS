@@ -68,6 +68,7 @@ extension SubscriptionSortingCell {
 
         labelTitle.textColor = theme.bodyText
         imageViewIcon.tintColor = theme.bodyText
+        tintColor = theme.tintColor
 
         switch isHighlighted {
         case false: backgroundColor = theme.backgroundColor

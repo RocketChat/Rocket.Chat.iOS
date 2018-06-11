@@ -19,7 +19,7 @@ class SubscriptionsSortingSeparatorView: UIView {
             x: horizontalSpacing,
             y: Double(frame.height) / 2,
             width: Double(frame.width) - horizontalSpacing * 2,
-            height: 0.33
+            height: 0.5
         ))
 
         super.init(frame: frame)

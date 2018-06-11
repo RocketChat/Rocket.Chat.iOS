@@ -99,6 +99,7 @@ extension ServerCell {
 
         labelServerName.textColor = theme.titleText
         labelServerDescription.textColor = theme.auxiliaryText
+        tintColor = theme.tintColor
 
         switch isHighlighted {
         case false: backgroundColor = theme.backgroundColor
