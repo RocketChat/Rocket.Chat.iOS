@@ -23,9 +23,9 @@ class SubscriptionsSortingSeparatorView: UIView {
         ))
 
         super.init(frame: frame)
-        separator.backgroundColor = .RCLightGray()
         separator.autoresizingMask = .flexibleWidth
         addSubview(separator)
+        applyTheme()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,9 +37,9 @@ class SubscriptionsSortingSeparatorView: UIView {
 
 extension SubscriptionsSortingSeparatorView {
     override func applyTheme() {
-        super.applyTheme()
         guard let theme = theme else { return }
 
+        backgroundColor = theme.backgroundColor
         separator.backgroundColor = theme.mutedAccent
     }
 }

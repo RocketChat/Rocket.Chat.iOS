@@ -31,6 +31,7 @@ final class SubscriptionsSortingView: UIView {
         }
     }
 
+    @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView! {
@@ -188,4 +189,17 @@ extension SubscriptionsSortingView: UITableViewDelegate {
         delegate?.userDidChangeSortingOptions()
     }
 
+}
+
+// MARK: Themeable
+
+extension SubscriptionsSortingView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.auxiliaryText
+        buttonClose.tintColor = theme.auxiliaryText
+        separatorView.backgroundColor = theme.mutedAccent
+    }
 }

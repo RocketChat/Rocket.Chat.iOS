@@ -67,6 +67,12 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewDidLoad()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        serversView?.frame = frameForDropDownOverlay
+        sortingView?.frame = frameForDropDownOverlay
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
