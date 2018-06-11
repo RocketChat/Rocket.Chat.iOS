@@ -11,6 +11,11 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
+    override var shouldAutorotate: Bool {
+        guard let topViewController = topViewController else { return true }
+        return !(topViewController is WelcomeViewController)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
