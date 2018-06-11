@@ -177,6 +177,7 @@ final class ConnectServerViewController: BaseViewController {
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
 
+        navigationItem.hidesBackButton = true
         connecting = true
         textFieldServerURL.alpha = 0.5
         buttonConnect.startLoading()
@@ -224,6 +225,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func stopConnecting() {
+        navigationItem.hidesBackButton = false
         connecting = false
         textFieldServerURL.alpha = 1
         buttonConnect.stopLoading()
