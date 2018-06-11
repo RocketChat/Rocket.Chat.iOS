@@ -14,13 +14,13 @@
         <!--Subscriptions View Controller-->
         <scene sceneID="aTu-g1-T0C">
             <objects>
-                <viewController storyboardIdentifier="Subscriptions1" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Subscriptions1" extendedLayoutIncludesOpaqueBars="YES" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorInsetReference="fromAutomaticInsets" rowHeight="71" estimatedRowHeight="71" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -193,7 +193,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BC2-s4-mxp"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
                         <barButtonItem key="leftBarButtonItem" image="Icon Settings" id="mF7-JJ-yY1">
                             <connections>

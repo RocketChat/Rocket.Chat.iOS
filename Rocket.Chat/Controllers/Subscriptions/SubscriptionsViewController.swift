@@ -455,6 +455,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             sortingView = SubscriptionsSortingView.showIn(self.view)
             sortingView?.delegate = self
+            sortingView?.applyTheme()
         }
     }
 

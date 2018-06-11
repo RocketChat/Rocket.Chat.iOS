@@ -97,6 +97,9 @@ extension ServerCell {
         super.applyTheme()
         guard let theme = theme else { return }
 
+        labelServerName.textColor = theme.titleText
+        labelServerDescription.textColor = theme.auxiliaryText
+
         switch isHighlighted {
         case false: backgroundColor = theme.backgroundColor
         case true: backgroundColor = theme.focusedBackground

@@ -30,7 +30,7 @@ extension SubscriptionSortingCell {
             case true:
                 self.backgroundColor = self.selectedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -45,9 +45,9 @@ extension SubscriptionSortingCell {
         let transition = {
             switch highlighted {
             case true:
-                self.backgroundColor = self.highlightedBackgroundColor
+                self.backgroundColor = self.theme?.focusedBackground ?? self.highlightedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -55,6 +55,23 @@ extension SubscriptionSortingCell {
             UIView.animate(withDuration: 0.18, animations: transition)
         } else {
             transition()
+        }
+    }
+}
+
+// MARK: Themeable
+
+extension SubscriptionSortingCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.bodyText
+        imageViewIcon.tintColor = theme.bodyText
+
+        switch isHighlighted {
+        case false: backgroundColor = theme.backgroundColor
+        case true: backgroundColor = theme.focusedBackground
         }
     }
 }
