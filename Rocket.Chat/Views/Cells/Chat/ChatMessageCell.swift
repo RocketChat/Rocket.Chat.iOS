@@ -123,6 +123,8 @@ final class ChatMessageCell: UICollectionViewCell {
         } else {
             readReceiptConstraint.constant = 0.0
         }
+
+        readReceiptImageView.image = UIImage(named: "Check")?.imageWithTint(message.unread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
     }
 
     override func prepareForReuse() {
