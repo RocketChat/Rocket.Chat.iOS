@@ -55,7 +55,6 @@ final class ReactorListView: UIView {
         }
     }
 
-    var closePressed: () -> Void = { }
     var selectedReactor: (String, CGRect) -> Void = { _, _ in }
     var configureCell: (ReactorCell) -> Void = { _ in }
 
@@ -81,10 +80,6 @@ final class ReactorListView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-    }
-
-    @IBAction func closePressed(_ sender: UIBarButtonItem) {
-        closePressed()
     }
 }
 

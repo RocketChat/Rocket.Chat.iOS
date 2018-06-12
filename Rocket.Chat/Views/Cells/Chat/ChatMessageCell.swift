@@ -14,6 +14,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
+    func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect))
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -142,7 +143,7 @@ final class ChatMessageCell: UICollectionViewCell {
             return
         }
 
-        
+        delegate?.handleReadReceiptPress(message, source: (readReceiptButton, readReceiptButton.frame))
     }
 
     override func prepareForReuse() {
