@@ -325,11 +325,13 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="avatarViewContainer" destination="Nb7-OU-8Qa" id="ksw-5C-ifh"/>
+                        <outlet property="labelAdministration" destination="PXV-oB-WDv" id="c8M-4m-qi4"/>
                         <outlet property="labelApp" destination="Lk4-H3-Y3R" id="jIL-6y-wNg"/>
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelDefaultWebBrowser" destination="fgh-3x-fTm" id="hid-6G-HCb"/>
                         <outlet property="labelLanguage" destination="TK4-N1-2eh" id="MEN-VF-dcq"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
+                        <outlet property="labelLogout" destination="96F-it-dku" id="PJa-e9-Nb9"/>
                         <outlet property="labelProfileName" destination="KHa-df-YqL" id="DIJ-iO-ESP"/>
                         <outlet property="labelProfileStatus" destination="q4p-F0-OV3" id="OFq-C5-inq"/>
                         <outlet property="labelServerAddress" destination="awd-rJ-YyE" id="6nz-YL-OlT"/>
