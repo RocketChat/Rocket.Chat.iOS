@@ -66,14 +66,16 @@ extension MainSplitViewController: UISplitViewControllerDelegate {
 extension MainSplitViewController: SocketConnectionHandler {
 
     func socketDidConnect(socket: SocketManager) {
-
+        Log.debug("[MainSplitViewController] socketDidConnect")
     }
 
     func socketDidDisconnect(socket: SocketManager) {
+        Log.debug("[MainSplitViewController] socketDidDisconnect")
         SocketManager.reconnect()
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        Log.debug("[MainSplitViewController] socketDidReturnError: \(error)")
         // Handle errors
     }
 

@@ -217,7 +217,7 @@ extension SocketManager: WebSocketDelegate {
         if let enumerator = connectionHandlers.objectEnumerator() {
             while let handler = enumerator.nextObject() {
                 if let handler = handler as? SocketConnectionHandler {
-                    handler.socketDidConnect(socket: self)
+                    handler.socketDidDisconnect(socket: self)
                 }
             }
         }

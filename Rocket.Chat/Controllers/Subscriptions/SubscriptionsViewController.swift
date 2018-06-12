@@ -26,6 +26,7 @@ final class SubscriptionsViewController: BaseViewController {
     weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
+    weak var loaderTitleView: LoaderTitleView?
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
 
@@ -63,21 +64,26 @@ final class SubscriptionsViewController: BaseViewController {
 
         setupSearchBar()
         setupTitleView()
+        setupLoaderTitleView()
         updateBackButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: animated)
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         subscribeModelChanges()
         updateData()
         tableView.reloadData()
-
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: animated)
-        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -280,6 +286,13 @@ final class SubscriptionsViewController: BaseViewController {
 
             titleView.delegate = self
             updateServerInformation()
+        }
+    }
+
+    func setupLoaderTitleView() {
+        if let titleView = LoaderTitleView.instantiateFromNib() {
+            navigationItem.titleView = titleView
+            self.loaderTitleView = titleView
         }
     }
 
@@ -645,15 +658,20 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 extension SubscriptionsViewController: SocketConnectionHandler {
 
     func socketDidConnect(socket: SocketManager) {
-
+        Log.debug("[SubscriptionsViewController] socketDidConnect")
+        setupTitleView()
     }
 
     func socketDidDisconnect(socket: SocketManager) {
+        Log.debug("[SubscriptionsViewController] socketDidDisconnect")
+        setupLoaderTitleView()
         SocketManager.reconnect()
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // Handle errors
+        Log.debug("[SubscriptionsViewController] socketDidReturnError: \(error)")
+        setupLoaderTitleView()
+        loaderTitleView?.status = .waitingNetwork
     }
 
 }
