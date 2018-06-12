@@ -55,6 +55,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="loginButton" destination="6Jz-DI-tKu" id="bfU-qT-yTZ"/>
                 <outlet property="registerButton" destination="8iy-Zh-nCb" id="Pir-D3-yVg"/>
             </connections>
         </tableViewCell>

@@ -26,6 +26,15 @@ final class AuthTableViewController: UITableViewController {
             return EmailAuthTableViewCell()
         }
 
+        let suffix = NSAttributedString(string: "Login with ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)]) // TODO: Localize
+        let service = NSAttributedString(string: "e-mail", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+        let combinedString = NSMutableAttributedString(attributedString: suffix)
+        combinedString.append(service)
+
+        emailAuthRow.loginButton.setAttributedTitle(combinedString, for: .normal)
+        emailAuthRow.loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
+        emailAuthRow.registerButton.addTarget(self, action: #selector(showSignup), for: .touchUpInside)
+
         return emailAuthRow
     }()
 
@@ -183,6 +192,14 @@ final class AuthTableViewController: UITableViewController {
     }
 
     // MARK: Actions
+
+    @objc func showLogin() {
+        performSegue(withIdentifier: "Login", sender: self)
+    }
+
+    @objc func showSignup() {
+        performSegue(withIdentifier: "Signup", sender: self)
+    }
 
     func showOrHideLoginServices() {
         isLoginServicesCollapsed = !isLoginServicesCollapsed

@@ -30,7 +30,7 @@ class BaseNavigationController: UINavigationController {
     override func popViewController(animated: Bool) -> UIViewController? {
         let poppedViewController = super.popViewController(animated: animated)
 
-        if (poppedViewController as? AuthTableViewController) != nil || (poppedViewController as? LoginTableViewController) != nil {
+        if topViewController is ConnectServerViewController {
             setTransparentTheme()
         }
 
@@ -38,14 +38,17 @@ class BaseNavigationController: UINavigationController {
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        let pushedFromViewController = topViewController
         super.pushViewController(viewController, animated: animated)
 
-        if viewController is LoginTableViewController {
-            setGrayTheme()
+        if viewController is LoginTableViewController || viewController is AuthTableViewController {
+            setGrayTheme(
+                forceRedraw: pushedFromViewController is ConnectServerViewController
+            )
         }
     }
 
-    func setTransparentTheme() {
+    func setTransparentTheme(forceRedraw: Bool = false) {
         UIApplication.shared.statusBarStyle = .default
         let navBar = self.navigationBar
         navBar.setBackgroundImage(UIImage(), for: .default)
@@ -53,9 +56,10 @@ class BaseNavigationController: UINavigationController {
         navBar.backgroundColor = UIColor.clear
         navBar.isTranslucent = true
         navBar.tintColor = .RCBlue()
+        if forceRedraw { forceNavigationToRedraw() }
     }
 
-    func setGrayTheme() {
+    func setGrayTheme(forceRedraw: Bool = false) {
         UIApplication.shared.statusBarStyle = .lightContent
         let navBar = self.navigationBar
         navBar.shadowImage = UIImage()
@@ -64,6 +68,10 @@ class BaseNavigationController: UINavigationController {
         navBar.isTranslucent = false
         navBar.tintColor = .white
         navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        if forceRedraw { forceNavigationToRedraw() }
+    }
+
+    func forceNavigationToRedraw() {
         isNavigationBarHidden = true
         isNavigationBarHidden = false
     }
