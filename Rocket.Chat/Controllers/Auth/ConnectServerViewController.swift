@@ -183,7 +183,7 @@ final class ConnectServerViewController: BaseViewController {
         connect()
     }
 
-    func buttonCloseDidPressed(_ sender: Any) {
+    @objc func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         AppManager.changeSelectedServer(index: (DatabaseManager.servers?.count ?? 1) - 1)
         AppManager.reloadApp()
