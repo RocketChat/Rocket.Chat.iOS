@@ -88,8 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Yes, change the URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "Jste offline, zkuste se znovu připojit";
-"connection.connecting.banner.message" = "Connecting...";
+"connection.connecting.banner.message" = "Connecting..."; // TODO
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Připojit";

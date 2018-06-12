@@ -88,8 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Tak, zmień adres";
 
 // Socket Connection
-"connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
 "connection.connecting.banner.message" = "Łączenie...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Połącz";

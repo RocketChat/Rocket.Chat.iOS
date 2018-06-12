@@ -88,8 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Sí, cambia la URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "Estás fuera de línea, intenta conectarte de nuevo";
 "connection.connecting.banner.message" = "Conectando ...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
