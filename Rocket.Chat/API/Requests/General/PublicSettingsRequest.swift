@@ -65,6 +65,7 @@ final class PublicSettingsRequest: APIRequest {
                 "Message_AllowStarring",
                 "Message_GroupingPeriod",
                 "Message_MaxAllowedSize",
+                "Message_Read_Receipt_Enabled",
                 "Accounts_CustomFields",
                 "First_Channel_After_Login"
             ]

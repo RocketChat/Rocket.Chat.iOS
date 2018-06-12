@@ -110,6 +110,21 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    // MARK: Read Receipt
+
+    @IBOutlet weak var readReceiptImageView: UIImageView!
+    @IBOutlet weak var readReceiptConstraint: NSLayoutConstraint!
+
+    func updateReadReceipt() {
+        guard let settings = AuthManager.isAuthenticated()?.settings else { return }
+
+        if settings.messageReadReceiptEnabled {
+            readReceiptConstraint.constant = 12.0
+        } else {
+            readReceiptConstraint.constant = 0.0
+        }
+    }
+
     override func prepareForReuse() {
         labelUsername.text = ""
         labelText.message = nil
@@ -302,6 +317,7 @@ final class ChatMessageCell: UICollectionViewCell {
         insertGesturesIfNeeded()
         insertAttachments()
         updateReactions()
+        updateReadReceipt()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
