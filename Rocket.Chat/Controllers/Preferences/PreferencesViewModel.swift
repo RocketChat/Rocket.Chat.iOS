@@ -29,7 +29,7 @@ final class PreferencesViewModel {
     internal let trackingTitle = localized("myaccount.settings.tracking.title")
     internal var trackingFooterText = localized("myaccount.settings.tracking.footer")
 
-    internal var logout: String {
+    internal var serverName: String {
         var serverName = "Rocket.Chat"
 
         if let authServerName = AuthSettingsManager.settings?.serverName {
@@ -42,6 +42,10 @@ final class PreferencesViewModel {
             }
         }
 
+        return serverName
+    }
+
+    internal var logout: String {
         return String(format: localized("myaccount.settings.logout"), serverName)
     }
 
