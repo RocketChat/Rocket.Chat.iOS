@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Profil wurde aktualisiert";
 "alert.update_password_success.title" = "Passwort wurde aktualisiert";
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
 "connection.server.redirect.alert.message" = "Sieht so aus, als ob dieser Server seine URL geändert hat:\n\n%@\n\nMöchten Sie die URL aktualisieren?";

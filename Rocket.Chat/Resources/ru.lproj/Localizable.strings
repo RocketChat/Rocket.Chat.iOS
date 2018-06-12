@@ -109,6 +109,10 @@
 "auth.forgot_password.message" = "Введите ваш адрес электронной почты";
 "auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Subscriptions
 "subscriptions.search" = "Поиск";
 "subscriptions.search_results" = "Результаты";

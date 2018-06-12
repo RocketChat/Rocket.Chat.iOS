@@ -10,17 +10,17 @@
 "error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 "error.login.title" = "Oops!";
-"error.login.message" = "Something wrong happened while trying to login."; //TODO
+"error.login.message" = "Aglo de errado aconteceu na tentativa de login. Tente novamente por favor.";
 
 "error.login_unauthorized.title" = "Oops!";
-"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+"error.login_unauthorized.message" = "Suas credenciais foram rejeitadas, tente novamente por favor!";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
 
-"alert.connection.not_secured.title" = "Oops!"; // TODO
-"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+"alert.connection.not_secured.title" = "Oops!";
+"alert.connection.not_secured.message" = "Não pudemos estabelecer uma conexão segura com este servidor. Por favor, certifique-se de que ele tem um certificado SSL válido.";
 
 "alert.connection.socket_error.title" = "Oops!";
 "alert.connection.socket_error.message" = "Não foi possível conectar a este servidor!";
@@ -81,6 +81,10 @@
 "alert.password_empty_fields.message" = "Por favor, preencha os dois campos para atualizar sua senha.";
 "alert.update_profile_success.title" = "Perfil atualizado";
 "alert.update_password_success.title" = "Senha alterada";
+
+"alert.logout.confirmation.title" = "Sair deste servidor";
+"alert.logout.confirmation.message" = "Tem certeza que desejar sair de \"%@\"?";
+"alert.logout.confirmation.confirm" = "Sim, sair";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";

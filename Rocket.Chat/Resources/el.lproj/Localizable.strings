@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
 "connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL;";
