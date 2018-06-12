@@ -30,7 +30,11 @@ final class ConnectServerViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var buttonClose: UIBarButtonItem!
+    lazy var buttonClose: UIBarButtonItem = {
+        let buttonClose = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(buttonCloseDidPressed))
+        return buttonClose
+    }()
+
     @IBOutlet weak var buttonConnect: StyledButton!
     @IBOutlet weak var textFieldServerURL: UITextField!
 
@@ -53,6 +57,8 @@ final class ConnectServerViewController: BaseViewController {
 
         if !(DatabaseManager.servers?.count ?? 0 > 0) {
             navigationItem.leftBarButtonItem = nil
+        } else {
+            navigationItem.leftBarButtonItem = buttonClose
         }
 
         infoRequestHandler.delegate = self
@@ -177,7 +183,7 @@ final class ConnectServerViewController: BaseViewController {
         connect()
     }
 
-    @IBAction func buttonCloseDidPressed(_ sender: Any) {
+    func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         AppManager.changeSelectedServer(index: (DatabaseManager.servers?.count ?? 1) - 1)
         AppManager.reloadApp()

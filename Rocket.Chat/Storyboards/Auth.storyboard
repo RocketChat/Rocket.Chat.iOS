@@ -397,22 +397,6 @@
             </objects>
             <point key="canvasLocation" x="2188" y="-47"/>
         </scene>
-        <!--Base Navigation Controller-->
-        <scene sceneID="dVT-E9-4gO">
-            <objects>
-                <navigationController id="eFO-g0-vxH" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="F7W-s9-wXu">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="clK-Fu-Ez0" kind="relationship" relationship="rootViewController" id="cJM-Z8-WB7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oa8-4P-jae" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-175" y="715"/>
-        </scene>
         <!--Login Table View Controller-->
         <scene sceneID="JnD-QH-qRl">
             <objects>
@@ -1243,15 +1227,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0PA-dH-46T"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kAP-Jq-h4I">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Ts7-Rl-f2L">
-                            <connections>
-                                <action selector="buttonCloseDidPressed:" destination="clK-Fu-Ez0" id="Cd8-jf-ED3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="kAP-Jq-h4I"/>
                     <connections>
-                        <outlet property="buttonClose" destination="Ts7-Rl-f2L" id="rMX-Qq-O8x"/>
                         <outlet property="buttonConnect" destination="0cw-94-7gd" id="nUC-fN-vTx"/>
                         <outlet property="textFieldServerURL" destination="0ry-Re-0rp" id="Kwl-Nc-paa"/>
                         <segue destination="ueL-n9-tXo" kind="show" identifier="Auth" id="lbH-ae-bNg"/>
@@ -1407,7 +1384,7 @@
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cJM-Z8-WB7"/>
+        <segue reference="uxe-wj-78g"/>
         <segue reference="oar-7v-T9W"/>
         <segue reference="tMH-P7-q5C"/>
         <segue reference="dnh-fI-fQN"/>

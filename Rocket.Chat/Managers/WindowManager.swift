@@ -28,8 +28,8 @@ enum Storyboard {
     }
 
     func initialViewController() -> UIViewController? {
-        let storyboardChat = UIStoryboard(name: name, bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
+        let storyboard = instantiate()
+        let controller = storyboard.instantiateInitialViewController()
 
         // preload view
         _ = controller?.view
@@ -50,6 +50,11 @@ enum Storyboard {
         }
 
         return controller
+    }
+
+    func instantiate(viewController: String) -> UIViewController? {
+        let storyboard = instantiate()
+        return storyboard.instantiateViewController(withIdentifier: viewController)
     }
 }
 
