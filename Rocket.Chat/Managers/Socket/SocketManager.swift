@@ -71,6 +71,7 @@ final class SocketManager {
         ]
 
         sharedInstance.socket?.connect()
+
         sharedInstance.state = .connecting
     }
 
@@ -226,7 +227,7 @@ extension SocketManager: WebSocketDelegate {
         isUserAuthenticated = false
         events = [:]
         queue = [:]
-        state = .disconnected
+        state = .waitingForNetwork
     }
 
     func websocketDidReceiveData(socket: WebSocket, data: Data) {

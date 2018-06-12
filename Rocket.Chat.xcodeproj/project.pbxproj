@@ -249,8 +249,6 @@
 		41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
 		41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */; };
 		41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */; };
-		41B5505020CF50F20050D4A7 /* LoaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5504F20CF50F20050D4A7 /* LoaderTitleView.swift */; };
-		41B5505220CF51000050D4A7 /* LoaderTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41B5505120CF51000050D4A7 /* LoaderTitleView.xib */; };
 		41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */; };
 		41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C61FBF0F9D000510B7 /* WindowManager.swift */; };
 		41B96360207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B9635F207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift */; };
@@ -970,8 +968,6 @@
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteCell.swift; sourceTree = "<group>"; };
 		41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderViewSpec.swift; sourceTree = "<group>"; };
 		41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerUploader.swift; sourceTree = "<group>"; };
-		41B5504F20CF50F20050D4A7 /* LoaderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTitleView.swift; sourceTree = "<group>"; };
-		41B5505120CF51000050D4A7 /* LoaderTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderTitleView.xib; sourceTree = "<group>"; };
 		41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensions.swift; sourceTree = "<group>"; };
 		41B554C61FBF0F9D000510B7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		41B9635F207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerTextViewDelegate.swift; sourceTree = "<group>"; };
@@ -2165,8 +2161,6 @@
 			isa = PBXGroup;
 			children = (
 				413FB6DC1FE17E4500F010AA /* LoaderView.swift */,
-				41B5504F20CF50F20050D4A7 /* LoaderTitleView.swift */,
-				41B5505120CF51000050D4A7 /* LoaderTitleView.xib */,
 			);
 			path = Loader;
 			sourceTree = "<group>";
@@ -3388,7 +3382,6 @@
 				14F8A270202E653E00175FDC /* Grey-76@2x.png in Resources */,
 				14F8A295202E65C700175FDC /* Blue-76@3x.png in Resources */,
 				80A2F39420057B48005D2DCA /* EmojiAutocompleteCell.xib in Resources */,
-				41B5505220CF51000050D4A7 /* LoaderTitleView.xib in Resources */,
 				14F8A29A202E65C700175FDC /* Blue-76@2x.png in Resources */,
 				14F8A241202E5D0600175FDC /* Red-60@2x.png in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
@@ -3917,7 +3910,6 @@
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
-				41B5505020CF50F20050D4A7 /* LoaderTitleView.swift in Sources */,
 				80E9DBD6209CA8FE00A48CA9 /* Closeable.swift in Sources */,
 				9987B5962093E4BA007D277C /* FilesListViewController.swift in Sources */,
 				41C955FC20A3937A00FC8314 /* ChatMessageActionButtonsView.swift in Sources */,

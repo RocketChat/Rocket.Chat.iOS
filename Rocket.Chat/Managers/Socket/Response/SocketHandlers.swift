@@ -55,10 +55,8 @@ extension SocketManager {
     }
 
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
-        // Do nothing?
         let error = SocketError(json: result.result["error"])
-
-        state = .disconnected
+        Log.debug("[ERROR][SocketManager]: \(error.message)")
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {

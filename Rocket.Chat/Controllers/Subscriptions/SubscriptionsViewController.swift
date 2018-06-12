@@ -26,7 +26,6 @@ final class SubscriptionsViewController: BaseViewController {
     weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
-    weak var loaderTitleView: LoaderTitleView?
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
 
@@ -59,6 +58,11 @@ final class SubscriptionsViewController: BaseViewController {
 
     let socketHandlerToken = String.random(5)
 
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        subscriptionsToken?.invalidate()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,19 +77,14 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // This method can stay here, since adding a new connection handler
+        // will override the existing one if there's already one. This is here
+        // to prevent that some connection issue removes all the connection handler.
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     // MARK: Storyboard Segues
@@ -283,13 +282,6 @@ final class SubscriptionsViewController: BaseViewController {
 
             titleView.delegate = self
             updateServerInformation()
-        }
-    }
-
-    func setupLoaderTitleView() {
-        if let titleView = LoaderTitleView.instantiateFromNib() {
-            navigationItem.titleView = titleView
-            self.loaderTitleView = titleView
         }
     }
 
@@ -656,18 +648,7 @@ extension SubscriptionsViewController: SocketConnectionHandler {
 
     func socketDidChangeState(state: SocketConnectionState) {
         Log.debug("[SubscriptionsViewController] socketDidChangeState: \(state)")
-
-        if state == .connected {
-            setupTitleView()
-        } else {
-            setupLoaderTitleView()
-
-            if state == .waitingForNetwork {
-                loaderTitleView?.status = .waitingNetwork
-            } else {
-                loaderTitleView?.status = .connecting
-            }
-        }
+        titleView?.state = state
     }
 
 }

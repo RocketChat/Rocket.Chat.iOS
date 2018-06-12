@@ -54,7 +54,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    weak var loaderTitleView: LoaderTitleView?
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     var documentController: UIDocumentInteractionController?
@@ -229,13 +228,6 @@ final class ChatViewController: SLKTextViewController {
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
-    }
-
-    private func setupLoaderTitleView() {
-        if let titleView = LoaderTitleView.instantiateFromNib() {
-            navigationItem.titleView = titleView
-            self.loaderTitleView = titleView
-        }
     }
 
     private func setupScrollToBottomButton() {
@@ -1237,12 +1229,7 @@ extension ChatViewController: SocketConnectionHandler {
 
     func socketDidChangeState(state: SocketConnectionState) {
         Log.debug("[ChatViewController] socketDidChangeState: \(state)")
-
-        if state == .connected {
-            setupTitleView()
-        } else {
-            setupLoaderTitleView()
-        }
+        chatTitleView?.state = state
     }
 
 }

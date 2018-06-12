@@ -16,6 +16,15 @@ final class SubscriptionsTitleView: UIView {
 
     weak var delegate: SubscriptionsTitleViewDelegate?
 
+    var state: SocketConnectionState = SocketManager.sharedInstance.state {
+        didSet {
+            updateConnectionState()
+        }
+    }
+
+    @IBOutlet weak var viewLoading: UIStackView!
+    @IBOutlet weak var labelLoading: UILabel!
+
     @IBOutlet weak var labelMessages: UILabel! {
         didSet {
             labelMessages.text = localized("subscriptions.messages")
@@ -49,12 +58,26 @@ final class SubscriptionsTitleView: UIView {
         }
     }
 
-    override var intrinsicContentSize: CGSize {
-        if #available(iOS 11.0, *) {
-            return UILayoutFittingExpandedSize
-        }
+    fileprivate func updateConnectionState() {
+        if state == .connecting || state == .waitingForNetwork {
+            viewLoading?.isHidden = false
+            labelMessages?.isHidden = true
 
-        return UILayoutFittingCompressedSize
+            if state == .connecting {
+                labelLoading?.text = localized("connection.connecting.banner.message")
+            }
+
+            if state == .waitingForNetwork {
+                labelLoading?.text = localized("connection.waiting_for_network.banner.message")
+            }
+        } else {
+            labelMessages?.isHidden = false
+            viewLoading?.isHidden = true
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
     }
 
 }
