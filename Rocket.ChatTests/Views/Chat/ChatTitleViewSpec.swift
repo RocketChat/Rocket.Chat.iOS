@@ -24,6 +24,8 @@ class ChatTitleViewSpec: XCTestCase {
             return XCTFail("instantion from nib should've worked")
         }
 
+        instance.updateConnectionState()
+
         XCTAssertEqual(instance.state, .waitingForNetwork)
         XCTAssertFalse(instance.viewLoading.isHidden)
         XCTAssertTrue(instance.buttonTitle.isHidden)

@@ -51,7 +51,7 @@ final class ChatTitleView: UIView {
         }
     }
 
-    fileprivate func updateConnectionState() {
+    internal func updateConnectionState() {
         if state == .connecting || state == .waitingForNetwork {
             viewLoading?.isHidden = false
             buttonTitle?.isHidden = true

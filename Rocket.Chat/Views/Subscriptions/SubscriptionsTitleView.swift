@@ -58,7 +58,7 @@ final class SubscriptionsTitleView: UIView {
         }
     }
 
-    fileprivate func updateConnectionState() {
+    internal func updateConnectionState() {
         if state == .connecting || state == .waitingForNetwork {
             viewLoading?.isHidden = false
             labelMessages?.isHidden = true
