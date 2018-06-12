@@ -280,6 +280,7 @@ final class SubscriptionsViewController: BaseViewController {
             titleView.sizeToFit()
             updateServerInformation()
 
+            // This code can be removed when we drop iOS 10 support.
             titleView.translatesAutoresizingMaskIntoConstraints = true
             navigationItem.titleView = titleView
             self.titleView = titleView
