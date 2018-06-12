@@ -393,7 +393,7 @@
                         <sections>
                             <tableViewSection id="3b3-wG-h1a">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="PlQ-xv-Qob">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="PlQ-xv-Qob" customClass="EditProfileStatusCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="180" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PlQ-xv-Qob" id="Bm0-rK-RT6">
@@ -425,6 +425,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailLabel" destination="3Xj-81-1Z8" id="RRE-Km-K4N"/>
+                                            <outlet property="titleLabel" destination="ktt-zT-6vl" id="fmc-sM-lnJ"/>
                                             <segue destination="PAX-xh-x7K" kind="show" identifier="Status" id="wSI-SD-bDF"/>
                                         </connections>
                                     </tableViewCell>

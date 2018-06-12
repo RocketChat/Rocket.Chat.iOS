@@ -133,7 +133,7 @@ extension UITableViewCell {
         guard let theme = theme else { return }
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         detailTextLabel?.textColor = theme.auxiliaryText
-        tintColor = theme.auxiliaryText
+        tintColor = theme.tintColor
     }
 }
 
