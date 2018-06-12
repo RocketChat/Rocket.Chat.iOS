@@ -47,14 +47,7 @@ extension SocketManager {
     fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
         internalConnectionHandler?(socket, true)
         internalConnectionHandler = nil
-
-        if let enumerator = connectionHandlers.objectEnumerator() {
-            while let handler = enumerator.nextObject() {
-                if let handler = handler as? SocketConnectionHandler {
-                    handler.socketDidConnect(socket: self)
-                }
-            }
-        }
+        state = .connected
     }
 
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
@@ -65,13 +58,7 @@ extension SocketManager {
         // Do nothing?
         let error = SocketError(json: result.result["error"])
 
-        if let enumerator = connectionHandlers.objectEnumerator() {
-            while let handler = enumerator.nextObject() {
-                if let handler = handler as? SocketConnectionHandler {
-                    handler.socketDidReturnError(socket: self, error: error)
-                }
-            }
-        }
+        state = .disconnected
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {

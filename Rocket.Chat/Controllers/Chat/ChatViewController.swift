@@ -1235,21 +1235,14 @@ extension ChatViewController: KeyboardFrameViewDelegate {
 
 extension ChatViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-        Log.debug("[ChatViewController] socketDidConnect")
-        setupTitleView()
-    }
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[ChatViewController] socketDidChangeState: \(state)")
 
-    func socketDidDisconnect(socket: SocketManager) {
-        Log.debug("[ChatViewController] socketDidDisconnect")
-        setupLoaderTitleView()
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        Log.debug("[ChatViewController] socketDidReturnError: \(error)")
-        setupLoaderTitleView()
-        loaderTitleView?.status = .waitingNetwork
+        if state == .connected {
+            setupTitleView()
+        } else {
+            setupLoaderTitleView()
+        }
     }
 
 }

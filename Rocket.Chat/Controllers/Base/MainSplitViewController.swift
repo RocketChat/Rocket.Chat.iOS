@@ -10,8 +10,6 @@ import UIKit
 
 final class MainSplitViewController: UISplitViewController {
 
-    let socketHandlerToken = String.random(5)
-
     static var chatViewController: ChatViewController? {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
@@ -35,17 +33,12 @@ final class MainSplitViewController: UISplitViewController {
         return controller
     }
 
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
         delegate = self
         preferredDisplayMode = .allVisible
 
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
         SocketManager.reconnect()
     }
 
@@ -57,26 +50,6 @@ extension MainSplitViewController: UISplitViewControllerDelegate {
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
-    }
-
-}
-
-// MARK: SocketConnectionHandler
-
-extension MainSplitViewController: SocketConnectionHandler {
-
-    func socketDidConnect(socket: SocketManager) {
-        Log.debug("[MainSplitViewController] socketDidConnect")
-    }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        Log.debug("[MainSplitViewController] socketDidDisconnect")
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        Log.debug("[MainSplitViewController] socketDidReturnError: \(error)")
-        // Handle errors
     }
 
 }

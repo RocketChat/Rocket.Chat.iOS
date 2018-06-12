@@ -18,17 +18,34 @@ public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 public typealias MessageCompletionObject <T: Object> = (T?) -> Void
 public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
-protocol SocketConnectionHandler {
-    func socketDidConnect(socket: SocketManager)
-    func socketDidDisconnect(socket: SocketManager)
-    func socketDidReturnError(socket: SocketManager, error: SocketError)
+enum SocketConnectionState {
+    case connected
+    case connecting
+    case disconnected
+    case waitingForNetwork
 }
 
-class SocketManager {
+protocol SocketConnectionHandler {
+    func socketDidChangeState(state: SocketConnectionState)
+}
+
+final class SocketManager {
 
     static let sharedInstance = SocketManager()
 
     var serverURL: URL?
+
+    var state: SocketConnectionState = .disconnected {
+        didSet {
+            if let enumerator = connectionHandlers.objectEnumerator() {
+                while let handler = enumerator.nextObject() {
+                    if let handler = handler as? SocketConnectionHandler {
+                        handler.socketDidChangeState(state: state)
+                    }
+                }
+            }
+        }
+    }
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
@@ -54,6 +71,7 @@ class SocketManager {
         ]
 
         sharedInstance.socket?.connect()
+        sharedInstance.state = .connecting
     }
 
     static func disconnect(_ completion: @escaping SocketCompletion) {
@@ -208,19 +226,7 @@ extension SocketManager: WebSocketDelegate {
         isUserAuthenticated = false
         events = [:]
         queue = [:]
-
-        if let handler = internalConnectionHandler {
-            internalConnectionHandler = nil
-            handler(socket, socket.isConnected)
-        }
-
-        if let enumerator = connectionHandlers.objectEnumerator() {
-            while let handler = enumerator.nextObject() {
-                if let handler = handler as? SocketConnectionHandler {
-                    handler.socketDidDisconnect(socket: self)
-                }
-            }
-        }
+        state = .disconnected
     }
 
     func websocketDidReceiveData(socket: WebSocket, data: Data) {

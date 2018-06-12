@@ -654,21 +654,20 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
 extension SubscriptionsViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-        Log.debug("[SubscriptionsViewController] socketDidConnect")
-        setupTitleView()
-    }
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[SubscriptionsViewController] socketDidChangeState: \(state)")
 
-    func socketDidDisconnect(socket: SocketManager) {
-        Log.debug("[SubscriptionsViewController] socketDidDisconnect")
-        setupLoaderTitleView()
-        SocketManager.reconnect()
-    }
+        if state == .connected {
+            setupTitleView()
+        } else {
+            setupLoaderTitleView()
 
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        Log.debug("[SubscriptionsViewController] socketDidReturnError: \(error)")
-        setupLoaderTitleView()
-        loaderTitleView?.status = .waitingNetwork
+            if state == .waitingForNetwork {
+                loaderTitleView?.status = .waitingNetwork
+            } else {
+                loaderTitleView?.status = .connecting
+            }
+        }
     }
 
 }
