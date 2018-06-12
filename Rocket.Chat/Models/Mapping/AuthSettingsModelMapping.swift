@@ -91,6 +91,7 @@ extension AuthSettings: ModelMappeable {
         self.messageMaxAllowedSize = objectForKey(object: values, key: "Message_MaxAllowedSize")?.int ?? 0
 
         self.messageReadReceiptEnabled = objectForKey(object: values, key: "Message_Read_Receipt_Enabled")?.bool ?? false
+        self.messageReadReceiptStoreUsers = objectForKey(object: values, key: "Message_Read_Receipt_Store_Users")?.bool ?? false
 
         // Custom Fields
         self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?.string?.removingWhitespaces()

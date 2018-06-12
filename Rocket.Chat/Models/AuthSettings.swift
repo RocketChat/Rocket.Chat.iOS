@@ -106,6 +106,7 @@ final class AuthSettings: Object {
     @objc dynamic var messageMaxAllowedSize: Int = 0
 
     @objc dynamic var messageReadReceiptEnabled: Bool = false
+    @objc dynamic var messageReadReceiptStoreUsers: Bool = false
 
     // Custom fields
     @objc dynamic var rawCustomFields: String?

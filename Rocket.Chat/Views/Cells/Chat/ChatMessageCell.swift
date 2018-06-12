@@ -39,6 +39,10 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    var settings: AuthSettings? {
+        return AuthManager.isAuthenticated()?.settings
+    }
+
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
@@ -112,11 +116,13 @@ final class ChatMessageCell: UICollectionViewCell {
 
     // MARK: Read Receipt
 
-    @IBOutlet weak var readReceiptImageView: UIImageView!
+    @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var readReceiptConstraint: NSLayoutConstraint!
 
     func updateReadReceipt() {
-        guard let settings = AuthManager.isAuthenticated()?.settings else { return }
+        guard let settings = settings else {
+            return
+        }
 
         if settings.messageReadReceiptEnabled {
             readReceiptConstraint.constant = 12.0
@@ -124,7 +130,19 @@ final class ChatMessageCell: UICollectionViewCell {
             readReceiptConstraint.constant = 0.0
         }
 
-        readReceiptImageView.image = UIImage(named: "Check")?.imageWithTint(message.unread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
+        let image = UIImage(named: "Check")?.imageWithTint(message.unread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
+        readReceiptButton.setImage(image, for: .normal)
+    }
+
+    @IBAction func readReceiptPressed(_ sender: UIButton) {
+        guard
+            let settings = settings,
+            settings.messageReadReceiptStoreUsers
+        else {
+            return
+        }
+
+        
     }
 
     override func prepareForReuse() {
