@@ -64,8 +64,10 @@ final class SubscriptionsViewController: BaseViewController {
 
         setupSearchBar()
         setupTitleView()
-        setupLoaderTitleView()
         updateBackButton()
+
+        subscribeModelChanges()
+        updateData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -78,16 +80,11 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        subscribeModelChanges()
-        updateData()
-        tableView.reloadData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        subscriptionsToken?.invalidate()
+        super.viewDidDisappear(animated)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
