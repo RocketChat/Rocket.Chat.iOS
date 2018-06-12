@@ -10,7 +10,29 @@ import UIKit
 
 class LoginTableViewController: UITableViewController {
 
+    internal let createAccountRow: Int = 5
+
     @IBOutlet weak var forgotPasswordCell: UITableViewCell!
+    @IBOutlet weak var createAccountButton: UIButton! {
+        didSet {
+            createAccountButton.titleLabel?.numberOfLines = 0
+
+            let suffix = NSAttributedString(string: "Don't have an account?", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()]) // TODO: Localize
+            let createAccount = NSAttributedString(string: "\nCreate an Account", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .semibold), NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()])
+            let combinedString = NSMutableAttributedString(attributedString: suffix)
+            combinedString.append(createAccount)
+
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 1
+            paragraphStyle.alignment = .center
+
+            let combinationRange = NSRange(location: 0, length: combinedString.length)
+            combinedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: combinationRange)
+
+            createAccountButton.setAttributedTitle(combinedString, for: .normal)
+        }
+    }
+
     var heightForSignUpRow: CGFloat {
         let forgotPasswordY = forgotPasswordCell.frame.origin.y
         let forgotPasswordHeight = forgotPasswordCell.frame.height
@@ -26,7 +48,10 @@ class LoginTableViewController: UITableViewController {
         return UIScreen.main.bounds.height - contentSize
     }
 
+    var shouldShowCreateAccount = false
     var isKeyboardAppearing = false
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +74,8 @@ class LoginTableViewController: UITableViewController {
         view.addGestureRecognizer(tapGesture)
     }
 
+    // MARK: Keyboard Management
+
     @objc func keyboardWillAppear(_ notification: Notification) {
         isKeyboardAppearing = true
         tableView.beginUpdates()
@@ -69,7 +96,7 @@ class LoginTableViewController: UITableViewController {
 
 extension LoginTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 5 && !isKeyboardAppearing {
+        if indexPath.row == createAccountRow && !isKeyboardAppearing {
             return heightForSignUpRow
         }
 

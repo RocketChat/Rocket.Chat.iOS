@@ -402,7 +402,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="uqi-GG-UQS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <state key="normal" title="Forgot your password?"/>
+                                                    <state key="normal" title="Don't have an account?"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -439,6 +439,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="createAccountButton" destination="Op4-2b-y8Z" id="m5O-Yp-adu"/>
                         <outlet property="forgotPasswordCell" destination="a2F-c8-kDy" id="1Da-CF-VaU"/>
                     </connections>
                 </tableViewController>
