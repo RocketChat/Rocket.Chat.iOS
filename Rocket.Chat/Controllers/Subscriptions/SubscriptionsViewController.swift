@@ -274,14 +274,18 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            titleView.translatesAutoresizingMaskIntoConstraints = false
+            titleView.delegate = self
+            titleView.layoutIfNeeded()
+            titleView.sizeToFit()
+            updateServerInformation()
+
+            titleView.translatesAutoresizingMaskIntoConstraints = true
             navigationItem.titleView = titleView
             self.titleView = titleView
 
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
             titleView.addGestureRecognizer(tapGesture)
-
-            titleView.delegate = self
-            updateServerInformation()
         }
     }
 
