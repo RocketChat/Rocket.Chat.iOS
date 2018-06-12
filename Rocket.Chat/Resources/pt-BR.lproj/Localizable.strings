@@ -149,6 +149,9 @@
 // Notifications
 "notifications.action.reply" = "Reply";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Lido por"; //TODO
+
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
 "chat.channel_preview_view.join" = "Entrar";

@@ -159,6 +159,9 @@
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
 "chat.unread_separator" = "νέα μηνύματα";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+
 // Chat Message Actions
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
 "chat.message.actions.block" = "Φράξτε μηνύματα από χρήστη";

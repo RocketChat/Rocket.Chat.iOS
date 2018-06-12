@@ -159,6 +159,9 @@
 "chat.loading_messages" = "Loading messages...";
 "chat.unread_separator" = "new messages";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by";
+
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Block messages from user";

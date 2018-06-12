@@ -53,7 +53,7 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
             )
         )
 
-        title = localized("readreceiptlist.title")
+        title = localized("chat.read_receipt_list.title")
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -159,6 +159,9 @@
 "chat.loading_messages" = "Loading messages..."; //TODO
 "chat.unread_separator" = "new messages"; //TODO
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokovat zprávy od uživatele";
