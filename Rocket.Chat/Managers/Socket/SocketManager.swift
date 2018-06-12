@@ -157,6 +157,8 @@ extension SocketManager {
             return
         }
 
+        sharedInstance.state = .connecting
+
         AuthManager.resume(auth, completion: { (response) in
             guard !response.isError() else {
                 return

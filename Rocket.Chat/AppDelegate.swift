@@ -57,6 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
+
+        if AuthManager.isAuthenticated() != nil {
+            if !SocketManager.isConnected() {
+                SocketManager.reconnect()
+            }
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
