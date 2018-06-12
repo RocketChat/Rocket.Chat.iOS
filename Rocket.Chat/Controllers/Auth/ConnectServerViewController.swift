@@ -156,7 +156,7 @@ final class ConnectServerViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? LoginTableViewController {
-            
+            controller.shouldShowCreateAccount = true
         }
 
         if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
