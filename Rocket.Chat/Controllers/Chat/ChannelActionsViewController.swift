@@ -178,7 +178,9 @@ extension ChannelActionsViewController {
     }
 
     func shareRoom() {
-        
+        guard let url = subscription?.externalURL() else { return }
+        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
