@@ -21,7 +21,7 @@ final class ConnectServerViewController: BaseViewController {
 
     var shouldAutoConnect = false
     var url: URL? {
-        guard var urlText = textFieldServerURL.text else { return nil }
+        guard var urlText = textFieldServerURL.text else { return URL(string: defaultURL, scheme: "https") }
         if urlText.isEmpty {
             urlText = defaultURL
         }
@@ -149,15 +149,24 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let loginServices = sender as? [LoginService], let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
+        if let controller = segue.destination as? LoginTableViewController {
+            
+        }
+
+        if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
             controller.serverVersion = infoRequestHandler.version
             controller.serverURL = url
             controller.serverPublicSettings = serverPublicSettings
-            controller.loginServices = loginServices
 
             if let credentials = deepLinkCredentials {
                 _ = controller.view
                 controller.authenticateWithDeepLinkCredentials(credentials)
+            }
+
+            if let loginServices = sender as? [LoginService] {
+                controller.loginServices = loginServices
+            } else if let shouldRetrieveLoginServices = sender as? Bool {
+                controller.shouldRetrieveLoginServices = shouldRetrieveLoginServices
             }
         }
     }
@@ -214,12 +223,19 @@ final class ConnectServerViewController: BaseViewController {
                 self?.serverPublicSettings = settings
 
                 if connected {
-                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices in
-                        self?.performSegue(withIdentifier: "Auth", sender: loginServices)
+                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
+                        self?.stopConnecting()
+                        if shouldRetrieveLoginServices {
+                            self?.performSegue(withIdentifier: "Auth", sender: shouldRetrieveLoginServices)
+                        } else {
+                            if loginServices.count > 0 {
+                                self?.performSegue(withIdentifier: "Auth", sender: loginServices)
+                            } else {
+                                self?.performSegue(withIdentifier: "Login", sender: loginServices)
+                            }
+                        }
                     })
                 }
-
-                self?.stopConnecting()
             }
         }
     }

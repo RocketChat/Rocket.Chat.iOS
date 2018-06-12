@@ -51,6 +51,7 @@ final class AuthTableViewController: UITableViewController {
     }()
 
     internal var connecting = false
+    var shouldRetrieveLoginServices = false
 
     var serverVersion: Version?
     var serverURL: URL!
@@ -74,7 +75,7 @@ final class AuthTableViewController: UITableViewController {
     var isLoginServicesCollapsed = true
     var loginServices: [LoginService] = [] {
         didSet {
-//            tableView.reloadData()
+            tableView.reloadData()
         }
     }
 

@@ -45,13 +45,18 @@ extension AuthTableViewController {
     }
 
     func setupLoginServices() {
-//        loginServicesToken?.invalidate()
-//
-//        loginServicesToken = LoginServiceManager.observe { [weak self] changes in
-//            self?.updateLoginServices(changes: changes)
-//        }
-//
-//        api?.client(InfoClient.self).fetchLoginServices()
+        guard shouldRetrieveLoginServices else {
+            return
+        }
+
+        if let objects = Realm.current?.objects(LoginService.self) {
+            loginServices = objects.map({ $0 })
+        }
+
+        loginServicesToken?.invalidate()
+        loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+            self?.updateLoginServices(changes: changes)
+        }
     }
 
     func presentOAuthViewController(for loginService: LoginService) {

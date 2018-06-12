@@ -138,9 +138,6 @@
                                         <state key="normal" title="Create a new server">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="w7q-9e-4D3" kind="show" id="AMj-Bd-xFL"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1053,6 +1050,7 @@
                         <outlet property="buttonConnect" destination="0cw-94-7gd" id="nUC-fN-vTx"/>
                         <outlet property="textFieldServerURL" destination="0ry-Re-0rp" id="Kwl-Nc-paa"/>
                         <segue destination="ueL-n9-tXo" kind="show" identifier="Auth" id="lbH-ae-bNg"/>
+                        <segue destination="w7q-9e-4D3" kind="show" identifier="Login" id="tMH-P7-q5C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s5Y-wv-rqf" userLabel="First Responder" sceneMemberID="firstResponder"/>

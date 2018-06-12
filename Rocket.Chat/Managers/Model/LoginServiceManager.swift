@@ -11,7 +11,7 @@ import RealmSwift
 struct LoginServiceManager {
     let observeTokens: [NotificationToken]
 
-    static func subscribe(completion: (([LoginService]) -> Void)? = nil) {
+    static func subscribe() {
         let object = [
             "msg": "sub",
             "name": "meteor.loginServiceConfiguration",

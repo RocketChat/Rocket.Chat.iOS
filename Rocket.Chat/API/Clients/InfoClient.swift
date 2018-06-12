@@ -25,11 +25,11 @@ struct InfoClient: APIClient {
         }
     }
 
-    func fetchLoginServices(realm: Realm? = Realm.current, completion: (([LoginService]) -> Void)? = nil) {
+    func fetchLoginServices(realm: Realm? = Realm.current, completion: ((_ loginServices: [LoginService], _ shouldRetrieveLoginServices: Bool) -> Void)? = nil) {
         api.fetch(LoginServicesRequest()) { response in
             switch response {
             case .resource(let res):
-                completion?(res.loginServices)
+                completion?(res.loginServices, false)
                 realm?.execute({ realm in
                     realm.add(res.loginServices, update: true)
                 })
@@ -37,7 +37,8 @@ struct InfoClient: APIClient {
                 switch error {
                 case .version:
                     // version fallback
-                    LoginServiceManager.subscribe(completion: completion)
+                    LoginServiceManager.subscribe()
+                    completion?([LoginService](), true)
                 default:
                     break
                 }

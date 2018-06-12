@@ -56,22 +56,36 @@ class LoginTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillAppear(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
+        if shouldShowCreateAccount {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(keyboardWillAppear(_:)),
+                name: NSNotification.Name.UIKeyboardWillShow,
+                object: nil
+            )
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillDisappear(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
-        )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(keyboardWillDisappear(_:)),
+                name: NSNotification.Name.UIKeyboardWillHide,
+                object: nil
+            )
+        }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setGrayTheme()
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Keyboard Management
@@ -96,6 +110,10 @@ class LoginTableViewController: UITableViewController {
 
 extension LoginTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == createAccountRow && !shouldShowCreateAccount {
+            return 0
+        }
+
         if indexPath.row == createAccountRow && !isKeyboardAppearing {
             return heightForSignUpRow
         }

@@ -30,7 +30,7 @@ class BaseNavigationController: UINavigationController {
     override func popViewController(animated: Bool) -> UIViewController? {
         let poppedViewController = super.popViewController(animated: animated)
 
-        if (poppedViewController as? AuthTableViewController) != nil {
+        if (poppedViewController as? AuthTableViewController) != nil || (poppedViewController as? LoginTableViewController) != nil {
             setTransparentTheme()
         }
 
@@ -40,7 +40,7 @@ class BaseNavigationController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
 
-        if viewController is AuthTableViewController {
+        if viewController is LoginTableViewController {
             setGrayTheme()
         }
     }
