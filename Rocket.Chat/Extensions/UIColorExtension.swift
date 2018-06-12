@@ -127,7 +127,7 @@ extension UIColor {
     }
 
     static func RCLightGray() -> UIColor {
-        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
+        return UIColor(rgb: 0xCBCED1, alphaVal: 1)
     }
 
     static func RCSeparatorGrey() -> UIColor {

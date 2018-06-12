@@ -117,6 +117,7 @@
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.conversations" = "Conversations";
 "subscriptions.you" = "you";
 "subscriptions.messages" = "Messages";
 "subscriptions.list.you_initial" = "You";
@@ -329,3 +330,12 @@
 "user_action_sheet.remove" = "Remove from room";
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name";
+"subscriptions.sorting.title.activity" = "Sorting by activity";
+"subscriptions.sorting.alphabetical" = "Alphabetical";
+"subscriptions.sorting.activity" = "Activity";
+"subscriptions.grouping.type" = "Group by type";
+"subscriptions.grouping.favorites" = "Group by favorites";
+"subscriptions.grouping.unread_top" = "Unread on top";

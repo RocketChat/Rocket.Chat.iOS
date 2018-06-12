@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ServerListViewDelegate: class {
+    func serverListViewDidClose()
+}
+
 final class ServersListView: UIView {
 
     private let viewModel = ServersListViewModel()
+    weak var delegate: ServerListViewDelegate?
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
@@ -25,6 +30,12 @@ final class ServersListView: UIView {
     }
 
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tappableView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+            tappableView.addGestureRecognizer(tapGesture)
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -62,10 +73,10 @@ final class ServersListView: UIView {
 
     // MARK: Showing the View
 
-    static func showIn(_ view: UIView) -> ServersListView? {
+    static func showIn(_ view: UIView, frame: CGRect) -> ServersListView? {
         guard let instance = ServersListView.instantiateFromNib() else { return nil }
         instance.backgroundColor = UIColor.black.withAlphaComponent(0)
-        instance.frame = view.bounds
+        instance.frame = frame
         view.addSubview(instance)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -82,8 +93,9 @@ final class ServersListView: UIView {
 
     // MARK: Hiding the View
 
-    func close() {
+    @objc func close() {
         headerViewTopConstraint.constant = viewModel.initialTableViewPosition
+        self.delegate?.serverListViewDidClose()
 
         animates({
             self.backgroundColor = UIColor.black.withAlphaComponent(0)

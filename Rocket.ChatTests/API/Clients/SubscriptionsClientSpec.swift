@@ -50,13 +50,13 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if realm.objects(Subscription.self).count == 2 {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
 
     func testSubscriptionsUpdate() {
@@ -103,14 +103,14 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let subs = realm.objects(Subscription.self)
             if subs.count == 2, subs[0].name == "general" {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
 
     func testSubscriptionsRemove() {
@@ -147,13 +147,13 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let subscription = realm.objects(Subscription.self).first, subscription.auth == nil {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
 
     func testSubscriptionsRoomMapping() {
@@ -196,13 +196,13 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchRooms(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let subscription = realm.objects(Subscription.self).first, subscription.roomReadOnly == true {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
 
     func testFetchRoles() {

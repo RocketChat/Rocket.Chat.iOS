@@ -184,7 +184,7 @@ final class PreferencesViewController: UITableViewController {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
                 cellLanguageDidPressed()
-            } else if indexPath.row == 2 {
+            } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == kSectionInformation {
