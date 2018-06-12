@@ -62,8 +62,7 @@ extension AuthTableViewController {
     func presentOAuthViewController(for loginService: LoginService) {
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
-//            strongSelf.startLoading()
-            // TODO: Start loading for OAuth
+            strongSelf.startLoading()
 
             AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
             }, failure: { [weak self] in
@@ -72,8 +71,7 @@ extension AuthTableViewController {
                     message: localized("alert.login_service_error.message")
                 )
 
-//                self?.stopLoading()
-                // TODO: Stop loading for OAuth
+                self?.stopLoading()
         })
     }
 
@@ -90,12 +88,10 @@ extension AuthTableViewController {
         let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
             AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
         }, failure: { [weak self] in
-//            self?.stopLoading()
-            // TODO: Stop loading for OAuth
+            self?.stopLoading()
         })
 
-//        startLoading()
-        // TODO: Start loading for OAuth
+        startLoading()
         navigationController?.pushViewController(controller, animated: true)
         return
     }
@@ -112,12 +108,10 @@ extension AuthTableViewController {
         let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
             AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)
         }, failure: { [weak self] in
-//            self?.stopLoading()
-            // TODO: Stop loading for OAuth
+            self?.stopLoading()
         })
 
-//        startLoading()
-        // TODO: Start loading for OAuth
+        startLoading()
         navigationController?.pushViewController(controller, animated: true)
         return
     }

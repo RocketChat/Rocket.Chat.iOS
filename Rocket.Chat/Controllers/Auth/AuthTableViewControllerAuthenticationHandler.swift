@@ -15,7 +15,7 @@ extension AuthTableViewController {
         case .resource(let resource):
             guard let error = resource.error else { break }
 
-            // TODO: Stop loading from deeplink credentials, verify if we will need loading for OAuth
+            stopLoading()
 
             switch error.lowercased() {
             case "totp-required":
@@ -38,7 +38,7 @@ extension AuthTableViewController {
                 }
             }
         case .error(let error):
-             // TODO: Stop loading from deeplink credentials, verify if we will need loading for OAuth
+            stopLoading()
             alert(title: localized("error.login.title"), message: error.description)
         }
 
@@ -67,12 +67,11 @@ extension AuthTableViewController {
                         self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 } else {
-                     // TODO: Stop loading from deeplink credentials, verify if we will need loading for OAuth
+                    self?.stopLoading()
                     Alert(key: "error.socket.default_error").present()
                 }
             case .error:
-                break
-                 // TODO: Stop loading from deeplink credentials, verify if we will need loading for OAuth
+                self?.stopLoading()
             }
         }
     }

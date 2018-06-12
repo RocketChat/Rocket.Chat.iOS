@@ -11,6 +11,7 @@ import UIKit
 import SafariServices
 import OnePasswordExtension
 import RealmSwift
+import MBProgressHUD
 
 final class AuthTableViewController: UITableViewController {
 
@@ -58,6 +59,8 @@ final class AuthTableViewController: UITableViewController {
 
         return collapsibleAuthSeparatorRow
     }()
+
+    var loadingView: MBProgressHUD!
 
     internal var connecting = false
     var shouldRetrieveLoginServices = false
@@ -161,7 +164,7 @@ final class AuthTableViewController: UITableViewController {
     // MARK: Auth
 
     func authenticateWithDeepLinkCredentials(_ credentials: DeepLinkCredentials) {
-        // TODO: Implement loading for deeplink credentials
+        startLoading()
         AuthManager.auth(token: credentials.token, completion: self.handleAuthenticationResponse)
     }
 
@@ -192,6 +195,15 @@ final class AuthTableViewController: UITableViewController {
     }
 
     // MARK: Actions
+
+    func startLoading() {
+        loadingView = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingView.mode = .indeterminate
+    }
+
+    func stopLoading() {
+        loadingView.hide(animated: true)
+    }
 
     @objc func showLogin() {
         performSegue(withIdentifier: "Login", sender: self)
