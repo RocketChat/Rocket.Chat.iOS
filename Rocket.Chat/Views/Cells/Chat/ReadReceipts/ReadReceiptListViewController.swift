@@ -55,13 +55,4 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
 
         title = localized("chat.read_receipt_list.title")
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-
-        // remove title from back button
-
-        if self.navigationController?.topViewController == self {
-            navigationController?.navigationBar.topItem?.title = ""
-        }
-    }
 }

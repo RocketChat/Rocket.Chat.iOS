@@ -90,12 +90,15 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     self.navigationController?.pushViewController(controller, animated: true)
                 } else {
-                    if let presenter = controller.popoverPresentationController {
+                    let navigationController = UINavigationController(rootViewController: controller)
+                    navigationController.modalPresentationStyle = .popover
+
+                    if let presenter = navigationController.popoverPresentationController {
                         presenter.sourceView = source.0
                         presenter.sourceRect = source.0.bounds
                     }
 
-                    self.present(controller, animated: true)
+                    self.present(navigationController, animated: true)
                 }
             case .error(let error):
                 print(error)
