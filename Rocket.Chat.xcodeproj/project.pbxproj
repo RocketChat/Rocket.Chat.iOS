@@ -610,6 +610,7 @@
 		990B4B642069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990B4B632069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift */; };
 		990FF6D620740C79007B4A53 /* RoomMentionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF6D520740C79007B4A53 /* RoomMentionsRequest.swift */; };
 		990FF6D8207438D4007B4A53 /* RoomMentionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF6D7207438D4007B4A53 /* RoomMentionsRequestSpec.swift */; };
+		99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99100B6B20CF3B3F000C5FCC /* LoginTableViewController.swift */; };
 		9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9911CF3320C1CF58001471C3 /* StyledButton.swift */; };
 		9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */; };
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
@@ -1330,6 +1331,7 @@
 		990B4B632069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		990FF6D520740C79007B4A53 /* RoomMentionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequest.swift; sourceTree = "<group>"; };
 		990FF6D7207438D4007B4A53 /* RoomMentionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequestSpec.swift; sourceTree = "<group>"; };
+		99100B6B20CF3B3F000C5FCC /* LoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
 		9911CF3320C1CF58001471C3 /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequestSpec.swift; sourceTree = "<group>"; };
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1973,6 +1975,7 @@
 				35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
 				99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */,
+				99100B6B20CF3B3F000C5FCC /* LoginTableViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -4141,6 +4144,7 @@
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
+				99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				99F8FAED20B66F210025FEEF /* ImageCoordinator.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,

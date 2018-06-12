@@ -12,7 +12,7 @@ final class StyledTextField: VOTextField {
 
     @IBInspectable var leftIcon: UIImage?
     lazy var iconView: UIImageView = {
-        let iconView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 42.0, height: 26.0))
+        let iconView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 20, height: 20))
         iconView.contentMode = .center
         iconView.image = self.leftIcon
 
@@ -28,11 +28,21 @@ final class StyledTextField: VOTextField {
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: leftIcon != nil ? 60 : 15, dy: 0)
+        return bounds.insetBy(dx: leftIcon != nil ? 45 : 15, dy: 0)
+    }
+
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        let defaultRect = super.leftViewRect(forBounds: bounds)
+        return CGRect(
+            x: 15,
+            y: defaultRect.origin.y,
+            width: defaultRect.width,
+            height: defaultRect.height
+        )
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: leftIcon != nil ? 60 : 15, dy: 0)
+        return bounds.insetBy(dx: leftIcon != nil ? 45 : 15, dy: 0)
     }
 
     override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
