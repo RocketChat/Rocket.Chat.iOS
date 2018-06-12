@@ -18,9 +18,11 @@ final class PreferencesViewController: UITableViewController {
 
     private let kSectionProfile = 0
     private let kSectionSettings = 1
-    private let kSectionInformation = 2
-    private let kSectionTracking = 3
-    private let kSectionFlex = 4
+    private let kSectionAdministration = 2
+    private let kSectionInformation = 3
+    private let kSectionTracking = 4
+    private let kSectionLogout = 5
+    private let kSectionFlex = 6
 
     private let viewModel = PreferencesViewModel()
 
@@ -44,6 +46,12 @@ final class PreferencesViewController: UITableViewController {
 
     @IBOutlet weak var labelProfileName: UILabel!
     @IBOutlet weak var labelProfileStatus: UILabel!
+
+    @IBOutlet weak var labelAdministration: UILabel! {
+        didSet {
+            labelAdministration.text = viewModel.administration
+        }
+    }
 
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
@@ -96,6 +104,12 @@ final class PreferencesViewController: UITableViewController {
     @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
         didSet {
             labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+        }
+    }
+
+    @IBOutlet weak var labelLogout: UILabel! {
+        didSet {
+            labelLogout.text = viewModel.logout
         }
     }
 
@@ -214,6 +228,22 @@ final class PreferencesViewController: UITableViewController {
         }
 
         return nil
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == kSectionAdministration && !viewModel.canViewAdministrationPanel {
+            return .leastNormalMagnitude
+        }
+
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == kSectionAdministration && !viewModel.canViewAdministrationPanel {
+            return .leastNormalMagnitude
+        }
+
+        return super.tableView(tableView, heightForFooterInSection: section)
     }
 
     // MARK: IBAction

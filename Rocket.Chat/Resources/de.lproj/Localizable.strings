@@ -134,14 +134,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Abwesend";
-"user_menu.busy" = "Beschäftigt";
-"user_menu.invisible" = "Unsichtbar";
-"user_menu.admin" = "Administration";
-"user_menu.preferences" = "Einstellungen";
-"user_menu.logout" = "Abmelden";
+// Status
+"status.online" = "Online";
+"status.away" = "Abwesend";
+"status.busy" = "Beschäftigt";
+"status.invisible" = "Unsichtbar";
 
 // New Room View
 "new_room.title" = "Neuer Kanal";
@@ -268,6 +265,8 @@
 
 // Settings
 "myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.administration" = "Administration"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Kontaktieren Sie uns";
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";

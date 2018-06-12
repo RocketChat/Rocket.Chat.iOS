@@ -134,14 +134,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Pryč";
-"user_menu.busy" = "Zaneprázdněn";
-"user_menu.invisible" = "Neviditelný";
-"user_menu.admin" = "Administration"; //TODO
-"user_menu.preferences" = "Můj účet"; // TODO: new text: Preferences
-"user_menu.logout" = "Odhlásit";
+// Status
+"status.online" = "Online";
+"status.away" = "Pryč";
+"status.busy" = "Zaneprázdněn";
+"status.invisible" = "Neviditelný";
 
 // New Room View
 "new_room.title" = "New Channel"; // TODO
@@ -268,6 +265,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO
+"myaccount.settings.administration" = "Administration"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Contact us"; // TODO
 "myaccount.settings.profile" = "Profile"; // TODO
 "myaccount.settings.license" = "License"; // TODO

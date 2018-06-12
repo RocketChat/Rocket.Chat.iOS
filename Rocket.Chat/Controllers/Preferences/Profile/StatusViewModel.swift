@@ -12,10 +12,10 @@ final class StatusViewModel {
     var user: User?
 
     internal let title = localized("myaccount.settings.profile.status.title")
-    internal let statusOnline = localized("user_menu.online")
-    internal let statusAway = localized("user_menu.away")
-    internal let statusBusy = localized("user_menu.busy")
-    internal let statusInvisible = localized("user_menu.invisible")
+    internal let statusOnline = localized("status.online")
+    internal let statusAway = localized("status.away")
+    internal let statusBusy = localized("status.busy")
+    internal let statusInvisible = localized("status.invisible")
 
     internal var currentStatusIndex: Int {
         guard let user = user else { return -1 }
