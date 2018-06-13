@@ -120,6 +120,7 @@
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */; };
 		33FB9D4220D06492005AF504 /* EditProfileStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D4120D06492005AF504 /* EditProfileStatusCell.swift */; };
+		33FB9D4420D0EE7F005AF504 /* ServerInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D4320D0EE7F005AF504 /* ServerInfoCell.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
 		35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD302201A9FB800B4BE5A /* AskSpec.swift */; };
@@ -845,6 +846,7 @@
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsSortingSeparatorView.swift; sourceTree = "<group>"; };
 		33FB9D4120D06492005AF504 /* EditProfileStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileStatusCell.swift; sourceTree = "<group>"; };
+		33FB9D4320D0EE7F005AF504 /* ServerInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerInfoCell.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		35BCD300201A57EA00B4BE5A /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -1772,6 +1774,7 @@
 			children = (
 				33FB9D4120D06492005AF504 /* EditProfileStatusCell.swift */,
 				4153E80420504BE700FBC26B /* ReusableViewText.swift */,
+				33FB9D4320D0EE7F005AF504 /* ServerInfoCell.swift */,
 				412EF3C52050507C001689A3 /* ReusableViewText.xib */,
 			);
 			path = Preferences;
@@ -3878,6 +3881,7 @@
 				990FF6D620740C79007B4A53 /* RoomMentionsRequest.swift in Sources */,
 				8039441820AF620C002F317A /* ResourceWithError.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
+				33FB9D4420D0EE7F005AF504 /* ServerInfoCell.swift in Sources */,
 				806DB94A20695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift in Sources */,
 				41F3704D20A31A3E00C5449E /* UIViewControllerExtension.swift in Sources */,
 				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,

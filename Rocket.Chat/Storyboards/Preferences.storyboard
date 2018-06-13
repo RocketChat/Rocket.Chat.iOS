@@ -205,7 +205,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="A7K-i5-rCS" detailTextLabel="awd-rJ-YyE" style="IBUITableViewCellStyleSubtitle" id="lry-Zd-QVi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="A7K-i5-rCS" detailTextLabel="awd-rJ-YyE" style="IBUITableViewCellStyleSubtitle" id="lry-Zd-QVi" customClass="ServerInfoCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="465" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lry-Zd-QVi" id="zKT-w3-7Hd">
