@@ -198,6 +198,14 @@ extension UITabBar {
     }
 }
 
+extension UIScrollView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        indicatorStyle = theme.appearence.scrollViewIndicatorStyle
+    }
+}
+
 extension SLKTextInputbar {
     override func applyTheme() {
         super.applyTheme()
