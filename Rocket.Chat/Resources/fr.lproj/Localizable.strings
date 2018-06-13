@@ -165,7 +165,7 @@
 "chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
-
+"chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Ajouter une réaction";
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
 "chat.message.actions.report" = "Signaler le message";
