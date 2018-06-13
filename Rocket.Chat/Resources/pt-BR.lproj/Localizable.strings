@@ -88,14 +88,32 @@
 "connection.server.redirect.alert.confirm" = "Sim, mudar a URL";
 
 // Socket Connection
+"connection.title" = "Conecte seu servidor";
+"connection.button_connect" = "Conectar";
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 "connection.connecting.banner.message" = "Conectando...";
+
+// Onboarding
+"onboarding.label_welcome" = "Bem-vindo ao Rocket Chat";
+"onboarding.label_subtitle" = "Comunicação Open Source";
+"onboarding.button_connect_server" = "Conectar um servidor";
+"onboarding.button_create_server" = "Criar um servidor";
+"onboarding.button_join_community_prefix" = "Junte-se a comunidade";
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
+"auth.email_auth_prefix" = "Entrar com ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Continuar com ";
 
+"auth.signup_title" = "Cadastre-se";
+
+"auth.login.login_title" = "Entrar";
+"auth.login.button_login_title" = "Entrar";
+"auth.login.create_account_prefix" = "Não tem uma conta?";
+"auth.login.create_account" = "\nCriar uma conta";
 "auth.login.username.placeholder" = "E-mail ou usuário";
 "auth.login.password.placeholder" = "Senha";
 "auth.login.buttonRegister" = "Criar uma conta";
