@@ -222,7 +222,6 @@
 		4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1B1D2DB2080086DAC8 /* LogManager.swift */; };
 		4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A70021D47918200FF46EE /* ResponseMessageSpec.swift */; };
-		4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4180204E1E718E370012A092 /* ChannelInfoViewController.swift */; };
 		41833F4E1DEF16B600E54655 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41833F4D1DEF16B600E54655 /* Keys.plist */; };
 		41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* ChatControllerReplyHandler.swift */; };
 		41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */; };
@@ -938,7 +937,6 @@
 		4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat-Bridge.h"; sourceTree = "<group>"; };
 		417A70021D47918200FF46EE /* ResponseMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMessageSpec.swift; sourceTree = "<group>"; };
-		4180204E1E718E370012A092 /* ChannelInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoViewController.swift; sourceTree = "<group>"; };
 		41833F4D1DEF16B600E54655 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		41852E881F92BBEC00D1C499 /* ChatControllerReplyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerReplyHandler.swift; sourceTree = "<group>"; };
 		41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerEmbedded.swift; sourceTree = "<group>"; };
@@ -2332,7 +2330,6 @@
 			isa = PBXGroup;
 			children = (
 				41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */,
-				4180204E1E718E370012A092 /* ChannelInfoViewController.swift */,
 				41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */,
 				419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */,
 				418688101E53CC86002F785C /* ChatControllerMessageActions.swift */,
@@ -3999,7 +3996,6 @@
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
-				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
 				99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
