@@ -85,24 +85,24 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         api?.fetch(ReadReceiptsRequest(messageId: messageId)) { response in
             switch response {
             case .resource(let resource):
-                controller.model = ReadReceiptListViewModel(users: resource.users)
-
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    self.navigationController?.pushViewController(controller, animated: true)
-                } else {
-                    let navigationController = UINavigationController(rootViewController: controller)
-                    navigationController.modalPresentationStyle = .popover
-
-                    if let presenter = navigationController.popoverPresentationController {
-                        presenter.sourceView = source.0
-                        presenter.sourceRect = source.0.bounds
-                    }
-
-                    self.present(navigationController, animated: true)
-                }
+                controller.model = ReadReceiptListViewModel(users: resource.users, isLoading: false)
             case .error(let error):
                 print(error)
             }
+        }
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.modalPresentationStyle = .popover
+
+            if let presenter = navigationController.popoverPresentationController {
+                presenter.sourceView = source.0
+                presenter.sourceRect = source.0.bounds
+            }
+
+            self.present(navigationController, animated: true)
         }
     }
 

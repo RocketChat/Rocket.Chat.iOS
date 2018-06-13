@@ -161,6 +161,8 @@
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Read by";
+"chat.read_receipt_list.title.loading" = "Loading...";
+"chat.read_receipt_list.title.empty" = "Read by no one";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";

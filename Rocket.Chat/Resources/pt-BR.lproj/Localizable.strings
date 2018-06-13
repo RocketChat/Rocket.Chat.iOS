@@ -151,6 +151,8 @@
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Lido por"; //TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
+"chat.read_receipt_list.title.empty" = "Lido por ninguém"; //TODO
 
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";

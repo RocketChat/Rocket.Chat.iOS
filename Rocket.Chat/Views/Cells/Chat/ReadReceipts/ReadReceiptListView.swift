@@ -10,6 +10,19 @@ import UIKit
 
 struct ReadReceiptListViewModel {
     let users: [User]
+    let isLoading: Bool
+
+    var title: String {
+        if isLoading {
+            return localized("chat.read_receipt_list.title.loading")
+        }
+
+        if users.isEmpty {
+            return localized("chat.read_receipt_list.title.empty")
+        }
+
+        return localized("chat.read_receipt_list.title")
+    }
 
     var numberOfSections: Int {
         return 1
@@ -32,7 +45,7 @@ struct ReadReceiptListViewModel {
     }
 
     static var emptyState: ReadReceiptListViewModel {
-        return ReadReceiptListViewModel(users: [])
+        return ReadReceiptListViewModel(users: [], isLoading: true)
     }
 }
 
@@ -66,6 +79,11 @@ class ReadReceiptListView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        map(model)
     }
 }
 

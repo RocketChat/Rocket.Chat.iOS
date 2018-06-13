@@ -9,19 +9,16 @@
 import UIKit
 
 class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter {
-    override var preferredContentSize: CGSize {
-        set { }
-        get {
-            readReceiptListView.layoutIfNeeded()
-            let height = min(readReceiptListView.tableView?.contentSize.height ?? 0, 400)
-            let width = CGFloat(300)
-            return CGSize(width: width, height: height)
-        }
-    }
-
     var model: ReadReceiptListViewModel = .emptyState {
         didSet {
             readReceiptListView.model = model
+
+            readReceiptListView.layoutIfNeeded()
+            let height = min(readReceiptListView.tableView?.contentSize.height ?? 0, 400)
+            let width = CGFloat(300)
+            preferredContentSize = CGSize(width: width, height: height)
+
+            title = model.title
         }
     }
 
@@ -53,6 +50,11 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
             )
         )
 
-        title = localized("chat.read_receipt_list.title")
+        title = model.title
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        preferredContentSize = CGSize(width: 300, height: 1)
     }
 }
