@@ -25,6 +25,8 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+
         startLoading()
         AuthManager.usernameSuggestion { [weak self] (response) in
             self?.stopLoading()

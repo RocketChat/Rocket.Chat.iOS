@@ -20,6 +20,11 @@ final class TwoFactorAuthTableViewController: BaseTableViewController {
     @IBOutlet weak var textFieldCode: UITextField!
     @IBOutlet weak var confirmButton: StyledButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         textFieldCode.text = token

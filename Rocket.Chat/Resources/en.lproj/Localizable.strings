@@ -88,6 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Yes, change the URL";
 
 // Socket Connection
+"connection.title" = "Sign in your server";
+"connection.button_connect" = "Connect";
 "connection.offline.banner.message" = "You're offline, try connecting again";
 "connection.connecting.banner.message" = "Connecting...";
 

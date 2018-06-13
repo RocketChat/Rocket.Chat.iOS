@@ -35,7 +35,18 @@ final class ConnectServerViewController: BaseViewController {
         return buttonClose
     }()
 
-    @IBOutlet weak var buttonConnect: StyledButton!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.text = localized("connection.title")
+        }
+    }
+
+    @IBOutlet weak var buttonConnect: StyledButton! {
+        didSet {
+            buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
+        }
+    }
+
     @IBOutlet weak var textFieldServerURL: UITextField!
 
     lazy var keyboardConstraint: NSLayoutConstraint = {
