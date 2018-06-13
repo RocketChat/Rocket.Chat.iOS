@@ -17,6 +17,11 @@ final class SignupViewController: BaseTableViewController {
     var serverPublicSettings: AuthSettings?
     let compoundPickers = CompoundPickerViewDelegate()
 
+    @IBOutlet weak var signupTitle: UILabel! {
+        didSet {
+            signupTitle.text = localized("auth.signup_title")
+        }
+    }
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -31,6 +36,8 @@ final class SignupViewController: BaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)

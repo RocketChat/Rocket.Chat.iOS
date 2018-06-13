@@ -13,7 +13,24 @@ class LoginTableViewController: BaseTableViewController {
 
     internal let createAccountRow: Int = 5
 
-    @IBOutlet weak var loginButton: StyledButton!
+    @IBOutlet weak var loginTitle: UILabel! {
+        didSet {
+            loginTitle.text = localized("auth.login.login_title")
+        }
+    }
+
+    @IBOutlet weak var loginButton: StyledButton! {
+        didSet {
+            loginButton.setTitle(localized("auth.login.button_login_title"), for: .normal)
+        }
+    }
+
+    @IBOutlet weak var forgotPasswordButton: StyledButton! {
+        didSet {
+            forgotPasswordButton.setTitle(localized("auth.forgot_password.title"), for: .normal)
+        }
+    }
+
     @IBOutlet weak var textFieldUsername: StyledTextField!
     @IBOutlet weak var textFieldPassword: StyledTextField!
     @IBOutlet weak var forgotPasswordCell: UITableViewCell!
@@ -21,9 +38,23 @@ class LoginTableViewController: BaseTableViewController {
         didSet {
             createAccountButton.titleLabel?.numberOfLines = 0
 
-            let suffix = NSAttributedString(string: "Don't have an account?", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()]) // TODO: Localize
-            let createAccount = NSAttributedString(string: "\nCreate an Account", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .semibold), NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()])
-            let combinedString = NSMutableAttributedString(attributedString: suffix)
+            let prefix = NSAttributedString(
+                string: localized("auth.login.create_account_prefix"),
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                    NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()
+                ]
+            )
+
+            let createAccount = NSAttributedString(
+                string: localized("auth.login.create_account"),
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
+                    NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()
+                ]
+            )
+
+            let combinedString = NSMutableAttributedString(attributedString: prefix)
             combinedString.append(createAccount)
 
             let paragraphStyle = NSMutableParagraphStyle()
@@ -31,7 +62,10 @@ class LoginTableViewController: BaseTableViewController {
             paragraphStyle.alignment = .center
 
             let combinationRange = NSRange(location: 0, length: combinedString.length)
-            combinedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: combinationRange)
+            combinedString.addAttributes(
+                [NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                range: combinationRange
+            )
 
             createAccountButton.setAttributedTitle(combinedString, for: .normal)
         }
@@ -83,6 +117,8 @@ class LoginTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = serverURL.host
+
         if shouldShowCreateAccount {
             NotificationCenter.default.addObserver(
                 self,
@@ -101,6 +137,9 @@ class LoginTableViewController: BaseTableViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+
+        updateFieldsPlaceholders()
+        updateUsernameSettings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -113,6 +152,36 @@ class LoginTableViewController: BaseTableViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: Setup
+
+    func updateUsernameSettings() {
+        guard let settings = serverPublicSettings else {
+            return
+        }
+
+        if !settings.isUsernameEmailAuthenticationEnabled {
+            createAccountButton.isHidden = true
+        } else {
+            createAccountButton.isHidden = settings.registrationForm != .isPublic
+        }
+    }
+
+    func updateFieldsPlaceholders() {
+        guard let settings = serverPublicSettings else { return }
+
+        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
+            textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        } else {
+            textFieldUsername.placeholder = localized("auth.login.username.placeholder")
+        }
+
+        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
+            textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        } else {
+            textFieldPassword.placeholder = localized("auth.login.password.placeholder")
+        }
     }
 
     // MARK: Keyboard Management

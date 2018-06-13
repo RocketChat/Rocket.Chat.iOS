@@ -11,6 +11,36 @@ import UIKit
 class WelcomeViewController: BaseViewController {
 
     internal var joinCommunitySegue = "JoinCommunity"
+    internal var communityServerURL = "\nopen.rocket.chat"
+
+    @IBOutlet weak var welcomeLabel: UILabel! {
+        didSet {
+            welcomeLabel.text = localized("onboarding.label_welcome")
+        }
+    }
+
+    @IBOutlet weak var subtitleLabel: UILabel! {
+        didSet {
+            subtitleLabel.text = localized("onboarding.label_subtitle")
+        }
+    }
+    @IBOutlet weak var connectServerButton: UIButton! {
+        didSet {
+            connectServerButton.setTitle(
+                localized("onboarding.button_connect_server"),
+                for: .normal
+            )
+        }
+    }
+
+    @IBOutlet weak var createServerButtton: UIButton! {
+        didSet {
+            connectServerButton.setTitle(
+                localized("onboarding.button_create_server"),
+                for: .normal
+            )
+        }
+    }
 
     @IBOutlet weak var connectServerContainer: UIView!
     @IBOutlet weak var joinCommunityContainer: UIView!
@@ -18,8 +48,21 @@ class WelcomeViewController: BaseViewController {
         didSet {
             joinCommunityButton.titleLabel?.numberOfLines = 0
 
-            let title = NSAttributedString(string: "Join the community", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .semibold), NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()]) // TODO: Localize
-            let serverURL = NSAttributedString(string: "\nopen.rocket.chat", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()])
+            let title = NSAttributedString(
+                string: localized("onboarding.button_join_community_prefix"),
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .semibold),
+                    NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()
+                ]
+            )
+            let serverURL = NSAttributedString(
+                string: communityServerURL,
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15, weight: .regular),
+                    NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()
+                ]
+            )
+
             let combinedString = NSMutableAttributedString(attributedString: title)
             combinedString.append(serverURL)
 
@@ -27,7 +70,10 @@ class WelcomeViewController: BaseViewController {
             paragraphStyle.lineSpacing = 1
 
             let combinationRange = NSRange(location: 0, length: combinedString.length)
-            combinedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: combinationRange)
+            combinedString.addAttributes(
+                [NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                range: combinationRange
+            )
 
             joinCommunityButton.setAttributedTitle(combinedString, for: .normal)
         }

@@ -43,9 +43,20 @@ class LoginServiceTableViewCell: UITableViewCell {
             loginServiceButton.buttonColor = defaultButtonColor
             loginServiceButton.applyStyle()
 
-            let suffix = NSAttributedString(string: "Continue with ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)]) // TODO: Localize
-            let service = NSAttributedString(string: loginService.service?.capitalized ?? "", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
-            let combinedString = NSMutableAttributedString(attributedString: suffix)
+            let prefix = NSAttributedString(
+                string: localized("auth.login_service_prefix"),
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                ]
+            )
+            let service = NSAttributedString(
+                string: loginService.service?.capitalized ?? "",
+                attributes: [
+                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                ]
+            )
+
+            let combinedString = NSMutableAttributedString(attributedString: prefix)
             combinedString.append(service)
 
             loginServiceButton.setAttributedTitle(combinedString, for: .normal)

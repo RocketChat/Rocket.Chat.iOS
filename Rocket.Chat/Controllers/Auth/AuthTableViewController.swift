@@ -27,9 +27,20 @@ class AuthTableViewController: BaseTableViewController {
             return EmailAuthTableViewCell()
         }
 
-        let suffix = NSAttributedString(string: "Login with ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)]) // TODO: Localize
-        let service = NSAttributedString(string: "e-mail", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
-        let combinedString = NSMutableAttributedString(attributedString: suffix)
+        let prefix = NSAttributedString(
+            string: localized("auth.email_auth_prefix"),
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+            ]
+        )
+        let service = NSAttributedString(
+            string: localized("auth.email_auth"),
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+            ]
+        )
+
+        let combinedString = NSMutableAttributedString(attributedString: prefix)
         combinedString.append(service)
 
         emailAuthRow.loginButton.setAttributedTitle(combinedString, for: .normal)
