@@ -322,3 +322,24 @@ extension LoginTableViewController {
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
 }
+
+extension LoginTableViewController: UITextFieldDelegate {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return !isRequesting
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if isRequesting {
+            return false
+        }
+
+        if textField == textFieldPassword {
+            authenticateWithUsernameOrEmail()
+        } else {
+            textFieldPassword.becomeFirstResponder()
+        }
+        return true
+    }
+
+}

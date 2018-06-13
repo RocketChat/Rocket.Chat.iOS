@@ -470,6 +470,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="w7q-9e-4D3" id="2g7-sL-Kg4"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" alpha="0.40000000596046448" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-1v-PFB">
                                                     <rect key="frame" x="265" y="19.5" width="25" height="25"/>
@@ -511,6 +514,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="keyBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="w7q-9e-4D3" id="9TW-es-peq"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
