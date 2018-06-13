@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignupTableViewController: UITableViewController {
+class SignupTableViewController: BaseTableViewController {
 
     // MARK: Life Cycle
 

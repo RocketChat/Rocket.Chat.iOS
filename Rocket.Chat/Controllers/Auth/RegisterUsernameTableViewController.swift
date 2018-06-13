@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class RegisterUsernameTableViewController: UITableViewController {
+final class RegisterUsernameTableViewController: BaseTableViewController {
 
     internal var requesting = false
 

@@ -13,7 +13,7 @@ import OnePasswordExtension
 import RealmSwift
 import MBProgressHUD
 
-final class AuthTableViewController: UITableViewController {
+class AuthTableViewController: BaseTableViewController {
 
     internal let kLoginProvidersSection: Int = 0
     internal let kLoginProvidersCollapsedMax: Int = 3
@@ -131,7 +131,7 @@ final class AuthTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         if let nav = navigationController as? BaseNavigationController {
-            nav.setGrayTheme(forceRedraw: true)
+            nav.setGrayTheme()
         }
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
@@ -214,7 +214,7 @@ final class AuthTableViewController: UITableViewController {
     }
 
     @objc func showLogin() {
-        performSegue(withIdentifier: "Login", sender: self)
+        performSegue(withIdentifier: "Login", sender: nil)
     }
 
     @objc func showSignup() {

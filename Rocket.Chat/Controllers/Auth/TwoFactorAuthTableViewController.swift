@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class TwoFactorAuthTableViewController: UITableViewController {
+final class TwoFactorAuthTableViewController: BaseTableViewController {
 
     internal var requesting = false
 

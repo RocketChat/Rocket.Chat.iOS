@@ -9,7 +9,7 @@
 import UIKit
 import OnePasswordExtension
 
-class LoginTableViewController: UITableViewController {
+class LoginTableViewController: BaseTableViewController {
 
     internal let createAccountRow: Int = 5
 
@@ -232,6 +232,10 @@ class LoginTableViewController: UITableViewController {
         navigationItem.hidesBackButton = false
         forgotPasswordCell.isUserInteractionEnabled = true
         createAccountButton.isEnabled = true
+    }
+
+    @objc func popSelf() {
+        navigationController?.popViewController(animated: true)
     }
 
 }

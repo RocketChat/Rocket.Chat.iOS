@@ -671,6 +671,7 @@
 		99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
+		99F530A120D0F08A004EC060 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F530A020D0F08A004EC060 /* BaseTableViewController.swift */; };
 		99F8FAED20B66F210025FEEF /* ImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F8FAEC20B66F210025FEEF /* ImageCoordinator.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		AB2AC99226FB9C7C9DA45E94 /* Pods_Rocket_Chat_ShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6787D07A45177F339DB234DD /* Pods_Rocket_Chat_ShareExtension.framework */; };
@@ -1399,6 +1400,7 @@
 		99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequestSpec.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
+		99F530A020D0F08A004EC060 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		99F8FAEC20B66F210025FEEF /* ImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoordinator.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
 		AAC8D92081FF042E089F3063 /* Pods-Rocket.Chat.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.beta.xcconfig"; sourceTree = "<group>"; };
@@ -2000,6 +2002,7 @@
 				4174CB141D2D99A30086DAC8 /* BaseNavigationController.swift */,
 				4174CB121D2D99960086DAC8 /* BaseViewController.swift */,
 				414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */,
+				99F530A020D0F08A004EC060 /* BaseTableViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4052,6 +4055,7 @@
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				80054CFC1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift in Sources */,
 				41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */,
+				99F530A120D0F08A004EC060 /* BaseTableViewController.swift in Sources */,
 				8076FDD12048646500114F28 /* MessageReply.swift in Sources */,
 				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
 				4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */,
