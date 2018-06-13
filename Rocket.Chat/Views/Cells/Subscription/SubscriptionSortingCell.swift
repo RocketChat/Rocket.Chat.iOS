@@ -66,8 +66,8 @@ extension SubscriptionSortingCell {
         super.applyTheme()
         guard let theme = theme else { return }
 
-        labelTitle.textColor = theme.bodyText
-        imageViewIcon.tintColor = theme.bodyText
+        labelTitle.textColor = theme.controlText
+        imageViewIcon.tintColor = theme.controlText
         tintColor = theme.tintColor
 
         switch isHighlighted {

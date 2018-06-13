@@ -204,7 +204,7 @@ extension SubscriptionCell {
         labelName.textColor = theme.titleText
         labelUnread.backgroundColor = theme.tintColor
         labelUnread.textColor = theme.backgroundColor
-        labelLastMessage.textColor = theme.auxiliaryText
+        labelLastMessage.textColor = theme.controlText
         iconRoom.tintColor = theme.auxiliaryText
 
         if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {

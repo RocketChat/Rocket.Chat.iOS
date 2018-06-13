@@ -353,6 +353,7 @@ extension EmojiPicker {
             backgroundColor: theme.focusedBackground,
             titleText: theme.titleText,
             bodyText: theme.bodyText,
+            controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             hyperlinkColor: theme.hyperlinkColor,
