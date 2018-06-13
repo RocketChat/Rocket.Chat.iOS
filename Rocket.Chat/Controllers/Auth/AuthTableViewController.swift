@@ -168,16 +168,13 @@ final class AuthTableViewController: UITableViewController {
     }
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard
-//            let service = customAuthButtons.filter({ $0.value == button }).keys.first,
-            let service = loginServices.first?.service,
-            let realm = Realm.current,
-            let loginService = LoginService.find(service: service, realm: realm)
-            else {
-                return
+        guard let realm = Realm.current else {
+            return
         }
 
+        let loginService = loginServices[button.tag]
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
+            loginServices[button.tag].serverUrl = url
             try? realm.write {
                 loginService.serverUrl = url
             }
@@ -268,6 +265,8 @@ extension AuthTableViewController {
             }
 
             loginServiceCell.loginService = loginServices[indexPath.row]
+            loginServiceCell.loginServiceButton.tag = indexPath.row
+            loginServiceCell.loginServiceButton.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
             return loginServiceCell
         case kEmailAuthSection:
             return emailAuthRow
