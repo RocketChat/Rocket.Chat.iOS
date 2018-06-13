@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OnePasswordExtension
 
 class LoginTableViewController: UITableViewController {
 
@@ -33,6 +34,12 @@ class LoginTableViewController: UITableViewController {
             combinedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: combinationRange)
 
             createAccountButton.setAttributedTitle(combinedString, for: .normal)
+        }
+    }
+
+    @IBOutlet weak var onePasswordButton: UIButton! {
+        didSet {
+            onePasswordButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
         }
     }
 
@@ -127,6 +134,20 @@ class LoginTableViewController: UITableViewController {
     }
 
     // MARK: Actions
+
+    @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
+        let siteURL = serverPublicSettings?.siteURL ?? ""
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
+            if login == nil {
+                return
+            }
+
+            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
+            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
+            self?.temporary2FACode = login?[AppExtensionTOTPKey] as? String
+            self?.authenticateWithUsernameOrEmail()
+        }
+    }
 
     @IBAction func forgotPasswordPressed(_ sender: UIButton) {
         let alert = UIAlertController(

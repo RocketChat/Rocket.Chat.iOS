@@ -449,12 +449,26 @@
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
+                                                <button opaque="NO" alpha="0.40000000596046448" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-1v-PFB">
+                                                    <rect key="frame" x="265" y="19.5" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="FY6-vN-hIc"/>
+                                                        <constraint firstAttribute="height" constant="25" id="uWD-Az-CBz"/>
+                                                    </constraints>
+                                                    <state key="normal" image="OnePassword-Button"/>
+                                                    <connections>
+                                                        <action selector="buttonOnePasswordDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="Csq-KR-ZoC"/>
+                                                        <action selector="buttonOnePasswordDidPressed:" destination="w7q-9e-4D3" eventType="touchUpInside" id="aex-HL-rQO"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4sT-R7-k6m" firstAttribute="leading" secondItem="JJ8-9d-OxX" secondAttribute="leading" constant="15" id="7uX-Iy-hg3"/>
+                                                <constraint firstItem="OZq-1v-PFB" firstAttribute="centerY" secondItem="4sT-R7-k6m" secondAttribute="centerY" id="8cJ-aY-jcA"/>
                                                 <constraint firstItem="4sT-R7-k6m" firstAttribute="top" secondItem="JJ8-9d-OxX" secondAttribute="top" constant="8" id="acG-Tt-wdh"/>
                                                 <constraint firstAttribute="bottom" secondItem="4sT-R7-k6m" secondAttribute="bottom" constant="4" id="fff-Li-GQG"/>
                                                 <constraint firstAttribute="trailing" secondItem="4sT-R7-k6m" secondAttribute="trailing" constant="15" id="pR0-Qp-iss"/>
+                                                <constraint firstAttribute="trailing" secondItem="OZq-1v-PFB" secondAttribute="trailing" constant="30" id="wdV-gd-66a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -629,6 +643,7 @@
                         <outlet property="createAccountButton" destination="Op4-2b-y8Z" id="m5O-Yp-adu"/>
                         <outlet property="forgotPasswordCell" destination="a2F-c8-kDy" id="1Da-CF-VaU"/>
                         <outlet property="loginButton" destination="FR9-qe-UqH" id="QYw-qb-qcy"/>
+                        <outlet property="onePasswordButton" destination="OZq-1v-PFB" id="QsK-Cb-bff"/>
                         <outlet property="textFieldPassword" destination="i30-m3-yKn" id="H3k-Zh-b6t"/>
                         <outlet property="textFieldUsername" destination="4sT-R7-k6m" id="uli-YQ-OI7"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="9kY-lU-ad7"/>
@@ -1663,7 +1678,7 @@ to mention you in messages</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uxe-wj-78g"/>
-        <segue reference="oar-7v-T9W"/>
+        <segue reference="O3e-MC-N7z"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>
         <segue reference="yUJ-js-l73"/>
