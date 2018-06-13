@@ -51,7 +51,7 @@
                                             <constraint firstAttribute="height" constant="30" id="ofh-fB-Eii"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="sWO-WG-94U">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="sWO-WG-94U">
                                         <rect key="frame" x="270" y="24" width="5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="diw-fU-ssx"/>
@@ -91,18 +91,20 @@
                                             <constraint firstAttribute="width" constant="30" id="uLB-Ea-noN"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="R0v-oO-zLf">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="R0v-oO-zLf">
                                         <rect key="frame" x="270" y="24" width="5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="8qZ-nr-qha"/>
                                             <constraint firstAttribute="width" constant="5" id="Ho4-CS-2pL"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-RK-wuE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-RK-wuE">
                                         <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Join the community"/>
+                                        <state key="normal" title="Join the community">
+                                            <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <segue destination="clK-Fu-Ez0" kind="show" identifier="JoinCommunity" id="uxe-wj-78g"/>
                                         </connections>
