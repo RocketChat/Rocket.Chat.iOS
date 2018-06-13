@@ -119,7 +119,6 @@ final class AuthTableViewController: UITableViewController {
             emailAuthRow.registerButton.isHidden = settings.registrationForm != .isPublic
         }
 
-        updateAuthenticationMethods()
         setupTableView()
     }
 

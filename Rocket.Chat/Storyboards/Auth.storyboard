@@ -898,6 +898,7 @@
                         <segue destination="w7q-9e-4D3" kind="show" identifier="Login" id="yUJ-js-l73"/>
                         <segue destination="hl8-Pc-62u" kind="show" identifier="Signup" id="dnh-fI-fQN"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="iQF-0t-Wye"/>
+                        <segue destination="0XD-Z9-Dv5" kind="show" identifier="RequestUsername" id="pMy-PV-X3C"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1x-Ay-MMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1638,8 +1639,9 @@ to mention you in messages</string>
     <inferredMetricsTieBreakers>
         <segue reference="uxe-wj-78g"/>
         <segue reference="oar-7v-T9W"/>
-        <segue reference="9kY-lU-ad7"/>
-        <segue reference="tMH-P7-q5C"/>
+        <segue reference="pMy-PV-X3C"/>
+        <segue reference="iQF-0t-Wye"/>
+        <segue reference="yUJ-js-l73"/>
         <segue reference="dnh-fI-fQN"/>
     </inferredMetricsTieBreakers>
 </document>
