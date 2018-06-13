@@ -395,6 +395,7 @@
 		8045F49B20D0599800AA0F3C /* ReadReceiptListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49A20D0599800AA0F3C /* ReadReceiptListView.swift */; };
 		8045F49D20D059A600AA0F3C /* ReadReceiptListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */; };
 		8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */; };
+		8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */; };
 		805C87D92052AA1900AD0EB0 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */; };
 		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
@@ -1101,6 +1102,7 @@
 		8045F49A20D0599800AA0F3C /* ReadReceiptListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptListView.swift; sourceTree = "<group>"; };
 		8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadReceiptListView.xib; sourceTree = "<group>"; };
 		8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptListViewController.swift; sourceTree = "<group>"; };
+		8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptsRequestSpec.swift; sourceTree = "<group>"; };
 		805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
@@ -2588,6 +2590,7 @@
 				80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
 				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
+				8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -4123,6 +4126,7 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
+				8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */,
 				99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */,
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
