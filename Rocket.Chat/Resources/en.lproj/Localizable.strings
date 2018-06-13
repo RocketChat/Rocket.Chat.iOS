@@ -92,8 +92,8 @@
 "connection.server.redirect.alert.confirm" = "Yes, change the URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "You're offline, try connecting again";
 "connection.connecting.banner.message" = "Connecting...";
+"connection.waiting_for_network.banner.message" = "Waiting for network";
 
 // Auth
 "auth.connect.button_connect" = "Connect";

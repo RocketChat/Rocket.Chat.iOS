@@ -227,6 +227,9 @@
 		41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */; };
 		41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */; };
 		418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418688101E53CC86002F785C /* ChatControllerMessageActions.swift */; };
+		418BBC4D20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */; };
+		418BBC4F20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */; };
+		418BBC5120D0309400EC09F5 /* ChatTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */; };
 		418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C4DC51DC4C07800ABED4C /* SubscriptionSectionView.swift */; };
 		418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418C4DC71DC4C08800ABED4C /* SubscriptionSectionView.xib */; };
 		418C74411FA3627F00499577 /* PickerViewDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C74401FA3627F00499577 /* PickerViewDelegateSpec.swift */; };
@@ -942,6 +945,9 @@
 		41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerEmbedded.swift; sourceTree = "<group>"; };
 		41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewControllerEmbedded.xib; sourceTree = "<group>"; };
 		418688101E53CC86002F785C /* ChatControllerMessageActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerMessageActions.swift; sourceTree = "<group>"; };
+		418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManagerConnectionHandlerSpec.swift; sourceTree = "<group>"; };
+		418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleViewSpec.swift; sourceTree = "<group>"; };
+		418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleViewSpec.swift; sourceTree = "<group>"; };
 		418C4DC51DC4C07800ABED4C /* SubscriptionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionSectionView.swift; sourceTree = "<group>"; };
 		418C4DC71DC4C08800ABED4C /* SubscriptionSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionSectionView.xib; sourceTree = "<group>"; };
 		418C74401FA3627F00499577 /* PickerViewDelegateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewDelegateSpec.swift; sourceTree = "<group>"; };
@@ -1776,6 +1782,7 @@
 			children = (
 				4156250A20BEDFA500D20576 /* ServersListViewModelSpec.swift */,
 				412435C720CAC89C00A3602D /* SubscriptionsSortingViewModelSpec.swift */,
+				418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -2022,6 +2029,7 @@
 			children = (
 				417A70021D47918200FF46EE /* ResponseMessageSpec.swift */,
 				41552F671D3035D80081438D /* SocketManagerSpec.swift */,
+				418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */,
 			);
 			path = Socket;
 			sourceTree = "<group>";
@@ -3168,6 +3176,7 @@
 			children = (
 				4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */,
 				411498E01FC7A85400D66542 /* ChatTitleViewModelSpec.swift */,
+				418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -4122,6 +4131,7 @@
 				805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */,
 				D18675EA1F70A58B00406FB4 /* InfoRequestSpec.swift in Sources */,
 				808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */,
+				418BBC4F20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift in Sources */,
 				99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */,
 				8062E33320A3AA760044F407 /* SubscriptionsClientSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
@@ -4152,6 +4162,7 @@
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
 				8067DA9D206BC7D2005E3369 /* ReactMessageRequestSpec.swift in Sources */,
+				418BBC4D20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift in Sources */,
 				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
 				0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */,
 				80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */,
@@ -4217,6 +4228,7 @@
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
 				99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */,
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
+				418BBC5120D0309400EC09F5 /* ChatTitleViewSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
 				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,

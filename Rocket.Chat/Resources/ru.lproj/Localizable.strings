@@ -88,8 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Да, изменить URL-адрес";
 
 // Socket Connection
-"connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Соединение";

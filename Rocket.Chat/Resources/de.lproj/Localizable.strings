@@ -92,8 +92,8 @@
 "connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
 
 // Socket Connection
-"connection.offline.banner.message" = "Sie sind offline. Versuche neu zu verbinden...";
 "connection.connecting.banner.message" = "Verbinde...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";

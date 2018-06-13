@@ -92,8 +92,8 @@
 "connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Σύνδεση";
