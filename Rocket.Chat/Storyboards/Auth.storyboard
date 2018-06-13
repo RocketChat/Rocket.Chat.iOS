@@ -905,10 +905,10 @@
             </objects>
             <point key="canvasLocation" x="1414" y="714"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Two Factor Auth Table View Controller-->
         <scene sceneID="w5C-wa-XFL">
             <objects>
-                <tableViewController id="em6-TJ-1CF" sceneMemberID="viewController">
+                <tableViewController id="em6-TJ-1CF" customClass="TwoFactorAuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Dv-tw-imc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1004,6 +1004,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didPressedConfirmButton" destination="em6-TJ-1CF" eventType="touchUpInside" id="WaP-fx-a3S"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1022,6 +1025,10 @@
                             <outlet property="delegate" destination="em6-TJ-1CF" id="NYb-2q-X6X"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="confirmButton" destination="fuN-XE-7co" id="m07-jw-4tv"/>
+                        <outlet property="textFieldCode" destination="RWJ-kT-yCz" id="2Mo-e6-JAG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lI-bX-4nb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

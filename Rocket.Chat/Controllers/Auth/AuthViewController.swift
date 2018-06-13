@@ -168,7 +168,7 @@ final class AuthViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TwoFactor" {
-            if let controller = segue.destination as? TwoFactorAuthenticationViewController {
+            if let controller = segue.destination as? TwoFactorAuthTableViewController {
                 controller.username = textFieldUsername.text ?? ""
                 controller.password = textFieldPassword.text ?? ""
                 controller.token = temporary2FACode ?? ""
