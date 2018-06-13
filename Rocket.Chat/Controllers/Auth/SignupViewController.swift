@@ -10,31 +10,23 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-final class SignupViewController: BaseViewController {
+final class SignupViewController: BaseTableViewController {
 
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
     let compoundPickers = CompoundPickerViewDelegate()
 
-    @IBOutlet weak var viewFields: UIView! {
+    @IBOutlet weak var signupTitle: UILabel! {
         didSet {
-            viewFields.layer.cornerRadius = 4
-            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
-            viewFields.layer.borderWidth = 0.5
+            signupTitle.text = localized("auth.signup_title")
         }
     }
-
-    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var fieldsContainerVerticalCenterConstraint: NSLayoutConstraint!
-    @IBOutlet weak var fieldsContainerTopConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var textFieldName: UITextField!
+    @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var fieldsContainer: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var registerButton: StyledButton!
 
     var customTextFields: [UITextField] = []
 
@@ -44,7 +36,13 @@ final class SignupViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCustomFields()
+
+        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+
+//        setupCustomFields()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -69,13 +67,14 @@ final class SignupViewController: BaseViewController {
 
     func startLoading() {
         textFieldName.alpha = 0.5
+        textFieldUsername.alpha = 0.5
         textFieldEmail.alpha = 0.5
         textFieldPassword.alpha = 0.5
         customTextFields.forEach { $0.alpha = 0.5 }
 
         requesting = true
 
-        activityIndicator.startAnimating()
+        registerButton.startLoading()
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
@@ -84,26 +83,23 @@ final class SignupViewController: BaseViewController {
 
     func stopLoading() {
         textFieldName.alpha = 1
+        textFieldUsername.alpha = 1
         textFieldEmail.alpha = 1
         textFieldPassword.alpha = 1
         customTextFields.forEach { $0.alpha = 1 }
 
         requesting = false
-        activityIndicator.stopAnimating()
+        registerButton.stopLoading()
     }
 
     // MARK: Keyboard Handlers
-    override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
-        }
-    }
 
-    override func keyboardWillHide(_ notification: Notification) {
-        visibleViewBottomConstraint.constant = 0
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK: Request username
+
     fileprivate func signup() {
         startLoading()
 
@@ -131,9 +127,13 @@ final class SignupViewController: BaseViewController {
                     return
                 }
 
+                self?.startLoading()
                 AuthManager.auth(email, password: password, completion: { _ in
+                    self?.stopLoading()
                     API.current()?.client(InfoClient.self).fetchInfo {
+                        self?.startLoading()
                         API.current()?.fetch(MeRequest()) { [weak self] response in
+                            self?.stopLoading()
                             switch response {
                             case .resource(let resource):
                                 let realm = Realm.current
@@ -147,9 +147,23 @@ final class SignupViewController: BaseViewController {
                                     self?.dismiss(animated: true, completion: nil)
                                     AppManager.reloadApp()
                                 } else {
-                                    self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                                    self?.startLoading()
+                                    AuthManager.setUsername(self?.textFieldUsername.text ?? "") { success, errorMessage in
+                                        self?.stopLoading()
+                                        DispatchQueue.main.async {
+                                            self?.stopLoading()
+                                            if !success {
+                                                Alert(
+                                                    title: localized("error.socket.default_error.title"),
+                                                    message: errorMessage ?? localized("error.socket.default_error.message")
+                                                ).present()
+                                            } else {
+                                                self?.dismiss(animated: true, completion: nil)
+                                                AppManager.reloadApp()
+                                            }
+                                        }
+                                    }
                                 }
-
                             case .error: break
                             }
                         }
@@ -185,10 +199,7 @@ extension SignupViewController: UITextFieldDelegate {
     }
 
     private func makeNextFieldFirstResponder(after textField: UITextField) {
-        let textViews = fieldsContainer.arrangedSubviews.filter { $0 is UITextField }
-        if let currentTextFieldIndex = textViews.index(of: textField) {
-            let nextTextFieldIndex = textViews.index(after: currentTextFieldIndex)
-            textViews[nextTextFieldIndex].becomeFirstResponder()
-        }
+        let nextTextField = view.viewWithTag(textField.tag + 1) as? UITextField
+        nextTextField?.becomeFirstResponder()
     }
 }

@@ -87,6 +87,11 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        subscriptionsToken?.invalidate()
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
     // MARK: Storyboard Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -470,6 +475,19 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(self.view, frame: frameForDropDownOverlay)
+            serversView?.presentAddServer = {
+                let connect = Storyboard.auth(
+                    serverUrl: "",
+                    credentials: nil
+                ).instantiate(
+                    viewController: String(describing: ConnectServerViewController.self)
+                ) ?? UIViewController()
+
+                let nav = BaseNavigationController(rootViewController: connect)
+                _ = nav.view
+
+                self.present(nav, animated: true, completion: nil)
+            }
             serversView?.delegate = self
         }
     }

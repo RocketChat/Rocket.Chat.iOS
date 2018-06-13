@@ -92,14 +92,33 @@
 "connection.server.redirect.alert.confirm" = "Oui, changez l'URL";
 
 // Socket Connection
+"connection.title" = "Sign in your server"; // TODO
+"connection.button_connect" = "Connect"; // TODO
+"connection.offline.banner.message" = "Vous êtes déconnecté, essayez de nouveau";
 "connection.connecting.banner.message" = "Connecter...";
 "connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
+
+// Onboarding
+"onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
+"onboarding.label_subtitle" = "Open Source Communication"; // TODO
+"onboarding.button_connect_server" = "Connect with a server"; // TODO
+"onboarding.button_create_server" = "Create a new server"; // TODO
+"onboarding.button_join_community_prefix" = "Join in the community"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Se connecter";
 "auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
 "auth.connect.connecting" = "Connexion en cours. Tenez bon.";
+"auth.email_auth_prefix" = "Login with "; // TODO
+"auth.email_auth" = "e-mail"; // TODO
+"auth.login_service_prefix" = "Continue with "; // TODO
 
+"auth.signup_title" = "Sign up"; // TODO
+
+"auth.login.login_title" = "Login"; // TODO
+"auth.login.button_login_title" = "Login"; // TODO
+"auth.login.create_account_prefix" = "Don't have an account?"; // TODO
+"auth.login.create_account" = "\nCreate an Account"; // TODO
 "auth.login.username.placeholder" = "Email or username";
 "auth.login.password.placeholder" = "Password";
 "auth.login.buttonRegister" = "Create new account";
