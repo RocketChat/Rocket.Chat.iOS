@@ -135,9 +135,11 @@ final class PreferencesViewModel {
         switch section {
         case 0: return 1
         case 1: return numberOfRowsInSectionOne()
-        case 2: return 3
-        case 3: return 1
-        case 4: return (canOpenFLEX ? 1 : 0)
+        case 2: return canViewAdministrationPanel ? 1 : 0
+        case 3: return 3
+        case 4: return 1
+        case 5: return 1
+        case 6: return canOpenFLEX ? 1 : 0
         default: return 0
         }
     }
