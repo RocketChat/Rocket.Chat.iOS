@@ -17,6 +17,7 @@ final class PreferencesViewModel {
 
     internal let title = localized("myaccount.settings.title")
     internal let profile = localized("myaccount.settings.profile")
+    internal let administration = localized("myaccount.settings.administration")
     internal let contactus = localized("myaccount.settings.contactus")
     internal let license = localized("myaccount.settings.license")
     internal let language = localized("myaccount.settings.language")
@@ -28,6 +29,26 @@ final class PreferencesViewModel {
 
     internal let trackingTitle = localized("myaccount.settings.tracking.title")
     internal var trackingFooterText = localized("myaccount.settings.tracking.footer")
+
+    internal var serverName: String {
+        var serverName = "Rocket.Chat"
+
+        if let authServerName = AuthSettingsManager.settings?.serverName {
+            serverName = authServerName
+        } else if let serverURL = AuthManager.isAuthenticated()?.serverURL {
+            if let host = URL(string: serverURL)?.host {
+                serverName = host
+            } else {
+                serverName = serverURL
+            }
+        }
+
+        return serverName
+    }
+
+    internal var logout: String {
+        return String(format: localized("myaccount.settings.logout"), serverName)
+    }
 
     internal var trackingValue: Bool {
         return !BugTrackingCoordinator.isCrashReportingDisabled
@@ -60,10 +81,10 @@ final class PreferencesViewModel {
         }
 
         switch user.status {
-        case .online: return localized("user_menu.online")
-        case .offline: return localized("user_menu.invisible")
-        case .busy: return localized("user_menu.busy")
-        case .away: return localized("user_menu.away")
+        case .online: return localized("status.online")
+        case .offline: return localized("status.invisible")
+        case .busy: return localized("status.busy")
+        case .away: return localized("status.away")
         }
     }
 
@@ -98,13 +119,17 @@ final class PreferencesViewModel {
         }
     }
 
+    internal var canViewAdministrationPanel: Bool {
+        return user?.canViewAdminPanel() ?? false
+    }
+
     #if DEBUG || BETA
     internal let canOpenFLEX = true
     #else
     internal let canOpenFLEX = false
     #endif
 
-    internal let numberOfSections = 5
+    internal let numberOfSections = 7
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {

@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
 
+"alert.logout.confirmation.title" = "Logout from this server";
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
+"alert.logout.confirmation.confirm" = "Yes, logout me";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -134,14 +138,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?";
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect";
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Away";
-"user_menu.busy" = "Busy";
-"user_menu.invisible" = "Invisible";
-"user_menu.admin" = "Administration";
-"user_menu.preferences" = "Preferences";
-"user_menu.logout" = "Logout";
+// Status
+"status.online" = "Online";
+"status.away" = "Away";
+"status.busy" = "Busy";
+"status.invisible" = "Invisible";
 
 // New Room View
 "new_room.title" = "New Channel";
@@ -268,6 +269,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferences";
+"myaccount.settings.administration" = "Administration";
+"myaccount.settings.logout" = "Logout from %@";
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.profile" = "Profile";
 "myaccount.settings.license" = "License";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bDT-Aq-lo9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bDT-Aq-lo9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
             <objects>
                 <tableViewController id="pKS-7b-iHv" customClass="PreferencesViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="vbg-IV-DH1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -169,6 +169,27 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="" id="TVK-cf-GTN">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="PXV-oB-WDv" style="IBUITableViewCellStyleDefault" id="H8o-oK-u51">
+                                        <rect key="frame" x="0.0" y="333" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H8o-oK-u51" id="R84-Su-EJZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Administration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PXV-oB-WDv">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="" id="zht-D2-Ukj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="kCF-5t-4W3" style="IBUITableViewCellStyleDefault" id="63z-0h-dAR">
@@ -265,17 +286,38 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="" id="rR4-fW-b8U">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="96F-it-dku" style="IBUITableViewCellStyleDefault" id="znI-p4-njC">
+                                        <rect key="frame" x="0.0" y="721" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znI-p4-njC" id="c7S-0r-2Vq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Logout from %@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="96F-it-dku">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" red="0.84705882352941175" green="0.15294117647058825" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="" id="foh-5i-x3M">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="yOP-5b-ROX" style="IBUITableViewCellStyleDefault" id="E1a-oW-6uO">
                                         <rect key="frame" x="0.0" y="685" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E1a-oW-6uO" id="vmD-3V-kdv">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Open FLEX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yOP-5b-ROX">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -299,13 +341,17 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="avatarViewContainer" destination="Nb7-OU-8Qa" id="ksw-5C-ifh"/>
+                        <outlet property="labelAdministration" destination="PXV-oB-WDv" id="c8M-4m-qi4"/>
                         <outlet property="labelApp" destination="Lk4-H3-Y3R" id="jIL-6y-wNg"/>
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelDefaultWebBrowser" destination="UYo-L4-lJh" id="TxG-P2-8Qa"/>
                         <outlet property="labelLanguage" destination="TK4-N1-2eh" id="MEN-VF-dcq"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
+                        <outlet property="labelLogout" destination="96F-it-dku" id="PJa-e9-Nb9"/>
                         <outlet property="labelProfileName" destination="KHa-df-YqL" id="DIJ-iO-ESP"/>
                         <outlet property="labelProfileStatus" destination="q4p-F0-OV3" id="OFq-C5-inq"/>
                         <outlet property="labelServerAddress" destination="awd-rJ-YyE" id="6nz-YL-OlT"/>
@@ -571,7 +617,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8D-7Z-aMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221.5999999999999" y="-16.641679160419791"/>
+            <point key="canvasLocation" x="1222" y="2"/>
         </scene>
         <!--New password-->
         <scene sceneID="MSa-AI-0n1">
@@ -663,7 +709,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D8n-lf-vZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="-15"/>
+            <point key="canvasLocation" x="2092" y="2"/>
         </scene>
         <!--Theme Preference Controller-->
         <scene sceneID="3lM-1e-OZs">
