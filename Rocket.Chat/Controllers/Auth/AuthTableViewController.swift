@@ -138,7 +138,7 @@ final class AuthTableViewController: UITableViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
 
         if isMovingFromParentViewController {
             SocketManager.removeConnectionHandler(token: socketHandlerToken)

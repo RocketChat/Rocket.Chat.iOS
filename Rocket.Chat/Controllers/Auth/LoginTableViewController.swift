@@ -48,7 +48,7 @@ class LoginTableViewController: UITableViewController {
 
         let contentSize = forgotPasswordY + forgotPasswordHeight + safeAreaInsets
 
-        return UIScreen.main.bounds.height - contentSize
+        return tableView.bounds.height - contentSize
     }
 
     var serverVersion: Version?
@@ -61,7 +61,7 @@ class LoginTableViewController: UITableViewController {
             let serverURL = serverURL,
             let serverVersion = serverVersion
         else {
-                return nil
+            return nil
         }
 
         return API(host: serverURL, version: serverVersion)

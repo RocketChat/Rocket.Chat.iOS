@@ -76,23 +76,6 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let nav = navigationController as? BaseNavigationController {
-            nav.setTransparentTheme()
-        }
-//
-//        SocketManager.sharedInstance.socket?.disconnect()
-//        DatabaseManager.cleanInvalidDatabases()
-//
-//        if let applicationServerURL = AppManager.applicationServerURL {
-//            textFieldServerURL.isEnabled = false
-//            textFieldServerURL.text = applicationServerURL.host
-//            connect()
-//        }
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 

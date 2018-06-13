@@ -117,6 +117,8 @@ final class StyledButton: UIButton {
             loadingIndicator.tintColor = borderColor
         }
 
+        setNeedsLayout()
+        layoutIfNeeded()
         let width = frame.width
         loadingIndicator.frame = CGRect(
             x: (width / 2 - loadingIndicator.frame.width / 2),
