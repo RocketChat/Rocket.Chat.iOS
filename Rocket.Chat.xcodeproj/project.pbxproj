@@ -618,6 +618,7 @@
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */; };
 		992B5AB8209A2890009C8123 /* RoomFilesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */; };
+		993417F520D1B31F0008B643 /* LegalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993417F420D1B31F0008B643 /* LegalTableViewController.swift */; };
 		99363FC820C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */; };
 		99363FCA20C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */; };
 		99363FCC20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */; };
@@ -1345,6 +1346,7 @@
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileViewController.swift; sourceTree = "<group>"; };
 		992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFilesRequestSpec.swift; sourceTree = "<group>"; };
+		993417F420D1B31F0008B643 /* LegalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalTableViewController.swift; sourceTree = "<group>"; };
 		99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowMoreSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreSeparatorTableViewCell.swift; sourceTree = "<group>"; };
@@ -1977,6 +1979,7 @@
 				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
 				35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthTableViewController.swift */,
+				993417F420D1B31F0008B643 /* LegalTableViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -4013,6 +4016,7 @@
 				8013F86C1FD6B59A00EE1A4E /* APIError.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				41FC9E0A209B3A9800FED485 /* MessageExtensions.swift in Sources */,
+				993417F520D1B31F0008B643 /* LegalTableViewController.swift in Sources */,
 				805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */,
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,

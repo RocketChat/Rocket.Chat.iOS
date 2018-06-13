@@ -406,6 +406,13 @@
                             <outlet property="delegate" destination="hl8-Pc-62u" id="Lhp-Ys-lGg"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="XOi-zP-GmR">
+                        <barButtonItem key="rightBarButtonItem" image="more" id="MV0-Z3-Zr6">
+                            <connections>
+                                <segue destination="gD1-Tz-RKb" kind="presentation" id="cnb-v1-dPj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="registerButton" destination="GwQ-MU-Sl1" id="p9x-js-Tf0"/>
                         <outlet property="signupTitle" destination="zAk-rX-TKn" id="Y4T-co-Zao"/>
@@ -666,6 +673,13 @@
                             <outlet property="delegate" destination="w7q-9e-4D3" id="Vzj-XI-bu2"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="T6U-YO-tD9">
+                        <barButtonItem key="rightBarButtonItem" image="more" id="8fn-5Q-qau">
+                            <connections>
+                                <segue destination="gD1-Tz-RKb" kind="presentation" id="cXi-ex-hQo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="createAccountButton" destination="Op4-2b-y8Z" id="m5O-Yp-adu"/>
                         <outlet property="forgotPasswordButton" destination="DqA-oE-fTY" id="4L9-Yu-9As"/>
@@ -683,7 +697,7 @@
             </objects>
             <point key="canvasLocation" x="609" y="19"/>
         </scene>
-        <!--Auth Table View Controller-->
+        <!--Title-->
         <scene sceneID="00e-2E-wLI">
             <objects>
                 <tableViewController id="ueL-n9-tXo" customClass="AuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
@@ -697,6 +711,13 @@
                             <outlet property="delegate" destination="ueL-n9-tXo" id="Vff-F1-swk"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="dnA-fX-QAL">
+                        <barButtonItem key="rightBarButtonItem" image="more" id="omz-YD-ESe">
+                            <connections>
+                                <segue destination="gD1-Tz-RKb" kind="presentation" id="ANZ-nn-OTA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="w7q-9e-4D3" kind="show" identifier="Login" id="yUJ-js-l73"/>
                         <segue destination="hl8-Pc-62u" kind="show" identifier="Signup" id="dnh-fI-fQN"/>
@@ -707,6 +728,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1x-Ay-MMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1414" y="714"/>
+        </scene>
+        <!--Legal-->
+        <scene sceneID="00X-dB-jvU">
+            <objects>
+                <tableViewController id="ubs-pY-bdr" customClass="LegalTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YBG-il-jGc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="bDx-Zn-96v">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="bsT-am-X4v">
+                                        <rect key="frame" x="0.0" y="35" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bsT-am-X4v" id="hRC-yR-lUB">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R78-rT-hy5">
+                                                    <rect key="frame" x="12" y="11" width="263" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="lmU-WS-Ka9"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="R78-rT-hy5" secondAttribute="trailing" constant="11" id="gbQ-ev-UJl"/>
+                                                <constraint firstItem="R78-rT-hy5" firstAttribute="top" secondItem="hRC-yR-lUB" secondAttribute="top" constant="11" id="j5g-m6-CTS"/>
+                                                <constraint firstItem="R78-rT-hy5" firstAttribute="leading" secondItem="hRC-yR-lUB" secondAttribute="leading" constant="12" id="uof-Dl-VTQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="R78-rT-hy5" secondAttribute="bottom" constant="11.5" id="y2y-o4-iPD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CIi-2h-6Nn">
+                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CIi-2h-6Nn" id="iP8-rF-YHi">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qV-dj-cr7">
+                                                    <rect key="frame" x="12" y="11" width="263" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="mIm-HH-Hfs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7qV-dj-cr7" secondAttribute="bottom" constant="11.5" id="BqI-sD-jdx"/>
+                                                <constraint firstAttribute="trailing" secondItem="7qV-dj-cr7" secondAttribute="trailing" constant="11" id="C6X-nk-AvL"/>
+                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="leading" secondItem="iP8-rF-YHi" secondAttribute="leading" constant="12" id="IYE-Jh-jb2"/>
+                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="top" secondItem="iP8-rF-YHi" secondAttribute="top" constant="11" id="XJv-C4-rrf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="ubs-pY-bdr" id="c0l-F3-Pgd"/>
+                            <outlet property="delegate" destination="ubs-pY-bdr" id="UWH-84-wmY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Legal" id="56Z-yf-D3a">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="c7H-Ge-Xq5">
+                            <connections>
+                                <action selector="close" destination="ubs-pY-bdr" id="njQ-qc-KFK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="privacyPolicyLabel" destination="7qV-dj-cr7" id="XUo-5A-idp"/>
+                        <outlet property="termsOfUseLabel" destination="R78-rT-hy5" id="kZL-VC-OMS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVf-uc-pEy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2921" y="712"/>
         </scene>
         <!--Two Factor Auth Table View Controller-->
         <scene sceneID="w5C-wa-XFL">
@@ -1073,6 +1179,24 @@ to mention you in messages</string>
             </objects>
             <point key="canvasLocation" x="-1033" y="713"/>
         </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="PM5-Dp-rQ1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gD1-Tz-RKb" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="trJ-5o-du2">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ubs-pY-bdr" kind="relationship" relationship="rootViewController" id="XCj-i1-TVR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L0U-NU-FhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2183" y="713"/>
+        </scene>
     </scenes>
     <resources>
         <image name="OnePassword-Button" width="27" height="27"/>
@@ -1081,6 +1205,7 @@ to mention you in messages</string>
         <image name="keyBlack" width="20" height="20"/>
         <image name="logoSmall" width="31" height="26"/>
         <image name="mailBlack" width="20" height="20"/>
+        <image name="more" width="25" height="5"/>
         <image name="onboarding" width="311" height="247"/>
         <image name="plusWhite" width="24" height="24"/>
         <image name="server" width="210" height="171"/>
@@ -1088,10 +1213,11 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cXi-ex-hQo"/>
         <segue reference="uxe-wj-78g"/>
-        <segue reference="B9E-PP-gIC"/>
-        <segue reference="9kY-lU-ad7"/>
-        <segue reference="tMH-P7-q5C"/>
+        <segue reference="pMy-PV-X3C"/>
+        <segue reference="iQF-0t-Wye"/>
+        <segue reference="yUJ-js-l73"/>
         <segue reference="kz9-vv-nLs"/>
     </inferredMetricsTieBreakers>
 </document>
