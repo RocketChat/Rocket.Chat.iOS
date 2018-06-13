@@ -515,6 +515,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didPressedLoginButton" destination="w7q-9e-4D3" eventType="touchUpInside" id="3Ej-TY-ugw"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -557,6 +560,9 @@
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="forgotPasswordPressed:" destination="w7q-9e-4D3" eventType="touchUpInside" id="NR1-Me-LB8"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -622,6 +628,9 @@
                     <connections>
                         <outlet property="createAccountButton" destination="Op4-2b-y8Z" id="m5O-Yp-adu"/>
                         <outlet property="forgotPasswordCell" destination="a2F-c8-kDy" id="1Da-CF-VaU"/>
+                        <outlet property="loginButton" destination="FR9-qe-UqH" id="QYw-qb-qcy"/>
+                        <outlet property="textFieldPassword" destination="i30-m3-yKn" id="H3k-Zh-b6t"/>
+                        <outlet property="textFieldUsername" destination="4sT-R7-k6m" id="uli-YQ-OI7"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="9kY-lU-ad7"/>
                         <segue destination="0XD-Z9-Dv5" kind="show" identifier="Username" id="B9E-PP-gIC"/>
                     </connections>
@@ -965,6 +974,9 @@
                                                     <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="em6-TJ-1CF" id="CAf-af-LZk"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1652,9 +1664,9 @@ to mention you in messages</string>
     <inferredMetricsTieBreakers>
         <segue reference="uxe-wj-78g"/>
         <segue reference="oar-7v-T9W"/>
-        <segue reference="pMy-PV-X3C"/>
-        <segue reference="iQF-0t-Wye"/>
+        <segue reference="B9E-PP-gIC"/>
+        <segue reference="9kY-lU-ad7"/>
         <segue reference="yUJ-js-l73"/>
-        <segue reference="dnh-fI-fQN"/>
+        <segue reference="kz9-vv-nLs"/>
     </inferredMetricsTieBreakers>
 </document>

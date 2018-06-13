@@ -68,13 +68,12 @@ final class AuthTableViewController: UITableViewController {
     var serverVersion: Version?
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
-    var temporary2FACode: String?
 
     var api: API? {
         guard
             let serverURL = serverURL,
             let serverVersion = serverVersion
-            else {
+        else {
                 return nil
         }
 
@@ -132,15 +131,18 @@ final class AuthTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         if let nav = navigationController as? BaseNavigationController {
-            nav.setGrayTheme()
+            nav.setGrayTheme(forceRedraw: true)
         }
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        super.viewWillAppear(animated)
+
+        if isMovingFromParentViewController {
+            SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        }
     }
 
     deinit {
@@ -187,6 +189,16 @@ final class AuthTableViewController: UITableViewController {
             presentSAMLViewController(for: loginService)
         default:
             presentOAuthViewController(for: loginService)
+        }
+    }
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? LoginTableViewController {
+            controller.serverVersion = serverVersion
+            controller.serverURL = serverURL
+            controller.serverPublicSettings = serverPublicSettings
         }
     }
 

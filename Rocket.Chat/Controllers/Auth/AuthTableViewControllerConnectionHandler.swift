@@ -13,7 +13,7 @@ extension AuthTableViewController: SocketConnectionHandler {
 
     func socketDidDisconnect(socket: SocketManager) {
         alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message")) { _ in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 

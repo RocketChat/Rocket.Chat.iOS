@@ -30,9 +30,9 @@ class BaseNavigationController: UINavigationController {
     override func popViewController(animated: Bool) -> UIViewController? {
         let poppedViewController = super.popViewController(animated: animated)
 
-        if topViewController is ConnectServerViewController {
-            setTransparentTheme()
-        }
+//        if (poppedViewController is LoginTableViewController || poppedViewController is AuthTableViewController) && topViewController is ConnectServerViewController {
+//            setTransparentTheme()
+//        }
 
         return poppedViewController
     }

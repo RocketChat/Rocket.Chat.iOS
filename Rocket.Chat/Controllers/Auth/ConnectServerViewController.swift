@@ -79,6 +79,23 @@ final class ConnectServerViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setTransparentTheme()
+        }
+//
+//        SocketManager.sharedInstance.socket?.disconnect()
+//        DatabaseManager.cleanInvalidDatabases()
+//
+//        if let applicationServerURL = AppManager.applicationServerURL {
+//            textFieldServerURL.isEnabled = false
+//            textFieldServerURL.text = applicationServerURL.host
+//            connect()
+//        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         SocketManager.sharedInstance.socket?.disconnect()
         DatabaseManager.cleanInvalidDatabases()
 
@@ -87,10 +104,6 @@ final class ConnectServerViewController: BaseViewController {
             textFieldServerURL.text = applicationServerURL.host
             connect()
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         NotificationCenter.default.addObserver(
             self,
@@ -157,6 +170,9 @@ final class ConnectServerViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? LoginTableViewController {
             controller.shouldShowCreateAccount = true
+            controller.serverVersion = infoRequestHandler.version
+            controller.serverURL = url
+            controller.serverPublicSettings = serverPublicSettings
         }
 
         if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
