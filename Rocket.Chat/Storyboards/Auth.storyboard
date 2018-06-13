@@ -1663,7 +1663,7 @@ to mention you in messages</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYT-1e-PIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895" y="1471"/>
+            <point key="canvasLocation" x="2524" y="933"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="VVk-L1-Mm3">
