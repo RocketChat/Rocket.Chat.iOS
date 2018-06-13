@@ -200,10 +200,10 @@
             </objects>
             <point key="canvasLocation" x="-208" y="713"/>
         </scene>
-        <!--Signup Table View Controller-->
+        <!--Signup View Controller-->
         <scene sceneID="bB9-3r-AEp">
             <objects>
-                <tableViewController id="hl8-Pc-62u" customClass="SignupTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hl8-Pc-62u" customClass="SignupViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aG8-IH-tGg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjS-mK-dwO" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjS-mK-dwO" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="8" width="290" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Bkb-d2-dek"/>
@@ -251,6 +251,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="userBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="2Ck-nB-Wys"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -268,7 +271,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-qi-aDM" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-qi-aDM" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="8" width="290" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="buT-l2-vZe"/>
@@ -279,6 +282,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="Lsb-OX-t9m"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -296,7 +302,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69P-3e-U7o" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69P-3e-U7o" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="8" width="290" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="uVU-QJ-zrk"/>
@@ -307,6 +313,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="mailBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="MT2-Hh-iGF"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -324,7 +333,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0TR-Jz-yD6" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0TR-Jz-yD6" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="4" width="290" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="CNj-8R-H6W"/>
@@ -335,6 +344,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="keyBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="W1i-Gc-csG"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -392,6 +404,13 @@
                             <outlet property="delegate" destination="hl8-Pc-62u" id="Lhp-Ys-lGg"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="registerButton" destination="GwQ-MU-Sl1" id="p9x-js-Tf0"/>
+                        <outlet property="textFieldEmail" destination="69P-3e-U7o" id="xw8-rl-Ebo"/>
+                        <outlet property="textFieldName" destination="xjS-mK-dwO" id="mQg-73-RPB"/>
+                        <outlet property="textFieldPassword" destination="0TR-Jz-yD6" id="AuE-a9-XAJ"/>
+                        <outlet property="textFieldUsername" destination="4Vj-qi-aDM" id="gZ6-Yu-JkI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7OX-Ev-NPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
