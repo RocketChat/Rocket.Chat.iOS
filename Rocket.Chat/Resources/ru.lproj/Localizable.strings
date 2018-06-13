@@ -88,8 +88,8 @@
 "connection.server.redirect.alert.confirm" = "Да, изменить URL-адрес";
 
 // Socket Connection
-"connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Соединение";
@@ -109,6 +109,10 @@
 "auth.forgot_password.message" = "Введите ваш адрес электронной почты";
 "auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Subscriptions
 "subscriptions.search" = "Поиск";
 "subscriptions.search_results" = "Результаты";
@@ -117,6 +121,7 @@
 "subscriptions.favorites" = "Избранные";
 "subscriptions.channels" = "Каналы";
 "subscriptions.direct_messages" = "Личная переписка";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "вы";
 "subscriptions.messages" = "Сообщения";
 "subscriptions.list.you_initial" = "Вы";
@@ -133,14 +138,11 @@
 "servers.action.disconnect.alert.message" = "Вы хотите отключиться от \"%@\" сервера?";
 "servers.action.disconnect.alert.confirm" = "Да, отключить";
 
-// User Menu
-"user_menu.online" = "Онлайн";
-"user_menu.away" = "Отошел";
-"user_menu.busy" = "Занят";
-"user_menu.invisible" = "Невидимый";
-"user_menu.admin" = "Администрирование";
-"user_menu.preferences" = "Настройки";
-"user_menu.logout" = "Выйти";
+// Status
+"status.online" = "Онлайн";
+"status.away" = "Отошел";
+"status.busy" = "Занят";
+"status.invisible" = "Невидимый";
 
 // New Room View
 "new_room.title" = "Новый канал";
@@ -267,6 +269,8 @@
 
 // Settings
 "myaccount.settings.title" = "Настройки";
+"myaccount.settings.administration" = "Администрирование";
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Связаться с нами";
 "myaccount.settings.profile" = "Профиль";
 "myaccount.settings.license" = "Лицензия";
@@ -329,3 +333,12 @@
 "user_action_sheet.remove" = "Удалить с канала";
 "user_action_sheet.remove_confirm.title" = "Удалить этого пользователя";
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

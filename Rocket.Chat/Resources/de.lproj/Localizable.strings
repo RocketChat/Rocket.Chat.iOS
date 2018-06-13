@@ -82,14 +82,18 @@
 "alert.update_profile_success.title" = "Profil wurde aktualisiert";
 "alert.update_password_success.title" = "Passwort wurde aktualisiert";
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
 "connection.server.redirect.alert.message" = "Sieht so aus, als ob dieser Server seine URL geändert hat:\n\n%@\n\nMöchten Sie die URL aktualisieren?";
 "connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
 
 // Socket Connection
-"connection.offline.banner.message" = "Sie sind offline. Versuche neu zu verbinden...";
 "connection.connecting.banner.message" = "Verbinde...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
@@ -117,6 +121,7 @@
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
 "subscriptions.direct_messages" = "Direktnachrichten";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "Du";
 "subscriptions.messages" = "Nachrichten";
 "subscriptions.list.you_initial" = "Du";
@@ -133,14 +138,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Abwesend";
-"user_menu.busy" = "Beschäftigt";
-"user_menu.invisible" = "Unsichtbar";
-"user_menu.admin" = "Administration";
-"user_menu.preferences" = "Einstellungen";
-"user_menu.logout" = "Abmelden";
+// Status
+"status.online" = "Online";
+"status.away" = "Abwesend";
+"status.busy" = "Beschäftigt";
+"status.invisible" = "Unsichtbar";
 
 // New Room View
 "new_room.title" = "Neuer Kanal";
@@ -272,6 +274,8 @@
 
 // Settings
 "myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.administration" = "Administration"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Kontaktieren Sie uns";
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";
@@ -334,3 +338,12 @@
 "user_action_sheet.remove" = "Aus Raum entfernen";
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

@@ -82,14 +82,18 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "El servidor cambió su URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor cambió su URL a:\n\n%@\n\n¿Le gustaría actualizar la URL?";
 "connection.server.redirect.alert.confirm" = "Sí, cambia la URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "Estás fuera de línea, intenta conectarte de nuevo";
 "connection.connecting.banner.message" = "Conectando ...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
@@ -117,6 +121,7 @@
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canales";
 "subscriptions.direct_messages" = "Mensajes directos";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "you"; //TODO
 "subscriptions.messages" = "Messages"; //TODO
 "subscriptions.list.you_initial" = "You"; //TODO
@@ -133,14 +138,13 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "En línea";
-"user_menu.away" = "Lejos";
-"user_menu.busy" = "Ocupado";
-"user_menu.invisible" = "Invisible";
+// Status
+"status.online" = "En línea";
+"status.away" = "Lejos";
+"status.busy" = "Ocupado";
+"status.invisible" = "Invisible";
+
 "user_menu.admin" = "Administración";
-"user_menu.preferences" = "Preferencias";
-"user_menu.logout" = "Cerrar sesión";
 
 // New Room View
 "new_room.title" = "Nuevo canal";
@@ -271,6 +275,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferencias";
+"myaccount.settings.administration" = "Administración";
+"myaccount.settings.logout" = "Cerrar sesión de %@";
 "myaccount.settings.contactus" = "Contáctenos";
 "myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licencia";
@@ -333,3 +339,12 @@
 "user_action_sheet.remove" = "Remove from room"; // TODO
 "user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

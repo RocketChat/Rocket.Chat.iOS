@@ -9,6 +9,40 @@
 import Foundation
 import RealmSwift
 
+typealias SortDescriptor<Value> = (Value, Value) -> Bool
+
+// MARK: URL Generation
+
+extension Subscription {
+
+    /**
+     This method returns the external URL of any subscription
+     when all the information required is valid on the related instance.
+
+     - returns: the external URL of the subscription object
+     */
+    func externalURL() -> URL? {
+        guard
+            let auth = auth,
+            let siteURLString = auth.settings?.siteURL,
+            name.count > 0
+        else {
+            return nil
+        }
+
+        let suffix: String = {
+            switch type {
+            case .channel: return "channel"
+            case .directMessage: return "direct"
+            case .group: return "group"
+            }
+        }()
+
+        return URL(string: "\(siteURLString)/\(suffix)/\(name)")
+    }
+
+}
+
 // MARK: Information Viewing Options
 
 extension Subscription {
@@ -45,7 +79,20 @@ extension Subscription {
 
 }
 
-extension LinkingObjects where Element == Subscription {
+extension Subscription {
+
+    static func all(realm: Realm? = Realm.current) -> Results<Subscription>? {
+        return realm?.objects(Subscription.self).filter("auth != NULL")
+    }
+
+}
+
+extension Results where Element == Subscription {
+
+    func sortedByName() -> Results<Subscription> {
+        return sorted(byKeyPath: "name", ascending: true)
+    }
+
     func sortedByLastMessageDate() -> Results<Subscription> {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
@@ -53,18 +100,5 @@ extension LinkingObjects where Element == Subscription {
     func filterBy(name: String) -> Results<Subscription> {
         return filter("name CONTAINS[cd] %@", name)
     }
-}
 
-extension Results where Element == Subscription {
-    func sortedByLastMessageDate() -> [Subscription] {
-        return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
-            guard let aDate = aSubscription.roomUpdatedAt else { return false }
-            guard let bDate = bSubscription.roomUpdatedAt else { return true }
-            return aDate > bDate
-        })
-    }
-
-    func filterBy(name: String) -> Results<Subscription> {
-        return filter("name CONTAINS[cd] %@", name)
-    }
 }

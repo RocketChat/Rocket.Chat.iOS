@@ -82,14 +82,18 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
 "connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL;";
 "connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Σύνδεση";
@@ -117,6 +121,7 @@
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "you"; //TODO
 "subscriptions.messages" = "Messages"; //TODO
 "subscriptions.list.you_initial" = "You"; //TODO
@@ -133,14 +138,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Σε σύνδεση";
-"user_menu.away" = "Λείπω";
-"user_menu.busy" = "Απασχολημένος";
-"user_menu.invisible" = "Αόρατος";
-"user_menu.admin" = "Διαχείριση";
-"user_menu.preferences" = "Ο Λογαριασμός μου";
-"user_menu.logout" = "Αποσύνδεση";
+// Status
+"status.online" = "Σε σύνδεση";
+"status.away" = "Λείπω";
+"status.busy" = "Απασχολημένος";
+"status.invisible" = "Αόρατος";
 
 // New Room View
 "new_room.title" = "Νέο Κανάλι";
@@ -272,6 +274,8 @@
 
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
+"myaccount.settings.administration" = "Διαχείριση"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
 "myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Άδεια";
@@ -334,3 +338,12 @@
 "user_action_sheet.remove" = "Remove from room"; // TODO
 "user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

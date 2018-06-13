@@ -82,14 +82,18 @@
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
 
+"alert.logout.confirmation.title" = "Logout from this server";
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
+"alert.logout.confirmation.confirm" = "Yes, logout me";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
 "connection.server.redirect.alert.confirm" = "Yes, change the URL";
 
 // Socket Connection
-"connection.offline.banner.message" = "You're offline, try connecting again";
 "connection.connecting.banner.message" = "Connecting...";
+"connection.waiting_for_network.banner.message" = "Waiting for network";
 
 // Auth
 "auth.connect.button_connect" = "Connect";
@@ -117,6 +121,7 @@
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.conversations" = "Conversations";
 "subscriptions.you" = "you";
 "subscriptions.messages" = "Messages";
 "subscriptions.list.you_initial" = "You";
@@ -133,14 +138,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?";
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect";
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Away";
-"user_menu.busy" = "Busy";
-"user_menu.invisible" = "Invisible";
-"user_menu.admin" = "Administration";
-"user_menu.preferences" = "Preferences";
-"user_menu.logout" = "Logout";
+// Status
+"status.online" = "Online";
+"status.away" = "Away";
+"status.busy" = "Busy";
+"status.invisible" = "Invisible";
 
 // New Room View
 "new_room.title" = "New Channel";
@@ -272,6 +274,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferences";
+"myaccount.settings.administration" = "Administration";
+"myaccount.settings.logout" = "Logout from %@";
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.profile" = "Profile";
 "myaccount.settings.license" = "License";
@@ -334,3 +338,12 @@
 "user_action_sheet.remove" = "Remove from room";
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name";
+"subscriptions.sorting.title.activity" = "Sorting by activity";
+"subscriptions.sorting.alphabetical" = "Alphabetical";
+"subscriptions.sorting.activity" = "Activity";
+"subscriptions.grouping.type" = "Group by type";
+"subscriptions.grouping.favorites" = "Group by favorites";
+"subscriptions.grouping.unread_top" = "Unread on top";

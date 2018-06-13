@@ -224,6 +224,7 @@ final class ChatViewController: SLKTextViewController {
 
     private func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
+        view?.subscription = subscription
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
@@ -1226,16 +1227,9 @@ extension ChatViewController: KeyboardFrameViewDelegate {
 
 extension ChatViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-
-    }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // Handle errors
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[ChatViewController] socketDidChangeState: \(state)")
+        chatTitleView?.state = state
     }
 
 }
