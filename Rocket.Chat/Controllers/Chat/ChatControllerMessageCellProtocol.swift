@@ -77,19 +77,9 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
             return
         }
 
-        let controller = ReadReceiptListViewController()
+        let controller = ReadReceiptListViewController(messageId: messageId)
         controller.modalPresentationStyle = .popover
         _ = controller.view
-
-        let api = API.current()
-        api?.fetch(ReadReceiptsRequest(messageId: messageId)) { response in
-            switch response {
-            case .resource(let resource):
-                controller.model = ReadReceiptListViewModel(users: resource.users, isLoading: false)
-            case .error(let error):
-                print(error)
-            }
-        }
 
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)

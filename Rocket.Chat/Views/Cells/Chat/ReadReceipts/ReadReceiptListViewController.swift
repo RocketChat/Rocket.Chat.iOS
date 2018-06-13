@@ -22,6 +22,8 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
         }
     }
 
+    var messageId: String = ""
+
     var readReceiptListView: ReadReceiptListView! {
         didSet {
             readReceiptListView.model = model
@@ -53,8 +55,26 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
         title = model.title
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        API.current()?.fetch(ReadReceiptsRequest(messageId: messageId)) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.model = ReadReceiptListViewModel(users: resource.users, isLoading: false)
+            case .error:
+                break
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         preferredContentSize = CGSize(width: 300, height: 1)
+    }
+
+    convenience init(messageId: String) {
+        self.init()
+        self.messageId = messageId
     }
 }
