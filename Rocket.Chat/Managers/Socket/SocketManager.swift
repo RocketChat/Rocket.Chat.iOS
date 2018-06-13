@@ -226,6 +226,11 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
+        if let handler = internalConnectionHandler {
+            internalConnectionHandler = nil
+            handler(socket, socket.isConnected)
+        }
+
         isUserAuthenticated = false
         events = [:]
         queue = [:]
