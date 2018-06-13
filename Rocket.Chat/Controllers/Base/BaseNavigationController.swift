@@ -27,6 +27,13 @@ class BaseNavigationController: UINavigationController {
         navBar.barTintColor = .RCNavigationBarColor()
     }
 
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        let viewControllers = super.popToRootViewController(animated: animated)
+        setTransparentTheme()
+
+        return viewControllers
+    }
+
     override func popViewController(animated: Bool) -> UIViewController? {
         let poppedViewController = super.popViewController(animated: animated)
 
