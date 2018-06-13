@@ -51,7 +51,7 @@
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eJ-5r-Kgq" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="47" y="23" width="285" height="9"/>
+                        <rect key="frame" x="47" y="23" width="281" height="9"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -73,7 +73,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68O-nk-SUK">
-                        <rect key="frame" x="336" y="21.5" width="12" height="12"/>
+                        <rect key="frame" x="332" y="21.5" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="eOE-YO-Wp2"/>
                             <constraint firstAttribute="width" constant="12" id="yLu-lZ-Qb6"/>
@@ -100,7 +100,7 @@
                 <constraint firstAttribute="trailing" secondItem="Idm-4q-rB2" secondAttribute="trailing" constant="8" id="Wzj-wo-r7j"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
-                <constraint firstAttribute="trailing" secondItem="68O-nk-SUK" secondAttribute="trailing" constant="4" id="iMf-4w-YbQ"/>
+                <constraint firstAttribute="trailing" secondItem="68O-nk-SUK" secondAttribute="trailing" constant="8" id="iMf-4w-YbQ"/>
                 <constraint firstAttribute="bottom" secondItem="Idm-4q-rB2" secondAttribute="bottom" id="kdQ-0K-2Dm"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="myV-aY-DuJ"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
