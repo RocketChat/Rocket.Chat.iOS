@@ -72,6 +72,30 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         }
     }
 
+    func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect)) {
+        guard let messageId = message.identifier else {
+            return
+        }
+
+        let controller = ReadReceiptListViewController(messageId: messageId)
+        controller.modalPresentationStyle = .popover
+        _ = controller.view
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.modalPresentationStyle = .popover
+
+            if let presenter = navigationController.popoverPresentationController {
+                presenter.sourceView = source.0
+                presenter.sourceRect = source.0.bounds
+            }
+
+            self.present(navigationController, animated: true)
+        }
+    }
+
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         guard let user = message.user else { return }
         presentActionSheetForUser(user, source: (view, nil))

@@ -27,10 +27,6 @@ final class ReactorListViewController: UIViewController, Closeable {
 
     var reactorListView: ReactorListView! {
         didSet {
-            reactorListView.closePressed = {
-                self.dismiss(animated: true, completion: nil)
-            }
-
             reactorListView.model = model
         }
     }
