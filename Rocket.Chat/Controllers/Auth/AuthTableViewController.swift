@@ -210,7 +210,7 @@ final class AuthTableViewController: UITableViewController {
     }
 
     func stopLoading() {
-        loadingView.hide(animated: true)
+        loadingView?.hide(animated: true)
     }
 
     @objc func showLogin() {
