@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SafariServices
 
 class WelcomeViewController: BaseViewController {
 
     internal var joinCommunitySegue = "JoinCommunity"
-    internal var communityServerURL = "\nopen.rocket.chat"
+    internal let communityServerURL = "\nopen.rocket.chat"
+    internal let createServerURL = "https://cloud.rocket.chat"
 
     @IBOutlet weak var welcomeLabel: UILabel! {
         didSet {
@@ -35,7 +37,7 @@ class WelcomeViewController: BaseViewController {
 
     @IBOutlet weak var createServerButtton: UIButton! {
         didSet {
-            connectServerButton.setTitle(
+            createServerButtton.setTitle(
                 localized("onboarding.button_create_server"),
                 for: .normal
             )
@@ -107,5 +109,19 @@ class WelcomeViewController: BaseViewController {
         if let connectServer = segue.destination as? ConnectServerViewController, segue.identifier == joinCommunitySegue {
             connectServer.shouldAutoConnect = true
         }
+    }
+
+    // MARK: Actions
+
+    @IBAction func showCreateServer() {
+        guard let url = URL(string: createServerURL) else {
+            return
+        }
+
+        let controller = SFSafariViewController(url: url)
+        controller.modalPresentationStyle = .popover
+        controller.preferredControlTintColor = view.tintColor
+
+        present(controller, animated: true, completion: nil)
     }
 }

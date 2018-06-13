@@ -136,6 +136,9 @@
                                         <state key="normal" title="Create a new server">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="showCreateServer" destination="Myv-ng-Lw2" eventType="touchUpInside" id="mSq-9u-wC0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

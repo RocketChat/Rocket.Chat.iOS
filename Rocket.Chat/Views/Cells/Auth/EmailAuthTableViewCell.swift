@@ -14,6 +14,10 @@ class EmailAuthTableViewCell: UITableViewCell {
     static let rowHeightBelowSeparator: CGFloat = 134
 
     @IBOutlet weak var loginButton: StyledButton!
-    @IBOutlet weak var registerButton: StyledButton!
+    @IBOutlet weak var registerButton: StyledButton! {
+        didSet {
+            registerButton.setTitle(localized("auth.login.buttonRegister"), for: .normal)
+        }
+    }
 
 }
