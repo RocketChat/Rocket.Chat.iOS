@@ -55,7 +55,6 @@ extension AuthTableViewController {
                 }
 
                 if let user = resource.user {
-
                     let realm = Realm.current
                     try? realm?.write {
                         realm?.add(user, update: true)

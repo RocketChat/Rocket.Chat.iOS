@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,6 +18,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1EU-Bf-ijR">
                     <rect key="frame" x="0.0" y="4" width="375" height="36"/>
                     <subviews>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Oo-Jr-ITD">
+                            <rect key="frame" x="157" y="0.0" width="61" height="18"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-nP-uyM">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="18"/>
+                                </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t2-Hf-Uj2">
+                                    <rect key="frame" x="28" y="0.0" width="33" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
                             <rect key="frame" x="156.5" y="0.0" width="62.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
@@ -46,9 +60,14 @@
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="3cY-6p-zbD"/>
                         <constraint firstAttribute="height" constant="36" id="Db1-Dl-ho2"/>
                         <constraint firstItem="ct8-6x-Vjc" firstAttribute="leading" secondItem="1EU-Bf-ijR" secondAttribute="leading" id="Fa2-5X-ymp"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="FkN-38-Da4"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="FnL-Uz-KpX"/>
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="IJT-0w-7Be"/>
                         <constraint firstAttribute="trailing" secondItem="ct8-6x-Vjc" secondAttribute="trailing" id="J35-gR-SUO"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="9Oo-Jr-ITD" secondAttribute="bottom" id="WPP-F1-cKZ"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1EU-Bf-ijR" secondAttribute="leading" id="ba3-Kp-rRe"/>
                         <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="dQV-QF-hgL"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Oo-Jr-ITD" secondAttribute="trailing" id="jBl-d4-c6R"/>
                         <constraint firstAttribute="bottom" secondItem="ct8-6x-Vjc" secondAttribute="bottom" id="mDL-TK-eV9"/>
                         <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="rKL-fl-g3g"/>
                         <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" id="rM1-dt-SVm"/>
@@ -66,7 +85,9 @@
             <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>
             <connections>
                 <outlet property="buttonServer" destination="ct8-6x-Vjc" id="fla-t6-d69"/>
+                <outlet property="labelLoading" destination="3t2-Hf-Uj2" id="7vu-DW-yCH"/>
                 <outlet property="labelMessages" destination="3Il-8X-3Zu" id="nFX-tp-Cw1"/>
+                <outlet property="viewLoading" destination="9Oo-Jr-ITD" id="n4D-Re-2Ke"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="54"/>
         </view>

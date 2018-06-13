@@ -11,6 +11,38 @@ import RealmSwift
 
 typealias SortDescriptor<Value> = (Value, Value) -> Bool
 
+// MARK: URL Generation
+
+extension Subscription {
+
+    /**
+     This method returns the external URL of any subscription
+     when all the information required is valid on the related instance.
+
+     - returns: the external URL of the subscription object
+     */
+    func externalURL() -> URL? {
+        guard
+            let auth = auth,
+            let siteURLString = auth.settings?.siteURL,
+            name.count > 0
+        else {
+            return nil
+        }
+
+        let suffix: String = {
+            switch type {
+            case .channel: return "channel"
+            case .directMessage: return "direct"
+            case .group: return "group"
+            }
+        }()
+
+        return URL(string: "\(siteURLString)/\(suffix)/\(name)")
+    }
+
+}
+
 // MARK: Information Viewing Options
 
 extension Subscription {

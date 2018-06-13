@@ -92,6 +92,7 @@
 "connection.button_connect" = "Connect"; // TODO
 "connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Onboarding
 "onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
@@ -127,6 +128,10 @@
 "auth.forgot_password.message" = "Введите ваш адрес электронной почты";
 "auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Subscriptions
 "subscriptions.search" = "Поиск";
 "subscriptions.search_results" = "Результаты";
@@ -152,14 +157,11 @@
 "servers.action.disconnect.alert.message" = "Вы хотите отключиться от \"%@\" сервера?";
 "servers.action.disconnect.alert.confirm" = "Да, отключить";
 
-// User Menu
-"user_menu.online" = "Онлайн";
-"user_menu.away" = "Отошел";
-"user_menu.busy" = "Занят";
-"user_menu.invisible" = "Невидимый";
-"user_menu.admin" = "Администрирование";
-"user_menu.preferences" = "Настройки";
-"user_menu.logout" = "Выйти";
+// Status
+"status.online" = "Онлайн";
+"status.away" = "Отошел";
+"status.busy" = "Занят";
+"status.invisible" = "Невидимый";
 
 // New Room View
 "new_room.title" = "Новый канал";
@@ -286,6 +288,8 @@
 
 // Settings
 "myaccount.settings.title" = "Настройки";
+"myaccount.settings.administration" = "Администрирование";
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Связаться с нами";
 "myaccount.settings.profile" = "Профиль";
 "myaccount.settings.license" = "Лицензия";

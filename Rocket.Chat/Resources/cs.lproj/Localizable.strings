@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -91,7 +95,8 @@
 "connection.title" = "Sign in your server"; // TODO
 "connection.button_connect" = "Connect"; // TODO
 "connection.offline.banner.message" = "Jste offline, zkuste se znovu připojit";
-"connection.connecting.banner.message" = "Connecting...";
+"connection.connecting.banner.message" = "Connecting..."; // TODO
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Onboarding
 "onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
@@ -152,14 +157,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Pryč";
-"user_menu.busy" = "Zaneprázdněn";
-"user_menu.invisible" = "Neviditelný";
-"user_menu.admin" = "Administration"; //TODO
-"user_menu.preferences" = "Můj účet"; // TODO: new text: Preferences
-"user_menu.logout" = "Odhlásit";
+// Status
+"status.online" = "Online";
+"status.away" = "Pryč";
+"status.busy" = "Zaneprázdněn";
+"status.invisible" = "Neviditelný";
 
 // New Room View
 "new_room.title" = "New Channel"; // TODO
@@ -286,6 +288,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO
+"myaccount.settings.administration" = "Administration"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Contact us"; // TODO
 "myaccount.settings.profile" = "Profile"; // TODO
 "myaccount.settings.license" = "License"; // TODO

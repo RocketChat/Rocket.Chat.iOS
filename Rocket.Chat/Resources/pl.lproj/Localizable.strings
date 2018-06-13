@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Serwer zmienił swój adres";
 "connection.server.redirect.alert.message" = "Wygląda na to, że serwer zmienił swój adres na:\n\n%@\n\nCzy chciałbyś zaktualizować adres?";
@@ -92,6 +96,7 @@
 "connection.button_connect" = "Connect"; // TODO
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
 "connection.connecting.banner.message" = "Łączenie...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Onboarding
 "onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
@@ -152,14 +157,11 @@
 "servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Dostępny";
-"user_menu.away" = "Zaraz wracam";
-"user_menu.busy" = "Zajęty";
-"user_menu.invisible" = "Ukryty";
-"user_menu.admin" = "Zarządzanie";
-"user_menu.preferences" = "Preferencje";
-"user_menu.logout" = "Wyloguj";
+// Status
+"status.online" = "Dostępny";
+"status.away" = "Zaraz wracam";
+"status.busy" = "Zajęty";
+"status.invisible" = "Ukryty";
 
 // New Room View
 "new_room.title" = "Nowy kanał";
@@ -285,6 +287,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferencje";
+"myaccount.settings.administration" = "Zarządzanie";
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Licencja";

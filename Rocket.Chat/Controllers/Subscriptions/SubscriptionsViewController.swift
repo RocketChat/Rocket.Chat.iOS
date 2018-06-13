@@ -58,22 +58,29 @@ final class SubscriptionsViewController: BaseViewController {
 
     let socketHandlerToken = String.random(5)
 
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        subscriptionsToken?.invalidate()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupSearchBar()
         setupTitleView()
         updateBackButton()
+
+        subscribeModelChanges()
+        updateData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // This method can stay here, since adding a new connection handler
+        // will override the existing one if there's already one. This is here
+        // to prevent that some connection issue removes all the connection handler.
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        subscribeModelChanges()
-        updateData()
-        tableView.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
@@ -83,6 +90,14 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         subscriptionsToken?.invalidate()
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
+    // MARK: Storyboard Segues
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Servers" {
+            segue.destination.modalPresentationCapturesStatusBarAppearance = true
+        }
     }
 
     // MARK: Subscriptions
@@ -264,14 +279,19 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            titleView.translatesAutoresizingMaskIntoConstraints = false
+            titleView.delegate = self
+            titleView.layoutIfNeeded()
+            titleView.sizeToFit()
+            updateServerInformation()
+
+            // This code can be removed when we drop iOS 10 support.
+            titleView.translatesAutoresizingMaskIntoConstraints = true
             navigationItem.titleView = titleView
             self.titleView = titleView
 
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
             titleView.addGestureRecognizer(tapGesture)
-
-            titleView.delegate = self
-            updateServerInformation()
         }
     }
 
@@ -649,16 +669,9 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
 extension SubscriptionsViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-
-    }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // Handle errors
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[SubscriptionsViewController] socketDidChangeState: \(state)")
+        titleView?.state = state
     }
 
 }
