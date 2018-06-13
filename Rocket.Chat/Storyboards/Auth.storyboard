@@ -1027,10 +1027,10 @@
             </objects>
             <point key="canvasLocation" x="2183" y="18"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Register Username Table View Controller-->
         <scene sceneID="JMr-VV-DlN">
             <objects>
-                <tableViewController id="0XD-Z9-Dv5" sceneMemberID="viewController">
+                <tableViewController id="0XD-Z9-Dv5" customClass="RegisterUsernameTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aDF-CG-zC2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1092,6 +1092,9 @@ to mention you in messages</string>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0XD-Z9-Dv5" id="LXr-EO-dpB"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1131,6 +1134,9 @@ to mention you in messages</string>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didPressedRegisterButton" destination="0XD-Z9-Dv5" eventType="touchUpInside" id="2ss-Ra-2IJ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1149,6 +1155,10 @@ to mention you in messages</string>
                             <outlet property="delegate" destination="0XD-Z9-Dv5" id="7h5-DX-phg"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="registerButton" destination="sdI-DC-ZEg" id="wqe-JD-bEA"/>
+                        <outlet property="textFieldUsername" destination="3vM-gD-Ajn" id="kdw-bD-A30"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRK-YA-nVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1328,9 +1338,6 @@ to mention you in messages</string>
                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="DCX-We-7Nh" id="1Gj-iw-vJS"/>
-                                                        </connections>
                                                     </textField>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aHo-hy-xeY">
                                                         <rect key="frame" x="235" y="18" width="25" height="25"/>
@@ -1406,7 +1413,6 @@ to mention you in messages</string>
                     <navigationItem key="navigationItem" title="Register Username" id="WSd-Fi-MAL"/>
                     <connections>
                         <outlet property="activityIndicator" destination="aHo-hy-xeY" id="mu1-BQ-e9f"/>
-                        <outlet property="textFieldUsername" destination="imX-dY-aux" id="rit-fI-0oC"/>
                         <outlet property="viewFields" destination="ue7-ub-2Su" id="23f-hZ-au4"/>
                         <outlet property="visibleViewBottomConstraint" destination="EWG-Ak-q4R" id="kIt-3p-L1T"/>
                     </connections>

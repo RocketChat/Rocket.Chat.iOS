@@ -1,5 +1,5 @@
 //
-//  RegisterUsernameViewController.swift
+//  RegisterUsernameTableViewController.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 04/03/17.
@@ -9,23 +9,14 @@
 import UIKit
 import SwiftyJSON
 
-final class RegisterUsernameViewController: BaseViewController {
+final class RegisterUsernameTableViewController: UITableViewController {
 
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var viewFields: UIView! {
-        didSet {
-            viewFields.layer.cornerRadius = 4
-            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
-            viewFields.layer.borderWidth = 0.5
-        }
-    }
-
-    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldUsername: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var registerButton: StyledButton!
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -46,49 +37,32 @@ final class RegisterUsernameViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
-        )
-
         textFieldUsername.becomeFirstResponder()
     }
 
     func startLoading() {
         textFieldUsername.alpha = 0.5
         requesting = true
-        activityIndicator.startAnimating()
+        registerButton.startLoading()
         textFieldUsername.resignFirstResponder()
     }
 
     func stopLoading() {
         textFieldUsername.alpha = 1
         requesting = false
-        activityIndicator.stopAnimating()
-    }
-
-    // MARK: Keyboard Handlers
-    override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
-        }
-    }
-
-    override func keyboardWillHide(_ notification: Notification) {
-        visibleViewBottomConstraint.constant = 0
+        registerButton.stopLoading()
     }
 
     // MARK: Request username
+
+    @IBAction func didPressedRegisterButton() {
+        guard !requesting else {
+            return
+        }
+
+        requestUsername()
+    }
+
     fileprivate func requestUsername() {
         startLoading()
 
@@ -110,14 +84,16 @@ final class RegisterUsernameViewController: BaseViewController {
 
 }
 
-extension RegisterUsernameViewController: UITextFieldDelegate {
+extension RegisterUsernameTableViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !requesting
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        requestUsername()
+        if !requesting {
+            requestUsername()
+        }
         return true
     }
 

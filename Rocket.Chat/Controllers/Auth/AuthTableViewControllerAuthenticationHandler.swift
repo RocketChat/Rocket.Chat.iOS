@@ -49,6 +49,7 @@ extension AuthTableViewController {
         API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
+                self?.stopLoading()
                 if let token = self?.socketHandlerToken {
                     SocketManager.removeConnectionHandler(token: token)
                 }
