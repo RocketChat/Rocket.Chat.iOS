@@ -18,9 +18,11 @@ final class PreferencesViewController: UITableViewController {
 
     private let kSectionProfile = 0
     private let kSectionSettings = 1
-    private let kSectionInformation = 2
-    private let kSectionTracking = 3
-    private let kSectionFlex = 4
+    private let kSectionAdministration = 2
+    private let kSectionInformation = 3
+    private let kSectionTracking = 4
+    private let kSectionLogout = 5
+    private let kSectionFlex = 6
 
     private let viewModel = PreferencesViewModel()
 
@@ -44,6 +46,12 @@ final class PreferencesViewController: UITableViewController {
 
     @IBOutlet weak var labelProfileName: UILabel!
     @IBOutlet weak var labelProfileStatus: UILabel!
+
+    @IBOutlet weak var labelAdministration: UILabel! {
+        didSet {
+            labelAdministration.text = viewModel.administration
+        }
+    }
 
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
@@ -96,6 +104,12 @@ final class PreferencesViewController: UITableViewController {
     @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
         didSet {
             labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+        }
+    }
+
+    @IBOutlet weak var labelLogout: UILabel! {
+        didSet {
+            labelLogout.text = viewModel.logout
         }
     }
 
@@ -158,6 +172,41 @@ final class PreferencesViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
+    private func cellLogoutDidPressed() {
+        let title = localized("alert.logout.confirmation.title")
+        let message = String(format: localized("alert.logout.confirmation.message"), viewModel.serverName)
+
+        let actions = [
+            UIAlertAction(title: localized("alert.logout.confirmation.confirm"), style: .destructive, handler: { _ in
+                API.current()?.client(PushClient.self).deletePushToken()
+
+                AuthManager.logout {
+                    AuthManager.recoverAuthIfNeeded()
+                    AppManager.reloadApp()
+                }
+            }),
+            UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil)
+        ]
+
+        alert(with: actions, title: title, message: message)
+    }
+
+    func openAdminPanel() {
+        guard
+            let auth = AuthManager.isAuthenticated(),
+            let baseURL = auth.settings?.siteURL,
+            let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
+        else {
+            return
+        }
+
+        if let controller = WebViewControllerEmbedded.instantiateFromNib() {
+            controller.url = adminURL
+            controller.navigationBar.topItem?.title = viewModel.administration
+            present(controller, animated: true)
+        }
+    }
+
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,6 +240,10 @@ final class PreferencesViewController: UITableViewController {
             if indexPath.row == 0 {
                 cellTermsOfServiceDidPressed()
             }
+        } else if indexPath.section == kSectionAdministration {
+            openAdminPanel()
+        } else if indexPath.section == kSectionLogout {
+            cellLogoutDidPressed()
         } else if indexPath.section == kSectionFlex, indexPath.row == 0 {
             #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
@@ -214,6 +267,22 @@ final class PreferencesViewController: UITableViewController {
         }
 
         return nil
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == kSectionAdministration && !viewModel.canViewAdministrationPanel {
+            return .leastNormalMagnitude
+        }
+
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == kSectionAdministration && !viewModel.canViewAdministrationPanel {
+            return .leastNormalMagnitude
+        }
+
+        return super.tableView(tableView, heightForFooterInSection: section)
     }
 
     // MARK: IBAction
