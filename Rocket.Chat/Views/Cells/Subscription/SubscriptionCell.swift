@@ -29,6 +29,7 @@ final class SubscriptionCell: UITableViewCell {
 
     @IBOutlet weak var viewStatus: UIView! {
         didSet {
+            viewStatus.backgroundColor = .RCInvisible()
             viewStatus.layer.masksToBounds = true
             viewStatus.layer.cornerRadius = 5
         }
