@@ -68,7 +68,7 @@ final class SubscriptionsViewController: BaseViewController {
         setupSearchBar()
         setupTitleView()
         updateBackButton()
-    
+
         subscribeModelChanges()
         updateData()
 
@@ -77,6 +77,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
         serversView?.frame = frameForDropDownOverlay
         sortingView?.frame = frameForDropDownOverlay
     }
@@ -95,7 +96,6 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        subscriptionsToken?.invalidate()
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
