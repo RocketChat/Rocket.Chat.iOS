@@ -133,6 +133,8 @@
 		411498E51FC7B8D500D66542 /* AttachmentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E41FC7B8D500D66542 /* AttachmentSpec.swift */; };
 		4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE420B599D9007E7163 /* StatusTableViewController.swift */; };
 		4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE620B599E6007E7163 /* StatusViewModel.swift */; };
+		411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */; };
+		411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
@@ -862,6 +864,8 @@
 		411498E41FC7B8D500D66542 /* AttachmentSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentSpec.swift; sourceTree = "<group>"; };
 		4116CBE420B599D9007E7163 /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
 		4116CBE620B599E6007E7163 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
+		411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelInfoDescriptionCell.xib; sourceTree = "<group>"; };
+		411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoDescriptionCell.swift; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManager.swift; sourceTree = "<group>"; };
 		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -2471,6 +2475,8 @@
 			isa = PBXGroup;
 			children = (
 				800FCD451F728E6A00D9A692 /* ChannelInfoCellProtocol.swift */,
+				411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */,
+				411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */,
 				4124FCC41F7A61C5008ED4C3 /* ChannelInfoActionCell.swift */,
 				4124FCC51F7A61C5008ED4C3 /* ChannelInfoActionCell.xib */,
 				800FCD481F728E6A00D9A692 /* ChannelInfoUserCell.swift */,
@@ -3520,6 +3526,7 @@
 				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
+				411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */,
 				4124FCC81F7A6BF5008ED4C3 /* ChannelInfoUserCell.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				14F8A280202E659000175FDC /* White-76@2x.png in Resources */,
@@ -4080,6 +4087,7 @@
 				8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */,
 				334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
+				411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */,
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
