@@ -91,8 +91,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="buttonAddNewServer" destination="Ale-R3-AFg" id="0Y0-pe-Mx4"/>
                 <outlet property="headerView" destination="bvu-bb-Zp7" id="j1T-xb-LzJ"/>
                 <outlet property="headerViewTopConstraint" destination="6hk-0Q-G36" id="gsk-7i-xjd"/>
+                <outlet property="labelTitle" destination="jTL-bo-3Co" id="rhv-2v-pgi"/>
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
                 <outlet property="tappableView" destination="LBY-jZ-ame" id="Ibl-jV-PGD"/>
