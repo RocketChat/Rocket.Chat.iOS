@@ -9,6 +9,7 @@
 import Foundation
 
 final class EditProfileViewModel {
+
     internal let title = localized("myaccount.settings.profile.title")
     internal let editingTitle = localized("myaccount.settings.editing_profile.title")
     internal let saveButtonTitle = localized("myaccount.settings.profile.actions.save")
@@ -19,4 +20,18 @@ final class EditProfileViewModel {
     internal let emailPlaceholder = localized("myaccount.settings.profile.email_placeholder")
     internal let statusTitle = localized("myaccount.settings.profile.status.title")
     internal let changeYourPasswordTitle = localized("myaccount.settings.profile.actions.change_password")
+
+    internal var userStatus: String {
+        guard let user = AuthManager.currentUser() else {
+            return localized("user_menu.invisible")
+        }
+
+        switch user.status {
+        case .online: return localized("status.online")
+        case .offline: return localized("status.invisible")
+        case .busy: return localized("status.busy")
+        case .away: return localized("status.away")
+        }
+    }
+
 }

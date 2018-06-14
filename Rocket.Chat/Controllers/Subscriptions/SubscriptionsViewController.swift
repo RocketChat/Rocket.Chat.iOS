@@ -353,6 +353,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
         searchState = .searchingLocally
         searchResult = subscriptions
+        organizeSubscriptionsGrouped()
 
         tableView.reloadData()
 
@@ -374,6 +375,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
             self?.searchState = .searchingRemotely
             self?.searchResult = result
+            self?.organizeSubscriptionsGrouped()
             self?.tableView.reloadData()
         }
     }
