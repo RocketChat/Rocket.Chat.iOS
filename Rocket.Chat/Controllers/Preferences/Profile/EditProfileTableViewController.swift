@@ -197,7 +197,7 @@ final class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func updateUserStatus() {
-        statusValueLabel.text = AuthManager.currentUser()?.status.rawValue.capitalized
+        statusValueLabel.text = viewModel.userStatus
     }
 
     // MARK: State Management
