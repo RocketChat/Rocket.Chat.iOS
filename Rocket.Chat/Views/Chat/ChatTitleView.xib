@@ -32,7 +32,7 @@
                     <rect key="frame" x="6" y="0.0" width="323" height="44"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Button">
+                    <state key="normal">
                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -84,6 +84,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="buttonMore" destination="TIT-TU-fEF" id="Vsg-hd-Cht"/>
                 <outlet property="buttonTitle" destination="k0T-MO-VVm" id="Ttj-KL-JNo"/>
                 <outlet property="labelLoading" destination="1mu-Gh-mpc" id="4Bq-Ly-1xE"/>
                 <outlet property="viewLoading" destination="oSA-hf-f6V" id="Sah-7o-vW8"/>

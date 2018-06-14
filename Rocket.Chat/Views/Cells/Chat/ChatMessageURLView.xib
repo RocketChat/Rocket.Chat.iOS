@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -66,6 +66,7 @@
                 <outlet property="imageViewURLWidthConstraint" destination="4uN-JF-MHW" id="kkw-2m-Dpr"/>
                 <outlet property="labelURLDescription" destination="7Cu-Hf-tVd" id="C5i-3P-hpp"/>
                 <outlet property="labelURLTitle" destination="9Mv-Tp-g1Y" id="Wdw-Aw-ouR"/>
+                <outlet property="viewLeftBorder" destination="nfz-qe-v9j" id="9ZQ-TY-8ww"/>
             </connections>
             <point key="canvasLocation" x="460" y="843"/>
         </view>

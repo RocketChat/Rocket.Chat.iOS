@@ -125,3 +125,15 @@ final class ChatMessageTextView: UIView {
         }
     }
 }
+
+// MARK: Themeable
+
+extension ChatMessageTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        viewLeftBorder.backgroundColor = theme.auxiliaryText
+        labelDescription.textColor = theme.auxiliaryText
+        labelTitle.textColor = theme.controlText
+    }
+}

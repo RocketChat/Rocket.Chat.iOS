@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LanguageViewController: UIViewController {
+final class LanguageViewController: BaseViewController {
     private let viewModel = LanguageViewModel()
 
     override func viewDidLoad() {

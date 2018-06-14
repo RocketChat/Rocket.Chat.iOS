@@ -17,7 +17,12 @@ class PreferencesViewModelSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        UserDefaults.group.set(["en"], forKey: "AppleLanguages")
+        AppManager.resetLanguage()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        AppManager.resetLanguage()
     }
 
     func testAppVersion() {
@@ -63,8 +68,14 @@ class PreferencesViewModelSpec: XCTestCase {
     func testNumberOfRowsInSection() {
         XCTAssertEqual(model.numberOfSections, 7)
         XCTAssertEqual(model.numberOfRowsInSection(0), 1)
-        XCTAssertEqual(model.numberOfRowsInSection(1), 4)
-        XCTAssertEqual(model.numberOfRowsInSection(2), 1)
+
+        if #available(iOS 11, *) {
+            XCTAssertEqual(model.numberOfRowsInSection(1), 5)
+        } else {
+            XCTAssertEqual(model.numberOfRowsInSection(1), 4)
+        }
+
+        XCTAssertEqual(model.numberOfRowsInSection(2), 0)
         XCTAssertEqual(model.numberOfRowsInSection(3), 3)
         XCTAssertEqual(model.numberOfRowsInSection(4), 1)
         XCTAssertEqual(model.numberOfRowsInSection(5), 1)

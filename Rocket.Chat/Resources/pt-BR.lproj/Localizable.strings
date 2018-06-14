@@ -92,14 +92,33 @@
 "connection.server.redirect.alert.confirm" = "Sim, mudar a URL";
 
 // Socket Connection
+"connection.title" = "Conecte seu servidor";
+"connection.button_connect" = "Conectar";
+"connection.offline.banner.message" = "Você está offline, conecte novamente";
 "connection.connecting.banner.message" = "Conectando...";
 "connection.waiting_for_network.banner.message" = "Aguardando conexão";
+
+// Onboarding
+"onboarding.label_welcome" = "Bem-vindo ao Rocket Chat";
+"onboarding.label_subtitle" = "Comunicação Open Source";
+"onboarding.button_connect_server" = "Conectar um servidor";
+"onboarding.button_create_server" = "Criar um servidor";
+"onboarding.button_join_community_prefix" = "Junte-se a comunidade";
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
+"auth.email_auth_prefix" = "Entrar com ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Continuar com ";
 
+"auth.signup_title" = "Cadastre-se";
+
+"auth.login.login_title" = "Entrar";
+"auth.login.button_login_title" = "Entrar";
+"auth.login.create_account_prefix" = "Não tem uma conta?";
+"auth.login.create_account" = "\nCriar uma conta";
 "auth.login.username.placeholder" = "E-mail ou usuário";
 "auth.login.password.placeholder" = "Senha";
 "auth.login.buttonRegister" = "Criar uma conta";
@@ -284,8 +303,8 @@
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do servidor: %@";
 "myaccount.settings.web_browser" = "Navegador";
-"myaccount.settings.tracking.title" = "Relatórios de erro";
-"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erros contém apenas informações relevantes relacionadas aos erros ocorridos para nos ajudar a corrigi-los.";
+"myaccount.settings.tracking.title" = "Relatórios de falhas";
+"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de falhas contém apenas informações relevantes relacionadas as falhas ocorridos para nos ajudar a corrigi-las.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
@@ -338,6 +357,14 @@
 "user_action_sheet.remove" = "Remover do canal";
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
+
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Ordenando por nome";

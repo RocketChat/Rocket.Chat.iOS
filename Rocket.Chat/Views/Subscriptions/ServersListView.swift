@@ -17,6 +17,7 @@ final class ServersListView: UIView {
     private let viewModel = ServersListViewModel()
     weak var delegate: ServerListViewDelegate?
 
+    @IBOutlet weak var titleSeperator: UIView!
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = viewModel.title
@@ -58,6 +59,8 @@ final class ServersListView: UIView {
             tableViewHeighConstraint.constant = viewModel.viewHeight
         }
     }
+
+    var presentAddServer: (() -> Void)?
 
     private func animates(_ animations: @escaping VoidCompletion, completion: VoidCompletion? = nil) {
         UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
@@ -106,7 +109,7 @@ final class ServersListView: UIView {
     // MARK: Server Management
 
     @IBAction func buttonAddNewServerDidPressed(sender: Any) {
-        WindowManager.open(.auth(serverUrl: "", credentials: nil))
+        presentAddServer?()
     }
 
     func selectServer(at indexPath: IndexPath) {
@@ -195,4 +198,16 @@ extension ServersListView: UITableViewDelegate {
         selectServer(at: indexPath)
     }
 
+}
+
+// MARK: Themeable
+
+extension ServersListView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonAddNewServer.setTitleColor(theme.tintColor, for: .normal)
+        labelTitle.textColor = theme.auxiliaryText
+        titleSeperator.backgroundColor = theme.mutedAccent
+    }
 }

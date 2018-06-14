@@ -17,11 +17,11 @@ struct ChannelInfoActionCellData: ChannelInfoCellDataProtocol {
 
     let action: (() -> Void)?
 
-    init(icon: UIImage?, title: String = "", action: (() -> Void)? = nil) {
+    init(icon: UIImage?, title: String = "", detail: Bool = true, action: (() -> Void)? = nil) {
         self.icon = icon
         self.title = title
         self.action = action
-        self.detail = true
+        self.detail = detail
     }
 }
 
@@ -34,10 +34,20 @@ class ChannelInfoActionCell: UITableViewCell, ChannelInfoCellProtocol {
         didSet {
             labelTitle.text = data?.title
             imageViewIcon.image = data?.icon
+
+            accessoryType = (data?.detail ?? false) ? .disclosureIndicator : .none
         }
     }
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var imageViewIcon: UIImageView!
 
+}
+
+extension ChannelInfoActionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imageViewIcon.tintColor = theme.titleText
+    }
 }

@@ -32,6 +32,21 @@ class ChannelActionsViewController: BaseViewController {
 
             if subscription.type == .directMessage {
                 header = [ChannelInfoUserCellData(user: subscription.directMessageUser)]
+            } else {
+                let hasDescription = !(subscription.roomDescription?.isEmpty ?? true)
+                let hasTopic = !(subscription.roomTopic?.isEmpty ?? true)
+
+                header = [
+                    ChannelInfoBasicCellData(title: "#\(subscription.name)"),
+                    ChannelInfoDescriptionCellData(
+                        title: localized("chat.info.item.description"),
+                        descriptionText: hasDescription ? subscription.roomDescription : localized("chat.info.item.no_description")
+                    ),
+                    ChannelInfoDescriptionCellData(
+                        title: localized("chat.info.item.topic"),
+                        descriptionText: hasTopic ? subscription.roomTopic : localized("chat.info.item.no_topic")
+                    )
+                ]
             }
 
             let data = [header, [
@@ -39,8 +54,9 @@ class ChannelActionsViewController: BaseViewController {
                 shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: showMentionsList) : nil,
                 ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: shareRoom),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList)
+            ], [
+                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", detail: false, action: shareRoom)
             ]]
 
             tableViewData = data.compactMap({ $0 })
@@ -69,6 +85,16 @@ class ChannelActionsViewController: BaseViewController {
             nibName: "ChannelInfoActionCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: ChannelInfoActionCell.identifier)
+
+        tableView?.register(UINib(
+            nibName: "ChannelInfoDescriptionCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: ChannelInfoDescriptionCell.identifier)
+
+        tableView?.register(UINib(
+            nibName: "ChannelInfoBasicCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: ChannelInfoBasicCell.identifier)
     }
 
     func setupFavoriteButton() {
@@ -230,6 +256,20 @@ extension ChannelActionsViewController: UITableViewDelegate {
             }
         }
 
+        if let data = data as? ChannelInfoDescriptionCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell {
+                cell.data = data
+                return cell
+            }
+        }
+
+        if let data = data as? ChannelInfoBasicCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoBasicCell.identifier) as? ChannelInfoBasicCell {
+                cell.data = data
+                return cell
+            }
+        }
+
         return UITableViewCell()
     }
 
@@ -242,6 +282,14 @@ extension ChannelActionsViewController: UITableViewDelegate {
 
         if data as? ChannelInfoUserCellData != nil {
             return CGFloat(ChannelInfoUserCell.defaultHeight)
+        }
+
+        if data as? ChannelInfoDescriptionCellData != nil {
+            return CGFloat(ChannelInfoDescriptionCell.defaultHeight)
+        }
+
+        if data as? ChannelInfoBasicCellData != nil {
+            return CGFloat(ChannelInfoBasicCell.defaultHeight)
         }
 
         return CGFloat(0)
