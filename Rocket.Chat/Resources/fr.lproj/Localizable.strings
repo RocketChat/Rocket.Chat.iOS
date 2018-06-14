@@ -149,6 +149,11 @@
 // Notifications
 "notifications.action.reply" = "Réspondre";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
+"chat.read_receipt_list.title.empty" = "Read by no one"; //TODO
+
 // Chat
 "chat.channel_preview_view.title" = "Ceci est un aperçu de #%@";
 "chat.channel_preview_view.join" = "Rejoindre le canal";
@@ -160,7 +165,7 @@
 "chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
-
+"chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Ajouter une réaction";
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
 "chat.message.actions.report" = "Signaler le message";

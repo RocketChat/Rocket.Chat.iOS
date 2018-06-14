@@ -25,6 +25,7 @@ extension Message: ModelMappeable {
         self.internalType = values["t"].string ?? "t"
         self.role = values["role"].stringValue
         self.pinned = values["pinned"].bool ?? false
+        self.unread = values["unread"].bool ?? false
         self.groupable = values["groupable"].bool ?? true
 
         if let createdAt = values["ts"]["$date"].double {

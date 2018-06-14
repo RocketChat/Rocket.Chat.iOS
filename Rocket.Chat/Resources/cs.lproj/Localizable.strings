@@ -159,8 +159,14 @@
 "chat.loading_messages" = "Loading messages..."; //TODO
 "chat.unread_separator" = "new messages"; //TODO
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
+"chat.read_receipt_list.title.empty" = "Read by no one"; //TODO
+
 // Chat Message Actions
-"chat.message.actions.react" = "Add Reaction";
+"chat.message.actions.info" = "Message info"; //TODO
+"chat.message.actions.react" = "Add Reaction"; //TODO
 "chat.message.actions.block" = "Blokovat zprávy od uživatele";
 "chat.message.actions.report" = "Nahlásit zprávu";
 "chat.message.actions.edit" = "Upravit zprávu";

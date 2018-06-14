@@ -48,6 +48,10 @@ extension ChatViewController {
             return []
         }
 
+        let info = (auth.settings?.messageReadReceiptStoreUsers ?? false) ? UIAlertAction(title: localized("chat.message.actions.info"), style: .default, handler: { _ in
+                self.handleReadReceiptPress(message, source: (view, view.frame))
+        }) : nil
+
         let react = UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
             self.react(message: message, view: view)
         })
@@ -68,7 +72,7 @@ extension ChatViewController {
             self?.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [react, reply, quote, copy, report]
+        var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
 
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
