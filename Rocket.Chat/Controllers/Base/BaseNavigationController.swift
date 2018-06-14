@@ -16,6 +16,19 @@ class BaseNavigationController: UINavigationController {
         return !(topViewController is WelcomeViewController)
     }
 
+    override init(rootViewController: UIViewController) {
+        super.init(navigationBarClass: BaseNavigationBar.self, toolbarClass: nil)
+        self.setViewControllers([rootViewController], animated: false)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,8 +36,7 @@ class BaseNavigationController: UINavigationController {
 
         let navBar = self.navigationBar
         navBar.isTranslucent = false
-        navBar.tintColor = .RCBlue()
-        navBar.barTintColor = .RCNavigationBarColor()
+        (navBar as? BaseNavigationBar)?.themeSource = self
     }
 
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
@@ -56,19 +68,21 @@ class BaseNavigationController: UINavigationController {
     }
 
     func setTransparentTheme(forceRedraw: Bool = false) {
-        UIApplication.shared.statusBarStyle = .default
         let navBar = self.navigationBar
+        navBar.barStyle = .default
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
         navBar.backgroundColor = UIColor.clear
         navBar.isTranslucent = true
         navBar.tintColor = .RCBlue()
         if forceRedraw { forceNavigationToRedraw() }
+        navBar.applyTheme()
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     func setGrayTheme(forceRedraw: Bool = false) {
-        UIApplication.shared.statusBarStyle = .lightContent
         let navBar = self.navigationBar
+        navBar.barStyle = .black
         navBar.shadowImage = UIImage()
         navBar.backgroundColor = .RCNavBarGray()
         navBar.barTintColor = .RCNavBarGray()
@@ -76,10 +90,18 @@ class BaseNavigationController: UINavigationController {
         navBar.tintColor = .white
         navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         if forceRedraw { forceNavigationToRedraw() }
+        navBar.applyTheme()
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     func forceNavigationToRedraw() {
         isNavigationBarHidden = true
         isNavigationBarHidden = false
+    }
+}
+
+extension BaseNavigationController: BaseNavigationBarThemeSource {
+    var navgiationBarTheme: Theme? {
+        return topViewController?.view.theme
     }
 }

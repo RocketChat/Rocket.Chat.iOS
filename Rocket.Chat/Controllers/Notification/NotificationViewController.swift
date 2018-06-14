@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-final class NotificationViewController: UIViewController {
+final class NotificationViewController: TopTransparentViewController {
 
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
@@ -51,11 +51,8 @@ final class NotificationViewController: UIViewController {
     // MARK: - View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowRadius = 1
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.clipsToBounds = true
+
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,15 +87,18 @@ final class NotificationViewController: UIViewController {
         // Commented out until a setting is added to toggle the sound.
         // playSound()
 
+        willStartDisplayingContent()
         UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { [weak self] _ in
-            UIView.animate(withDuration: self?.animationDuration ?? 0.0) {
+            UIView.animate(withDuration: self?.animationDuration ?? 0.0, animations: ({
                 self?.notificationViewIsHidden = true
                 self?.view.layoutIfNeeded()
+            })) { (_) in
+                self?.didEndDisplayingContent()
             }
         }
     }

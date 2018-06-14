@@ -12,6 +12,7 @@ class NotificationView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
+    @IBOutlet weak var backgroundBlurView: UIVisualEffectView!
 
     @IBOutlet weak var grabber: UIView! {
         didSet {
@@ -37,15 +38,26 @@ class NotificationView: UIView {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.clipsToBounds = true
-    }
-
     func displayNotification(title: String, body: String, username: String) {
         titleLabel.text = title
         bodyLabel.text = body
         avatarView.username = username
     }
 
+    private func applyShadow(color: UIColor = .black) {
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = 0.3
+        layer.shadowRadius = 1
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+}
+
+extension NotificationView {
+    override func applyTheme() {
+        guard let theme = theme else { return }
+        bodyLabel.textColor = theme.bodyText
+        titleLabel.textColor = theme.titleText
+        grabber.backgroundColor = theme.titleText.withAlphaComponent(0.18)
+        applyShadow(color: theme.titleText)
+    }
 }

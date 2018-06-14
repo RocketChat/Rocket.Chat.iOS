@@ -353,6 +353,14 @@
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
 
+// Theme
+"theme.settings.title" = "Theme";
+"theme.settings.header" = "ALL THEMES";
+"theme.settings.footer" = "Applying a theme will change how the app looks.";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+"theme.black" = "Black";
+
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Sorting by name";
 "subscriptions.sorting.title.activity" = "Sorting by activity";

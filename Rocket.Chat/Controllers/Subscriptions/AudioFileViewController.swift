@@ -8,10 +8,11 @@
 
 import UIKit
 
-class AudioFileViewController: UIViewController {
+class AudioFileViewController: BaseViewController {
 
     @IBOutlet weak var audioPlayerContainer: UIView!
     @IBOutlet weak var audioTitle: UILabel!
+    @IBOutlet weak var audioImage: UIImageView!
 
     var file: File!
 
@@ -27,6 +28,7 @@ class AudioFileViewController: UIViewController {
     func setupAudioPlayer() {
         guard let view = ChatMessageAudioView.instantiateFromNib() else { return }
         view.file = file
+        view.timeLabel.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         audioPlayerContainer.addSubview(view)
         view.topAnchor.constraint(equalTo: audioPlayerContainer.topAnchor, constant: -30).isActive = true
@@ -34,5 +36,20 @@ class AudioFileViewController: UIViewController {
         view.trailingAnchor.constraint(equalTo: audioPlayerContainer.trailingAnchor, constant: -15).isActive = true
         view.bottomAnchor.constraint(equalTo: audioPlayerContainer.bottomAnchor, constant: 0).isActive = true
     }
+}
 
+// MARK: Themeable
+
+extension AudioFileViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+
+        switch theme {
+        case .light: view.backgroundColor = #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1)
+        default: view.backgroundColor = theme.focusedBackground
+        }
+
+        audioImage.tintColor = theme.titleText
+    }
 }

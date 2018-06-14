@@ -26,7 +26,7 @@ final class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
+    @discardableResult func update(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
         let key = cachedKey(for: identifier)
@@ -37,10 +37,10 @@ final class MessageTextCacheManager {
 
         if message.isSystemMessage() {
             text.setFont(MessageTextFontAttributes.italicFont)
-            text.setFontColor(MessageTextFontAttributes.systemFontColor)
+            text.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
         } else {
             text.setFont(MessageTextFontAttributes.defaultFont)
-            text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+            text.setFontColor(MessageTextFontAttributes.defaultFontColor(for: theme))
             text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
@@ -50,6 +50,14 @@ final class MessageTextCacheManager {
 
         let attributedString = text.transformMarkdown()
         let finalText = NSMutableAttributedString(attributedString: attributedString)
+
+        // Set text color for markdown quotes
+        finalText.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: finalText.length), options: []) { (value, range, _) in
+            if let backgroundColor = value as? UIColor, backgroundColor != .clear {
+                finalText.addAttribute(.foregroundColor, value: UIColor.darkGray, range: range)
+            }
+        }
+
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, currentUsername: username)
         finalText.highlightChannels(channels)
@@ -58,7 +66,7 @@ final class MessageTextCacheManager {
         return finalText
     }
 
-    func message(for message: Message) -> NSMutableAttributedString? {
+    func message(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
         var resultText: NSAttributedString?
@@ -66,7 +74,7 @@ final class MessageTextCacheManager {
 
         if let cachedVersion = cache.object(forKey: key) {
             resultText = cachedVersion
-        } else if let result = update(for: message) {
+        } else if let result = update(for: message, with: theme) {
             resultText = result
         }
 

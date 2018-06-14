@@ -17,8 +17,8 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
     internal let defaultBackgroundColor = UIColor.white
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
+    internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
+    internal let highlightedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09530179799)
 
     var subscription: Subscription? {
         didSet {
@@ -97,7 +97,6 @@ final class SubscriptionCell: UITableViewCell {
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .semibold)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .medium)
-            labelDate.textColor = .RCBlue()
 
             if subscription.unread > 0 {
                 labelUnread.alpha = 1
@@ -109,11 +108,12 @@ final class SubscriptionCell: UITableViewCell {
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .medium)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .regular)
-            labelDate.textColor = .RCGray()
 
             labelUnread.alpha = 0
             labelUnread.text =  ""
         }
+
+        applyTheme()
     }
 
     fileprivate func updateStatus(subscription: Subscription) {
@@ -166,7 +166,7 @@ extension SubscriptionCell {
             case true:
                 self.backgroundColor = self.selectedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -183,7 +183,7 @@ extension SubscriptionCell {
             case true:
                 self.backgroundColor = self.highlightedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -192,5 +192,28 @@ extension SubscriptionCell {
         } else {
             transition()
         }
+    }
+}
+
+// MARK: Themeable
+
+extension SubscriptionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelName.textColor = theme.titleText
+        labelUnread.backgroundColor = theme.tintColor
+        labelUnread.textColor = theme.backgroundColor
+        labelLastMessage.textColor = theme.controlText
+        iconRoom.tintColor = theme.auxiliaryText
+
+        if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {
+            labelDate.textColor = theme.tintColor
+        } else {
+            labelDate.textColor = theme.auxiliaryText
+        }
+
+        setSelected(isSelected, animated: false)
+        setHighlighted(isHighlighted, animated: false)
     }
 }

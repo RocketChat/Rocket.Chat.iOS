@@ -119,7 +119,7 @@ extension NSMutableAttributedString {
                     background = .attention
                     font = .white
                 } else {
-                    background = .white
+                    background = .clear
                     font = .link
 
                     if shouldUseRealName && !realName.isEmpty {

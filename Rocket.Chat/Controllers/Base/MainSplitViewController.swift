@@ -42,6 +42,8 @@ final class MainSplitViewController: UISplitViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        ThemeManager.addObserver(self)
+
         delegate = self
         preferredDisplayMode = .allVisible
 
@@ -49,6 +51,14 @@ final class MainSplitViewController: UISplitViewController {
         SocketManager.reconnect()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        applyTheme()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return view.theme?.appearence.statusBarStyle ?? .default
+    }
 }
 
 // MARK: UISplitViewControllerDelegate
@@ -71,4 +81,14 @@ extension MainSplitViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+// MARK: Themeable
+
+extension MainSplitViewController {
+    override func applyTheme() {
+        guard let theme = view.theme else { return }
+        view.backgroundColor = theme.mutedAccent
+        view.subviews.first?.backgroundColor = theme.mutedAccent
+    }
 }

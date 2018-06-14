@@ -15,7 +15,7 @@
         <scene sceneID="LqB-MH-2JS">
             <objects>
                 <viewController id="Myv-ng-Lw2" customClass="WelcomeViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uwQ-R3-NW4">
+                    <view key="view" contentMode="scaleToFill" id="uwQ-R3-NW4" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -209,7 +209,7 @@
         <scene sceneID="bB9-3r-AEp">
             <objects>
                 <tableViewController id="hl8-Pc-62u" customClass="SignupViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aG8-IH-tGg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aG8-IH-tGg" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -433,7 +433,7 @@
         <scene sceneID="JnD-QH-qRl">
             <objects>
                 <tableViewController id="w7q-9e-4D3" customClass="LoginTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zS7-X0-xOA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zS7-X0-xOA" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -704,7 +704,7 @@
         <scene sceneID="00e-2E-wLI">
             <objects>
                 <tableViewController id="ueL-n9-tXo" customClass="AuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CqE-Lb-iM8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CqE-Lb-iM8" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -736,7 +736,7 @@
         <scene sceneID="00X-dB-jvU">
             <objects>
                 <tableViewController id="ubs-pY-bdr" customClass="LegalTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YBG-il-jGc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YBG-il-jGc" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
@@ -821,7 +821,7 @@
         <scene sceneID="w5C-wa-XFL">
             <objects>
                 <tableViewController id="em6-TJ-1CF" customClass="TwoFactorAuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Dv-tw-imc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Dv-tw-imc" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -953,7 +953,7 @@
         <scene sceneID="JMr-VV-DlN">
             <objects>
                 <tableViewController id="0XD-Z9-Dv5" customClass="RegisterUsernameTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aDF-CG-zC2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aDF-CG-zC2" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1090,7 +1090,7 @@ to mention you in messages</string>
         <scene sceneID="TgY-mK-uEk">
             <objects>
                 <viewController storyboardIdentifier="ConnectServerViewController" id="clK-Fu-Ez0" customClass="ConnectServerViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HFb-22-bea">
+                    <view key="view" contentMode="scaleToFill" id="HFb-22-bea" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1169,7 +1169,7 @@ to mention you in messages</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kCN-DM-NIV" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqn-Q1-9Rp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqn-Q1-9Rp" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1216,11 +1216,11 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cXi-ex-hQo"/>
+        <segue reference="ANZ-nn-OTA"/>
         <segue reference="uxe-wj-78g"/>
         <segue reference="pMy-PV-X3C"/>
         <segue reference="iQF-0t-Wye"/>
-        <segue reference="yUJ-js-l73"/>
-        <segue reference="kz9-vv-nLs"/>
+        <segue reference="tMH-P7-q5C"/>
+        <segue reference="dnh-fI-fQN"/>
     </inferredMetricsTieBreakers>
 </document>

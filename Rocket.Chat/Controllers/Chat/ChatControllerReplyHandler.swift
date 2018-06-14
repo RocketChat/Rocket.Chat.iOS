@@ -12,7 +12,6 @@ import SlackTextViewController
 extension ChatViewController {
     func setupReplyView() {
         replyView = ReplyView.instantiateFromNib()
-        replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
         replyView.frame = textInputbar.addonContentView.bounds
         replyView.onClose = { [weak self] in
             self?.stopReplying()

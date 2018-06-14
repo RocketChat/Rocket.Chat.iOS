@@ -17,3 +17,14 @@ final class SubscriptionSectionView: UIView {
     }
 
 }
+
+// MARK: Themeable
+
+extension SubscriptionSectionView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.bodyText
+    }
+}
