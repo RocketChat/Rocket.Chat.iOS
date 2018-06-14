@@ -146,11 +146,11 @@
 		411498E51FC7B8D500D66542 /* AttachmentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E41FC7B8D500D66542 /* AttachmentSpec.swift */; };
 		4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE420B599D9007E7163 /* StatusTableViewController.swift */; };
 		4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE620B599E6007E7163 /* StatusViewModel.swift */; };
+		411D40C620D2668B001A1035 /* SubscriptionLastMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40C520D2668B001A1035 /* SubscriptionLastMessageSpec.swift */; };
 		411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */; };
 		411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */; };
 		411D40CD20D28150001A1035 /* ChannelInfoBasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411D40CB20D2814F001A1035 /* ChannelInfoBasicCell.xib */; };
 		411D40CE20D28150001A1035 /* ChannelInfoBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40CC20D2814F001A1035 /* ChannelInfoBasicCell.swift */; };
-		411D40C620D2668B001A1035 /* SubscriptionLastMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40C520D2668B001A1035 /* SubscriptionLastMessageSpec.swift */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
@@ -893,11 +893,11 @@
 		411498E41FC7B8D500D66542 /* AttachmentSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentSpec.swift; sourceTree = "<group>"; };
 		4116CBE420B599D9007E7163 /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
 		4116CBE620B599E6007E7163 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
+		411D40C520D2668B001A1035 /* SubscriptionLastMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLastMessageSpec.swift; sourceTree = "<group>"; };
 		411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelInfoDescriptionCell.xib; sourceTree = "<group>"; };
 		411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoDescriptionCell.swift; sourceTree = "<group>"; };
 		411D40CB20D2814F001A1035 /* ChannelInfoBasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelInfoBasicCell.xib; sourceTree = "<group>"; };
 		411D40CC20D2814F001A1035 /* ChannelInfoBasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoBasicCell.swift; sourceTree = "<group>"; };
-		411D40C520D2668B001A1035 /* SubscriptionLastMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLastMessageSpec.swift; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManager.swift; sourceTree = "<group>"; };
 		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
