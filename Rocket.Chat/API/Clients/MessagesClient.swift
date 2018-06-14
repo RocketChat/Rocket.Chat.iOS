@@ -55,15 +55,8 @@ struct MessagesClient: APIClient {
             case .resource(let resource):
                 guard let message = resource.raw?["message"] else { return }
                 updateMessage(json: message)
-            case .error(let error):
-                switch error {
-                case .version:
-                    SubscriptionManager.sendTextMessage(message, completion: { response in
-                        updateMessage(json: response.result["result"])
-                    })
-                default:
-                    setMessageOffline()
-                }
+            case .error(_):
+                setMessageOffline()
             }
 
         }
@@ -209,20 +202,7 @@ struct MessagesClient: APIClient {
             realm?.add(message, update: true)
         }
 
-        api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
-            switch response {
-            case .resource: break
-            case .error(let error):
-                switch error {
-                case .version:
-                    // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in })
-                default:
-                    Alert.defaultError.present()
-                }
-            }
-        }
-
+        api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { _ in }
         return true
     }
 }

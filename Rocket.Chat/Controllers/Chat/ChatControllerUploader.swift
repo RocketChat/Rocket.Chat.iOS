@@ -209,31 +209,14 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
-                       completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
-
-        func deprecatedMethod() {
-            UploadManager.shared.upload(file: file, fileName: fileName, subscription: subscription, progress: { _ in
-                // We currently don't have progress being called.
-            }, completion: { [unowned self] (response, error) in
-                self.stopLoadingUpload()
-
-                if error {
-                    var errorMessage = localized("error.socket.default_error.message")
-
-                    if let response = response {
-                        if let message = response.result["error"]["message"].string {
-                            errorMessage = message
-                        }
-                    }
-
-                    Alert(
-                        title: localized("error.socket.default_error.title"),
-                        message: errorMessage
-                    ).present()
-                }
-            })
-        }
+        client?.uploadMessage(
+            roomId: subscription.rid,
+            data: file.data,
+            filename: fileName,
+            mimetype: file.type,
+            description: description ?? "",
+            completion: stopLoadingUpload
+        )
     }
 
     func uploadDialog(_ file: FileUpload) {

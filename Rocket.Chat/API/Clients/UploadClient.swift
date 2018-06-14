@@ -14,7 +14,7 @@ struct UploadClient: APIClient {
         self.api = api
     }
 
-    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil) {
         let req = UploadMessageRequest(
             roomId: roomId,
             data: data,
@@ -30,15 +30,10 @@ struct UploadClient: APIClient {
                     Alert(key: "alert.upload_error").withMessage(error).present()
                 }
                 completion?()
-            case .error(let error):
-                if case .version = error {
-                    versionFallback?()
-                } else {
-                    Alert(key: "alert.upload_error").present()
-                    completion?()
-                }
+            case .error(_):
+                Alert(key: "alert.upload_error").present()
+                completion?()
             }
-
         }
     }
 
