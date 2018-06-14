@@ -12,8 +12,6 @@ import XCTest
 
 class SubscriptionLastMessageSpec: XCTestCase {
 
-    let defaultIdentifier = "message-identifier"
-
     override func setUp() {
         super.setUp()
         AppManager.resetLanguage()
@@ -21,7 +19,6 @@ class SubscriptionLastMessageSpec: XCTestCase {
 
     func testEmptyUserMessage() {
         let message = Message()
-        message.identifier = defaultIdentifier
         message.text = "foo"
 
         let lastMessage = Subscription.lastMessageText(lastMessage: message)
@@ -33,7 +30,7 @@ class SubscriptionLastMessageSpec: XCTestCase {
         user.username = "user_username"
 
         let message = Message()
-        message.identifier = defaultIdentifier
+        message.identifier = String.random(20)
         message.text = "**foo** *bar* [testing link](https://foo.bar)"
         message.user = user
 

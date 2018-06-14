@@ -238,6 +238,36 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.roomBroadcast, false)
     }
 
+    func testMapRoomLastMessage() {
+        let messageDateInterval = Double(1480377601)
+        let messageIdentifier = "NX5dO115rrYbnUBrxA"
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "lastMessage": [
+                "u": [
+                    "name": "Rafael Kellermann Streit",
+                    "username": "rafaelks.test.2",
+                    "_id": "8WmDXhgXSyKeGrF5L"
+                ],
+                "_id": messageIdentifier,
+                "msg": "Testing.",
+                "ts": [ "$date": messageDateInterval ]
+            ]
+        ])
+
+        let subscription = Subscription()
+
+        Realm.executeOnMainThread { (realm) in
+            subscription.mapRoom(object, realm: realm)
+        }
+
+        XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
+        XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
+        XCTAssertEqual(subscription.roomLastMessage?.identifier, messageIdentifier)
+    }
+
     func testSubscriptionDisplayNameHonorFullnameSettings() {
         let settings = AuthSettings()
         settings.useUserRealName = false
