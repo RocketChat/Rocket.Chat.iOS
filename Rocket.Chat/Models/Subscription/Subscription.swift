@@ -50,6 +50,7 @@ final class Subscription: BaseModel {
     @objc dynamic var roomReadOnly = false
     @objc dynamic var roomUpdatedAt: Date?
     @objc dynamic var roomLastMessage: Message?
+    @objc dynamic var roomLastMessageText: String?
     @objc dynamic var roomLastMessageDate: Date?
     @objc dynamic var roomBroadcast = false
 

@@ -473,6 +473,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     // MARK: IBAction
 
     @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+        serversView?.close()
+
         if let sortingView = self.sortingView {
             sortingView.close()
         } else {
@@ -483,6 +485,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     @objc func openServersList() {
+        sortingView?.close()
+
         if let serversView = self.serversView {
             titleView?.updateTitleImage(reverse: false)
             serversView.close()
