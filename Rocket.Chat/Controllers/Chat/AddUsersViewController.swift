@@ -88,45 +88,9 @@ class AddUsersViewController: UIViewController {
         title = data.title
     }
 
-    func setupSearchBar() {
-        if #available(iOS 11.0, *) {
-            let searchController = UISearchController(searchResultsController: nil)
-            searchController.dimsBackgroundDuringPresentation = false
-            searchController.hidesNavigationBarDuringPresentation = false
-
-            navigationController?.navigationBar.prefersLargeTitles = false
-
-            navigationItem.largeTitleDisplayMode = .never
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = false
-
-            searchBar = searchController.searchBar
-        } else {
-            if let headerView = tableView.tableHeaderView {
-                var frame = headerView.frame
-                frame.size.height = 88
-                headerView.frame = frame
-
-                let searchBar = UISearchBar(frame: CGRect(
-                    x: 0,
-                    y: 44,
-                    width: frame.width,
-                    height: 44
-                ))
-
-                self.searchBar = searchBar
-
-                headerView.addSubview(searchBar)
-
-                tableView.tableHeaderView = headerView
-            }
-        }
-
-        searchBar?.placeholder = localized("subscriptions.search")
-        searchBar?.delegate = self
-    }
-
     func refreshUsers(searchText: String = "") {
+        searchBar?.textField?.startIndicatingActivity()
+
         let data = AddUsersViewData()
         data.searchText = searchText
         data.subscription = self.data.subscription
@@ -136,6 +100,8 @@ class AddUsersViewController: UIViewController {
             UIView.performWithoutAnimation {
                 self?.tableView?.reloadData()
             }
+
+            self?.searchBar?.textField?.stopIndicatingActivity()
         }
     }
 
@@ -256,7 +222,49 @@ extension AddUsersViewController: UITableViewDataSource {
     }
 }
 
-// MARK: UISearchBar
+// MARK: SearchBar
+
+extension AddUsersViewController {
+    func setupSearchBar() {
+        if #available(iOS 11.0, *) {
+            let searchController = UISearchController(searchResultsController: nil)
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.hidesNavigationBarDuringPresentation = false
+
+            navigationController?.navigationBar.prefersLargeTitles = false
+
+            navigationItem.largeTitleDisplayMode = .never
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+
+            searchBar = searchController.searchBar
+        } else {
+            if let headerView = tableView.tableHeaderView {
+                var frame = headerView.frame
+                frame.size.height = 88
+                headerView.frame = frame
+
+                let searchBar = UISearchBar(frame: CGRect(
+                    x: 0,
+                    y: 44,
+                    width: frame.width,
+                    height: 44
+                ))
+
+                self.searchBar = searchBar
+
+                headerView.addSubview(searchBar)
+
+                tableView.tableHeaderView = headerView
+            }
+        }
+
+        searchBar?.placeholder = localized("subscriptions.search")
+        searchBar?.delegate = self
+    }
+}
+
+// MARK: UISearchBarDelegate
 
 extension AddUsersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
