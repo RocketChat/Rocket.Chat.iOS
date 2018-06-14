@@ -173,3 +173,13 @@ extension RCTextView: UITextViewDelegate {
     }
 
 }
+
+// MARK: Themeable
+
+extension RCTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        customEmojiViews.forEach { $0.backgroundColor = theme.backgroundColor }
+    }
+}

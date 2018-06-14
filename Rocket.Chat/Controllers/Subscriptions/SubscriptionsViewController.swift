@@ -17,6 +17,7 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filterSeperator: UIView!
     @IBOutlet weak var labelSortingTitleDescription: UILabel! {
         didSet {
             updateSortingTitleDescription()
@@ -64,14 +65,20 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         setupSearchBar()
         setupTitleView()
         updateBackButton()
-
+    
         subscribeModelChanges()
         updateData()
+
+        super.viewDidLoad()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        serversView?.frame = frameForDropDownOverlay
+        sortingView?.frame = frameForDropDownOverlay
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -275,6 +282,7 @@ final class SubscriptionsViewController: BaseViewController {
         self.searchController = searchController
         self.searchBar?.placeholder = localized("subscriptions.search")
         self.searchBar?.delegate = self
+        self.searchBar?.applyTheme()
     }
 
     func setupTitleView() {
@@ -298,6 +306,11 @@ final class SubscriptionsViewController: BaseViewController {
 }
 
 extension SubscriptionsViewController: UISearchBarDelegate {
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        serversView?.close()
+        sortingView?.close()
+    }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "\n" {
@@ -460,15 +473,20 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     // MARK: IBAction
 
     @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+        serversView?.close()
+
         if let sortingView = self.sortingView {
             sortingView.close()
         } else {
             sortingView = SubscriptionsSortingView.showIn(self.view)
             sortingView?.delegate = self
+            sortingView?.applyTheme()
         }
     }
 
     @objc func openServersList() {
+        sortingView?.close()
+
         if let serversView = self.serversView {
             titleView?.updateTitleImage(reverse: false)
             serversView.close()
@@ -489,6 +507,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
                 self.present(nav, animated: true, completion: nil)
             }
             serversView?.delegate = self
+            serversView?.applyTheme()
         }
     }
 
@@ -679,5 +698,24 @@ extension SubscriptionsViewController: SocketConnectionHandler {
 extension SubscriptionsViewController: ServerListViewDelegate {
     func serverListViewDidClose() {
         titleView?.updateTitleImage(reverse: false)
+    }
+}
+
+// MARK: Themeable
+
+extension SubscriptionsViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+        filterSeperator?.backgroundColor = theme.mutedAccent
+        labelSortingTitleDescription?.textColor = theme.auxiliaryText
+        navigationController?.view.backgroundColor = view.theme?.backgroundColor
+        searchBar?.applyTheme()
+
+        if serversView != nil {
+            titleView?.updateTitleImage(reverse: true)
+        } else {
+            titleView?.updateTitleImage(reverse: false)
+        }
     }
 }

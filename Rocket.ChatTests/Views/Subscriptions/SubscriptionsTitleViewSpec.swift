@@ -17,21 +17,6 @@ class SubscriptionsTitleViewSpec: XCTestCase {
         XCTAssertNotNil(SubscriptionsTitleView.instantiateFromNib(), "instantiation from nib will work")
     }
 
-    func testInitialStateFromWebSocket() {
-        SocketManager.sharedInstance.state = .waitingForNetwork
-
-        guard let instance = SubscriptionsTitleView.instantiateFromNib() else {
-            return XCTFail("instantion from nib should've worked")
-        }
-
-        instance.updateConnectionState()
-
-        XCTAssertEqual(instance.state, .waitingForNetwork)
-        XCTAssertFalse(instance.viewLoading.isHidden)
-        XCTAssertTrue(instance.labelMessages.isHidden)
-        XCTAssertFalse(instance.buttonServer.isHidden)
-    }
-
     func testStateConnectedLabelsVisibility() {
         guard let instance = SubscriptionsTitleView.instantiateFromNib() else {
             return XCTFail("instantion from nib should've worked")

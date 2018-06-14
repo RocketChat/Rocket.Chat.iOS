@@ -10,11 +10,21 @@ import Foundation
 
 extension Subscription {
 
-    func lastMessageText() -> String {
-        guard
-            let lastMessage = roomLastMessage,
-            let userLastMessage = lastMessage.user
-        else {
+    /**
+     This method returns the last message text for the Subscription. It should
+     never be called directly on the interface.
+
+     It will remove all the markdown tags, the initial breaking lines and will
+     add some strings based on the context of the message.
+
+     Examples:
+     1. When the message is just an attachment: it'll return "Sent an attachment".
+     2. When is a text message from other user, it'll return (username): message.
+
+     - returns: the last message text for the Message object, after being processed.
+     */
+    static func lastMessageText(lastMessage: Message) -> String {
+        guard let userLastMessage = lastMessage.user else {
             return localized("subscriptions.list.no_message")
         }
 

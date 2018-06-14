@@ -352,6 +352,14 @@
 "user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
 
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
+
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
 "subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO

@@ -29,11 +29,16 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
 
             let attributedString = NSAttributedString(string: data?.descriptionText ?? "")
             labelSubtitle.attributedText = MarkdownManager.shared.transformAttributedString(attributedString)
-            labelSubtitle.textColor = .RCGray()
         }
     }
+}
 
-    @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelSubtitle: UILabel!
+// MARK: Themeable
 
+extension ChannelInfoDescriptionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelSubtitle.textColor = theme.auxiliaryText
+    }
 }

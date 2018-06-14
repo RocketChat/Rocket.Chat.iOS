@@ -26,3 +26,11 @@ final class SubscriptionSearchMoreView: UIView {
         delegate?.buttonLoadMoreDidPressed()
     }
 }
+
+extension SubscriptionSearchMoreView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonLoadMore.setTitleColor(theme.auxiliaryText, for: .normal)
+    }
+}

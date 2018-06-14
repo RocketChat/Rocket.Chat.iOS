@@ -298,8 +298,8 @@
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do servidor: %@";
 "myaccount.settings.web_browser" = "Navegador";
-"myaccount.settings.tracking.title" = "Relatórios de erro";
-"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erros contém apenas informações relevantes relacionadas aos erros ocorridos para nos ajudar a corrigi-los.";
+"myaccount.settings.tracking.title" = "Relatórios de falhas";
+"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de falhas contém apenas informações relevantes relacionadas as falhas ocorridos para nos ajudar a corrigi-las.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
@@ -352,6 +352,14 @@
 "user_action_sheet.remove" = "Remover do canal";
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
+
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Ordenando por nome";

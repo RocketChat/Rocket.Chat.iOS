@@ -45,3 +45,11 @@ class ChannelInfoActionCell: UITableViewCell, ChannelInfoCellProtocol {
     @IBOutlet weak var imageViewIcon: UIImageView!
 
 }
+
+extension ChannelInfoActionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imageViewIcon.tintColor = theme.titleText
+    }
+}

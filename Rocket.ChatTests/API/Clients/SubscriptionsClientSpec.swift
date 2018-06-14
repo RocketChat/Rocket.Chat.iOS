@@ -12,6 +12,16 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
+
+    override func setUp() {
+        super.setUp()
+
+        let realm = testRealm()
+        try? realm.write {
+            realm.deleteAll()
+        }
+    }
+
     func testFetchSubscriptionsList() {
         let realm = testRealm()
         let api = MockAPI()
@@ -246,19 +256,24 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         client.fetchRoles(subscription: subscription, realm: realm)
 
         let expectation = XCTestExpectation(description: "subscription has correct roles for user")
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             guard
                 let subscription = realm.objects(Subscription.self).first,
                 let user = User.find(username: "test-user-username", realm: realm),
                 let user2 = User.find(username: "test-user2-username", realm: realm)
             else {
+                XCTFail("no results were found")
                 return
             }
 
             if user.rolesInSubscription(subscription).count == 2, user2.rolesInSubscription(subscription).count == 1 {
                 expectation.fulfill()
+            } else {
+                XCTFail("no results were found")
             }
         })
+
         wait(for: [expectation], timeout: 3)
     }
 }

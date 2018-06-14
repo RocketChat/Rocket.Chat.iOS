@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class StatusTableViewController: UITableViewController {
+final class StatusTableViewController: BaseTableViewController {
 
     let viewModel = StatusViewModel()
 

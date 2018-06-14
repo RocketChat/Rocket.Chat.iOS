@@ -31,6 +31,7 @@ final class SubscriptionsSortingView: UIView {
         }
     }
 
+    @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView! {
@@ -141,22 +142,12 @@ extension SubscriptionsSortingView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
-            let viewHeight = viewModel.listSeparatorHeight
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: viewHeight))
-            view.backgroundColor = .white
-
-            let horizontalSpacing = 16.0
-            let separator = UIView(frame: CGRect(
-                x: horizontalSpacing,
-                y: Double(viewHeight) / 2,
-                width: Double(tableView.bounds.width) - horizontalSpacing * 2,
-                height: 0.5
-            ))
-
-            separator.backgroundColor = .RCLightGray()
-            view.addSubview(separator)
-
-            return view
+            return SubscriptionsSortingSeparatorView(frame: CGRect(
+                x: 0,
+                y: 0,
+                width: tableView.bounds.width,
+                height: viewModel.listSeparatorHeight)
+            )
         }
 
         return UIView()
@@ -198,4 +189,17 @@ extension SubscriptionsSortingView: UITableViewDelegate {
         delegate?.userDidChangeSortingOptions()
     }
 
+}
+
+// MARK: Themeable
+
+extension SubscriptionsSortingView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.auxiliaryText
+        buttonClose.tintColor = theme.auxiliaryText
+        separatorView.backgroundColor = theme.mutedAccent
+    }
 }

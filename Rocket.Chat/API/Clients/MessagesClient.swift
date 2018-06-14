@@ -40,7 +40,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
