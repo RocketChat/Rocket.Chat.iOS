@@ -299,6 +299,11 @@ final class SubscriptionsViewController: BaseViewController {
 
 extension SubscriptionsViewController: UISearchBarDelegate {
 
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        serversView?.close()
+        sortingView?.close()
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "\n" {
             if searchText.count > 0 {
