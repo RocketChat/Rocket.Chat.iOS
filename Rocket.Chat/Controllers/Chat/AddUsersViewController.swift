@@ -193,7 +193,14 @@ extension AddUsersViewController: UITableViewDelegate {
 
         let message = String(format: localized("chat.add_users.confirm.message"), username, roomName)
 
-        alertYesNo(
+        let controller: UIViewController
+        if let presentedViewController = presentedViewController {
+            controller = presentedViewController
+        } else {
+            controller = self
+        }
+
+        controller.alertYesNo(
             title: localized("chat.add_users.confirm.title"),
             message: message,
             handler: { yes in
@@ -253,6 +260,10 @@ extension AddUsersViewController: UITableViewDataSource {
 
 extension AddUsersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        debouncedRefreshUsers()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         debouncedRefreshUsers()
     }
 }
