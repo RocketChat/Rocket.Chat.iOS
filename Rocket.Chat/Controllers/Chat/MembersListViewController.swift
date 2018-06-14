@@ -115,6 +115,7 @@ class MembersListViewController: BaseViewController {
 // MARK: ViewController
 extension MembersListViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
 
@@ -147,8 +148,8 @@ extension MembersListViewController {
         loadMoreMembers()
 
         guard let refreshControl = membersTableView.refreshControl else { return }
-        membersTableView.refreshControl?.beginRefreshing()
         membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        membersTableView.refreshControl?.beginRefreshing()
     }
 }
 

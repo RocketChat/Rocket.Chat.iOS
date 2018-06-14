@@ -353,6 +353,14 @@
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
 
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
+
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Ordenando por nome";
 "subscriptions.sorting.title.activity" = "Ordenando por atividade";

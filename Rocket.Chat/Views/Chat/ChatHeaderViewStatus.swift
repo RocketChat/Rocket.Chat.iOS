@@ -43,3 +43,20 @@ final class ChatHeaderViewStatus: UIView {
     }
 
 }
+
+// MARK: Themeable
+
+extension ChatHeaderViewStatus {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        switch theme {
+        case .light:
+            backgroundColor = .RCLightGray()
+            setTextColor(.RCDarkBlue())
+        default:
+            backgroundColor = UIColor.RCDarkGray()
+            setTextColor(theme.bodyText)
+        }
+    }
+}

@@ -181,7 +181,6 @@ class MessagesListViewData {
             }
 
             if !self.isSearchingMessages { self.currentPage += 1 }
-
             self.isLoadingMoreMessages = false
             completion?()
         }
@@ -282,8 +281,8 @@ extension MessagesListViewController {
         }
 
         guard let refreshControl = collectionView.refreshControl, !data.isSearchingMessages else { return }
-        collectionView.refreshControl?.beginRefreshing()
         collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        collectionView.refreshControl?.beginRefreshing()
     }
 
     func registerCells() {
@@ -310,6 +309,7 @@ extension MessagesListViewController {
 
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.titleView = searchBar
+        searchBar.applyTheme()
     }
 
     @objc func close() {

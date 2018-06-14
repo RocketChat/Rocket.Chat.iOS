@@ -17,6 +17,7 @@ final class ServersListView: UIView {
     private let viewModel = ServersListViewModel()
     weak var delegate: ServerListViewDelegate?
 
+    @IBOutlet weak var titleSeperator: UIView!
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = viewModel.title
@@ -197,4 +198,16 @@ extension ServersListView: UITableViewDelegate {
         selectServer(at: indexPath)
     }
 
+}
+
+// MARK: Themeable
+
+extension ServersListView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonAddNewServer.setTitleColor(theme.tintColor, for: .normal)
+        labelTitle.textColor = theme.auxiliaryText
+        titleSeperator.backgroundColor = theme.mutedAccent
+    }
 }

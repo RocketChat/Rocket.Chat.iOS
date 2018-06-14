@@ -23,6 +23,7 @@ final class PreferencesViewModel {
     internal let language = localized("myaccount.settings.language")
     internal let appicon = localized("myaccount.settings.appicon")
     internal let webBrowser = localized("myaccount.settings.web_browser")
+    internal let theme = localized("theme.settings.title")
 
     internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
@@ -133,7 +134,7 @@ final class PreferencesViewModel {
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return canChangeAppIcon ? 4 : 3
+        case 1: return numberOfRowsInSectionOne()
         case 2: return canViewAdministrationPanel ? 1 : 0
         case 3: return 3
         case 4: return 1
@@ -141,6 +142,18 @@ final class PreferencesViewModel {
         case 6: return canOpenFLEX ? 1 : 0
         default: return 0
         }
+    }
+
+    private func numberOfRowsInSectionOne() -> Int {
+        var totalCount = 5
+        if #available(iOS 11, *) {
+            // Do nothing
+        } else {
+            totalCount -= 1
+        }
+
+        totalCount -= canChangeAppIcon ? 0 : 1
+        return totalCount
     }
 
     // MARK: Helpers

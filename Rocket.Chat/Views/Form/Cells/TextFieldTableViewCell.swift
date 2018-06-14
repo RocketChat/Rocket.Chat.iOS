@@ -34,3 +34,13 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
     }
 
 }
+
+// MARK: Themeable
+
+extension TextFieldTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imgLeftIcon.tintColor = theme.titleText
+    }
+}

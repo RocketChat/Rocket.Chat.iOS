@@ -19,7 +19,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHT-nZ-nga" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="15" y="15" width="25" height="25"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="tK2-vW-gE9"/>
                             <constraint firstAttribute="width" constant="25" id="xep-ph-JqQ"/>

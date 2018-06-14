@@ -14,7 +14,7 @@ import SafariServices
 import FLEX
 #endif
 
-final class PreferencesViewController: UITableViewController {
+final class PreferencesViewController: BaseTableViewController {
 
     private let kSectionProfile = 0
     private let kSectionSettings = 1
@@ -98,6 +98,12 @@ final class PreferencesViewController: UITableViewController {
     @IBOutlet weak var labelWebBrowser: UILabel! {
         didSet {
             labelWebBrowser.text = viewModel.webBrowser
+        }
+    }
+
+    @IBOutlet weak var labelTheme: UILabel! {
+        didSet {
+            labelTheme.text = viewModel.theme
         }
     }
 

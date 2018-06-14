@@ -127,18 +127,10 @@ final class ChatViewController: SLKTextViewController {
         registerCells()
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .RCNavigationBarColor()
-        navigationController?.navigationBar.tintColor = .RCBlue()
 
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
@@ -181,11 +173,14 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        ThemeManager.addObserver(navigationController?.navigationBar)
+        textInputbar.applyTheme()
     }
 
     override func viewWillLayoutSubviews() {
@@ -228,12 +223,14 @@ final class ChatViewController: SLKTextViewController {
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
+        chatTitleView?.applyTheme()
     }
 
     private func setupScrollToBottomButton() {
         buttonScrollToBottom.layer.cornerRadius = 25
-        buttonScrollToBottom.layer.borderColor = UIColor.lightGray.cgColor
         buttonScrollToBottom.layer.borderWidth = 1
+        buttonScrollToBottom.layer.borderColor = (view.theme?.bodyText ?? Theme.light.bodyText).cgColor
+        buttonScrollToBottom.tintColor = view.theme?.bodyText ?? Theme.light.bodyText
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -278,7 +275,6 @@ final class ChatViewController: SLKTextViewController {
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
         collectionView?.setContentOffset(offset, animated: animated)
-        scrollToBottomButtonIsVisible = false
     }
 
     internal func resetScrollToBottomButtonPosition() {
@@ -343,34 +339,17 @@ final class ChatViewController: SLKTextViewController {
             if !textInputbar.subviews.contains(textInputbarBackground) {
                 insertTextInputbarBackground()
             }
-
-            // Making the old background for textInputView, transparent
-            // after the safeAreaInsets are set. (Initially zero)
-            // This helps improve the translucency effect of the bar.
-            if !oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
-                textInputbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-                textInputbar.backgroundColor = UIColor.clear
-                oldTextInputbarBgIsTransparent = true
-            }
-
-            if let textInputbarHC = textInputbarBackgroundHeightConstraint, textInputbarHC.constant != view.safeAreaInsets.bottom {
-                textInputbarHC.constant = view.safeAreaInsets.bottom
-            }
         }
     }
 
     private func insertTextInputbarBackground() {
-        if #available(iOS 11.0, *) {
-            textInputbar.insertSubview(textInputbarBackground, at: 0)
-            textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
+        textInputbar.insertSubview(textInputbarBackground, at: 0)
+        textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
 
-            textInputbarBackgroundHeightConstraint = textInputbarBackground.heightAnchor.constraint(equalTo: textInputbar.heightAnchor, multiplier: 1, constant: view.safeAreaInsets.bottom)
-            textInputbarBackgroundHeightConstraint?.isActive = true
-
-            textInputbarBackground.widthAnchor.constraint(equalTo: textInputbar.widthAnchor).isActive = true
-            textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
-            textInputbarBackground.centerXAnchor.constraint(equalTo: textInputbar.centerXAnchor).isActive = true
-        }
+        textInputbarBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        textInputbarBackground.widthAnchor.constraint(equalTo: textInputbar.widthAnchor).isActive = true
+        textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
+        textInputbarBackground.centerXAnchor.constraint(equalTo: textInputbar.centerXAnchor).isActive = true
     }
 
     // MARK: SlackTextViewController
@@ -872,6 +851,8 @@ final class ChatViewController: SLKTextViewController {
 
             chatPreviewModeView = previewView
             updateChatPreviewModeViewConstraints()
+
+            previewView.applyTheme()
         }
     }
 
@@ -1178,7 +1159,7 @@ extension ChatViewController {
 
     private func blockMessageSending(reason: String) {
         textInputbar.textView.placeholder = reason
-        textInputbar.backgroundColor = .white
+        textInputbar.backgroundColor = view.theme?.backgroundColor ?? .white
         textInputbar.isUserInteractionEnabled = false
         leftButton.isEnabled = false
         rightButton.isEnabled = false
@@ -1186,7 +1167,7 @@ extension ChatViewController {
 
     private func allowMessageSending() {
         textInputbar.textView.placeholder = ""
-        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.backgroundColor = view.theme?.focusedBackground ?? .backgroundWhite
         textInputbar.isUserInteractionEnabled = true
         leftButton.isEnabled = true
         rightButton.isEnabled = true
@@ -1232,4 +1213,14 @@ extension ChatViewController: SocketConnectionHandler {
         chatTitleView?.state = state
     }
 
+}
+
+// MARK: Themeable
+
+extension ChatViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        updateMessageSendingPermission()
+        setupScrollToBottomButton()
+    }
 }

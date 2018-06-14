@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebBrowserTableViewController: UITableViewController {
+class WebBrowserTableViewController: BaseTableViewController {
 
     let viewModel = WebBrowserViewModel()
     var updateDefaultWebBrowser: (() -> Void)?

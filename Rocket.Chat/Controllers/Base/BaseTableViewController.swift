@@ -12,6 +12,8 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ThemeManager.addObserver(self)
+
         self.navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "",
             style: .plain,

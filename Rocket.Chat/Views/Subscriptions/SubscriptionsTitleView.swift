@@ -48,7 +48,7 @@ final class SubscriptionsTitleView: UIView {
     }
 
     func updateTitleImage(reverse: Bool = false) {
-        if let image = UIImage(named: "Server Selector")?.imageWithTint(.RCBlue()) {
+        if let image = UIImage(named: "Server Selector")?.imageWithTint(theme?.tintColor ?? .RCBlue()) {
             if reverse, let cgImage = image.cgImage {
                 let rotatedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .downMirrored)
                 buttonServer.setImage(rotatedImage, for: .normal)
@@ -84,4 +84,15 @@ final class SubscriptionsTitleView: UIView {
         return UILayoutFittingCompressedSize
     }
 
+}
+
+// MARK: Themeable
+
+extension SubscriptionsTitleView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonServer.setTitleColor(theme.tintColor, for: .normal)
+        buttonServer.tintColor = theme.tintColor
+    }
 }
