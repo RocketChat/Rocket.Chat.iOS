@@ -27,7 +27,9 @@ class SubscriptionLastMessageSpec: XCTestCase {
 
     func testMarkdownMessageRemoval() {
         let user = User()
+        user.identifier = "user_identifier"
         user.username = "user_username"
+        user.name = "user_name"
 
         let message = Message()
         message.identifier = String.random(20)

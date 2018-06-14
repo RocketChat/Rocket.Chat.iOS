@@ -268,6 +268,60 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(subscription.roomLastMessage?.identifier, messageIdentifier)
     }
 
+    func testMapRoomLastMessageWontUpdate() {
+        let messageDateInterval = Double(1480377601)
+        let messageIdentifier = "NX5dO115rrYbnUBrxA"
+        let subscription = Subscription()
+
+        let object1 = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "lastMessage": [
+                "u": [
+                    "name": "Rafael Kellermann Streit",
+                    "username": "rafaelks.test.2",
+                    "_id": "8WmDXhgXSyKeGrF5L"
+                ],
+                "_id": messageIdentifier,
+                "msg": "Testing.",
+                "ts": [ "$date": messageDateInterval ]
+            ]
+        ])
+
+        Realm.executeOnMainThread { (realm) in
+            subscription.mapRoom(object1, realm: realm)
+        }
+
+        XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
+        XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
+        XCTAssertEqual(subscription.roomLastMessage?.identifier, messageIdentifier)
+
+        let object2 = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "lastMessage": [
+                "u": [
+                    "name": "Rafael Kellermann Streit",
+                    "username": "rafaelks.test.2",
+                    "_id": "8WmDXhgXSyKeGrF5L"
+                ],
+                "_id": messageIdentifier,
+                "msg": "Testing message update, without changing date.",
+                "ts": [ "$date": messageDateInterval ]
+            ]
+        ])
+
+        Realm.executeOnMainThread { (realm) in
+            subscription.mapRoom(object2, realm: realm)
+        }
+
+        XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
+        XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
+        XCTAssertEqual(subscription.roomLastMessage?.identifier, messageIdentifier)
+    }
+
     func testSubscriptionDisplayNameHonorFullnameSettings() {
         let settings = AuthSettings()
         settings.useUserRealName = false
