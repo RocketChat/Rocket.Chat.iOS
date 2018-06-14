@@ -34,6 +34,19 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.sha256() == hash, "String SHA-256 cryptographic is correct")
     }
 
+    // MARK: Removing Last Slash (when needed)
+
+    func testRemovingLastSlashURLPresent() {
+        XCTAssertEqual("http://foo.bar/".removingLastSlashIfNeeded(), "http://foo.bar")
+        XCTAssertEqual("http://foo.bar/foo/bar/".removingLastSlashIfNeeded(), "http://foo.bar/foo/bar")
+        XCTAssertEqual("http://foo.bar/foo/bar/?12345".removingLastSlashIfNeeded(), "http://foo.bar/foo/bar/?12345")
+    }
+
+    func testRemovingLastSlashURLNotPresent() {
+        XCTAssertEqual("foo".removingLastSlashIfNeeded(), "foo")
+        XCTAssertEqual("http://foo.bar".removingLastSlashIfNeeded(), "http://foo.bar")
+    }
+
     // MARK: Range
 
     func testRangesOf() {

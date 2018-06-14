@@ -24,6 +24,15 @@ final class ChatTitleView: UIView {
         }
     }
 
+    var state: SocketConnectionState = SocketManager.sharedInstance.state {
+        didSet {
+            updateConnectionState()
+        }
+    }
+
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var labelLoading: UILabel!
+
     override var intrinsicContentSize: CGSize {
         return UILayoutFittingExpandedSize
     }
@@ -38,6 +47,26 @@ final class ChatTitleView: UIView {
 
             let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
             buttonTitle.setImage(image, for: .normal)
+
+            updateConnectionState()
+        }
+    }
+
+    internal func updateConnectionState() {
+        if state == .connecting || state == .waitingForNetwork {
+            viewLoading?.isHidden = false
+            buttonTitle?.isHidden = true
+
+            if state == .connecting {
+                labelLoading?.text = localized("connection.connecting.banner.message")
+            }
+
+            if state == .waitingForNetwork {
+                labelLoading?.text = localized("connection.waiting_for_network.banner.message")
+            }
+        } else {
+            buttonTitle?.isHidden = false
+            viewLoading?.isHidden = true
         }
     }
 

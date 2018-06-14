@@ -65,6 +65,100 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
 
 }
 
+// MARK: URL generation
+
+extension SubscriptionExtensionsSpec {
+
+    func testURLGenerationChannelSubscription() {
+        let authSettings = AuthSettings()
+        authSettings.siteURL = "https://foo.bar"
+
+        let auth = Auth()
+        auth.settings = authSettings
+
+        let subscription = Subscription()
+        subscription.auth = auth
+        subscription.name = "baz"
+        subscription.type = .channel
+
+        XCTAssertEqual(subscription.externalURL()?.absoluteString, "https://foo.bar/channel/baz")
+    }
+
+    func testURLGenerationGroupSubscription() {
+        let authSettings = AuthSettings()
+        authSettings.siteURL = "https://foo.bar"
+
+        let auth = Auth()
+        auth.settings = authSettings
+
+        let subscription = Subscription()
+        subscription.auth = auth
+        subscription.name = "baz"
+        subscription.type = .group
+
+        XCTAssertEqual(subscription.externalURL()?.absoluteString, "https://foo.bar/group/baz")
+    }
+
+    func testURLGenerationDirectMessageSubscription() {
+        let authSettings = AuthSettings()
+        authSettings.siteURL = "https://foo.bar"
+
+        let auth = Auth()
+        auth.settings = authSettings
+
+        let subscription = Subscription()
+        subscription.auth = auth
+        subscription.name = "baz"
+        subscription.type = .directMessage
+
+        XCTAssertEqual(subscription.externalURL()?.absoluteString, "https://foo.bar/direct/baz")
+    }
+
+    func testURLGenerationInvalidSiteURLSubscription() {
+        let authSettings = AuthSettings()
+
+        let auth = Auth()
+        auth.settings = authSettings
+
+        let subscription = Subscription()
+        subscription.auth = auth
+        subscription.name = "baz"
+
+        XCTAssertNil(subscription.externalURL())
+    }
+
+    func testURLGenerationInvalidSettingsSubscription() {
+        let auth = Auth()
+
+        let subscription = Subscription()
+        subscription.auth = auth
+        subscription.name = "baz"
+
+        XCTAssertNil(subscription.externalURL())
+    }
+
+    func testURLGenerationEmptyAuthSubscription() {
+        let subscription = Subscription()
+        subscription.name = "baz"
+
+        XCTAssertNil(subscription.externalURL())
+    }
+
+    func testURLGenerationEmptyNameSubscription() {
+        let authSettings = AuthSettings()
+        authSettings.siteURL = "https://foo.bar"
+
+        let auth = Auth()
+        auth.settings = authSettings
+
+        let subscription = Subscription()
+        subscription.auth = auth
+
+        XCTAssertNil(subscription.externalURL())
+    }
+
+}
+
 // MARK: Information Viewing Options
 
 extension SubscriptionExtensionsSpec {

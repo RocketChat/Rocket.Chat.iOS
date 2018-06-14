@@ -16,6 +16,15 @@ final class SubscriptionsTitleView: UIView {
 
     weak var delegate: SubscriptionsTitleViewDelegate?
 
+    var state: SocketConnectionState = SocketManager.sharedInstance.state {
+        didSet {
+            updateConnectionState()
+        }
+    }
+
+    @IBOutlet weak var viewLoading: UIStackView!
+    @IBOutlet weak var labelLoading: UILabel!
+
     @IBOutlet weak var labelMessages: UILabel! {
         didSet {
             labelMessages.text = localized("subscriptions.messages")
@@ -46,6 +55,24 @@ final class SubscriptionsTitleView: UIView {
             } else {
                 buttonServer.setImage(image, for: .normal)
             }
+        }
+    }
+
+    internal func updateConnectionState() {
+        if state == .connecting || state == .waitingForNetwork {
+            viewLoading?.isHidden = false
+            labelMessages?.isHidden = true
+
+            if state == .connecting {
+                labelLoading?.text = localized("connection.connecting.banner.message")
+            }
+
+            if state == .waitingForNetwork {
+                labelLoading?.text = localized("connection.waiting_for_network.banner.message")
+            }
+        } else {
+            labelMessages?.isHidden = false
+            viewLoading?.isHidden = true
         }
     }
 

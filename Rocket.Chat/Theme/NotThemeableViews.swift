@@ -12,6 +12,10 @@ class NotThemeableView: UIView {
     override var theme: Theme? { return nil }
 }
 
+class NotThemeableTableView: UITableView {
+    override var theme: Theme? { return nil }
+}
+
 class NotThemeableNavigationBar: UINavigationBar {
     override var theme: Theme? { return nil }
 }

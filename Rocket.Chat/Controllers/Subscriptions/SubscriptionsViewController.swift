@@ -59,10 +59,18 @@ final class SubscriptionsViewController: BaseViewController {
 
     let socketHandlerToken = String.random(5)
 
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        subscriptionsToken?.invalidate()
+    }
+
     override func viewDidLoad() {
         setupSearchBar()
         setupTitleView()
         updateBackButton()
+    
+        subscribeModelChanges()
+        updateData()
 
         super.viewDidLoad()
     }
@@ -76,11 +84,10 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // This method can stay here, since adding a new connection handler
+        // will override the existing one if there's already one. This is here
+        // to prevent that some connection issue removes all the connection handler.
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        subscribeModelChanges()
-        updateData()
-        tableView.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
@@ -280,14 +287,19 @@ final class SubscriptionsViewController: BaseViewController {
 
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            titleView.translatesAutoresizingMaskIntoConstraints = false
+            titleView.delegate = self
+            titleView.layoutIfNeeded()
+            titleView.sizeToFit()
+            updateServerInformation()
+
+            // This code can be removed when we drop iOS 10 support.
+            titleView.translatesAutoresizingMaskIntoConstraints = true
             navigationItem.titleView = titleView
             self.titleView = titleView
 
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
             titleView.addGestureRecognizer(tapGesture)
-
-            titleView.delegate = self
-            updateServerInformation()
         }
     }
 
@@ -472,6 +484,19 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(self.view, frame: frameForDropDownOverlay)
+            serversView?.presentAddServer = {
+                let connect = Storyboard.auth(
+                    serverUrl: "",
+                    credentials: nil
+                ).instantiate(
+                    viewController: String(describing: ConnectServerViewController.self)
+                ) ?? UIViewController()
+
+                let nav = BaseNavigationController(rootViewController: connect)
+                _ = nav.view
+
+                self.present(nav, animated: true, completion: nil)
+            }
             serversView?.delegate = self
             serversView?.applyTheme()
         }
@@ -654,16 +679,9 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
 extension SubscriptionsViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-
-    }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // Handle errors
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[SubscriptionsViewController] socketDidChangeState: \(state)")
+        titleView?.state = state
     }
 
 }

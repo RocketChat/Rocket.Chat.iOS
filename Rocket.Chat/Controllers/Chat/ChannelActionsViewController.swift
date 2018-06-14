@@ -39,7 +39,7 @@ class ChannelActionsViewController: BaseViewController {
                 shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: showMentionsList) : nil,
                 ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: shareRoom),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList)
             ]]
 
@@ -175,6 +175,12 @@ extension ChannelActionsViewController {
         )
 
         self.performSegue(withIdentifier: "toFilesList", sender: data)
+    }
+
+    func shareRoom() {
+        guard let url = subscription?.externalURL() else { return }
+        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

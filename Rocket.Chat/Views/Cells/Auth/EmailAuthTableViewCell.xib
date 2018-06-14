@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="164" id="QQ4-Xv-EVU" customClass="EmailAuthTableViewCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QQ4-Xv-EVU" id="chD-Di-DS9">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="163.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jz-DI-tKu" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="15" y="30" width="345" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="Cgo-1A-HDy"/>
+                        </constraints>
+                        <state key="normal" title="Login with e-mail"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iy-Zh-nCb" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="15" y="86" width="345" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="rv2-oM-2Tn"/>
+                        </constraints>
+                        <state key="normal" title="Create an account"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Bold"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="8iy-Zh-nCb" secondAttribute="bottom" constant="30" id="80s-Ux-VxC"/>
+                    <constraint firstItem="6Jz-DI-tKu" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" constant="15" id="J7Q-Kw-gjy"/>
+                    <constraint firstAttribute="trailing" secondItem="8iy-Zh-nCb" secondAttribute="trailing" constant="15" id="JBj-Qh-VgL"/>
+                    <constraint firstItem="8iy-Zh-nCb" firstAttribute="top" secondItem="6Jz-DI-tKu" secondAttribute="bottom" constant="8" id="RtN-7r-C1T"/>
+                    <constraint firstAttribute="trailing" secondItem="6Jz-DI-tKu" secondAttribute="trailing" constant="15" id="dye-95-zB1"/>
+                    <constraint firstItem="8iy-Zh-nCb" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" constant="15" id="qBJ-39-FV0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="loginButton" destination="6Jz-DI-tKu" id="bfU-qT-yTZ"/>
+                <outlet property="registerButton" destination="8iy-Zh-nCb" id="Pir-D3-yVg"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

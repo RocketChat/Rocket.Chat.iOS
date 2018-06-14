@@ -12,6 +12,10 @@ final class MainSplitViewController: UISplitViewController {
 
     let socketHandlerToken = String.random(5)
 
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
     static var chatViewController: ChatViewController? {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
@@ -33,10 +37,6 @@ final class MainSplitViewController: UISplitViewController {
         }
 
         return controller
-    }
-
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     override func awakeFromNib() {
@@ -75,16 +75,10 @@ extension MainSplitViewController: UISplitViewControllerDelegate {
 
 extension MainSplitViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
-
-    }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        SocketManager.reconnect()
-    }
-
-    func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // Handle errors
+    func socketDidChangeState(state: SocketConnectionState) {
+        if state == .waitingForNetwork || state == .disconnected {
+            SocketManager.reconnect()
+        }
     }
 
 }
