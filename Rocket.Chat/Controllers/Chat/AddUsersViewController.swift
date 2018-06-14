@@ -69,11 +69,7 @@ class AddUsersViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var searchBar: UISearchBar! {
-        didSet {
-            searchBar.delegate = self
-        }
-    }
+    var searchBar: UISearchBar?
 
     var loaderCell: LoaderTableViewCell!
     var data = AddUsersViewData()
@@ -81,22 +77,53 @@ class AddUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
-
-        tableView.refreshControl = refreshControl
-
         registerCells()
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
             self.loaderCell = cell
         }
 
+        setupSearchBar()
+
         title = data.title
     }
 
-    @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
-        refreshUsers()
+    func setupSearchBar() {
+        if #available(iOS 11.0, *) {
+            let searchController = UISearchController(searchResultsController: nil)
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.hidesNavigationBarDuringPresentation = false
+
+            navigationController?.navigationBar.prefersLargeTitles = false
+
+            navigationItem.largeTitleDisplayMode = .never
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+
+            searchBar = searchController.searchBar
+        } else {
+            if let headerView = tableView.tableHeaderView {
+                var frame = headerView.frame
+                frame.size.height = 88
+                headerView.frame = frame
+
+                let searchBar = UISearchBar(frame: CGRect(
+                    x: 0,
+                    y: 44,
+                    width: frame.width,
+                    height: 44
+                ))
+
+                self.searchBar = searchBar
+
+                headerView.addSubview(searchBar)
+
+                tableView.tableHeaderView = headerView
+            }
+        }
+
+        searchBar?.placeholder = localized("subscriptions.search")
+        searchBar?.delegate = self
     }
 
     func refreshUsers(searchText: String = "") {
@@ -105,10 +132,6 @@ class AddUsersViewController: UIViewController {
         data.subscription = self.data.subscription
         data.loadMoreUsers { [weak self] in
             self?.data = data
-
-            if self?.tableView?.refreshControl?.isRefreshing ?? false {
-                self?.tableView?.refreshControl?.endRefreshing()
-            }
 
             UIView.performWithoutAnimation {
                 self?.tableView?.reloadData()
@@ -123,10 +146,6 @@ class AddUsersViewController: UIViewController {
     func loadMoreMembers() {
         data.loadMoreUsers { [weak self] in
             self?.title = self?.data.title
-
-            if self?.tableView?.refreshControl?.isRefreshing ?? false {
-                self?.tableView?.refreshControl?.endRefreshing()
-            }
 
             UIView.performWithoutAnimation {
                 self?.tableView?.reloadData()
@@ -150,10 +169,6 @@ class AddUsersViewController: UIViewController {
         super.viewWillAppear(animated)
 
         loadMoreMembers()
-
-        guard let refreshControl = tableView.refreshControl else { return }
-        tableView.refreshControl?.beginRefreshing()
-        tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
     }
 }
 
