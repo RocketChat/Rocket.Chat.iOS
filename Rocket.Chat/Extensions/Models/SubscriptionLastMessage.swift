@@ -19,6 +19,7 @@ extension Subscription {
 
      Examples:
      1. When the message is just an attachment: it'll return "Sent an attachment".
+     2. When is a text message from other user, it'll return (username): message.
 
      - returns: the last message text for the Message object, after being processed.
      */
