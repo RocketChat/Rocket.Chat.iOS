@@ -135,6 +135,8 @@
 		4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CBE620B599E6007E7163 /* StatusViewModel.swift */; };
 		411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */; };
 		411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */; };
+		411D40CD20D28150001A1035 /* ChannelInfoBasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411D40CB20D2814F001A1035 /* ChannelInfoBasicCell.xib */; };
+		411D40CE20D28150001A1035 /* ChannelInfoBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D40CC20D2814F001A1035 /* ChannelInfoBasicCell.swift */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
@@ -866,6 +868,8 @@
 		4116CBE620B599E6007E7163 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelInfoDescriptionCell.xib; sourceTree = "<group>"; };
 		411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoDescriptionCell.swift; sourceTree = "<group>"; };
+		411D40CB20D2814F001A1035 /* ChannelInfoBasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelInfoBasicCell.xib; sourceTree = "<group>"; };
+		411D40CC20D2814F001A1035 /* ChannelInfoBasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelInfoBasicCell.swift; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManager.swift; sourceTree = "<group>"; };
 		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -2475,6 +2479,8 @@
 			isa = PBXGroup;
 			children = (
 				800FCD451F728E6A00D9A692 /* ChannelInfoCellProtocol.swift */,
+				411D40CC20D2814F001A1035 /* ChannelInfoBasicCell.swift */,
+				411D40CB20D2814F001A1035 /* ChannelInfoBasicCell.xib */,
 				411D40C820D27A5E001A1035 /* ChannelInfoDescriptionCell.swift */,
 				411D40C720D27A5E001A1035 /* ChannelInfoDescriptionCell.xib */,
 				4124FCC41F7A61C5008ED4C3 /* ChannelInfoActionCell.swift */,
@@ -3440,6 +3446,7 @@
 			files = (
 				412A95D71FD94ED000954AA6 /* ChatMessageVideoView.xib in Resources */,
 				14F8A25D202E64B200175FDC /* BnW-29@3x.png in Resources */,
+				411D40CD20D28150001A1035 /* ChannelInfoBasicCell.xib in Resources */,
 				412A95D71FD94ED000954AA6 /* ChatMessageVideoView.xib in Resources */,
 				33A5C9CC206A565800FE1C8F /* regional.json in Resources */,
 				412EF3C62050507C001689A3 /* ReusableViewText.xib in Resources */,
@@ -3923,6 +3930,7 @@
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
+				411D40CE20D28150001A1035 /* ChannelInfoBasicCell.swift in Sources */,
 				4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
