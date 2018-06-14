@@ -1,4 +1,4 @@
-    //
+//
 //  UserPermissions.swift
 //  Rocket.Chat
 //
