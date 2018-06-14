@@ -86,16 +86,24 @@ extension Subscription: ModelMappeable {
             let message = Message()
             message.map(values["lastMessage"], realm: realm)
             message.subscription = self
-            realm?.add(message, update: true)
 
-            self.roomLastMessage = message
+            if !(self.roomLastMessage == message) {
+                realm?.add(message, update: true)
 
-            if let createdAt = values["lastMessage"]["ts"].string {
-                self.roomLastMessageDate = Date.dateFromString(createdAt)
+                self.roomLastMessage = message
+                self.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+
+                if let createdAt = values["lastMessage"]["ts"].string {
+                    self.roomLastMessageDate = Date.dateFromString(createdAt)
+                }
+
+                if let createdAt = values["lastMessage"]["ts"]["$date"].double {
+                    self.roomLastMessageDate = Date.dateFromInterval(createdAt)
+                }
             }
-
-            if let createdAt = values["lastMessage"]["ts"]["$date"].double {
-                self.roomLastMessageDate = Date.dateFromInterval(createdAt)
+        } else {
+            if self.roomLastMessageText?.isEmpty ?? true {
+                self.roomLastMessageText = localized("subscriptions.list.no_message")
             }
         }
     }
