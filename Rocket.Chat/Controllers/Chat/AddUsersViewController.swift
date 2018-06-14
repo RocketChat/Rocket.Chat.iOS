@@ -110,12 +110,16 @@ class AddUsersViewController: UIViewController {
     }
 
     func loadMoreMembers() {
+        searchBar?.textField?.startIndicatingActivity()
+
         data.loadMoreUsers { [weak self] in
             self?.title = self?.data.title
 
             UIView.performWithoutAnimation {
                 self?.tableView?.reloadData()
             }
+
+            self?.searchBar?.textField?.stopIndicatingActivity()
         }
     }
 
