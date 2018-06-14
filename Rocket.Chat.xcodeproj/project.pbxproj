@@ -639,6 +639,9 @@
 		99363FC820C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */; };
 		99363FCA20C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */; };
 		99363FCC20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */; };
+		9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */; };
+		9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */; };
+		9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */; };
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
@@ -1384,6 +1387,9 @@
 		99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowMoreSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreSeparatorTableViewCell.swift; sourceTree = "<group>"; };
+		9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFieldTableViewCell.xib; sourceTree = "<group>"; };
+		9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldTableViewCell.swift; sourceTree = "<group>"; };
+		9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomFieldsTableViewController.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
@@ -2051,6 +2057,7 @@
 				35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthTableViewController.swift */,
 				993417F420D1B31F0008B643 /* LegalTableViewController.swift */,
+				9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3153,6 +3160,8 @@
 				995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */,
 				99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */,
 				99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */,
+				9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */,
+				9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3585,6 +3594,7 @@
 				809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */,
 				14F8A293202E65C700175FDC /* Blue-60@2x.png in Resources */,
 				8041C048202BA234007E21FA /* RCEmojiKit.xcassets in Resources */,
+				9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */,
 				41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */,
 				14F8A281202E659000175FDC /* White-40@3x.png in Resources */,
 				14F8A22A202E5CBF00175FDC /* Black-40@2x.png in Resources */,
@@ -4019,6 +4029,7 @@
 				8013F8861FD6B76600EE1A4E /* CommandsRequest.swift in Sources */,
 				412719461E6B403700461FEE /* RegisterUsernameTableViewController.swift in Sources */,
 				806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */,
+				9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
@@ -4185,6 +4196,7 @@
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
 				3330329E20738EBB00A9514D /* SubscriptionManagerTyping.swift in Sources */,
 				3330329C20738E6000A9514D /* SubscriptionManagerSearch.swift in Sources */,
+				9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
 				8076FDD82048654F00114F28 /* UserUtils.swift in Sources */,
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,

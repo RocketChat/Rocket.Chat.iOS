@@ -26,9 +26,21 @@ final class SignupViewController: BaseTableViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var registerButton: StyledButton!
+    @IBOutlet weak var registerButton: StyledButton! {
+        didSet {
+            let title = hasCustomFields ? localized("auth.signup.button_next") : localized("auth.signup.button_register")
+            registerButton.setTitle(title, for: .normal)
+        }
+    }
 
     var customTextFields: [UITextField] = []
+    lazy var hasCustomFields: Bool = {
+        guard let customFields = AuthSettingsManager.settings?.customFields, customFields.count > 0 else {
+            return false
+        }
+
+        return true
+    }()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -41,8 +53,6 @@ final class SignupViewController: BaseTableViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
-
-//        setupCustomFields()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -99,6 +109,18 @@ final class SignupViewController: BaseTableViewController {
     }
 
     // MARK: Request username
+
+    @IBAction func didPressSignupButton() {
+        guard !requesting else {
+            return
+        }
+
+        if hasCustomFields {
+            performSegue(withIdentifier: "CustomFields", sender: self)
+        } else {
+            signup()
+        }
+    }
 
     fileprivate func signup() {
         startLoading()

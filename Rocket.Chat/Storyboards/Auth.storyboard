@@ -391,6 +391,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didPressSignupButton" destination="hl8-Pc-62u" eventType="touchUpInside" id="3je-yu-mIB"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -423,6 +426,7 @@
                         <outlet property="textFieldName" destination="xjS-mK-dwO" id="mQg-73-RPB"/>
                         <outlet property="textFieldPassword" destination="0TR-Jz-yD6" id="AuE-a9-XAJ"/>
                         <outlet property="textFieldUsername" destination="4Vj-qi-aDM" id="gZ6-Yu-JkI"/>
+                        <segue destination="uXD-hs-Lir" kind="show" identifier="CustomFields" id="hsm-IE-icl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7OX-Ev-NPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -949,6 +953,43 @@
             </objects>
             <point key="canvasLocation" x="2183" y="18"/>
         </scene>
+        <!--Signup Custom Fields Table View Controller-->
+        <scene sceneID="O5l-eW-K50">
+            <objects>
+                <tableViewController id="uXD-hs-Lir" customClass="SignupCustomFieldsTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cgD-vs-WUJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="kP3-L1-aox">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete your register" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwP-px-cUd">
+                                    <rect key="frame" x="15" y="24" width="290" height="28"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                    <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="dwP-px-cUd" firstAttribute="top" secondItem="kP3-L1-aox" secondAttribute="top" constant="24" id="BPO-JF-scU"/>
+                                <constraint firstAttribute="bottom" secondItem="dwP-px-cUd" secondAttribute="bottom" constant="4" id="G6d-ag-2oh"/>
+                                <constraint firstAttribute="trailing" secondItem="dwP-px-cUd" secondAttribute="trailing" constant="15" id="bWH-Ht-2fM"/>
+                                <constraint firstItem="dwP-px-cUd" firstAttribute="leading" secondItem="kP3-L1-aox" secondAttribute="leading" constant="15" id="xNC-9V-47g"/>
+                            </constraints>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="uXD-hs-Lir" id="Glb-1i-R3m"/>
+                            <outlet property="delegate" destination="uXD-hs-Lir" id="XI1-MS-FHr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INh-Os-nfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2933" y="18"/>
+        </scene>
         <!--Register Username Table View Controller-->
         <scene sceneID="JMr-VV-DlN">
             <objects>
@@ -1216,7 +1257,7 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ANZ-nn-OTA"/>
+        <segue reference="cnb-v1-dPj"/>
         <segue reference="uxe-wj-78g"/>
         <segue reference="pMy-PV-X3C"/>
         <segue reference="iQF-0t-Wye"/>
