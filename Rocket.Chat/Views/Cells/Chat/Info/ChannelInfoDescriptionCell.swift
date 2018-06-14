@@ -22,10 +22,12 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
     static let identifier = "kChannelInfoCellDescription"
     static let defaultHeight: Float = 80
 
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelSubtitle: UILabel!
+
     var data: DataType? {
         didSet {
             labelTitle.text = data?.title
-            labelTitle.textColor = .RCDarkGray()
 
             let attributedString = NSAttributedString(string: data?.descriptionText ?? "")
             labelSubtitle.attributedText = MarkdownManager.shared.transformAttributedString(attributedString)
@@ -39,6 +41,8 @@ extension ChannelInfoDescriptionCell {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.bodyText
         labelSubtitle.textColor = theme.auxiliaryText
     }
 }
