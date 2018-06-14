@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RCMarkdownParser
 
 struct ChannelInfoDescriptionCellData: ChannelInfoCellDataProtocol {
     let cellType = ChannelInfoDescriptionCell.self
@@ -24,7 +25,11 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
     var data: DataType? {
         didSet {
             labelTitle.text = data?.title
-            labelSubtitle.text = data?.descriptionText
+            labelTitle.textColor = .RCDarkGray()
+
+            let attributedString = NSAttributedString(string: data?.descriptionText ?? "")
+            labelSubtitle.attributedText = MarkdownManager.shared.transformAttributedString(attributedString)
+            labelSubtitle.textColor = .RCGray()
         }
     }
 

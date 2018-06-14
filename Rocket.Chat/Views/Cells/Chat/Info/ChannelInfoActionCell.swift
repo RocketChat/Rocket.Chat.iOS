@@ -33,7 +33,10 @@ class ChannelInfoActionCell: UITableViewCell, ChannelInfoCellProtocol {
     var data: DataType? {
         didSet {
             labelTitle.text = data?.title
-            imageViewIcon.image = data?.icon
+            labelTitle.textColor = .RCDarkGray()
+
+            imageViewIcon.image = data?.icon?.imageWithTint(.RCDarkGray())
+
             accessoryType = (data?.detail ?? false) ? .disclosureIndicator : .none
         }
     }
