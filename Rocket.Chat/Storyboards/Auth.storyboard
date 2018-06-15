@@ -755,9 +755,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R78-rT-hy5">
-                                                    <rect key="frame" x="12" y="11" width="263" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="263" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="lmU-WS-Ka9"/>
+                                                        <constraint firstAttribute="height" constant="21" id="aOJ-b7-JPy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
@@ -765,10 +765,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="R78-rT-hy5" secondAttribute="trailing" constant="11" id="gbQ-ev-UJl"/>
-                                                <constraint firstItem="R78-rT-hy5" firstAttribute="top" secondItem="hRC-yR-lUB" secondAttribute="top" constant="11" id="j5g-m6-CTS"/>
-                                                <constraint firstItem="R78-rT-hy5" firstAttribute="leading" secondItem="hRC-yR-lUB" secondAttribute="leading" constant="12" id="uof-Dl-VTQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="R78-rT-hy5" secondAttribute="bottom" constant="11.5" id="y2y-o4-iPD"/>
+                                                <constraint firstItem="R78-rT-hy5" firstAttribute="leading" secondItem="hRC-yR-lUB" secondAttribute="leading" constant="15" id="2SH-oi-2CT"/>
+                                                <constraint firstAttribute="bottom" secondItem="R78-rT-hy5" secondAttribute="bottom" constant="11.5" id="5uN-TF-shu"/>
+                                                <constraint firstItem="R78-rT-hy5" firstAttribute="top" secondItem="hRC-yR-lUB" secondAttribute="top" constant="11" id="6Zq-Fa-H23"/>
+                                                <constraint firstAttribute="trailing" secondItem="R78-rT-hy5" secondAttribute="trailing" constant="8" id="zqe-Jb-aJ4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -780,9 +780,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qV-dj-cr7">
-                                                    <rect key="frame" x="12" y="11" width="263" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="263" height="22"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="mIm-HH-Hfs"/>
+                                                        <constraint firstAttribute="height" constant="22" id="ra8-gU-zYk"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -790,10 +790,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="7qV-dj-cr7" secondAttribute="bottom" constant="11.5" id="BqI-sD-jdx"/>
-                                                <constraint firstAttribute="trailing" secondItem="7qV-dj-cr7" secondAttribute="trailing" constant="11" id="C6X-nk-AvL"/>
-                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="leading" secondItem="iP8-rF-YHi" secondAttribute="leading" constant="12" id="IYE-Jh-jb2"/>
-                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="top" secondItem="iP8-rF-YHi" secondAttribute="top" constant="11" id="XJv-C4-rrf"/>
+                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="leading" secondItem="iP8-rF-YHi" secondAttribute="leading" constant="15" id="HDe-MU-BH1"/>
+                                                <constraint firstAttribute="bottom" secondItem="7qV-dj-cr7" secondAttribute="bottom" constant="10.5" id="hwh-zW-15X"/>
+                                                <constraint firstAttribute="trailing" secondItem="7qV-dj-cr7" secondAttribute="trailing" constant="8" id="prH-sh-FTg"/>
+                                                <constraint firstItem="7qV-dj-cr7" firstAttribute="top" secondItem="iP8-rF-YHi" secondAttribute="top" constant="11" id="rli-mT-nFP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1306,7 +1306,7 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cnb-v1-dPj"/>
+        <segue reference="cXi-ex-hQo"/>
         <segue reference="uxe-wj-78g"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>
