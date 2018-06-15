@@ -15,7 +15,6 @@ final class SignupViewController: BaseTableViewController {
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
-    let compoundPickers = CompoundPickerViewDelegate()
 
     @IBOutlet weak var signupTitle: UILabel! {
         didSet {
@@ -108,7 +107,28 @@ final class SignupViewController: BaseTableViewController {
         view.endEditing(true)
     }
 
-    // MARK: Request username
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? SignupCustomFieldsTableViewController {
+            controller.signup = { [weak self] customFields, startLoading, stopLoading in
+                let name = self?.textFieldName.text ?? ""
+                let email = self?.textFieldEmail.text ?? ""
+                let password = self?.textFieldPassword.text ?? ""
+
+                self?.signup(
+                    with: name,
+                    email: email,
+                    password: password,
+                    customFields: customFields,
+                    startLoading: startLoading,
+                    stopLoading: stopLoading
+                )
+            }
+        }
+    }
+
+    // MARK: Actions
 
     @IBAction func didPressSignupButton() {
         guard !requesting else {
@@ -122,15 +142,25 @@ final class SignupViewController: BaseTableViewController {
         }
     }
 
-    fileprivate func signup() {
-        startLoading()
-
+    func signup() {
         let name = textFieldName.text ?? ""
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] response in
-            self?.stopLoading()
+        signup(
+            with: name,
+            email: email,
+            password: password,
+            startLoading: startLoading,
+            stopLoading: stopLoading
+        )
+    }
+
+    fileprivate func signup(with name: String, email: String, password: String, customFields: [String: String] = [:], startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        startLoading()
+
+        AuthManager.signup(with: name, email, password, customFields: customFields) { [weak self] response in
+            stopLoading()
 
             if response.isError() {
                 if let error = response.result["error"].dictionary {
@@ -149,13 +179,13 @@ final class SignupViewController: BaseTableViewController {
                     return
                 }
 
-                self?.startLoading()
+                startLoading()
                 AuthManager.auth(email, password: password, completion: { _ in
-                    self?.stopLoading()
+                    stopLoading()
                     API.current()?.client(InfoClient.self).fetchInfo {
-                        self?.startLoading()
+                        startLoading()
                         API.current()?.fetch(MeRequest()) { [weak self] response in
-                            self?.stopLoading()
+                            stopLoading()
                             switch response {
                             case .resource(let resource):
                                 let realm = Realm.current
@@ -166,21 +196,21 @@ final class SignupViewController: BaseTableViewController {
                                 }
 
                                 if resource.user?.username != nil {
-                                    self?.dismiss(animated: true, completion: nil)
+                                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
                                     AppManager.reloadApp()
                                 } else {
-                                    self?.startLoading()
+                                    startLoading()
                                     AuthManager.setUsername(self?.textFieldUsername.text ?? "") { success, errorMessage in
-                                        self?.stopLoading()
+                                        stopLoading()
                                         DispatchQueue.main.async {
-                                            self?.stopLoading()
+                                            stopLoading()
                                             if !success {
                                                 Alert(
                                                     title: localized("error.socket.default_error.title"),
                                                     message: errorMessage ?? localized("error.socket.default_error.message")
                                                 ).present()
                                             } else {
-                                                self?.dismiss(animated: true, completion: nil)
+                                                self?.presentingViewController?.dismiss(animated: true, completion: nil)
                                                 AppManager.reloadApp()
                                             }
                                         }
@@ -193,11 +223,6 @@ final class SignupViewController: BaseTableViewController {
                 })
             }
         }
-    }
-
-    private func getCustomFieldsParams() -> [String: String] {
-        let pairs = customTextFields.map { (key: $0.placeholder ?? "", value: $0.text ?? "") }
-        return Dictionary(keyValuePairs: pairs)
     }
 }
 
@@ -213,7 +238,11 @@ extension SignupViewController: UITextFieldDelegate {
         }
 
         if textField == textFieldPassword {
-            signup()
+            if hasCustomFields {
+                performSegue(withIdentifier: "CustomFields", sender: self)
+            } else {
+                signup()
+            }
         } else {
             makeNextFieldFirstResponder(after: textField)
         }

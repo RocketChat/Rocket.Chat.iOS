@@ -980,11 +980,52 @@
                                 <constraint firstItem="dwP-px-cUd" firstAttribute="leading" secondItem="kP3-L1-aox" secondAttribute="leading" constant="15" id="xNC-9V-47g"/>
                             </constraints>
                         </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="ZV5-14-xRB">
+                            <rect key="frame" x="0.0" y="56" width="320" height="63"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7O-YC-uPz" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="PHc-gC-7hA"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Register"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                            <real key="value" value="18"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="didPressRegisterButton" destination="uXD-hs-Lir" eventType="touchUpInside" id="uRp-cm-Lps"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="k7O-YC-uPz" firstAttribute="top" secondItem="ZV5-14-xRB" secondAttribute="top" constant="11" id="HNm-Tk-3VQ"/>
+                                <constraint firstItem="k7O-YC-uPz" firstAttribute="leading" secondItem="ZV5-14-xRB" secondAttribute="leading" constant="15" id="mEc-3P-TrQ"/>
+                                <constraint firstAttribute="trailing" secondItem="k7O-YC-uPz" secondAttribute="trailing" constant="15" id="soi-dE-6zJ"/>
+                            </constraints>
+                        </view>
                         <connections>
                             <outlet property="dataSource" destination="uXD-hs-Lir" id="Glb-1i-R3m"/>
                             <outlet property="delegate" destination="uXD-hs-Lir" id="XI1-MS-FHr"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="registerButton" destination="k7O-YC-uPz" id="bKi-eq-foX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INh-Os-nfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
