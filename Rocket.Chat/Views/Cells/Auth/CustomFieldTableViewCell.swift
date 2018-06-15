@@ -37,6 +37,7 @@ class CustomFieldTableViewCell: UITableViewCell {
         let pickerDelegate = PickerViewDelegate(data: model.options) {
             textField.text = $0
         }
+
         delegateReference = pickerDelegate
         pickerView.dataSource = pickerDelegate
         pickerView.delegate = pickerDelegate

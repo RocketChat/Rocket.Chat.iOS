@@ -957,7 +957,7 @@
         <scene sceneID="O5l-eW-K50">
             <objects>
                 <tableViewController id="uXD-hs-Lir" customClass="SignupCustomFieldsTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cgD-vs-WUJ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cgD-vs-WUJ" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1031,6 +1031,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="customFieldsTitleLabel" destination="dwP-px-cUd" id="fOQ-3Z-YS6"/>
                         <outlet property="registerButton" destination="k7O-YC-uPz" id="bKi-eq-foX"/>
                     </connections>
                 </tableViewController>
@@ -1305,11 +1306,11 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cnb-v1-dPj"/>
+        <segue reference="jf7-a5-Wdf"/>
         <segue reference="uxe-wj-78g"/>
-        <segue reference="pMy-PV-X3C"/>
-        <segue reference="iQF-0t-Wye"/>
+        <segue reference="B9E-PP-gIC"/>
+        <segue reference="9kY-lU-ad7"/>
         <segue reference="yUJ-js-l73"/>
-        <segue reference="dnh-fI-fQN"/>
+        <segue reference="kz9-vv-nLs"/>
     </inferredMetricsTieBreakers>
 </document>

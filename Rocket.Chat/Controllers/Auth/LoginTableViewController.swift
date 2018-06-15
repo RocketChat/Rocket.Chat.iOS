@@ -150,6 +150,12 @@ class LoginTableViewController: BaseTableViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        textFieldUsername.becomeFirstResponder()
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

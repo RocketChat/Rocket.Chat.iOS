@@ -10,7 +10,17 @@ import UIKit
 
 class SignupCustomFieldsTableViewController: BaseTableViewController {
 
-    @IBOutlet weak var registerButton: StyledButton!
+    @IBOutlet weak var customFieldsTitleLabel: UILabel! {
+        didSet {
+            customFieldsTitleLabel.text = localized("auth.signup.custom_fields_title")
+        }
+    }
+
+    @IBOutlet weak var registerButton: StyledButton! {
+        didSet {
+            registerButton.setTitle(localized("auth.signup.button_register"), for: .normal)
+        }
+    }
 
     lazy var customFields: [CustomFieldTableViewCell] = {
         return AuthSettingsManager.settings?.customFields.compactMap { customField in
@@ -37,6 +47,15 @@ class SignupCustomFieldsTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    // MARK: Keyboard Management
+
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK: Actions

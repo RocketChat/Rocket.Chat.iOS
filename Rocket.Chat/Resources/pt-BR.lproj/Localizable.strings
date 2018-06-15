@@ -114,6 +114,9 @@
 "auth.login_service_prefix" = "Continuar com ";
 
 "auth.signup_title" = "Cadastre-se";
+"auth.signup.button_register" = "Cadastrar";
+"auth.signup.button_next" = "Próximo";
+"auth.signup.custom_fields_title" = "Complete seu cadastro";
 
 "auth.login.login_title" = "Entrar";
 "auth.login.button_login_title" = "Entrar";
