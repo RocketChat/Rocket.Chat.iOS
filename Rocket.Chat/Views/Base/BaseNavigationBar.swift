@@ -15,10 +15,6 @@ protocol BaseNavigationBarThemeSource {
 class BaseNavigationBar: UINavigationBar {
     var themeSource: BaseNavigationBarThemeSource?
     override var theme: Theme? {
-        if let themeSource = themeSource {
-            return themeSource.navgiationBarTheme
-        } else {
-            return Theme.light
-        }
+        return themeSource?.navgiationBarTheme
     }
 }
