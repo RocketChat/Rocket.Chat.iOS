@@ -29,7 +29,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-MO-VVm">
-                    <rect key="frame" x="6" y="0.0" width="323" height="44"/>
+                    <rect key="frame" x="24" y="0.0" width="305" height="44"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal">
@@ -40,17 +40,17 @@
                     </connections>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSA-hf-f6V">
-                    <rect key="frame" x="6" y="0.0" width="323" height="44"/>
+                    <rect key="frame" x="16" y="0.0" width="313" height="44"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cdS-HW-2AF">
-                            <rect key="frame" x="131.5" y="0.0" width="61" height="44"/>
+                            <rect key="frame" x="124.5" y="0.0" width="65.5" height="44"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-tD-R8X">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="44"/>
                                 </activityIndicatorView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mu-Gh-mpc">
-                                    <rect key="frame" x="28" y="0.0" width="33" height="44"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <rect key="frame" x="28" y="0.0" width="37.5" height="44"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -77,8 +77,8 @@
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhT-1Q-dIQ"/>
                 <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
                 <constraint firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fSB-bC-X7D"/>
-                <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="nqV-yl-Zil"/>
-                <constraint firstItem="oSA-hf-f6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="qQV-zr-a4T"/>
+                <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="8" id="nqV-yl-Zil"/>
+                <constraint firstItem="oSA-hf-f6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="qQV-zr-a4T"/>
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="leading" secondItem="oSA-hf-f6V" secondAttribute="trailing" id="qW3-t7-0yX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
