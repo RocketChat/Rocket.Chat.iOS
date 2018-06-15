@@ -146,8 +146,6 @@ class AddUsersViewController: BaseViewController {
 
 extension AddUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-
         let user = data.user(at: indexPath.row)
 
         guard
@@ -173,6 +171,8 @@ extension AddUsersViewController: UITableViewDelegate {
             title: localized("chat.add_users.confirm.title"),
             message: message,
             handler: { yes in
+                tableView.deselectRow(at: indexPath, animated: true)
+
                 guard yes else { return }
 
                 let req = RoomInviteRequest(roomId: roomId, roomType: roomType, userId: userId)
