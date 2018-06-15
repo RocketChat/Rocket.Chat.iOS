@@ -60,7 +60,6 @@ class MembersListViewData {
 
                     strongSelf.currentPage += 1
 
-//                    strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
                     strongSelf.isLoadingMoreMembers = false
                     completion?()
                 case .error:
@@ -157,7 +156,7 @@ extension MembersListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreMembers()
+        refreshMembers()
 
         guard let refreshControl = membersTableView.refreshControl else { return }
         membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
