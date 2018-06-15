@@ -158,8 +158,6 @@ extension MembersListViewController {
 
         refreshMembers()
 
-        guard let refreshControl = membersTableView.refreshControl else { return }
-        membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
         membersTableView.refreshControl?.beginRefreshing()
     }
 }
