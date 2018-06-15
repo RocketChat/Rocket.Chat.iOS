@@ -182,6 +182,7 @@ extension AddUsersViewController: UITableViewDelegate {
                         if let error = resource.error {
                             Alert(title: localized("global.error"), message: error).present()
                         } else {
+                            self?.presentedViewController?.dismiss(animated: true, completion: nil)
                             self?.navigationController?.popViewController(animated: true)
                         }
                     case .error:
