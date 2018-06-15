@@ -193,7 +193,13 @@
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
 "chat.unread_separator" = "νέα μηνύματα";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
+"chat.read_receipt_list.title.empty" = "Read by no one"; //TODO
+
 // Chat Message Actions
+"chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
 "chat.message.actions.block" = "Φράξτε μηνύματα από χρήστη";
 "chat.message.actions.report" = "Αναφέρατε μήνυμα";
