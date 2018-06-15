@@ -61,7 +61,7 @@ class AddUsersViewData {
     }
 }
 
-class AddUsersViewController: UIViewController {
+class AddUsersViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self

@@ -82,6 +82,11 @@ extension UIActivityIndicatorView {
         guard let theme = theme else { return }
         color = theme.bodyText
     }
+
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        applyTheme()
+    }
 }
 
 extension UIRefreshControl {
