@@ -32,11 +32,12 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-
         let navBar = self.navigationBar
         navBar.isTranslucent = false
         (navBar as? BaseNavigationBar)?.themeSource = self
+
+        view.backgroundColor = .white
+        ThemeManager.addObserver(self)
     }
 
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
@@ -99,7 +100,7 @@ class BaseNavigationController: UINavigationController {
 }
 
 extension BaseNavigationController: BaseNavigationBarThemeSource {
-    var navgiationBarTheme: Theme? {
+    var navigationBarTheme: Theme? {
         return topViewController?.view.theme
     }
 }

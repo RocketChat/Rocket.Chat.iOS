@@ -1,8 +1,8 @@
 //
-//  RoomKickRequest.swift
+//  RoomInviteRequest.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Cardoso on 5/18/18.
+//  Created by Matheus Cardoso on 5/21/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
@@ -12,17 +12,17 @@ fileprivate extension RoomType {
     var path: String {
         switch self {
         case .channel:
-            return "/api/v1/channels.kick"
+            return "/api/v1/channels.invite"
         case .group:
-            return "/api/v1/groups.kick"
+            return "/api/v1/groups.invite"
         case .directMessage:
             return ""
         }
     }
 }
 
-final class RoomKickRequest: APIRequest {
-    typealias APIResourceType = RoomKickResource
+final class RoomInviteRequest: APIRequest {
+    typealias APIResourceType = RoomInviteResource
     let requiredVersion = Version(0, 48, 0)
 
     let method: HTTPMethod = .post
@@ -50,4 +50,4 @@ final class RoomKickRequest: APIRequest {
     }
 }
 
-final class RoomKickResource: APIResource, ResourceSharedProperties { }
+final class RoomInviteResource: APIResource, ResourceSharedProperties { }

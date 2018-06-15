@@ -415,6 +415,13 @@
 		803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803782B61FB4751D00DED049 /* RealmTestCase.swift */; };
 		8039441120AF1334002F317A /* RoomKickRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441020AF1334002F317A /* RoomKickRequest.swift */; };
 		8039441320AF17F1002F317A /* RoomKickRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */; };
+		8039441820AF620C002F317A /* ResourceSharedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441720AF620C002F317A /* ResourceSharedProperties.swift */; };
+		8039442520B330B2002F317A /* RoomInviteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442420B330B2002F317A /* RoomInviteRequest.swift */; };
+		8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */; };
+		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
+		8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddUsersViewController.swift */; };
+		8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442F20B34B12002F317A /* DirectoryRequest.swift */; };
+		8039443220B3988F002F317A /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039443120B3988F002F317A /* PagedResource.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
 		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
@@ -432,7 +439,10 @@
 		8045F49D20D059A600AA0F3C /* ReadReceiptListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */; };
 		8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */; };
 		8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */; };
-		8045F4D020D4640700AA0F3C /* ResourceWithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4CF20D4640600AA0F3C /* ResourceWithError.swift */; };
+		8045F4A420D30B8300AA0F3C /* UISearchBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */; };
+		8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */; };
+		8045F4AD20D313C100AA0F3C /* UITextFieldActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */; };
+		8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75620B4ADC400B3B0CF /* Debounce.swift */; };
 		8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */; };
 		8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */; };
 		805C87D92052AA1900AD0EB0 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */; };
@@ -1190,6 +1200,13 @@
 		803782B61FB4751D00DED049 /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
 		8039441020AF1334002F317A /* RoomKickRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomKickRequest.swift; sourceTree = "<group>"; };
 		8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomKickRequestSpec.swift; sourceTree = "<group>"; };
+		8039441720AF620C002F317A /* ResourceSharedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSharedProperties.swift; sourceTree = "<group>"; };
+		8039442420B330B2002F317A /* RoomInviteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequest.swift; sourceTree = "<group>"; };
+		8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequestSpec.swift; sourceTree = "<group>"; };
+		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
+		8039442D20B342BB002F317A /* AddUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersViewController.swift; sourceTree = "<group>"; };
+		8039442F20B34B12002F317A /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
+		8039443120B3988F002F317A /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
 		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
@@ -1200,7 +1217,10 @@
 		8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadReceiptListView.xib; sourceTree = "<group>"; };
 		8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptListViewController.swift; sourceTree = "<group>"; };
 		8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptsRequestSpec.swift; sourceTree = "<group>"; };
-		8045F4CF20D4640600AA0F3C /* ResourceWithError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceWithError.swift; sourceTree = "<group>"; };
+		8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarTextField.swift; sourceTree = "<group>"; };
+		8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldClearButton.swift; sourceTree = "<group>"; };
+		8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldActivityIndicator.swift; sourceTree = "<group>"; };
+		8052F75620B4ADC400B3B0CF /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionImage.swift; sourceTree = "<group>"; };
 		8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionTitleTextAlignment.swift; sourceTree = "<group>"; };
 		805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
@@ -2116,6 +2136,8 @@
 				8013F8631FD5E11100EE1A4E /* API */,
 				414EFF901E54FE35004F001F /* Models */,
 				8052F75A20B7522900B3B0CF /* UIAlertAction */,
+				8045F4A920D3114900AA0F3C /* UITextField */,
+				8045F4A220D30B6A00AA0F3C /* UISearchBar */,
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
@@ -2362,6 +2384,7 @@
 				35C7D199202B130400B4BE5A /* RCDateFormatter.swift */,
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
+				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2474,6 +2497,7 @@
 				80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
+				8039442D20B342BB002F317A /* AddUsersViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 			);
 			path = Chat;
@@ -2553,6 +2577,7 @@
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
 				807C7C0720751EDB006B600E /* SpotlightRequest.swift */,
 				80D41E062099341C00034D1F /* PermissionsRequest.swift */,
+				8039442F20B34B12002F317A /* DirectoryRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2674,6 +2699,7 @@
 				9987B59B2093E60C007D277C /* RoomFilesRequest.swift */,
 				414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */,
 				8039441020AF1334002F317A /* RoomKickRequest.swift */,
+				8039442420B330B2002F317A /* RoomInviteRequest.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2689,6 +2715,7 @@
 				992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */,
 				41E96C3020B88A0000ACBA92 /* RoomRolesRequestSpec.swift */,
 				8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */,
+				8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2733,9 +2760,27 @@
 		8045F4CE20D4640600AA0F3C /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				8045F4CF20D4640600AA0F3C /* ResourceWithError.swift */,
+				8039441720AF620C002F317A /* ResourceSharedProperties.swift */,
+				8039443120B3988F002F317A /* PagedResource.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		8045F4A220D30B6A00AA0F3C /* UISearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */,
+			);
+			path = UISearchBar;
+			sourceTree = "<group>";
+		};
+		8045F4A920D3114900AA0F3C /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */,
+				8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */,
+			);
+			path = UITextField;
 			sourceTree = "<group>";
 		};
 		8052F75A20B7522900B3B0CF /* UIAlertAction */ = {
@@ -2828,6 +2873,7 @@
 				8076FDC62048632300114F28 /* SubscriptionQueries.swift */,
 				8076FDC420485ABB00114F28 /* SubscriptionUser.swift */,
 				8076FDC220485A2200114F28 /* SubscriptionUtils.swift */,
+				8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3985,6 +4031,7 @@
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
+				8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
 				41FC9E0C209B3BAA00FED485 /* UploadMessageRequest.swift in Sources */,
@@ -4012,7 +4059,7 @@
 				0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */,
 				35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */,
 				990FF6D620740C79007B4A53 /* RoomMentionsRequest.swift in Sources */,
-				8039441820AF620C002F317A /* ResourceWithError.swift in Sources */,
+				8039441820AF620C002F317A /* ResourceSharedProperties.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				33FB9D4420D0EE7F005AF504 /* ServerInfoCell.swift in Sources */,
 				41F3704D20A31A3E00C5449E /* UIViewControllerExtension.swift in Sources */,
@@ -4021,6 +4068,7 @@
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4124D834209A0521005374CD /* ChatMessageDaySeparator.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
+				8039443220B3988F002F317A /* PagedResource.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */,
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
@@ -4035,6 +4083,7 @@
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				411D40CE20D28150001A1035 /* ChannelInfoBasicCell.swift in Sources */,
+				8045F4A420D30B8300AA0F3C /* UISearchBarTextField.swift in Sources */,
 				4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
@@ -4072,6 +4121,7 @@
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
 				80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */,
 				8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */,
+				8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */,
 				80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */,
 				41D3668720C0323100970B99 /* SubscriptionsSortingView.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,
@@ -4080,11 +4130,13 @@
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
 				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
 				0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */,
+				8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */,
 				80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */,
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
 				99D86ABA20D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift in Sources */,
+				8045F4AD20D313C100AA0F3C /* UITextFieldActivityIndicator.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41D8EC8E1F780C3800764B36 /* ChatControllerTitleViewProtocol.swift in Sources */,
 				999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */,
@@ -4125,6 +4177,7 @@
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
+				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
 				33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */,
 				995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */,
 				41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */,
@@ -4201,6 +4254,7 @@
 				33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
+				8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */,
 				99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
@@ -4220,6 +4274,7 @@
 				0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */,
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
 				3330329E20738EBB00A9514D /* SubscriptionManagerTyping.swift in Sources */,
+				8039442520B330B2002F317A /* RoomInviteRequest.swift in Sources */,
 				3330329C20738E6000A9514D /* SubscriptionManagerSearch.swift in Sources */,
 				9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
@@ -4356,6 +4411,7 @@
 				41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */,
 				41E9BD0F208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift in Sources */,
 				808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */,
+				8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */,
 				807C7C0C20751F06006B600E /* SpotlightRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,

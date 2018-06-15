@@ -285,6 +285,11 @@
 // Members List
 "chat.members.list.title" = "Membros";
 
+// Add Users
+"chat.add_users.title" = "Adicionar Usuários";
+"chat.add_users.confirm.title" = "Adicionar esse usuário?";
+"chat.add_users.confirm.message" = "Você tem certeza que deseja adicionar '%@' a '%@'?";
+
 // Messages List
 "chat.messages.list.title" = "Mensagens";
 "chat.messages.list.empty" = "Nenhuma mensagem encontrada";
