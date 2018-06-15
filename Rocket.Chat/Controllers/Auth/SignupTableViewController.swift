@@ -1,5 +1,5 @@
 //
-//  SignupViewController.swift
+//  SignupTableViewController.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 14/04/17.
@@ -10,12 +10,11 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-final class SignupViewController: BaseTableViewController {
+final class SignupTableViewController: BaseTableViewController {
 
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
-    let compoundPickers = CompoundPickerViewDelegate()
 
     @IBOutlet weak var signupTitle: UILabel! {
         didSet {
@@ -26,9 +25,21 @@ final class SignupViewController: BaseTableViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var registerButton: StyledButton!
+    @IBOutlet weak var registerButton: StyledButton! {
+        didSet {
+            let title = hasCustomFields ? localized("auth.signup.button_next") : localized("auth.signup.button_register")
+            registerButton.setTitle(title, for: .normal)
+        }
+    }
 
     var customTextFields: [UITextField] = []
+    lazy var hasCustomFields: Bool = {
+        guard let customFields = AuthSettingsManager.settings?.customFields, customFields.count > 0 else {
+            return false
+        }
+
+        return true
+    }()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -41,8 +52,6 @@ final class SignupViewController: BaseTableViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
-
-//        setupCustomFields()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -98,17 +107,60 @@ final class SignupViewController: BaseTableViewController {
         view.endEditing(true)
     }
 
-    // MARK: Request username
+    // MARK: Navigation
 
-    fileprivate func signup() {
-        startLoading()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? SignupCustomFieldsTableViewController {
+            controller.signup = { [weak self] customFields, startLoading, stopLoading in
+                let name = self?.textFieldName.text ?? ""
+                let email = self?.textFieldEmail.text ?? ""
+                let password = self?.textFieldPassword.text ?? ""
 
+                self?.signup(
+                    with: name,
+                    email: email,
+                    password: password,
+                    customFields: customFields,
+                    startLoading: startLoading,
+                    stopLoading: stopLoading
+                )
+            }
+        }
+    }
+
+    // MARK: Actions
+
+    @IBAction func didPressSignupButton() {
+        guard !requesting else {
+            return
+        }
+
+        if hasCustomFields {
+            performSegue(withIdentifier: "CustomFields", sender: self)
+        } else {
+            signup()
+        }
+    }
+
+    func signup() {
         let name = textFieldName.text ?? ""
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] response in
-            self?.stopLoading()
+        signup(
+            with: name,
+            email: email,
+            password: password,
+            startLoading: startLoading,
+            stopLoading: stopLoading
+        )
+    }
+
+    fileprivate func signup(with name: String, email: String, password: String, customFields: [String: String] = [:], startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        startLoading()
+
+        AuthManager.signup(with: name, email, password, customFields: customFields) { [weak self] response in
+            stopLoading()
 
             if response.isError() {
                 if let error = response.result["error"].dictionary {
@@ -127,13 +179,13 @@ final class SignupViewController: BaseTableViewController {
                     return
                 }
 
-                self?.startLoading()
+                startLoading()
                 AuthManager.auth(email, password: password, completion: { _ in
-                    self?.stopLoading()
+                    stopLoading()
                     API.current()?.client(InfoClient.self).fetchInfo {
-                        self?.startLoading()
+                        startLoading()
                         API.current()?.fetch(MeRequest()) { [weak self] response in
-                            self?.stopLoading()
+                            stopLoading()
                             switch response {
                             case .resource(let resource):
                                 let realm = Realm.current
@@ -144,21 +196,21 @@ final class SignupViewController: BaseTableViewController {
                                 }
 
                                 if resource.user?.username != nil {
-                                    self?.dismiss(animated: true, completion: nil)
+                                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
                                     AppManager.reloadApp()
                                 } else {
-                                    self?.startLoading()
+                                    startLoading()
                                     AuthManager.setUsername(self?.textFieldUsername.text ?? "") { success, errorMessage in
-                                        self?.stopLoading()
+                                        stopLoading()
                                         DispatchQueue.main.async {
-                                            self?.stopLoading()
+                                            stopLoading()
                                             if !success {
                                                 Alert(
                                                     title: localized("error.socket.default_error.title"),
                                                     message: errorMessage ?? localized("error.socket.default_error.message")
                                                 ).present()
                                             } else {
-                                                self?.dismiss(animated: true, completion: nil)
+                                                self?.presentingViewController?.dismiss(animated: true, completion: nil)
                                                 AppManager.reloadApp()
                                             }
                                         }
@@ -172,14 +224,9 @@ final class SignupViewController: BaseTableViewController {
             }
         }
     }
-
-    private func getCustomFieldsParams() -> [String: String] {
-        let pairs = customTextFields.map { (key: $0.placeholder ?? "", value: $0.text ?? "") }
-        return Dictionary(keyValuePairs: pairs)
-    }
 }
 
-extension SignupViewController: UITextFieldDelegate {
+extension SignupTableViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !requesting
@@ -191,7 +238,11 @@ extension SignupViewController: UITextFieldDelegate {
         }
 
         if textField == textFieldPassword {
-            signup()
+            if hasCustomFields {
+                performSegue(withIdentifier: "CustomFields", sender: self)
+            } else {
+                signup()
+            }
         } else {
             makeNextFieldFirstResponder(after: textField)
         }

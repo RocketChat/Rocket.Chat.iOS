@@ -113,7 +113,10 @@
 "auth.email_auth" = "e-mail"; // TODO
 "auth.login_service_prefix" = "Continue with "; // TODO
 
-"auth.signup_title" = "Sign up";  // TODO
+"auth.signup_title" = "Sign up"; // TODO
+"auth.signup.button_register" = "Register"; // TODO
+"auth.signup.button_next" = "Next"; // TODO
+"auth.signup.custom_fields_title" = "Complete your register"; // TODO
 
 "auth.login.login_title" = "Login";  // TODO
 "auth.login.button_login_title" = "Login"; // TODO

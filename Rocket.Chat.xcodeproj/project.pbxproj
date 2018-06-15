@@ -130,7 +130,6 @@
 		35E892C6201CDCBC00B4BE5A /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */; };
 		35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */; };
 		35E892CA201CDD9700B4BE5A /* PreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */; };
-		35E892CC201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */; };
 		4100B2842087779D00E2883A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1B1D2DB2080086DAC8 /* LogManager.swift */; };
 		4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF001F8D0A1700F67E89 /* AppManager.swift */; };
 		4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */; };
@@ -196,7 +195,7 @@
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
 		414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */; };
-		414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */; };
+		414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */; };
 		414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */; };
 		414E8A8F20A5DDF800615CE6 /* ChatControllerRolesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8E20A5DDF800615CE6 /* ChatControllerRolesController.swift */; };
 		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
@@ -639,6 +638,9 @@
 		99363FC820C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */; };
 		99363FCA20C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */; };
 		99363FCC20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */; };
+		9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */; };
+		9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */; };
+		9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */; };
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
@@ -878,7 +880,6 @@
 		35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRoomViewController.swift; sourceTree = "<group>"; };
 		35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewModel.swift; sourceTree = "<group>"; };
-		35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewControllerCustomFields.swift; sourceTree = "<group>"; };
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagerSpec.swift; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -942,7 +943,7 @@
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
 		414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
-		414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTableViewController.swift; sourceTree = "<group>"; };
 		414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRolesRequest.swift; sourceTree = "<group>"; };
 		414E8A8E20A5DDF800615CE6 /* ChatControllerRolesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerRolesController.swift; sourceTree = "<group>"; };
 		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
@@ -1384,6 +1385,9 @@
 		99363FC720C8650B00AA68C0 /* AuthSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowMoreSeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreSeparatorTableViewCell.swift; sourceTree = "<group>"; };
+		9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFieldTableViewCell.xib; sourceTree = "<group>"; };
+		9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldTableViewCell.swift; sourceTree = "<group>"; };
+		9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomFieldsTableViewController.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
@@ -2047,10 +2051,10 @@
 				80113DF71F98330B0048F2C2 /* OAuthViewController.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameTableViewController.swift */,
 				80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */,
-				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
-				35E892CB201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift */,
+				414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthTableViewController.swift */,
 				993417F420D1B31F0008B643 /* LegalTableViewController.swift */,
+				9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3153,6 +3157,8 @@
 				995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */,
 				99363FC920C8657400AA68C0 /* ShowMoreSeparatorTableViewCell.xib */,
 				99363FCB20C8758500AA68C0 /* ShowMoreSeparatorTableViewCell.swift */,
+				9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */,
+				9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3585,6 +3591,7 @@
 				809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */,
 				14F8A293202E65C700175FDC /* Blue-60@2x.png in Resources */,
 				8041C048202BA234007E21FA /* RCEmojiKit.xcassets in Resources */,
+				9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */,
 				41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */,
 				14F8A281202E659000175FDC /* White-40@3x.png in Resources */,
 				14F8A22A202E5CBF00175FDC /* Black-40@2x.png in Resources */,
@@ -4019,6 +4026,7 @@
 				8013F8861FD6B76600EE1A4E /* CommandsRequest.swift in Sources */,
 				412719461E6B403700461FEE /* RegisterUsernameTableViewController.swift in Sources */,
 				806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */,
+				9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
@@ -4085,7 +4093,7 @@
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				41FC9E08209B3A6300FED485 /* NSAttributedStringExtensions.swift in Sources */,
-				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
+				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
@@ -4185,6 +4193,7 @@
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
 				3330329E20738EBB00A9514D /* SubscriptionManagerTyping.swift in Sources */,
 				3330329C20738E6000A9514D /* SubscriptionManagerSearch.swift in Sources */,
+				9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
 				8076FDD82048654F00114F28 /* UserUtils.swift in Sources */,
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,
@@ -4232,7 +4241,6 @@
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				999F25B7207EEE70002E0F68 /* (null) in Sources */,
-				35E892CC201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
