@@ -1187,7 +1187,7 @@ to mention you in messages</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gD1-Tz-RKb" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="trJ-5o-du2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="trJ-5o-du2" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1220,7 +1220,7 @@ to mention you in messages</string>
         <segue reference="uxe-wj-78g"/>
         <segue reference="pMy-PV-X3C"/>
         <segue reference="iQF-0t-Wye"/>
-        <segue reference="tMH-P7-q5C"/>
+        <segue reference="yUJ-js-l73"/>
         <segue reference="dnh-fI-fQN"/>
     </inferredMetricsTieBreakers>
 </document>
