@@ -1023,6 +1023,13 @@
                             <outlet property="delegate" destination="uXD-hs-Lir" id="XI1-MS-FHr"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="cG0-RM-akN">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="more" id="EjR-dt-xS4">
+                            <connections>
+                                <segue destination="gD1-Tz-RKb" kind="presentation" id="jf7-a5-Wdf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="registerButton" destination="k7O-YC-uPz" id="bKi-eq-foX"/>
                     </connections>
