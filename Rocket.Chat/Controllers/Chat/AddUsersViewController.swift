@@ -155,13 +155,12 @@ extension AddUsersViewController: UITableViewDelegate {
             let roomType = data.subscription?.type,
             let roomName = data.subscription?.displayName(),
             let userId = user.identifier,
-            let username = user.username,
             let api = API.current()
         else {
             return
         }
 
-        let message = String(format: localized("chat.add_users.confirm.message"), username, roomName)
+        let message = String(format: localized("chat.add_users.confirm.message"), user.displayName(), roomName)
 
         let controller: UIViewController
         if let presentedViewController = presentedViewController {
