@@ -195,7 +195,7 @@
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
 		414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */; };
-		414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */; };
+		414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */; };
 		414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */; };
 		414E8A8F20A5DDF800615CE6 /* ChatControllerRolesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8E20A5DDF800615CE6 /* ChatControllerRolesController.swift */; };
 		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
@@ -943,7 +943,7 @@
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
 		414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
-		414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTableViewController.swift; sourceTree = "<group>"; };
 		414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRolesRequest.swift; sourceTree = "<group>"; };
 		414E8A8E20A5DDF800615CE6 /* ChatControllerRolesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerRolesController.swift; sourceTree = "<group>"; };
 		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
@@ -2051,7 +2051,7 @@
 				80113DF71F98330B0048F2C2 /* OAuthViewController.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameTableViewController.swift */,
 				80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */,
-				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
+				414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthTableViewController.swift */,
 				993417F420D1B31F0008B643 /* LegalTableViewController.swift */,
 				9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */,
@@ -4093,7 +4093,7 @@
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				41FC9E08209B3A6300FED485 /* NSAttributedStringExtensions.swift in Sources */,
-				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
+				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SignupViewController.swift
+//  SignupTableViewController.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 14/04/17.
@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-final class SignupViewController: BaseTableViewController {
+final class SignupTableViewController: BaseTableViewController {
 
     internal var requesting = false
 
@@ -226,7 +226,7 @@ final class SignupViewController: BaseTableViewController {
     }
 }
 
-extension SignupViewController: UITextFieldDelegate {
+extension SignupTableViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !requesting

@@ -205,10 +205,10 @@
             </objects>
             <point key="canvasLocation" x="-208" y="713"/>
         </scene>
-        <!--Signup View Controller-->
+        <!--Signup Table View Controller-->
         <scene sceneID="bB9-3r-AEp">
             <objects>
-                <tableViewController id="hl8-Pc-62u" customClass="SignupViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hl8-Pc-62u" customClass="SignupTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aG8-IH-tGg" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1306,7 +1306,7 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jf7-a5-Wdf"/>
+        <segue reference="cnb-v1-dPj"/>
         <segue reference="uxe-wj-78g"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>
