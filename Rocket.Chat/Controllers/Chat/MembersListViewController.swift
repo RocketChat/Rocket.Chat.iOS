@@ -25,6 +25,10 @@ class MembersListViewData {
         return showing >= total
     }
 
+    var canInviteUsers: Bool {
+        return subscription?.canInviteUsers() ?? false
+    }
+
     var membersPages: [[User]] = []
     var members: FlattenCollection<[[User]]> {
         return membersPages.joined()
@@ -56,7 +60,6 @@ class MembersListViewData {
 
                     strongSelf.currentPage += 1
 
-//                    strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
                     strongSelf.isLoadingMoreMembers = false
                     completion?()
                 case .error:
@@ -128,6 +131,14 @@ extension MembersListViewController {
         }
 
         title = data.title
+
+        if data.canInviteUsers {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(inviteUsersButtonPressed(sender:)))
+        }
+    }
+
+    @objc func inviteUsersButtonPressed(sender: Any) {
+        performSegue(withIdentifier: "toAddUsers", sender: self)
     }
 
     func registerCells() {
@@ -145,11 +156,20 @@ extension MembersListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreMembers()
+        refreshMembers()
 
-        guard let refreshControl = membersTableView.refreshControl else { return }
-        membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
         membersTableView.refreshControl?.beginRefreshing()
+    }
+}
+
+// MARK: Prepare for Segue
+extension MembersListViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if let addUsers = segue.destination as? AddUsersViewController {
+            addUsers.data.subscription = data.subscription
+        }
     }
 }
 

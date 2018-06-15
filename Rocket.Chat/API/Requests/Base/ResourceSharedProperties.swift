@@ -1,5 +1,5 @@
 //
-//  ResourceWithError.swift
+//  ResourceSharedProperties.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 5/18/18.
@@ -8,17 +8,22 @@
 
 import Foundation
 
-protocol ResourceWithError {
+protocol ResourceSharedProperties {
     var error: String? { get }
     var errorType: String? { get }
+    var success: Bool? { get }
 }
 
-extension ResourceWithError where Self: APIResource {
+extension ResourceSharedProperties where Self: APIResource {
     var error: String? {
         return raw?["error"].string
     }
 
     var errorType: String? {
         return raw?["errorType"].string
+    }
+
+    var success: Bool? {
+        return raw?["success"].boolValue
     }
 }

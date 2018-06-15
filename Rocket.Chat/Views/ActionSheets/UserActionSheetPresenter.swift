@@ -48,7 +48,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
             if AuthManager.currentUser()?.hasPermission(.removeUser, subscription: subscription) == true {
                 controller.addAction(UIAlertAction(title: localized("user_action_sheet.remove"), style: .destructive, handler: { [weak self] _ in
                     let message = String(format: localized("user_action_sheet.remove_confirm.message"), user.username ?? "")
-                    self?.alertYesNo(title: localized("user_action_sheet.remove_confirm.title"), message: message) { yes in
+                    self?.alertYesNo(title: localized("user_action_sheet.remove_confirm.title"), message: message, yesStyle: .destructive) { yes in
                         guard yes else { completion?(.none); return }
 
                         api?.fetch(RoomKickRequest(roomId: subscription.rid, roomType: subscription.type, userId: userId)) { response in

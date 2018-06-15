@@ -9,12 +9,12 @@
 import UIKit
 
 protocol BaseNavigationBarThemeSource {
-    var navgiationBarTheme: Theme? { get }
+    var navigationBarTheme: Theme? { get }
 }
 
 class BaseNavigationBar: UINavigationBar {
     var themeSource: BaseNavigationBarThemeSource?
     override var theme: Theme? {
-        return themeSource?.navgiationBarTheme
+        return themeSource?.navigationBarTheme
     }
 }
