@@ -76,7 +76,6 @@ class BaseNavigationController: UINavigationController {
         navBar.isTranslucent = true
         navBar.tintColor = .RCBlue()
         if forceRedraw { forceNavigationToRedraw() }
-        navBar.applyTheme()
         setNeedsStatusBarAppearanceUpdate()
     }
 
@@ -90,7 +89,6 @@ class BaseNavigationController: UINavigationController {
         navBar.tintColor = .white
         navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         if forceRedraw { forceNavigationToRedraw() }
-        navBar.applyTheme()
         setNeedsStatusBarAppearanceUpdate()
     }
 
