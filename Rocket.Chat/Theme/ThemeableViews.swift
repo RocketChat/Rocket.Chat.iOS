@@ -27,11 +27,9 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-//        if #available(iOS 11, *) {
-            guard let theme = theme else { return }
-            backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
-            self.subviews.forEach { $0.applyTheme() }
-//        }
+        guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        self.subviews.forEach { $0.applyTheme() }
     }
 }
 
@@ -46,12 +44,8 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
-//        if #available(iOS 11, *) {
-            guard let superview = superview else { return ThemeManager.theme }
-            return superview.theme
-//        } else {
-//            return nil
-//        }
+        guard let superview = superview else { return ThemeManager.theme }
+        return superview.theme
     }
 }
 
@@ -79,7 +73,12 @@ extension UITextField {
 extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
-        searchBarStyle = .minimal
+        if #available(iOS 11, *) {
+            // Do nothing
+        } else {
+            backgroundImage = UIImage()
+            textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
+        }
     }
 }
 
