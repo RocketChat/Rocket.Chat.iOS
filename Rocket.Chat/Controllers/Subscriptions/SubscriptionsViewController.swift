@@ -260,7 +260,7 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
         } else {
-            if let headerView = tableView.tableHeaderView {
+            if let headerView = tableView.tableHeaderView, searchBar == nil {
                 var frame = headerView.frame
                 frame.size.height = 88
                 headerView.frame = frame

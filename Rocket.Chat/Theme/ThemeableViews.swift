@@ -27,11 +27,11 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-        if #available(iOS 11, *) {
+//        if #available(iOS 11, *) {
             guard let theme = theme else { return }
             backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
             self.subviews.forEach { $0.applyTheme() }
-        }
+//        }
     }
 }
 
@@ -46,12 +46,12 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
-        if #available(iOS 11, *) {
+//        if #available(iOS 11, *) {
             guard let superview = superview else { return ThemeManager.theme }
             return superview.theme
-        } else {
-            return nil
-        }
+//        } else {
+//            return nil
+//        }
     }
 }
 
@@ -73,6 +73,13 @@ extension UITextField {
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.auxiliaryText])
         }
+    }
+}
+
+extension UISearchBar {
+    override func applyTheme() {
+        super.applyTheme()
+        searchBarStyle = .minimal
     }
 }
 
@@ -139,6 +146,11 @@ extension UITableViewCell {
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         detailTextLabel?.textColor = theme.auxiliaryText
         tintColor = theme.tintColor
+    }
+
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        applyTheme()
     }
 }
 
