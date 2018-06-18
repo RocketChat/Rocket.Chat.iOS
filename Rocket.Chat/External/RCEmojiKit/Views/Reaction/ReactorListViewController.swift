@@ -27,12 +27,7 @@ final class ReactorListViewController: UIViewController, Closeable {
 
     var reactorListView: ReactorListView! {
         didSet {
-            reactorListView.closePressed = {
-                self.dismiss(animated: true, completion: nil)
-            }
-
             reactorListView.isPopover = presentationController?.presentationStyle == .popover
-
             reactorListView.model = model
         }
     }

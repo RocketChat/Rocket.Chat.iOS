@@ -52,7 +52,7 @@
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eJ-5r-Kgq" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="62" y="23" width="274" height="9"/>
+                        <rect key="frame" x="47" y="23" width="281" height="9"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -73,6 +73,17 @@
                             <constraint firstAttribute="height" constant="14" id="cco-0E-Vbd"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68O-nk-SUK">
+                        <rect key="frame" x="332" y="21.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="eOE-YO-Wp2"/>
+                            <constraint firstAttribute="width" constant="12" id="yLu-lZ-Qb6"/>
+                        </constraints>
+                        <state key="normal" image="Check"/>
+                        <connections>
+                            <action selector="readReceiptPressed:" destination="oAa-qT-sOc" eventType="touchUpInside" id="blA-wL-0tg"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -88,12 +99,14 @@
                 <constraint firstItem="Gxd-Cw-G69" firstAttribute="leading" secondItem="pvK-41-cNi" secondAttribute="trailing" constant="7" id="LKE-Pc-HmH"/>
                 <constraint firstAttribute="trailingMargin" secondItem="Idm-4q-rB2" secondAttribute="trailing" id="Wzj-wo-r7j"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
-                <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="11" id="evW-4R-3TS"/>
+                <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
+                <constraint firstAttribute="trailing" secondItem="68O-nk-SUK" secondAttribute="trailing" constant="8" id="iMf-4w-YbQ"/>
                 <constraint firstAttribute="bottom" secondItem="Idm-4q-rB2" secondAttribute="bottom" id="kdQ-0K-2Dm"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leadingMargin" id="myV-aY-DuJ"/>
                 <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" id="oBU-c9-0bJ"/>
-                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="11" id="wIX-xY-yjb"/>
-                <constraint firstAttribute="trailingMargin" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" id="xan-6S-aXM"/>
+                <constraint firstItem="68O-nk-SUK" firstAttribute="centerY" secondItem="2eJ-5r-Kgq" secondAttribute="centerY" id="q1U-5f-3TW"/>
+                <constraint firstItem="68O-nk-SUK" firstAttribute="leading" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" constant="4" id="rUE-1d-U2s"/>
+                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="wIX-xY-yjb"/>
             </constraints>
             <size key="customSize" width="352" height="332"/>
             <connections>
@@ -108,12 +121,15 @@
                 <outlet property="mediaViewsHeightConstraint" destination="4Ab-x2-r5e" id="W2f-II-O9Y"/>
                 <outlet property="reactionsListView" destination="Idm-4q-rB2" id="Ngi-hA-zYt"/>
                 <outlet property="reactionsListViewConstraint" destination="un3-x5-7Av" id="hj4-Bd-W8t"/>
+                <outlet property="readReceiptButton" destination="68O-nk-SUK" id="o9j-3a-b1j"/>
+                <outlet property="readReceiptConstraint" destination="yLu-lZ-Qb6" id="bJ1-8L-0O5"/>
                 <outlet property="statusView" destination="Gxd-Cw-G69" id="shS-p3-TpK"/>
             </connections>
             <point key="canvasLocation" x="699" y="660"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Check" width="20" height="16"/>
         <image name="Exclamation" width="20" height="20"/>
     </resources>
 </document>

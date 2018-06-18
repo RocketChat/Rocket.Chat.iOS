@@ -434,6 +434,11 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResponse.swift */; };
+		8045F49820D0543900AA0F3C /* ReadReceiptsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49720D0543900AA0F3C /* ReadReceiptsRequest.swift */; };
+		8045F49B20D0599800AA0F3C /* ReadReceiptListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49A20D0599800AA0F3C /* ReadReceiptListView.swift */; };
+		8045F49D20D059A600AA0F3C /* ReadReceiptListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */; };
+		8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */; };
+		8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */; };
 		8045F4A420D30B8300AA0F3C /* UISearchBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */; };
 		8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */; };
 		8045F4AD20D313C100AA0F3C /* UITextFieldActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */; };
@@ -1207,6 +1212,11 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		8045F49720D0543900AA0F3C /* ReadReceiptsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptsRequest.swift; sourceTree = "<group>"; };
+		8045F49A20D0599800AA0F3C /* ReadReceiptListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptListView.swift; sourceTree = "<group>"; };
+		8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadReceiptListView.xib; sourceTree = "<group>"; };
+		8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptListViewController.swift; sourceTree = "<group>"; };
+		8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptsRequestSpec.swift; sourceTree = "<group>"; };
 		8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarTextField.swift; sourceTree = "<group>"; };
 		8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldClearButton.swift; sourceTree = "<group>"; };
 		8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldActivityIndicator.swift; sourceTree = "<group>"; };
@@ -1941,6 +1951,7 @@
 		416133351D46CA7400E09DA2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				8045F49920D0597500AA0F3C /* ReadReceipts */,
 				800FCD431F728E6A00D9A692 /* Info */,
 				41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */,
 				41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */,
@@ -2403,6 +2414,7 @@
 				807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */,
 				41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF77011D2C50720028DBF8 /* Rocket.ChatUITests */,
+				8045F4CD20D462EA00AA0F3C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2735,7 +2747,17 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
-		8039441620AF61ED002F317A /* Base */ = {
+		8045F49920D0597500AA0F3C /* ReadReceipts */ = {
+			isa = PBXGroup;
+			children = (
+				8045F49A20D0599800AA0F3C /* ReadReceiptListView.swift */,
+				8045F49C20D059A600AA0F3C /* ReadReceiptListView.xib */,
+				8045F49E20D05A1700AA0F3C /* ReadReceiptListViewController.swift */,
+			);
+			path = ReadReceipts;
+			sourceTree = "<group>";
+		};
+		8045F4CE20D4640600AA0F3C /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				8039441720AF620C002F317A /* ResourceSharedProperties.swift */,
@@ -2794,11 +2816,12 @@
 				806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */,
 				80D41E0A20993CE200034D1F /* PinMessageRequest.swift */,
 				8067DA9A206BC71A005E3369 /* ReactMessageRequest.swift */,
-				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
 				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
 				80D41DFC2092378400034D1F /* StarMessageRequest.swift */,
 				8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */,
 				80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */,
+				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
+				8045F49720D0543900AA0F3C /* ReadReceiptsRequest.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2809,10 +2832,11 @@
 				8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */,
 				806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */,
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
-				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
 				80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */,
 				80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
+				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
+				8045F4A020D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -3322,7 +3346,7 @@
 		D1D535EF1F70863C006625D2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				8039441620AF61ED002F317A /* Base */,
+				8045F4CE20D4640600AA0F3C /* Base */,
 				802498EC1F7A82CD005477EC /* Authentication */,
 				8013F8831FD6B74800EE1A4E /* Command */,
 				9977302520725B3A009AF465 /* Emoji */,
@@ -3605,6 +3629,7 @@
 				14F8A25A202E64B200175FDC /* BnW-29@2x.png in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
 				14F8A298202E65C700175FDC /* Blue-29@2x.png in Resources */,
+				8045F49D20D059A600AA0F3C /* ReadReceiptListView.xib in Resources */,
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
 				41FC9E0F209B469C00FED485 /* AutocompleteCell.xib in Resources */,
 				413FB6E01FE17EB700F010AA /* SubscriptionsTitleView.xib in Resources */,
@@ -4000,6 +4025,7 @@
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
 				8076FDAB2048549C00114F28 /* AuthSettingsHiddenTypes.swift in Sources */,
 				8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */,
+				8045F49B20D0599800AA0F3C /* ReadReceiptListView.swift in Sources */,
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
@@ -4022,6 +4048,7 @@
 				33FD181D20D253AE00380BEC /* BaseNavigationBar.swift in Sources */,
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
+				8045F4D020D4640700AA0F3C /* ResourceWithError.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
 				0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */,
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
@@ -4232,6 +4259,7 @@
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
 				8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */,
+				8045F49820D0543900AA0F3C /* ReadReceiptsRequest.swift in Sources */,
 				334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */,
@@ -4344,6 +4372,7 @@
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */,
 				8062E327209E19BB0044F407 /* AuthClient.swift in Sources */,
+				8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */,
 				807C7C12207522EF006B600E /* LoginServicesRequest.swift in Sources */,
 				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,
 				8067DA9B206BC71A005E3369 /* ReactMessageRequest.swift in Sources */,
@@ -4458,6 +4487,7 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
+				8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */,
 				99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */,
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				418BBC5120D0309400EC09F5 /* ChatTitleViewSpec.swift in Sources */,

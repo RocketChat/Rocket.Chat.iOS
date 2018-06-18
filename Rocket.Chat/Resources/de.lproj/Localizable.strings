@@ -193,7 +193,13 @@
 "chat.loading_messages" = "Nachrichten werden geladen...";
 "chat.unread_separator" = "ungelesen";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; //TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
+"chat.read_receipt_list.title.empty" = "Read by no one"; //TODO
+
 // Chat Message Actions
+"chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Reaktion hinzufügen";
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";

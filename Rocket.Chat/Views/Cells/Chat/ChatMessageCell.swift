@@ -14,6 +14,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
+    func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect))
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -37,6 +38,10 @@ final class ChatMessageCell: UICollectionViewCell {
 
             updateMessage()
         }
+    }
+
+    var settings: AuthSettings? {
+        return AuthManager.isAuthenticated()?.settings
     }
 
     @IBOutlet weak var avatarViewContainer: UIView! {
@@ -108,6 +113,37 @@ final class ChatMessageCell: UICollectionViewCell {
             labelUsernameHeightConstraint.constant = sequential ? 0 : 21
             labelDateHeightConstraint.constant = sequential ? 0 : 21
         }
+    }
+
+    // MARK: Read Receipt
+
+    @IBOutlet weak var readReceiptButton: UIButton!
+    @IBOutlet weak var readReceiptConstraint: NSLayoutConstraint!
+
+    func updateReadReceipt() {
+        guard let settings = settings else {
+            return
+        }
+
+        if settings.messageReadReceiptEnabled {
+            readReceiptConstraint.constant = 12.0
+        } else {
+            readReceiptConstraint.constant = 0.0
+        }
+
+        let image = UIImage(named: "Check")?.imageWithTint(message.unread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
+        readReceiptButton.setImage(image, for: .normal)
+    }
+
+    @IBAction func readReceiptPressed(_ sender: UIButton) {
+        guard
+            let settings = settings,
+            settings.messageReadReceiptStoreUsers
+        else {
+            return
+        }
+
+        delegate?.handleReadReceiptPress(message, source: (readReceiptButton, readReceiptButton.frame))
     }
 
     override func prepareForReuse() {
@@ -295,6 +331,7 @@ final class ChatMessageCell: UICollectionViewCell {
         insertGesturesIfNeeded()
         insertAttachments()
         updateReactions()
+        updateReadReceipt()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
