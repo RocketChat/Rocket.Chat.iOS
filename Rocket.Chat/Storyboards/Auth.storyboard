@@ -697,7 +697,7 @@
                         <outlet property="textFieldPassword" destination="i30-m3-yKn" id="H3k-Zh-b6t"/>
                         <outlet property="textFieldUsername" destination="4sT-R7-k6m" id="uli-YQ-OI7"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="9kY-lU-ad7"/>
-                        <segue destination="0XD-Z9-Dv5" kind="show" identifier="Username" id="B9E-PP-gIC"/>
+                        <segue destination="0XD-Z9-Dv5" kind="show" identifier="RequestUsername" id="B9E-PP-gIC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1039,6 +1039,22 @@
             </objects>
             <point key="canvasLocation" x="2933" y="18"/>
         </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="eWA-Rw-ed8">
+            <objects>
+                <navigationController storyboardIdentifier="RegisterUsernameNav" id="q3n-0j-UeJ" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAH-Yd-p9w" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0XD-Z9-Dv5" kind="relationship" relationship="rootViewController" id="bxA-XM-a3K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sGi-8X-Ah7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="609" y="-1385"/>
+        </scene>
         <!--Register Username Table View Controller-->
         <scene sceneID="JMr-VV-DlN">
             <objects>
@@ -1167,6 +1183,7 @@ to mention you in messages</string>
                             <outlet property="delegate" destination="0XD-Z9-Dv5" id="7h5-DX-phg"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="1Sm-hf-iEJ"/>
                     <connections>
                         <outlet property="registerButton" destination="sdI-DC-ZEg" id="wqe-JD-bEA"/>
                         <outlet property="textFieldUsername" destination="3vM-gD-Ajn" id="kdw-bD-A30"/>
