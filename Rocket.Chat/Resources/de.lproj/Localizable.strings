@@ -82,9 +82,9 @@
 "alert.update_profile_success.title" = "Profil wurde aktualisiert";
 "alert.update_password_success.title" = "Passwort wurde aktualisiert";
 
-"alert.logout.confirmation.title" = "Logout from this server"; // TODO
-"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
-"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+"alert.logout.confirmation.title" = "Von diesem Server abmelden";
+"alert.logout.confirmation.message" = "Bist du sicher, dass du dich von \"%@\" abmelden möchtest?";
+"alert.logout.confirmation.confirm" = "Ja, abmelden";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
@@ -92,36 +92,36 @@
 "connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
 
 // Socket Connection
-"connection.title" = "Sign in your server"; // TODO
-"connection.button_connect" = "Connect"; // TODO
+"connection.title" = "Bei Server anmelden";
+"connection.button_connect" = "Verbinden";
 "connection.offline.banner.message" = "Sie sind offline. Versuche neu zu verbinden...";
 "connection.connecting.banner.message" = "Verbinde...";
-"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
+"connection.waiting_for_network.banner.message" = "Warte auf Netzwerk";
 
 // Onboarding
-"onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
-"onboarding.label_subtitle" = "Open Source Communication"; // TODO
-"onboarding.button_connect_server" = "Connect with a server"; // TODO
-"onboarding.button_create_server" = "Create a new server"; // TODO
-"onboarding.button_join_community_prefix" = "Join in the community"; // TODO
+"onboarding.label_welcome" = "Willkommen bei Rocket Chat";
+"onboarding.label_subtitle" = "Open Source Kommuniation";
+"onboarding.button_connect_server" = "Mit einem Server verbinden";
+"onboarding.button_create_server" = "Neuen Server erstellen";
+"onboarding.button_join_community_prefix" = "Der Community beitreten";
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Bitte warten Sie kurz!";
-"auth.email_auth_prefix" = "Login with "; // TODO
-"auth.email_auth" = "e-mail"; // TODO
-"auth.login_service_prefix" = "Continue with "; // TODO
+"auth.email_auth_prefix" = "Einloggen mit ";
+"auth.email_auth" = "E-Mail";
+"auth.login_service_prefix" = "Fortfahren mit ";
 
-"auth.signup_title" = "Sign up"; // TODO
-"auth.signup.button_register" = "Register"; // TODO
-"auth.signup.button_next" = "Next"; // TODO
-"auth.signup.custom_fields_title" = "Complete your register"; // TODO
+"auth.signup_title" = "Registrieren";
+"auth.signup.button_register" = "Registrieren";
+"auth.signup.button_next" = "Weiter";
+"auth.signup.custom_fields_title" = "Registrierung vervollständigen";
 
-"auth.login.login_title" = "Login"; // TODO
-"auth.login.button_login_title" = "Login"; // TODO
-"auth.login.create_account_prefix" = "Don't have an account?"; // TODO
-"auth.login.create_account" = "\nCreate an Account"; // TODO
+"auth.login.login_title" = "Login";
+"auth.login.button_login_title" = "Login";
+"auth.login.create_account_prefix" = "Noch kein Benutzerkonto?";
+"auth.login.create_account" = "\nKonto erstellen";
 "auth.login.username.placeholder" = "E-Mail oder Benutzername";
 "auth.login.password.placeholder" = "Passwort";
 "auth.login.buttonRegister" = "Neues Konto erstellen";
@@ -143,7 +143,7 @@
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
 "subscriptions.direct_messages" = "Direktnachrichten";
-"subscriptions.conversations" = "Conversations"; //TODO
+"subscriptions.conversations" = "Konversationen";
 "subscriptions.you" = "Du";
 "subscriptions.messages" = "Nachrichten";
 "subscriptions.list.you_initial" = "Du";
@@ -153,12 +153,12 @@
 
 // Servers
 "servers.add_new_team" = "Neues Team hinzufügen";
-"servers.title" = "Servers"; //TODO
-"servers.add_new_server" = "Add Server"; //TODO
-"servers.action.disconnect" = "Disconnect"; //TODO
-"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
-"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
-"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
+"servers.title" = "Server";
+"servers.add_new_server" = "Server hinzufügen";
+"servers.action.disconnect" = "Abmelden";
+"servers.action.disconnect.alert.title" = "Von diesem Server abmelden";
+"servers.action.disconnect.alert.message" = "Von dem Server \"%@\" wirklich abmelden??";
+"servers.action.disconnect.alert.confirm" = "Ja, abmelden";
 
 // Status
 "status.online" = "Online";
@@ -280,9 +280,9 @@
 "chat.members.list.title" = "Mitglieder";
 
 // Add Users
-"chat.add_users.title" = "Add Users"; // TODO
-"chat.add_users.confirm.title" = "Add this user?"; // TODO
-"chat.add_users.confirm.message" = "Are you sure you want to add '%@' to '%@'?"; // TODO
+"chat.add_users.title" = "Nutzer hinzufügen";
+"chat.add_users.confirm.title" = "Diesen Nutzer hinzufügen?";
+"chat.add_users.confirm.message" = "Soll '%@' wirklich zu '%@' hinzugefügt werden?";
 
 // Messages List
 "chat.messages.list.title" = "Nachrichten";
@@ -296,8 +296,8 @@
 
 // Settings
 "myaccount.settings.title" = "Einstellungen";
-"myaccount.settings.administration" = "Administration"; // TODO
-"myaccount.settings.logout" = "Logout from %@"; // TODO
+"myaccount.settings.administration" = "Administration";
+"myaccount.settings.logout" = "Von %@ abmelden";
 "myaccount.settings.contactus" = "Kontaktieren Sie uns";
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";
@@ -357,26 +357,26 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Konversation";
-"user_action_sheet.remove" = "Remove from room"; // TODO
-"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
-"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+"user_action_sheet.remove" = "Von Raum entfernen";
+"user_action_sheet.remove_confirm.title" = "Diesen Nutzer entfernen?";
+"user_action_sheet.remove_confirm.message" = "Soll '%@' wirklich aus diesem Raum entfernt werden?";
 "user_action_sheet.remove" = "Aus Raum entfernen";
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";
 
 // Theme
-"theme.settings.title" = "Theme"; // TODO
-"theme.settings.header" = "ALL THEMES"; // TODO
-"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
-"theme.light" = "Light"; // TODO
-"theme.dark" = "Dark"; // TODO
-"theme.black" = "Black"; // TODO
+"theme.settings.title" = "Aussehen";
+"theme.settings.header" = "ALLE THEMES";
+"theme.settings.footer" = "Das Anwenden eines Themes ändert die Optik der App.";
+"theme.light" = "Hell";
+"theme.dark" = "Dunkel";
+"theme.black" = "Schwarz";
 
 // Sorting & Grouping Subscriptions
-"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
-"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
-"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
-"subscriptions.sorting.activity" = "Activity"; //TODO
-"subscriptions.grouping.type" = "Group by type"; //TODO
-"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
-"subscriptions.grouping.unread_top" = "Unread on top"; //TODO
+"subscriptions.sorting.title.alphabetical" = "Nach Name sortieren";
+"subscriptions.sorting.title.activity" = "Nach Aktivität sortieren";
+"subscriptions.sorting.alphabetical" = "Alphabetisch";
+"subscriptions.sorting.activity" = "Aktivität";
+"subscriptions.grouping.type" = "Nach Art gruppieren";
+"subscriptions.grouping.favorites" = "Favoriten gruppieren";
+"subscriptions.grouping.unread_top" = "Ungelesene ganz oben";
