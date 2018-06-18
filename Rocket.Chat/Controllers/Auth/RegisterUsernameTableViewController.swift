@@ -25,14 +25,24 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+        if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL], let url = URL(string: serverURL) {
+            navigationItem.title = url.host
+        } else {
+            navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+        }
 
-        startLoading()
-        AuthManager.usernameSuggestion { [weak self] (response) in
-            self?.stopLoading()
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setGrayTheme()
+        }
 
-            if !response.isError() {
-                self?.textFieldUsername.text = response.result["result"].stringValue
+        if SocketManager.isConnected() {
+            startLoading()
+            AuthManager.usernameSuggestion { [weak self] (response) in
+                self?.stopLoading()
+
+                if !response.isError() {
+                    self?.textFieldUsername.text = response.result["result"].stringValue
+                }
             }
         }
     }
