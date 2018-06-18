@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class NewPasswordTableViewController: UITableViewController {
+final class NewPasswordTableViewController: BaseTableViewController {
 
     @IBOutlet weak var newPassword: UITextField! {
         didSet {
@@ -103,18 +103,14 @@ class NewPasswordTableViewController: UITableViewController {
     }
 
     fileprivate func update(password newPassword: String, sender: UIBarButtonItem) {
-        DispatchQueue.main.async {
-            self.navigationItem.hidesBackButton = true
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
-        }
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
 
         let stopLoading = {
-            DispatchQueue.main.async {
-                self.newPassword.text = nil
-                self.passwordConfirmation.text = nil
-                self.navigationItem.hidesBackButton = false
-                self.navigationItem.rightBarButtonItem = sender
-            }
+            self.newPassword.text = nil
+            self.passwordConfirmation.text = nil
+            self.navigationItem.hidesBackButton = false
+            self.navigationItem.rightBarButtonItem = sender
         }
 
         let updatePasswordRequest = UpdateUserRequest(password: newPassword, currentPassword: currentPassword)

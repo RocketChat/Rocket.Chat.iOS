@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-final class NotificationViewController: UIViewController {
+final class NotificationViewController: TopTransparentViewController {
 
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
@@ -21,7 +21,7 @@ final class NotificationViewController: UIViewController {
     var lastTouchLocation: CGPoint?
     let animationDuration: TimeInterval = 0.3
     let notificationVisibleDuration: TimeInterval = 6.0
-    let topInset: CGFloat = 8.0
+    let notificationContentHeight: CGFloat = 64
 
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
 
@@ -51,21 +51,24 @@ final class NotificationViewController: UIViewController {
     // MARK: - View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowRadius = 8.0
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.clipsToBounds = true
+
+        ThemeManager.addObserver(self)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationView.setNeedsLayout()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        visibleConstraint.constant = topInset
-        if #available(iOS 11.0, *) {
-            if isDeviceWithNotch {
-                visibleConstraint.constant = view.safeAreaInsets.top
-            }
+        if #available(iOS 11.0, *), isDeviceWithNotch {
+            visibleConstraint.constant = notificationContentHeight +  view.safeAreaInsets.top
+            view.window?.windowLevel = UIWindowLevelStatusBar - 1
+        } else {
+            visibleConstraint.constant = notificationContentHeight + 10
+            view.window?.windowLevel = UIWindowLevelAlert
         }
     }
 
@@ -84,15 +87,18 @@ final class NotificationViewController: UIViewController {
         // Commented out until a setting is added to toggle the sound.
         // playSound()
 
+        willStartDisplayingContent()
         UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { [weak self] _ in
-            UIView.animate(withDuration: self?.animationDuration ?? 0.0) {
+            UIView.animate(withDuration: self?.animationDuration ?? 0.0, animations: ({
                 self?.notificationViewIsHidden = true
                 self?.view.layoutIfNeeded()
+            })) { (_) in
+                self?.didEndDisplayingContent()
             }
         }
     }
@@ -126,13 +132,8 @@ extension NotificationViewController {
             let displacement = sender.location(in: view).y - lastTouchLocation.y
             let newYOffset = notificationView.frame.origin.y + displacement
 
-            if newYOffset <= visibleConstraint.constant {
+            if newYOffset <= 0 {
                 notificationView.frame.origin.y += displacement
-                self.lastTouchLocation = sender.location(in: view)
-
-            } else if notificationView.bounds.contains(sender.location(in: notificationView)),
-                newYOffset <= visibleConstraint.constant + 16 {
-                notificationView.frame.origin.y += displacement / 10
                 self.lastTouchLocation = sender.location(in: view)
             }
 

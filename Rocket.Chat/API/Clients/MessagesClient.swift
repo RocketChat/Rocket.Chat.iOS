@@ -20,17 +20,15 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    message.temporary = false
-                    message.failed = false
-                    message.updatedAt = Date()
-                    message.map(json, realm: realm)
-                    realm?.add(message, update: true)
-                }
-
-                MessageTextCacheManager.shared.update(for: message)
+            try? realm?.write {
+                message.temporary = false
+                message.failed = false
+                message.updatedAt = Date()
+                message.map(json, realm: realm)
+                realm?.add(message, update: true)
             }
+
+            MessageTextCacheManager.shared.update(for: message)
         }
 
         func setMessageOffline() {
@@ -42,7 +40,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
@@ -157,13 +155,11 @@ struct MessagesClient: APIClient {
                     return Alert.defaultError.present()
                 }
 
-                DispatchQueue.main.async {
-                    try? realm?.write {
-                        realm?.add(message, update: true)
-                    }
-
-                    MessageTextCacheManager.shared.update(for: message)
+                try? realm?.write {
+                    realm?.add(message, update: true)
                 }
+
+                MessageTextCacheManager.shared.update(for: message)
             case .error: Alert.defaultError.present()
             }
         }

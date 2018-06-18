@@ -23,6 +23,7 @@ final class ChatPreviewModeView: UIView {
         }
     }
 
+    @IBOutlet weak var seperatorView: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var buttonJoin: UIButton! {
         didSet {
@@ -56,5 +57,16 @@ final class ChatPreviewModeView: UIView {
         set {
             bottomConstraint.constant = newValue + requiredBottomInset
         }
+    }
+}
+
+extension ChatPreviewModeView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelTitle.textColor = theme.auxiliaryText
+        seperatorView.backgroundColor = theme.mutedAccent
+        buttonJoin.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1)
+        backgroundColor = theme.focusedBackground
     }
 }

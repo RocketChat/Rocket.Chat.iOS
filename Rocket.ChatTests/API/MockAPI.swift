@@ -15,7 +15,7 @@ class MockAPI: APIFetcher {
     var nextError: APIError?
 
     @discardableResult
-    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
         if let nextResult = nextResult {
             completion?(.resource(R.APIResourceType(raw: nextResult)))
         }

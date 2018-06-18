@@ -8,21 +8,30 @@
 
 import UIKit
 
+protocol ChatTitleViewProtocol: class {
+    func titleViewButtonChannelDidPressed()
+    func titleViewButtonMoreDidPressed()
+}
+
 final class ChatTitleView: UIView {
 
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel! {
+    weak var delegate: ChatTitleViewProtocol?
+
+    @IBOutlet weak var buttonMore: UIButton!
+    @IBOutlet weak var buttonTitle: UIButton! {
         didSet {
-            labelTitle.textColor = .RCDarkGray()
+            buttonTitle.titleLabel?.textColor = .RCDarkGray()
         }
     }
 
-    @IBOutlet weak var imageArrowDown: UIImageView! {
+    var state: SocketConnectionState = SocketManager.sharedInstance.state {
         didSet {
-            imageArrowDown.image = imageArrowDown.image?.withRenderingMode(.alwaysTemplate)
-            imageArrowDown.tintColor = .RCGray()
+            updateConnectionState()
         }
     }
+
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var labelLoading: UILabel!
 
     override var intrinsicContentSize: CGSize {
         return UILayoutFittingExpandedSize
@@ -33,12 +42,53 @@ final class ChatTitleView: UIView {
     var subscription: Subscription? {
         didSet {
             guard let subscription = subscription, !subscription.isInvalidated else { return }
-
             viewModel.subscription = subscription
-            labelTitle.text = viewModel.title
-            icon.image = UIImage(named: viewModel.imageName)?.withRenderingMode(.alwaysTemplate)
-            icon.tintColor = viewModel.iconColor
+            buttonTitle.setTitle(viewModel.title, for: .normal)
+
+            let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
+            buttonTitle.setImage(image, for: .normal)
+
+            updateConnectionState()
         }
     }
 
+    internal func updateConnectionState() {
+        if state == .connecting || state == .waitingForNetwork {
+            viewLoading?.isHidden = false
+            buttonTitle?.isHidden = true
+
+            if state == .connecting {
+                labelLoading?.text = localized("connection.connecting.banner.message")
+            }
+
+            if state == .waitingForNetwork {
+                labelLoading?.text = localized("connection.waiting_for_network.banner.message")
+            }
+        } else {
+            buttonTitle?.isHidden = false
+            viewLoading?.isHidden = true
+        }
+    }
+
+    // MARK: IBAction
+
+    @IBAction func buttonChannelDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonChannelDidPressed()
+    }
+
+    @IBAction func buttonMoreDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonMoreDidPressed()
+    }
+
+}
+
+// MARK: Themeable
+
+extension ChatTitleView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        buttonMore.tintColor = theme.titleText
+        buttonTitle.setTitleColor(theme.titleText, for: .normal)
+    }
 }

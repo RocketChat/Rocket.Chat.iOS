@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kServerCellIdentifier" rowHeight="58" id="3xd-cX-I4a" customClass="ServerCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3xd-cX-I4a" id="WgH-Ee-waB">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7C6-il-XaA">
+                        <rect key="frame" x="15" y="8" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="SaD-i6-qnq"/>
+                            <constraint firstAttribute="width" constant="42" id="XgW-PJ-fq4"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tb-Ih-Bjt">
+                        <rect key="frame" x="73" y="8" width="287" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Ey8-eS-E6n"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOy-10-ij5">
+                        <rect key="frame" x="73" y="32.5" width="287" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5Tb-Ih-Bjt" firstAttribute="top" secondItem="WgH-Ee-waB" secondAttribute="top" constant="8" id="Bo9-aY-dFc"/>
+                    <constraint firstItem="5Tb-Ih-Bjt" firstAttribute="leading" secondItem="7C6-il-XaA" secondAttribute="trailing" constant="16" id="GQ2-fN-XT4"/>
+                    <constraint firstAttribute="trailing" secondItem="5Tb-Ih-Bjt" secondAttribute="trailing" constant="15" id="STe-9q-zn8"/>
+                    <constraint firstItem="7C6-il-XaA" firstAttribute="leading" secondItem="WgH-Ee-waB" secondAttribute="leading" constant="15" id="bDB-OX-Uef"/>
+                    <constraint firstItem="7C6-il-XaA" firstAttribute="centerY" secondItem="WgH-Ee-waB" secondAttribute="centerY" id="tHW-8R-2o8"/>
+                    <constraint firstItem="ZOy-10-ij5" firstAttribute="leading" secondItem="7C6-il-XaA" secondAttribute="trailing" constant="16" id="tHX-rw-UKg"/>
+                    <constraint firstAttribute="trailing" secondItem="ZOy-10-ij5" secondAttribute="trailing" constant="15" id="u3q-uF-CMV"/>
+                    <constraint firstAttribute="bottom" secondItem="ZOy-10-ij5" secondAttribute="bottom" constant="8" id="zTU-JV-nh6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="imageViewServer" destination="7C6-il-XaA" id="Lyw-XV-pdC"/>
+                <outlet property="labelServerDescription" destination="ZOy-10-ij5" id="pmZ-YG-8U6"/>
+                <outlet property="labelServerName" destination="5Tb-Ih-Bjt" id="3Qk-nK-4qs"/>
+            </connections>
+            <point key="canvasLocation" x="84" y="-82"/>
+        </tableViewCell>
+    </objects>
+</document>

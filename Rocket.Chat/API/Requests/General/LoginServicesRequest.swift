@@ -18,9 +18,14 @@ class LoginServicesRequest: APIRequest {
 
 class LoginServicesResource: APIResource {
     var loginServices: [LoginService] {
-        return raw?["services"].arrayValue.map {
+        return raw?["services"].arrayValue.compactMap {
             let service = LoginService()
             service.map($0, realm: nil)
+
+            guard service.isValid, service.service != nil else {
+                return nil
+            }
+
             return service
         } ?? []
     }

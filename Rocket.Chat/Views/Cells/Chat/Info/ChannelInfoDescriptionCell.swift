@@ -7,30 +7,42 @@
 //
 
 import UIKit
+import RCMarkdownParser
 
 struct ChannelInfoDescriptionCellData: ChannelInfoCellDataProtocol {
     let cellType = ChannelInfoDescriptionCell.self
+
     var title: String?
-    var description: String?
+    var descriptionText: String?
 }
 
 final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol {
+    typealias DataType = ChannelInfoDescriptionCellData
 
     static let identifier = "kChannelInfoCellDescription"
     static let defaultHeight: Float = 80
 
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelDescription: UILabel! {
-        didSet {
-            labelDescription.textColor = UIColor.RCGray()
-        }
-    }
+    @IBOutlet weak var labelSubtitle: UILabel!
 
-    var data: ChannelInfoDescriptionCellData? {
+    var data: DataType? {
         didSet {
             labelTitle.text = data?.title
-            labelDescription.text = data?.description
+
+            let attributedString = NSAttributedString(string: data?.descriptionText ?? "")
+            labelSubtitle.attributedText = MarkdownManager.shared.transformAttributedString(attributedString)
         }
     }
+}
 
+// MARK: Themeable
+
+extension ChannelInfoDescriptionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelTitle.textColor = theme.bodyText
+        labelSubtitle.textColor = theme.auxiliaryText
+    }
 }

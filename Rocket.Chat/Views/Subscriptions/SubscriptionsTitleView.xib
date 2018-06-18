@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKY-Ch-wz7" userLabel="User View" customClass="SubscriptionsTitleView" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1EU-Bf-ijR">
+                    <rect key="frame" x="0.0" y="4" width="375" height="36"/>
+                    <subviews>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Oo-Jr-ITD">
+                            <rect key="frame" x="157" y="0.0" width="61" height="18"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-nP-uyM">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="18"/>
+                                </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t2-Hf-Uj2">
+                                    <rect key="frame" x="28" y="0.0" width="33" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
+                            <rect key="frame" x="156.5" y="0.0" width="62.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
+                            <rect key="frame" x="0.0" y="18" width="375" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="f5b-22-pcB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="open.rocket.chat" image="Server Selector">
+                                <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonServerDidPressedWithSender:" destination="dKY-Ch-wz7" eventType="touchUpInside" id="HkY-sj-4yp"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="1e3-dn-Xdj"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="3cY-6p-zbD"/>
+                        <constraint firstAttribute="height" constant="36" id="Db1-Dl-ho2"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="leading" secondItem="1EU-Bf-ijR" secondAttribute="leading" id="Fa2-5X-ymp"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="FkN-38-Da4"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="top" secondItem="1EU-Bf-ijR" secondAttribute="top" id="FnL-Uz-KpX"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="IJT-0w-7Be"/>
+                        <constraint firstAttribute="trailing" secondItem="ct8-6x-Vjc" secondAttribute="trailing" id="J35-gR-SUO"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="9Oo-Jr-ITD" secondAttribute="bottom" id="WPP-F1-cKZ"/>
+                        <constraint firstItem="9Oo-Jr-ITD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1EU-Bf-ijR" secondAttribute="leading" id="ba3-Kp-rRe"/>
+                        <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="dQV-QF-hgL"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Oo-Jr-ITD" secondAttribute="trailing" id="jBl-d4-c6R"/>
+                        <constraint firstAttribute="bottom" secondItem="ct8-6x-Vjc" secondAttribute="bottom" id="mDL-TK-eV9"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="centerX" secondItem="1EU-Bf-ijR" secondAttribute="centerX" id="rKL-fl-g3g"/>
+                        <constraint firstItem="ct8-6x-Vjc" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" id="rM1-dt-SVm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="dVf-qa-uaN"/>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="centerX" secondItem="dKY-Ch-wz7" secondAttribute="centerX" id="hnJ-8y-wUo"/>
+                <constraint firstItem="1EU-Bf-ijR" firstAttribute="leading" secondItem="6rA-25-euU" secondAttribute="leading" id="pqr-Kf-FRF"/>
+                <constraint firstItem="6rA-25-euU" firstAttribute="trailing" secondItem="1EU-Bf-ijR" secondAttribute="trailing" id="xh2-Cz-1JS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>
+            <connections>
+                <outlet property="buttonServer" destination="ct8-6x-Vjc" id="fla-t6-d69"/>
+                <outlet property="labelLoading" destination="3t2-Hf-Uj2" id="7vu-DW-yCH"/>
+                <outlet property="labelMessages" destination="3Il-8X-3Zu" id="nFX-tp-Cw1"/>
+                <outlet property="viewLoading" destination="9Oo-Jr-ITD" id="n4D-Re-2Ke"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Server Selector" width="12" height="9"/>
+    </resources>
+</document>

@@ -75,10 +75,10 @@ final class ChatMessageTextView: UIView {
         }
 
         if let thumbURL = viewModel?.thumbURL {
-            imageViewThumb.sd_setImage(with: thumbURL, completed: { _, error, _, _ in
+            ImageManager.loadImage(with: thumbURL, into: imageViewThumb) { _, error in
                 let width = error != nil ? 0 : ChatMessageTextView.imageViewDefaultWidth
                 updateConstraint(width)
-            })
+            }
         } else {
             updateConstraint(0)
         }
@@ -123,5 +123,17 @@ final class ChatMessageTextView: UIView {
         if !containsGesture {
             addGestureRecognizer(tapGesture)
         }
+    }
+}
+
+// MARK: Themeable
+
+extension ChatMessageTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        viewLeftBorder.backgroundColor = theme.auxiliaryText
+        labelDescription.textColor = theme.auxiliaryText
+        labelTitle.textColor = theme.controlText
     }
 }

@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SDWebImage
 import FLAnimatedImage
 import SimpleImageViewer
 import MBProgressHUD
 import MobilePlayer
+import Nuke
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -42,8 +42,8 @@ class FilesListViewData {
         if let subscription = subscription {
             isLoadingMoreFiles = true
 
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
-            let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+            let filesRequest = RoomFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {
                 case .resource(let resource):
@@ -55,26 +55,24 @@ class FilesListViewData {
         }
     }
 
-    private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
-        DispatchQueue.main.async {
-            self.showing += result.count ?? 0
-            self.total = result.total ?? 0
+    private func handle(result: RoomFilesResource, completion: (() -> Void)? = nil) {
+        self.showing += result.count ?? 0
+        self.total = result.total ?? 0
 
-            if let files = result.files {
-                guard !files.isEmpty else {
-                    self.isLoadingMoreFiles = false
-                    completion?()
-                    return
-                }
-
-                self.cells.append(contentsOf: files)
+        if let files = result.files {
+            guard !files.isEmpty else {
+                self.isLoadingMoreFiles = false
+                completion?()
+                return
             }
 
-            self.currentPage += 1
-
-            self.isLoadingMoreFiles = false
-            completion?()
+            self.cells.append(contentsOf: files)
         }
+
+        self.currentPage += 1
+
+        self.isLoadingMoreFiles = false
+        completion?()
     }
 }
 
@@ -89,11 +87,9 @@ class FilesListViewController: BaseViewController {
         data.subscription = self.data.subscription
         data.loadMoreFiles {
             self.data = data
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
-                self.updateIsEmptyFile()
-            }
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+            self.updateIsEmptyFile()
         }
     }
 
@@ -109,11 +105,9 @@ class FilesListViewController: BaseViewController {
 
     func loadMoreFiles() {
         data.loadMoreFiles {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
-                self.updateIsEmptyFile()
-            }
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+            self.updateIsEmptyFile()
         }
     }
 
@@ -134,15 +128,15 @@ class FilesListViewController: BaseViewController {
     private func openRemoteImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView?) {
         guard let fileURL = file.fullFileURL() else { return }
 
-        let open: ((Data?) -> Void) = { [weak self] data in
+        let open: ((Image?) -> Void) = { [weak self] image in
             guard let strongSelf = self else { return }
 
             let configuration = ImageViewerConfiguration { config in
-                if let data = data {
+                if let image = image {
                     if file.isGif {
-                        config.animatedImage = FLAnimatedImage(gifData: data)
+                        config.animatedImage = FLAnimatedImage(gifData: image.animatedImageData)
                     } else {
-                        config.image = UIImage(data: data)
+                        config.image = image
                     }
                 }
                 config.imageView = imageView
@@ -155,9 +149,9 @@ class FilesListViewController: BaseViewController {
         }
 
         MBProgressHUD.showAdded(to: view, animated: true)
-        SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
-            open(data)
-        })
+        ImagePipeline.shared.loadImage(with: fileURL) { response, _ in
+            open(response?.image)
+        }
     }
 
     func openVideo(fromFile file: File) {
@@ -179,6 +173,7 @@ class FilesListViewController: BaseViewController {
         func open() {
             documentController = UIDocumentInteractionController(url: localFileURL)
             documentController?.delegate = self
+
             DispatchQueue.main.async {
                 self.documentController?.presentPreview(animated: true)
             }
@@ -234,8 +229,8 @@ extension FilesListViewController {
             loadMoreFiles()
 
             guard let refreshControl = tableView.refreshControl else { return }
-            tableView.refreshControl?.beginRefreshing()
             tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+            tableView.refreshControl?.beginRefreshing()
         }
     }
 

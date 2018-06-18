@@ -20,6 +20,7 @@ extension API {
         let api = API(host: host, version: Version(auth.serverVersion) ?? .zero)
         api.userId = auth.userId
         api.authToken = auth.token
+        api.language = AppManager.language
 
         return api
     }

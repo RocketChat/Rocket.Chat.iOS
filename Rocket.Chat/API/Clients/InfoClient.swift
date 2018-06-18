@@ -11,34 +11,34 @@ import RealmSwift
 struct InfoClient: APIClient {
     let api: AnyAPIFetcher
 
-    func fetchInfo(realm: Realm? = Realm.current) {
+    func fetchInfo(realm: Realm? = Realm.current, completion: VoidCompletion? = nil) {
         api.fetch(InfoRequest()) { response in
             switch response {
             case .resource(let resource):
                 guard let version = resource.version else { return }
                 realm?.execute({ realm in
                     AuthManager.isAuthenticated(realm: realm)?.serverVersion = version
-                })
+                }, completion: completion)
             case .error:
                 break
             }
         }
     }
 
-    func fetchLoginServices(realm: Realm? = Realm.current) {
+    func fetchLoginServices(realm: Realm? = Realm.current, completion: ((_ loginServices: [LoginService], _ shouldRetrieveLoginServices: Bool) -> Void)? = nil) {
         api.fetch(LoginServicesRequest()) { response in
             switch response {
             case .resource(let res):
-                DispatchQueue.main.async {
-                    realm?.execute({ realm in
-                        realm.add(res.loginServices, update: true)
-                    })
-                }
+                completion?(res.loginServices, false)
+                realm?.execute({ realm in
+                    realm.add(res.loginServices, update: true)
+                })
             case .error(let error):
                 switch error {
                 case .version:
                     // version fallback
                     LoginServiceManager.subscribe()
+                    completion?([LoginService](), true)
                 default:
                     break
                 }
@@ -51,11 +51,9 @@ struct InfoClient: APIClient {
         api.fetch(PermissionsRequest()) { response in
             switch response {
             case .resource(let res):
-                DispatchQueue.main.async {
-                    realm?.execute({ realm in
-                        realm.add(res.permissions, update: true)
-                    })
-                }
+                realm?.execute({ realm in
+                    realm.add(res.permissions, update: true)
+                })
             case .error(let error):
                 switch error {
                 case .version:

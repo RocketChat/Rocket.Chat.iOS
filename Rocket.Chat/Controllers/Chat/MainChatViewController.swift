@@ -17,6 +17,10 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return centerViewController.preferredStatusBarStyle
+    }
+
     class func closeSideMenuIfNeeded() {
         if let instance = shared {
             if instance.sidePanelVisible {

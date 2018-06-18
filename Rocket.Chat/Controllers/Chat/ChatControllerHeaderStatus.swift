@@ -19,6 +19,7 @@ extension ChatViewController {
             headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
             view.addSubview(headerView)
             chatHeaderViewStatus = headerView
+            chatHeaderViewStatus?.applyTheme()
 
             // Shadow of the view
             headerView.layer.masksToBounds = false
@@ -52,8 +53,7 @@ extension ChatViewController {
 
         chatHeaderViewStatus?.labelTitle.text = localized("chat.loading_messages")
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
-        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+        chatPreviewModeView?.applyTheme()
         chatHeaderViewStatus?.activityIndicator.startAnimating()
     }
 }

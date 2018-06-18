@@ -12,15 +12,14 @@ enum Storyboard {
     case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
     case preferences
+    case subscriptions
 
     var name: String {
         switch self {
-        case .auth:
-            return "Auth"
-        case .chat:
-            return "Chat"
-        case .preferences:
-            return "Preferences"
+        case .auth: return "Auth"
+        case .chat: return "Chat"
+        case .preferences: return "Preferences"
+        case .subscriptions: return "Subscriptions"
         }
     }
 
@@ -29,8 +28,8 @@ enum Storyboard {
     }
 
     func initialViewController() -> UIViewController? {
-        let storyboardChat = UIStoryboard(name: name, bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
+        let storyboard = instantiate()
+        let controller = storyboard.instantiateInitialViewController()
 
         // preload view
         _ = controller?.view
@@ -51,6 +50,11 @@ enum Storyboard {
         }
 
         return controller
+    }
+
+    func instantiate(viewController: String) -> UIViewController? {
+        let storyboard = instantiate()
+        return storyboard.instantiateViewController(withIdentifier: viewController)
     }
 }
 

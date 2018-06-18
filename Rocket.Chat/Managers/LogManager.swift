@@ -11,9 +11,8 @@ import Foundation
 struct Log {
 
     static func debug(_ text: String?) {
-        guard let text = text else { return }
-
         #if DEBUG
+        guard let text = text else { return }
         print(text)
         #endif
     }

@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol, ChatMessageActionButtonsViewProtocol {
     func openURL(url: URL)
+
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
@@ -151,6 +152,22 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    func insertButtonActions() -> CGFloat {
+        var addedHeight = CGFloat(0)
+
+        if message.isBroadcastReplyAvailable() {
+            if let view = ChatMessageActionButtonsView.instantiateFromNib() {
+                view.message = message
+                view.delegate = delegate
+
+                mediaViews.addArrangedSubview(view)
+                addedHeight += ChatMessageActionButtonsView.defaultHeight
+            }
+        }
+
+        return addedHeight
+    }
+
     func insertURLs() -> CGFloat {
         var addedHeight = CGFloat(0)
         message.urls.forEach { url in
@@ -168,7 +185,8 @@ final class ChatMessageCell: UICollectionViewCell {
 
     //swiftlint:disable cyclomatic_complexity
     func insertAttachments() {
-        var mediaViewHeight = insertURLs()
+        var mediaViewHeight = CGFloat(0)
+        mediaViewHeight += insertURLs()
 
         message.attachments.forEach { attachment in
             let type = attachment.type
@@ -223,6 +241,7 @@ final class ChatMessageCell: UICollectionViewCell {
             }
         }
 
+        mediaViewHeight += insertButtonActions()
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
 
@@ -245,14 +264,12 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    fileprivate func updateMessageContent() {
-        if let text = MessageTextCacheManager.shared.message(for: message) {
+    fileprivate func updateMessageContent(force: Bool = false) {
+        if let text = force ? MessageTextCacheManager.shared.update(for: message, with: theme) : MessageTextCacheManager.shared.message(for: message, with: theme) {
             if message.temporary {
-                text.setFontColor(MessageTextFontAttributes.systemFontColor)
-            }
-
-            if message.failed {
-                text.setFontColor(MessageTextFontAttributes.failedFontColor)
+                text.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
+            } else if message.failed {
+                text.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
             }
 
             labelText.message = text
@@ -260,12 +277,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessage() {
-        guard
-            delegate != nil,
-            let message = message
-        else {
-            return
-        }
+        guard let message = message else { return }
 
         if message.failed {
             statusView.isHidden = false
@@ -308,11 +320,15 @@ extension ChatMessageCell {
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
-        let attributedString = MessageTextCacheManager.shared.message(for: message)
+        let attributedString = MessageTextCacheManager.shared.message(for: message, with: nil)
 
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
             total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
+        }
+
+        if message.isBroadcastReplyAvailable() {
+            total += ChatMessageActionButtonsView.defaultHeight
         }
 
         for url in message.urls {
@@ -348,7 +364,6 @@ extension ChatMessageCell {
 
         return total
     }
-
 }
 
 // MARK: Reactions
@@ -386,5 +401,17 @@ extension ChatMessageCell {
             reactionsListView.isHidden = true
             reactionsListViewConstraint.constant = 0
         }
+    }
+}
+
+// MARK: Themeable
+
+extension ChatMessageCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelDate.textColor = theme.auxiliaryText
+        labelUsername.textColor = theme.titleText
+        updateMessageContent(force: true)
     }
 }

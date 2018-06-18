@@ -26,8 +26,6 @@ extension ChatViewController: SocketConnectionHandler {
 
         chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
         chatHeaderViewStatus?.buttonRefresh.isHidden = false
-        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {

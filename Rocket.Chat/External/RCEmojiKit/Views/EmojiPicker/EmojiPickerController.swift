@@ -25,6 +25,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
                 }
             }
 
+            emojiPicker.isPopover = presentationController?.presentationStyle == .popover
+
             emojiPicker.customEmojis = customEmojis
         }
     }

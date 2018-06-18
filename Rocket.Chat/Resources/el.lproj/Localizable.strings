@@ -1,7 +1,9 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Ναί";
 "global.no" = "Όχι";
 "global.cancel" = "Ακύρωση";
+"global.error" = "λάθος";
 
 // Errors
 "error.socket.default_error.title" = "Ωπ!";
@@ -11,7 +13,7 @@
 "error.login.message" = "Something wrong happened while trying to login."; //TODO
 
 "error.login_unauthorized.title" = "Ωπ!";
-"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ωπ!";
@@ -80,20 +82,46 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.logout.confirmation.title" = "Logout from this server"; // TODO
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
 "connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL;";
 "connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
 
 // Socket Connection
+"connection.title" = "Sign in your server"; // TODO
+"connection.button_connect" = "Connect"; // TODO
 "connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
+"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
+
+// Onboarding
+"onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
+"onboarding.label_subtitle" = "Open Source Communication"; // TODO
+"onboarding.button_connect_server" = "Connect with a server"; // TODO
+"onboarding.button_create_server" = "Create a new server"; // TODO
+"onboarding.button_join_community_prefix" = "Join in the community"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Σύνδεση";
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
+"auth.email_auth_prefix" = "Login with "; // TODO
+"auth.email_auth" = "e-mail"; // TODO
+"auth.login_service_prefix" = "Continue with "; // TODO
 
+"auth.signup_title" = "Sign up"; // TODO
+"auth.signup.button_register" = "Register"; // TODO
+"auth.signup.button_next" = "Next"; // TODO
+"auth.signup.custom_fields_title" = "Complete your register"; // TODO
+
+"auth.login.login_title" = "Login";  // TODO
+"auth.login.button_login_title" = "Login"; // TODO
+"auth.login.create_account_prefix" = "Don't have an account?"; // TODO
+"auth.login.create_account" = "\nCreate an Account"; // TODO
 "auth.login.username.placeholder" = "Email ή όνομα χρήστη";
 "auth.login.password.placeholder" = "Συνθηματικό";
 "auth.login.buttonRegister" = "Δημιουργήστε νέο λογαριασμό";
@@ -115,21 +143,28 @@
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
+"subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "you"; //TODO
+"subscriptions.messages" = "Messages"; //TODO
+"subscriptions.list.you_initial" = "You"; //TODO
+"subscriptions.list.no_message" = "No message"; //TODO
+"subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
+"subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
-"servers.action.connect" = "Σύνδεση";
-"servers.action.remove" = "Αφαιρέστε ομάδα";
+"servers.title" = "Servers"; //TODO
+"servers.add_new_server" = "Add Server"; //TODO
+"servers.action.disconnect" = "Disconnect"; //TODO
+"servers.action.disconnect.alert.title" = "Disconnect from Server"; //TODO
+"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?"; //TODO
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect"; //TODO
 
-// User Menu
-"user_menu.online" = "Σε σύνδεση";
-"user_menu.away" = "Λείπω";
-"user_menu.busy" = "Απασχολημένος";
-"user_menu.invisible" = "Αόρατος";
-"user_menu.admin" = "Διαχείριση";
-"user_menu.preferences" = "Ο Λογαριασμός μου";
-"user_menu.logout" = "Αποσύνδεση";
+// Status
+"status.online" = "Σε σύνδεση";
+"status.away" = "Λείπω";
+"status.busy" = "Απασχολημένος";
+"status.invisible" = "Αόρατος";
 
 // New Room View
 "new_room.title" = "Νέο Κανάλι";
@@ -139,9 +174,8 @@
 "new_room.cell.public_channel.description.public_only" = "Μπορείτε να δημιουργείτε μόνο δημόσια κανάλια";
 "new_room.cell.public_channel.description.private_only" = "Μπορείτε να δημιουργείτε μόνο ιδιωτικά κανάλια";
 "new_room.cell.read_only.title" = "Κανάλι μόνο ανάγνωσης";
-"new_room.cell.read_only.description" = "Μόνο ο διαχειριστής μπορεί να γράψει νέα μηνύματα";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages"; // TODO
 "new_room.group.channel.name" = "Όνομα Καναλιού";
-"new_room.group.channel.footer" = "Τα ονόματα πρέπει να χρησιμοποιούν πεζά γράμματα και να είναι μικρότερα από 22 χαρακτήρες";
 "new_room.cell.channel_name.title" = "Όνομα Καναλιού";
 "new_room.group.invite_users" = "Προσκαλέστε χρήστες";
 "new_room.cell.invite_users.placeholder" = "Ονόματα χρηστών";
@@ -194,7 +228,7 @@
 "chat.upload.take_photo" = "Τραβήξτε Φωτογραφία";
 "chat.upload.shoot_video" = "Τραβήξτε Video";
 "chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
-"chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
+"chat.upload.import_file" = "Εισαγωγή Αρχείου Από";
 "chat.upload.draw" = "Σχεδιάστε κάτι";
 
 // Chat Download
@@ -240,10 +274,15 @@
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.files" = "Arquivos"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "Μέλη";
+
+// Add Users
+"chat.add_users.title" = "Add Users"; // TODO
+"chat.add_users.confirm.title" = "Add this user?"; // TODO
+"chat.add_users.confirm.message" = "Are you sure you want to add '%@' to '%@'?"; // TODO
 
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
@@ -257,6 +296,8 @@
 
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
+"myaccount.settings.administration" = "Διαχείριση"; // TODO
+"myaccount.settings.logout" = "Logout from %@"; // TODO
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
 "myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Άδεια";
@@ -299,6 +340,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.status.title" = "Status"; // TODO
 "myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
 "myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
@@ -315,3 +357,23 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation"; // TODO
+"user_action_sheet.remove" = "Remove from room"; // TODO
+"user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
+"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
+"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
+"subscriptions.sorting.activity" = "Activity"; //TODO
+"subscriptions.grouping.type" = "Group by type"; //TODO
+"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
+"subscriptions.grouping.unread_top" = "Unread on top"; //TODO

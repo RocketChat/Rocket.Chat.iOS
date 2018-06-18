@@ -91,11 +91,9 @@ extension ChatViewController {
 
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-                DispatchQueue.main.async {
-                    MessageManager.blockMessagesFrom(messageUser, completion: {
-                        self?.updateSubscriptionInfo()
-                    })
-                }
+                MessageManager.blockMessagesFrom(messageUser, completion: {
+                    self?.updateSubscriptionInfo()
+                })
             })
 
             actions.append(block)
@@ -105,6 +103,7 @@ extension ChatViewController {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.messageToEdit = message
                 self.editText(message.text)
+                self.applyTheme()
             })
 
             actions.append(edit)
@@ -191,6 +190,7 @@ extension ChatViewController {
         if let presenter = controller.popoverPresentationController {
             presenter.sourceView = view
             presenter.sourceRect = view.bounds
+            presenter.backgroundColor = view.theme?.focusedBackground
         }
 
         controller.emojiPicked = { emoji in
@@ -199,6 +199,7 @@ extension ChatViewController {
         }
 
         controller.customEmojis = CustomEmoji.emojis()
+        ThemeManager.addObserver(controller.view)
 
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)
@@ -228,9 +229,7 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            Alert(
-                key: "chat.message.report.success.title"
-            ).present()
+            Alert(key: "chat.message.report.success.title").present()
         }
     }
 }
