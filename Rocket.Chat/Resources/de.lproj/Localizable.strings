@@ -83,7 +83,7 @@
 "alert.update_password_success.title" = "Passwort wurde aktualisiert";
 
 "alert.logout.confirmation.title" = "Von diesem Server abmelden";
-"alert.logout.confirmation.message" = "Bist du sicher, dass du dich von \"%@\" abmelden möchtest?";
+"alert.logout.confirmation.message" = "Sind Sie sicher, dass Sie sich von \"%@\" abmelden möchten?";
 "alert.logout.confirmation.confirm" = "Ja, abmelden";
 
 // Connection Redirect
