@@ -49,6 +49,8 @@ extension UIView: ThemeProvider {
     }
 }
 
+// MARK: UIKit class extensions
+
 extension UILabel {
     override func applyTheme() {
         super.applyTheme()
@@ -222,6 +224,8 @@ extension UIScrollView {
     }
 }
 
+// MARK: External class extensions
+
 extension SLKTextInputbar {
     override func applyTheme() {
         super.applyTheme()
@@ -243,5 +247,14 @@ extension SLKTextView {
         backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1021854048)
         textColor = theme.bodyText
         tintColor = theme.tintColor
+    }
+}
+
+// MARK: Subclasses
+
+class ThemeableStackView: UIStackView {
+    override func addArrangedSubview(_ view: UIView) {
+        super.addArrangedSubview(view)
+        view.applyTheme()
     }
 }

@@ -199,7 +199,6 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 mediaViews.addArrangedSubview(view)
-                view.applyTheme()
                 mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
 
                 if !attachment.collapsed {
@@ -207,7 +206,6 @@ final class ChatMessageCell: UICollectionViewCell {
                         guard let view = ChatMessageTextView.instantiateFromNib() else { return }
                         view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
                         mediaViews.addArrangedSubview(view)
-                        view.applyTheme()
                         mediaViewHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
                     }
                 }
@@ -219,7 +217,6 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 mediaViews.addArrangedSubview(view)
-                view.applyTheme()
                 mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
 
             case .video:
@@ -229,7 +226,6 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 mediaViews.addArrangedSubview(view)
-                view.applyTheme()
                 mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
 
             case .audio:
@@ -238,7 +234,6 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 mediaViews.addArrangedSubview(view)
-                view.applyTheme()
                 mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
 
             default:
