@@ -25,16 +25,9 @@ PODS:
   - Realm/Headers (3.7.0)
   - RealmSwift (3.7.0):
     - Realm (= 3.7.0)
-  - SDWebImage (4.4.1):
-    - SDWebImage/Core (= 4.4.1)
-  - SDWebImage/Core (4.4.1)
-  - SDWebImage/GIF (4.4.1):
-    - FLAnimatedImage (~> 1.0)
-    - SDWebImage/Core
   - semver (1.1.0)
   - SimpleImageViewer (1.1.1):
-    - SDWebImage (~> 4)
-    - SDWebImage/GIF
+    - FLAnimatedImage
   - SlackTextViewController (1.9.6)
   - Starscream (2.1.1)
   - SwiftLint (0.25.1)
@@ -76,7 +69,6 @@ SPEC REPOS:
     - ReachabilitySwift
     - Realm
     - RealmSwift
-    - SDWebImage
     - semver
     - Starscream
     - SwiftLint
@@ -95,7 +87,7 @@ CHECKOUT OPTIONS:
     :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   SimpleImageViewer:
-    :commit: da60c24ea5ac56b8aff9e060176b03aef4057556
+    :commit: d76f6757d29746071cb6bd17bba9e636d21b03a8
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
@@ -117,9 +109,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: 4998c6ced1ea15b3792f273b18f8e6faaf935b5c
   RealmSwift: 7dc2ab780b9742a1fc7469b2e4776b9773e2e825
-  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
-  SimpleImageViewer: eba438bc6c117298ff0626c04c1943df5f4b5ee3
+  SimpleImageViewer: f82e45a362e3b4b674e25508f42d534e525a73b7
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
