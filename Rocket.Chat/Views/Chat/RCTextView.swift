@@ -88,6 +88,7 @@ class HighlightLayoutManager: NSLayoutManager {
                     let emojiView = EmojiView(frame: rect)
                     emojiView.backgroundColor = .white
                     emojiView.isUserInteractionEnabled = false
+                    emojiView.applyTheme()
 
                     if let imageUrlData = attachment.contents,
                             let imageUrlString = String(data: imageUrlData, encoding: .utf8),
