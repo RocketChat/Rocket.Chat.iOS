@@ -76,16 +76,23 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     }
 
     fileprivate func requestUsername() {
-        startLoading()
+        let error = { (errorMessage: String?) in
+            Alert(
+                title: localized("error.socket.default_error.title"),
+                message: errorMessage ?? localized("error.socket.default_error.message")
+            ).present()
+        }
 
+        guard let username = textFieldUsername.text, !username.isEmpty else {
+            return error(nil)
+        }
+
+        startLoading()
         AuthManager.setUsername(textFieldUsername.text ?? "") { [weak self] success, errorMessage in
             DispatchQueue.main.async {
             self?.stopLoading()
                 if !success {
-                    Alert(
-                        title: localized("error.socket.default_error.title"),
-                        message: errorMessage ?? localized("error.socket.default_error.message")
-                    ).present()
+                    error(errorMessage)
                 } else {
                     self?.dismiss(animated: true, completion: nil)
                     AppManager.reloadApp()
