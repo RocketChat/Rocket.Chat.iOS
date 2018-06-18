@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -16,11 +12,11 @@
             <objects>
                 <viewController id="Myv-ng-Lw2" customClass="WelcomeViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uwQ-R3-NW4" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Rocket Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FN-Px-5xv">
-                                <rect key="frame" x="15" y="230.5" width="290" height="28"/>
+                                <rect key="frame" x="15" y="246.5" width="570" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Bs5-Ep-8ni"/>
                                 </constraints>
@@ -29,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Source Communication" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSZ-9C-ZA2">
-                                <rect key="frame" x="15" y="266.5" width="290" height="20"/>
+                                <rect key="frame" x="15" y="282.5" width="570" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Rkj-eJ-fCz"/>
                                 </constraints>
@@ -38,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8M-Uc-93R">
-                                <rect key="frame" x="15" y="331.5" width="290" height="60"/>
+                                <rect key="frame" x="15" y="347.5" width="570" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connectServer" translatesAutoresizingMaskIntoConstraints="NO" id="ZaD-3p-867">
                                         <rect key="frame" x="15" y="15" width="30" height="30"/>
@@ -48,17 +44,17 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="sWO-WG-94U">
-                                        <rect key="frame" x="270" y="24" width="5" height="12"/>
+                                        <rect key="frame" x="550" y="24" width="5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="diw-fU-ssx"/>
                                             <constraint firstAttribute="width" constant="5" id="l7u-Aj-ULu"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4q4-bw-dA7">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="570" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Connect with a server"/>
+                                        <state key="normal" title="Connect to a server"/>
                                         <connections>
                                             <segue destination="clK-Fu-Ez0" kind="show" id="Ivf-BH-9zE"/>
                                         </connections>
@@ -78,7 +74,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smf-cw-ZKs">
-                                <rect key="frame" x="15" y="399.5" width="290" height="60"/>
+                                <rect key="frame" x="15" y="415.5" width="570" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="OdB-XV-16Q">
                                         <rect key="frame" x="15" y="15" width="30" height="30"/>
@@ -88,14 +84,14 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="R0v-oO-zLf">
-                                        <rect key="frame" x="270" y="24" width="5" height="12"/>
+                                        <rect key="frame" x="550" y="24" width="5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="8qZ-nr-qha"/>
                                             <constraint firstAttribute="width" constant="5" id="Ho4-CS-2pL"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-RK-wuE">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="570" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Join the community">
@@ -120,7 +116,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-JP-D1F">
-                                <rect key="frame" x="15" y="467.5" width="290" height="60"/>
+                                <rect key="frame" x="15" y="483.5" width="570" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusWhite" translatesAutoresizingMaskIntoConstraints="NO" id="oyk-aw-9G2">
                                         <rect key="frame" x="15" y="15" width="30" height="30"/>
@@ -130,10 +126,10 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFU-jq-KHv">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="570" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Create a new server">
+                                        <state key="normal" title="Create a new workspace">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -158,7 +154,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="nLV-Nj-DCP">
-                                <rect key="frame" x="70" y="40.5" width="180" height="145"/>
+                                <rect key="frame" x="210" y="56.5" width="180" height="145"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="309" id="Ll4-i8-ZOJ"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="nLV-Nj-DCP" secondAttribute="height" multiplier="311:250" id="cl0-ZK-FsV"/>
@@ -210,21 +206,21 @@
             <objects>
                 <tableViewController id="hl8-Pc-62u" customClass="SignupTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aG8-IH-tGg" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="vOi-yf-p82">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Xif-mV-lsv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xif-mV-lsv" id="862-cs-MP4">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAk-rX-TKn">
-                                                    <rect key="frame" x="15" y="24" width="290" height="28"/>
+                                                    <rect key="frame" x="15" y="24" width="570" height="28"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -239,14 +235,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="SDd-bK-SMe">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="56" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SDd-bK-SMe" id="M5b-oF-l0u">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjS-mK-dwO" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Bkb-d2-dek"/>
                                                     </constraints>
@@ -270,14 +266,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="lSq-tz-R6d">
-                                        <rect key="frame" x="0.0" y="116" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="116" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lSq-tz-R6d" id="4ah-EC-Nmo">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-qi-aDM" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="buT-l2-vZe"/>
                                                     </constraints>
@@ -301,14 +297,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="mXN-9O-osI">
-                                        <rect key="frame" x="0.0" y="176" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="176" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXN-9O-osI" id="y8x-xp-90x">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69P-3e-U7o" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="uVU-QJ-zrk"/>
                                                     </constraints>
@@ -332,14 +328,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="hQB-Sc-tmn">
-                                        <rect key="frame" x="0.0" y="236" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="236" width="600" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hQB-Sc-tmn" id="frM-U4-gNT">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0TR-Jz-yD6" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="4" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="4" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="CNj-8R-H6W"/>
                                                     </constraints>
@@ -363,14 +359,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="63" id="PB3-yo-RHQ">
-                                        <rect key="frame" x="0.0" y="292" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="292" width="600" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PB3-yo-RHQ" id="0wr-TW-1eZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwQ-MU-Sl1" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="11" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Qkp-Sd-XT9"/>
                                                     </constraints>
@@ -438,21 +434,21 @@
             <objects>
                 <tableViewController id="w7q-9e-4D3" customClass="LoginTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zS7-X0-xOA" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="qiy-Sq-wMu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="8sw-IL-Fjc">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8sw-IL-Fjc" id="VSv-w9-ZEn">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEg-Td-rmK">
-                                                    <rect key="frame" x="15" y="24" width="290" height="28"/>
+                                                    <rect key="frame" x="15" y="24" width="570" height="28"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="0.18431372549019609" green="0.20392156862745098" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -467,14 +463,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="vC4-Sy-nzt">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="56" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vC4-Sy-nzt" id="JJ8-9d-OxX">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username or e-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4sT-R7-k6m" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="8Rp-dA-EM7"/>
                                                     </constraints>
@@ -489,7 +485,7 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" alpha="0.40000000596046448" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-1v-PFB">
-                                                    <rect key="frame" x="265" y="19.5" width="25" height="25"/>
+                                                    <rect key="frame" x="545" y="19.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="FY6-vN-hIc"/>
                                                         <constraint firstAttribute="height" constant="25" id="uWD-Az-CBz"/>
@@ -511,14 +507,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="R1f-2H-TYd">
-                                        <rect key="frame" x="0.0" y="116" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="116" width="600" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R1f-2H-TYd" id="DPa-lb-a9g">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i30-m3-yKn" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="4" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="4" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="pIf-gP-eEk"/>
                                                     </constraints>
@@ -542,14 +538,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="63" id="ZZ3-2B-aP5">
-                                        <rect key="frame" x="0.0" y="172" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="172" width="600" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZZ3-2B-aP5" id="VI9-RB-rXu">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR9-qe-UqH" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="11" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="dLL-vq-YJ3"/>
                                                     </constraints>
@@ -584,14 +580,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="a2F-c8-kDy">
-                                        <rect key="frame" x="0.0" y="235" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="235" width="600" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a2F-c8-kDy" id="d9C-Lw-PFM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqA-oE-fTY" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="4" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="4" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="bwb-wR-mhx"/>
                                                     </constraints>
@@ -629,14 +625,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="88" id="ztg-t7-Xfu">
-                                        <rect key="frame" x="0.0" y="291" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="291" width="600" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ztg-t7-Xfu" id="QP5-RC-kSA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Op4-2b-y8Z" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="28" width="290" height="38"/>
+                                                    <rect key="frame" x="15" y="28" width="570" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="uqi-GG-UQS"/>
                                                     </constraints>
@@ -709,7 +705,7 @@
             <objects>
                 <tableViewController id="ueL-n9-tXo" customClass="AuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CqE-Lb-iM8" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections/>
@@ -741,21 +737,21 @@
             <objects>
                 <tableViewController id="ubs-pY-bdr" customClass="LegalTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YBG-il-jGc" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="bDx-Zn-96v">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="bsT-am-X4v">
-                                        <rect key="frame" x="0.0" y="35" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bsT-am-X4v" id="hRC-yR-lUB">
-                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="562" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R78-rT-hy5">
-                                                    <rect key="frame" x="15" y="11" width="263" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="539" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="aOJ-b7-JPy"/>
                                                     </constraints>
@@ -773,14 +769,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CIi-2h-6Nn">
-                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="79" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CIi-2h-6Nn" id="iP8-rF-YHi">
-                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="562" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qV-dj-cr7">
-                                                    <rect key="frame" x="15" y="11" width="263" height="22"/>
+                                                    <rect key="frame" x="15" y="11" width="539" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="ra8-gU-zYk"/>
                                                     </constraints>
@@ -826,27 +822,27 @@
             <objects>
                 <tableViewController id="em6-TJ-1CF" customClass="TwoFactorAuthTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Dv-tw-imc" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="lWB-ZB-GPk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="84" id="5Pt-P8-kaL">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Pt-P8-kaL" id="Ggk-qL-oHK">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two-factor Authentication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cos-jj-UFX">
-                                                    <rect key="frame" x="15" y="24" width="290" height="26.5"/>
+                                                    <rect key="frame" x="15" y="24" width="570" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s your 2FA code?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCI-8H-lxM">
-                                                    <rect key="frame" x="15" y="56" width="290" height="20"/>
+                                                    <rect key="frame" x="15" y="56" width="570" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="cEV-yH-ZsA"/>
                                                     </constraints>
@@ -867,14 +863,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="91u-M6-LbA">
-                                        <rect key="frame" x="0.0" y="84" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="84" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="91u-M6-LbA" id="tkn-Ve-bNc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RWJ-kT-yCz" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="5mR-4X-w4f"/>
                                                     </constraints>
@@ -895,14 +891,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="63" id="HCt-ie-E6l">
-                                        <rect key="frame" x="0.0" y="144" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="144" width="600" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HCt-ie-E6l" id="Vil-wL-dGU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-XE-7co" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="11" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="dYA-ta-Lb8"/>
                                                     </constraints>
@@ -958,15 +954,15 @@
             <objects>
                 <tableViewController id="uXD-hs-Lir" customClass="SignupCustomFieldsTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cgD-vs-WUJ" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="kP3-L1-aox">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete your register" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwP-px-cUd">
-                                    <rect key="frame" x="15" y="24" width="290" height="28"/>
+                                    <rect key="frame" x="15" y="24" width="570" height="28"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -981,11 +977,11 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZV5-14-xRB">
-                            <rect key="frame" x="0.0" y="56" width="320" height="63"/>
+                            <rect key="frame" x="0.0" y="56" width="600" height="63"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7O-YC-uPz" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                    <rect key="frame" x="15" y="11" width="570" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="PHc-gC-7hA"/>
                                     </constraints>
@@ -1044,27 +1040,27 @@
             <objects>
                 <tableViewController id="0XD-Z9-Dv5" customClass="RegisterUsernameTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aDF-CG-zC2" customClass="NotThemeableTableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="9Iw-Oh-kx3">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="104" id="3lG-Xk-rYr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3lG-Xk-rYr" id="r4h-xY-79g">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtF-RP-bfP">
-                                                    <rect key="frame" x="15" y="24" width="290" height="26.5"/>
+                                                    <rect key="frame" x="15" y="24" width="570" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDP-HG-rSk">
-                                                    <rect key="frame" x="15" y="56" width="290" height="40"/>
+                                                    <rect key="frame" x="15" y="56" width="570" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="5ph-4F-ZEe"/>
                                                     </constraints>
@@ -1087,14 +1083,14 @@ to mention you in messages</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="zY3-eO-6wv">
-                                        <rect key="frame" x="0.0" y="104" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="104" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zY3-eO-6wv" id="MNM-aV-ZHo">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3vM-gD-Ajn" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="8" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="dvQ-dZ-xCY"/>
                                                     </constraints>
@@ -1118,14 +1114,14 @@ to mention you in messages</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="63" id="Wpx-AK-Kft">
-                                        <rect key="frame" x="0.0" y="164" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="164" width="600" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wpx-AK-Kft" id="2vA-e8-DEU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdI-DC-ZEg" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="11" width="290" height="48"/>
+                                                    <rect key="frame" x="15" y="11" width="570" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Ako-o5-FD4"/>
                                                     </constraints>
@@ -1181,18 +1177,18 @@ to mention you in messages</string>
             <objects>
                 <viewController storyboardIdentifier="ConnectServerViewController" id="clK-Fu-Ez0" customClass="ConnectServerViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HFb-22-bea" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="server" translatesAutoresizingMaskIntoConstraints="NO" id="gL9-Oa-Vfe">
-                                <rect key="frame" x="55" y="34" width="210" height="171"/>
+                                <rect key="frame" x="195" y="34" width="210" height="171"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gL9-Oa-Vfe" secondAttribute="height" multiplier="70:57" id="AAJ-so-DLF"/>
                                     <constraint firstAttribute="height" constant="171" id="Pb2-HS-CJU"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0ry-Re-0rp" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="261" width="290" height="48"/>
+                                <rect key="frame" x="15" y="261" width="570" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="auth.connect.urlfield"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Mmf-NW-LEw"/>
@@ -1204,8 +1200,8 @@ to mention you in messages</string>
                                     <outlet property="delegate" destination="clK-Fu-Ez0" id="7fo-Ht-kvv"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in your server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W3-Wb-DIA">
-                                <rect key="frame" x="15" y="214" width="290" height="26.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to your server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W3-Wb-DIA">
+                                <rect key="frame" x="15" y="214" width="570" height="26.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26.5" id="wxA-DQ-r7N"/>
                                 </constraints>
@@ -1214,7 +1210,7 @@ to mention you in messages</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-94-7gd" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="329" width="290" height="48"/>
+                                <rect key="frame" x="15" y="329" width="570" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Cvd-OB-wcp"/>
                                 </constraints>

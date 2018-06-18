@@ -25,7 +25,7 @@ class ServerManagerSpec: XCTestCase {
         defaults.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
 
-        // Create a new server settings
+        // Create a new workspace settings
         let settings = AuthSettings()
         settings.serverName = "serverName"
         settings.serverFaviconURL = "serverFaviconURL"
@@ -53,7 +53,7 @@ class ServerManagerSpec: XCTestCase {
         defaults.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
 
-        // Create a new server settings
+        // Create a new workspace settings
         let settings = AuthSettings()
 
         // Update it
