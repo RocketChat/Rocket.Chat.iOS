@@ -17,7 +17,7 @@ protocol Alerter: class {
 extension UIViewController: Alerter {
     func alert(with customActions: [UIAlertAction], title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        customActions.forEach{( alert.addAction($0) )}
+        customActions.forEach {( alert.addAction($0) )}
         present(alert, animated: true, completion: nil)
     }
 
