@@ -88,36 +88,36 @@
 "connection.server.redirect.alert.confirm" = "Да, изменить URL-адрес";
 
 // Socket Connection
-"connection.title" = "Sign in your server"; // TODO
-"connection.button_connect" = "Connect"; // TODO
+"connection.title" = "Войдите на ваш сервер"; // TODO
+"connection.button_connect" = "Соединение"; // TODO
 "connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
-"connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
+"connection.waiting_for_network.banner.message" = "Ожидание сети"; // TODO
 
 // Onboarding
-"onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
-"onboarding.label_subtitle" = "Open Source Communication"; // TODO
-"onboarding.button_connect_server" = "Connect with a server"; // TODO
-"onboarding.button_create_server" = "Create a new server"; // TODO
-"onboarding.button_join_community_prefix" = "Join the community"; // TODO
+"onboarding.label_welcome" = "Добро пожаловать в Rocket Chat"; // TODO
+"onboarding.label_subtitle" = "Средство общения с открытым исходным кодом"; // TODO
+"onboarding.button_connect_server" = "Соединиться с сервером"; // TODO
+"onboarding.button_create_server" = "Создать новый сервер"; // TODO
+"onboarding.button_join_community_prefix" = "Присоединиться к сообществу"; // TODO
 
 // Auth
 "auth.connect.button_connect" = "Соединение";
 "auth.connect.ssl_required" = "Требуется, чтобы ваш сервер поддерживал SSL";
 "auth.connect.connecting" = "Выполняется соединение";
-"auth.email_auth_prefix" = "Login with "; // TODO
+"auth.email_auth_prefix" = "Войти с "; // TODO
 "auth.email_auth" = "e-mail"; // TODO
-"auth.login_service_prefix" = "Continue with "; // TODO
+"auth.login_service_prefix" = "Продолжить с "; // TODO
 
-"auth.signup_title" = "Sign up"; // TODO
-"auth.signup.button_register" = "Register"; // TODO
-"auth.signup.button_next" = "Next"; // TODO
-"auth.signup.custom_fields_title" = "Complete your register"; // TODO
+"auth.signup_title" = "Зарегистрироваться"; // TODO
+"auth.signup.button_register" = "Регистрация"; // TODO
+"auth.signup.button_next" = "Дальше"; // TODO
+"auth.signup.custom_fields_title" = "Завершить вашу регистрацию"; // TODO
 
-"auth.login.login_title" = "Login"; // TODO
-"auth.login.button_login_title" = "Login"; // TODO
-"auth.login.create_account_prefix" = "Don't have an account?"; // TODO
-"auth.login.create_account" = "\nCreate an Account"; // TODO
+"auth.login.login_title" = "Вход"; // TODO
+"auth.login.button_login_title" = "Войти"; // TODO
+"auth.login.create_account_prefix" = "У вас нет аккаунта?"; // TODO
+"auth.login.create_account" = "\nСоздать аккаунт"; // TODO
 "auth.login.username.placeholder" = "Электронная почта или имя пользователя";
 "auth.login.password.placeholder" = "Пароль";
 "auth.login.buttonRegister" = "Создать новый аккаунт";
@@ -131,9 +131,9 @@
 "auth.forgot_password.message" = "Введите ваш адрес электронной почты";
 "auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
 
-"alert.logout.confirmation.title" = "Logout from this server"; // TODO
-"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
-"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+"alert.logout.confirmation.title" = "Выход с этого сервера"; // TODO
+"alert.logout.confirmation.message" = "Вы действительно хотите выйти из \"%@\"?"; // TODO
+"alert.logout.confirmation.confirm" = "Да, выйти"; // TODO
 
 // Subscriptions
 "subscriptions.search" = "Поиск";
@@ -143,7 +143,7 @@
 "subscriptions.favorites" = "Избранные";
 "subscriptions.channels" = "Каналы";
 "subscriptions.direct_messages" = "Личная переписка";
-"subscriptions.conversations" = "Conversations"; //TODO
+"subscriptions.conversations" = "Диалоги"; //TODO
 "subscriptions.you" = "вы";
 "subscriptions.messages" = "Сообщения";
 "subscriptions.list.you_initial" = "Вы";
@@ -292,7 +292,7 @@
 // Settings
 "myaccount.settings.title" = "Настройки";
 "myaccount.settings.administration" = "Администрирование";
-"myaccount.settings.logout" = "Logout from %@"; // TODO
+"myaccount.settings.logout" = "Выход из %@"; // TODO
 "myaccount.settings.contactus" = "Связаться с нами";
 "myaccount.settings.profile" = "Профиль";
 "myaccount.settings.license" = "Лицензия";
@@ -357,10 +357,10 @@
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
 
 // Sorting & Grouping Subscriptions
-"subscriptions.sorting.title.alphabetical" = "Sorting by name"; //TODO
-"subscriptions.sorting.title.activity" = "Sorting by activity"; //TODO
-"subscriptions.sorting.alphabetical" = "Alphabetical"; //TODO
-"subscriptions.sorting.activity" = "Activity"; //TODO
-"subscriptions.grouping.type" = "Group by type"; //TODO
-"subscriptions.grouping.favorites" = "Group by favorites"; //TODO
-"subscriptions.grouping.unread_top" = "Unread on top"; //TODO
+"subscriptions.sorting.title.alphabetical" = "Сортировать по имени"; //TODO
+"subscriptions.sorting.title.activity" = "Сортировать по активности"; //TODO
+"subscriptions.sorting.alphabetical" = "По алфавиту"; //TODO
+"subscriptions.sorting.activity" = "Активности"; //TODO
+"subscriptions.grouping.type" = "Группировать по типу"; //TODO
+"subscriptions.grouping.favorites" = "Группировать по избранным"; //TODO
+"subscriptions.grouping.unread_top" = "Непрочитанные свеху"; //TODO

@@ -57,8 +57,8 @@ final class Message: BaseModel {
     @objc dynamic var text = ""
 
     @objc dynamic var userBlocked: Bool = false
-
     @objc dynamic var pinned: Bool = false
+    @objc dynamic var unread: Bool = false
 
     @objc dynamic var alias = ""
     @objc dynamic var avatar: String?

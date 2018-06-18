@@ -29,10 +29,6 @@ extension LoginTableViewController {
                 return
             }
 
-            if let publicSettings = serverPublicSettings {
-                AuthSettingsManager.persistPublicSettings(settings: publicSettings)
-            }
-
             if let realm = Realm.current, let auth = AuthManager.isAuthenticated(realm: realm), let version = serverVersion {
                 try? realm.write {
                     auth.serverVersion = version.description

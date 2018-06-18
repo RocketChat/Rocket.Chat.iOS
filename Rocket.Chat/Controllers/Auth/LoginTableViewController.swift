@@ -309,8 +309,14 @@ class LoginTableViewController: BaseTableViewController {
         createAccountButton.isEnabled = true
     }
 
-    @objc func popSelf() {
-        navigationController?.popViewController(animated: true)
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? TwoFactorAuthTableViewController {
+            controller.username = textFieldUsername.text ?? ""
+            controller.password = textFieldPassword.text ?? ""
+            controller.token = temporary2FACode ?? ""
+        }
     }
 
 }
