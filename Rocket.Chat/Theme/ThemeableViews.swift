@@ -27,11 +27,9 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-        if #available(iOS 11, *) {
-            guard let theme = theme else { return }
-            backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
-            self.subviews.forEach { $0.applyTheme() }
-        }
+        guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        self.subviews.forEach { $0.applyTheme() }
     }
 }
 
@@ -46,14 +44,12 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
-        if #available(iOS 11, *) {
-            guard let superview = superview else { return ThemeManager.theme }
-            return superview.theme
-        } else {
-            return nil
-        }
+        guard let superview = superview else { return ThemeManager.theme }
+        return superview.theme
     }
 }
+
+// MARK: UIKit class extensions
 
 extension UILabel {
     override func applyTheme() {
@@ -72,6 +68,18 @@ extension UITextField {
         leftView?.tintColor = theme.auxiliaryText
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.auxiliaryText])
+        }
+    }
+}
+
+extension UISearchBar {
+    override func applyTheme() {
+        super.applyTheme()
+        if #available(iOS 11, *) {
+            // Do nothing
+        } else {
+            backgroundImage = UIImage()
+            textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
         }
     }
 }
@@ -139,6 +147,11 @@ extension UITableViewCell {
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         detailTextLabel?.textColor = theme.auxiliaryText
         tintColor = theme.tintColor
+    }
+
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        applyTheme()
     }
 }
 
@@ -211,6 +224,8 @@ extension UIScrollView {
     }
 }
 
+// MARK: External class extensions
+
 extension SLKTextInputbar {
     override func applyTheme() {
         super.applyTheme()
@@ -232,5 +247,14 @@ extension SLKTextView {
         backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1021854048)
         textColor = theme.bodyText
         tintColor = theme.tintColor
+    }
+}
+
+// MARK: Subclasses
+
+class ThemeableStackView: UIStackView {
+    override func addArrangedSubview(_ view: UIView) {
+        super.addArrangedSubview(view)
+        view.applyTheme()
     }
 }
