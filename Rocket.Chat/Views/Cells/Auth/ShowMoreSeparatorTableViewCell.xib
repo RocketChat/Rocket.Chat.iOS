@@ -23,12 +23,14 @@
                         <color key="backgroundColor" red="0.88235294119999996" green="0.8980392157" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Sm7-Dz-thY"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="141.5" id="kpx-Yw-Igd"/>
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxb-Gr-aLr">
                         <rect key="frame" x="218.5" y="30" width="141.5" height="1"/>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.8980392157" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="141" id="DKX-oY-jV1"/>
                             <constraint firstAttribute="height" constant="1" id="nrk-Xa-agb"/>
                         </constraints>
                     </view>
@@ -48,12 +50,12 @@
                     <constraint firstItem="B9t-sQ-LR4" firstAttribute="centerX" secondItem="Mjg-AX-2IG" secondAttribute="centerX" id="8HU-Se-cwH"/>
                     <constraint firstItem="Mxb-Gr-aLr" firstAttribute="width" secondItem="l5d-Cn-FUx" secondAttribute="width" id="CE3-gB-hLg"/>
                     <constraint firstItem="Mxb-Gr-aLr" firstAttribute="leading" secondItem="B9t-sQ-LR4" secondAttribute="trailing" id="Fet-12-Jgy"/>
-                    <constraint firstAttribute="trailing" secondItem="Mxb-Gr-aLr" secondAttribute="trailing" constant="15" id="LBd-Kl-rUx"/>
+                    <constraint firstAttribute="trailing" secondItem="Mxb-Gr-aLr" secondAttribute="trailing" priority="999" constant="15" id="LBd-Kl-rUx"/>
                     <constraint firstItem="B9t-sQ-LR4" firstAttribute="leading" secondItem="l5d-Cn-FUx" secondAttribute="trailing" id="Y94-H6-V6w"/>
                     <constraint firstItem="Mxb-Gr-aLr" firstAttribute="centerY" secondItem="B9t-sQ-LR4" secondAttribute="centerY" id="aeH-nr-eBF"/>
                     <constraint firstItem="l5d-Cn-FUx" firstAttribute="centerY" secondItem="B9t-sQ-LR4" secondAttribute="centerY" id="fY3-JG-oyw"/>
                     <constraint firstItem="B9t-sQ-LR4" firstAttribute="top" secondItem="Mjg-AX-2IG" secondAttribute="top" constant="15" id="gV4-W5-gU1"/>
-                    <constraint firstItem="l5d-Cn-FUx" firstAttribute="leading" secondItem="Mjg-AX-2IG" secondAttribute="leading" constant="15" id="xAE-iX-QeU"/>
+                    <constraint firstItem="l5d-Cn-FUx" firstAttribute="leading" secondItem="Mjg-AX-2IG" secondAttribute="leading" priority="999" constant="15" id="xAE-iX-QeU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

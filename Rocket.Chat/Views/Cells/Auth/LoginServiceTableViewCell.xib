@@ -22,6 +22,7 @@
                         <rect key="frame" x="15" y="7.5" width="345" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="c2X-4w-Rpk"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="wLa-tp-LBk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <state key="normal" title="Connect with">
@@ -41,9 +42,10 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="fDF-i9-TFi" secondAttribute="trailing" constant="15" id="5Zc-z2-v6x"/>
+                    <constraint firstAttribute="trailing" secondItem="fDF-i9-TFi" secondAttribute="trailing" priority="999" constant="15" id="5Zc-z2-v6x"/>
                     <constraint firstAttribute="bottom" secondItem="fDF-i9-TFi" secondAttribute="bottom" id="8Ha-OU-823"/>
-                    <constraint firstItem="fDF-i9-TFi" firstAttribute="leading" secondItem="K9c-fy-sQs" secondAttribute="leading" constant="15" id="Px9-ms-PxJ"/>
+                    <constraint firstItem="fDF-i9-TFi" firstAttribute="leading" secondItem="K9c-fy-sQs" secondAttribute="leading" priority="999" constant="15" id="Px9-ms-PxJ"/>
+                    <constraint firstItem="fDF-i9-TFi" firstAttribute="centerX" secondItem="K9c-fy-sQs" secondAttribute="centerX" id="je3-Ae-tKS"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
