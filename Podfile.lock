@@ -40,7 +40,7 @@ DEPENDENCIES:
   - FLEX (~> 2.0)
   - Instabug
   - MBProgressHUD (~> 1.1.0)
-  - MobilePlayer
+  - MobilePlayer (from `https://github.com/RocketChat/RCiOSMobilePlayer`)
   - Nuke-FLAnimatedImage-Plugin
   - OAuthSwift
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
@@ -62,7 +62,6 @@ SPEC REPOS:
     - FLEX
     - Instabug
     - MBProgressHUD
-    - MobilePlayer
     - Nuke
     - Nuke-FLAnimatedImage-Plugin
     - OAuthSwift
@@ -75,6 +74,8 @@ SPEC REPOS:
     - SwiftyJSON
 
 EXTERNAL SOURCES:
+  MobilePlayer:
+    :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   SimpleImageViewer:
@@ -83,6 +84,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/rafaelks/SlackTextViewController.git
 
 CHECKOUT OPTIONS:
+  MobilePlayer:
+    :commit: c7160990d7b50d34a45514df4535011e64541340
+    :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
@@ -116,6 +120,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 0af4673565909cbfda00f61124b8286f6433aff3
+PODFILE CHECKSUM: 3e18e9e45e5a7653cfcf96d3fb07910bdbaf6b77
 
 COCOAPODS: 1.5.3
