@@ -61,9 +61,10 @@ final class SubscriptionCell: UITableViewCell {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLastMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var labelUnread: UILabel! {
+    @IBOutlet weak var labelUnread: UILabel!
+    @IBOutlet weak var viewUnread: UIView! {
         didSet {
-            labelUnread.layer.cornerRadius = 4
+            viewUnread.layer.cornerRadius = 4
         }
     }
 
@@ -72,10 +73,10 @@ final class SubscriptionCell: UITableViewCell {
 
         avatarView.prepareForReuse()
 
-        labelName.text = ""
-        labelLastMessage.text = ""
-        labelUnread.text = ""
-        labelUnread.alpha = 0
+        labelName.text = nil
+        labelLastMessage.text = nil
+        labelUnread.text = nil
+        viewUnread.isHidden = true
     }
 
     func updateSubscriptionInformatin() {
@@ -108,18 +109,23 @@ final class SubscriptionCell: UITableViewCell {
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .medium)
 
             if subscription.unread > 0 {
-                labelUnread.alpha = 1
-                labelUnread.text =  "\(subscription.unread)"
+                viewUnread.isHidden = false
+
+                if subscription.groupMentions > 0 || subscription.userMentions > 0 {
+                    labelUnread.text =  "@\(subscription.unread)"
+                } else {
+                    labelUnread.text =  "\(subscription.unread)"
+                }
             } else {
-                labelUnread.alpha = 0
-                labelUnread.text =  ""
+                viewUnread.isHidden = true
+                labelUnread.text = nil
             }
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .medium)
             labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .regular)
 
-            labelUnread.alpha = 0
-            labelUnread.text =  ""
+            viewUnread.isHidden = true
+            labelUnread.text =  nil
         }
 
         applyTheme()
@@ -212,6 +218,7 @@ extension SubscriptionCell {
         guard let theme = theme else { return }
 
         labelName.textColor = theme.titleText
+        viewUnread.backgroundColor = theme.tintColor
         labelUnread.backgroundColor = theme.tintColor
         labelUnread.textColor = theme.backgroundColor
         labelLastMessage.textColor = theme.auxiliaryText

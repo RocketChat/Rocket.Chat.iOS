@@ -275,6 +275,7 @@
 "chat.info.item.starred" = "Отмеченные";
 "chat.info.item.mentions" = "Упоминания";
 "chat.info.item.files" = "Файлы";
+"chat.info.item.share" = "Share"; // TODO
 
 // Members List
 "chat.members.list.title" = "Пользователи";
