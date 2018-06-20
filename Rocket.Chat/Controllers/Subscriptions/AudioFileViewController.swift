@@ -45,11 +45,7 @@ extension AudioFileViewController {
         super.applyTheme()
         guard let theme = view.theme else { return }
 
-        switch theme {
-        case .light: view.backgroundColor = #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1)
-        default: view.backgroundColor = theme.focusedBackground
-        }
-
+        view.backgroundColor = theme.auxiliaryBackground
         audioImage.tintColor = theme.titleText
     }
 }

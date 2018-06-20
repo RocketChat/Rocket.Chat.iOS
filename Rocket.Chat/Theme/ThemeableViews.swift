@@ -44,6 +44,7 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
+        guard type(of: self).description() != "_UIAlertControllerView" else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
         return superview.theme
     }
@@ -121,10 +122,7 @@ extension UITableView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        switch theme {
-        case .dark, .black: backgroundColor = style == .grouped ? theme.focusedBackground : theme.backgroundColor
-        default: backgroundColor = style == .grouped ? #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1) : theme.backgroundColor
-        }
+        backgroundColor = style == .grouped ? theme.auxiliaryBackground : theme.backgroundColor
         separatorColor = theme.mutedAccent
     }
 
@@ -166,7 +164,7 @@ extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlinkColor
+        tintColor = theme.hyperlink
     }
 }
 

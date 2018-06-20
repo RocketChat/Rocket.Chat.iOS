@@ -120,9 +120,6 @@ extension ChangeAppIconViewController {
         super.applyTheme()
         guard let theme = view.theme else { return }
 
-        switch theme {
-        case .dark, .black: view.backgroundColor = theme.focusedBackground
-        default: view.backgroundColor = #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1)
-        }
+        view.backgroundColor = theme.auxiliaryBackground
     }
 }
