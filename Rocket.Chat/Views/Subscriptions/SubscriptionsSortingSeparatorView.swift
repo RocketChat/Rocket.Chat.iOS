@@ -42,4 +42,9 @@ extension SubscriptionsSortingSeparatorView {
         backgroundColor = theme.backgroundColor
         separator.backgroundColor = theme.mutedAccent
     }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        applyTheme()
+    }
 }
