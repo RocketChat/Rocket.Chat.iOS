@@ -49,14 +49,18 @@ class ChannelActionsViewController: BaseViewController {
                 ]
             }
 
+            func title(for menuTitle: String) -> String {
+                return localized("chat.info.item.\(menuTitle)")
+            }
+
             let data = [header, [
-                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: showFilesList),
-                shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: showMentionsList) : nil,
-                ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList)
+                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: title(for: "files"), action: showFilesList),
+                shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList) : nil,
+                ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: title(for: "starred"), action: showStarredList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList)
             ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", detail: false, action: shareRoom)
+                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: title(for: "share"), detail: false, action: shareRoom)
             ]]
 
             tableViewData = data.compactMap({ $0 })
@@ -245,6 +249,7 @@ extension ChannelActionsViewController: UITableViewDelegate {
         if let data = data as? ChannelInfoActionCellData {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoActionCell.identifier) as? ChannelInfoActionCell {
                 cell.data = data
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
                 return cell
             }
         }

@@ -281,6 +281,7 @@
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
 "chat.info.item.files" = "Files";
+"chat.info.item.share" = "Share";
 
 // Members List
 "chat.members.list.title" = "Members";
