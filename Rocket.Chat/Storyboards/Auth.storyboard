@@ -58,7 +58,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Connect with a server"/>
+                                        <state key="normal" title="Connect to a server"/>
                                         <connections>
                                             <segue destination="clK-Fu-Ez0" kind="show" id="Ivf-BH-9zE"/>
                                         </connections>
@@ -135,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Create a new server">
+                                        <state key="normal" title="Create a new workspace">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -248,47 +248,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="SDd-bK-SMe">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SDd-bK-SMe" id="M5b-oF-l0u">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjS-mK-dwO" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="345" height="48"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="Bkb-d2-dek"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="Yny-Zw-fdO"/>
-                                                    </constraints>
-                                                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="userBlack"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="2Ck-nB-Wys"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="xjS-mK-dwO" firstAttribute="leading" secondItem="M5b-oF-l0u" secondAttribute="leading" priority="999" constant="15" id="02N-mF-JRu"/>
-                                                <constraint firstAttribute="bottom" secondItem="xjS-mK-dwO" secondAttribute="bottom" constant="4" id="3jH-52-43a"/>
-                                                <constraint firstItem="xjS-mK-dwO" firstAttribute="centerX" secondItem="M5b-oF-l0u" secondAttribute="centerX" id="AIo-qh-V27"/>
-                                                <constraint firstItem="xjS-mK-dwO" firstAttribute="top" secondItem="M5b-oF-l0u" secondAttribute="top" constant="8" id="Qaq-19-ecB"/>
-                                                <constraint firstAttribute="trailing" secondItem="xjS-mK-dwO" secondAttribute="trailing" priority="999" constant="15" id="ott-xL-gFj"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="lSq-tz-R6d">
-                                        <rect key="frame" x="0.0" y="116" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lSq-tz-R6d" id="4ah-EC-Nmo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-qi-aDM" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-qi-aDM" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="8" width="345" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="AJ0-Dp-UsV"/>
@@ -298,7 +265,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="userBlack"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outlet property="delegate" destination="hl8-Pc-62u" id="Lsb-OX-t9m"/>
@@ -311,6 +278,39 @@
                                                 <constraint firstAttribute="bottom" secondItem="4Vj-qi-aDM" secondAttribute="bottom" constant="4" id="g1A-rR-fRq"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Vj-qi-aDM" secondAttribute="trailing" priority="999" constant="15" id="jCL-Fe-5aj"/>
                                                 <constraint firstItem="4Vj-qi-aDM" firstAttribute="leading" secondItem="4ah-EC-Nmo" secondAttribute="leading" priority="999" constant="15" id="yAu-gP-qMf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="V30-OR-WOg">
+                                        <rect key="frame" x="0.0" y="116" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V30-OR-WOg" id="zCu-Cu-IrW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qqD-Hk-Hsw" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="8" width="345" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="a67-hE-8lC"/>
+                                                        <constraint firstAttribute="height" constant="48" id="iXz-Rs-oLR"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="hl8-Pc-62u" id="hda-qf-aJ4"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qqD-Hk-Hsw" firstAttribute="centerX" secondItem="zCu-Cu-IrW" secondAttribute="centerX" id="7Ij-bA-hx7"/>
+                                                <constraint firstAttribute="trailing" secondItem="qqD-Hk-Hsw" secondAttribute="trailing" priority="999" constant="15" id="WdI-Yg-Iz7"/>
+                                                <constraint firstItem="qqD-Hk-Hsw" firstAttribute="leading" secondItem="zCu-Cu-IrW" secondAttribute="leading" priority="999" constant="15" id="bcO-Th-liH"/>
+                                                <constraint firstAttribute="bottom" secondItem="qqD-Hk-Hsw" secondAttribute="bottom" constant="4" id="gOo-6D-YAI"/>
+                                                <constraint firstItem="qqD-Hk-Hsw" firstAttribute="top" secondItem="zCu-Cu-IrW" secondAttribute="top" constant="8" id="n7h-3y-gJA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -443,9 +443,9 @@
                         <outlet property="registerButton" destination="GwQ-MU-Sl1" id="p9x-js-Tf0"/>
                         <outlet property="signupTitle" destination="zAk-rX-TKn" id="Y4T-co-Zao"/>
                         <outlet property="textFieldEmail" destination="69P-3e-U7o" id="xw8-rl-Ebo"/>
-                        <outlet property="textFieldName" destination="xjS-mK-dwO" id="mQg-73-RPB"/>
+                        <outlet property="textFieldName" destination="4Vj-qi-aDM" id="y95-fG-30u"/>
                         <outlet property="textFieldPassword" destination="0TR-Jz-yD6" id="AuE-a9-XAJ"/>
-                        <outlet property="textFieldUsername" destination="4Vj-qi-aDM" id="gZ6-Yu-JkI"/>
+                        <outlet property="textFieldUsername" destination="qqD-Hk-Hsw" id="nuN-hv-wn7"/>
                         <segue destination="uXD-hs-Lir" kind="show" identifier="CustomFields" id="hsm-IE-icl"/>
                     </connections>
                 </tableViewController>
@@ -731,7 +731,7 @@
                         <outlet property="textFieldPassword" destination="i30-m3-yKn" id="H3k-Zh-b6t"/>
                         <outlet property="textFieldUsername" destination="4sT-R7-k6m" id="uli-YQ-OI7"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="9kY-lU-ad7"/>
-                        <segue destination="0XD-Z9-Dv5" kind="show" identifier="Username" id="B9E-PP-gIC"/>
+                        <segue destination="0XD-Z9-Dv5" kind="show" identifier="RequestUsername" id="B9E-PP-gIC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1090,6 +1090,22 @@
             </objects>
             <point key="canvasLocation" x="2933" y="18"/>
         </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="eWA-Rw-ed8">
+            <objects>
+                <navigationController storyboardIdentifier="RegisterUsernameNav" id="q3n-0j-UeJ" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAH-Yd-p9w" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0XD-Z9-Dv5" kind="relationship" relationship="rootViewController" id="bxA-XM-a3K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sGi-8X-Ah7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="609" y="-1385"/>
+        </scene>
         <!--Register Username Table View Controller-->
         <scene sceneID="JMr-VV-DlN">
             <objects>
@@ -1228,6 +1244,7 @@ to mention you in messages</string>
                             <outlet property="delegate" destination="0XD-Z9-Dv5" id="7h5-DX-phg"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="1Sm-hf-iEJ"/>
                     <connections>
                         <outlet property="registerButton" destination="sdI-DC-ZEg" id="wqe-JD-bEA"/>
                         <outlet property="textFieldUsername" destination="3vM-gD-Ajn" id="kdw-bD-A30"/>
@@ -1371,7 +1388,7 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jf7-a5-Wdf"/>
+        <segue reference="cnb-v1-dPj"/>
         <segue reference="uxe-wj-78g"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>

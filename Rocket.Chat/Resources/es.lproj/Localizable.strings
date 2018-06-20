@@ -92,7 +92,7 @@
 "connection.server.redirect.alert.confirm" = "Sí, cambia la URL";
 
 // Socket Connection
-"connection.title" = "Sign in your server"; // TODO
+"connection.title" = "Sign in to your server"; // TODO
 "connection.button_connect" = "Connect"; // TODO
 "connection.offline.banner.message" = "Estás fuera de línea, intenta conectarte de nuevo";
 "connection.connecting.banner.message" = "Conectando ...";
@@ -101,8 +101,8 @@
 // Onboarding
 "onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
 "onboarding.label_subtitle" = "Open Source Communication"; // TODO
-"onboarding.button_connect_server" = "Connect with a server"; // TODO
-"onboarding.button_create_server" = "Create a new server"; // TODO
+"onboarding.button_connect_server" = "Connect to a server"; // TODO
+"onboarding.button_create_server" = "Create a new workspace"; // TODO
 "onboarding.button_join_community_prefix" = "Join the community"; // TODO
 
 // Auth
