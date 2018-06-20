@@ -250,7 +250,7 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     func setupSearchBar() {
-        var searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
 
