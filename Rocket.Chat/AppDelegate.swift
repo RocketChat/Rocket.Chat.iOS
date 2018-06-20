@@ -29,16 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If user is authenticated, open the chat right away
         // but if not, just open the authentication screen.
         if let auth = AuthManager.isAuthenticated() {
-            if AuthManager.currentUser()?.username != nil {
-                AuthManager.persistAuthInformation(auth)
-                AuthSettingsManager.shared.updateCachedSettings()
-                WindowManager.open(.subscriptions)
+            AuthManager.persistAuthInformation(auth)
+            AuthSettingsManager.shared.updateCachedSettings()
+            WindowManager.open(.subscriptions)
 
-                if let user = auth.user {
-                    BugTrackingCoordinator.identifyCrashReports(withUser: user)
-                }
-            } else {
-                WindowManager.open(.auth(serverUrl: "", credentials: nil), viewControllerIdentifier: "RegisterUsernameNav")
+            if let user = auth.user {
+                BugTrackingCoordinator.identifyCrashReports(withUser: user)
             }
         } else {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))

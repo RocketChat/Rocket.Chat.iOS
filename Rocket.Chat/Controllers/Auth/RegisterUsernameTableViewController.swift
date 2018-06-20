@@ -34,6 +34,10 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
         if let nav = navigationController as? BaseNavigationController {
             nav.setGrayTheme()
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         if SocketManager.isConnected() {
             startLoading()
@@ -45,10 +49,7 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
                 }
             }
         }
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         textFieldUsername.becomeFirstResponder()
     }
 
