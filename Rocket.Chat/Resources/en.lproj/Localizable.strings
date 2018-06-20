@@ -157,7 +157,7 @@
 "servers.add_new_server" = "Add Server";
 "servers.action.disconnect" = "Disconnect";
 "servers.action.disconnect.alert.title" = "Disconnect from Server";
-"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?";
+"servers.action.disconnect.alert.message" = "Do you want to disconnect from \"%@\" server?";
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect";
 
 // Status
