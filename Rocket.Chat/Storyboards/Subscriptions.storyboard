@@ -268,7 +268,7 @@
                 <viewControllerPlaceholder storyboardName="New Room" id="Yv3-wP-OPQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUE-tQ-REW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983" y="338"/>
+            <point key="canvasLocation" x="962" y="338"/>
         </scene>
     </scenes>
     <resources>
