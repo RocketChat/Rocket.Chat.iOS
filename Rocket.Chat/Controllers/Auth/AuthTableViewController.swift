@@ -16,7 +16,12 @@ import MBProgressHUD
 class AuthTableViewController: BaseTableViewController {
 
     internal let kLoginProvidersSection: Int = 0
-    internal let kLoginProvidersCollapsedMax: Int = 3
+    internal var kLoginProvidersCollapsedMax: Int {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad: return 6
+        default: return 3
+        }
+    }
     internal let kEmailAuthSection: Int = 1
     internal var shouldShowSeparator: Bool {
         return loginServices.count > 0
@@ -102,11 +107,11 @@ class AuthTableViewController: BaseTableViewController {
     }
 
     lazy var extraLoginServiceIndexPaths: [IndexPath] = {
-        guard loginServices.count > 3 else {
+        guard loginServices.count > kLoginProvidersCollapsedMax else {
             return []
         }
 
-        let extraLoginServices = loginServices[3...loginServices.count - 1]
+        let extraLoginServices = loginServices[kLoginProvidersCollapsedMax...loginServices.count - 1]
         var extraLoginServiceIndexPaths: [IndexPath] = []
         for index in extraLoginServices.indices {
             extraLoginServiceIndexPaths.append(IndexPath(row: index, section: 0))

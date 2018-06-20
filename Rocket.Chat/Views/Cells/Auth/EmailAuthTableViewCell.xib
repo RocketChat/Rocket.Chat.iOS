@@ -22,12 +22,14 @@
                         <rect key="frame" x="15" y="30" width="345" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="Cgo-1A-HDy"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="OaZ-oe-bDN"/>
                         </constraints>
                         <state key="normal" title="Login with e-mail"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iy-Zh-nCb" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="15" y="86" width="345" height="48"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="bCc-L8-BXc"/>
                             <constraint firstAttribute="height" constant="48" id="rv2-oM-2Tn"/>
                         </constraints>
                         <state key="normal" title="Create an account"/>
@@ -47,11 +49,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="8iy-Zh-nCb" secondAttribute="bottom" constant="30" id="80s-Ux-VxC"/>
-                    <constraint firstItem="6Jz-DI-tKu" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" constant="15" id="J7Q-Kw-gjy"/>
-                    <constraint firstAttribute="trailing" secondItem="8iy-Zh-nCb" secondAttribute="trailing" constant="15" id="JBj-Qh-VgL"/>
+                    <constraint firstItem="8iy-Zh-nCb" firstAttribute="centerX" secondItem="chD-Di-DS9" secondAttribute="centerX" id="Byy-ML-gOA"/>
+                    <constraint firstItem="6Jz-DI-tKu" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" priority="999" constant="15" id="J7Q-Kw-gjy"/>
+                    <constraint firstAttribute="trailing" secondItem="8iy-Zh-nCb" secondAttribute="trailing" priority="999" constant="15" id="JBj-Qh-VgL"/>
                     <constraint firstItem="8iy-Zh-nCb" firstAttribute="top" secondItem="6Jz-DI-tKu" secondAttribute="bottom" constant="8" id="RtN-7r-C1T"/>
-                    <constraint firstAttribute="trailing" secondItem="6Jz-DI-tKu" secondAttribute="trailing" constant="15" id="dye-95-zB1"/>
-                    <constraint firstItem="8iy-Zh-nCb" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" constant="15" id="qBJ-39-FV0"/>
+                    <constraint firstItem="6Jz-DI-tKu" firstAttribute="centerX" secondItem="chD-Di-DS9" secondAttribute="centerX" id="WP8-Un-b4V"/>
+                    <constraint firstAttribute="trailing" secondItem="6Jz-DI-tKu" secondAttribute="trailing" priority="999" constant="15" id="dye-95-zB1"/>
+                    <constraint firstItem="8iy-Zh-nCb" firstAttribute="leading" secondItem="chD-Di-DS9" secondAttribute="leading" priority="999" constant="15" id="qBJ-39-FV0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
