@@ -12,10 +12,6 @@ final class SubscriptionCell: UITableViewCell {
 
     static let identifier = "CellSubscription"
 
-    internal let labelSelectedTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
-    internal let labelReadTextColor = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-    internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
-
     internal let defaultBackgroundColor = UIColor.white
     internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
     internal let highlightedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09530179799)
@@ -46,6 +42,18 @@ final class SubscriptionCell: UITableViewCell {
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
             }
+        }
+    }
+
+    @IBOutlet weak var labelDateRightSpacingConstraint: NSLayoutConstraint! {
+        didSet {
+            labelDateRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? -8 : 0
+        }
+    }
+
+    @IBOutlet weak var labelUnreadRightSpacingConstraint: NSLayoutConstraint! {
+        didSet {
+            labelUnreadRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? 8 : 0
         }
     }
 
@@ -202,10 +210,11 @@ extension SubscriptionCell {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
+
         labelName.textColor = theme.titleText
         labelUnread.backgroundColor = theme.tintColor
         labelUnread.textColor = theme.backgroundColor
-        labelLastMessage.textColor = theme.controlText
+        labelLastMessage.textColor = theme.auxiliaryText
         iconRoom.tintColor = theme.auxiliaryText
 
         if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {

@@ -19,22 +19,22 @@
                     <rect key="frame" x="0.0" y="4" width="375" height="36"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Oo-Jr-ITD">
-                            <rect key="frame" x="157" y="0.0" width="61" height="18"/>
+                            <rect key="frame" x="155" y="0.0" width="65.5" height="18"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-nP-uyM">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="18"/>
                                 </activityIndicatorView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t2-Hf-Uj2">
-                                    <rect key="frame" x="28" y="0.0" width="33" height="18"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <rect key="frame" x="28" y="0.0" width="37.5" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
-                            <rect key="frame" x="156.5" y="0.0" width="62.5" height="18"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <rect key="frame" x="153.5" y="0.0" width="69.5" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
