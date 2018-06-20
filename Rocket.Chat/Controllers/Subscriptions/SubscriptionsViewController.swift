@@ -114,7 +114,9 @@ final class SubscriptionsViewController: BaseViewController {
         guard let susbcriptions = Subscription.all() else { return }
 
         assigned = true
-        subscriptionsToken = susbcriptions.observe(handleSubscriptionUpdates)
+        subscriptionsToken = susbcriptions.observe({ [weak self] changes in
+            self?.handleSubscriptionUpdates(changes: changes)
+        })
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -237,8 +239,8 @@ final class SubscriptionsViewController: BaseViewController {
             for obj in realm.objects(Subscription.self) {
                 unread += obj.unread
             }
-        }, completion: {
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        }, completion: { [weak self] in
+            self?.navigationItem.backBarButtonItem = UIBarButtonItem(
                 title: unread == 0 ? "" : "\(unread)",
                 style: .plain,
                 target: nil,
@@ -253,7 +255,7 @@ final class SubscriptionsViewController: BaseViewController {
         searchController.hidesNavigationBarDuringPresentation = true
 
         if #available(iOS 11.0, *) {
-            self.searchBar = searchController.searchBar
+            searchBar = searchController.searchBar
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.largeTitleDisplayMode = .never
 
@@ -280,9 +282,9 @@ final class SubscriptionsViewController: BaseViewController {
         }
 
         self.searchController = searchController
-        self.searchBar?.placeholder = localized("subscriptions.search")
-        self.searchBar?.delegate = self
-        self.searchBar?.applyTheme()
+        searchBar?.placeholder = localized("subscriptions.search")
+        searchBar?.delegate = self
+        searchBar?.applyTheme()
     }
 
     func setupTitleView() {
@@ -412,15 +414,15 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateSubscriptionsList() {
-        let visibleRows = self.tableView.indexPathsForVisibleRows ?? []
+        let visibleRows = tableView.indexPathsForVisibleRows ?? []
 
-        self.updateBackButton()
+        updateBackButton()
 
         updateSubscriptionsToShow()
 
         // If the list were empty, let's just refresh everything.
         if visibleRows.count == 0 {
-            self.tableView.reloadData()
+            tableView.reloadData()
             return
         }
 
@@ -432,10 +434,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         for indexPath in visibleRows {
-            guard self.subscriptions?.count ?? -1 > indexPath.row else { continue }
+            guard subscriptions?.count ?? -1 > indexPath.row else { continue }
 
-            if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
-                subscriptionCell.subscription = self.subscriptions?[indexPath.row]
+            if let subscriptionCell = tableView.cellForRow(at: indexPath) as? SubscriptionCell {
+                subscriptionCell.subscription = subscriptions?[indexPath.row]
 
                 if subscriptionCell.subscription == selectedSubscriptionIdentifier {
                     tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
@@ -477,10 +479,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
         serversView?.close()
 
-        if let sortingView = self.sortingView {
+        if let sortingView = sortingView {
             sortingView.close()
         } else {
-            sortingView = SubscriptionsSortingView.showIn(self.view)
+            sortingView = SubscriptionsSortingView.showIn(view)
             sortingView?.delegate = self
             sortingView?.applyTheme()
         }
@@ -489,13 +491,13 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     @objc func openServersList() {
         sortingView?.close()
 
-        if let serversView = self.serversView {
+        if let serversView = serversView {
             titleView?.updateTitleImage(reverse: false)
             serversView.close()
         } else {
             titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(self.view, frame: frameForDropDownOverlay)
-            serversView?.presentAddServer = {
+            serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
+            serversView?.presentAddServer = { [weak self] in
                 let connect = Storyboard.auth(
                     serverUrl: "",
                     credentials: nil
@@ -506,7 +508,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
                 let nav = BaseNavigationController(rootViewController: connect)
                 _ = nav.view
 
-                self.present(nav, animated: true, completion: nil)
+                self?.present(nav, animated: true, completion: nil)
             }
             serversView?.delegate = self
             serversView?.applyTheme()
