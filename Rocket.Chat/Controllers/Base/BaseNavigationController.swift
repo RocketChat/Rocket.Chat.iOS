@@ -104,3 +104,12 @@ extension BaseNavigationController: BaseNavigationBarThemeSource {
         return topViewController?.view.theme
     }
 }
+
+// MARK: Themeable
+
+extension BaseNavigationController {
+    override func applyTheme() {
+        super.applyTheme()
+        view.backgroundColor = navigationBar.theme?.backgroundColor ?? .white
+    }
+}
