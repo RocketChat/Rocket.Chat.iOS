@@ -78,10 +78,10 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" rowHeight="75" id="EDM-8E-WsE" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" rowHeight="75" id="EDM-8E-WsE" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EDM-8E-WsE" id="77b-s3-dhx">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="EDM-8E-WsE" id="77b-s3-dhx">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -122,8 +122,8 @@
                                                         <constraint firstAttribute="width" constant="48" id="cKX-oW-ZWW"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoS-By-2a2">
-                                                    <rect key="frame" x="78" y="32" width="183" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.94999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="AoS-By-2a2">
+                                                    <rect key="frame" x="78" y="31" width="183" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -160,7 +160,7 @@
                                                 <constraint firstItem="IkN-GD-8NO" firstAttribute="leading" secondItem="D5j-bA-MaN" secondAttribute="trailing" constant="5" id="epL-AA-60S"/>
                                                 <constraint firstItem="IkN-GD-8NO" firstAttribute="top" secondItem="77b-s3-dhx" secondAttribute="topMargin" id="lMC-Xq-Uft"/>
                                                 <constraint firstItem="D5j-bA-MaN" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="15" id="nhj-GB-KNz"/>
-                                                <constraint firstItem="AoS-By-2a2" firstAttribute="top" secondItem="IkN-GD-8NO" secondAttribute="bottom" constant="1" id="qUZ-EB-jL8"/>
+                                                <constraint firstItem="AoS-By-2a2" firstAttribute="top" secondItem="IkN-GD-8NO" secondAttribute="bottom" id="qUZ-EB-jL8"/>
                                                 <constraint firstItem="D5j-bA-MaN" firstAttribute="centerY" secondItem="IkN-GD-8NO" secondAttribute="centerY" id="x8g-K4-v2w"/>
                                                 <constraint firstItem="rcW-Pk-bqG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IkN-GD-8NO" secondAttribute="trailing" constant="2" id="ypU-cj-uqH"/>
                                             </constraints>

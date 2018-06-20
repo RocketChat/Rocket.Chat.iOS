@@ -249,7 +249,7 @@ extension ChannelActionsViewController: UITableViewDelegate {
         if let data = data as? ChannelInfoActionCellData {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoActionCell.identifier) as? ChannelInfoActionCell {
                 cell.data = data
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 48, bottom: 0, right: 0)
                 return cell
             }
         }

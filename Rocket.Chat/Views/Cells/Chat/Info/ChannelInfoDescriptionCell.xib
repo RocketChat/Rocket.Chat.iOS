@@ -12,10 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="fkQ-pS-nco" customClass="ChannelInfoDescriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="80" id="fkQ-pS-nco" customClass="ChannelInfoDescriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fkQ-pS-nco" id="ncm-ZA-XmF">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="fkQ-pS-nco" id="ncm-ZA-XmF">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -28,7 +28,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2L-Al-CUM">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2L-Al-CUM">
                                 <rect key="frame" x="0.0" y="18" width="343" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,7 +42,7 @@
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gOy-IF-4Ys" secondAttribute="bottom" constant="4" id="DdB-it-xeJ"/>
                     <constraint firstItem="gOy-IF-4Ys" firstAttribute="centerY" secondItem="ncm-ZA-XmF" secondAttribute="centerY" id="eaC-ah-TsC"/>
                     <constraint firstItem="gOy-IF-4Ys" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ncm-ZA-XmF" secondAttribute="topMargin" constant="4" id="ulA-wD-g9Q"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="gOy-IF-4Ys" secondAttribute="trailing" id="wKl-5Y-NJ3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gOy-IF-4Ys" secondAttribute="trailingMargin" id="wKl-5Y-NJ3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
