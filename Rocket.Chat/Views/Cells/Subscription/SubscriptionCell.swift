@@ -112,7 +112,12 @@ final class SubscriptionCell: UITableViewCell {
 
             if subscription.unread > 0 {
                 viewUnread.isHidden = false
-                labelUnread.text =  "\(subscription.unread)"
+
+                if subscription.groupMentions > 0 || subscription.userMentions > 0 {
+                    labelUnread.text =  "@\(subscription.unread)"
+                } else {
+                    labelUnread.text =  "\(subscription.unread)"
+                }
             } else {
                 viewUnread.isHidden = true
                 labelUnread.text = nil

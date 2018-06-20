@@ -20,6 +20,8 @@ extension Subscription: ModelMappeable {
         self.name = values["name"].stringValue
         self.fname = values["fname"].stringValue
         self.unread = values["unread"].int ?? 0
+        self.userMentions = values["userMentions"].int ?? 0
+        self.groupMentions = values["groupMentions"].int ?? 0
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false
         self.favorite = values["f"].bool ?? false

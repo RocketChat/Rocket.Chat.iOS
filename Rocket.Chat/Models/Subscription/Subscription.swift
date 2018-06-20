@@ -38,6 +38,8 @@ final class Subscription: BaseModel {
     @objc dynamic var fname = ""
 
     @objc dynamic var unread = 0
+    @objc dynamic var userMentions = 0
+    @objc dynamic var groupMentions = 0
     @objc dynamic var open = false
     @objc dynamic var alert = false
     @objc dynamic var favorite = false
