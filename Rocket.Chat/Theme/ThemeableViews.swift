@@ -44,6 +44,7 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
+        guard type(of: self).description() != "_UIAlertControllerView" else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
         return superview.theme
     }
