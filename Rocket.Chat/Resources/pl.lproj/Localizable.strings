@@ -279,7 +279,8 @@
 "chat.info.item.pinned" = "Przypięte";
 "chat.info.item.starred" = "Oznaczone gwiazdką";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.files" = "Arquivos"; // TODO
+"chat.info.item.files" = "Files"; // TODO
+"chat.info.item.share" = "Share"; // TODO
 
 // Members List
 "chat.members.list.title" = "Członkowie";

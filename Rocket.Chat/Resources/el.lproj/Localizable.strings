@@ -281,6 +281,7 @@
 "chat.info.item.starred" = "Αστερωμένα";
 "chat.info.item.mentions" = "Mentions"; // TODO
 "chat.info.item.files" = "Files"; // TODO
+"chat.info.item.share" = "Share"; // TODO
 
 // Members List
 "chat.members.list.title" = "Μέλη";
