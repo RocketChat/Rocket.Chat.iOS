@@ -60,7 +60,7 @@ class LoaderView: UIView {
                 clockwise: false
             )
 
-            circleLayer.fillColor = theme?.auxiliaryBackground.cgColor ?? fillColor
+            circleLayer.fillColor = theme?.auxiliaryTintColor.cgColor ?? fillColor
             circleLayer.backgroundColor = nil
             circleLayer.path = path.cgPath
             circleLayer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
