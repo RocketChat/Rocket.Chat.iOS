@@ -25,14 +25,24 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+        if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL], let url = URL(string: serverURL) {
+            navigationItem.title = url.host
+        } else {
+            navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+        }
 
-        startLoading()
-        AuthManager.usernameSuggestion { [weak self] (response) in
-            self?.stopLoading()
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setGrayTheme()
+        }
 
-            if !response.isError() {
-                self?.textFieldUsername.text = response.result["result"].stringValue
+        if SocketManager.isConnected() {
+            startLoading()
+            AuthManager.usernameSuggestion { [weak self] (response) in
+                self?.stopLoading()
+
+                if !response.isError() {
+                    self?.textFieldUsername.text = response.result["result"].stringValue
+                }
             }
         }
     }
@@ -66,16 +76,23 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     }
 
     fileprivate func requestUsername() {
-        startLoading()
+        let error = { (errorMessage: String?) in
+            Alert(
+                title: localized("error.socket.default_error.title"),
+                message: errorMessage ?? localized("error.socket.default_error.message")
+            ).present()
+        }
 
+        guard let username = textFieldUsername.text, !username.isEmpty else {
+            return error(nil)
+        }
+
+        startLoading()
         AuthManager.setUsername(textFieldUsername.text ?? "") { [weak self] success, errorMessage in
             DispatchQueue.main.async {
             self?.stopLoading()
                 if !success {
-                    Alert(
-                        title: localized("error.socket.default_error.title"),
-                        message: errorMessage ?? localized("error.socket.default_error.message")
-                    ).present()
+                    error(errorMessage)
                 } else {
                     self?.dismiss(animated: true, completion: nil)
                     AppManager.reloadApp()
