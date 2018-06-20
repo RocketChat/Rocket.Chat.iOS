@@ -351,7 +351,9 @@ extension EmojiPicker {
         guard isPopover else { return theme }
         let popoverTheme = Theme(
             backgroundColor: theme.focusedBackground,
-            focusedBackground: theme.focusedBackground, auxiliaryBackground: theme.auxiliaryBackground, titleText: theme.titleText,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            titleText: theme.titleText,
             bodyText: theme.bodyText,
             controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,

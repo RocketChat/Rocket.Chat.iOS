@@ -164,7 +164,8 @@ extension ReactorListView {
         let popoverTheme = Theme(
             backgroundColor: theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
-            auxiliaryBackground: theme.auxiliaryBackground, titleText: theme.titleText,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            titleText: theme.titleText,
             bodyText: theme.bodyText,
             controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,
