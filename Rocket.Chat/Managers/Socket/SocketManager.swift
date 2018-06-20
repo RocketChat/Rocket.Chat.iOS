@@ -183,6 +183,16 @@ extension SocketManager {
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
                 }
+
+                if AuthManager.currentUser()?.username == nil {
+                    WindowManager.open(
+                        .auth(
+                            serverUrl: "",
+                            credentials: nil
+                        ),
+                        viewControllerIdentifier: "RegisterUsernameNav"
+                    )
+                }
             }
         })
     }
