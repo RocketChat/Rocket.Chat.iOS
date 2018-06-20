@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorInsetReference="fromAutomaticInsets" rowHeight="71" estimatedRowHeight="71" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorInsetReference="fromAutomaticInsets" rowHeight="71" estimatedRowHeight="71" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,7 +106,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="10:41 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcW-Pk-bqG">
-                                                    <rect key="frame" x="231" y="11" width="56" height="18"/>
+                                                    <rect key="frame" x="231" y="12" width="56" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="2Sb-Nl-AgS"/>
                                                     </constraints>
@@ -154,9 +154,9 @@
                                                 <constraint firstItem="DkA-vH-8he" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="15" id="Tll-79-8Wh"/>
                                                 <constraint firstItem="AoS-By-2a2" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="15" id="Z5E-7N-Kxa"/>
                                                 <constraint firstAttribute="trailing" secondItem="c6A-bb-KeM" secondAttribute="trailing" id="ZaG-Ws-Ien"/>
-                                                <constraint firstItem="rcW-Pk-bqG" firstAttribute="top" secondItem="77b-s3-dhx" secondAttribute="topMargin" id="b79-9K-Ce5"/>
                                                 <constraint firstItem="MFe-Al-bKv" firstAttribute="centerY" secondItem="77b-s3-dhx" secondAttribute="centerY" id="blE-8q-ogR"/>
                                                 <constraint firstItem="c6A-bb-KeM" firstAttribute="centerY" secondItem="77b-s3-dhx" secondAttribute="centerY" id="e5J-Ja-aPf"/>
+                                                <constraint firstItem="rcW-Pk-bqG" firstAttribute="centerY" secondItem="IkN-GD-8NO" secondAttribute="centerY" id="eTs-cR-J2i"/>
                                                 <constraint firstItem="IkN-GD-8NO" firstAttribute="leading" secondItem="D5j-bA-MaN" secondAttribute="trailing" constant="5" id="epL-AA-60S"/>
                                                 <constraint firstItem="IkN-GD-8NO" firstAttribute="top" secondItem="77b-s3-dhx" secondAttribute="topMargin" id="lMC-Xq-Uft"/>
                                                 <constraint firstItem="D5j-bA-MaN" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="15" id="nhj-GB-KNz"/>
@@ -170,9 +170,11 @@
                                             <outlet property="avatarViewContainer" destination="MFe-Al-bKv" id="cTR-KB-bEu"/>
                                             <outlet property="iconRoom" destination="D5j-bA-MaN" id="728-tO-Bhb"/>
                                             <outlet property="labelDate" destination="rcW-Pk-bqG" id="MJE-vl-yz7"/>
+                                            <outlet property="labelDateRightSpacingConstraint" destination="Gr2-Rg-61K" id="7bj-9f-rCq"/>
                                             <outlet property="labelLastMessage" destination="AoS-By-2a2" id="g6i-ef-FdZ"/>
                                             <outlet property="labelName" destination="IkN-GD-8NO" id="1o7-7O-pS0"/>
                                             <outlet property="labelUnread" destination="c6A-bb-KeM" id="z3F-US-v0x"/>
+                                            <outlet property="labelUnreadRightSpacingConstraint" destination="ZaG-Ws-Ien" id="4gI-YS-v49"/>
                                             <outlet property="viewStatus" destination="DkA-vH-8he" id="eT6-ZL-Spd"/>
                                         </connections>
                                     </tableViewCell>
