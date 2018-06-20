@@ -12,7 +12,7 @@ class SubscriptionsSortingHeaderView: UIView {
     override var theme: Theme? {
         guard let theme = super.theme else { return nil }
         return Theme(
-            backgroundColor: theme == .dark ? theme.focusedBackground : theme.backgroundColor,
+            backgroundColor: theme == .light ? theme.backgroundColor : theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             titleText: theme.titleText,
