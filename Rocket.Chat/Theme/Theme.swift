@@ -100,14 +100,14 @@ class Theme: NSObject {
     )
 
     static let dark = Theme(
-        backgroundColor: #colorLiteral(red: 0.06482539596, green: 0.06587358546, blue: 0.06711885095, alpha: 1),
-        titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
+        backgroundColor: #colorLiteral(red: 0.01176470588, green: 0.0431372549, blue: 0.1058823529, alpha: 1),
+        titleText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         controlText: #colorLiteral(red: 0.8549193462, green: 0.8697612629, blue: 0.903159703, alpha: 1),
-        auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        tintColor: #colorLiteral(red: 0.1176899746, green: 0.6068716645, blue: 0.9971964955, alpha: 1),
-        hyperlinkColor: #colorLiteral(red: 0.4039215686, green: 0.7333333333, blue: 1, alpha: 1),
-        focusedBackground: #colorLiteral(red: 0.08987318066, green: 0.08987318066, blue: 0.1, alpha: 1),
+        auxiliaryText: #colorLiteral(red: 0.5732198682, green: 0.5927470883, blue: 0.638310602, alpha: 1),
+        tintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        hyperlinkColor: #colorLiteral(red: 0.2598184008, green: 0.5860730593, blue: 1, alpha: 1),
+        focusedBackground: #colorLiteral(red: 0.0431372549, green: 0.09411764706, blue: 0.1725490196, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.1672673633, green: 0.1672673633, blue: 0.1769603646, alpha: 1),
         strongAccent: nil,
