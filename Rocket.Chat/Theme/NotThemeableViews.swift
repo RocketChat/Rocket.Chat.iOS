@@ -19,3 +19,7 @@ class NotThemeableTableView: UITableView {
 class NotThemeableNavigationBar: UINavigationBar {
     override var theme: Theme? { return nil }
 }
+
+class NotThemeableLabel: UILabel {
+    override var theme: Theme? { return nil }
+}

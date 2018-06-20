@@ -45,8 +45,8 @@
                             <constraint firstAttribute="width" constant="35" id="Cny-FU-tGi"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views">
-                        <rect key="frame" x="61" y="32" width="275" height="260"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views" customClass="ThemeableStackView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="47" y="32" width="297" height="260"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="260" id="4Ab-x2-r5e"/>
                         </constraints>
