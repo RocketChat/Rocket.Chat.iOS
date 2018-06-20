@@ -680,17 +680,9 @@ final class ChatViewController: SLKTextViewController {
 
         let tempSubscription = Subscription(value: subscription)
 
-        if date == nil {
-//            showLoadingMessagesHeaderStatusView()
-        }
-
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
-
-                if date == nil {
-//                    self?.hideHeaderStatusView()
-                }
 
                 if loadNextPage {
                     self?.isRequestingHistory = false
@@ -715,6 +707,10 @@ final class ChatViewController: SLKTextViewController {
         guard let subscription = subscription else { return }
 
         if isRequestingHistory {
+            if date == nil {
+                collectionView?.reloadData()
+            }
+
             return
         }
 
@@ -725,6 +721,10 @@ final class ChatViewController: SLKTextViewController {
             messages.append(contentsOf: newMessages)
             appendMessages(messages: newMessages, completion: { [weak self] in
                 self?.activityIndicator.stopAnimating()
+
+                if date == nil {
+                    self?.collectionView?.reloadData()
+                }
 
                 if SocketManager.isConnected() {
                     if !loadRemoteHistory {
