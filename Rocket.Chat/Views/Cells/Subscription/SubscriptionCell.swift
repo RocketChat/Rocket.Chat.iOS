@@ -94,8 +94,6 @@ final class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.displayName()
         labelLastMessage.text = subscription.roomLastMessageText
-        labelLastMessage.setNeedsLayout()
-        setNeedsLayout()
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
