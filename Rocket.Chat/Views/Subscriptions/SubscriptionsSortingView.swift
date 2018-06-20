@@ -194,6 +194,25 @@ extension SubscriptionsSortingView: UITableViewDelegate {
 // MARK: Themeable
 
 extension SubscriptionsSortingView {
+    override var theme: Theme? {
+        guard let theme = super.theme else { return nil }
+        return Theme(
+            backgroundColor: theme == .light ? theme.backgroundColor : theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
+    }
+
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }

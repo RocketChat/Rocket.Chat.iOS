@@ -163,14 +163,15 @@ extension ReactorListView {
         guard isPopover else { return theme }
         let popoverTheme = Theme(
             backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
             titleText: theme.titleText,
             bodyText: theme.bodyText,
             controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
-            hyperlinkColor: theme.hyperlinkColor,
-            focusedBackground: theme.focusedBackground,
-            auxiliaryBackground: theme.auxiliaryBackground,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence
