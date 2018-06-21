@@ -142,6 +142,7 @@
 "subscriptions.unreads" = "Nepřečtené";
 "subscriptions.favorites" = "Oblíbené";
 "subscriptions.channels" = "Kanály";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Přímé zprávy";
 "subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "you"; //TODO

@@ -142,6 +142,7 @@
 "subscriptions.unreads" = "Αδιάβαστα";
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
 "subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "you"; //TODO
