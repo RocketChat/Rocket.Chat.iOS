@@ -34,7 +34,6 @@ struct SubscriptionsViewModel {
         }
     }
 
-    // todo: try making these lazy
     var unreadSubscriptions: Results<Subscription>? {
         return subscriptions?.filter("alert == true")
     }

@@ -386,6 +386,7 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
     func userDidChangeSortingOptions(_ sender: SubscriptionsSortingView) {
         viewModel.buildSections()
         tableView.reloadData()
+        updateSortingTitleDescription()
     }
 
 }
