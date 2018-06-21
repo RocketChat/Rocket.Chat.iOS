@@ -64,11 +64,15 @@ struct SubscriptionsViewModel {
 
     typealias SubscriptionsSection = (name: String, items: Results<Subscription>?)
 
-    var tokens: [NotificationToken?] = []
+    private var tokens: [NotificationToken?] = []
+    private func invalidateTokens() {
+        tokens.forEach { $0?.invalidate() }
+    }
+
     var sections: [SubscriptionsSection] = []
 
     mutating func buildSections() {
-        self.tokens.forEach { $0?.invalidate() }
+        invalidateTokens()
 
         var sections: [SubscriptionsSection] = []
         var tokens: [NotificationToken?] = []
@@ -122,7 +126,7 @@ struct SubscriptionsViewModel {
 
             sectionUpdated?(deletions, insertions, modifications)
         default:
-            break
+            sectionUpdated?([], [], [])
         }
     }
 }

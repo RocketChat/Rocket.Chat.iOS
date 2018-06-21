@@ -59,6 +59,8 @@ final class SubscriptionsViewController: BaseViewController {
             tableView.reloadRows(at: modifications, with: .none)
             tableView.endUpdates()
         }
+
+        viewModel.buildSections()
     }
 
     override func viewDidLayoutSubviews() {
