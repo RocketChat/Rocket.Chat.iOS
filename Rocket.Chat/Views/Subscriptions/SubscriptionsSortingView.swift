@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SubscriptionsSortingViewDelegate: class {
-    func userDidChangeSortingOptions()
+    func userDidChangeSortingOptions(_ sender: SubscriptionsSortingView)
 }
 
 final class SubscriptionsSortingView: UIView {
@@ -186,7 +186,7 @@ extension SubscriptionsSortingView: UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
 
-        delegate?.userDidChangeSortingOptions()
+        delegate?.userDidChangeSortingOptions(self)
     }
 
 }

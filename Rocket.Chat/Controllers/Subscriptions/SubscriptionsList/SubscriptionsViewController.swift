@@ -31,29 +31,7 @@ final class SubscriptionsViewController: BaseViewController {
     weak var searchBar: UISearchBar?
 
     var assigned = false
-    var searchState: SearchState = .notSearching
-    var searchResult: [Subscription]?
-    var subscriptions: [Subscription]?
-    var subscriptionsToken: NotificationToken?
-    var currentUserToken: NotificationToken?
-
-    var groupInfomation: [[String: String]]?
-    var groupSubscriptions: [[Subscription]]?
-
-    var subscriptionsToShow: [Subscription] {
-        switch searchState {
-        case .searchingLocally:
-            return searchResult ?? []
-        case .searchingRemotely:
-            return searchResult ?? []
-        case .notSearching:
-            if let subscriptions = subscriptions {
-                return Array(subscriptions)
-            } else {
-                return []
-            }
-        }
-    }
+    var viewModel = SubscriptionsViewModel()
 
     var searchText: String = ""
 
@@ -61,7 +39,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     deinit {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
-        subscriptionsToken?.invalidate()
     }
 
     override func viewDidLoad() {
@@ -69,10 +46,21 @@ final class SubscriptionsViewController: BaseViewController {
         setupTitleView()
         updateBackButton()
 
-        subscribeModelChanges()
-        updateData()
-
         super.viewDidLoad()
+
+        viewModel.sectionUpdated = { [weak self] deletions, insertions, modifications in
+            guard let tableView = self?.tableView else {
+                return
+            }
+
+            tableView.beginUpdates()
+            tableView.deleteRows(at: deletions, with: .none)
+            tableView.insertRows(at: insertions, with: .none)
+            tableView.reloadRows(at: modifications, with: .none)
+            tableView.endUpdates()
+        }
+
+        tableView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -93,6 +81,8 @@ final class SubscriptionsViewController: BaseViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
         }
+
+        tableView.reloadData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -105,129 +95,6 @@ final class SubscriptionsViewController: BaseViewController {
         if segue.identifier == "Servers" {
             segue.destination.modalPresentationCapturesStatusBarAppearance = true
         }
-    }
-
-    // MARK: Subscriptions
-
-    func subscribeModelChanges() {
-        guard !assigned else { return }
-        guard let susbcriptions = Subscription.all() else { return }
-
-        assigned = true
-        subscriptionsToken = susbcriptions.observe({ [weak self] changes in
-            self?.handleSubscriptionUpdates(changes: changes)
-        })
-    }
-
-    // swiftlint:disable function_body_length cyclomatic_complexity
-    func organizeSubscriptionsGrouped() {
-        var unreadGroup: [Subscription] = []
-        var favoriteGroup: [Subscription] = []
-        var channelGroup: [Subscription] = []
-        var directMessageGroup: [Subscription] = []
-        var searchResultsGroup: [Subscription] = []
-        var untitledGroup: [Subscription] = []
-
-        let isSearchingRemotely = searchState == .searchingRemotely
-        let isSearchingLocally = searchState == .searchingLocally
-
-        let grouping = SubscriptionsSortingManager.selectedGroupingOptions
-        let isGroupByTypeEnabled = grouping.contains(.type)
-        let isGroupFavoritesEnabled = grouping.contains(.favorites)
-        let isGroupUnreadsEnabled = grouping.contains(.unread)
-
-        guard let subscriptions = subscriptions else { return }
-        let orderSubscriptions = isSearchingRemotely ? searchResult : subscriptions
-
-        for subscription in orderSubscriptions ?? [] {
-            if isSearchingRemotely {
-                searchResultsGroup.append(subscription)
-            }
-
-            if !isSearchingLocally && !subscription.open {
-                continue
-            }
-
-            if isGroupUnreadsEnabled && subscription.alert {
-                unreadGroup.append(subscription)
-                continue
-            }
-
-            if isGroupFavoritesEnabled && subscription.favorite {
-                favoriteGroup.append(subscription)
-                continue
-            }
-
-            if isGroupByTypeEnabled {
-                switch subscription.type {
-                case .channel, .group:
-                    channelGroup.append(subscription)
-                case .directMessage:
-                    directMessageGroup.append(subscription)
-                }
-            } else {
-                untitledGroup.append(subscription)
-            }
-        }
-
-        groupInfomation = [[String: String]]()
-        groupSubscriptions = [[Subscription]]()
-
-        if searchResultsGroup.count > 0 {
-            groupInfomation?.append([
-                "name": localized("subscriptions.search_results")
-            ])
-
-            groupSubscriptions?.append(searchResultsGroup)
-        } else {
-            if unreadGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": localized("subscriptions.unreads")
-                ])
-
-                groupSubscriptions?.append(unreadGroup)
-            }
-
-            if favoriteGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": localized("subscriptions.favorites")
-                ])
-
-                groupSubscriptions?.append(favoriteGroup)
-            }
-
-            if channelGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": localized("subscriptions.channels")
-                ])
-
-                groupSubscriptions?.append(channelGroup)
-            }
-
-            if directMessageGroup.count > 0 {
-                groupInfomation?.append([
-                    "name": localized("subscriptions.direct_messages")
-                ])
-
-                groupSubscriptions?.append(directMessageGroup)
-            }
-
-            if untitledGroup.count > 0 {
-                let title = isGroupFavoritesEnabled || isGroupByTypeEnabled || isGroupUnreadsEnabled ? localized("subscriptions.conversations") : ""
-                groupInfomation?.append([
-                    "name": title
-                ])
-
-                groupSubscriptions?.append(untitledGroup)
-            }
-        }
-    }
-
-    func subscription(for indexPath: IndexPath) -> Subscription? {
-        guard let groups = groupSubscriptions else { return nil }
-        guard groups.count > indexPath.section else { return nil }
-        guard groups[indexPath.section].count > indexPath.row else { return nil }
-        return groups[indexPath.section][indexPath.row]
     }
 
     // MARK: Setup Views
@@ -315,149 +182,13 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "\n" {
-            if searchText.count > 0 {
-                searchOnSpotlight(searchText)
-            }
 
-            return
-        }
-
-        searchBy(searchText)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = ""
         searchText = ""
-        searchBy()
-    }
-
-    func searchBy(_ text: String = "") {
-        updateSearched()
-        searchText = text
-
-        if text.count == 0 {
-            searchState = .notSearching
-            searchResult = []
-
-            updateAll()
-            tableView.reloadData()
-            tableView.tableFooterView = nil
-
-            return
-        }
-
-        if subscriptions?.count == 0 {
-            searchOnSpotlight(text)
-            return
-        }
-
-        searchState = .searchingLocally
-        searchResult = subscriptions
-        organizeSubscriptionsGrouped()
-
-        tableView.reloadData()
-
-        if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
-            footerView.delegate = self
-            tableView.tableFooterView = footerView
-        }
-    }
-
-    func searchOnSpotlight(_ text: String = "") {
-        tableView.tableFooterView = nil
-
-        API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
-            let currentText = self?.searchBar?.text ?? ""
-
-            if currentText.count == 0 {
-                return
-            }
-
-            self?.searchState = .searchingRemotely
-            self?.searchResult = result
-            self?.organizeSubscriptionsGrouped()
-            self?.tableView.reloadData()
-        }
-    }
-
-    func updateSubscriptionsToShow() {
-        switch searchState {
-        case .notSearching:
-            updateAll()
-        case .searchingLocally, .searchingRemotely:
-            updateSearched()
-        }
-    }
-
-    func updateAll() {
-        guard let allSubscriptions = Subscription.all() else { return }
-
-        if SubscriptionsSortingManager.selectedSortingOption == .activity {
-            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
-        } else {
-            subscriptions = Array(allSubscriptions.sortedByName())
-        }
-
-        organizeSubscriptionsGrouped()
-    }
-
-    func updateSearched() {
-        guard let allSubscriptions = Subscription.all()?.filterBy(name: searchText) else { return }
-
-        if SubscriptionsSortingManager.selectedSortingOption == .activity {
-            subscriptions = Array(allSubscriptions.sortedByLastMessageDate())
-        } else {
-            subscriptions = Array(allSubscriptions.sortedByName())
-        }
-    }
-
-    func updateSubscriptionsList() {
-        let visibleRows = tableView.indexPathsForVisibleRows ?? []
-
-        updateBackButton()
-
-        updateSubscriptionsToShow()
-
-        // If the list were empty, let's just refresh everything.
-        if visibleRows.count == 0 {
-            tableView.reloadData()
-            return
-        }
-
-        var selectedSubscriptionIdentifier: Subscription?
-        if let nav = splitViewController?.detailViewController as? BaseNavigationController {
-            if let controller = nav.viewControllers.first as? ChatViewController {
-                selectedSubscriptionIdentifier = controller.subscription
-            }
-        }
-
-        for indexPath in visibleRows {
-            guard subscriptions?.count ?? -1 > indexPath.row else { continue }
-
-            if let subscriptionCell = tableView.cellForRow(at: indexPath) as? SubscriptionCell {
-                subscriptionCell.subscription = subscriptions?[indexPath.row]
-
-                if subscriptionCell.subscription == selectedSubscriptionIdentifier {
-                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-                } else if indexPath == tableView.indexPathForSelectedRow {
-                    tableView.deselectRow(at: indexPath, animated: false)
-                }
-            }
-        }
-    }
-
-    func updateData() {
-        guard case .notSearching = searchState else { return }
-
-        updateAll()
-        updateServerInformation()
-        updateSubscriptionsList()
-    }
-
-    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
-        updateSubscriptionsList()
     }
 
     func updateServerInformation() {
@@ -544,11 +275,11 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groupInfomation?.count ?? 0
+        return viewModel.numberOfSections
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupSubscriptions?[section].count ?? 0
+        return viewModel.numberOfRowsIn(section: section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -562,7 +293,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
             cell.accessoryType = .disclosureIndicator
         }
 
-        if let subscription = subscription(for: indexPath) {
+        if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
             cell.subscription = subscription
         }
 
@@ -573,33 +304,19 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard
-            groupInfomation?.count ?? 0 > section,
-            let group = groupInfomation?[section],
-            let name = group["name"] as String?,
-            !name.isEmpty
-        else {
-            return 0
-        }
-
         return 55
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            groupInfomation?.count ?? 0 > section,
-            let group = groupInfomation?[section],
-            let view = SubscriptionSectionView.instantiateFromNib()
-        else {
+        guard let view = SubscriptionSectionView.instantiateFromNib() else {
             return nil
         }
-
-        view.setTitle(group["name"])
+        view.setTitle(viewModel.titleForHeaderIn(section: section))
         return view
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let subscription = subscription(for: indexPath) else { return }
+        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
 
         searchController?.searchBar.resignFirstResponder()
 
@@ -631,25 +348,13 @@ extension SubscriptionsViewController {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
-
-        if string == "\n" {
-            if currentText.count > 0 {
-                searchOnSpotlight(currentText)
-            }
-
-            return false
-        }
-
-        searchBy(searchText)
         return true
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        searchBy()
         return true
     }
+
 }
 
 extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
@@ -670,9 +375,8 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
         }
     }
 
-    func userDidChangeSortingOptions() {
-        updateSortingTitleDescription()
-        updateAll()
+    func userDidChangeSortingOptions(_ sender: SubscriptionsSortingView) {
+        viewModel.buildSections()
         tableView.reloadData()
     }
 
@@ -681,7 +385,7 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
     func buttonLoadMoreDidPressed() {
-        searchOnSpotlight(searchController?.searchBar.text ?? "")
+
     }
 
     @IBAction func buttonAddChannelDidTap(sender: Any) {
