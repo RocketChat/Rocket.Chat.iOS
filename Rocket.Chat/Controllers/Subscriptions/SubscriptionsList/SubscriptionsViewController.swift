@@ -304,7 +304,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 55
+        return CGFloat(viewModel.heightForHeaderIn(section: section))
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -158,6 +158,10 @@ extension SubscriptionsViewModel {
         return sections[section].name
     }
 
+    func heightForHeaderIn(section: Int) -> Double {
+        return numberOfRowsIn(section: section) > 0 ? 55 : 0
+    }
+
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
         guard let items = sections[indexPath.section].items else {
             return nil
