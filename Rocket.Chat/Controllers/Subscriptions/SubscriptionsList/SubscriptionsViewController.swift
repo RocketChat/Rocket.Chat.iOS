@@ -59,8 +59,6 @@ final class SubscriptionsViewController: BaseViewController {
             tableView.reloadRows(at: modifications, with: .none)
             tableView.endUpdates()
         }
-
-        tableView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -182,13 +180,23 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            viewModel.searchState = .notSearching
+        } else {
+            viewModel.searchState = .searching(by: searchText, remotely: false)
+        }
 
+        viewModel.buildSections()
+        tableView.reloadData()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.searchState = .notSearching
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        searchText = ""
+
+        viewModel.buildSections()
+        tableView.reloadData()
     }
 
     func updateServerInformation() {

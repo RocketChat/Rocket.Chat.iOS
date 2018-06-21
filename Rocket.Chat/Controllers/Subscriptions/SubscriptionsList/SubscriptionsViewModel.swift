@@ -66,6 +66,14 @@ struct SubscriptionsViewModel {
         return subscriptions?.filter("privateType == 'd'")
     }
 
+    var searchedSubscriptions: Results<Subscription>? {
+        if case let .searching(searchText, _) = searchState {
+            return subscriptions?.filterBy(name: searchText)
+        } else {
+            return nil
+        }
+    }
+
     typealias SubscriptionsSection = (name: String, items: Results<Subscription>?)
 
     var tokens: [NotificationToken?] = []
@@ -87,12 +95,8 @@ struct SubscriptionsViewModel {
         }
 
         switch searchState {
-        case .searching(_/*let name*/, let remotely):
-            if remotely {
-                addSection((localized("subscriptions.search_results"), nil))
-            } else {
-                addSection((localized("subscriptions.search_results"), nil))
-            }
+        case .searching:
+                addSection((localized("subscriptions.search_results"), searchedSubscriptions))
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
                 addSection((localized("subscriptions.unreads"), unreadSubscriptions))
