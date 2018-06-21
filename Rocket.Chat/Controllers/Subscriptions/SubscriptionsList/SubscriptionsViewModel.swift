@@ -23,17 +23,6 @@ struct SubscriptionsViewModel {
         case notSearching
     }
 
-    var settings = (
-        sorting: SubscriptionsSortingOption.activity,
-        groupByType: false,
-        groupByFavorites: false,
-        unreadOnTop: false
-    ) {
-        didSet {
-            SubscriptionsSortingManager.select(option: settings.sorting)
-        }
-    }
-
     var searchState: SearchState = .notSearching
 
     var sortedSubscriptions: Results<Subscription>? {
