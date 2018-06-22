@@ -361,7 +361,7 @@ extension ChatMessageCell {
 
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 65) ?? 0)
+            total += (attributedString?.heightForView(withWidth: fullWidth - 61) ?? 0)
         }
 
         if message.isBroadcastReplyAvailable() {
