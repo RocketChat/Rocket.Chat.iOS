@@ -91,7 +91,7 @@ struct SubscriptionsClient: APIClient {
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastRoomFetchWithLastMessage = Date.serverDate
                     realm.add(auth, update: true)
                 })
 

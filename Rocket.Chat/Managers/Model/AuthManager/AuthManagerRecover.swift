@@ -72,6 +72,7 @@ extension AuthManager {
 
             let auth = Auth()
             auth.lastSubscriptionFetchWithLastMessage = nil
+            auth.lastRoomFetchWithLastMessage = nil
             auth.lastAccess = Date()
             auth.serverURL = serverURL
             auth.token = token
