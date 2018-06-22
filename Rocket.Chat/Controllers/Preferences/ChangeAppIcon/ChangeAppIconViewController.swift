@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChangeAppIconViewController: UIViewController {
+final class ChangeAppIconViewController: BaseViewController {
 
     private let viewModel = ChangeAppIconViewModel()
 
@@ -111,4 +111,15 @@ extension ChangeAppIconViewController: UICollectionViewDelegate {
         changeIcon(name: viewModel.availableIcons[indexPath.row])
     }
 
+}
+
+// MARK: Themeable
+
+extension ChangeAppIconViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+
+        view.backgroundColor = theme.auxiliaryBackground
+    }
 }

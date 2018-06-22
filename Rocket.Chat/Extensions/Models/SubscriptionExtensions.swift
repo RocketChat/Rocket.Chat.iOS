@@ -9,6 +9,40 @@
 import Foundation
 import RealmSwift
 
+typealias SortDescriptor<Value> = (Value, Value) -> Bool
+
+// MARK: URL Generation
+
+extension Subscription {
+
+    /**
+     This method returns the external URL of any subscription
+     when all the information required is valid on the related instance.
+
+     - returns: the external URL of the subscription object
+     */
+    func externalURL() -> URL? {
+        guard
+            let auth = auth,
+            let siteURLString = auth.settings?.siteURL,
+            name.count > 0
+        else {
+            return nil
+        }
+
+        let suffix: String = {
+            switch type {
+            case .channel: return "channel"
+            case .directMessage: return "direct"
+            case .group: return "group"
+            }
+        }()
+
+        return URL(string: "\(siteURLString)/\(suffix)/\(name)")
+    }
+
+}
+
 // MARK: Information Viewing Options
 
 extension Subscription {
@@ -45,22 +79,26 @@ extension Subscription {
 
 }
 
-extension LinkingObjects where Element == Subscription {
-    func sortedByLastSeen() -> Results<Subscription> {
-        return self.sorted(byKeyPath: "lastSeen", ascending: false)
+extension Subscription {
+
+    static func all(realm: Realm? = Realm.current) -> Results<Subscription>? {
+        return realm?.objects(Subscription.self).filter("auth != NULL")
     }
 
-    func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[cd] %@", name)
-    }
 }
 
 extension Results where Element == Subscription {
-    func sortedByLastSeen() -> Results<Subscription> {
-        return self.sorted(byKeyPath: "lastSeen", ascending: false)
+
+    func sortedByName() -> Results<Subscription> {
+        return sorted(byKeyPath: "name", ascending: true)
+    }
+
+    func sortedByLastMessageDate() -> Results<Subscription> {
+        return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[cd] %@", name)
+        return filter("name CONTAINS[cd] %@", name)
     }
+
 }

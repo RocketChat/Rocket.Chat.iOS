@@ -20,6 +20,8 @@ extension Subscription: ModelMappeable {
         self.name = values["name"].stringValue
         self.fname = values["fname"].stringValue
         self.unread = values["unread"].int ?? 0
+        self.userMentions = values["userMentions"].int ?? 0
+        self.groupMentions = values["groupMentions"].int ?? 0
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false
         self.favorite = values["f"].bool ?? false
@@ -49,7 +51,7 @@ extension Subscription: ModelMappeable {
         }
     }
 
-    func mapRoom(_ values: JSON) {
+    func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
 
@@ -68,6 +70,43 @@ extension Subscription: ModelMappeable {
         self.roomMuted.removeAll()
         if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
             self.roomMuted.append(objectsIn: roomMuted)
+        }
+
+        if let readOnly = values["ro"].bool {
+            self.roomReadOnly = readOnly
+        }
+
+        if let ownerId = values["u"]["_id"].string {
+            self.roomOwnerId = ownerId
+        }
+
+        if let updatedAt = values["_updatedAt"]["$date"].double {
+            self.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+        }
+
+        if values["lastMessage"].dictionary != nil {
+            let message = Message()
+            message.map(values["lastMessage"], realm: realm)
+            message.subscription = self
+
+            if !(self.roomLastMessage == message) {
+                realm?.add(message, update: true)
+
+                self.roomLastMessage = message
+                self.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+
+                if let createdAt = values["lastMessage"]["ts"].string {
+                    self.roomLastMessageDate = Date.dateFromString(createdAt)
+                }
+
+                if let createdAt = values["lastMessage"]["ts"]["$date"].double {
+                    self.roomLastMessageDate = Date.dateFromInterval(createdAt)
+                }
+            }
+        } else {
+            if self.roomLastMessageText?.isEmpty ?? true {
+                self.roomLastMessageText = localized("subscriptions.list.no_message")
+            }
         }
     }
 }

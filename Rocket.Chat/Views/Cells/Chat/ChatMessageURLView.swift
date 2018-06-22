@@ -23,6 +23,7 @@ final class ChatMessageURLView: UIView {
         }
     }
 
+    @IBOutlet weak var viewLeftBorder: UIView!
     @IBOutlet weak var imageViewURLWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewURL: UIImageView! {
         didSet {
@@ -47,11 +48,11 @@ final class ChatMessageURLView: UIView {
         labelURLDescription.text = url.textDescription
 
         if let imageURL = URL(string: url.imageURL ?? "") {
-            imageViewURL.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
+            ImageManager.loadImage(with: imageURL, into: imageViewURL) { [weak self] _, error in
                 let width = error != nil ? 0 : ChatMessageURLView.imageViewDefaultWidth
                 self?.imageViewURLWidthConstraint.constant = width
                 self?.layoutSubviews()
-            })
+            }
         } else {
             imageViewURLWidthConstraint.constant = 0
             layoutSubviews()
@@ -60,5 +61,16 @@ final class ChatMessageURLView: UIView {
 
     @objc func viewDidTapped(_ sender: Any) {
         delegate?.openURLFromCell(url: url)
+    }
+}
+
+// MARK: Themeable
+
+extension ChatMessageURLView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        viewLeftBorder.backgroundColor = theme.auxiliaryText
+        labelURLDescription.textColor = theme.auxiliaryText
     }
 }

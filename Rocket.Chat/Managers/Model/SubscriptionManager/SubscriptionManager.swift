@@ -24,13 +24,21 @@ struct SubscriptionManager {
 
     static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
         let client = API.current()?.client(SubscriptionsClient.self)
+        let lastUpdate = auth.lastSubscriptionFetchWithLastMessage
+        let dispatchGroup = DispatchGroup()
 
-        let lastUpdate = auth.lastSubscriptionFetch
-
+        dispatchGroup.enter()
         client?.fetchSubscriptions(updatedSince: lastUpdate) {
-            client?.fetchRooms(updatedSince: lastUpdate) {
-                completion?()
-            }
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.enter()
+        client?.fetchRooms(updatedSince: lastUpdate) {
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            completion?()
         }
     }
 
@@ -83,8 +91,7 @@ struct SubscriptionManager {
             currentRealm?.execute({ (realm) in
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
-                        subscription.mapRoom(object)
-
+                        subscription.mapRoom(object, realm: realm)
                         realm.add(subscription, update: true)
                     }
                 }

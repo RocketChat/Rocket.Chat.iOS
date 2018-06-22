@@ -12,7 +12,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        ThemeManager.addObserver(self)
+
+        navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "",
             style: .plain,
             target: nil,

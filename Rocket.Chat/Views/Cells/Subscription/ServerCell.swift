@@ -10,6 +10,7 @@ import UIKit
 
 final class ServerCell: UITableViewCell {
 
+    static let cellHeight = CGFloat(65)
     static let identifier = "kServerCellIdentifier"
 
     @IBOutlet weak var imageViewServer: UIImageView! {
@@ -22,9 +23,9 @@ final class ServerCell: UITableViewCell {
     @IBOutlet weak var labelServerName: UILabel!
     @IBOutlet weak var labelServerDescription: UILabel!
 
-    internal let defaultBackgroundColor = UIColor.clear
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.18)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.27)
+    internal let defaultBackgroundColor = UIColor.white
+    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.08)
+    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.14)
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -45,7 +46,7 @@ final class ServerCell: UITableViewCell {
             }
 
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                imageViewServer.sd_setImage(with: imageURL)
+                ImageManager.loadImage(with: imageURL, into: imageViewServer)
             }
         }
     }
@@ -60,7 +61,7 @@ extension ServerCell {
             case true:
                 self.backgroundColor = self.selectedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -75,9 +76,9 @@ extension ServerCell {
         let transition = {
             switch highlighted {
             case true:
-                self.backgroundColor = self.highlightedBackgroundColor
+                self.backgroundColor = self.theme?.focusedBackground ?? self.highlightedBackgroundColor
             case false:
-                self.backgroundColor = self.defaultBackgroundColor
+                self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
         }
 
@@ -87,5 +88,22 @@ extension ServerCell {
             transition()
         }
     }
+}
 
+// MARK: Themeable
+
+extension ServerCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+
+        labelServerName.textColor = theme.titleText
+        labelServerDescription.textColor = theme.auxiliaryText
+        tintColor = theme.tintColor
+
+        switch isHighlighted {
+        case false: backgroundColor = theme.backgroundColor
+        case true: backgroundColor = theme.focusedBackground
+        }
+    }
 }

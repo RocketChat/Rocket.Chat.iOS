@@ -17,10 +17,16 @@ class MembersListViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String = localized("chat.members.list.title")
+    var title: String {
+        return String(format: localized("chat.members.list.title"), total)
+    }
 
     var isShowingAllMembers: Bool {
         return showing >= total
+    }
+
+    var canInviteUsers: Bool {
+        return subscription?.canInviteUsers() ?? false
     }
 
     var membersPages: [[User]] = []
@@ -39,7 +45,7 @@ class MembersListViewData {
         if let subscription = subscription {
             isLoadingMoreMembers = true
 
-            let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
+            let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
             API.current()?.fetch(request, options: options) { [weak self] response in
@@ -54,7 +60,6 @@ class MembersListViewData {
 
                     strongSelf.currentPage += 1
 
-                    strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
                     strongSelf.isLoadingMoreMembers = false
                     completion?()
                 case .error:
@@ -69,9 +74,21 @@ class MembersListViewController: BaseViewController {
     @IBOutlet weak var membersTableView: UITableView!
     var loaderCell: LoaderTableViewCell!
 
-    var data = MembersListViewData()
+    var data = MembersListViewData() {
+        didSet {
+            UIView.performWithoutAnimation {
+                membersTableView?.reloadData()
+            }
+
+            title = data.title
+        }
+    }
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        refreshMembers()
+    }
+
+    func refreshMembers() {
         let data = MembersListViewData()
         data.subscription = self.data.subscription
         data.loadMoreMembers { [weak self] in
@@ -79,10 +96,6 @@ class MembersListViewController: BaseViewController {
 
             if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
                 self?.membersTableView?.refreshControl?.endRefreshing()
-            }
-
-            UIView.performWithoutAnimation {
-                self?.membersTableView?.reloadData()
             }
         }
     }
@@ -105,6 +118,7 @@ class MembersListViewController: BaseViewController {
 // MARK: ViewController
 extension MembersListViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
 
@@ -117,6 +131,14 @@ extension MembersListViewController {
         }
 
         title = data.title
+
+        if data.canInviteUsers {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(inviteUsersButtonPressed(sender:)))
+        }
+    }
+
+    @objc func inviteUsersButtonPressed(sender: Any) {
+        performSegue(withIdentifier: "toAddUsers", sender: self)
     }
 
     func registerCells() {
@@ -134,11 +156,20 @@ extension MembersListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreMembers()
+        refreshMembers()
 
-        guard let refreshControl = membersTableView.refreshControl else { return }
         membersTableView.refreshControl?.beginRefreshing()
-        membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+    }
+}
+
+// MARK: Prepare for Segue
+extension MembersListViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if let addUsers = segue.destination as? AddUsersViewController {
+            addUsers.data.subscription = data.subscription
+        }
     }
 }
 
@@ -175,7 +206,15 @@ extension MembersListViewController: UITableViewDataSource {
 extension MembersListViewController: UITableViewDelegate, UserActionSheetPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presentActionSheetForUser(data.member(at: indexPath.row), source: (tableView, tableView.rectForRow(at: indexPath)))
+
+        let user = data.member(at: indexPath.row)
+        let subscription = data.subscription
+        let rect = tableView.rectForRow(at: indexPath)
+        presentActionSheetForUser(user, subscription: subscription, source: (tableView, rect)) { [weak self] action in
+            if case .remove = action {
+                self?.refreshMembers()
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

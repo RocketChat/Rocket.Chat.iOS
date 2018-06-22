@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-extension SubscriptionMessagesResource {
+extension RoomMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
         let realm = Realm.current
         return raw?["messages"].arrayValue.map { json in
@@ -20,7 +20,7 @@ extension SubscriptionMessagesResource {
     }
 }
 
-extension SubscriptionMentionsResource {
+extension RoomMentionsResource {
     func fetchMessagesFromRealm() -> [Message]? {
         let realm = Realm.current
         return raw?["mentions"].arrayValue.map { json in
@@ -110,7 +110,7 @@ class MessagesListViewData {
 
         isLoadingMoreMessages = true
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
-        let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+        let request = RoomMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
             case .resource(let resource):
@@ -131,7 +131,7 @@ class MessagesListViewData {
 
         isLoadingMoreMessages = true
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
-        let request = SubscriptionMentionsRequest(roomId: subscription.rid)
+        let request = RoomMentionsRequest(roomId: subscription.rid)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
             case .resource(let resource):
@@ -181,7 +181,6 @@ class MessagesListViewData {
             }
 
             if !self.isSearchingMessages { self.currentPage += 1 }
-
             self.isLoadingMoreMessages = false
             completion?()
         }
@@ -282,8 +281,8 @@ extension MessagesListViewController {
         }
 
         guard let refreshControl = collectionView.refreshControl, !data.isSearchingMessages else { return }
-        collectionView.refreshControl?.beginRefreshing()
         collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        collectionView.refreshControl?.beginRefreshing()
     }
 
     func registerCells() {
@@ -310,6 +309,7 @@ extension MessagesListViewController {
 
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.titleView = searchBar
+        searchBar.applyTheme()
     }
 
     @objc func close() {
@@ -346,7 +346,6 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         if let message = cellData.message,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
-            cell.delegate = ChatViewController.shared
             cell.message = message
             return cell
         }

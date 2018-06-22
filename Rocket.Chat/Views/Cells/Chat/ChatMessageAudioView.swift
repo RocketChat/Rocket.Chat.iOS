@@ -51,13 +51,7 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
         }
     }
 
-    @IBOutlet weak var playButton: UIButton! {
-        didSet {
-            playButton.tintColor = .gray
-            playButton.imageView?.tintColor = .gray
-        }
-    }
-
+    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private var player: AVAudioPlayer? {
@@ -76,7 +70,7 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             let pause = #imageLiteral(resourceName: "Player Pause").withRenderingMode(.alwaysTemplate)
             let play = #imageLiteral(resourceName: "Player Play").withRenderingMode(.alwaysTemplate)
             playButton.setImage(playing ? pause : play, for: .normal)
-            playButton.imageView?.tintColor = .RCDarkGray()
+            applyTheme()
         }
     }
 
@@ -169,5 +163,16 @@ extension ChatMessageAudioView: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         playing = false
         self.timeSlider.value = 0.0
+    }
+}
+
+// MARK: Themeable
+
+extension ChatMessageAudioView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        playButton.tintColor = theme.titleText
+        playButton.imageView?.tintColor = theme.titleText
     }
 }

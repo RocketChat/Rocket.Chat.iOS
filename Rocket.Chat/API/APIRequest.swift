@@ -64,13 +64,14 @@ extension APIRequest {
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         request.addValue(API.userAgent, forHTTPHeaderField: "User-Agent")
 
-        if let token = api.authToken {
-            request.addValue(token, forHTTPHeaderField: "X-Auth-Token")
+        func addValueIfSome(_ value: String?, forHTTPHeaderField field: String) {
+            guard let value = value else { return }
+            request.addValue(value, forHTTPHeaderField: field)
         }
 
-        if let userId = api.userId {
-            request.addValue(userId, forHTTPHeaderField: "X-User-Id")
-        }
+        addValueIfSome(api.authToken, forHTTPHeaderField: "X-Auth-Token")
+        addValueIfSome(api.userId, forHTTPHeaderField: "X-User-Id")
+        addValueIfSome(api.language, forHTTPHeaderField: "Accept-Language")
 
         return request
     }

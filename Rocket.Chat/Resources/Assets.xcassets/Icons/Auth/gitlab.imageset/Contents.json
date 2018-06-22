@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "gitlab@1x.png",
+      "filename" : "iconGitlab.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "gitlab@2x.png",
+      "filename" : "iconGitlab@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "gitlab@3x.png",
+      "filename" : "iconGitlab@3x.png",
       "scale" : "3x"
     }
   ],

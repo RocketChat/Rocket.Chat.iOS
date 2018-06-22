@@ -58,6 +58,8 @@ class ChannelInfoViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ThemeManager.addObserver(self)
+        ThemeManager.addObserver(navigationController?.navigationBar)
         title = localized("chat.info.title")
 
         if let settings = AuthSettingsManager.settings {

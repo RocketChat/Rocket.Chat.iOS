@@ -21,8 +21,8 @@ final class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
 
     var data: DataType? {
         didSet {
-            labelTitle.text = data?.user?.username
-            labelSubtitle.text = data?.user?.name
+            labelTitle.text = data?.user?.name
+            labelSubtitle.text = data?.user?.username
             avatarView.user = data?.user
         }
     }

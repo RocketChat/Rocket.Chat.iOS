@@ -88,14 +88,12 @@ class HighlightLayoutManager: NSLayoutManager {
                     let emojiView = EmojiView(frame: rect)
                     emojiView.backgroundColor = .white
                     emojiView.isUserInteractionEnabled = false
+                    emojiView.applyTheme()
 
                     if let imageUrlData = attachment.contents,
-                        let imageUrlString = String(data: imageUrlData, encoding: .utf8),
-                        let imageUrl = URL(string: imageUrlString) {
-                        DispatchQueue.global(qos: .background).async {
-                            emojiView.emojiImageView.sd_setImage(with: imageUrl, completed: nil)
-                        }
-
+                            let imageUrlString = String(data: imageUrlData, encoding: .utf8),
+                            let imageUrl = URL(string: imageUrlString) {
+                        ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
                         self.customEmojiViews.append(emojiView)
                         self.addSubview(emojiView)
                     }
@@ -169,10 +167,20 @@ extension RCTextView: UITextViewDelegate {
                 return false
             }
 
-            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+            MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
         }
 
         return false
     }
 
+}
+
+// MARK: Themeable
+
+extension RCTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        customEmojiViews.forEach { $0.backgroundColor = theme.backgroundColor }
+    }
 }

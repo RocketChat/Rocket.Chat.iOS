@@ -1,7 +1,9 @@
 // Global
 "global.ok" = "OK";
+"global.yes" = "Yes";
 "global.no" = "No";
 "global.cancel" = "Cancel";
+"global.error" = "Error";
 
 // Errors
 "error.socket.default_error.title" = "Oops!";
@@ -80,20 +82,46 @@
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
 
+"alert.logout.confirmation.title" = "Logout from this server";
+"alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
+"alert.logout.confirmation.confirm" = "Yes, logout me";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
 "connection.server.redirect.alert.confirm" = "Yes, change the URL";
 
 // Socket Connection
+"connection.title" = "Sign in to your server";
+"connection.button_connect" = "Connect";
 "connection.offline.banner.message" = "You're offline, try connecting again";
 "connection.connecting.banner.message" = "Connecting...";
+"connection.waiting_for_network.banner.message" = "Waiting for network";
+
+// Onboarding
+"onboarding.label_welcome" = "Welcome to Rocket Chat";
+"onboarding.label_subtitle" = "Open Source Communication";
+"onboarding.button_connect_server" = "Connect to a server";
+"onboarding.button_create_server" = "Create a new workspace";
+"onboarding.button_join_community_prefix" = "Join the community";
 
 // Auth
 "auth.connect.button_connect" = "Connect";
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
+"auth.email_auth_prefix" = "Login with ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Continue with ";
 
+"auth.signup_title" = "Sign up";
+"auth.signup.button_register" = "Register";
+"auth.signup.button_next" = "Next";
+"auth.signup.custom_fields_title" = "Complete your register";
+
+"auth.login.login_title" = "Login";
+"auth.login.button_login_title" = "Login";
+"auth.login.create_account_prefix" = "Don't have an account?";
+"auth.login.create_account" = "\nCreate an Account";
 "auth.login.username.placeholder" = "Email or username";
 "auth.login.password.placeholder" = "Password";
 "auth.login.buttonRegister" = "Create new account";
@@ -115,21 +143,28 @@
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.conversations" = "Conversations";
 "subscriptions.you" = "you";
+"subscriptions.messages" = "Messages";
+"subscriptions.list.you_initial" = "You";
+"subscriptions.list.no_message" = "No message";
+"subscriptions.list.sent_an_attachment" = "sent an attachment";
+"subscriptions.list.date.yesterday" = "Yesterday";
 
 // Servers
 "servers.add_new_team" = "Add new Team";
-"servers.action.connect" = "Connect";
-"servers.action.remove" = "Remove team";
+"servers.title" = "Servers";
+"servers.add_new_server" = "Add Server";
+"servers.action.disconnect" = "Disconnect";
+"servers.action.disconnect.alert.title" = "Disconnect from Server";
+"servers.action.disconnect.alert.message" = "Do you want to disconnect from \"%@\" server?";
+"servers.action.disconnect.alert.confirm" = "Yes, disconnect";
 
-// User Menu
-"user_menu.online" = "Online";
-"user_menu.away" = "Away";
-"user_menu.busy" = "Busy";
-"user_menu.invisible" = "Invisible";
-"user_menu.admin" = "Administration";
-"user_menu.preferences" = "Preferences";
-"user_menu.logout" = "Logout";
+// Status
+"status.online" = "Online";
+"status.away" = "Away";
+"status.busy" = "Busy";
+"status.invisible" = "Invisible";
 
 // New Room View
 "new_room.title" = "New Channel";
@@ -139,9 +174,8 @@
 "new_room.cell.public_channel.description.public_only" = "You can only create public channels";
 "new_room.cell.public_channel.description.private_only" = "You can only create private channels";
 "new_room.cell.read_only.title" = "Read only channel";
-"new_room.cell.read_only.description" = "Only admin can write new messages";
+"new_room.cell.read_only.description" = "Only authorized members can write new messages";
 "new_room.group.channel.name" = "Channel Name";
-"new_room.group.channel.footer" = "Names must be all lower case and shorter than 22 characters";
 "new_room.cell.channel_name.title" = "Channel Name";
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";
@@ -197,10 +231,10 @@
 "chat.upload.uploading_image" = "Uploading image";
 "chat.upload.uploading_video" = "Uploading video";
 "chat.upload.uploading_file" = "Uploading \"%@\"";
-"chat.upload.take_photo" = "Take Photo";
-"chat.upload.shoot_video" = "Shoot Video";
-"chat.upload.choose_from_library" = "Choose From Library";
-"chat.upload.import_file" = "Import File From...";
+"chat.upload.take_photo" = "Take a photo";
+"chat.upload.shoot_video" = "Record video";
+"chat.upload.choose_from_library" = "Choose from library";
+"chat.upload.import_file" = "Attach files";
 "chat.upload.draw" = "Draw something";
 
 // Chat Download
@@ -247,9 +281,15 @@
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
 "chat.info.item.files" = "Files";
+"chat.info.item.share" = "Share";
 
 // Members List
 "chat.members.list.title" = "Members";
+
+// Add Users
+"chat.add_users.title" = "Add Users";
+"chat.add_users.confirm.title" = "Add this user?";
+"chat.add_users.confirm.message" = "Are you sure you want to add '%@' to '%@'?";
 
 // Messages List
 "chat.messages.list.title" = "Messages";
@@ -263,6 +303,8 @@
 
 // Settings
 "myaccount.settings.title" = "Preferences";
+"myaccount.settings.administration" = "Administration";
+"myaccount.settings.logout" = "Logout from %@";
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.profile" = "Profile";
 "myaccount.settings.license" = "License";
@@ -305,6 +347,7 @@
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Status";
 "myaccount.settings.profile.password_required.title" = "Enter your password";
 "myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail.";
 "myaccount.settings.profile.password_required.placeholder" = "Password";
@@ -321,3 +364,23 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation";
+"user_action_sheet.remove" = "Remove from room";
+"user_action_sheet.remove_confirm.title" = "Remove this user?";
+"user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
+
+// Theme
+"theme.settings.title" = "Theme";
+"theme.settings.header" = "ALL THEMES";
+"theme.settings.footer" = "Applying a theme will change how the app looks.";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+"theme.black" = "Black";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Sorting by name";
+"subscriptions.sorting.title.activity" = "Sorting by activity";
+"subscriptions.sorting.alphabetical" = "Alphabetical";
+"subscriptions.sorting.activity" = "Activity";
+"subscriptions.grouping.type" = "Group by type";
+"subscriptions.grouping.favorites" = "Group by favorites";
+"subscriptions.grouping.unread_top" = "Unread on top";

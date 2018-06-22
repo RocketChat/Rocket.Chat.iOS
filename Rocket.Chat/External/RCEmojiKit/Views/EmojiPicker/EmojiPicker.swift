@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import SDWebImage
 
 private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
 final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
+
+    var isPopover = false
 
     var customEmojis: [Emoji] = []
     var customCategory: (name: String, emojis: [Emoji]) {
@@ -339,5 +340,35 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Themeable
+
+extension EmojiPicker {
+    override var theme: Theme? {
+        guard let theme = super.theme else { return nil }
+        guard isPopover else { return theme }
+        let popoverTheme = Theme(
+            backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
+        return popoverTheme
+    }
+
+    override func applyTheme() {
+        super.applyTheme()
+        skinToneButton.backgroundColor = currentSkinTone.color
     }
 }

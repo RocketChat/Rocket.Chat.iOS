@@ -16,7 +16,7 @@ struct PermissionManager {
             "msg": "sub",
             "name": "stream-notify-logged",
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
