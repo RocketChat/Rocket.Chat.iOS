@@ -59,18 +59,6 @@ final class SubscriptionsViewController: BaseViewController {
             tableView.reloadRows(at: modifications, with: .none)
             tableView.endUpdates()
         }
-
-        viewModel.searchStateUpdated = { [weak self] _, searchState in
-            guard case .searching = searchState, let tableView = self?.tableView else {
-                self?.tableView?.tableFooterView = nil
-                return
-            }
-
-            if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
-                footerView.delegate = self
-                tableView.tableFooterView = footerView
-            }
-        }
     }
 
     override func viewDidLayoutSubviews() {
