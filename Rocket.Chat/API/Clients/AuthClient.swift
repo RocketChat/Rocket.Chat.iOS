@@ -22,6 +22,7 @@ struct AuthClient: APIClient {
                 let auth = Auth()
                 auth.internalFirstChannelOpened = false
                 auth.lastSubscriptionFetchWithLastMessage = nil
+                auth.lastRoomFetchWithLastMessage = nil
                 auth.lastAccess = Date()
                 auth.serverURL = (self.api as? API)?.host.absoluteString ?? ""
                 auth.token = resource.authToken

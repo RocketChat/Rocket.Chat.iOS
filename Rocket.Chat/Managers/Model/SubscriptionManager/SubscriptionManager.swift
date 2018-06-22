@@ -24,16 +24,17 @@ struct SubscriptionManager {
 
     static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
         let client = API.current()?.client(SubscriptionsClient.self)
-        let lastUpdate = auth.lastSubscriptionFetchWithLastMessage
+        let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
+        let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
         let dispatchGroup = DispatchGroup()
 
         dispatchGroup.enter()
-        client?.fetchSubscriptions(updatedSince: lastUpdate) {
+        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions) {
             dispatchGroup.leave()
         }
 
         dispatchGroup.enter()
-        client?.fetchRooms(updatedSince: lastUpdate) {
+        client?.fetchRooms(updatedSince: lastUpdateRooms) {
             dispatchGroup.leave()
         }
 
