@@ -76,6 +76,8 @@ final class SubscriptionsViewController: BaseViewController {
         // to prevent that some connection issue removes all the connection handler.
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
+        updateServerInformation()
+
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
         }

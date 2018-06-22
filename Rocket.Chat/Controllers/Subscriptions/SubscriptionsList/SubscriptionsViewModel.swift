@@ -86,7 +86,6 @@ class SubscriptionsViewModel {
     }
 
     var sections: [SubscriptionsSection] = []
-
     func buildSections() {
         invalidateTokens()
 
@@ -143,7 +142,7 @@ class SubscriptionsViewModel {
 
             sectionUpdated?(deletions, insertions, modifications)
         default:
-            sectionUpdated?([], [], [])
+            break
         }
     }
 }
