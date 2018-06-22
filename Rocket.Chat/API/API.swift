@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 protocol APIRequestMiddleware {
-    var api: API { get }
+    var api: API? { get }
     init(api: API)
 
     func handle<R: APIRequest>(_ request: inout R) -> APIError?
