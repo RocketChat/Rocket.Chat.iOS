@@ -12,6 +12,7 @@ final class ServersListViewModel {
 
     internal let title = localized("servers.title")
     internal let addNewServer = localized("servers.add_new_server")
+    internal let connectServerNavIdentifier = "ConnectServerNav"
 
     internal lazy var serversList: [[String: String]] = DatabaseManager.servers ?? []
 

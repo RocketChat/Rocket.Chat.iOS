@@ -497,19 +497,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-            serversView?.presentAddServer = { [weak self] in
-                let connect = Storyboard.auth(
-                    serverUrl: "",
-                    credentials: nil
-                ).instantiate(
-                    viewController: String(describing: ConnectServerViewController.self)
-                ) ?? UIViewController()
-
-                let nav = BaseNavigationController(rootViewController: connect)
-                _ = nav.view
-
-                self?.present(nav, animated: true, completion: nil)
-            }
             serversView?.delegate = self
             serversView?.applyTheme()
         }
