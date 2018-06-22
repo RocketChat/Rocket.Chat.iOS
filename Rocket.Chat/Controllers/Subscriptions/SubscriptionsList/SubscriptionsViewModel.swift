@@ -8,22 +8,38 @@
 
 import RealmSwift
 
-struct SubscriptionsViewModel {
+class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
+        let results = Subscription.all(onlyJoined: !searchState.isSearching)
+
         switch SubscriptionsSortingManager.selectedSortingOption {
         case .activity:
-            return Subscription.all()?.sortedByLastMessageDate()
+            return results?.sortedByLastMessageDate()
         case .alphabetically:
-            return Subscription.all()?.sortedByName()
+            return results?.sortedByName()
         }
     }
 
     enum SearchState {
-        case searching(by: String, remotely: Bool)
+        case searching(query: String)
         case notSearching
+
+        var isSearching: Bool {
+            switch self {
+            case .searching:
+                return true
+            case .notSearching:
+                return false
+            }
+        }
     }
 
-    var searchState: SearchState = .notSearching
+    var searchStateUpdated: ((_ oldValue: SearchState, _ searchState: SearchState) -> Void)?
+    var searchState: SearchState = .notSearching {
+        didSet {
+            searchStateUpdated?(oldValue, searchState)
+        }
+    }
 
     var sortedSubscriptions: Results<Subscription>? {
         switch SubscriptionsSortingManager.selectedSortingOption {
@@ -55,24 +71,27 @@ struct SubscriptionsViewModel {
     }
 
     var searchedSubscriptions: Results<Subscription>? {
-        if case let .searching(searchText, _) = searchState {
-            return subscriptions?.filterBy(name: searchText)
+        if case let .searching(query) = searchState {
+            return subscriptions?.filterBy(name: query)
         } else {
             return nil
         }
     }
 
+    var remoteSubscriptions: [Subscription] = []
+
     typealias SubscriptionsSection = (name: String, items: Results<Subscription>?)
 
     private var tokens: [NotificationToken?] = []
-    private func invalidateTokens() {
+    func invalidateTokens() {
         tokens.forEach { $0?.invalidate() }
     }
 
     var sections: [SubscriptionsSection] = []
 
-    mutating func buildSections() {
+    func buildSections() {
         invalidateTokens()
+        remoteSubscriptions = []
 
         var sections: [SubscriptionsSection] = []
         var tokens: [NotificationToken?] = []
@@ -87,8 +106,9 @@ struct SubscriptionsViewModel {
         }
 
         switch searchState {
-        case .searching:
-                addSection((localized("subscriptions.search_results"), searchedSubscriptions))
+        case .searching(let query):
+            addSection((localized("subscriptions.search_results"), searchedSubscriptions))
+            API.current()?.client(SpotlightClient.self).search(query: query) { _ in }
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
                 addSection((localized("subscriptions.unreads"), unreadSubscriptions))

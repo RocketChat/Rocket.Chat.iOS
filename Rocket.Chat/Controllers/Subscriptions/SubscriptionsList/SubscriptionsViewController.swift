@@ -60,7 +60,17 @@ final class SubscriptionsViewController: BaseViewController {
             tableView.endUpdates()
         }
 
-        viewModel.buildSections()
+        viewModel.searchStateUpdated = { [weak self] _, searchState in
+            guard case .searching = searchState, let tableView = self?.tableView else {
+                self?.tableView?.tableFooterView = nil
+                return
+            }
+
+            if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
+                footerView.delegate = self
+                tableView.tableFooterView = footerView
+            }
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -82,11 +92,13 @@ final class SubscriptionsViewController: BaseViewController {
             tableView.deselectRow(at: indexPath, animated: animated)
         }
 
+        viewModel.buildSections()
         tableView.reloadData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        viewModel.invalidateTokens()
     }
 
     // MARK: Storyboard Segues
@@ -185,7 +197,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             viewModel.searchState = .notSearching
         } else {
-            viewModel.searchState = .searching(by: searchText, remotely: false)
+            viewModel.searchState = .searching(query: searchText)
         }
 
         viewModel.buildSections()
@@ -396,7 +408,7 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
     func buttonLoadMoreDidPressed() {
-
+        //viewModel.searchState =
     }
 
     @IBAction func buttonAddChannelDidTap(sender: Any) {
