@@ -78,8 +78,6 @@ class SubscriptionsViewModel {
         }
     }
 
-    var remoteSubscriptions: [Subscription] = []
-
     typealias SubscriptionsSection = (name: String, items: Results<Subscription>?)
 
     private var tokens: [NotificationToken?] = []
@@ -91,7 +89,6 @@ class SubscriptionsViewModel {
 
     func buildSections() {
         invalidateTokens()
-        remoteSubscriptions = []
 
         var sections: [SubscriptionsSection] = []
         var tokens: [NotificationToken?] = []
