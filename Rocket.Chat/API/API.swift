@@ -40,8 +40,8 @@ extension APIFetcher {
 typealias AnyAPIFetcher = Any & APIFetcher
 
 final class API: APIFetcher {
-    let host: URL
-    let version: Version
+    var host: URL
+    var version: Version
 
     var requestMiddlewares = [APIRequestMiddleware]()
 
