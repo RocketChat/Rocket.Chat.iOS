@@ -42,7 +42,10 @@ class BaseNavigationController: UINavigationController {
 
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         let viewControllers = super.popToRootViewController(animated: animated)
-        setTransparentTheme()
+
+        if topViewController is ConnectServerViewController || topViewController is WelcomeViewController {
+            setTransparentTheme()
+        }
 
         return viewControllers
     }
