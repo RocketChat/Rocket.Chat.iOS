@@ -53,41 +53,46 @@ class SubscriptionsViewModel {
         if let realm = realm {
             assorter?.invalidate()
             assorter = RealmAssorter<Subscription>(realm: realm, results: subscriptions)
-            assorter?.didUpdateIndexPaths = didUpdateIndexPaths!
+            assorter?.didUpdateIndexPaths = didUpdateIndexPaths
+        }
+
+        guard let assorter = assorter else {
+            return
         }
 
         switch searchState {
         case .searching(let query):
-            assorter?.registerSection(name: localized("subscriptions.search_results")) {
+            assorter.registerSection(name: localized("subscriptions.search_results")) {
                 $0.filterBy(name: query)
             }
 
             API.current()?.client(SpotlightClient.self).search(query: query) { _ in }
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
-                assorter?.registerSection(name: localized("subscriptions.unreads")) {
+                assorter.registerSection(name: localized("subscriptions.unreads")) {
                     $0.filter("alert == true")
                 }
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) {
-                assorter?.registerSection(name: localized("subscriptions.favorites")) {
+                assorter.registerSection(name: localized("subscriptions.favorites")) {
                     $0.filter("favorite == true")
                 }
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.type) {
-                assorter?.registerSection(name: localized("subscriptions.channels")) {
+                assorter.registerSection(name: localized("subscriptions.channels")) {
                     $0.filter("privateType == 'c'")
                 }
-                assorter?.registerSection(name: localized("subscriptions.groups")) {
+                assorter.registerSection(name: localized("subscriptions.groups")) {
                     $0.filter("privateType == 'p'")
                 }
-                assorter?.registerSection(name: localized("subscriptions.direct_messages")) {
+                assorter.registerSection(name: localized("subscriptions.direct_messages")) {
                     $0.filter("privateType == 'd'")
                 }
             } else {
-                assorter?.registerSection(name: localized("subscriptions.conversations"))
+                let title = assorter.numberOfSections > 0 ? localized("subscriptions.conversations") : ""
+                assorter.registerSection(name: title)
             }
         }
 
@@ -114,7 +119,10 @@ extension SubscriptionsViewModel {
     }
 
     func heightForHeaderIn(section: Int) -> Double {
-        return numberOfRowsInSection(section) > 0 ? 55 : 0
+        let numberOfRows = numberOfRowsInSection(section)
+        let title = titleForHeaderInSection(section)
+
+        return numberOfRows > 0 && !title.isEmpty ? 55 : 0
     }
 
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
