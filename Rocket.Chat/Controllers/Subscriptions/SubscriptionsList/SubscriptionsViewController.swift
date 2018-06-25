@@ -379,10 +379,10 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
         }
     }
 
-    func userDidChangeSortingOptions(_ sender: SubscriptionsSortingView) {
+    func userDidChangeSortingOptions() {
         viewModel.buildSections()
-        tableView.reloadData()
         updateSortingTitleDescription()
+        tableView.reloadData()
     }
 
 }
