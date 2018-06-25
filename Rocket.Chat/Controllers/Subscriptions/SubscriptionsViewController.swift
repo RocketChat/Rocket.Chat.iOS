@@ -315,6 +315,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         sortingView?.close()
     }
 
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "\n" {
             if searchText.count > 0 {
