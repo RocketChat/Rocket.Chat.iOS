@@ -578,6 +578,7 @@
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
+		80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */; };
 		80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1820ACE320009D64DF /* UserPermissions.swift */; };
 		80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
@@ -1345,6 +1346,7 @@
 		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewModel.swift; sourceTree = "<group>"; };
+		80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAssorter.swift; sourceTree = "<group>"; };
 		80CC8A1820ACE320009D64DF /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerUserActionPresenter.swift; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
@@ -2390,6 +2392,7 @@
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
 				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
+				80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -4136,6 +4139,7 @@
 				8062E32C20A1F8100044F407 /* RoomsRequest.swift in Sources */,
 				995F711E20C799E000B7535F /* EmailAuthTableViewCell.swift in Sources */,
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
+				80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */,
 				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
 				0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */,
 				8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */,

@@ -48,16 +48,24 @@ final class SubscriptionsViewController: BaseViewController {
 
         super.viewDidLoad()
 
-        viewModel.sectionUpdated = { [weak self] deletions, insertions, modifications in
+        viewModel.didUpdateIndexPaths = { [weak self] changes in
             guard let tableView = self?.tableView else {
                 return
             }
 
+            let modifications = tableView.indexPathsForVisibleRows?.filter {
+                changes.modifications.contains($0)
+            } ?? []
+
             tableView.beginUpdates()
-            tableView.deleteRows(at: deletions, with: .none)
-            tableView.insertRows(at: insertions, with: .none)
-            tableView.reloadRows(at: modifications, with: .none)
+            tableView.deleteRows(at: changes.deletions, with: .automatic)
+            tableView.insertRows(at: changes.insertions, with: .automatic)
+            tableView.reloadRows(at: modifications, with: .automatic)
             tableView.endUpdates()
+        }
+
+        viewModel.didRebuildSections = { [weak self] in
+            self?.tableView?.reloadData()
         }
     }
 
@@ -88,7 +96,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
-        viewModel.invalidateTokens()
     }
 
     // MARK: Storyboard Segues
@@ -291,7 +298,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsIn(section: section)
+        return viewModel.numberOfRowsInSection(section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -323,7 +330,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard let view = SubscriptionSectionView.instantiateFromNib() else {
             return nil
         }
-        view.setTitle(viewModel.titleForHeaderIn(section: section))
+        view.setTitle(viewModel.titleForHeaderInSection(section))
         return view
     }
 

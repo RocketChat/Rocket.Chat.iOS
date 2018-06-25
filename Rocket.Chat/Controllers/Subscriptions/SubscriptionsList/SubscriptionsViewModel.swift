@@ -41,148 +41,83 @@ class SubscriptionsViewModel {
         }
     }
 
-    var sortedSubscriptions: Results<Subscription>? {
-        switch SubscriptionsSortingManager.selectedSortingOption {
-        case .activity:
-            return subscriptions?.sortedByLastMessageDate()
-        case .alphabetically:
-            return subscriptions?.sortedByName()
-        }
+    var assorter: RealmAssorter<Subscription>?
+
+    let realm: Realm?
+
+    init(realm: Realm? = Realm.current) {
+        self.realm = realm
     }
 
-    var unreadSubscriptions: Results<Subscription>? {
-        return subscriptions?.filter("alert == true")
-    }
-
-    var favoriteSubscriptions: Results<Subscription>? {
-        return subscriptions?.filter("favorite == true")
-    }
-
-    var groupSubscriptions: Results<Subscription>? {
-        return subscriptions?.filter("privateType == 'p'")
-    }
-
-    var channelSubscriptions: Results<Subscription>? {
-        return subscriptions?.filter("privateType == 'c'")
-    }
-
-    var dmSubscriptions: Results<Subscription>? {
-        return subscriptions?.filter("privateType == 'd'")
-    }
-
-    var searchedSubscriptions: Results<Subscription>? {
-        if case let .searching(query) = searchState {
-            return subscriptions?.filterBy(name: query)
-        } else {
-            return nil
-        }
-    }
-
-    typealias SubscriptionsSection = (name: String, items: Results<Subscription>?)
-
-    private var tokens: [NotificationToken?] = []
-    func invalidateTokens() {
-        tokens.forEach { $0?.invalidate() }
-    }
-
-    var sections: [SubscriptionsSection] = []
     func buildSections() {
-        invalidateTokens()
-
-        var sections: [SubscriptionsSection] = []
-        var tokens: [NotificationToken?] = []
-
-        func addSection(_ section: SubscriptionsSection) {
-            let index = sections.count
-            tokens.append(section.items?.observe { [self, index] change in
-                self.handleSectionUpdate(section: index, change: change)
-            })
-
-            sections.append(section)
+        if let realm = realm {
+            assorter?.invalidate()
+            assorter = RealmAssorter<Subscription>(realm: realm, results: subscriptions)
+            assorter?.didUpdateIndexPaths = didUpdateIndexPaths!
         }
 
         switch searchState {
         case .searching(let query):
-            addSection((localized("subscriptions.search_results"), searchedSubscriptions))
+            assorter?.registerSection(name: localized("subscriptions.search_results")) {
+                $0.filterBy(name: query)
+            }
+
             API.current()?.client(SpotlightClient.self).search(query: query) { _ in }
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
-                addSection((localized("subscriptions.unreads"), unreadSubscriptions))
+                assorter?.registerSection(name: localized("subscriptions.unreads")) {
+                    $0.filter("alert == true")
+                }
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) {
-                addSection((localized("subscriptions.favorites"), favoriteSubscriptions))
+                assorter?.registerSection(name: localized("subscriptions.favorites")) {
+                    $0.filter("favorite == true")
+                }
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.type) {
-                addSection((localized("subscriptions.channels"), channelSubscriptions))
-                addSection((localized("subscriptions.groups"), groupSubscriptions))
-                addSection((localized("subscriptions.direct_messages"), dmSubscriptions))
+                assorter?.registerSection(name: localized("subscriptions.channels")) {
+                    $0.filter("privateType == 'c'")
+                }
+                assorter?.registerSection(name: localized("subscriptions.groups")) {
+                    $0.filter("privateType == 'p'")
+                }
+                assorter?.registerSection(name: localized("subscriptions.direct_messages")) {
+                    $0.filter("privateType == 'd'")
+                }
             } else {
-                addSection((localized("subscriptions.conversations"), subscriptions))
+                assorter?.registerSection(name: localized("subscriptions.conversations"))
             }
         }
 
-        self.sections = sections
-        self.tokens = tokens
+        didRebuildSections?()
     }
 
-    var sectionUpdated: ((_ deletions: [IndexPath], _ insertions: [IndexPath], _ modifications: [IndexPath]) -> Void)?
-
-    private func handleSectionUpdate(section: Int, change: RealmCollectionChange<Results<Subscription>>) {
-        switch change {
-        case .update(_, let deletions, let insertions, let modifications):
-            let toIndexPath = { (row: Int) in
-                IndexPath(row: row, section: section)
-            }
-
-            let deletions = deletions.map(toIndexPath)
-            let insertions = insertions.map(toIndexPath)
-            let modifications = modifications.map(toIndexPath)
-
-            sectionUpdated?(deletions, insertions, modifications)
-        default:
-            break
-        }
-    }
+    var didUpdateIndexPaths: IndexPathsChangesEvent?
+    var didRebuildSections: (() -> Void)?
 }
 
 // MARK: TableView
 
 extension SubscriptionsViewModel {
     var numberOfSections: Int {
-        return sections.count
+        return assorter?.numberOfSections ?? 0
     }
 
-    func numberOfRowsIn(section: Int) -> Int {
-        guard sections.count > section else {
-            return 0
-        }
-
-        return sections[section].items?.count ?? 0
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return assorter?.numberOfRowsInSection(section) ?? 0
     }
 
-    func titleForHeaderIn(section: Int) -> String {
-        guard sections.count > section else {
-            return "error_out_of_bounds"
-        }
-
-        return sections[section].name
+    func titleForHeaderInSection(_ section: Int) -> String {
+        return assorter?.nameForSection(section) ?? "error"
     }
 
     func heightForHeaderIn(section: Int) -> Double {
-        return numberOfRowsIn(section: section) > 0 ? 55 : 0
+        return numberOfRowsInSection(section) > 0 ? 55 : 0
     }
 
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
-        guard let items = sections[indexPath.section].items else {
-            return nil
-        }
-
-        if items.count > indexPath.row {
-            return items[indexPath.row]
-        }
-
-        return nil
+        return assorter?.objectForRowAtIndexPath(indexPath)
     }
 }
