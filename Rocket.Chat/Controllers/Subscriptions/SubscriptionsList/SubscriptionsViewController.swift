@@ -361,18 +361,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
 }
 
-extension SubscriptionsViewController {
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return true
-    }
-
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return true
-    }
-
-}
-
 extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
 
     func userDidPressServerName() {
