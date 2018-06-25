@@ -82,6 +82,10 @@
 "alert.update_profile_success.title" = "Профиль обновлен";
 "alert.update_password_success.title" = "Пароль обновлен";
 
+"alert.logout.confirmation.title" = "Выход с этого сервера";
+"alert.logout.confirmation.message" = "Вы действительно хотите выйти из \"%@\"?";
+"alert.logout.confirmation.confirm" = "Да, выйти";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Сервер изменил URL-адрес";
 "connection.server.redirect.alert.message" = "Похоже, этот сервер изменил URL-адрес на: \ n \ n% @ \ n \ nВы хотите обновить URL-адрес?";
@@ -130,10 +134,6 @@
 "auth.forgot_password.title" = "Забыли пароль?";
 "auth.forgot_password.message" = "Введите ваш адрес электронной почты";
 "auth.forgot_password.success" = "Если эта электронная почта зарегистрирована, мы отправим вам инструкции по сбросу пароля. Если вы не получите письмо в ближайшее время, вернитесь и повторите попытку.";
-
-"alert.logout.confirmation.title" = "Выход с этого сервера"; // TODO
-"alert.logout.confirmation.message" = "Вы действительно хотите выйти из \"%@\"?"; // TODO
-"alert.logout.confirmation.confirm" = "Да, выйти"; // TODO
 
 // Subscriptions
 "subscriptions.search" = "Поиск";
@@ -193,7 +193,13 @@
 "chat.loading_messages" = "Загрузка сообщений...";
 "chat.unread_separator" = "новые сообщения";
 
+// Read Receipts
+"chat.read_receipt_list.title" = "Read by"; // TODO
+"chat.read_receipt_list.title.loading" = "Loading..."; // TODO
+"chat.read_receipt_list.title.empty" = "Read by no one"; // TODO
+
 // Chat Message Actions
+"chat.message.actions.info" = "Message info"; // TODO
 "chat.message.actions.react" = "Добавить реакцию";
 "chat.message.actions.block" = "Блокировать сообщения от пользователя";
 "chat.message.actions.report" = "Пожаловаться на сообщение";
@@ -280,6 +286,11 @@
 // Members List
 "chat.members.list.title" = "Пользователи";
 
+// Add Users
+"chat.add_users.title" = "Adicionar Usuários";
+"chat.add_users.confirm.title" = "Adicionar esse usuário?";
+"chat.add_users.confirm.message" = "Você tem certeza que deseja adicionar '%@' a '%@'?";
+
 // Messages List
 "chat.messages.list.title" = "Сообщения";
 "chat.messages.list.empty" = "Сообщения не найдены";
@@ -356,6 +367,14 @@
 "user_action_sheet.remove" = "Удалить с канала";
 "user_action_sheet.remove_confirm.title" = "Удалить этого пользователя";
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
+
+// Theme
+"theme.settings.title" = "Theme"; // TODO
+"theme.settings.header" = "ALL THEMES"; // TODO
+"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
+"theme.light" = "Light"; // TODO
+"theme.dark" = "Dark"; // TODO
+"theme.black" = "Black"; // TODO
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Сортировать по имени"; //TODO
