@@ -387,18 +387,6 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
 }
 
-extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
-
-    func buttonLoadMoreDidPressed() {
-        //viewModel.searchState =
-    }
-
-    @IBAction func buttonAddChannelDidTap(sender: Any) {
-        performSegue(withIdentifier: "New Channel", sender: sender)
-    }
-
-}
-
 extension SubscriptionsViewController: SocketConnectionHandler {
 
     func socketDidChangeState(state: SocketConnectionState) {
