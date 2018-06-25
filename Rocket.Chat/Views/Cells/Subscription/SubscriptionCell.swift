@@ -171,6 +171,21 @@ final class SubscriptionCell: UITableViewCell {
         return RCDateFormatter.date(date, dateStyle: .short)
     }
 
+    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
+        guard
+            let lastMessageText = subscription.roomLastMessageText,
+            let lastMessageDate = subscription.roomLastMessageDate
+        else {
+            return false
+        }
+
+        let isNameDifferent = labelName.text != subscription.displayName()
+        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
+        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
+
+        return isNameDifferent || isLastMessageDifferent || isDateDifferent
+    }
+
 }
 
 extension SubscriptionCell {

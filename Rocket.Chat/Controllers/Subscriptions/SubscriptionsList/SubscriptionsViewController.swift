@@ -54,7 +54,7 @@ final class SubscriptionsViewController: BaseViewController {
             }
 
             let modifications = tableView.indexPathsForVisibleRows?.filter {
-                changes.modifications.contains($0)
+                changes.modifications.contains($0) && self?.shouldUpdateCellAt(indexPath: $0) ?? false
             } ?? []
 
             tableView.beginUpdates()
@@ -352,6 +352,18 @@ extension SubscriptionsViewController: UITableViewDelegate {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+
+    func shouldUpdateCellAt(indexPath: IndexPath) -> Bool {
+        guard
+            let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
+            let cell = tableView.visibleCells[index] as? SubscriptionCell
+        else {
+            return false
+        }
+
+        return cell.shouldUpdateForSubscription(subscription)
     }
 
 }
