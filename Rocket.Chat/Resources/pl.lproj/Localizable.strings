@@ -84,7 +84,7 @@
 
 "alert.logout.confirmation.title" = "Wyloguj z tego serwera";
 "alert.logout.confirmation.message" = "Czy na pewno chcesz się wylogować z \"%@\"?";
-"alert.logout.confirmation.confirm" = "Tak, wyloguj mnie";
+"alert.logout.confirmation.confirm" = "Tak, wyloguj mnie"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Serwer zmienił swój adres";

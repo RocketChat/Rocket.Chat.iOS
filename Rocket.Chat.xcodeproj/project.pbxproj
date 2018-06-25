@@ -1758,7 +1758,6 @@
 				33D08E2120BD5EDC008D03EF /* ThemeManager.swift */,
 				33D08E2220BD5EDC008D03EF /* NotThemeableViews.swift */,
 				33D08E2320BD5EDC008D03EF /* Theme.swift */,
-				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -2305,6 +2304,7 @@
 				4156250720BEDCD100D20576 /* ServersListViewModel.swift */,
 				41D3668420C0323100970B99 /* SubscriptionsSortingView.swift */,
 				41D3668320C0323000970B99 /* SubscriptionsSortingView.xib */,
+				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
 				33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */,
 				41D3668520C0323100970B99 /* SubscriptionsSortingViewModel.swift */,
 			);
