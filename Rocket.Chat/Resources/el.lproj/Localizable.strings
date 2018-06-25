@@ -84,7 +84,7 @@
 
 "alert.logout.confirmation.title" = "Αποσύνδεση από αυτό τον εξυπηρετητή"; 
 "alert.logout.confirmation.message" = "Σίγουρα θέλετε να αποσυνδεθείτε από \"%@\"?"; 
-"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με"; 
+"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";

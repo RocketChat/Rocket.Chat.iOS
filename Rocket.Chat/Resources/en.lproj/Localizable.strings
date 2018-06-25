@@ -84,7 +84,7 @@
 
 "alert.logout.confirmation.title" = "Logout from this server";
 "alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
-"alert.logout.confirmation.confirm" = "Yes, logout me";
+"alert.logout.confirmation.confirm" = "Yes, logout";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
