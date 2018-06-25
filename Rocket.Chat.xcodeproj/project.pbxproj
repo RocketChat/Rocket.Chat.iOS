@@ -689,7 +689,7 @@
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
-		999F25B7207EEE70002E0F68 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		999F25B7207EEE70002E0F68 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
@@ -4325,7 +4325,7 @@
 				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
-				999F25B7207EEE70002E0F68 /* BuildFile in Sources */,
+				999F25B7207EEE70002E0F68 /* (null) in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
