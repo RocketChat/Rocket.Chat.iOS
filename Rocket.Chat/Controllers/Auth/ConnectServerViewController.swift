@@ -77,7 +77,7 @@ final class ConnectServerViewController: BaseViewController {
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
         }
 
