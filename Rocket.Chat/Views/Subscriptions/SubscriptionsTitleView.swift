@@ -99,7 +99,6 @@ extension SubscriptionsTitleView {
         if #available(iOS 11, *) {
             // Do nothing
         } else {
-            print(buttonServer.subviews)
             if let buttonLabel = buttonServer.subviews.first(where: { $0 is UILabel }) as? UILabel {
                 buttonLabel.textColor = theme.tintColor
             }
