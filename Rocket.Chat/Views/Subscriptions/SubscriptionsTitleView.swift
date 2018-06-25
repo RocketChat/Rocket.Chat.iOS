@@ -92,7 +92,17 @@ extension SubscriptionsTitleView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        buttonServer.setTitleColor(theme.tintColor, for: .normal)
+
         buttonServer.tintColor = theme.tintColor
+        buttonServer.setTitleColor(theme.tintColor, for: .normal)
+
+        if #available(iOS 11, *) {
+            // Do nothing
+        } else {
+            print(buttonServer.subviews)
+            if let buttonLabel = buttonServer.subviews.first(where: { $0 is UILabel }) as? UILabel {
+                buttonLabel.textColor = theme.tintColor
+            }
+        }
     }
 }
