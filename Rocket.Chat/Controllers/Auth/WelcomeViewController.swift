@@ -91,7 +91,7 @@ class WelcomeViewController: BaseViewController {
     // MARK: Setup
 
     func setupAppearance() {
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
         }
 

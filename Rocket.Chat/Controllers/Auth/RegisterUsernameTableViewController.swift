@@ -31,9 +31,13 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
             navigationItem.title = SocketManager.sharedInstance.serverURL?.host
         }
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         if SocketManager.isConnected() {
             startLoading()
@@ -45,10 +49,7 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
                 }
             }
         }
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         textFieldUsername.becomeFirstResponder()
     }
 

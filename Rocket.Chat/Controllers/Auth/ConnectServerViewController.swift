@@ -18,6 +18,7 @@ final class ConnectServerViewController: BaseViewController {
     internal let buttonConnectBottomSpacing: CGFloat = 24
 
     var deepLinkCredentials: DeepLinkCredentials?
+    var selectedServer: Int = 0
 
     var shouldAutoConnect = false
     var url: URL? {
@@ -72,10 +73,11 @@ final class ConnectServerViewController: BaseViewController {
             navigationItem.leftBarButtonItem = buttonClose
         }
 
+        selectedServer = DatabaseManager.selectedIndex
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
         }
 
@@ -195,8 +197,7 @@ final class ConnectServerViewController: BaseViewController {
 
     @objc func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        AppManager.changeSelectedServer(index: (DatabaseManager.servers?.count ?? 1) - 1)
-        AppManager.reloadApp()
+        AppManager.changeSelectedServer(index: selectedServer)
     }
 
     func connect() {

@@ -186,8 +186,13 @@ final class SubscriptionsViewController: BaseViewController {
 extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
         serversView?.close()
         sortingView?.close()
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -203,6 +208,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel.searchState = .notSearching
+        searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
         searchBar.text = ""
 
@@ -247,19 +253,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-            serversView?.presentAddServer = { [weak self] in
-                let connect = Storyboard.auth(
-                    serverUrl: "",
-                    credentials: nil
-                ).instantiate(
-                    viewController: String(describing: ConnectServerViewController.self)
-                ) ?? UIViewController()
-
-                let nav = BaseNavigationController(rootViewController: connect)
-                _ = nav.view
-
-                self?.present(nav, animated: true, completion: nil)
-            }
             serversView?.delegate = self
             serversView?.applyTheme()
         }
@@ -369,14 +362,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
 }
 
 extension SubscriptionsViewController {
-
-    func showCancelSearchButton() {
-        searchController?.searchBar.setShowsCancelButton(true, animated: true)
-    }
-
-    func hideCancelSearchButton() {
-        searchController?.searchBar.setShowsCancelButton(false, animated: true)
-    }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return true

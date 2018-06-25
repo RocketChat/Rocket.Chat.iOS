@@ -84,7 +84,7 @@
 
 "alert.logout.confirmation.title" = "Logout from this server";
 "alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
-"alert.logout.confirmation.confirm" = "Yes, logout me";
+"alert.logout.confirmation.confirm" = "Yes, logout";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -158,7 +158,7 @@
 "servers.add_new_server" = "Add Server";
 "servers.action.disconnect" = "Disconnect";
 "servers.action.disconnect.alert.title" = "Disconnect from Server";
-"servers.action.disconnect.alert.message" = "Are you want to disconnect from \"%@\" server?";
+"servers.action.disconnect.alert.message" = "Do you want to disconnect from \"%@\" server?";
 "servers.action.disconnect.alert.confirm" = "Yes, disconnect";
 
 // Status

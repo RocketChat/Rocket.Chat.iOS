@@ -117,6 +117,7 @@
 		33D08E2E20BD9267008D03EF /* ThemePreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2C20BD9267008D03EF /* ThemePreferenceController.swift */; };
 		33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */; };
 		33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */; };
+		33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */; };
@@ -882,6 +883,7 @@
 		33D08E2C20BD9267008D03EF /* ThemePreferenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreferenceController.swift; sourceTree = "<group>"; };
 		33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreferenceViewModel.swift; sourceTree = "<group>"; };
 		33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThemePreferenceCell.swift; path = Preferences/ThemePreferenceCell.swift; sourceTree = "<group>"; };
+		33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsSortingSeparatorView.swift; sourceTree = "<group>"; };
@@ -1759,7 +1761,6 @@
 				33D08E2120BD5EDC008D03EF /* ThemeManager.swift */,
 				33D08E2220BD5EDC008D03EF /* NotThemeableViews.swift */,
 				33D08E2320BD5EDC008D03EF /* Theme.swift */,
-				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -2082,6 +2083,7 @@
 				995F710A20C7822A00B7535F /* AuthTableViewController.swift */,
 				995F711520C790AB00B7535F /* AuthTableViewControllerAuthenticationHandler.swift */,
 				995F711720C790D800B7535F /* AuthTableViewControllerConnectionHandler.swift */,
+				33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */,
 				995F711920C7910800B7535F /* AuthTableViewControllerLoginServices.swift */,
 				80D955C1202154A300E3F281 /* CASViewController.swift */,
 				4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */,
@@ -2305,6 +2307,7 @@
 				4156250720BEDCD100D20576 /* ServersListViewModel.swift */,
 				41D3668420C0323100970B99 /* SubscriptionsSortingView.swift */,
 				41D3668320C0323000970B99 /* SubscriptionsSortingView.xib */,
+				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
 				33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */,
 				41D3668520C0323100970B99 /* SubscriptionsSortingViewModel.swift */,
 			);
@@ -4178,6 +4181,7 @@
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */,
+				33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
 				414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */,
