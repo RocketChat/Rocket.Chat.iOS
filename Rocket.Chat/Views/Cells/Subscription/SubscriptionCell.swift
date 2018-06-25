@@ -224,13 +224,17 @@ extension SubscriptionCell {
         labelLastMessage.textColor = theme.auxiliaryText
         iconRoom.tintColor = theme.auxiliaryText
 
-        if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {
+        setSelected(isSelected, animated: false)
+        setHighlighted(isHighlighted, animated: false)
+
+        guard let subscription = self.subscription, !subscription.isInvalidated else {
+            return
+        }
+
+        if subscription.unread > 0 || subscription.alert {
             labelDate.textColor = theme.tintColor
         } else {
             labelDate.textColor = theme.auxiliaryText
         }
-
-        setSelected(isSelected, animated: false)
-        setHighlighted(isHighlighted, animated: false)
     }
 }
