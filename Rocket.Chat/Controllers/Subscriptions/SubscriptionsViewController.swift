@@ -310,6 +310,7 @@ final class SubscriptionsViewController: BaseViewController {
 extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
         serversView?.close()
         sortingView?.close()
     }
@@ -327,6 +328,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
         searchBar.text = ""
         searchText = ""
@@ -608,14 +610,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
 }
 
 extension SubscriptionsViewController {
-
-    func showCancelSearchButton() {
-        searchController?.searchBar.setShowsCancelButton(true, animated: true)
-    }
-
-    func hideCancelSearchButton() {
-        searchController?.searchBar.setShowsCancelButton(false, animated: true)
-    }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""

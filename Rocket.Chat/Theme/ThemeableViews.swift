@@ -170,11 +170,11 @@ extension UITextView {
 
 extension UINavigationBar {
     override func applyTheme() {
-        super.applyTheme()
         guard let theme = theme else { return }
         tintColor = theme.tintColor
         barStyle = theme.appearence.barStyle
         barTintColor = theme.focusedBackground
+        items?.forEach { $0.titleView?.applyTheme() }
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {

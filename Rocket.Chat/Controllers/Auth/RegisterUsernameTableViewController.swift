@@ -31,7 +31,7 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
             navigationItem.title = SocketManager.sharedInstance.serverURL?.host
         }
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }
     }

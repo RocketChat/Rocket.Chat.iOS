@@ -1090,11 +1090,11 @@
             </objects>
             <point key="canvasLocation" x="2933" y="18"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Auth Navigation Controller-->
         <scene sceneID="eWA-Rw-ed8">
             <objects>
-                <navigationController storyboardIdentifier="RegisterUsernameNav" id="q3n-0j-UeJ" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAH-Yd-p9w" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                <navigationController storyboardIdentifier="RegisterUsernameNav" id="q3n-0j-UeJ" customClass="AuthNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fAH-Yd-p9w" customClass="NotThemeableNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1336,11 +1336,11 @@ to mention you in messages</string>
             </objects>
             <point key="canvasLocation" x="610" y="714"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Auth Navigation Controller-->
         <scene sceneID="eEk-8u-HV2">
             <objects>
-                <navigationController storyboardIdentifier="ConnectServerNav" id="OC3-Ih-BUc" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0We-EH-aKl" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                <navigationController storyboardIdentifier="ConnectServerNav" id="OC3-Ih-BUc" customClass="AuthNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0We-EH-aKl" customClass="NotThemeableNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1352,12 +1352,12 @@ to mention you in messages</string>
             </objects>
             <point key="canvasLocation" x="609" y="1433"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Auth Navigation Controller-->
         <scene sceneID="VVk-L1-Mm3">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kCN-DM-NIV" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kCN-DM-NIV" customClass="AuthNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqn-Q1-9Rp" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fqn-Q1-9Rp" customClass="NotThemeableNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1370,12 +1370,12 @@ to mention you in messages</string>
             </objects>
             <point key="canvasLocation" x="-1033" y="713"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Auth Navigation Controller-->
         <scene sceneID="PM5-Dp-rQ1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gD1-Tz-RKb" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gD1-Tz-RKb" customClass="AuthNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="trJ-5o-du2" customClass="BaseNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="trJ-5o-du2" customClass="NotThemeableNavigationBar" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

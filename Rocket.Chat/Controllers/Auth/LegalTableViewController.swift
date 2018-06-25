@@ -26,7 +26,7 @@ class LegalTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }
     }
