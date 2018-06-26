@@ -92,36 +92,36 @@
 "connection.server.redirect.alert.confirm" = "Да, изменить URL-адрес";
 
 // Socket Connection
-"connection.title" = "Войдите на ваш сервер"; // TODO
-"connection.button_connect" = "Соединение"; // TODO
+"connection.title" = "Войдите на ваш сервер";
+"connection.button_connect" = "Соединение";
 "connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
-"connection.waiting_for_network.banner.message" = "Ожидание сети"; // TODO
+"connection.waiting_for_network.banner.message" = "Ожидание сети";
 
 // Onboarding
-"onboarding.label_welcome" = "Добро пожаловать в Rocket Chat"; // TODO
-"onboarding.label_subtitle" = "Средство общения с открытым исходным кодом"; // TODO
-"onboarding.button_connect_server" = "Соединиться с сервером"; // TODO
-"onboarding.button_create_server" = "Создать новый сервер"; // TODO
-"onboarding.button_join_community_prefix" = "Присоединиться к сообществу"; // TODO
+"onboarding.label_welcome" = "Добро пожаловать в Rocket Chat";
+"onboarding.label_subtitle" = "Средство общения с открытым исходным кодом";
+"onboarding.button_connect_server" = "Соединиться с сервером";
+"onboarding.button_create_server" = "Создать новый сервер";
+"onboarding.button_join_community_prefix" = "Присоединиться к сообществу";
 
 // Auth
 "auth.connect.button_connect" = "Соединение";
 "auth.connect.ssl_required" = "Требуется, чтобы ваш сервер поддерживал SSL";
 "auth.connect.connecting" = "Выполняется соединение";
-"auth.email_auth_prefix" = "Войти с "; // TODO
-"auth.email_auth" = "e-mail"; // TODO
-"auth.login_service_prefix" = "Продолжить с "; // TODO
+"auth.email_auth_prefix" = "Войти с ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Продолжить с ";
 
-"auth.signup_title" = "Зарегистрироваться"; // TODO
-"auth.signup.button_register" = "Регистрация"; // TODO
-"auth.signup.button_next" = "Дальше"; // TODO
-"auth.signup.custom_fields_title" = "Завершить вашу регистрацию"; // TODO
+"auth.signup_title" = "Зарегистрироваться";
+"auth.signup.button_register" = "Регистрация";
+"auth.signup.button_next" = "Дальше";
+"auth.signup.custom_fields_title" = "Завершить вашу регистрацию";
 
-"auth.login.login_title" = "Вход"; // TODO
-"auth.login.button_login_title" = "Войти"; // TODO
-"auth.login.create_account_prefix" = "У вас нет аккаунта?"; // TODO
-"auth.login.create_account" = "\nСоздать аккаунт"; // TODO
+"auth.login.login_title" = "Вход";
+"auth.login.button_login_title" = "Войти";
+"auth.login.create_account_prefix" = "У вас нет аккаунта?";
+"auth.login.create_account" = "\nСоздать аккаунт";
 "auth.login.username.placeholder" = "Электронная почта или имя пользователя";
 "auth.login.password.placeholder" = "Пароль";
 "auth.login.buttonRegister" = "Создать новый аккаунт";
@@ -143,7 +143,7 @@
 "subscriptions.favorites" = "Избранные";
 "subscriptions.channels" = "Каналы";
 "subscriptions.direct_messages" = "Личная переписка";
-"subscriptions.conversations" = "Диалоги"; //TODO
+"subscriptions.conversations" = "Диалоги";
 "subscriptions.you" = "вы";
 "subscriptions.messages" = "Сообщения";
 "subscriptions.list.you_initial" = "Вы";
@@ -194,12 +194,12 @@
 "chat.unread_separator" = "новые сообщения";
 
 // Read Receipts
-"chat.read_receipt_list.title" = "Read by"; // TODO
-"chat.read_receipt_list.title.loading" = "Loading..."; // TODO
-"chat.read_receipt_list.title.empty" = "Read by no one"; // TODO
+"chat.read_receipt_list.title" = "Прочитано";
+"chat.read_receipt_list.title.loading" = "Загрузка...";
+"chat.read_receipt_list.title.empty" = "Никем не прочитано";
 
 // Chat Message Actions
-"chat.message.actions.info" = "Message info"; // TODO
+"chat.message.actions.info" = "Информация о сообщении";
 "chat.message.actions.react" = "Добавить реакцию";
 "chat.message.actions.block" = "Блокировать сообщения от пользователя";
 "chat.message.actions.report" = "Пожаловаться на сообщение";
@@ -207,8 +207,8 @@
 "chat.message.actions.copy" = "Копировать";
 "chat.message.actions.pin" = "Прикрепить сообщение";
 "chat.message.actions.unpin" = "Открепить сообщение";
-"chat.message.actions.star" = "Пометить сообщение"; // TODO
-"chat.message.actions.unstar" = "Снять отметку"; // TODO
+"chat.message.actions.star" = "Пометить сообщение";
+"chat.message.actions.unstar" = "Снять отметку";
 "chat.message.actions.quote" = "Цитата";
 "chat.message.actions.reply" = "Ответить";
 "chat.message.actions.delete" = "Удалить сообщение";
@@ -281,15 +281,15 @@
 "chat.info.item.starred" = "Отмеченные";
 "chat.info.item.mentions" = "Упоминания";
 "chat.info.item.files" = "Файлы";
-"chat.info.item.share" = "Поделиться"; // TODO
+"chat.info.item.share" = "Поделиться";
 
 // Members List
 "chat.members.list.title" = "Пользователи";
 
 // Add Users
-"chat.add_users.title" = "Adicionar Usuários";
-"chat.add_users.confirm.title" = "Adicionar esse usuário?";
-"chat.add_users.confirm.message" = "Você tem certeza que deseja adicionar '%@' a '%@'?";
+"chat.add_users.title" = "Добавить пользователей";
+"chat.add_users.confirm.title" = "Добавить этого пользователя?";
+"chat.add_users.confirm.message" = "Вы уверены, что хотите добавить '%@' в '%@'?";
 
 // Messages List
 "chat.messages.list.title" = "Сообщения";
@@ -304,7 +304,7 @@
 // Settings
 "myaccount.settings.title" = "Настройки";
 "myaccount.settings.administration" = "Администрирование";
-"myaccount.settings.logout" = "Выход из %@"; // TODO
+"myaccount.settings.logout" = "Выход из %@";
 "myaccount.settings.contactus" = "Связаться с нами";
 "myaccount.settings.profile" = "Профиль";
 "myaccount.settings.license" = "Лицензия";
@@ -369,18 +369,18 @@
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
 
 // Theme
-"theme.settings.title" = "Theme"; // TODO
-"theme.settings.header" = "ALL THEMES"; // TODO
-"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
-"theme.light" = "Light"; // TODO
-"theme.dark" = "Dark"; // TODO
-"theme.black" = "Black"; // TODO
+"theme.settings.title" = "Тема";
+"theme.settings.header" = "ВСЕ ТЕМЫ";
+"theme.settings.footer" = "Применение темы изменит внешний вид приложения.";
+"theme.light" = "Светлая";
+"theme.dark" = "Темная";
+"theme.black" = "Черная";
 
 // Sorting & Grouping Subscriptions
-"subscriptions.sorting.title.alphabetical" = "Сортировать по имени"; //TODO
-"subscriptions.sorting.title.activity" = "Сортировать по активности"; //TODO
-"subscriptions.sorting.alphabetical" = "По алфавиту"; //TODO
-"subscriptions.sorting.activity" = "Активности"; //TODO
-"subscriptions.grouping.type" = "Группировать по типу"; //TODO
-"subscriptions.grouping.favorites" = "Группировать по избранным"; //TODO
-"subscriptions.grouping.unread_top" = "Непрочитанные свеху"; //TODO
+"subscriptions.sorting.title.alphabetical" = "Сортировать по имени";
+"subscriptions.sorting.title.activity" = "Сортировать по активности";
+"subscriptions.sorting.alphabetical" = "По алфавиту";
+"subscriptions.sorting.activity" = "Активности";
+"subscriptions.grouping.type" = "Группировать по типу";
+"subscriptions.grouping.favorites" = "Группировать по избранным";
+"subscriptions.grouping.unread_top" = "Непрочитанные свеху";
