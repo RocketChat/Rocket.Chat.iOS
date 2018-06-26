@@ -40,7 +40,6 @@ struct AuthClient: APIClient {
                     realm.add(auth)
                 })
 
-                SocketManager.sharedInstance.isUserAuthenticated = true
                 ServerManager.timestampSync()
                 completion(response)
             case .error:
