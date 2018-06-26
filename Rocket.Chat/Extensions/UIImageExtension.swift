@@ -53,4 +53,54 @@ extension UIImage {
         return result
     }
 
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        if percentage == 1.0 { return self }
+
+        let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+
+    func compressForUpload() -> Data {
+        return compressImage(forMaxExpectedSize: 2*1024*1024)
+    }
+
+    func compressImage(forMaxExpectedSize maxSize: UInt) -> Data {
+
+        let jpegImage = UIImageJPEGRepresentation(self, 1.0) ?? Data()
+        let imageSize = jpegImage.byteSize
+
+        if imageSize < maxSize {
+            return jpegImage
+        }
+
+        var percentSize = percentSizeAfterCompression(forImageWithSize: imageSize, maxExpectedSize: maxSize)
+        while true {
+            let compressedImage = compressImage(resizedWithPercentage: percentSize)
+            if compressedImage.byteSize < maxSize {
+                return compressedImage
+            } else {
+                percentSize *= 0.8
+            }
+        }
+    }
+
+    private func compressImage(resizedWithPercentage percentage: CGFloat) -> Data {
+        let resizedImage = self.resized(withPercentage: percentage) ?? UIImage()
+        return UIImageJPEGRepresentation(resizedImage, 0.5) ?? Data()
+    }
+
+    private func percentSizeAfterCompression(forImageWithSize size: UInt, maxExpectedSize maxSize: UInt) -> CGFloat {
+        let sizeReductionFactor: CGFloat = 0.36
+        let safeEstimationFactor: CGFloat = 0.95
+
+        let expectedImageSizeOnCompression = CGFloat(size) * sizeReductionFactor
+        if expectedImageSizeOnCompression < CGFloat(maxSize) {
+            return 1.0
+        } else {
+            return safeEstimationFactor * CGFloat(maxSize) / expectedImageSizeOnCompression
+        }
+    }
 }

@@ -42,4 +42,8 @@ extension Data {
             assertionFailure("data is invalid")
         }
     }
+
+    var byteSize: UInt {
+        return UInt([UInt8](self).count)
+    }
 }
