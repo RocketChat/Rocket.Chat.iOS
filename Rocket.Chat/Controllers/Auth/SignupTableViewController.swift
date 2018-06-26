@@ -170,57 +170,115 @@ final class SignupTableViewController: BaseTableViewController {
                     ).present()
                 }
             } else {
-
                 guard AuthSettingsManager.settings?.emailVerification == false else {
                     Alert(key: "alert.email_verification").present { _ in
-                        self?.navigationController?.popViewController(animated: true)
+                        guard
+                            let viewControllers = self?.navigationController?.viewControllers,
+                            let authController = viewControllers.filter({$0 is AuthTableViewController}).first
+                        else {
+                            self?.navigationController?.popViewController(animated: true)
+                            return
+                        }
+
+                        self?.navigationController?.popToViewController(authController, animated: true)
                     }
 
                     return
                 }
 
-                startLoading()
-                AuthManager.auth(email, password: password, completion: { _ in
-                    stopLoading()
-                    API.current()?.client(InfoClient.self).fetchInfo {
-                        startLoading()
-                        API.current()?.fetch(MeRequest()) { [weak self] response in
-                            stopLoading()
-                            switch response {
-                            case .resource(let resource):
-                                let realm = Realm.current
-                                try? realm?.write {
-                                    if let user = resource.user {
-                                        realm?.add(user, update: true)
-                                    }
-                                }
+                self?.authThenFetchInfo(
+                    email: email,
+                    password: password,
+                    startLoading: startLoading,
+                    stopLoading: stopLoading
+                )
+            }
+        }
+    }
 
-                                if resource.user?.username != nil {
-                                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
-                                    AppManager.reloadApp()
-                                } else {
-                                    startLoading()
-                                    AuthManager.setUsername(self?.textFieldUsername.text ?? "") { success, errorMessage in
-                                        stopLoading()
-                                        DispatchQueue.main.async {
-                                            stopLoading()
-                                            if !success {
-                                                Alert(
-                                                    title: localized("error.socket.default_error.title"),
-                                                    message: errorMessage ?? localized("error.socket.default_error.message")
-                                                ).present()
-                                            } else {
-                                                self?.presentingViewController?.dismiss(animated: true, completion: nil)
-                                                AppManager.reloadApp()
-                                            }
-                                        }
-                                    }
-                                }
-                            case .error: break
-                            }
+    func authThenFetchInfo(email: String, password: String, startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        startLoading()
+        AuthManager.auth(email, password: password, completion: { [weak self] response in
+            stopLoading()
+            switch response {
+            case .resource:
+                self?.fetchInfoThenFetchMe(startLoading: startLoading, stopLoading: stopLoading)
+            case .error:
+                Alert(
+                    title: localized("error.socket.default_error.title"),
+                    message: localized("error.socket.default_error.message")
+                ).present()
+            }
+        })
+    }
+
+    func fetchInfoThenFetchMe(startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        startLoading()
+        API.current()?.client(InfoClient.self).fetchInfo { [weak self] in
+            stopLoading()
+            self?.fetchMeThenSetUsername(startLoading: startLoading, stopLoading: stopLoading)
+        }
+    }
+
+    func fetchMeThenSetUsername(startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        let realm = Realm.current
+        startLoading()
+        API.current()?.fetch(MeRequest()) { [weak self] response in
+            stopLoading()
+            switch response {
+            case .resource(let resource):
+                try? realm?.write {
+                    if let user = resource.user {
+                        realm?.add(user, update: true)
+                    }
+                }
+
+                if resource.user?.username != nil {
+                    self?.dismiss(animated: true, completion: nil)
+                    AppManager.reloadApp()
+                } else {
+                    self?.setUsername(startLoading: startLoading, stopLoading: stopLoading)
+                }
+            case .error:
+                Alert(
+                    title: localized("error.socket.default_error.title"),
+                    message: localized("error.socket.default_error.message")
+                ).present()
+            }
+        }
+    }
+
+    func setUsername(startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
+        guard
+            let username = textFieldUsername.text,
+            let auth = AuthManager.isAuthenticated(),
+            !username.isEmpty
+        else {
+            return
+        }
+
+        startLoading()
+        AuthManager.resume(auth) { [weak self] response in
+            if response.isError() {
+                Alert(
+                    title: localized("error.socket.default_error.title"),
+                    message: localized("error.socket.default_error.message")
+                ).present()
+            } else {
+                AuthManager.setUsername(username) { success, errorMessage in
+                    DispatchQueue.main.async {
+                        stopLoading()
+                        if !success {
+                            Alert(
+                                title: localized("error.socket.default_error.title"),
+                                message: errorMessage ?? localized("error.socket.default_error.message")
+                            ).present()
+                        } else {
+                            self?.dismiss(animated: true, completion: nil)
+                            AppManager.reloadApp()
                         }
                     }
-                })
+                }
             }
         }
     }
