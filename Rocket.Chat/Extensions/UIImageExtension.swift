@@ -63,14 +63,14 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 
-    func compressForUpload() -> Data {
+    var compressedForUpload: Data {
         guard let auth = AuthManager.isAuthenticated() else { return Data() }
         guard let settings = auth.settings else { return Data() }
         let maxSize = settings.maxFileSize
-        return compressImage(forMaxExpectedSize: maxSize)
+        return compressedImage(forMaxExpectedSize: maxSize)
     }
 
-    func compressImage(forMaxExpectedSize maxSize: Int) -> Data {
+    func compressedImage(forMaxExpectedSize maxSize: Int) -> Data {
 
         let jpegImage = UIImageJPEGRepresentation(self, 1.0) ?? Data()
         let imageSize = jpegImage.byteSize
@@ -79,9 +79,9 @@ extension UIImage {
             return jpegImage
         }
 
-        var percentSize = percentSizeAfterCompression(forImageWithSize: imageSize, maxExpectedSize: maxSize)
+        var percentSize = UIImage.percentSizeAfterCompression(forImageWithSize: imageSize, maxExpectedSize: maxSize)
         while true {
-            let compressedImage = compressImage(resizedWithPercentage: percentSize)
+            let compressedImage = self.compressedImage(resizedWithPercentage: percentSize)
             if compressedImage.byteSize < maxSize {
                 return compressedImage
             } else {
@@ -90,12 +90,12 @@ extension UIImage {
         }
     }
 
-    private func compressImage(resizedWithPercentage percentage: CGFloat) -> Data {
+    private func compressedImage(resizedWithPercentage percentage: CGFloat) -> Data {
         let resizedImage = self.resized(withPercentage: percentage) ?? UIImage()
         return UIImageJPEGRepresentation(resizedImage, 0.5) ?? Data()
     }
 
-    private func percentSizeAfterCompression(forImageWithSize size: Int, maxExpectedSize maxSize: Int) -> CGFloat {
+    private static func percentSizeAfterCompression(forImageWithSize size: Int, maxExpectedSize maxSize: Int) -> CGFloat {
         let sizeReductionFactor: CGFloat = 0.36
         let safeEstimationFactor: CGFloat = 0.95
 
