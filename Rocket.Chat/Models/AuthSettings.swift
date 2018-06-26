@@ -81,6 +81,7 @@ final class AuthSettings: Object {
 
     // File upload
     @objc dynamic var uploadStorageType: String?
+    @objc dynamic var maxFileSize: Int = 0
 
     // Hide Message Types
     @objc dynamic var hideMessageUserJoined: Bool = false

@@ -64,10 +64,13 @@ extension UIImage {
     }
 
     func compressForUpload() -> Data {
-        return compressImage(forMaxExpectedSize: 2*1024*1024)
+        guard let auth = AuthManager.isAuthenticated() else { return Data() }
+        guard let settings = auth.settings else { return Data() }
+        let maxSize = settings.maxFileSize
+        return compressImage(forMaxExpectedSize: maxSize)
     }
 
-    func compressImage(forMaxExpectedSize maxSize: UInt) -> Data {
+    func compressImage(forMaxExpectedSize maxSize: Int) -> Data {
 
         let jpegImage = UIImageJPEGRepresentation(self, 1.0) ?? Data()
         let imageSize = jpegImage.byteSize
@@ -92,7 +95,7 @@ extension UIImage {
         return UIImageJPEGRepresentation(resizedImage, 0.5) ?? Data()
     }
 
-    private func percentSizeAfterCompression(forImageWithSize size: UInt, maxExpectedSize maxSize: UInt) -> CGFloat {
+    private func percentSizeAfterCompression(forImageWithSize size: Int, maxExpectedSize maxSize: Int) -> CGFloat {
         let sizeReductionFactor: CGFloat = 0.36
         let safeEstimationFactor: CGFloat = 0.95
 

@@ -43,7 +43,7 @@ extension Data {
         }
     }
 
-    var byteSize: UInt {
-        return UInt([UInt8](self).count)
+    var byteSize: Int {
+        return [UInt8](self).count
     }
 }
