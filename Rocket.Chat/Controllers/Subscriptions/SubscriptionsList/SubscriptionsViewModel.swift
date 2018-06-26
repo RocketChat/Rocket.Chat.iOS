@@ -41,7 +41,11 @@ class SubscriptionsViewModel {
         }
     }
 
-    var assorter: RealmAssorter<Subscription>?
+    var assorter: RealmAssorter<Subscription>? {
+        didSet {
+            assorter?.invalidate()
+        }
+    }
 
     let realm: Realm?
 
@@ -49,9 +53,12 @@ class SubscriptionsViewModel {
         self.realm = realm
     }
 
+    deinit {
+        assorter?.invalidate()
+    }
+
     func buildSections() {
         if let realm = realm {
-            assorter?.invalidate()
             assorter = RealmAssorter<Subscription>(realm: realm, results: subscriptions)
             assorter?.didUpdateIndexPaths = didUpdateIndexPaths
         }
