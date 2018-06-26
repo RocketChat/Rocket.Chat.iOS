@@ -90,7 +90,7 @@ class RealmAssorter<Object: RealmSwift.Object> {
             }
 
             let mappedModifications = objects.enumerated().compactMap { offset, element -> IndexPath? in
-                guard affected.contains(element) else {
+                guard affected.contains(element) || (offset < section.objects.count && section.objects[offset] != element) else {
                     return nil
                 }
 

@@ -351,6 +351,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard
             let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
+            index < tableView.visibleCells.count,
             let cell = tableView.visibleCells[index] as? SubscriptionCell
         else {
             return false
