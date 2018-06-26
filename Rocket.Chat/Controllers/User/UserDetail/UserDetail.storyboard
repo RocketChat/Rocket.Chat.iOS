@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB">
-                                <rect key="frame" x="0.0" y="-88" width="375" height="900"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="b3B-9a-fwl" userLabel="Header View">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
@@ -96,7 +96,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="06e-g9-2mB" firstAttribute="top" secondItem="PvQ-5C-aNJ" secondAttribute="top" constant="-88" id="0V7-Uk-Mt2"/>
+                            <constraint firstItem="06e-g9-2mB" firstAttribute="top" secondItem="PvQ-5C-aNJ" secondAttribute="top" id="0V7-Uk-Mt2"/>
                             <constraint firstItem="06e-g9-2mB" firstAttribute="leading" secondItem="PvQ-5C-aNJ" secondAttribute="leading" id="XuJ-lq-hR7"/>
                             <constraint firstAttribute="trailing" secondItem="06e-g9-2mB" secondAttribute="trailing" id="cYh-TF-xbI"/>
                             <constraint firstAttribute="bottom" secondItem="06e-g9-2mB" secondAttribute="bottom" id="qMZ-eG-S5K"/>
@@ -104,6 +104,9 @@
                         <viewLayoutGuide key="safeArea" id="pKt-zL-IrR"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="06e-g9-2mB" id="vhG-66-hJB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMv-9i-AvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
