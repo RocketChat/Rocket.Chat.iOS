@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Detail View Controller-->
+        <scene sceneID="TxN-hQ-3Fi">
+            <objects>
+                <viewController id="6OD-GW-L6f" customClass="UserDetailViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PvQ-5C-aNJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB">
+                                <rect key="frame" x="0.0" y="-88" width="375" height="900"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="b3B-9a-fwl" userLabel="Header View">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="travel" translatesAutoresizingMaskIntoConstraints="NO" id="cbW-5Y-lku" userLabel="Background Image View" customClass="FLAnimatedImageView">
+                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
+                                            <rect key="frame" x="44.666666666666657" y="211" width="286" height="70"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="3OI-kY-Tfp"/>
+                                                        <constraint firstAttribute="width" constant="70" id="oLy-cA-1gi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="25" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Message" image="UserDetail_Message">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
+                                                    <rect key="frame" x="108" y="0.0" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="Bkq-UB-S4J"/>
+                                                        <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="27" minY="-16" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Voice call" image="UserDetail_VoiceCall">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="216.00000000000003" y="0.0" width="69.999999999999972" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
+                                                        <constraint firstAttribute="width" constant="70" id="xf7-75-bUs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="23" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Video call" image="UserDetail_VideoCall">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz">
+                                            <rect key="frame" x="147.66666666666666" y="0.6666666666666643" width="80" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
+                                                <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="centerY" secondItem="b3B-9a-fwl" secondAttribute="centerY" id="LoM-8B-ds1"/>
+                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="RcX-9E-qTe"/>
+                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="top" secondItem="cbW-5Y-lku" secondAttribute="top" id="Ufz-UG-clM"/>
+                                        <constraint firstItem="s6E-mn-etl" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="aA6-dm-QTP"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="width" secondItem="b3B-9a-fwl" secondAttribute="width" id="fKB-jZ-odX"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="height" secondItem="b3B-9a-fwl" secondAttribute="height" id="h5D-x8-Fig"/>
+                                        <constraint firstAttribute="bottom" secondItem="s6E-mn-etl" secondAttribute="bottom" constant="27" id="wpm-VI-Fck"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="zUi-6D-Yfa"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="06e-g9-2mB" firstAttribute="top" secondItem="PvQ-5C-aNJ" secondAttribute="top" constant="-88" id="0V7-Uk-Mt2"/>
+                            <constraint firstItem="06e-g9-2mB" firstAttribute="leading" secondItem="PvQ-5C-aNJ" secondAttribute="leading" id="XuJ-lq-hR7"/>
+                            <constraint firstAttribute="trailing" secondItem="06e-g9-2mB" secondAttribute="trailing" id="cYh-TF-xbI"/>
+                            <constraint firstAttribute="bottom" secondItem="06e-g9-2mB" secondAttribute="bottom" id="qMZ-eG-S5K"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pKt-zL-IrR"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XMv-9i-AvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260" y="-19.211822660098523"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="UserDetail_Message" width="22" height="21"/>
+        <image name="UserDetail_VideoCall" width="21" height="15"/>
+        <image name="UserDetail_VoiceCall" width="16" height="19"/>
+        <image name="travel" width="24" height="18"/>
+    </resources>
+</document>

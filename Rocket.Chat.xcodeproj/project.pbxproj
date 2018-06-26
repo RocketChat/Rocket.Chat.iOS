@@ -578,6 +578,12 @@
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
+		80CC78D920E25A5B002FBEBC /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */; };
+		80CC78DF20E285F9002FBEBC /* UIViewControllerShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */; };
+		80CC78E120E29353002FBEBC /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */; };
+		80CC78E420E2979A002FBEBC /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E320E2979A002FBEBC /* UINavigationBar.swift */; };
+		80CC78E620E2B66C002FBEBC /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */; };
+		80CC78E820E2BBDF002FBEBC /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */; };
 		80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1820ACE320009D64DF /* UserPermissions.swift */; };
 		80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
@@ -1345,6 +1351,12 @@
 		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
+		80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerShow.swift; sourceTree = "<group>"; };
+		80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
+		80CC78E320E2979A002FBEBC /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		80CC8A1820ACE320009D64DF /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerUserActionPresenter.swift; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
@@ -2045,6 +2057,7 @@
 		4174CB0A1D2D990F0086DAC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				80CC78D420E25A18002FBEBC /* User */,
 				4174CB101D2D997E0086DAC8 /* Auth */,
 				4174CB111D2D99840086DAC8 /* Base */,
 				41E2FA021D414ECC00238DFD /* Chat */,
@@ -2143,6 +2156,7 @@
 				8052F75A20B7522900B3B0CF /* UIAlertAction */,
 				8045F4A920D3114900AA0F3C /* UITextField */,
 				8045F4A220D30B6A00AA0F3C /* UISearchBar */,
+				80CC78E220E29775002FBEBC /* UINavigationBar */,
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
@@ -2391,6 +2405,7 @@
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
 				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
+				80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -3064,6 +3079,32 @@
 			path = RCEmojiKit;
 			sourceTree = "<group>";
 		};
+		80CC78D420E25A18002FBEBC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				80CC78D720E25A46002FBEBC /* UserDetail */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		80CC78D720E25A46002FBEBC /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */,
+				80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */,
+				80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
+		80CC78E220E29775002FBEBC /* UINavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				80CC78E320E2979A002FBEBC /* UINavigationBar.swift */,
+			);
+			path = UINavigationBar;
+			sourceTree = "<group>";
+		};
 		80CC8A1520AC9985009D64DF /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -3137,6 +3178,7 @@
 			isa = PBXGroup;
 			children = (
 				41F3704C20A31A3D00C5449E /* UIViewControllerExtension.swift */,
+				80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -3717,6 +3759,7 @@
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
 				14F8A226202E5CBF00175FDC /* Black-29@2x.png in Resources */,
 				33A5C9D0206A565800FE1C8F /* food.json in Resources */,
+				80CC78E820E2BBDF002FBEBC /* UserDetail.storyboard in Resources */,
 				33A5C9CF206A565800FE1C8F /* objects.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4066,6 +4109,7 @@
 				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
+				80CC78DF20E285F9002FBEBC /* UIViewControllerShow.swift in Sources */,
 				4124D834209A0521005374CD /* ChatMessageDaySeparator.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				8039443220B3988F002F317A /* PagedResource.swift in Sources */,
@@ -4176,6 +4220,7 @@
 				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
+				80CC78E420E2979A002FBEBC /* UINavigationBar.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
@@ -4280,6 +4325,7 @@
 				3330329C20738E6000A9514D /* SubscriptionManagerSearch.swift in Sources */,
 				9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
+				80CC78E620E2B66C002FBEBC /* UserDetailViewController.swift in Sources */,
 				8076FDD82048654F00114F28 /* UserUtils.swift in Sources */,
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,
 				995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */,
@@ -4312,6 +4358,7 @@
 				35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */,
 				80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
+				80CC78E120E29353002FBEBC /* StoryboardInitializable.swift in Sources */,
 				41D51B0620A62DD60073E8E7 /* Role.swift in Sources */,
 				41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
@@ -4372,6 +4419,7 @@
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				41FC9E0B209B3B3100FED485 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
+				80CC78D920E25A5B002FBEBC /* UserDetailViewModel.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */,
 				8062E327209E19BB0044F407 /* AuthClient.swift in Sources */,
 				8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */,
