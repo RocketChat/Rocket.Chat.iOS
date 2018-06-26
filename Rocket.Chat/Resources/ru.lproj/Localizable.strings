@@ -194,12 +194,12 @@
 "chat.unread_separator" = "новые сообщения";
 
 // Read Receipts
-"chat.read_receipt_list.title" = "Read by"; // TODO
-"chat.read_receipt_list.title.loading" = "Loading..."; // TODO
-"chat.read_receipt_list.title.empty" = "Read by no one"; // TODO
+"chat.read_receipt_list.title" = "Прочитано"; // TODO
+"chat.read_receipt_list.title.loading" = "Загрузка..."; // TODO
+"chat.read_receipt_list.title.empty" = "Никем не прочитано"; // TODO
 
 // Chat Message Actions
-"chat.message.actions.info" = "Message info"; // TODO
+"chat.message.actions.info" = "Информация о сообщении"; // TODO
 "chat.message.actions.react" = "Добавить реакцию";
 "chat.message.actions.block" = "Блокировать сообщения от пользователя";
 "chat.message.actions.report" = "Пожаловаться на сообщение";
@@ -287,9 +287,9 @@
 "chat.members.list.title" = "Пользователи";
 
 // Add Users
-"chat.add_users.title" = "Adicionar Usuários";
-"chat.add_users.confirm.title" = "Adicionar esse usuário?";
-"chat.add_users.confirm.message" = "Você tem certeza que deseja adicionar '%@' a '%@'?";
+"chat.add_users.title" = "Добавить пользователей";
+"chat.add_users.confirm.title" = "Добавить этого пользователя?";
+"chat.add_users.confirm.message" = "Вы уверены, что хотите добавить '%@' в '%@'?";
 
 // Messages List
 "chat.messages.list.title" = "Сообщения";
@@ -369,12 +369,12 @@
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";
 
 // Theme
-"theme.settings.title" = "Theme"; // TODO
-"theme.settings.header" = "ALL THEMES"; // TODO
-"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
-"theme.light" = "Light"; // TODO
-"theme.dark" = "Dark"; // TODO
-"theme.black" = "Black"; // TODO
+"theme.settings.title" = "Тема"; // TODO
+"theme.settings.header" = "ВСЕ ТЕМЫ"; // TODO
+"theme.settings.footer" = "Применение темы изменит внешний вид приложения."; // TODO
+"theme.light" = "Светлая"; // TODO
+"theme.dark" = "Темная"; // TODO
+"theme.black" = "Черная"; // TODO
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Сортировать по имени"; //TODO
