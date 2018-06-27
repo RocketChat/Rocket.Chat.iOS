@@ -13,6 +13,11 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     static var storyboardName: String = "UserDetail"
 
     @IBOutlet weak var backgroundImageView: FLAnimatedImageView!
+
+    @IBOutlet weak var avatarImageView: FLAnimatedImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+
     @IBOutlet weak var tableView: UserDetailTableView!
 
     override func viewDidLoad() {

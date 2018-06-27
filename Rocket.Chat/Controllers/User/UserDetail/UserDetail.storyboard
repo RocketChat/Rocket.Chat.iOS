@@ -25,11 +25,50 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="travel" translatesAutoresizingMaskIntoConstraints="NO" id="cbW-5Y-lku" userLabel="Background Image View" customClass="FLAnimatedImageView">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="cbW-5Y-lku" userLabel="Background Image View" customClass="FLAnimatedImageView">
                                             <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
                                         </imageView>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-B7-HLO">
+                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Iq-Kt-zYq">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="victoria.anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVX-O9-mV3">
+                                                        <rect key="frame" x="128.33333333333334" y="187" width="118.66666666666666" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victoria Anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Uo-Hy-eeB">
+                                                        <rect key="frame" x="111.33333333333333" y="161.33333333333334" width="151.66666666666669" height="21.666666666666657"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="IVX-O9-mV3" firstAttribute="top" secondItem="9Uo-Hy-eeB" secondAttribute="bottom" constant="4" id="L9R-yu-c2Z"/>
+                                                    <constraint firstItem="IVX-O9-mV3" firstAttribute="centerX" secondItem="9Uo-Hy-eeB" secondAttribute="centerX" id="iTK-Rs-X92"/>
+                                                </constraints>
+                                            </view>
+                                            <blurEffect style="light"/>
+                                        </visualEffectView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz" customClass="FLAnimatedImageView">
+                                            <rect key="frame" x="147" y="72.333333333333329" width="80" height="79.999999999999986"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
+                                                <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
-                                            <rect key="frame" x="44.666666666666657" y="211" width="286" height="70"/>
+                                            <rect key="frame" x="44.666666666666657" y="212" width="286" height="70"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -65,30 +104,29 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="23" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <inset key="imageEdgeInsets" minX="28" minY="-15" maxX="0.0" maxY="2"/>
                                                     <state key="normal" title="Video call" image="UserDetail_VideoCall">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
                                             </subviews>
                                         </stackView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz">
-                                            <rect key="frame" x="147.66666666666666" y="0.6666666666666643" width="80" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
-                                                <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
-                                            </constraints>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="width" secondItem="cbW-5Y-lku" secondAttribute="width" id="9be-qE-kbc"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="BUr-qB-Ypf"/>
                                         <constraint firstItem="cbW-5Y-lku" firstAttribute="centerY" secondItem="b3B-9a-fwl" secondAttribute="centerY" id="LoM-8B-ds1"/>
-                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="RcX-9E-qTe"/>
-                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="top" secondItem="cbW-5Y-lku" secondAttribute="top" id="Ufz-UG-clM"/>
+                                        <constraint firstItem="G2w-8I-1Td" firstAttribute="top" secondItem="IVX-O9-mV3" secondAttribute="bottom" constant="6.3333333333333712" id="Neh-bF-RtZ"/>
+                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="U1I-3O-sdy"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="height" secondItem="cbW-5Y-lku" secondAttribute="height" id="VbC-Am-HT6"/>
                                         <constraint firstItem="s6E-mn-etl" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="aA6-dm-QTP"/>
+                                        <constraint firstItem="9Uo-Hy-eeB" firstAttribute="centerX" secondItem="pYP-y6-oBz" secondAttribute="centerX" id="bke-be-ofR"/>
+                                        <constraint firstItem="9Uo-Hy-eeB" firstAttribute="top" secondItem="pYP-y6-oBz" secondAttribute="bottom" constant="9.6666666666666288" id="eWn-mb-fbl"/>
                                         <constraint firstItem="cbW-5Y-lku" firstAttribute="width" secondItem="b3B-9a-fwl" secondAttribute="width" id="fKB-jZ-odX"/>
                                         <constraint firstItem="cbW-5Y-lku" firstAttribute="height" secondItem="b3B-9a-fwl" secondAttribute="height" id="h5D-x8-Fig"/>
-                                        <constraint firstAttribute="bottom" secondItem="s6E-mn-etl" secondAttribute="bottom" constant="27" id="wpm-VI-Fck"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="centerY" secondItem="cbW-5Y-lku" secondAttribute="centerY" id="up3-L4-4Xb"/>
+                                        <constraint firstAttribute="bottom" secondItem="s6E-mn-etl" secondAttribute="bottom" constant="26" id="wpm-VI-Fck"/>
                                         <constraint firstItem="cbW-5Y-lku" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="zUi-6D-Yfa"/>
                                     </constraints>
                                 </view>
@@ -105,7 +143,11 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="pYP-y6-oBz" id="M5i-Gk-NEJ"/>
+                        <outlet property="backgroundImageView" destination="cbW-5Y-lku" id="a8c-yy-mCp"/>
+                        <outlet property="nameLabel" destination="9Uo-Hy-eeB" id="5cQ-5b-L0f"/>
                         <outlet property="tableView" destination="06e-g9-2mB" id="vhG-66-hJB"/>
+                        <outlet property="usernameLabel" destination="IVX-O9-mV3" id="JN7-94-2bh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMv-9i-AvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -117,6 +159,6 @@
         <image name="UserDetail_Message" width="22" height="21"/>
         <image name="UserDetail_VideoCall" width="21" height="15"/>
         <image name="UserDetail_VoiceCall" width="16" height="19"/>
-        <image name="travel" width="24" height="18"/>
+        <image name="Victoria_Anderson" width="128" height="128"/>
     </resources>
 </document>
