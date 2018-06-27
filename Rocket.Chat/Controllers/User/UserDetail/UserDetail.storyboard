@@ -130,6 +130,41 @@
                                         <constraint firstItem="cbW-5Y-lku" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="zUi-6D-Yfa"/>
                                     </constraints>
                                 </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserDetailFieldCell" rowHeight="54" id="gYp-eN-ewP" customClass="UserDetailFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="336" width="375" height="54"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gYp-eN-ewP" id="QMZ-pG-8SL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki4-tx-1mt">
+                                                    <rect key="frame" x="15" y="4" width="30" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Designer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlQ-w0-4tK">
+                                                    <rect key="frame" x="15.000000000000007" y="26" width="126.66666666666669" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="MFm-n5-s0x"/>
+                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="top" secondItem="Ki4-tx-1mt" secondAttribute="bottom" constant="4" id="V0U-wk-ILj"/>
+                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="top" secondItem="QMZ-pG-8SL" secondAttribute="top" constant="4" id="a3c-nS-rhE"/>
+                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="cbh-sq-GxI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detailLabel" destination="RlQ-w0-4tK" id="YnC-pK-RR5"/>
+                                            <outlet property="titleLabel" destination="Ki4-tx-1mt" id="rz0-gd-vp1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

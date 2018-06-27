@@ -18,10 +18,40 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
 
-    @IBOutlet weak var tableView: UserDetailTableView!
+    @IBOutlet weak var tableView: UserDetailTableView! {
+        didSet {
+            tableView.dataSource = self
+        }
+    }
+
+    var model: UserDetailViewModel = .emptyState {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setTransparent()
+    }
+}
+
+extension UserDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return model.numberOfSections
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.numberOfRowsForSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserDetailFieldCell") as? UserDetailFieldCell else {
+            fatalError("Could not dequeue reusable cell 'UserDetailFieldCell'")
+        }
+
+        cell.model = model.cellForRowAtIndexPath(indexPath)
+
+        return cell
     }
 }
