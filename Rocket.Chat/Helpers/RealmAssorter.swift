@@ -74,6 +74,10 @@ class RealmAssorter<Object: RealmSwift.Object> {
     var didUpdateIndexPaths: IndexPathsChangesEvent?
 
     func handleUpdate(values: Results<Object>, deletions: [Int], insertions: [Int], modifications: [Int]) {
+        guard values.count > 0 else {
+            return
+        }
+
         let affected = deletions.map { values[$0] } + insertions.map { values[$0] } + modifications.map { values[$0] }
 
         let indexPathsChanges = sections.enumerated().reduce(([IndexPath](), [IndexPath](), [IndexPath]())) { currentResult, currentValue in
