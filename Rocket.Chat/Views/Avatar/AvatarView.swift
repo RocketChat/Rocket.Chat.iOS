@@ -20,6 +20,7 @@ final class AvatarView: UIView {
 
                     self?.labelInitials.text = ""
                     self?.backgroundColor = UIColor.clear
+                    self?.superview?.setNeedsLayout()
                 }
             }
         }
