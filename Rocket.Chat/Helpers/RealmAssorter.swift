@@ -49,7 +49,7 @@ class RealmAssorter<Object: RealmSwift.Object> {
             case .update(let values, let deletions, let insertions, let modifications):
                 self.handleUpdate(values: values, deletions: deletions, insertions: insertions, modifications: modifications)
             default:
-                break
+                self.didUpdateIndexPaths?((deletions: [], insertions: [], modifications: []))
             }
         }
     }
