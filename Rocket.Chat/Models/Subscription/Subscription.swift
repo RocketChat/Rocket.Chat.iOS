@@ -64,6 +64,16 @@ final class Subscription: BaseModel {
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 
     let usersRoles = List<RoomRoles>()
+
+    // MARK: Internal
+    @objc dynamic var privateOtherUserStatus: String?
+    var otherUserStatus: UserStatus? {
+        if let privateOtherUserStatus = privateOtherUserStatus {
+            return UserStatus(rawValue: privateOtherUserStatus)
+        } else {
+            return nil
+        }
+    }
 }
 
 final class RoomRoles: Object {
