@@ -42,7 +42,7 @@ class SubscriptionsViewModel {
     }
 
     var assorter: RealmAssorter<Subscription>? {
-        didSet {
+        willSet {
             assorter?.invalidate()
         }
     }
