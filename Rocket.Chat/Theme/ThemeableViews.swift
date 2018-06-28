@@ -60,6 +60,15 @@ extension UILabel {
     }
 }
 
+extension UIButton {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        setTitleColor(theme.tintColor, for: .normal)
+        tintColor = theme.tintColor
+    }
+}
+
 extension UITextField {
     override func applyTheme() {
         guard let theme = theme else { return }

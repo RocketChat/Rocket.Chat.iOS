@@ -19,3 +19,13 @@ class UserDetailFieldCell: UITableViewCell {
         }
     }
 }
+
+// MARK: Themeable
+
+extension UserDetailFieldCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        titleLabel.textColor = theme.auxiliaryText
+    }
+}
