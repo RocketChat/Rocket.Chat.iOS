@@ -13,7 +13,6 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     static var storyboardName: String = "UserDetail"
 
     @IBOutlet weak var backgroundImageView: FLAnimatedImageView!
-
     @IBOutlet weak var avatarImageView: FLAnimatedImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -27,13 +26,24 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
     var model: UserDetailViewModel = .emptyState {
         didSet {
-            tableView.reloadData()
+            updateForModel()
+        }
+    }
+
+    func updateForModel() {
+        tableView?.reloadData()
+        nameLabel?.text = model.name
+        usernameLabel?.text = model.username
+        if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
+            ImageManager.loadImage(with: url, into: avatar)
+            ImageManager.loadImage(with: url, into: background)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setTransparent()
+        updateForModel()
     }
 }
 

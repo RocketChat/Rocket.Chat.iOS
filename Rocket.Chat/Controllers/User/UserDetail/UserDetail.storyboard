@@ -177,7 +177,9 @@
                     <connections>
                         <outlet property="avatarImageView" destination="pYP-y6-oBz" id="M5i-Gk-NEJ"/>
                         <outlet property="backgroundImageView" destination="cbW-5Y-lku" id="a8c-yy-mCp"/>
+                        <outlet property="nameLabel" destination="8Hs-3q-tIe" id="3li-P5-hA8"/>
                         <outlet property="tableView" destination="06e-g9-2mB" id="vhG-66-hJB"/>
+                        <outlet property="usernameLabel" destination="wRy-tb-DvF" id="mFW-Ur-djL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMv-9i-AvN" userLabel="First Responder" sceneMemberID="firstResponder"/>

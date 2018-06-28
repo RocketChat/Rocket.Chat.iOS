@@ -31,11 +31,12 @@ extension UserActionSheetPresenter where Self: UIViewController {
         // Conversation (Open DM)
 
         controller.addAction(UIAlertAction(title: localized("user_action_sheet.conversation"), style: .default, handler: { [weak self] _ in
-            guard let username = user.username else { return }
+            //guard let username = user.username else { return }
 
             //self?.close(animated: true)
 
             let detailController = UserDetailViewController.fromStoryboard()
+            detailController.model = UserDetailViewModel.forUser(user)
             self?.pushOrPresent(detailController)
 
             /*AppManager.openDirectMessage(username: username) {

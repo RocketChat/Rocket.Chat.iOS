@@ -3101,9 +3101,9 @@
 			isa = PBXGroup;
 			children = (
 				80B2D98020E5496E002F4149 /* UserDetail.storyboard */,
-				80B2D98120E5496E002F4149 /* UserDetailViewModel.swift */,
-				80B2D98220E5496E002F4149 /* Cell */,
 				80B2D98520E5496E002F4149 /* UserDetailTableView.swift */,
+				80B2D98220E5496E002F4149 /* Cell */,
+				80B2D98120E5496E002F4149 /* UserDetailViewModel.swift */,
 				80B2D98620E5496E002F4149 /* UserDetailViewController.swift */,
 			);
 			path = UserDetail;

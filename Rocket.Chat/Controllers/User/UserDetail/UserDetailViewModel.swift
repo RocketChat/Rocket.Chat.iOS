@@ -9,20 +9,29 @@
 import Foundation
 
 struct UserDetailViewModel {
-    var cells: [UserDetailFieldCellModel]
+    let name: String
+    let username: String
+    let avatarUrl: URL?
+    let cells: [UserDetailFieldCellModel]
 }
 
 // MARK: Empty State
 
 extension UserDetailViewModel {
     static var emptyState: UserDetailViewModel {
+        return UserDetailViewModel(name: "", username: "", avatarUrl: nil, cells: [])
+    }
+}
+
+// MARK: User
+
+extension UserDetailViewModel {
+    static func forUser(_ user: User) -> UserDetailViewModel {
         return UserDetailViewModel(
-            cells: [
-                UserDetailFieldCellModel(title: "Role", detail: "Product Designer"),
-                UserDetailFieldCellModel(title: "Email", detail: "victoria.anderson@rocket.chat"),
-                UserDetailFieldCellModel(title: "Phone number", detail: "+1 (408) 568-4583"),
-                UserDetailFieldCellModel(title: "Timezone", detail: "(GMT +3) 12:41 PM")
-            ]
+            name: user.name ?? user.username ?? "",
+            username: user.username ?? "",
+            avatarUrl: user.avatarURL(),
+            cells: UserDetailFieldCellModel.cellsForUser(user)
         )
     }
 }
