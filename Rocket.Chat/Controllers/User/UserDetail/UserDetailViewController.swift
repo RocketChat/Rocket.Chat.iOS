@@ -21,6 +21,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var tableView: UserDetailTableView! {
         didSet {
             tableView.dataSource = self
+            tableView.delegate = self
         }
     }
 
@@ -53,5 +54,11 @@ extension UserDetailViewController: UITableViewDataSource {
         cell.model = model.cellForRowAtIndexPath(indexPath)
 
         return cell
+    }
+}
+
+extension UserDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 13
     }
 }

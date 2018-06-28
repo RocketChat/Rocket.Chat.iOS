@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="63" estimatedRowHeight="63" sectionHeaderHeight="40" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="b3B-9a-fwl" userLabel="Header View">
@@ -131,21 +131,21 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserDetailFieldCell" rowHeight="54" id="gYp-eN-ewP" customClass="UserDetailFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="336" width="375" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserDetailFieldCell" rowHeight="63" id="gYp-eN-ewP" customClass="UserDetailFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="348" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gYp-eN-ewP" id="QMZ-pG-8SL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki4-tx-1mt">
-                                                    <rect key="frame" x="15" y="4" width="30" height="18"/>
+                                                    <rect key="frame" x="15" y="19" width="30" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Designer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlQ-w0-4tK">
-                                                    <rect key="frame" x="15.000000000000007" y="26" width="126.66666666666669" height="19.333333333333329"/>
+                                                    <rect key="frame" x="15.000000000000007" y="42" width="126.66666666666669" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -153,8 +153,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Ki4-tx-1mt" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="MFm-n5-s0x"/>
-                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="top" secondItem="Ki4-tx-1mt" secondAttribute="bottom" constant="4" id="V0U-wk-ILj"/>
-                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="top" secondItem="QMZ-pG-8SL" secondAttribute="top" constant="4" id="a3c-nS-rhE"/>
+                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="top" secondItem="Ki4-tx-1mt" secondAttribute="bottom" constant="5" id="V0U-wk-ILj"/>
+                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="top" secondItem="QMZ-pG-8SL" secondAttribute="top" constant="19" id="a3c-nS-rhE"/>
                                                 <constraint firstItem="RlQ-w0-4tK" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="cbh-sq-GxI"/>
                                             </constraints>
                                         </tableViewCellContentView>
