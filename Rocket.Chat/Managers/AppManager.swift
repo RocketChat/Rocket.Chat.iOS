@@ -158,7 +158,7 @@ extension AppManager {
                 UIApplication.shared.statusBarStyle = .default
                 if AuthManager.isAuthenticated() != nil {
                     if let currentUser = AuthManager.currentUser() {
-                        BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+                        AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
                     }
 
                     WindowManager.open(.subscriptions)
