@@ -58,6 +58,10 @@ extension UserDetailViewController: UITableViewDataSource {
 }
 
 extension UserDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 13
     }
