@@ -576,17 +576,19 @@
 		80AE2540203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */; };
 		80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */; };
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
+		80B2D98720E5496E002F4149 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80B2D98020E5496E002F4149 /* UserDetail.storyboard */; };
+		80B2D98820E5496E002F4149 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98120E5496E002F4149 /* UserDetailViewModel.swift */; };
+		80B2D98920E5496E002F4149 /* UserDetailFieldCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98320E5496E002F4149 /* UserDetailFieldCellModel.swift */; };
+		80B2D98A20E5496E002F4149 /* UserDetailFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98420E5496E002F4149 /* UserDetailFieldCell.swift */; };
+		80B2D98B20E5496E002F4149 /* UserDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98520E5496E002F4149 /* UserDetailTableView.swift */; };
+		80B2D98C20E5496E002F4149 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98620E5496E002F4149 /* UserDetailViewController.swift */; };
+		80B2D98F20E5499A002F4149 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98E20E54999002F4149 /* UINavigationBar.swift */; };
+		80B2D99120E549CC002F4149 /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */; };
+		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
-		80CC78D920E25A5B002FBEBC /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */; };
-		80CC78DF20E285F9002FBEBC /* UIViewControllerShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */; };
-		80CC78E120E29353002FBEBC /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */; };
-		80CC78E420E2979A002FBEBC /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E320E2979A002FBEBC /* UINavigationBar.swift */; };
-		80CC78E620E2B66C002FBEBC /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */; };
-		80CC78E820E2BBDF002FBEBC /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */; };
-		80CC78EA20E2F417002FBEBC /* UserDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78E920E2F417002FBEBC /* UserDetailTableView.swift */; };
-		80CC78ED20E3BCFE002FBEBC /* UserDetailFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78EC20E3BCFE002FBEBC /* UserDetailFieldCell.swift */; };
-		80CC78EF20E3BD16002FBEBC /* UserDetailFieldCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78EE20E3BD16002FBEBC /* UserDetailFieldCellModel.swift */; };
+		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
+		80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */; };
 		80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1820ACE320009D64DF /* UserPermissions.swift */; };
 		80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
@@ -698,7 +700,6 @@
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
-		999F25B7207EEE70002E0F68 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
@@ -1346,6 +1347,15 @@
 		80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionExtensionsSpec.swift; sourceTree = "<group>"; };
 		80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageUnreadSeparator.swift; sourceTree = "<group>"; };
 		80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageUnreadSeparator.xib; sourceTree = "<group>"; };
+		80B2D98020E5496E002F4149 /* UserDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
+		80B2D98120E5496E002F4149 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
+		80B2D98320E5496E002F4149 /* UserDetailFieldCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailFieldCellModel.swift; sourceTree = "<group>"; };
+		80B2D98420E5496E002F4149 /* UserDetailFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailFieldCell.swift; sourceTree = "<group>"; };
+		80B2D98520E5496E002F4149 /* UserDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailTableView.swift; sourceTree = "<group>"; };
+		80B2D98620E5496E002F4149 /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		80B2D98E20E54999002F4149 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
+		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
 		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLViewController.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
@@ -1354,15 +1364,8 @@
 		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
-		80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
-		80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerShow.swift; sourceTree = "<group>"; };
-		80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
-		80CC78E320E2979A002FBEBC /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
-		80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
-		80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
-		80CC78E920E2F417002FBEBC /* UserDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailTableView.swift; sourceTree = "<group>"; };
-		80CC78EC20E3BCFE002FBEBC /* UserDetailFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailFieldCell.swift; sourceTree = "<group>"; };
-		80CC78EE20E3BD16002FBEBC /* UserDetailFieldCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailFieldCellModel.swift; sourceTree = "<group>"; };
+		80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewModel.swift; sourceTree = "<group>"; };
+		80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAssorter.swift; sourceTree = "<group>"; };
 		80CC8A1820ACE320009D64DF /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerUserActionPresenter.swift; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
@@ -2063,7 +2066,7 @@
 		4174CB0A1D2D990F0086DAC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				80CC78D420E25A18002FBEBC /* User */,
+				80B2D97E20E5496E002F4149 /* User */,
 				4174CB101D2D997E0086DAC8 /* Auth */,
 				4174CB111D2D99840086DAC8 /* Base */,
 				41E2FA021D414ECC00238DFD /* Chat */,
@@ -2162,7 +2165,7 @@
 				8052F75A20B7522900B3B0CF /* UIAlertAction */,
 				8045F4A920D3114900AA0F3C /* UITextField */,
 				8045F4A220D30B6A00AA0F3C /* UISearchBar */,
-				80CC78E220E29775002FBEBC /* UINavigationBar */,
+				80B2D98D20E54999002F4149 /* UINavigationBar */,
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
@@ -2411,7 +2414,8 @@
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
 				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
-				80CC78E020E29353002FBEBC /* StoryboardInitializable.swift */,
+				80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */,
+				80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2532,9 +2536,9 @@
 		41E2FA031D414ED400238DFD /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
+				80CC78CD20DAE313002FBEBC /* SubscriptionsList */,
 				9987B5952093E4BA007D277C /* FilesListViewController.swift */,
 				35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */,
-				41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */,
 				992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */,
 			);
 			path = Subscriptions;
@@ -3085,41 +3089,50 @@
 			path = RCEmojiKit;
 			sourceTree = "<group>";
 		};
-		80CC78D420E25A18002FBEBC /* User */ = {
+		80B2D97E20E5496E002F4149 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				80CC78D720E25A46002FBEBC /* UserDetail */,
+				80B2D97F20E5496E002F4149 /* UserDetail */,
 			);
 			path = User;
 			sourceTree = "<group>";
 		};
-		80CC78D720E25A46002FBEBC /* UserDetail */ = {
+		80B2D97F20E5496E002F4149 /* UserDetail */ = {
 			isa = PBXGroup;
 			children = (
-				80CC78E920E2F417002FBEBC /* UserDetailTableView.swift */,
-				80CC78EB20E3BC77002FBEBC /* Cell */,
-				80CC78D820E25A5B002FBEBC /* UserDetailViewModel.swift */,
-				80CC78E520E2B66B002FBEBC /* UserDetailViewController.swift */,
-				80CC78E720E2BBDF002FBEBC /* UserDetail.storyboard */,
+				80B2D98020E5496E002F4149 /* UserDetail.storyboard */,
+				80B2D98120E5496E002F4149 /* UserDetailViewModel.swift */,
+				80B2D98220E5496E002F4149 /* Cell */,
+				80B2D98520E5496E002F4149 /* UserDetailTableView.swift */,
+				80B2D98620E5496E002F4149 /* UserDetailViewController.swift */,
 			);
 			path = UserDetail;
 			sourceTree = "<group>";
 		};
-		80CC78E220E29775002FBEBC /* UINavigationBar */ = {
+		80B2D98220E5496E002F4149 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				80CC78E320E2979A002FBEBC /* UINavigationBar.swift */,
+				80B2D98320E5496E002F4149 /* UserDetailFieldCellModel.swift */,
+				80B2D98420E5496E002F4149 /* UserDetailFieldCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		80B2D98D20E54999002F4149 /* UINavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				80B2D98E20E54999002F4149 /* UINavigationBar.swift */,
 			);
 			path = UINavigationBar;
 			sourceTree = "<group>";
 		};
-		80CC78EB20E3BC77002FBEBC /* Cell */ = {
+		80CC78CD20DAE313002FBEBC /* SubscriptionsList */ = {
 			isa = PBXGroup;
 			children = (
-				80CC78EE20E3BD16002FBEBC /* UserDetailFieldCellModel.swift */,
-				80CC78EC20E3BCFE002FBEBC /* UserDetailFieldCell.swift */,
+				80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */,
+				41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */,
 			);
-			path = Cell;
+			path = SubscriptionsList;
 			sourceTree = "<group>";
 		};
 		80CC8A1520AC9985009D64DF /* Subscription */ = {
@@ -3195,7 +3208,7 @@
 			isa = PBXGroup;
 			children = (
 				41F3704C20A31A3D00C5449E /* UIViewControllerExtension.swift */,
-				80CC78DE20E285F9002FBEBC /* UIViewControllerShow.swift */,
+				80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -3776,7 +3789,7 @@
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
 				14F8A226202E5CBF00175FDC /* Black-29@2x.png in Resources */,
 				33A5C9D0206A565800FE1C8F /* food.json in Resources */,
-				80CC78E820E2BBDF002FBEBC /* UserDetail.storyboard in Resources */,
+				80B2D98720E5496E002F4149 /* UserDetail.storyboard in Resources */,
 				33A5C9CF206A565800FE1C8F /* objects.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4090,6 +4103,7 @@
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
+				80B2D98920E5496E002F4149 /* UserDetailFieldCellModel.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */,
@@ -4118,7 +4132,6 @@
 				33D08E2520BD5EDC008D03EF /* ThemeableViews.swift in Sources */,
 				0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */,
 				35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */,
-				80CC78ED20E3BCFE002FBEBC /* UserDetailFieldCell.swift in Sources */,
 				990FF6D620740C79007B4A53 /* RoomMentionsRequest.swift in Sources */,
 				8039441820AF620C002F317A /* ResourceSharedProperties.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
@@ -4127,13 +4140,13 @@
 				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
-				80CC78DF20E285F9002FBEBC /* UIViewControllerShow.swift in Sources */,
 				4124D834209A0521005374CD /* ChatMessageDaySeparator.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				8039443220B3988F002F317A /* PagedResource.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */,
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
+				80B2D99120E549CC002F4149 /* StoryboardInitializable.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
@@ -4154,6 +4167,7 @@
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */,
 				8076FDB52048571200114F28 /* AuthUser.swift in Sources */,
+				80B2D98B20E5496E002F4149 /* UserDetailTableView.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
 				806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */,
@@ -4174,8 +4188,8 @@
 				3330329A20738E1500A9514D /* SubscriptionManagerRooms.swift in Sources */,
 				8020CCF51FEAD8C9003424F4 /* EmojiPickerController.swift in Sources */,
 				D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */,
+				80B2D98A20E5496E002F4149 /* UserDetailFieldCell.swift in Sources */,
 				8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */,
-				80CC78EF20E3BD16002FBEBC /* UserDetailFieldCellModel.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
 				41DE687D20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift in Sources */,
 				8013F8651FD5E13600EE1A4E /* APIExtensions.swift in Sources */,
@@ -4191,6 +4205,7 @@
 				8062E32C20A1F8100044F407 /* RoomsRequest.swift in Sources */,
 				995F711E20C799E000B7535F /* EmailAuthTableViewCell.swift in Sources */,
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
+				80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */,
 				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
 				0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */,
 				8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */,
@@ -4217,6 +4232,7 @@
 				41DE687B20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
+				80B2D98F20E5499A002F4149 /* UINavigationBar.swift in Sources */,
 				33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				80E9DBD6209CA8FE00A48CA9 /* Closeable.swift in Sources */,
@@ -4229,6 +4245,7 @@
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
+				80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */,
 				33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
@@ -4239,7 +4256,6 @@
 				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
-				80CC78E420E2979A002FBEBC /* UINavigationBar.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
@@ -4344,7 +4360,6 @@
 				3330329C20738E6000A9514D /* SubscriptionManagerSearch.swift in Sources */,
 				9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
-				80CC78E620E2B66C002FBEBC /* UserDetailViewController.swift in Sources */,
 				8076FDD82048654F00114F28 /* UserUtils.swift in Sources */,
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,
 				995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */,
@@ -4363,6 +4378,7 @@
 				99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
+				80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */,
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
@@ -4375,9 +4391,9 @@
 				8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */,
+				80B2D98C20E5496E002F4149 /* UserDetailViewController.swift in Sources */,
 				80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
-				80CC78E120E29353002FBEBC /* StoryboardInitializable.swift in Sources */,
 				41D51B0620A62DD60073E8E7 /* Role.swift in Sources */,
 				41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
@@ -4391,8 +4407,6 @@
 				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
-				999F25B7207EEE70002E0F68 /* (null) in Sources */,
-				80CC78EA20E2F417002FBEBC /* UserDetailTableView.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
@@ -4439,7 +4453,7 @@
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				41FC9E0B209B3B3100FED485 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
-				80CC78D920E25A5B002FBEBC /* UserDetailViewModel.swift in Sources */,
+				80B2D98820E5496E002F4149 /* UserDetailViewModel.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */,
 				8062E327209E19BB0044F407 /* AuthClient.swift in Sources */,
 				8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */,

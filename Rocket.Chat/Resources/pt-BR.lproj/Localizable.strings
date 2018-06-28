@@ -142,6 +142,7 @@
 "subscriptions.unreads" = "Não lidos";
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
+"subscriptions.groups" = "Grupos Privados";
 "subscriptions.direct_messages" = "Mensagens Diretas";
 "subscriptions.conversations" = "Conversas";
 "subscriptions.you" = "Você";

@@ -34,28 +34,19 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
         if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }
+
+        setupAuth()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if SocketManager.isConnected() {
-            startLoading()
-            AuthManager.usernameSuggestion { [weak self] (response) in
-                self?.stopLoading()
-
-                if !response.isError() {
-                    self?.textFieldUsername.text = response.result["result"].stringValue
-                }
-            }
-        }
-
         textFieldUsername.becomeFirstResponder()
     }
 
     func startLoading() {
         textFieldUsername.alpha = 0.5
         requesting = true
+        view.layoutIfNeeded()
         registerButton.startLoading()
         textFieldUsername.resignFirstResponder()
     }
@@ -67,6 +58,37 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     }
 
     // MARK: Request username
+
+    func setupAuth() {
+        let presentGenericSocketError = {
+            Alert(
+                title: localized("error.socket.default_error.title"),
+                message: localized("error.socket.default_error.message")
+            ).present()
+        }
+        guard let auth = AuthManager.isAuthenticated() else {
+            presentGenericSocketError()
+            return
+        }
+
+        startLoading()
+        AuthManager.resume(auth) { [weak self] response in
+            self?.stopLoading()
+
+            if response.isError() {
+                presentGenericSocketError()
+            } else {
+                self?.startLoading()
+                AuthManager.usernameSuggestion { (response) in
+                    self?.stopLoading()
+
+                    if !response.isError() {
+                        self?.textFieldUsername.text = response.result["result"].stringValue
+                    }
+                }
+            }
+        }
+    }
 
     @IBAction func didPressedRegisterButton() {
         guard !requesting else {

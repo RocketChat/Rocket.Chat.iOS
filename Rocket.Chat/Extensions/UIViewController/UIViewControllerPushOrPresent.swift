@@ -1,5 +1,5 @@
 //
-//  UIViewControllerPresent.swift
+//  UIViewControllerPushOrPresent.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 6/26/18.
@@ -9,11 +9,11 @@
 import UIKit
 
 extension UIViewController {
-    func pushOrPresent(_ vc: UIViewController) {
+    func pushOrPresent(_ controller: UIViewController) {
         if UIDevice.current.userInterfaceIdiom == .phone, let navigationController = navigationController {
-            navigationController.pushViewController(vc, animated: true)
+            navigationController.pushViewController(controller, animated: true)
         } else {
-            self.present(vc, animated: true)
+            self.present(controller, animated: true)
         }
     }
 }
