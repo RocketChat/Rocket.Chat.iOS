@@ -14,4 +14,11 @@ extension UINavigationBar {
         shadowImage = UIImage()
         isTranslucent = true
     }
+
+    func setNonTransparent() {
+        let navigationBar = UINavigationBar(frame: frame)
+        setBackgroundImage(navigationBar.backgroundImage(for: .default), for: .default)
+        shadowImage = navigationBar.shadowImage
+        isTranslucent = navigationBar.isTranslucent
+    }
 }

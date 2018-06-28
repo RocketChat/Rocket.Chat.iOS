@@ -42,8 +42,19 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setTransparent()
         updateForModel()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 1.0) {
+            self.navigationController?.navigationBar.setTransparent()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        UIView.animate(withDuration: 1.0) {
+            self.navigationController?.navigationBar.setNonTransparent()
+        }
     }
 }
 
