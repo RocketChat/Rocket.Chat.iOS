@@ -30,14 +30,15 @@ extension UserDetailFieldCellModel {
 
         cells.append(createCell("Status", "\(user.status)"))
 
-        if !user.roles.isEmpty {
-            let roles = user.roles.reduce("") { "\($0), \($1)" }
-            cells.append(createCell(roles.count > 1 ? "Role" : "Roles", roles))
+        if let role = user.roles.first {
+            let roles = user.roles.dropFirst().reduce("\(role)") { "\($0), \($1)" }
+            cells.append(createCell(roles.count > 1 ? "Roles" : "Role", roles))
         }
 
-        if !user.emails.isEmpty {
-            let emails = user.emails.reduce("") { "\($0), \($1)" }
-            cells.append(createCell(emails.count > 1 ? "Email" : "Emails", emails))
+        let emails = user.emails.map { $0.email }
+        if let email = emails.first {
+            let emails = emails.dropFirst().reduce("\(email)") { "\($0), \($1)" }
+            cells.append(createCell(emails.count > 1 ? "Emails" : "Email", emails))
         }
 
         let sign = user.utcOffset < 0 ? "" : "+"
