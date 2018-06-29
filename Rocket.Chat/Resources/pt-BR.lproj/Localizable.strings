@@ -365,7 +365,7 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Conversa";
+"user_action_sheet.info" = "Informação";
 "user_action_sheet.remove" = "Remover do canal";
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";

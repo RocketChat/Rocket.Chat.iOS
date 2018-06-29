@@ -365,10 +365,7 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Passwort";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Konversation";
-"user_action_sheet.remove" = "Von Raum entfernen";
-"user_action_sheet.remove_confirm.title" = "Diesen Nutzer entfernen?";
-"user_action_sheet.remove_confirm.message" = "Soll '%@' wirklich aus diesem Raum entfernt werden?";
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Aus Raum entfernen";
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";

@@ -364,7 +364,7 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Hasło";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Rozmowa";
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Usuń z pokoju";
 "user_action_sheet.remove_confirm.title" = "Usunąć tego użytkownika?";
 "user_action_sheet.remove_confirm.message" = "Czy na pewno chcesz usunąć '%@' z tego pokoju?";

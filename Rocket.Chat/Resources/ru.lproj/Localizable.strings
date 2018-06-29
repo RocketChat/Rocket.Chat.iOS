@@ -365,7 +365,7 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Пароль";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Разговор";
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Удалить с канала";
 "user_action_sheet.remove_confirm.title" = "Удалить этого пользователя";
 "user_action_sheet.remove_confirm.message" = "Вы действительно хотите удалить '%@' с канала?";

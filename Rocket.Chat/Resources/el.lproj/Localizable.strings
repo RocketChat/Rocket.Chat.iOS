@@ -365,7 +365,7 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Συνθηματικό"; 
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Συνομιλία"; 
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Αφαίρεση από το δωμάτιο"; 
 "user_action_sheet.remove_confirm.title" = "Αφαίρεση αυτού του χρήστη;"; 
 "user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;"; 

@@ -28,9 +28,9 @@ extension UserActionSheetPresenter where Self: UIViewController {
         controller.popoverPresentationController?.sourceView = source?.view
         controller.popoverPresentationController?.sourceRect = source?.rect ?? source?.view?.frame ?? .zero
 
-        // Conversation (Open DM)
+        // Information (Open User Details)
 
-        controller.addAction(UIAlertAction(title: localized("user_action_sheet.conversation"), style: .default, handler: { [weak self] _ in
+        controller.addAction(UIAlertAction(title: localized("user_action_sheet.info"), style: .default, handler: { [weak self] _ in
             let detailController = UserDetailViewController.fromStoryboard().withModel(.forUser(user))
             detailController.modalPresentationStyle = .formSheet
             self?.pushOrPresent(detailController, source: source)
