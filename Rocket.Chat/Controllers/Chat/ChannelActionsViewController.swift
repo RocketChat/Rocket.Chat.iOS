@@ -158,6 +158,11 @@ extension ChannelActionsViewController {
 
 extension ChannelActionsViewController {
 
+    func showUserDetails(_ user: User) {
+        let controller = UserDetailViewController.fromStoryboard().withUser(user)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
     func showMembersList() {
         self.performSegue(withIdentifier: "toMembersList", sender: self)
     }
@@ -304,6 +309,10 @@ extension ChannelActionsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let data = tableViewData[indexPath.section][indexPath.row]
+
+        if let data = data as? ChannelInfoUserCellData, let user = data.user {
+            showUserDetails(user)
+        }
 
         if let data = data as? ChannelInfoActionCellData {
             guard let action = data.action else {

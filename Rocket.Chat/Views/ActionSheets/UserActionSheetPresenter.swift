@@ -35,8 +35,7 @@ extension UserActionSheetPresenter where Self: UIViewController {
 
             //self?.close(animated: true)
 
-            let detailController = UserDetailViewController.fromStoryboard()
-            detailController.model = UserDetailViewModel.forUser(user)
+            let detailController = UserDetailViewController.fromStoryboard().withUser(user)
             detailController.modalPresentationStyle = .formSheet
             self?.pushOrPresent(detailController, source: source)
 

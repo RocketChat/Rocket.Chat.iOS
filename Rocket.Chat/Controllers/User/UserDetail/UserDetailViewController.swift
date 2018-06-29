@@ -58,6 +58,13 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     }
 }
 
+extension UserDetailViewController {
+    func withUser(_ user: User) -> UserDetailViewController {
+        model = UserDetailViewModel.forUser(user)
+        return self
+    }
+}
+
 extension UserDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return model.numberOfSections
