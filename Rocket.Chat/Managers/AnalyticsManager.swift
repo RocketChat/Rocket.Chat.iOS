@@ -30,11 +30,13 @@ enum Event {
 }
 
 struct AnalyticsManager {
-    func log(event: Event) {
+    static func log(event: Event) {
+        // Make sure the user has opted in for sending his usage data
         guard AnalyticsCoordinator.isCrashReportingDisabled else {
             return
         }
 
+        // Don't log screen views when using firebase since it already log it automatically
         if event.name() != Event.screenView(screenName: "").name() {
             Analytics.logEvent(
                 event.name(for: .firebase),
@@ -42,6 +44,7 @@ struct AnalyticsManager {
             )
         }
 
+        // Fabric has a specific method for logging login and sign up events
         if event.name() == Event.login.name() {
             Answers.logLogin(
                 withMethod: nil,

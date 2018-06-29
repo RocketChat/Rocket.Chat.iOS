@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DrawingViewController: UIViewController {
+final class DrawingViewController: BaseViewController {
     @IBOutlet weak var colorItem: UIBarButtonItem!
 
     weak var delegate: DrawingControllerDelegate?

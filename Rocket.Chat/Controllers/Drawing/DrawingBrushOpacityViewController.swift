@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DrawingBrushOpacityViewController: UIViewController {
+final class DrawingBrushOpacityViewController: BaseViewController {
     weak var delegate: DrawingBrushOpacityDelegate?
 
     private var opacity: CGFloat = 1
