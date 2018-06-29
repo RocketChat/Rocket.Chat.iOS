@@ -165,6 +165,7 @@
 "status.online" = "Online";
 "status.away" = "Abwesend";
 "status.busy" = "Beschäftigt";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Unsichtbar";
 
 // New Room View

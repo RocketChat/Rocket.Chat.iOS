@@ -14,8 +14,17 @@ enum UserPresence: String {
     case online, away
 }
 
-enum UserStatus: String {
+enum UserStatus: String, CustomStringConvertible {
     case offline, online, busy, away
+
+    var description: String {
+        switch self {
+        case .online: return localized("status.online")
+        case .offline: return localized("status.offline")
+        case .busy: return localized("status.busy")
+        case .away: return localized("status.away")
+        }
+    }
 }
 
 final class User: BaseModel {

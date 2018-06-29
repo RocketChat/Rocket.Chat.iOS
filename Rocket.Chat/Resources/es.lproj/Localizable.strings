@@ -165,9 +165,8 @@
 "status.online" = "En línea";
 "status.away" = "Lejos";
 "status.busy" = "Ocupado";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Invisible";
-
-"user_menu.admin" = "Administración";
 
 // New Room View
 "new_room.title" = "Nuevo canal";

@@ -28,6 +28,8 @@ extension UserDetailFieldCellModel {
         var cells = [UserDetailFieldCellModel]()
         let createCell = UserDetailFieldCellModel.init
 
+        cells.append(createCell("Status", "\(user.status)"))
+
         if !user.roles.isEmpty {
             let roles = user.roles.reduce("") { "\($0), \($1)" }
             cells.append(createCell(roles.count > 1 ? "Role" : "Roles", roles))

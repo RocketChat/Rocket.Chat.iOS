@@ -165,6 +165,7 @@
 "status.online" = "Online";
 "status.away" = "Pryč";
 "status.busy" = "Zaneprázdněn";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Neviditelný";
 
 // New Room View
