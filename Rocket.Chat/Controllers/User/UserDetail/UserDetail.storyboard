@@ -76,9 +76,12 @@
                                                     <state key="normal" title="Message" image="UserDetail_Message">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="messageDidPress:" destination="6OD-GW-L6f" eventType="touchUpInside" id="dCk-Wg-IfY"/>
+                                                    </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
-                                                    <rect key="frame" x="-152.66666666666663" y="0.0" width="70" height="70"/>
+                                                    <rect key="frame" x="-152.66666666666666" y="0.0" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="Bkq-UB-S4J"/>
                                                         <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
@@ -91,7 +94,7 @@
                                                     </state>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
-                                                    <rect key="frame" x="-152.66666666666663" y="0.0" width="70" height="70"/>
+                                                    <rect key="frame" x="-152.66666666666666" y="0.0" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
                                                         <constraint firstAttribute="width" constant="70" id="xf7-75-bUs"/>

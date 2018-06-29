@@ -58,6 +58,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
             self.navigationController?.navigationBar.setNonTransparent()
         }
     }
+
+    @IBAction func messageDidPress(_ sender: UIButton) {
+        AppManager.openDirectMessage(username: model.username)
+    }
 }
 
 extension UserDetailViewController {
