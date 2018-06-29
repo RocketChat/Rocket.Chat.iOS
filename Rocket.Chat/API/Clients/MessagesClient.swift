@@ -213,12 +213,23 @@ struct MessagesClient: APIClient {
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
             switch response {
-            case .resource: break
+            case .resource:
+                AnalyticsManager.log(
+                    event: .reaction(
+                        subscriptionType: message.subscription?.type.rawValue ?? ""
+                    )
+                )
             case .error(let error):
                 switch error {
                 case .version:
                     // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in })
+                    MessageManager.react(message, emoji: emoji, completion: { _ in
+                        AnalyticsManager.log(
+                            event: .reaction(
+                                subscriptionType: message.subscription?.type.rawValue ?? ""
+                            )
+                        )
+                    })
                 default:
                     Alert.defaultError.present()
                 }

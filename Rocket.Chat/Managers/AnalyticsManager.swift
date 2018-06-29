@@ -36,7 +36,7 @@ struct AnalyticsManager {
             return
         }
 
-        // Don't log screen views when using firebase since it already log it automatically
+        // Don't log screen views when using firebase since it already logs them automatically
         if event.name() != Event.screenView(screenName: "").name() {
             Analytics.logEvent(
                 event.name(for: .firebase),
