@@ -211,6 +211,18 @@ extension ChatViewController {
         let client = API.current()?.client(UploadClient.self)
         client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
                        completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
+        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", completion: {
+            AnalyticsManager.log(
+                event: .mediaUpload(
+                    mediaType: file.type,
+                    subscriptionType: subscription.type.rawValue
+                )
+            )
+
+            stopLoadingUpload()
+        }, versionFallback: {
+            deprecatedMethod()
+        })
 
         func deprecatedMethod() {
             UploadManager.shared.upload(file: file, fileName: fileName, subscription: subscription, progress: { _ in
@@ -231,6 +243,13 @@ extension ChatViewController {
                         title: localized("error.socket.default_error.title"),
                         message: errorMessage
                     ).present()
+                } else {
+                    AnalyticsManager.log(
+                        event: .mediaUpload(
+                            mediaType: file.type,
+                            subscriptionType: subscription.type.rawValue
+                        )
+                    )
                 }
             })
         }

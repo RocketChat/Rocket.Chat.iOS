@@ -20,7 +20,7 @@ enum Event {
     case login
     case screenView(screenName: String)
     case messageSent(subscriptionType: String)
-    case mediaUpload(subscriptionType: String)
+    case mediaUpload(mediaType: String, subscriptionType: String)
     case reaction(subscriptionType: String)
     case serverSwitch(serverCount: Int)
     case updatedSubscriptionSorting(options: [String])
@@ -95,9 +95,10 @@ extension Event {
         case let .screenView(screenName):
             return ["screen": screenName]
         case let .messageSent(subscriptionType),
-             let .mediaUpload(subscriptionType),
              let .reaction(subscriptionType):
             return ["subscription_type": subscriptionType]
+        case let .mediaUpload(mediaType, subscriptionType):
+            return ["media_type": mediaType, "subscription_type": subscriptionType]
         case let .serverSwitch(serverCount):
             return ["server_count": serverCount]
         case let .updatedSubscriptionSorting(options):
