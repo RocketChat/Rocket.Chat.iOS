@@ -22,7 +22,7 @@ enum Event {
     case messageSent(subscriptionType: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
     case reaction(subscriptionType: String)
-    case serverSwitch(serverCount: Int)
+    case serverSwitch(server: String, serverCount: Int)
     case updatedSubscriptionSorting(sorting: String, grouping: String)
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
@@ -99,8 +99,8 @@ extension Event {
             return ["subscription_type": subscriptionType]
         case let .mediaUpload(mediaType, subscriptionType):
             return ["media_type": mediaType, "subscription_type": subscriptionType]
-        case let .serverSwitch(serverCount):
-            return ["server_count": serverCount]
+        case let .serverSwitch(server, serverCount):
+            return ["server_url": server, "server_count": serverCount]
         case let .updatedSubscriptionSorting(sorting, grouping):
             return ["sorting": sorting, "grouping": grouping]
         case let .updatedWebBrowser(browser):

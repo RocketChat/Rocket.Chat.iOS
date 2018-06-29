@@ -163,8 +163,14 @@ extension AppManager {
 
                     WindowManager.open(.subscriptions)
 
+                    var server = ""
+                    if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL], let url = URL(string: serverURL) {
+                        server = url.host ?? ""
+                    }
+
                     AnalyticsManager.log(
                         event: .serverSwitch(
+                            server: server,
                             serverCount: DatabaseManager.servers?.count ?? 1
                         )
                     )
