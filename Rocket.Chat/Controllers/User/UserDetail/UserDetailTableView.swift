@@ -10,7 +10,14 @@ import UIKit
 
 class UserDetailTableView: UITableView {
     private var headerViewHeight: CGFloat {
-        return 220
+        let topInset: CGFloat
+        if #available(iOS 11, *) {
+            topInset = safeAreaInsets.top
+        } else {
+            topInset = 0
+        }
+
+        return 308 - topInset
     }
 
     lazy var headerView: UIView = {

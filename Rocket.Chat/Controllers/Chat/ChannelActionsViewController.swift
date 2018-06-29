@@ -159,7 +159,7 @@ extension ChannelActionsViewController {
 extension ChannelActionsViewController {
 
     func showUserDetails(_ user: User) {
-        let controller = UserDetailViewController.fromStoryboard().withUser(user)
+        let controller = UserDetailViewController.fromStoryboard().withModel(.forUser(user))
         navigationController?.pushViewController(controller, animated: true)
     }
 

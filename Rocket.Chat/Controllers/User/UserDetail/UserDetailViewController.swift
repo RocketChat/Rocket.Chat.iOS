@@ -59,8 +59,8 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 }
 
 extension UserDetailViewController {
-    func withUser(_ user: User) -> UserDetailViewController {
-        model = UserDetailViewModel.forUser(user)
+    func withModel(_ model: UserDetailViewModel) -> UserDetailViewController {
+        self.model = model
         return self
     }
 }
