@@ -19,7 +19,7 @@ let kCrashReportingDisabledKey = "kCrashReportingDisabledKey"
 
 struct AnalyticsCoordinator: LauncherProtocol {
 
-    static var isCrashReportingDisabled: Bool {
+    static var isUsageDataLoggingDisabled: Bool {
         return UserDefaults.standard.bool(forKey: kCrashReportingDisabledKey)
     }
 
@@ -34,7 +34,7 @@ struct AnalyticsCoordinator: LauncherProtocol {
     }
 
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
-        if AnalyticsCoordinator.isCrashReportingDisabled {
+        if AnalyticsCoordinator.isUsageDataLoggingDisabled {
             return
         }
 

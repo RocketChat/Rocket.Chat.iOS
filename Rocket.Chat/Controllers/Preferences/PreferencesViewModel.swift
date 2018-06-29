@@ -51,7 +51,7 @@ final class PreferencesViewModel {
     }
 
     internal var trackingValue: Bool {
-        return !AnalyticsCoordinator.isCrashReportingDisabled
+        return !AnalyticsCoordinator.isUsageDataLoggingDisabled
     }
 
     internal var formattedVersion: String {

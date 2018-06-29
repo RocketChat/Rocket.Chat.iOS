@@ -32,7 +32,7 @@ enum Event {
 struct AnalyticsManager {
     static func log(event: Event) {
         // Make sure the user has opted in for sending his usage data
-        guard AnalyticsCoordinator.isCrashReportingDisabled else {
+        guard AnalyticsCoordinator.isUsageDataLoggingDisabled else {
             return
         }
 
