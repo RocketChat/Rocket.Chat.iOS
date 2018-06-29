@@ -162,6 +162,12 @@ extension AppManager {
                     }
 
                     WindowManager.open(.subscriptions)
+
+                    AnalyticsManager.log(
+                        event: .serverSwitch(
+                            serverCount: DatabaseManager.servers?.count ?? 1
+                        )
+                    )
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
