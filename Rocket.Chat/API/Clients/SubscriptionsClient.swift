@@ -280,3 +280,20 @@ struct SubscriptionsClient: APIClient {
         }
     }
 }
+
+// MARK: Members List
+
+extension SubscriptionsClient {
+    func fetchMembersList(subscription: Subscription, options: APIRequestOptionSet = [], realm: Realm? = Realm.current, completion: @escaping (APIResponse<RoomMembersResource>) -> Void) {
+        let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
+        api.fetch(request, options: options) { response in
+            if case let .resource(resource) = response {
+                try? realm?.write {
+                    realm?.add(resource.members?.compactMap { $0 } ?? [], update: true)
+                }
+            }
+
+            completion(response)
+        }
+    }
+}

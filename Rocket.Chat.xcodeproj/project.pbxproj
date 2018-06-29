@@ -586,6 +586,7 @@
 		80B2D98F20E5499A002F4149 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98E20E54999002F4149 /* UINavigationBar.swift */; };
 		80B2D99120E549CC002F4149 /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */; };
 		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
+		80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99620E677D6002F4149 /* UsersClient.swift */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
@@ -1358,6 +1359,7 @@
 		80B2D98E20E54999002F4149 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
 		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
+		80B2D99620E677D6002F4149 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
 		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLViewController.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
@@ -2651,6 +2653,7 @@
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
 				806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */,
 				8062E326209E19BB0044F407 /* AuthClient.swift */,
+				80B2D99620E677D6002F4149 /* UsersClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -4294,6 +4297,7 @@
 				4124D833209A0517005374CD /* ChatLoaderCell.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
 				9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */,
+				80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				80054CFC1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift in Sources */,
 				41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */,

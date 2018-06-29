@@ -6,7 +6,7 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
 enum UserAction {
     case remove
@@ -38,6 +38,12 @@ extension UserActionSheetPresenter where Self: UIViewController {
             let detailController = UserDetailViewController.fromStoryboard().withModel(.forUser(user))
             detailController.modalPresentationStyle = .formSheet
             self?.pushOrPresent(detailController, source: source)
+
+            API.current()?.client(UsersClient.self).fetchUser(user) { [weak detailController] response in
+                if case let .resource(resource) = response, let user = resource.user {
+                    detailController?.model = .forUser(user)
+                }
+            }
 
             /*AppManager.openDirectMessage(username: username) {
                 completion?(.conversation)

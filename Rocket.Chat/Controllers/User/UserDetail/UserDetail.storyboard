@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="63" estimatedRowHeight="63" sectionHeaderHeight="40" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="63" estimatedRowHeight="63" sectionHeaderHeight="40" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="b3B-9a-fwl" userLabel="Header View" customClass="UserDetailHeaderView" customModule="Rocket_Chat" customModuleProvider="target">
@@ -62,7 +62,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
-                                            <rect key="frame" x="44.666666666666657" y="212" width="286" height="70"/>
+                                            <rect key="frame" x="152.66666666666666" y="212" width="70" height="70"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -77,8 +77,8 @@
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
-                                                    <rect key="frame" x="108" y="0.0" width="70" height="70"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
+                                                    <rect key="frame" x="-152.66666666666663" y="0.0" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="Bkq-UB-S4J"/>
                                                         <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
@@ -90,8 +90,8 @@
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
-                                                    <rect key="frame" x="216.00000000000003" y="0.0" width="69.999999999999972" height="70"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="-152.66666666666663" y="0.0" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
                                                         <constraint firstAttribute="width" constant="70" id="xf7-75-bUs"/>

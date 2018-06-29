@@ -38,9 +38,9 @@ extension UserDetailFieldCellModel {
             cells.append(createCell(emails.count > 1 ? "Email" : "Emails", emails))
         }
 
-        if let offset = user.utcOffset {
-            cells.append(createCell("Timezone", "(GMT +\(offset))"))
-        }
+        let sign = user.utcOffset < 0 ? "" : "+"
+        let offset = user.utcOffset.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(user.utcOffset))" : "\(user.utcOffset)"
+        cells.append(createCell("Timezone", "(UTC \(sign)\(offset)) \(Date().addingTimeInterval(user.utcOffset * 60 * 60 * 60).formatted("hh:mm a"))"))
 
         return cells
     }

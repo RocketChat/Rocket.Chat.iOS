@@ -24,13 +24,13 @@ final class User: BaseModel {
     var emails = List<Email>()
     var roles = List<String>()
 
-    @objc internal dynamic var privateStatus = UserStatus.offline.rawValue
+    @objc dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
     }
 
-    var utcOffset: Double?
+    @objc dynamic var utcOffset: Double = 0.0
 }
 
 extension User {
