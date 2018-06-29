@@ -44,7 +44,9 @@ struct AnalyticsCoordinator: LauncherProtocol {
     }
 
     private func launchFirebase() {
+        #if RELEASE || BETA
         FirebaseApp.configure()
+        #endif
     }
 
     private func launchInstabug() {
