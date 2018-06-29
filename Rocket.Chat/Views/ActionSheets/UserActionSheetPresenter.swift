@@ -37,7 +37,8 @@ extension UserActionSheetPresenter where Self: UIViewController {
 
             let detailController = UserDetailViewController.fromStoryboard()
             detailController.model = UserDetailViewModel.forUser(user)
-            self?.pushOrPresent(detailController)
+            detailController.modalPresentationStyle = .formSheet
+            self?.pushOrPresent(detailController, source: source)
 
             /*AppManager.openDirectMessage(username: username) {
                 completion?(.conversation)
