@@ -381,6 +381,18 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
     }
 
     func userDidChangeSortingOptions() {
+        let selectedSortingOption = SubscriptionsSortingManager.selectedSortingOption.rawValue
+        let selectedGroupingOptions = SubscriptionsSortingManager.selectedGroupingOptions.map {$0.rawValue}
+
+        AnalyticsManager.log(
+            event: .updatedSubscriptionSorting(
+                options: [
+                    selectedSortingOption,
+                    selectedGroupingOptions
+                ]
+            )
+        )
+
         viewModel.buildSections()
         updateSortingTitleDescription()
         tableView.reloadData()

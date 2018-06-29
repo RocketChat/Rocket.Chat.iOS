@@ -23,7 +23,7 @@ enum Event {
     case mediaUpload(mediaType: String, subscriptionType: String)
     case reaction(subscriptionType: String)
     case serverSwitch(serverCount: Int)
-    case updatedSubscriptionSorting(options: [String])
+    case updatedSubscriptionSorting(options: [Any])
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
 
