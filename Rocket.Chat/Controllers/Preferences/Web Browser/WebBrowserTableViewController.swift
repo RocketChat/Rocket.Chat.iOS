@@ -60,8 +60,11 @@ extension WebBrowserTableViewController {
             return
         }
 
-        WebBrowserManager.set(defaultBrowser: viewModel.browsers[indexPath.row])
+        let browser = viewModel.browsers[indexPath.row]
+        WebBrowserManager.set(defaultBrowser: browser)
         updateDefaultWebBrowser?()
+
+        AnalyticsManager.log(event: .updatedWebBrowser(browser: browser.rawValue))
 
         let newSelectedCell = tableView.cellForRow(at: indexPath)
         newSelectedCell?.accessoryType = .checkmark
