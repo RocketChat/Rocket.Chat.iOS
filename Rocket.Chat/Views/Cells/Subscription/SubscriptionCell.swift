@@ -131,18 +131,26 @@ final class SubscriptionCell: UITableViewCell {
         applyTheme()
     }
 
+    var userStatus: UserStatus? {
+        didSet {
+            if let userStatus = userStatus {
+                switch userStatus {
+                case .online: viewStatus.backgroundColor = .RCOnline()
+                case .busy: viewStatus.backgroundColor = .RCBusy()
+                case .away: viewStatus.backgroundColor = .RCAway()
+                case .offline: viewStatus.backgroundColor = .RCInvisible()
+                }
+            }
+        }
+    }
+
     fileprivate func updateStatus(subscription: Subscription) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true
 
             if let user = subscription.directMessageUser {
-                switch user.status {
-                case .online: viewStatus.backgroundColor = .RCOnline()
-                case .busy: viewStatus.backgroundColor = .RCBusy()
-                case .away: viewStatus.backgroundColor = .RCAway()
-                case .offline: viewStatus.backgroundColor = .RCInvisible()
-                }
+                userStatus = user.status
             }
         } else {
             iconRoom.isHidden = false
@@ -169,6 +177,22 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         return RCDateFormatter.date(date, dateStyle: .short)
+    }
+
+    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
+        guard
+            let lastMessageText = subscription.roomLastMessageText,
+            let lastMessageDate = subscription.roomLastMessageDate
+        else {
+            return false
+        }
+
+        let isNameDifferent = labelName.text != subscription.displayName()
+        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
+        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
+        let isStatusDifferent = userStatus != subscription.otherUserStatus
+
+        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent
     }
 
 }

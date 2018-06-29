@@ -41,13 +41,20 @@ struct SpotlightClient: APIClient {
 
                     resource.users.forEach { object in
                         let user = User.getOrCreate(realm: realm, values: object, updates: nil)
-                        let subscription = Subscription()
-                        subscription.identifier = user.identifier ?? ""
-                        subscription.otherUserId = user.identifier
-                        subscription.type = .directMessage
-                        subscription.name = user.username ?? ""
-                        subscription.fname = user.name ?? ""
-                        subscriptions.append(subscription)
+
+                        guard let username = user.username else {
+                            return
+                        }
+
+                        let subscription = Subscription.find(name: username, subscriptionType: [.directMessage]) ?? Subscription()
+                        if subscription.realm == nil {
+                            subscription.identifier = subscription.identifier ?? user.identifier ?? ""
+                            subscription.otherUserId = user.identifier
+                            subscription.type = .directMessage
+                            subscription.name = user.username ?? ""
+                            subscription.fname = user.name ?? ""
+                            subscriptions.append(subscription)
+                        }
 
                         if let identifier = subscription.identifier {
                             identifiers.append(identifier)

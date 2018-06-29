@@ -142,6 +142,7 @@
 "subscriptions.unreads" = "Непрочитанные";
 "subscriptions.favorites" = "Избранные";
 "subscriptions.channels" = "Каналы";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Личная переписка";
 "subscriptions.conversations" = "Диалоги";
 "subscriptions.you" = "вы";

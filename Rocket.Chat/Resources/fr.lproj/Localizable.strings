@@ -142,6 +142,7 @@
 "subscriptions.unreads" = "Non lus";
 "subscriptions.favorites" = "Favoris";
 "subscriptions.channels" = "Canaux";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Messages directs";
 "subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "Toi";
