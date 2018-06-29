@@ -23,7 +23,7 @@ enum Event {
     case mediaUpload(mediaType: String, subscriptionType: String)
     case reaction(subscriptionType: String)
     case serverSwitch(serverCount: Int)
-    case updatedSubscriptionSorting(options: [Any])
+    case updatedSubscriptionSorting(sorting: String, grouping: String)
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
 
@@ -32,7 +32,7 @@ enum Event {
 struct AnalyticsManager {
     static func log(event: Event) {
         // Make sure the user has opted in for sending his usage data
-        guard AnalyticsCoordinator.isUsageDataLoggingDisabled else {
+        guard !AnalyticsCoordinator.isUsageDataLoggingDisabled else {
             return
         }
 
@@ -101,8 +101,8 @@ extension Event {
             return ["media_type": mediaType, "subscription_type": subscriptionType]
         case let .serverSwitch(serverCount):
             return ["server_count": serverCount]
-        case let .updatedSubscriptionSorting(options):
-            return ["options": options]
+        case let .updatedSubscriptionSorting(sorting, grouping):
+            return ["sorting": sorting, "grouping": grouping]
         case let .updatedWebBrowser(browser):
             return ["web_browser": browser]
         case let .updatedTheme(theme):

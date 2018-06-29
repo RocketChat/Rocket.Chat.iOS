@@ -386,10 +386,8 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
         AnalyticsManager.log(
             event: .updatedSubscriptionSorting(
-                options: [
-                    selectedSortingOption,
-                    selectedGroupingOptions
-                ]
+                sorting: selectedSortingOption,
+                grouping: selectedGroupingOptions.joined(separator: " | ")
             )
         )
 
