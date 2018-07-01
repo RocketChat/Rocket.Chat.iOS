@@ -28,10 +28,29 @@ extension UIView {
         }
     }
 
+    open override func setValue(_ value: Any?, forUndefinedKey key: String) {
+        assertionFailure("Trying to set value for an undefined key: \(key)")
+    }
+
+    /**
+     Applies theming properties defined using the User Defined Runtime Attributes in Interface Builder.
+
+     This method is already called in the base implementation of `applyTheme`. When overriding `applyTheme` if `super.applytheme` is not called, it is recommended that `applyThemeFromRuntimeAttributes` be called somewhere in the implementation.
+    */
+
     func applyThemeFromRuntimeAttributes() {
         guard let theme = theme else { return }
         themeableProperties.forEach {
-            self.setValue(theme.value(forKey: $0.value), forKey: $0.key)
+            if let value = theme.value(forKey: $0.value) {
+                self.setValue(value, forKey: $0.key)
+            }
         }
+    }
+}
+
+extension Theme {
+    open override func value(forUndefinedKey key: String) -> Any? {
+        assertionFailure("Trying to get value for an undefined key: \(key)")
+        return nil
     }
 }
