@@ -54,16 +54,8 @@ struct InfoClient: APIClient {
                 realm?.execute({ realm in
                     realm.add(res.permissions, update: true)
                 })
-            case .error(let error):
-                switch error {
-                case .version:
-                    // version fallback
-                    PermissionManager.updatePermissions()
-                default:
-                    break
-                }
+            default: break
             }
-
         }
     }
 }
