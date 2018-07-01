@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIView {
-    private struct DynamicProperties {
-        static var themeableProperties = [String: String]
+    private struct ThemeableAssociatedObject {
+        static var themeableProperties = [String: String]()
     }
 
     @objc func setThemeColor(_ themeString: String) {
@@ -21,10 +21,10 @@ extension UIView {
 
     private var themeableProperties: [String: String] {
         get {
-            return objc_getAssociatedObject(self, &DynamicProperties.themeableProperties) as? [String: String] ?? [:]
+            return objc_getAssociatedObject(self, &ThemeableAssociatedObject.themeableProperties) as? [String: String] ?? [:]
         }
         set {
-            objc_setAssociatedObject(self, &DynamicProperties.themeableProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &ThemeableAssociatedObject.themeableProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
