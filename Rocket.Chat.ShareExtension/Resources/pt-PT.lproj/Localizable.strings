@@ -7,7 +7,7 @@
 
 "rooms.title" = "Selecionar sala";
 "rooms.section.server" = "Selecione o servidor";
-"rooms.section.favorites" = "Favoritos"
+"rooms.section.favorites" = "Favoritos";
 "rooms.section.channels" = "Canais";
 "rooms.section.groups" = "Grupos Privados";
 "rooms.section.directMessages" = "Mensagens Directas";
