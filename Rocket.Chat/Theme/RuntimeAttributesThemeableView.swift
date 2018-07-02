@@ -12,13 +12,13 @@ extension UIView {
     @objc func setThemeColor(_ themeString: String) {
         let parsedComponents = themeString.removingWhitespaces().components(separatedBy: ":")
         guard parsedComponents.count == 2 else { return }
-        themeableProperties[parsedComponents[0]] = parsedComponents[1]
+        themeProperties[parsedComponents[0]] = parsedComponents[1]
     }
 
     @objc func setThemeColorOverride(_ overrideString: String) {
         let parsedComponents = overrideString.removingWhitespaces().components(separatedBy: ":")
         guard parsedComponents.count == 2 else { return }
-        themeableOverrideProperties[parsedComponents[0]] = UIColor(hex: parsedComponents[1])
+        themeOverrideProperties[parsedComponents[0]] = UIColor(hex: parsedComponents[1])
     }
 
     open override func setValue(_ value: Any?, forUndefinedKey key: String) {
@@ -33,38 +33,38 @@ extension UIView {
 
     func applyThemeFromRuntimeAttributes() {
         guard let theme = theme else { return }
-        themeableProperties.forEach {
+        themeProperties.forEach {
             if let value = theme.value(forKey: $0.value) {
                 self.setValue(value, forKey: $0.key)
             }
         }
-        themeableOverrideProperties.forEach {
+        themeOverrideProperties.forEach {
             self.setValue($0.value, forKey: $0.key)
         }
     }
 }
 
 extension UIView {
-    private struct ThemeableAssociatedObject {
-        static var themeableProperties = [String: String]()
-        static var themeableOverrideProperties = [String: UIColor]()
+    private struct ThemeAssociatedObject {
+        static var themeProperties = [String: String]()
+        static var themeOverrideProperties = [String: UIColor]()
     }
 
-    internal var themeableProperties: [String: String] {
+    internal var themeProperties: [String: String] {
         get {
-            return objc_getAssociatedObject(self, &ThemeableAssociatedObject.themeableProperties) as? [String: String] ?? [:]
+            return objc_getAssociatedObject(self, &ThemeAssociatedObject.themeProperties) as? [String: String] ?? [:]
         }
         set {
-            objc_setAssociatedObject(self, &ThemeableAssociatedObject.themeableProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &ThemeAssociatedObject.themeProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
-    internal var themeableOverrideProperties: [String: UIColor] {
+    internal var themeOverrideProperties: [String: UIColor] {
         get {
-            return objc_getAssociatedObject(self, &ThemeableAssociatedObject.themeableOverrideProperties) as? [String: UIColor] ?? [:]
+            return objc_getAssociatedObject(self, &ThemeAssociatedObject.themeOverrideProperties) as? [String: UIColor] ?? [:]
         }
         set {
-            objc_setAssociatedObject(self, &ThemeableAssociatedObject.themeableOverrideProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &ThemeAssociatedObject.themeOverrideProperties, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
