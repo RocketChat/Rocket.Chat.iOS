@@ -3,8 +3,25 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - Fabric (1.7.6)
+  - Firebase/Core (5.2.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.2.0):
+    - FirebaseCore (= 5.0.3)
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.0.3):
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseInstanceID (3.1.0):
+    - FirebaseCore (~> 5.0)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - Instabug (7.13):
     - Instabug/Instabug (= 7.13)
     - Instabug/InstabugCore (= 7.13)
@@ -13,6 +30,11 @@ PODS:
   - Instabug/InstabugCore (7.13)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - Nuke (7.0.1)
   - Nuke-FLAnimatedImage-Plugin (5.0):
     - FLAnimatedImage (~> 1.0)
@@ -37,6 +59,7 @@ DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
   - Fabric
+  - Firebase/Core
   - FLEX (~> 2.0)
   - Instabug
   - MBProgressHUD (~> 1.1.0)
@@ -58,10 +81,16 @@ SPEC REPOS:
     - 1PasswordExtension
     - Crashlytics
     - Fabric
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
     - FLAnimatedImage
     - FLEX
+    - GoogleToolboxForMac
     - Instabug
     - MBProgressHUD
+    - nanopb
     - Nuke
     - Nuke-FLAnimatedImage-Plugin
     - OAuthSwift
@@ -101,11 +130,17 @@ SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Firebase: 25ed0412036d7d008568d1fb4d2e9d81ea8a0a2c
+  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
+  FirebaseCore: a3c87242451633fff8490183898075ce77d168d2
+  FirebaseInstanceID: 05d779cbb97bd5bd5c51a38a903fc9cfe1b2454a
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   Instabug: 81ccd646e7fd2e3a243c5e61ae6af69c72328373
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nuke: 0944b2e721c8f21857028d980dc3d6a249df8b3e
   Nuke-FLAnimatedImage-Plugin: 6dfb9335ce298eaff9fdfed8d20d1bbfb2a6c326
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
@@ -120,6 +155,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 3e18e9e45e5a7653cfcf96d3fb07910bdbaf6b77
+PODFILE CHECKSUM: 2ece79753ea45a03d3f0d5e9b1bda19fe7b8fabe
 
 COCOAPODS: 1.5.3
