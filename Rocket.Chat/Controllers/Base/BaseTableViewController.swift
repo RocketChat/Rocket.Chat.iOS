@@ -21,4 +21,11 @@ class BaseTableViewController: UITableViewController {
             action: nil
         )
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let screenName = String(describing: type(of: self))
+        AnalyticsManager.log(event: .screenView(screenName: screenName))
+    }
 }

@@ -294,7 +294,7 @@ final class PreferencesViewController: BaseTableViewController {
     // MARK: IBAction
 
     @IBAction func crashReportSwitchDidChange(sender: Any) {
-        BugTrackingCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
+        AnalyticsCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
     }
 
 }

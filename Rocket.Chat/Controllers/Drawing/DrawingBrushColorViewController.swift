@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DrawingBrushColorViewController: UIViewController {
+final class DrawingBrushColorViewController: BaseViewController {
     weak var delegate: DrawingBrushColorDelegate?
     private let viewModel = DrawingBrushColorViewModel()
     @IBOutlet private weak var colorPreview: UIView! {

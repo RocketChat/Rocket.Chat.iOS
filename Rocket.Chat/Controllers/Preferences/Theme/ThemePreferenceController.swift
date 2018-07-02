@@ -54,6 +54,13 @@ extension ThemePreferenceController {
         if ThemeManager.theme != selectedTheme {
             ThemeManager.theme = selectedTheme
         }
+
         tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let titleForEvent = ThemeManager.themes.filter({ $0.theme == selectedTheme }).first?.title else {
+            return
+        }
+
+        AnalyticsManager.log(event: .updatedTheme(theme: titleForEvent))
     }
 }
