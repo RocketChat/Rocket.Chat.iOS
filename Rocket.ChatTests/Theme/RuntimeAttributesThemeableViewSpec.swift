@@ -28,22 +28,18 @@ class RuntimeAttributesThemeableViewSpec: XCTestCase {
     }
 
     func testSetThemeColorWithIncorrectViewKey() {
-        #if RELEASE
         view.setThemeColor("not-a-valid-key: tintColor")
         view.applyThemeFromRuntimeAttributes()
         // Should not crash
-        #endif
     }
 
     func testSetThemeColorWithIncorrectThemeKey() {
-        #if RELEASE
         view.setThemeColor("backgroundColor: not-a-valid-key")
         view.applyThemeFromRuntimeAttributes()
         // Should not crash
 
         guard let theme = view.theme else { return }
         XCTAssertNil(theme.value(forKey: "not-a-valid-key"), "Value for an  undefined should return nil")
-        #endif
     }
 
     func testSetThemeOverrideColor() {
@@ -56,11 +52,9 @@ class RuntimeAttributesThemeableViewSpec: XCTestCase {
     }
 
     func testSetThemeOverrideColorWithIncorrectViewKey() {
-        #if RELEASE
         view.setThemeColorOverride("not-a-valid-key: #000000")
         view.applyThemeFromRuntimeAttributes()
         // Should not crash
-        #endif
     }
 
     func testApplyThemeFromRuntimeAttributes() {
