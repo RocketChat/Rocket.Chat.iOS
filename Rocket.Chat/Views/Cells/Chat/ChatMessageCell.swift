@@ -286,8 +286,8 @@ final class ChatMessageCell: UICollectionViewCell {
             labelDate.text = RCDateFormatter.time(createdAt)
         }
 
-        avatarView.user = message.user
         avatarView.emoji = message.emoji
+        avatarView.user = message.user
 
         if let avatar = message.avatar {
             avatarView.avatarURL = URL(string: avatar)

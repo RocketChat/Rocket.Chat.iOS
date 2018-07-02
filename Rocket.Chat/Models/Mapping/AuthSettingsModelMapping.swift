@@ -64,6 +64,7 @@ extension AuthSettings: ModelMappeable {
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
+        self.maxFileSize = objectForKey(object: values, key: "FileUpload_MaxFileSize")?.int ?? 0
 
         // HideType
         self.hideMessageUserJoined = objectForKey(object: values, key: "Message_HideType_uj")?.bool ?? false
