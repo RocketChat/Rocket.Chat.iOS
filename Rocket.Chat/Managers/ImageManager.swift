@@ -11,7 +11,7 @@ import Nuke
 
 struct ImageManager {
 
-    static internal let dataCacheName = "com.github.kean.Nuke.DataCache"
+    static internal let dataCacheName = "com.rocket.chat.DataCache"
 
     static let loadingOptions: ImageLoadingOptions = {
         var loadingOptions = ImageLoadingOptions.shared
@@ -36,6 +36,8 @@ struct ImageManager {
         $0.imageCache = ImageCache()
 
         $0.dataCache = dataCache
+
+        $0.isDeduplicationEnabled = false
     }
 
     @discardableResult

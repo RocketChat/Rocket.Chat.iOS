@@ -372,7 +372,9 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
             strongSelf.isUploadingAvatar = false
             strongSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-            strongSelf.stopLoading()
+            strongSelf.avatarView.refreshCurrentAvatar(withCachedData: avatarFile.data, completion: {
+                strongSelf.stopLoading()
+            })
             strongSelf.avatarFile = nil
         })
     }

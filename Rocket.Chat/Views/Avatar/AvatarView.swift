@@ -8,6 +8,7 @@
 
 import UIKit
 import FLAnimatedImage
+import Nuke
 
 final class AvatarView: UIView {
 
@@ -144,6 +145,21 @@ final class AvatarView: UIView {
 
         labelInitials?.text = initials.uppercased()
         backgroundColor = color
+    }
+
+    func refreshCurrentAvatar(withCachedData data: Data, completion: (() -> Void)? = nil) {
+        guard let url = imageURL else {
+            return
+        }
+
+        ImageManager.dataCache?.storeData(data, for: url.absoluteString)
+        ImageCache.shared.removeResponse(
+            for: ImageRequest(
+                url: url
+            )
+        )
+
+        completion?()
     }
 
     func prepareForReuse() {
