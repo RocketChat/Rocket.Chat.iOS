@@ -1000,6 +1000,10 @@
 		416296FB1F41D42800BCCEDD /* DownloadManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManagerSpec.swift; sourceTree = "<group>"; };
 		4162E1521D651A8800AAAE49 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4162E1541D654A7400AAAE49 /* SocketHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketHandlers.swift; sourceTree = "<group>"; };
+		416772D420EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
+		416772D520EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		416772D620EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/VoiceOver.strings"; sourceTree = "<group>"; };
+		416772D720EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarViewSpec.swift; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -3588,6 +3592,7 @@
 				el,
 				es,
 				ru,
+				"pt-PT",
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -4682,6 +4687,7 @@
 				1499781C1FA605CE007E013D /* pl */,
 				41EB223A1E5F057F00AA3AE7 /* pt-BR */,
 				415D4B8620C57FF700EB72F2 /* ru */,
+				416772D520EA4CCA009999F8 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -4699,6 +4705,7 @@
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E441FD75DCB006AD9EF /* pt-BR */,
 				415D4B8720C57FF700EB72F2 /* ru */,
+				416772D620EA4CCA009999F8 /* pt-PT */,
 			);
 			name = VoiceOver.strings;
 			path = .;
@@ -4723,6 +4730,7 @@
 				807FB57520472B7200E21429 /* fr */,
 				807FB57320472B6F00E21429 /* pl */,
 				807FB57020472B6A00E21429 /* pt-BR */,
+				416772D720EA4CCA009999F8 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -4739,6 +4747,7 @@
 				80C7DD651FF46B8C00E6647C /* fr */,
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD611FF46B8300E6647C /* pt-BR */,
+				416772D420EA4CCA009999F8 /* pt-PT */,
 			);
 			name = RCEmojiKit.strings;
 			path = .;

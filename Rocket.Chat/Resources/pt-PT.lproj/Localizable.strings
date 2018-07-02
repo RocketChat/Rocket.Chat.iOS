@@ -1,0 +1,386 @@
+// Global
+"global.ok" = "OK";
+"global.yes" = "Sim";
+"global.no" = "Não";
+"global.cancel" = "Cancelar";
+"global.error" = "Erro";
+
+// Errors
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
+
+"error.login.title" = "Oops!";
+"error.login.message" = "Algo errado aconteceu ao tentar fazer o login.";
+
+"error.login_unauthorized.title" = "Oops!";
+"error.login_unauthorized.message" = "As suas credenciais foram rejeitadas! Por favor, tente novamente.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.message" = "O URL inserido é inválido. Verifique e tente novamente, por favor!";
+
+"alert.connection.not_secured.title" = "Oops!";
+"alert.connection.not_secured.message" = "Não foi possível estabelecer uma ligação segura com o servidor. Por favor, verifique se o servidor suporta SSL.";
+
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Não foi possível ligar-se a este servidor!";
+
+"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.message" = "O servidor ao qual está a tentar ligar-se utiliza uma versão que não é mais suportada por esta aplicação: %@.\n\nNós exigimos a versão %@.";
+
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "Nenhuma conta de e-mail. Por favor, configure uma conta de e-mail para enviar e-mail.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "Ainda estamos trabalhando nesse recurso, fique atento!";
+
+"alert.insecure_image.title" = "Recurso inseguro";
+"alert.insecure_image.message" = "O recurso da imagem é inseguro e, portanto, não é carregado. Apenas recursos SSL são permitidos.";
+
+"alert.socket_error.invalid_user.title" = "Sessão expirada";
+"alert.socket_error.invalid_user.message" = "Sua sessão expirou. Por favor faça login novamente.";
+
+"alert.login_service_error.title" = "Erro de Autenticação";
+"alert.login_service_error.message" = "Não foi possível autenticar usando este serviço. Por favor, tente novamente.";
+
+"alert.authorization_error.title" = "Erro de Autorização";
+"alert.authorization_error.create_channel.description" = "Você não pode criar canais";
+
+"alert.unsupported_feature.title" = "Recurso não suportado";
+"alert.unsupported_feature.message" = "A versão deste servidor é: %@. Este recurso é suportado apenas nas versões %@ e superiores.";
+
+"alert.push_token_error.title" = "Aviso";
+"alert.push_token_error.message" = "Você ainda pode receber notificações por push deste servidor devido a um problema com os servidores de versão inferior a 0.60.0.";
+
+"alert.upload_error.title" = "Erro de Envio";
+"alert.upload_error.message" = "Algo errado aconteceu ao fazer o envio do seu arquivo. Por favor, tente novamente.";
+
+"alert.upload_dialog.title" = "Enviar ficheiro";
+"alert.upload_dialog.placeholder.title" = "Título";
+"alert.upload_dialog.placeholder.description" = "Descrição";
+"alert.upload_dialog.action.upload" = "Enviar";
+
+"alert.email_verification.title" = "Verificação de e-mail";
+"alert.email_verification.message" = "Enviamos um e-mail para você confirmar o seu registo. Se você não receber um e-mail em breve, volte e tente novamente.";
+
+"alert.discarding_changes.title" = "Mudanças não salvas";
+"alert.discarding_changes.message" = "As suas alterações não salvas foram descartadas.";
+"alert.load_profile_error.title" = "Falha ao carregar o seu perfil";
+"alert.load_profile_error.message" = "Algo errado aconteceu ao carregar o seu perfil. Por favor, tente novamente.";
+"alert.password_mismatch_error.title" = "A sua palavra-passe não corresponde";
+"alert.password_mismatch_error.message" = "O campo de confirmação não corresponde à palavra-passe que você forneceu. Por favor verifique e tente novamente.";
+"alert.update_profile_error.title" = "Falha ao actualizar";
+"alert.update_profile_error.message" = "Algo errado aconteceu ao actualizar o seu perfil. Por favor, tente novamente.";
+"alert.update_password_error.title" = "Falha ao alterar a palavra-passe";
+"alert.update_password_error.message" = "Algo errado aconteceu ao alterar a sua palavra-passe. Por favor, tente novamente.";
+"alert.update_profile_empty_fields.title" = "Por favor, preencha os campos vazios";
+"alert.update_profile_empty_fields.message" = "Todas as informações do seu perfil são obrigatórias e não podem ficar em branco";
+"alert.update_profile_invalid_email.title" = "E-mail inválido";
+"alert.update_profile_invalid_email.message" = "Parece que o e-mail que você forneceu é inválido. Por favor, corrija-o e tente novamente.";
+"alert.password_empty_fields.title" = "Por favor, preencha os campos vazios";
+"alert.password_empty_fields.message" = "Preencha os campos de palavra-passe e confirmação para poder actualizar sua senha.";
+"alert.update_profile_success.title" = "Perfil actualizado";
+"alert.update_password_success.title" = "Palavra-passe actualizada";
+
+"alert.logout.confirmation.title" = "Sair deste servidor";
+"alert.logout.confirmation.message" = "Tem certeza de que deseja sair de \"%@\"?";
+"alert.logout.confirmation.confirm" = "Sim, quero sair";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "O servidor mudou o seu URL";
+"connection.server.redirect.alert.message" = "Parece que este servidor mudou o seu URL para:\n\n%@\n\nGostaria de actualizar o URL??";
+"connection.server.redirect.alert.confirm" = "Sim, actualizar o URL";
+
+// Socket Connection
+"connection.title" = "Entre no seu servidor";
+"connection.button_connect" = "Ligar";
+"connection.offline.banner.message" = "Você está off-line, tente ligar-se novamente";
+"connection.connecting.banner.message" = "A ligar...";
+"connection.waiting_for_network.banner.message" = "Esperando por rede";
+
+// Onboarding
+"onboarding.label_welcome" = "Bem-vindo ao Rocket Chat";
+"onboarding.label_subtitle" = "Comunicação Open Source";
+"onboarding.button_connect_server" = "Ligue-se a um servidor";
+"onboarding.button_create_server" = "Crie um servidor";
+"onboarding.button_join_community_prefix" = "Junte-se à comunidade";
+
+// Auth
+"auth.connect.button_connect" = "Ligar";
+"auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
+"auth.connect.connecting" = "Ligação em progresso. Segure-se";
+"auth.email_auth_prefix" = "Entrar com ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Continuar com ";
+
+"auth.signup_title" = "Registe-se";
+"auth.signup.button_register" = "Registar";
+"auth.signup.button_next" = "Próximo";
+"auth.signup.custom_fields_title" = "Complete o seu registo";
+
+"auth.login.login_title" = "Entrar";
+"auth.login.button_login_title" = "Entrar";
+"auth.login.create_account_prefix" = "Não tem uma conta?";
+"auth.login.create_account" = "\nCriar uma conta";
+"auth.login.username.placeholder" = "Email ou nome de utilizador";
+"auth.login.password.placeholder" = "Palavra-passe";
+"auth.login.buttonRegister" = "Criar uma conta nova";
+"auth.login.buttonResetPassword" = "Esqueceu a palavra-passe";
+"auth.login.agree_label" = "Ao prosseguir você concorda com o nosso";
+"auth.login.agree_and" = "e";
+"auth.login.agree_termsofservice" = "Termos de Serviço";
+"auth.login.agree_privacypolicy" = "Política de Privacidade";
+
+"auth.forgot_password.title" = "Esqueceu a palavra-passe?";
+"auth.forgot_password.message" = "Introduza o seu email";
+"auth.forgot_password.success" = "Se este e-mail estiver registrado, enviaremos instruções sobre como repor a sua palavra-passe. Se você não receber um e-mail em breve, volte e tente novamente.";
+
+// Subscriptions
+"subscriptions.search" = "Pesquisar";
+"subscriptions.search_results" = "Resultados";
+"subscriptions.search.load_more_results" = "Carregar mais resultados";
+"subscriptions.unreads" = "Não lidas";
+"subscriptions.favorites" = "Favoritos";
+"subscriptions.channels" = "Canais";
+"subscriptions.direct_messages" = "Mensagens Diretas";
+"subscriptions.conversations" = "Conversas";
+"subscriptions.you" = "você";
+"subscriptions.messages" = "Mensagens";
+"subscriptions.list.you_initial" = "Você";
+"subscriptions.list.no_message" = "Nenhuma mensagem";
+"subscriptions.list.sent_an_attachment" = "enviou um ficheiro";
+"subscriptions.list.date.yesterday" = "Ontem";
+
+// Servers
+"servers.add_new_team" = "Adicionar nova Equipa";
+"servers.title" = "Servidores";
+"servers.add_new_server" = "Adicionar Servidor";
+"servers.action.disconnect" = "Desligar";
+"servers.action.disconnect.alert.title" = "Desligar do Servidor";
+"servers.action.disconnect.alert.message" = "Você quer desligar do servidor \"%@\"?";
+"servers.action.disconnect.alert.confirm" = "Sim, desligar";
+
+// Status
+"status.online" = "Online";
+"status.away" = "Ausente";
+"status.busy" = "Ocupado";
+"status.invisible" = "Invisível";
+
+// New Room View
+"new_room.title" = "Novo Canal";
+"new_room.buttons.create" = "Criar";
+"new_room.cell.public_channel.title" = "Canal Público";
+"new_room.cell.public_channel.description" = "Todos podem aceder a este canal";
+"new_room.cell.public_channel.description.public_only" = "Você só pode criar canais públicos";
+"new_room.cell.public_channel.description.private_only" = "Você só pode criar canais privados";
+"new_room.cell.read_only.title" = "Canal apenas de leitura";
+"new_room.cell.read_only.description" = "Apenas membros autorizados podem escrever novas mensagens";
+"new_room.group.channel.name" = "Nome do Canal";
+"new_room.cell.channel_name.title" = "Nome do Canal";
+"new_room.group.invite_users" = "Convidar utilizadores";
+"new_room.cell.invite_users.placeholder" = "Nomes de utilizadores";
+
+// Notifications
+"notifications.action.reply" = "Responder";
+
+// Chat
+"chat.channel_preview_view.title" = "Esta é uma pré-visualização do #%@";
+"chat.channel_preview_view.join" = "Entrar no Canal";
+"chat.dm.start_conversation" = "Este é o início da sua conversa com %@";
+"chat.channel.start_conversation" = "Este é o início da sua conversa no %@";
+"chat.read_only" = "Esta sala é apenas de leitura";
+"chat.muted" = "Você foi silenciado";
+"chat.loading_messages" = "Carregando mensagens...";
+"chat.unread_separator" = "novas mensagens";
+
+// Read Receipts
+"chat.read_receipt_list.title" = "Lida por";
+"chat.read_receipt_list.title.loading" = "Carregando...";
+"chat.read_receipt_list.title.empty" = "Não lida por ninguém";
+
+// Chat Message Actions
+"chat.message.actions.info" = "Informação da mensagem";
+"chat.message.actions.react" = "Adicionar Reação";
+"chat.message.actions.block" = "Bloquear mensagens do utilizador";
+"chat.message.actions.report" = "Relatar mensagem";
+"chat.message.actions.edit" = "Editar";
+"chat.message.actions.copy" = "Copiar";
+"chat.message.actions.pin" = "Afixar";
+"chat.message.actions.unpin" = "Desafixar";
+"chat.message.actions.star" = "Dar estrela"; // TODO
+"chat.message.actions.unstar" = "Retirar estrela"; // TODO
+"chat.message.actions.quote" = "Citar";
+"chat.message.actions.reply" = "Responder";
+"chat.message.actions.delete" = "Apagar mensagem";
+"chat.message.actions.delete.confirm.title" = "Apagar esta mensagem?";
+"chat.message.actions.delete.confirm.message" = "Tem a certeza que ddeseja apagar esta mensagem? Esta acção não pode ser desfeita.";
+"chat.message.actions.delete.confirm.yes" = "Sim, apagar";
+"chat.message.actions.discard" = "Descartar mensagem";
+"chat.message.actions.discard.confirm.title" = "Descartar esta mensagem?";
+"chat.message.actions.discard.confirm.message" = "Esta mensagem ainda não foi enviada. Deseja descarta-la? Esta acção não pode ser desfeita.";
+"chat.message.actions.discard.confirm.yes" = "Sim, descartar";
+"chat.message.actions.resend" = "Reeenviar";
+"chat.message.actions.resend_all" = "Reenviar todas";
+"Send" = "Enviar"; //SLKTextInputbar.m
+
+// Chat Message Report
+"chat.message.report.success.title" = "Mensagem Relatada";
+"chat.message.report.success.message" = "Mensagem relatada com sucesso, obrigado!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Enviando imagem";
+"chat.upload.uploading_video" = "Enviando video";
+"chat.upload.uploading_file" = "Enviando \"%@\"";
+"chat.upload.take_photo" = "Tirar uma foto";
+"chat.upload.shoot_video" = "Gravar um video";
+"chat.upload.choose_from_library" = "Escolher da biblioteca";
+"chat.upload.import_file" = "Anexar ficheiros";
+"chat.upload.draw" = "Desenhe algo";
+
+// Chat Download
+"chat.download.downloading_file" = "Descarregando \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Toque para abrir o ficheiro";
+"chat.message.open_browser" = "Abrir no Navegador";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você tem que desenhar algo antes de enviá-lo.";
+"chat.drawing.fileName" = "Desenhando";
+"chat.drawing.settings.opacity" = "Opacidade";
+"chat.drawing.settings.width" = "Largura";
+"chat.drawing.settings.color.selected" = "Cor seleccionada";
+"chat.drawing.settings.color.others" = "Escolha uma cor abaixo:";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Nome da sala alterado para: %@ por %@";
+"chat.message.type.user_added_by" = "Utilizador %@ adicionado por %@";
+"chat.message.type.user_removed_by" = "Utilizador %@ removido por %@";
+"chat.message.type.user_left" = "Saiu do canal";
+"chat.message.type.user_joined" = "Entrou no canal";
+"chat.message.type.user_muted" = "Utilizador %@ silenciado por %@";
+"chat.message.type.user_unmuted" = "Utilizador %@ des-silenciado por %@";
+"chat.message.type.welcome" = "Bem vindo/a %@";
+"chat.message.type.message_removed" = "Mensagem removida";
+"chat.message.type.subscription_role_added" = "%@ foi promovido a %@ por %@";
+"chat.message.type.subscription_role_removed" = "%@ foi despromovido de %@ por %@";
+"chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
+"chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
+"chat.message.type.message_pinned" = "Fixou uma mensagem:";
+
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Tópico";
+"chat.info.item.no_topic" = "Sem tópico";
+"chat.info.item.description" = "Descrição";
+"chat.info.item.no_description" = "Sem descrição";
+"chat.info.item.notifications" = "Notificações";
+"chat.info.item.members" = "Membros";
+"chat.info.item.pinned" = "Fixar";
+"chat.info.item.starred" = "Com Estrelas";
+"chat.info.item.mentions" = "Menções";
+"chat.info.item.files" = "Ficheiros";
+"chat.info.item.share" = "Partilhar";
+
+// Members List
+"chat.members.list.title" = "Membros";
+
+// Add Users
+"chat.add_users.title" = "Adicionar Utilizadores";
+"chat.add_users.confirm.title" = "Adicionar este utilizador?";
+"chat.add_users.confirm.message" = "Tem certeza de que deseja adicionar '%@' no '%@'?";
+
+// Messages List
+"chat.messages.list.title" = "Mensagens";
+"chat.messages.list.empty" = "Nenhuma mensagem encontrada";
+"chat.messages.list.search.placeholder" = "Procurar mensagens";
+"chat.messages.pinned.list.title" = "Mensagens Fixadas";
+"chat.messages.starred.list.title" = "Mensagens com Estrelas";
+"chat.messages.mentions.list.title" = "Menções";
+"chat.messages.files.list.title" = "Ficheiros";
+"chat.messages.files.list.empty" = "Nenhum ficheiro encontrado";
+
+// Settings
+"myaccount.settings.title" = "Preferências";
+"myaccount.settings.administration" = "Administração";
+"myaccount.settings.logout" = "Terminar sessão de %@";
+"myaccount.settings.contactus" = "Contate-nos";
+"myaccount.settings.profile" = "Perfil";
+"myaccount.settings.license" = "Licença";
+"myaccount.settings.language" = "Idioma";
+"myaccount.settings.appicon" = "Ícone da Aplicação";
+"myaccount.settings.version" = "Versão: %@ (%@)";
+"myaccount.settings.server_version" = "Versão do Servidor: %@";
+"myaccount.settings.web_browser" = "Navegador";
+"myaccount.settings.tracking.title" = "Enviar relatório de erro";
+"myaccount.settings.tracking.footer" = "Nós nunca rastreamos o conteúdo de suas conversas. O relatório de erros contém apenas informações relevantes para nós, a fim de identificar problemas e corrigi-los.";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Escolha um ícone";
+"myaccount.settings.changeicon.header" = "Você pode alterar a aparência do ícone do Rocket.Chat no seu dispositivo. Por favor, escolha entre os ícones abaixo, o que você mais gosta.";
+"myaccount.settings.changeicon.errortitle" = "Não é possível alterar o ícone";
+"myaccount.settings.changeicon.iosversion" = "Os ícones de aplicativos alternativos não são suportados na versão iOS abaixo de 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Mudar Idioma";
+"myaccount.settings.language.reset" = "Restaurar para Padrão";
+"myaccount.settings.language.message" = "Você alterou as configurações de idioma. Você deve reiniciar o Rocket.Chat para que as novas configurações sejam aplicadas.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "Navegador na aplicaçao";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Navegador";
+"myaccount.settings.web_browser.footer" = "Esta aplicação será usada para abrir links no Rocket Chat.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Perfil";
+"myaccount.settings.editing_profile.title" = "Editar Perfil";
+"myaccount.settings.profile.actions.save" = "Guardar";
+"myaccount.settings.profile.actions.edit" = "Editar";
+"myaccount.settings.profile.actions.change_password" = "Altere a sua palavra-passe";
+"myaccount.settings.profile.section.profile" = "Perfil";
+"myaccount.settings.profile.section.password" = "Palavra-pass";
+"myaccount.settings.profile.name_placeholder" = "Nome";
+"myaccount.settings.profile.username_placeholder" = "Nome de Utilizador";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Estado";
+"myaccount.settings.profile.password_required.title" = "Introduza a sua palavra-passe";
+"myaccount.settings.profile.password_required.message" = "a sua palavra-passe é necessária ao atualizar o seu e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Palavra-passe";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Nova palavra-passe";
+"myaccount.settings.profile.new_password.section.password" = "Palavra-passe";
+"myaccount.settings.profile.new_password.actions.save" = "Guardar";
+"myaccount.settings.profile.new_password.password_placeholder" = "Nova palavra-pass";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Confirmação da palavra-passe";
+"myaccount.settings.profile.new_password.password_required.title" = "Introduza a sua palavra-passe";
+"myaccount.settings.profile.new_password.password_required.message" = "A sua palavra-passe actual é necessária para definir uma nova palavra-passe.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Palavra-passe";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversação";
+"user_action_sheet.remove" = "Remover da sala";
+"user_action_sheet.remove_confirm.title" = "Remover este utilizador?";
+"user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' da sala?";
+
+// Theme
+"theme.settings.title" = "Tema";
+"theme.settings.header" = "TODOS OS TEMAS";
+"theme.settings.footer" = "A aplicação de um tema mudará a aparência da aplicaçao.";
+"theme.light" = "Claro";
+"theme.dark" = "Escuro";
+"theme.black" = "Negro";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Ordenar por nome";
+"subscriptions.sorting.title.activity" = "Ordenar por actividade";
+"subscriptions.sorting.alphabetical" = "Alfabeticamente";
+"subscriptions.sorting.activity" = "Actividade";
+"subscriptions.grouping.type" = "Agrupar por tipo";
+"subscriptions.grouping.favorites" = "Agrupar por favoritos";
+"subscriptions.grouping.unread_top" = "Não lidas no topo";
