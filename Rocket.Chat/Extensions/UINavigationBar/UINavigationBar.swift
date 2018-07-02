@@ -19,6 +19,6 @@ extension UINavigationBar {
         let navigationBar = UINavigationBar(frame: frame)
         setBackgroundImage(navigationBar.backgroundImage(for: .default), for: .default)
         shadowImage = navigationBar.shadowImage
-        isTranslucent = navigationBar.isTranslucent
+        isTranslucent = false
     }
 }
