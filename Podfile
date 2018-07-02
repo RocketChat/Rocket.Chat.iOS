@@ -37,6 +37,7 @@ def shared_pods
   database_pods
 
   # Network
+  pod 'Nuke', '~> 7.3'
   pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
