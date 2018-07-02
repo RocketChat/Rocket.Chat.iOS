@@ -214,7 +214,7 @@
 		4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */; };
 		4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */; };
 		4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */; };
-		41534EE2208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */; };
+		41534EE2208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */; };
 		4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153E80420504BE700FBC26B /* ReusableViewText.swift */; };
 		41552F661D30308C0081438D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F671D3035D80081438D /* SocketManagerSpec.swift */; };
@@ -985,7 +985,7 @@
 		4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
 		4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsModelMapping.swift; sourceTree = "<group>"; };
 		4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURLModelMapping.swift; sourceTree = "<group>"; };
-		41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinatorSpec.swift; sourceTree = "<group>"; };
+		41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsCoordinatorSpec.swift; sourceTree = "<group>"; };
 		4153E80420504BE700FBC26B /* ReusableViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewText.swift; sourceTree = "<group>"; };
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManagerSpec.swift; sourceTree = "<group>"; };
@@ -1879,7 +1879,7 @@
 		41534EE0208E43FF009C5A17 /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
-				41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */,
+				41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -4562,7 +4562,7 @@
 				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
-				41534EE2208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift in Sources */,
+				41534EE2208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
 				D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */,
 				806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */,
