@@ -11,10 +11,18 @@ import Nuke
 
 struct ImageManager {
 
+    static internal let dataCacheName = "com.github.kean.Nuke.DataCache"
+
     static let loadingOptions: ImageLoadingOptions = {
         var loadingOptions = ImageLoadingOptions.shared
         loadingOptions.pipeline = ImageManager.pipeline
         return loadingOptions
+    }()
+
+    static let dataCache: DataCache? = {
+        return try? DataCache(name: dataCacheName, filenameGenerator: {
+            return $0.sha256()
+        })
     }()
 
     static let pipeline = ImagePipeline {
@@ -27,11 +35,7 @@ struct ImageManager {
 
         $0.imageCache = ImageCache()
 
-        $0.enableExperimentalAggressiveDiskCaching(
-            keyEncoder: {
-                return $0.sha256()
-            }
-        )
+        $0.dataCache = dataCache
     }
 
     @discardableResult
