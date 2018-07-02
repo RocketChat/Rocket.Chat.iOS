@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.subscriptions)
 
             if let user = auth.user {
-                BugTrackingCoordinator.identifyCrashReports(withUser: user)
+                AnalyticsCoordinator.identifyCrashReports(withUser: user)
             }
         } else {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))

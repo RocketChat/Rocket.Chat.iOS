@@ -183,6 +183,13 @@ final class ChatViewController: SLKTextViewController {
         textInputbar.applyTheme()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let screenName = String(describing: ChatViewController.self)
+        AnalyticsManager.log(event: .screenView(screenName: screenName))
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         updateChatPreviewModeViewConstraints()

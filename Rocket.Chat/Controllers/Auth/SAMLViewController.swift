@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SAMLViewController: UIViewController {
+class SAMLViewController: BaseViewController {
     var serverUrl: URL!
     var provider: String = ""
 

@@ -158,10 +158,22 @@ extension AppManager {
                 UIApplication.shared.statusBarStyle = .default
                 if AuthManager.isAuthenticated() != nil {
                     if let currentUser = AuthManager.currentUser() {
-                        BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+                        AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
                     }
 
                     WindowManager.open(.subscriptions)
+
+                    var server = ""
+                    if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL], let url = URL(string: serverURL) {
+                        server = url.host ?? ""
+                    }
+
+                    AnalyticsManager.log(
+                        event: .serverSwitch(
+                            server: server,
+                            serverCount: DatabaseManager.servers?.count ?? 1
+                        )
+                    )
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }

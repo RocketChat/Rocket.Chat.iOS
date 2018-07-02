@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DrawingBrushWidthViewController: UIViewController {
+final class DrawingBrushWidthViewController: BaseViewController {
     weak var delegate: DrawingBrushWidthDelegate?
 
     private var width: Float = 1

@@ -707,6 +707,7 @@
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
+		99D77C6B20E474BF008F2438 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */; };
 		99D86ABA20D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D86AB920D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
@@ -739,7 +740,7 @@
 		D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535F01F70864C006625D2 /* InfoRequest.swift */; };
 		D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */; };
-		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
+		D32E28241DFD86C300D6019C /* AnalyticsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* AnalyticsCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
 		D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */; };
@@ -1011,6 +1012,10 @@
 		416296FB1F41D42800BCCEDD /* DownloadManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManagerSpec.swift; sourceTree = "<group>"; };
 		4162E1521D651A8800AAAE49 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4162E1541D654A7400AAAE49 /* SocketHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketHandlers.swift; sourceTree = "<group>"; };
+		416772D420EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
+		416772D520EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		416772D620EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/VoiceOver.strings"; sourceTree = "<group>"; };
+		416772D720EA4CCA009999F8 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarViewSpec.swift; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -1481,6 +1486,7 @@
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManager.swift; sourceTree = "<group>"; };
 		99B802EC20BC3BD400230109 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		99D86AB920D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableViewControllerAuthenticationHandler.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
@@ -1514,7 +1520,7 @@
 		D1D535ED1F708628006625D2 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		D1D535F01F70864C006625D2 /* InfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequest.swift; sourceTree = "<group>"; };
 		D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataControllerSpec.swift; sourceTree = "<group>"; };
-		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
+		D32E28211DFD86C300D6019C /* AnalyticsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
@@ -2157,6 +2163,7 @@
 				995FEB2E206286D9004EE38F /* WebBrowserManager.swift */,
 				41B554C61FBF0F9D000510B7 /* WindowManager.swift */,
 				99B802EC20BC3BD400230109 /* ImageManager.swift */,
+				99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -3457,7 +3464,7 @@
 		D32E28201DFD86AC00D6019C /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
-				D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */,
+				D32E28211DFD86C300D6019C /* AnalyticsCoordinator.swift */,
 				D32E28221DFD86C300D6019C /* LauncherProtocol.swift */,
 				8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */,
 				411119B51F680DB00019854B /* NetworkCoordinator.swift */,
@@ -3650,6 +3657,7 @@
 				el,
 				es,
 				ru,
+				"pt-PT",
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -3916,6 +3924,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${PODS_ROOT}/Instabug/Instabug.framework",
 				"${PODS_ROOT}/Instabug/Instabug.framework.dSYM",
 				"${PODS_ROOT}/Instabug/InstabugCore.framework",
@@ -3927,6 +3936,7 @@
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -3940,6 +3950,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instabug.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Instabug.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstabugCore.framework",
@@ -3951,6 +3962,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4022,6 +4034,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${PODS_ROOT}/Instabug/Instabug.framework",
 				"${PODS_ROOT}/Instabug/Instabug.framework.dSYM",
 				"${PODS_ROOT}/Instabug/InstabugCore.framework",
@@ -4033,6 +4046,7 @@
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -4046,6 +4060,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instabug.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Instabug.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InstabugCore.framework",
@@ -4057,6 +4072,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4230,7 +4246,7 @@
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				8013F8711FD6B5B000EE1A4E /* InfoClient.swift in Sources */,
 				8076FDA02048519D00114F28 /* AuthManagerSocket.swift in Sources */,
-				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
+				D32E28241DFD86C300D6019C /* AnalyticsCoordinator.swift in Sources */,
 				D1D535EC1F7081FA006625D2 /* API.swift in Sources */,
 				995F711820C790D800B7535F /* AuthTableViewControllerConnectionHandler.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
@@ -4382,6 +4398,7 @@
 				99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */,
 				809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */,
 				8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */,
+				99D77C6B20E474BF008F2438 /* AnalyticsManager.swift in Sources */,
 				3330329820738D4600A9514D /* SubscriptionManagerMessages.swift in Sources */,
 				99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
@@ -4746,6 +4763,7 @@
 				1499781C1FA605CE007E013D /* pl */,
 				41EB223A1E5F057F00AA3AE7 /* pt-BR */,
 				415D4B8620C57FF700EB72F2 /* ru */,
+				416772D520EA4CCA009999F8 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -4763,6 +4781,7 @@
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E441FD75DCB006AD9EF /* pt-BR */,
 				415D4B8720C57FF700EB72F2 /* ru */,
+				416772D620EA4CCA009999F8 /* pt-PT */,
 			);
 			name = VoiceOver.strings;
 			path = .;
@@ -4787,6 +4806,7 @@
 				807FB57520472B7200E21429 /* fr */,
 				807FB57320472B6F00E21429 /* pl */,
 				807FB57020472B6A00E21429 /* pt-BR */,
+				416772D720EA4CCA009999F8 /* pt-PT */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -4803,6 +4823,7 @@
 				80C7DD651FF46B8C00E6647C /* fr */,
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD611FF46B8300E6647C /* pt-BR */,
+				416772D420EA4CCA009999F8 /* pt-PT */,
 			);
 			name = RCEmojiKit.strings;
 			path = .;

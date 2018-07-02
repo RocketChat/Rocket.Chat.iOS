@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class CASViewController: UIViewController {
+class CASViewController: BaseViewController {
     var baseUrl: URL!
     var loginUrl: URL!
     var callbackUrl: URL!

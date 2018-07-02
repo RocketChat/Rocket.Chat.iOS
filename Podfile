@@ -14,6 +14,9 @@ def ui_pods
 end
 
 def shared_pods
+  # Analytics
+  pod 'Firebase/Core'
+
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
