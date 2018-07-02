@@ -85,11 +85,8 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let resizedImage = image.resizeWith(width: 1024) ?? image
-            guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
-
             file = UploadHelper.file(
-                for: imageData,
+                for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
                 mimeType: "image/jpeg"
             )
