@@ -64,7 +64,7 @@ class ThemeManagerSpec: XCTestCase {
 
     func testRetrievingThemeFromUserDefaultsWhenKeyIsNotStored() {
         if UserDefaults.standard.string(forKey: ThemeManager.userDefaultsKey) == nil {
-            XCTAssert(ThemeManager.theme == .light, "The light theme should be the default theme in case value is not stored in user defaults")
+            XCTAssertEqual(ThemeManager.theme, Theme.light, "The light theme should be the default theme in case value is not stored in user defaults")
             return
         }
     }

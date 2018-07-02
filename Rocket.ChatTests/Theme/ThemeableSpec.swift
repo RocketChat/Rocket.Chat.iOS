@@ -44,12 +44,12 @@ class ThemeableSpec: XCTestCase {
         let subview = MockThemeableView()
         view.addSubview(subview)
         subview.internalTheme = nil
-        XCTAssertEqual(subview.theme, nil, "View should be able to override its parent's theme.")
+        XCTAssertNil(subview.theme, "View should be able to override its parent's theme.")
     }
 
     func testNotThemeableView() {
         let view = NotThemeableView()
-        XCTAssertEqual(view.theme, nil, "NotThemeableView should have a nil theme.")
+        XCTAssertNil(view.theme, "NotThemeableView should have a nil theme.")
     }
 
     func testApplyThemeOnViewController() {

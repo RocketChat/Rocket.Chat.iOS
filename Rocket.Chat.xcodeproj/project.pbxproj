@@ -1736,8 +1736,8 @@
 		33230AAF20EA6A970031C71D /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				33230AB020EA6A970031C71D /* ThemeManagerSpec.swift */,
 				3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */,
+				33230AB020EA6A970031C71D /* ThemeManagerSpec.swift */,
 				33230AB120EA6A970031C71D /* ThemeableSpec.swift */,
 			);
 			name = Theme;
