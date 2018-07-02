@@ -22,7 +22,11 @@ extension UIView {
     }
 
     open override func setValue(_ value: Any?, forUndefinedKey key: String) {
+        #if TEST
+        print("ASSERTION: Trying to set value for an undefined key: \(key)")
+        #else
         assertionFailure("Trying to set value for an undefined key: \(key)")
+        #endif
     }
 
     /**
@@ -71,7 +75,11 @@ extension UIView {
 
 extension Theme {
     open override func value(forUndefinedKey key: String) -> Any? {
+        #if TEST
+        print("ASSERTION: Trying to get value for an undefined key: \(key)")
+        #else
         assertionFailure("Trying to get value for an undefined key: \(key)")
+        #endif
         return nil
     }
 }
