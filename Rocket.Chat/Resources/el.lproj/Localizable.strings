@@ -368,7 +368,15 @@
 "user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Αφαίρεση από το δωμάτιο"; 
 "user_action_sheet.remove_confirm.title" = "Αφαίρεση αυτού του χρήστη;"; 
-"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;"; 
+"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;";
+
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
 
 // Theme
 "theme.settings.title" = "Θέμα"; 

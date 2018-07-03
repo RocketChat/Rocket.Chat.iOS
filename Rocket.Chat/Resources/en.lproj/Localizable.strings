@@ -370,6 +370,14 @@
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
 
+// User Details
+"user_details.status" = "Status";
+"user_details.role" = "Role";
+"user_details.roles" = "Roles";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Timezone";
+
 // Theme
 "theme.settings.title" = "Theme";
 "theme.settings.header" = "ALL THEMES";

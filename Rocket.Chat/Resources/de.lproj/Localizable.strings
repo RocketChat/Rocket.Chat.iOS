@@ -370,6 +370,14 @@
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";
 
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
+
 // Theme
 "theme.settings.title" = "Aussehen";
 "theme.settings.header" = "ALLE THEMES";

@@ -370,6 +370,14 @@
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
 
+// User Details
+"user_details.status" = "Status";
+"user_details.role" = "Função";
+"user_details.roles" = "Funções";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Fuso horário";
+
 // Theme
 "theme.settings.title" = "Theme"; // TODO
 "theme.settings.header" = "ALL THEMES"; // TODO
