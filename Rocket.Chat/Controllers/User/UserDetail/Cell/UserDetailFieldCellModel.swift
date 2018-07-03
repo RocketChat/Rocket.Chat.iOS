@@ -43,7 +43,8 @@ extension UserDetailFieldCellModel {
 
         let sign = user.utcOffset < 0 ? "" : "+"
         let offset = user.utcOffset.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(user.utcOffset))" : "\(user.utcOffset)"
-        cells.append(createCell("Timezone", "(UTC \(sign)\(offset)) \(Date().addingTimeInterval(user.utcOffset * 60 * 60 * 60).formatted("hh:mm a"))"))
+        let timeZone = TimeZone(secondsFromGMT: Int(user.utcOffset * 60 * 60))
+        cells.append(createCell("Timezone", "(UTC \(sign)\(offset)) \(Date().formatted("hh:mm a", timeZone: timeZone))"))
 
         return cells
     }
