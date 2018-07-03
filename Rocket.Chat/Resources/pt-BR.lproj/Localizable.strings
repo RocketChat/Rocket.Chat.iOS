@@ -377,6 +377,9 @@
 "user_details.email" = "Email";
 "user_details.emails" = "Emails";
 "user_details.timezone" = "Fuso horário";
+"user_details.message_button" = "Mensagem";
+"user_details.voice_call_button" = "Voz";
+"user_details.video_call_button" = "Vídeo";
 
 // Theme
 "theme.settings.title" = "Theme"; // TODO

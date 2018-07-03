@@ -61,50 +61,65 @@
                                             <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
-                                            <rect key="frame" x="152.66666666666666" y="212" width="70" height="70"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
+                                            <rect key="frame" x="34.666666666666657" y="212" width="306" height="70"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="3OI-kY-Tfp"/>
-                                                        <constraint firstAttribute="width" constant="70" id="oLy-cA-1gi"/>
+                                                        <constraint firstAttribute="width" constant="90" id="oLy-cA-1gi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="25" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-21" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="34" minY="-15" maxX="0.0" maxY="2"/>
                                                     <state key="normal" title="Message" image="UserDetail_Message">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="messageDidPress:" destination="6OD-GW-L6f" eventType="touchUpInside" id="dCk-Wg-IfY"/>
                                                     </connections>
                                                 </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
-                                                    <rect key="frame" x="-152.66666666666666" y="0.0" width="70" height="70"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
+                                                    <rect key="frame" x="108" y="0.0" width="90" height="70"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="Bkq-UB-S4J"/>
+                                                        <constraint firstAttribute="width" constant="90" id="Bkq-UB-S4J"/>
                                                         <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="27" minY="-16" maxX="0.0" maxY="2"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-18" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="37" minY="-16" maxX="0.0" maxY="2"/>
                                                     <state key="normal" title="Voice call" image="UserDetail_VoiceCall">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
-                                                    <rect key="frame" x="-152.66666666666666" y="0.0" width="70" height="70"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="216" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
-                                                        <constraint firstAttribute="width" constant="70" id="xf7-75-bUs"/>
+                                                        <constraint firstAttribute="width" constant="90" id="xf7-75-bUs"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <inset key="titleEdgeInsets" minX="-19" minY="44" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="28" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-22" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="35" minY="-15" maxX="0.0" maxY="2"/>
                                                     <state key="normal" title="Video call" image="UserDetail_VideoCall">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </button>
                                             </subviews>
                                         </stackView>

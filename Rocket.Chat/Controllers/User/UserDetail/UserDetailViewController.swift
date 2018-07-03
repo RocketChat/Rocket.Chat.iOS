@@ -21,6 +21,12 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var voiceCallButton: UIButton!
     @IBOutlet weak var videoCallButton: UIButton!
 
+    func updateButtonsInsets() {
+        messageButton?.centerImageHorizontally()
+        voiceCallButton?.centerImageHorizontally()
+        videoCallButton?.centerImageHorizontally()
+    }
+
     @IBOutlet weak var tableView: UserDetailTableView! {
         didSet {
             tableView.dataSource = self
@@ -38,13 +44,15 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         tableView?.reloadData()
         nameLabel?.text = model.name
         usernameLabel?.text = model.username
-        messageButton?.titleLabel?.text = model.messageButtonText
-        voiceCallButton?.titleLabel?.text = model.voiceCallButtonText
-        videoCallButton?.titleLabel?.text = model.videoCallButtonText
         if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
             ImageManager.loadImage(with: url, into: avatar)
             ImageManager.loadImage(with: url, into: background)
         }
+
+        messageButton?.setTitle(model.messageButtonText, for: .normal)
+        voiceCallButton?.setTitle(model.voiceCallButtonText, for: .normal)
+        videoCallButton?.setTitle(model.videoCallButtonText, for: .normal)
+        updateButtonsInsets()
     }
 
     override func viewDidLoad() {

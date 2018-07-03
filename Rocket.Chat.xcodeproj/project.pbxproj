@@ -563,6 +563,7 @@
 		809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53111FE2F2F900833DD2 /* ReactionView.xib */; };
 		809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53131FE3294400833DD2 /* ReactionListView.xib */; };
 		809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
+		809D577620EBAE5F0014C364 /* UIButtonCenterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */; };
 		80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2A2AC2073BE3500857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */; };
@@ -1342,6 +1343,7 @@
 		809B53111FE2F2F900833DD2 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
 		809B53131FE3294400833DD2 /* ReactionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionListView.xib; sourceTree = "<group>"; };
 		809B53151FE3D3DC00833DD2 /* MessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReaction.swift; sourceTree = "<group>"; };
+		809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonCenterImage.swift; sourceTree = "<group>"; };
 		80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCurrent.swift; sourceTree = "<group>"; };
 		80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcher.swift; sourceTree = "<group>"; };
 		80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiAutocompleteCell.swift; sourceTree = "<group>"; };
@@ -2174,6 +2176,7 @@
 				8013F8631FD5E11100EE1A4E /* API */,
 				414EFF901E54FE35004F001F /* Models */,
 				8052F75A20B7522900B3B0CF /* UIAlertAction */,
+				809D577420EBAE460014C364 /* UIButton */,
 				8045F4A920D3114900AA0F3C /* UITextField */,
 				8045F4A220D30B6A00AA0F3C /* UISearchBar */,
 				80B2D98D20E54999002F4149 /* UINavigationBar */,
@@ -3069,6 +3072,14 @@
 				8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */,
 			);
 			path = Reaction;
+			sourceTree = "<group>";
+		};
+		809D577420EBAE460014C364 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		80A97EFD200628A300A2774C /* Views */ = {
@@ -4320,6 +4331,7 @@
 				99F530A120D0F08A004EC060 /* BaseTableViewController.swift in Sources */,
 				8076FDD12048646500114F28 /* MessageReply.swift in Sources */,
 				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
+				809D577620EBAE5F0014C364 /* UIButtonCenterImage.swift in Sources */,
 				4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */,
 				8041C04620290A48007E21FA /* RCEmojiKitLocalizable.swift in Sources */,
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
