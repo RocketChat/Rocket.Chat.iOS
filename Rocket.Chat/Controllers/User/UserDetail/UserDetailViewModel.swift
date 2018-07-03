@@ -13,6 +13,10 @@ struct UserDetailViewModel {
     let username: String
     let avatarUrl: URL?
     let cells: [UserDetailFieldCellModel]
+
+    let messageButtonText = localized("user_details.message_button")
+    let voiceCallButtonText = localized("user_details.voice_call_button")
+    let videoCallButtonText = localized("user_details.video_call_button")
 }
 
 // MARK: Empty State

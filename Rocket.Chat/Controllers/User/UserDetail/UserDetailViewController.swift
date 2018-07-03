@@ -17,6 +17,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
 
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var voiceCallButton: UIButton!
+    @IBOutlet weak var videoCallButton: UIButton!
+
     @IBOutlet weak var tableView: UserDetailTableView! {
         didSet {
             tableView.dataSource = self
@@ -34,6 +38,9 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         tableView?.reloadData()
         nameLabel?.text = model.name
         usernameLabel?.text = model.username
+        messageButton?.titleLabel?.text = model.messageButtonText
+        voiceCallButton?.titleLabel?.text = model.voiceCallButtonText
+        videoCallButton?.titleLabel?.text = model.videoCallButtonText
         if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
             ImageManager.loadImage(with: url, into: avatar)
             ImageManager.loadImage(with: url, into: background)
