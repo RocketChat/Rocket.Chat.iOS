@@ -15,16 +15,16 @@ class BugTrackingCoordinatorSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        BugTrackingCoordinator.toggleCrashReporting(disabled: false)
+        AnalyticsCoordinator.toggleCrashReporting(disabled: false)
     }
 
     func testDefaultValue() {
-        XCTAssertFalse(BugTrackingCoordinator.isCrashReportingDisabled)
+        XCTAssertFalse(AnalyticsCoordinator.isUsageDataLoggingDisabled)
     }
 
     func testValueChanged() {
-        BugTrackingCoordinator.toggleCrashReporting(disabled: true)
-        XCTAssertTrue(BugTrackingCoordinator.isCrashReportingDisabled)
+        AnalyticsCoordinator.toggleCrashReporting(disabled: true)
+        XCTAssertTrue(AnalyticsCoordinator.isUsageDataLoggingDisabled)
     }
 
 }

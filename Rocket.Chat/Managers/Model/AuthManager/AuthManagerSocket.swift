@@ -46,7 +46,7 @@ extension AuthManager {
                 "msg": "method",
                 "method": "login",
                 "params": [[
-                    "resume": auth.token ?? ""
+                    "resume": auth.isInvalidated ? "" : (auth.token ?? "")
                 ]]
             ] as [String: Any]
 
