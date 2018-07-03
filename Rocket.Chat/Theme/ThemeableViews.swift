@@ -18,11 +18,13 @@ extension UIView: Themeable {
 
      The default implementation calls the `applyTheme` method on all of its subviews, and sets the background color of the views.
 
-     Override this method to adapt the components of the view to the theme being applied. The implementation of `super` should be called somewhere in the overridden implementation to apply the theme on all of the subviews, and to adapt the `backgroundColor` of `self`.
+     Override this method to adapt the components of the view to the theme currently applied. `super.applyTheme` should be called somewhere in the implementation to sutomatically call `applyTheme` on all of the subviews, to set the `backgroundColor` and set the attributes defined in User Defined Runtime Attributes.
 
      This method should only be called directly if the view or any of its subviews require theming after the first initialization.
 
      - Important:
+     It is recommended that this method be only overridden, if it is not possible to use User Defined Runtime Attributes to achieve the desired result.
+
      On first initializaiton, it is recommended that the view controller for the view be added as an observer to the ThemeManager using the `ThemeManager.addObserver(_:)` method. If a view controller does not exist, the view should be added as an observer instead.
      */
 

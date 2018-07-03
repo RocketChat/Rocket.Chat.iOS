@@ -9,24 +9,54 @@
 import UIKit
 
 extension UIView {
+    /**
+     Sets desired theme color on a `UIColor` attribute using a formatted string.
+
+     The color is automatically changed based on the currently applied theme.
+
+     - Important:
+     Should only be used with User Defined Runtime Attributes in Interface Builder.
+
+     - parameters:
+        - themeString: contains the attribute of the view, which needs to be themed and the attribute of the theme which represents the desired color, separated with a colon.
+
+            ```
+            textColor: auxiliaryText
+            ```
+
+            This can be read as `view.textColor = theme.auxiliaryText`
+    */
+
     @objc func setThemeColor(_ themeString: String) {
         let parsedComponents = themeString.removingWhitespaces().components(separatedBy: ":")
         guard parsedComponents.count == 2 else { return }
         themeProperties[parsedComponents[0]] = parsedComponents[1]
     }
 
+    /**
+     Sets desired color on a `UIColor` attribute using a formatted string.
+
+     This color stays the same irrespective of the theme currently applied.
+
+     - Important:
+     Should only be used with User Defined Runtime Attributes in Interface Builder.
+
+     - parameters:
+        - overrideString: contains the attribute of the view, which needs to be themed and the desired color represented in hex, separated with a colon.
+
+            ```
+            backgroundColor: #FFFFFF
+            ```
+
+            This can be read as `view.backgroundColor = UIColor(hex: "#FFFFFF")`
+
+            **TIP:** The color can be represented in various forms of hex, eg. `aaa`, `ababab`, `#ffffff`, `#AAAAAAFF`, etc. Some common color names are also supported, such as `red`, `green`, `blue`, etc. This behavior is adopted from the UIColor extension declared in the `UIColorCSSColorsExtension.swift` file.
+     */
+
     @objc func setThemeColorOverride(_ overrideString: String) {
         let parsedComponents = overrideString.removingWhitespaces().components(separatedBy: ":")
         guard parsedComponents.count == 2 else { return }
         themeOverrideProperties[parsedComponents[0]] = UIColor(hex: parsedComponents[1])
-    }
-
-    open override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        #if TEST
-        print("ASSERTION: Trying to set value for an undefined key: \(key)")
-        #else
-        assertionFailure("Trying to set value for an undefined key: \(key)")
-        #endif
     }
 
     /**
@@ -45,6 +75,14 @@ extension UIView {
         themeOverrideProperties.forEach {
             self.setValue($0.value, forKey: $0.key)
         }
+    }
+
+    open override func setValue(_ value: Any?, forUndefinedKey key: String) {
+        #if TEST
+        print("ASSERTION: Trying to set value for an undefined key: \(key)")
+        #else
+        assertionFailure("Trying to set value for an undefined key: \(key)")
+        #endif
     }
 }
 
