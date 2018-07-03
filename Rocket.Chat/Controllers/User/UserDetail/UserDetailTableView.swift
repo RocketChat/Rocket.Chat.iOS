@@ -24,7 +24,7 @@ class UserDetailTableView: UITableView {
         let headerView = tableHeaderView ?? UIView()
         tableHeaderView = nil
         addSubview(headerView)
-        contentInset = UIEdgeInsets(top: headerViewHeight, left: 0, bottom: 0, right: 0)
+        contentInset = UIEdgeInsets(top: headerViewHeight, left: 0, bottom: 16, right: 0)
         return headerView
     }()
 
