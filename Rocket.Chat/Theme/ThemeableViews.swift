@@ -23,9 +23,11 @@ extension UIView: Themeable {
      This method should only be called directly if the view or any of its subviews require theming after the first initialization.
 
      - Important:
-     It is recommended that this method be only overridden, if it is not possible to use User Defined Runtime Attributes to achieve the desired result.
+     It is recommended that this method be only overridden, if it is not possible to use User Defined Runtime Attributes to achieve the desired result. For more information, please see [Setting theme properties using User Defined Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850).
 
      On first initializaiton, it is recommended that the view controller for the view be added as an observer to the ThemeManager using the `ThemeManager.addObserver(_:)` method. If a view controller does not exist, the view should be added as an observer instead.
+
+     **See also:** [Theming Rocket.Chat](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1602)
      */
 
     func applyTheme() {

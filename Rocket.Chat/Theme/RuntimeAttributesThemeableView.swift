@@ -17,6 +17,8 @@ extension UIView {
      - Important:
      Should only be used with User Defined Runtime Attributes in Interface Builder.
 
+     For more information, please see [Setting theme properties using User Defined Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850)
+
      - parameters:
         - themeString: contains the attribute of the view, which needs to be themed and the attribute of the theme which represents the desired color, separated with a colon.
 
@@ -41,6 +43,8 @@ extension UIView {
      - Important:
      Should only be used with User Defined Runtime Attributes in Interface Builder.
 
+     For more information, please see [Setting theme properties using User Defined Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850)
+
      - parameters:
         - overrideString: contains the attribute of the view, which needs to be themed and the desired color represented in hex, separated with a colon.
 
@@ -63,6 +67,8 @@ extension UIView {
      Applies theming properties defined using the User Defined Runtime Attributes in Interface Builder.
 
      This method is already called in the base implementation of `applyTheme`. When overriding `applyTheme` if `super.applytheme` is not called, it is recommended that `applyThemeFromRuntimeAttributes` be called somewhere in the implementation.
+
+     **See also:** [Setting theme properties using User Defined Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850)
     */
 
     func applyThemeFromRuntimeAttributes() {
