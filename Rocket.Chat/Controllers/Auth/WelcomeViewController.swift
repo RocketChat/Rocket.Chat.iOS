@@ -119,7 +119,7 @@ class WelcomeViewController: BaseViewController {
         }
 
         let controller = SFSafariViewController(url: url)
-        controller.modalPresentationStyle = .popover
+        controller.modalPresentationStyle = .formSheet
         controller.preferredControlTintColor = view.tintColor
 
         present(controller, animated: true, completion: nil)
