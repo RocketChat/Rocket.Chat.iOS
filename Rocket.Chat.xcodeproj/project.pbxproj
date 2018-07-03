@@ -801,6 +801,7 @@
 		14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushWidthViewController.swift; sourceTree = "<group>"; };
 		14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushOpacityViewController.swift; sourceTree = "<group>"; };
 		14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewController.swift; sourceTree = "<group>"; };
+		14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.test.xcconfig"; sourceTree = "<group>"; };
 		14F8A213202E5CBD00175FDC /* Black-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-29@3x.png"; sourceTree = "<group>"; };
 		14F8A216202E5CBE00175FDC /* Black-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-76@2x.png"; sourceTree = "<group>"; };
 		14F8A217202E5CBE00175FDC /* Black-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-60@3x.png"; sourceTree = "<group>"; };
@@ -1422,6 +1423,7 @@
 		897083D21F8CF08100233561 /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		89AEB7F71F7D225D00112A09 /* RoomCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreateRequest.swift; sourceTree = "<group>"; };
 		89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomViewControllerSpec.swift; sourceTree = "<group>"; };
+		931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.test.xcconfig"; sourceTree = "<group>"; };
 		990B4B632069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		990FF6D520740C79007B4A53 /* RoomMentionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequest.swift; sourceTree = "<group>"; };
 		990FF6D7207438D4007B4A53 /* RoomMentionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequestSpec.swift; sourceTree = "<group>"; };
@@ -1510,6 +1512,7 @@
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.test.xcconfig"; sourceTree = "<group>"; };
 		F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; sourceTree = "<group>"; };
 		FEDACA44BBB1C0633DEA6F3D /* Pods-Rocket.ChatTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3453,6 +3456,9 @@
 				5A633C5AF9C033AF48DB8EE0 /* Pods-Rocket.Chat.ShareExtension.debug.xcconfig */,
 				81DE5CC08EFE20733A40A51E /* Pods-Rocket.Chat.ShareExtension.release.xcconfig */,
 				F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */,
+				E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */,
+				14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */,
+				931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4841,7 +4847,7 @@
 		};
 		33A37DF420EAB7E9004014B6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */;
+			baseConfigurationReference = E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4867,7 +4873,7 @@
 		};
 		33A37DF520EAB7E9004014B6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A633C5AF9C033AF48DB8EE0 /* Pods-Rocket.Chat.ShareExtension.debug.xcconfig */;
+			baseConfigurationReference = 14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4895,7 +4901,7 @@
 		};
 		33A37DF620EAB7E9004014B6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */;
+			baseConfigurationReference = 931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
@@ -4903,7 +4909,6 @@
 				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PODS_CONFIGURATION_BUILD_DIR = "${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
