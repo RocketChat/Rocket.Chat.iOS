@@ -153,7 +153,7 @@ final class AvatarView: UIView {
         }
 
         ImageManager.dataCache?.storeData(data, for: url.absoluteString)
-        ImageCache.shared.removeResponse(
+        ImageManager.memoryCache.removeResponse(
             for: ImageRequest(
                 url: url
             )

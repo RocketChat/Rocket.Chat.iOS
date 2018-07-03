@@ -11,7 +11,10 @@ import Nuke
 
 struct ImageManager {
 
-    static internal let dataCacheName = "com.rocket.chat.DataCache"
+    // On older versions this name was defined internally by Nuke,
+    // now that we must define it, if we don't want the people to clear the entire image caching
+    // when they update the app, we must set the same data cache name that it used to be when internally managed.
+    static internal let dataCacheName = "com.github.kean.Nuke.DataCache"
 
     static let loadingOptions: ImageLoadingOptions = {
         var loadingOptions = ImageLoadingOptions.shared
@@ -25,6 +28,10 @@ struct ImageManager {
         })
     }()
 
+    static let memoryCache: ImageCache = {
+        return ImageCache()
+    }()
+
     static let pipeline = ImagePipeline {
         $0.dataLoader = DataLoader(configuration: {
             // Disable disk caching built into URLSession
@@ -33,10 +40,8 @@ struct ImageManager {
             return conf
         }())
 
-        $0.imageCache = ImageCache()
-
+        $0.imageCache = memoryCache
         $0.dataCache = dataCache
-
         $0.isDeduplicationEnabled = false
     }
 
