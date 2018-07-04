@@ -165,6 +165,7 @@
 "status.online" = "Σε σύνδεση";
 "status.away" = "Λείπω";
 "status.busy" = "Απασχολημένος";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Αόρατος";
 
 // New Room View
@@ -364,10 +365,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Συνθηματικό"; 
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Συνομιλία"; 
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Αφαίρεση από το δωμάτιο"; 
 "user_action_sheet.remove_confirm.title" = "Αφαίρεση αυτού του χρήστη;"; 
-"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;"; 
+"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;";
+
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
+"user_details.message_button" = "Message"; // TODO
+"user_details.voice_call_button" = "Voice Call"; // TODO
+"user_details.video_call_button" = "Video Call"; // TODO
 
 // Theme
 "theme.settings.title" = "Θέμα"; 

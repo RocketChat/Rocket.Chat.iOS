@@ -165,6 +165,7 @@
 "status.online" = "Disponível";
 "status.away" = "Ausente";
 "status.busy" = "Ocupado";
+"status.offline" = "Desconectado";
 "status.invisible" = "Invisível";
 
 // New Room View
@@ -364,10 +365,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Conversa";
+"user_action_sheet.info" = "Informação";
 "user_action_sheet.remove" = "Remover do canal";
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
+
+// User Details
+"user_details.status" = "Status";
+"user_details.role" = "Função";
+"user_details.roles" = "Funções";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Fuso horário";
+"user_details.message_button" = "Mensagem";
+"user_details.voice_call_button" = "Voz";
+"user_details.video_call_button" = "Vídeo";
 
 // Theme
 "theme.settings.title" = "Theme"; // TODO

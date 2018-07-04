@@ -45,15 +45,15 @@ class MembersListViewData {
         if let subscription = subscription {
             isLoadingMoreMembers = true
 
-            let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
-
-            API.current()?.fetch(request, options: options) { [weak self] response in
+            let client = API.current()?.client(SubscriptionsClient.self)
+            client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response in
                 guard let strongSelf = self else { return }
                 switch response {
                 case .resource(let resource):
                     strongSelf.showing += resource.count ?? 0
                     strongSelf.total = resource.total ?? 0
+
                     if let members = resource.members {
                         strongSelf.membersPages.append(members.compactMap { $0 })
                     }

@@ -23,6 +23,20 @@ class BaseNavigationController: UINavigationController {
         super.init(coder: aDecoder)
     }
 
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        super.pushViewController(viewController, animated: animated)
+
+        (viewController as? BaseViewController)?.willBePushed(animated: animated)
+    }
+
+    override func popViewController(animated: Bool) -> UIViewController? {
+        let viewController = super.popViewController(animated: animated)
+
+        (viewController as? BaseViewController)?.willBePopped(animated: animated)
+
+        return viewController
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

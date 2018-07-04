@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Detail View Controller-->
+        <scene sceneID="TxN-hQ-3Fi">
+            <objects>
+                <viewController id="6OD-GW-L6f" customClass="UserDetailViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PvQ-5C-aNJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="63" estimatedRowHeight="63" sectionHeaderHeight="40" estimatedSectionHeaderHeight="40" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06e-g9-2mB" customClass="UserDetailTableView" customModule="Rocket_Chat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="b3B-9a-fwl" userLabel="Header View" customClass="UserDetailHeaderView" customModule="Rocket_Chat" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="cbW-5Y-lku" userLabel="Background Image View" customClass="FLAnimatedImageView">
+                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                        </imageView>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-B7-HLO">
+                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Iq-Kt-zYq">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <blurEffect style="light"/>
+                                        </visualEffectView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz" customClass="FLAnimatedImageView">
+                                            <rect key="frame" x="147" y="72" width="80" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
+                                                <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victoria Anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hs-3q-tIe" userLabel="Name Label">
+                                            <rect key="frame" x="110.99999999999999" y="162" width="151.66666666666663" height="21.666666666666657"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="victoria.anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRy-tb-DvF" userLabel="Username Label">
+                                            <rect key="frame" x="128" y="188" width="118.66666666666669" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
+                                            <rect key="frame" x="142.66666666666666" y="212" width="90" height="70"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="3OI-kY-Tfp"/>
+                                                        <constraint firstAttribute="width" constant="90" id="oLy-cA-1gi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-21" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="34" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Message" image="UserDetail_Message">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="messageDidPress:" destination="6OD-GW-L6f" eventType="touchUpInside" id="dCk-Wg-IfY"/>
+                                                    </connections>
+                                                </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
+                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="Bkq-UB-S4J"/>
+                                                        <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-18" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="37" minY="-16" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Voice call" image="UserDetail_VoiceCall">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
+                                                        <constraint firstAttribute="width" constant="90" id="xf7-75-bUs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-22" minY="44" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="35" minY="-15" maxX="0.0" maxY="2"/>
+                                                    <state key="normal" title="Video call" image="UserDetail_VideoCall">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="wRy-tb-DvF" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="0RQ-OR-wQD"/>
+                                        <constraint firstItem="wRy-tb-DvF" firstAttribute="centerX" secondItem="8Hs-3q-tIe" secondAttribute="centerX" id="3N5-yc-JoW"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="width" secondItem="cbW-5Y-lku" secondAttribute="width" id="9be-qE-kbc"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="BUr-qB-Ypf"/>
+                                        <constraint firstItem="8Hs-3q-tIe" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="Haw-Di-O5C"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="centerY" secondItem="b3B-9a-fwl" secondAttribute="centerY" id="LoM-8B-ds1"/>
+                                        <constraint firstItem="pYP-y6-oBz" firstAttribute="centerX" secondItem="cbW-5Y-lku" secondAttribute="centerX" id="U1I-3O-sdy"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="height" secondItem="cbW-5Y-lku" secondAttribute="height" id="VbC-Am-HT6"/>
+                                        <constraint firstItem="s6E-mn-etl" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="aA6-dm-QTP"/>
+                                        <constraint firstItem="8Hs-3q-tIe" firstAttribute="top" secondItem="pYP-y6-oBz" secondAttribute="bottom" constant="10" id="eHU-xj-7aA"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="width" secondItem="b3B-9a-fwl" secondAttribute="width" id="fKB-jZ-odX"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="height" secondItem="b3B-9a-fwl" secondAttribute="height" id="h5D-x8-Fig"/>
+                                        <constraint firstItem="wRy-tb-DvF" firstAttribute="top" secondItem="8Hs-3q-tIe" secondAttribute="bottom" constant="4" id="rRg-nI-XuJ"/>
+                                        <constraint firstItem="s6E-mn-etl" firstAttribute="top" secondItem="wRy-tb-DvF" secondAttribute="bottom" constant="6" id="scE-DU-uPm"/>
+                                        <constraint firstItem="y9U-B7-HLO" firstAttribute="centerY" secondItem="cbW-5Y-lku" secondAttribute="centerY" id="up3-L4-4Xb"/>
+                                        <constraint firstAttribute="bottom" secondItem="s6E-mn-etl" secondAttribute="bottom" constant="26" id="wpm-VI-Fck"/>
+                                        <constraint firstItem="cbW-5Y-lku" firstAttribute="centerX" secondItem="b3B-9a-fwl" secondAttribute="centerX" id="zUi-6D-Yfa"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="messageButton" destination="K5G-d0-NQx" id="qah-9N-6Bb"/>
+                                        <outlet property="nameLabel" destination="8Hs-3q-tIe" id="1XV-95-CM0"/>
+                                        <outlet property="usernameLabel" destination="wRy-tb-DvF" id="f03-Nz-44c"/>
+                                        <outlet property="videoCallButton" destination="a7c-7i-dcb" id="QX9-Ln-0aR"/>
+                                        <outlet property="voiceCallButton" destination="G2w-8I-1Td" id="KbN-6i-eDR"/>
+                                    </connections>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserDetailFieldCell" rowHeight="63" id="gYp-eN-ewP" customClass="UserDetailFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="348" width="375" height="63"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gYp-eN-ewP" id="QMZ-pG-8SL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki4-tx-1mt">
+                                                    <rect key="frame" x="15" y="19" width="30" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Designer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlQ-w0-4tK">
+                                                    <rect key="frame" x="15.000000000000007" y="42" width="126.66666666666669" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="MFm-n5-s0x"/>
+                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="top" secondItem="Ki4-tx-1mt" secondAttribute="bottom" constant="5" id="V0U-wk-ILj"/>
+                                                <constraint firstItem="Ki4-tx-1mt" firstAttribute="top" secondItem="QMZ-pG-8SL" secondAttribute="top" constant="19" id="a3c-nS-rhE"/>
+                                                <constraint firstItem="RlQ-w0-4tK" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="cbh-sq-GxI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detailLabel" destination="RlQ-w0-4tK" id="YnC-pK-RR5"/>
+                                            <outlet property="titleLabel" destination="Ki4-tx-1mt" id="rz0-gd-vp1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="06e-g9-2mB" firstAttribute="top" secondItem="PvQ-5C-aNJ" secondAttribute="top" id="0V7-Uk-Mt2"/>
+                            <constraint firstItem="06e-g9-2mB" firstAttribute="leading" secondItem="PvQ-5C-aNJ" secondAttribute="leading" id="XuJ-lq-hR7"/>
+                            <constraint firstAttribute="trailing" secondItem="06e-g9-2mB" secondAttribute="trailing" id="cYh-TF-xbI"/>
+                            <constraint firstAttribute="bottom" secondItem="06e-g9-2mB" secondAttribute="bottom" id="qMZ-eG-S5K"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pKt-zL-IrR"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="avatarImageView" destination="pYP-y6-oBz" id="M5i-Gk-NEJ"/>
+                        <outlet property="backgroundImageView" destination="cbW-5Y-lku" id="a8c-yy-mCp"/>
+                        <outlet property="messageButton" destination="K5G-d0-NQx" id="66U-Zx-ZEE"/>
+                        <outlet property="nameLabel" destination="8Hs-3q-tIe" id="3li-P5-hA8"/>
+                        <outlet property="tableView" destination="06e-g9-2mB" id="vhG-66-hJB"/>
+                        <outlet property="usernameLabel" destination="wRy-tb-DvF" id="mFW-Ur-djL"/>
+                        <outlet property="videoCallButton" destination="a7c-7i-dcb" id="WhP-9N-7Ba"/>
+                        <outlet property="voiceCallButton" destination="G2w-8I-1Td" id="MM2-AH-8Ep"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XMv-9i-AvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260" y="-19.211822660098523"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="UserDetail_Message" width="22" height="21"/>
+        <image name="UserDetail_VideoCall" width="21" height="15"/>
+        <image name="UserDetail_VoiceCall" width="16" height="19"/>
+        <image name="Victoria_Anderson" width="128" height="128"/>
+    </resources>
+</document>
