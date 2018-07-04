@@ -86,6 +86,9 @@
 		33093DC5207C7EAF00DD81F6 /* ChatNotificationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */; };
 		33093DC7207C900900DD81F6 /* NotificationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */; };
 		33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */; };
+		33230AAE20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33230AAD20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift */; };
+		33230AB420EA6B230031C71D /* ThemeManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33230AB020EA6A970031C71D /* ThemeManagerSpec.swift */; };
+		33230AB520EA6B590031C71D /* ThemeableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33230AB120EA6A970031C71D /* ThemeableSpec.swift */; };
 		332BCB1C20DA6D5F00C8CAD2 /* SubscriptionsSortingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */; };
 		3330329820738D4600A9514D /* SubscriptionManagerMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329720738D4600A9514D /* SubscriptionManagerMessages.swift */; };
 		3330329A20738E1500A9514D /* SubscriptionManagerRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329920738E1500A9514D /* SubscriptionManagerRooms.swift */; };
@@ -96,6 +99,7 @@
 		33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */; };
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
+		3397604920EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
@@ -210,7 +214,7 @@
 		4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */; };
 		4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */; };
 		4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */; };
-		41534EE2208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */; };
+		41534EE2208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */; };
 		4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153E80420504BE700FBC26B /* ReusableViewText.swift */; };
 		41552F661D30308C0081438D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F671D3035D80081438D /* SocketManagerSpec.swift */; };
@@ -797,6 +801,7 @@
 		14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushWidthViewController.swift; sourceTree = "<group>"; };
 		14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushOpacityViewController.swift; sourceTree = "<group>"; };
 		14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewController.swift; sourceTree = "<group>"; };
+		14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.test.xcconfig"; sourceTree = "<group>"; };
 		14F8A213202E5CBD00175FDC /* Black-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-29@3x.png"; sourceTree = "<group>"; };
 		14F8A216202E5CBE00175FDC /* Black-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-76@2x.png"; sourceTree = "<group>"; };
 		14F8A217202E5CBE00175FDC /* Black-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-60@3x.png"; sourceTree = "<group>"; };
@@ -854,6 +859,9 @@
 		33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotificationSpec.swift; sourceTree = "<group>"; };
 		33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerSpec.swift; sourceTree = "<group>"; };
 		33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewControllerSpec.swift; sourceTree = "<group>"; };
+		33230AAD20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeAttributesThemeableView.swift; sourceTree = "<group>"; };
+		33230AB020EA6A970031C71D /* ThemeManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeManagerSpec.swift; sourceTree = "<group>"; };
+		33230AB120EA6A970031C71D /* ThemeableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeableSpec.swift; sourceTree = "<group>"; };
 		332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubscriptionsSortingHeaderView.swift; path = Rocket.Chat/Views/Subscriptions/SubscriptionsSortingHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		3330329720738D4600A9514D /* SubscriptionManagerMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManagerMessages.swift; sourceTree = "<group>"; };
 		3330329920738E1500A9514D /* SubscriptionManagerRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManagerRooms.swift; sourceTree = "<group>"; };
@@ -863,6 +871,7 @@
 		33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentToTouchesWindow.swift; sourceTree = "<group>"; };
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeAttributesThemeableViewSpec.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
@@ -977,7 +986,7 @@
 		4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
 		4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsModelMapping.swift; sourceTree = "<group>"; };
 		4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURLModelMapping.swift; sourceTree = "<group>"; };
-		41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinatorSpec.swift; sourceTree = "<group>"; };
+		41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsCoordinatorSpec.swift; sourceTree = "<group>"; };
 		4153E80420504BE700FBC26B /* ReusableViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewText.swift; sourceTree = "<group>"; };
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManagerSpec.swift; sourceTree = "<group>"; };
@@ -1414,6 +1423,7 @@
 		897083D21F8CF08100233561 /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		89AEB7F71F7D225D00112A09 /* RoomCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreateRequest.swift; sourceTree = "<group>"; };
 		89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomViewControllerSpec.swift; sourceTree = "<group>"; };
+		931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.test.xcconfig"; sourceTree = "<group>"; };
 		990B4B632069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		990FF6D520740C79007B4A53 /* RoomMentionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequest.swift; sourceTree = "<group>"; };
 		990FF6D7207438D4007B4A53 /* RoomMentionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomMentionsRequestSpec.swift; sourceTree = "<group>"; };
@@ -1502,6 +1512,7 @@
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.test.xcconfig"; sourceTree = "<group>"; };
 		F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; sourceTree = "<group>"; };
 		FEDACA44BBB1C0633DEA6F3D /* Pods-Rocket.ChatTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1731,6 +1742,17 @@
 			path = Blue;
 			sourceTree = "<group>";
 		};
+		33230AAF20EA6A970031C71D /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */,
+				33230AB020EA6A970031C71D /* ThemeManagerSpec.swift */,
+				33230AB120EA6A970031C71D /* ThemeableSpec.swift */,
+			);
+			name = Theme;
+			path = Rocket.ChatTests/Theme;
+			sourceTree = SOURCE_ROOT;
+		};
 		3330329F2073905900A9514D /* SubscriptionManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1766,6 +1788,7 @@
 				33D08E2020BD5EDC008D03EF /* ThemeableViews.swift */,
 				33D08E2120BD5EDC008D03EF /* ThemeManager.swift */,
 				33D08E2220BD5EDC008D03EF /* NotThemeableViews.swift */,
+				33230AAD20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift */,
 				33D08E2320BD5EDC008D03EF /* Theme.swift */,
 			);
 			path = Theme;
@@ -1859,7 +1882,7 @@
 		41534EE0208E43FF009C5A17 /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
-				41534EE1208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift */,
+				41534EE1208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -2479,6 +2502,7 @@
 				41552F691D3035DB0081438D /* Managers */,
 				416133361D46DB0900E09DA2 /* Models */,
 				925FF74F1E8EFC9200982043 /* Preferences */,
+				33230AAF20EA6A970031C71D /* Theme */,
 				4171ABA31E7C0556009FC3F0 /* Views */,
 				41DF76F91D2C50720028DBF8 /* Info.plist */,
 				803782B61FB4751D00DED049 /* RealmTestCase.swift */,
@@ -3432,6 +3456,9 @@
 				5A633C5AF9C033AF48DB8EE0 /* Pods-Rocket.Chat.ShareExtension.debug.xcconfig */,
 				81DE5CC08EFE20733A40A51E /* Pods-Rocket.Chat.ShareExtension.release.xcconfig */,
 				F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */,
+				E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */,
+				14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */,
+				931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4401,6 +4428,7 @@
 				414E8A8F20A5DDF800615CE6 /* ChatControllerRolesController.swift in Sources */,
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
+				33230AAE20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift in Sources */,
 				41FC9E0B209B3B3100FED485 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */,
@@ -4486,6 +4514,7 @@
 				998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */,
 				8039441320AF17F1002F317A /* RoomKickRequestSpec.swift in Sources */,
 				993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */,
+				3397604920EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
@@ -4505,6 +4534,7 @@
 				418C74411FA3627F00499577 /* PickerViewDelegateSpec.swift in Sources */,
 				410AD84720A9B73B00EAFC64 /* FileSpec.swift in Sources */,
 				80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */,
+				33230AB520EA6B590031C71D /* ThemeableSpec.swift in Sources */,
 				B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */,
 				4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */,
 				80213C0B1FDFE35C00809E14 /* UploadMessageRequestSpec.swift in Sources */,
@@ -4516,6 +4546,7 @@
 				99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */,
 				41E96C3120B88A0000ACBA92 /* RoomRolesRequestSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
+				33230AB420EA6B230031C71D /* ThemeManagerSpec.swift in Sources */,
 				80A63C511F719FB300FE5AC4 /* RoomInfoRequestSpec.swift in Sources */,
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
@@ -4537,7 +4568,7 @@
 				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
-				41534EE2208E4411009C5A17 /* BugTrackingCoordinatorSpec.swift in Sources */,
+				41534EE2208E4411009C5A17 /* AnalyticsCoordinatorSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
 				D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */,
 				806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */,
@@ -4756,6 +4787,152 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		33A37DF320EAB7E9004014B6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
+		33A37DF420EAB7E9004014B6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				INFOPLIST_FILE = Rocket.Chat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Onone -D TEST \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_DISABLE_SAFETY_CHECKS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Test;
+		};
+		33A37DF520EAB7E9004014B6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat.ShareExtension/Rocket.Chat.ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Rocket.Chat.ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-ShareExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
+		33A37DF620EAB7E9004014B6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rocket.Chat.app/Rocket.Chat";
+			};
+			name = Test;
+		};
+		33A37DF720EAB7E9004014B6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				INFOPLIST_FILE = Rocket.ChatUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = Rocket.Chat;
+			};
+			name = Test;
+		};
 		41DF77051D2C50720028DBF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4906,6 +5083,7 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5182,6 +5360,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41DF77051D2C50720028DBF8 /* Debug */,
+				33A37DF320EAB7E9004014B6 /* Test */,
 				41DF77061D2C50720028DBF8 /* Release */,
 				41E69F0420050A310040ADB2 /* Beta */,
 			);
@@ -5192,6 +5371,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41DF77081D2C50720028DBF8 /* Debug */,
+				33A37DF420EAB7E9004014B6 /* Test */,
 				41DF77091D2C50720028DBF8 /* Release */,
 				41E69F0520050A310040ADB2 /* Beta */,
 			);
@@ -5202,6 +5382,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41DF770B1D2C50720028DBF8 /* Debug */,
+				33A37DF620EAB7E9004014B6 /* Test */,
 				41DF770C1D2C50720028DBF8 /* Release */,
 				41E69F0620050A310040ADB2 /* Beta */,
 			);
@@ -5212,6 +5393,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41DF770E1D2C50720028DBF8 /* Debug */,
+				33A37DF720EAB7E9004014B6 /* Test */,
 				41DF770F1D2C50720028DBF8 /* Release */,
 				41E69F0720050A310040ADB2 /* Beta */,
 			);
@@ -5222,6 +5404,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				807FB5632046E7DD00E21429 /* Debug */,
+				33A37DF520EAB7E9004014B6 /* Test */,
 				807FB5642046E7DD00E21429 /* Release */,
 				807FB5652046E7DD00E21429 /* Beta */,
 			);
