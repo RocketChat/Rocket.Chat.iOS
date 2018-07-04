@@ -62,7 +62,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
-                                            <rect key="frame" x="34.666666666666657" y="212" width="306" height="70"/>
+                                            <rect key="frame" x="142.66666666666666" y="212" width="90" height="70"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="70"/>
@@ -85,8 +85,8 @@
                                                         <action selector="messageDidPress:" destination="6OD-GW-L6f" eventType="touchUpInside" id="dCk-Wg-IfY"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
-                                                    <rect key="frame" x="108" y="0.0" width="90" height="70"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
+                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="Bkq-UB-S4J"/>
                                                         <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
@@ -103,8 +103,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
-                                                    <rect key="frame" x="216" y="0.0" width="90" height="70"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
                                                         <constraint firstAttribute="width" constant="90" id="xf7-75-bUs"/>
