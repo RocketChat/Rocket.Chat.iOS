@@ -22,7 +22,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var videoCallButton: UIButton!
 
     override var isNavigationBarTransparent: Bool {
-        return false
+        return true
     }
 
     func updateButtonsInsets() {

@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
         return false
     }
 
-    func willBePushed(animated: Bool) {
+    func updateNavigationBarTransparency() {
         if isNavigationBarTransparent {
             navigationController?.navigationBar.setTransparent()
         } else {
@@ -23,14 +23,13 @@ class BaseViewController: UIViewController {
         navigationController?.redrawNavigationBar()
     }
 
-    func willBePopped(animated: Bool) {
-        if (navigationController?.topViewController as? BaseViewController)?.isNavigationBarTransparent == true {
-            navigationController?.navigationBar.setTransparent()
-        } else {
-            navigationController?.navigationBar.setNonTransparent()
-        }
+    func willBePushed(animated: Bool) {
+        updateNavigationBarTransparency()
+    }
 
-        navigationController?.redrawNavigationBar()
+    func willBePopped(animated: Bool) {
+        let controller = navigationController?.topViewController as? BaseViewController
+        controller?.updateNavigationBarTransparency()
     }
 
     override func viewDidLoad() {
@@ -51,5 +50,10 @@ class BaseViewController: UIViewController {
 
         let screenName = String(describing: type(of: self))
         AnalyticsManager.log(event: .screenView(screenName: screenName))
+    }
+
+    override func applyTheme() {
+        super.applyTheme()
+        updateNavigationBarTransparency()
     }
 }
