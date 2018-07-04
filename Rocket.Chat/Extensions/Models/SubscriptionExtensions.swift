@@ -98,6 +98,10 @@ extension Results where Element == Subscription {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
 
+    func sortedByRoomUpdatedAt() -> Results<Subscription> {
+        return sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+    }
+
     func filterBy(name: String) -> Results<Subscription> {
         return filter("name CONTAINS[cd] %@", name)
     }

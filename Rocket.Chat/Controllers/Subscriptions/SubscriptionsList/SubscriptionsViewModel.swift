@@ -11,10 +11,11 @@ import RealmSwift
 class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
         let results = Subscription.all(onlyJoined: !searchState.isSearching)
+        let hasLastMessage = AuthSettingsManager.settings?.storeLastMessage ?? true
 
         switch SubscriptionsSortingManager.selectedSortingOption {
         case .activity:
-            return results?.sortedByLastMessageDate()
+            return hasLastMessage ? results?.sortedByLastMessageDate() : results?.sortedByRoomUpdatedAt()
         case .alphabetically:
             return results?.sortedByName()
         }
