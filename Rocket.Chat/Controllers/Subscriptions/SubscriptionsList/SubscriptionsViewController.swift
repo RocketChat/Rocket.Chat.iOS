@@ -295,7 +295,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (AuthSettingsManager.settings?.storeLastMessage ?? true) ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
+        let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             cell.accessoryType = .none

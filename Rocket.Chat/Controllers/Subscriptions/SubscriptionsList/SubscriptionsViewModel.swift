@@ -11,7 +11,6 @@ import RealmSwift
 class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
         let results = Subscription.all(onlyJoined: !searchState.isSearching)
-        let hasLastMessage = AuthSettingsManager.settings?.storeLastMessage ?? true
 
         switch SubscriptionsSortingManager.selectedSortingOption {
         case .activity:
@@ -114,6 +113,10 @@ class SubscriptionsViewModel {
 // MARK: TableView
 
 extension SubscriptionsViewModel {
+
+    var hasLastMessage: Bool {
+        return AuthSettingsManager.settings?.storeLastMessage ?? true
+    }
 
     var numberOfSections: Int {
         return assorter?.numberOfSections ?? 0
