@@ -93,7 +93,10 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-        labelLastMessage.text = subscription.roomLastMessageText
+
+        if AuthSettingsManager.settings?.storeLastMessage ?? true {
+            labelLastMessage.text = subscription.roomLastMessageText
+        }
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
