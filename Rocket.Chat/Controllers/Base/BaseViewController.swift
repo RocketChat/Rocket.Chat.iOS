@@ -28,8 +28,12 @@ class BaseViewController: UIViewController {
     }
 
     func willBePopped(animated: Bool) {
-        let controller = navigationController?.topViewController as? BaseViewController
-        controller?.updateNavigationBarTransparency()
+        if let controller = navigationController?.topViewController as? BaseViewController {
+            controller.updateNavigationBarTransparency()
+        } else {
+            navigationController?.navigationBar.setNonTransparent()
+            navigationController?.redrawNavigationBar()
+        }
     }
 
     override func viewDidLoad() {
