@@ -33,6 +33,8 @@ struct SubscriptionManager {
             dispatchGroup.leave()
 
             // We don't trust the updatedSince response all the time.
+            // Our API is having issues with caching and we can't try
+            // to avoid this on the request.
             client?.fetchSubscriptions(updatedSince: nil) { }
         }
 
@@ -41,6 +43,8 @@ struct SubscriptionManager {
             dispatchGroup.leave()
 
             // We don't trust the updatedSince response all the time.
+            // Our API is having issues with caching and we can't try
+            // to avoid this on the request.
             client?.fetchRooms(updatedSince: nil) { }
         }
 
