@@ -9,24 +9,34 @@
 import UIKit
 
 class UserDetailTableView: UITableView {
-    private var headerViewHeight: CGFloat {
-        let topInset: CGFloat
+    private var topInset: CGFloat {
         if #available(iOS 11, *) {
-            topInset = safeAreaInsets.top
+            return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
         } else {
-            topInset = 0
+            return 0
         }
+    }
 
-        return 308 - topInset
+    private var headerViewHeight: CGFloat {
+        return 220 + topInset
     }
 
     lazy var headerView: UIView = {
         let headerView = tableHeaderView ?? UIView()
         tableHeaderView = nil
-        addSubview(headerView)
-        contentInset = UIEdgeInsets(top: headerViewHeight, left: 0, bottom: 16, right: 0)
+        contentInset = UIEdgeInsets(top: headerViewHeight - topInset, left: 0, bottom: 16, right: 0)
         return headerView
     }()
+
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: style)
+        addSubview(headerView)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        addSubview(headerView)
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
