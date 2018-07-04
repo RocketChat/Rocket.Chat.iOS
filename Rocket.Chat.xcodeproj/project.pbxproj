@@ -568,6 +568,7 @@
 		809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53131FE3294400833DD2 /* ReactionListView.xib */; };
 		809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
 		809D577620EBAE5F0014C364 /* UIButtonCenterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */; };
+		809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */; };
 		80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2A2AC2073BE3500857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */; };
@@ -588,7 +589,7 @@
 		80B2D98A20E5496E002F4149 /* UserDetailFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98420E5496E002F4149 /* UserDetailFieldCell.swift */; };
 		80B2D98B20E5496E002F4149 /* UserDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98520E5496E002F4149 /* UserDetailTableView.swift */; };
 		80B2D98C20E5496E002F4149 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98620E5496E002F4149 /* UserDetailViewController.swift */; };
-		80B2D98F20E5499A002F4149 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98E20E54999002F4149 /* UINavigationBar.swift */; };
+		80B2D98F20E5499A002F4149 /* UINavigationBarTransparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D98E20E54999002F4149 /* UINavigationBarTransparent.swift */; };
 		80B2D99120E549CC002F4149 /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */; };
 		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
 		80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99620E677D6002F4149 /* UsersClient.swift */; };
@@ -1353,6 +1354,7 @@
 		809B53131FE3294400833DD2 /* ReactionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionListView.xib; sourceTree = "<group>"; };
 		809B53151FE3D3DC00833DD2 /* MessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReaction.swift; sourceTree = "<group>"; };
 		809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonCenterImage.swift; sourceTree = "<group>"; };
+		809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerRedrawBar.swift; sourceTree = "<group>"; };
 		80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCurrent.swift; sourceTree = "<group>"; };
 		80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcher.swift; sourceTree = "<group>"; };
 		80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiAutocompleteCell.swift; sourceTree = "<group>"; };
@@ -1372,7 +1374,7 @@
 		80B2D98420E5496E002F4149 /* UserDetailFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailFieldCell.swift; sourceTree = "<group>"; };
 		80B2D98520E5496E002F4149 /* UserDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailTableView.swift; sourceTree = "<group>"; };
 		80B2D98620E5496E002F4149 /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
-		80B2D98E20E54999002F4149 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		80B2D98E20E54999002F4149 /* UINavigationBarTransparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarTransparent.swift; sourceTree = "<group>"; };
 		80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
 		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
 		80B2D99620E677D6002F4149 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
@@ -2202,8 +2204,9 @@
 				809D577420EBAE460014C364 /* UIButton */,
 				8045F4A920D3114900AA0F3C /* UITextField */,
 				8045F4A220D30B6A00AA0F3C /* UISearchBar */,
-				80B2D98D20E54999002F4149 /* UINavigationBar */,
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
+				80B2D98D20E54999002F4149 /* UINavigationBar */,
+				809D577720ED069C0014C364 /* UINavigationController */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
 				77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */,
@@ -2218,7 +2221,6 @@
 				D1C536CD1F688B7100EBA8D9 /* UIFontExtensions.swift */,
 				41494B911D63C6280004F369 /* UIImageExtension.swift */,
 				419205481D52EDE6004EEC5F /* UILabelExtension.swift */,
-				994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */,
 				41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */,
 				41DD6139203D9E6600B02D8A /* UISplitViewControllerExtensions.swift */,
 				413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */,
@@ -3106,6 +3108,15 @@
 			path = UIButton;
 			sourceTree = "<group>";
 		};
+		809D577720ED069C0014C364 /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */,
+				809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
 		80A97EFD200628A300A2774C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3169,7 +3180,7 @@
 		80B2D98D20E54999002F4149 /* UINavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				80B2D98E20E54999002F4149 /* UINavigationBar.swift */,
+				80B2D98E20E54999002F4149 /* UINavigationBarTransparent.swift */,
 			);
 			path = UINavigationBar;
 			sourceTree = "<group>";
@@ -4292,7 +4303,7 @@
 				41DE687B20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
-				80B2D98F20E5499A002F4149 /* UINavigationBar.swift in Sources */,
+				80B2D98F20E5499A002F4149 /* UINavigationBarTransparent.swift in Sources */,
 				33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				80E9DBD6209CA8FE00A48CA9 /* Closeable.swift in Sources */,
@@ -4447,6 +4458,7 @@
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
 				80054D001FDB1FA200F5ECF9 /* Alert.swift in Sources */,
+				809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */,
 				8032E3E820362EF5009D33CE /* UpdateMessageRequest.swift in Sources */,
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,

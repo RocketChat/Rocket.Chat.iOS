@@ -9,6 +9,30 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+
+    func willBePushed(animated: Bool) {
+        if isNavigationBarTransparent {
+            navigationController?.navigationBar.setTransparent()
+        } else {
+            navigationController?.navigationBar.setNonTransparent()
+        }
+
+        navigationController?.redrawNavigationBar()
+    }
+
+    func willBePopped(animated: Bool) {
+        if (navigationController?.topViewController as? BaseViewController)?.isNavigationBarTransparent == true {
+            navigationController?.navigationBar.setTransparent()
+        } else {
+            navigationController?.navigationBar.setNonTransparent()
+        }
+
+        navigationController?.redrawNavigationBar()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

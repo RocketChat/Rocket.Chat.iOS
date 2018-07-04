@@ -21,6 +21,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var voiceCallButton: UIButton!
     @IBOutlet weak var videoCallButton: UIButton!
 
+    override var isNavigationBarTransparent: Bool {
+        return false
+    }
+
     func updateButtonsInsets() {
         messageButton?.centerImageHorizontally()
         voiceCallButton?.centerImageHorizontally()
@@ -60,20 +64,6 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         updateForModel()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-
-        UIView.animate(withDuration: 1.0) {
-            self.navigationController?.navigationBar.setTransparent()
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        UIView.animate(withDuration: 1.0) {
-            self.navigationController?.navigationBar.setNonTransparent()
-        }
-    }
-
     @IBAction func messageDidPress(_ sender: UIButton) {
         AppManager.openDirectMessage(username: model.username)
     }
@@ -85,6 +75,8 @@ extension UserDetailViewController {
         return self
     }
 }
+
+// MARK: Table View
 
 extension UserDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

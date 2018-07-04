@@ -1,5 +1,5 @@
 //
-//  UINavigationBar.swift
+//  UINavigationBarTransparent.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 6/26/18.
