@@ -35,6 +35,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+
+            if navigationController == nil {
+                tableView.additionalTopInset = 44.0
+            }
         }
     }
 

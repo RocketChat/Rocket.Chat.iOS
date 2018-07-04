@@ -9,16 +9,26 @@
 import UIKit
 
 class UserDetailTableView: UITableView {
-    private var topInset: CGFloat {
-        if #available(iOS 11, *) {
-            return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        } else {
-            return 0
+    var additionalTopInset: CGFloat = 0 {
+        didSet {
+            contentInset = UIEdgeInsets(top: headerViewHeight - topInset, left: 0, bottom: 16, right: 0)
         }
     }
 
+    private var topInset: CGFloat {
+        let safeAreaInset: CGFloat
+
+        if #available(iOS 11, *) {
+            safeAreaInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+        } else {
+            safeAreaInset = 0
+        }
+
+        return safeAreaInset
+    }
+
     private var headerViewHeight: CGFloat {
-        return 220 + topInset
+        return 220 + topInset + additionalTopInset
     }
 
     lazy var headerView: UIView = {
