@@ -1,5 +1,5 @@
 //
-//  BugTrackingCoordinatorSpec.swift
+//  AnalyticsCoordinatorSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Rafael Kellermann Streit on 23/04/18.
@@ -11,7 +11,7 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
-class BugTrackingCoordinatorSpec: XCTestCase {
+class AnalyticsCoordinatorSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
