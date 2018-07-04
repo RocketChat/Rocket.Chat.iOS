@@ -11,8 +11,15 @@ import UIKit
 class AuthNavigationController: UINavigationController {
 
     override var shouldAutorotate: Bool {
-        guard let topViewController = topViewController else { return true }
-        return !(topViewController is WelcomeViewController)
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return super.supportedInterfaceOrientations
+        }
+
+        return [.portrait]
     }
 
     override func viewDidLoad() {
