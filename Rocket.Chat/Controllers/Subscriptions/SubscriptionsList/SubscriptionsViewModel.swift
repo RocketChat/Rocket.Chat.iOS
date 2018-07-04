@@ -114,6 +114,7 @@ class SubscriptionsViewModel {
 // MARK: TableView
 
 extension SubscriptionsViewModel {
+
     var numberOfSections: Int {
         return assorter?.numberOfSections ?? 0
     }
@@ -136,4 +137,5 @@ extension SubscriptionsViewModel {
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
+
 }
