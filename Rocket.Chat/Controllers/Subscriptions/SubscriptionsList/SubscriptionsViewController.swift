@@ -295,14 +295,32 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as? SubscriptionCell else {
-            return UITableViewCell()
-        }
+        let cell = (AuthSettingsManager.settings?.storeLastMessage ?? true) ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             cell.accessoryType = .none
         } else {
             cell.accessoryType = .disclosureIndicator
+        }
+
+        return cell
+    }
+
+    func cellForSubscription(at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as? SubscriptionCell else {
+            return UITableViewCell()
+        }
+
+        if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
+            cell.subscription = subscription
+        }
+
+        return cell
+    }
+
+    func cellForSubscriptionCondensed(at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCellCondensed.identifier) as? SubscriptionCellCondensed else {
+            return UITableViewCell()
         }
 
         if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
