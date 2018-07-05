@@ -12,7 +12,7 @@ protocol ChannelInfoCellProtocol {
     associatedtype DataType
 
     static var identifier: String { get }
-    static var defaultHeight: Float { get }
+    static var defaultHeight: CGFloat { get }
     var data: DataType? { get set }
 }
 

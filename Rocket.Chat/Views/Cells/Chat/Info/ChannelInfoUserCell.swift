@@ -17,7 +17,7 @@ final class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
     typealias DataType = ChannelInfoUserCellData
 
     static let identifier = "kChannelInfoCellUser"
-    static let defaultHeight: Float = 80
+    static let defaultHeight: CGFloat = 80
 
     var data: DataType? {
         didSet {
