@@ -29,7 +29,7 @@ class ChannelInfoActionCell: UITableViewCell, ChannelInfoCellProtocol {
     typealias DataType = ChannelInfoActionCellData
 
     static let identifier = "kChannelInfoActionCell"
-    static let defaultHeight: Float = 44
+    static let defaultHeight: CGFloat = 44
     var data: DataType? {
         didSet {
             labelTitle.text = data?.title

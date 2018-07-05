@@ -20,7 +20,7 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
     typealias DataType = ChannelInfoDescriptionCellData
 
     static let identifier = "kChannelInfoCellDescription"
-    static let defaultHeight: Float = 80
+    static let defaultHeight: CGFloat = UITableViewAutomaticDimension
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
