@@ -242,7 +242,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             sortingView = SubscriptionsSortingView.showIn(view)
             sortingView?.delegate = self
-            sortingView?.applyTheme()
         }
     }
 
@@ -256,7 +255,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
             serversView?.delegate = self
-            serversView?.applyTheme()
         }
     }
 

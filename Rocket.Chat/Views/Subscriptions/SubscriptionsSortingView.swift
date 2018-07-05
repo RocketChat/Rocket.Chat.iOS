@@ -87,6 +87,7 @@ final class SubscriptionsSortingView: UIView {
             })
         }
 
+        instance.applyTheme()
         return instance
     }
 
