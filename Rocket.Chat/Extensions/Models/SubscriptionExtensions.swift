@@ -91,7 +91,8 @@ extension Subscription {
 extension Results where Element == Subscription {
 
     func sortedByName() -> Results<Subscription> {
-        return sorted(byKeyPath: "name", ascending: true)
+        let shouldUseRealName = AuthSettingsManager.settings?.useUserRealName ?? false
+        return sorted(byKeyPath: shouldUseRealName ? "fname" : "name", ascending: true)
     }
 
     func sortedByLastMessageDate() -> Results<Subscription> {
