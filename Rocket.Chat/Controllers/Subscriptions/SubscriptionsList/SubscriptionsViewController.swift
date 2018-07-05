@@ -376,13 +376,20 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard
             let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
-            index < tableView.visibleCells.count,
-            let cell = tableView.visibleCells[index] as? SubscriptionCell
+            index < tableView.visibleCells.count
         else {
             return false
         }
 
-        return cell.shouldUpdateForSubscription(subscription)
+        if let cell = tableView.visibleCells[index] as? SubscriptionCell {
+            return cell.shouldUpdateForSubscription(subscription)
+        }
+
+        if let cell = tableView.visibleCells[index] as? SubscriptionCellCondensed {
+            return cell.shouldUpdateForSubscription(subscription)
+        }
+
+        return false
     }
 
 }
