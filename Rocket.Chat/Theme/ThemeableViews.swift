@@ -170,6 +170,7 @@ extension UITableViewCell {
 
     open override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard superview != nil else { return }
         applyTheme()
     }
 }
