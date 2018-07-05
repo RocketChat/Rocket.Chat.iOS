@@ -194,8 +194,9 @@ final class SubscriptionCell: UITableViewCell {
         let isLastMessageDifferent = labelLastMessage.text != lastMessageText
         let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
         let isStatusDifferent = userStatus != subscription.otherUserStatus
+        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
 
-        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent
+        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }

@@ -148,7 +148,9 @@ final class SubscriptionCellCondensed: UITableViewCell {
     func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
         let isNameDifferent = labelName.text != subscription.displayName()
         let isStatusDifferent = userStatus != subscription.otherUserStatus
-        return isNameDifferent || isStatusDifferent
+        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
+
+        return isNameDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }
