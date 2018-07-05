@@ -56,6 +56,9 @@
                                                         <constraint firstAttribute="width" constant="26" id="Csn-9c-ij6"/>
                                                         <constraint firstAttribute="height" constant="26" id="wM0-wd-Xwj"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="tintColor: auxiliaryText"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -231,7 +234,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="4P3-t0-GTZ">
                     <connections>
-                        <action selector="sortingViewTapRecognizer:" destination="pre-Wt-UOv" id="Mm3-1B-wlU"/>
+                        <action selector="recognizeHeaderTapGesture:" destination="pre-Wt-UOv" id="ZbT-9D-gpO"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

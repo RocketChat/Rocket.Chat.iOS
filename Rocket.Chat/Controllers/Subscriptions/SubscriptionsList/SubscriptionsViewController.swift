@@ -232,7 +232,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     // MARK: IBAction
 
-    @IBAction func sortingViewTapRecognizer(_ sender: UITapGestureRecognizer) {
+    @IBAction func recognizeHeaderTapGesture(_ sender: UITapGestureRecognizer) {
         guard sender.state == .ended else { return }
 
         serversView?.close()
