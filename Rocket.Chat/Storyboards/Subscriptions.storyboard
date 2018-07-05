@@ -40,17 +40,6 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: auxiliaryText"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI3-jt-pfZ">
-                                                    <rect key="frame" x="278" y="9" width="26" height="26"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="b5N-LL-VBq"/>
-                                                        <constraint firstAttribute="width" constant="26" id="u3Y-kp-cho"/>
-                                                    </constraints>
-                                                    <state key="normal" image="Icon Filter"/>
-                                                    <connections>
-                                                        <action selector="buttonSortingOptionsDidPressedWithSender:" destination="pre-Wt-UOv" eventType="touchUpInside" id="ctX-se-yia"/>
-                                                    </connections>
-                                                </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9G-xO-EGZ">
                                                     <rect key="frame" x="0.0" y="44" width="320" height="0.0"/>
                                                     <color key="backgroundColor" red="0.79607843137254897" green="0.80784313725490198" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,19 +50,33 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="backgroundColor: mutedAccent"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon Filter" translatesAutoresizingMaskIntoConstraints="NO" id="9xD-de-hJs">
+                                                    <rect key="frame" x="278" y="9" width="26" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="26" id="Csn-9c-ij6"/>
+                                                        <constraint firstAttribute="height" constant="26" id="wM0-wd-Xwj"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="tintColor: auxiliaryText"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="11y-S6-l31"/>
                                                 <constraint firstItem="4ch-xw-I4W" firstAttribute="leading" secondItem="7Cv-R3-fat" secondAttribute="leadingMargin" constant="8" id="2Ne-nq-pVk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="gI3-jt-pfZ" secondAttribute="trailing" constant="8" id="2bw-Ng-xZf"/>
                                                 <constraint firstItem="4ch-xw-I4W" firstAttribute="centerY" secondItem="7Cv-R3-fat" secondAttribute="centerY" id="8LN-rJ-2h0"/>
+                                                <constraint firstItem="9xD-de-hJs" firstAttribute="centerY" secondItem="7Cv-R3-fat" secondAttribute="centerY" id="BoY-Bd-ex0"/>
                                                 <constraint firstAttribute="bottom" secondItem="n9G-xO-EGZ" secondAttribute="bottom" id="Bpq-q8-TKj"/>
                                                 <constraint firstAttribute="trailing" secondItem="n9G-xO-EGZ" secondAttribute="trailing" id="DPI-uW-XKe"/>
-                                                <constraint firstItem="gI3-jt-pfZ" firstAttribute="centerY" secondItem="7Cv-R3-fat" secondAttribute="centerY" id="kZu-FC-Ntu"/>
                                                 <constraint firstItem="n9G-xO-EGZ" firstAttribute="leading" secondItem="7Cv-R3-fat" secondAttribute="leading" id="qhi-FY-Kol"/>
-                                                <constraint firstItem="gI3-jt-pfZ" firstAttribute="leading" secondItem="4ch-xw-I4W" secondAttribute="trailing" constant="8" id="szv-pu-HUu"/>
+                                                <constraint firstItem="9xD-de-hJs" firstAttribute="leading" secondItem="4ch-xw-I4W" secondAttribute="trailing" constant="8" id="rq0-oB-2pm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9xD-de-hJs" secondAttribute="trailing" constant="8" id="y2i-YO-iLq"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="4P3-t0-GTZ" appends="YES" id="6ej-YP-XrL"/>
+                                            </connections>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,6 +232,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4P3-t0-GTZ">
+                    <connections>
+                        <action selector="recognizeHeaderTapGesture:" destination="pre-Wt-UOv" id="ZbT-9D-gpO"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="283.125" y="254.57746478873239"/>
         </scene>

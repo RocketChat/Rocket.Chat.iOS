@@ -87,6 +87,7 @@ final class ServersListView: UIView {
             })
         }
 
+        instance.applyTheme()
         return instance
     }
 

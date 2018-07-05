@@ -232,7 +232,9 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     // MARK: IBAction
 
-    @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+    @IBAction func recognizeHeaderTapGesture(_ sender: UITapGestureRecognizer) {
+        guard sender.state == .ended else { return }
+
         serversView?.close()
 
         if let sortingView = sortingView {
@@ -240,7 +242,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         } else {
             sortingView = SubscriptionsSortingView.showIn(view)
             sortingView?.delegate = self
-            sortingView?.applyTheme()
         }
     }
 
@@ -254,7 +255,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             titleView?.updateTitleImage(reverse: true)
             serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
             serversView?.delegate = self
-            serversView?.applyTheme()
         }
     }
 
