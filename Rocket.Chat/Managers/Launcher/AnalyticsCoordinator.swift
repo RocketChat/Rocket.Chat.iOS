@@ -44,6 +44,7 @@ struct AnalyticsCoordinator: LauncherProtocol {
     }
 
     private func launchFirebase() {
+        #if RELEASE || BETA
         guard
             let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
             NSDictionary(contentsOfFile: path) != nil
@@ -52,6 +53,7 @@ struct AnalyticsCoordinator: LauncherProtocol {
         }
 
         FirebaseApp.configure()
+        #endif
     }
 
     private func launchInstabug() {
