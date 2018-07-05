@@ -69,6 +69,10 @@ final class SubscriptionsViewController: BaseViewController {
                     tableView.reloadRows(at: modifications, with: .automatic)
                 }
             }
+
+            // We need to update the number of unread messages
+            // for the back button when chat screen is opened
+            self?.updateBackButton()
         }
 
         viewModel.didRebuildSections = { [weak self] in
