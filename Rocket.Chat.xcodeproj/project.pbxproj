@@ -265,8 +265,6 @@
 		4199A9891DABCC570035F820 /* Emojione.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4199A9881DABCC570035F820 /* Emojione.swift */; };
 		419D78831FBDB7E0005FC7A2 /* InfoRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */; };
 		419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */; };
-		419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419D84FD1DF599CA0021F034 /* ChatHeaderViewStatus.xib */; };
-		419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */; };
 		419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419ECCA31F3CA21A005F224B /* DownloadManager.swift */; };
 		419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */; };
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
@@ -1056,8 +1054,6 @@
 		4199A9881DABCC570035F820 /* Emojione.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojione.swift; sourceTree = "<group>"; };
 		419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestHandler.swift; sourceTree = "<group>"; };
 		419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestHandlerSpec.swift; sourceTree = "<group>"; };
-		419D84FD1DF599CA0021F034 /* ChatHeaderViewStatus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatHeaderViewStatus.xib; sourceTree = "<group>"; };
-		419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHeaderViewStatus.swift; sourceTree = "<group>"; };
 		419ECCA31F3CA21A005F224B /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerDocuments.swift; sourceTree = "<group>"; };
 		41A6191A1FA7065400CFFA69 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2587,8 +2583,6 @@
 		41F167E51DAC450200775CCA /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */,
-				419D84FD1DF599CA0021F034 /* ChatHeaderViewStatus.xib */,
 				41F167E81DAC4D4300775CCA /* ChatTitleView.swift */,
 				41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */,
 				411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */,
@@ -3816,7 +3810,6 @@
 				333032A02073940800A9514D /* RCEmojiKit.strings in Resources */,
 				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
-				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */,
 				4124FCC81F7A6BF5008ED4C3 /* ChannelInfoUserCell.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
@@ -4444,7 +4437,6 @@
 				99805D7520C191BE00741B8E /* StyledTextField.swift in Sources */,
 				419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */,
 				80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */,
-				419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */,
 				99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */,
 				809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */,
 				8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */,
