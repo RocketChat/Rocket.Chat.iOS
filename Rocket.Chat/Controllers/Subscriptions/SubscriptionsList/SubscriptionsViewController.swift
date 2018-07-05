@@ -232,7 +232,9 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     // MARK: IBAction
 
-    @IBAction func buttonSortingOptionsDidPressed(sender: Any) {
+    @IBAction func sortingViewTapRecognizer(_ sender: UITapGestureRecognizer) {
+        guard sender.state == .ended else { return }
+
         serversView?.close()
 
         if let sortingView = sortingView {
