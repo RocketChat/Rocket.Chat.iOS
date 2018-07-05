@@ -244,6 +244,7 @@
 		4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB141D2D99A30086DAC8 /* BaseNavigationController.swift */; };
 		4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1B1D2DB2080086DAC8 /* LogManager.swift */; };
 		4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
+		41778EB920ED4C2C007F72F9 /* SubscriptionCellCondensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */; };
 		417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A70021D47918200FF46EE /* ResponseMessageSpec.swift */; };
 		41833F4E1DEF16B600E54655 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41833F4D1DEF16B600E54655 /* Keys.plist */; };
 		41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* ChatControllerReplyHandler.swift */; };
@@ -1035,6 +1036,7 @@
 		4174CB1B1D2DB2080086DAC8 /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat-Bridge.h"; sourceTree = "<group>"; };
+		41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellCondensed.swift; sourceTree = "<group>"; };
 		417A70021D47918200FF46EE /* ResponseMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMessageSpec.swift; sourceTree = "<group>"; };
 		41833F4D1DEF16B600E54655 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		41852E881F92BBEC00D1C499 /* ChatControllerReplyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerReplyHandler.swift; sourceTree = "<group>"; };
@@ -2280,6 +2282,7 @@
 				4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */,
 				41FBF4EA20BD8C650080D00D /* ServerCell.xib */,
 				4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */,
+				41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */,
 				41DE687C20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift */,
 				41DE688020C6EBE600AA5EC8 /* SubscriptionSortingCell.xib */,
 			);
@@ -4441,6 +4444,7 @@
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
 				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,
 				33D08E2720BD5EDC008D03EF /* NotThemeableViews.swift in Sources */,
+				41778EB920ED4C2C007F72F9 /* SubscriptionCellCondensed.swift in Sources */,
 				99805D7520C191BE00741B8E /* StyledTextField.swift in Sources */,
 				419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */,
 				80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */,

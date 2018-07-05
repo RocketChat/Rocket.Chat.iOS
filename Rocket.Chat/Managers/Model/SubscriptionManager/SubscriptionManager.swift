@@ -31,11 +31,21 @@ struct SubscriptionManager {
         dispatchGroup.enter()
         client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions) {
             dispatchGroup.leave()
+
+            // We don't trust the updatedSince response all the time.
+            // Our API is having issues with caching and we can't try
+            // to avoid this on the request.
+            client?.fetchSubscriptions(updatedSince: nil) { }
         }
 
         dispatchGroup.enter()
         client?.fetchRooms(updatedSince: lastUpdateRooms) {
             dispatchGroup.leave()
+
+            // We don't trust the updatedSince response all the time.
+            // Our API is having issues with caching and we can't try
+            // to avoid this on the request.
+            client?.fetchRooms(updatedSince: nil) { }
         }
 
         dispatchGroup.notify(queue: .main) {

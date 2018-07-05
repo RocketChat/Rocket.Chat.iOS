@@ -14,7 +14,7 @@ class SubscriptionsViewModel {
 
         switch SubscriptionsSortingManager.selectedSortingOption {
         case .activity:
-            return results?.sortedByLastMessageDate()
+            return hasLastMessage ? results?.sortedByLastMessageDate() : results?.sortedByRoomUpdatedAt()
         case .alphabetically:
             return results?.sortedByName()
         }
@@ -113,6 +113,11 @@ class SubscriptionsViewModel {
 // MARK: TableView
 
 extension SubscriptionsViewModel {
+
+    var hasLastMessage: Bool {
+        return AuthSettingsManager.settings?.storeLastMessage ?? true
+    }
+
     var numberOfSections: Int {
         return assorter?.numberOfSections ?? 0
     }
@@ -135,4 +140,5 @@ extension SubscriptionsViewModel {
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
+
 }

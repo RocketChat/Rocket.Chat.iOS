@@ -1,16 +1,16 @@
 //
-//  SubscriptionCell.swift
+//  SubscriptionCellCondensed.swift
 //  Rocket.Chat
 //
-//  Created by Rafael K. Streit on 8/4/16.
-//  Copyright © 2016 Rocket.Chat. All rights reserved.
+//  Created by Rafael Kellermann Streit on 04/07/18.
+//  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 
-final class SubscriptionCell: UITableViewCell {
+final class SubscriptionCellCondensed: UITableViewCell {
 
-    static let identifier = "CellSubscription"
+    static let identifier = "CellSubscriptionCondensed"
 
     internal let defaultBackgroundColor = UIColor.white
     internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
@@ -45,12 +45,6 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    @IBOutlet weak var labelDateRightSpacingConstraint: NSLayoutConstraint! {
-        didSet {
-            labelDateRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? -8 : 0
-        }
-    }
-
     @IBOutlet weak var labelUnreadRightSpacingConstraint: NSLayoutConstraint! {
         didSet {
             labelUnreadRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? 8 : 0
@@ -59,8 +53,6 @@ final class SubscriptionCell: UITableViewCell {
 
     @IBOutlet weak var iconRoom: UIImageView!
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var labelLastMessage: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel!
     @IBOutlet weak var viewUnread: UIView! {
         didSet {
@@ -74,8 +66,6 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.prepareForReuse()
 
         labelName.text = nil
-        labelDate.text = nil
-        labelLastMessage.text = nil
         labelUnread.text = nil
         viewUnread.isHidden = true
     }
@@ -95,22 +85,10 @@ final class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.displayName()
 
-        if AuthSettingsManager.settings?.storeLastMessage ?? true {
-            labelLastMessage.text = subscription.roomLastMessageText
-        }
-
         let nameFontSize = labelName.font.pointSize
-        let lastMessageFontSize = labelLastMessage.font.pointSize
-
-        if let roomLastMessage = subscription.roomLastMessage?.createdAt {
-            labelDate.text = dateFormatted(date: roomLastMessage)
-        } else {
-            labelDate.text = nil
-        }
 
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .semibold)
-            labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .medium)
 
             if subscription.unread > 0 {
                 viewUnread.isHidden = false
@@ -126,7 +104,6 @@ final class SubscriptionCell: UITableViewCell {
             }
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize, weight: .medium)
-            labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize, weight: .regular)
 
             viewUnread.isHidden = true
             labelUnread.text =  nil
@@ -168,40 +145,17 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    func dateFormatted(date: Date) -> String {
-        let calendar = NSCalendar.current
-
-        if calendar.isDateInYesterday(date) {
-            return localized("subscriptions.list.date.yesterday")
-        }
-
-        if calendar.isDateInToday(date) {
-            return RCDateFormatter.time(date)
-        }
-
-        return RCDateFormatter.date(date, dateStyle: .short)
-    }
-
     func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
-        guard
-            let lastMessageText = subscription.roomLastMessageText,
-            let lastMessageDate = subscription.roomLastMessageDate
-        else {
-            return false
-        }
-
         let isNameDifferent = labelName.text != subscription.displayName()
-        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
-        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
         let isStatusDifferent = userStatus != subscription.otherUserStatus
         let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
 
-        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent || isUnreadDifferent
+        return isNameDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }
 
-extension SubscriptionCell {
+extension SubscriptionCellCondensed {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         let transition = {
@@ -240,7 +194,8 @@ extension SubscriptionCell {
 
 // MARK: Themeable
 
-extension SubscriptionCell {
+extension SubscriptionCellCondensed {
+
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
@@ -249,20 +204,10 @@ extension SubscriptionCell {
         viewUnread.backgroundColor = theme.tintColor
         labelUnread.backgroundColor = theme.tintColor
         labelUnread.textColor = theme.backgroundColor
-        labelLastMessage.textColor = theme.auxiliaryText
         iconRoom.tintColor = theme.auxiliaryText
 
         setSelected(isSelected, animated: false)
         setHighlighted(isHighlighted, animated: false)
-
-        guard let subscription = self.subscription, !subscription.isInvalidated else {
-            return
-        }
-
-        if subscription.unread > 0 || subscription.alert {
-            labelDate.textColor = theme.tintColor
-        } else {
-            labelDate.textColor = theme.auxiliaryText
-        }
     }
+
 }
