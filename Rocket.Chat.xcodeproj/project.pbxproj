@@ -578,6 +578,9 @@
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */; };
+		80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AC400320EECB03005082E1 /* ChatBannerView.xib */; };
+		80AC400620EECB84005082E1 /* ChatBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC400520EECB84005082E1 /* ChatBannerView.swift */; };
+		80AC400820EECB90005082E1 /* ChatBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC400720EECB90005082E1 /* ChatBannerViewModel.swift */; };
 		80AE2540203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */; };
 		80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */; };
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
@@ -1361,6 +1364,9 @@
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcherSpec.swift; sourceTree = "<group>"; };
+		80AC400320EECB03005082E1 /* ChatBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatBannerView.xib; sourceTree = "<group>"; };
+		80AC400520EECB84005082E1 /* ChatBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerView.swift; sourceTree = "<group>"; };
+		80AC400720EECB90005082E1 /* ChatBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerViewModel.swift; sourceTree = "<group>"; };
 		80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionExtensionsSpec.swift; sourceTree = "<group>"; };
 		80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageUnreadSeparator.swift; sourceTree = "<group>"; };
 		80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageUnreadSeparator.xib; sourceTree = "<group>"; };
@@ -2583,6 +2589,7 @@
 		41F167E51DAC450200775CCA /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				80AC400920EECB93005082E1 /* ChatBannerView */,
 				41F167E81DAC4D4300775CCA /* ChatTitleView.swift */,
 				41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */,
 				411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */,
@@ -3139,6 +3146,16 @@
 				807FB53E2045F36D00E21429 /* EmojioneSpec.swift */,
 			);
 			path = RCEmojiKit;
+			sourceTree = "<group>";
+		};
+		80AC400920EECB93005082E1 /* ChatBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				80AC400320EECB03005082E1 /* ChatBannerView.xib */,
+				80AC400520EECB84005082E1 /* ChatBannerView.swift */,
+				80AC400720EECB90005082E1 /* ChatBannerViewModel.swift */,
+			);
+			path = ChatBannerView;
 			sourceTree = "<group>";
 		};
 		80B2D97E20E5496E002F4149 /* User */ = {
@@ -3823,6 +3840,7 @@
 				14F8A286202E659000175FDC /* White-29@2x.png in Resources */,
 				14F8A282202E659000175FDC /* White-76@3x.png in Resources */,
 				14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */,
+				80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */,
 				14F8A23D202E5D0600175FDC /* Red-29@3x.png in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
 				14F8A256202E64B200175FDC /* BnW-83.5@2x.png in Resources */,
@@ -4184,6 +4202,7 @@
 				B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */,
 				9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
+				80AC400620EECB84005082E1 /* ChatBannerView.swift in Sources */,
 				33FD181D20D253AE00380BEC /* BaseNavigationBar.swift in Sources */,
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
@@ -4369,6 +4388,7 @@
 				33FB9D4220D06492005AF504 /* EditProfileStatusCell.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
+				80AC400820EECB90005082E1 /* ChatBannerViewModel.swift in Sources */,
 				806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */,
 				33D08E2820BD5EDC008D03EF /* Theme.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,

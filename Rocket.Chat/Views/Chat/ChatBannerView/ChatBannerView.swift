@@ -1,0 +1,59 @@
+//
+//  ChatBannerView.swift
+//  Rocket.Chat
+//
+//  Created by Matheus Cardoso on 7/5/18.
+//  Copyright © 2018 Rocket.Chat. All rights reserved.
+//
+
+import UIKit
+
+class ChatBannerView: UIView {
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var closeButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closeButtonWidthConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconImageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iconImageViewTrailingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var actionButton: UIButton!
+
+    var model: ChatBannerViewModel = .emptyState {
+        didSet {
+            updateForModel()
+        }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateForModel()
+    }
+
+    func updateForModel() {
+        textLabel.text = model.text
+        progressView.progress = model.progress
+
+        actionButton.isHidden = model.actionText == nil
+        actionButton.setTitle(model.actionText, for: .normal)
+
+        if let imageName = model.imageName {
+            iconImageView.image = UIImage(named: imageName)
+            iconImageViewWidthConstraint.constant = 24
+            iconImageViewTrailingConstraint.constant = 15
+        } else {
+            iconImageViewWidthConstraint.constant = 0
+            iconImageViewTrailingConstraint.constant = 0
+        }
+
+        if model.showCloseButton {
+            closeButtonLeadingConstraint.constant = 20
+            closeButtonWidthConstraint.constant = 20
+        } else {
+            closeButtonLeadingConstraint.constant = 0
+            closeButtonWidthConstraint.constant = 0
+        }
+    }
+}
