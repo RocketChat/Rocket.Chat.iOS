@@ -57,11 +57,18 @@ final class SubscriptionsViewController: BaseViewController {
                 changes.modifications.contains($0) && self?.shouldUpdateCellAt(indexPath: $0) ?? false
             } ?? []
 
-            tableView.beginUpdates()
-            tableView.deleteRows(at: changes.deletions, with: .automatic)
-            tableView.insertRows(at: changes.insertions, with: .automatic)
-            tableView.reloadRows(at: modifications, with: .automatic)
-            tableView.endUpdates()
+            if changes.deletions.count > 0 || changes.insertions.count > 0 {
+                tableView.beginUpdates()
+                tableView.deleteRows(at: changes.deletions, with: .automatic)
+                tableView.insertRows(at: changes.insertions, with: .automatic)
+                tableView.endUpdates()
+            }
+
+            if modifications.count > 0 {
+                UIView.performWithoutAnimation {
+                    tableView.reloadRows(at: modifications, with: .automatic)
+                }
+            }
         }
 
         viewModel.didRebuildSections = { [weak self] in
