@@ -72,7 +72,7 @@ struct AuthManager {
             let url = URL(string: serverURL),
             let host = url.host
         else {
-            return ""
+            return "undefined"
         }
 
         return host
