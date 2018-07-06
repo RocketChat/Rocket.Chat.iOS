@@ -179,8 +179,8 @@ extension ChatViewController: UIDocumentPickerDelegate {
 
 extension ChatViewController {
 
-    func startLoadingUpload(_ fileName: String) {
-        showBanner(.forUploadingFile(named: fileName))
+    func startLoadingUpload(_ fileName: String, type: String) {
+        showBanner(.forUploadingFile(named: fileName, type: type))
     }
 
     func stopLoadingUpload() {
@@ -190,7 +190,7 @@ extension ChatViewController {
     func upload(_ file: FileUpload, fileName: String, description: String?) {
         guard let subscription = subscription else { return }
 
-        startLoadingUpload(fileName)
+        startLoadingUpload(fileName, type: file.type)
 
         func stopLoadingUpload() {
             DispatchQueue.main.async { [weak self] in
@@ -199,7 +199,9 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", completion: {
+        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", progress: { [weak self] double in
+            self?.bannerView?.progressView.setProgress(Float(double), animated: true)
+        }, completion: {
             AnalyticsManager.log(
                 event: .mediaUpload(
                     mediaType: file.type,

@@ -8,13 +8,18 @@
 
 import Foundation
 
-struct UploadClient: APIClient {
+@objc class UploadClient: NSObject, APIClient, URLSessionTaskDelegate {
+    typealias Progress = (Double) -> Void
+    typealias Completion = () -> Void
+
     let api: AnyAPIFetcher
-    init(api: AnyAPIFetcher) {
+    var tasks: [URLSessionTask: Progress] = [:]
+
+    required init(api: AnyAPIFetcher) {
         self.api = api
     }
 
-    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, progress: Progress? = nil, completion: Completion? = nil, versionFallback: (() -> Void)? = nil) {
         let req = UploadMessageRequest(
             roomId: roomId,
             data: data,
@@ -23,7 +28,7 @@ struct UploadClient: APIClient {
             description: description
         )
 
-        api.fetch(req) { response in
+        let task = api.fetch(req, options: [], sessionDelegate: self) { response in
             switch response {
             case .resource(let resource):
                 if let error = resource.error {
@@ -38,11 +43,18 @@ struct UploadClient: APIClient {
                     completion?()
                 }
             }
+        }
 
+        if let task = task, let progress = progress {
+            tasks.updateValue({ double in
+                DispatchQueue.main.async {
+                    progress(double)
+                }
+            }, forKey: task)
         }
     }
 
-    func uploadAvatar(data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil) {
+    func uploadAvatar(data: Data, filename: String, mimetype: String, completion: Completion? = nil) {
         let req = UploadAvatarRequest(
             data: data,
             filename: filename,
@@ -52,5 +64,15 @@ struct UploadClient: APIClient {
         api.fetch(req) { _ in
             completion?()
         }
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        let total = Double(totalBytesSent)/Double(totalBytesExpectedToSend)
+        tasks[task]?(total)
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        tasks[task]?(1.0)
+        tasks.removeValue(forKey: task)
     }
 }

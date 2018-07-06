@@ -33,13 +33,13 @@ extension ChatBannerViewModel {
 // MARK: Upload
 
 extension ChatBannerViewModel {
-    static func forUploadingFile(named name: String) -> ChatBannerViewModel {
+    static func forUploadingFile(named name: String, type: String) -> ChatBannerViewModel {
         return ChatBannerViewModel(
             text: "Uploading \(name)",
             actionText: nil,
-            imageName: "Message_Upload_Image",
+            imageName: type.contains("image") || type.contains("video") ? "Message_Upload_Image" : "Message_Upload_File",
             showCloseButton: true,
-            progress: 2/3
+            progress: 0
         )
     }
 }
