@@ -23,6 +23,8 @@ extension ChatViewController {
             return nil
         }
 
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(bannerView)
 
         view.addConstraints(
@@ -36,7 +38,7 @@ extension ChatViewController {
 
         view.addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[bannerView]",
+                withVisualFormat: "V:|-0-[bannerView(54)]",
                 options: .alignAllLeft,
                 metrics: nil,
                 views: ["bannerView": bannerView]
