@@ -191,6 +191,7 @@
                                             <outlet property="labelLastMessage" destination="AoS-By-2a2" id="g6i-ef-FdZ"/>
                                             <outlet property="labelName" destination="IkN-GD-8NO" id="1o7-7O-pS0"/>
                                             <outlet property="labelUnread" destination="c6A-bb-KeM" id="z3F-US-v0x"/>
+                                            <outlet property="labelUnreadRightSpacingConstraint" destination="azx-D0-PON" id="Jmx-46-z3n"/>
                                             <outlet property="viewStatus" destination="DkA-vH-8he" id="eT6-ZL-Spd"/>
                                             <outlet property="viewUnread" destination="zlJ-tz-XvT" id="YeT-tH-YFU"/>
                                         </connections>
@@ -276,6 +277,7 @@
                                             <outlet property="iconRoom" destination="3gX-g3-hTD" id="gOq-AT-tYt"/>
                                             <outlet property="labelName" destination="K89-aJ-SjN" id="sRs-gc-WG3"/>
                                             <outlet property="labelUnread" destination="TMT-XP-jhR" id="scj-iv-jWe"/>
+                                            <outlet property="labelUnreadRightSpacingConstraint" destination="t7G-Iw-IZ2" id="GT8-dD-su3"/>
                                             <outlet property="viewStatus" destination="eSG-Ye-bSX" id="1T9-GU-k8B"/>
                                             <outlet property="viewUnread" destination="UA8-Fz-OyC" id="nSm-gX-Jf6"/>
                                         </connections>
