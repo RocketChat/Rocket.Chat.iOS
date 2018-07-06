@@ -29,7 +29,30 @@ enum Event {
 
 }
 
+enum UserProperty {
+    case server(server: String)
+
+    var propertyName: String {
+        switch self {
+        case .server:
+            return "Server"
+        }
+    }
+}
+
 struct AnalyticsManager {
+    static func set(userProperty: UserProperty) {
+        // Make sure the user has opted in for sending his usage data
+        guard !AnalyticsCoordinator.isUsageDataLoggingDisabled else {
+            return
+        }
+
+        switch userProperty {
+        case let .server(server):
+            Analytics.setUserProperty(server, forName: userProperty.propertyName)
+        }
+    }
+
     static func log(event: Event) {
         // Make sure the user has opted in for sending his usage data
         guard !AnalyticsCoordinator.isUsageDataLoggingDisabled else {
