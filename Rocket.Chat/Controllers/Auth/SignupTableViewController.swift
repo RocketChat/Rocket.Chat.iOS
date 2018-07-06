@@ -157,8 +157,21 @@ final class SignupTableViewController: BaseTableViewController {
     }
 
     fileprivate func signup(with name: String, email: String, password: String, customFields: [String: String] = [:], startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
-        startLoading()
+        guard
+            !name.isEmpty,
+            !(textFieldUsername.text ?? "").isEmpty,
+            !email.isEmpty,
+            !password.isEmpty,
+            (hasCustomFields ? !customFields.isEmpty : true)
+        else {
+            Alert(
+                title: localized("error.signup.title"),
+                message: localized("error.signup.empty_input.message")
+            ).present()
+            return
+        }
 
+        startLoading()
         AuthManager.signup(with: name, email, password, customFields: customFields) { [weak self] response in
             stopLoading()
 
