@@ -12,6 +12,9 @@
 "error.login.title" = "Oops!";
 "error.login.message" = "Something wrong happened while trying to login.";
 
+"error.signup.title" = "Oops!";
+"error.signup.empty_input.message" = "All the fields are required for sign up.";
+
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "Your credentials were rejected! Please try again.";
 
