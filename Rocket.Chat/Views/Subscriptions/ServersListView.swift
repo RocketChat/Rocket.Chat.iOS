@@ -142,6 +142,11 @@ final class ServersListView: UIView {
 
         alert.actions.append(UIAlertAction(title: localized("servers.action.disconnect.alert.confirm"), style: .destructive, handler: { _ in
             API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
+
+            if indexPath.row < DatabaseManager.selectedIndex {
+                DatabaseManager.selectDatabase(at: DatabaseManager.selectedIndex - 1)
+            }
+
             DatabaseManager.removeDatabase(at: indexPath.row)
 
             self.viewModel.updateServersList()
