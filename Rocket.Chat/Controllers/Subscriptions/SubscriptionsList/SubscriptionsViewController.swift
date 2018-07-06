@@ -244,7 +244,15 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     // MARK: IBAction
 
     @IBAction func recognizeHeaderTapGesture(_ sender: UITapGestureRecognizer) {
-        guard sender.state == .ended else { return }
+        guard let headerView = sender.view,
+            sender.state == .ended
+        else {
+                return
+        }
+
+        let tapInsets: CGFloat = 10
+        let tapLocation = sender.location(in: headerView).y
+        guard tapLocation > tapInsets, tapLocation < headerView.bounds.height - tapInsets else { return }
 
         serversView?.close()
 
