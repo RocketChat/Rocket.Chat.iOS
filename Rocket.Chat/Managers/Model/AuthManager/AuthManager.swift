@@ -65,4 +65,16 @@ struct AuthManager {
 
         return server
     }
+
+    static func selectedServerHost() -> String {
+        guard
+            let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL],
+            let url = URL(string: serverURL),
+            let host = url.host
+        else {
+            return ""
+        }
+
+        return host
+    }
 }
