@@ -9,9 +9,15 @@
 import Foundation
 
 struct ChatBannerViewModel {
+    enum Icon: String {
+        case image = "Message_Upload_Image"
+        case file = "Message_Upload_File"
+        case error = "Message_Upload_Error"
+    }
+
     let text: String
     let actionText: String?
-    let imageName: String?
+    let icon: Icon?
     let showCloseButton: Bool
     let progress: Float
 }
@@ -23,7 +29,7 @@ extension ChatBannerViewModel {
         return ChatBannerViewModel(
             text: "Uploading layout_webapp.jpg",
             actionText: "Try again",
-            imageName: "Message_Upload_Image",
+            icon: .error,
             showCloseButton: true,
             progress: 0
         )
@@ -37,7 +43,7 @@ extension ChatBannerViewModel {
         return ChatBannerViewModel(
             text: "Uploading \(name)",
             actionText: nil,
-            imageName: type.contains("image") || type.contains("video") ? "Message_Upload_Image" : "Message_Upload_File",
+            icon: type.contains("image") || type.contains("video") ? .image : .file,
             showCloseButton: true,
             progress: 0
         )

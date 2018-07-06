@@ -39,7 +39,7 @@ class ChatBannerView: UIView {
         actionButton.setTitle(model.actionText, for: .normal)
         actionButton.isHidden = model.actionText == nil
 
-        if let imageName = model.imageName {
+        if let imageName = model.icon?.rawValue {
             iconImageView.image = UIImage(named: imageName)
             iconImageViewWidthConstraint.constant = 24
             iconImageViewTrailingConstraint.constant = 15
