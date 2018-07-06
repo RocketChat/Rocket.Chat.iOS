@@ -57,11 +57,22 @@ final class SubscriptionsViewController: BaseViewController {
                 changes.modifications.contains($0) && self?.shouldUpdateCellAt(indexPath: $0) ?? false
             } ?? []
 
-            tableView.beginUpdates()
-            tableView.deleteRows(at: changes.deletions, with: .automatic)
-            tableView.insertRows(at: changes.insertions, with: .automatic)
-            tableView.reloadRows(at: modifications, with: .automatic)
-            tableView.endUpdates()
+            if changes.deletions.count > 0 || changes.insertions.count > 0 {
+                tableView.beginUpdates()
+                tableView.deleteRows(at: changes.deletions, with: .automatic)
+                tableView.insertRows(at: changes.insertions, with: .automatic)
+                tableView.endUpdates()
+            }
+
+            if modifications.count > 0 {
+                UIView.performWithoutAnimation {
+                    tableView.reloadRows(at: modifications, with: .automatic)
+                }
+            }
+
+            // We need to update the number of unread messages
+            // for the back button when chat screen is opened
+            self?.updateBackButton()
         }
 
         viewModel.didRebuildSections = { [weak self] in
@@ -295,14 +306,32 @@ extension SubscriptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as? SubscriptionCell else {
-            return UITableViewCell()
-        }
+        let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             cell.accessoryType = .none
         } else {
             cell.accessoryType = .disclosureIndicator
+        }
+
+        return cell
+    }
+
+    func cellForSubscription(at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as? SubscriptionCell else {
+            return UITableViewCell()
+        }
+
+        if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
+            cell.subscription = subscription
+        }
+
+        return cell
+    }
+
+    func cellForSubscriptionCondensed(at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCellCondensed.identifier) as? SubscriptionCellCondensed else {
+            return UITableViewCell()
         }
 
         if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
@@ -351,13 +380,20 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard
             let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
-            index < tableView.visibleCells.count,
-            let cell = tableView.visibleCells[index] as? SubscriptionCell
+            index < tableView.visibleCells.count
         else {
             return false
         }
 
-        return cell.shouldUpdateForSubscription(subscription)
+        if let cell = tableView.visibleCells[index] as? SubscriptionCell {
+            return cell.shouldUpdateForSubscription(subscription)
+        }
+
+        if let cell = tableView.visibleCells[index] as? SubscriptionCellCondensed {
+            return cell.shouldUpdateForSubscription(subscription)
+        }
+
+        return false
     }
 
 }

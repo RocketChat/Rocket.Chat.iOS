@@ -34,6 +34,7 @@ final class AuthSettings: Object {
 
     // Rooms
     @objc dynamic var favoriteRooms = true
+    @objc dynamic var storeLastMessage = true
 
     // Authentication methods
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false

@@ -382,12 +382,12 @@
 "user_details.video_call_button" = "Vídeo";
 
 // Theme
-"theme.settings.title" = "Theme"; // TODO
-"theme.settings.header" = "ALL THEMES"; // TODO
-"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
-"theme.light" = "Light"; // TODO
-"theme.dark" = "Dark"; // TODO
-"theme.black" = "Black"; // TODO
+"theme.settings.title" = "Tema";
+"theme.settings.header" = "TODOS OS TEMAS";
+"theme.settings.footer" = "Aplicar um tema novo muda a forma como o app aparece para você.";
+"theme.light" = "Claro";
+"theme.dark" = "Escuro";
+"theme.black" = "Preto";
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Ordenando por nome";

@@ -27,6 +27,7 @@ final class PublicSettingsRequest: APIRequest {
                 "UI_Use_Real_Name",
                 "UI_Allow_room_names_with_special_chars",
                 "Favorite_Rooms",
+                "Store_Last_Message",
                 "Accounts_OAuth_Google",
                 "Accounts_OAuth_Facebook",
                 "Accounts_OAuth_Github",
