@@ -27,6 +27,8 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    lazy var bannerView: ChatBannerView? = setupBanner()
+
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 

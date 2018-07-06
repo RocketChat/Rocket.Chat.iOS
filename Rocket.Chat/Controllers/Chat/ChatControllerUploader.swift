@@ -180,11 +180,11 @@ extension ChatViewController: UIDocumentPickerDelegate {
 extension ChatViewController {
 
     func startLoadingUpload(_ fileName: String) {
-
+        showBanner(model: .emptyState)
     }
 
     func stopLoadingUpload() {
-
+        hideBanner()
     }
 
     func upload(_ file: FileUpload, fileName: String, description: String?) {

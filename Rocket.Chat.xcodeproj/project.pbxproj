@@ -581,6 +581,7 @@
 		80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AC400320EECB03005082E1 /* ChatBannerView.xib */; };
 		80AC400620EECB84005082E1 /* ChatBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC400520EECB84005082E1 /* ChatBannerView.swift */; };
 		80AC400820EECB90005082E1 /* ChatBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC400720EECB90005082E1 /* ChatBannerViewModel.swift */; };
+		80AC400C20EEE8F5005082E1 /* ChatViewControllerBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC400B20EEE8F5005082E1 /* ChatViewControllerBanner.swift */; };
 		80AE2540203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */; };
 		80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */; };
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
@@ -1367,6 +1368,7 @@
 		80AC400320EECB03005082E1 /* ChatBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatBannerView.xib; sourceTree = "<group>"; };
 		80AC400520EECB84005082E1 /* ChatBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerView.swift; sourceTree = "<group>"; };
 		80AC400720EECB90005082E1 /* ChatBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerViewModel.swift; sourceTree = "<group>"; };
+		80AC400B20EEE8F5005082E1 /* ChatViewControllerBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerBanner.swift; sourceTree = "<group>"; };
 		80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionExtensionsSpec.swift; sourceTree = "<group>"; };
 		80AE2541203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageUnreadSeparator.swift; sourceTree = "<group>"; };
 		80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageUnreadSeparator.xib; sourceTree = "<group>"; };
@@ -2563,10 +2565,11 @@
 				41D8EC8D1F780C3800764B36 /* ChatControllerTitleViewProtocol.swift */,
 				414E8A8E20A5DDF800615CE6 /* ChatControllerRolesController.swift */,
 				41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */,
+				80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */,
 				41C45AEE1DFAD42800D9969C /* ChatDataController.swift */,
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 				41B9635F207E46F10068F1A6 /* ChatViewControllerTextViewDelegate.swift */,
-				80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */,
+				80AC400B20EEE8F5005082E1 /* ChatViewControllerBanner.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
 				8039442D20B342BB002F317A /* AddUsersViewController.swift */,
@@ -4355,6 +4358,7 @@
 				805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */,
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
+				80AC400C20EEE8F5005082E1 /* ChatViewControllerBanner.swift in Sources */,
 				9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */,
 				0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */,
 				9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */,
