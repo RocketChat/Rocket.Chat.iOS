@@ -29,3 +29,17 @@ extension ChatBannerViewModel {
         )
     }
 }
+
+// MARK: Upload
+
+extension ChatBannerViewModel {
+    static func forUploadingFile(named name: String) -> ChatBannerViewModel {
+        return ChatBannerViewModel(
+            text: "Uploading \(name)",
+            actionText: nil,
+            imageName: "Message_Upload_Image",
+            showCloseButton: true,
+            progress: 2/3
+        )
+    }
+}

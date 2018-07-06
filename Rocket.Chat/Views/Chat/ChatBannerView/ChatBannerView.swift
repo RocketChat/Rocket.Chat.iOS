@@ -36,8 +36,8 @@ class ChatBannerView: UIView {
         textLabel.text = model.text
         progressView.progress = model.progress
 
-        actionButton.isHidden = model.actionText == nil
         actionButton.setTitle(model.actionText, for: .normal)
+        actionButton.isHidden = model.actionText == nil
 
         if let imageName = model.imageName {
             iconImageView.image = UIImage(named: imageName)

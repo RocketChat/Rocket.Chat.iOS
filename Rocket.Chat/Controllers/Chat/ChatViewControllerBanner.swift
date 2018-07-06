@@ -9,7 +9,8 @@
 import UIKit
 
 extension ChatViewController {
-    func showBanner(model: ChatBannerViewModel) {
+    func showBanner(_ model: ChatBannerViewModel) {
+        bannerView?.model = model
         bannerView?.isHidden = false
     }
 
