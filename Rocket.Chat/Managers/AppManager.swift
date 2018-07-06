@@ -200,6 +200,7 @@ extension AppManager {
 
                 // Close all presenting controllers, modals & pushed
                 mainViewController.presentedViewController?.dismiss(animated: true, completion: nil)
+                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
 
                 let nav = BaseNavigationController(rootViewController: controller)
                 mainViewController.showDetailViewController(nav, sender: self)
