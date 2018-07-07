@@ -77,21 +77,6 @@ class LoginTableViewController: BaseTableViewController {
         }
     }
 
-    var heightForSignUpRow: CGFloat {
-        let forgotPasswordY = forgotPasswordCell.frame.origin.y
-        let forgotPasswordHeight = forgotPasswordCell.frame.height
-        var safeAreaInsets: CGFloat
-        if #available(iOS 11.0, *) {
-            safeAreaInsets = tableView.safeAreaInsets.top + tableView.safeAreaInsets.bottom
-        } else {
-            safeAreaInsets = tableView.contentInset.top
-        }
-
-        let contentSize = forgotPasswordY + forgotPasswordHeight + safeAreaInsets
-
-        return tableView.bounds.height - contentSize
-    }
-
     var serverVersion: Version?
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
@@ -109,7 +94,6 @@ class LoginTableViewController: BaseTableViewController {
     }
 
     var shouldShowCreateAccount = false
-    var isKeyboardAppearing = false
     var isRequesting = false
 
     // MARK: Life Cycle
@@ -118,22 +102,6 @@ class LoginTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = serverURL.host
-
-        if shouldShowCreateAccount {
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(keyboardWillAppear(_:)),
-                name: NSNotification.Name.UIKeyboardWillShow,
-                object: nil
-            )
-
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(keyboardWillDisappear(_:)),
-                name: NSNotification.Name.UIKeyboardWillHide,
-                object: nil
-            )
-        }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -145,7 +113,7 @@ class LoginTableViewController: BaseTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }
     }
@@ -188,20 +156,6 @@ class LoginTableViewController: BaseTableViewController {
         } else {
             textFieldPassword.placeholder = localized("auth.login.password.placeholder")
         }
-    }
-
-    // MARK: Keyboard Management
-
-    @objc func keyboardWillAppear(_ notification: Notification) {
-        isKeyboardAppearing = true
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
-
-    @objc func keyboardWillDisappear(_ notification: Notification) {
-        isKeyboardAppearing = false
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
 
     @objc func hideKeyboard() {
@@ -325,10 +279,6 @@ extension LoginTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == createAccountRow && !shouldShowCreateAccount {
             return 0
-        }
-
-        if indexPath.row == createAccountRow && !isKeyboardAppearing {
-            return heightForSignUpRow
         }
 
         return super.tableView(tableView, heightForRowAt: indexPath)

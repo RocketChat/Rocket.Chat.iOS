@@ -81,8 +81,9 @@ extension Subscription {
 
 extension Subscription {
 
-    static func all(realm: Realm? = Realm.current) -> Results<Subscription>? {
-        return realm?.objects(Subscription.self).filter("auth != NULL")
+    static func all(onlyJoined: Bool = true, realm: Realm? = Realm.current) -> Results<Subscription>? {
+        let results = realm?.objects(Subscription.self)
+        return onlyJoined ? results?.filter("auth != NULL") : results
     }
 
 }
@@ -90,11 +91,16 @@ extension Subscription {
 extension Results where Element == Subscription {
 
     func sortedByName() -> Results<Subscription> {
-        return sorted(byKeyPath: "name", ascending: true)
+        let shouldUseRealName = AuthSettingsManager.settings?.useUserRealName ?? false
+        return sorted(byKeyPath: shouldUseRealName ? "fname" : "name", ascending: true)
     }
 
     func sortedByLastMessageDate() -> Results<Subscription> {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
+    }
+
+    func sortedByRoomUpdatedAt() -> Results<Subscription> {
+        return sorted(byKeyPath: "roomUpdatedAt", ascending: false)
     }
 
     func filterBy(name: String) -> Results<Subscription> {

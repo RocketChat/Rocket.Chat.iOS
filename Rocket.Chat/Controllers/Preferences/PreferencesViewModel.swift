@@ -51,7 +51,7 @@ final class PreferencesViewModel {
     }
 
     internal var trackingValue: Bool {
-        return !BugTrackingCoordinator.isCrashReportingDisabled
+        return !AnalyticsCoordinator.isUsageDataLoggingDisabled
     }
 
     internal var formattedVersion: String {
@@ -123,7 +123,7 @@ final class PreferencesViewModel {
         return user?.canViewAdminPanel() ?? false
     }
 
-    #if DEBUG || BETA
+    #if DEBUG || BETA || TEST
     internal let canOpenFLEX = true
     #else
     internal let canOpenFLEX = false

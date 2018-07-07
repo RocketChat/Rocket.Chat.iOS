@@ -46,7 +46,7 @@ extension AuthManager {
                 "msg": "method",
                 "method": "login",
                 "params": [[
-                    "resume": auth.token ?? ""
+                    "resume": auth.isInvalidated ? "" : (auth.token ?? "")
                 ]]
             ] as [String: Any]
 
@@ -222,26 +222,13 @@ extension AuthManager {
             "params": [username]
         ] as [String: Any]
 
-        let req = UpdateUserRequest(username: username)
-        API.current()?.fetch(req) { response in
-            switch response {
-            case .resource(let resource):
-                if let errorMessage = resource.errorMessage {
-                    return completion(false, errorMessage)
-                }
-                return completion(true, nil)
-            case .error(let error):
-                switch error {
-                case .version:
-                    SocketManager.send(object) { response in
-                        if let message = response.result["error"]["message"].string {
-                            completion(false, message)
-                        }
-                    }
-                default:
-                    completion(false, error.description)
-                }
+        SocketManager.send(object) { response in
+            if let message = response.result["error"]["message"].string {
+                completion(false, message)
+                return
             }
+
+            completion(true, nil)
         }
     }
 
@@ -251,7 +238,7 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            BugTrackingCoordinator.anonymizeCrashReports()
+            AnalyticsCoordinator.anonymizeCrashReports()
 
             DraftMessageManager.clearServerDraftMessages()
 

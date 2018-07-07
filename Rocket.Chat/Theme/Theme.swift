@@ -17,18 +17,18 @@ import UIKit
 }
 
 class Theme: NSObject {
-    let backgroundColor: UIColor
-    let focusedBackground: UIColor
-    let auxiliaryBackground: UIColor
-    let titleText: UIColor
-    let bodyText: UIColor
-    let controlText: UIColor
-    let auxiliaryText: UIColor
-    let tintColor: UIColor
-    let auxiliaryTintColor: UIColor
-    let hyperlink: UIColor
-    let mutedAccent: UIColor
-    let strongAccent: UIColor
+    @objc let backgroundColor: UIColor
+    @objc let focusedBackground: UIColor
+    @objc let auxiliaryBackground: UIColor
+    @objc let titleText: UIColor
+    @objc let bodyText: UIColor
+    @objc let controlText: UIColor
+    @objc let auxiliaryText: UIColor
+    @objc let tintColor: UIColor
+    @objc let auxiliaryTintColor: UIColor
+    @objc let hyperlink: UIColor
+    @objc let mutedAccent: UIColor
+    @objc let strongAccent: UIColor
     let appearence: Appearence
 
     struct Appearence: Equatable {

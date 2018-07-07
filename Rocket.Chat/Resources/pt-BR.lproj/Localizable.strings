@@ -10,7 +10,10 @@
 "error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 "error.login.title" = "Oops!";
-"error.login.message" = "Aglo de errado aconteceu na tentativa de login. Tente novamente por favor.";
+"error.login.message" = "Algo de errado aconteceu na tentativa de login. Tente novamente por favor.";
+
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos."; // TODO
 
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "Suas credenciais foram rejeitadas, tente novamente por favor!";
@@ -142,6 +145,7 @@
 "subscriptions.unreads" = "Não lidos";
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
+"subscriptions.groups" = "Grupos Privados";
 "subscriptions.direct_messages" = "Mensagens Diretas";
 "subscriptions.conversations" = "Conversas";
 "subscriptions.you" = "Você";
@@ -164,6 +168,7 @@
 "status.online" = "Disponível";
 "status.away" = "Ausente";
 "status.busy" = "Ocupado";
+"status.offline" = "Desconectado";
 "status.invisible" = "Invisível";
 
 // New Room View
@@ -363,18 +368,29 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Conversa";
+"user_action_sheet.info" = "Informação";
 "user_action_sheet.remove" = "Remover do canal";
 "user_action_sheet.remove_confirm.title" = "Remove esse usuário?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' do canal?";
 
+// User Details
+"user_details.status" = "Status";
+"user_details.role" = "Função";
+"user_details.roles" = "Funções";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Fuso horário";
+"user_details.message_button" = "Mensagem";
+"user_details.voice_call_button" = "Voz";
+"user_details.video_call_button" = "Vídeo";
+
 // Theme
-"theme.settings.title" = "Theme"; // TODO
-"theme.settings.header" = "ALL THEMES"; // TODO
-"theme.settings.footer" = "Applying a theme will change how the app looks."; // TODO
-"theme.light" = "Light"; // TODO
-"theme.dark" = "Dark"; // TODO
-"theme.black" = "Black"; // TODO
+"theme.settings.title" = "Tema";
+"theme.settings.header" = "TODOS OS TEMAS";
+"theme.settings.footer" = "Aplicar um tema novo muda a forma como o app aparece para você.";
+"theme.light" = "Claro";
+"theme.dark" = "Escuro";
+"theme.black" = "Preto";
 
 // Sorting & Grouping Subscriptions
 "subscriptions.sorting.title.alphabetical" = "Ordenando por nome";

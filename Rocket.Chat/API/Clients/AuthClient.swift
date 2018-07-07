@@ -22,6 +22,7 @@ struct AuthClient: APIClient {
                 let auth = Auth()
                 auth.internalFirstChannelOpened = false
                 auth.lastSubscriptionFetchWithLastMessage = nil
+                auth.lastRoomFetchWithLastMessage = nil
                 auth.lastAccess = Date()
                 auth.serverURL = (self.api as? API)?.host.absoluteString ?? ""
                 auth.token = resource.authToken
@@ -39,7 +40,6 @@ struct AuthClient: APIClient {
                     realm.add(auth)
                 })
 
-                SocketManager.sharedInstance.isUserAuthenticated = true
                 ServerManager.timestampSync()
                 completion(response)
             case .error:

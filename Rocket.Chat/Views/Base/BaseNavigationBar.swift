@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol BaseNavigationBarThemeSource {
+protocol BaseNavigationBarThemeSource: class {
     var navigationBarTheme: Theme? { get }
 }
 
 class BaseNavigationBar: UINavigationBar {
-    var themeSource: BaseNavigationBarThemeSource?
+    weak var themeSource: BaseNavigationBarThemeSource?
     override var theme: Theme? {
         return themeSource?.navigationBarTheme
     }

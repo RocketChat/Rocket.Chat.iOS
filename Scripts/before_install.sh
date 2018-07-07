@@ -2,6 +2,4 @@
 
 set -e
 
-gem install bundler
-gem install xcpretty
-gem install cocoapods
+bundle install

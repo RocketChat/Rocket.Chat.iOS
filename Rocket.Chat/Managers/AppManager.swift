@@ -155,13 +155,26 @@ extension AppManager {
         SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
-                UIApplication.shared.statusBarStyle = .default
                 if AuthManager.isAuthenticated() != nil {
                     if let currentUser = AuthManager.currentUser() {
-                        BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+                        AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
                     }
 
                     WindowManager.open(.subscriptions)
+
+                    let server = AuthManager.selectedServerHost()
+                    AnalyticsManager.log(
+                        event: .serverSwitch(
+                            server: server,
+                            serverCount: DatabaseManager.servers?.count ?? 1
+                        )
+                    )
+
+                    AnalyticsManager.set(
+                        userProperty: .server(
+                            server: server
+                        )
+                    )
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
@@ -189,6 +202,7 @@ extension AppManager {
 
                 // Close all presenting controllers, modals & pushed
                 mainViewController.presentedViewController?.dismiss(animated: true, completion: nil)
+                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
 
                 let nav = BaseNavigationController(rootViewController: controller)
                 mainViewController.showDetailViewController(nav, sender: self)

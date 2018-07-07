@@ -23,15 +23,10 @@ final class EditProfileViewModel {
 
     internal var userStatus: String {
         guard let user = AuthManager.currentUser() else {
-            return localized("user_menu.invisible")
+            return localized("status.invisible")
         }
 
-        switch user.status {
-        case .online: return localized("status.online")
-        case .offline: return localized("status.invisible")
-        case .busy: return localized("status.busy")
-        case .away: return localized("status.away")
-        }
+        return user.status != .offline ? "\(user.status)" : localized("status.invisible")
     }
 
 }

@@ -12,6 +12,9 @@
 "error.login.title" = "Oups!";
 "error.login.message" = "Something wrong happened while trying to login."; //TODO
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Oups!";
 "error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
@@ -84,7 +87,7 @@
 
 "alert.logout.confirmation.title" = "Logout from this server"; // TODO
 "alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?"; // TODO
-"alert.logout.confirmation.confirm" = "Yes, logout me"; // TODO
+"alert.logout.confirmation.confirm" = "Yes, logout"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Le serveur a changé son URL";
@@ -142,6 +145,7 @@
 "subscriptions.unreads" = "Non lus";
 "subscriptions.favorites" = "Favoris";
 "subscriptions.channels" = "Canaux";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Messages directs";
 "subscriptions.conversations" = "Conversations"; //TODO
 "subscriptions.you" = "Toi";
@@ -164,6 +168,7 @@
 "status.online" = "En ligne";
 "status.away" = "Absent";
 "status.busy" = "Occupé";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Invisible";
 
 // New Room View
@@ -362,10 +367,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Conversation"; // TODO
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Remove from room"; // TODO
 "user_action_sheet.remove_confirm.title" = "Remove this user?"; // TODO
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?"; // TODO
+
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
+"user_details.message_button" = "Message"; // TODO
+"user_details.voice_call_button" = "Voice Call"; // TODO
+"user_details.video_call_button" = "Video Call"; // TODO
 
 // Theme
 "theme.settings.title" = "Theme"; // TODO

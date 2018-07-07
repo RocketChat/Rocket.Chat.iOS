@@ -60,8 +60,6 @@ final class ServersListView: UIView {
         }
     }
 
-    var presentAddServer: (() -> Void)?
-
     private func animates(_ animations: @escaping VoidCompletion, completion: VoidCompletion? = nil) {
         UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
             animations()
@@ -89,6 +87,7 @@ final class ServersListView: UIView {
             })
         }
 
+        instance.applyTheme()
         return instance
     }
 
@@ -109,7 +108,13 @@ final class ServersListView: UIView {
     // MARK: Server Management
 
     @IBAction func buttonAddNewServerDidPressed(sender: Any) {
-        presentAddServer?()
+        WindowManager.open(
+            .auth(
+                serverUrl: "",
+                credentials: nil
+            ),
+            viewControllerIdentifier: viewModel.connectServerNavIdentifier
+        )
     }
 
     func selectServer(at indexPath: IndexPath) {
@@ -137,6 +142,11 @@ final class ServersListView: UIView {
 
         alert.actions.append(UIAlertAction(title: localized("servers.action.disconnect.alert.confirm"), style: .destructive, handler: { _ in
             API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
+
+            if indexPath.row < DatabaseManager.selectedIndex {
+                DatabaseManager.selectDatabase(at: DatabaseManager.selectedIndex - 1)
+            }
+
             DatabaseManager.removeDatabase(at: indexPath.row)
 
             self.viewModel.updateServersList()

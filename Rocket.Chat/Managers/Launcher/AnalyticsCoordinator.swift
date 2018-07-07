@@ -1,5 +1,5 @@
 //
-//  BugTrackingCoordinator.swift
+//  AnalyticsCoordinator.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Machado on 11/12/16.
@@ -9,6 +9,7 @@
 import Foundation
 import Fabric
 import Crashlytics
+import Firebase
 
 #if BETA || DEBUG
 import Instabug
@@ -16,9 +17,9 @@ import Instabug
 
 let kCrashReportingDisabledKey = "kCrashReportingDisabledKey"
 
-struct BugTrackingCoordinator: LauncherProtocol {
+struct AnalyticsCoordinator: LauncherProtocol {
 
-    static var isCrashReportingDisabled: Bool {
+    static var isUsageDataLoggingDisabled: Bool {
         return UserDefaults.standard.bool(forKey: kCrashReportingDisabledKey)
     }
 
@@ -28,17 +29,31 @@ struct BugTrackingCoordinator: LauncherProtocol {
         if disabled {
             anonymizeCrashReports()
         } else {
-            BugTrackingCoordinator().prepareToLaunch(with: nil)
+            AnalyticsCoordinator().prepareToLaunch(with: nil)
         }
     }
 
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
-        if BugTrackingCoordinator.isCrashReportingDisabled {
+        if AnalyticsCoordinator.isUsageDataLoggingDisabled {
             return
         }
 
         launchFabric()
         launchInstabug()
+        launchFirebase()
+    }
+
+    private func launchFirebase() {
+        #if RELEASE || BETA
+        guard
+            let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+            NSDictionary(contentsOfFile: path) != nil
+        else {
+            return
+        }
+
+        FirebaseApp.configure()
+        #endif
     }
 
     private func launchInstabug() {
@@ -59,9 +74,9 @@ struct BugTrackingCoordinator: LauncherProtocol {
         Fabric.with([Crashlytics.self])
 
         if let currentUser = AuthManager.currentUser() {
-            BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+            AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
         } else {
-            BugTrackingCoordinator.anonymizeCrashReports()
+            AnalyticsCoordinator.anonymizeCrashReports()
         }
     }
 

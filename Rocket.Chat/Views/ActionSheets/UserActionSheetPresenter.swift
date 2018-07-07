@@ -6,7 +6,7 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
 enum UserAction {
     case remove
@@ -28,18 +28,21 @@ extension UserActionSheetPresenter where Self: UIViewController {
         controller.popoverPresentationController?.sourceView = source?.view
         controller.popoverPresentationController?.sourceRect = source?.rect ?? source?.view?.frame ?? .zero
 
-        // Conversation (Open DM)
+        // Information (Open User Details)
 
-        controller.addAction(UIAlertAction(title: localized("user_action_sheet.conversation"), style: .default, handler: { [weak self] _ in
-            guard let username = user.username else { return }
+        let openUserDetails = { [weak self] in
+            let detailController = UserDetailViewController.fromStoryboard().withModel(.forUser(user))
+            detailController.modalPresentationStyle = .formSheet
+            self?.pushOrPresent(detailController, source: source)
 
-            self?.close(animated: true)
-
-            AppManager.openDirectMessage(username: username) {
-                completion?(.conversation)
-                controller.dismiss(animated: true, completion: nil)
+            API.current()?.client(UsersClient.self).fetchUser(user) { [weak detailController] response in
+                if case let .resource(resource) = response, let user = resource.user {
+                    detailController?.model = .forUser(user)
+                }
             }
-        }))
+        }
+
+        controller.addAction(UIAlertAction(title: localized("user_action_sheet.info"), style: .default, handler: { _ in openUserDetails() }))
 
         // Remove User (Kick)
         let api = API.current()
@@ -69,8 +72,11 @@ extension UserActionSheetPresenter where Self: UIViewController {
             }
         }
 
-        controller.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
-
-        present(controller, animated: true, completion: nil)
+        if controller.actions.count == 1 {
+            openUserDetails()
+        } else {
+            controller.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
+            present(controller, animated: true, completion: nil)
+        }
     }
 }

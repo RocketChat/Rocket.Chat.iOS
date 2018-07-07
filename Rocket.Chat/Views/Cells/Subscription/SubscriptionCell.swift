@@ -74,6 +74,7 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.prepareForReuse()
 
         labelName.text = nil
+        labelDate.text = nil
         labelLastMessage.text = nil
         labelUnread.text = nil
         viewUnread.isHidden = true
@@ -93,7 +94,10 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-        labelLastMessage.text = subscription.roomLastMessageText
+
+        if AuthSettingsManager.settings?.storeLastMessage ?? true {
+            labelLastMessage.text = subscription.roomLastMessageText
+        }
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
@@ -131,18 +135,26 @@ final class SubscriptionCell: UITableViewCell {
         applyTheme()
     }
 
+    var userStatus: UserStatus? {
+        didSet {
+            if let userStatus = userStatus {
+                switch userStatus {
+                case .online: viewStatus.backgroundColor = .RCOnline()
+                case .busy: viewStatus.backgroundColor = .RCBusy()
+                case .away: viewStatus.backgroundColor = .RCAway()
+                case .offline: viewStatus.backgroundColor = .RCInvisible()
+                }
+            }
+        }
+    }
+
     fileprivate func updateStatus(subscription: Subscription) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true
 
             if let user = subscription.directMessageUser {
-                switch user.status {
-                case .online: viewStatus.backgroundColor = .RCOnline()
-                case .busy: viewStatus.backgroundColor = .RCBusy()
-                case .away: viewStatus.backgroundColor = .RCAway()
-                case .offline: viewStatus.backgroundColor = .RCInvisible()
-                }
+                userStatus = user.status
             }
         } else {
             iconRoom.isHidden = false
@@ -156,7 +168,6 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    // Need to localize this formatting
     func dateFormatted(date: Date) -> String {
         let calendar = NSCalendar.current
 
@@ -169,6 +180,23 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         return RCDateFormatter.date(date, dateStyle: .short)
+    }
+
+    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
+        guard
+            let lastMessageText = subscription.roomLastMessageText,
+            let lastMessageDate = subscription.roomLastMessageDate
+        else {
+            return false
+        }
+
+        let isNameDifferent = labelName.text != subscription.displayName()
+        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
+        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
+        let isStatusDifferent = userStatus != subscription.otherUserStatus
+        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
+
+        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }
@@ -224,13 +252,17 @@ extension SubscriptionCell {
         labelLastMessage.textColor = theme.auxiliaryText
         iconRoom.tintColor = theme.auxiliaryText
 
-        if let subscription = self.subscription, subscription.unread > 0 || subscription.alert {
+        setSelected(isSelected, animated: false)
+        setHighlighted(isHighlighted, animated: false)
+
+        guard let subscription = self.subscription, !subscription.isInvalidated else {
+            return
+        }
+
+        if subscription.unread > 0 || subscription.alert {
             labelDate.textColor = theme.tintColor
         } else {
             labelDate.textColor = theme.auxiliaryText
         }
-
-        setSelected(isSelected, animated: false)
-        setHighlighted(isHighlighted, animated: false)
     }
 }

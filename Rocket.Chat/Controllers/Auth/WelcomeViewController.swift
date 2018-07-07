@@ -91,7 +91,7 @@ class WelcomeViewController: BaseViewController {
     // MARK: Setup
 
     func setupAppearance() {
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
         }
 
@@ -119,7 +119,7 @@ class WelcomeViewController: BaseViewController {
         }
 
         let controller = SFSafariViewController(url: url)
-        controller.modalPresentationStyle = .popover
+        controller.modalPresentationStyle = .formSheet
         controller.preferredControlTintColor = view.tintColor
 
         present(controller, animated: true, completion: nil)

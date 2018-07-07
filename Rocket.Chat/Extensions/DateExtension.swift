@@ -44,8 +44,9 @@ extension Date {
         return self.formatted("YYYY")
     }
 
-    func formatted(_ format: String = "dd/MM/yyyy HH:mm:ss ZZZ") -> String {
+    func formatted(_ format: String = "dd/MM/yyyy HH:mm:ss ZZZ", timeZone: TimeZone? = .current) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }

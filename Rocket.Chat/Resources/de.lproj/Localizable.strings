@@ -12,6 +12,9 @@
 "error.login.title" = "Oops!";
 "error.login.message" = "Während der Anmeldung ist ein Problem aufgetreten.";
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "Ihre Anmeldedaten wurden abgelehnt! Bitte versuchen Sie es noch einmal.";
 
@@ -142,6 +145,7 @@
 "subscriptions.unreads" = "Ungelesen";
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Direktnachrichten";
 "subscriptions.conversations" = "Konversationen";
 "subscriptions.you" = "Du";
@@ -164,6 +168,7 @@
 "status.online" = "Online";
 "status.away" = "Abwesend";
 "status.busy" = "Beschäftigt";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Unsichtbar";
 
 // New Room View
@@ -363,13 +368,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Passwort";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Konversation";
-"user_action_sheet.remove" = "Von Raum entfernen";
-"user_action_sheet.remove_confirm.title" = "Diesen Nutzer entfernen?";
-"user_action_sheet.remove_confirm.message" = "Soll '%@' wirklich aus diesem Raum entfernt werden?";
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Aus Raum entfernen";
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";
+
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
+"user_details.message_button" = "Message"; // TODO
+"user_details.voice_call_button" = "Voice Call"; // TODO
+"user_details.video_call_button" = "Video Call"; // TODO
 
 // Theme
 "theme.settings.title" = "Aussehen";

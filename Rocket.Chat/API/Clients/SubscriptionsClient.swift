@@ -30,7 +30,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchSubscriptions(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = SubscriptionsRequest()
+        let req = SubscriptionsRequest(updatedSince: updatedSince)
 
         let currentRealm = realm
 
@@ -77,7 +77,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = RoomsRequest()
+        let req = RoomsRequest(updatedSince: updatedSince)
 
         let currentRealm = realm
 
@@ -91,7 +91,7 @@ struct SubscriptionsClient: APIClient {
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastRoomFetchWithLastMessage = Date.serverDate
                     realm.add(auth, update: true)
                 })
 
@@ -277,6 +277,23 @@ struct SubscriptionsClient: APIClient {
             }, completion: {
                 completion?()
             })
+        }
+    }
+}
+
+// MARK: Members List
+
+extension SubscriptionsClient {
+    func fetchMembersList(subscription: Subscription, options: APIRequestOptionSet = [], realm: Realm? = Realm.current, completion: @escaping (APIResponse<RoomMembersResource>) -> Void) {
+        let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
+        api.fetch(request, options: options) { response in
+            if case let .resource(resource) = response {
+                try? realm?.write {
+                    realm?.add(resource.members?.compactMap { $0 } ?? [], update: true)
+                }
+            }
+
+            completion(response)
         }
     }
 }

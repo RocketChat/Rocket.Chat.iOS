@@ -179,8 +179,16 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let screenName = String(describing: ChatViewController.self)
+        AnalyticsManager.log(event: .screenView(screenName: screenName))
     }
 
     override func viewWillLayoutSubviews() {
@@ -706,14 +714,6 @@ final class ChatViewController: SLKTextViewController {
     private func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
         guard let subscription = subscription else { return }
 
-        if isRequestingHistory {
-            if date == nil {
-                collectionView?.reloadData()
-            }
-
-            return
-        }
-
         isRequestingHistory = true
 
         let newMessages = subscription.fetchMessages(lastMessageDate: date).map({ Message(value: $0) })
@@ -737,6 +737,10 @@ final class ChatViewController: SLKTextViewController {
                 }
             })
         } else {
+            if date == nil {
+                collectionView?.reloadData()
+            }
+
             if SocketManager.isConnected() {
                 if loadRemoteHistory {
                     loadHistoryFromRemote(date: date)

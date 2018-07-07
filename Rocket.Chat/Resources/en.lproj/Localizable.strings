@@ -12,6 +12,9 @@
 "error.login.title" = "Oops!";
 "error.login.message" = "Something wrong happened while trying to login.";
 
+"error.signup.title" = "Oops!";
+"error.signup.empty_input.message" = "All the fields are required for sign up.";
+
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "Your credentials were rejected! Please try again.";
 
@@ -84,7 +87,7 @@
 
 "alert.logout.confirmation.title" = "Logout from this server";
 "alert.logout.confirmation.message" = "Are you sure you want to logout from \"%@\"?";
-"alert.logout.confirmation.confirm" = "Yes, logout me";
+"alert.logout.confirmation.confirm" = "Yes, logout";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -142,6 +145,7 @@
 "subscriptions.unreads" = "Unreads";
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
+"subscriptions.groups" = "Private Groups";
 "subscriptions.direct_messages" = "Direct Messages";
 "subscriptions.conversations" = "Conversations";
 "subscriptions.you" = "you";
@@ -164,6 +168,7 @@
 "status.online" = "Online";
 "status.away" = "Away";
 "status.busy" = "Busy";
+"status.offline" = "Offline";
 "status.invisible" = "Invisible";
 
 // New Room View
@@ -363,10 +368,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password";
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Conversation";
+"user_action_sheet.info" = "Information";
 "user_action_sheet.remove" = "Remove from room";
 "user_action_sheet.remove_confirm.title" = "Remove this user?";
 "user_action_sheet.remove_confirm.message" = "Are you sure you want to remove '%@' from the room?";
+
+// User Details
+"user_details.status" = "Status";
+"user_details.role" = "Role";
+"user_details.roles" = "Roles";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Timezone";
+"user_details.message_button" = "Message";
+"user_details.voice_call_button" = "Voice Call";
+"user_details.video_call_button" = "Video Call";
 
 // Theme
 "theme.settings.title" = "Theme";

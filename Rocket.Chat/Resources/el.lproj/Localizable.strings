@@ -12,6 +12,9 @@
 "error.login.title" = "Ωπ!";
 "error.login.message" = "Συνέβη κάποιο σφάλμα καθώς προσπαθούσατε να συνδεθείτε.";
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Ωπ!";
 "error.login_unauthorized.message" = "Τα διαπιστευτήριά σας απορρίφθηκαν! Παρακαλούμε ξαναπροσπαθήστε.";
 
@@ -84,7 +87,7 @@
 
 "alert.logout.confirmation.title" = "Αποσύνδεση από αυτό τον εξυπηρετητή"; 
 "alert.logout.confirmation.message" = "Σίγουρα θέλετε να αποσυνδεθείτε από \"%@\"?"; 
-"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με"; 
+"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
@@ -142,6 +145,7 @@
 "subscriptions.unreads" = "Αδιάβαστα";
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
+"subscriptions.groups" = "Private Groups"; //TODO
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
 "subscriptions.conversations" = "Συνομιλίες";
 "subscriptions.you" = "εσείς";
@@ -164,6 +168,7 @@
 "status.online" = "Σε σύνδεση";
 "status.away" = "Λείπω";
 "status.busy" = "Απασχολημένος";
+"status.offline" = "Offline"; //TODO
 "status.invisible" = "Αόρατος";
 
 // New Room View
@@ -363,10 +368,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Συνθηματικό"; 
 
 // User Action Sheet
-"user_action_sheet.conversation" = "Συνομιλία"; 
+"user_action_sheet.info" = "Information"; // TODO
 "user_action_sheet.remove" = "Αφαίρεση από το δωμάτιο"; 
 "user_action_sheet.remove_confirm.title" = "Αφαίρεση αυτού του χρήστη;"; 
-"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;"; 
+"user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;";
+
+// User Details
+"user_details.status" = "Status"; // TODO
+"user_details.role" = "Role"; // TODO
+"user_details.roles" = "Roles"; // TODO
+"user_details.email" = "Email"; // TODO
+"user_details.emails" = "Emails"; // TODO
+"user_details.timezone" = "Timezone"; // TODO
+"user_details.message_button" = "Message"; // TODO
+"user_details.voice_call_button" = "Voice Call"; // TODO
+"user_details.video_call_button" = "Video Call"; // TODO
 
 // Theme
 "theme.settings.title" = "Θέμα"; 
