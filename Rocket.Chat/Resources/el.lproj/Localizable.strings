@@ -301,7 +301,11 @@
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
 "chat.messages.mentions.list.title" = "Αναφέρθηκε"; 
 "chat.messages.files.list.title" = "Αρχεία"; 
-"chat.messages.files.list.empty" = "Δεν βρέθηκαν αρχεία"; 
+"chat.messages.files.list.empty" = "Δεν βρέθηκαν αρχεία";
+
+// Upload Banner
+"chat.banner.upload.uploading" = "Uploading %@"; // TODO
+"chat.banner.upload.try_again" = "Try again"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";

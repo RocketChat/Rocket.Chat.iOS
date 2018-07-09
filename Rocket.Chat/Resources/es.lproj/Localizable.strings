@@ -302,6 +302,10 @@
 "chat.messages.files.list.title" = "Files"; // TODO
 "chat.messages.files.list.empty" = "No files found"; // TODO
 
+// Upload Banner
+"chat.banner.upload.uploading" = "Uploading %@"; // TODO
+"chat.banner.upload.try_again" = "Try again"; // TODO
+
 // Settings
 "myaccount.settings.title" = "Preferencias";
 "myaccount.settings.administration" = "Administración";
