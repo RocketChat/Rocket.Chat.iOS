@@ -23,7 +23,6 @@ struct SubscriptionManager {
     }
 
     static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
-        Realm.current?.refresh()
         let client = API.current()?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
