@@ -6,29 +6,29 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-"global.ok" = "Ok"; //TODO
+"global.ok" = "Ok";
 
-"alert.no_servers.title" = "No servers"; //TODO
-"alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something."; //TODO
+"alert.no_servers.title" = "Aucun serveur";
+"alert.no_servers.message" = "Vous devez être connecté à au moins un serveur Rocket.Chat pour partager quelque chose.";
 
-"servers.title" = "Servers"; //TODO
+"servers.title" = "Serveurs";
 
-"rooms.title" = "Select Rooms"; //TODO
-"rooms.section.server" = "Select server"; //TODO
-"rooms.section.favorites" = "Favorites"; //TODO
-"rooms.section.channels" = "Channels"; //TODO
-"rooms.section.groups" = "Private Groups"; //TODO
-"rooms.section.directMessages" = "Direct Messages"; //TODO
+"rooms.title" = "Sélectionner Canal";
+"rooms.section.server" = "Sélectionner serveur";
+"rooms.section.favorites" = "Favoris";
+"rooms.section.channels" = "Canaux";
+"rooms.section.groups" = "Groupes Privés";
+"rooms.section.directMessages" = "Messages Directs";
 
-"compose.title" = "Share"; //TODO
-"compose.send" = "Send"; //TODO
-"compose.cancel" = "Cancel"; //TODO
-"compose.destination.to" = "To: "; //TODO
-"compose.file.name.placeholder" = "File name"; //TODO
-"compose.file.description.placeholder" = "File description"; //TODO
+"compose.title" = "Partager";
+"compose.send" = "Envoyer";
+"compose.cancel" = "Annuler";
+"compose.destination.to" = "À: ";
+"compose.file.name.placeholder" = "Nom de fichier";
+"compose.file.description.placeholder" = "Description du fichier";
 
-"report.success.title" = "Success"; //TODO
-"report.success.message" = "Shared your content successfully."; //TODO
-"report.error.title" = "Error"; //TODO
-"report.error.message" = "Something wrong happened while sending your content."; //TODO
-"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
+"report.success.title" = "Succès";
+"report.success.message" = "Votre contenu a été partagé avec succès.";
+"report.error.title" = "Erreur";
+"report.error.message" = "Une erreur est survenue lors de l'envoi de votre contenu.";
+"report.cancelled.message" = "Vous avez annulé votre requête. Votre message n'a pas été envoyé.";
