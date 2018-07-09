@@ -164,36 +164,36 @@ extension SocketManager {
                 return
             }
 
-            infoClient.fetchInfo(completion: {
-                SubscriptionManager.updateSubscriptions(auth) {
-                    AuthSettingsManager.updatePublicSettings(auth)
+            infoClient.fetchInfo()
 
-                    UserManager.userDataChanges()
-                    UserManager.changes()
-                    SubscriptionManager.changes(auth)
-                    SubscriptionManager.subscribeRoomChanges()
-                    SubscriptionManager.subscribeInAppNotifications()
-                    PermissionManager.changes()
-                    infoClient.fetchPermissions()
-                    CustomEmojiManager.sync()
+            SubscriptionManager.updateSubscriptions(auth) {
+                AuthSettingsManager.updatePublicSettings(auth)
 
-                    commandsClient.fetchCommands()
+                UserManager.userDataChanges()
+                UserManager.changes()
+                SubscriptionManager.changes(auth)
+                SubscriptionManager.subscribeRoomChanges()
+                SubscriptionManager.subscribeInAppNotifications()
+                PermissionManager.changes()
+                infoClient.fetchPermissions()
+                CustomEmojiManager.sync()
 
-                    if let userIdentifier = auth.userId {
-                        PushManager.updateUser(userIdentifier)
-                    }
+                commandsClient.fetchCommands()
 
-                    if AuthManager.currentUser()?.username == nil {
-                        WindowManager.open(
-                            .auth(
-                                serverUrl: "",
-                                credentials: nil
-                            ),
-                            viewControllerIdentifier: "RegisterUsernameNav"
-                        )
-                    }
+                if let userIdentifier = auth.userId {
+                    PushManager.updateUser(userIdentifier)
                 }
-            })
+
+                if AuthManager.currentUser()?.username == nil {
+                    WindowManager.open(
+                        .auth(
+                            serverUrl: "",
+                            credentials: nil
+                        ),
+                        viewControllerIdentifier: "RegisterUsernameNav"
+                    )
+                }
+            }
         })
     }
 
