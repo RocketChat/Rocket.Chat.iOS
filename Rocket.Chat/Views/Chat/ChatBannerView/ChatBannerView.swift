@@ -61,4 +61,9 @@ class ChatBannerView: UIView {
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         onCancelButtonPressed?()
     }
+
+    var onActionButtonPressed: (() -> Void)?
+    @IBAction func actionButtonPressed(_ sender: UIButton) {
+        onActionButtonPressed?()
+    }
 }

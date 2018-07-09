@@ -304,7 +304,7 @@
 
 // Upload Banner
 "chat.banner.upload.uploading" = "Uploading %@"; // TODO
-"chat.banner.upload.try_again" = "Try again"; // TODO
+"chat.banner.upload.retry" = "Try again"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferencias";

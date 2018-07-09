@@ -46,14 +46,18 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <state key="normal" title="Try again"/>
+                            <connections>
+                                <action selector="actionButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PSO-md-8Rh"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT8-q9-UV4">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT8-q9-UV4">
                     <rect key="frame" x="335" y="-1" width="40" height="55"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="94y-vE-csA"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="Message_Upload_Cancel">
                         <color key="titleColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="0.0" colorSpace="calibratedRGB"/>
                     </state>
