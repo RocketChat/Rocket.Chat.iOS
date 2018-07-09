@@ -30,6 +30,9 @@ class ChatBannerView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         updateForModel()
+
+        layer.borderWidth = 1.0
+        layer.borderColor = #colorLiteral(red: 0.7921568627, green: 0.8078431373, blue: 0.8196078431, alpha: 1)
     }
 
     func updateForModel() {
