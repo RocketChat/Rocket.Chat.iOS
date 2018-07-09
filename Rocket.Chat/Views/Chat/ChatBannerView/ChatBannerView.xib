@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XhB-RB-AUS">
-                    <rect key="frame" x="0.0" y="52" width="375" height="2"/>
+                    <rect key="frame" x="0.0" y="51" width="375" height="2"/>
                     <color key="trackTintColor" red="0.94509803921568625" green="0.94901960784313721" blue="0.95686274509803926" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </progressView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Message_Upload_Image" translatesAutoresizingMaskIntoConstraints="NO" id="r2c-iL-1f3">
@@ -73,7 +73,7 @@
                 <constraint firstItem="r2c-iL-1f3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Aku-lS-q6y"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wT8-q9-UV4" secondAttribute="trailing" id="Hfx-wF-cPg"/>
                 <constraint firstItem="fWo-Tx-Jvo" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="M0w-h2-YYj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XhB-RB-AUS" secondAttribute="bottom" id="Nva-qe-rkx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XhB-RB-AUS" secondAttribute="bottom" constant="1" id="Nva-qe-rkx"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wT8-q9-UV4" secondAttribute="bottom" id="QU9-Ej-xiT"/>
                 <constraint firstItem="r2c-iL-1f3" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="j1X-qk-o8r"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XhB-RB-AUS" secondAttribute="trailing" id="lKR-hW-1G4"/>
