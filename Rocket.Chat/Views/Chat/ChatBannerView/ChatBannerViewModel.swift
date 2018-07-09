@@ -41,9 +41,9 @@ extension ChatBannerViewModel {
 extension ChatBannerViewModel {
     static func forUploadingFile(named name: String, type: String, failed: Bool = false) -> ChatBannerViewModel {
         return ChatBannerViewModel(
-            text: String(format: localized("chat.banner.upload.uploading"), name),
+            text: String(format: localized("chat.banner.upload.\(failed ? "error" : "uploading")"), name),
             actionText: failed ? localized("chat.banner.upload.retry") : nil,
-            icon: type.contains("image") || type.contains("video") ? .image : .file,
+            icon: failed ? .error : (type.contains("image") || type.contains("video") ? .image : .file),
             showCloseButton: true,
             progress: 0
         )

@@ -304,6 +304,7 @@
 
 // Upload Banner
 "chat.banner.upload.uploading" = "Uploading %@"; // TODO
+"chat.banner.upload.error" = "Failed uploading %@"; // TODO
 "chat.banner.upload.retry" = "Try again"; // TODO
 
 // Settings

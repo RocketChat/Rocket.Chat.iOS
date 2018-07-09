@@ -27,23 +27,9 @@ extension ChatViewController {
 
         view.addSubview(bannerView)
 
-        view.addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[bannerView]-0-|",
-                options: .alignAllLeft,
-                metrics: nil,
-                views: ["bannerView": bannerView]
-            )
-        )
-
-        view.addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[bannerView(54)]",
-                options: .alignAllLeft,
-                metrics: nil,
-                views: ["bannerView": bannerView]
-            )
-        )
+        bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bannerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        bannerView.heightAnchor.constraint(equalToConstant: bannerView.frame.height).isActive = true
 
         return bannerView
     }
