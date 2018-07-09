@@ -28,10 +28,10 @@
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-Tx-Jvo">
-                    <rect key="frame" x="59" y="7" width="256" height="40"/>
+                    <rect key="frame" x="59" y="7" width="276" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading layout_webapp.jpg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kX-8q-3LY">
-                            <rect key="frame" x="0.0" y="0.0" width="256" height="20"/>
+                            <rect key="frame" x="0.0" y="0.0" width="276" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="RUU-Vg-UQu"/>
                             </constraints>
@@ -40,7 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-qc-OBz">
-                            <rect key="frame" x="0.0" y="20" width="256" height="20"/>
+                            <rect key="frame" x="0.0" y="20" width="276" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="gH5-XW-gbp"/>
                             </constraints>
@@ -49,25 +49,28 @@
                         </button>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT8-q9-UV4">
-                    <rect key="frame" x="335" y="16.5" width="20" height="20"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT8-q9-UV4">
+                    <rect key="frame" x="335" y="-1" width="40" height="55"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="94y-vE-csA"/>
-                        <constraint firstAttribute="height" constant="20" id="PRH-Uh-gZW"/>
+                        <constraint firstAttribute="width" constant="40" id="94y-vE-csA"/>
                     </constraints>
-                    <state key="normal" image="closeButton">
+                    <state key="normal" image="Message_Upload_Cancel">
                         <color key="titleColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="0.0" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="cancelButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xwp-6I-oQb"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.94509803921568625" green="0.94901960784313721" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wT8-q9-UV4" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="5CM-M2-Apw"/>
-                <constraint firstItem="wT8-q9-UV4" firstAttribute="leading" secondItem="fWo-Tx-Jvo" secondAttribute="trailing" constant="20" id="8IM-8W-zfH"/>
+                <constraint firstItem="wT8-q9-UV4" firstAttribute="leading" secondItem="fWo-Tx-Jvo" secondAttribute="trailing" id="8IM-8W-zfH"/>
                 <constraint firstItem="r2c-iL-1f3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Aku-lS-q6y"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wT8-q9-UV4" secondAttribute="trailing" constant="20" id="Hfx-wF-cPg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wT8-q9-UV4" secondAttribute="trailing" id="Hfx-wF-cPg"/>
                 <constraint firstItem="fWo-Tx-Jvo" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="M0w-h2-YYj"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XhB-RB-AUS" secondAttribute="bottom" id="Nva-qe-rkx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wT8-q9-UV4" secondAttribute="bottom" id="QU9-Ej-xiT"/>
                 <constraint firstItem="r2c-iL-1f3" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="j1X-qk-o8r"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XhB-RB-AUS" secondAttribute="trailing" id="lKR-hW-1G4"/>
                 <constraint firstItem="XhB-RB-AUS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mmO-Gp-rcS"/>
@@ -90,7 +93,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Message_Upload_Cancel" width="20" height="20"/>
         <image name="Message_Upload_Image" width="24" height="24"/>
-        <image name="closeButton" width="13" height="13"/>
     </resources>
 </document>

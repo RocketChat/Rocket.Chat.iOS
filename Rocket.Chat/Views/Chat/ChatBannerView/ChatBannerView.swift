@@ -56,4 +56,9 @@ class ChatBannerView: UIView {
             closeButtonWidthConstraint.constant = 0
         }
     }
+
+    var onCancelButtonPressed: (() -> Void)?
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        onCancelButtonPressed?()
+    }
 }

@@ -38,6 +38,8 @@ import Foundation
             case .error(let error):
                 if case .version = error {
                     versionFallback?()
+                } else if case let .error(error) = error, (error as NSError).code == NSURLErrorCancelled {
+                    completion?()
                 } else {
                     Alert(key: "alert.upload_error").present()
                     completion?()
@@ -74,5 +76,9 @@ import Foundation
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         tasks[task]?(1.0)
         tasks.removeValue(forKey: task)
+    }
+
+    func cancelUploads() {
+        tasks.keys.forEach { $0.cancel() }
     }
 }
