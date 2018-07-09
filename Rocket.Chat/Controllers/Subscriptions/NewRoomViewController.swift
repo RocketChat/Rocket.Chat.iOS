@@ -43,7 +43,7 @@ final class NewRoomViewController: BaseViewController {
             footer: nil,
             cells: [
                 FormCell(
-                    cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
+                    cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag"), textLimit: 40),
                     key: "room name",
                     defaultValue: [],
                     enabled: true

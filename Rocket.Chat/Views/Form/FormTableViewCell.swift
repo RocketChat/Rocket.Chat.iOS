@@ -45,7 +45,7 @@ struct FormCell {
 
 enum FormTableViewCell {
     case check(title: String, description: String)
-    case textField(placeholder: String?, icon: UIImage?)
+    case textField(placeholder: String?, icon: UIImage?, textLimit: Int?)
 
     func getClass() -> FormTableViewCellProtocol.Type {
         switch self {
@@ -69,11 +69,12 @@ enum FormTableViewCell {
                 cell.switchOption.isEnabled = enabled
             }
 
-        case .textField(let placeholder, let icon):
+        case .textField(let placeholder, let icon, let textLimit):
             if let cell = cell as? TextFieldTableViewCell {
                 cell.textFieldInput.placeholder = placeholder
                 cell.imgLeftIcon.image = icon
                 cell.textFieldInput.isEnabled = enabled
+                cell.textLimit = textLimit ?? 0
             }
         }
 
