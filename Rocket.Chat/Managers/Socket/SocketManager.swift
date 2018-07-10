@@ -133,7 +133,7 @@ final class SocketManager {
         let request = [
             "msg": "unsub",
             "id": eventName
-        ] as [String: Any]
+            ] as [String: Any]
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -153,8 +153,8 @@ extension SocketManager {
             let auth = AuthManager.isAuthenticated(),
             let infoClient = API.current()?.client(InfoClient.self),
             let commandsClient = API.current()?.client(CommandsClient.self)
-        else {
-            return
+            else {
+                return
         }
 
         sharedInstance.state = .connecting
@@ -164,36 +164,36 @@ extension SocketManager {
                 return
             }
 
-            infoClient.fetchInfo()
+            infoClient.fetchInfo(completion: {
+                SubscriptionManager.updateSubscriptions(auth) {
+                    AuthSettingsManager.updatePublicSettings(auth)
 
-            SubscriptionManager.updateSubscriptions(auth) {
-                AuthSettingsManager.updatePublicSettings(auth)
+                    UserManager.userDataChanges()
+                    UserManager.changes()
+                    SubscriptionManager.changes(auth)
+                    SubscriptionManager.subscribeRoomChanges()
+                    SubscriptionManager.subscribeInAppNotifications()
+                    PermissionManager.changes()
+                    infoClient.fetchPermissions()
+                    CustomEmojiManager.sync()
 
-                UserManager.userDataChanges()
-                UserManager.changes()
-                SubscriptionManager.changes(auth)
-                SubscriptionManager.subscribeRoomChanges()
-                SubscriptionManager.subscribeInAppNotifications()
-                PermissionManager.changes()
-                infoClient.fetchPermissions()
-                CustomEmojiManager.sync()
+                    commandsClient.fetchCommands()
 
-                commandsClient.fetchCommands()
+                    if let userIdentifier = auth.userId {
+                        PushManager.updateUser(userIdentifier)
+                    }
 
-                if let userIdentifier = auth.userId {
-                    PushManager.updateUser(userIdentifier)
+                    if AuthManager.currentUser()?.username == nil {
+                        WindowManager.open(
+                            .auth(
+                                serverUrl: "",
+                                credentials: nil
+                            ),
+                            viewControllerIdentifier: "RegisterUsernameNav"
+                        )
+                    }
                 }
-
-                if AuthManager.currentUser()?.username == nil {
-                    WindowManager.open(
-                        .auth(
-                            serverUrl: "",
-                            credentials: nil
-                        ),
-                        viewControllerIdentifier: "RegisterUsernameNav"
-                    )
-                }
-            }
+            })
         })
     }
 
@@ -228,7 +228,7 @@ extension SocketManager: WebSocketDelegate {
             "msg": "connect",
             "version": "1",
             "support": ["1", "pre2", "pre1"]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object)
     }
