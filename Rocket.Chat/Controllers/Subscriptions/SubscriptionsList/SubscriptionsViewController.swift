@@ -177,7 +177,6 @@ final class SubscriptionsViewController: BaseViewController {
     func setupTitleView() {
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
             titleView.translatesAutoresizingMaskIntoConstraints = false
-            titleView.delegate = self
             titleView.layoutIfNeeded()
             titleView.sizeToFit()
             updateServerInformation()
@@ -415,14 +414,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
         }
 
         return false
-    }
-
-}
-
-extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
-
-    func userDidPressServerName() {
-        toggleServersList()
     }
 
 }

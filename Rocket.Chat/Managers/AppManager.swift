@@ -155,7 +155,6 @@ extension AppManager {
         SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
-                UIApplication.shared.statusBarStyle = .default
                 if AuthManager.isAuthenticated() != nil {
                     if let currentUser = AuthManager.currentUser() {
                         AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
