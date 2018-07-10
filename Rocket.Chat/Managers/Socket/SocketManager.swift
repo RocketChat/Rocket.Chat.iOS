@@ -133,7 +133,7 @@ final class SocketManager {
         let request = [
             "msg": "unsub",
             "id": eventName
-            ] as [String: Any]
+        ] as [String: Any]
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -153,8 +153,8 @@ extension SocketManager {
             let auth = AuthManager.isAuthenticated(),
             let infoClient = API.current()?.client(InfoClient.self),
             let commandsClient = API.current()?.client(CommandsClient.self)
-            else {
-                return
+        else {
+            return
         }
 
         sharedInstance.state = .connecting
@@ -228,7 +228,7 @@ extension SocketManager: WebSocketDelegate {
             "msg": "connect",
             "version": "1",
             "support": ["1", "pre2", "pre1"]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object)
     }
