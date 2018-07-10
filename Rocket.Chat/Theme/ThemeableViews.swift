@@ -278,6 +278,10 @@ extension SLKTextView {
     }
 }
 
+extension MBProgressHUD {
+    override var theme: Theme? { return nil }
+}
+
 // MARK: Subclasses
 
 class ThemeableStackView: UIStackView {
