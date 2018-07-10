@@ -20,7 +20,8 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
-            AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue))
+            let server = AuthManager.selectedServerHost()
+            AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
 
             try? realm?.write {
                 message.temporary = false

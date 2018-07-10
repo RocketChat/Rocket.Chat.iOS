@@ -162,15 +162,17 @@ extension AppManager {
 
                     WindowManager.open(.subscriptions)
 
-                    var server = ""
-                    if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL], let url = URL(string: serverURL) {
-                        server = url.host ?? ""
-                    }
-
+                    let server = AuthManager.selectedServerHost()
                     AnalyticsManager.log(
                         event: .serverSwitch(
                             server: server,
                             serverCount: DatabaseManager.servers?.count ?? 1
+                        )
+                    )
+
+                    AnalyticsManager.set(
+                        userProperty: .server(
+                            server: server
                         )
                     )
                 } else {
@@ -200,6 +202,7 @@ extension AppManager {
 
                 // Close all presenting controllers, modals & pushed
                 mainViewController.presentedViewController?.dismiss(animated: true, completion: nil)
+                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
 
                 let nav = BaseNavigationController(rootViewController: controller)
                 mainViewController.showDetailViewController(nav, sender: self)

@@ -12,6 +12,9 @@
 "error.login.title" = "Ups!";
 "error.login.message" = "Wystąpił nieoczekiwany błąd w trakcie logowania.";
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Ups!";
 "error.login_unauthorized.message" = "Twoje dane do logowania zostaly odrzucone. Spróbuj ponownie.";
 
