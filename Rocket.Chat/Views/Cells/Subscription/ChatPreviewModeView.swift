@@ -63,10 +63,6 @@ final class ChatPreviewModeView: UIView {
 extension ChatPreviewModeView {
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
-        labelTitle.textColor = theme.auxiliaryText
-        seperatorView.backgroundColor = theme.mutedAccent
-        buttonJoin.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1)
-        backgroundColor = theme.focusedBackground
+        buttonJoin.setTitleColor(#colorLiteral(red: 0.6814334393, green: 0.6957040429, blue: 0.7027211785, alpha: 1), for: .normal)
     }
 }
