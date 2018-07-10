@@ -27,30 +27,27 @@
                         <constraint firstAttribute="height" constant="24" id="ONq-Xm-kzS"/>
                     </constraints>
                 </imageView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-Tx-Jvo">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-Tx-Jvo">
                     <rect key="frame" x="59" y="7" width="276" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading layout_webapp.jpg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kX-8q-3LY">
                             <rect key="frame" x="0.0" y="0.0" width="276" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="RUU-Vg-UQu"/>
-                            </constraints>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                             <color key="textColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-qc-OBz">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-qc-OBz">
                             <rect key="frame" x="0.0" y="20" width="276" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="gH5-XW-gbp"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <state key="normal" title="Try again"/>
                             <connections>
                                 <action selector="actionButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PSO-md-8Rh"/>
                             </connections>
                         </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="jBX-5O-QNu"/>
+                    </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT8-q9-UV4">
                     <rect key="frame" x="335" y="-1" width="40" height="55"/>
