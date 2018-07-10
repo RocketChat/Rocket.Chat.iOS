@@ -38,10 +38,10 @@ final class SubscriptionsTitleView: UIView {
             buttonServer.layer.masksToBounds = true
         }
     }
-
-    @IBAction func buttonServerDidPressed(sender: Any) {
-        delegate?.userDidPressServerName()
-    }
+//
+//    @IBAction func buttonServerDidPressed(sender: Any) {
+//        delegate?.userDidPressServerName()
+//    }
 
     func updateServerName(name: String?) {
         buttonServer.setTitle(name, for: .normal)

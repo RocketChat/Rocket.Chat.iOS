@@ -187,7 +187,7 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.titleView = titleView
             self.titleView = titleView
 
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeTitleViewTapGesture(_:)))
             titleView.addGestureRecognizer(tapGesture)
         }
     }
@@ -241,19 +241,32 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
     }
 
+    private func shouldRespondToTap(recognizer: UITapGestureRecognizer, inset: CGFloat) -> Bool {
+        guard
+            let view = recognizer.view,
+            recognizer.state == .ended
+        else {
+            return false
+        }
+        let tapLocation = recognizer.location(in: view).y
+        return tapLocation > inset && tapLocation < view.bounds.height - inset
+    }
+
     // MARK: IBAction
 
-    @IBAction func recognizeHeaderTapGesture(_ sender: UITapGestureRecognizer) {
-        guard let headerView = sender.view,
-            sender.state == .ended
-        else {
-                return
+    @IBAction func recognizeSortingHeaderTapGesture(_ recognizer: UITapGestureRecognizer) {
+        if shouldRespondToTap(recognizer: recognizer, inset: 8) {
+            toggleSortingView()
         }
+    }
 
-        let tapInsets: CGFloat = 10
-        let tapLocation = sender.location(in: headerView).y
-        guard tapLocation > tapInsets, tapLocation < headerView.bounds.height - tapInsets else { return }
+    @objc func recognizeTitleViewTapGesture(_ recognizer: UITapGestureRecognizer) {
+        if shouldRespondToTap(recognizer: recognizer, inset: 6) {
+            toggleServersList()
+        }
+    }
 
+    func toggleSortingView() {
         serversView?.close()
 
         if let sortingView = sortingView {
@@ -264,7 +277,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
     }
 
-    @objc func openServersList() {
+    func toggleServersList() {
         sortingView?.close()
 
         if let serversView = serversView {
@@ -409,7 +422,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 extension SubscriptionsViewController: SubscriptionsTitleViewDelegate {
 
     func userDidPressServerName() {
-        openServersList()
+        toggleServersList()
     }
 
 }
