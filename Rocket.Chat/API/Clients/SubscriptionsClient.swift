@@ -17,6 +17,17 @@ struct SubscriptionsClient: APIClient {
 
     func markAsRead(subscription: Subscription) {
         let req = SubscriptionReadRequest(rid: subscription.rid)
+        let subscriptionIdentifier = subscription.rid
+
+        Realm.execute({ (realm) in
+            if let subscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
+                subscription.alert = false
+                subscription.unread = 0
+                subscription.userMentions = 0
+                subscription.groupMentions = 0
+                realm.add(subscription, update: true)
+            }
+        })
 
         api.fetch(req) { response in
             switch response {
