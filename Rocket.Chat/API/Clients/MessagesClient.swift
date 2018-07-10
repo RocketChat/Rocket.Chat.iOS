@@ -14,15 +14,18 @@ struct MessagesClient: APIClient {
 
     func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.current) {
         guard let id = message.identifier else { return }
+        let subscriptionIdentifier = subscription.rid
 
-        Realm.executeOnMainThread({ (realm) in
-            subscription.roomLastMessage = message
-            subscription.roomLastMessageDate = message.createdAt
-            subscription.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+        try? realm?.write {
+            if let subscriptionMutable = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
+                subscriptionMutable.roomLastMessage = message
+                subscriptionMutable.roomLastMessageDate = message.createdAt
+                subscriptionMutable.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+                realm?.add(subscriptionMutable, update: true)
+            }
 
-            realm.add(subscription, update: true)
-            realm.add(message, update: true)
-        })
+            realm?.add(message, update: true)
+        }
 
         func updateMessage(json: JSON) {
             let server = AuthManager.selectedServerHost()

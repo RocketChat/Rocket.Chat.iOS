@@ -32,17 +32,13 @@ class CommandsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchCommands(realm: realm)
 
-        // RKS NOTE: I'm commenting this assertion because the method fetchCommands
-        // is now using the Realm.execute method and we currently have no way
-        // to test the results from the test method.
-
-        // let expectation = XCTestExpectation(description: "two commands added to realm")
-        // DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-        //     if realm.objects(Command.self).count == 2 {
-        //         expectation.fulfill()
-        //     }
-        // })
-        // wait(for: [expectation], timeout: 3)
+        let expectation = XCTestExpectation(description: "two commands added to realm")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            if realm.objects(Command.self).count == 2 {
+                expectation.fulfill()
+            }
+        })
+        wait(for: [expectation], timeout: 3)
     }
 
     func testRunCommand() {

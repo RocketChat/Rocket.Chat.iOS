@@ -15,7 +15,7 @@ struct CommandsClient: APIClient {
         api.fetch(CommandsRequest()) { response in
             switch response {
             case .resource(let resource):
-                Realm.execute({ (realm) in
+                realm?.execute({ realm in
                     var commands: [Command] = []
 
                     resource.commands?.forEach { command in
