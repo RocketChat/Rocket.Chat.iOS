@@ -22,12 +22,8 @@ protocol ChatMessageTextViewModelProtocol {
 
 final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     var color: UIColor? {
-//        if let color = attachment.color {
         guard let color = attachment.color else { return nil }
-            return UIColor.normalizeColorFromString(string: color)
-//        }
-
-//        return .lightGray
+        return UIColor.normalizeColorFromString(string: color)
     }
 
     var title: String {
