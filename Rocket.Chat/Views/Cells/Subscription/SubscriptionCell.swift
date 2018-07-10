@@ -19,7 +19,7 @@ final class SubscriptionCell: UITableViewCell {
     var subscription: Subscription? {
         didSet {
             guard let subscription = subscription, !subscription.isInvalidated else { return }
-            updateSubscriptionInformatin()
+            updateSubscriptionInformation()
         }
     }
 
@@ -80,7 +80,7 @@ final class SubscriptionCell: UITableViewCell {
         viewUnread.isHidden = true
     }
 
-    func updateSubscriptionInformatin() {
+    func updateSubscriptionInformation() {
         guard let subscription = self.subscription else { return }
 
         updateStatus(subscription: subscription)
