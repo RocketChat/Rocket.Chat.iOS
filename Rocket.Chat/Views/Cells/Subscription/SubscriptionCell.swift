@@ -132,7 +132,22 @@ final class SubscriptionCell: UITableViewCell {
             labelUnread.text =  nil
         }
 
-        applyTheme()
+        setDateColor()
+    }
+
+    private func setDateColor() {
+        guard
+            let theme = theme,
+            let subscription = subscription
+        else {
+            return
+        }
+
+        if subscription.unread > 0 || subscription.alert {
+            labelDate.textColor = theme.tintColor
+        } else {
+            labelDate.textColor = theme.auxiliaryText
+        }
     }
 
     var userStatus: UserStatus? {
@@ -255,14 +270,6 @@ extension SubscriptionCell {
         setSelected(isSelected, animated: false)
         setHighlighted(isHighlighted, animated: false)
 
-        guard let subscription = self.subscription, !subscription.isInvalidated else {
-            return
-        }
-
-        if subscription.unread > 0 || subscription.alert {
-            labelDate.textColor = theme.tintColor
-        } else {
-            labelDate.textColor = theme.auxiliaryText
-        }
+        setDateColor()
     }
 }
