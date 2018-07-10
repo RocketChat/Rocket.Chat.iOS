@@ -15,11 +15,15 @@ struct CommandsClient: APIClient {
         api.fetch(CommandsRequest()) { response in
             switch response {
             case .resource(let resource):
-                resource.commands?.forEach { command in
-                    try? realm?.write {
-                        realm?.add(command, update: true)
+                Realm.execute({ (realm) in
+                    var commands: [Command] = []
+
+                    resource.commands?.forEach { command in
+                        commands.append(command)
                     }
-                }
+
+                    realm.add(commands, update: true)
+                })
             case .error:
                 break
             }
