@@ -12,6 +12,9 @@
 "error.login.title" = "Ωπ!";
 "error.login.message" = "Συνέβη κάποιο σφάλμα καθώς προσπαθούσατε να συνδεθείτε.";
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Ωπ!";
 "error.login_unauthorized.message" = "Τα διαπιστευτήριά σας απορρίφθηκαν! Παρακαλούμε ξαναπροσπαθήστε.";
 

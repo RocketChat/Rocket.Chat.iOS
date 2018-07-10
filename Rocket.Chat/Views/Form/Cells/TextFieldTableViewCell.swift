@@ -15,10 +15,12 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
 
     weak var delegate: FormTableViewDelegate?
     var key: String?
+    var textLimit = 0
 
     @IBOutlet weak var imgLeftIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField! {
         didSet {
+            textFieldInput.delegate = self
             textFieldInput.clearButtonMode = .whileEditing
         }
     }
@@ -33,6 +35,16 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
 
+}
+
+extension TextFieldTableViewCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textLimit > 0 else { return true }
+        guard let text = textField.text else { return true }
+
+        let newLength = text.count + string.count
+        return newLength <= 40
+    }
 }
 
 // MARK: Themeable

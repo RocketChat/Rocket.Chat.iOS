@@ -12,6 +12,9 @@
 "error.login.title" = "Упс!";
 "error.login.message" = "При попытке входа в систему что-то пошло не так";
 
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+
 "error.login_unauthorized.title" = "Упс!";
 "error.login_unauthorized.message" = "Ваши учетные данные были отклонены! Пожалуйста, попробуйте еще раз.";
 

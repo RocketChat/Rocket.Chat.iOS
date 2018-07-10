@@ -157,21 +157,25 @@ extension RCTextView: UITextViewDelegate {
         }
 
         if let deepLink = DeepLink(url: URL) {
-            guard
-                case let .mention(name) = deepLink,
-                let user = User.find(username: name),
-                let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
-                let end = textView.position(from: start, offset: characterRange.length),
-                let range = textView.textRange(from: start, to: end)
-            else {
-                return true
-            }
+            switch deepLink {
+            case let .mention(name):
+                guard
+                    let user = User.find(username: name),
+                    let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
+                    let end = textView.position(from: start, offset: characterRange.length),
+                    let range = textView.textRange(from: start, to: end)
+                else {
+                    return false
+                }
 
-            MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
-            return false
+                MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+                return false
+            default:
+                return UIApplication.shared.canOpenURL(URL)
+            }
         }
 
-        return true
+        return false
     }
 
 }

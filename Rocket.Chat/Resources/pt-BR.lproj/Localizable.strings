@@ -10,7 +10,10 @@
 "error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 "error.login.title" = "Oops!";
-"error.login.message" = "Aglo de errado aconteceu na tentativa de login. Tente novamente por favor.";
+"error.login.message" = "Algo de errado aconteceu na tentativa de login. Tente novamente por favor.";
+
+"error.signup.title" = "Oops!"; // TODO
+"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos."; // TODO
 
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "Suas credenciais foram rejeitadas, tente novamente por favor!";

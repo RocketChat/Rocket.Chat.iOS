@@ -19,7 +19,7 @@ enum Event {
     case signup
     case login
     case screenView(screenName: String)
-    case messageSent(subscriptionType: String)
+    case messageSent(subscriptionType: String, server: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
     case reaction(subscriptionType: String)
     case serverSwitch(server: String, serverCount: Int)
@@ -29,7 +29,30 @@ enum Event {
 
 }
 
+enum UserProperty {
+    case server(server: String)
+
+    var propertyName: String {
+        switch self {
+        case .server:
+            return "Server"
+        }
+    }
+}
+
 struct AnalyticsManager {
+    static func set(userProperty: UserProperty) {
+        // Make sure the user has opted in for sending his usage data
+        guard !AnalyticsCoordinator.isUsageDataLoggingDisabled else {
+            return
+        }
+
+        switch userProperty {
+        case let .server(server):
+            Analytics.setUserProperty(server, forName: userProperty.propertyName)
+        }
+    }
+
     static func log(event: Event) {
         // Make sure the user has opted in for sending his usage data
         guard !AnalyticsCoordinator.isUsageDataLoggingDisabled else {
@@ -94,9 +117,10 @@ extension Event {
         switch self {
         case let .screenView(screenName):
             return ["screen": screenName]
-        case let .messageSent(subscriptionType),
-             let .reaction(subscriptionType):
+        case let .reaction(subscriptionType):
             return ["subscription_type": subscriptionType]
+        case let .messageSent(subscriptionType, server):
+            return ["subscription_type": subscriptionType, "server": server]
         case let .mediaUpload(mediaType, subscriptionType):
             return ["media_type": mediaType, "subscription_type": subscriptionType]
         case let .serverSwitch(server, serverCount):
