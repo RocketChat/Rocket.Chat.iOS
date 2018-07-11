@@ -10,10 +10,16 @@ import XCTest
 
 @testable import Rocket_Chat
 
-class APIExtensionsSpec: XCTestCase {
+class APIExtensionsSpec: XCTestCase, RealmTestCase {
     func testCurrent() {
-        var auth = Auth.testInstance()
-        var api = API.current(auth: auth)
+        let realm = testRealm()
+        let auth = Auth.testInstance()
+
+        try? realm.write {
+            realm.add(auth)
+        }
+
+        var api = API.current(realm: realm)
 
         XCTAssertEqual(api?.userId, "auth-userid")
         XCTAssertEqual(api?.authToken, "auth-token")
