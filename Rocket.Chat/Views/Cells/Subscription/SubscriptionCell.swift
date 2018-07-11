@@ -82,10 +82,15 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformation() {
         guard let subscription = self.subscription else { return }
+        var user: User?
 
-        updateStatus(subscription: subscription)
+        if subscription.type == .directMessage {
+            user = subscription.directMessageUser
+        }
 
-        if let user = subscription.directMessageUser {
+        updateStatus(subscription: subscription, user: user)
+
+        if let user = user {
             avatarView.subscription = nil
             avatarView.user = user
         } else {
@@ -163,12 +168,12 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    fileprivate func updateStatus(subscription: Subscription) {
+    fileprivate func updateStatus(subscription: Subscription, user: User?) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true
 
-            if let user = subscription.directMessageUser {
+            if let user = user {
                 userStatus = user.status
             }
         } else {
