@@ -21,7 +21,7 @@ final class NotificationViewController: TopTransparentViewController {
     var lastTouchLocation: CGPoint?
     let animationDuration: TimeInterval = 0.3
     let notificationVisibleDuration: TimeInterval = 6.0
-    let notificationContentHeight: CGFloat = 0
+    let topInsetWithoutNotch: CGFloat = 10
 
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
 
@@ -64,10 +64,10 @@ final class NotificationViewController: TopTransparentViewController {
         super.viewWillLayoutSubviews()
 
         if #available(iOS 11.0, *), isDeviceWithNotch {
-            visibleConstraint.constant = notificationContentHeight +  view.safeAreaInsets.top
+            visibleConstraint.constant = view.safeAreaInsets.top
             view.window?.windowLevel = UIWindowLevelStatusBar - 1
         } else {
-            visibleConstraint.constant = notificationContentHeight + 10
+            visibleConstraint.constant = topInsetWithoutNotch
             view.window?.windowLevel = UIWindowLevelAlert
         }
     }
