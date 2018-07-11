@@ -145,7 +145,9 @@ extension ChannelActionsViewController {
                 subscription.updateFavorite(!subscription.favorite)
             }
 
-            self.updateButtonFavoriteImage()
+            DispatchQueue.main.async {
+                self.updateButtonFavoriteImage()
+            }
         }
 
         self.subscription?.updateFavorite(!subscription.favorite)
