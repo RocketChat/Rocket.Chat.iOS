@@ -46,7 +46,7 @@ extension UIViewController: Alerter {
             let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
             successHUD.mode = .customView
 
-            let checkmark = UIImage(named: "Checkmark")?.withRenderingMode(.alwaysTemplate)
+            let checkmark = UIImage(named: "Check")?.withRenderingMode(.alwaysTemplate)
             successHUD.customView = UIImageView(image: checkmark)
             successHUD.isSquare = true
             successHUD.label.text = title
