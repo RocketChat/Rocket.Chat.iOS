@@ -143,7 +143,8 @@ final class SubscriptionCell: UITableViewCell {
     private func setDateColor() {
         guard
             let theme = theme,
-            let subscription = subscription
+            let subscription = subscription,
+            !subscription.isInvalidated
         else {
             return
         }
@@ -263,6 +264,7 @@ extension SubscriptionCell {
 extension SubscriptionCell {
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = theme else { return }
 
         labelName.textColor = theme.titleText
