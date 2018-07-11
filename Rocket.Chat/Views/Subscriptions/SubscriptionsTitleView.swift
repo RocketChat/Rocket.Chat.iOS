@@ -8,13 +8,7 @@
 
 import UIKit
 
-protocol SubscriptionsTitleViewDelegate: class {
-    func userDidPressServerName()
-}
-
 final class SubscriptionsTitleView: UIView {
-
-    weak var delegate: SubscriptionsTitleViewDelegate?
 
     var state: SocketConnectionState = SocketManager.sharedInstance.state {
         didSet {
@@ -37,10 +31,6 @@ final class SubscriptionsTitleView: UIView {
             buttonServer.layer.cornerRadius = 5
             buttonServer.layer.masksToBounds = true
         }
-    }
-
-    @IBAction func buttonServerDidPressed(sender: Any) {
-        delegate?.userDidPressServerName()
     }
 
     func updateServerName(name: String?) {
