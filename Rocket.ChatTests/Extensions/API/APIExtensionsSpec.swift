@@ -13,7 +13,7 @@ import XCTest
 class APIExtensionsSpec: XCTestCase, RealmTestCase {
     func testCurrent() {
         let realm = testRealm()
-        let auth = Auth.testInstance()
+        var auth = Auth.testInstance()
 
         try? realm.write {
             realm.add(auth)
@@ -26,11 +26,11 @@ class APIExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(api?.version, Version(1, 2, 3))
 
         auth.serverVersion = "invalid"
-        api = API.current(auth: auth)
+        api = API.current(realm: realm)
         XCTAssertEqual(api?.version, Version.zero)
 
         auth = Auth()
-        api = API.current(auth: auth)
+        api = API.current(realm: realm)
 
         XCTAssertNil(api)
     }
