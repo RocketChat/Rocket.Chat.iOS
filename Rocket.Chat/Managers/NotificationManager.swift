@@ -15,13 +15,33 @@ final class NotificationManager {
 
     /// Posts an in-app notification.
     ///
+    /// This method is thread safe, and therefore can be called from any thread.
+    ///
+    /// This method calls `NotificationManager.post(notification:)` on the main thread.
+    ///
+    /// - parameters:
+    ///     - notification: The `ChatNotification` object used to display the
+    ///         contents of the notification. The `title` and the `body` of the
+    ///         notification cannot be empty strings.
+
+    static func postOnMainThread(notification: ChatNotification) {
+        DispatchQueue.main.async {
+            post(notification: notification)
+        }
+    }
+
+    /// Posts an in-app notification.
+    ///
+    /// This method is **not** thread safe, and therefore must be called
+    /// on the main thread.
+    ///
     /// **NOTE:** The notification is only posted if the `rid` of the
     /// notification is different from the `AppManager.currentRoomId`
     ///
     /// - parameters:
-    ///     - notification: The `ChatNotification` object to display the
-    ///         contents of the notification from. The `title` and the `body`
-    ///         cannot be empty strings.
+    ///     - notification: The `ChatNotification` object used to display the
+    ///         contents of the notification. The `title` and the `body` of the
+    ///         notification cannot be empty strings.
 
     static func post(notification: ChatNotification) {
         guard
