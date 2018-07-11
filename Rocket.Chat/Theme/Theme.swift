@@ -20,6 +20,7 @@ class Theme: NSObject {
     @objc let backgroundColor: UIColor
     @objc let focusedBackground: UIColor
     @objc let auxiliaryBackground: UIColor
+    @objc let bannerBackground: UIColor
     @objc let titleText: UIColor
     @objc let bodyText: UIColor
     @objc let controlText: UIColor
@@ -55,6 +56,7 @@ class Theme: NSObject {
     init(backgroundColor: UIColor,
          focusedBackground: UIColor,
          auxiliaryBackground: UIColor,
+         bannerBackground: UIColor,
          titleText: UIColor,
          bodyText: UIColor,
          controlText: UIColor,
@@ -69,6 +71,7 @@ class Theme: NSObject {
         self.backgroundColor = backgroundColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
+        self.bannerBackground = bannerBackground
         self.titleText = titleText
         self.bodyText = bodyText
         self.controlText = controlText
@@ -91,6 +94,7 @@ class Theme: NSObject {
         backgroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
         focusedBackground: .RCNavigationBarColor(),
         auxiliaryBackground: #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1),
+        bannerBackground: #colorLiteral(red: 0.9450980392, green: 0.9490196078, blue: 0.9568627451, alpha: 1),
         titleText: #colorLiteral(red: 0.05143930763, green: 0.0585193634, blue: 0.07106169313, alpha: 1),
         bodyText: #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1),
         controlText: #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1),
@@ -107,6 +111,7 @@ class Theme: NSObject {
         backgroundColor: #colorLiteral(red: 0.01176470588, green: 0.0431372549, blue: 0.1058823529, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.0431372549, green: 0.09411764706, blue: 0.1725490196, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.02950551261, green: 0.06437566387, blue: 0.1180220504, alpha: 1),
+        bannerBackground: #colorLiteral(red: 0.1008644532, green: 0.1498226816, blue: 0.2468964041, alpha: 1),
         titleText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         controlText: #colorLiteral(red: 0.8549193462, green: 0.8697612629, blue: 0.903159703, alpha: 1),
@@ -123,6 +128,7 @@ class Theme: NSObject {
         backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.05332512842, green: 0.05332512842, blue: 0.05332512842, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.03411494007, green: 0.03411494007, blue: 0.03411494007, alpha: 1),
+        bannerBackground: #colorLiteral(red: 0.1215686275, green: 0.137254902, blue: 0.1607843137, alpha: 1),
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         controlText: #colorLiteral(red: 0.8549193462, green: 0.8697612629, blue: 0.903159703, alpha: 1),
