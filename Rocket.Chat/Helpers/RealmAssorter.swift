@@ -11,6 +11,8 @@ import RealmSwift
 typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], modifications: [IndexPath])
 typealias IndexPathsChangesEvent = ((IndexPathsChanges) -> Void)
 
+let subscriptionUpdatesHandlerQueue = DispatchQueue(label: "chat.rocket.subscription.updates.handler", qos: .background)
+
 class RealmAssorter<Object: RealmSwift.Object> {
     typealias ResultsTransform = ((Results<Object>) -> Results<Object>)
 
@@ -18,12 +20,12 @@ class RealmAssorter<Object: RealmSwift.Object> {
 
     struct RealmSection {
         let name: String
-        var objects: [Object]
+        var objects: Results<Object>
         let transform: ResultsTransform?
 
         static func make(name: String, results: Results<Object>, transform: ResultsTransform?) -> RealmSection {
             let results = transform?(results) ?? results
-            return RealmSection(name: name, objects: Array(results), transform: transform)
+            return RealmSection(name: name, objects: results, transform: transform)
         }
     }
 
@@ -63,8 +65,7 @@ class RealmAssorter<Object: RealmSwift.Object> {
     }
 
     func registerSection(name: String, transform: ResultsTransform? = nil) {
-        let results = transform?(self.results) ?? self.results
-        sections.append(.make(name: name, results: results, transform: transform))
+        sections.append(.make(name: name, results: self.results, transform: transform))
     }
 
     func clearSections() {

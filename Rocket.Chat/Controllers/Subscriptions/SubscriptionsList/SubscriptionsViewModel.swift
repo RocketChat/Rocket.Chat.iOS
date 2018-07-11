@@ -102,8 +102,6 @@ class SubscriptionsViewModel {
                 assorter.registerSection(name: title)
             }
         }
-
-        didRebuildSections?()
     }
 
     var didUpdateIndexPaths: IndexPathsChangesEvent?

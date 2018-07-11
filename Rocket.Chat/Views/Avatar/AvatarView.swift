@@ -19,9 +19,8 @@ final class AvatarView: UIView {
                 ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
                     guard error == nil else { return }
 
-                    self?.labelInitials.text = ""
+                    self?.labelInitials.text = nil
                     self?.backgroundColor = UIColor.clear
-                    self?.superview?.setNeedsLayout()
                 }
             }
         }
