@@ -111,7 +111,7 @@ class Theme: NSObject {
         backgroundColor: #colorLiteral(red: 0.01176470588, green: 0.0431372549, blue: 0.1058823529, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.0431372549, green: 0.09411764706, blue: 0.1725490196, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.02950551261, green: 0.06437566387, blue: 0.1180220504, alpha: 1),
-        bannerBackground: #colorLiteral(red: 0.1008644532, green: 0.1498226816, blue: 0.2468964041, alpha: 1),
+        bannerBackground: #colorLiteral(red: 0.05490196078, green: 0.1215686275, blue: 0.2196078431, alpha: 1),
         titleText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         controlText: #colorLiteral(red: 0.8549193462, green: 0.8697612629, blue: 0.903159703, alpha: 1),
