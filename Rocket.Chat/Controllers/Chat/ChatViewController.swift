@@ -628,17 +628,19 @@ final class ChatViewController: SLKTextViewController {
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
             guard let username = username, username != loggedUsername else { return }
 
-            let isAtBottom = self?.chatLogIsAtBottom()
+            DispatchQueue.main.async {
+                let isAtBottom = self?.chatLogIsAtBottom()
 
-            if flag {
-                self?.typingIndicatorView?.insertUsername(username)
-            } else {
-                self?.typingIndicatorView?.removeUsername(username)
-            }
+                if flag {
+                    self?.typingIndicatorView?.insertUsername(username)
+                } else {
+                    self?.typingIndicatorView?.removeUsername(username)
+                }
 
-            if let isAtBottom = isAtBottom,
-                isAtBottom == true {
-                self?.scrollToBottom(true)
+                if let isAtBottom = isAtBottom,
+                    isAtBottom == true {
+                    self?.scrollToBottom(true)
+                }
             }
         }
     }
