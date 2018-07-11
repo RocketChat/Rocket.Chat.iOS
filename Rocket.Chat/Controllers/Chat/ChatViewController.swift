@@ -37,7 +37,6 @@ final class ChatViewController: SLKTextViewController {
         button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
         button.setImage(UIImage(named: "Float Button"), for: .normal)
         button.addTarget(self, action: #selector(buttonScrollToBottomDidPressed), for: .touchUpInside)
-        button.applyTheme()
         return button
     }()
 
@@ -1247,7 +1246,9 @@ extension ChatViewController: SocketConnectionHandler {
 extension ChatViewController {
     override func applyTheme() {
         super.applyTheme()
-        buttonScrollToBottom.applyTheme()
+        guard let theme = view.theme else { return }
+        let scrollToBottomImageName = "Float Button" + (theme.appearence == .dark ? " Dark" : "")
+        buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
         updateMessageSendingPermission()
     }
 }
