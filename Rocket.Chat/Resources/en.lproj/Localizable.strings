@@ -306,6 +306,11 @@
 "chat.messages.files.list.title" = "Files";
 "chat.messages.files.list.empty" = "No files found";
 
+// Upload Banner
+"chat.banner.upload.uploading" = "Uploading %@";
+"chat.banner.upload.error" = "Failed uploading %@";
+"chat.banner.upload.retry" = "Try again";
+
 // Settings
 "myaccount.settings.title" = "Preferences";
 "myaccount.settings.administration" = "Administration";

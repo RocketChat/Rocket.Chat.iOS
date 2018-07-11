@@ -27,6 +27,9 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    lazy var uploadClient = API.current()?.client(UploadClient.self)
+    lazy var bannerView: ChatBannerView? = setupBanner()
+
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 

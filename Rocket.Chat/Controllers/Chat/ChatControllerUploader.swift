@@ -178,35 +178,33 @@ extension ChatViewController: UIDocumentPickerDelegate {
 // MARK: Uploading a FileUpload
 
 extension ChatViewController {
-
-    func startLoadingUpload(_ fileName: String) {
-//        showHeaderStatusView()
-//
-//        let message = String(format: localized("chat.upload.uploading_file"), fileName)
-//        chatHeaderViewStatus?.labelTitle.text = message
-//        chatHeaderViewStatus?.buttonRefresh.isHidden = true
-//        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-//        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
-//        chatHeaderViewStatus?.activityIndicator.startAnimating()
-    }
-
-    func stopLoadingUpload() {
-//        hideHeaderStatusView()
-    }
-
     func upload(_ file: FileUpload, fileName: String, description: String?) {
         guard let subscription = subscription else { return }
 
-        startLoadingUpload(fileName)
+        func showBanner(failed: Bool = false) {
+            self.showBanner(.forUploadingFile(named: fileName, type: file.type, failed: failed))
+        }
+
+        showBanner()
 
         func stopLoadingUpload() {
             DispatchQueue.main.async { [weak self] in
-                self?.stopLoadingUpload()
+                self?.hideBanner()
             }
         }
 
-        let client = API.current()?.client(UploadClient.self)
-        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", completion: {
+        bannerView?.onCancelButtonPressed = { [weak self] in
+            self?.uploadClient?.cancelUploads()
+        }
+
+        bannerView?.onActionButtonPressed = { [weak self] in
+            self?.uploadClient?.retryUploads()
+            showBanner()
+        }
+
+        uploadClient?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", progress: { [weak self] double in
+            self?.bannerView?.progressView.setProgress(Float(double), animated: true)
+        }, completion: { [weak self] success in
             AnalyticsManager.log(
                 event: .mediaUpload(
                     mediaType: file.type,
@@ -214,40 +212,12 @@ extension ChatViewController {
                 )
             )
 
-            stopLoadingUpload()
-        }, versionFallback: {
-            deprecatedMethod()
+            if success {
+                self?.hideBanner()
+            } else {
+                showBanner(failed: true)
+            }
         })
-
-        func deprecatedMethod() {
-            UploadManager.shared.upload(file: file, fileName: fileName, subscription: subscription, progress: { _ in
-                // We currently don't have progress being called.
-            }, completion: { [unowned self] (response, error) in
-                self.stopLoadingUpload()
-
-                if error {
-                    var errorMessage = localized("error.socket.default_error.message")
-
-                    if let response = response {
-                        if let message = response.result["error"]["message"].string {
-                            errorMessage = message
-                        }
-                    }
-
-                    Alert(
-                        title: localized("error.socket.default_error.title"),
-                        message: errorMessage
-                    ).present()
-                } else {
-                    AnalyticsManager.log(
-                        event: .mediaUpload(
-                            mediaType: file.type,
-                            subscriptionType: subscription.type.rawValue
-                        )
-                    )
-                }
-            })
-        }
     }
 
     func uploadDialog(_ file: FileUpload) {
