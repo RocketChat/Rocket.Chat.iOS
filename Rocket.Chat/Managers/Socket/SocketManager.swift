@@ -251,6 +251,7 @@ extension SocketManager: WebSocketDelegate {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
+    static let jsonParseQueue = DispatchQueue(label: "chat.rocket.json.parse", qos: .background)
     static let messageHandlerQueue = DispatchQueue(label: "chat.rocket.websocket.handler", qos: .background)
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
