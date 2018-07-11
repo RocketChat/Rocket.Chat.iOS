@@ -48,6 +48,12 @@ final class SubscriptionsViewController: BaseViewController {
 
         super.viewDidLoad()
 
+        // If the device is not using the SplitView, we want to show
+        // the 3D Touch preview for the cells
+        if splitViewController?.detailViewController as? BaseNavigationController == nil {
+            registerForPreviewing(with: self, sourceView: tableView)
+        }
+
         viewModel.didUpdateIndexPaths = { [weak self] changes in
             guard let tableView = self?.tableView else {
                 return
@@ -303,6 +309,35 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         return CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: view.bounds.height)
+    }
+
+}
+
+// MARK: UIViewControllerPreviewingDelegate
+
+extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard
+            let indexPath = tableView.indexPathForRow(at: location),
+            let cell = tableView.cellForRow(at: indexPath),
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+        else {
+            return nil
+        }
+
+        previewingContext.sourceRect = cell.frame
+
+        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            controller.subscription = subscription
+            return controller
+        }
+
+        return nil
     }
 
 }
