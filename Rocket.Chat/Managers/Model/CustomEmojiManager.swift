@@ -13,7 +13,7 @@ struct CustomEmojiManager {
     static func sync(realm: Realm? = Realm.current) {
         CustomEmoji.cachedEmojis = nil
 
-        API.current()?.fetch(CustomEmojiRequest()) { response in
+        API.current(realm: realm)?.fetch(CustomEmojiRequest()) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success else {
