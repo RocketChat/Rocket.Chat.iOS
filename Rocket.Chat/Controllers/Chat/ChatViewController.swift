@@ -219,10 +219,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: nil, completion: { _ in
-            self.collectionView?.collectionViewLayout.invalidateLayout()
+        dataController.invalidateLayout(for: nil)
+        coordinator.animate(alongsideTransition: { _ in
+            self.collectionView?.reloadData()
+            self.tableView?.reloadData()
         })
     }
 
@@ -1082,6 +1082,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         }
 
         if let obj = dataController.itemAt(indexPath) {
+            if let value = dataController.dataCellHeight[obj.identifier] {
+                return CGSize(width: fullWidth, height: value)
+            }
+
             if obj.type == .header {
                 let isDirectMessage = subscription.type == .directMessage
                 let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
@@ -1110,6 +1114,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
+                dataController.cacheCellHeight(for: obj.identifier, value: height)
+
                 return CGSize(width: fullWidth, height: height)
             }
         }
