@@ -21,7 +21,7 @@ final class NotificationViewController: TopTransparentViewController {
     var lastTouchLocation: CGPoint?
     let animationDuration: TimeInterval = 0.3
     let notificationVisibleDuration: TimeInterval = 6.0
-    let notificationContentHeight: CGFloat = 64
+    let notificationContentHeight: CGFloat = 0
 
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
 
