@@ -108,15 +108,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Shortcuts
 
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        guard
-            let userInfo = shortcutItem.userInfo,
-            let serverIndex = userInfo[ShortcutsManager.serverIndex] as? Int
-        else {
-            completionHandler(false)
-            return
-        }
+        if let userInfo = shortcutItem.userInfo,
+            let serverIndex = userInfo[ShortcutsManager.serverIndex] as? Int {
+            ShortcutsManager.selectServer(at: serverIndex)
+            completionHandler(true)
+        } else if shortcutItem.type == ShortcutsManager.addServerActionIdentifier, AuthManager.isAuthenticated() != nil {
+            WindowManager.open(
+                .auth(
+                    serverUrl: "",
+                    credentials: nil
+                ), viewControllerIdentifier: ShortcutsManager.connectServerNavIdentifier
+            )
 
-        ShortcutsManager.selectServer(at: serverIndex)
-        completionHandler(true)
+            completionHandler(true)
+        } else {
+            completionHandler(false)
+        }
     }
 }

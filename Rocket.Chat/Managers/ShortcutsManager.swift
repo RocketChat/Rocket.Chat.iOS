@@ -15,6 +15,8 @@ struct ShortcutServerItem {
 }
 
 struct ShortcutsManager {
+    static let addServerActionIdentifier = "addserver"
+    static let connectServerNavIdentifier = "ConnectServerNav"
     static let serverIndex = "kServerIndex"
 
     private static var shortcuts: [ShortcutServerItem]? {
