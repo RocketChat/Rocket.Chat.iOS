@@ -6,12 +6,12 @@
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
 extension API {
-    static func current(auth: Auth? = AuthManager.isAuthenticated()) -> API? {
+    static func current(realm: Realm? = Realm.current) -> API? {
         guard
-            let auth = auth,
+            let auth = AuthManager.isAuthenticated(realm: realm),
             let host = auth.apiHost?.httpServerURL() ?? auth.apiHost
         else {
             return nil
@@ -27,7 +27,6 @@ extension API {
 
     static func server(index: Int) -> API? {
         let realm = DatabaseManager.databaseInstace(index: index)
-        let auth = AuthManager.isAuthenticated(realm: realm)
-        return current(auth: auth)
+        return current(realm: realm)
     }
 }

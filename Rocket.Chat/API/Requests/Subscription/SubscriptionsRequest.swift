@@ -33,23 +33,26 @@ struct SubscriptionsRequest: APIRequest {
 
 final class SubscriptionsResource: APIResource {
     var update: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
         return raw?["update"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
+            let subscription = Subscription()
+            subscription.map($0, realm: nil)
+            return subscription
         }.compactMap { $0 }
     }
 
     var remove: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
         return raw?["remove"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
+            let subscription = Subscription()
+            subscription.map($0, realm: nil)
+            return subscription
         }.compactMap { $0 }
     }
 
     var list: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
         return raw?["result"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
+            let subscription = Subscription()
+            subscription.map($0, realm: nil)
+            return subscription
         }.compactMap { $0 }
     }
 

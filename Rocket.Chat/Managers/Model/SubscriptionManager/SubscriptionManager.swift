@@ -22,31 +22,32 @@ struct SubscriptionManager {
         })
     }
 
-    static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
-        Realm.current?.refresh()
-        let client = API.current()?.client(SubscriptionsClient.self)
+    static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
+        realm?.refresh()
+
+        let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
         let dispatchGroup = DispatchGroup()
 
         dispatchGroup.enter()
-        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions) {
+        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
             dispatchGroup.leave()
 
             // We don't trust the updatedSince response all the time.
             // Our API is having issues with caching and we can't try
             // to avoid this on the request.
-            client?.fetchSubscriptions(updatedSince: nil) { }
+            client?.fetchSubscriptions(updatedSince: nil, realm: realm) { }
         }
 
         dispatchGroup.enter()
-        client?.fetchRooms(updatedSince: lastUpdateRooms) {
+        client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
             dispatchGroup.leave()
 
             // We don't trust the updatedSince response all the time.
             // Our API is having issues with caching and we can't try
             // to avoid this on the request.
-            client?.fetchRooms(updatedSince: nil) { }
+            client?.fetchRooms(updatedSince: nil, realm: realm) { }
         }
 
         dispatchGroup.notify(queue: .main) {

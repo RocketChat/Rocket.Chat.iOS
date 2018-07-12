@@ -121,13 +121,6 @@ final class ServersListView: UIView {
         if indexPath.row == DatabaseManager.selectedIndex {
             close()
         } else {
-            DatabaseManager.selectDatabase(at: indexPath.row)
-            DatabaseManager.changeDatabaseInstance(index: indexPath.row)
-
-            SocketManager.disconnect { (_, _) in
-                WindowManager.open(.subscriptions)
-            }
-
             AppManager.changeSelectedServer(index: indexPath.row)
         }
     }
