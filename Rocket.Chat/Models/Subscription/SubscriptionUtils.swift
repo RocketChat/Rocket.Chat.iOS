@@ -15,10 +15,10 @@ extension Subscription {
         }
 
         if type != .directMessage {
-            return settings.allowSpecialCharsOnRoomNames && fname != "" ? fname : name
+            return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
         }
 
-        return settings.useUserRealName ? fname : name
+        return settings.useUserRealName && !fname.isEmpty ? fname : name
     }
 
     func isValid() -> Bool {
