@@ -165,6 +165,7 @@ extension ReactorListView {
             backgroundColor: theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
+            bannerBackground: theme.backgroundColor,
             titleText: theme.titleText,
             bodyText: theme.bodyText,
             controlText: theme.controlText,
