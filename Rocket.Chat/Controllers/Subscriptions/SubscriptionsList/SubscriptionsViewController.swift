@@ -426,26 +426,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
         }
     }
 
-    func shouldUpdateCellAt(indexPath: IndexPath) -> Bool {
-        guard
-            let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
-            index < tableView.visibleCells.count
-        else {
-            return false
-        }
-
-        if let cell = tableView.visibleCells[index] as? SubscriptionCell {
-            return cell.shouldUpdateForSubscription(subscription)
-        }
-
-        if let cell = tableView.visibleCells[index] as? SubscriptionCellCondensed {
-            return cell.shouldUpdateForSubscription(subscription)
-        }
-
-        return false
-    }
-
 }
 
 extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {

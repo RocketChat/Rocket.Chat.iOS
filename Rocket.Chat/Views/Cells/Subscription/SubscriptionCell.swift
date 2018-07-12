@@ -99,10 +99,7 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-
-        if AuthSettingsManager.settings?.storeLastMessage ?? true {
-            labelLastMessage.text = subscription.roomLastMessageText
-        }
+        labelLastMessage.text = subscription.roomLastMessageText
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
@@ -202,24 +199,6 @@ final class SubscriptionCell: UITableViewCell {
 
         return RCDateFormatter.date(date, dateStyle: .short)
     }
-
-    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
-        guard
-            let lastMessageText = subscription.roomLastMessageText,
-            let lastMessageDate = subscription.roomLastMessageDate
-        else {
-            return false
-        }
-
-        let isNameDifferent = labelName.text != subscription.displayName()
-        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
-        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
-        let isStatusDifferent = userStatus != subscription.otherUserStatus
-        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
-
-        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent || isUnreadDifferent
-    }
-
 }
 
 extension SubscriptionCell {
