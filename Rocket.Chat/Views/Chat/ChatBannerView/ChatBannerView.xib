@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,6 +19,9 @@
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XhB-RB-AUS">
                     <rect key="frame" x="0.0" y="51" width="375" height="2"/>
                     <color key="trackTintColor" red="0.94509803921568625" green="0.94901960784313721" blue="0.95686274509803926" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="tintColor: tintColor"/>
+                    </userDefinedRuntimeAttributes>
                 </progressView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Message_Upload_Image" translatesAutoresizingMaskIntoConstraints="NO" id="r2c-iL-1f3">
                     <rect key="frame" x="20" y="15" width="24" height="24"/>
@@ -26,6 +29,9 @@
                         <constraint firstAttribute="width" constant="24" id="6nm-Ww-2EO"/>
                         <constraint firstAttribute="height" constant="24" id="ONq-Xm-kzS"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="tintColor: auxiliaryText"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-Tx-Jvo">
                     <rect key="frame" x="59" y="7" width="276" height="40"/>
@@ -35,6 +41,9 @@
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                             <color key="textColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: controlText"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-qc-OBz">
                             <rect key="frame" x="0.0" y="20" width="276" height="20"/>
@@ -58,6 +67,9 @@
                     <state key="normal" image="Message_Upload_Cancel">
                         <color key="titleColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="0.0" colorSpace="calibratedRGB"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="tintColor: auxiliaryText"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="cancelButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xwp-6I-oQb"/>
                     </connections>
@@ -79,6 +91,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="backgroundColor: bannerBackground"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="actionButton" destination="2us-qc-OBz" id="fSN-gz-EaK"/>
                 <outlet property="closeButton" destination="wT8-q9-UV4" id="n0d-rB-3Iy"/>

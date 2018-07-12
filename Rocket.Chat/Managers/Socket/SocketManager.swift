@@ -159,13 +159,14 @@ extension SocketManager {
 
         sharedInstance.state = .connecting
 
+        let currentRealm = Realm.current
         AuthManager.resume(auth, completion: { (response) in
             guard !response.isError() else {
                 return
             }
 
-            infoClient.fetchInfo(completion: {
-                SubscriptionManager.updateSubscriptions(auth) {
+            infoClient.fetchInfo(realm: currentRealm, completion: {
+                SubscriptionManager.updateSubscriptions(auth, realm: currentRealm) {
                     AuthSettingsManager.updatePublicSettings(auth)
 
                     UserManager.userDataChanges()
@@ -174,16 +175,16 @@ extension SocketManager {
                     SubscriptionManager.subscribeRoomChanges()
                     SubscriptionManager.subscribeInAppNotifications()
                     PermissionManager.changes()
-                    infoClient.fetchPermissions()
-                    CustomEmojiManager.sync()
+                    infoClient.fetchPermissions(realm: currentRealm)
+                    CustomEmojiManager.sync(realm: currentRealm)
 
-                    commandsClient.fetchCommands()
+                    commandsClient.fetchCommands(realm: currentRealm)
 
                     if let userIdentifier = auth.userId {
                         PushManager.updateUser(userIdentifier)
                     }
 
-                    if AuthManager.currentUser()?.username == nil {
+                    if AuthManager.currentUser(realm: currentRealm)?.username == nil {
                         WindowManager.open(
                             .auth(
                                 serverUrl: "",

@@ -1253,3 +1253,11 @@ extension ChatViewController {
         updateMessageSendingPermission()
     }
 }
+
+// MARK: NavigationBar Transparency
+
+extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+}

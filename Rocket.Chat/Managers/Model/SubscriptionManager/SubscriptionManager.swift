@@ -22,20 +22,21 @@ struct SubscriptionManager {
         })
     }
 
-    static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
-        Realm.current?.refresh()
-        let client = API.current()?.client(SubscriptionsClient.self)
+    static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
+        realm?.refresh()
+
+        let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
         let dispatchGroup = DispatchGroup()
 
         dispatchGroup.enter()
-        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions) {
+        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
             dispatchGroup.leave()
         }
 
         dispatchGroup.enter()
-        client?.fetchRooms(updatedSince: lastUpdateRooms) {
+        client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
             dispatchGroup.leave()
         }
 
