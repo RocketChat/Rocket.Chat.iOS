@@ -8,7 +8,17 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+protocol PopPushDelegate where Self: UIViewController {
+    func willBePushed(animated: Bool)
+    func willBePopped(animated: Bool)
+}
+
+protocol NavigationBarTransparency where Self: UIViewController {
+    var isNavigationBarTransparent: Bool { get }
+    func updateNavigationBarTransparency()
+}
+
+extension NavigationBarTransparency {
     var isNavigationBarTransparent: Bool {
         return false
     }
@@ -22,7 +32,9 @@ class BaseViewController: UIViewController {
 
         navigationController?.redrawNavigationBar()
     }
+}
 
+extension PopPushDelegate where Self: NavigationBarTransparency {
     func willBePushed(animated: Bool) {
         updateNavigationBarTransparency()
     }
@@ -35,7 +47,9 @@ class BaseViewController: UIViewController {
             navigationController?.redrawNavigationBar()
         }
     }
+}
 
+class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransparency {
     override func viewDidLoad() {
         super.viewDidLoad()
 

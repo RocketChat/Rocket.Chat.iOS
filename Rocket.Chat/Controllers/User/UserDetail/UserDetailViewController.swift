@@ -21,7 +21,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var voiceCallButton: UIButton!
     @IBOutlet weak var videoCallButton: UIButton!
 
-    override var isNavigationBarTransparent: Bool {
+    var isNavigationBarTransparent: Bool {
         return true
     }
 
