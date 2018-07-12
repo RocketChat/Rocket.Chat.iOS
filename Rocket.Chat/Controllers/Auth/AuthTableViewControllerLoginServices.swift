@@ -69,8 +69,8 @@ extension AuthTableViewController {
             let provider = loginService.provider,
             let host = serverURL.host,
             let serverUrl = URL(string: "https://\(host)")
-            else {
-                return
+        else {
+            return
         }
 
         let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
