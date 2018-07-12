@@ -113,7 +113,7 @@ extension LoginService {
             return nil
         }
 
-        return "\(serverUrl)\(authorizePath)"
+        return authorizePath.contains("://") ? authorizePath : "\(serverUrl)\(authorizePath)"
     }
 
     var accessTokenUrl: String? {

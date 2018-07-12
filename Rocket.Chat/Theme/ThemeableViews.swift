@@ -74,6 +74,27 @@ extension UIButton {
         guard let theme = theme else { return }
         setTitleColor(theme.tintColor, for: .normal)
         tintColor = theme.tintColor
+        themeTextFieldClearButton()
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        themeTextFieldClearButton()
+    }
+
+    private func themeTextFieldClearButton() {
+        guard
+            let textField = superview as? UITextField,
+            let theme = theme,
+            textField.clearButton === self,
+            type(of: textField).description() != "UISearchBarTextField"
+        else {
+            return
+        }
+
+        self.setImage(self.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.tintColor = theme.titleText
     }
 }
 
@@ -278,6 +299,10 @@ extension SLKTextView {
         tintColor = theme.tintColor
         applyThemeFromRuntimeAttributes()
     }
+}
+
+extension MBProgressHUD {
+    override var theme: Theme? { return nil }
 }
 
 // MARK: Subclasses

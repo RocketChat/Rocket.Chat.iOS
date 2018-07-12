@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
                 <outlet property="hiddenConstraint" destination="OBQ-Ni-7rE" id="IcW-dO-nLu"/>
                 <outlet property="notificationView" destination="PHK-lk-IxG" id="0pR-AZ-ZxP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="0Rj-yq-cb5"/>
-                <outlet property="visibleConstraint" destination="P5C-7n-52d" id="gx9-Z4-ile"/>
+                <outlet property="visibleConstraint" destination="ToK-UV-3Oc" id="eiF-xM-Uk0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,20 +25,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-lk-IxG" customClass="NotificationView" customModule="Rocket_Chat" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
-                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Sn-Lw-2jc">
-                            <rect key="frame" x="0.0" y="0.0" width="392" height="0.0"/>
-                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4JV-l7-f9r">
-                                <rect key="frame" x="0.0" y="0.0" width="392" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <blurEffect style="regular"/>
-                        </visualEffectView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRK-ug-kzZ">
-                            <rect key="frame" x="0.0" y="-64" width="375" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                             <subviews>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
                                     <rect key="frame" x="71" y="8" width="284" height="19.5"/>
@@ -54,7 +44,7 @@
                                         <constraint firstAttribute="width" secondItem="KOK-7t-SFa" secondAttribute="height" multiplier="1:1" id="dcq-yW-PH5"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-Fj-whL">
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-Fj-whL">
                                     <rect key="frame" x="71" y="27.5" width="284" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.18431372549019609" green="0.20392156862745098" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,33 +70,32 @@
                                 <constraint firstAttribute="trailing" secondItem="pSR-mg-fTE" secondAttribute="trailing" constant="20" id="pSq-Qq-eHb"/>
                                 <constraint firstItem="Khg-Fj-whL" firstAttribute="top" secondItem="pSR-mg-fTE" secondAttribute="bottom" id="uvv-qZ-HuD"/>
                                 <constraint firstAttribute="bottom" secondItem="nku-6b-puF" secondAttribute="bottom" constant="5" id="v9K-TN-0pL"/>
+                                <constraint firstAttribute="bottom" secondItem="Khg-Fj-whL" secondAttribute="bottom" constant="16" id="vjq-gm-hes"/>
                                 <constraint firstItem="pSR-mg-fTE" firstAttribute="leading" secondItem="KOK-7t-SFa" secondAttribute="trailing" constant="15" id="vyA-IR-eb2"/>
-                                <constraint firstAttribute="height" constant="64" id="x7i-GV-Yv5"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="x7i-GV-Yv5"/>
                                 <constraint firstItem="KOK-7t-SFa" firstAttribute="leading" secondItem="aRK-ug-kzZ" secondAttribute="leading" constant="20" id="xRp-BT-7Y2"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.99409537845187712" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.99409537845187712" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="2Sn-Lw-2jc" secondAttribute="bottom" id="8cp-06-ISQ"/>
-                        <constraint firstAttribute="trailing" secondItem="2Sn-Lw-2jc" secondAttribute="trailing" constant="-17" id="HbH-Iu-soj"/>
                         <constraint firstAttribute="height" id="OBQ-Ni-7rE"/>
-                        <constraint firstItem="2Sn-Lw-2jc" firstAttribute="leading" secondItem="PHK-lk-IxG" secondAttribute="leading" id="OoK-HZ-ESV"/>
-                        <constraint firstAttribute="height" constant="64" id="P5C-7n-52d"/>
+                        <constraint firstAttribute="height" secondItem="aRK-ug-kzZ" secondAttribute="height" id="ToK-UV-3Oc"/>
                         <constraint firstItem="aRK-ug-kzZ" firstAttribute="centerX" secondItem="PHK-lk-IxG" secondAttribute="centerX" id="ZuR-Pk-NP7"/>
-                        <constraint firstItem="2Sn-Lw-2jc" firstAttribute="top" secondItem="PHK-lk-IxG" secondAttribute="top" id="mIT-YN-AkC"/>
                         <constraint firstAttribute="bottom" secondItem="aRK-ug-kzZ" secondAttribute="bottom" id="xld-Ri-VAg"/>
                         <constraint firstItem="aRK-ug-kzZ" firstAttribute="width" secondItem="PHK-lk-IxG" secondAttribute="width" priority="750" id="xsR-7E-QLm"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="backgroundColor: focusedBackground"/>
+                    </userDefinedRuntimeAttributes>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="P5C-7n-52d"/>
+                            <exclude reference="OBQ-Ni-7rE"/>
                         </mask>
                     </variation>
                     <connections>
                         <outlet property="avatarViewContainer" destination="KOK-7t-SFa" id="pg6-OP-A6F"/>
-                        <outlet property="backgroundBlurView" destination="2Sn-Lw-2jc" id="jwp-im-auU"/>
                         <outlet property="bodyLabel" destination="Khg-Fj-whL" id="GaY-eI-DdQ"/>
                         <outlet property="grabber" destination="nku-6b-puF" id="X9V-Fx-tMO"/>
                         <outlet property="titleLabel" destination="pSR-mg-fTE" id="f4g-xL-MX6"/>

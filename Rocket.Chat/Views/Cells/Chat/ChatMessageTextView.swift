@@ -46,16 +46,12 @@ final class ChatMessageTextView: UIView {
 
     func prepareView() {
         addGestureIfNeeded()
-        updateLeftBorder()
         updateLabels()
         updateImageView()
+        applyTheme()
     }
 
     // MARK: Layout
-
-    private func updateLeftBorder() {
-        viewLeftBorder.backgroundColor = viewModel?.color
-    }
 
     private func updateLabels() {
         labelTitle.text = viewModel?.title
@@ -132,7 +128,7 @@ extension ChatMessageTextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        viewLeftBorder.backgroundColor = theme.auxiliaryText
+        viewLeftBorder.backgroundColor = viewModel?.color ?? theme.auxiliaryText
         labelDescription.textColor = theme.auxiliaryText
         labelTitle.textColor = theme.controlText
     }

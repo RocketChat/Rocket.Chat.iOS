@@ -20,13 +20,6 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         XCTAssert(model.color == color, "Should have a valid color for a valid hexa code")
     }
 
-    func testNilColor() {
-        let attachment = Attachment()
-        let model = ChatMessageTextViewModel(withAttachment: attachment)
-
-        XCTAssert(model.color == UIColor.lightGray, "Should have a light gray color for an invalid hexa code")
-    }
-
     func testTitle() {
         let attachment = Attachment()
         attachment.title = "Message title"

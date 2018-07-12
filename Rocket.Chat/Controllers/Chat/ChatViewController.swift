@@ -27,6 +27,9 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    lazy var uploadClient = API.current()?.client(UploadClient.self)
+    lazy var bannerView: ChatBannerView? = setupBanner()
+
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 
@@ -1226,5 +1229,13 @@ extension ChatViewController {
         super.applyTheme()
         updateMessageSendingPermission()
         setupScrollToBottomButton()
+    }
+}
+
+// MARK: NavigationBar Transparency
+
+extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
     }
 }

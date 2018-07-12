@@ -50,12 +50,12 @@ class NotificationManagerSpec: XCTestCase {
     func testMultipleNotifications() {
         var notification1 = notification
         notification1.title = "Notif1"
-        notification1.post()
+        NotificationManager.post(notification: notification1)
         XCTAssert(NotificationManager.shared.notification == notification1, "First notification should be stored")
 
         var notification2 = notification
         notification2.title = "Notif2"
-        notification2.post()
+        NotificationManager.post(notification: notification2)
         XCTAssert(NotificationManager.shared.notification == notification2, "Second notification should be stored")
 
         NotificationManager.shared.didRespondToNotification()
@@ -87,7 +87,7 @@ class NotificationManagerSpec: XCTestCase {
 
         var notification = self.notification
         notification.payload.rid = rid
-        notification.post()
+        NotificationManager.post(notification: notification)
 
         XCTAssertNil(NotificationManager.shared.notification, "The notification should not post, and should not be stored")
         XCTAssertTrue(NotificationViewController.shared.notificationViewIsHidden, "The notification should not be visible")
@@ -107,7 +107,7 @@ class NotificationManagerSpec: XCTestCase {
             AppManager.open(room: subscription)
         }
 
-        self.notification.post()
+        NotificationManager.post(notification: notification)
 
         XCTAssertNotNil(NotificationManager.shared.notification, "The notification should post, and should be stored")
         XCTAssertFalse(NotificationViewController.shared.notificationViewIsHidden, "The notification should be visible")

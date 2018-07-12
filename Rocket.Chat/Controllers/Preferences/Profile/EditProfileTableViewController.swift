@@ -363,7 +363,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         isUploadingAvatar = true
 
         let client = API.current()?.client(UploadClient.self)
-        client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
+        client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] _ in
             guard let strongSelf = self else { return }
 
             if !strongSelf.isUpdatingUser {

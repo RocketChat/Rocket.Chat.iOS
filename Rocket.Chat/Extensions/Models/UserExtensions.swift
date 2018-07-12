@@ -10,10 +10,10 @@ import RealmSwift
 
 extension User {
     func updateStatus(status: UserStatus) {
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             self.status = status
             realm.add(self, update: true)
-        }
+        })
     }
 
     static func search(usernameContaining word: String, preference: Set<String> = [], limit: Int = 5, realm: Realm? = Realm.current) -> [(String, Any)] {

@@ -321,7 +321,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="4P3-t0-GTZ">
                     <connections>
-                        <action selector="recognizeHeaderTapGesture:" destination="pre-Wt-UOv" id="ZbT-9D-gpO"/>
+                        <action selector="recognizeSortingHeaderTapGesture:" destination="pre-Wt-UOv" id="cIM-oE-FLQ"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -38,7 +38,7 @@
                             <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
+                        <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct8-6x-Vjc">
                             <rect key="frame" x="0.0" y="18" width="375" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="f5b-22-pcB"/>
@@ -50,9 +50,6 @@
                             <state key="normal" title="open.rocket.chat" image="Server Selector">
                                 <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <connections>
-                                <action selector="buttonServerDidPressedWithSender:" destination="dKY-Ch-wz7" eventType="touchUpInside" id="HkY-sj-4yp"/>
-                            </connections>
                         </button>
                     </subviews>
                     <constraints>
