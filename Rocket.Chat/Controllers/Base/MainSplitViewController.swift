@@ -99,8 +99,12 @@ extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
             UIKeyCommand.init(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:))),
-            UIKeyCommand.init(input: "\t", modifierFlags: .shift, action: #selector(shortcutFocusOnSearch(_:)))
-        ]
+            UIKeyCommand.init(input: "\t", modifierFlags: .shift, action: #selector(shortcutFocusOnSearch(_:))),
+            UIKeyCommand.init(input: "\t", modifierFlags: .alternate, action: #selector(shortcutNextServer(_:))),
+            UIKeyCommand.init(input: "\t", modifierFlags: [.alternate, .shift], action: #selector(shortcutPreviousServer(_:))),
+        ] + ((0...9).map({ "\($0)" }) + ["`", "n"]).map {
+            UIKeyCommand(input: $0, modifierFlags: .command, action: #selector(shortcutSelectServer(_:)))
+        }
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
@@ -112,5 +116,38 @@ extension MainSplitViewController {
 
     @objc func shortcutFocusOnSearch(_ command: UIKeyCommand) {
         subscriptionsViewController?.searchBar?.becomeFirstResponder()
+    }
+
+    @objc func shortcutNextServer(_ command: UIKeyCommand) {
+        subscriptionsViewController?.openServersList()
+    }
+
+    @objc func shortcutPreviousServer(_ command: UIKeyCommand) {
+        subscriptionsViewController?.closeServersList()
+    }
+
+    @objc func shortcutSelectServer(_ command: UIKeyCommand) {
+        guard let input = command.input else {
+            return
+        }
+
+        switch input {
+        case "`":
+            subscriptionsViewController?.toggleServersList()
+        case "n":
+            AppManager.addServer(serverUrl: "")
+        default:
+            guard let position = Int(input) else {
+                break
+            }
+
+            let index = position - 1
+
+            if index < DatabaseManager.servers?.count ?? 0 {
+                AppManager.changeSelectedServer(index: index)
+            } else {
+                subscriptionsViewController?.openServersList()
+            }
+        }
     }
 }

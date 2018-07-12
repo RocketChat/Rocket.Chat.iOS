@@ -277,16 +277,32 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func toggleServersList() {
+        if serversView != nil {
+            closeServersList()
+        } else {
+            openServersList()
+        }
+    }
+
+    func openServersList() {
+        guard serversView == nil else {
+            return
+        }
+
         sortingView?.close()
 
-        if let serversView = serversView {
-            titleView?.updateTitleImage(reverse: false)
-            serversView.close()
-        } else {
-            titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-            serversView?.delegate = self
+        titleView?.updateTitleImage(reverse: true)
+        serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
+        serversView?.delegate = self
+    }
+
+    func closeServersList() {
+        guard let serversView = serversView else {
+            return
         }
+
+        titleView?.updateTitleImage(reverse: false)
+        serversView.close()
     }
 
     private var frameForDropDownOverlay: CGRect {
