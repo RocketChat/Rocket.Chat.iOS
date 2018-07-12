@@ -225,9 +225,7 @@ extension ChannelActionsViewController {
             controller.popoverPresentationController?.sourceRect = shareRoomCell.bounds
         }
 
-        DispatchQueue.main.async {
-            self.present(controller, animated: true, completion: nil)
-        }
+        present(controller, animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
