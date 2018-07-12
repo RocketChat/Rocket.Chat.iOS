@@ -23,16 +23,28 @@ class BaseNavigationController: UINavigationController {
         super.init(coder: aDecoder)
     }
 
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        let viewControllers = super.popToRootViewController(animated: animated)
+
+        viewControllers?.compactMap {
+            $0 as? PopPushDelegate
+        }.forEach {
+            $0.willBePopped(animated: animated)
+        }
+
+        return viewControllers
+    }
+
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
 
-        (viewController as? BaseViewController)?.willBePushed(animated: animated)
+        (viewController as? PopPushDelegate)?.willBePushed(animated: animated)
     }
 
     override func popViewController(animated: Bool) -> UIViewController? {
         let viewController = super.popViewController(animated: animated)
 
-        (viewController as? BaseViewController)?.willBePopped(animated: animated)
+        (viewController as? PopPushDelegate)?.willBePopped(animated: animated)
 
         return viewController
     }

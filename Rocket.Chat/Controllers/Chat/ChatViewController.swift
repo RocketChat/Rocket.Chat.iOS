@@ -1231,3 +1231,11 @@ extension ChatViewController {
         setupScrollToBottomButton()
     }
 }
+
+// MARK: NavigationBar Transparency
+
+extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+}
