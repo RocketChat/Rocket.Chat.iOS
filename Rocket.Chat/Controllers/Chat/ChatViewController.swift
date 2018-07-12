@@ -185,6 +185,10 @@ final class ChatViewController: SLKTextViewController {
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
+
+
+        textInputbar.textView.inputAssistantItem.leadingBarButtonGroups = []
+        textInputbar.textView.inputAssistantItem.trailingBarButtonGroups = []
     }
 
     override func viewDidAppear(_ animated: Bool) {

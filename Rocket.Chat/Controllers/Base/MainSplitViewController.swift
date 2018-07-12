@@ -24,19 +24,21 @@ final class MainSplitViewController: UISplitViewController {
             return nil
         }
 
-        var controller: ChatViewController?
+        return mainViewController.chatViewController
+    }
 
-        if let nav = mainViewController.detailViewController as? UINavigationController {
-            if let chatController = nav.viewControllers.first as? ChatViewController {
-                controller = chatController
-            }
-        } else if let nav = mainViewController.viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
-            if let chatController = nav.viewControllers[1] as? ChatViewController {
-                controller = chatController
-            }
+    var chatViewController: ChatViewController? {
+        if let nav = detailViewController as? UINavigationController {
+            return nav.viewControllers.first as? ChatViewController
+        } else if let nav = viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
+            return nav.viewControllers[1] as? ChatViewController
         }
 
-        return controller
+        return nil
+    }
+
+    var subscriptionsViewController: SubscriptionsViewController? {
+        return (viewControllers.first as? UINavigationController)?.viewControllers.first as? SubscriptionsViewController
     }
 
     override func awakeFromNib() {
@@ -90,5 +92,25 @@ extension MainSplitViewController {
         guard let theme = view.theme else { return }
         view.backgroundColor = theme.mutedAccent
         view.subviews.first?.backgroundColor = theme.mutedAccent
+    }
+}
+
+extension MainSplitViewController {
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand.init(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:))),
+            UIKeyCommand.init(input: "\t", modifierFlags: .shift, action: #selector(shortcutFocusOnSearch(_:)))
+        ]
+    }
+
+    @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
+        chatViewController?.textInputbar.textView.becomeFirstResponder()
+        subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
+            self?.chatViewController?.keyboardFrame?.updateFrame()
+        }
+    }
+
+    @objc func shortcutFocusOnSearch(_ command: UIKeyCommand) {
+        subscriptionsViewController?.searchBar?.becomeFirstResponder()
     }
 }
