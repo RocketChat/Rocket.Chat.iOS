@@ -12,9 +12,12 @@ private typealias ListSegueData = (title: String, query: String?, isListingMenti
 
 class ChannelActionsViewController: BaseViewController {
 
+    internal let kShareRoomSection = 2
+
     @IBOutlet weak var tableView: UITableView!
 
     weak var buttonFavorite: UIBarButtonItem?
+    weak var shareRoomCell: UITableViewCell!
 
     var tableViewData: [[Any?]] = [] {
         didSet {
@@ -215,7 +218,16 @@ extension ChannelActionsViewController {
     func shareRoom() {
         guard let url = subscription?.externalURL() else { return }
         let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        present(controller, animated: true, completion: nil)
+
+        if shareRoomCell != nil && UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = .popover
+            controller.popoverPresentationController?.sourceView = shareRoomCell
+            controller.popoverPresentationController?.sourceRect = shareRoomCell.bounds
+        }
+
+        DispatchQueue.main.async {
+            self.present(controller, animated: true, completion: nil)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -307,6 +319,10 @@ extension ChannelActionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.section == kShareRoomSection && UIDevice.current.userInterfaceIdiom == .pad {
+            shareRoomCell = tableView.cellForRow(at: indexPath)
+        }
 
         let data = tableViewData[indexPath.section][indexPath.row]
 
