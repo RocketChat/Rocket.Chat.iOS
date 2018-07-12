@@ -8,21 +8,17 @@
 
 import UIKit
 
-protocol PopPushDelegate where Self: UIViewController {
+protocol PopPushDelegate: class {
     func willBePushed(animated: Bool)
     func willBePopped(animated: Bool)
 }
 
-protocol NavigationBarTransparency where Self: UIViewController {
+protocol NavigationBarTransparency: class {
     var isNavigationBarTransparent: Bool { get }
     func updateNavigationBarTransparency()
 }
 
-extension NavigationBarTransparency {
-    var isNavigationBarTransparent: Bool {
-        return false
-    }
-
+extension NavigationBarTransparency where Self: UIViewController {
     func updateNavigationBarTransparency() {
         if isNavigationBarTransparent {
             navigationController?.navigationBar.setTransparent()
@@ -34,7 +30,7 @@ extension NavigationBarTransparency {
     }
 }
 
-extension PopPushDelegate where Self: NavigationBarTransparency {
+extension PopPushDelegate where Self: UIViewController & NavigationBarTransparency {
     func willBePushed(animated: Bool) {
         updateNavigationBarTransparency()
     }
@@ -50,6 +46,10 @@ extension PopPushDelegate where Self: NavigationBarTransparency {
 }
 
 class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

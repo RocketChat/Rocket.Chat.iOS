@@ -1235,7 +1235,7 @@ extension ChatViewController {
 // MARK: NavigationBar Transparency
 
 extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
-    func updateNavigationBarTransparency() {
-        // accessing navigationBar in this VC will crash the App
+    var isNavigationBarTransparent: Bool {
+        return false
     }
 }

@@ -12,6 +12,10 @@ import FLAnimatedImage
 class UserDetailViewController: BaseViewController, StoryboardInitializable {
     static var storyboardName: String = "UserDetail"
 
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
+
     @IBOutlet weak var backgroundImageView: FLAnimatedImageView!
     @IBOutlet weak var avatarImageView: FLAnimatedImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -20,10 +24,6 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var voiceCallButton: UIButton!
     @IBOutlet weak var videoCallButton: UIButton!
-
-    var isNavigationBarTransparent: Bool {
-        return true
-    }
 
     func updateButtonsInsets() {
         messageButton?.centerImageHorizontally()
@@ -109,5 +109,13 @@ extension UserDetailViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 13
+    }
+}
+
+// MARK: Navigation Bar Transparency
+
+extension NavigationBarTransparency where Self == UserDetailViewController {
+    var isNavigationBarTransparent: Bool {
+        return true
     }
 }
