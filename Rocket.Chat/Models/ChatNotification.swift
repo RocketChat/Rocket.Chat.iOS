@@ -64,6 +64,6 @@ extension ChatNotification {
     /// notification is different from the `AppManager.currentRoomId`
 
     func post() {
-        NotificationManager.post(notification: self)
+        NotificationManager.postOnMainThread(notification: self)
     }
 }

@@ -102,7 +102,14 @@ class ChatNotificationSpec: XCTestCase {
                 internalType: "c"
             )
         )
+
+        let expectation = XCTestExpectation(description: "notification should be stored in the notification manager")
+
         notification.post()
-        XCTAssert(NotificationManager.shared.notification == notification, "notification should be stored in the notification manager")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 2)
     }
 }

@@ -624,20 +624,23 @@ final class ChatViewController: SLKTextViewController {
         typingIndicatorView?.interval = 0
         guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
+        let loggedUsername = user.username
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username != user.username else { return }
+            guard let username = username, username != loggedUsername else { return }
 
-            let isAtBottom = self?.chatLogIsAtBottom()
+            DispatchQueue.main.async {
+                let isAtBottom = self?.chatLogIsAtBottom()
 
-            if flag {
-                self?.typingIndicatorView?.insertUsername(username)
-            } else {
-                self?.typingIndicatorView?.removeUsername(username)
-            }
+                if flag {
+                    self?.typingIndicatorView?.insertUsername(username)
+                } else {
+                    self?.typingIndicatorView?.removeUsername(username)
+                }
 
-            if let isAtBottom = isAtBottom,
-                isAtBottom == true {
-                self?.scrollToBottom(true)
+                if let isAtBottom = isAtBottom,
+                    isAtBottom == true {
+                    self?.scrollToBottom(true)
+                }
             }
         }
     }

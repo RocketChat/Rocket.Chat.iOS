@@ -53,26 +53,21 @@ final class SubscriptionsViewController: BaseViewController {
                 return
             }
 
-            let modifications = tableView.indexPathsForVisibleRows?.filter {
-                changes.modifications.contains($0) && self?.shouldUpdateCellAt(indexPath: $0) ?? false
-            } ?? []
+            self?.updateBackButton()
 
-            if changes.deletions.count > 0 || changes.insertions.count > 0 {
+            if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
+                return
+            }
+
+            if self?.viewModel.numberOfSections ?? 2 > 1 {
+                tableView.reloadData()
+            } else {
                 tableView.beginUpdates()
                 tableView.deleteRows(at: changes.deletions, with: .automatic)
                 tableView.insertRows(at: changes.insertions, with: .automatic)
+                tableView.reloadRows(at: changes.modifications, with: .none)
                 tableView.endUpdates()
             }
-
-            if modifications.count > 0 {
-                UIView.performWithoutAnimation {
-                    tableView.reloadRows(at: modifications, with: .automatic)
-                }
-            }
-
-            // We need to update the number of unread messages
-            // for the back button when chat screen is opened
-            self?.updateBackButton()
         }
 
         viewModel.didRebuildSections = { [weak self] in
