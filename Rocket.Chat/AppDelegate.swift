@@ -64,10 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SocketManager.reconnect()
             }
         }
+
+        ShortcutsManager.sync()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         SubscriptionManager.updateUnreadApplicationBadge()
+        ShortcutsManager.sync()
 
         if AuthManager.isAuthenticated() != nil {
             UserManager.setUserPresence(status: .away) { (_) in
@@ -100,5 +103,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Log.debug("Fail to register for notification: \(error)")
+    }
+
+    // MARK: Shortcuts
+
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        guard
+            let userInfo = shortcutItem.userInfo,
+            let serverIndex = userInfo[ShortcutsManager.serverIndex] as? Int
+        else {
+            completionHandler(false)
+            return
+        }
+
+        ShortcutsManager.selectServer(at: serverIndex)
+        completionHandler(true)
     }
 }
