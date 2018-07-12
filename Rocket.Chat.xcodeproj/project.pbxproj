@@ -12,6 +12,7 @@
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
 		0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */; };
 		0B92E65520F74CE8003DAB5A /* ShortcutsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92E65420F74CE8003DAB5A /* ShortcutsManager.swift */; };
+		0B92E65720F76393003DAB5A /* ShortcutsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92E65620F76393003DAB5A /* ShortcutsManagerSpec.swift */; };
 		0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */; };
 		0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */; };
 		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
@@ -800,6 +801,7 @@
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconCell.swift; sourceTree = "<group>"; };
 		0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageResetCell.swift; sourceTree = "<group>"; };
 		0B92E65420F74CE8003DAB5A /* ShortcutsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsManager.swift; sourceTree = "<group>"; };
+		0B92E65620F76393003DAB5A /* ShortcutsManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsManagerSpec.swift; sourceTree = "<group>"; };
 		0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
@@ -1970,6 +1972,7 @@
 				412435C920CACF1400A3602D /* SubscriptionSortingManagerSpec.swift */,
 				B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */,
 				994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */,
+				0B92E65620F76393003DAB5A /* ShortcutsManagerSpec.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -4579,6 +4582,7 @@
 				99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */,
 				8062E33320A3AA760044F407 /* SubscriptionsClientSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
+				0B92E65720F76393003DAB5A /* ShortcutsManagerSpec.swift in Sources */,
 				D18675EE1F716FBC00406FB4 /* LoginRequestSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				412435C820CAC89C00A3602D /* SubscriptionsSortingViewModelSpec.swift in Sources */,
