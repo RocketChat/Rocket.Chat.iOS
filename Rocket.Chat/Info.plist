@@ -264,6 +264,17 @@
 			</dict>
 		</dict>
 	</dict>
+    <key>UIApplicationShortcutItems</key>
+    <array>
+        <dict>
+            <key>UIApplicationShortcutItemIconType</key>
+            <string>UIApplicationShortcutIconTypeAdd</string>
+            <key>UIApplicationShortcutItemTitle</key>
+            <string>add-server-shortcut</string>
+            <key>UIApplicationShortcutItemType</key>
+            <string>addserver</string>
+        </dict>
+    </array>
 	<key>NSCameraUsageDescription</key>
 	<string>To take photos and record videos</string>
 	<key>NSMicrophoneUsageDescription</key>
