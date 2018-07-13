@@ -7,33 +7,88 @@
 //
 
 import UIKit
+import RealmSwift
 
-struct ShortcutServerItem {
+enum ShortcutItemType {
+    case server(url: String, index: Int)
+    case room(roomId: String, server: String, serverURL: String)
+}
+
+struct ShortcutItem {
     let name: String
-    let url: String
-    let index: Int
+    let type: ShortcutItemType
 }
 
 struct ShortcutsManager {
     static let addServerActionIdentifier = "addserver"
     static let connectServerNavIdentifier = "ConnectServerNav"
-    static let serverIndex = "kServerIndex"
+    static let serverIndexKey = "kServerIndex"
+    static let serverUrlKey = "kServerURL"
+    static let roomIdKey = "kRoomId"
 
-    private static var shortcuts: [ShortcutServerItem]? {
+    private static var shortcuts: [ShortcutItem]? {
         let servers = DatabaseManager.servers?.enumerated().compactMap({ index, server in
-            ShortcutServerItem(name: server[ServerPersistKeys.serverName] ?? "", url: server[ServerPersistKeys.serverURL] ?? "", index: index)
+            ShortcutItem(name: server[ServerPersistKeys.serverName] ?? "",
+                         type: .server(url: server[ServerPersistKeys.serverURL] ?? "",
+                                       index: index))
         })
 
-        return servers
+        guard
+            servers?.count == 1,
+            let server = servers?.first
+        else {
+            return servers
+        }
+
+        let serverURL: String?
+        switch server.type {
+        case .server(let url, _):
+            serverURL = url
+        default:
+            serverURL = nil
+        }
+
+        guard let currentServerURL = serverURL else {
+            return nil
+        }
+
+        // Rooms
+        let rooms: [ShortcutItem]? = roomsForCurrentServer()?.compactMap({ room in
+            ShortcutItem(name: room.displayName(),
+                         type: .room(roomId: room.rid,
+                                     server: server.name,
+                                     serverURL: currentServerURL))
+        })
+
+        return rooms
     }
 
     static func sync() {
         UIApplication.shared.shortcutItems = shortcuts?.compactMap({ shortcut in
-            let url = URL(string: shortcut.url)?.host ?? shortcut.url
-            return UIMutableApplicationShortcutItem(type: url, localizedTitle: shortcut.name, localizedSubtitle: url, icon: nil, userInfo: [serverIndex: shortcut.index])
+            let type: String
+            let title: String
+            let subtitle: String
+            let userInfo: [String: Any]
+
+            switch shortcut.type {
+            case .server(let url, let index):
+                type = URL(string: url)?.host ?? url
+                title = shortcut.name
+                subtitle = url
+                userInfo = [serverIndexKey: index]
+            case .room(let roomId, let server, let serverURL):
+                type = "\(serverURL)-\(shortcut.name)"
+                title = shortcut.name
+                subtitle = server
+                userInfo = [roomIdKey: roomId,
+                            serverUrlKey: serverURL]
+            }
+
+            return UIMutableApplicationShortcutItem(type: type, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo: userInfo)
         })
     }
 
+    // TODO: extract it and reuse in ServersListView
     static func selectServer(at index: Int) {
         guard index != DatabaseManager.selectedIndex else {
             return
@@ -47,5 +102,36 @@ struct ShortcutsManager {
         }
 
         AppManager.changeSelectedServer(index: index)
+    }
+
+    // TODO: extract it and reuse in PushManager
+    static func openRoom(with roomId: String, for serverHost: String) {
+        guard
+            let serverURL = URL(string: serverHost),
+            let index = DatabaseManager.serverIndexForUrl(serverURL)
+        else {
+            return
+        }
+
+        // side effect: needed for Subscription.notificationSubscription()
+        AppManager.initialRoomId = roomId
+
+        if index != DatabaseManager.selectedIndex {
+            AppManager.changeSelectedServer(index: index)
+        } else {
+            if let auth = AuthManager.isAuthenticated() {
+                if let subscription = Subscription.notificationSubscription(auth: auth) {
+                    AppManager.open(room: subscription)
+                }
+            }
+        }
+    }
+
+    private static func roomsForCurrentServer() -> Results<Subscription>? {
+        guard let results = Subscription.all(onlyJoined: true)?.sortedByLastSeen() else {
+            return nil
+        }
+
+        return results
     }
 }

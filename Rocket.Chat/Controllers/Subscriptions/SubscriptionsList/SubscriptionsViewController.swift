@@ -423,21 +423,26 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         searchController?.searchBar.resignFirstResponder()
 
+        openChat(for: subscription)
+    }
+
+    func openChat(for subscription: Subscription) {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController else {
+            return
+        }
+
         // When using iPads, we override the detail controller creating
         // a new instance.
         if splitViewController?.detailViewController as? BaseNavigationController != nil {
-            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
-                controller.subscription = subscription
+            controller.subscription = subscription
 
-                let nav = BaseNavigationController(rootViewController: controller)
-                splitViewController?.showDetailViewController(nav, sender: self)
-            }
-        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            let nav = BaseNavigationController(rootViewController: controller)
+            splitViewController?.showDetailViewController(nav, sender: self)
+        } else {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
     }
-
 }
 
 extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
