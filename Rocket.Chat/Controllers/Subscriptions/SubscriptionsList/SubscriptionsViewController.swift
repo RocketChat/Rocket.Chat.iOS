@@ -432,7 +432,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
 
         searchController?.searchBar.resignFirstResponder()
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
 
         // When using iPads, we override the detail controller creating
         // a new instance.
