@@ -199,10 +199,12 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         navigationController?.setNavigationBarHidden(false, animated: animated)
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
+        chatTitleView?.state = SocketManager.sharedInstance.state
     }
 
     override func viewDidAppear(_ animated: Bool) {
