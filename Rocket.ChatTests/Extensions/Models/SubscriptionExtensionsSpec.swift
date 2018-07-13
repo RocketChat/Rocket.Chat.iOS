@@ -41,12 +41,18 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
 
         let sub1 = Subscription.testInstance("sub1")
         sub1.auth = auth
+
         let sub2 = Subscription.testInstance("sub2")
         sub2.auth = auth
+
+        let sub3 = Subscription.testInstance("sub3")
+        sub3.auth = auth
+        sub3.open = false
 
         try? realm.write {
             realm.add(sub1, update: true)
             realm.add(sub2, update: true)
+            realm.add(sub3, update: true)
             realm.add(auth, update: true)
         }
 
@@ -61,6 +67,9 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         let objectsUppercase = subscriptions.filterBy(name: "SUB1")
         XCTAssertEqual(objectsUppercase.count, 1)
         XCTAssertEqual(objectsUppercase.first?.identifier, sub1.identifier)
+
+        let objectsHidden = subscriptions.filterBy(name: "sub3")
+        XCTAssertEqual(objectsHidden.count, 0)
     }
 
 }
