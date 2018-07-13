@@ -87,43 +87,4 @@ struct ShortcutsManager {
             return UIMutableApplicationShortcutItem(type: type, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo: userInfo)
         })
     }
-
-    // TODO: extract it and reuse in ServersListView
-    static func selectServer(at index: Int) {
-        guard index != DatabaseManager.selectedIndex else {
-            return
-        }
-
-        DatabaseManager.selectDatabase(at: index)
-        DatabaseManager.changeDatabaseInstance(index: index)
-
-        SocketManager.disconnect { (_, _) in
-            WindowManager.open(.subscriptions)
-        }
-
-        AppManager.changeSelectedServer(index: index)
-    }
-
-    // TODO: extract it and reuse in PushManager
-    static func openRoom(with roomId: String, for serverHost: String) {
-        guard
-            let serverURL = URL(string: serverHost),
-            let index = DatabaseManager.serverIndexForUrl(serverURL)
-        else {
-            return
-        }
-
-        // side effect: needed for Subscription.notificationSubscription()
-        AppManager.initialRoomId = roomId
-
-        if index != DatabaseManager.selectedIndex {
-            AppManager.changeSelectedServer(index: index)
-        } else {
-            if let auth = AuthManager.isAuthenticated() {
-                if let subscription = Subscription.notificationSubscription(auth: auth) {
-                    AppManager.open(room: subscription)
-                }
-            }
-        }
-    }
 }
