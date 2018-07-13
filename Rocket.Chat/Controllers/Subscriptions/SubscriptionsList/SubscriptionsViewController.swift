@@ -429,7 +429,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let theme = view.theme,
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
         else {
             return nil
@@ -442,14 +441,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
                 success(true)
             })
 
-            markUnread.backgroundColor = theme.bodyText
+            markUnread.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markUnread)
         } else {
             let markRead = UIContextualAction(style: .normal, title:  "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 success(true)
             })
 
-            markRead.backgroundColor = theme.bodyText
+            markRead.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markRead)
         }
 
@@ -459,7 +458,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let theme = view.theme,
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
         else {
             return nil
@@ -471,14 +469,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
             success(true)
         })
 
-        hide.backgroundColor = theme.auxiliaryBackground
+        hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         actions.append(hide)
 
         let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             success(true)
         })
 
-        leave.backgroundColor = theme.controlText
+        leave.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         actions.append(leave)
 
         return UISwipeActionsConfiguration(actions: actions)
