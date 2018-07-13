@@ -6,35 +6,35 @@
 "global.error" = "Fehler";
 
 // Errors
-"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.title" = "Ups!";
 "error.socket.default_error.message" = "Es ist ein Problem aufgetreten! Bitte versuchen Sie es noch einmal.";
 
-"error.login.title" = "Oops!";
+"error.login.title" = "Ups!";
 "error.login.message" = "Während der Anmeldung ist ein Problem aufgetreten.";
 
-"error.signup.title" = "Oops!"; // TODO
-"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+"error.signup.title" = "Ups!";
+"error.signup.empty_input.message" = "Alle Felder sind für die Anmeldung erforderlich.";
 
-"error.login_unauthorized.title" = "Oops!";
+"error.login_unauthorized.title" = "Ups!";
 "error.login_unauthorized.message" = "Ihre Anmeldedaten wurden abgelehnt! Bitte versuchen Sie es noch einmal.";
 
 // Alerts
-"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.title" = "Ups!";
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
 
-"alert.connection.not_secured.title" = "Oops!";
+"alert.connection.not_secured.title" = "Ups!";
 "alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Stellen Sie bitte sicher, dass dieser SSL unterstützt.";
 
-"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.title" = "Ups!";
 "alert.connection.socket_error.message" = "Es konnte keine Verbindung zum Server hergestellt werden!";
 
-"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.title" = "Ups!";
 "alert.connection.invalid_version.message" = "Der Server mit dem Sie sich verbinden möchten benutzt eine Version, die von dieser App nicht mehr unterstützt wird: %@.\n\nWir benötigen Version %@.";
 
-"alert.settings.set_mail_app.title" = "Oops!";
-"alert.settings.set_mail_app.message" = "Bitte richten Sie einen Mail Account ein um Emails versenden zu können.";
+"alert.settings.set_mail_app.title" = "Ups!";
+"alert.settings.set_mail_app.message" = "Bitte richten Sie einen Mail Account ein um E-Mails versenden zu können.";
 
-"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Diese Funktion ist leider noch nicht verfügbar.";
 
 "alert.insecure_image.title" = "Unsichere Quelle";
@@ -145,7 +145,7 @@
 "subscriptions.unreads" = "Ungelesen";
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
-"subscriptions.groups" = "Private Groups"; //TODO
+"subscriptions.groups" = "Private Gruppen";
 "subscriptions.direct_messages" = "Direktnachrichten";
 "subscriptions.conversations" = "Konversationen";
 "subscriptions.you" = "Du";
@@ -168,7 +168,7 @@
 "status.online" = "Online";
 "status.away" = "Abwesend";
 "status.busy" = "Beschäftigt";
-"status.offline" = "Offline"; //TODO
+"status.offline" = "Offline";
 "status.invisible" = "Unsichtbar";
 
 // New Room View
@@ -199,12 +199,12 @@
 "chat.unread_separator" = "ungelesen";
 
 // Read Receipts
-"chat.read_receipt_list.title" = "Read by"; //TODO
-"chat.read_receipt_list.title.loading" = "Loading..."; //TODO
-"chat.read_receipt_list.title.empty" = "Read by no one"; //TODO
+"chat.read_receipt_list.title" = "Gelesen von";
+"chat.read_receipt_list.title.loading" = "Lädt...";
+"chat.read_receipt_list.title.empty" = "Von niemandem gelesen";
 
 // Chat Message Actions
-"chat.message.actions.info" = "Message info"; //TODO
+"chat.message.actions.info" = "Nachrichteninfo";
 "chat.message.actions.react" = "Reaktion hinzufügen";
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
@@ -250,7 +250,7 @@
 "chat.message.open_browser" = "Im Browser öffnen";
 
 // Chat Drawing
-"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.errorTitle" = "Ups!";
 "chat.drawing.messageTitle" = "Es muss etwas gezeichnet werden, bevor es verschickt werden kann.";
 "chat.drawing.fileName" = "Zeichnung";
 "chat.drawing.settings.opacity" = "Transparenz";
@@ -286,7 +286,7 @@
 "chat.info.item.starred" = "Favorisiert";
 "chat.info.item.files" = "Dateien";
 "chat.info.item.mentions" = "Erwähnungen";
-"chat.info.item.share" = "Share"; // TODO
+"chat.info.item.share" = "Teilen";
 
 // Members List
 "chat.members.list.title" = "Mitglieder";
@@ -307,9 +307,9 @@
 "chat.messages.mentions.list.title" = "Erwähnungen";
 
 // Upload Banner
-"chat.banner.upload.uploading" = "Uploading %@"; // TODO
-"chat.banner.upload.error" = "Failed uploading %@"; // TODO
-"chat.banner.upload.retry" = "Try again"; // TODO
+"chat.banner.upload.uploading" = "Hochladen von %@";
+"chat.banner.upload.error" = "Hochladen von %@ ist fehlgeschlagen";
+"chat.banner.upload.retry" = "Versuchen Sie es noch einmal";
 
 // Settings
 "myaccount.settings.title" = "Einstellungen";
@@ -373,21 +373,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Passwort";
 
 // User Action Sheet
-"user_action_sheet.info" = "Information"; // TODO
+"user_action_sheet.info" = "Information";
 "user_action_sheet.remove" = "Aus Raum entfernen";
 "user_action_sheet.remove_confirm.title" = "Diesen Benutzer entfernen?";
 "user_action_sheet.remove_confirm.message" = "Sind Sie sicher, dass Sie '%@' aus dem Raum entfernen möchten?";
 
 // User Details
-"user_details.status" = "Status"; // TODO
-"user_details.role" = "Role"; // TODO
-"user_details.roles" = "Roles"; // TODO
-"user_details.email" = "Email"; // TODO
-"user_details.emails" = "Emails"; // TODO
-"user_details.timezone" = "Timezone"; // TODO
-"user_details.message_button" = "Message"; // TODO
-"user_details.voice_call_button" = "Voice Call"; // TODO
-"user_details.video_call_button" = "Video Call"; // TODO
+"user_details.status" = "Status";
+"user_details.role" = "Rolle";
+"user_details.roles" = "Rollen";
+"user_details.email" = "E-Mail";
+"user_details.emails" = "E-Mails";
+"user_details.timezone" = "Zeitzone";
+"user_details.message_button" = "Nachricht";
+"user_details.voice_call_button" = "Sprachanruf";
+"user_details.video_call_button" = "Videoanruf";
 
 // Theme
 "theme.settings.title" = "Aussehen";
