@@ -13,9 +13,11 @@ struct SubscriptionManager {
     static func updateUnreadApplicationBadge() {
         var unread = 0
 
-        Realm.execute({ (realm) in
-            for obj in realm.objects(Subscription.self) {
-                unread += obj.unread
+        Realm.execute({ _ in
+            if let list = Subscription.all() {
+                for obj in list {
+                    unread += obj.unread
+                }
             }
         }, completion: {
             UIApplication.shared.applicationIconBadgeNumber = unread
@@ -28,30 +30,17 @@ struct SubscriptionManager {
         let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
-        let dispatchGroup = DispatchGroup()
 
-        dispatchGroup.enter()
+        // The call needs to be nested because at the first time the user
+        // opens the app we don't have the Subscriptions and the Room object
+        // is not able to create one, so the request needs to be completed
+        // only after the Subscriptions one is finished.
         client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
-            dispatchGroup.leave()
-
-            // We don't trust the updatedSince response all the time.
-            // Our API is having issues with caching and we can't try
-            // to avoid this on the request.
-            client?.fetchSubscriptions(updatedSince: nil, realm: realm) { }
-        }
-
-        dispatchGroup.enter()
-        client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
-            dispatchGroup.leave()
-
-            // We don't trust the updatedSince response all the time.
-            // Our API is having issues with caching and we can't try
-            // to avoid this on the request.
-            client?.fetchRooms(updatedSince: nil, realm: realm) { }
-        }
-
-        dispatchGroup.notify(queue: .main) {
-            completion?()
+            client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
+                DispatchQueue.main.async {
+                    completion?()
+                }
+            }
         }
     }
 

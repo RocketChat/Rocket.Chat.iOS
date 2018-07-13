@@ -12,6 +12,8 @@ import SlackTextViewController
 private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
 private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
+private let buttonScrollToBottomSize = CGFloat(70)
+
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
@@ -30,29 +32,51 @@ final class ChatViewController: SLKTextViewController {
     lazy var uploadClient = API.current()?.client(UploadClient.self)
     lazy var bannerView: ChatBannerView? = setupBanner()
 
-    @IBOutlet weak var buttonScrollToBottom: UIButton!
-    var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
+    lazy var buttonScrollToBottom: UIButton! = {
+        let button = UIButton()
+        button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
+        button.setImage(UIImage(named: "Float Button light"), for: .normal)
+        button.addTarget(self, action: #selector(buttonScrollToBottomDidPressed), for: .touchUpInside)
+        return button
+    }()
 
     var scrollToBottomButtonIsVisible: Bool = false {
         didSet {
-            self.buttonScrollToBottom.superview?.layoutIfNeeded()
-
-            if self.scrollToBottomButtonIsVisible {
-                guard let collectionView = collectionView else {
-                    scrollToBottomButtonIsVisible = false
-                    return
-                }
-
-                let collectionViewBottom = collectionView.frame.origin.y + collectionView.frame.height
-                self.buttonScrollToBottomMarginConstraint?.constant = (collectionViewBottom - view.frame.height) - 40
-            } else {
-                self.buttonScrollToBottomMarginConstraint?.constant = 50
+            guard oldValue != scrollToBottomButtonIsVisible,
+                let collectionView = collectionView
+            else {
+                scrollToBottomButtonIsVisible = !scrollToBottomButtonIsVisible
+                return
             }
 
-            if scrollToBottomButtonIsVisible != oldValue {
-                UIView.animate(withDuration: 0.5) {
-                    self.buttonScrollToBottom.superview?.layoutIfNeeded()
+            func animates(_ animations: @escaping VoidCompletion) {
+                UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+                    animations()
+                }, completion: nil)
+            }
+
+            if self.scrollToBottomButtonIsVisible {
+                if buttonScrollToBottom.superview == nil {
+                    view.addSubview(buttonScrollToBottom)
                 }
+
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height - buttonScrollToBottomSize - collectionView.layoutMargins.bottom
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 1
+                })
+            } else {
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 0
+                })
             }
         }
     }
@@ -96,6 +120,8 @@ final class ChatViewController: SLKTextViewController {
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
+                    self?.chatTitleView?.subscription = self?.subscription
+
                     propertyChanges.forEach {
                         if $0.name == "roomReadOnly" || $0.name == "roomMuted" {
                             self?.updateMessageSendingPermission()
@@ -154,7 +180,6 @@ final class ChatViewController: SLKTextViewController {
 
         setupTitleView()
         setupTextViewSettings()
-        setupScrollToBottomButton()
 
         // Remove title from back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(
@@ -170,25 +195,22 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
 
-        if buttonScrollToBottomMarginConstraint == nil {
-            buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
-            buttonScrollToBottomMarginConstraint?.isActive = true
-        }
-
         setupReplyView()
         ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         navigationController?.setNavigationBarHidden(false, animated: animated)
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
 
-
         textInputbar.textView.inputAssistantItem.leadingBarButtonGroups = []
         textInputbar.textView.inputAssistantItem.trailingBarButtonGroups = []
+
+        chatTitleView?.state = SocketManager.sharedInstance.state
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -204,10 +226,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: nil, completion: { _ in
-            self.collectionView?.collectionViewLayout.invalidateLayout()
+        dataController.invalidateLayout(for: nil)
+        coordinator.animate(alongsideTransition: { _ in
+            self.collectionView?.reloadData()
+            self.tableView?.reloadData()
         })
     }
 
@@ -239,13 +261,6 @@ final class ChatViewController: SLKTextViewController {
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
-    }
-
-    private func setupScrollToBottomButton() {
-        buttonScrollToBottom.layer.cornerRadius = 25
-        buttonScrollToBottom.layer.borderWidth = 1
-        buttonScrollToBottom.layer.borderColor = (view.theme?.bodyText ?? Theme.light.bodyText).cgColor
-        buttonScrollToBottom.tintColor = view.theme?.bodyText ?? Theme.light.bodyText
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -285,11 +300,16 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    internal func scrollToBottom(_ animated: Bool = false) {
+    @objc internal func scrollToBottom(_ animated: Bool = false) {
         let boundsHeight = collectionView?.bounds.size.height ?? 0
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
         collectionView?.setContentOffset(offset, animated: animated)
+        scrollToBottomButtonIsVisible = false
+    }
+
+    @objc internal func buttonScrollToBottomDidPressed() {
+        scrollToBottom(true)
     }
 
     internal func resetScrollToBottomButtonPosition() {
@@ -509,7 +529,7 @@ final class ChatViewController: SLKTextViewController {
         let scrollContentSizeHeight = collectionView.contentSize.height
         let verticalOffsetForBottom = scrollContentSizeHeight + bottomInset - height
 
-        return collectionView.contentOffset.y >= (verticalOffsetForBottom - 1)
+        return collectionView.contentOffset.y >= (verticalOffsetForBottom - buttonScrollToBottomSize)
     }
 
     // MARK: Subscription
@@ -611,20 +631,23 @@ final class ChatViewController: SLKTextViewController {
         typingIndicatorView?.interval = 0
         guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
+        let loggedUsername = user.username
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username != user.username else { return }
+            guard let username = username, username != loggedUsername else { return }
 
-            let isAtBottom = self?.chatLogIsAtBottom()
+            DispatchQueue.main.async {
+                let isAtBottom = self?.chatLogIsAtBottom()
 
-            if flag {
-                self?.typingIndicatorView?.insertUsername(username)
-            } else {
-                self?.typingIndicatorView?.removeUsername(username)
-            }
+                if flag {
+                    self?.typingIndicatorView?.insertUsername(username)
+                } else {
+                    self?.typingIndicatorView?.removeUsername(username)
+                }
 
-            if let isAtBottom = isAtBottom,
-                isAtBottom == true {
-                self?.scrollToBottom(true)
+                if let isAtBottom = isAtBottom,
+                    isAtBottom == true {
+                    self?.scrollToBottom(true)
+                }
             }
         }
     }
@@ -856,7 +879,7 @@ final class ChatViewController: SLKTextViewController {
                 previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ])
+            ])
 
             collectionView?.bottomAnchor.constraint(equalTo: previewView.topAnchor).isActive = true
 
@@ -900,10 +923,6 @@ final class ChatViewController: SLKTextViewController {
         let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
 
         present(searchMessagesNav, animated: true, completion: nil)
-    }
-
-    @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
-        scrollToBottom(true)
     }
 }
 
@@ -1073,6 +1092,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         }
 
         if let obj = dataController.itemAt(indexPath) {
+            if let value = dataController.dataCellHeight[obj.identifier] {
+                return CGSize(width: fullWidth, height: value)
+            }
+
             if obj.type == .header {
                 let isDirectMessage = subscription.type == .directMessage
                 let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
@@ -1101,6 +1124,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
+                dataController.cacheCellHeight(for: obj.identifier, value: height)
+
                 return CGSize(width: fullWidth, height: height)
             }
         }
@@ -1222,6 +1247,10 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidChangeState(state: SocketConnectionState) {
         Log.debug("[ChatViewController] socketDidChangeState: \(state)")
         chatTitleView?.state = state
+
+        if state == .connected {
+            loadMoreMessagesFrom(date: nil, loadRemoteHistory: true)
+        }
     }
 
 }
@@ -1231,8 +1260,11 @@ extension ChatViewController: SocketConnectionHandler {
 extension ChatViewController {
     override func applyTheme() {
         super.applyTheme()
+        guard let theme = view.theme else { return }
+        let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+        let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
+        buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
         updateMessageSendingPermission()
-        setupScrollToBottomButton()
     }
 }
 

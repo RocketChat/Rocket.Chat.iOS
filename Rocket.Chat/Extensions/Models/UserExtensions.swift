@@ -10,9 +10,13 @@ import RealmSwift
 
 extension User {
     func updateStatus(status: UserStatus) {
+        let userIdentifier = self.identifier
+
         Realm.execute({ (realm) in
-            self.status = status
-            realm.add(self, update: true)
+            if let identifier = userIdentifier, let user = User.find(withIdentifier: identifier) {
+                user.status = status
+                realm.add(user, update: true)
+            }
         })
     }
 

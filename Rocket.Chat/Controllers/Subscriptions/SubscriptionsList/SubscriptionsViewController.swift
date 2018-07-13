@@ -48,31 +48,43 @@ final class SubscriptionsViewController: BaseViewController {
 
         super.viewDidLoad()
 
+        // If the device is not using the SplitView, we want to show
+        // the 3D Touch preview for the cells
+        if splitViewController?.detailViewController as? BaseNavigationController == nil {
+            registerForPreviewing(with: self, sourceView: tableView)
+        }
+
         viewModel.didUpdateIndexPaths = { [weak self] changes in
             guard let tableView = self?.tableView else {
                 return
             }
 
-            let modifications = tableView.indexPathsForVisibleRows?.filter {
-                changes.modifications.contains($0) && self?.shouldUpdateCellAt(indexPath: $0) ?? false
-            } ?? []
+            // Update back button title with the number of unreads
+            self?.updateBackButton()
 
-            if changes.deletions.count > 0 || changes.insertions.count > 0 {
-                tableView.beginUpdates()
-                tableView.deleteRows(at: changes.deletions, with: .automatic)
-                tableView.insertRows(at: changes.insertions, with: .automatic)
-                tableView.endUpdates()
+            // If there's no changes, let's not proceed.
+            if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
+                return
             }
 
-            if modifications.count > 0 {
-                UIView.performWithoutAnimation {
-                    tableView.reloadRows(at: modifications, with: .automatic)
+            // Update TableView data if there's any change in the data
+            if self?.viewModel.numberOfSections ?? 2 > 1 {
+                tableView.reloadData()
+            } else {
+                if #available(iOS 11.0, *) {
+                    tableView.performBatchUpdates({
+                        tableView.deleteRows(at: changes.deletions, with: .automatic)
+                        tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
+                    }, completion: nil)
+                } else {
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: changes.deletions, with: .automatic)
+                    tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
+                    tableView.endUpdates()
                 }
             }
-
-            // We need to update the number of unread messages
-            // for the back button when chat screen is opened
-            self?.updateBackButton()
         }
 
         viewModel.didRebuildSections = { [weak self] in
@@ -103,6 +115,7 @@ final class SubscriptionsViewController: BaseViewController {
 
         viewModel.buildSections()
         tableView.reloadData()
+        titleView?.state = SocketManager.sharedInstance.state
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -323,6 +336,35 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
 }
 
+// MARK: UIViewControllerPreviewingDelegate
+
+extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard
+            let indexPath = tableView.indexPathForRow(at: location),
+            let cell = tableView.cellForRow(at: indexPath),
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+        else {
+            return nil
+        }
+
+        previewingContext.sourceRect = cell.frame
+
+        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            controller.subscription = subscription
+            return controller
+        }
+
+        return nil
+    }
+
+}
+
 extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -339,6 +381,16 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SubscriptionCellProtocol else { return }
+        guard let subscription = cell.subscription else { return }
+        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
+
+        if subscription.identifier == selectedSubscription.identifier {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -422,26 +474,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
-    }
-
-    func shouldUpdateCellAt(indexPath: IndexPath) -> Bool {
-        guard
-            let index = tableView.indexPathsForVisibleRows?.index(where: { $0 == indexPath }),
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath),
-            index < tableView.visibleCells.count
-        else {
-            return false
-        }
-
-        if let cell = tableView.visibleCells[index] as? SubscriptionCell {
-            return cell.shouldUpdateForSubscription(subscription)
-        }
-
-        if let cell = tableView.visibleCells[index] as? SubscriptionCellCondensed {
-            return cell.shouldUpdateForSubscription(subscription)
-        }
-
-        return false
     }
 
 }

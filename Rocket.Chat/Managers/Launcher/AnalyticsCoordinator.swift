@@ -11,11 +11,9 @@ import Fabric
 import Crashlytics
 import Firebase
 
-#if BETA || DEBUG
-import Instabug
-#endif
-
 let kCrashReportingDisabledKey = "kCrashReportingDisabledKey"
+
+private var isFirebaseInitialized = false
 
 struct AnalyticsCoordinator: LauncherProtocol {
 
@@ -39,34 +37,21 @@ struct AnalyticsCoordinator: LauncherProtocol {
         }
 
         launchFabric()
-        launchInstabug()
         launchFirebase()
     }
 
     private func launchFirebase() {
         #if RELEASE || BETA
         guard
+            !isFirebaseInitialized,
             let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
             NSDictionary(contentsOfFile: path) != nil
         else {
             return
         }
 
+        isFirebaseInitialized = true
         FirebaseApp.configure()
-        #endif
-    }
-
-    private func launchInstabug() {
-        guard
-            let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
-            let keys = NSDictionary(contentsOfFile: path),
-            let instabug = keys["Instabug"] as? String
-        else {
-            return
-        }
-
-        #if BETA || DEBUG
-        Instabug.start(withToken: instabug, invocationEvent: .floatingButton)
         #endif
     }
 
