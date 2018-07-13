@@ -104,6 +104,8 @@ final class ChatViewController: SLKTextViewController {
     var messagesQuery: Results<Message>!
     var messages: [Message] = []
 
+    var backgroundImageViewEmptyState: UIImageView?
+
     var subscription: Subscription? {
         didSet {
             guard
@@ -207,6 +209,30 @@ final class ChatViewController: SLKTextViewController {
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
         chatTitleView?.state = SocketManager.sharedInstance.state
+
+        if self.subscription == nil {
+            title = ""
+            textView.isEditable = false
+            leftButton.isEnabled = false
+
+            chatTitleView?.removeFromSuperview()
+            backgroundImageViewEmptyState?.removeFromSuperview()
+
+            guard let theme = view.theme else { return }
+            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
+            let backgroundImageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
+            backgroundImageView.contentMode = .scaleAspectFill
+            backgroundImageView.clipsToBounds = true
+            self.view.insertSubview(backgroundImageView, belowSubview: textInputbar)
+
+            backgroundImageViewEmptyState = backgroundImageView
+            updateEmptyBackgroundImageFrames()
+        } else {
+            backgroundImageViewEmptyState?.removeFromSuperview()
+            textView.isEditable = true
+            leftButton.isEnabled = true
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -223,6 +249,11 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         updateChatPreviewModeViewConstraints()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateEmptyBackgroundImageFrames()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -899,6 +930,11 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    private func updateEmptyBackgroundImageFrames() {
+        guard let backgroundImageViewEmptyState = backgroundImageViewEmptyState else { return }
+        backgroundImageViewEmptyState.frame = view.bounds
+    }
+
     private func updateChatPreviewModeViewConstraints() {
         if #available(iOS 11.0, *) {
             chatPreviewModeView?.bottomInset = view.safeAreaInsets.bottom
@@ -1272,6 +1308,11 @@ extension ChatViewController {
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
+
+        if let backgroundImageViewEmptyState = backgroundImageViewEmptyState {
+            backgroundImageViewEmptyState.image = UIImage(named: "Empty State \(themeName ?? "light")")
+        }
+
         updateMessageSendingPermission()
     }
 }
