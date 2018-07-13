@@ -83,7 +83,7 @@ extension Subscription {
 
     static func all(onlyJoined: Bool = true, realm: Realm? = Realm.current) -> Results<Subscription>? {
         let results = realm?.objects(Subscription.self)
-        return onlyJoined ? results?.filter("auth != NULL") : results
+        return onlyJoined ? results?.filter("auth != NULL && open == TRUE") : results
     }
 
 }
