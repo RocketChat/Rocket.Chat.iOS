@@ -208,31 +208,9 @@ final class ChatViewController: SLKTextViewController {
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
+        updateEmptyState()
+
         chatTitleView?.state = SocketManager.sharedInstance.state
-
-        if self.subscription == nil {
-            title = ""
-            textView.isEditable = false
-            leftButton.isEnabled = false
-
-            chatTitleView?.removeFromSuperview()
-            backgroundImageViewEmptyState?.removeFromSuperview()
-
-            guard let theme = view.theme else { return }
-            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
-
-            let backgroundImageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
-            backgroundImageView.contentMode = .scaleAspectFill
-            backgroundImageView.clipsToBounds = true
-            self.view.insertSubview(backgroundImageView, belowSubview: textInputbar)
-
-            backgroundImageViewEmptyState = backgroundImageView
-            updateEmptyBackgroundImageFrames()
-        } else {
-            backgroundImageViewEmptyState?.removeFromSuperview()
-            textView.isEditable = true
-            leftButton.isEnabled = true
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -591,6 +569,30 @@ final class ChatViewController: SLKTextViewController {
         SocketManager.unsubscribe(eventName: subscription.rid)
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
+    }
+
+    internal func updateEmptyState() {
+        if self.subscription == nil {
+            title = ""
+            setTextInputbarHidden(true, animated: false)
+
+            chatTitleView?.removeFromSuperview()
+            backgroundImageViewEmptyState?.removeFromSuperview()
+
+            guard let theme = view.theme else { return }
+            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
+            let backgroundImageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
+            backgroundImageView.contentMode = .scaleAspectFill
+            backgroundImageView.clipsToBounds = true
+            self.view.insertSubview(backgroundImageView, belowSubview: textInputbar)
+
+            backgroundImageViewEmptyState = backgroundImageView
+            updateEmptyBackgroundImageFrames()
+        } else {
+            backgroundImageViewEmptyState?.removeFromSuperview()
+            updateJoinedView()
+        }
     }
 
     internal func emptySubscriptionState() {
