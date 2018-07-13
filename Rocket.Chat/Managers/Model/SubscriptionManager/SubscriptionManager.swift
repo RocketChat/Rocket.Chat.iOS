@@ -28,20 +28,17 @@ struct SubscriptionManager {
         let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
-        let dispatchGroup = DispatchGroup()
 
-        dispatchGroup.enter()
+        // The call needs to be nested because at the first time the user
+        // opens the app we don't have the Subscriptions and the Room object
+        // is not able to create one, so the request needs to be completed
+        // only after the Subscriptions one is finished.
         client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
-            dispatchGroup.leave()
-        }
-
-        dispatchGroup.enter()
-        client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
-            dispatchGroup.leave()
-        }
-
-        dispatchGroup.notify(queue: .main) {
-            completion?()
+            client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
+                DispatchQueue.main.async {
+                    completion?()
+                }
+            }
         }
     }
 
