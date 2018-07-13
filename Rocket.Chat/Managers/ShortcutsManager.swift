@@ -57,8 +57,8 @@ struct ShortcutsManager {
         }
 
         // Rooms
-        let subscriptions = Subscription.all()?.sortedByLastSeen()[..<4]
-        let rooms: [ShortcutItem]? = subscriptions?.compactMap({ room in
+        let subscriptions = Subscription.all()?.sortedByLastSeen()
+        var rooms: [ShortcutItem]? = subscriptions?.compactMap({ room in
             ShortcutItem(
                 name: room.displayName(),
                 type: .room(
@@ -69,7 +69,7 @@ struct ShortcutsManager {
             )
         })
 
-        return rooms
+        return (rooms?.count ?? 0) > 5 ? Array(rooms?[..<4] ?? []) : rooms
     }
 
     static func sync() {
