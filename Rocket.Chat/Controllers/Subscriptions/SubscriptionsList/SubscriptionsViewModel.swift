@@ -75,7 +75,7 @@ class SubscriptionsViewModel {
             let queryData = queryBase.filterBy(name: query)
             assorter.registerSection(name: localized("subscriptions.search_results"), objects: queryData)
 
-            API.current()?.client(SpotlightClient.self).search(query: query) { _ in }
+            API.current()?.client(SpotlightClient.self).search(query: query) { _, _ in }
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
                 let queryData = queryBase.filter("alert == true")

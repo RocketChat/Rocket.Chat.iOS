@@ -30,35 +30,43 @@ extension Subscription {
     }
 
     func fetchRoomIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
+        guard let identifier = self.identifier else { return }
+
         if type == .channel {
-            SubscriptionManager.getRoom(byName: name, completion: { [weak self] (response) in
+            SubscriptionManager.getRoom(byName: name, completion: { (response) in
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
-                Realm.executeOnMainThread({ realm in
-                    if let obj = self {
+                Realm.execute({ realm in
+                    if let obj = Subscription.find(withIdentifier: identifier) {
+                        if let rid = response.result["result"]["_id"].string {
+                            obj.rid = rid
+                        }
+
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
                     }
+                }, completion: {
+                    if let subscription = Subscription.find(withIdentifier: identifier) {
+                        completion(subscription)
+                    }
                 })
-
-                guard let strongSelf = self else { return }
-                completion(strongSelf)
             })
         } else if type == .directMessage {
-            SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
+            SubscriptionManager.createDirectMessage(name, completion: { (response) in
                 guard !response.isError() else { return }
 
                 let rid = response.result["result"]["rid"].stringValue
-                Realm.executeOnMainThread({ realm in
-                    if let obj = self {
+                Realm.execute({ realm in
+                    if let obj = Subscription.find(withIdentifier: identifier) {
                         obj.rid = rid
                         realm.add(obj, update: true)
                     }
+                }, completion: {
+                    if let subscription = Subscription.find(withIdentifier: identifier) {
+                        completion(subscription)
+                    }
                 })
-
-                guard let strongSelf = self else { return }
-                completion(strongSelf)
             })
         }
     }
