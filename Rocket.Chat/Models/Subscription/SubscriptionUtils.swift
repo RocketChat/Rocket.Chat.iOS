@@ -35,19 +35,17 @@ extension Subscription {
         if type == .channel {
             SubscriptionManager.getRoom(byName: name, completion: { (response) in
                 guard !response.isError() else { return }
+                guard let rid = response.result["result"]["_id"].string else { return }
 
                 let result = response.result["result"]
                 Realm.execute({ realm in
                     if let obj = Subscription.find(withIdentifier: identifier) {
-                        if let rid = response.result["result"]["_id"].string {
-                            obj.rid = rid
-                        }
-
+                        obj.rid = rid
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
                     }
                 }, completion: {
-                    if let subscription = Subscription.find(withIdentifier: identifier) {
+                    if let subscription = Subscription.find(rid: rid) {
                         completion(subscription)
                     }
                 })
@@ -55,15 +53,26 @@ extension Subscription {
         } else if type == .directMessage {
             SubscriptionManager.createDirectMessage(name, completion: { (response) in
                 guard !response.isError() else { return }
+                guard let rid = response.result["result"]["rid"].string else { return }
 
-                let rid = response.result["result"]["rid"].stringValue
                 Realm.execute({ realm in
-                    if let obj = Subscription.find(withIdentifier: identifier) {
-                        obj.rid = rid
-                        realm.add(obj, update: true)
+                    // We need to check for the existence of one Subscription
+                    // here because another real time response may have
+                    // already included this object into the database
+                    // before this block is executed.
+                    if let existingObject = Subscription.find(rid: rid, realm: realm) {
+                        if let obj = Subscription.find(withIdentifier: identifier) {
+                            realm.add(existingObject, update: true)
+                            realm.delete(obj)
+                        }
+                    } else {
+                        if let obj = Subscription.find(withIdentifier: identifier) {
+                            obj.rid = rid
+                            realm.add(obj, update: true)
+                        }
                     }
                 }, completion: {
-                    if let subscription = Subscription.find(withIdentifier: identifier) {
+                    if let subscription = Subscription.find(rid: rid) {
                         completion(subscription)
                     }
                 })
