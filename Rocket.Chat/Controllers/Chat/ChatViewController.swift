@@ -1239,6 +1239,10 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidChangeState(state: SocketConnectionState) {
         Log.debug("[ChatViewController] socketDidChangeState: \(state)")
         chatTitleView?.state = state
+
+        if state == .connected {
+            loadMoreMessagesFrom(date: nil, loadRemoteHistory: true)
+        }
     }
 
 }
