@@ -309,7 +309,7 @@
 // Upload Banner
 "chat.banner.upload.uploading" = "Hochladen von %@";
 "chat.banner.upload.error" = "Hochladen von %@ ist fehlgeschlagen";
-"chat.banner.upload.retry" = "Versuchen Sie es noch einmal";
+"chat.banner.upload.retry" = "Erneut versuchen";
 
 // Settings
 "myaccount.settings.title" = "Einstellungen";
