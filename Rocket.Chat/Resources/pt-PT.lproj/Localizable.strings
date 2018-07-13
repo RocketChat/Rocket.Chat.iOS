@@ -13,7 +13,7 @@
 "error.login.message" = "Algo errado aconteceu ao tentar fazer o login.";
 
 "error.signup.title" = "Oops!";
-"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos."; // TODO
+"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos.";
 
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "As suas credenciais foram rejeitadas! Por favor, tente novamente.";

@@ -6,7 +6,7 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-add-server-shortcut = "Add Server"; // TODO:
+add-server-shortcut = "Προσθήκη διακομιστή";
 NSCameraUsageDescription = "To take photos and record videos"; // TODO
 NSMicrophoneUsageDescription = "To record and upload audio and videos"; // TODO
 NSPhotoLibraryAddUsageDescription = "To save images to your library"; // TODO

@@ -13,9 +13,11 @@ struct SubscriptionManager {
     static func updateUnreadApplicationBadge() {
         var unread = 0
 
-        Realm.execute({ (realm) in
-            for obj in realm.objects(Subscription.self) {
-                unread += obj.unread
+        Realm.execute({ _ in
+            if let list = Subscription.all() {
+                for obj in list {
+                    unread += obj.unread
+                }
             }
         }, completion: {
             UIApplication.shared.applicationIconBadgeNumber = unread

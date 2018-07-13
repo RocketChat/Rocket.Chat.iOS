@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubscriptionCellCondensed: UITableViewCell {
+final class SubscriptionCellCondensed: UITableViewCell, SubscriptionCellProtocol {
 
     static let identifier = "CellSubscriptionCondensed"
 
