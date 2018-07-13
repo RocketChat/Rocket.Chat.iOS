@@ -53,7 +53,7 @@ struct ShortcutsManager {
         }
 
         // Rooms
-        let rooms: [ShortcutItem]? = roomsForCurrentServer()?.compactMap({ room in
+        let rooms: [ShortcutItem]? = Subscription.all(onlyJoined: true)?.sortedByLastSeen().compactMap({ room in
             ShortcutItem(name: room.displayName(),
                          type: .room(roomId: room.rid,
                                      server: server.name,
@@ -125,13 +125,5 @@ struct ShortcutsManager {
                 }
             }
         }
-    }
-
-    private static func roomsForCurrentServer() -> Results<Subscription>? {
-        guard let results = Subscription.all(onlyJoined: true)?.sortedByLastSeen() else {
-            return nil
-        }
-
-        return results
     }
 }
