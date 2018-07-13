@@ -39,12 +39,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     deinit {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
         setupSearchBar()
         setupTitleView()
         updateBackButton()
+        startObservingKeyboard()
 
         super.viewDidLoad()
 
@@ -128,6 +130,44 @@ final class SubscriptionsViewController: BaseViewController {
         if segue.identifier == "Servers" {
             segue.destination.modalPresentationCapturesStatusBarAppearance = true
         }
+    }
+
+    // MARK: Keyboard
+
+    private func startObservingKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardFrameWillChange(_:)),
+            name: Notification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardFrameWillChange(_:)),
+            name: Notification.Name.UIKeyboardWillHide,
+            object: nil
+        )
+    }
+
+    @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            tableView.contentInset.bottom = 0
+            return
+        }
+
+        let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+
+        UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+            self.tableView.contentInset.bottom = notification.name == Notification.Name.UIKeyboardWillHide ? 0 : keyboardFrameInView.height
+        }, completion: nil)
     }
 
     // MARK: Setup Views
