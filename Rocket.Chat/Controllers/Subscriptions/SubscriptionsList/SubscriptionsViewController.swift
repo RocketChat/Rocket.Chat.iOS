@@ -376,6 +376,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
             cell.subscription = subscription
         }
 
+        cell.tintColor = view.theme?.auxiliaryText
         return cell
     }
 
@@ -388,6 +389,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
             cell.subscription = subscription
         }
 
+        cell.tintColor = view.theme?.auxiliaryText
         return cell
     }
 }
@@ -424,6 +426,64 @@ extension SubscriptionsViewController: UITableViewDelegate {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard
+            let theme = view.theme,
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+        else {
+            return nil
+        }
+
+        var actions: [UIContextualAction] = []
+
+        if subscription.unread > 0 {
+            let markUnread = UIContextualAction(style: .normal, title:  "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                success(true)
+            })
+
+            markUnread.backgroundColor = theme.bodyText
+            actions.append(markUnread)
+        } else {
+            let markRead = UIContextualAction(style: .normal, title:  "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                success(true)
+            })
+
+            markRead.backgroundColor = theme.bodyText
+            actions.append(markRead)
+        }
+
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard
+            let theme = view.theme,
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+        else {
+            return nil
+        }
+
+        var actions: [UIContextualAction] = []
+
+        let hide = UIContextualAction(style: .normal, title:  "Hide", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            success(true)
+        })
+
+        hide.backgroundColor = theme.auxiliaryBackground
+        actions.append(hide)
+
+        let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            success(true)
+        })
+
+        leave.backgroundColor = theme.controlText
+        actions.append(leave)
+
+        return UISwipeActionsConfiguration(actions: actions)
     }
 
 }
