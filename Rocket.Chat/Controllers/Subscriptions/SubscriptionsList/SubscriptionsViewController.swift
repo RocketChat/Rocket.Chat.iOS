@@ -376,7 +376,6 @@ extension SubscriptionsViewController: UITableViewDataSource {
             cell.subscription = subscription
         }
 
-        cell.tintColor = view.theme?.auxiliaryText
         return cell
     }
 
@@ -389,7 +388,6 @@ extension SubscriptionsViewController: UITableViewDataSource {
             cell.subscription = subscription
         }
 
-        cell.tintColor = view.theme?.auxiliaryText
         return cell
     }
 }
