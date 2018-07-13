@@ -236,7 +236,7 @@ final class ChatViewController: SLKTextViewController {
             self?.tableView?.reloadData()
         }, completion: { [weak self] _ in
             if let indexPath = topIndexPath {
-                self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
+                self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: false)
             }
         })
     }
