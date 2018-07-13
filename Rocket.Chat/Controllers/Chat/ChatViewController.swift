@@ -226,7 +226,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        let viewingIndexPath = collectionView?.indexPathsForVisibleItems.first
+        let visibleIndexPaths = collectionView?.indexPathsForVisibleItems ?? []
+        let topIndexPath = visibleIndexPaths.sorted().first
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.dataController.invalidateLayout(for: nil)
@@ -234,7 +235,7 @@ final class ChatViewController: SLKTextViewController {
             self?.collectionView?.reloadData()
             self?.tableView?.reloadData()
         }, completion: { [weak self] _ in
-            if let indexPath = viewingIndexPath {
+            if let indexPath = topIndexPath {
                 self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
             }
         })
