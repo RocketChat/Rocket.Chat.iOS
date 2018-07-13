@@ -120,6 +120,8 @@ final class ChatViewController: SLKTextViewController {
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
+                    self?.chatTitleView?.subscription = self?.subscription
+
                     propertyChanges.forEach {
                         if $0.name == "roomReadOnly" || $0.name == "roomMuted" {
                             self?.updateMessageSendingPermission()
