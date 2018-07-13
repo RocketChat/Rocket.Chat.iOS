@@ -83,16 +83,17 @@ extension MessageManager {
         ] as [String: Any]
 
         let currentRealm = Realm.current
+        let subscriptionIdentifier = subscription.rid
+
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else {
                 return Log.debug(response.result.string)
             }
 
             let object = response.result["fields"]["args"][0]
-            let subscriptionIdentifier = subscription.identifier
 
             currentRealm?.execute({ (realm) in
-                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
+                guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
                 let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.subscription = detachedSubscription
                 })
@@ -117,7 +118,7 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             if let msgId = response.result["fields"]["args"][0]["_id"].string {
-                Realm.executeOnMainThread(realm: currentRealm, { realm in
+                currentRealm?.execute({ realm in
                     guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
                     realm.delete(message)
                     completion(msgId)

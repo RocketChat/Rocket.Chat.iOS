@@ -14,29 +14,26 @@ struct SpotlightClient: APIClient {
         self.api = api
     }
 
-    func search(query: String, realm: Realm? = Realm.current, completion: @escaping ([Subscription]) -> Void) {
+    func search(query: String, realm: Realm? = Realm.current, completion: @escaping RequestCompletion) {
         api.fetch(SpotlightRequest(query: query)) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success else {
-                    completion([])
-                    return Log.debug(resource.error)
+                    completion(nil, true)
+                    return
                 }
 
-                var subscriptions = [Subscription]()
-                var identifiers = [String]()
-
                 realm?.execute({ (realm) in
+                    var subscriptions: [Subscription] = []
+
                     resource.rooms.forEach { object in
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                            object?.rid = object?.identifier ?? ""
-                        })
-
-                        if let identifier = subscription.identifier {
-                            identifiers.append(identifier)
+                        if let roomIdentifier = object["_id"].string {
+                            if let subscription = Subscription.find(rid: roomIdentifier, realm: realm) {
+                                subscription.map(object, realm: realm)
+                                subscription.mapRoom(object, realm: realm)
+                                subscriptions.append(subscription)
+                            }
                         }
-
-                        subscriptions.append(subscription)
                     }
 
                     resource.users.forEach { object in
@@ -55,33 +52,14 @@ struct SpotlightClient: APIClient {
                             subscription.fname = user.name ?? ""
                             subscriptions.append(subscription)
                         }
-
-                        if let identifier = subscription.identifier {
-                            identifiers.append(identifier)
-                        }
                     }
 
                     realm.add(subscriptions, update: true)
                 }, completion: {
-                    var detachedSubscriptions = [Subscription]()
-
-                    try? realm?.write {
-                        for identifier in identifiers {
-                            if let subscription = realm?.object(ofType: Subscription.self, forPrimaryKey: identifier) {
-                                detachedSubscriptions.append(subscription)
-                            }
-                        }
-                    }
-
-                    completion(detachedSubscriptions)
+                    completion(resource.raw, false)
                 })
             case .error(let error):
-                switch error {
-                case .version:
-                    SubscriptionManager.spotlight(query, completion: completion)
-                default:
-                    completion([])
-                }
+                completion(nil, true)
             }
         }
     }

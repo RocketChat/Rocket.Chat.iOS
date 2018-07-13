@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9TE-I5-CEe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9TE-I5-CEe">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,25 +29,11 @@
                                     <constraint firstAttribute="width" constant="60" id="rqT-ly-vaC"/>
                                 </constraints>
                             </view>
-                            <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Stw-bA-gXV">
-                                <rect key="frame" x="242" y="504" width="50" height="50"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bhf-ad-40E"/>
-                                    <constraint firstAttribute="width" constant="50" id="yvM-a6-qZc"/>
-                                </constraints>
-                                <state key="normal" image="Arrow Down"/>
-                                <connections>
-                                    <action selector="buttonScrollToBottomPressed:" destination="A1E-cs-q8E" eventType="touchUpInside" id="t4d-sb-ypv"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fbt-TF-z7U" firstAttribute="centerX" secondItem="vBC-8x-yRN" secondAttribute="centerX" id="KJR-gK-4gl"/>
-                            <constraint firstItem="Stw-bA-gXV" firstAttribute="bottom" secondItem="vBC-8x-yRN" secondAttribute="bottom" constant="50" id="Rmd-sZ-pDt"/>
                             <constraint firstItem="fbt-TF-z7U" firstAttribute="centerY" secondItem="OVX-LA-RMF" secondAttribute="centerY" constant="-27" id="cGn-Mi-wTF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Stw-bA-gXV" secondAttribute="trailing" constant="12" id="hLW-Z0-cMV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
                     </view>
@@ -57,7 +42,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
-                        <outlet property="buttonScrollToBottom" destination="Stw-bA-gXV" id="u7H-cM-6TS"/>
                         <segue destination="hUy-gX-yhf" kind="modal" identifier="Channel Actions" modalPresentationStyle="formSheet" id="on8-Tf-r4t"/>
                     </connections>
                 </viewController>
@@ -362,7 +346,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Arrow Down" width="25" height="25"/>
         <image name="audioLarge" width="100" height="100"/>
     </resources>
 </document>

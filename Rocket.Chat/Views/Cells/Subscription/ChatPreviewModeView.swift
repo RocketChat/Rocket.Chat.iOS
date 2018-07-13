@@ -41,9 +41,11 @@ final class ChatPreviewModeView: UIView {
         buttonJoin.setTitle("", for: .normal)
 
         SubscriptionManager.join(room: subscription.rid) { [weak self] _ in
-            self?.activityIndicator.stopAnimating()
-            self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
-            self?.delegate?.userDidJoinedSubscription()
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
+                self?.delegate?.userDidJoinedSubscription()
+            }
         }
     }
 

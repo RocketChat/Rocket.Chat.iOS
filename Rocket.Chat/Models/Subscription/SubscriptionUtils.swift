@@ -15,10 +15,10 @@ extension Subscription {
         }
 
         if type != .directMessage {
-            return settings.allowSpecialCharsOnRoomNames && fname != "" ? fname : name
+            return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
         }
 
-        return settings.useUserRealName ? fname : name
+        return settings.useUserRealName && !fname.isEmpty ? fname : name
     }
 
     func isValid() -> Bool {
@@ -30,35 +30,52 @@ extension Subscription {
     }
 
     func fetchRoomIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
+        guard let identifier = self.identifier else { return }
+
         if type == .channel {
-            SubscriptionManager.getRoom(byName: name, completion: { [weak self] (response) in
+            SubscriptionManager.getRoom(byName: name, completion: { (response) in
                 guard !response.isError() else { return }
+                guard let rid = response.result["result"]["_id"].string else { return }
 
                 let result = response.result["result"]
-                Realm.executeOnMainThread({ realm in
-                    if let obj = self {
+                Realm.execute({ realm in
+                    if let obj = Subscription.find(withIdentifier: identifier) {
+                        obj.rid = rid
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
                     }
-                })
-
-                guard let strongSelf = self else { return }
-                completion(strongSelf)
-            })
-        } else if type == .directMessage {
-            SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
-                guard !response.isError() else { return }
-
-                let rid = response.result["result"]["rid"].stringValue
-                Realm.executeOnMainThread({ realm in
-                    if let obj = self {
-                        obj.rid = rid
-                        realm.add(obj, update: true)
+                }, completion: {
+                    if let subscription = Subscription.find(rid: rid) {
+                        completion(subscription)
                     }
                 })
+            })
+        } else if type == .directMessage {
+            SubscriptionManager.createDirectMessage(name, completion: { (response) in
+                guard !response.isError() else { return }
+                guard let rid = response.result["result"]["rid"].string else { return }
 
-                guard let strongSelf = self else { return }
-                completion(strongSelf)
+                Realm.execute({ realm in
+                    // We need to check for the existence of one Subscription
+                    // here because another real time response may have
+                    // already included this object into the database
+                    // before this block is executed.
+                    if let existingObject = Subscription.find(rid: rid, realm: realm) {
+                        if let obj = Subscription.find(withIdentifier: identifier) {
+                            realm.add(existingObject, update: true)
+                            realm.delete(obj)
+                        }
+                    } else {
+                        if let obj = Subscription.find(withIdentifier: identifier) {
+                            obj.rid = rid
+                            realm.add(obj, update: true)
+                        }
+                    }
+                }, completion: {
+                    if let subscription = Subscription.find(rid: rid) {
+                        completion(subscription)
+                    }
+                })
             })
         }
     }

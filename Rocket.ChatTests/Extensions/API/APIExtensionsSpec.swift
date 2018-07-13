@@ -25,12 +25,21 @@ class APIExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(api?.authToken, "auth-token")
         XCTAssertEqual(api?.version, Version(1, 2, 3))
 
-        auth.serverVersion = "invalid"
+        try? realm.write {
+            auth.serverVersion = "invalid"
+            realm.add(auth, update: true)
+        }
+
         api = API.current(realm: realm)
         XCTAssertEqual(api?.version, Version.zero)
 
         auth = Auth()
         api = API.current(realm: realm)
+
+        XCTAssertNotNil(api)
+
+        auth = Auth()
+        api = API.current(realm: nil)
 
         XCTAssertNil(api)
     }

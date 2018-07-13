@@ -16,9 +16,20 @@ extension Subscription: ModelMappeable {
             self.identifier = values["_id"].stringValue
         }
 
-        self.rid = values["rid"].stringValue
+        if let rid = values["rid"].string {
+            self.rid = rid
+        }
+
         self.name = values["name"].stringValue
-        self.fname = values["fname"].stringValue
+
+        if let fname = values["fname"].string {
+            self.fname = fname
+        } else {
+            if self.fname.isEmpty {
+                self.fname = self.name
+            }
+        }
+
         self.unread = values["unread"].int ?? 0
         self.userMentions = values["userMentions"].int ?? 0
         self.groupMentions = values["groupMentions"].int ?? 0

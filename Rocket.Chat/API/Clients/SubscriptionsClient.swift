@@ -56,7 +56,8 @@ struct SubscriptionsClient: APIClient {
                 realm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
-                    func queueSubscriptionForUpdate(_ subscription: Subscription) {
+                    func queueSubscriptionForUpdate(_ object: JSON) {
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         subscription.auth = auth
                         subscriptions.append(subscription)
                     }
@@ -64,8 +65,11 @@ struct SubscriptionsClient: APIClient {
                     resource.list?.forEach(queueSubscriptionForUpdate)
                     resource.update?.forEach(queueSubscriptionForUpdate)
 
-                    resource.remove?.forEach { subscription in
-                        subscription.auth = nil
+                    resource.remove?.forEach { object in
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (obj) in
+                            obj?.auth = nil
+                        })
+
                         subscriptions.append(subscription)
                     }
 
