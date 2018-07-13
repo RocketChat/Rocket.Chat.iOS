@@ -373,7 +373,6 @@ extension SubscriptionsViewController: UITableViewDataSource {
         guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
 
         if subscription.identifier == selectedSubscription.identifier {
-            print("willDisplay selected cell")
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
