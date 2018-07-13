@@ -99,10 +99,11 @@ extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
             UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Write message"),
+            UIKeyCommand(input: "p", modifierFlags: [.command], action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Toggle preferences"),
             UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutSearchSubscriptions(_:)), discoverabilityTitle: "Search rooms"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Select room 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Create new room"),
-            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
+            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Toggle server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Select server 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add new server")
         ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
@@ -117,6 +118,10 @@ extension MainSplitViewController {
         subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
             self?.chatViewController?.keyboardFrame?.updateFrame()
         }
+    }
+
+    @objc func shortcutTogglePreferences(_ command: UIKeyCommand) {
+        subscriptionsViewController?.togglePreferences()
     }
 
     @objc func shortcutSearchSubscriptions(_ command: UIKeyCommand) {
