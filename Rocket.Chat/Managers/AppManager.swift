@@ -69,6 +69,14 @@ struct AppManager {
         return chatController.subscription?.rid
     }
 
+    static var isOnAuthFlow: Bool {
+        guard !(UIApplication.shared.delegate?.window??.rootViewController is MainSplitViewController) else {
+            return false
+        }
+
+        return true
+    }
+
     // MARK: Localization
 
     private static let kAppLanguagesKey = "AppleLanguages"

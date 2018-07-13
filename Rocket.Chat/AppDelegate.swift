@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.removeAllDeliveredNotifications()
 
         if AuthManager.isAuthenticated() != nil {
-            if !SocketManager.isConnected() {
+            if !SocketManager.isConnected() && !(AppManager.isOnAuthFlow) {
                 SocketManager.reconnect()
             }
         }
