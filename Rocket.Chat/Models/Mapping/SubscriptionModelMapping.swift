@@ -26,7 +26,7 @@ extension Subscription: ModelMappeable {
             self.fname = fname
         } else {
             if self.fname.isEmpty {
-                self.fname = name
+                self.fname = self.name
             }
         }
 
