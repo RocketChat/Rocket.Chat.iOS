@@ -367,6 +367,17 @@ extension SubscriptionsViewController: UITableViewDataSource {
         return viewModel.numberOfRowsInSection(section)
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SubscriptionCellProtocol else { return }
+        guard let subscription = cell.subscription else { return }
+        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
+
+        if subscription.identifier == selectedSubscription.identifier {
+            print("willDisplay selected cell")
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
 
@@ -422,6 +433,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
 
         searchController?.searchBar.resignFirstResponder()
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
 
         // When using iPads, we override the detail controller creating
         // a new instance.
