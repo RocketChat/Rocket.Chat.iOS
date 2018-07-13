@@ -98,11 +98,16 @@ extension MainSplitViewController {
 extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand.init(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:))),
-            UIKeyCommand.init(input: "f", modifierFlags: [.command], action: #selector(shortcutSearchSubscriptions(_:)))
-        ] + ((0...9).map({ "\($0)" }) + ["n"]).map { (input: String) -> UIKeyCommand in
+            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Write message"),
+            UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutSearchSubscriptions(_:)), discoverabilityTitle: "Search rooms"),
+            UIKeyCommand(input: "1...9", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Select room 1...9"),
+            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Create new room"),
+            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
+            UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Select server 1...9"),
+            UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add new server")
+        ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
                 UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
-        } + ((0...9).map({ "\($0)" }) + ["`", "n"]).map { (input: String) -> UIKeyCommand in
+        } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
             UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
         }
     }
