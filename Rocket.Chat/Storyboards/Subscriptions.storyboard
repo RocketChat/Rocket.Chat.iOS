@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -307,7 +307,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Icon New Channel" id="84L-Iz-PSG">
                             <connections>
-                                <segue destination="Yv3-wP-OPQ" kind="presentation" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
+                                <segue destination="Yv3-wP-OPQ" kind="presentation" identifier="toNewRoom" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -333,7 +333,6 @@
                 <navigationController id="M6P-WE-AWB" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4dq-gt-amv">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

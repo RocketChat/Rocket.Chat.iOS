@@ -99,11 +99,11 @@ extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
             UIKeyCommand.init(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:))),
-            UIKeyCommand.init(input: "\t", modifierFlags: .shift, action: #selector(shortcutFocusOnSearch(_:))),
-            UIKeyCommand.init(input: "\t", modifierFlags: .alternate, action: #selector(shortcutNextServer(_:))),
-            UIKeyCommand.init(input: "\t", modifierFlags: [.alternate, .shift], action: #selector(shortcutPreviousServer(_:))),
-        ] + ((0...9).map({ "\($0)" }) + ["`", "n"]).map {
-            UIKeyCommand(input: $0, modifierFlags: .command, action: #selector(shortcutSelectServer(_:)))
+            UIKeyCommand.init(input: "f", modifierFlags: [.command], action: #selector(shortcutSearchSubscriptions(_:)))
+        ] + ((0...9).map({ "\($0)" }) + ["n"]).map { (input: String) -> UIKeyCommand in
+                UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
+        } + ((0...9).map({ "\($0)" }) + ["`", "n"]).map { (input: String) -> UIKeyCommand in
+            UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
         }
     }
 
@@ -114,16 +114,8 @@ extension MainSplitViewController {
         }
     }
 
-    @objc func shortcutFocusOnSearch(_ command: UIKeyCommand) {
+    @objc func shortcutSearchSubscriptions(_ command: UIKeyCommand) {
         subscriptionsViewController?.searchBar?.becomeFirstResponder()
-    }
-
-    @objc func shortcutNextServer(_ command: UIKeyCommand) {
-        subscriptionsViewController?.openServersList()
-    }
-
-    @objc func shortcutPreviousServer(_ command: UIKeyCommand) {
-        subscriptionsViewController?.closeServersList()
     }
 
     @objc func shortcutSelectServer(_ command: UIKeyCommand) {
@@ -137,7 +129,7 @@ extension MainSplitViewController {
         case "n":
             AppManager.addServer(serverUrl: "")
         default:
-            guard let position = Int(input) else {
+            guard let position = Int(input), position > 0 else {
                 break
             }
 
@@ -148,6 +140,23 @@ extension MainSplitViewController {
             } else {
                 subscriptionsViewController?.openServersList()
             }
+        }
+    }
+
+    @objc func shortcutSelectRoom(_ command: UIKeyCommand) {
+        guard let viewController = subscriptionsViewController, let input = command.input else {
+            return
+        }
+
+        switch input {
+        case "n":
+            viewController.performSegue(withIdentifier: "toNewRoom", sender: nil)
+        default:
+            guard let position = Int(input), position > 0 else {
+                break
+            }
+
+            viewController.selectRowAt(position - 1)
         }
     }
 }

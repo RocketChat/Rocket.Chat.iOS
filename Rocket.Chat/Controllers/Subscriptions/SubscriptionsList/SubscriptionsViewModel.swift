@@ -137,6 +137,23 @@ extension SubscriptionsViewModel {
         return numberOfRows > 0 && !title.isEmpty ? 55 : 0
     }
 
+    func indexPathForAbsoluteIndex(_ index: Int) -> IndexPath? {
+        var count = 0
+        let sections = (0..<numberOfSections).map({
+            (0..<numberOfRowsInSection($0))
+        }).enumerated()
+
+        for (section, rows) in sections {
+            if index > count + rows.count - 1 {
+                count += rows.count
+            } else {
+                return IndexPath(row: index - count, section: section)
+            }
+        }
+
+        return nil
+    }
+
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }

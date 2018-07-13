@@ -393,6 +393,18 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        onSelectRowAt(indexPath)
+    }
+
+    func selectRowAt(_ index: Int) {
+        guard let indexPath = viewModel.indexPathForAbsoluteIndex(index) else {
+            return
+        }
+
+        onSelectRowAt(indexPath)
+    }
+
+    func onSelectRowAt(_ indexPath: IndexPath) {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
 
         searchController?.searchBar.resignFirstResponder()
