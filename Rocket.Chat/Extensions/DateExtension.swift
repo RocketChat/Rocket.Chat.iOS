@@ -58,9 +58,7 @@ extension Date {
     }
 
     func sameDayAs(_ otherDate: Date) -> Bool {
-        return day == otherDate.day &&
-            month == otherDate.month &&
-            year == otherDate.year
+        return Calendar.current.isDate(otherDate, inSameDayAs: self)
     }
 
 }

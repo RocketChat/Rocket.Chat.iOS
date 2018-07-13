@@ -60,7 +60,7 @@ class ChannelActionsViewController: BaseViewController {
                 ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: title(for: "files"), action: showFilesList),
                 shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList) : nil,
                 ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: title(for: "starred"), action: showStarredList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Star"), title: title(for: "starred"), action: showStarredList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList)
             ], [
                 ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: title(for: "share"), detail: false, action: shareRoom)
@@ -148,7 +148,9 @@ extension ChannelActionsViewController {
                 subscription.updateFavorite(!subscription.favorite)
             }
 
-            self.updateButtonFavoriteImage()
+            DispatchQueue.main.async {
+                self.updateButtonFavoriteImage()
+            }
         }
 
         self.subscription?.updateFavorite(!subscription.favorite)

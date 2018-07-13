@@ -82,10 +82,15 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformation() {
         guard let subscription = self.subscription else { return }
+        var user: User?
 
-        updateStatus(subscription: subscription)
+        if subscription.type == .directMessage {
+            user = subscription.directMessageUser
+        }
 
-        if let user = subscription.directMessageUser {
+        updateStatus(subscription: subscription, user: user)
+
+        if let user = user {
             avatarView.subscription = nil
             avatarView.user = user
         } else {
@@ -94,10 +99,7 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-
-        if AuthSettingsManager.settings?.storeLastMessage ?? true {
-            labelLastMessage.text = subscription.roomLastMessageText
-        }
+        labelLastMessage.text = subscription.roomLastMessageText
 
         let nameFontSize = labelName.font.pointSize
         let lastMessageFontSize = labelLastMessage.font.pointSize
@@ -138,7 +140,8 @@ final class SubscriptionCell: UITableViewCell {
     private func setDateColor() {
         guard
             let theme = theme,
-            let subscription = subscription
+            let subscription = subscription,
+            !subscription.isInvalidated
         else {
             return
         }
@@ -163,12 +166,12 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    fileprivate func updateStatus(subscription: Subscription) {
+    fileprivate func updateStatus(subscription: Subscription, user: User?) {
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
             iconRoom.isHidden = true
 
-            if let user = subscription.directMessageUser {
+            if let user = user {
                 userStatus = user.status
             }
         } else {
@@ -196,24 +199,6 @@ final class SubscriptionCell: UITableViewCell {
 
         return RCDateFormatter.date(date, dateStyle: .short)
     }
-
-    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
-        guard
-            let lastMessageText = subscription.roomLastMessageText,
-            let lastMessageDate = subscription.roomLastMessageDate
-        else {
-            return false
-        }
-
-        let isNameDifferent = labelName.text != subscription.displayName()
-        let isLastMessageDifferent = labelLastMessage.text != lastMessageText
-        let isDateDifferent = labelDate.text != dateFormatted(date: lastMessageDate)
-        let isStatusDifferent = userStatus != subscription.otherUserStatus
-        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
-
-        return isNameDifferent || isLastMessageDifferent || isDateDifferent || isStatusDifferent || isUnreadDifferent
-    }
-
 }
 
 extension SubscriptionCell {
@@ -258,6 +243,7 @@ extension SubscriptionCell {
 extension SubscriptionCell {
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = theme else { return }
 
         labelName.textColor = theme.titleText

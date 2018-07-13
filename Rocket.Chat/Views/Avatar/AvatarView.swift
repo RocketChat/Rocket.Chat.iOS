@@ -19,9 +19,8 @@ final class AvatarView: UIView {
                 ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
                     guard error == nil else { return }
 
-                    self?.labelInitials.text = ""
+                    self?.labelInitials.text = nil
                     self?.backgroundColor = UIColor.clear
-                    self?.superview?.setNeedsLayout()
                 }
             }
         }
@@ -29,19 +28,25 @@ final class AvatarView: UIView {
 
     var avatarURL: URL? {
         didSet {
-            updateAvatar()
+            if avatarURL != nil {
+                updateAvatar()
+            }
         }
     }
 
     var subscription: Subscription? {
         didSet {
-            updateAvatar()
+            if subscription != nil {
+                updateAvatar()
+            }
         }
     }
 
     var user: User? {
         didSet {
-            updateAvatar()
+            if user != nil {
+                updateAvatar()
+            }
         }
     }
 
