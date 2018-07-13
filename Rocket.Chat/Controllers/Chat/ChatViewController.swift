@@ -201,10 +201,12 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         navigationController?.setNavigationBarHidden(false, animated: animated)
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
+        chatTitleView?.state = SocketManager.sharedInstance.state
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -1241,6 +1243,10 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidChangeState(state: SocketConnectionState) {
         Log.debug("[ChatViewController] socketDidChangeState: \(state)")
         chatTitleView?.state = state
+
+        if state == .connected {
+            loadMoreMessagesFrom(date: nil, loadRemoteHistory: true)
+        }
     }
 
 }

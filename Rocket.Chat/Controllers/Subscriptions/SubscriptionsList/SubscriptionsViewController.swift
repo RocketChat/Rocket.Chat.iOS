@@ -115,6 +115,7 @@ final class SubscriptionsViewController: BaseViewController {
 
         viewModel.buildSections()
         tableView.reloadData()
+        titleView?.state = SocketManager.sharedInstance.state
     }
 
     override func viewDidDisappear(_ animated: Bool) {
