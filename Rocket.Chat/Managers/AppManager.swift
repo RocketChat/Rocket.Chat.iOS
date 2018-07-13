@@ -134,8 +134,9 @@ extension AppManager {
 
         if index != DatabaseManager.selectedIndex {
             AppManager.initialRoomId = roomId
-            changeSelectedServer(index: index)
         }
+
+        changeSelectedServer(index: index)
 
         return true
     }
