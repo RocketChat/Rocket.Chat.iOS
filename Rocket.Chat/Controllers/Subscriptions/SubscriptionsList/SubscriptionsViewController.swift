@@ -488,14 +488,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
         onSelectRowAt(indexPath)
     }
 
-    func selectRowAt(_ index: Int) {
-        guard let indexPath = viewModel.indexPathForAbsoluteIndex(index) else {
-            return
-        }
-
-        onSelectRowAt(indexPath)
-    }
-
     func onSelectRowAt(_ indexPath: IndexPath) {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
 
@@ -606,6 +598,37 @@ extension SubscriptionsViewController {
     func closePreferences() {
         if let preferencesController = presentedViewController as? PreferencesNavigationController {
             preferencesController.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: Room Selection Helpers
+
+extension SubscriptionsViewController {
+    func selectRoomAt(_ index: Int) {
+        guard
+            let indexPath = viewModel.indexPathForAbsoluteIndex(index),
+            indexPath.row >= 0 && indexPath.section >= 0
+        else {
+            return
+        }
+
+        onSelectRowAt(indexPath)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
+    func selectNextRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) + 1)
+        }
+    }
+
+    func selectPreviousRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) - 1)
         }
     }
 }

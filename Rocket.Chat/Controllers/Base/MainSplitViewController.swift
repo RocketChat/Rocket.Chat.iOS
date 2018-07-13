@@ -102,6 +102,8 @@ extension MainSplitViewController {
             UIKeyCommand(input: "p", modifierFlags: [.command], action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
             UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Room search"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
+            UIKeyCommand(input: "]", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
+            UIKeyCommand(input: "[", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
             UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
@@ -165,12 +167,16 @@ extension MainSplitViewController {
         switch input {
         case "n":
             viewController.performSegue(withIdentifier: "toNewRoom", sender: nil)
+        case "]":
+            viewController.selectNextRoom()
+        case "[":
+            viewController.selectPreviousRoom()
         default:
             guard let position = Int(input), position > 0 else {
                 break
             }
 
-            viewController.selectRowAt(position - 1)
+            viewController.selectRoomAt(position - 1)
         }
     }
 }

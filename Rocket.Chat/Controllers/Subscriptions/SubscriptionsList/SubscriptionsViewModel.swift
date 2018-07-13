@@ -134,6 +134,12 @@ extension SubscriptionsViewModel {
         return numberOfRows > 0 && !title.isEmpty ? 55 : 0
     }
 
+    func absoluteIndexForIndexPath(_ indexPath: IndexPath) -> Int {
+        return (0..<indexPath.section).reduce(0, { index, section in
+            return index + numberOfRowsInSection(section)
+        }) + indexPath.row
+    }
+
     func indexPathForAbsoluteIndex(_ index: Int) -> IndexPath? {
         var count = 0
         let sections = (0..<numberOfSections).map({
