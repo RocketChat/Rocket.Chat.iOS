@@ -118,7 +118,7 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             if let msgId = response.result["fields"]["args"][0]["_id"].string {
-                Realm.executeOnMainThread(realm: currentRealm, { realm in
+                currentRealm?.execute({ realm in
                     guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
                     realm.delete(message)
                     completion(msgId)
