@@ -28,9 +28,13 @@ struct ShortcutsManager {
 
     private static var shortcuts: [ShortcutItem]? {
         let servers = DatabaseManager.servers?.enumerated().compactMap({ index, server in
-            ShortcutItem(name: server[ServerPersistKeys.serverName] ?? "",
-                         type: .server(url: server[ServerPersistKeys.serverURL] ?? "",
-                                       index: index))
+            ShortcutItem(
+                name: server[ServerPersistKeys.serverName] ?? "",
+                type: .server(
+                    url: server[ServerPersistKeys.serverURL] ?? "",
+                    index: index
+                )
+            )
         })
 
         guard
@@ -53,11 +57,16 @@ struct ShortcutsManager {
         }
 
         // Rooms
-        let rooms: [ShortcutItem]? = Subscription.all(onlyJoined: true)?.sortedByLastSeen().compactMap({ room in
-            ShortcutItem(name: room.displayName(),
-                         type: .room(roomId: room.rid,
-                                     server: server.name,
-                                     serverURL: currentServerURL))
+        let subscriptions = Subscription.all()?.sortedByLastSeen()[..<4]
+        let rooms: [ShortcutItem]? = subscriptions?.compactMap({ room in
+            ShortcutItem(
+                name: room.displayName(),
+                type: .room(
+                    roomId: room.rid,
+                    server: server.name,
+                    serverURL: currentServerURL
+                )
+            )
         })
 
         return rooms
@@ -80,8 +89,7 @@ struct ShortcutsManager {
                 type = "\(serverURL)-\(shortcut.name)"
                 title = shortcut.name
                 subtitle = server
-                userInfo = [roomIdKey: roomId,
-                            serverUrlKey: serverURL]
+                userInfo = [roomIdKey: roomId, serverUrlKey: serverURL]
             }
 
             return UIMutableApplicationShortcutItem(type: type, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo: userInfo)
