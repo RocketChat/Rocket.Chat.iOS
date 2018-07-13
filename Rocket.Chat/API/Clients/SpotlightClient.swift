@@ -32,6 +32,17 @@ struct SpotlightClient: APIClient {
                                 subscription.map(object, realm: realm)
                                 subscription.mapRoom(object, realm: realm)
                                 subscriptions.append(subscription)
+                            } else {
+                                let subscription = Subscription()
+                                subscription.identifier = String.random()
+                                subscription.rid = roomIdentifier
+                                subscription.name = object["name"].string ?? ""
+
+                                if let typeRaw = object["t"].string, let type = SubscriptionType(rawValue: typeRaw) {
+                                    subscription.type = type
+                                }
+
+                                subscriptions.append(subscription)
                             }
                         }
                     }
