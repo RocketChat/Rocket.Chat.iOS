@@ -207,10 +207,6 @@ final class ChatViewController: SLKTextViewController {
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
         chatTitleView?.state = SocketManager.sharedInstance.state
-
-        dataController.invalidateLayout(for: nil)
-        collectionView?.setNeedsLayout()
-        collectionView?.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -218,6 +214,10 @@ final class ChatViewController: SLKTextViewController {
 
         let screenName = String(describing: ChatViewController.self)
         AnalyticsManager.log(event: .screenView(screenName: screenName))
+
+        dataController.invalidateLayout(for: nil)
+        collectionView?.setNeedsLayout()
+        collectionView?.reloadData()
     }
 
     override func viewWillLayoutSubviews() {
@@ -226,11 +226,17 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        dataController.invalidateLayout(for: nil)
+        let viewingIndexPath = collectionView?.indexPathsForVisibleItems.first
 
-        coordinator.animate(alongsideTransition: { _ in
-            self.collectionView?.reloadData()
-            self.tableView?.reloadData()
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.dataController.invalidateLayout(for: nil)
+
+            self?.collectionView?.reloadData()
+            self?.tableView?.reloadData()
+        }, completion: { [weak self] _ in
+            if let indexPath = viewingIndexPath {
+                self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
+            }
         })
     }
 
@@ -1087,7 +1093,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             return .zero
         }
 
-        var fullWidth = collectionView.bounds.size.width
+        var fullWidth = collectionView.frame.size.width
 
         if #available(iOS 11, *) {
             fullWidth -= collectionView.safeAreaInsets.right + collectionView.safeAreaInsets.left
