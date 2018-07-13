@@ -68,11 +68,19 @@ final class SubscriptionsViewController: BaseViewController {
             if self?.viewModel.numberOfSections ?? 2 > 1 {
                 tableView.reloadData()
             } else {
-                tableView.beginUpdates()
-                tableView.deleteRows(at: changes.deletions, with: .automatic)
-                tableView.insertRows(at: changes.insertions, with: .automatic)
-                tableView.reloadRows(at: changes.modifications, with: .none)
-                tableView.endUpdates()
+                if #available(iOS 11.0, *) {
+                    tableView.performBatchUpdates({
+                        tableView.deleteRows(at: changes.deletions, with: .automatic)
+                        tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
+                    }, completion: nil)
+                } else {
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: changes.deletions, with: .automatic)
+                    tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
+                    tableView.endUpdates()
+                }
             }
         }
 
