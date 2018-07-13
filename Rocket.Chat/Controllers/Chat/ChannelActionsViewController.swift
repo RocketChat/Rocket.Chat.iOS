@@ -29,8 +29,7 @@ class ChannelActionsViewController: BaseViewController {
         didSet {
             guard let subscription = self.subscription else { return }
 
-            let shouldListMentions = subscription.type != .directMessage
-            let shouldListMembers = subscription.type != .directMessage
+            let isDirectMessage = subscription.type == .directMessage
 
             var header: [Any?]? = nil
 
@@ -59,8 +58,8 @@ class ChannelActionsViewController: BaseViewController {
 
             let data = [header, [
                 ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: title(for: "files"), action: showFilesList),
-                shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList) : nil,
-                shouldListMembers ? ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList) : nil,
+                isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList),
+                isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star"), title: title(for: "starred"), action: showStarredList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList)
             ], [
