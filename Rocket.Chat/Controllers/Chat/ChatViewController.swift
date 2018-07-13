@@ -218,6 +218,10 @@ final class ChatViewController: SLKTextViewController {
 
         let screenName = String(describing: ChatViewController.self)
         AnalyticsManager.log(event: .screenView(screenName: screenName))
+
+        dataController.invalidateLayout(for: nil)
+        collectionView?.setNeedsLayout()
+        collectionView?.reloadData()
     }
 
     override func viewWillLayoutSubviews() {
@@ -226,10 +230,18 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        dataController.invalidateLayout(for: nil)
-        coordinator.animate(alongsideTransition: { _ in
-            self.collectionView?.reloadData()
-            self.tableView?.reloadData()
+        let visibleIndexPaths = collectionView?.indexPathsForVisibleItems ?? []
+        let topIndexPath = visibleIndexPaths.sorted().first
+
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.dataController.invalidateLayout(for: nil)
+
+            self?.collectionView?.reloadData()
+            self?.tableView?.reloadData()
+        }, completion: { [weak self] _ in
+            if let indexPath = topIndexPath {
+                self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: false)
+            }
         })
     }
 
@@ -555,6 +567,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func emptySubscriptionState() {
+        dataController.invalidateLayout(for: nil)
         clearListData()
         updateJoinedView()
 
@@ -1085,7 +1098,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             return .zero
         }
 
-        var fullWidth = collectionView.bounds.size.width
+        var fullWidth = collectionView.frame.size.width
 
         if #available(iOS 11, *) {
             fullWidth -= collectionView.safeAreaInsets.right + collectionView.safeAreaInsets.left
@@ -1164,7 +1177,6 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         })
 
         self.subscription = subscription
-
         updateJoinedView()
     }
 

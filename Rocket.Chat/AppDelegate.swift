@@ -113,9 +113,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Shortcuts
 
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        if let userInfo = shortcutItem.userInfo,
-            let serverIndex = userInfo[ShortcutsManager.serverIndex] as? Int {
-            ShortcutsManager.selectServer(at: serverIndex)
+        if let userInfo = shortcutItem.userInfo {
+            if let index = userInfo[ShortcutsManager.serverIndexKey] as? Int {
+                AppManager.changeSelectedServer(index: index)
+            } else if let roomId = userInfo[ShortcutsManager.roomIdKey] as? String,
+                let serverURL = userInfo[ShortcutsManager.serverUrlKey] as? String {
+                AppManager.changeToRoom(roomId, on: serverURL)
+            } else {
+                completionHandler(false)
+            }
+
             completionHandler(true)
         } else if shortcutItem.type == ShortcutsManager.addServerActionIdentifier, AuthManager.isAuthenticated() != nil {
             WindowManager.open(
