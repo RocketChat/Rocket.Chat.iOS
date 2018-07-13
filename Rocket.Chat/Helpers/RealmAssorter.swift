@@ -43,7 +43,7 @@ class RealmAssorter<Object: RealmSwift.Object> {
     }
 
     func invalidate() {
-        tokens.map({ $0.invalidate() })
+        tokens.forEach({ $0.invalidate() })
         tokens = []
     }
 

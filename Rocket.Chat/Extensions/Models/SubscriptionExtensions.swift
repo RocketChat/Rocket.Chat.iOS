@@ -99,6 +99,10 @@ extension Results where Element == Subscription {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
 
+    func sortedByLastSeen() -> Results<Subscription> {
+        return sorted(byKeyPath: "lastSeen", ascending: false)
+    }
+
     func sortedByRoomUpdatedAt() -> Results<Subscription> {
         return sorted(byKeyPath: "roomUpdatedAt", ascending: false)
     }
