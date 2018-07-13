@@ -79,6 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func applicationWillTerminate(_ application: UIApplication) {
+        SubscriptionManager.updateUnreadApplicationBadge()
+        ShortcutsManager.sync()
+    }
+
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if let url = userActivity.webpageURL, AppManager.handleDeepLink(url) != nil {
             return true
