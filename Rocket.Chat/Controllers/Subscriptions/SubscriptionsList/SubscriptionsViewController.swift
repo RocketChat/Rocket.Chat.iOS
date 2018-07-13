@@ -59,20 +59,31 @@ final class SubscriptionsViewController: BaseViewController {
                 return
             }
 
+            // Update back button title with the number of unreads
             self?.updateBackButton()
 
+            // If there's no changes, let's not proceed.
             if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
                 return
             }
 
+            // Update TableView data if there's any change in the data
             if self?.viewModel.numberOfSections ?? 2 > 1 {
                 tableView.reloadData()
             } else {
-                tableView.beginUpdates()
-                tableView.deleteRows(at: changes.deletions, with: .automatic)
-                tableView.insertRows(at: changes.insertions, with: .automatic)
-                tableView.reloadRows(at: changes.modifications, with: .none)
-                tableView.endUpdates()
+                if #available(iOS 11.0, *) {
+                    tableView.performBatchUpdates({
+                        tableView.deleteRows(at: changes.deletions, with: .automatic)
+                        tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
+                    }, completion: nil)
+                } else {
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: changes.deletions, with: .automatic)
+                    tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
+                    tableView.endUpdates()
+                }
             }
         }
 
