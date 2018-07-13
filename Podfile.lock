@@ -22,12 +22,6 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - Instabug (7.13):
-    - Instabug/Instabug (= 7.13)
-    - Instabug/InstabugCore (= 7.13)
-  - Instabug/Instabug (7.13):
-    - Instabug/InstabugCore
-  - Instabug/InstabugCore (7.13)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
   - nanopb (0.3.8):
@@ -61,7 +55,6 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
-  - Instabug
   - MBProgressHUD (~> 1.1.0)
   - MobilePlayer (from `https://github.com/RocketChat/RCiOSMobilePlayer`)
   - Nuke (~> 7.3)
@@ -89,7 +82,6 @@ SPEC REPOS:
     - FLAnimatedImage
     - FLEX
     - GoogleToolboxForMac
-    - Instabug
     - MBProgressHUD
     - nanopb
     - Nuke
@@ -138,7 +130,6 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  Instabug: 81ccd646e7fd2e3a243c5e61ae6af69c72328373
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -156,6 +147,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 037b9f601d7dd32f9106666072b2674def34b80c
+PODFILE CHECKSUM: e30b11fd34e7043eec6c9d2d0550e6e147670e19
 
 COCOAPODS: 1.5.3
