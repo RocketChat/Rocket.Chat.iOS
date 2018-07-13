@@ -207,6 +207,10 @@ final class ChatViewController: SLKTextViewController {
         ThemeManager.addObserver(navigationController?.navigationBar)
         textInputbar.applyTheme()
         chatTitleView?.state = SocketManager.sharedInstance.state
+
+        dataController.invalidateLayout(for: nil)
+        collectionView?.setNeedsLayout()
+        collectionView?.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -223,6 +227,7 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         dataController.invalidateLayout(for: nil)
+
         coordinator.animate(alongsideTransition: { _ in
             self.collectionView?.reloadData()
             self.tableView?.reloadData()
@@ -551,6 +556,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func emptySubscriptionState() {
+        dataController.invalidateLayout(for: nil)
         clearListData()
         updateJoinedView()
 
