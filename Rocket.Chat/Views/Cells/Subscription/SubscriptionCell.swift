@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class SubscriptionCell: UITableViewCell {
+protocol SubscriptionCellProtocol {
+    var subscription: Subscription? { get set }
+}
+
+final class SubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
 
     static let identifier = "CellSubscription"
 
