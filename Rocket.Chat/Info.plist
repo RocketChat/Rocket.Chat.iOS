@@ -276,13 +276,13 @@
         </dict>
     </array>
 	<key>NSCameraUsageDescription</key>
-	<string>To take photos and record videos</string>
+	<string>NSCameraUsageDescription</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>To record and upload audio and videos</string>
+	<string>NSMicrophoneUsageDescription</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To save images to your library</string>
+	<string>NSPhotoLibraryAddUsageDescription</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To upload photos from your library</string>
+	<string>NSPhotoLibraryUsageDescription</string>
 	<key>RC_MIN_SERVER_VERSION</key>
 	<string>0.54.0</string>
 	<key>UIBackgroundModes</key>
