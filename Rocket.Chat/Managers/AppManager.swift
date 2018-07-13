@@ -139,7 +139,7 @@ extension AppManager {
     static func addServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
         SocketManager.disconnect { _, _ in }
         AppManager.initialRoomId = roomId
-        WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials))
+        WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials), viewControllerIdentifier: "ConnectServerNav")
     }
 
     static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
