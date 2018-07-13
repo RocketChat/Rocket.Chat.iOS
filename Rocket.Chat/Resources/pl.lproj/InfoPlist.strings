@@ -7,3 +7,7 @@
 */
 
 add-server-shortcut = "Dodaj Serwer";
+NSCameraUsageDescription = "Do robienia zdjęć oraz nagrywania wideo";
+NSMicrophoneUsageDescription = "Do nagrywania i wysyłania plików audio i wideo";
+NSPhotoLibraryAddUsageDescription = "Do zapisywania obrazów do Twojej biblioteki zdjęć";
+NSPhotoLibraryUsageDescription = "Do wysyłania zdjęć z Twojej biblioteki zdjęć";
