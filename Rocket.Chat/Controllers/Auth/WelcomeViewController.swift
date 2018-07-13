@@ -13,7 +13,7 @@ class WelcomeViewController: BaseViewController {
 
     internal var joinCommunitySegue = "JoinCommunity"
     internal let communityServerURL = "\nopen.rocket.chat"
-    internal let createServerURL = "https://cloud.rocket.chat"
+    internal let createServerURL = "https://cloud.rocket.chat/trial"
 
     @IBOutlet weak var welcomeLabel: UILabel! {
         didSet {

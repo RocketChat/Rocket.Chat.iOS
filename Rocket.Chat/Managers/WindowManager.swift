@@ -54,7 +54,27 @@ enum Storyboard {
 
     func instantiate(viewController: String) -> UIViewController? {
         let storyboard = instantiate()
-        return storyboard.instantiateViewController(withIdentifier: viewController)
+        let controller = storyboard.instantiateViewController(withIdentifier: viewController)
+
+        // preload view
+        _ = controller.view
+
+        switch self {
+        case let .auth(serverUrl, credentials):
+            let navigationController = (controller as? UINavigationController)
+            let controller = navigationController?.topViewController as? ConnectServerViewController
+            _ = controller?.view
+            controller?.textFieldServerURL.text = serverUrl
+
+            if serverUrl.count > 0 {
+                controller?.connect()
+                controller?.deepLinkCredentials = credentials
+            }
+        default:
+            break
+        }
+
+        return controller
     }
 }
 
