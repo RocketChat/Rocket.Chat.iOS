@@ -13,7 +13,7 @@
 "error.login.message" = "Algo errado aconteceu ao tentar fazer o login.";
 
 "error.signup.title" = "Oops!";
-"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos."; // TODO
+"error.signup.empty_input.message" = "Todos os campos precisam ser preenchidos.";
 
 "error.login_unauthorized.title" = "Oops!";
 "error.login_unauthorized.message" = "As suas credenciais foram rejeitadas! Por favor, tente novamente.";
@@ -303,6 +303,11 @@
 "chat.messages.mentions.list.title" = "Menções";
 "chat.messages.files.list.title" = "Ficheiros";
 "chat.messages.files.list.empty" = "Nenhum ficheiro encontrado";
+
+// Upload Banner
+"chat.banner.upload.uploading" = "Uploading %@"; // TODO
+"chat.banner.upload.error" = "Failed uploading %@"; // TODO
+"chat.banner.upload.retry" = "Try again"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferências";

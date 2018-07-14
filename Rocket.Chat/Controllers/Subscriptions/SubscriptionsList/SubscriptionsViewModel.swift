@@ -59,51 +59,48 @@ class SubscriptionsViewModel {
 
     func buildSections() {
         if let realm = realm {
-            assorter = RealmAssorter<Subscription>(realm: realm, results: subscriptions)
+            assorter = RealmAssorter<Subscription>(realm: realm)
             assorter?.didUpdateIndexPaths = didUpdateIndexPaths
         }
 
-        guard let assorter = assorter else {
+        guard
+            let queryBase = subscriptions,
+            let assorter = assorter
+        else {
             return
         }
 
         switch searchState {
         case .searching(let query):
-            assorter.registerSection(name: localized("subscriptions.search_results")) {
-                $0.filterBy(name: query)
-            }
+            let queryData = queryBase.filterBy(name: query)
+            assorter.registerSection(name: localized("subscriptions.search_results"), objects: queryData)
 
-            API.current()?.client(SpotlightClient.self).search(query: query) { _ in }
+            API.current()?.client(SpotlightClient.self).search(query: query) { _, _ in }
         case .notSearching:
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
-                assorter.registerSection(name: localized("subscriptions.unreads")) {
-                    $0.filter("alert == true")
-                }
+                let queryData = queryBase.filter("alert == true")
+                assorter.registerSection(name: localized("subscriptions.unreads"), objects: queryData)
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) {
-                assorter.registerSection(name: localized("subscriptions.favorites")) {
-                    $0.filter("favorite == true")
-                }
+                let queryData = queryBase.filter("favorite == true")
+                assorter.registerSection(name: localized("subscriptions.favorites"), objects: queryData)
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.type) {
-                assorter.registerSection(name: localized("subscriptions.channels")) {
-                    $0.filter("privateType == 'c'")
-                }
-                assorter.registerSection(name: localized("subscriptions.groups")) {
-                    $0.filter("privateType == 'p'")
-                }
-                assorter.registerSection(name: localized("subscriptions.direct_messages")) {
-                    $0.filter("privateType == 'd'")
-                }
+                let queryDataChannels = queryBase.filter("privateType == 'c'")
+                assorter.registerSection(name: localized("subscriptions.channels"), objects: queryDataChannels)
+
+                let queryDataGroups = queryBase.filter("privateType == 'p'")
+                assorter.registerSection(name: localized("subscriptions.groups"), objects: queryDataGroups)
+
+                let queryDataDirectMessages = queryBase.filter("privateType == 'd'")
+                assorter.registerSection(name: localized("subscriptions.direct_messages"), objects: queryDataDirectMessages)
             } else {
                 let title = assorter.numberOfSections > 0 ? localized("subscriptions.conversations") : ""
-                assorter.registerSection(name: title)
+                assorter.registerSection(name: title, objects: queryBase)
             }
         }
-
-        didRebuildSections?()
     }
 
     var didUpdateIndexPaths: IndexPathsChangesEvent?

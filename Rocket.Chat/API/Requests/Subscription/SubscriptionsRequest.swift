@@ -32,25 +32,16 @@ struct SubscriptionsRequest: APIRequest {
 }
 
 final class SubscriptionsResource: APIResource {
-    var update: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["update"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var update: [JSON]? {
+        return raw?["update"].array
     }
 
-    var remove: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["remove"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var remove: [JSON]? {
+        return raw?["remove"].array
     }
 
-    var list: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["result"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var list: [JSON]? {
+        return raw?["result"].array
     }
 
     var success: Bool? {

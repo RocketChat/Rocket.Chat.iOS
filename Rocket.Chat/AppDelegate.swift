@@ -60,20 +60,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.removeAllDeliveredNotifications()
 
         if AuthManager.isAuthenticated() != nil {
-            if !SocketManager.isConnected() {
+            if !SocketManager.isConnected() && !(AppManager.isOnAuthFlow) {
                 SocketManager.reconnect()
             }
         }
+
+        ShortcutsManager.sync()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         SubscriptionManager.updateUnreadApplicationBadge()
+        ShortcutsManager.sync()
 
         if AuthManager.isAuthenticated() != nil {
             UserManager.setUserPresence(status: .away) { (_) in
                 SocketManager.disconnect({ (_, _) in })
             }
         }
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        SubscriptionManager.updateUnreadApplicationBadge()
+        ShortcutsManager.sync()
     }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
@@ -100,5 +108,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Log.debug("Fail to register for notification: \(error)")
+    }
+
+    // MARK: Shortcuts
+
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if let userInfo = shortcutItem.userInfo {
+            if let index = userInfo[ShortcutsManager.serverIndexKey] as? Int {
+                AppManager.changeSelectedServer(index: index)
+            } else if let roomId = userInfo[ShortcutsManager.roomIdKey] as? String,
+                let serverURL = userInfo[ShortcutsManager.serverUrlKey] as? String {
+                AppManager.changeToRoom(roomId, on: serverURL)
+            } else {
+                completionHandler(false)
+            }
+
+            completionHandler(true)
+        } else if shortcutItem.type == ShortcutsManager.addServerActionIdentifier, AuthManager.isAuthenticated() != nil {
+            WindowManager.open(
+                .auth(
+                    serverUrl: "",
+                    credentials: nil
+                ), viewControllerIdentifier: ShortcutsManager.connectServerNavIdentifier
+            )
+
+            completionHandler(true)
+        } else {
+            completionHandler(false)
+        }
     }
 }

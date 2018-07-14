@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 protocol ChatMessageTextViewModelProtocol {
-    var color: UIColor { get }
+    var color: UIColor? { get }
     var title: String { get }
     var text: String { get }
     var thumbURL: URL? { get }
@@ -21,12 +21,9 @@ protocol ChatMessageTextViewModelProtocol {
 }
 
 final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
-    var color: UIColor {
-        if let color = attachment.color {
-            return UIColor.normalizeColorFromString(string: color)
-        }
-
-        return .lightGray
+    var color: UIColor? {
+        guard let color = attachment.color else { return nil }
+        return UIColor.normalizeColorFromString(string: color)
     }
 
     var title: String {
@@ -79,7 +76,7 @@ final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
 }
 
 final class ChatMessageAttachmentFieldViewModel: ChatMessageTextViewModelProtocol {
-    var color: UIColor {
+    var color: UIColor? {
         return  attachment.color != nil
             ? UIColor(hex: attachment.color)
             : UIColor.lightGray

@@ -41,9 +41,11 @@ final class ChatPreviewModeView: UIView {
         buttonJoin.setTitle("", for: .normal)
 
         SubscriptionManager.join(room: subscription.rid) { [weak self] _ in
-            self?.activityIndicator.stopAnimating()
-            self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
-            self?.delegate?.userDidJoinedSubscription()
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
+                self?.delegate?.userDidJoinedSubscription()
+            }
         }
     }
 
@@ -63,10 +65,6 @@ final class ChatPreviewModeView: UIView {
 extension ChatPreviewModeView {
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
-        labelTitle.textColor = theme.auxiliaryText
-        seperatorView.backgroundColor = theme.mutedAccent
-        buttonJoin.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1)
-        backgroundColor = theme.focusedBackground
+        buttonJoin.setTitleColor(#colorLiteral(red: 0.6814334393, green: 0.6957040429, blue: 0.7027211785, alpha: 1), for: .normal)
     }
 }

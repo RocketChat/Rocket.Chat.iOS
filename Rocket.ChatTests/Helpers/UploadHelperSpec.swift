@@ -16,10 +16,10 @@ class UploadHelperSpec: XCTestCase {
         let mimetype = "image/png"
 
         guard
-            let image = UIImage(named: "Logo"),
+            let image = UIImage(named: "logoSmall"),
             let data = UIImagePNGRepresentation(image)
         else {
-                return XCTAssertTrue(false, "File wasn't created successfuly")
+            return XCTAssertTrue(false, "File wasn't created successfuly")
         }
 
         let file = UploadHelper.file(for: data, name: name, mimeType: mimetype)
@@ -51,9 +51,10 @@ class UploadHelperSpec: XCTestCase {
 
     func testFileSize() {
         guard
-            let image = UIImage(named: "Logo"),
-            let data = UIImagePNGRepresentation(image) else {
-                return XCTAssertTrue(false, "File data isn't valid")
+            let image = UIImage(named: "logoSmall"),
+            let data = UIImagePNGRepresentation(image)
+        else {
+            return XCTAssertTrue(false, "File data isn't valid")
         }
 
         XCTAssert(UploadHelper.sizeFor(data) == (data as NSData).length, "file data is equal to data")

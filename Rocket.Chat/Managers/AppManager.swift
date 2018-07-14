@@ -69,6 +69,14 @@ struct AppManager {
         return chatController.subscription?.rid
     }
 
+    static var isOnAuthFlow: Bool {
+        guard !(UIApplication.shared.delegate?.window??.rootViewController is MainSplitViewController) else {
+            return false
+        }
+
+        return true
+    }
+
     // MARK: Localization
 
     private static let kAppLanguagesKey = "AppleLanguages"
@@ -110,6 +118,11 @@ struct AppManager {
 extension AppManager {
 
     static func changeSelectedServer(index: Int) {
+        guard index != DatabaseManager.selectedIndex else {
+            reloadApp()
+            return
+        }
+
         SocketManager.disconnect { _, _ in
             DatabaseManager.selectDatabase(at: index)
             DatabaseManager.changeDatabaseInstance(index: index)
@@ -121,6 +134,7 @@ extension AppManager {
         }
     }
 
+    @discardableResult
     static func changeToServerIfExists(serverUrl: URL, roomId: String? = nil) -> Bool {
         guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
             return false
@@ -128,18 +142,37 @@ extension AppManager {
 
         if index != DatabaseManager.selectedIndex {
             AppManager.initialRoomId = roomId
-            changeSelectedServer(index: index)
-        } else {
-            changeSelectedServer(index: index)
         }
 
+        changeSelectedServer(index: index)
+
         return true
+    }
+
+    static func changeToRoom(_ roomId: String, on serverHost: String) {
+        guard
+            let serverUrl = URL(string: serverHost),
+            let index = DatabaseManager.serverIndexForUrl(serverUrl)
+        else {
+            return
+        }
+
+        guard index == DatabaseManager.selectedIndex else {
+            changeToServerIfExists(serverUrl: serverUrl, roomId: roomId)
+            return
+        }
+
+        AppManager.initialRoomId = roomId
+        if let auth = AuthManager.isAuthenticated(),
+            let subscription = Subscription.notificationSubscription(auth: auth) {
+            AppManager.open(room: subscription)
+        }
     }
 
     static func addServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
         SocketManager.disconnect { _, _ in }
         AppManager.initialRoomId = roomId
-        WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials))
+        WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials), viewControllerIdentifier: "ConnectServerNav")
     }
 
     static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {

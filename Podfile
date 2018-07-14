@@ -47,7 +47,6 @@ def shared_pods
   pod '1PasswordExtension'
 
   # Debugging
-  pod 'Instabug', :configurations => ['Debug', 'Beta']
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end

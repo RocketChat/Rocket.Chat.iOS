@@ -43,7 +43,11 @@ final class NewRoomViewController: BaseViewController {
             footer: nil,
             cells: [
                 FormCell(
-                    cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
+                    cell: .textField(
+                        placeholder: localized("new_room.cell.channel_name.title"),
+                        icon: UIImage(named: "Cell Subscription Hashtag")?.imageWithTint(.RCDarkGray()),
+                        textLimit: 40
+                    ),
                     key: "room name",
                     defaultValue: [],
                     enabled: true
@@ -193,9 +197,9 @@ extension NewRoomViewController: FormTableViewDelegate {
             let cellRoomName = referenceOfCells["room name"] as? TextFieldTableViewCell {
 
             if value {
-                cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Hashtag")
+                cellRoomName.imgLeftIcon.image = UIImage(named: "Cell Subscription Hashtag")?.imageWithTint(.RCDarkGray())
             } else {
-                cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
+                cellRoomName.imgLeftIcon.image = UIImage(named: "Cell Subscription Lock")?.imageWithTint(.RCDarkGray())
             }
         }
     }

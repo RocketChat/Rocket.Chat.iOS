@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubscriptionCellCondensed: UITableViewCell {
+final class SubscriptionCellCondensed: UITableViewCell, SubscriptionCellProtocol {
 
     static let identifier = "CellSubscriptionCondensed"
 
@@ -19,7 +19,7 @@ final class SubscriptionCellCondensed: UITableViewCell {
     var subscription: Subscription? {
         didSet {
             guard let subscription = subscription, !subscription.isInvalidated else { return }
-            updateSubscriptionInformatin()
+            updateSubscriptionInformation()
         }
     }
 
@@ -70,7 +70,7 @@ final class SubscriptionCellCondensed: UITableViewCell {
         viewUnread.isHidden = true
     }
 
-    func updateSubscriptionInformatin() {
+    func updateSubscriptionInformation() {
         guard let subscription = self.subscription else { return }
 
         updateStatus(subscription: subscription)
@@ -108,8 +108,6 @@ final class SubscriptionCellCondensed: UITableViewCell {
             viewUnread.isHidden = true
             labelUnread.text =  nil
         }
-
-        applyTheme()
     }
 
     var userStatus: UserStatus? {
@@ -143,14 +141,6 @@ final class SubscriptionCellCondensed: UITableViewCell {
                 iconRoom.image = UIImage(named: "Cell Subscription Lock")
             }
         }
-    }
-
-    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
-        let isNameDifferent = labelName.text != subscription.displayName()
-        let isStatusDifferent = userStatus != subscription.otherUserStatus
-        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
-
-        return isNameDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }
