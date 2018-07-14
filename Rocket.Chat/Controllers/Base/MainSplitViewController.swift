@@ -101,14 +101,19 @@ extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
             UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Message composer"),
-            UIKeyCommand(input: "p", modifierFlags: [.command], action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
-            UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
-            UIKeyCommand(input: "1...9", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
-            UIKeyCommand(input: "]", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
-            UIKeyCommand(input: "[", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
-            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
-            UIKeyCommand(input: "i", modifierFlags: [.command], action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
-            UIKeyCommand(input: "r", modifierFlags: [.command], action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: "Reply to latest"),
+            UIKeyCommand(input: "p", modifierFlags: .command, action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
+            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
+            UIKeyCommand(input: "1...9", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
+            UIKeyCommand(input: "]", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
+            UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
+            UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
+            UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
+            UIKeyCommand(input: "↑ ↓", modifierFlags: [], action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: "Scroll messages"),
+            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: [], action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: [], action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .shift, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .shift, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: "Reply to latest"),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add server")
@@ -117,14 +122,22 @@ extension MainSplitViewController {
         } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
             UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
         } + [
-            UIKeyCommand(input: "t", modifierFlags: [.command], action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
+            UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
         ]
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
-        chatViewController?.textInputbar.textView.becomeFirstResponder()
-        subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
-            self?.chatViewController?.keyboardFrame?.updateFrame()
+        guard let textView = chatViewController?.textInputbar.textView else {
+            return
+        }
+
+        if textView.isFirstResponder {
+            textView.resignFirstResponder()
+        } else {
+            textView.becomeFirstResponder()
+            subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
+                self?.chatViewController?.keyboardFrame?.updateFrame()
+            }
         }
     }
 
@@ -188,6 +201,27 @@ extension MainSplitViewController {
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
         chatViewController?.toggleActions()
+    }
+
+    @objc func shortcutScrollMessages(_ command: UIKeyCommand) {
+        guard
+            let input = command.input,
+            let offset = chatViewController?.collectionView?.contentOffset,
+            let maxHeight = chatViewController?.collectionView?.contentSize.height,
+            let collectionView = chatViewController?.collectionView
+        else {
+            return
+        }
+
+        let heightOffset: CGFloat = command.modifierFlags.contains(.shift) ? 100.0 : 10.0
+        let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -heightOffset : heightOffset
+
+        UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
+            let offset = min(offset.y + heightDelta, maxHeight)
+            collectionView?.contentOffset = CGPoint(x: 0, y: offset)
+        }, completion: { [weak collectionView] _ in
+            collectionView?.setNeedsLayout()
+        })
     }
 
     @objc func shortcutReplyLatest(_ command: UIKeyCommand) {
