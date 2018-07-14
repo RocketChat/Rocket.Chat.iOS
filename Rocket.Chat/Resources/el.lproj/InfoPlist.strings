@@ -7,7 +7,7 @@
 */
 
 add-server-shortcut = "Προσθήκη διακομιστή";
-NSCameraUsageDescription = "To take photos and record videos"; // TODO
-NSMicrophoneUsageDescription = "To record and upload audio and videos"; // TODO
-NSPhotoLibraryAddUsageDescription = "To save images to your library"; // TODO
-NSPhotoLibraryUsageDescription = "To upload photos from your library"; // TODO
+NSCameraUsageDescription = "Για να φωτογραφίζετε και να αποθηκεύσετε βίντεο";
+NSMicrophoneUsageDescription = "Για να καταγράψετε και να ανεβάσετε ήχους και βίντεο";
+NSPhotoLibraryAddUsageDescription = "Για να αποθηκεύσετε εικόνες στη βιβλιοθήκη σας";
+NSPhotoLibraryUsageDescription = "Για να ανεβάσεετε φωτογραφίες από την βιβλιοθήκη σας";
