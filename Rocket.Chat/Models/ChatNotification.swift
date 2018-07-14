@@ -38,7 +38,7 @@ extension ChatNotification {
 extension ChatNotification.Payload {
     struct Sender: Codable, Equatable {
         let id: String
-        let name: String
+        let name: String?
         let username: String
 
         enum CodingKeys: String, CodingKey {
@@ -64,6 +64,6 @@ extension ChatNotification {
     /// notification is different from the `AppManager.currentRoomId`
 
     func post() {
-        NotificationManager.post(notification: self)
+        NotificationManager.postOnMainThread(notification: self)
     }
 }

@@ -76,7 +76,9 @@ extension ChatViewController {
         let result = searchResult[indexPath.row]
         let key = result.0
 
-        if result.1 as? Emoji == nil {
+        if let user = result.1 as? User, let username = user.username {
+            acceptAutoCompletion(with: "\(username) ", keepPrefix: true)
+        } else if result.1 as? Emoji == nil {
             acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
         } else {
             acceptAutoCompletion(with: "\(key) ", keepPrefix: false)
@@ -89,15 +91,17 @@ extension ChatViewController {
         }
 
         cell.selectionStyle = .default
+        var isUser = false
 
         if let user = searchResult[indexPath.row].1 as? User {
+            isUser = true
             cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
             if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: EmojiAutocompleteCell.identifier) as? EmojiAutocompleteCell {
 
-                if case let .custom(imageUrl) = emoji.type {
-                    cell.emojiView.emojiImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                if case let .custom(imageUrl) = emoji.type, let url = URL(string: imageUrl) {
+                    ImageManager.loadImage(with: url, into: cell.emojiView.emojiImageView)
                 } else {
                     cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
                 }
@@ -116,7 +120,12 @@ extension ChatViewController {
             cell.avatarView.backgroundColor = .white
         }
 
+        let user = AuthManager.currentUser()
+
         cell.labelTitle.text = searchResult[indexPath.row].0
+        if isUser, searchResult[indexPath.row].0 == user?.username {
+            cell.labelTitle.text?.append(" (" + localized("subscriptions.you") + ")")
+        }
         return cell
     }
 }

@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import SDWebImage
 
 private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
-class EmojiPicker: UIView, RCEmojiKitLocalizable {
+final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
+
+    var isPopover = false
 
     var customEmojis: [Emoji] = []
     var customCategory: (name: String, emojis: [Emoji]) {
@@ -55,6 +56,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         (name: "symbols", emojis: Emojione.symbols),
         (name: "flags", emojis: Emojione.flags)
     ]
+
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
         return ([customCategory] + defaultCategories).map {
@@ -291,9 +293,13 @@ extension EmojiPicker: UITabBarDelegate {
         emojisCollectionView.reloadData()
         emojisCollectionView.layoutIfNeeded()
 
+        let numberOfCells = emojisCollectionView.numberOfItems(inSection: index)
         let indexPath = IndexPath(row: 1, section: index)
-        emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+
+        if numberOfCells > 0 {
+            emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+        }
     }
 }
 
@@ -334,5 +340,36 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Themeable
+
+extension EmojiPicker {
+    override var theme: Theme? {
+        guard let theme = super.theme else { return nil }
+        guard isPopover else { return theme }
+        let popoverTheme = Theme(
+            backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            bannerBackground: theme.bannerBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
+        return popoverTheme
+    }
+
+    override func applyTheme() {
+        super.applyTheme()
+        skinToneButton.backgroundColor = currentSkinTone.color
     }
 }

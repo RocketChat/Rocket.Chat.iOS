@@ -10,16 +10,17 @@ import Foundation
 import RealmSwift
 
 struct CustomEmojiManager {
-    static func sync() {
-        let currentRealm = Realm.current
-        API.current()?.fetch(CustomEmojiRequest()) { response in
+    static func sync(realm: Realm? = Realm.current) {
+        CustomEmoji.cachedEmojis = nil
+
+        API.current(realm: realm)?.fetch(CustomEmojiRequest()) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success else {
                     return Log.debug(resource.errorMessage)
                 }
 
-                currentRealm?.execute({ realm in
+                realm?.execute({ realm in
                     realm.delete(realm.objects(CustomEmoji.self))
 
                     let emoji = List<CustomEmoji>()
@@ -32,11 +33,10 @@ struct CustomEmojiManager {
                 })
             case .error(let error):
                 switch error {
-                case .version: websocketSync(currentRealm)
+                case .version: websocketSync(realm)
                 default: break
                 }
             }
-
         }
     }
 

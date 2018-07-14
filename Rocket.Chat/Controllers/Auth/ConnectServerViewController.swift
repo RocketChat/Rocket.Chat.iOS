@@ -15,11 +15,14 @@ final class ConnectServerViewController: BaseViewController {
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
+    internal let buttonConnectBottomSpacing: CGFloat = 24
 
     var deepLinkCredentials: DeepLinkCredentials?
+    var selectedServer: Int = 0
 
+    var shouldAutoConnect = false
     var url: URL? {
-        guard var urlText = textFieldServerURL.text else { return nil }
+        guard var urlText = textFieldServerURL.text else { return URL(string: defaultURL, scheme: "https") }
         if urlText.isEmpty {
             urlText = defaultURL
         }
@@ -28,54 +31,60 @@ final class ConnectServerViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var buttonClose: UIBarButtonItem!
+    lazy var buttonClose: UIBarButtonItem = {
+        let buttonClose = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(buttonCloseDidPressed))
+        return buttonClose
+    }()
 
-    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textFieldServerURL: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    @IBOutlet weak var viewFields: UIView! {
+    @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            viewFields.layer.cornerRadius = 4
-            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
-            viewFields.layer.borderWidth = 0.5
+            titleLabel.text = localized("connection.title")
         }
     }
 
-    @IBOutlet weak var labelSSLRequired: UILabel!
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    @IBOutlet weak var buttonConnect: StyledButton! {
+        didSet {
+            buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
+        }
     }
+
+    @IBOutlet weak var textFieldServerURL: UITextField!
+
+    lazy var keyboardConstraint: NSLayoutConstraint = {
+        var bottomGuide: NSLayoutYAxisAnchor
+
+        if #available(iOS 11.0, *) {
+            bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            bottomGuide = view.bottomAnchor
+        }
+
+        return buttonConnect.bottomAnchor.constraint(equalTo: bottomGuide, constant: 0)
+    }()
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if DatabaseManager.servers?.count ?? 0 > 0 {
-            title = localized("servers.add_new_team")
-        } else {
+        if !(DatabaseManager.servers?.count ?? 0 > 0) {
             navigationItem.leftBarButtonItem = nil
+        } else {
+            navigationItem.leftBarButtonItem = buttonClose
         }
 
+        selectedServer = DatabaseManager.selectedIndex
         infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
-        labelSSLRequired.text = localized("auth.connect.ssl_required")
 
-        if let nav = navigationController as? BaseNavigationController {
+        if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
         }
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
 
-        SocketManager.sharedInstance.socket?.disconnect()
-        DatabaseManager.cleanInvalidDatabases()
-
-        if let applicationServerURL = AppManager.applicationServerURL {
-            textFieldServerURL.isEnabled = false
-            labelSSLRequired.text = localized("auth.connect.connecting")
-            textFieldServerURL.text = applicationServerURL.host
+        if shouldAutoConnect {
             connect()
         }
     }
@@ -83,61 +92,122 @@ final class ConnectServerViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        SocketManager.sharedInstance.socket?.disconnect()
+        DatabaseManager.cleanInvalidDatabases()
+
+        if let applicationServerURL = AppManager.applicationServerURL {
+            textFieldServerURL.isEnabled = false
+            textFieldServerURL.text = applicationServerURL.host
+            connect()
+        }
+
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillShow(_:)),
+            selector: #selector(keyboardWillAppear(_:)),
             name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide(_:)),
+            selector: #selector(keyboardWillDisappear(_:)),
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
 
-        textFieldServerURL.becomeFirstResponder()
+        if !shouldAutoConnect {
+            textFieldServerURL.becomeFirstResponder()
+        }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.serverVersion = infoRequestHandler.version
-            controller.serverURL = url
-            controller.serverPublicSettings = self.serverPublicSettings
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
-            if let credentials = deepLinkCredentials {
-                _ = controller.view
-                controller.authenticateWithDeepLinkCredentials(credentials)
+    // MARK: Keyboard Handling
+
+    @objc func keyboardWillAppear(_ notification: Notification) {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            var viewRect = view.frame
+            viewRect.size.height -= keyboardSize.height
+
+            if let buttonConnect = buttonConnect {
+                let buttonVisibleOrigin = CGPoint(
+                    x: buttonConnect.frame.origin.x,
+                    y: buttonConnect.frame.origin.y + buttonConnect.frame.size.height + buttonConnectBottomSpacing
+                )
+
+                if viewRect.contains(buttonVisibleOrigin) {
+                    return
+                }
+            }
+
+            keyboardConstraint.isActive = true
+            keyboardConstraint.constant = -(keyboardSize.height + buttonConnectBottomSpacing)
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
             }
         }
     }
 
-    // MARK: Keyboard Handlers
-    override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
+    @objc func keyboardWillDisappear(_ notification: Notification) {
+        keyboardConstraint.isActive = false
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
         }
     }
 
-    override func keyboardWillHide(_ notification: Notification) {
-        visibleViewBottomConstraint.constant = 0
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? LoginTableViewController {
+            controller.shouldShowCreateAccount = true
+            controller.serverVersion = infoRequestHandler.version
+            controller.serverURL = url
+            controller.serverPublicSettings = serverPublicSettings
+        }
+
+        if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
+            controller.serverVersion = infoRequestHandler.version
+            controller.serverURL = url
+            controller.serverPublicSettings = serverPublicSettings
+
+            if let credentials = deepLinkCredentials {
+                _ = controller.view
+                controller.authenticateWithDeepLinkCredentials(credentials)
+                deepLinkCredentials = nil
+            }
+
+            if let loginServices = sender as? [LoginService] {
+                controller.loginServices = loginServices
+            } else if let shouldRetrieveLoginServices = sender as? Bool {
+                controller.shouldRetrieveLoginServices = shouldRetrieveLoginServices
+            }
+        }
     }
 
     // MARK: IBAction
 
-    @IBAction func buttonCloseDidPressed(_ sender: Any) {
+    @IBAction func buttonConnectDidPressed(_ sender: Any) {
+        connect()
+    }
+
+    @objc func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        AppManager.changeSelectedServer(index: (DatabaseManager.servers?.count ?? 1) - 1)
-        AppManager.reloadApp()
+        AppManager.changeSelectedServer(index: selectedServer)
     }
 
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
 
+        navigationItem.hidesBackButton = true
         connecting = true
         textFieldServerURL.alpha = 0.5
-        activityIndicator.startAnimating()
+        buttonConnect.startLoading()
         textFieldServerURL.resignFirstResponder()
 
         if AppManager.changeToServerIfExists(serverUrl: url) {
@@ -171,18 +241,28 @@ final class ConnectServerViewController: BaseViewController {
                 self?.serverPublicSettings = settings
 
                 if connected {
-                    self?.performSegue(withIdentifier: "Auth", sender: nil)
+                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
+                        self?.stopConnecting()
+                        if shouldRetrieveLoginServices {
+                            self?.performSegue(withIdentifier: "Auth", sender: shouldRetrieveLoginServices)
+                        } else {
+                            if loginServices.count > 0 {
+                                self?.performSegue(withIdentifier: "Auth", sender: loginServices)
+                            } else {
+                                self?.performSegue(withIdentifier: "Login", sender: loginServices)
+                            }
+                        }
+                    })
                 }
-
-                self?.stopConnecting()
             }
         }
     }
 
     func stopConnecting() {
+        navigationItem.hidesBackButton = false
         connecting = false
         textFieldServerURL.alpha = 1
-        activityIndicator.stopAnimating()
+        buttonConnect.stopLoading()
     }
 }
 
@@ -193,6 +273,10 @@ extension ConnectServerViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if buttonConnect.isLoading {
+            return false
+        }
+
         connect()
         return true
     }
@@ -204,27 +288,19 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
     var viewControllerToPresentAlerts: UIViewController? { return self }
 
     func urlNotValid() {
-        DispatchQueue.main.async {
-            self.stopConnecting()
-        }
+        self.stopConnecting()
     }
 
     func serverIsValid() {
-        DispatchQueue.main.async {
-            self.connectWebSocket()
-        }
+        self.connectWebSocket()
     }
 
     func serverChangedURL(_ newURL: String?) {
         if let url = newURL {
-            DispatchQueue.main.async {
-                self.textFieldServerURL.text = url
-                self.connect()
-            }
+            self.textFieldServerURL.text = url
+            self.connect()
         } else {
-            DispatchQueue.main.async {
-                self.stopConnecting()
-            }
+            self.stopConnecting()
         }
     }
 

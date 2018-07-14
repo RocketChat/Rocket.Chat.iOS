@@ -18,11 +18,46 @@ extension AuthSettings {
         let settings = AuthSettings()
         settings.siteURL = "https://open.rocket.chat"
         settings.cdnPrefixURL = "https://open.rocket.chat"
+
         return settings
     }
 }
 
 class AuthSettingsSpec: XCTestCase {
+
+    // MARK: Base URLs
+
+    func testBaseURLsMappingNoSlashInTheEnd() {
+        let json = JSON([[
+            "_id": "Site_Url",
+            "value": "https://foo.bar"
+        ], [
+            "_id": "CDN_PREFIX",
+            "value": "https://cdn.foo.bar"
+        ]])
+
+        let settings = AuthSettings()
+        settings.map(json, realm: nil)
+
+        XCTAssertEqual(settings.siteURL, "https://foo.bar")
+        XCTAssertEqual(settings.cdnPrefixURL, "https://cdn.foo.bar")
+    }
+
+    func testBaseURLsMappingWithSlashInTheEnd() {
+        let json = JSON([[
+            "_id": "Site_Url",
+            "value": "https://foo.bar/"
+        ], [
+            "_id": "CDN_PREFIX",
+            "value": "https://cdn.foo.bar/"
+        ]])
+
+        let settings = AuthSettings()
+        settings.map(json, realm: nil)
+
+        XCTAssertEqual(settings.siteURL, "https://foo.bar")
+        XCTAssertEqual(settings.cdnPrefixURL, "https://cdn.foo.bar")
+    }
 
     // MARK: Registration Form
 

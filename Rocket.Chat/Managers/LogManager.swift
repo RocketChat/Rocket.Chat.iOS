@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class Log {
-    static func debug(_ text: String?) {
-        guard let text = text else { return }
+struct Log {
 
+    static func debug(_ text: String?) {
         #if DEBUG
+        guard let text = text else { return }
         print(text)
         #endif
     }

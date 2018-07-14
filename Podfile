@@ -4,11 +4,6 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
-def webimage_pods
-  pod 'SDWebImage', '~> 4'
-  pod 'SDWebImage/GIF'
-end
-
 def database_pods
   pod 'RealmSwift'
   pod 'SwiftyJSON'
@@ -19,6 +14,9 @@ def ui_pods
 end
 
 def shared_pods
+  # Analytics
+  pod 'Firebase/Core'
+
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
@@ -27,12 +25,9 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
-  pod 'MobilePlayer'
+  pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
-  pod 'TagListView', '~> 1.0'
-  pod 'SearchTextField'
   ui_pods
 
   # Text Processing
@@ -42,7 +37,8 @@ def shared_pods
   database_pods
 
   # Network
-  webimage_pods
+  pod 'Nuke', '~> 7.3'
+  pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
@@ -51,13 +47,12 @@ def shared_pods
   pod '1PasswordExtension'
 
   # Debugging
-  pod 'Instabug', :configurations => ['Debug', 'Beta']
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end
 
 target 'Rocket.Chat.ShareExtension' do
-  webimage_pods
+  pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
 end
@@ -73,7 +68,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'

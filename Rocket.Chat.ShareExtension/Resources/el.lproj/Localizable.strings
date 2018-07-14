@@ -6,29 +6,29 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-"global.ok" = "Ok"; //TODO
+"global.ok" = "Εντάξει";
 
-"alert.no_servers.title" = "No servers"; //TODO
-"alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something."; //TODO
+"alert.no_servers.title" = "Δεν υπάρχουν εξυπηρετητητές";
+"alert.no_servers.message" = "Χρειάζεται να συνδεθείτε σε τουλάχιστον ένα εξυπηρετητή Rocket.Chat ώστε να μοιραστείτε κάτι.";
 
-"servers.title" = "Servers"; //TODO
+"servers.title" = "Εξυπηρετητητές";
 
-"rooms.title" = "Select Rooms"; //TODO
-"rooms.section.server" = "Select server"; //TODO
-"rooms.section.favorites" = "Favorites"; //TODO
-"rooms.section.channels" = "Channels"; //TODO
-"rooms.section.groups" = "Private Groups"; //TODO
-"rooms.section.directMessages" = "Direct Messages"; //TODO
+"rooms.title" = "Επιλέξτε Δωμάτια";
+"rooms.section.server" = "Επιλέξτε εξυπηρετητητή";
+"rooms.section.favorites" = "Αγαπημένα";
+"rooms.section.channels" = "Κανάλια";
+"rooms.section.groups" = "Ιδιωτικές Ομάδες";
+"rooms.section.directMessages" = "Άμεσα Μηνύματα";
 
-"compose.title" = "Share"; //TODO
-"compose.send" = "Send"; //TODO
-"compose.cancel" = "Cancel"; //TODO
-"compose.destination.to" = "To: "; //TODO
-"compose.file.name.placeholder" = "File name"; //TODO
-"compose.file.description.placeholder" = "File description"; //TODO
+"compose.title" = "Μοιραστείτε";
+"compose.send" = "Αποστολή";
+"compose.cancel" = "Ακύρωση";
+"compose.destination.to" = "Προς: ";
+"compose.file.name.placeholder" = "Όνομα Αρχείου";
+"compose.file.description.placeholder" = "Περιγραφή Αρχείου";
 
-"report.success.title" = "Success"; //TODO
-"report.success.message" = "Shared your content successfully."; //TODO
-"report.error.title" = "Error"; //TODO
-"report.error.message" = "Something wrong happened while sending your content."; //TODO
-"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
+"report.success.title" = "Επιτυχία";
+"report.success.message" = "Το περιεχόμενό σας μοιράστηκε επιτυχώς.";
+"report.error.title" = "Σφάλμα";
+"report.error.message" = "Συνέβη κάποιο λάθος καθώς στέλνατε το περιεχόμενό σας.";
+"report.cancelled.message" = "Ακυρώσατε την αίτησή σας. Το μήνυμα δεν στάλθηκε.";

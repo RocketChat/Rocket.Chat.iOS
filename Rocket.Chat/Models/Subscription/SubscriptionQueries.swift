@@ -22,21 +22,8 @@ extension Subscription {
         return realm?.objects(Subscription.self).filter(predicate).first
     }
 
-    static func notificationSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
+    static func notificationSubscription(auth: Auth) -> Subscription? {
         guard let roomId = AppManager.initialRoomId else { return nil }
-        return auth?.subscriptions.filter("rid = %@", roomId).first
-    }
-
-    static func lastSeenSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
-        return auth?.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
-    }
-
-    static func initialSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
-        if let subscription = notificationSubscription(auth: auth) {
-            AppManager.initialRoomId = nil
-            return subscription
-        }
-
-        return lastSeenSubscription(auth: auth)
+        return auth.subscriptions.filter("rid = %@", roomId).first
     }
 }

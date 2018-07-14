@@ -19,7 +19,7 @@ extension User {
             let realm = realm,
             let user = realm.objects(User.self).filter("username = %@", username).first
         else {
-                return nil
+            return nil
         }
 
         return user

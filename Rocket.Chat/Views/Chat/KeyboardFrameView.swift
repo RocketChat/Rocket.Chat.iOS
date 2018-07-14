@@ -14,7 +14,7 @@ protocol KeyboardFrameViewDelegate: class {
     var keyboardProxyView: UIView? { get }
 }
 
-class KeyboardFrameView: UIView {
+final class KeyboardFrameView: UIView {
     weak var delegate: KeyboardFrameViewDelegate?
     weak var keyboardProxyView: UIView?
 
@@ -25,7 +25,12 @@ class KeyboardFrameView: UIView {
     }
 
     private func registerForNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeFrameNotificationReceived), name: Notification.Name.UIKeyboardDidChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidChangeFrameNotificationReceived),
+            name: Notification.Name.UIKeyboardDidChangeFrame,
+            object: nil
+        )
     }
 
     func updateFrame() {
@@ -54,7 +59,7 @@ class KeyboardFrameView: UIView {
             self.leftAnchor.constraint(equalTo: keyboardProxyView.leftAnchor),
             self.rightAnchor.constraint(equalTo: keyboardProxyView.rightAnchor),
             self.bottomAnchor.constraint(equalTo: keyboardProxyView.superview?.bottomAnchor ?? keyboardProxyView.bottomAnchor)
-            ])
+        ])
     }
 
     override func layoutSubviews() {

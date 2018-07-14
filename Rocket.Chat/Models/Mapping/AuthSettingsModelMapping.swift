@@ -13,8 +13,8 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
-        self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
+        self.siteURL = objectForKey(object: values, key: "Site_Url")?.string?.removingLastSlashIfNeeded()
+        self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string?.removingLastSlashIfNeeded()
 
         self.serverName = objectForKey(object: values, key: "Site_Name")?.string
 
@@ -30,6 +30,7 @@ extension AuthSettings: ModelMappeable {
         self.useUserRealName = objectForKey(object: values, key: "UI_Use_Real_Name")?.bool ?? false
         self.allowSpecialCharsOnRoomNames = objectForKey(object: values, key: "UI_Allow_room_names_with_special_chars")?.bool ?? false
         self.favoriteRooms = objectForKey(object: values, key: "Favorite_Rooms")?.bool ?? true
+        self.storeLastMessage = objectForKey(object: values, key: "Store_Last_Message")?.bool ?? true
 
         // Authentication methods
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
@@ -37,13 +38,17 @@ extension AuthSettings: ModelMappeable {
         self.isGitHubAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Github")?.bool ?? false
         self.isGitLabAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Gitlab")?.bool ?? false
         self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
+        self.isWordPressAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Wordpress")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
+        self.gitlabUrl = objectForKey(object: values, key: "API_Gitlab_URL")?.string
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
+
+        self.firstChannelAfterLogin = objectForKey(object: values, key: "First_Channel_After_Login")?.string
 
         // Authentication Placeholder Fields
         self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
@@ -60,6 +65,7 @@ extension AuthSettings: ModelMappeable {
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
+        self.maxFileSize = objectForKey(object: values, key: "FileUpload_MaxFileSize")?.int ?? 0
 
         // HideType
         self.hideMessageUserJoined = objectForKey(object: values, key: "Message_HideType_uj")?.bool ?? false
@@ -74,6 +80,7 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+        self.messageAllowStarring = objectForKey(object: values, key: "Message_AllowStarring")?.bool ?? true
 
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true
@@ -84,6 +91,9 @@ extension AuthSettings: ModelMappeable {
         self.messageAllowEditingBlockEditInMinutes = objectForKey(object: values, key: "Message_AllowEditing_BlockEditInMinutes")?.int ?? 0
 
         self.messageMaxAllowedSize = objectForKey(object: values, key: "Message_MaxAllowedSize")?.int ?? 0
+
+        self.messageReadReceiptEnabled = objectForKey(object: values, key: "Message_Read_Receipt_Enabled")?.bool ?? false
+        self.messageReadReceiptStoreUsers = objectForKey(object: values, key: "Message_Read_Receipt_Store_Users")?.bool ?? false
 
         // Custom Fields
         self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?.string?.removingWhitespaces()

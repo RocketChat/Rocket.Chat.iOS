@@ -11,11 +11,13 @@ import RealmSwift
 import TagListView
 import SearchTextField
 
-class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
+final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
     static let identifier = "kMentionsTextFieldTableViewCell"
     static let xibFileName = "MentionsTextFieldTableViewCell"
+
     static let defaultHeight: Float = -1
     weak var delegate: FormTableViewDelegate?
+
     var key: String?
 
     @IBOutlet private weak var tagListView: TagListView!
@@ -88,6 +90,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     // MARK: Tag
+
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         for tag in users where tag.value === tagView {
             users.removeValue(forKey: tag.key)
@@ -109,5 +112,15 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
             updateTagViewConstraint()
             delegate?.updateTable(key: key ?? "")
         }
+    }
+}
+
+// MARK: Themeable
+
+extension MentionsTextFieldTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imgLeftIcon.tintColor = theme.titleText
     }
 }

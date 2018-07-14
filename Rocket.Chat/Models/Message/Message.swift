@@ -32,6 +32,8 @@ enum MessageType: String {
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
 
+    case messagePinned = "message_pinned"
+
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
@@ -45,8 +47,8 @@ enum MessageType: String {
     }
 }
 
-class Message: BaseModel {
-    @objc dynamic var subscription: Subscription!
+final class Message: BaseModel {
+    @objc dynamic var subscription: Subscription?
     @objc dynamic var internalType: String = ""
     @objc dynamic var rid = ""
     @objc dynamic var createdAt: Date?
@@ -55,8 +57,8 @@ class Message: BaseModel {
     @objc dynamic var text = ""
 
     @objc dynamic var userBlocked: Bool = false
-
     @objc dynamic var pinned: Bool = false
+    @objc dynamic var unread: Bool = false
 
     @objc dynamic var alias = ""
     @objc dynamic var avatar: String?
@@ -70,6 +72,7 @@ class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    var starred = List<String>()
     var mentions = List<Mention>()
     var channels = List<Channel>()
     var attachments = List<Attachment>()
@@ -78,6 +81,10 @@ class Message: BaseModel {
     var reactions = List<MessageReaction>()
 
     var type: MessageType {
+        if let type = MessageType(rawValue: internalType) {
+            return type
+        }
+
         if let attachment = attachments.first {
             return attachment.type
         }
@@ -88,9 +95,21 @@ class Message: BaseModel {
             }
         }
 
-        return MessageType(rawValue: internalType) ?? .text
+        return  .text
     }
 
     // Internal
     @objc dynamic var markedForDeletion: Bool = false
+}
+
+extension Message {
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        return
+            lhs.identifier == rhs.identifier &&
+            lhs.temporary == rhs.temporary &&
+            lhs.failed == rhs.failed &&
+            lhs.mentions.count == rhs.mentions.count &&
+            lhs.channels.count == rhs.channels.count &&
+            lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
+    }
 }

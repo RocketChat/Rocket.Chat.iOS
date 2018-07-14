@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import RCMarkdownParser
 
 struct ChannelInfoBasicCellData: ChannelInfoCellDataProtocol {
     let cellType = ChannelInfoBasicCell.self
     var title: String?
 }
 
-class ChannelInfoBasicCell: UITableViewCell, ChannelInfoCellProtocol {
+final class ChannelInfoBasicCell: UITableViewCell, ChannelInfoCellProtocol {
+    typealias DataType = ChannelInfoBasicCellData
 
     static let identifier = "kChannelInfoCellBasic"
-    static let defaultHeight: Float = 44
-    var data: ChannelInfoBasicCellData? {
+    static let defaultHeight: CGFloat = 44
+
+    var data: DataType? {
         didSet {
             labelTitle.text = data?.title
+            labelTitle.textColor = .RCDarkGray()
+            labelTitle.font = UIFont.boldSystemFont(ofSize: labelTitle.font.pointSize)
         }
     }
 

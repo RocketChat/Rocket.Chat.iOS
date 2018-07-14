@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  Rocket.Chat
+
+  Created by Artur Rymarz on 12.07.2018.
+  Copyright © 2018 Rocket.Chat. All rights reserved.
+*/
+
+add-server-shortcut = "Προσθήκη διακομιστή";
+NSCameraUsageDescription = "Για να φωτογραφίζετε και να αποθηκεύσετε βίντεο";
+NSMicrophoneUsageDescription = "Για να καταγράψετε και να ανεβάσετε ήχους και βίντεο";
+NSPhotoLibraryAddUsageDescription = "Για να αποθηκεύσετε εικόνες στη βιβλιοθήκη σας";
+NSPhotoLibraryUsageDescription = "Για να ανεβάσεετε φωτογραφίες από την βιβλιοθήκη σας";

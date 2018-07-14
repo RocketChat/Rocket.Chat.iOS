@@ -72,28 +72,32 @@ class HighlightLayoutManager: NSLayoutManager {
     func updateCustomEmojiViews() {
         customEmojiViews.forEach { $0.removeFromSuperview() }
         customEmojiViews.removeAll()
+        addCustomEmojiIfNeeded()
+    }
 
+    func addCustomEmojiIfNeeded() {
         message?.enumerateAttributes(in: NSRange(location: 0, length: message.length), options: [], using: { attributes, crange, _ in
             if let attachment = attributes[NSAttributedStringKey.attachment] as? NSTextAttachment {
+                DispatchQueue.main.async {
+                    guard let position1 = self.textView.position(from: self.textView.beginningOfDocument, offset: crange.location) else { return }
+                    guard let position2 = self.textView.position(from: position1, offset: crange.length) else { return }
+                    guard let range = self.textView.textRange(from: position1, to: position2) else { return }
 
-                guard let position1 = textView.position(from: textView.beginningOfDocument, offset: crange.location) else { return }
-                guard let position2 = textView.position(from: position1, offset: crange.length) else { return }
-                guard let range = textView.textRange(from: position1, to: position2) else { return }
+                    let rect = self.textView.firstRect(for: range)
 
-                let rect = textView.firstRect(for: range)
+                    let emojiView = EmojiView(frame: rect)
+                    emojiView.backgroundColor = .white
+                    emojiView.isUserInteractionEnabled = false
+                    emojiView.applyTheme()
 
-                let emojiView = EmojiView(frame: rect)
-                emojiView.backgroundColor = .white
-                emojiView.isUserInteractionEnabled = false
-
-                if let imageUrlData = attachment.contents,
-                    let imageUrlString = String(data: imageUrlData, encoding: .utf8),
-                    let imageUrl = URL(string: imageUrlString) {
-                    emojiView.emojiImageView.sd_setImage(with: imageUrl, completed: nil)
-                    customEmojiViews.append(emojiView)
+                    if let imageUrlData = attachment.contents,
+                            let imageUrlString = String(data: imageUrlData, encoding: .utf8),
+                            let imageUrl = URL(string: imageUrlString) {
+                        ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
+                        self.customEmojiViews.append(emojiView)
+                        self.addSubview(emojiView)
+                    }
                 }
-
-                self.addSubview(emojiView)
             }
         })
     }
@@ -135,8 +139,6 @@ class HighlightLayoutManager: NSLayoutManager {
         super.layoutSubviews()
 
         textView.frame = bounds
-
-        updateCustomEmojiViews()
     }
 
     override func prepareForInterfaceBuilder() {
@@ -154,6 +156,36 @@ extension RCTextView: UITextViewDelegate {
             return false
         }
 
-        return true
+        if let deepLink = DeepLink(url: URL) {
+            switch deepLink {
+            case let .mention(name):
+                guard
+                    let user = User.find(username: name),
+                    let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
+                    let end = textView.position(from: start, offset: characterRange.length),
+                    let range = textView.textRange(from: start, to: end)
+                else {
+                    return false
+                }
+
+                MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+                return false
+            default:
+                return UIApplication.shared.canOpenURL(URL)
+            }
+        }
+
+        return false
+    }
+
+}
+
+// MARK: Themeable
+
+extension RCTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        customEmojiViews.forEach { $0.backgroundColor = theme.backgroundColor }
     }
 }

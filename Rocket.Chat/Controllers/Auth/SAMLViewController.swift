@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SAMLViewController: UIViewController {
+class SAMLViewController: BaseViewController {
     var serverUrl: URL!
     var provider: String = ""
 
@@ -69,7 +69,7 @@ class SAMLViewController: UIViewController {
     }
 }
 
-extension SAMLViewController: WKNavigationDelegate {
+extension SAMLViewController: WKNavigationDelegate, Closeable {
     func isCallback(url: URL) -> Bool {
         return url.host == serverUrl.host && url.path == "/_saml/validate/\(provider)"
     }
@@ -86,14 +86,6 @@ extension SAMLViewController: WKNavigationDelegate {
         }
 
         return true
-    }
-
-    func close(animated: Bool) {
-        if navigationController?.topViewController == self {
-            navigationController?.popViewController(animated: animated)
-        } else {
-            dismiss(animated: animated, completion: nil)
-        }
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

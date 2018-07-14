@@ -12,7 +12,9 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
-extension ChatViewController: ChatMessageCellProtocol {
+extension ReactorListViewController: UserActionSheetPresenter { }
+
+extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
@@ -48,6 +50,7 @@ extension ChatViewController: ChatMessageCellProtocol {
             if let presenter = controller.popoverPresentationController {
                 presenter.sourceView = reactionView
                 presenter.sourceRect = reactionView.bounds
+                presenter.backgroundColor = view.theme?.focusedBackground
             }
 
             self.present(controller, animated: true)
@@ -55,9 +58,12 @@ extension ChatViewController: ChatMessageCellProtocol {
 
         // on select reactor
 
-        controller.reactorListView.selectedReactor = { username in
-            controller.close(animated: true)
-            AppManager.openDirectMessage(username: username)
+        controller.reactorListView.selectedReactor = { [weak self] username, rect in
+            guard let user = User.find(username: username) else {
+                return
+            }
+
+            controller.presentActionSheetForUser(user, subscription: self?.subscription, source: (controller.view, rect))
         }
     }
 
@@ -67,9 +73,33 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+    func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect)) {
+        guard let messageId = message.identifier else {
+            return
+        }
+
+        let controller = ReadReceiptListViewController(messageId: messageId)
+        controller.modalPresentationStyle = .popover
+        _ = controller.view
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.modalPresentationStyle = .popover
+
+            if let presenter = navigationController.popoverPresentationController {
+                presenter.sourceView = source.0
+                presenter.sourceRect = source.0.bounds
+            }
+
+            self.present(navigationController, animated: true)
+        }
+    }
+
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let username = message.user?.username else { return }
-        AppManager.openDirectMessage(username: username)
+        guard let user = message.user else { return }
+        presentActionSheetForUser(user, subscription: subscription, source: (view, nil))
     }
 
     func openURL(url: URL) {
@@ -88,6 +118,11 @@ extension ChatViewController: ChatMessageCellProtocol {
         controller.title = attachment.title
         controller.activityItems = [attachment.title, videoURL]
         present(controller, animated: true, completion: nil)
+    }
+
+    func openReplyMessage(message: Message) {
+        guard let username = message.user?.username else { return }
+        AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {

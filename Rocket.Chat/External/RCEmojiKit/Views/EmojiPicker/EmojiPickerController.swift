@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
+final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
     var emojiPicked: ((String) -> Void)?
     var customEmojis: [Emoji] = []
@@ -24,6 +24,8 @@ class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
                     self.dismiss(animated: true)
                 }
             }
+
+            emojiPicker.isPopover = presentationController?.presentationStyle == .popover
 
             emojiPicker.customEmojis = customEmojis
         }

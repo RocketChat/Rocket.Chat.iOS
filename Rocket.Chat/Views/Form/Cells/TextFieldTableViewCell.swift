@@ -8,20 +8,21 @@
 
 import Foundation
 
-class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+
     static let identifier = "kTextFieldTableViewCell"
-    static let xibFileName = "TextFieldTableViewCell"
-    static let defaultHeight: Float = 44
+    static let defaultHeight: Float = 50.0
+
     weak var delegate: FormTableViewDelegate?
     var key: String?
+    var textLimit = 0
 
     @IBOutlet weak var imgLeftIcon: UIImageView!
-    @IBOutlet weak var textFieldInput: UITextField!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        textFieldInput.clearButtonMode = .whileEditing
+    @IBOutlet weak var textFieldInput: UITextField! {
+        didSet {
+            textFieldInput.delegate = self
+            textFieldInput.clearButtonMode = .whileEditing
+        }
     }
 
     func setPreviousValue(previous: Any) {
@@ -32,5 +33,26 @@ class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
 
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
+    }
+
+}
+
+extension TextFieldTableViewCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textLimit > 0 else { return true }
+        guard let text = textField.text else { return true }
+
+        let newLength = text.count + string.count
+        return newLength <= 40
+    }
+}
+
+// MARK: Themeable
+
+extension TextFieldTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imgLeftIcon.tintColor = theme.titleText
     }
 }

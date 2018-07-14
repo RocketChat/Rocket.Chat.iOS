@@ -8,13 +8,24 @@
 
 import Foundation
 
-class ReplyView: UIView {
+final class ReplyView: UIView {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
 
     var onClose: (() -> Void)?
 
     @IBAction func closePressed(_ sender: UIButton) {
         onClose?()
+    }
+}
+
+extension ReplyView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        backgroundColor = theme.focusedBackground
+        closeButton.setTitleColor(theme.titleText, for: .normal)
+        message.textColor = theme.bodyText
     }
 }

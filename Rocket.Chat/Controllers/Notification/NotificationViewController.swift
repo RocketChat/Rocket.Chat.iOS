@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class NotificationViewController: UIViewController {
+final class NotificationViewController: TopTransparentViewController {
 
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
@@ -21,7 +21,17 @@ class NotificationViewController: UIViewController {
     var lastTouchLocation: CGPoint?
     let animationDuration: TimeInterval = 0.3
     let notificationVisibleDuration: TimeInterval = 6.0
+    let topInsetWithoutNotch: CGFloat = 10
+
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
+
+    var isDeviceWithNotch: Bool {
+        if #available(iOS 11.0, *) {
+            return view.safeAreaInsets.top > 20
+        } else {
+            return false
+        }
+    }
 
     var notificationViewIsHidden: Bool {
         get {
@@ -34,28 +44,31 @@ class NotificationViewController: UIViewController {
         set {
             visibleConstraint?.isActive = !newValue
             hiddenConstraint?.isActive = newValue
-            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue ? 1 : 0
+            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
         }
     }
 
     // MARK: - View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowRadius = 8.0
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.clipsToBounds = true
+
+        ThemeManager.addObserver(self)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationView.setNeedsLayout()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        visibleConstraint.constant = 8
-        if #available(iOS 11.0, *) {
-            if view.safeAreaInsets.top > 20 {
-                visibleConstraint.constant = 38
-            }
+        if #available(iOS 11.0, *), isDeviceWithNotch {
+            visibleConstraint.constant = view.safeAreaInsets.top
+            view.window?.windowLevel = UIWindowLevelStatusBar - 1
+        } else {
+            visibleConstraint.constant = topInsetWithoutNotch
+            view.window?.windowLevel = UIWindowLevelAlert
         }
     }
 
@@ -74,15 +87,18 @@ class NotificationViewController: UIViewController {
         // Commented out until a setting is added to toggle the sound.
         // playSound()
 
+        willStartDisplayingContent()
         UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { [weak self] _ in
-            UIView.animate(withDuration: self?.animationDuration ?? 0.0) {
+            UIView.animate(withDuration: self?.animationDuration ?? 0.0, animations: ({
                 self?.notificationViewIsHidden = true
                 self?.view.layoutIfNeeded()
+            })) { (_) in
+                self?.didEndDisplayingContent()
             }
         }
     }
@@ -116,13 +132,8 @@ extension NotificationViewController {
             let displacement = sender.location(in: view).y - lastTouchLocation.y
             let newYOffset = notificationView.frame.origin.y + displacement
 
-            if newYOffset <= visibleConstraint.constant {
+            if newYOffset <= 0 {
                 notificationView.frame.origin.y += displacement
-                self.lastTouchLocation = sender.location(in: view)
-
-            } else if notificationView.bounds.contains(sender.location(in: notificationView)),
-                newYOffset <= visibleConstraint.constant + 16 {
-                notificationView.frame.origin.y += displacement / 10
                 self.lastTouchLocation = sender.location(in: view)
             }
 

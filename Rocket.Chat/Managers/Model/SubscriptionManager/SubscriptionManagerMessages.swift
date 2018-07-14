@@ -14,7 +14,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "readMessages",
             "params": [subscription.rid]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -23,16 +23,15 @@ extension SubscriptionManager {
     }
 
     static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
-
         let request = [
             "msg": "method",
             "method": "sendMessage",
             "params": [[
                 "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
+                "rid": message.subscription?.rid ?? "",
                 "msg": message.text
-                ]]
-            ] as [String: Any]
+            ]]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }

@@ -14,23 +14,32 @@ struct MessagesClient: APIClient {
 
     func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.current) {
         guard let id = message.identifier else { return }
+        let subscriptionIdentifier = subscription.rid
 
         try? realm?.write {
+            if let subscriptionMutable = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
+                subscriptionMutable.roomLastMessage = message
+                subscriptionMutable.roomLastMessageDate = message.createdAt
+                subscriptionMutable.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+                realm?.add(subscriptionMutable, update: true)
+            }
+
             realm?.add(message, update: true)
         }
 
         func updateMessage(json: JSON) {
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    message.temporary = false
-                    message.failed = false
-                    message.updatedAt = Date()
-                    message.map(json, realm: realm)
-                    realm?.add(message, update: true)
-                }
+            let server = AuthManager.selectedServerHost()
+            AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
 
-                MessageTextCacheManager.shared.update(for: message)
+            try? realm?.write {
+                message.temporary = false
+                message.failed = false
+                message.updatedAt = Date()
+                message.map(json, realm: realm)
+                realm?.add(message, update: true)
             }
+
+            MessageTextCacheManager.shared.update(for: message)
         }
 
         func setMessageOffline() {
@@ -42,7 +51,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
@@ -105,6 +114,44 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
+    func starMessage(_ message: Message, star: Bool) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(StarMessageRequest(msgId: id, star: star)) { response in
+            switch response {
+            case .resource: break
+            case .error: Alert.defaultError.present()
+            }
+        }
+
+        return true
+    }
+
+    @discardableResult
+    func pinMessage(_ message: Message, pin: Bool) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(PinMessageRequest(msgId: id, pin: pin)) { response in
+            switch response {
+            case .resource: break
+            case .error: Alert.defaultError.present()
+            }
+        }
+
+        return true
+    }
+
+    @discardableResult
     func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier, !message.rid.isEmpty else {
             return false
@@ -119,13 +166,11 @@ struct MessagesClient: APIClient {
                     return Alert.defaultError.present()
                 }
 
-                DispatchQueue.main.async {
-                    try? realm?.write {
-                        realm?.add(message, update: true)
-                    }
-
-                    MessageTextCacheManager.shared.update(for: message)
+                try? realm?.write {
+                    realm?.add(message, update: true)
                 }
+
+                MessageTextCacheManager.shared.update(for: message)
             case .error: Alert.defaultError.present()
             }
         }
@@ -177,12 +222,23 @@ struct MessagesClient: APIClient {
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
             switch response {
-            case .resource: break
+            case .resource:
+                AnalyticsManager.log(
+                    event: .reaction(
+                        subscriptionType: message.subscription?.type.rawValue ?? ""
+                    )
+                )
             case .error(let error):
                 switch error {
                 case .version:
                     // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in })
+                    MessageManager.react(message, emoji: emoji, completion: { _ in
+                        AnalyticsManager.log(
+                            event: .reaction(
+                                subscriptionType: message.subscription?.type.rawValue ?? ""
+                            )
+                        )
+                    })
                 default:
                     Alert.defaultError.present()
                 }

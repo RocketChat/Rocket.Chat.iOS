@@ -9,21 +9,34 @@
 import UIKit
 import RealmSwift
 
-extension SubscriptionMessagesResource {
+extension RoomMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.current)
+            message.map(json, realm: realm)
             return message
         }
     }
 }
 
-extension SubscriptionMentionsResource {
+extension RoomMentionsResource {
     func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
         return raw?["mentions"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.current)
+            message.map(json, realm: realm)
+            return message
+        }
+    }
+}
+
+extension SearchMessagesResource {
+    func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
+        return raw?["messages"].arrayValue.map { json in
+            let message = Message()
+            message.map(json, realm: realm)
             return message
         }
     }
@@ -42,6 +55,8 @@ class MessagesListViewData {
 
     var title: String = localized("chat.messages.list.title")
 
+    var isLoadingSearchResults: Bool = false
+    var isSearchingMessages: Bool = false
     var isListingMentions: Bool = false
     var isShowingAllMessages: Bool {
         return showing >= total
@@ -57,45 +72,77 @@ class MessagesListViewData {
     }
 
     var query: String?
-
     private var isLoadingMoreMessages = false
+
+    func searchMessages(withText text: String, completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else {
+            return
+        }
+
+        API.current()?.fetch(SearchMessagesRequest(roomId: subscription.rid, searchText: text)) { [weak self] response in
+            self?.isLoadingSearchResults = false
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: nil,
+                    total: nil,
+                    completion: completion
+                )
+            default:
+                break
+            }
+        }
+    }
+
     func loadMoreMessages(completion: (() -> Void)? = nil) {
-        if isLoadingMoreMessages { return }
+        guard !isLoadingMoreMessages else { return }
 
-        if let subscription = subscription {
-            isLoadingMoreMessages = true
+        if isListingMentions {
+            loadMentions(completion: completion)
+        } else {
+            loadMessages(completion: completion)
+        }
+    }
 
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
-            if isListingMentions {
-                let request = SubscriptionMentionsRequest(roomId: subscription.rid)
-                API.current()?.fetch(request, options: options) { [weak self] response in
-                    switch response {
-                    case .resource(let resource):
-                        self?.handleMessages(
-                            fetchingWith: resource.fetchMessagesFromRealm,
-                            showing: resource.count,
-                            total: resource.total,
-                            completion: completion
-                        )
-                    case .error:
-                        Alert.defaultError.present()
-                    }
-                }
-            } else {
-                let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
-                API.current()?.fetch(request, options: options) { [weak self] response in
-                    switch response {
-                    case .resource(let resource):
-                        self?.handleMessages(
-                            fetchingWith: resource.fetchMessagesFromRealm,
-                            showing: resource.count,
-                            total: resource.total,
-                            completion: completion
-                        )
-                    case .error:
-                        Alert.defaultError.present()
-                    }
-                }
+    private func loadMessages(completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else { return }
+
+        isLoadingMoreMessages = true
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+        let request = RoomMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+        API.current()?.fetch(request, options: options) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: resource.count,
+                    total: resource.total,
+                    completion: completion
+                )
+            case .error:
+                Alert.defaultError.present()
+            }
+        }
+    }
+
+    private func loadMentions(completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else { return }
+
+        isLoadingMoreMessages = true
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+        let request = RoomMentionsRequest(roomId: subscription.rid)
+        API.current()?.fetch(request, options: options) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: resource.count,
+                    total: resource.total,
+                    completion: completion
+                )
+            case .error:
+                Alert.defaultError.present()
             }
         }
     }
@@ -106,10 +153,15 @@ class MessagesListViewData {
             self.total = total ?? 0
             if let messages = messagesFetcher() {
                 guard var lastMessage = messages.first else {
+                    if self.isSearchingMessages {
+                        self.cellsPages = []
+                    }
+
                     self.isLoadingMoreMessages = false
                     completion?()
                     return
                 }
+
                 var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
                 messages.forEach { message in
                     if lastMessage.createdAt?.day != message.createdAt?.day ||
@@ -120,11 +172,15 @@ class MessagesListViewData {
                     cellsPage.append(CellData(message: message, date: nil))
                     lastMessage = message
                 }
-                self.cellsPages.append(cellsPage)
+
+                if self.isSearchingMessages {
+                    self.cellsPages = [cellsPage]
+                } else {
+                    self.cellsPages.append(cellsPage)
+                }
             }
 
-            self.currentPage += 1
-
+            if !self.isSearchingMessages { self.currentPage += 1 }
             self.isLoadingMoreMessages = false
             completion?()
         }
@@ -132,6 +188,10 @@ class MessagesListViewData {
 }
 
 class MessagesListViewController: BaseViewController {
+    lazy var refreshControl = UIRefreshControl()
+    lazy var searchBar = UISearchBar()
+
+    var searchTimer: Timer?
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -143,11 +203,9 @@ class MessagesListViewController: BaseViewController {
         data.isListingMentions = self.data.isListingMentions
         data.loadMoreMessages {
             self.data = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
-            }
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
         }
     }
 
@@ -155,6 +213,13 @@ class MessagesListViewController: BaseViewController {
         guard let label = collectionView.backgroundView as? UILabel else { return }
 
         if data.cells.count == 0 {
+            if data.isSearchingMessages &&
+                    (searchBar.text == nil || searchBar.text == "") ||
+                    data.isLoadingSearchResults {
+                label.text = ""
+                return
+            }
+
             label.text = localized("chat.messages.list.empty")
         } else {
             label.text = ""
@@ -163,11 +228,20 @@ class MessagesListViewController: BaseViewController {
 
     func loadMoreMessages() {
         data.loadMoreMessages {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.refreshControl?.endRefreshing()
-                self.updateIsEmptyMessage()
+            self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+            self.updateIsEmptyMessage()
+        }
+    }
+
+    func searchMessages(withText text: String) {
+        data.searchMessages(withText: text) {
+            if self.searchBar.text == nil || self.searchBar.text == "" {
+                self.data.cellsPages = []
             }
+
+            self.collectionView.reloadData()
+            self.updateIsEmptyMessage()
         }
     }
 }
@@ -178,11 +252,6 @@ extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
-
-        collectionView.refreshControl = refreshControl
-
         let label = UILabel(frame: collectionView.frame)
         label.textAlignment = .center
         label.textColor = .gray
@@ -190,17 +259,30 @@ extension MessagesListViewController {
 
         registerCells()
 
-        title = data.title
+        if data.isSearchingMessages {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+            gesture.cancelsTouchesInView = false
+            collectionView.addGestureRecognizer(gesture)
+            setupSearchBar()
+        } else {
+            title = data.title
+            refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+            collectionView.refreshControl = refreshControl
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreMessages()
+        if !data.isSearchingMessages {
+            loadMoreMessages()
+        } else {
+            searchBar.becomeFirstResponder()
+        }
 
-        guard let refreshControl = collectionView.refreshControl else { return }
-        collectionView.refreshControl?.beginRefreshing()
+        guard let refreshControl = collectionView.refreshControl, !data.isSearchingMessages else { return }
         collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        collectionView.refreshControl?.beginRefreshing()
     }
 
     func registerCells() {
@@ -219,13 +301,36 @@ extension MessagesListViewController {
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
     }
+
+    func setupSearchBar() {
+        searchBar.placeholder = localized("chat.messages.list.search.placeholder")
+        searchBar.delegate = self
+        let cancelButton = UIBarButtonItem(title: localized("global.cancel"), style: .plain, target: self, action: #selector(close))
+
+        navigationItem.rightBarButtonItem = cancelButton
+        navigationItem.titleView = searchBar
+        searchBar.applyTheme()
+    }
+
+    @objc func close() {
+        hideKeyboard()
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func hideKeyboard() {
+        guard data.isSearchingMessages else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
+    }
 }
 
 // MARK: CollectionView
 
 extension MessagesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.cells.count + (data.isShowingAllMessages ? 0 : 1)
+        return !data.isLoadingSearchResults ? data.cells.count + (data.isShowingAllMessages ? 0 : 1) : 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -233,11 +338,14 @@ extension MessagesListViewController: UICollectionViewDataSource {
             return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
         }
 
+        if data.isSearchingMessages && data.isLoadingSearchResults {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
+        }
+
         let cellData = data.cell(at: indexPath.row)
 
         if let message = cellData.message,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
-            cell.delegate = ChatViewController.shared
             cell.message = message
             return cell
         }
@@ -253,8 +361,12 @@ extension MessagesListViewController: UICollectionViewDataSource {
 }
 
 extension MessagesListViewController: UICollectionViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideKeyboard()
+    }
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == data.cells.count - data.pageSize/3 {
+        if indexPath.row == data.cells.count - data.pageSize/3 && !data.isSearchingMessages {
             loadMoreMessages()
         }
     }

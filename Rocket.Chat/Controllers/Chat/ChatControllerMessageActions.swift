@@ -42,10 +42,15 @@ extension ChatViewController {
     func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
         guard
             let messageUser = message.user,
-            let auth = AuthManager.isAuthenticated()
+            let auth = AuthManager.isAuthenticated(),
+            let client = API.current()?.client(MessagesClient.self)
         else {
             return []
         }
+
+        let info = (auth.settings?.messageReadReceiptStoreUsers ?? false) ? UIAlertAction(title: localized("chat.message.actions.info"), style: .default, handler: { _ in
+                self.handleReadReceiptPress(message, source: (view, view.frame))
+        }) : nil
 
         let react = UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
             self.react(message: message, view: view)
@@ -67,28 +72,32 @@ extension ChatViewController {
             self?.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [react, reply, quote, copy, report]
+        var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
 
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
             let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
-                if message.pinned {
-                    MessageManager.unpin(message)
-                } else {
-                    MessageManager.pin(message)
-                }
+                client.pinMessage(message, pin: !message.pinned)
             })
 
             actions.append(pin)
         }
 
+        if auth.canStarMessage(message) == .allowed, let userId = auth.user?.identifier {
+            let isStarred = message.starred.contains(userId)
+            let starMessage = isStarred ? localized("chat.message.actions.unstar") : localized("chat.message.actions.star")
+            let star = UIAlertAction(title: starMessage, style: .default, handler: { (_) in
+                client.starMessage(message, star: !isStarred)
+            })
+
+            actions.append(star)
+        }
+
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-                DispatchQueue.main.async {
-                    MessageManager.blockMessagesFrom(messageUser, completion: {
-                        self?.updateSubscriptionInfo()
-                    })
-                }
+                MessageManager.blockMessagesFrom(messageUser, completion: {
+                    self?.updateSubscriptionInfo()
+                })
             })
 
             actions.append(block)
@@ -98,6 +107,7 @@ extension ChatViewController {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.messageToEdit = message
                 self.editText(message.text)
+                self.applyTheme()
             })
 
             actions.append(edit)
@@ -184,6 +194,7 @@ extension ChatViewController {
         if let presenter = controller.popoverPresentationController {
             presenter.sourceView = view
             presenter.sourceRect = view.bounds
+            presenter.backgroundColor = view.theme?.focusedBackground
         }
 
         controller.emojiPicked = { emoji in
@@ -192,6 +203,7 @@ extension ChatViewController {
         }
 
         controller.customEmojis = CustomEmoji.emojis()
+        ThemeManager.addObserver(controller.view)
 
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)
@@ -221,9 +233,7 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            Alert(
-                key: "chat.message.report.success.title"
-            ).present()
+            Alert(key: "chat.message.report.success.title").present()
         }
     }
 }

@@ -151,7 +151,7 @@ struct DatabaseManager {
         servers.append([
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.serverURL: serverURL
-            ])
+        ])
 
         let index = servers.count - 1
         defaults.set(servers, forKey: ServerPersistKeys.servers)
@@ -192,6 +192,10 @@ struct DatabaseManager {
         else {
             return nil
         }
+
+        #if DEBUG
+        Log.debug("Realm path: \(url.appendingPathComponent(databaseName))")
+        #endif
 
         return Realm.Configuration(
             fileURL: url.appendingPathComponent(databaseName),

@@ -13,129 +13,34 @@ struct SubscriptionManager {
     static func updateUnreadApplicationBadge() {
         var unread = 0
 
-        Realm.execute({ (realm) in
-            for obj in realm.objects(Subscription.self) {
-                unread += obj.unread
+        Realm.execute({ _ in
+            if let list = Subscription.all() {
+                for obj in list {
+                    unread += obj.unread
+                }
             }
         }, completion: {
             UIApplication.shared.applicationIconBadgeNumber = unread
         })
     }
 
-    // swiftlint:disable function_body_length
-    static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
-        var params: [[String: Any]] = []
+    static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
+        realm?.refresh()
 
-        if let lastUpdated = auth.lastSubscriptionFetch {
-            params.append(["$date": Date.intervalFromDate(lastUpdated)])
-        }
+        let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
+        let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage
+        let lastUpdateRooms = auth.lastRoomFetchWithLastMessage
 
-        let requestSubscriptions = [
-            "msg": "method",
-            "method": "subscriptions/get",
-            "params": params
-        ] as [String: Any]
-
-        let requestRooms = [
-            "msg": "method",
-            "method": "rooms/get",
-            "params": params
-        ] as [String: Any]
-
-        let currentRealm = Realm.current
-
-        func executeRoomsRequest() {
-            SocketManager.send(requestRooms) { response in
-                guard !response.isError() else { return Log.debug(response.result.string) }
-
-                currentRealm?.execute({ realm in
-                    guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
-                    realm.add(auth, update: true)
-                })
-
-                let subscriptions = List<Subscription>()
-
-                // List is used the first time user opens the app
-                let list = response.result["result"].array
-
-                // Update is used on updates
-                let updated = response.result["result"]["update"].array
-
-                currentRealm?.execute({ realm in
-                    list?.forEach { object in
-                        if let rid = object["_id"].string {
-                            if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.mapRoom(object)
-                                subscriptions.append(subscription)
-                            }
-                        }
-                    }
-
-                    updated?.forEach { object in
-                        if let rid = object["_id"].string {
-                            if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.mapRoom(object)
-                                subscriptions.append(subscription)
-                            }
-                        }
-                    }
-
-                    realm.add(subscriptions, update: true)
-                }, completion: {
-                    completion(response)
-                })
-            }
-        }
-
-        SocketManager.send(requestSubscriptions) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-
-            let subscriptions = List<Subscription>()
-
-            // List is used the first time user opens the app
-            let list = response.result["result"].array
-
-            // Update & Removed is used on updates
-            let updated = response.result["result"]["update"].array
-            let removed = response.result["result"]["remove"].array
-
-            currentRealm?.execute({ realm in
-                guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-
-                list?.forEach { object in
-                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.auth = auth
-                    })
-
-                    subscriptions.append(subscription)
-                }
-
-                updated?.forEach { object in
-                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.auth = auth
-                    })
-
-                    subscriptions.append(subscription)
-                }
-
-                removed?.forEach { object in
-                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.auth = nil
-                    })
-
-                    subscriptions.append(subscription)
-                }
-
-                auth.lastSubscriptionFetch = Date.serverDate
-
-                realm.add(subscriptions, update: true)
-                realm.add(auth, update: true)
-
+        // The call needs to be nested because at the first time the user
+        // opens the app we don't have the Subscriptions and the Room object
+        // is not able to create one, so the request needs to be completed
+        // only after the Subscriptions one is finished.
+        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
+            client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
                 DispatchQueue.main.async {
-                    executeRoomsRequest()
+                    completion?()
                 }
-            })
+            }
         }
     }
 
@@ -188,8 +93,7 @@ struct SubscriptionManager {
             currentRealm?.execute({ (realm) in
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
-                        subscription.mapRoom(object)
-
+                        subscription.mapRoom(object, realm: realm)
                         realm.add(subscription, update: true)
                     }
                 }

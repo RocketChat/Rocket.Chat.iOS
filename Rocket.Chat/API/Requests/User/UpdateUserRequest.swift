@@ -1,5 +1,5 @@
 //
-//  UserUpdateRequest.swift
+//  UpdateUserRequest.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 27/02/18.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UpdateUserRequest: APIRequest {
+final class UpdateUserRequest: APIRequest {
     typealias APIResourceType = UpdateUserResource
 
     let requiredVersion = Version(0, 62, 2)
@@ -17,6 +17,7 @@ class UpdateUserRequest: APIRequest {
     let path = "/api/v1/users.updateOwnBasicInfo"
 
     let user: User?
+    let username: String?
     let currentPassword: String?
     let password: String?
 
@@ -24,6 +25,14 @@ class UpdateUserRequest: APIRequest {
         self.user = user
         self.password = password
         self.currentPassword = currentPassword
+        self.username = nil
+    }
+
+    init(username: String) {
+        self.username = username
+        self.user = nil
+        self.currentPassword = nil
+        self.password = nil
     }
 
     func body() -> Data? {
@@ -51,6 +60,10 @@ class UpdateUserRequest: APIRequest {
             body["data"]["currentPassword"].string = currentPassword.sha256()
         }
 
+        if let username = username {
+            body["data"] = ["username": username]
+        }
+
         let string = body.rawString()
         let data = string?.data(using: .utf8)
 
@@ -62,12 +75,12 @@ class UpdateUserRequest: APIRequest {
     }
 }
 
-class UpdateUserResource: APIResource {
+final class UpdateUserResource: APIResource {
     var user: User? {
-        guard let rawMessage = raw?["user"] else { return nil }
+        guard let rawUser = raw?["user"] else { return nil }
 
         let user = User()
-        user.map(rawMessage, realm: nil)
+        user.map(rawUser, realm: nil)
         return user
     }
 

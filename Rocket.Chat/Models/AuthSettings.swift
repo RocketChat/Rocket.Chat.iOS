@@ -34,6 +34,7 @@ final class AuthSettings: Object {
 
     // Rooms
     @objc dynamic var favoriteRooms = true
+    @objc dynamic var storeLastMessage = true
 
     // Authentication methods
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false
@@ -44,10 +45,15 @@ final class AuthSettings: Object {
     @objc dynamic var isGitHubAuthenticationEnabled = false
     @objc dynamic var isGitLabAuthenticationEnabled = false
     @objc dynamic var isLinkedInAuthenticationEnabled = false
+    @objc dynamic var isWordPressAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
     @objc dynamic var isCASEnabled = false
     @objc dynamic var casLoginUrl: String?
+
+    @objc dynamic var gitlabUrl: String?
+
+    @objc dynamic var firstChannelAfterLogin: String?
 
     // Authentication Placeholder Fields
     @objc dynamic var emailOrUsernameFieldPlaceholder: String?
@@ -76,6 +82,7 @@ final class AuthSettings: Object {
 
     // File upload
     @objc dynamic var uploadStorageType: String?
+    @objc dynamic var maxFileSize: Int = 0
 
     // Hide Message Types
     @objc dynamic var hideMessageUserJoined: Bool = false
@@ -88,6 +95,7 @@ final class AuthSettings: Object {
     @objc dynamic var messageGroupingPeriod = AuthSettingsDefaults.messageGroupingPeriod
 
     @objc dynamic var messageAllowPinning = true
+    @objc dynamic var messageAllowStarring = true
 
     @objc dynamic var messageShowDeletedStatus: Bool = true
     @objc dynamic var messageAllowDeleting: Bool = true
@@ -98,6 +106,9 @@ final class AuthSettings: Object {
     @objc dynamic var messageAllowEditingBlockEditInMinutes: Int = 0
 
     @objc dynamic var messageMaxAllowedSize: Int = 0
+
+    @objc dynamic var messageReadReceiptEnabled: Bool = false
+    @objc dynamic var messageReadReceiptStoreUsers: Bool = false
 
     // Custom fields
     @objc dynamic var rawCustomFields: String?

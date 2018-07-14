@@ -9,18 +9,6 @@
 import RealmSwift
 
 extension User {
-    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.current) -> Bool {
-        guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
-
-        for userRole in self.roles {
-            for permissionRole in permissionRoles where userRole == permissionRole {
-                return true
-            }
-        }
-
-        return false
-    }
-
     func displayName() -> String {
         guard let settings = AuthSettingsManager.settings else {
             return username ?? ""
@@ -63,6 +51,6 @@ extension User {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
     }
 }

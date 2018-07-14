@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatChannelHeaderCell: UICollectionViewCell {
+final class ChatChannelHeaderCell: UICollectionViewCell {
 
     static let minimumHeight = CGFloat(200)
     static let identifier = "ChatChannelHeaderCell"

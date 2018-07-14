@@ -77,6 +77,21 @@ extension String {
         return ranges
     }
 
+    /**
+     This method prevents the app from keeping the URL that may
+     come with (or without) a slash in the end. All the URLs
+     coming/mapped from the API should not have a slash in the end.
+
+     - returns: the same string, but without the last char if it exists.
+     */
+    func removingLastSlashIfNeeded() -> String {
+        if last == "/" {
+            return String(self.dropLast())
+        }
+
+        return self
+    }
+
     func removingWhitespaces() -> String {
         return components(separatedBy: .whitespacesAndNewlines).joined()
     }
@@ -87,6 +102,11 @@ extension String {
 
     var removingPercentEncoding: String? {
         return NSString(string: self).removingPercentEncoding
+    }
+
+    func replacingFirstOccurrence(of string: String, with replacement: String) -> String {
+        guard let range = self.range(of: string) else { return self }
+        return replacingCharacters(in: range, with: replacement)
     }
 
     func commandAndParams() -> (command: String, params: String)? {

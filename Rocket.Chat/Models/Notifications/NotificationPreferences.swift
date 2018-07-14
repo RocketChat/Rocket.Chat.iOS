@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationPreferences {
+final class NotificationPreferences {
     let desktopNotifications: SubscriptionNotificationsStatus
     let disableNotifications: Bool
     let emailNotifications: SubscriptionNotificationsStatus

@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Realm
 
 final class Auth: Object {
     // Server
@@ -24,11 +25,11 @@ final class Auth: Object {
 
     @objc dynamic var settings: AuthSettings?
 
-    // Token
     @objc dynamic var token: String?
     @objc dynamic var tokenExpires: Date?
     @objc dynamic var lastAccess: Date?
-    @objc dynamic var lastSubscriptionFetch: Date?
+    @objc dynamic var lastSubscriptionFetchWithLastMessage: Date?
+    @objc dynamic var lastRoomFetchWithLastMessage: Date?
 
     @objc dynamic var userId: String?
 
@@ -39,4 +40,10 @@ final class Auth: Object {
     override static func primaryKey() -> String? {
         return "serverURL"
     }
+
+    // MARK: Internal
+
+    // This key controls if the first channel (based on firstChannelAfterLogin) setting
+    // was already opened on this authentication object
+    @objc dynamic var internalFirstChannelOpened = true
 }

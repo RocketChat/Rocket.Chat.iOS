@@ -11,7 +11,7 @@ import OAuthSwift
 import UIKit
 import SwiftyJSON
 
-class OAuthCredentials {
+final class OAuthCredentials {
     let token: String
     let secret: String?
 
@@ -28,7 +28,7 @@ class OAuthCredentials {
     }
 }
 
-class OAuthManager {
+final class OAuthManager {
     private static var oauthSwift: OAuth2Swift?
 
     @discardableResult
@@ -81,7 +81,12 @@ class OAuthManager {
             return nil
         }
 
-        return URL(string: "https://\(host)/_oauth/\(callbackPath)")
+        var portString = ""
+        if let port = server.port {
+            portString = ":\(port)"
+        }
+
+        return URL(string: "https://\(host)\(portString)/_oauth/\(callbackPath)")
     }
 
     static func state() -> String? {

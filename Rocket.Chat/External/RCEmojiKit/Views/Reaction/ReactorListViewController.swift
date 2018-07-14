@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReactorListViewController: UIViewController {
+final class ReactorListViewController: UIViewController, Closeable {
     override var preferredContentSize: CGSize {
         set { }
         get {
@@ -27,19 +27,8 @@ class ReactorListViewController: UIViewController {
 
     var reactorListView: ReactorListView! {
         didSet {
-            reactorListView.closePressed = {
-                self.dismiss(animated: true, completion: nil)
-            }
-
+            reactorListView.isPopover = presentationController?.presentationStyle == .popover
             reactorListView.model = model
-        }
-    }
-
-    func close(animated: Bool) {
-        if navigationController?.topViewController == self {
-            navigationController?.popViewController(animated: animated)
-        } else {
-            dismiss(animated: animated)
         }
     }
 
@@ -63,6 +52,8 @@ class ReactorListViewController: UIViewController {
         )
 
         title = NSLocalizedString("reactorlist.title", tableName: "RCEmojiKit", bundle: Bundle.main, value: "", comment: "")
+
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {

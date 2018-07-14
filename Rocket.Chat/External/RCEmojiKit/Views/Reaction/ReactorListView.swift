@@ -16,7 +16,7 @@ protocol ReactorPresenter {
 
 typealias ReactorCell = UITableViewCell & ReactorPresenter
 
-class DefaultReactorCell: UITableViewCell, ReactorPresenter {
+final class DefaultReactorCell: UITableViewCell, ReactorPresenter {
     var reactor: String = "" {
         didSet {
             textLabel?.text = reactor
@@ -42,7 +42,7 @@ struct ReactorListViewModel: RCEmojiKitLocalizable {
     }
 }
 
-class ReactorListView: UIView {
+final class ReactorListView: UIView {
     @IBOutlet var contentView: UIView!
 
     @IBOutlet weak var reactorTableView: UITableView! {
@@ -55,8 +55,8 @@ class ReactorListView: UIView {
         }
     }
 
-    var closePressed: () -> Void = { }
-    var selectedReactor: (String) -> Void = { _ in }
+    var isPopover = false
+    var selectedReactor: (String, CGRect) -> Void = { _, _ in }
     var configureCell: (ReactorCell) -> Void = { _ in }
 
     var model: ReactorListViewModel = .emptyState {
@@ -81,10 +81,6 @@ class ReactorListView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-    }
-
-    @IBAction func closePressed(_ sender: UIBarButtonItem) {
-        closePressed()
     }
 }
 
@@ -128,7 +124,6 @@ extension ReactorListView: UITableViewDataSource {
 extension ReactorListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-        view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
 
         let stackView = UIStackView(frame: CGRect(x: 16, y: 8, width: tableView.frame.size.width - 16, height: 24))
         stackView.spacing = 8
@@ -145,6 +140,9 @@ extension ReactorListView: UITableViewDelegate {
 
         view.addSubview(stackView)
 
+        view.applyTheme()
+        view.backgroundColor = view.theme?.auxiliaryBackground
+
         return view
     }
 
@@ -154,6 +152,31 @@ extension ReactorListView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row])
+        let rect = tableView.rectForRow(at: indexPath)
+        selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row], rect)
+    }
+}
+
+extension ReactorListView {
+    override var theme: Theme? {
+        guard let theme = super.theme else { return nil }
+        guard isPopover else { return theme }
+        let popoverTheme = Theme(
+            backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            bannerBackground: theme.backgroundColor,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
+        return popoverTheme
     }
 }

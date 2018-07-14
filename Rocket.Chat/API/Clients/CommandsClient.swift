@@ -13,17 +13,19 @@ struct CommandsClient: APIClient {
 
     func fetchCommands(realm: Realm? = Realm.current) {
         api.fetch(CommandsRequest()) { response in
-            DispatchQueue.main.async {
-                switch response {
-                case .resource(let resource):
+            switch response {
+            case .resource(let resource):
+                realm?.execute({ realm in
+                    var commands: [Command] = []
+
                     resource.commands?.forEach { command in
-                        try? realm?.write {
-                            realm?.add(command, update: true)
-                        }
+                        commands.append(command)
                     }
-                case .error:
-                    break
-                }
+
+                    realm.add(commands, update: true)
+                })
+            case .error:
+                break
             }
         }
     }

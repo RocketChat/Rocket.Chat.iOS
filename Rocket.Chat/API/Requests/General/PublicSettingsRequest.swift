@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PublicSettingsRequest: APIRequest {
+final class PublicSettingsRequest: APIRequest {
     typealias APIResourceType = PublicSettingsResource
 
     let requiredVersion = Version(0, 62, 2)
@@ -27,14 +27,17 @@ class PublicSettingsRequest: APIRequest {
                 "UI_Use_Real_Name",
                 "UI_Allow_room_names_with_special_chars",
                 "Favorite_Rooms",
+                "Store_Last_Message",
                 "Accounts_OAuth_Google",
                 "Accounts_OAuth_Facebook",
                 "Accounts_OAuth_Github",
                 "Accounts_OAuth_Gitlab",
                 "Accounts_OAuth_Linkedin",
+                "Accounts_OAuth_Wordpress",
                 "LDAP_Enable",
                 "CAS_enabled",
                 "CAS_login_url",
+                "API_Gitlab_URL",
                 "Accounts_ShowFormLogin",
                 "Accounts_RegistrationForm",
                 "Accounts_PasswordReset",
@@ -60,16 +63,21 @@ class PublicSettingsRequest: APIRequest {
                 "Message_AllowEditing",
                 "Message_AllowEditing_BlockEditInMinutes",
                 "Message_AllowPinning",
+                "Message_AllowStarring",
                 "Message_GroupingPeriod",
                 "Message_MaxAllowedSize",
-                "Accounts_CustomFields"
+                "Message_Read_Receipt_Enabled",
+                "Message_Read_Receipt_Store_Users",
+                "Accounts_CustomFields",
+                "First_Channel_After_Login",
+                "FileUpload_MaxFileSize"
             ]
         }
     }
     """.removingWhitespaces()
 }
 
-class PublicSettingsResource: APIResource {
+final class PublicSettingsResource: APIResource {
     var authSettings: AuthSettings {
         let authSettings = AuthSettings()
 

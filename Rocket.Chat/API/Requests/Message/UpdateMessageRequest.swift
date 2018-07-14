@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class UpdateMessageRequest: APIRequest {
+final class UpdateMessageRequest: APIRequest {
     typealias APIResourceType = UpdateMessageResource
 
     let requiredVersion = Version(0, 49, 0)
@@ -37,7 +37,7 @@ class UpdateMessageRequest: APIRequest {
     }
 }
 
-class UpdateMessageResource: APIResource {
+final class UpdateMessageResource: APIResource {
     var message: Message? {
         guard let rawMessage = raw?["message"] else { return nil }
 

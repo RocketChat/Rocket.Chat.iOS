@@ -152,7 +152,11 @@ extension PushManager {
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
         } else {
-            ChatViewController.shared?.subscription = .notificationSubscription()
+             if let auth = AuthManager.isAuthenticated() {
+                if let subscription = Subscription.notificationSubscription(auth: auth) {
+                    AppManager.open(room: subscription)
+                }
+             }
         }
 
         if let reply = reply {
@@ -175,7 +179,7 @@ extension PushManager {
     }
 }
 
-class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
+final class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if SocketManager.isConnected() {
             completionHandler([])

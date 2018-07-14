@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oAa-qT-sOc" customClass="ChatMessageCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="352" height="332"/>
+            <rect key="frame" x="0.0" y="0.0" width="352" height="359"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="332"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="359"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="40K-VI-9eL">
-                        <rect key="frame" x="47" y="2" width="40" height="21"/>
+                        <rect key="frame" x="58" y="2" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="pkt-kd-3cU"/>
                         </constraints>
@@ -28,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvK-41-cNi">
-                        <rect key="frame" x="94" y="2" width="32.5" height="21"/>
+                        <rect key="frame" x="105" y="2" width="32.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="eQ8-bg-xoj"/>
                         </constraints>
@@ -37,21 +38,21 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-RL-dFU">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                        <rect key="frame" x="16" y="5" width="35" height="35"/>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="0XY-Gd-C8z"/>
                             <constraint firstAttribute="width" constant="35" id="Cny-FU-tGi"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views">
-                        <rect key="frame" x="47" y="32" width="297" height="260"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views" customClass="ThemeableStackView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="61" y="59" width="275" height="260"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="260" id="4Ab-x2-r5e"/>
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eJ-5r-Kgq" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="47" y="23" width="297" height="9"/>
+                        <rect key="frame" x="58" y="24" width="270" height="35"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -60,49 +61,54 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idm-4q-rB2" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="47" y="292" width="297" height="40"/>
+                        <rect key="frame" x="61" y="319" width="275" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="un3-x5-7Av"/>
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxd-Cw-G69">
-                        <rect key="frame" x="133" y="6" width="14" height="14"/>
+                        <rect key="frame" x="144" y="6" width="14" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14" id="NhW-py-xNz"/>
                             <constraint firstAttribute="height" constant="14" id="cco-0E-Vbd"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68O-nk-SUK">
+                        <rect key="frame" x="332" y="35.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="eOE-YO-Wp2"/>
+                            <constraint firstAttribute="width" constant="12" id="yLu-lZ-Qb6"/>
+                        </constraints>
+                        <state key="normal" image="Check"/>
+                        <connections>
+                            <action selector="readReceiptPressed:" destination="oAa-qT-sOc" eventType="touchUpInside" id="blA-wL-0tg"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="sWJ-OU-dZk" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="47" id="1TD-TH-eBP"/>
+                <constraint firstItem="sWJ-OU-dZk" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leadingMargin" constant="45" id="1TD-TH-eBP"/>
                 <constraint firstItem="Gxd-Cw-G69" firstAttribute="centerY" secondItem="pvK-41-cNi" secondAttribute="centerY" id="3p5-a3-GUZ"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="4Ig-wg-cUQ"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="5" id="4Zr-IT-efr"/>
-                <constraint firstItem="pvK-41-cNi" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="796-8s-tZB"/>
-                <constraint firstItem="Idm-4q-rB2" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="47" id="8Er-OM-NsM"/>
+                <constraint firstItem="Idm-4q-rB2" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leadingMargin" constant="45" id="8Er-OM-NsM"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
-                <constraint firstAttribute="trailing" secondItem="sWJ-OU-dZk" secondAttribute="trailing" constant="8" id="D1b-Il-xxS"/>
+                <constraint firstItem="pvK-41-cNi" firstAttribute="centerY" secondItem="40K-VI-9eL" secondAttribute="centerY" id="Cqz-UW-C6F"/>
+                <constraint firstAttribute="trailingMargin" secondItem="sWJ-OU-dZk" secondAttribute="trailing" id="D1b-Il-xxS"/>
                 <constraint firstItem="Idm-4q-rB2" firstAttribute="top" secondItem="sWJ-OU-dZk" secondAttribute="bottom" id="J8K-SC-v89"/>
                 <constraint firstItem="Gxd-Cw-G69" firstAttribute="leading" secondItem="pvK-41-cNi" secondAttribute="trailing" constant="7" id="LKE-Pc-HmH"/>
-                <constraint firstAttribute="trailing" secondItem="pvK-41-cNi" secondAttribute="trailing" priority="900" constant="2" id="OVZ-S3-Gij"/>
-                <constraint firstAttribute="trailing" secondItem="Idm-4q-rB2" secondAttribute="trailing" constant="8" id="Wzj-wo-r7j"/>
+                <constraint firstAttribute="trailingMargin" secondItem="Idm-4q-rB2" secondAttribute="trailing" id="Wzj-wo-r7j"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
+                <constraint firstAttribute="trailing" secondItem="68O-nk-SUK" secondAttribute="trailing" constant="8" id="iMf-4w-YbQ"/>
                 <constraint firstAttribute="bottom" secondItem="Idm-4q-rB2" secondAttribute="bottom" id="kdQ-0K-2Dm"/>
-                <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="myV-aY-DuJ"/>
-                <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
-                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" id="oBU-c9-0bJ"/>
+                <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leadingMargin" id="myV-aY-DuJ"/>
+                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" constant="1" id="oBU-c9-0bJ"/>
+                <constraint firstItem="68O-nk-SUK" firstAttribute="centerY" secondItem="2eJ-5r-Kgq" secondAttribute="centerY" id="q1U-5f-3TW"/>
+                <constraint firstItem="68O-nk-SUK" firstAttribute="leading" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" constant="4" id="rUE-1d-U2s"/>
                 <constraint firstItem="2eJ-5r-Kgq" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="wIX-xY-yjb"/>
-                <constraint firstAttribute="trailing" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" constant="8" id="xan-6S-aXM"/>
             </constraints>
-            <size key="customSize" width="352" height="332"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="OVZ-S3-Gij"/>
-                    <exclude reference="nFi-sf-ZfI"/>
-                </mask>
-            </variation>
+            <size key="customSize" width="352" height="359"/>
             <connections>
                 <outlet property="avatarContainerHeightConstraint" destination="0XY-Gd-C8z" id="1lv-Yr-gpi"/>
                 <outlet property="avatarViewContainer" destination="dHe-RL-dFU" id="Gdl-Cs-ReM"/>
@@ -115,12 +121,15 @@
                 <outlet property="mediaViewsHeightConstraint" destination="4Ab-x2-r5e" id="W2f-II-O9Y"/>
                 <outlet property="reactionsListView" destination="Idm-4q-rB2" id="Ngi-hA-zYt"/>
                 <outlet property="reactionsListViewConstraint" destination="un3-x5-7Av" id="hj4-Bd-W8t"/>
+                <outlet property="readReceiptButton" destination="68O-nk-SUK" id="o9j-3a-b1j"/>
+                <outlet property="readReceiptConstraint" destination="yLu-lZ-Qb6" id="bJ1-8L-0O5"/>
                 <outlet property="statusView" destination="Gxd-Cw-G69" id="shS-p3-TpK"/>
             </connections>
-            <point key="canvasLocation" x="699" y="660"/>
+            <point key="canvasLocation" x="699" y="673.5"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Check" width="20" height="16"/>
         <image name="Exclamation" width="20" height="20"/>
     </resources>
 </document>

@@ -15,6 +15,7 @@ enum LoginServiceType {
     case facebook
     case linkedin
     case gitlab
+    case wordpress
     case saml
     case cas
     case custom
@@ -27,9 +28,22 @@ enum LoginServiceType {
         case "github": self = .github
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
+        case "wordpress": self = .wordpress
         case "saml": self = .saml
         case "cas": self = .cas
         default: self = .invalid
+        }
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .google: return #imageLiteral(resourceName: "google")
+        case .facebook: return #imageLiteral(resourceName: "facebook")
+        case .github: return #imageLiteral(resourceName: "github")
+        case .gitlab: return #imageLiteral(resourceName: "gitlab")
+        case .linkedin: return #imageLiteral(resourceName: "linkedin")
+        case .wordpress: return #imageLiteral(resourceName: "wordpress")
+        default: return nil
         }
     }
 }
@@ -99,7 +113,7 @@ extension LoginService {
             return nil
         }
 
-        return "\(serverUrl)\(authorizePath)"
+        return authorizePath.contains("://") ? authorizePath : "\(serverUrl)\(authorizePath)"
     }
 
     var accessTokenUrl: String? {
@@ -149,15 +163,26 @@ extension LoginService {
         return service
     }
 
-    static var gitlab: LoginService {
+    static func gitlab(url: String? = nil) -> LoginService {
         let service = LoginService()
         service.mapGitLab()
+
+        if let url = url {
+            service.serverUrl = url
+        }
+
         return service
     }
 
     static var linkedin: LoginService {
         let service = LoginService()
         service.mapLinkedIn()
+        return service
+    }
+
+    static var wordpress: LoginService {
+        let service = LoginService()
+        service.mapWordPress()
         return service
     }
 

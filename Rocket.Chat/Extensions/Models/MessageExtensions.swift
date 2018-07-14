@@ -7,8 +7,32 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension Message {
+
+    /**
+        This method will return if the reply button
+        in a broadcast room needs to be displayed or
+        not for the message. If the subscription is not
+        a broadcast type, it'll return false.
+     */
+    func isBroadcastReplyAvailable(realm: Realm? = Realm.current) -> Bool {
+        guard
+            !temporary,
+            !failed,
+            !markedForDeletion,
+            subscription?.roomBroadcast ?? false,
+            !isSystemMessage(),
+            let currentUser = AuthManager.currentUser(realm: realm),
+            currentUser.identifier != user?.identifier
+        else {
+            return false
+        }
+
+        return true
+    }
+
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
@@ -103,15 +127,20 @@ extension Message {
                 text
             )
 
+        case .messagePinned:
+            return localized("chat.message.type.message_pinned")
+
         default:
             break
         }
 
         return text
     }
+
 }
 
 // MARK: Accessibility
+
 extension Message {
     override var accessibilityLabel: String? {
         get {

@@ -14,27 +14,34 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
-                self.openCamera()
-            }))
-
-            alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
-                self.openCamera(video: true)
-            }))
+        func addAction(_ titleKey: String, image: UIImage, style: UIAlertActionStyle = .default, handler: @escaping (UIAlertAction) -> Void) {
+            let action = UIAlertAction(title: localized(titleKey), style: style, handler: handler)
+            action.image = image
+            action.titleTextAlignment = .left
+            alert.addAction(action)
         }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            addAction("chat.upload.take_photo", image: #imageLiteral(resourceName: "TakeAPhoto")) { _ in
+                self.openCamera()
+            }
+
+            addAction("chat.upload.shoot_video", image: #imageLiteral(resourceName: "RecordVideo")) { _ in
+                self.openCamera(video: true)
+            }
+        }
+
+        addAction("chat.upload.choose_from_library", image: #imageLiteral(resourceName: "ChooseFromLibrary")) { _ in
             self.openPhotosLibrary()
-        }))
+        }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
+        addAction("chat.upload.import_file", image: #imageLiteral(resourceName: "AttachFiles")) { _ in
             self.openDocumentPicker()
-        }))
+        }
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.draw"), style: .default, handler: { (_) in
+        addAction("chat.upload.draw", image: #imageLiteral(resourceName: "DrawSomething")) { _ in
             self.openDrawing()
-        }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
@@ -78,11 +85,8 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let resizedImage = image.resizeWith(width: 1024) ?? image
-            guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
-
             file = UploadHelper.file(
-                for: imageData,
+                for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
                 mimeType: "image/jpeg"
             )
@@ -174,59 +178,46 @@ extension ChatViewController: UIDocumentPickerDelegate {
 // MARK: Uploading a FileUpload
 
 extension ChatViewController {
-
-    func startLoadingUpload(_ fileName: String) {
-        showHeaderStatusView()
-
-        let message = String(format: localized("chat.upload.uploading_file"), fileName)
-        chatHeaderViewStatus?.labelTitle.text = message
-        chatHeaderViewStatus?.buttonRefresh.isHidden = true
-        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
-        chatHeaderViewStatus?.activityIndicator.startAnimating()
-    }
-
-    func stopLoadingUpload() {
-        hideHeaderStatusView()
-    }
-
     func upload(_ file: FileUpload, fileName: String, description: String?) {
         guard let subscription = subscription else { return }
 
-        startLoadingUpload(fileName)
+        func showBanner(failed: Bool = false) {
+            self.showBanner(.forUploadingFile(named: fileName, type: file.type, failed: failed))
+        }
+
+        showBanner()
 
         func stopLoadingUpload() {
             DispatchQueue.main.async { [weak self] in
-                self?.stopLoadingUpload()
+                self?.hideBanner()
             }
         }
 
-        let client = API.current()?.client(UploadClient.self)
-        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
-                       completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
-
-        func deprecatedMethod() {
-            UploadManager.shared.upload(file: file, fileName: fileName, subscription: subscription, progress: { _ in
-                // We currently don't have progress being called.
-            }, completion: { [unowned self] (response, error) in
-                self.stopLoadingUpload()
-
-                if error {
-                    var errorMessage = localized("error.socket.default_error.message")
-
-                    if let response = response {
-                        if let message = response.result["error"]["message"].string {
-                            errorMessage = message
-                        }
-                    }
-
-                    Alert(
-                        title: localized("error.socket.default_error.title"),
-                        message: errorMessage
-                    ).present()
-                }
-            })
+        bannerView?.onCancelButtonPressed = { [weak self] in
+            self?.uploadClient?.cancelUploads()
         }
+
+        bannerView?.onActionButtonPressed = { [weak self] in
+            self?.uploadClient?.retryUploads()
+            showBanner()
+        }
+
+        uploadClient?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", progress: { [weak self] double in
+            self?.bannerView?.progressView.setProgress(Float(double), animated: true)
+        }, completion: { [weak self] success in
+            AnalyticsManager.log(
+                event: .mediaUpload(
+                    mediaType: file.type,
+                    subscriptionType: subscription.type.rawValue
+                )
+            )
+
+            if success {
+                self?.hideBanner()
+            } else {
+                showBanner(failed: true)
+            }
+        })
     }
 
     func uploadDialog(_ file: FileUpload) {
@@ -239,12 +230,14 @@ extension ChatViewController {
             fileName?.placeholder = localized("alert.upload_dialog.placeholder.title")
             fileName?.text = file.name
         }
+
         alert.addTextField { (_ field) -> Void in
             fileDescription = field
             fileDescription?.autocorrectionType = .yes
             fileDescription?.autocapitalizationType = .sentences
             fileDescription?.placeholder = localized("alert.upload_dialog.placeholder.description")
         }
+
         alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.upload"), style: .default, handler: { _ in
             var name = file.name
             if fileName?.text?.isEmpty == false {
@@ -253,6 +246,7 @@ extension ChatViewController {
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
@@ -261,7 +255,9 @@ extension ChatViewController {
 }
 
 extension ChatViewController: DrawingControllerDelegate {
+
     func finishedEditing(with file: FileUpload) {
         uploadDialog(file)
     }
+
 }

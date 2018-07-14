@@ -27,6 +27,12 @@ enum PermissionType: String {
     case pinMessage = "pin-message"
 
     case postReadOnly = "post-readonly"
+
+    case removeUser = "remove-user"
+
+    case addUserToJoinedRoom = "add-user-to-joined-room"
+    case addUserToAnyChannelRoom = "add-user-to-any-c-room"
+    case addUserToAnyPrivateRoom = "add-user-to-any-p-room"
 }
 
 class Permission: BaseModel {
