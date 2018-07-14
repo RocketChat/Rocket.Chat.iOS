@@ -95,6 +95,8 @@ extension MainSplitViewController {
     }
 }
 
+// MARK: Keyboard Shortcuts
+
 extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
@@ -114,7 +116,9 @@ extension MainSplitViewController {
                 UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
         } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
             UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
-        }
+        } + [
+            UIKeyCommand(input: "t", modifierFlags: [.command], action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
+        ]
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
@@ -189,6 +193,16 @@ extension MainSplitViewController {
     @objc func shortcutReplyLatest(_ command: UIKeyCommand) {
         if let message = chatViewController?.subscription?.roomLastMessage {
             chatViewController?.reply(to: message)
+        }
+    }
+
+    @objc func shortcutChangeTheme(_ command: UIKeyCommand) {
+        if let currentThemeIndex = ThemeManager.themes.index(where: { $0.title == ThemeManager.themeTitle }) {
+            if ThemeManager.themes.count > currentThemeIndex + 1 {
+                ThemeManager.theme = ThemeManager.themes[currentThemeIndex + 1].theme
+            } else {
+                ThemeManager.theme = ThemeManager.themes.first?.theme ?? .light
+            }
         }
     }
 }

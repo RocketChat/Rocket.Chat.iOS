@@ -16,7 +16,7 @@ struct ThemeManager {
      Setting a new value will cause the `applyTheme` method to be called on all the `ThemeManager.observers`. The transition is animated by default.
      */
 
-    static var theme = themes.first(where: { $0.title == UserDefaults.standard.string(forKey: userDefaultsKey) })?.theme ?? Theme.light {
+    static var theme = themes.first(where: { $0.title == themeTitle })?.theme ?? Theme.light {
         didSet {
             UIView.animate(withDuration: 0.3) {
                 observers.forEach { $0.value?.applyTheme() }
@@ -24,6 +24,10 @@ struct ThemeManager {
             let themeName = themes.first(where: { $0.theme == theme })?.title
             UserDefaults.standard.set(themeName, forKey: userDefaultsKey)
         }
+    }
+
+    static var themeTitle: String {
+        return UserDefaults.standard.string(forKey: userDefaultsKey) ?? ""
     }
 
     static let userDefaultsKey = "RCTheme"
