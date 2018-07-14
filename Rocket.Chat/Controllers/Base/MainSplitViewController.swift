@@ -106,6 +106,7 @@ extension MainSplitViewController {
             UIKeyCommand(input: "[", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
             UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
             UIKeyCommand(input: "i", modifierFlags: [.command], action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
+            UIKeyCommand(input: "r", modifierFlags: [.command], action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: "Reply to latest"),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add server")
@@ -183,5 +184,11 @@ extension MainSplitViewController {
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
         chatViewController?.toggleActions()
+    }
+
+    @objc func shortcutReplyLatest(_ command: UIKeyCommand) {
+        if let message = chatViewController?.subscription?.roomLastMessage {
+            chatViewController?.reply(to: message)
+        }
     }
 }
