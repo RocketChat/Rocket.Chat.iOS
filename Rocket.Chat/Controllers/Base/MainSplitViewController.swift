@@ -100,11 +100,12 @@ extension MainSplitViewController {
         return [
             UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Message composer"),
             UIKeyCommand(input: "p", modifierFlags: [.command], action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
-            UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Room search"),
+            UIKeyCommand(input: "f", modifierFlags: [.command], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
             UIKeyCommand(input: "]", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
             UIKeyCommand(input: "[", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
             UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
+            UIKeyCommand(input: "i", modifierFlags: [.command], action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add server")
@@ -178,5 +179,9 @@ extension MainSplitViewController {
 
             viewController.selectRoomAt(position - 1)
         }
+    }
+
+    @objc func shortcutRoomActions(_ command: UIKeyCommand) {
+        chatViewController?.toggleActions()
     }
 }
