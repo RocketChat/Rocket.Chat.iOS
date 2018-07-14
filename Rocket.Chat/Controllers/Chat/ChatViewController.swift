@@ -207,6 +207,7 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
+        setupAutoCompletionSeparator()
         textInputbar.applyTheme()
         updateEmptyState()
 
@@ -278,6 +279,12 @@ final class ChatViewController: SLKTextViewController {
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
+    }
+
+    private func setupAutoCompletionSeparator() {
+        guard let hairlineView = self.value(forKey: "autoCompletionHairline") as? UIView else { return }
+        hairlineView.setThemeColor("backgroundColor: mutedAccent")
+        hairlineView.applyTheme()
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
