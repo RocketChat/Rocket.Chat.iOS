@@ -83,6 +83,10 @@ class WelcomeViewController: BaseViewController {
 
     // MARK: Life Cycle
 
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()

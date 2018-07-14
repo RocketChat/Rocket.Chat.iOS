@@ -64,6 +64,10 @@ final class ConnectServerViewController: BaseViewController {
 
     // MARK: Life Cycle
 
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
