@@ -14,18 +14,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         let options: [T]
         var type: NotificationCellType
         let title: String
+        let pickerVisible: Dynamic<Bool>
     }
 
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var valueField: DropDownMenu!
-    weak var tableView: UITableView? {
+    @IBOutlet private weak var valueLabel: UILabel!
+    @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {
-            valueField.parentView = tableView
-        }
-    }
-    var dropDownRect: CGRect = .zero {
-        didSet {
-            valueField.dropDownRect = dropDownRect
+            pickerView.delegate = self
         }
     }
 
@@ -43,15 +39,13 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         }
 
         titleLabel.text = model.title
-        valueField.options = model.options.map({ status -> String in
-            status.localizedCase
-        })
-        valueField.didSelectItem = { index in
-            model.value.value = model.options[index]
-        }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value.localizedCase
+            self.valueLabel.text = value.localizedCase
+        }
+
+        model.pickerVisible.bindAndFire { [unowned self] visible in
+            self.pickerView.isHidden = !visible
         }
     }
 
@@ -61,15 +55,13 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         }
 
         titleLabel.text = model.title
-        valueField.options = model.options.map({ status -> String in
-            status.localizedCase
-        })
-        valueField.didSelectItem = { index in
-            model.value.value = model.options[index]
-        }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value.localizedCase
+            self.valueLabel.text = value.localizedCase
+        }
+
+        model.pickerVisible.bindAndFire { [unowned self] visible in
+            self.pickerView.isHidden = !visible
         }
     }
 
@@ -79,15 +71,63 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         }
 
         titleLabel.text = model.title
-        valueField.options = model.options.map({ seconds -> String in
-            "\(seconds) \(localized("myaccount.settings.notifications.duration.seconds"))"
-        })
-        valueField.didSelectItem = { index in
-            model.value.value = model.options[index]
-        }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
+            self.valueLabel.text = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
         }
+
+        model.pickerVisible.bindAndFire { [unowned self] visible in
+            self.pickerView.isHidden = !visible
+        }
+    }
+}
+
+extension NotificationsChooseCell: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+
+        let title: String
+        if let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> {
+            title = model.options[row].localizedCase
+        } else if let model = cellModel as? SettingModel<SubscriptionNotificationsAudioValue> {
+            title = model.options[row].localizedCase
+        } else if let model = cellModel as? SettingModel<Int> {
+            let value = model.options[row]
+            title = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
+        } else {
+            title = ""
+        }
+
+        return NSAttributedString(string: title, attributes: [
+            NSAttributedStringKey.foregroundColor: UIColor(hex: "3C7AFF"),
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)
+            ])
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> {
+            model.value.value = model.options[row]
+        } else if let model = cellModel as? SettingModel<SubscriptionNotificationsAudioValue> {
+            model.value.value = model.options[row]
+        } else if let model = cellModel as? SettingModel<Int> {
+            model.value.value = model.options[row]
+        }
+    }
+}
+
+extension NotificationsChooseCell: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> {
+            return model.options.count
+        } else if let model = cellModel as? SettingModel<SubscriptionNotificationsAudioValue> {
+            return model.options.count
+        } else if let model = cellModel as? SettingModel<Int> {
+            return model.options.count
+        }
+
+        return 0
     }
 }

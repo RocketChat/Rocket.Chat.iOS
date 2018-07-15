@@ -90,8 +90,23 @@ extension NotificationsPreferencesViewController {
         cell.cellModel = settingModel
 
         if let chooseCell = cell as? NotificationsChooseCell {
-            chooseCell.tableView = tableView
-            chooseCell.dropDownRect = tableView.rectForRow(at: indexPath)
+//            chooseCell.tableView = tableView
+//            chooseCell.dropDownRect = tableView.rectForRow(at: indexPath)
         }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellModel = viewModel.settingModel(for: indexPath)
+
+        if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsStatus> {
+            model.pickerVisible.value = !model.pickerVisible.value
+        } else if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsAudioValue> {
+            model.pickerVisible.value = !model.pickerVisible.value
+        } else if let model = cellModel as? NotificationsChooseCell.SettingModel<Int> {
+            model.pickerVisible.value = !model.pickerVisible.value
+        }
+
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }

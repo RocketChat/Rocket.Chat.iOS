@@ -59,32 +59,32 @@ final class NotificationsPreferencesViewModel {
     internal let desktopAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
                                                                            options: SubscriptionNotificationsStatus.allCases,
                                                                            type: .list,
-                                                                           title: localized("myaccount.settings.notifications.desktop.alerts"))
+                                                                           title: localized("myaccount.settings.notifications.desktop.alerts"), pickerVisible: Dynamic(false))
 
     internal let desktopAudioModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
                                                                           options: SubscriptionNotificationsStatus.allCases,
                                                                           type: .list,
-                                                                          title: localized("myaccount.settings.notifications.desktop.audio"))
+                                                                          title: localized("myaccount.settings.notifications.desktop.audio"), pickerVisible: Dynamic(false))
 
     internal let desktopSoundModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsAudioValue.default),
                                                                           options: SubscriptionNotificationsAudioValue.allCases,
                                                                           type: .list,
-                                                                          title: localized("myaccount.settings.notifications.desktop.sound"))
+                                                                          title: localized("myaccount.settings.notifications.desktop.sound"), pickerVisible: Dynamic(false))
 
     internal let desktopDurationModel = NotificationsChooseCell.SettingModel(value: Dynamic(0),
                                                                              options: [0, 1, 2, 3, 4, 5],
                                                                              type: .list,
-                                                                             title: localized("myaccount.settings.notifications.desktop.duration"))
+                                                                             title: localized("myaccount.settings.notifications.desktop.duration"), pickerVisible: Dynamic(false))
 
     internal let mobileAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
                                                                           options: SubscriptionNotificationsStatus.allCases,
                                                                           type: .list,
-                                                                          title: localized("myaccount.settings.notifications.mobile.alerts"))
+                                                                          title: localized("myaccount.settings.notifications.mobile.alerts"), pickerVisible: Dynamic(false))
 
     internal let mailAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
                                                                         options: SubscriptionNotificationsStatus.allCases,
                                                                         type: .list,
-                                                                        title: localized("myaccount.settings.notifications.email.alerts"))
+                                                                        title: localized("myaccount.settings.notifications.email.alerts"), pickerVisible: Dynamic(false))
 
     private var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
         let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, counterModel])]
