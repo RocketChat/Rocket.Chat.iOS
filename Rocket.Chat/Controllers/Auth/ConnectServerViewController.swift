@@ -64,6 +64,10 @@ final class ConnectServerViewController: BaseViewController {
 
     // MARK: Life Cycle
 
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -179,6 +183,7 @@ final class ConnectServerViewController: BaseViewController {
             if let credentials = deepLinkCredentials {
                 _ = controller.view
                 controller.authenticateWithDeepLinkCredentials(credentials)
+                deepLinkCredentials = nil
             }
 
             if let loginServices = sender as? [LoginService] {

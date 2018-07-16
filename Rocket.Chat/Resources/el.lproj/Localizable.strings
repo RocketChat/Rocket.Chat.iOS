@@ -12,8 +12,8 @@
 "error.login.title" = "Ωπ!";
 "error.login.message" = "Συνέβη κάποιο σφάλμα καθώς προσπαθούσατε να συνδεθείτε.";
 
-"error.signup.title" = "Oops!"; // TODO
-"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+"error.signup.title" = "Ωπ!";
+"error.signup.empty_input.message" = "Όλα τα πεδία απαιτούνται για την εγγραφή σας.";
 
 "error.login_unauthorized.title" = "Ωπ!";
 "error.login_unauthorized.message" = "Τα διαπιστευτήριά σας απορρίφθηκαν! Παρακαλούμε ξαναπροσπαθήστε.";
@@ -56,7 +56,7 @@
 "alert.push_token_error.message" = "Μπορεί ακόμη να λαμβάνετε ειδοποιήσεις ώθησης από αυτό τον εξυπηρετητή εξαιτίας ενός προβλήματος σε εξυπηρετητές έκδοσης κάτω από 0.60.0.";
 
 "alert.upload_error.title" = "Σφάλμα στο ανέβασμα";
-"alert.upload_error.message" = "Συνέβη κάποιο σφάλμα ενώ ανεβάζατε το αρχείο σας. Παρακαλούμε ξαναπροσπαθείστε.";
+"alert.upload_error.message" = "Συνέβη κάποιο σφάλμα ενώ ανεβάζατε το αρχείο σας. Παρακαλούμε ξαναπροσπαθήστε.";
 
 "alert.upload_dialog.title" = "Ανένβασμα αρχείου";
 "alert.upload_dialog.placeholder.title" = "Τίτλος";
@@ -87,7 +87,7 @@
 
 "alert.logout.confirmation.title" = "Αποσύνδεση από αυτό τον εξυπηρετητή"; 
 "alert.logout.confirmation.message" = "Σίγουρα θέλετε να αποσυνδεθείτε από \"%@\"?"; 
-"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με"; // TODO
+"alert.logout.confirmation.confirm" = "Ναι, αποσυνδέστε με";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
@@ -145,7 +145,7 @@
 "subscriptions.unreads" = "Αδιάβαστα";
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
-"subscriptions.groups" = "Private Groups"; //TODO
+"subscriptions.groups" = "Ιδιωτικές Ομάδες";
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
 "subscriptions.conversations" = "Συνομιλίες";
 "subscriptions.you" = "εσείς";
@@ -168,7 +168,7 @@
 "status.online" = "Σε σύνδεση";
 "status.away" = "Λείπω";
 "status.busy" = "Απασχολημένος";
-"status.offline" = "Offline"; //TODO
+"status.offline" = "Εκτός σύνδεσης";
 "status.invisible" = "Αόρατος";
 
 // New Room View
@@ -221,7 +221,7 @@
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
 "chat.message.actions.discard" = "Απόρριψη μηνύματος";
-"chat.message.actions.discard.confirm.title" = "Να απορριφθεί αυτό το μήνυμα?";
+"chat.message.actions.discard.confirm.title" = "Να απορριφθεί αυτό το μήνυμα;";
 "chat.message.actions.discard.confirm.message" = "Αυτό το μήνυμα δεν στάλθηκε ακόμη. Θέλετε να το απορρίψετε? Αυτή η ενέργεια δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.discard.confirm.yes" = "Ναι, να απορριφθεί";
 "chat.message.actions.resend" = "Ξαναστέλνω";
@@ -271,7 +271,7 @@
 "chat.message.type.subscription_role_added" = "%@ τέθηκε σε %@ από %@";
 "chat.message.type.subscription_role_removed" = "%@ δεν ισχύει πλέον %@ για %@";
 "chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
-"chat.message.type.room_unarchived" = "Αυτό το δωμάτιο ξεαρχειοθετήθηκε από %@";
+"chat.message.type.room_unarchived" = "Αυτό το δωμάτιο αποαρχειοθετήθηκε από %@";
 "chat.message.type.message_pinned" = "Καρφιτσώθηκε ένα μήνυμα:"; 
 
 // Chat Information
@@ -284,7 +284,7 @@
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
-"chat.info.item.mentions" = "Αναφέρθηκε"; 
+"chat.info.item.mentions" = "Αναφέρθηκαν"; 
 "chat.info.item.files" = "Αρχεία"; 
 "chat.info.item.share" = "Κοινή Χρήση"; 
 
@@ -307,9 +307,9 @@
 "chat.messages.files.list.empty" = "Δεν βρέθηκαν αρχεία";
 
 // Upload Banner
-"chat.banner.upload.uploading" = "Uploading %@"; // TODO
-"chat.banner.upload.error" = "Failed uploading %@"; // TODO
-"chat.banner.upload.retry" = "Try again"; // TODO
+"chat.banner.upload.uploading" = "Ανέβασμα %@";
+"chat.banner.upload.error" = "Αποτυχία ανεβάσματος %@";
+"chat.banner.upload.retry" = "Ξαναπροσπαθήστε";
 
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
@@ -369,25 +369,25 @@
 "myaccount.settings.profile.new_password.password_placeholder" = "Νέο συνθηματικό"; 
 "myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Επιβεβαίωση Συνθηματικού"; 
 "myaccount.settings.profile.new_password.password_required.title" = "Εισάγετε το συνθηματικό σας"; 
-"myaccount.settings.profile.new_password.password_required.message" = "Τοο τρέχον συνθηματικό είναι απαραίτητο όταν δημιουργείτε ένα νέο συνθηματικό."; 
+"myaccount.settings.profile.new_password.password_required.message" = "Το τρέχον συνθηματικό είναι απαραίτητο όταν δημιουργείτε ένα νέο συνθηματικό.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Συνθηματικό"; 
 
 // User Action Sheet
-"user_action_sheet.info" = "Information"; // TODO
+"user_action_sheet.info" = "Πληροφορία";
 "user_action_sheet.remove" = "Αφαίρεση από το δωμάτιο"; 
 "user_action_sheet.remove_confirm.title" = "Αφαίρεση αυτού του χρήστη;"; 
 "user_action_sheet.remove_confirm.message" = "Σίγουρα θέλετε να αφαιρεθεί '%@' από το δωμάτιο;";
 
 // User Details
-"user_details.status" = "Status"; // TODO
-"user_details.role" = "Role"; // TODO
-"user_details.roles" = "Roles"; // TODO
+"user_details.status" = "Κατάσταση";
+"user_details.role" = "Ρόλος";
+"user_details.roles" = "Ρόλοι";
 "user_details.email" = "Email"; // TODO
 "user_details.emails" = "Emails"; // TODO
-"user_details.timezone" = "Timezone"; // TODO
-"user_details.message_button" = "Message"; // TODO
-"user_details.voice_call_button" = "Voice Call"; // TODO
-"user_details.video_call_button" = "Video Call"; // TODO
+"user_details.timezone" = "Ζώνη ώρας";
+"user_details.message_button" = "Μήνυμα";
+"user_details.voice_call_button" = "Κλήση Ομιλίας";
+"user_details.video_call_button" = "Κλήση Βίντεο";
 
 // Theme
 "theme.settings.title" = "Θέμα"; 

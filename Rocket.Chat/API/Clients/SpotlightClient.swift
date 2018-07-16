@@ -15,17 +15,14 @@ struct SpotlightClient: APIClient {
         self.api = api
     }
 
-    func search(query: String, realm: Realm? = Realm.current, completion: @escaping ([Subscription]) -> Void) {
+    func search(query: String, realm: Realm? = Realm.current, completion: @escaping RequestCompletion) {
         api.fetch(SpotlightRequest(query: query)) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success else {
-                    completion([])
-                    return Log.debug(resource.error)
+                    completion(nil, true)
+                    return
                 }
-
-                var subscriptions = [Subscription]()
-                var identifiers = [String]()
 
                 realm?.execute({ (realm) in
                     let roomSubscriptions = SpotlightClient.parse(rooms: resource.rooms, realm: realm)
@@ -36,25 +33,10 @@ struct SpotlightClient: APIClient {
 
                     realm.add(subscriptions, update: true)
                 }, completion: {
-                    var detachedSubscriptions = [Subscription]()
-
-                    try? realm?.write {
-                        for identifier in identifiers {
-                            if let subscription = realm?.object(ofType: Subscription.self, forPrimaryKey: identifier) {
-                                detachedSubscriptions.append(subscription)
-                            }
-                        }
-                    }
-
-                    completion(detachedSubscriptions)
+                    completion(resource.raw, false)
                 })
-            case .error(let error):
-                switch error {
-                case .version:
-                    SubscriptionManager.spotlight(query, completion: completion)
-                default:
-                    completion([])
-                }
+            case .error(let _):
+                completion(nil, true)
             }
         }
     }

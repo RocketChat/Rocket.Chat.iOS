@@ -21,6 +21,7 @@ extension Subscription {
         subscription.rid = "\(name)-rid"
         subscription.name = "\(name)-name"
         subscription.identifier = "\(name)-identifier"
+        subscription.open = true
         return subscription
     }
 }

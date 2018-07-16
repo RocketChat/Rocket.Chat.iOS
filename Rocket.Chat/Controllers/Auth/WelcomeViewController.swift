@@ -13,7 +13,7 @@ class WelcomeViewController: BaseViewController {
 
     internal var joinCommunitySegue = "JoinCommunity"
     internal let communityServerURL = "\nopen.rocket.chat"
-    internal let createServerURL = "https://cloud.rocket.chat"
+    internal let createServerURL = "https://cloud.rocket.chat/trial"
 
     @IBOutlet weak var welcomeLabel: UILabel! {
         didSet {
@@ -82,6 +82,10 @@ class WelcomeViewController: BaseViewController {
     }
 
     // MARK: Life Cycle
+
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

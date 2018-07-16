@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubscriptionCellCondensed: UITableViewCell {
+final class SubscriptionCellCondensed: UITableViewCell, SubscriptionCellProtocol {
 
     static let identifier = "CellSubscriptionCondensed"
 
@@ -141,14 +141,6 @@ final class SubscriptionCellCondensed: UITableViewCell {
                 iconRoom.image = UIImage(named: "Cell Subscription Lock")
             }
         }
-    }
-
-    func shouldUpdateForSubscription(_ subscription: Subscription) -> Bool {
-        let isNameDifferent = labelName.text != subscription.displayName()
-        let isStatusDifferent = userStatus != subscription.otherUserStatus
-        let isUnreadDifferent = labelUnread.text != "\(subscription.unread)"
-
-        return isNameDifferent || isStatusDifferent || isUnreadDifferent
     }
 
 }

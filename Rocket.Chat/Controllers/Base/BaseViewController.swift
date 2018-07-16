@@ -63,6 +63,11 @@ class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransp
         )
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavigationBarTransparency()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
