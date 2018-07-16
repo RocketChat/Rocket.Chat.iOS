@@ -119,6 +119,7 @@ extension AppManager {
 
     static func changeSelectedServer(index: Int) {
         guard index != DatabaseManager.selectedIndex else {
+            DatabaseManager.changeDatabaseInstance(index: index)
             reloadApp()
             return
         }
