@@ -170,6 +170,7 @@ struct DatabaseManager {
      using this parameter.
      */
     static func changeDatabaseInstance(index: Int? = nil) {
+        AuthSettingsManager.shared.clearCachedSettings()
         realmConfiguration = databaseConfiguration(index: index)
     }
 
