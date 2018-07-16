@@ -415,7 +415,12 @@ extension SubscriptionsViewController: UITableViewDataSource {
         guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
 
         if subscription.identifier == selectedSubscription.identifier {
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            let numberOfSections = tableView.numberOfSections
+            let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
+
+            if numberOfSections > indexPath.section && numberOfRows > indexPath.row {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
         }
     }
 
