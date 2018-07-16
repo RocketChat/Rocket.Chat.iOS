@@ -46,6 +46,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
+
+            guard let index = model.options.index(of: model.value.value) else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.pickerView.selectRow(index, inComponent: 0, animated: false)
+            }
         }
     }
 
@@ -62,6 +70,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
+
+            guard let index = model.options.index(of: model.value.value) else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.pickerView.selectRow(index, inComponent: 0, animated: false)
+            }
         }
     }
 
@@ -78,6 +94,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
+
+            guard let index = model.options.index(of: model.value.value) else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.pickerView.selectRow(index, inComponent: 0, animated: false)
+            }
         }
     }
 }
