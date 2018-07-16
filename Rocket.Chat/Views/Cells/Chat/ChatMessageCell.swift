@@ -147,9 +147,11 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         labelUsername.text = ""
         labelText.message = nil
         labelDate.text = ""
+
         sequential = false
         message = nil
 
