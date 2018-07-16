@@ -219,8 +219,6 @@ extension MainSplitViewController {
         UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
             let offset = min(offset.y + heightDelta, maxHeight)
             collectionView?.contentOffset = CGPoint(x: 0, y: offset)
-        }, completion: { [weak collectionView] _ in
-            collectionView?.setNeedsLayout()
         })
     }
 
