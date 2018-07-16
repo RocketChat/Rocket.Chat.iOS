@@ -147,9 +147,12 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        labelUsername.text = ""
-        labelText.message = nil
-        labelDate.text = ""
+        DispatchQueue.main.async {
+            self.labelUsername.text = ""
+            self.labelText.message = nil
+            self.labelDate.text = ""
+        }
+
         sequential = false
         message = nil
 
