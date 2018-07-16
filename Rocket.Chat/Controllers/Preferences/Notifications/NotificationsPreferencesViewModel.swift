@@ -130,11 +130,11 @@ final class NotificationsPreferencesViewModel {
 
     private func setPickerVisible(_ visible: Bool, for cellModel: NotificationSettingModel) {
         if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsStatus> {
-            model.pickerVisible.value = visible
+            model.pickerVisible.value = visible ? !model.pickerVisible.value : false
         } else if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsAudioValue> {
-            model.pickerVisible.value = visible
+            model.pickerVisible.value = visible ? !model.pickerVisible.value : false
         } else if let model = cellModel as? NotificationsChooseCell.SettingModel<Int> {
-            model.pickerVisible.value = visible
+            model.pickerVisible.value = visible ? !model.pickerVisible.value : false
         }
     }
 }
