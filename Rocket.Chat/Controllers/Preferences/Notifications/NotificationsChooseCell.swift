@@ -19,7 +19,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var valueLabel: UILabel!
-    @IBOutlet private weak var pickerView: UIPickerView! {
+    @IBOutlet private weak var pickerView: RCPickerView! {
         didSet {
             pickerView.delegate = self
         }
@@ -83,7 +83,9 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 }
 
 extension NotificationsChooseCell: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = theme?.tintColor ?? ThemeManager.theme.tintColor
 
         let title: String
         if let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> {
@@ -94,13 +96,14 @@ extension NotificationsChooseCell: UIPickerViewDelegate {
             let value = model.options[row]
             title = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
         } else {
-            title = ""
+            fatalError("Model not supported")
         }
 
-        return NSAttributedString(string: title, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor(hex: "3C7AFF"),
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)
-            ])
+        pickerLabel.text = title
+        pickerLabel.font = UIFont.systemFont(ofSize: 14)
+        pickerLabel.textAlignment = .center
+
+        return pickerLabel
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

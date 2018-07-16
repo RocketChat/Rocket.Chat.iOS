@@ -11,6 +11,7 @@
 		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
 		0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */; };
+		0B80EE5920FC614600E7E43B /* RCPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B80EE5820FC614600E7E43B /* RCPickerView.swift */; };
 		0B92E65520F74CE8003DAB5A /* ShortcutsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92E65420F74CE8003DAB5A /* ShortcutsManager.swift */; };
 		0B92E65720F76393003DAB5A /* ShortcutsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B92E65620F76393003DAB5A /* ShortcutsManagerSpec.swift */; };
 		0B92E66A20F767F8003DAB5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B92E66C20F767F8003DAB5A /* InfoPlist.strings */; };
@@ -33,7 +34,6 @@
 		1496A86F20FA4644005C2E14 /* NotificationsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A86A20FA4644005C2E14 /* NotificationsSwitchCell.swift */; };
 		1496A87020FA4644005C2E14 /* NotificationsPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A86B20FA4644005C2E14 /* NotificationsPreferencesViewModel.swift */; };
 		1496A87220FA469C005C2E14 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A87120FA469C005C2E14 /* Dynamic.swift */; };
-		1496A87720FA46FC005C2E14 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A87620FA46FB005C2E14 /* DropDownMenu.swift */; };
 		1496A87920FA4736005C2E14 /* EnumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A87820FA4735005C2E14 /* EnumExtensions.swift */; };
 		1496A87C20FA481B005C2E14 /* SaveNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A87B20FA481B005C2E14 /* SaveNotificationRequest.swift */; };
 		1496A87D20FA4845005C2E14 /* EnumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496A87820FA4735005C2E14 /* EnumExtensions.swift */; };
@@ -812,6 +812,7 @@
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconCell.swift; sourceTree = "<group>"; };
 		0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageResetCell.swift; sourceTree = "<group>"; };
+		0B80EE5820FC614600E7E43B /* RCPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCPickerView.swift; sourceTree = "<group>"; };
 		0B92E65420F74CE8003DAB5A /* ShortcutsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsManager.swift; sourceTree = "<group>"; };
 		0B92E65620F76393003DAB5A /* ShortcutsManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsManagerSpec.swift; sourceTree = "<group>"; };
 		0B92E66B20F767F8003DAB5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -844,7 +845,6 @@
 		1496A86A20FA4644005C2E14 /* NotificationsSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSwitchCell.swift; sourceTree = "<group>"; };
 		1496A86B20FA4644005C2E14 /* NotificationsPreferencesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsPreferencesViewModel.swift; sourceTree = "<group>"; };
 		1496A87120FA469C005C2E14 /* Dynamic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
-		1496A87620FA46FB005C2E14 /* DropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		1496A87820FA4735005C2E14 /* EnumExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumExtensions.swift; sourceTree = "<group>"; };
 		1496A87B20FA481B005C2E14 /* SaveNotificationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequest.swift; sourceTree = "<group>"; };
 		1496A87F20FA4890005C2E14 /* NotificationPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
@@ -1642,6 +1642,14 @@
 			path = ChangeAppIcon;
 			sourceTree = "<group>";
 		};
+		0B80EE5720FC613800E7E43B /* PickerView */ = {
+			isa = PBXGroup;
+			children = (
+				0B80EE5820FC614600E7E43B /* RCPickerView.swift */,
+			);
+			path = PickerView;
+			sourceTree = "<group>";
+		};
 		0B9AB2BF20444EB300ABEA05 /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -1704,14 +1712,6 @@
 				1496A86A20FA4644005C2E14 /* NotificationsSwitchCell.swift */,
 			);
 			path = Notifications;
-			sourceTree = "<group>";
-		};
-		1496A87520FA46D9005C2E14 /* DropDown */ = {
-			isa = PBXGroup;
-			children = (
-				1496A87620FA46FB005C2E14 /* DropDownMenu.swift */,
-			);
-			path = DropDown;
 			sourceTree = "<group>";
 		};
 		1496A87A20FA4807005C2E14 /* Notifications */ = {
@@ -2059,7 +2059,7 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1496A87520FA46D9005C2E14 /* DropDown */,
+				0B80EE5720FC613800E7E43B /* PickerView */,
 				9911CF3220C1CF3D001471C3 /* Buttons */,
 				99805D7320C190FC00741B8E /* TextFields */,
 				80D41DFB2092152A00034D1F /* ActionSheets */,
@@ -4486,6 +4486,7 @@
 				806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */,
 				8076FDB2204856CC00114F28 /* AuthCanEditMessage.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
+				0B80EE5920FC614600E7E43B /* RCPickerView.swift in Sources */,
 				99C577EE207E4F1500CE9B4D /* File.swift in Sources */,
 				1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */,
 				8076FDC520485ABB00114F28 /* SubscriptionUser.swift in Sources */,
@@ -4571,7 +4572,6 @@
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				80A63C4F1F719F9600FE5AC4 /* RoomInfoRequest.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
-				1496A87720FA46FC005C2E14 /* DropDownMenu.swift in Sources */,
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,

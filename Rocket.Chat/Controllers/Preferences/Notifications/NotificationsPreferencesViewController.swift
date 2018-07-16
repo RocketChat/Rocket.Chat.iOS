@@ -88,11 +88,6 @@ extension NotificationsPreferencesViewController {
         }
 
         cell.cellModel = settingModel
-
-        if let chooseCell = cell as? NotificationsChooseCell {
-//            chooseCell.tableView = tableView
-//            chooseCell.dropDownRect = tableView.rectForRow(at: indexPath)
-        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

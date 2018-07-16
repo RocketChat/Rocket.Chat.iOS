@@ -107,6 +107,9 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.23529411759999999" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: tintColor"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,11 +123,14 @@
                                                         <constraint firstItem="h9u-73-IX5" firstAttribute="leading" secondItem="Uy1-nR-8qR" secondAttribute="leading" id="xfj-aS-kUt"/>
                                                     </constraints>
                                                 </view>
-                                                <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="IjA-0H-1QH">
+                                                <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="IjA-0H-1QH" customClass="RCPickerView" customModule="Rocket_Chat" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="25.5" width="359" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="G2M-1F-zIv"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: tintColor"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </pickerView>
                                             </subviews>
                                         </stackView>
