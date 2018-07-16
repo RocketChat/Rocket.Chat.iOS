@@ -175,7 +175,7 @@ final class AvatarView: UIView {
         subscription = nil
         emoji = nil
 
-        DispatchQuee.main.async {
+        DispatchQueue.main.async {
             self.imageView.image = nil
             self.imageView.animatedImage = nil
             self.labelInitials.text = ""
