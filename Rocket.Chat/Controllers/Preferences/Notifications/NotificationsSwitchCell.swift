@@ -54,10 +54,12 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
             return
         }
 
-        leftTitleLabel.textColor = model.value.value ? .lightGray : .black
-        leftDescriptionLabel.textColor = model.value.value ? .lightGray : .black
-        rightTitleLabel.textColor = model.value.value ? .black : .lightGray
-        rightDescriptionLabel.textColor = model.value.value ? .black : .lightGray
+        let currentTheme = theme ?? ThemeManager.theme
+
+        leftTitleLabel.textColor = model.value.value ? currentTheme.auxiliaryText : currentTheme.titleText
+        leftDescriptionLabel.textColor = model.value.value ? currentTheme.auxiliaryText : currentTheme.titleText
+        rightTitleLabel.textColor = model.value.value ? currentTheme.titleText : .lightGray
+        rightDescriptionLabel.textColor = model.value.value ? currentTheme.titleText : currentTheme.auxiliaryText
     }
 
 }

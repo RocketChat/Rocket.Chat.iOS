@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class NotificationsPreferencesViewController: UITableViewController {
+final class NotificationsPreferencesViewController: BaseTableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
     var subscription: Subscription?
 
