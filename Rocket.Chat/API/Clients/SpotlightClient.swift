@@ -7,7 +7,6 @@
 //
 
 import RealmSwift
-import SwiftyJSON
 
 struct SpotlightClient: APIClient {
     let api: AnyAPIFetcher
@@ -25,61 +24,54 @@ struct SpotlightClient: APIClient {
                 }
 
                 realm?.execute({ (realm) in
-                    let roomSubscriptions = SpotlightClient.parse(rooms: resource.rooms, realm: realm)
-                    let userSubscriptions = SpotlightClient.parse(users: resource.users, realm: realm)
+                    var subscriptions: [Subscription] = []
 
-                    subscriptions = roomSubscriptions.subscriptions + userSubscriptions.subscriptions
-                    identifiers = roomSubscriptions.identifiers + userSubscriptions.identifiers
+                    resource.rooms.forEach { object in
+                        if let roomIdentifier = object["_id"].string {
+                            if let subscription = Subscription.find(rid: roomIdentifier, realm: realm) {
+                                subscription.map(object, realm: realm)
+                                subscription.mapRoom(object, realm: realm)
+                                subscriptions.append(subscription)
+                            } else {
+                                let subscription = Subscription()
+                                subscription.identifier = String.random()
+                                subscription.rid = roomIdentifier
+                                subscription.name = object["name"].string ?? ""
+
+                                if let typeRaw = object["t"].string, let type = SubscriptionType(rawValue: typeRaw) {
+                                    subscription.type = type
+                                }
+
+                                subscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    resource.users.forEach { object in
+                        let user = User.getOrCreate(realm: realm, values: object, updates: nil)
+
+                        guard let username = user.username else {
+                            return
+                        }
+
+                        let subscription = Subscription.find(name: username, subscriptionType: [.directMessage]) ?? Subscription()
+                        if subscription.realm == nil {
+                            subscription.identifier = subscription.identifier ?? user.identifier ?? ""
+                            subscription.otherUserId = user.identifier
+                            subscription.type = .directMessage
+                            subscription.name = user.username ?? ""
+                            subscription.fname = user.name ?? ""
+                            subscriptions.append(subscription)
+                        }
+                    }
 
                     realm.add(subscriptions, update: true)
                 }, completion: {
                     completion(resource.raw, false)
                 })
-            case .error(let _):
+            case .error:
                 completion(nil, true)
             }
-        }
-    }
-
-    private struct Subscriptions {
-        var subscriptions: [Subscription]
-        var identifiers: [String]
-    }
-
-    private static func parse(rooms: [JSON], realm: Realm) -> Subscriptions {
-        return rooms.reduce(Subscriptions(subscriptions: [], identifiers: [])) { (result, object) -> Subscriptions in
-            let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                object?.rid = object?.identifier ?? ""
-            })
-
-            return Subscriptions(
-                subscriptions: result.subscriptions + [subscription],
-                identifiers: result.identifiers + [subscription.identifier].compactMap { $0 }
-            )
-        }
-    }
-
-    private static func parse(users: [JSON], realm: Realm) -> Subscriptions {
-        return users.reduce(Subscriptions(subscriptions: [], identifiers: [])) { (result, object) -> Subscriptions in
-            let user = User.getOrCreate(realm: realm, values: object, updates: nil)
-
-            guard let username = user.username else {
-                return result
-            }
-
-            let subscription = Subscription.find(name: username, subscriptionType: [.directMessage]) ?? Subscription()
-            if subscription.realm == nil {
-                subscription.identifier = subscription.identifier ?? user.identifier ?? ""
-                subscription.otherUserId = user.identifier
-                subscription.type = .directMessage
-                subscription.name = user.username ?? ""
-                subscription.fname = user.name ?? ""
-            }
-
-            return Subscriptions(
-                subscriptions: result.subscriptions + [subscription].compactMap { $0.realm == nil ? $0 : nil },
-                identifiers: result.identifiers + [subscription.identifier].compactMap { $0 }
-            )
         }
     }
 }

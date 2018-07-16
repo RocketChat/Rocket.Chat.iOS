@@ -11,6 +11,7 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// swiftlint:disable function_body_length
 class SpotlightClientSpec: XCTestCase, RealmTestCase {
     func testSearch() {
         let realm = testRealm()

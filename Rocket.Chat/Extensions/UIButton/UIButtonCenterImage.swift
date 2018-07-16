@@ -11,8 +11,7 @@ import UIKit
 extension UIButton {
     func centerImageHorizontally() {
         guard
-            let imageViewWidth = imageView?.frame.width,
-            let textWidth = titleLabel?.frame.width
+            let imageViewWidth = imageView?.frame.width
         else {
             return
         }
