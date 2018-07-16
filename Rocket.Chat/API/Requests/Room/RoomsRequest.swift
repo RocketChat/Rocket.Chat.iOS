@@ -15,9 +15,14 @@ struct RoomsRequest: APIRequest {
 
     var query: String? {
         if let updatedSince = updatedSince {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            return "updatedSince=\(dateFormatter.string(from: updatedSince))"
+            let dateFormatter = ISO8601DateFormatter()
+            let dateString = dateFormatter.string(from: updatedSince)
+
+            if let encodedString = dateString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                return "updatedSince=\(encodedString)"
+            }
+
+            return ""
         }
 
         return nil
