@@ -117,4 +117,24 @@ final class NotificationsPreferencesViewModel {
     internal func settingModel(for indexPath: IndexPath) -> NotificationSettingModel {
         return settingsCells[indexPath.section].elements[indexPath.row]
     }
+
+    internal func openPicker(for indexPath: IndexPath) {
+        for section in 0..<settingsCells.count {
+            let elements = settingsCells[section].elements
+
+            for row in 0..<elements.count {
+                setPickerVisible(indexPath.section == section && indexPath.row == row, for: elements[row])
+            }
+        }
+    }
+
+    private func setPickerVisible(_ visible: Bool, for cellModel: NotificationSettingModel) {
+        if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsStatus> {
+            model.pickerVisible.value = visible
+        } else if let model = cellModel as? NotificationsChooseCell.SettingModel<SubscriptionNotificationsAudioValue> {
+            model.pickerVisible.value = visible
+        } else if let model = cellModel as? NotificationsChooseCell.SettingModel<Int> {
+            model.pickerVisible.value = visible
+        }
+    }
 }
