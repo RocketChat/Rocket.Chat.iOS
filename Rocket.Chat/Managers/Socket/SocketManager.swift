@@ -55,6 +55,7 @@ final class SocketManager {
 
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers = NSMapTable<NSString, AnyObject>(keyOptions: .strongMemory, valueOptions: .weakMemory)
+    internal var isPresentingInvalidSessionAlert = false
 
     // MARK: Connection
 
