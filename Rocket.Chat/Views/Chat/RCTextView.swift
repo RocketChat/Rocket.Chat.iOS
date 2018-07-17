@@ -88,14 +88,12 @@ class HighlightLayoutManager: NSLayoutManager {
                     let emojiView = EmojiView(frame: rect)
                     emojiView.backgroundColor = .white
                     emojiView.isUserInteractionEnabled = false
+                    emojiView.applyTheme()
 
                     if let imageUrlData = attachment.contents,
-                        let imageUrlString = String(data: imageUrlData, encoding: .utf8),
-                        let imageUrl = URL(string: imageUrlString) {
-                        DispatchQueue.global(qos: .background).async {
-                            emojiView.emojiImageView.sd_setImage(with: imageUrl, completed: nil)
-                        }
-
+                            let imageUrlString = String(data: imageUrlData, encoding: .utf8),
+                            let imageUrl = URL(string: imageUrlString) {
+                        ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
                         self.customEmojiViews.append(emojiView)
                         self.addSubview(emojiView)
                     }
@@ -159,20 +157,35 @@ extension RCTextView: UITextViewDelegate {
         }
 
         if let deepLink = DeepLink(url: URL) {
-            guard
-                case let .mention(name) = deepLink,
-                let user = User.find(username: name),
-                let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
-                let end = textView.position(from: start, offset: characterRange.length),
-                let range = textView.textRange(from: start, to: end)
-            else {
-                return false
-            }
+            switch deepLink {
+            case let .mention(name):
+                guard
+                    let user = User.find(username: name),
+                    let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
+                    let end = textView.position(from: start, offset: characterRange.length),
+                    let range = textView.textRange(from: start, to: end)
+                else {
+                    return false
+                }
 
-            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+                MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+                return false
+            default:
+                return UIApplication.shared.canOpenURL(URL)
+            }
         }
 
         return false
     }
 
+}
+
+// MARK: Themeable
+
+extension RCTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        customEmojiViews.forEach { $0.backgroundColor = theme.backgroundColor }
+    }
 }

@@ -9,7 +9,7 @@
 import XCTest
 @testable import Rocket_Chat
 
-class SubscriptionManagerQueriesSpec: RealmTestCase {
+class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
 
     func testFindByRoomId() throws {
         let realm = testRealm()
@@ -53,38 +53,6 @@ class SubscriptionManagerQueriesSpec: RealmTestCase {
         XCTAssertEqual(Subscription.find(name: "sub2-name", subscriptionType: [.channel], realm: realm), sub2)
     }
 
-    func testInitialSubscription() throws {
-        let realm = testRealm()
-
-        let auth = Auth.testInstance()
-
-        let sub1 = Subscription()
-        sub1.identifier = "sub1-identifier"
-        sub1.rid = "sub1-rid"
-        sub1.lastSeen = Date()
-        sub1.auth = auth
-
-        let sub2 = Subscription()
-        sub2.identifier = "sub2-identifier"
-        sub2.rid = "sub2-rid"
-        sub2.lastSeen = Date().addingTimeInterval(-1.0)
-        sub2.auth = auth
-
-        try realm.write {
-            realm.add(auth)
-            realm.add(sub1)
-            realm.add(sub2)
-        }
-
-        // if there's no last notification room id (user didn't launch app by tapping notification)
-        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub1)
-
-        AppManager.initialRoomId = "sub2-rid"
-
-        // if there's no last notification room id (user launched app by tapping notification)
-        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub2)
-    }
-
     func testSetTemporaryMessagesFailed() {
         let realm = testRealm()
 
@@ -113,46 +81,6 @@ class SubscriptionManagerQueriesSpec: RealmTestCase {
 
         XCTAssert(msg2.failed == true)
         XCTAssert(msg2.temporary == false)
-    }
-
-    func testFindSubscriptionByNameFound() throws {
-        let realm = testRealm()
-
-        let auth = Auth.testInstance()
-
-        let sub1 = Subscription()
-        sub1.identifier = "sub1-identifier"
-        sub1.rid = "sub1-rid"
-        sub1.lastSeen = Date()
-        sub1.auth = auth
-        sub1.name = "sub1-name"
-
-        try realm.write {
-            realm.add(auth)
-            realm.add(sub1)
-        }
-
-        XCTAssertEqual(Subscription.subscription(with: "sub1-name", auth: auth)?.identifier, sub1.identifier)
-    }
-
-    func testFindSubscriptionByNameNotFound() throws {
-        let realm = testRealm()
-
-        let auth = Auth.testInstance()
-
-        let sub1 = Subscription()
-        sub1.identifier = "sub1-identifier"
-        sub1.rid = "sub1-rid"
-        sub1.lastSeen = Date()
-        sub1.auth = auth
-        sub1.name = "sub1-name"
-
-        try realm.write {
-            realm.add(auth)
-            realm.add(sub1)
-        }
-
-        XCTAssertNil(Subscription.subscription(with: "not-found", auth: auth))
     }
 
 }

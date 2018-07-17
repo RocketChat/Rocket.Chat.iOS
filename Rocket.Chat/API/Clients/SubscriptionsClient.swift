@@ -17,6 +17,17 @@ struct SubscriptionsClient: APIClient {
 
     func markAsRead(subscription: Subscription) {
         let req = SubscriptionReadRequest(rid: subscription.rid)
+        let subscriptionIdentifier = subscription.rid
+
+        Realm.execute({ (realm) in
+            if let subscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
+                subscription.alert = false
+                subscription.unread = 0
+                subscription.userMentions = 0
+                subscription.groupMentions = 0
+                realm.add(subscription, update: true)
+            }
+        })
 
         api.fetch(req) { response in
             switch response {
@@ -30,9 +41,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchSubscriptions(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = SubscriptionsRequest()
-
-        let currentRealm = realm
+        let req = SubscriptionsRequest(updatedSince: updatedSince)
 
         api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
@@ -44,10 +53,11 @@ struct SubscriptionsClient: APIClient {
 
                 let subscriptions = List<Subscription>()
 
-                currentRealm?.execute({ realm in
+                realm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
-                    func queueSubscriptionForUpdate(_ subscription: Subscription) {
+                    func queueSubscriptionForUpdate(_ object: JSON) {
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         subscription.auth = auth
                         subscriptions.append(subscription)
                     }
@@ -55,12 +65,15 @@ struct SubscriptionsClient: APIClient {
                     resource.list?.forEach(queueSubscriptionForUpdate)
                     resource.update?.forEach(queueSubscriptionForUpdate)
 
-                    resource.remove?.forEach { subscription in
-                        subscription.auth = nil
+                    resource.remove?.forEach { object in
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (obj) in
+                            obj?.auth = nil
+                        })
+
                         subscriptions.append(subscription)
                     }
 
-                    auth.lastSubscriptionFetch = Date.serverDate
+                    auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
@@ -77,9 +90,7 @@ struct SubscriptionsClient: APIClient {
     }
 
     func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
-        let req = RoomsRequest()
-
-        let currentRealm = realm
+        let req = RoomsRequest(updatedSince: updatedSince)
 
         api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
@@ -89,15 +100,15 @@ struct SubscriptionsClient: APIClient {
                     return
                 }
 
-                currentRealm?.execute({ realm in
+                realm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                    auth.lastRoomFetchWithLastMessage = Date.serverDate
                     realm.add(auth, update: true)
                 })
 
                 let subscriptions = List<Subscription>()
 
-                currentRealm?.execute({ realm in
+                realm?.execute({ realm in
                     func queueRoomValuesForUpdate(_ object: JSON) {
                         guard
                             let rid = object["_id"].string,
@@ -106,7 +117,7 @@ struct SubscriptionsClient: APIClient {
                             return
                         }
 
-                        subscription.mapRoom(object)
+                        subscription.mapRoom(object, realm: realm)
                         subscriptions.append(subscription)
                     }
 
@@ -121,6 +132,37 @@ struct SubscriptionsClient: APIClient {
                 default:
                     completion?()
                 }
+            }
+        }
+    }
+
+    func fetchRoles(subscription: Subscription, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
+        let rid = subscription.rid
+        let rolesRequest = RoomRolesRequest(roomName: subscription.name, subscriptionType: subscription.type)
+
+        let currentRealm = realm
+
+        api.fetch(rolesRequest) { result in
+            switch result {
+            case .resource(let resource):
+                if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
+                    try? currentRealm?.write {
+                        let subscriptionCopy = Subscription(value: subscription)
+
+                        subscriptionCopy.usersRoles.removeAll()
+                        resource.roomRoles?.forEach { role in
+                            subscriptionCopy.usersRoles.append(role)
+                        }
+
+                        currentRealm?.add(subscriptionCopy, update: true)
+                    }
+
+                    completion?()
+                }
+
+            // Fail silently
+            case .error(let error):
+                print(error)
             }
         }
     }
@@ -180,7 +222,7 @@ struct SubscriptionsClient: APIClient {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date.serverDate
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
@@ -211,7 +253,7 @@ struct SubscriptionsClient: APIClient {
 
             currentRealm?.execute({ realm in
                 guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
-                auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                auth.lastSubscriptionFetchWithLastMessage = Date.serverDate.addingTimeInterval(-1)
                 realm.add(auth, update: true)
             })
 
@@ -227,7 +269,7 @@ struct SubscriptionsClient: APIClient {
                 list?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }
@@ -236,7 +278,7 @@ struct SubscriptionsClient: APIClient {
                 updated?.forEach { object in
                     if let rid = object["_id"].string {
                         if let subscription = Subscription.find(rid: rid, realm: realm) {
-                            subscription.mapRoom(object)
+                            subscription.mapRoom(object, realm: realm)
                             subscriptions.append(subscription)
                         }
                     }
@@ -246,6 +288,23 @@ struct SubscriptionsClient: APIClient {
             }, completion: {
                 completion?()
             })
+        }
+    }
+}
+
+// MARK: Members List
+
+extension SubscriptionsClient {
+    func fetchMembersList(subscription: Subscription, options: APIRequestOptionSet = [], realm: Realm? = Realm.current, completion: @escaping (APIResponse<RoomMembersResource>) -> Void) {
+        let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
+        api.fetch(request, options: options) { response in
+            if case let .resource(resource) = response {
+                try? realm?.write {
+                    realm?.add(resource.members?.compactMap { $0 } ?? [], update: true)
+                }
+            }
+
+            completion(response)
         }
     }
 }

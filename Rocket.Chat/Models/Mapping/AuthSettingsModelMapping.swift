@@ -13,8 +13,8 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
-        self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
+        self.siteURL = objectForKey(object: values, key: "Site_Url")?.string?.removingLastSlashIfNeeded()
+        self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string?.removingLastSlashIfNeeded()
 
         self.serverName = objectForKey(object: values, key: "Site_Name")?.string
 
@@ -30,6 +30,7 @@ extension AuthSettings: ModelMappeable {
         self.useUserRealName = objectForKey(object: values, key: "UI_Use_Real_Name")?.bool ?? false
         self.allowSpecialCharsOnRoomNames = objectForKey(object: values, key: "UI_Allow_room_names_with_special_chars")?.bool ?? false
         self.favoriteRooms = objectForKey(object: values, key: "Favorite_Rooms")?.bool ?? true
+        self.storeLastMessage = objectForKey(object: values, key: "Store_Last_Message")?.bool ?? true
 
         // Authentication methods
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
@@ -64,6 +65,7 @@ extension AuthSettings: ModelMappeable {
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
+        self.maxFileSize = objectForKey(object: values, key: "FileUpload_MaxFileSize")?.int ?? 0
 
         // HideType
         self.hideMessageUserJoined = objectForKey(object: values, key: "Message_HideType_uj")?.bool ?? false

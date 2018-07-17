@@ -11,12 +11,33 @@ import MBProgressHUD
 protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
     func alertSuccess(title: String, completion: (() -> Void)?)
+    func alertYesNo(title: String, message: String, yesStyle: UIAlertActionStyle, noStyle: UIAlertActionStyle, handler: @escaping (Bool) -> Void)
 }
 
 extension UIViewController: Alerter {
+    func alert(with customActions: [UIAlertAction], title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        customActions.forEach {( alert.addAction($0) )}
+        present(alert, animated: true, completion: nil)
+    }
+
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func alertYesNo(title: String, message: String, yesStyle: UIAlertActionStyle = .default, noStyle: UIAlertActionStyle = .cancel, handler: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: localized("global.yes"), style: yesStyle, handler: { _ in
+            handler(true)
+        }))
+
+        alert.addAction(UIAlertAction(title: localized("global.no"), style: noStyle, handler: { _ in
+            handler(false)
+        }))
+
         present(alert, animated: true, completion: nil)
     }
 
@@ -25,7 +46,7 @@ extension UIViewController: Alerter {
             let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
             successHUD.mode = .customView
 
-            let checkmark = UIImage(named: "Checkmark")?.withRenderingMode(.alwaysTemplate)
+            let checkmark = UIImage(named: "Check")?.withRenderingMode(.alwaysTemplate)
             successHUD.customView = UIImageView(image: checkmark)
             successHUD.isSquare = true
             successHUD.label.text = title
@@ -43,6 +64,7 @@ extension UIViewController: Alerter {
 struct Alert {
     let title: String
     let message: String
+    var actions: [UIAlertAction] = []
 
     init(title: String, message: String) {
         self.title = title
@@ -50,15 +72,22 @@ struct Alert {
     }
 
     init(key: String) {
-        self.init(title: NSLocalizedString("\(key).title", comment: ""),
-                  message: NSLocalizedString("\(key).message", comment: ""))
+        self.init(
+            title: localized("\(key).title"),
+            message: localized("\(key).message")
+        )
     }
 
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
             let window = UIWindow.topWindow
             window.windowLevel = UIWindowLevelAlert + 1
-            window.rootViewController?.alert(title: title, message: message, handler: handler)
+
+            if actions.isEmpty {
+                window.rootViewController?.alert(title: title, message: message, handler: handler)
+            } else {
+                window.rootViewController?.alert(with: actions, title: title, message: message)
+            }
         }
 
         if Thread.isMainThread {

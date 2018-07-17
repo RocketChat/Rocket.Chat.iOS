@@ -1,109 +1,119 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - Fabric (1.7.6)
+  - Crashlytics (3.10.5):
+    - Fabric (~> 1.7.9)
+  - Fabric (1.7.9)
+  - Firebase/Core (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.4.0):
+    - FirebaseCore (= 5.0.5)
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.0.5):
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseInstanceID (3.1.1):
+    - FirebaseCore (~> 5.0)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
-  - Instabug (7.12.7):
-    - Instabug/Instabug (= 7.12.7)
-    - Instabug/InstabugCore (= 7.12.7)
-  - Instabug/Instabug (7.12.7):
-    - Instabug/InstabugCore
-  - Instabug/InstabugCore (7.12.7)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
-  - OAuthSwift (1.2.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
+  - Nuke (7.3)
+  - Nuke-FLAnimatedImage-Plugin (5.0):
+    - FLAnimatedImage (~> 1.0)
+    - Nuke (~> 7.0)
+  - OAuthSwift (1.2.2)
   - RCMarkdownParser (3.0.6)
   - ReachabilitySwift (4.1.0)
-  - Realm (3.5.0):
-    - Realm/Headers (= 3.5.0)
-  - Realm/Headers (3.5.0)
-  - RealmSwift (3.5.0):
-    - Realm (= 3.5.0)
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
-  - SDWebImage/GIF (4.3.3):
-    - FLAnimatedImage (~> 1.0)
-    - SDWebImage/Core
-  - SearchTextField (1.2.0)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
   - semver (1.1.0)
-  - SideMenuController (0.2.4.1)
-  - SimpleImageViewer (1.0.2):
-    - SDWebImage (~> 4)
-    - SDWebImage/GIF
+  - SimpleImageViewer (1.1.1):
+    - FLAnimatedImage
   - SlackTextViewController (1.9.6)
   - Starscream (2.1.1)
-  - SwiftLint (0.25.1)
+  - SwiftLint (0.26.0)
   - SwiftyJSON (4.1.0)
-  - TagListView (1.3.0)
 
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
   - Fabric
+  - Firebase/Core
   - FLEX (~> 2.0)
-  - Instabug
   - MBProgressHUD (~> 1.1.0)
-  - MobilePlayer
+  - MobilePlayer (from `https://github.com/RocketChat/RCiOSMobilePlayer`)
+  - Nuke (~> 7.3)
+  - Nuke-FLAnimatedImage-Plugin
   - OAuthSwift
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
   - ReachabilitySwift
   - RealmSwift
-  - SDWebImage (~> 4)
-  - SDWebImage/GIF
-  - SearchTextField
   - semver
-  - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
   - Starscream (~> 2)
   - SwiftLint
   - SwiftyJSON
-  - TagListView (~> 1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
     - Crashlytics
     - Fabric
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
     - FLAnimatedImage
     - FLEX
-    - Instabug
+    - GoogleToolboxForMac
     - MBProgressHUD
-    - MobilePlayer
+    - nanopb
+    - Nuke
+    - Nuke-FLAnimatedImage-Plugin
     - OAuthSwift
     - ReachabilitySwift
     - Realm
     - RealmSwift
-    - SDWebImage
-    - SearchTextField
     - semver
     - Starscream
     - SwiftLint
     - SwiftyJSON
-    - TagListView
 
 EXTERNAL SOURCES:
+  MobilePlayer:
+    :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :git: https://github.com/rafaelks/SlackTextViewController.git
 
 CHECKOUT OPTIONS:
+  MobilePlayer:
+    :commit: c7160990d7b50d34a45514df4535011e64541340
+    :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  SideMenuController:
-    :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
-    :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
-    :commit: 0398657e933c8c8f06831a93d2cc96610e18a4f2
+    :commit: d76f6757d29746071cb6bd17bba9e636d21b03a8
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
@@ -111,29 +121,32 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
+  Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
+  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
+  FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
+  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  Instabug: bd712783b3a2035b4a0b7ce474839b8cc9f3a9c6
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Nuke: 3680b7186b18f84a5e9e283bfce4357bfd70fdf9
+  Nuke-FLAnimatedImage-Plugin: 6dfb9335ce298eaff9fdfed8d20d1bbfb2a6c326
+  OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
-  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
-  SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
-  SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
-  SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
+  SimpleImageViewer: f82e45a362e3b4b674e25508f42d534e525a73b7
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+  SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
+PODFILE CHECKSUM: e30b11fd34e7043eec6c9d2d0550e6e147670e19
 
 COCOAPODS: 1.5.3

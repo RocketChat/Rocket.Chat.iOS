@@ -14,12 +14,23 @@ struct MessagesClient: APIClient {
 
     func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.current) {
         guard let id = message.identifier else { return }
+        let subscriptionIdentifier = subscription.rid
 
         try? realm?.write {
+            if let subscriptionMutable = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
+                subscriptionMutable.roomLastMessage = message
+                subscriptionMutable.roomLastMessageDate = message.createdAt
+                subscriptionMutable.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
+                realm?.add(subscriptionMutable, update: true)
+            }
+
             realm?.add(message, update: true)
         }
 
         func updateMessage(json: JSON) {
+            let server = AuthManager.selectedServerHost()
+            AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
+
             try? realm?.write {
                 message.temporary = false
                 message.failed = false
@@ -40,7 +51,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
@@ -211,12 +222,23 @@ struct MessagesClient: APIClient {
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
             switch response {
-            case .resource: break
+            case .resource:
+                AnalyticsManager.log(
+                    event: .reaction(
+                        subscriptionType: message.subscription?.type.rawValue ?? ""
+                    )
+                )
             case .error(let error):
                 switch error {
                 case .version:
                     // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in })
+                    MessageManager.react(message, emoji: emoji, completion: { _ in
+                        AnalyticsManager.log(
+                            event: .reaction(
+                                subscriptionType: message.subscription?.type.rawValue ?? ""
+                            )
+                        )
+                    })
                 default:
                     Alert.defaultError.present()
                 }

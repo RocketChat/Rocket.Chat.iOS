@@ -13,28 +13,40 @@ struct SubscriptionsRequest: APIRequest {
     typealias APIResourceType = SubscriptionsResource
     let path = "/api/v1/subscriptions.get"
     let requiredVersion = Version(0, 60, 0)
+
+    var query: String? {
+        if let updatedSince = updatedSince {
+            let dateFormatter = ISO8601DateFormatter()
+            let dateString = dateFormatter.string(from: updatedSince)
+
+            if let encodedString = dateString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                return "updatedSince=\(encodedString)"
+            }
+
+            return ""
+        }
+
+        return nil
+    }
+
+    let updatedSince: Date?
+
+    init(updatedSince: Date? = nil) {
+        self.updatedSince = updatedSince
+    }
 }
 
 final class SubscriptionsResource: APIResource {
-    var update: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["update"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var update: [JSON]? {
+        return raw?["update"].array
     }
 
-    var remove: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["remove"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var remove: [JSON]? {
+        return raw?["remove"].array
     }
 
-    var list: [Subscription]? {
-        guard let realm = Realm.current else { return [] }
-        return raw?["result"].array?.map {
-            return Subscription.getOrCreate(realm: realm, values: $0, updates: nil)
-        }.compactMap { $0 }
+    var list: [JSON]? {
+        return raw?["result"].array
     }
 
     var success: Bool? {

@@ -34,6 +34,7 @@ final class AuthSettings: Object {
 
     // Rooms
     @objc dynamic var favoriteRooms = true
+    @objc dynamic var storeLastMessage = true
 
     // Authentication methods
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false
@@ -81,6 +82,7 @@ final class AuthSettings: Object {
 
     // File upload
     @objc dynamic var uploadStorageType: String?
+    @objc dynamic var maxFileSize: Int = 0
 
     // Hide Message Types
     @objc dynamic var hideMessageUserJoined: Bool = false

@@ -10,35 +10,15 @@ import Foundation
 import RealmSwift
 
 extension ChatViewController {
-
     func updateSubscriptionRoles() {
         guard
+            let client = API.current()?.client(SubscriptionsClient.self),
             let subscription = subscription,
             subscription.type != .directMessage
         else {
             return
         }
 
-        let rid = subscription.rid
-        let rolesRequest = SubscriptionRolesRequest(roomName: subscription.name, subscriptionType: subscription.type)
-        API.current()?.fetch(rolesRequest, completion: { result in
-            switch result {
-            case .resource(let resource):
-                if let subscription = Subscription.find(rid: rid) {
-                    Realm.executeOnMainThread({ (realm) in
-                        subscription.usersRoles.removeAll()
-                        resource.subscriptionRoles?.forEach({ (role) in
-                            subscription.usersRoles.append(role)
-                        })
-
-                        realm.add(subscription, update: true)
-                    })
-                }
-
-            // Fail silently
-            default: break
-            }
-        })
+        client.fetchRoles(subscription: subscription)
     }
-
 }

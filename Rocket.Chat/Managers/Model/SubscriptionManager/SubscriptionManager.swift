@@ -13,23 +13,33 @@ struct SubscriptionManager {
     static func updateUnreadApplicationBadge() {
         var unread = 0
 
-        Realm.execute({ (realm) in
-            for obj in realm.objects(Subscription.self) {
-                unread += obj.unread
+        Realm.execute({ _ in
+            if let list = Subscription.all() {
+                for obj in list {
+                    unread += obj.unread
+                }
             }
         }, completion: {
             UIApplication.shared.applicationIconBadgeNumber = unread
         })
     }
 
-    static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
-        let client = API.current()?.client(SubscriptionsClient.self)
+    static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
+        realm?.refresh()
 
-        let lastUpdate = auth.lastSubscriptionFetch
+        let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
+        let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage?.addingTimeInterval(-100000)
+        let lastUpdateRooms = auth.lastRoomFetchWithLastMessage?.addingTimeInterval(-100000)
 
-        client?.fetchSubscriptions(updatedSince: lastUpdate) {
-            client?.fetchRooms(updatedSince: lastUpdate) {
-                completion?()
+        // The call needs to be nested because at the first time the user
+        // opens the app we don't have the Subscriptions and the Room object
+        // is not able to create one, so the request needs to be completed
+        // only after the Subscriptions one is finished.
+        client?.fetchSubscriptions(updatedSince: lastUpdateSubscriptions, realm: realm) {
+            client?.fetchRooms(updatedSince: lastUpdateRooms, realm: realm) {
+                DispatchQueue.main.async {
+                    completion?()
+                }
             }
         }
     }
@@ -83,8 +93,7 @@ struct SubscriptionManager {
             currentRealm?.execute({ (realm) in
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
-                        subscription.mapRoom(object)
-
+                        subscription.mapRoom(object, realm: realm)
                         realm.add(subscription, update: true)
                     }
                 }

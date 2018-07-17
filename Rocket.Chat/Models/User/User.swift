@@ -14,8 +14,17 @@ enum UserPresence: String {
     case online, away
 }
 
-enum UserStatus: String {
+enum UserStatus: String, CustomStringConvertible {
     case offline, online, busy, away
+
+    var description: String {
+        switch self {
+        case .online: return localized("status.online")
+        case .offline: return localized("status.offline")
+        case .busy: return localized("status.busy")
+        case .away: return localized("status.away")
+        }
+    }
 }
 
 final class User: BaseModel {
@@ -24,13 +33,13 @@ final class User: BaseModel {
     var emails = List<Email>()
     var roles = List<String>()
 
-    @objc internal dynamic var privateStatus = UserStatus.offline.rawValue
+    @objc dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
     }
 
-    var utcOffset: Double?
+    @objc dynamic var utcOffset: Double = 0.0
 }
 
 extension User {

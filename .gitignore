@@ -6,6 +6,7 @@
 
 ## Sensitive data
 Rocket.Chat/Keys.plist
+Rocket.Chat/GoogleService-Info.plist
 
 ## Build generated
 build/

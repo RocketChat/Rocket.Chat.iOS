@@ -27,6 +27,7 @@ final class ReactorListViewController: UIViewController, Closeable {
 
     var reactorListView: ReactorListView! {
         didSet {
+            reactorListView.isPopover = presentationController?.presentationStyle == .popover
             reactorListView.model = model
         }
     }
@@ -51,6 +52,8 @@ final class ReactorListViewController: UIViewController, Closeable {
         )
 
         title = NSLocalizedString("reactorlist.title", tableName: "RCEmojiKit", bundle: Bundle.main, value: "", comment: "")
+
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {

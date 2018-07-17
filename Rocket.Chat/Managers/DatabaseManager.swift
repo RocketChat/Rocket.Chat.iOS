@@ -151,26 +151,12 @@ struct DatabaseManager {
         servers.append([
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.serverURL: serverURL
-            ])
+        ])
 
         let index = servers.count - 1
         defaults.set(servers, forKey: ServerPersistKeys.servers)
         defaults.set(index, forKey: ServerPersistKeys.selectedIndex)
         return index
-    }
-
-    /**
-     This method is responsible to get the server
-     information that's stored locally on device and
-     use it to change the database configuration being
-     used by the currently instance.
-
-     - parameter index: If the index you want to use isn't stored
-     into the UserDefaults.group, you can for the index
-     using this parameter.
-     */
-    static func changeDatabaseInstance(index: Int? = nil) {
-        realmConfiguration = databaseConfiguration(index: index)
     }
 
     /**
@@ -192,6 +178,10 @@ struct DatabaseManager {
         else {
             return nil
         }
+
+        #if DEBUG
+        Log.debug("Realm path: \(url.appendingPathComponent(databaseName))")
+        #endif
 
         return Realm.Configuration(
             fileURL: url.appendingPathComponent(databaseName),

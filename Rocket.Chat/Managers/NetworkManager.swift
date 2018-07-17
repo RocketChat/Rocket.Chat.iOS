@@ -24,6 +24,22 @@ final class NetworkManager {
 
     func start() {
         reachability = Reachability()
+
+        reachability?.whenReachable = { reachability in
+            if !SocketManager.isConnected() {
+                SocketManager.reconnect()
+            }
+        }
+
+        reachability?.whenUnreachable = { _ in
+            SocketManager.sharedInstance.state = .waitingForNetwork
+        }
+
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            fatalError("was unable to start reachability notifier")
+        }
     }
 
 }

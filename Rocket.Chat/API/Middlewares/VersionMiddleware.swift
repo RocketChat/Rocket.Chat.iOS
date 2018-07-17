@@ -7,9 +7,17 @@
 //
 
 struct VersionMiddleware: APIRequestMiddleware {
-    let api: API
+    weak var api: API?
+
+    init(api: API) {
+        self.api = api
+    }
 
     func handle<R: APIRequest>(_ request: inout R) -> APIError? {
+        guard let api = api else {
+            return nil
+        }
+
         if api.version < request.requiredVersion {
             return APIError.version(available: api.version, required: request.requiredVersion)
         }

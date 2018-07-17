@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
@@ -60,7 +59,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             detailText.text = ""
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
             imageView.contentMode = UIViewContentMode.center
-            imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
+            imageView.image =  UIImage(named: "Resource Unavailable")
             return nil
         }
         labelTitle.text = attachment.title
@@ -83,22 +82,19 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         }
 
         activityIndicatorImageView.startAnimating()
-
-        let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages]
-        imageView.sd_setImage(with: imageURL, placeholderImage: nil, options: options, completed: { [weak self] _, _, _, _ in
+        ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, _ in
             self?.activityIndicatorImageView.stopAnimating()
-        })
+        }
     }
 
     @objc func didTapView() {
         if isLoadable {
             delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
         } else {
-            guard let imageURL = attachment.fullImageURL() else {
-                return
-            }
+            guard let imageURL = attachment.fullImageURL() else { return }
+
             Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                ChatViewController.shared?.openURL(url: imageURL)
+                 MainSplitViewController.chatViewController?.openURL(url: imageURL)
             }).present()
         }
     }

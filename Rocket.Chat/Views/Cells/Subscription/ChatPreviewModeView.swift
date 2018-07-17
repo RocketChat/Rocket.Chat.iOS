@@ -23,6 +23,7 @@ final class ChatPreviewModeView: UIView {
         }
     }
 
+    @IBOutlet weak var seperatorView: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var buttonJoin: UIButton! {
         didSet {
@@ -40,9 +41,11 @@ final class ChatPreviewModeView: UIView {
         buttonJoin.setTitle("", for: .normal)
 
         SubscriptionManager.join(room: subscription.rid) { [weak self] _ in
-            self?.activityIndicator.stopAnimating()
-            self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
-            self?.delegate?.userDidJoinedSubscription()
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
+                self?.delegate?.userDidJoinedSubscription()
+            }
         }
     }
 
@@ -56,5 +59,12 @@ final class ChatPreviewModeView: UIView {
         set {
             bottomConstraint.constant = newValue + requiredBottomInset
         }
+    }
+}
+
+extension ChatPreviewModeView {
+    override func applyTheme() {
+        super.applyTheme()
+        buttonJoin.setTitleColor(#colorLiteral(red: 0.6814334393, green: 0.6957040429, blue: 0.7027211785, alpha: 1), for: .normal)
     }
 }

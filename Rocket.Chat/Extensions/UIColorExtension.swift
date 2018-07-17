@@ -90,6 +90,10 @@ extension UIColor {
 
     // MARK: Theme color
 
+    static func RCNavigationBarColor() -> UIColor {
+        return UIColor(rgb: 0xF8F8F8, alphaVal: 1)
+    }
+
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
     }
@@ -98,20 +102,40 @@ extension UIColor {
         return UIColor(rgb: 0xEAEAEA, alphaVal: 0.75)
     }
 
+    static func RCTextFieldGray() -> UIColor {
+        return UIColor(rgb: 10396328, alphaVal: 1)
+    }
+
+    static func RCTextFieldBorderGray() -> UIColor {
+        return UIColor(rgb: 15199218, alphaVal: 1)
+    }
+
+    static func RCButtonBorderGray() -> UIColor {
+        return UIColor(rgb: 14804456, alphaVal: 1)
+    }
+
     static func RCDarkGray() -> UIColor {
         return UIColor(rgb: 0x333333, alphaVal: 1)
     }
 
     static func RCGray() -> UIColor {
-        return UIColor(rgb: 0x999999, alphaVal: 1)
+        return UIColor(rgb: 0x9EA2A8, alphaVal: 1)
+    }
+
+    static func RCNavBarGray() -> UIColor {
+        return UIColor(rgb: 3355443, alphaVal: 1)
     }
 
     static func RCLightGray() -> UIColor {
-        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
+        return UIColor(rgb: 0xCBCED1, alphaVal: 1)
     }
 
     static func RCSeparatorGrey() -> UIColor {
         return UIColor(rgb: 0xC2C2C2, alphaVal: 0.5)
+    }
+
+    static func RCSkyBlue() -> UIColor {
+        return UIColor(rgb: 1930485, alphaVal: 1)
     }
 
     static func RCDarkBlue() -> UIColor {
@@ -123,7 +147,7 @@ extension UIColor {
     }
 
     static func RCBlue() -> UIColor {
-        return UIColor(rgb: 0x0b4c74, alphaVal: 1)
+        return UIColor(rgb: 0x1D74F5, alphaVal: 1)
     }
 
     // MARK: Function color
@@ -178,6 +202,7 @@ extension UIColor {
 }
 
 // MARK: UIKit default colors
+
 extension UIColor {
     static var placeholderGray: UIColor {
         return UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
@@ -185,5 +210,16 @@ extension UIColor {
 
     static var backgroundWhite: UIColor {
         return UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+    }
+}
+
+// MARK: Utils
+
+extension UIColor {
+    func isBrightColor() -> Bool {
+        guard let components = cgColor.components else { return false }
+        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+
+        return brightness < 0.5 ? false : true
     }
 }

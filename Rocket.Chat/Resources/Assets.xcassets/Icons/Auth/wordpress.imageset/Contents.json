@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "wordpress@1x.png",
+      "filename" : "iconWordpress.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "wordpress@2x.png",
+      "filename" : "iconWordpress@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "wordpress@3x.png",
+      "filename" : "iconWordpress@3x.png",
       "scale" : "3x"
     }
   ],

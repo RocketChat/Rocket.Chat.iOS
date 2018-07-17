@@ -19,6 +19,7 @@ extension User: ModelHandler {
         guard let identifier = self.identifier else { return }
         if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
             subscription.otherUserId = identifier
+            subscription.privateOtherUserStatus = privateStatus
             realm.add(subscription, update: true)
         }
     }

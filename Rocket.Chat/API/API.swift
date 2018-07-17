@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 protocol APIRequestMiddleware {
-    var api: API { get }
+    var api: API? { get }
     init(api: API)
 
     func handle<R: APIRequest>(_ request: inout R) -> APIError?
@@ -47,6 +47,7 @@ final class API: APIFetcher {
 
     var authToken: String?
     var userId: String?
+    var language: String?
 
     static let userAgent: String = {
         let info = Bundle.main.infoDictionary

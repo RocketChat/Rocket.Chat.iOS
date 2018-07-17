@@ -17,7 +17,12 @@ class PreferencesViewModelSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        UserDefaults.group.set(["en"], forKey: "AppleLanguages")
+        AppManager.resetLanguage()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        AppManager.resetLanguage()
     }
 
     func testAppVersion() {
@@ -54,19 +59,21 @@ class PreferencesViewModelSpec: XCTestCase {
     }
 
     func testTrackingValue() {
-        let value = BugTrackingCoordinator.isCrashReportingDisabled
+        let value = AnalyticsCoordinator.isUsageDataLoggingDisabled
 
         // trackinValue is always the opposite of the value
         XCTAssertNotEqual(model.trackingValue, value)
     }
 
     func testNumberOfRowsInSection() {
-        XCTAssertTrue(model.numberOfSections == 5, "incorrect sections number")
-        XCTAssertTrue(model.numberOfRowsInSection(0) == 1, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(1) == 4, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(2) == 3, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(3) == 1, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(4) == 1, "incorrect rows number")
+        XCTAssertEqual(model.numberOfSections, 7)
+        XCTAssertEqual(model.numberOfRowsInSection(0), 1)
+        XCTAssertEqual(model.numberOfRowsInSection(1), 5)
+        XCTAssertEqual(model.numberOfRowsInSection(2), 0)
+        XCTAssertEqual(model.numberOfRowsInSection(3), 3)
+        XCTAssertEqual(model.numberOfRowsInSection(4), 1)
+        XCTAssertEqual(model.numberOfRowsInSection(5), 1)
+        XCTAssertEqual(model.numberOfRowsInSection(6), 1)
     }
 
     func testStringsOverall() {

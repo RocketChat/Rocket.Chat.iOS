@@ -18,17 +18,34 @@ public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 public typealias MessageCompletionObject <T: Object> = (T?) -> Void
 public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
-protocol SocketConnectionHandler {
-    func socketDidConnect(socket: SocketManager)
-    func socketDidDisconnect(socket: SocketManager)
-    func socketDidReturnError(socket: SocketManager, error: SocketError)
+enum SocketConnectionState {
+    case connected
+    case connecting
+    case disconnected
+    case waitingForNetwork
 }
 
-class SocketManager {
+protocol SocketConnectionHandler {
+    func socketDidChangeState(state: SocketConnectionState)
+}
+
+final class SocketManager {
 
     static let sharedInstance = SocketManager()
 
     var serverURL: URL?
+
+    var state: SocketConnectionState = .disconnected {
+        didSet {
+            if let enumerator = connectionHandlers.objectEnumerator() {
+                while let handler = enumerator.nextObject() {
+                    if let handler = handler as? SocketConnectionHandler {
+                        handler.socketDidChangeState(state: state)
+                    }
+                }
+            }
+        }
+    }
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
@@ -38,6 +55,7 @@ class SocketManager {
 
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers = NSMapTable<NSString, AnyObject>(keyOptions: .strongMemory, valueOptions: .weakMemory)
+    internal var isPresentingInvalidSessionAlert = false
 
     // MARK: Connection
 
@@ -54,6 +72,8 @@ class SocketManager {
         ]
 
         sharedInstance.socket?.connect()
+
+        sharedInstance.state = .connecting
     }
 
     static func disconnect(_ completion: @escaping SocketCompletion) {
@@ -138,31 +158,44 @@ extension SocketManager {
             return
         }
 
+        sharedInstance.state = .connecting
+
+        let currentRealm = Realm.current
         AuthManager.resume(auth, completion: { (response) in
             guard !response.isError() else {
                 return
             }
 
-            infoClient.fetchInfo()
+            infoClient.fetchInfo(realm: currentRealm, completion: {
+                SubscriptionManager.updateSubscriptions(auth, realm: currentRealm) {
+                    AuthSettingsManager.updatePublicSettings(auth)
 
-            SubscriptionManager.updateSubscriptions(auth) {
-                AuthSettingsManager.updatePublicSettings(auth)
+                    UserManager.userDataChanges()
+                    UserManager.changes()
+                    SubscriptionManager.changes(auth)
+                    SubscriptionManager.subscribeRoomChanges()
+                    SubscriptionManager.subscribeInAppNotifications()
+                    PermissionManager.changes()
+                    infoClient.fetchPermissions(realm: currentRealm)
+                    CustomEmojiManager.sync(realm: currentRealm)
 
-                UserManager.userDataChanges()
-                UserManager.changes()
-                SubscriptionManager.changes(auth)
-                SubscriptionManager.subscribeRoomChanges()
-                SubscriptionManager.subscribeInAppNotifications()
-                PermissionManager.changes()
-                infoClient.fetchPermissions()
-                CustomEmojiManager.sync()
+                    commandsClient.fetchCommands(realm: currentRealm)
 
-                commandsClient.fetchCommands()
+                    if let userIdentifier = auth.userId {
+                        PushManager.updateUser(userIdentifier)
+                    }
 
-                if let userIdentifier = auth.userId {
-                    PushManager.updateUser(userIdentifier)
+                    if AuthManager.currentUser(realm: currentRealm)?.username == nil {
+                        WindowManager.open(
+                            .auth(
+                                serverUrl: "",
+                                credentials: nil
+                            ),
+                            viewControllerIdentifier: "RegisterUsernameNav"
+                        )
+                    }
                 }
-            }
+            })
         })
     }
 
@@ -205,47 +238,38 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
-        isUserAuthenticated = false
-        events = [:]
-        queue = [:]
-
         if let handler = internalConnectionHandler {
             internalConnectionHandler = nil
             handler(socket, socket.isConnected)
         }
 
-        if let enumerator = connectionHandlers.objectEnumerator() {
-            while let handler = enumerator.nextObject() {
-                if let handler = handler as? SocketConnectionHandler {
-                    handler.socketDidConnect(socket: self)
-                }
-            }
-        }
+        isUserAuthenticated = false
+        events = [:]
+        queue = [:]
+        state = .waitingForNetwork
     }
 
     func websocketDidReceiveData(socket: WebSocket, data: Data) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
-    static let jsonParseQueue = DispatchQueue(label: "chat.rocket.json.parse", qos: .background)
+    static let messageHandlerQueue = DispatchQueue(label: "chat.rocket.websocket.handler", qos: .background)
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        SocketManager.jsonParseQueue.async {
-            let json = JSON(parseJSON: text)
+        let json = JSON(parseJSON: text)
 
-            // JSON is invalid
-            guard json.exists() else {
-                Log.debug("[WebSocket] \(socket.currentURL)\n - did receive invalid JSON object:\n\(text)")
-                return
-            }
+        // JSON is invalid
+        guard json.exists() else {
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive invalid JSON object:\n\(text)")
+            return
+        }
 
-            if let raw = json.rawString() {
-                Log.debug("[WebSocket] \(socket.currentURL)\n - did receive JSON message:\n\(raw)")
-            }
+        if let raw = json.rawString() {
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive JSON message:\n\(raw)")
+        }
 
-            DispatchQueue.main.async {
-                self.handleMessage(json, socket: socket)
-            }
+        SocketManager.messageHandlerQueue.async {
+            self.handleMessage(json, socket: socket)
         }
     }
 

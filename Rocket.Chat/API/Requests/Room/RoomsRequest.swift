@@ -12,6 +12,27 @@ struct RoomsRequest: APIRequest {
     typealias APIResourceType = RoomsResource
     let path = "/api/v1/rooms.get"
     let requiredVersion = Version(0, 62, 0)
+
+    var query: String? {
+        if let updatedSince = updatedSince {
+            let dateFormatter = ISO8601DateFormatter()
+            let dateString = dateFormatter.string(from: updatedSince)
+
+            if let encodedString = dateString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                return "updatedSince=\(encodedString)"
+            }
+
+            return ""
+        }
+
+        return nil
+    }
+
+    let updatedSince: Date?
+
+    init(updatedSince: Date? = nil) {
+        self.updatedSince = updatedSince
+    }
 }
 
 final class RoomsResource: APIResource {
