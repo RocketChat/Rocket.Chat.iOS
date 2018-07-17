@@ -44,17 +44,21 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
     }
 
     func startLoading() {
-        textFieldUsername.alpha = 0.5
-        requesting = true
-        view.layoutIfNeeded()
-        registerButton.startLoading()
-        textFieldUsername.resignFirstResponder()
+        DispatchQueue.main.async {
+            self.textFieldUsername.alpha = 0.5
+            self.requesting = true
+            self.view.layoutIfNeeded()
+            self.registerButton.startLoading()
+            self.textFieldUsername.resignFirstResponder()
+        }
     }
 
     func stopLoading() {
-        textFieldUsername.alpha = 1
-        requesting = false
-        registerButton.stopLoading()
+        DispatchQueue.main.async {
+            self.textFieldUsername.alpha = 1
+            self.requesting = false
+            self.registerButton.stopLoading()
+        }
     }
 
     // MARK: Request username
@@ -83,7 +87,9 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
                     self?.stopLoading()
 
                     if !response.isError() {
-                        self?.textFieldUsername.text = response.result["result"].stringValue
+                        DispatchQueue.main.async {
+                            self?.textFieldUsername.text = response.result["result"].stringValue
+                        }
                     }
                 }
             }
