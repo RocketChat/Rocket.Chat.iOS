@@ -125,6 +125,8 @@ extension ChatViewController {
         return actions
     }
 
+    // swiftlint:enable function_body_length
+
     func actionsForFailedMessage(_ message: Message) -> [UIAlertAction] {
 
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in

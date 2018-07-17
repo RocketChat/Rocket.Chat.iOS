@@ -81,6 +81,8 @@ struct MessagesClient: APIClient {
         }
     }
 
+    // swiftlint:enable function_body_length
+
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
         let message = Message()
         message.internalType = ""
@@ -179,6 +181,7 @@ struct MessagesClient: APIClient {
         return true
     }
 
+    // swiftlint:disable function_body_length
     @discardableResult
     func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier, let username = user?.username else {
@@ -248,4 +251,6 @@ struct MessagesClient: APIClient {
 
         return true
     }
+
+    // swiftlint:enable function_body_length
 }
