@@ -855,38 +855,13 @@ final class ChatViewController: SLKTextViewController {
 
         isAppendingMessages = true
 
-        var tempMessages: [Message] = []
-        for message in messages {
-            tempMessages.append(Message(value: message))
-        }
+        let tempMessages = messages.map { Message(value: $0) }
 
         DispatchQueue.global(qos: .background).async {
-            var objs: [ChatData] = []
-            var newMessages: [Message] = []
-
-            // Do not add duplicated messages
-            for message in tempMessages {
-                var insert = true
-
-                for obj in self.dataController.data where message.identifier == obj.message?.identifier {
-                    insert = false
-                }
-
-                if insert {
-                    newMessages.append(message)
-                }
-            }
-
-            // Normalize data into ChatData object
-            for message in newMessages {
-                guard let createdAt = message.createdAt else { continue }
-                var obj = ChatData(type: .message, timestamp: createdAt)
-                obj.message = message
-                objs.append(obj)
-            }
+            let chatData = self.insertMessages(messages: tempMessages)
 
             // No new data? Don't update it then
-            if objs.count == 0 {
+            if chatData.count == 0 {
                 if self.dataController.dismissUnreadSeparator {
                     DispatchQueue.main.async {
                         self.syncCollectionView()
@@ -903,7 +878,7 @@ final class ChatViewController: SLKTextViewController {
 
             DispatchQueue.main.async {
                 collectionView.performBatchUpdates({
-                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
+                    let (indexPaths, removedIndexPaths) = self.dataController.insert(chatData)
                     collectionView.insertItems(at: indexPaths)
                     collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
@@ -912,6 +887,34 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+    }
+
+    private func insertMessages(messages: [Message]) -> [ChatData] {
+        var objs: [ChatData] = []
+        var newMessages: [Message] = []
+
+        // Do not add duplicated messages
+        for message in messages {
+            var insert = true
+
+            for obj in self.dataController.data where message.identifier == obj.message?.identifier {
+                insert = false
+            }
+
+            if insert {
+                newMessages.append(message)
+            }
+        }
+
+        // Normalize data into ChatData object
+        for message in newMessages {
+            guard let createdAt = message.createdAt else { continue }
+            var obj = ChatData(type: .message, timestamp: createdAt)
+            obj.message = message
+            objs.append(obj)
+        }
+
+        return objs
     }
 
     private func showChatPreviewModeView() {
@@ -1150,27 +1153,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: fullWidth, height: value)
             }
 
-            if obj.type == .header {
-                let isDirectMessage = subscription.type == .directMessage
-                let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
-                let channelHeaderSize = CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
-                return isDirectMessage ? directMessageHeaderSize : channelHeaderSize
-            }
-
-            if obj.type == .loader {
-                return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
-            }
-
-            if obj.type == .daySeparator {
-                return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
-            }
-
-            if obj.type == .unreadSeparator {
-                if dataController.dismissUnreadSeparator {
-                    return CGSize(width: fullWidth, height: 0)
-                }
-
-                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
+            if let value = sizeForChatObject(obj, subscription: subscription, fullWidth: fullWidth) {
+                return value
             }
 
             if let message = obj.message {
@@ -1185,6 +1169,33 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         }
 
         return CGSize(width: fullWidth, height: 40)
+    }
+
+    func sizeForChatObject(_ obj: ChatData, subscription: Subscription, fullWidth: CGFloat) -> CGSize? {
+        if obj.type == .header {
+            let isDirectMessage = subscription.type == .directMessage
+            let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+            let channelHeaderSize = CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+            return isDirectMessage ? directMessageHeaderSize : channelHeaderSize
+        }
+
+        if obj.type == .loader {
+            return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
+        }
+
+        if obj.type == .daySeparator {
+            return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+        }
+
+        if obj.type == .unreadSeparator {
+            if dataController.dismissUnreadSeparator {
+                return CGSize(width: fullWidth, height: 0)
+            }
+
+            return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
+        }
+
+        return nil
     }
 }
 
