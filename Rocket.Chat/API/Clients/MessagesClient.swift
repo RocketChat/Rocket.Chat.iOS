@@ -12,6 +12,7 @@ import SwiftyJSON
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
+    // swiftlint:disable function_body_length
     func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.current) {
         guard let id = message.identifier else { return }
         let subscriptionIdentifier = subscription.rid

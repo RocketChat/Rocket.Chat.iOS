@@ -8,6 +8,7 @@
 
 import UIKit
 
+// swiftlint:disable file_length
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol, ChatMessageActionButtonsViewProtocol {
     func openURL(url: URL)
 
