@@ -160,20 +160,6 @@ struct DatabaseManager {
     }
 
     /**
-     This method is responsible to get the server
-     information that's stored locally on device and
-     use it to change the database configuration being
-     used by the currently instance.
-
-     - parameter index: If the index you want to use isn't stored
-     into the UserDefaults.group, you can for the index
-     using this parameter.
-     */
-    static func changeDatabaseInstance(index: Int? = nil) {
-        realmConfiguration = databaseConfiguration(index: index)
-    }
-
-    /**
      This method gets the realm associated with this server
     */
     static func databaseInstace(index: Int) -> Realm? {
