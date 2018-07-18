@@ -31,6 +31,12 @@ class UserDetailTableView: UITableView {
         return 220 + topInset + additionalTopInset
     }
 
+    var preferredContentSize: CGSize {
+        let height = headerViewHeight + contentSize.height
+        let width = CGFloat(300)
+        return CGSize(width: width, height: height)
+    }
+
     lazy var headerView: UIView = {
         let headerView = tableHeaderView ?? UIView()
         tableHeaderView = nil
