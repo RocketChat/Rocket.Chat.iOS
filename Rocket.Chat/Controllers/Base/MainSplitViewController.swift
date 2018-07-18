@@ -108,11 +108,9 @@ extension MainSplitViewController {
             UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
             UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
             UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
-            UIKeyCommand(input: "↑ ↓", modifierFlags: [], action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: "Scroll messages"),
-            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: [], action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: [], action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .shift, action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .shift, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: "Scroll messages"),
+            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
             UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: "Reply to latest"),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
@@ -213,8 +211,7 @@ extension MainSplitViewController {
             return
         }
 
-        let heightOffset: CGFloat = command.modifierFlags.contains(.shift) ? 100.0 : 10.0
-        let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -heightOffset : heightOffset
+        let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -50.0 : 50.0
 
         UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
             let offset = min(offset.y + heightDelta, maxHeight)
