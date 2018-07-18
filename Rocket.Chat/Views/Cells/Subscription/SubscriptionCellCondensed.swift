@@ -9,5 +9,5 @@
 import UIKit
 
 final class SubscriptionCellCondensed: BaseSubscriptionCell {
-    static let identifier = "SubscriptionCellCondensed"
+    static let identifier = "CellSubscriptionCondensed"
 }
