@@ -144,11 +144,11 @@ extension ChannelActionsViewController {
         guard let subscription = self.subscription else { return }
 
         SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
-            if response.isError() {
-                subscription.updateFavorite(!subscription.favorite)
-            }
-
             DispatchQueue.main.async {
+                if response.isError() {
+                    subscription.updateFavorite(!subscription.favorite)
+                }
+
                 self.updateButtonFavoriteImage()
             }
         }

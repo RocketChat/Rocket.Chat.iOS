@@ -207,6 +207,7 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         keyboardFrame?.updateFrame()
         ThemeManager.addObserver(navigationController?.navigationBar)
+        setupAutoCompletionSeparator()
         textInputbar.applyTheme()
 
         textInputbar.textView.inputAssistantItem.leadingBarButtonGroups = []
@@ -282,6 +283,12 @@ final class ChatViewController: SLKTextViewController {
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
+    }
+
+    private func setupAutoCompletionSeparator() {
+        guard let hairlineView = self.value(forKey: "autoCompletionHairline") as? UIView else { return }
+        hairlineView.setThemeColor("backgroundColor: mutedAccent")
+        hairlineView.applyTheme()
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -564,7 +571,9 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            self?.deleteMessage(msgId: msgId)
+            DispatchQueue.main.async {
+                self?.deleteMessage(msgId: msgId)
+            }
         }
         registerTypingEvent(subscription)
     }

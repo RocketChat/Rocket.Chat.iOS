@@ -15,7 +15,7 @@ extension SocketError {
 
         init(rawValue: String) {
             switch rawValue {
-            case "403":
+            case "403", "401":
                 self = .invalidSession
             default:
                 self = .other(rawValue)
