@@ -567,7 +567,9 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            self?.deleteMessage(msgId: msgId)
+            DispatchQueue.main.async {
+                self?.deleteMessage(msgId: msgId)
+            }
         }
         registerTypingEvent(subscription)
     }

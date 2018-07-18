@@ -150,7 +150,11 @@ class HighlightLayoutManager: NSLayoutManager {
 
 extension RCTextView: UITextViewDelegate {
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if interaction != .invokeDefaultAction {
+            return false
+        }
+
         if URL.scheme == "http" || URL.scheme == "https" {
             delegate?.openURL(url: URL)
             return false
