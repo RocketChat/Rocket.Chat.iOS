@@ -127,9 +127,8 @@ extension NSMutableAttributedString {
                     }
                 }
 
-                let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")
-                for range in ranges {
-                    let range = NSRange(range, in: string)
+                if let substringRange = string.range(of: "@\(shouldUseRealName ? realName : username)") {
+                    let range = NSRange(substringRange, in: string)
 
                     if username != "all" && username != "here" && username != currentUsername {
                         setMention(username, range: range)
