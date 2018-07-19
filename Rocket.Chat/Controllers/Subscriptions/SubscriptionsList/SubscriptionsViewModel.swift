@@ -149,7 +149,7 @@ extension SubscriptionsViewModel {
 
 }
 
-extension NSPredicate {
+private extension NSPredicate {
     var negation: NSPredicate {
         return NSCompoundPredicate(notPredicateWithSubpredicate: self)
     }
