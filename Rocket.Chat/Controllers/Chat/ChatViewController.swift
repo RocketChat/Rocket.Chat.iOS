@@ -859,19 +859,20 @@ final class ChatViewController: SLKTextViewController {
 
         let tempMessages = messages.map { Message(value: $0) }
 
-        DispatchQueue.global(qos: .background).async {
-            let chatData = self.insertMessages(messages: tempMessages)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let strongSelf = self else { return }
+            let chatData = strongSelf.insertMessages(messages: tempMessages)
 
             // No new data? Don't update it then
             if chatData.count == 0 {
-                if self.dataController.dismissUnreadSeparator {
+                if strongSelf.dataController.dismissUnreadSeparator {
                     DispatchQueue.main.async {
-                        self.syncCollectionView()
+                        strongSelf.syncCollectionView()
                     }
                 }
 
                 DispatchQueue.main.async {
-                    self.isAppendingMessages = false
+                    strongSelf.isAppendingMessages = false
                     completion?()
                 }
 
@@ -880,11 +881,11 @@ final class ChatViewController: SLKTextViewController {
 
             DispatchQueue.main.async {
                 collectionView.performBatchUpdates({
-                    let (indexPaths, removedIndexPaths) = self.dataController.insert(chatData)
+                    let (indexPaths, removedIndexPaths) = strongSelf.dataController.insert(chatData)
                     collectionView.insertItems(at: indexPaths)
                     collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
-                    self.isAppendingMessages = false
+                    strongSelf.isAppendingMessages = false
                     completion?()
                 })
             }
