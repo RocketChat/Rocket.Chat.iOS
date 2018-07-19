@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension LoginService: ModelMappeable {
+    // swiftlint:disable cyclomatic_complexity
     func map(_ values: JSON, realm: Realm?) {
         if identifier == nil {
             identifier = values["_id"].string ?? values["id"].string
@@ -52,6 +53,8 @@ extension LoginService: ModelMappeable {
         case .invalid: break
         }
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     func mapGoogle() {
         service = "google"
