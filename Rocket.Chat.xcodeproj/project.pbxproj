@@ -737,7 +737,6 @@
 		B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */; };
 		D10E9C1A1F643457007F1796 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C191F643457007F1796 /* Channel.swift */; };
 		D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */; };
-		D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */; };
 		D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C211F643616007F1796 /* MentionModelMapping.swift */; };
 		D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12D34021F69C76400AED992 /* SubscriptionExtensions.swift */; };
 		D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */; };
@@ -1541,7 +1540,6 @@
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		D10E9C191F643457007F1796 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelModelMapping.swift; sourceTree = "<group>"; };
-		D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRangeExtensions.swift; sourceTree = "<group>"; };
 		D10E9C211F643616007F1796 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionModelMapping.swift; sourceTree = "<group>"; };
 		D12D34021F69C76400AED992 /* SubscriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionExtensions.swift; sourceTree = "<group>"; };
 		D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelSpec.swift; sourceTree = "<group>"; };
@@ -2237,7 +2235,6 @@
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
 				77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */,
 				41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */,
-				D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */,
 				80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */,
 				8076FDA8204853DE00114F28 /* RealmExecute.swift */,
 				8076FDA32048533000114F28 /* String+Random.swift */,
@@ -4257,7 +4254,6 @@
 				4153E80520504BE700FBC26B /* ReusableViewText.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
-				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
 				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */,
