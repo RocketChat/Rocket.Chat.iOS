@@ -77,28 +77,37 @@ class SubscriptionsViewModel {
 
             API.current()?.client(SpotlightClient.self).search(query: query) { _, _ in }
         case .notSearching:
+            var queryItems = queryBase
+
+            func filtered(using predicateFormat: String) -> Results<Subscription> {
+                let predicate = NSPredicate(format: predicateFormat)
+                let filteredResult = queryItems.filter(predicate)
+                queryItems = queryItems.filter(predicate.negation)
+                return filteredResult
+            }
+
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.unread) {
-                let queryData = queryBase.filter("alert == true")
+                let queryData = filtered(using: "alert == true")
                 assorter.registerSection(name: localized("subscriptions.unreads"), objects: queryData)
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) {
-                let queryData = queryBase.filter("favorite == true")
+                let queryData = filtered(using: "favorite == true")
                 assorter.registerSection(name: localized("subscriptions.favorites"), objects: queryData)
             }
 
             if SubscriptionsSortingManager.selectedGroupingOptions.contains(.type) {
-                let queryDataChannels = queryBase.filter("privateType == 'c'")
+                let queryDataChannels = filtered(using: "privateType == 'c'")
                 assorter.registerSection(name: localized("subscriptions.channels"), objects: queryDataChannels)
 
-                let queryDataGroups = queryBase.filter("privateType == 'p'")
+                let queryDataGroups = filtered(using: "privateType == 'p'")
                 assorter.registerSection(name: localized("subscriptions.groups"), objects: queryDataGroups)
 
-                let queryDataDirectMessages = queryBase.filter("privateType == 'd'")
+                let queryDataDirectMessages = filtered(using: "privateType == 'd'")
                 assorter.registerSection(name: localized("subscriptions.direct_messages"), objects: queryDataDirectMessages)
             } else {
                 let title = assorter.numberOfSections > 0 ? localized("subscriptions.conversations") : ""
-                assorter.registerSection(name: title, objects: queryBase)
+                assorter.registerSection(name: title, objects: queryItems)
             }
         }
     }
@@ -138,4 +147,10 @@ extension SubscriptionsViewModel {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
 
+}
+
+extension NSPredicate {
+    var negation: NSPredicate {
+        return NSCompoundPredicate(notPredicateWithSubpredicate: self)
+    }
 }
