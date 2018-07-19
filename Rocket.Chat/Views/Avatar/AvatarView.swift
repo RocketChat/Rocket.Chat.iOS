@@ -177,7 +177,6 @@ final class AvatarView: UIView {
 
         imageView.image = nil
         imageView.animatedImage = nil
-
         labelInitials.text = ""
     }
 

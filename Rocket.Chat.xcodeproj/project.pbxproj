@@ -115,6 +115,7 @@
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
 		3397604920EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
+		33A1BB0720FF75D600AFA7D4 /* BaseSubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1BB0620FF75D600AFA7D4 /* BaseSubscriptionCell.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
 		33A5C9CB206A565800FE1C8F /* travel.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C2206A565800FE1C8F /* travel.json */; };
@@ -504,7 +505,6 @@
 		807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */; };
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
 		8076FD9A20484A6000114F28 /* SEStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FD9920484A6000114F28 /* SEStore.swift */; };
-		8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F8DD81F599EF100AF7786 /* DatabaseManager.swift */; };
 		8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
 		8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		8076FDA02048519D00114F28 /* AuthManagerSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FD9F2048519D00114F28 /* AuthManagerSocket.swift */; };
@@ -726,6 +726,8 @@
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
+		99B15BCD20FD4589005A528F /* DatabaseManagerAuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */; };
+		99B15BCF20FD4681005A528F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F8DD81F599EF100AF7786 /* DatabaseManager.swift */; };
 		99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
@@ -925,6 +927,7 @@
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeAttributesThemeableViewSpec.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
+		33A1BB0620FF75D600AFA7D4 /* BaseSubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSubscriptionCell.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
 		33A5C9C2206A565800FE1C8F /* travel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = travel.json; sourceTree = "<group>"; };
@@ -1540,6 +1543,7 @@
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManager.swift; sourceTree = "<group>"; };
+		99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerAuthSettings.swift; sourceTree = "<group>"; };
 		99B802EC20BC3BD400230109 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -2257,6 +2261,7 @@
 				411EDECE1E30F2D700BC7BE3 /* Uploader */,
 				4101BF001F8D0A1700F67E89 /* AppManager.swift */,
 				412F8DD81F599EF100AF7786 /* DatabaseManager.swift */,
+				99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */,
 				419ECCA31F3CA21A005F224B /* DownloadManager.swift */,
 				99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */,
 				4174CB1B1D2DB2080086DAC8 /* LogManager.swift */,
@@ -2364,6 +2369,7 @@
 				4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */,
 				41FBF4EA20BD8C650080D00D /* ServerCell.xib */,
 				4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */,
+				33A1BB0620FF75D600AFA7D4 /* BaseSubscriptionCell.swift */,
 				41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */,
 				41DE687C20C6D57F00AA5EC8 /* SubscriptionSortingCell.swift */,
 				41DE688020C6EBE600AA5EC8 /* SubscriptionSortingCell.xib */,
@@ -4241,6 +4247,7 @@
 				995F710E20C7837300B7535F /* AuthSeparatorTableViewCell.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
 				8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */,
+				99B15BCD20FD4589005A528F /* DatabaseManagerAuthSettings.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
 				8039441120AF1334002F317A /* RoomKickRequest.swift in Sources */,
 				33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */,
@@ -4600,6 +4607,7 @@
 				1496A86D20FA4644005C2E14 /* NotificationsChooseCell.swift in Sources */,
 				8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */,
 				8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */,
+				33A1BB0720FF75D600AFA7D4 /* BaseSubscriptionCell.swift in Sources */,
 				806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */,
 				9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */,
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
@@ -4788,12 +4796,12 @@
 				4100B2842087779D00E2883A /* LogManager.swift in Sources */,
 				80D0CE62205023710056B17F /* SECell.swift in Sources */,
 				80FA90702056A33A0069038F /* SEComposeViewModel.swift in Sources */,
-				8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */,
 				80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */,
 				41D51B0720A62DD60073E8E7 /* Role.swift in Sources */,
 				80977AB6204EEF1E00C41435 /* SelectServer.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeHeaderViewModel.swift in Sources */,
+				99B15BCF20FD4681005A528F /* DatabaseManager.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResponse.swift in Sources */,
 				8029B2F22059B6F60067157B /* VideoInfo.swift in Sources */,
 				80D0CE6620503C860056B17F /* SERoomCell.swift in Sources */,

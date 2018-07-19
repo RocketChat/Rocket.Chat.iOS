@@ -53,6 +53,41 @@ extension SocketManager {
 
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
         let error = SocketError(json: result.result["error"])
+        switch error.error {
+        case .invalidSession:
+            guard !isPresentingInvalidSessionAlert else {
+                return
+            }
+
+            let invalidSessionAlert = UIAlertController(
+                title: localized("alert.socket_error.invalid_user.title"),
+                message: localized("alert.socket_error.invalid_user.message"),
+                preferredStyle: .alert
+            )
+
+            invalidSessionAlert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
+                self.isPresentingInvalidSessionAlert = false
+                AppManager.reloadApp()
+            }))
+
+            func present() {
+                isPresentingInvalidSessionAlert = true
+
+                let alertWindow = UIWindow.topWindow
+                alertWindow.windowLevel = UIWindowLevelAlert + 1
+                alertWindow.rootViewController?.present(invalidSessionAlert, animated: true)
+            }
+
+            API.current()?.client(PushClient.self).deletePushToken()
+
+            AuthManager.logout {
+                AuthManager.recoverAuthIfNeeded()
+                DispatchQueue.main.async(execute: present)
+            }
+        default:
+            break
+        }
+
         Log.debug("[ERROR][SocketManager]: \(error.message)")
     }
 
