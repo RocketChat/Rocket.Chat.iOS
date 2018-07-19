@@ -16,6 +16,13 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         return true
     }
 
+    override var preferredContentSize: CGSize {
+        set { }
+        get {
+            return tableView.preferredContentSize
+        }
+    }
+
     @IBOutlet weak var backgroundImageView: FLAnimatedImageView!
     @IBOutlet weak var avatarImageView: FLAnimatedImageView!
     @IBOutlet weak var nameLabel: UILabel!
