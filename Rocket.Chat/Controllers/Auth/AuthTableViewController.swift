@@ -198,6 +198,13 @@ class AuthTableViewController: BaseTableViewController {
             }
         }
 
+        if loginService.service == "wordpress", let url = serverPublicSettings?.wordpressUrl {
+            loginServices[button.tag].serverUrl = url
+            try? realm.write {
+                loginService.serverUrl = url
+            }
+        }
+
         switch loginService.type {
         case .cas:
             presentCASViewController(for: loginService)

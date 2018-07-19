@@ -43,6 +43,7 @@ extension AuthSettings: ModelMappeable {
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
         self.gitlabUrl = objectForKey(object: values, key: "API_Gitlab_URL")?.string
+        self.wordpressUrl = objectForKey(object: values, key: "API_Wordpress_URL")?.string
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string

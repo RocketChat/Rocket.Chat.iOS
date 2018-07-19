@@ -38,6 +38,7 @@ final class PublicSettingsRequest: APIRequest {
                 "CAS_enabled",
                 "CAS_login_url",
                 "API_Gitlab_URL",
+                "API_Wordpress_URL",
                 "Accounts_ShowFormLogin",
                 "Accounts_RegistrationForm",
                 "Accounts_PasswordReset",
