@@ -42,7 +42,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
-                        <segue destination="hUy-gX-yhf" kind="presentation" identifier="Channel Actions" id="on8-Tf-r4t"/>
+                        <segue destination="hUy-gX-yhf" kind="presentation" identifier="Channel Actions" modalPresentationStyle="formSheet" id="on8-Tf-r4t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
