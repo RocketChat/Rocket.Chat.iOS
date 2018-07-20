@@ -75,10 +75,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         super.viewDidLoad()
     }
 
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        view.applyTheme()
-//    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.applyTheme()
+    }
 
     @IBAction func messageDidPress(_ sender: UIButton) {
         AppManager.openDirectMessage(username: model.username)
