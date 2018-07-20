@@ -51,12 +51,12 @@ final class SERoomsViewController: SEViewController {
 // MARK: UISearchBarDelegate
 
 extension SERoomsViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        store.dispatch(.setSearchRooms(.none))
-    }
-
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         store.dispatch(.setSearchRooms(.started))
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        store.dispatch(.setSearchRooms(.none))
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
