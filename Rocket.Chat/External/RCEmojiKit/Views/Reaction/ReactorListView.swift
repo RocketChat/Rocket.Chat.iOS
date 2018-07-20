@@ -161,27 +161,3 @@ extension ReactorListView: UITableViewDelegate {
         selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row], rect)
     }
 }
-
-extension ReactorListView {
-//    override var theme: Theme? {
-//        guard let theme = super.theme else { return nil }
-//        guard isPopover else { return theme }
-//        let popoverTheme = Theme(
-//            backgroundColor: theme.focusedBackground,
-//            focusedBackground: theme.focusedBackground,
-//            auxiliaryBackground: theme.auxiliaryBackground,
-//            bannerBackground: theme.backgroundColor,
-//            titleText: theme.titleText,
-//            bodyText: theme.bodyText,
-//            controlText: theme.controlText,
-//            auxiliaryText: theme.auxiliaryText,
-//            tintColor: theme.tintColor,
-//            auxiliaryTintColor: theme.auxiliaryTintColor,
-//            hyperlink: theme.hyperlink,
-//            mutedAccent: theme.mutedAccent,
-//            strongAccent: theme.strongAccent,
-//            appearence: theme.appearence
-//        )
-//        return popoverTheme
-//    }
-}
