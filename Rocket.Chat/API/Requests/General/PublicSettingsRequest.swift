@@ -51,6 +51,7 @@ final class PublicSettingsRequest: APIRequest {
                 "Accounts_AllowUsernameChange",
                 "Accounts_AllowEmailChange",
                 "Accounts_AllowPasswordChange",
+                "Accounts_OAuth_Wordpress_server_type",
                 "FileUpload_Storage_Type",
                 "Message_HideType_uj",
                 "Message_HideType_ul",

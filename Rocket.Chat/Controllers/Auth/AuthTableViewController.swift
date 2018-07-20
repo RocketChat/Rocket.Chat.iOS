@@ -190,7 +190,7 @@ class AuthTableViewController: BaseTableViewController {
             return
         }
 
-        let loginService = loginServices[button.tag]
+        let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
             try? realm.write {
@@ -198,10 +198,22 @@ class AuthTableViewController: BaseTableViewController {
             }
         }
 
-        if loginService.service == "wordpress", let url = serverPublicSettings?.wordpressUrl {
-            loginServices[button.tag].serverUrl = url
-            try? realm.write {
+        if loginService.service == "wordpress" {
+            if let url = serverPublicSettings?.wordpressUrl, !url.isEmpty {
                 loginService.serverUrl = url
+
+                /*
+                 NOTE: If should be this, but API is broken
+                 serverPublicSettings?.oauthWordpressServerType == "custom"
+                 */
+
+                loginService.mapWordPressCustom()
+            } else { // oauthWordPressServerType == wordpress-com
+                loginService.mapWordPress()
+            } // missing implementation for wp-oauth-server
+
+            try? realm.write {
+                realm.add(loginService, update: true)
             }
         }
 

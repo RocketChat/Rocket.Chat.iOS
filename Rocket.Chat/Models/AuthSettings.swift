@@ -68,6 +68,7 @@ final class AuthSettings: Object {
     @objc dynamic var isAllowedToEditUsername = false
     @objc dynamic var isAllowedToEditEmail = false
     @objc dynamic var isAllowedToEditPassword = false
+    @objc dynamic var oauthWordpressServerType = ""
 
     // Registration
     @objc dynamic var rawRegistrationForm: String?

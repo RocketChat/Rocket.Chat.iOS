@@ -19,10 +19,10 @@ extension LoginService: ModelMappeable {
         service = values["name"].string ?? values["service"].string
         clientId = values["appId"].string ?? values["clientId"].string
         custom = values["custom"].boolValue
-        serverUrl = values["serverURL"].stringValue
-        tokenPath = values["tokenPath"].stringValue
-        authorizePath = values["authorizePath"].stringValue
-        scope = values["scope"].stringValue
+        serverUrl = values["serverURL"].string
+        tokenPath = values["tokenPath"].string
+        authorizePath = values["authorizePath"].string
+        scope = values["scope"].string
         buttonLabelText = values["buttonLabelText"].stringValue
         buttonLabelColor = values["buttonLabelColor"].stringValue
         tokenSentVia = values["tokenSentVia"].stringValue
@@ -45,7 +45,8 @@ extension LoginService: ModelMappeable {
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
-        case .wordpress: mapWordPress()
+        case .wordpress:
+            break // not mapped here since it needs a public setting for type
         case .saml: break
         case .cas: break
         case .custom: break
@@ -124,11 +125,25 @@ extension LoginService: ModelMappeable {
 
     func mapWordPress() {
         service = "wordpress"
-        scope = "openid" // "auth"
+        scope = scope ?? "auth"
 
         serverUrl = "https://public-api.wordpress.com"
-        tokenPath = "/oauth/token" // "/oauth2/token"
-        authorizePath = "/oauth/authorize" // "/oauth2/token"
+        tokenPath = "/oauth2/token"
+        authorizePath = "/oauth2/authorize"
+        buttonLabelText = "wordpress"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#1e8cbe"
+
+        callbackPath = "wordpress?close"
+    }
+
+    func mapWordPressCustom() {
+        service = "wordpress"
+        scope = scope ?? "openid"
+
+        serverUrl = serverUrl ?? "https://public-api.wordpress.com"
+        tokenPath = tokenPath ?? "/oauth/token"
+        authorizePath = authorizePath ?? "/oauth/authorize"
         buttonLabelText = "wordpress"
         buttonLabelColor = "#ffffff"
         buttonColor = "#1e8cbe"
