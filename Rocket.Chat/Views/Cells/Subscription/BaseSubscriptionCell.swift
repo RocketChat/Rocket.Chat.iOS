@@ -100,6 +100,7 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
 
     func updateViewForAlert(with subscription: Subscription) {
         labelName.font = UIFont.systemFont(ofSize: labelName.font.pointSize, weight: .semibold)
+        labelUnread.font = UIFont.boldSystemFont(ofSize: labelUnread.font.pointSize)
 
         if subscription.unread > 0 {
             viewUnread.isHidden = false
@@ -110,8 +111,8 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
                 labelUnread.text =  "\(subscription.unread)"
             }
         } else {
-            viewUnread.isHidden = true
-            labelUnread.text = nil
+            viewUnread.isHidden = false
+            labelUnread.text = "!"
         }
     }
 
