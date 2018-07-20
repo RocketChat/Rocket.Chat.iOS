@@ -30,6 +30,7 @@ struct MessagesClient: APIClient {
 
         func updateMessage(json: JSON) {
             let server = AuthManager.selectedServerHost()
+
             AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
 
             try? realm?.write {
@@ -71,7 +72,9 @@ struct MessagesClient: APIClient {
                 switch error {
                 case .version:
                     SubscriptionManager.sendTextMessage(message, completion: { response in
-                        updateMessage(json: response.result["result"])
+                        DispatchQueue.main.async {
+                            updateMessage(json: response.result["result"])
+                        }
                     })
                 default:
                     setMessageOffline()
@@ -237,11 +240,13 @@ struct MessagesClient: APIClient {
                 case .version:
                     // version fallback
                     MessageManager.react(message, emoji: emoji, completion: { _ in
-                        AnalyticsManager.log(
-                            event: .reaction(
-                                subscriptionType: message.subscription?.type.rawValue ?? ""
+                        DispatchQueue.main.async {
+                            AnalyticsManager.log(
+                                event: .reaction(
+                                    subscriptionType: message.subscription?.type.rawValue ?? ""
+                                )
                             )
-                        )
+                        }
                     })
                 default:
                     Alert.defaultError.present()
