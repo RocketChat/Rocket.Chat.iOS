@@ -22,6 +22,11 @@ class BaseTableViewController: UITableViewController {
         )
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        ThemeManager.addObserver(self)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 

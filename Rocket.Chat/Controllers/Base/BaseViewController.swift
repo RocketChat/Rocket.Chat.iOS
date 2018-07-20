@@ -53,7 +53,6 @@ class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransp
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ThemeManager.addObserver(self)
 
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "",
@@ -61,6 +60,8 @@ class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransp
             target: nil,
             action: nil
         )
+
+        popoverPresentationController?.backgroundColor = view.theme?.focusedBackground
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +74,12 @@ class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransp
 
         let screenName = String(describing: type(of: self))
         AnalyticsManager.log(event: .screenView(screenName: screenName))
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        ThemeManager.addObserver(self)
+//        view.applyTheme()
     }
 
     override func applyTheme() {
