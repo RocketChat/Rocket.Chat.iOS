@@ -54,7 +54,7 @@ extension UIView {
 
             This can be read as `view.backgroundColor = UIColor(hex: "#FFFFFF")`
 
-            **TIP:** The color can be represented in various forms of hex, eg. `aaa`, `ababab`, `#ffffff`, `#AAAAAAFF`, etc. Some common color names are also supported, such as `red`, `green`, `blue`, etc. This behavior is adopted from the UIColor extension declared in the `UIColorCSSColorsExtension.swift` file.
+            **TIP:** The color can be represented in various forms of hex, (eg. `aaa`, `#ffffff`, `#AAAAAAFF`) and some common color names are also supported (such as `red`, `green`, `blue`). This behavior is adopted from the UIColor extension declared in the `UIColorCSSColorsExtension.swift` file.
      */
 
     @objc func setThemeColorOverride(_ overrideString: String) {

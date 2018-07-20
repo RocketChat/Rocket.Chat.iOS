@@ -122,6 +122,13 @@ final class SubscriptionsViewController: BaseViewController {
         titleView?.state = SocketManager.sharedInstance.state
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !(searchBar?.text?.isEmpty ?? true) {
+            searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
