@@ -110,8 +110,8 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
                 labelUnread.text =  "\(subscription.unread)"
             }
         } else {
-            viewUnread.isHidden = true
-            labelUnread.text = nil
+            viewUnread.isHidden = false
+            labelUnread.text = "!"
         }
     }
 
