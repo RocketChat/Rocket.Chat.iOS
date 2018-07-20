@@ -124,9 +124,12 @@ class AuthTableViewController: BaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = serverURL.host
 
         guard let settings = serverPublicSettings else { return }
+
+        emailAuthRow.loginButton.isHidden = !settings.isUsernameEmailAuthenticationEnabled
 
         if !settings.isUsernameEmailAuthenticationEnabled {
             emailAuthRow.registerButton.isHidden = true
