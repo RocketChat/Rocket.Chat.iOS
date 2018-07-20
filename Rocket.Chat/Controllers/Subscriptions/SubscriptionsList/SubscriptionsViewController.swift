@@ -77,16 +77,14 @@ final class SubscriptionsViewController: BaseViewController {
                     tableView.performBatchUpdates({
                         tableView.deleteRows(at: changes.deletions, with: .automatic)
                         tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
                     }, completion: nil)
                 } else {
                     tableView.beginUpdates()
                     tableView.deleteRows(at: changes.deletions, with: .automatic)
                     tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
                     tableView.endUpdates()
-                }
-
-                UIView.performWithoutAnimation {
-                    tableView.reloadRows(at: changes.modifications, with: .automatic)
                 }
             }
         }
