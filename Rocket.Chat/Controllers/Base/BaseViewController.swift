@@ -61,6 +61,8 @@ class BaseViewController: UIViewController, PopPushDelegate, NavigationBarTransp
             target: nil,
             action: nil
         )
+
+        popoverPresentationController?.backgroundColor = view.theme?.focusedBackground
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -81,6 +81,11 @@ final class ReactorListView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyTheme()
+    }
 }
 
 // MARK: Initialization
@@ -139,8 +144,8 @@ extension ReactorListView: UITableViewDelegate {
 
         view.addSubview(stackView)
 
+        view.setThemeColor("backgroundColor: bannerBackground")
         view.applyTheme()
-        view.backgroundColor = view.theme?.auxiliaryBackground
 
         return view
     }
@@ -153,29 +158,5 @@ extension ReactorListView: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let rect = tableView.rectForRow(at: indexPath)
         selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row], rect)
-    }
-}
-
-extension ReactorListView {
-    override var theme: Theme? {
-        guard let theme = super.theme else { return nil }
-        guard isPopover else { return theme }
-        let popoverTheme = Theme(
-            backgroundColor: theme.focusedBackground,
-            focusedBackground: theme.focusedBackground,
-            auxiliaryBackground: theme.auxiliaryBackground,
-            bannerBackground: theme.backgroundColor,
-            titleText: theme.titleText,
-            bodyText: theme.bodyText,
-            controlText: theme.controlText,
-            auxiliaryText: theme.auxiliaryText,
-            tintColor: theme.tintColor,
-            auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
-            mutedAccent: theme.mutedAccent,
-            strongAccent: theme.strongAccent,
-            appearence: theme.appearence
-        )
-        return popoverTheme
     }
 }

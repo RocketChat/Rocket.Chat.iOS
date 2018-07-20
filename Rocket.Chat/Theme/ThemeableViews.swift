@@ -53,7 +53,28 @@ extension UIView: ThemeProvider {
     var theme: Theme? {
         guard type(of: self).description() != "_UIAlertControllerView" else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
+        if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
         return superview.theme
+    }
+
+    private var themeForPopover: Theme? {
+        guard let theme = superview?.theme else { return nil }
+        return Theme(
+            backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            bannerBackground: theme.bannerBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
     }
 }
 
