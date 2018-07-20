@@ -29,6 +29,10 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
+            if message.isInvalidated {
+                return
+            }
+
             let server = AuthManager.selectedServerHost()
 
             AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
@@ -46,6 +50,10 @@ struct MessagesClient: APIClient {
 
         func setMessageOffline() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if message.isInvalidated {
+                    return
+                }
+
                 try? realm?.write {
                     message.temporary = false
                     message.failed = true
