@@ -47,7 +47,6 @@ final class ReactorListView: UIView {
 
     @IBOutlet weak var reactorTableView: UITableView! {
         didSet {
-            reactorTableView.bounces = false
             reactorTableView.tableFooterView = UIView()
 
             reactorTableView.dataSource = self
