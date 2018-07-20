@@ -330,7 +330,11 @@ extension AuthTableViewController {
 
             return LoginServiceTableViewCell.rowHeight
         case kEmailAuthSection:
-            return loginServices.count > 0 ? EmailAuthTableViewCell.rowHeightBelowSeparator : EmailAuthTableViewCell.rowHeight
+            if loginServices.count > 0 {
+                return emailAuthRow.isHidden ? .leastNonzeroMagnitude : EmailAuthTableViewCell.rowHeightBelowSeparator
+            }
+
+            return EmailAuthTableViewCell.rowHeight
         default:
             return 0
         }
