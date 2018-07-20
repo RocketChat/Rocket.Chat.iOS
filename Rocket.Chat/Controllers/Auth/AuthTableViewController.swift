@@ -129,10 +129,9 @@ class AuthTableViewController: BaseTableViewController {
 
         guard let settings = serverPublicSettings else { return }
 
-        emailAuthRow.loginButton.isHidden = !settings.isUsernameEmailAuthenticationEnabled
-
         if !settings.isUsernameEmailAuthenticationEnabled {
             emailAuthRow.registerButton.isHidden = true
+            emailAuthRow.loginButton.isHidden = true
         } else {
             emailAuthRow.registerButton.isHidden = settings.registrationForm != .isPublic
         }
