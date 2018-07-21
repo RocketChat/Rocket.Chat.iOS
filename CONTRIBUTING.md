@@ -24,15 +24,13 @@ In case you're interested in playing around with the code or giving something ba
 ```
 sudo gem install cocoapods
 ```
-To update cocoapods (not that often needed) run
-```
-sudo gem update cocoapods
-```
+To update cocoapods (you will be notified when new versions become available with a _CocoaPods X.X.X is now available, please update_ message) run the same command above.
+
 4. Clone this repo:
 ```
 git clone https://github.com/RocketChat/Rocket.Chat.iOS
 ```
-5. Download library dependencies using the cocoapods dependency manager (and update the same way):
+5. From the project directory download library dependencies using the cocoapods dependency manager (and update the same way):
 ```
 pod install
 ```
