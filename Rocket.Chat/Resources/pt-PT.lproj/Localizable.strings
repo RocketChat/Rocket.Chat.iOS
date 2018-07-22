@@ -335,6 +335,49 @@
 "myaccount.settings.language.reset" = "Restaurar para Padrão";
 "myaccount.settings.language.message" = "Você alterou as configurações de idioma. Você deve reiniciar o Rocket.Chat para que as novas configurações sejam aplicadas.";
 
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Notifications Preferences"; // TODO
+"myaccount.settings.notifications.save" = "Save"; // TODO
+
+"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
+"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
+
+"myaccount.settings.notifications.desktop" = "Desktop"; // TODO
+"myaccount.settings.notifications.desktop.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
+"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
+"myaccount.settings.notifications.desktop.duration" = "Notifications Duration"; // TODO
+
+"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
+"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
+
+"myaccount.settings.notifications.mail" = "Email"; // TODO
+"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
+
+"myaccount.settings.notifications.duration.default" = "Default"; // TODO
+"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+
+"alert.update_notifications_preferences_success.title" = "Successfully updated your notification preferences."; // TODO
+
+"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
+"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Default"; // TODO
+"subscription.notifications.status.nothing" = "Nothing"; // TODO
+"subscription.notifications.status.all" = "All"; // TODO
+"subscription.notifications.status.mentions" = "Mentions"; // TODO
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "None"; // TODO
+"subscription.notifications.audio.value.default" = "Default"; // TODO
+"subscription.notifications.audio.value.beep" = "Beep"; // TODO
+"subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
+"subscription.notifications.audio.value.ding" = "Ding"; // TODO
+"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
+"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
+"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
+
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
 "web_browser.in_app_safari.title" = "Navegador na aplicaçao";

@@ -342,29 +342,20 @@
 "myaccount.settings.notifications.title" = "Notifications Preferences"; // TODO
 "myaccount.settings.notifications.save" = "Save"; // TODO
 
-"myaccount.settings.notifications.mute.title" = "Turn OFF"; // TODO
-"myaccount.settings.notifications.mute.description" = "Mute all notifications"; // TODO
-
-"myaccount.settings.notifications.receive.title" = "Turn ON"; // TODO
-"myaccount.settings.notifications.receive.description" = "Receive alerts"; // TODO
-
-"myaccount.settings.notifications.hide.title" = "Hide counter"; // TODO
-"myaccount.settings.notifications.hide.description" = "Do not display any counter of this channel"; // TODO
-
-"myaccount.settings.notifications.show.title" = "Show counter"; // TODO
-"myaccount.settings.notifications.show.description" = "Display number of unread messages"; // TODO
+"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
+"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
 
 "myaccount.settings.notifications.desktop" = "Desktop"; // TODO
-"myaccount.settings.notifications.desktop.alerts" = "Alerts:"; // TODO
-"myaccount.settings.notifications.desktop.audio" = "Audio:"; // TODO
-"myaccount.settings.notifications.desktop.sound" = "Sound:"; // TODO
-"myaccount.settings.notifications.desktop.duration" = "Notifications Duration:"; // TODO
+"myaccount.settings.notifications.desktop.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
+"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
+"myaccount.settings.notifications.desktop.duration" = "Notifications Duration"; // TODO
 
 "myaccount.settings.notifications.mobile" = "Mobile"; // TODO
-"myaccount.settings.notifications.mobile.alerts" = "Alerts:"; // TODO
+"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
 
 "myaccount.settings.notifications.mail" = "Email"; // TODO
-"myaccount.settings.notifications.email.alerts" = "Alerts:"; // TODO
+"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
 
 "myaccount.settings.notifications.duration.default" = "Default"; // TODO
 "myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
