@@ -29,7 +29,12 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
+            if message.isInvalidated {
+                return
+            }
+
             let server = AuthManager.selectedServerHost()
+
             AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
 
             try? realm?.write {
@@ -45,6 +50,10 @@ struct MessagesClient: APIClient {
 
         func setMessageOffline() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if message.isInvalidated {
+                    return
+                }
+
                 try? realm?.write {
                     message.temporary = false
                     message.failed = true
@@ -71,7 +80,9 @@ struct MessagesClient: APIClient {
                 switch error {
                 case .version:
                     SubscriptionManager.sendTextMessage(message, completion: { response in
-                        updateMessage(json: response.result["result"])
+                        DispatchQueue.main.async {
+                            updateMessage(json: response.result["result"])
+                        }
                     })
                 default:
                     setMessageOffline()
@@ -237,11 +248,13 @@ struct MessagesClient: APIClient {
                 case .version:
                     // version fallback
                     MessageManager.react(message, emoji: emoji, completion: { _ in
-                        AnalyticsManager.log(
-                            event: .reaction(
-                                subscriptionType: message.subscription?.type.rawValue ?? ""
+                        DispatchQueue.main.async {
+                            AnalyticsManager.log(
+                                event: .reaction(
+                                    subscriptionType: message.subscription?.type.rawValue ?? ""
+                                )
                             )
-                        )
+                        }
                     })
                 default:
                     Alert.defaultError.present()

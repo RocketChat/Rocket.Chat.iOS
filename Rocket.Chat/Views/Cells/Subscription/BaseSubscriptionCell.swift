@@ -100,6 +100,7 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
 
     func updateViewForAlert(with subscription: Subscription) {
         labelName.font = UIFont.systemFont(ofSize: labelName.font.pointSize, weight: .semibold)
+        labelUnread.font = UIFont.boldSystemFont(ofSize: labelUnread.font.pointSize)
 
         if subscription.unread > 0 {
             viewUnread.isHidden = false
@@ -110,8 +111,8 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
                 labelUnread.text =  "\(subscription.unread)"
             }
         } else {
-            viewUnread.isHidden = true
-            labelUnread.text = nil
+            viewUnread.isHidden = false
+            labelUnread.text = "!"
         }
     }
 
@@ -162,7 +163,7 @@ extension BaseSubscriptionCell {
         let transition = {
             switch selected {
             case true:
-                self.backgroundColor = self.selectedBackgroundColor
+                self.backgroundColor = self.theme?.bannerBackground ?? self.selectedBackgroundColor
             case false:
                 self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }
@@ -179,7 +180,7 @@ extension BaseSubscriptionCell {
         let transition = {
             switch highlighted {
             case true:
-                self.backgroundColor = self.highlightedBackgroundColor
+                self.backgroundColor = self.theme?.auxiliaryBackground ?? self.highlightedBackgroundColor
             case false:
                 self.backgroundColor = self.theme?.backgroundColor ?? self.defaultBackgroundColor
             }

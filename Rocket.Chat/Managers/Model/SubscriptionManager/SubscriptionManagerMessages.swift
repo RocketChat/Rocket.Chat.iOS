@@ -44,7 +44,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "toggleFavorite",
             "params": [subscription.rid, !subscription.favorite]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
     }
