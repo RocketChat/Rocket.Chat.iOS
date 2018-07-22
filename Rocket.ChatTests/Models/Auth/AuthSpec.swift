@@ -25,6 +25,7 @@ extension Auth {
     }
 }
 
+// swiftlint:disable type_body_length file_length
 class AuthSpec: XCTestCase, RealmTestCase {
 
     // MARK: Setup

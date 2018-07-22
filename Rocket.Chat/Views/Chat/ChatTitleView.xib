@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -76,7 +75,6 @@
                 <constraint firstAttribute="bottom" secondItem="oSA-hf-f6V" secondAttribute="bottom" id="RzI-6F-E36"/>
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhT-1Q-dIQ"/>
                 <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
-                <constraint firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fSB-bC-X7D"/>
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="8" id="nqV-yl-Zil"/>
                 <constraint firstItem="oSA-hf-f6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="qQV-zr-a4T"/>
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="leading" secondItem="oSA-hf-f6V" secondAttribute="trailing" id="qW3-t7-0yX"/>

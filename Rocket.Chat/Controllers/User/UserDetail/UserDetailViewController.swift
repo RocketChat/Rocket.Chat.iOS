@@ -71,8 +71,13 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         updateForModel()
+        super.viewDidLoad()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.applyTheme()
     }
 
     @IBAction func messageDidPress(_ sender: UIButton) {

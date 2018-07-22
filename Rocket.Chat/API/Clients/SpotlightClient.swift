@@ -69,7 +69,7 @@ struct SpotlightClient: APIClient {
                 }, completion: {
                     completion(resource.raw, false)
                 })
-            case .error(let _):
+            case .error:
                 completion(nil, true)
             }
         }

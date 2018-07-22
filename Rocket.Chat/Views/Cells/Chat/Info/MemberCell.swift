@@ -12,7 +12,7 @@ struct MemberCellData {
     let member: User
 
     var nameText: String {
-        let utcText = member.utcOffset != nil ? "(UTC \(member.utcOffset ?? 0))" : ""
+        let utcText = "(UTC \(member.utcOffset))"
         return "\(member.displayName()) \(utcText)"
     }
 
