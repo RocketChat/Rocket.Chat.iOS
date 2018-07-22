@@ -83,18 +83,18 @@
                                     <outlet property="turnSwitch" destination="ff6-ie-dni" id="fMg-RR-3PJ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationsChooseCell" rowHeight="188" id="ang-Kr-999" customClass="NotificationsChooseCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="188"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationsChooseCell" rowHeight="44" id="ang-Kr-999" customClass="NotificationsChooseCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ang-Kr-999" id="Fmy-8w-9WV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="187.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tH5-9A-GkM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="187.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uy1-nR-8qR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1H-6s-rZr">
                                                             <rect key="frame" x="317" y="11" width="42" height="20.5"/>
@@ -121,8 +121,8 @@
                                                         <constraint firstItem="Yth-KA-qKv" firstAttribute="leading" secondItem="Uy1-nR-8qR" secondAttribute="leading" constant="16" id="p33-9e-8Ui"/>
                                                     </constraints>
                                                 </view>
-                                                <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="IjA-0H-1QH">
-                                                    <rect key="frame" x="0.0" y="44" width="375" height="143.5"/>
+                                                <pickerView hidden="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="IjA-0H-1QH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="143.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="144" id="G2M-1F-zIv"/>
                                                     </constraints>
@@ -131,10 +131,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="tH5-9A-GkM" secondAttribute="bottom" id="FXK-zk-kGb"/>
                                         <constraint firstItem="tH5-9A-GkM" firstAttribute="top" secondItem="Fmy-8w-9WV" secondAttribute="top" id="J0E-Sl-ce3"/>
                                         <constraint firstItem="tH5-9A-GkM" firstAttribute="leading" secondItem="Fmy-8w-9WV" secondAttribute="leading" id="Kne-LF-LT7"/>
                                         <constraint firstAttribute="trailing" secondItem="tH5-9A-GkM" secondAttribute="trailing" id="s1D-ZY-E1Y"/>
+                                        <constraint firstAttribute="bottom" secondItem="tH5-9A-GkM" secondAttribute="bottom" id="yNj-Xb-wrM"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
