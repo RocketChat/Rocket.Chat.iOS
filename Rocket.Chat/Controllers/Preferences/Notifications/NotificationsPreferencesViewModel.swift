@@ -44,17 +44,11 @@ final class NotificationsPreferencesViewModel {
 
     internal let enableModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                     type: .switch,
-                                                                    leftTitle: localized("myaccount.settings.notifications.mute.title"),
-                                                                    leftDescription: localized("myaccount.settings.notifications.mute.description"),
-                                                                    rightTitle: localized("myaccount.settings.notifications.receive.title"),
-                                                                    rightDescription: localized("myaccount.settings.notifications.receive.description"))
+                                                                    title: localized("myaccount.settings.notifications.mute.title"))
 
     internal let counterModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                      type: .switch,
-                                                                     leftTitle: localized("myaccount.settings.notifications.hide.title"),
-                                                                     leftDescription: localized("myaccount.settings.notifications.hide.description"),
-                                                                     rightTitle: localized("myaccount.settings.notifications.show.title"),
-                                                                     rightDescription: localized("myaccount.settings.notifications.show.description"))
+                                                                     title: localized("myaccount.settings.notifications.hide.title"))
 
     internal let desktopAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
                                                                            options: SubscriptionNotificationsStatus.allCases,

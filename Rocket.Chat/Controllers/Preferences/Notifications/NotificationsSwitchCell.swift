@@ -12,16 +12,10 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
     struct SettingModel: NotificationSettingModel {
         let value: Dynamic<Bool>
         var type: NotificationCellType
-        let leftTitle: String
-        let leftDescription: String
-        let rightTitle: String
-        let rightDescription: String
+        let title: String
     }
 
-    @IBOutlet weak var leftTitleLabel: UILabel!
-    @IBOutlet weak var leftDescriptionLabel: UILabel!
-    @IBOutlet weak var rightTitleLabel: UILabel!
-    @IBOutlet weak var rightDescriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var turnSwitch: UISwitch!
 
     var cellModel: NotificationSettingModel? {
@@ -30,13 +24,7 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
                 return
             }
 
-            leftTitleLabel.text = model.leftTitle
-            leftDescriptionLabel.text = model.leftDescription
-            rightTitleLabel.text = model.rightTitle
-            rightDescriptionLabel.text = model.rightDescription
-            turnSwitch.isOn = model.value.value
-
-            updateCell()
+            titleLabel.text = model.title
         }
     }
 
@@ -46,20 +34,5 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
         }
 
         model.value.value = sender.isOn
-        updateCell()
     }
-
-    private func updateCell() {
-        guard let model = cellModel as? SettingModel else {
-            return
-        }
-
-        let currentTheme = theme ?? ThemeManager.theme
-
-        leftTitleLabel.textColor = model.value.value ? currentTheme.auxiliaryText : currentTheme.titleText
-        leftDescriptionLabel.textColor = model.value.value ? currentTheme.auxiliaryText : currentTheme.titleText
-        rightTitleLabel.textColor = model.value.value ? currentTheme.titleText : .lightGray
-        rightDescriptionLabel.textColor = model.value.value ? currentTheme.titleText : currentTheme.auxiliaryText
-    }
-
 }
