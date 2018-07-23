@@ -14,6 +14,7 @@ final class SERoomsViewController: SEViewController {
         didSet {
             title = viewModel.title
             navigationItem.searchController?.searchBar.text = viewModel.searchText
+            navigationItem.searchController?.searchBar.showsCancelButton = viewModel.showsCancelButton
             tableView.reloadData()
         }
     }

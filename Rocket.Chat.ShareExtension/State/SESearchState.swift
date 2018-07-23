@@ -12,4 +12,15 @@ enum SESearchState {
     case none
     case started
     case searching(String)
+
+    var text: String {
+        switch self {
+        case .none:
+            return ""
+        case .started:
+            return ""
+        case .searching(let query):
+            return query
+        }
+    }
 }

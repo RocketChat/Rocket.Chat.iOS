@@ -29,9 +29,15 @@ struct SERoomsViewModel {
     let title: String
     let sections: [SERoomsSection]
     let searchText: String
+    let showsCancelButton: Bool
 
     static var emptyState: SERoomsViewModel {
-        return SERoomsViewModel(title: "Error", sections: [], searchText: "")
+        return SERoomsViewModel(
+            title: "Error",
+            sections: [],
+            searchText: "",
+            showsCancelButton: false
+        )
     }
 }
 
@@ -42,10 +48,13 @@ extension SERoomsViewModel {
         switch state.searchRooms {
         case .none:
             searchText = ""
+            showsCancelButton = false
         case .started:
             searchText = ""
+            showsCancelButton = true
         case .searching(let text):
             searchText = text
+            showsCancelButton = true
         }
 
         let server = state.servers[state.selectedServerIndex]
