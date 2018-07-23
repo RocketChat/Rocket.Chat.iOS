@@ -846,9 +846,20 @@ final class ChatViewController: SLKTextViewController {
             // to the list. Also, we keep the subscription identifier in order to make sure
             // we're updating the same subscription, because this view controller is reused
             // for all the chats.
+
+            guard !subscription.isInvalidated else {
+                return
+            }
+
             let oldSubscriptionIdentifier = subscription.identifier
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
-                guard oldSubscriptionIdentifier == self?.subscription?.identifier else { return }
+                guard
+                    !(self?.subscription?.isInvalidated ?? true),
+                    oldSubscriptionIdentifier == self?.subscription?.identifier
+                else {
+                    return
+                }
+
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
