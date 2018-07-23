@@ -67,9 +67,10 @@ extension SERoomsViewModel {
             ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
         }.map(roomToCell)
 
-        let channels = state.displayedRooms.filter { $0.type == .channel }.map(roomToCell)
-        let groups = state.displayedRooms.filter { $0.type == .group }.map(roomToCell)
-        let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(roomToCell)
+        let notFavorites = state.displayedRooms.filter { !$0.favorite }
+        let channels = notFavorites.filter { $0.type == .channel }.map(roomToCell)
+        let groups = notFavorites.filter { $0.type == .group }.map(roomToCell)
+        let directMessages = notFavorites.filter { $0.type == .directMessage }.map(roomToCell)
 
         let serverCell = SEServerCellModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
         let serverSection = searchText.isEmpty ? [SERoomsSection(type: .server, cells: [serverCell])] : []
