@@ -339,20 +339,26 @@
 "myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
 
 // Notifications preferences
-"myaccount.settings.notifications.title" = "Notifications Preferences"; // TODO
+"myaccount.settings.notifications.title" = "Notification Preferences"; // TODO
 "myaccount.settings.notifications.save" = "Save"; // TODO
 
 "myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
+"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@"; // TODO
 "myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
+"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list."; // TODO
 
-"myaccount.settings.notifications.desktop" = "Desktop"; // TODO
-"myaccount.settings.notifications.desktop.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
-"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
-"myaccount.settings.notifications.desktop.duration" = "Notifications Duration"; // TODO
+"myaccount.settings.notifications.inapp" = "Inapp and Desktop"; // TODO
+"myaccount.settings.notifications.inapp.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop."; // TODO
 
 "myaccount.settings.notifications.mobile" = "Mobile"; // TODO
 "myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open."; // TODO
+
+"myaccount.settings.notifications.desktop" = "Desktop options"; // TODO
+"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
+"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
+"myaccount.settings.notifications.desktop.duration" = "Notification Duration"; // TODO
 
 "myaccount.settings.notifications.mail" = "Email"; // TODO
 "myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
