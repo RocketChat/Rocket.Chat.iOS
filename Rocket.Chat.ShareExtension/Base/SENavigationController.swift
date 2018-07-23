@@ -16,6 +16,7 @@ final class SENavigationController: UINavigationController {
         } ?? []
 
         parseItemProviders(store, itemProviders)
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
 
         return nil
     }

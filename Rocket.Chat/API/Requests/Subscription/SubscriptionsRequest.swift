@@ -52,4 +52,12 @@ final class SubscriptionsResource: APIResource {
     var success: Bool? {
         return raw?["success"].bool
     }
+
+    var subscriptions: [Subscription]? {
+        return update?.compactMap {
+            let subscription = Subscription()
+            subscription.map($0, realm: nil)
+            return subscription
+        }
+    }
 }
