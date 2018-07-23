@@ -62,7 +62,7 @@ final class NotificationsPreferencesViewModel {
         value: Dynamic(SubscriptionNotificationsStatus.default),
         options: SubscriptionNotificationsStatus.allCases,
         type: .list,
-        title: localized("myaccount.settings.notifications.desktop.alerts"), pickerVisible: Dynamic(false)
+        title: localized("myaccount.settings.notifications.inapp.alerts"), pickerVisible: Dynamic(false)
     )
 
     internal let desktopAudioModel = NotificationsChooseCell.SettingModel(
@@ -104,8 +104,8 @@ final class NotificationsPreferencesViewModel {
 
     private var settingsCells: [TableSection] {
         let alwaysActiveSections: [TableSection] = [
-            (header: nil, footer: "Receive notifications from \(channelName)", [enableModel]),
-            (header: nil, footer: "Unread counter is displayed as a badge on to the right of the channel, in the list.", [counterModel])
+            (header: nil, footer: String(format: localized("myaccount.settings.notifications.receive.footer"), channelName), [enableModel]),
+            (header: nil, footer: localized("myaccount.settings.notifications.show.footer"), [counterModel])
         ]
 
         guard enableModel.value.value else {
@@ -113,8 +113,9 @@ final class NotificationsPreferencesViewModel {
         }
 
         let conditionallyActiveSections: [TableSection] = [
-            (header: localized("myaccount.settings.notifications.desktop"), footer: nil, [desktopAlertsModel, desktopAudioModel, desktopSoundModel, desktopDurationModel]),
-            (header: localized("myaccount.settings.notifications.mobile"), footer: nil, [mobileAlertsModel]),
+            (header: localized("myaccount.settings.notifications.inapp"), footer: localized("myaccount.settings.notifications.inapp.footer"), [desktopAlertsModel]),
+            (header: localized("myaccount.settings.notifications.mobile"), footer: localized("myaccount.settings.notifications.mobile.footer"), [mobileAlertsModel]),
+            (header: localized("myaccount.settings.notifications.desktop"), footer: nil, [desktopAudioModel, desktopSoundModel, desktopDurationModel]),
             (header: localized("myaccount.settings.notifications.mail"), footer: nil, [mailAlertsModel])
         ]
 

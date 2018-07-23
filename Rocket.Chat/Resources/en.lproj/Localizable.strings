@@ -338,20 +338,26 @@
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat before the new settings will take effect.";
 
 // Notifications preferences
-"myaccount.settings.notifications.title" = "Notifications Preferences";
+"myaccount.settings.notifications.title" = "Notification Preferences";
 "myaccount.settings.notifications.save" = "Save";
 
 "myaccount.settings.notifications.receive.title" = "Receive Notifications";
+"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@";
 "myaccount.settings.notifications.show.title" = "Show Unread Counter";
+"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list.";
 
-"myaccount.settings.notifications.desktop" = "Desktop";
-"myaccount.settings.notifications.desktop.alerts" = "Alerts";
+"myaccount.settings.notifications.inapp" = "Inapp and Desktop";
+"myaccount.settings.notifications.inapp.alerts" = "Alerts";
+"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop.";
+
+"myaccount.settings.notifications.mobile" = "Push notifications";
+"myaccount.settings.notifications.mobile.alerts" = "Alerts";
+"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open.";
+
+"myaccount.settings.notifications.desktop" = "Desktop options";
 "myaccount.settings.notifications.desktop.audio" = "Audio";
 "myaccount.settings.notifications.desktop.sound" = "Sound";
-"myaccount.settings.notifications.desktop.duration" = "Notifications Duration";
-
-"myaccount.settings.notifications.mobile" = "Mobile";
-"myaccount.settings.notifications.mobile.alerts" = "Alerts";
+"myaccount.settings.notifications.desktop.duration" = "Notification Duration";
 
 "myaccount.settings.notifications.mail" = "Email";
 "myaccount.settings.notifications.email.alerts" = "Alerts";

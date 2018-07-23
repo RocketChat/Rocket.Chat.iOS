@@ -30,6 +30,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
             configureStatusEnumModel()
             configureAudioEnumModel()
             configureIntModel()
+            pickerView.reloadAllComponents()
         }
     }
 
