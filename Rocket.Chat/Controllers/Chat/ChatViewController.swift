@@ -765,7 +765,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
-        guard let subscription = subscription else { return }
+        guard let subscription = subscription?.validated() else { return }
 
         let tempSubscription = Subscription(value: subscription)
 
