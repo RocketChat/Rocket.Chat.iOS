@@ -346,7 +346,7 @@
 "myaccount.settings.notifications.show.title" = "Show Unread Counter";
 "myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list.";
 
-"myaccount.settings.notifications.inapp" = "Inapp and Desktop";
+"myaccount.settings.notifications.inapp" = "In-app and Desktop";
 "myaccount.settings.notifications.inapp.alerts" = "Alerts";
 "myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop.";
 
