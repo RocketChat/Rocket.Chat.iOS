@@ -168,6 +168,11 @@ extension SocketManager {
 
             infoClient.fetchInfo(realm: currentRealm, completion: {
                 SubscriptionManager.updateSubscriptions(auth, realm: currentRealm) {
+                    let validAuth = auth.isInvalidated ? AuthManager.isAuthenticated(realm: currentRealm) : auth
+                    guard let auth = validAuth else {
+                        return
+                    }
+
                     AuthSettingsManager.updatePublicSettings(auth)
 
                     UserManager.userDataChanges()
