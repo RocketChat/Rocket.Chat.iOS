@@ -1251,7 +1251,7 @@ extension ChatViewController {
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly, subscription: subscription) {
             blockMessageSending(reason: localized("chat.read_only"))
         } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))
