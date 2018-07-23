@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
+// swiftlint:disable cyclomatic_complexity
 extension Subscription: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {

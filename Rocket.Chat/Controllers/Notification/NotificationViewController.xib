@@ -87,7 +87,7 @@
                         <constraint firstItem="aRK-ug-kzZ" firstAttribute="width" secondItem="PHK-lk-IxG" secondAttribute="width" priority="750" id="xsR-7E-QLm"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="backgroundColor: focusedBackground"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="backgroundColor: bannerBackground"/>
                     </userDefinedRuntimeAttributes>
                     <variation key="default">
                         <mask key="constraints">

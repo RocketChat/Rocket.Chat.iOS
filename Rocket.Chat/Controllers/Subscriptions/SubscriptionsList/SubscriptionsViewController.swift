@@ -77,16 +77,14 @@ final class SubscriptionsViewController: BaseViewController {
                     tableView.performBatchUpdates({
                         tableView.deleteRows(at: changes.deletions, with: .automatic)
                         tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
                     }, completion: nil)
                 } else {
                     tableView.beginUpdates()
                     tableView.deleteRows(at: changes.deletions, with: .automatic)
                     tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
                     tableView.endUpdates()
-                }
-
-                UIView.performWithoutAnimation {
-                    tableView.reloadRows(at: changes.modifications, with: .automatic)
                 }
             }
         }
@@ -120,6 +118,13 @@ final class SubscriptionsViewController: BaseViewController {
         viewModel.buildSections()
         tableView.reloadData()
         titleView?.state = SocketManager.sharedInstance.state
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !(searchBar?.text?.isEmpty ?? true) {
+            searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
