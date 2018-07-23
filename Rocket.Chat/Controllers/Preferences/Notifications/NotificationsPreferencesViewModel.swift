@@ -44,6 +44,8 @@ final class NotificationsPreferencesViewModel {
         )
     }
 
+    internal var channelName = "channel"
+
     internal let enableModel = NotificationsSwitchCell.SettingModel(
         value: Dynamic(false),
         type: .switch,
@@ -98,20 +100,25 @@ final class NotificationsPreferencesViewModel {
         title: localized("myaccount.settings.notifications.email.alerts"), pickerVisible: Dynamic(false)
     )
 
-    private var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
-        let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, counterModel])]
+    private typealias TableSection = (header: String?, footer: String?, elements: [NotificationSettingModel])
 
-        guard enableModel.value.value else {
-            return firstSection
-        }
-
-        let secondSection: [(title: String?, elements: [NotificationSettingModel])] = [
-            (title: localized("myaccount.settings.notifications.desktop"), [desktopAlertsModel, desktopAudioModel, desktopSoundModel, desktopDurationModel]),
-            (title: localized("myaccount.settings.notifications.mobile"), [mobileAlertsModel]),
-            (title: localized("myaccount.settings.notifications.mail"), [mailAlertsModel])
+    private var settingsCells: [TableSection] {
+        let alwaysActiveSections: [TableSection] = [
+            (header: nil, footer: "Receive notifications from \(channelName)", [enableModel]),
+            (header: nil, footer: "Unread counter is displayed as a badge on to the right of the channel, in the list.", [counterModel])
         ]
 
-        return firstSection + secondSection
+        guard enableModel.value.value else {
+            return alwaysActiveSections
+        }
+
+        let conditionallyActiveSections: [TableSection] = [
+            (header: localized("myaccount.settings.notifications.desktop"), footer: nil, [desktopAlertsModel, desktopAudioModel, desktopSoundModel, desktopDurationModel]),
+            (header: localized("myaccount.settings.notifications.mobile"), footer: nil, [mobileAlertsModel]),
+            (header: localized("myaccount.settings.notifications.mail"), footer: nil, [mailAlertsModel])
+        ]
+
+        return alwaysActiveSections + conditionallyActiveSections
     }
 
     internal func numberOfSections() -> Int {
@@ -123,7 +130,11 @@ final class NotificationsPreferencesViewModel {
     }
 
     internal func titleForHeader(in section: Int) -> String? {
-        return settingsCells[section].title
+        return settingsCells[section].header
+    }
+
+    internal func titleForFooter(in section: Int) -> String? {
+        return settingsCells[section].footer
     }
 
     internal func settingModel(for indexPath: IndexPath) -> NotificationSettingModel {
