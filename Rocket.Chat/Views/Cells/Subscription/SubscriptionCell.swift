@@ -56,8 +56,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
     private func setDateColor() {
         guard
             let theme = theme,
-            let subscription = subscription,
-            !subscription.isInvalidated
+            let subscription = subscription?.validated()
         else {
             return
         }
