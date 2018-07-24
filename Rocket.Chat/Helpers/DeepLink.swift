@@ -18,22 +18,22 @@ enum DeepLink {
     case channel(name: String)
 
     init?(url: URL) {
+        let isSchemeBased = url.scheme == "rocket.chat"
+
         guard
-            url.scheme == "rocketchat",
-            let actionString = url.host
+            isSchemeBased || url.host == "go.rocket.chat",
+            let actionString = isSchemeBased ? url.host : url.path.replacingOccurrences(of: "/", with: "")
         else {
             return nil
         }
 
         switch actionString {
-
         case "auth":
             guard let auth = DeepLink.parseAuthUrl(url) else {
                 return nil
             }
 
             self = auth
-
         case "room":
             guard
                 let host = url.queryParameters?["host"],
@@ -43,21 +43,18 @@ enum DeepLink {
             }
 
             self = .room(host: host, roomId: roomId)
-
         case "mention":
             guard let name = url.queryParameters?["name"] else {
                 return nil
             }
 
             self = .mention(name: name)
-
         case "channel":
             guard let name = url.queryParameters?["name"] else {
                 return nil
             }
 
             self = .channel(name: name)
-
         default:
             return nil
         }
