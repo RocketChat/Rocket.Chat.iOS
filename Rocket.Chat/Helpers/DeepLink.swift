@@ -18,7 +18,7 @@ enum DeepLink {
     case channel(name: String)
 
     init?(url: URL) {
-        let isSchemeBased = url.scheme == "rocket.chat"
+        let isSchemeBased = url.scheme == "rocketchat"
 
         guard
             isSchemeBased || url.host == "go.rocket.chat",
