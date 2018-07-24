@@ -108,6 +108,10 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 }
 
 extension NotificationsChooseCell: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 35
+    }
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 
         let title: String
@@ -126,6 +130,7 @@ extension NotificationsChooseCell: UIPickerViewDelegate {
         pickerLabel.textColor = theme?.titleText ?? .black
         pickerLabel.text = title
         pickerLabel.textAlignment = .center
+        pickerLabel.font = UIFont.systemFont(ofSize: 20)
 
         return pickerLabel
     }
