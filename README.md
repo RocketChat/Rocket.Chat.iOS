@@ -14,8 +14,8 @@
 
 [![Rocket.Chat on Apple AppStore](https://user-images.githubusercontent.com/551004/29770691-a2082ff4-8bc6-11e7-89a6-964cd405ea8e.png)](https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8)
 
-![iPad](https://rocket.chat/images/posts/2018/07/2018-07-17-ios_3_0_0_released/ipad_2.png)
-![iPhone](https://rocket.chat/images/posts/2018/07/2018-07-17-ios_3_0_0_released/themes.png)
+![iPad](https://user-images.githubusercontent.com/551004/43151426-4b2784c0-8f42-11e8-8930-8b18aa6ac075.png)
+![iPhone](https://user-images.githubusercontent.com/551004/43151411-46cba65e-8f42-11e8-9a38-3efc9dd471b2.png)
 
 # Reporting an Issue
 
