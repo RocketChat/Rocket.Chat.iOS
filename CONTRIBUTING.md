@@ -31,13 +31,17 @@ git clone https://github.com/RocketChat/Rocket.Chat.iOS
 ```
 2. Install [Bundler](https://bundler.io)
 ```
-gem install bundler (sudo might be required in some cases)
+sudo gem install bundler
+```
+To update _Bundler_ (when there is new version available)
+```
+sudo gem update bundler
 ```
 3. Install all gem dependencies
 ```
 bundle install (sudo might be required in some cases)
 ```
-To update all gem dependencies (not that often needed) run
+To update all gem dependencies (usually executed by maintainer) run
 ```
 bundle update
 ```
