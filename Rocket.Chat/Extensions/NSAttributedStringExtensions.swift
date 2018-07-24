@@ -97,9 +97,20 @@ extension NSMutableAttributedString {
 
     func highlightMentions(_ mentions: [Mention], currentUsername: String?) {
         var handledHighlights: [String] = []
+        let shouldUseRealName = AuthSettingsManager.shared.settings?.useUserRealName ?? false
+
+        if shouldUseRealName {
+            mentions.forEach { mention in
+                let realName = mention.realName ?? ""
+                let username = mention.username ?? ""
+
+                if shouldUseRealName {
+                    mutableString.setString(string.replacingOccurrences(of: username, with: realName))
+                }
+            }
+        }
 
         mentions.forEach { mention in
-            let shouldUseRealName = AuthSettingsManager.shared.settings?.useUserRealName ?? false
             let realName = mention.realName ?? ""
             let username = mention.username ?? ""
 
@@ -111,20 +122,12 @@ extension NSMutableAttributedString {
                 if username == currentUsername {
                     background = .primaryAction
                     font = .white
-
-                    if shouldUseRealName {
-                        mutableString.setString(string.replacingFirstOccurrence(of: username, with: realName))
-                    }
                 } else if username == "all" || username == "here" {
                     background = .attention
                     font = .white
                 } else {
                     background = .clear
                     font = .link
-
-                    if shouldUseRealName && !realName.isEmpty {
-                        mutableString.setString(string.replacingFirstOccurrence(of: username, with: realName))
-                    }
                 }
 
                 let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")

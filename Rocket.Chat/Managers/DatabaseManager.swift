@@ -115,12 +115,14 @@ struct DatabaseManager {
         let servers = self.servers ?? []
         var validServers: [[String: String]] = []
 
-        for server in servers {
+        for (index, server) in servers.enumerated() {
             guard
                 server[ServerPersistKeys.token] != nil,
                 server[ServerPersistKeys.userId] != nil,
                 server[ServerPersistKeys.databaseName] != nil,
-                server[ServerPersistKeys.serverURL] != nil
+                server[ServerPersistKeys.serverURL] != nil,
+                let realmConfiguration = databaseConfiguration(index: index),
+                (try? Realm(configuration: realmConfiguration)) != nil
             else {
                 continue
             }

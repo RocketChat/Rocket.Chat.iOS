@@ -52,6 +52,7 @@ final class AuthSettings: Object {
     @objc dynamic var casLoginUrl: String?
 
     @objc dynamic var gitlabUrl: String?
+    @objc dynamic var wordpressUrl: String?
 
     @objc dynamic var firstChannelAfterLogin: String?
 
@@ -67,6 +68,7 @@ final class AuthSettings: Object {
     @objc dynamic var isAllowedToEditUsername = false
     @objc dynamic var isAllowedToEditEmail = false
     @objc dynamic var isAllowedToEditPassword = false
+    @objc dynamic var oauthWordpressServerType = ""
 
     // Registration
     @objc dynamic var rawRegistrationForm: String?

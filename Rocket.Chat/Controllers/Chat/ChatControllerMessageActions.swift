@@ -39,6 +39,7 @@ extension ChatViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    // swiftlint:disable function_body_length
     func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
         guard
             let messageUser = message.user,
@@ -123,6 +124,8 @@ extension ChatViewController {
 
         return actions
     }
+
+    // swiftlint:enable function_body_length
 
     func actionsForFailedMessage(_ message: Message) -> [UIAlertAction] {
 

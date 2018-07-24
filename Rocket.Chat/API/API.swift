@@ -72,6 +72,7 @@ final class API: APIFetcher {
         requestMiddlewares.append(VersionMiddleware(api: self))
     }
 
+    // swiftlint:disable function_body_length
     @discardableResult
     func fetch<R: APIRequest>(_ request: R, options: APIRequestOptionSet = [], sessionDelegate: URLSessionTaskDelegate? = nil,
                               completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {

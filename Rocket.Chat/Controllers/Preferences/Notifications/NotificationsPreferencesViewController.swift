@@ -50,6 +50,8 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
             return
         }
 
+        self.viewModel.channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
+
         self.viewModel.enableModel.value.value = !subscription.disableNotifications
         self.viewModel.counterModel.value.value = !subscription.hideUnreadStatus
         self.viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications
@@ -72,6 +74,10 @@ extension NotificationsPreferencesViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.titleForHeader(in: section)
+    }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return viewModel.titleForFooter(in: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

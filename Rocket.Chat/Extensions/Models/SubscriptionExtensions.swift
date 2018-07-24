@@ -108,7 +108,22 @@ extension Results where Element == Subscription {
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return filter("name CONTAINS[cd] %@", name)
+        let userIdentifiersForDMs: [String] = Realm.current?.objects(User.self).filter(NSCompoundPredicate(
+            type: .or,
+            subpredicates: [
+                NSPredicate(format: "name CONTAINS[cd] %@", name),
+                NSPredicate(format: "username CONTAINS[cd] %@", name)
+            ]
+        )).compactMap({ $0.identifier }) ?? []
+
+        return filter(NSCompoundPredicate(
+            type: .or,
+            subpredicates: [
+                NSPredicate(format: "name CONTAINS[cd] %@", name),
+                NSPredicate(format: "fname CONTAINS[cd] %@", name),
+                NSPredicate(format: "otherUserId IN %@", userIdentifiersForDMs)
+            ]
+        ))
     }
 
 }

@@ -19,7 +19,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var valueLabel: UILabel!
-    @IBOutlet private weak var pickerView: RCPickerView! {
+    @IBOutlet private weak var pickerView: UIPickerView! {
         didSet {
             pickerView.delegate = self
         }
@@ -30,6 +30,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
             configureStatusEnumModel()
             configureAudioEnumModel()
             configureIntModel()
+            pickerView.reloadAllComponents()
         }
     }
 
@@ -108,8 +109,6 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
 extension NotificationsChooseCell: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let pickerLabel = UILabel()
-        pickerLabel.textColor = theme?.tintColor ?? ThemeManager.theme.tintColor
 
         let title: String
         if let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> {
@@ -123,8 +122,9 @@ extension NotificationsChooseCell: UIPickerViewDelegate {
             fatalError("Model not supported")
         }
 
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = theme?.titleText ?? .black
         pickerLabel.text = title
-        pickerLabel.font = UIFont.systemFont(ofSize: 14)
         pickerLabel.textAlignment = .center
 
         return pickerLabel
