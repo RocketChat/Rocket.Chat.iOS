@@ -490,7 +490,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         // When using iPads, we override the detail controller creating
         // a new instance.
-        if splitViewController?.detailViewController as? BaseNavigationController != nil {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             controller.subscription = subscription
 
             let nav = BaseNavigationController(rootViewController: controller)
