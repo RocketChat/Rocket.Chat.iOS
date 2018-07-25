@@ -416,8 +416,8 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SubscriptionCellProtocol else { return }
-        guard let subscription = cell.subscription else { return }
-        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
+        guard let subscription = cell.subscription?.validated() else { return }
+        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription?.validated() else { return }
 
         if subscription.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)

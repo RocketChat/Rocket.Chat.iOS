@@ -13,10 +13,7 @@ final class ChatTitleViewModel {
     internal var user: User?
     var subscription: Subscription? {
         didSet {
-            guard
-                let subscription = subscription,
-                !subscription.isInvalidated
-            else {
+            guard let subscription = subscription?.validated() else {
                 return
             }
 

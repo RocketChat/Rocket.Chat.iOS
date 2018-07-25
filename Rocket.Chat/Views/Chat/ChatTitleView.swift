@@ -41,7 +41,7 @@ final class ChatTitleView: UIView {
 
     var subscription: Subscription? {
         didSet {
-            guard let subscription = subscription, !subscription.isInvalidated else { return }
+            guard let subscription = subscription?.validated() else { return }
             viewModel.subscription = subscription
             buttonTitle.setTitle(viewModel.title, for: .normal)
 
