@@ -1,5 +1,14 @@
 ![Rocket.Chat logo](https://raw.githubusercontent.com/RocketChat/Rocket.Chat.Artwork/master/Logos/logo-dark.svg?sanitize=true)
 
+
+![Screenshot](https://user-images.githubusercontent.com/7317008/43209700-eb3ded88-904a-11e8-8ec4-9ac10a39f344.png)
+
+<p align="center">
+  <a href=https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8>
+  <img alt="Download on the app store" src="https://user-images.githubusercontent.com/7317008/43209852-4ca39622-904b-11e8-8ce1-cdc3aee76ae9.png" width=160>
+  </a>
+ </p>
+ 
 # Rocket.Chat iOS native application
 
 [![Build Status](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop.svg?style=shield)](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop)
@@ -9,14 +18,6 @@
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 [About Rocket.Chat](https://github.com/RocketChat/Rocket.Chat/#about-rocketchat)
-
-![Screenshot](https://user-images.githubusercontent.com/7317008/43209700-eb3ded88-904a-11e8-8ec4-9ac10a39f344.png)
-
-<p align="center">
-  <a href=https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8>
-  <img alt="Download on the app store" src="https://user-images.githubusercontent.com/7317008/43209852-4ca39622-904b-11e8-8ce1-cdc3aee76ae9.png" width=160>
-  </a>
- </p>
 
 # Reporting an Issue
 
