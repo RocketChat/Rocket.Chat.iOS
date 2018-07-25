@@ -365,7 +365,7 @@
 "myaccount.settings.notifications.duration.default" = "Default";
 "myaccount.settings.notifications.duration.seconds" = "seconds";
 
-"alert.update_notifications_preferences_success.title" = "Successfully updated your notification preferences.";
+"alert.update_notifications_preferences_success.title" = "Perferences saved";
 
 "alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences";
 "alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again.";
