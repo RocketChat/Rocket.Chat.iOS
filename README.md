@@ -10,12 +10,13 @@
 
 [About Rocket.Chat](https://github.com/RocketChat/Rocket.Chat/#about-rocketchat)
 
-# Download from the App Store
+![Screenshot](https://user-images.githubusercontent.com/7317008/43209700-eb3ded88-904a-11e8-8ec4-9ac10a39f344.png)
 
-[![Rocket.Chat on Apple AppStore](https://user-images.githubusercontent.com/551004/29770691-a2082ff4-8bc6-11e7-89a6-964cd405ea8e.png)](https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8)
-
-![iPad](https://user-images.githubusercontent.com/551004/43151426-4b2784c0-8f42-11e8-8930-8b18aa6ac075.png)
-![iPhone](https://user-images.githubusercontent.com/551004/43151411-46cba65e-8f42-11e8-9a38-3efc9dd471b2.png)
+<p align="center">
+  <a href=https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8>
+  <img alt="Download on the app store" src="https://user-images.githubusercontent.com/7317008/43209852-4ca39622-904b-11e8-8ce1-cdc3aee76ae9.png" width=160>
+  </a>
+ </p>
 
 # Reporting an Issue
 
