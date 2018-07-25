@@ -19,6 +19,46 @@ protocol NotificationSettingModel {
 
 final class NotificationsPreferencesViewModel {
 
+    var subscription: Subscription? {
+        didSet {
+            guard let subscription = subscription else {
+                return
+            }
+
+            enableModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            counterModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            desktopAlertsModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            desktopAudioModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            desktopSoundModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            desktopDurationModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            mobileAlertsModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+
+            mailAlertsModel.value.bind { [weak self] _ in
+                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+            }
+        }
+    }
+
     internal var title: String {
         return localized("myaccount.settings.notifications.title")
     }
@@ -43,6 +83,8 @@ final class NotificationsPreferencesViewModel {
             mobilePushNotifications: mobileAlertsModel.value.value
         )
     }
+
+    internal var isSaveButtonEnabled = Dynamic(false)
 
     internal var channelName = "channel"
 
@@ -150,6 +192,18 @@ final class NotificationsPreferencesViewModel {
                 setPickerVisible(indexPath.section == section && indexPath.row == row, for: elements[row])
             }
         }
+    }
+
+    internal func checkIfSaveButtonShouldBeEnabled(subscription: Subscription) {
+        isSaveButtonEnabled.value =
+            enableModel.value.value == subscription.disableNotifications ||
+            counterModel.value.value == subscription.hideUnreadStatus ||
+            desktopAlertsModel.value.value != subscription.desktopNotifications ||
+            desktopAudioModel.value.value != subscription.audioNotifications ||
+            desktopSoundModel.value.value != subscription.audioNotificationValue ||
+            desktopDurationModel.value.value != subscription.desktopNotificationDuration ||
+            mobileAlertsModel.value.value != subscription.mobilePushNotifications ||
+            mailAlertsModel.value.value != subscription.emailNotifications
     }
 
     private func setPickerVisible(_ visible: Bool, for cellModel: NotificationSettingModel) {

@@ -10,7 +10,11 @@ import UIKit
 
 final class NotificationsPreferencesViewController: BaseTableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
-    var subscription: Subscription?
+    var subscription: Subscription? {
+        didSet {
+            viewModel.subscription = subscription
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,11 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
         viewModel.enableModel.value.bind { [unowned self] _ in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
+        }
+        viewModel.isSaveButtonEnabled.bindAndFire { enabled in
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItem?.isEnabled = enabled
             }
         }
         updateModel(subscription: subscription)
@@ -38,7 +47,9 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
 
             switch response {
             case .resource:
-                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle)
+                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle, completion: {
+                    strongSelf.navigationController?.popViewController(animated: true)
+                })
             case .error:
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
             }
@@ -50,16 +61,16 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
             return
         }
 
-        self.viewModel.channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
+        viewModel.channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
 
-        self.viewModel.enableModel.value.value = !subscription.disableNotifications
-        self.viewModel.counterModel.value.value = !subscription.hideUnreadStatus
-        self.viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications
-        self.viewModel.desktopAudioModel.value.value = subscription.audioNotifications
-        self.viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue
-        self.viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration
-        self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications
-        self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications
+        viewModel.enableModel.value.value = !subscription.disableNotifications
+        viewModel.counterModel.value.value = !subscription.hideUnreadStatus
+        viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications
+        viewModel.desktopAudioModel.value.value = subscription.audioNotifications
+        viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue
+        viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration
+        viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications
+        viewModel.mailAlertsModel.value.value = subscription.emailNotifications
     }
 }
 
