@@ -44,7 +44,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
         // present (push on iPhone, popover on iPad)
 
-        if UIDevice.current.userInterfaceIdiom == .phone {
+        if traitCollection.horizontalSizeClass == .compact {
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
             if let presenter = controller.popoverPresentationController {
