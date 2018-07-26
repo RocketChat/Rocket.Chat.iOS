@@ -16,14 +16,16 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
                 return
             }
 
-            viewModel.currentPreferences = NotificationPreferences(desktopNotifications: subscription.desktopNotifications,
-                                                                   disableNotifications: subscription.disableNotifications,
-                                                                   emailNotifications: subscription.emailNotifications,
-                                                                   audioNotificationValue: subscription.audioNotificationValue,
-                                                                   desktopNotificationDuration: subscription.desktopNotificationDuration,
-                                                                   audioNotifications: subscription.audioNotifications,
-                                                                   hideUnreadStatus: subscription.hideUnreadStatus,
-                                                                   mobilePushNotifications: subscription.mobilePushNotifications)
+            viewModel.currentPreferences = NotificationPreferences(
+                desktopNotifications: subscription.desktopNotifications,
+                disableNotifications: subscription.disableNotifications,
+                emailNotifications: subscription.emailNotifications,
+                audioNotificationValue: subscription.audioNotificationValue,
+                desktopNotificationDuration: subscription.desktopNotificationDuration,
+                audioNotifications: subscription.audioNotifications,
+                hideUnreadStatus: subscription.hideUnreadStatus,
+                mobilePushNotifications: subscription.mobilePushNotifications
+            )
         }
     }
 
@@ -32,10 +34,16 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
 
         title = viewModel.title
         viewModel.enableModel.value.bind { [unowned self] _ in
+            let updates = self.viewModel.tableUpdatesAfterStateChange()
+
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.tableView.beginUpdates()
+                self.tableView.insertSections(updates.insertions, with: .fade)
+                self.tableView.deleteSections(updates.deletions, with: .fade)
+                self.tableView.endUpdates()
             }
         }
+
         viewModel.isSaveButtonEnabled.bindAndFire { enabled in
             DispatchQueue.main.async {
                 self.navigationItem.rightBarButtonItem?.isEnabled = enabled

@@ -151,24 +151,29 @@ final class NotificationsPreferencesViewModel {
 
     private typealias TableSection = (header: String?, footer: String?, elements: [NotificationSettingModel])
 
+    private lazy var alwaysActiveSections: [TableSection] = [
+        (header: nil, footer: String(format: localized("myaccount.settings.notifications.receive.footer"), channelName), [enableModel]),
+        (header: nil, footer: localized("myaccount.settings.notifications.show.footer"), [counterModel])
+    ]
+
+    private lazy var conditionallyActiveSections: [TableSection] = [
+        (header: localized("myaccount.settings.notifications.inapp"), footer: localized("myaccount.settings.notifications.inapp.footer"), [desktopAlertsModel]),
+        (header: localized("myaccount.settings.notifications.mobile"), footer: localized("myaccount.settings.notifications.mobile.footer"), [mobileAlertsModel]),
+        (header: localized("myaccount.settings.notifications.desktop"), footer: nil, [desktopAudioModel, desktopSoundModel, desktopDurationModel]),
+        (header: localized("myaccount.settings.notifications.mail"), footer: nil, [mailAlertsModel])
+    ]
+
+    // These variables help in row animation
+    private var lastEnableState = false
+    private var currentEnableState: Bool { return enableModel.value.value }
+
     private var settingsCells: [TableSection] {
-        let alwaysActiveSections: [TableSection] = [
-            (header: nil, footer: String(format: localized("myaccount.settings.notifications.receive.footer"), channelName), [enableModel]),
-            (header: nil, footer: localized("myaccount.settings.notifications.show.footer"), [counterModel])
-        ]
-
-        guard enableModel.value.value else {
+        lastEnableState = currentEnableState
+        if !enableModel.value.value {
             return alwaysActiveSections
+        } else {
+            return alwaysActiveSections + conditionallyActiveSections
         }
-
-        let conditionallyActiveSections: [TableSection] = [
-            (header: localized("myaccount.settings.notifications.inapp"), footer: localized("myaccount.settings.notifications.inapp.footer"), [desktopAlertsModel]),
-            (header: localized("myaccount.settings.notifications.mobile"), footer: localized("myaccount.settings.notifications.mobile.footer"), [mobileAlertsModel]),
-            (header: localized("myaccount.settings.notifications.desktop"), footer: nil, [desktopAudioModel, desktopSoundModel, desktopDurationModel]),
-            (header: localized("myaccount.settings.notifications.mail"), footer: nil, [mailAlertsModel])
-        ]
-
-        return alwaysActiveSections + conditionallyActiveSections
     }
 
     internal func numberOfSections() -> Int {
@@ -224,6 +229,7 @@ final class NotificationsPreferencesViewModel {
         }
 
         channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
+        lastEnableState = !subscription.disableNotifications
 
         enableModel.value.value = !subscription.disableNotifications
         counterModel.value.value = !subscription.hideUnreadStatus
@@ -233,17 +239,20 @@ final class NotificationsPreferencesViewModel {
         desktopDurationModel.value.value = subscription.desktopNotificationDuration
         mobileAlertsModel.value.value = subscription.mobilePushNotifications
         mailAlertsModel.value.value = subscription.emailNotifications
+
     }
 
     internal func updateCurrentPreferences() {
-        currentPreferences = NotificationPreferences(desktopNotifications: desktopAlertsModel.value.value,
-                                                     disableNotifications: !enableModel.value.value,
-                                                     emailNotifications: mailAlertsModel.value.value,
-                                                     audioNotificationValue: desktopSoundModel.value.value,
-                                                     desktopNotificationDuration: desktopDurationModel.value.value,
-                                                     audioNotifications: desktopAudioModel.value.value,
-                                                     hideUnreadStatus: !counterModel.value.value,
-                                                     mobilePushNotifications: mobileAlertsModel.value.value)
+        currentPreferences = NotificationPreferences(
+            desktopNotifications: desktopAlertsModel.value.value,
+            disableNotifications: !enableModel.value.value,
+            emailNotifications: mailAlertsModel.value.value,
+            audioNotificationValue: desktopSoundModel.value.value,
+            desktopNotificationDuration: desktopDurationModel.value.value,
+            audioNotifications: desktopAudioModel.value.value,
+            hideUnreadStatus: !counterModel.value.value,
+            mobilePushNotifications: mobileAlertsModel.value.value
+        )
     }
 
     private func setPickerVisible(_ visible: Bool, for cellModel: NotificationSettingModel) {
@@ -253,6 +262,23 @@ final class NotificationsPreferencesViewModel {
             model.pickerVisible.value = visible ? !model.pickerVisible.value : false
         } else if let model = cellModel as? NotificationsChooseCell.SettingModel<Int> {
             model.pickerVisible.value = visible ? !model.pickerVisible.value : false
+        }
+    }
+
+    internal func tableUpdatesAfterStateChange() -> (insertions: IndexSet, deletions: IndexSet) {
+        guard lastEnableState != currentEnableState else {
+            return (insertions: IndexSet(), deletions: IndexSet())
+        }
+
+        var indexSetForConditionallyActiveSections = IndexSet()
+        for section in conditionallyActiveSections.startIndex..<conditionallyActiveSections.endIndex {
+            indexSetForConditionallyActiveSections.insert(section + alwaysActiveSections.count)
+        }
+
+        if currentEnableState {
+            return (insertions: indexSetForConditionallyActiveSections, deletions: IndexSet())
+        } else {
+            return (insertions: IndexSet(), deletions: indexSetForConditionallyActiveSections)
         }
     }
 }
