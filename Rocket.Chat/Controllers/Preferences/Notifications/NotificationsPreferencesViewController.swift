@@ -12,7 +12,18 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
     var subscription: Subscription? {
         didSet {
-            viewModel.subscription = subscription
+            guard let subscription = subscription else {
+                return
+            }
+
+            viewModel.currentPreferences = NotificationPreferences(desktopNotifications: subscription.desktopNotifications,
+                                                                   disableNotifications: subscription.disableNotifications,
+                                                                   emailNotifications: subscription.emailNotifications,
+                                                                   audioNotificationValue: subscription.audioNotificationValue,
+                                                                   desktopNotificationDuration: subscription.desktopNotificationDuration,
+                                                                   audioNotifications: subscription.audioNotifications,
+                                                                   hideUnreadStatus: subscription.hideUnreadStatus,
+                                                                   mobilePushNotifications: subscription.mobilePushNotifications)
         }
     }
 
@@ -30,7 +41,7 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
                 self.navigationItem.rightBarButtonItem?.isEnabled = enabled
             }
         }
-        updateModel(subscription: subscription)
+        viewModel.updateModel(subscription: subscription)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveSettings))
     }
@@ -47,31 +58,14 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
 
             switch response {
             case .resource:
-                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle, completion: {
-                    strongSelf.navigationController?.popViewController(animated: true)
-                })
+                strongSelf.viewModel.updateCurrentPreferences()
+                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle)
             case .error:
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
             }
         }
     }
 
-    private func updateModel(subscription: Subscription?) {
-        guard let subscription = subscription else {
-            return
-        }
-
-        viewModel.channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
-
-        viewModel.enableModel.value.value = !subscription.disableNotifications
-        viewModel.counterModel.value.value = !subscription.hideUnreadStatus
-        viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications
-        viewModel.desktopAudioModel.value.value = subscription.audioNotifications
-        viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue
-        viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration
-        viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications
-        viewModel.mailAlertsModel.value.value = subscription.emailNotifications
-    }
 }
 
 extension NotificationsPreferencesViewController {

@@ -25,6 +25,9 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
             }
 
             titleLabel.text = model.title
+            model.value.bindAndFire { [weak self] value in
+                self?.turnSwitch.isOn = value
+            }
         }
     }
 

@@ -19,42 +19,49 @@ protocol NotificationSettingModel {
 
 final class NotificationsPreferencesViewModel {
 
-    var subscription: Subscription? {
+    var isModelBinded = false
+
+    var currentPreferences: NotificationPreferences? {
         didSet {
-            guard let subscription = subscription else {
+            guard
+                !isModelBinded
+            else {
+                checkIfSaveButtonShouldBeEnabled()
                 return
             }
 
+            isModelBinded = true
+
             enableModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             counterModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             desktopAlertsModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             desktopAudioModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             desktopSoundModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             desktopDurationModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             mobileAlertsModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
 
             mailAlertsModel.value.bind { [weak self] _ in
-                self?.checkIfSaveButtonShouldBeEnabled(subscription: subscription)
+                self?.checkIfSaveButtonShouldBeEnabled()
             }
         }
     }
@@ -194,16 +201,49 @@ final class NotificationsPreferencesViewModel {
         }
     }
 
-    internal func checkIfSaveButtonShouldBeEnabled(subscription: Subscription) {
+    internal func checkIfSaveButtonShouldBeEnabled() {
+        guard let currentPreferences = currentPreferences else {
+            isSaveButtonEnabled.value = false
+            return
+        }
+
         isSaveButtonEnabled.value =
-            enableModel.value.value == subscription.disableNotifications ||
-            counterModel.value.value == subscription.hideUnreadStatus ||
-            desktopAlertsModel.value.value != subscription.desktopNotifications ||
-            desktopAudioModel.value.value != subscription.audioNotifications ||
-            desktopSoundModel.value.value != subscription.audioNotificationValue ||
-            desktopDurationModel.value.value != subscription.desktopNotificationDuration ||
-            mobileAlertsModel.value.value != subscription.mobilePushNotifications ||
-            mailAlertsModel.value.value != subscription.emailNotifications
+            enableModel.value.value == currentPreferences.disableNotifications ||
+            counterModel.value.value == currentPreferences.hideUnreadStatus ||
+            desktopAlertsModel.value.value != currentPreferences.desktopNotifications ||
+            desktopAudioModel.value.value != currentPreferences.audioNotifications ||
+            desktopSoundModel.value.value != currentPreferences.audioNotificationValue ||
+            desktopDurationModel.value.value != currentPreferences.desktopNotificationDuration ||
+            mobileAlertsModel.value.value != currentPreferences.mobilePushNotifications ||
+            mailAlertsModel.value.value != currentPreferences.emailNotifications
+    }
+
+    internal func updateModel(subscription: Subscription?) {
+        guard let subscription = subscription else {
+            return
+        }
+
+        channelName = AuthSettingsManager.settings?.useUserRealName ?? false ? subscription.fname : subscription.name
+
+        enableModel.value.value = !subscription.disableNotifications
+        counterModel.value.value = !subscription.hideUnreadStatus
+        desktopAlertsModel.value.value = subscription.desktopNotifications
+        desktopAudioModel.value.value = subscription.audioNotifications
+        desktopSoundModel.value.value = subscription.audioNotificationValue
+        desktopDurationModel.value.value = subscription.desktopNotificationDuration
+        mobileAlertsModel.value.value = subscription.mobilePushNotifications
+        mailAlertsModel.value.value = subscription.emailNotifications
+    }
+
+    internal func updateCurrentPreferences() {
+        currentPreferences = NotificationPreferences(desktopNotifications: desktopAlertsModel.value.value,
+                                                     disableNotifications: !enableModel.value.value,
+                                                     emailNotifications: mailAlertsModel.value.value,
+                                                     audioNotificationValue: desktopSoundModel.value.value,
+                                                     desktopNotificationDuration: desktopDurationModel.value.value,
+                                                     audioNotifications: desktopAudioModel.value.value,
+                                                     hideUnreadStatus: !counterModel.value.value,
+                                                     mobilePushNotifications: mobileAlertsModel.value.value)
     }
 
     private func setPickerVisible(_ visible: Bool, for cellModel: NotificationSettingModel) {
