@@ -490,14 +490,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         // When using iPads, we override the detail controller creating
         // a new instance.
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
             controller.subscription = subscription
 
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
-        } else {
-            controller.subscription = subscription
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

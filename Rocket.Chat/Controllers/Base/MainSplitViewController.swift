@@ -59,6 +59,22 @@ final class MainSplitViewController: UISplitViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return view.theme?.appearence.statusBarStyle ?? .default
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if previousTraitCollection?.horizontalSizeClass != traitCollection.horizontalSizeClass {
+            if traitCollection.horizontalSizeClass != .compact {
+                if let nav = primaryViewController as? UINavigationController {
+                    if let subscriptions = nav.viewControllers.first as? SubscriptionsViewController {
+                        if let chat = detailViewController as? ChatViewController {
+                            if let subscription = chat.subscription {
+                                subscriptions.openChat(for: subscription)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: UISplitViewControllerDelegate
