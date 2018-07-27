@@ -705,6 +705,7 @@
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
 		997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */; };
+		997FE19C210BA5B8000F6836 /* SubscriptionHideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */; };
 		99805D7520C191BE00741B8E /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99805D7420C191BE00741B8E /* StyledTextField.swift */; };
 		998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */; };
 		998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */; };
@@ -1513,6 +1514,7 @@
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
 		997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLeaveRequest.swift; sourceTree = "<group>"; };
+		997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHideRequest.swift; sourceTree = "<group>"; };
 		99805D7420C191BE00741B8E /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequestSpec.swift; sourceTree = "<group>"; };
 		998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequestSpec.swift; sourceTree = "<group>"; };
@@ -3243,6 +3245,7 @@
 				996A2652210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift */,
 				8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */,
 				997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */,
+				997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -4211,6 +4214,7 @@
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
 				41FC9E0C209B3BAA00FED485 /* UploadMessageRequest.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
+				997FE19C210BA5B8000F6836 /* SubscriptionHideRequest.swift in Sources */,
 				77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */,
 				413FB6C61FE17DBC00F010AA /* MessageTextFontAttributes.swift in Sources */,
 				412A95D61FD94ED000954AA6 /* ChatMessageVideoView.swift in Sources */,
