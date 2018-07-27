@@ -63,6 +63,11 @@ extension SERoomsViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            store.dispatch(.setSearchRooms(.none))
+            return
+        }
+
         store.dispatch(.setSearchRooms(.searching(searchText)))
     }
 }
