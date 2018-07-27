@@ -37,6 +37,8 @@ final class SERoomsViewController: SEViewController {
         searchController.hidesNavigationBarDuringPresentation = false
 
         navigationItem.searchController = searchController
+
+        tableView.keyboardDismissMode = .interactive
     }
 
     override func stateUpdated(_ state: SEState) {
