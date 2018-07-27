@@ -37,6 +37,8 @@ final class SERoomsViewController: SEViewController {
         searchController.hidesNavigationBarDuringPresentation = false
 
         navigationItem.searchController = searchController
+
+        tableView.keyboardDismissMode = .interactive
     }
 
     override func stateUpdated(_ state: SEState) {
@@ -61,6 +63,11 @@ extension SERoomsViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            store.dispatch(.setSearchRooms(.none))
+            return
+        }
+
         store.dispatch(.setSearchRooms(.searching(searchText)))
     }
 }
