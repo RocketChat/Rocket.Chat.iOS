@@ -504,7 +504,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.validated()
         else {
             return nil
         }
@@ -514,9 +514,9 @@ extension SubscriptionsViewController: UITableViewDelegate {
         if !subscription.alert {
             let markUnread = UIContextualAction(style: .normal, title: "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 API.current()?.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
-                Realm.executeOnMainThread({ (_) in
+                Realm.executeOnMainThread { _ in
                     subscription.alert = true
-                })
+                }
                 success(true)
             })
 
@@ -525,9 +525,9 @@ extension SubscriptionsViewController: UITableViewDelegate {
         } else {
             let markRead = UIContextualAction(style: .normal, title: "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 API.current()?.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
-                Realm.executeOnMainThread({ (_) in
+                Realm.executeOnMainThread { _ in
                     subscription.alert = false
-                })
+                }
                 success(true)
             })
 
@@ -541,7 +541,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.validated()
         else {
             return nil
         }
@@ -553,12 +553,20 @@ extension SubscriptionsViewController: UITableViewDelegate {
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
 
         let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            let leaveRequest = SubscriptionLeaveRequest(roomId: subscription.rid, type: subscription.type)
+            API.current()?.fetch(leaveRequest, completion: nil)
+
+            Realm.executeOnMainThread { realm in
+                realm.delete(subscription)
+            }
+
             success(true)
         })
 
         leave.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
 
-        let actions = [hide, subscription.type != .directMessage ? leave : nil].compactMap { $0 }
+        let shouldAddLeaveAction = subscription.type != .directMessage
+        let actions = [hide, shouldAddLeaveAction ? leave : nil].compactMap { $0 }
         return UISwipeActionsConfiguration(actions: actions)
     }
 }
