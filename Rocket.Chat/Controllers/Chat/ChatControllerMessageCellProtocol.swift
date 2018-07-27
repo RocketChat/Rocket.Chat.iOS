@@ -148,6 +148,9 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
     func viewDidCollapseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
+
+        let item = dataController.itemAt(indexPath)
+        dataController.invalidateLayout(for: item?.identifier)
         collectionView?.reloadItems(at: [indexPath])
     }
 

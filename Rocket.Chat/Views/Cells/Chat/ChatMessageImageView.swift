@@ -54,6 +54,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         guard let imageURL = attachment.fullImageURL() else {
             return nil
         }
+
         if imageURL.absoluteString.starts(with: "http://") {
             isLoadable = false
             detailText.text = ""
@@ -62,12 +63,16 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             imageView.image =  UIImage(named: "Resource Unavailable")
             return nil
         }
+
         labelTitle.text = attachment.title
         detailText.text = attachment.descriptionText
         detailTextIndicator.isHidden = attachment.descriptionText?.isEmpty ?? true
-        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.descriptionText)
+
+        let availableWidth = frame.size.width
+        let fullHeight = ChatMessageImageView.heightFor(with: availableWidth, description: attachment.descriptionText)
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
+
         return imageURL
     }
 
