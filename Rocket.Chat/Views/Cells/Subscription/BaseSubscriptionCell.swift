@@ -19,7 +19,7 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
 
     var subscription: Subscription? {
         didSet {
-            guard let subscription = subscription?.validated() else { return }
+            guard subscription?.validated() != nil else { return }
             updateSubscriptionInformation()
         }
     }

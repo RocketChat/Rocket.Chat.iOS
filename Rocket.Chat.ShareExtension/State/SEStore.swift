@@ -16,6 +16,7 @@ final class SEStore {
     private(set) var state = SEState()
     private(set) var subscribers = [SEStoreSubscriber]()
 
+    // swiftlint:disable cyclomatic_complexity
     func dispatch(_ action: SEAction) {
         switch action {
         case .setContent(let content):
@@ -49,6 +50,8 @@ final class SEStore {
 
         notifySubscribers()
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     func dispatch(_ actionCreator: (SEStore) -> SEAction?) {
         if let action = actionCreator(self) {

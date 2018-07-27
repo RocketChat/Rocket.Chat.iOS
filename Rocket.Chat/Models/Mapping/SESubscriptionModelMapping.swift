@@ -17,6 +17,5 @@ extension Subscription {
 
 extension Message {
     func map(_ values: JSON, realm: Realm?) {
-        
     }
 }
