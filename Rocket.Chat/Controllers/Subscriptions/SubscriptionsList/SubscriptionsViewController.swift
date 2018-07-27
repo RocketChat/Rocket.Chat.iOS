@@ -513,6 +513,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         if subscription.unread > 0 {
             let markUnread = UIContextualAction(style: .normal, title:  "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                API.current()?.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
                 success(true)
             })
 
@@ -520,6 +521,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
             actions.append(markUnread)
         } else {
             let markRead = UIContextualAction(style: .normal, title:  "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                API.current()?.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
                 success(true)
             })
 
