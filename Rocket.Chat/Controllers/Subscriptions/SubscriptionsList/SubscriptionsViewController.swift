@@ -512,7 +512,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         var actions: [UIContextualAction] = []
 
         if !subscription.alert {
-            let markUnread = UIContextualAction(style: .normal, title: "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            let markUnread = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.unread"), handler: { _, _, success in
                 API.current()?.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
                 Realm.executeOnMainThread { _ in
                     subscription.alert = true
@@ -523,7 +523,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
             markUnread.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markUnread)
         } else {
-            let markRead = UIContextualAction(style: .normal, title: "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            let markRead = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.read"), handler: { _, _, success in
                 API.current()?.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
                 Realm.executeOnMainThread { _ in
                     subscription.alert = false
@@ -546,7 +546,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
             return nil
         }
 
-        let hide = UIContextualAction(style: .normal, title:  "Hide", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+        let hide = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.hide"), handler: { _, _, success in
             let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(hideRequest, completion: nil)
 
@@ -559,7 +559,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
 
-        let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+        let leave = UIContextualAction(style: .destructive, title: localized("subscriptions.list.actions.leave"), handler: { _, _, success in
             let leaveRequest = SubscriptionLeaveRequest(rid: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(leaveRequest, completion: nil)
 

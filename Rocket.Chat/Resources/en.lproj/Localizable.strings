@@ -154,6 +154,10 @@
 "subscriptions.list.no_message" = "No message";
 "subscriptions.list.sent_an_attachment" = "sent an attachment";
 "subscriptions.list.date.yesterday" = "Yesterday";
+"subscriptions.list.actions.read" = "Mark as\nRead";
+"subscriptions.list.actions.unread" = "Mark as\nUnread";
+"subscriptions.list.actions.leave" = "Leave\nChannel";
+"subscriptions.list.actions.hide" = "Hide";
 
 // Servers
 "servers.add_new_team" = "Add new Team";
