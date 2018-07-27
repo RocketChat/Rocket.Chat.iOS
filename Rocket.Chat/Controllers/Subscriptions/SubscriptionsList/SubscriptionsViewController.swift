@@ -511,17 +511,23 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         var actions: [UIContextualAction] = []
 
-        if subscription.unread > 0 {
-            let markUnread = UIContextualAction(style: .normal, title:  "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+        if !subscription.alert {
+            let markUnread = UIContextualAction(style: .normal, title: "Mark as\nUnread", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 API.current()?.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
+                Realm.executeOnMainThread({ (_) in
+                    subscription.alert = true
+                })
                 success(true)
             })
 
             markUnread.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markUnread)
         } else {
-            let markRead = UIContextualAction(style: .normal, title:  "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            let markRead = UIContextualAction(style: .normal, title: "Mark as\nRead", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 API.current()?.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
+                Realm.executeOnMainThread({ (_) in
+                    subscription.alert = false
+                })
                 success(true)
             })
 
