@@ -13,11 +13,11 @@ fileprivate extension SubscriptionType {
     var path: String {
         switch self {
         case .channel:
-            return "/api/v1/channels.leave"
+            return "/api/v1/channels.close"
         case .group:
-            return "/api/v1/groups.leave"
-        default:
-            return "/api/v1/channels.leave"
+            return "/api/v1/groups.close"
+        case .directMessage:
+            return "/api/v1/im.close"
         }
     }
 }
@@ -25,18 +25,27 @@ fileprivate extension SubscriptionType {
 final class SubscriptionHideRequest: APIRequest {
     typealias APIResourceType = SubscriptionHideResource
 
+    let requiredVersion = Version(0, 48, 0)
+
+    let method: HTTPMethod = .post
     var path: String {
         return type.path
     }
 
-    var query: String?
-    let roomId: String?
+    let rid: String
     let type: SubscriptionType
 
-    init(roomId: String, type: SubscriptionType = .channel) {
-        self.type = type
-        self.roomId = roomId
-        self.query = "roomId=\(roomId)"
+    init(rid: String, subscriptionType: SubscriptionType) {
+        self.rid = rid
+        self.type = subscriptionType
+    }
+
+    func body() -> Data? {
+        let body = JSON([
+            "roomId": rid
+        ])
+
+        return body.rawString()?.data(using: .utf8)
     }
 }
 

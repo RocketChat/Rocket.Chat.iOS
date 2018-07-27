@@ -547,6 +547,13 @@ extension SubscriptionsViewController: UITableViewDelegate {
         }
 
         let hide = UIContextualAction(style: .normal, title:  "Hide", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
+            API.current()?.fetch(hideRequest, completion: nil)
+
+            Realm.executeOnMainThread { realm in
+                realm.delete(subscription)
+            }
+
             success(true)
         })
 
