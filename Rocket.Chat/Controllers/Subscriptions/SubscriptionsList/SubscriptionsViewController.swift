@@ -566,6 +566,9 @@ extension SubscriptionsViewController: UITableViewDelegate {
         leave.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
 
         let shouldAddLeaveAction = subscription.type != .directMessage
+            && subscription.isJoined()
+            && subscription.roomOwner?.identifier != AuthManager.currentUser()?.identifier
+
         let actions = [hide, shouldAddLeaveAction ? leave : nil].compactMap { $0 }
         return UISwipeActionsConfiguration(actions: actions)
     }
