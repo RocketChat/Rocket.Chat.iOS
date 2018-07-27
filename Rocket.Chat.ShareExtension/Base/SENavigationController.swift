@@ -47,7 +47,7 @@ final class SENavigationController: UINavigationController {
         store.subscribe(self)
     }
 
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    private func completeRequest() {
         UIView.animate(withDuration: 0.20, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: { [weak self] in
             self?.view.transform = CGAffineTransform(translationX: 0, y: self?.view.frame.height ?? 0)
         }, completion: { [weak self] _ in
@@ -99,7 +99,7 @@ extension SENavigationController: SEStoreSubscriber {
                 statusReport()
             }
         case .finish:
-            dismiss(animated: true)
+            completeRequest()
             store.clearSubscribers()
             store.dispatch(.setContent([]))
         }
