@@ -553,7 +553,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
 
         let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            let leaveRequest = SubscriptionLeaveRequest(roomId: subscription.rid, type: subscription.type)
+            let leaveRequest = SubscriptionLeaveRequest(rid: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(leaveRequest, completion: nil)
 
             Realm.executeOnMainThread { realm in

@@ -1,5 +1,5 @@
 //
-//  SubscriptionLeaveRequest.swift
+//  SubscriptionHideRequest.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 27/07/18.
@@ -22,34 +22,25 @@ fileprivate extension SubscriptionType {
     }
 }
 
-final class SubscriptionLeaveRequest: APIRequest {
-    typealias APIResourceType = SubscriptionLeaveResource
+final class SubscriptionHideRequest: APIRequest {
+    typealias APIResourceType = SubscriptionHideResource
 
-    let requiredVersion = Version(0, 48, 0)
-
-    let method: HTTPMethod = .post
     var path: String {
         return type.path
     }
 
-    let rid: String
+    var query: String?
+    let roomId: String?
     let type: SubscriptionType
 
-    init(rid: String, subscriptionType: SubscriptionType) {
-        self.rid = rid
-        self.type = subscriptionType
-    }
-
-    func body() -> Data? {
-        let body = JSON([
-            "roomId": rid
-        ])
-
-        return body.rawString()?.data(using: .utf8)
+    init(roomId: String, type: SubscriptionType = .channel) {
+        self.type = type
+        self.roomId = roomId
+        self.query = "roomId=\(roomId)"
     }
 }
 
-final class SubscriptionLeaveResource: APIResource {
+final class SubscriptionHideResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }
