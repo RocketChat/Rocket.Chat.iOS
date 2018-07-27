@@ -115,12 +115,14 @@ struct DatabaseManager {
         let servers = self.servers ?? []
         var validServers: [[String: String]] = []
 
-        for server in servers {
+        for (index, server) in servers.enumerated() {
             guard
                 server[ServerPersistKeys.token] != nil,
                 server[ServerPersistKeys.userId] != nil,
                 server[ServerPersistKeys.databaseName] != nil,
-                server[ServerPersistKeys.serverURL] != nil
+                server[ServerPersistKeys.serverURL] != nil,
+                let realmConfiguration = databaseConfiguration(index: index),
+                (try? Realm(configuration: realmConfiguration)) != nil
             else {
                 continue
             }
@@ -157,20 +159,6 @@ struct DatabaseManager {
         defaults.set(servers, forKey: ServerPersistKeys.servers)
         defaults.set(index, forKey: ServerPersistKeys.selectedIndex)
         return index
-    }
-
-    /**
-     This method is responsible to get the server
-     information that's stored locally on device and
-     use it to change the database configuration being
-     used by the currently instance.
-
-     - parameter index: If the index you want to use isn't stored
-     into the UserDefaults.group, you can for the index
-     using this parameter.
-     */
-    static func changeDatabaseInstance(index: Int? = nil) {
-        realmConfiguration = databaseConfiguration(index: index)
     }
 
     /**

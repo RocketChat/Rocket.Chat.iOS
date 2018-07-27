@@ -124,12 +124,14 @@ class AuthTableViewController: BaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = serverURL.host
 
         guard let settings = serverPublicSettings else { return }
 
         if !settings.isUsernameEmailAuthenticationEnabled {
-            emailAuthRow.registerButton.isHidden = true
+            emailAuthRow.isHidden = true
+            authSeparatorRow.isHidden = true
         } else {
             emailAuthRow.registerButton.isHidden = settings.registrationForm != .isPublic
         }
@@ -190,11 +192,30 @@ class AuthTableViewController: BaseTableViewController {
             return
         }
 
-        let loginService = loginServices[button.tag]
+        let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
             try? realm.write {
                 loginService.serverUrl = url
+            }
+        }
+
+        if loginService.service == "wordpress" {
+            if let url = serverPublicSettings?.wordpressUrl, !url.isEmpty {
+                loginService.serverUrl = url
+
+                /*
+                 NOTE: If should be this, but API is broken
+                 serverPublicSettings?.oauthWordpressServerType == "custom"
+                 */
+
+                loginService.mapWordPressCustom()
+            } else { // oauthWordPressServerType == wordpress-com
+                loginService.mapWordPress()
+            } // missing implementation for wp-oauth-server
+
+            try? realm.write {
+                realm.add(loginService, update: true)
             }
         }
 
@@ -328,7 +349,11 @@ extension AuthTableViewController {
 
             return LoginServiceTableViewCell.rowHeight
         case kEmailAuthSection:
-            return loginServices.count > 0 ? EmailAuthTableViewCell.rowHeightBelowSeparator : EmailAuthTableViewCell.rowHeight
+            if loginServices.count > 0 {
+                return emailAuthRow.isHidden ? .leastNonzeroMagnitude : EmailAuthTableViewCell.rowHeightBelowSeparator
+            }
+
+            return EmailAuthTableViewCell.rowHeight
         default:
             return 0
         }

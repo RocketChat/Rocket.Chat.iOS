@@ -6,4 +6,8 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-add-server-shortcut = "Add Server"; // TODO:
+add-server-shortcut = "добавить сервер";
+NSCameraUsageDescription = "Чтобы делать фотографии и записывать видео";
+NSMicrophoneUsageDescription = "Запись и загрузка аудио и видео";
+NSPhotoLibraryAddUsageDescription = "Чтобы сохранить изображения в библиотеке";
+NSPhotoLibraryUsageDescription = "Загрузка фотографий из вашей библиотеки";

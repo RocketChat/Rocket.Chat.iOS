@@ -11,6 +11,7 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// swiftlint:disable function_body_length
 class SpotlightClientSpec: XCTestCase, RealmTestCase {
     func testSearch() {
         let realm = testRealm()
@@ -67,12 +68,19 @@ class SpotlightClientSpec: XCTestCase, RealmTestCase {
 
         let expectation = XCTestExpectation(description: "number of subscriptions is correct")
 
-        client.search(query: "test", realm: realm, completion: { subscriptions in
-            if subscriptions.count == 7 && realm.objects(Subscription.self).count == 7 {
+        client.search(query: "test", realm: realm, completion: { response, _ in
+            guard let response = response else {
+                return
+            }
+
+            let rooms: [JSON] = response["rooms"].arrayValue
+            let users: [JSON] = response["users"].arrayValue
+
+            if (rooms.count + users.count) == 7 && realm.objects(Subscription.self).count == 7 {
                 expectation.fulfill()
             }
         })
 
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 10)
     }
 }

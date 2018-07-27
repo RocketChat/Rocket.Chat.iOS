@@ -55,6 +55,7 @@ final class SocketManager {
 
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers = NSMapTable<NSString, AnyObject>(keyOptions: .strongMemory, valueOptions: .weakMemory)
+    internal var isPresentingInvalidSessionAlert = false
 
     // MARK: Connection
 
@@ -167,6 +168,11 @@ extension SocketManager {
 
             infoClient.fetchInfo(realm: currentRealm, completion: {
                 SubscriptionManager.updateSubscriptions(auth, realm: currentRealm) {
+                    let validAuth = auth.isInvalidated ? AuthManager.isAuthenticated(realm: currentRealm) : auth
+                    guard let auth = validAuth else {
+                        return
+                    }
+
                     AuthSettingsManager.updatePublicSettings(auth)
 
                     UserManager.userDataChanges()

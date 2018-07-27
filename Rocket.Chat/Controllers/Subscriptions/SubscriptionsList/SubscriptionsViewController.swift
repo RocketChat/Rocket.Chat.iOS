@@ -39,12 +39,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     deinit {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
         setupSearchBar()
         setupTitleView()
         updateBackButton()
+        startObservingKeyboard()
 
         super.viewDidLoad()
 
@@ -59,20 +61,31 @@ final class SubscriptionsViewController: BaseViewController {
                 return
             }
 
+            // Update back button title with the number of unreads
             self?.updateBackButton()
 
+            // If there's no changes, let's not proceed.
             if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
                 return
             }
 
+            // Update TableView data if there's any change in the data
             if self?.viewModel.numberOfSections ?? 2 > 1 {
                 tableView.reloadData()
             } else {
-                tableView.beginUpdates()
-                tableView.deleteRows(at: changes.deletions, with: .automatic)
-                tableView.insertRows(at: changes.insertions, with: .automatic)
-                tableView.reloadRows(at: changes.modifications, with: .none)
-                tableView.endUpdates()
+                if #available(iOS 11.0, *) {
+                    tableView.performBatchUpdates({
+                        tableView.deleteRows(at: changes.deletions, with: .automatic)
+                        tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
+                    }, completion: nil)
+                } else {
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: changes.deletions, with: .automatic)
+                    tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
+                    tableView.endUpdates()
+                }
             }
         }
 
@@ -104,6 +117,14 @@ final class SubscriptionsViewController: BaseViewController {
 
         viewModel.buildSections()
         tableView.reloadData()
+        titleView?.state = SocketManager.sharedInstance.state
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !(searchBar?.text?.isEmpty ?? true) {
+            searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -116,6 +137,44 @@ final class SubscriptionsViewController: BaseViewController {
         if segue.identifier == "Servers" {
             segue.destination.modalPresentationCapturesStatusBarAppearance = true
         }
+    }
+
+    // MARK: Keyboard
+
+    private func startObservingKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardFrameWillChange(_:)),
+            name: Notification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardFrameWillChange(_:)),
+            name: Notification.Name.UIKeyboardWillHide,
+            object: nil
+        )
+    }
+
+    @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            tableView.contentInset.bottom = 0
+            return
+        }
+
+        let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+
+        UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+            self.tableView.contentInset.bottom = notification.name == Notification.Name.UIKeyboardWillHide ? 0 : keyboardFrameInView.height
+        }, completion: nil)
     }
 
     // MARK: Setup Views
@@ -355,6 +414,16 @@ extension SubscriptionsViewController: UITableViewDataSource {
         return viewModel.numberOfRowsInSection(section)
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SubscriptionCellProtocol else { return }
+        guard let subscription = cell.subscription?.validated() else { return }
+        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription?.validated() else { return }
+
+        if subscription.identifier == selectedSubscription.identifier {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
 
@@ -411,16 +480,22 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         searchController?.searchBar.resignFirstResponder()
 
+        openChat(for: subscription)
+    }
+
+    func openChat(for subscription: Subscription) {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController else {
+            return
+        }
+
         // When using iPads, we override the detail controller creating
         // a new instance.
         if splitViewController?.detailViewController as? BaseNavigationController != nil {
-            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
-                controller.subscription = subscription
+            controller.subscription = subscription
 
-                let nav = BaseNavigationController(rootViewController: controller)
-                splitViewController?.showDetailViewController(nav, sender: self)
-            }
-        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            let nav = BaseNavigationController(rootViewController: controller)
+            splitViewController?.showDetailViewController(nav, sender: self)
+        } else {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
@@ -481,7 +556,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         return UISwipeActionsConfiguration(actions: actions)
     }
-
 }
 
 extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {

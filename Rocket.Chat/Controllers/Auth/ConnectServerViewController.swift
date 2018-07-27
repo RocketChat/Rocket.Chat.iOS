@@ -23,10 +23,20 @@ final class ConnectServerViewController: BaseViewController {
     var shouldAutoConnect = false
     var url: URL? {
         guard var urlText = textFieldServerURL.text else { return URL(string: defaultURL, scheme: "https") }
+
         if urlText.isEmpty {
             urlText = defaultURL
         }
-        return  URL(string: urlText, scheme: "https")
+
+        // Remove all the whitespaces from the string
+        urlText = urlText.removingWhitespaces()
+
+        // Add .rocket.chat in the end if it's only one string
+        if !urlText.contains(".") {
+            urlText += ".rocket.chat"
+        }
+
+        return URL(string: urlText, scheme: "https")
     }
 
     var serverPublicSettings: AuthSettings?
@@ -63,6 +73,10 @@ final class ConnectServerViewController: BaseViewController {
     }()
 
     // MARK: Life Cycle
+
+    override var isNavigationBarTransparent: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,6 +193,7 @@ final class ConnectServerViewController: BaseViewController {
             if let credentials = deepLinkCredentials {
                 _ = controller.view
                 controller.authenticateWithDeepLinkCredentials(credentials)
+                deepLinkCredentials = nil
             }
 
             if let loginServices = sender as? [LoginService] {

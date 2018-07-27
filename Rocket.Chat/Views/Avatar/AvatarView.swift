@@ -79,7 +79,7 @@ final class AvatarView: UIView {
             backgroundColor = .clear
         } else if let avatarURL = avatarURL {
             imageURL = avatarURL
-        } else if let user = user {
+        } else if let user = user?.validated() {
             setAvatarWithInitials(forUsername: user.username)
 
             if let avatarURL = user.avatarURL() {
@@ -177,7 +177,6 @@ final class AvatarView: UIView {
 
         imageView.image = nil
         imageView.animatedImage = nil
-
         labelInitials.text = ""
     }
 

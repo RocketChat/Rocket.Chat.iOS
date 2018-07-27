@@ -29,7 +29,7 @@ class ChannelActionsViewController: BaseViewController {
         didSet {
             guard let subscription = self.subscription else { return }
 
-            let shouldListMentions = subscription.type != .directMessage
+            let isDirectMessage = subscription.type == .directMessage
 
             var header: [Any?]? = nil
 
@@ -58,8 +58,8 @@ class ChannelActionsViewController: BaseViewController {
 
             let data = [header, [
                 ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: title(for: "files"), action: showFilesList),
-                shouldListMentions ? ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList) : nil,
-                ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
+                isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList),
+                isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star"), title: title(for: "starred"), action: showStarredList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList)
             ], [
@@ -144,11 +144,11 @@ extension ChannelActionsViewController {
         guard let subscription = self.subscription else { return }
 
         SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
-            if response.isError() {
-                subscription.updateFavorite(!subscription.favorite)
-            }
-
             DispatchQueue.main.async {
+                if response.isError() {
+                    subscription.updateFavorite(!subscription.favorite)
+                }
+
                 self.updateButtonFavoriteImage()
             }
         }

@@ -99,12 +99,31 @@ extension Results where Element == Subscription {
         return sorted(byKeyPath: "roomLastMessageDate", ascending: false)
     }
 
+    func sortedByLastSeen() -> Results<Subscription> {
+        return sorted(byKeyPath: "lastSeen", ascending: false)
+    }
+
     func sortedByRoomUpdatedAt() -> Results<Subscription> {
         return sorted(byKeyPath: "roomUpdatedAt", ascending: false)
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return filter("name CONTAINS[cd] %@", name)
+        let userIdentifiersForDMs: [String] = Realm.current?.objects(User.self).filter(NSCompoundPredicate(
+            type: .or,
+            subpredicates: [
+                NSPredicate(format: "name CONTAINS[cd] %@", name),
+                NSPredicate(format: "username CONTAINS[cd] %@", name)
+            ]
+        )).compactMap({ $0.identifier }) ?? []
+
+        return filter(NSCompoundPredicate(
+            type: .or,
+            subpredicates: [
+                NSPredicate(format: "name CONTAINS[cd] %@", name),
+                NSPredicate(format: "fname CONTAINS[cd] %@", name),
+                NSPredicate(format: "otherUserId IN %@", userIdentifiersForDMs)
+            ]
+        ))
     }
 
 }

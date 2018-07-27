@@ -21,10 +21,12 @@ extension Subscription {
         subscription.rid = "\(name)-rid"
         subscription.name = "\(name)-name"
         subscription.identifier = "\(name)-identifier"
+        subscription.open = true
         return subscription
     }
 }
 
+// swiftlint:disable type_body_length file_length
 class SubscriptionSpec: XCTestCase {
 
     override func setUp() {

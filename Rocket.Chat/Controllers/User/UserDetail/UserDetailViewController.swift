@@ -16,6 +16,13 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         return true
     }
 
+    override var preferredContentSize: CGSize {
+        set { }
+        get {
+            return tableView.preferredContentSize
+        }
+    }
+
     @IBOutlet weak var backgroundImageView: FLAnimatedImageView!
     @IBOutlet weak var avatarImageView: FLAnimatedImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -64,8 +71,13 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         updateForModel()
+        super.viewDidLoad()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.applyTheme()
     }
 
     @IBAction func messageDidPress(_ sender: UIButton) {
