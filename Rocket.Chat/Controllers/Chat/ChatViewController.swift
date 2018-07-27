@@ -739,12 +739,12 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 if indexPathModifications.count > 0 {
-                    UIView.performWithoutAnimation {
-                        self.collectionView?.performBatchUpdates({
-                            self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                        }, completion: { _ in
+                    UIView.performWithoutAnimation { [weak self] in
+                        self?.collectionView?.performBatchUpdates({
+                            self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                        }, completion: { [weak self] _ in
                             if isAtBottom {
-                                self.scrollToBottom()
+                                self?.scrollToBottom()
                             }
                         })
                     }
