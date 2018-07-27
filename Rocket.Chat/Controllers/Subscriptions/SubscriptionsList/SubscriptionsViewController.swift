@@ -546,22 +546,19 @@ extension SubscriptionsViewController: UITableViewDelegate {
             return nil
         }
 
-        var actions: [UIContextualAction] = []
-
         let hide = UIContextualAction(style: .normal, title:  "Hide", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             success(true)
         })
 
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        actions.append(hide)
 
         let leave = UIContextualAction(style: .destructive, title:  "Leave\nChannel", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             success(true)
         })
 
         leave.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-        actions.append(leave)
 
+        let actions = [hide, subscription.type != .directMessage ? leave : nil].compactMap { $0 }
         return UISwipeActionsConfiguration(actions: actions)
     }
 }
