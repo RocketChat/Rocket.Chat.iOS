@@ -40,15 +40,15 @@ final class SENavigationController: UINavigationController {
 
         view.transform = CGAffineTransform(translationX: 0, y: view.frame.size.height)
 
-        UIView.animate(withDuration: 0.25) { [weak self] in
+        UIView.animate(withDuration: 0.25, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: { [weak self] in
             self?.view.transform = CGAffineTransform.identity
-        }
+        }, completion: nil)
 
         store.subscribe(self)
     }
 
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: 0.20, animations: { [weak self] in
+        UIView.animate(withDuration: 0.20, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: { [weak self] in
             self?.view.transform = CGAffineTransform(translationX: 0, y: self?.view.frame.height ?? 0)
         }, completion: { [weak self] _ in
             self?.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
