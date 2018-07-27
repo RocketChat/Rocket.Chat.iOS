@@ -1010,14 +1010,17 @@ extension ChatViewController {
         guard
             dataController.data.count > indexPath.row,
             let subscription = subscription,
-            let obj = dataController.itemAt(indexPath),
-            obj.message?.validated() != nil
+            let obj = dataController.itemAt(indexPath)
         else {
             return cellForEmpty(at: indexPath)
         }
 
         if obj.type == .message {
-            return cellForMessage(obj, at: indexPath)
+            if obj.message?.validated() != nil {
+                return cellForMessage(obj, at: indexPath)
+            } else {
+                return cellForEmpty(at: indexPath)
+            }
         }
 
         if obj.type == .daySeparator {
@@ -1170,7 +1173,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 dataController.cacheCellHeight(for: obj.identifier, value: height)
-
                 return CGSize(width: fullWidth, height: height)
             }
         }

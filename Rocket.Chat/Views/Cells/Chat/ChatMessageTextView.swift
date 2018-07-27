@@ -80,12 +80,12 @@ final class ChatMessageTextView: UIView {
         }
     }
 
-    static func heightFor(collapsed: Bool, withText text: String?, isFile: Bool = false) -> CGFloat {
+    static func heightFor(with availableWidth: CGFloat, collapsed: Bool, text: String?, isFile: Bool = false) -> CGFloat {
         guard !isFile else {
             return defaultHeight
         }
 
-        let width = UIScreen.main.bounds.size.width - 73
+        let width = availableWidth - 73
         var textHeight: CGFloat = 1
 
         if let text = text, text.count > 0 {

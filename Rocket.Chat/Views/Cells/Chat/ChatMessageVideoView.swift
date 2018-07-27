@@ -45,7 +45,9 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
         labelTitle.text = attachment.title
         detailText.text = attachment.descriptionText
         detailTextIndicator.isHidden = attachment.descriptionText?.isEmpty ?? true
-        let fullHeight = ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
+
+        let availableWidth = frame.size.width
+        let fullHeight = ChatMessageVideoView.heightFor(with: availableWidth, description: attachment.descriptionText)
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageVideoView.defaultHeight
 

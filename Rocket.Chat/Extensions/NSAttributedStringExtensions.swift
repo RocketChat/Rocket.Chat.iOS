@@ -11,9 +11,12 @@ import UIKit
 extension NSAttributedString {
     func heightForView(withWidth width: CGFloat) -> CGFloat? {
         let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let rect = self.boundingRect(with: size,
-                                     options: [.usesLineFragmentOrigin, .usesFontLeading],
-                                     context: nil)
+
+        let rect = self.boundingRect(
+            with: size,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
 
         return rect.height
     }
