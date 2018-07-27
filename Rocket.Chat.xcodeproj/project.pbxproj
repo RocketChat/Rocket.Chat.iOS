@@ -431,6 +431,13 @@
 		8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddUsersViewController.swift */; };
 		8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442F20B34B12002F317A /* DirectoryRequest.swift */; };
 		8039443220B3988F002F317A /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039443120B3988F002F317A /* PagedResource.swift */; };
+		803D866821062D7E00B1B697 /* SubscriptionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */; };
+		803D866C21062F7400B1B697 /* SEStateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D866B21062F7400B1B697 /* SEStateAPI.swift */; };
+		803D866D2106307C00B1B697 /* SubscriptionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */; };
+		803D866E2106309200B1B697 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* DateExtension.swift */; };
+		803D866F210630A800B1B697 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41499C8E1F2A116900790EA7 /* ServerManager.swift */; };
+		803D8670210631D700B1B697 /* ModelMappeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112DC571FFFB9B1005995E1 /* ModelMappeable.swift */; };
+		803D86762106333900B1B697 /* SESubscriptionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D86742106333500B1B697 /* SESubscriptionModelMapping.swift */; };
 		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
 		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
@@ -1258,6 +1265,8 @@
 		8039442D20B342BB002F317A /* AddUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersViewController.swift; sourceTree = "<group>"; };
 		8039442F20B34B12002F317A /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
 		8039443120B3988F002F317A /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
+		803D866B21062F7400B1B697 /* SEStateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEStateAPI.swift; sourceTree = "<group>"; };
+		803D86742106333500B1B697 /* SESubscriptionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESubscriptionModelMapping.swift; sourceTree = "<group>"; };
 		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
 		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
@@ -2441,6 +2450,7 @@
 				806401321FB09EC400990572 /* PermissionModelMapping.swift */,
 				999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */,
 				4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */,
+				803D86742106333500B1B697 /* SESubscriptionModelMapping.swift */,
 				41BD37E01E290F2900CBC4C2 /* UserModelMapping.swift */,
 			);
 			path = Mapping;
@@ -2846,6 +2856,14 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
+		803D866A21062F5B00B1B697 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				803D866B21062F7400B1B697 /* SEStateAPI.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8045F49920D0597500AA0F3C /* ReadReceipts */ = {
 			isa = PBXGroup;
 			children = (
@@ -3047,6 +3065,7 @@
 				8076FDE02048A69200114F28 /* Compose */,
 				806C2ACE206BBAF200EE5F67 /* External */,
 				80D5637320593245008896D6 /* Helpers */,
+				803D866A21062F5B00B1B697 /* Extensions */,
 				807FB56C20472B2700E21429 /* Resources */,
 				807FB57E2048376900E21429 /* Rooms */,
 				807FB5802048378500E21429 /* Servers */,
@@ -4729,6 +4748,7 @@
 				80D0CE6620503C860056B17F /* SERoomCell.swift in Sources */,
 				80FA90722056C1190069038F /* SEComposeTextCell.swift in Sources */,
 				80D0CE60205016B40056B17F /* SEServerCell.swift in Sources */,
+				803D866821062D7E00B1B697 /* SubscriptionsRequest.swift in Sources */,
 				8076FDCC204863DF00114F28 /* AuthExtensions.swift in Sources */,
 				80D0CE64205034280056B17F /* SEServerCellModel.swift in Sources */,
 				8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */,
@@ -4738,13 +4758,16 @@
 				80977AB9204EFBCC00C41435 /* SENavigation.swift in Sources */,
 				8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */,
 				80977AC2204F37C200C41435 /* SEState.swift in Sources */,
+				803D86762106333900B1B697 /* SESubscriptionModelMapping.swift in Sources */,
 				804273E1204EBD51006DF420 /* APIRequest.swift in Sources */,
 				8076FDCA204863B900114F28 /* Channel.swift in Sources */,
 				8076FDBD2048598100114F28 /* Subscription.swift in Sources */,
+				803D8670210631D700B1B697 /* ModelMappeable.swift in Sources */,
 				4124D837209A06BD005374CD /* Permission.swift in Sources */,
 				41D0DA5820991BAE008649E7 /* UploadMessageRequest.swift in Sources */,
 				804273DE204EBD51006DF420 /* APIClient.swift in Sources */,
 				8076FDCB204863C500114F28 /* Attachment.swift in Sources */,
+				803D866E2106309200B1B697 /* DateExtension.swift in Sources */,
 				804273D6204D7F38006DF420 /* AppGroup.swift in Sources */,
 				8076FDE22048A7C500114F28 /* SEComposeHeaderViewController.swift in Sources */,
 				80DC9A6E206BA96200032BE0 /* Localized.swift in Sources */,
@@ -4760,6 +4783,8 @@
 				8076FDA62048536800114F28 /* BaseModel.swift in Sources */,
 				80FA906A20569F890069038F /* SEComposeFileCell.swift in Sources */,
 				804273DF204EBD51006DF420 /* APIError.swift in Sources */,
+				803D866D2106307C00B1B697 /* SubscriptionModelMapping.swift in Sources */,
+				803D866C21062F7400B1B697 /* SEStateAPI.swift in Sources */,
 				806DB94320687697004ED8ED /* Alert.swift in Sources */,
 				80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */,
 				8062E33620A5ED200044F407 /* APIRequestOption.swift in Sources */,
@@ -4799,6 +4824,7 @@
 				804273DD204EBD51006DF420 /* API.swift in Sources */,
 				8029B2F42059C1840067157B /* UIAlertController+StatusReport.swift in Sources */,
 				80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */,
+				803D866F210630A800B1B697 /* ServerManager.swift in Sources */,
 				80825F0D207EB2D800C477DE /* APIResource.swift in Sources */,
 				80FA9068205314040069038F /* SEServer.swift in Sources */,
 			);
