@@ -42,7 +42,7 @@ struct SEState {
         let displayedRooms: [Subscription]
         switch searchRooms {
         case .none:
-            displayedRooms = rooms
+            displayedRooms = rooms.filter { $0.open }
         case .searching(let search):
             let search = search.lowercased()
             displayedRooms = rooms.filter {
