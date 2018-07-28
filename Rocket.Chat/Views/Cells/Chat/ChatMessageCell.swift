@@ -317,12 +317,11 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 extension ChatMessageCell {
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
-        let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message, with: nil)
 
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 61) ?? 0)
+            total += (attributedString?.heightForView(withWidth: width - 61) ?? 0)
         }
 
         if message.isBroadcastReplyAvailable() {
@@ -338,24 +337,24 @@ extension ChatMessageCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
+                total += ChatMessageTextView.heightFor(with: width, collapsed: attachment.collapsed, text: attachment.text, isFile: attachment.isFile)
             }
 
             if type == .image {
-                total += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
+                total += ChatMessageImageView.heightFor(with: width, description: attachment.descriptionText)
             }
 
             if type == .video {
-                total += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
+                total += ChatMessageVideoView.heightFor(with: width, description: attachment.descriptionText)
             }
 
             if type == .audio {
-                total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
+                total += ChatMessageAudioView.heightFor(with: width, description: attachment.descriptionText)
             }
 
             if !attachment.collapsed {
                 attachment.fields.forEach {
-                    total += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
+                    total += ChatMessageTextView.heightFor(with: width, collapsed: false, text: $0.value)
                 }
             }
         }
@@ -412,14 +411,16 @@ extension ChatMessageCell {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         mediaViews.addArrangedSubview(view)
-        var attachmentHeight = ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
+
+        let availableWidth = frame.size.width
+        var attachmentHeight = ChatMessageTextView.heightFor(with: availableWidth, collapsed: attachment.collapsed, text: attachment.text, isFile: attachment.isFile)
 
         if !attachment.collapsed {
             attachment.fields.forEach {
                 guard let view = ChatMessageTextView.instantiateFromNib() else { return }
                 view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
                 mediaViews.addArrangedSubview(view)
-                attachmentHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
+                attachmentHeight += ChatMessageTextView.heightFor(with: availableWidth, collapsed: false, text: $0.value)
             }
         }
 
@@ -431,9 +432,10 @@ extension ChatMessageCell {
         view.attachment = attachment
         view.delegate = delegate
         view.translatesAutoresizingMaskIntoConstraints = false
-
         mediaViews.addArrangedSubview(view)
-        return ChatMessageImageView.heightFor(withText: attachment.descriptionText)
+
+        let availableWidth = frame.size.width
+        return ChatMessageImageView.heightFor(with: availableWidth, description: attachment.descriptionText)
     }
 
     private func insertVideoAttachment(_ attachment: Attachment) -> CGFloat {
@@ -441,18 +443,20 @@ extension ChatMessageCell {
         view.attachment = attachment
         view.delegate = delegate
         view.translatesAutoresizingMaskIntoConstraints = false
-
         mediaViews.addArrangedSubview(view)
-        return ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
+
+        let availableWidth = frame.size.width
+        return ChatMessageImageView.heightFor(with: availableWidth, description: attachment.descriptionText)
     }
 
     private func insertAudioAttachment(_ attachment: Attachment) -> CGFloat {
         guard let view = ChatMessageAudioView.instantiateFromNib() else { return 0 }
         view.attachment = attachment
         view.translatesAutoresizingMaskIntoConstraints = false
-
         mediaViews.addArrangedSubview(view)
-        return ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
+
+        let availableWidth = frame.size.width
+        return ChatMessageImageView.heightFor(with: availableWidth, description: attachment.descriptionText)
     }
 }
 

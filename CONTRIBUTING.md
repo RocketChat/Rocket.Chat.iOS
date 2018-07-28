@@ -20,26 +20,56 @@ In case you're interested in playing around with the code or giving something ba
 
 1. A macOS machine
 2. Xcode 9.3.x or higher (Swift 4.1)
-3. Install [CocoaPods](https://cocoapods.org/) (note that you will need to install at least Ruby 2.2.3 for this to work)
-```
-sudo gem install cocoapods
-```
-To update cocoapods (not that often needed) run
-```
-sudo gem update cocoapods
-```
-4. Clone this repo:
+
+### Installing dependencies
+
+_(NOTE: Steps 3 and 4 must be executed from project's directory)_
+
+1. Clone this repo:
 ```
 git clone https://github.com/RocketChat/Rocket.Chat.iOS
 ```
-5. Download library dependencies using the cocoapods dependency manager (and update the same way):
+2. Install [Bundler](https://bundler.io)
 ```
-pod install
+sudo gem install bundler
 ```
-6. Do NOT open the Xcode project directly, instead use the Rocket.Chat.xcworkspace file to open the Xcode workspace.
-7. Build the project by ⌘ + R
+To update _Bundler_ (when there is new version available)
+```
+sudo gem update bundler
+```
+3. Install all gem dependencies
+```
+bundle install (sudo might be required in some cases)
+```
+To update all gem dependencies (usually executed by maintainer) run
+```
+bundle update
+```
+To update pod's repository (in case of having those oudated compared to Podfile.lock and in case of `pod install` failure)
+```
+bundle exec pod repo update
+```
+4. Download library dependencies using the cocoapods dependency manager (and update the same way):
+```
+bundle exec pod install
+```
+5. Do NOT open the Xcode project directly, instead use the Rocket.Chat.xcworkspace file to open the Xcode workspace.
+6. Build the project by ⌘ + R
 
 Also refer to [Guidelines](#project.pbxproj) for modifying files.
+
+#### Alternative
+
+You can skip installing Bundler (not recommended) and just install [CocoaPods](https://cocoapods.org/) (note that you will need to install at least Ruby 2.2.3 for this to work). Make sure you have correct version of CocoaPods installed or you might be not able to build project properly.
+```
+sudo gem install cocoapods
+```
+Then you can call all the cocoapods actions without **bundle exe** command.
+
+To update cocoapods (not that often needed, you will be notified during `pod install` when new version is available) run.
+```
+sudo gem update cocoapods
+```
 
 ## Issues needing help
 

@@ -24,6 +24,14 @@ enum SEAction {
 struct SEState {
     var servers: [SEServer] = []
     var selectedServerIndex: Int = 0
+    var selectedServer: SEServer? {
+        guard selectedServerIndex < servers.count else {
+            return nil
+        }
+
+        return servers[selectedServerIndex]
+    }
+
     var rooms: [Subscription] = []
     var currentRoom = Subscription()
     var searchRooms: SESearchState = .none

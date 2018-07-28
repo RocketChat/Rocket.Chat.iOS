@@ -159,13 +159,17 @@ extension PushManager {
              }
         }
 
+        guard let realm = DatabaseManager.databaseInstace(index: index) else {
+            return false
+        }
+
         if let reply = reply {
             let appendage = notification.roomType == .directMessage ? "" : " @\(notification.username)"
 
             let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message)) { response in
+            API.current(realm: realm)?.fetch(PostMessageRequest(roomId: notification.roomId, text: message)) { response in
                 switch response {
                 case .resource:
                     UIApplication.shared.endBackgroundTask(backgroundTask)
