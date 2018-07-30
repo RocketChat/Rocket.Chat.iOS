@@ -309,6 +309,8 @@ final class ChatDataController {
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
+                invalidateLayout(for: obj.identifier)
+
                 if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
                    return -1
                 }
@@ -320,7 +322,6 @@ final class ChatDataController {
                 }
 
                 data[idx].message = message
-                invalidateLayout(for: obj.identifier)
                 return obj.indexPath.row
         }
 

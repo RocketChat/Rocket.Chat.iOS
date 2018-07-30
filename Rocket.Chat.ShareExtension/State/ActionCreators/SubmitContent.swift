@@ -34,16 +34,6 @@ fileprivate extension SEStore {
             }
         }.enumerated().map { ($0, $1) }
     }
-
-    var api: API? {
-        let server = state.servers[state.selectedServerIndex]
-
-        let api = API(host: server.host, version: Version(0, 60, 0))
-        api?.userId = server.userId
-        api?.authToken = server.token
-
-        return api
-    }
 }
 
 var urlTasks: [URLSessionTask?] = []
@@ -69,7 +59,7 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 
             store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-            let task = store.api?.fetch(request) { response in
+            let task = store.state.api?.fetch(request) { response in
 
                 switch response {
                 case .resource(let resource):
@@ -117,7 +107,7 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
         let content = store.state.content[index]
         store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-        let task = store.api?.fetch(request) { response in
+        let task = store.state.api?.fetch(request) { response in
             switch response {
             case .resource:
                 DispatchQueue.main.async {

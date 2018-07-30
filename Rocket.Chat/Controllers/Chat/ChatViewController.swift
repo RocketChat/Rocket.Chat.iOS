@@ -108,10 +108,7 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
-            guard
-                let subscription = subscription,
-                !subscription.isInvalidated
-            else {
+            guard let subscription = subscription?.validated() else {
                 return
             }
 
@@ -742,12 +739,12 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 if indexPathModifications.count > 0 {
-                    UIView.performWithoutAnimation {
-                        self.collectionView?.performBatchUpdates({
-                            self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                        }, completion: { _ in
+                    UIView.performWithoutAnimation { [weak self] in
+                        self?.collectionView?.performBatchUpdates({
+                            self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                        }, completion: { [weak self] _ in
                             if isAtBottom {
-                                self.scrollToBottom()
+                                self?.scrollToBottom()
                             }
                         })
                     }
@@ -765,7 +762,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
-        guard let subscription = subscription else { return }
+        guard let subscription = subscription?.validated() else { return }
 
         let tempSubscription = Subscription(value: subscription)
 
@@ -835,7 +832,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     private func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard let subscription = subscription, let collectionView = collectionView, !subscription.isInvalidated else {
+        guard let subscription = subscription?.validated(), let collectionView = collectionView else {
             return
         }
 
@@ -846,9 +843,16 @@ final class ChatViewController: SLKTextViewController {
             // to the list. Also, we keep the subscription identifier in order to make sure
             // we're updating the same subscription, because this view controller is reused
             // for all the chats.
+
             let oldSubscriptionIdentifier = subscription.identifier
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
-                guard oldSubscriptionIdentifier == self?.subscription?.identifier else { return }
+                guard
+                    self?.subscription?.validated() != nil,
+                    oldSubscriptionIdentifier == self?.subscription?.identifier
+                else {
+                    return
+                }
+
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
@@ -1006,14 +1010,17 @@ extension ChatViewController {
         guard
             dataController.data.count > indexPath.row,
             let subscription = subscription,
-            let obj = dataController.itemAt(indexPath),
-            !(obj.message?.isInvalidated ?? false)
+            let obj = dataController.itemAt(indexPath)
         else {
             return cellForEmpty(at: indexPath)
         }
 
         if obj.type == .message {
-            return cellForMessage(obj, at: indexPath)
+            if obj.message?.validated() != nil {
+                return cellForMessage(obj, at: indexPath)
+            } else {
+                return cellForEmpty(at: indexPath)
+            }
         }
 
         if obj.type == .daySeparator {
@@ -1141,7 +1148,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let subscription = subscription, !subscription.isInvalidated else {
+        guard let subscription = subscription?.validated() else {
             return .zero
         }
 
@@ -1166,7 +1173,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 dataController.cacheCellHeight(for: obj.identifier, value: height)
-
                 return CGSize(width: fullWidth, height: height)
             }
         }
@@ -1251,7 +1257,7 @@ extension ChatViewController {
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly, subscription: subscription) {
             blockMessageSending(reason: localized("chat.read_only"))
         } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))

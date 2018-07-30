@@ -29,7 +29,7 @@ struct MessagesClient: APIClient {
         }
 
         func updateMessage(json: JSON) {
-            if message.isInvalidated {
+            if message.validated() == nil {
                 return
             }
 
@@ -50,7 +50,7 @@ struct MessagesClient: APIClient {
 
         func setMessageOffline() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if message.isInvalidated {
+                if message.validated() == nil {
                     return
                 }
 

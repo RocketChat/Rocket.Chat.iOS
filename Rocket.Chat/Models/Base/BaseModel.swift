@@ -35,3 +35,13 @@ class BaseModel: Object {
         return true
     }
 }
+
+extension BaseModel {
+    func validated() -> Self? {
+        guard !isInvalidated else {
+            return nil
+        }
+
+        return self
+    }
+}

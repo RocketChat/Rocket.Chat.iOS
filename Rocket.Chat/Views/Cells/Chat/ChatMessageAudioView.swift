@@ -19,9 +19,12 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             self.titleLabel.text = attachment?.title
             self.detailText.text = attachment?.descriptionText
             self.detailTextIndicator.isHidden = attachment?.descriptionText?.isEmpty ?? true
-            let fullHeight = ChatMessageAudioView.heightFor(withText: attachment?.descriptionText)
+
+            let availableWidth = frame.size.width
+            let fullHeight = ChatMessageAudioView.heightFor(with: availableWidth, description: attachment?.descriptionText)
             fullHeightConstraint.constant = fullHeight
             detailTextHeightConstraint.constant = fullHeight - ChatMessageAudioView.defaultHeight
+
             loading = true
             playing = false
             updateAudio(attachment: attachment)
