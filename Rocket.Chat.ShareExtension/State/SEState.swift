@@ -49,7 +49,7 @@ struct SEState {
                 $0.fname.lowercased().contains(search) || $0.name.lowercased().contains(search)
             }
         case .started:
-            displayedRooms = rooms
+            displayedRooms = rooms.filter { $0.open }
         }
         return displayedRooms.sorted(by: { $0.name < $1.name })
     }
