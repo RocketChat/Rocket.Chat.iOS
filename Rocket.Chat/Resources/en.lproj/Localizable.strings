@@ -280,11 +280,11 @@
 "chat.info.item.no_topic" = "No topic";
 "chat.info.item.description" = "Description";
 "chat.info.item.no_description" = "No description";
-"chat.info.item.notifications" = "Notifications";
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
+"chat.info.item.notifications" = "Notifications";
 "chat.info.item.files" = "Files";
 "chat.info.item.share" = "Share";
 
@@ -336,6 +336,55 @@
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat before the new settings will take effect.";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Notification Preferences";
+"myaccount.settings.notifications.save" = "Save";
+
+"myaccount.settings.notifications.receive.title" = "Receive Notifications";
+"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@";
+"myaccount.settings.notifications.show.title" = "Show Unread Counter";
+"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list.";
+
+"myaccount.settings.notifications.inapp" = "In-app and Desktop";
+"myaccount.settings.notifications.inapp.alerts" = "Alerts";
+"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop.";
+
+"myaccount.settings.notifications.mobile" = "Push notifications";
+"myaccount.settings.notifications.mobile.alerts" = "Alerts";
+"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open.";
+
+"myaccount.settings.notifications.desktop" = "Desktop options";
+"myaccount.settings.notifications.desktop.audio" = "Audio";
+"myaccount.settings.notifications.desktop.sound" = "Sound";
+"myaccount.settings.notifications.desktop.duration" = "Notification Duration";
+
+"myaccount.settings.notifications.mail" = "Email";
+"myaccount.settings.notifications.email.alerts" = "Alerts";
+
+"myaccount.settings.notifications.duration.default" = "Default";
+"myaccount.settings.notifications.duration.seconds" = "seconds";
+
+"alert.update_notifications_preferences_success.title" = "Preferences saved";
+
+"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences";
+"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again.";
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Default";
+"subscription.notifications.status.nothing" = "Nothing";
+"subscription.notifications.status.all" = "All";
+"subscription.notifications.status.mentions" = "Mentions";
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "None";
+"subscription.notifications.audio.value.default" = "Default";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
