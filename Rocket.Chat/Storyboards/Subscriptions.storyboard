@@ -133,7 +133,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" preservesSuperviewLayoutMargins="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoS-By-2a2">
-                                                    <rect key="frame" x="79" y="31.5" width="178" height="17"/>
+                                                    <rect key="frame" x="79" y="31.5" width="176" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                                                             <rect key="frame" x="3" y="1" width="22" height="16"/>
                                                             <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="vtS-ax-9uo"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="vtS-ax-9uo"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -168,7 +168,7 @@
                                                 <constraint firstItem="AoS-By-2a2" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="16" id="KpE-IU-eLe"/>
                                                 <constraint firstItem="DkA-vH-8he" firstAttribute="centerY" secondItem="IkN-GD-8NO" secondAttribute="centerY" id="Okn-cA-7xw"/>
                                                 <constraint firstItem="AoS-By-2a2" firstAttribute="top" secondItem="IkN-GD-8NO" secondAttribute="bottom" id="OnK-gH-OAa"/>
-                                                <constraint firstItem="zlJ-tz-XvT" firstAttribute="leading" secondItem="AoS-By-2a2" secondAttribute="trailing" constant="2" id="P7s-ES-Myn"/>
+                                                <constraint firstItem="zlJ-tz-XvT" firstAttribute="leading" secondItem="AoS-By-2a2" secondAttribute="trailing" constant="4" id="P7s-ES-Myn"/>
                                                 <constraint firstItem="zlJ-tz-XvT" firstAttribute="centerY" secondItem="AoS-By-2a2" secondAttribute="centerY" id="TVJ-mT-9CU"/>
                                                 <constraint firstItem="DkA-vH-8he" firstAttribute="leading" secondItem="MFe-Al-bKv" secondAttribute="trailing" constant="15" id="Tll-79-8Wh"/>
                                                 <constraint firstAttribute="trailing" secondItem="zlJ-tz-XvT" secondAttribute="trailing" id="azx-D0-PON"/>
@@ -204,7 +204,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K89-aJ-SjN">
-                                                    <rect key="frame" x="93" y="11" width="164" height="52.5"/>
+                                                    <rect key="frame" x="93" y="11" width="162" height="52.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -239,7 +239,7 @@
                                                             <rect key="frame" x="3" y="1" width="22" height="16"/>
                                                             <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="XAM-os-Dxp"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="XAM-os-Dxp"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,7 +266,7 @@
                                                 <constraint firstItem="K89-aJ-SjN" firstAttribute="leading" secondItem="eSG-Ye-bSX" secondAttribute="trailing" constant="6" id="Xkv-YG-9LL"/>
                                                 <constraint firstItem="K89-aJ-SjN" firstAttribute="leading" secondItem="3gX-g3-hTD" secondAttribute="trailing" constant="5" id="YVx-ev-orO"/>
                                                 <constraint firstAttribute="trailing" secondItem="UA8-Fz-OyC" secondAttribute="trailing" id="mBt-9x-ail"/>
-                                                <constraint firstItem="UA8-Fz-OyC" firstAttribute="leading" secondItem="K89-aJ-SjN" secondAttribute="trailing" constant="2" id="nuu-Hh-80G"/>
+                                                <constraint firstItem="UA8-Fz-OyC" firstAttribute="leading" secondItem="K89-aJ-SjN" secondAttribute="trailing" constant="4" id="nuu-Hh-80G"/>
                                                 <constraint firstItem="kic-F5-4fQ" firstAttribute="centerY" secondItem="jUz-mp-O84" secondAttribute="centerY" id="vOe-zu-ofc"/>
                                                 <constraint firstItem="3gX-g3-hTD" firstAttribute="leading" secondItem="kic-F5-4fQ" secondAttribute="trailing" constant="15" id="xcl-Ju-kE8"/>
                                             </constraints>

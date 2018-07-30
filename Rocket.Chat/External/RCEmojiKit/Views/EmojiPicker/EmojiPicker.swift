@@ -197,6 +197,11 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         setupCategoriesView()
         setupCollectionView()
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyTheme()
+    }
 }
 
 extension EmojiPicker: UICollectionViewDataSource {
@@ -346,28 +351,6 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 // MARK: Themeable
 
 extension EmojiPicker {
-    override var theme: Theme? {
-        guard let theme = super.theme else { return nil }
-        guard isPopover else { return theme }
-        let popoverTheme = Theme(
-            backgroundColor: theme.focusedBackground,
-            focusedBackground: theme.focusedBackground,
-            auxiliaryBackground: theme.auxiliaryBackground,
-            bannerBackground: theme.bannerBackground,
-            titleText: theme.titleText,
-            bodyText: theme.bodyText,
-            controlText: theme.controlText,
-            auxiliaryText: theme.auxiliaryText,
-            tintColor: theme.tintColor,
-            auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
-            mutedAccent: theme.mutedAccent,
-            strongAccent: theme.strongAccent,
-            appearence: theme.appearence
-        )
-        return popoverTheme
-    }
-
     override func applyTheme() {
         super.applyTheme()
         skinToneButton.backgroundColor = currentSkinTone.color

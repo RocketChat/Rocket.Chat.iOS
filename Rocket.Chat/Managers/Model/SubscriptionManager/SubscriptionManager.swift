@@ -27,6 +27,11 @@ struct SubscriptionManager {
     static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
         realm?.refresh()
 
+        let validAuth = auth.isInvalidated ? AuthManager.isAuthenticated(realm: realm) : auth
+        guard let auth = validAuth else {
+            return
+        }
+
         let client = API.current(realm: realm)?.client(SubscriptionsClient.self)
         let lastUpdateSubscriptions = auth.lastSubscriptionFetchWithLastMessage?.addingTimeInterval(-100000)
         let lastUpdateRooms = auth.lastRoomFetchWithLastMessage?.addingTimeInterval(-100000)

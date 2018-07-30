@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.1</string>
+	<string>3.0.3</string>
 	<key>CFBundleVersion</key>
-	<string>199</string>
+	<string>203</string>
 	<key>ITSEncryptionExportComplianceCode</key>
 	<string></string>
 	<key>NSExtension</key>
@@ -53,9 +53,5 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 	</dict>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
 </dict>
 </plist>

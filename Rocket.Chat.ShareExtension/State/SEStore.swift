@@ -16,6 +16,7 @@ final class SEStore {
     private(set) var state = SEState()
     private(set) var subscribers = [SEStoreSubscriber]()
 
+    // swiftlint:disable cyclomatic_complexity
     func dispatch(_ action: SEAction) {
         switch action {
         case .setContent(let content):
@@ -29,19 +30,28 @@ final class SEStore {
         case .setRooms(let rooms):
             state.rooms = rooms
         case .setSearchRooms(let search):
-            state.searchRooms = search
+            if case .started = search, !state.searchRooms.text.isEmpty {
+                state.searchRooms = .searching(state.searchRooms.text)
+            } else {
+                state.searchRooms = search
+            }
         case .setCurrentRoom(let room):
             state.currentRoom = room
         case .setScenes(let scenes):
             state.navigation.scenes = scenes
         case .makeSceneTransition(let transition):
             state.navigation.makeTransition(transition)
+            if state.searchRooms.text.isEmpty {
+                state.searchRooms = .none
+            }
         case .finish:
             state.navigation.makeTransition(.finish)
         }
 
         notifySubscribers()
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     func dispatch(_ actionCreator: (SEStore) -> SEAction?) {
         if let action = actionCreator(self) {

@@ -44,7 +44,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
         // present (push on iPhone, popover on iPad)
 
-        if UIDevice.current.userInterfaceIdiom == .phone {
+        if traitCollection.horizontalSizeClass == .compact {
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
             if let presenter = controller.popoverPresentationController {
@@ -148,6 +148,9 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
     func viewDidCollapseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
+
+        let item = dataController.itemAt(indexPath)
+        dataController.invalidateLayout(for: item?.identifier)
         collectionView?.reloadItems(at: [indexPath])
     }
 

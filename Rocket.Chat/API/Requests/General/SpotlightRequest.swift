@@ -18,7 +18,11 @@ final class SpotlightRequest: APIRequest {
     let query: String?
 
     init(query: String) {
-        self.query = "query=\(query)"
+        if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            self.query = "query=\(encodedQuery)"
+        } else {
+            self.query = ""
+        }
     }
 }
 

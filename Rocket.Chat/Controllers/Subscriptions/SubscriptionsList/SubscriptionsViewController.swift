@@ -77,16 +77,14 @@ final class SubscriptionsViewController: BaseViewController {
                     tableView.performBatchUpdates({
                         tableView.deleteRows(at: changes.deletions, with: .automatic)
                         tableView.insertRows(at: changes.insertions, with: .automatic)
+                        tableView.reloadRows(at: changes.modifications, with: .none)
                     }, completion: nil)
                 } else {
                     tableView.beginUpdates()
                     tableView.deleteRows(at: changes.deletions, with: .automatic)
                     tableView.insertRows(at: changes.insertions, with: .automatic)
+                    tableView.reloadRows(at: changes.modifications, with: .none)
                     tableView.endUpdates()
-                }
-
-                UIView.performWithoutAnimation {
-                    tableView.reloadRows(at: changes.modifications, with: .automatic)
                 }
             }
         }
@@ -120,6 +118,13 @@ final class SubscriptionsViewController: BaseViewController {
         viewModel.buildSections()
         tableView.reloadData()
         titleView?.state = SocketManager.sharedInstance.state
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !(searchBar?.text?.isEmpty ?? true) {
+            searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -194,7 +199,7 @@ final class SubscriptionsViewController: BaseViewController {
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
         if #available(iOS 11.0, *) {
             searchBar = searchController.searchBar
@@ -427,8 +432,8 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SubscriptionCellProtocol else { return }
-        guard let subscription = cell.subscription else { return }
-        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription else { return }
+        guard let subscription = cell.subscription?.validated() else { return }
+        guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription?.validated() else { return }
 
         if subscription.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
@@ -505,14 +510,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         // When using iPads, we override the detail controller creating
         // a new instance.
-        if splitViewController?.detailViewController as? BaseNavigationController != nil {
+        if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
             controller.subscription = subscription
 
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
-        } else {
-            controller.subscription = subscription
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

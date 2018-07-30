@@ -27,7 +27,22 @@ func fetchServers(store: SEStore) -> SEAction {
 }
 
 func fetchRooms(store: SEStore) -> SEAction {
-    guard let realm = DatabaseManager.databaseInstace(index: store.state.selectedServerIndex) else { return .setRooms([]) }
+    defer {
+        let request = SubscriptionsRequest(updatedSince: nil)
+        store.state.api?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                store.dispatch(.setRooms(resource.subscriptions ?? []))
+            case .error:
+                store.dispatch(.setRooms([]))
+            }
+        }
+    }
+
+    guard let realm = DatabaseManager.databaseInstace(index: store.state.selectedServerIndex) else {
+        return .setRooms([])
+    }
+
     let rooms = Array(realm.objects(Subscription.self).map(Subscription.init))
     return .setRooms(rooms)
 }

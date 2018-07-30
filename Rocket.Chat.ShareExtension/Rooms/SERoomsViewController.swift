@@ -14,6 +14,7 @@ final class SERoomsViewController: SEViewController {
         didSet {
             title = viewModel.title
             navigationItem.searchController?.searchBar.text = viewModel.searchText
+            navigationItem.searchController?.searchBar.showsCancelButton = viewModel.showsCancelButton
             tableView.reloadData()
         }
     }
@@ -36,6 +37,8 @@ final class SERoomsViewController: SEViewController {
         searchController.hidesNavigationBarDuringPresentation = false
 
         navigationItem.searchController = searchController
+
+        tableView.keyboardDismissMode = .interactive
     }
 
     override func stateUpdated(_ state: SEState) {
@@ -51,15 +54,20 @@ final class SERoomsViewController: SEViewController {
 // MARK: UISearchBarDelegate
 
 extension SERoomsViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        store.dispatch(.setSearchRooms(.none))
-    }
-
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         store.dispatch(.setSearchRooms(.started))
     }
 
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        store.dispatch(.setSearchRooms(.none))
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            store.dispatch(.setSearchRooms(.none))
+            return
+        }
+
         store.dispatch(.setSearchRooms(.searching(searchText)))
     }
 }

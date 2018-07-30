@@ -18,12 +18,14 @@ extension UIView: Themeable {
 
      The default implementation calls the `applyTheme` method on all of its subviews, and sets the background color of the views.
 
-     Override this method to adapt the components of the view to the theme currently applied. `super.applyTheme` should be called somewhere in the implementation to sutomatically call `applyTheme` on all of the subviews, to set the `backgroundColor` and set the attributes defined in User Defined Runtime Attributes.
+     Override this method to adapt the components of the view to the theme currently applied.
+
+     `super.applyTheme` should be called somewhere in the implementation to automatically call `applyTheme` on all of the subviews, set the `backgroundColor` according to the theme and the `UIColor` attributes defined in Runtime Attributes.
 
      This method should only be called directly if the view or any of its subviews require theming after the first initialization.
 
      - Important:
-     It is recommended that this method be only overridden, if it is not possible to use User Defined Runtime Attributes to achieve the desired result. For more information, please see [Setting theme properties using User Defined Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850).
+     It is recommended that this method be only overridden, if it's not possible to use User Defined Runtime Attributes to achieve the desired result. For more information, please see [Setting theme properties using Runtime Attributes](https://github.com/RocketChat/Rocket.Chat.iOS/pull/1850).
 
      On first initializaiton, it is recommended that the view controller for the view be added as an observer to the ThemeManager using the `ThemeManager.addObserver(_:)` method. If a view controller does not exist, the view should be added as an observer instead.
 
@@ -31,10 +33,14 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-        guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        applyThemeBackgroundColor()
         self.subviews.forEach { $0.applyTheme() }
         applyThemeFromRuntimeAttributes()
+    }
+
+    func applyThemeBackgroundColor() {
+        guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
     }
 }
 
@@ -51,7 +57,28 @@ extension UIView: ThemeProvider {
     var theme: Theme? {
         guard type(of: self).description() != "_UIAlertControllerView" else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
+        if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
         return superview.theme
+    }
+
+    private var themeForPopover: Theme? {
+        guard let theme = superview?.theme else { return nil }
+        return Theme(
+            backgroundColor: theme.focusedBackground,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            bannerBackground: theme.bannerBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            controlText: theme.controlText,
+            auxiliaryText: theme.auxiliaryText,
+            tintColor: theme.tintColor,
+            auxiliaryTintColor: theme.auxiliaryTintColor,
+            hyperlink: theme.hyperlink,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
     }
 }
 
@@ -268,6 +295,26 @@ extension UIScrollView {
         guard let theme = theme else { return }
         indicatorStyle = theme.appearence.scrollViewIndicatorStyle
         applyThemeFromRuntimeAttributes()
+    }
+}
+
+extension UIPickerView {
+    override func applyTheme() {
+        guard let theme = theme else { return }
+        applyThemeBackgroundColor()
+        subviews.forEach {
+            if $0.frame.height > 0, $0.frame.height < 1 {
+                $0.backgroundColor = theme.mutedAccent
+            } else {
+                $0.applyTheme()
+            }
+        }
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        applyTheme()
     }
 }
 

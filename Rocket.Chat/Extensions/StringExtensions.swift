@@ -117,4 +117,8 @@ extension String {
         let params = components.dropFirst().joined(separator: " ")
         return (command: command, params: params)
     }
+
+    var boolValue: Bool {
+        return NSString(string: self).boolValue
+    }
 }
