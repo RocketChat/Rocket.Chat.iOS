@@ -69,7 +69,6 @@ class ChatTitleViewSpec: XCTestCase {
         instance.isTitleHidden = true
         XCTAssertTrue(instance.titleLabel.isHidden, "titleLabel should be hidden")
         XCTAssertTrue(instance.titleImage.isHidden, "titleImage should be hidden")
-        XCTAssertTrue(instance.titleButton.isHidden, "titleButton should be hidden")
         XCTAssertTrue(instance.showInfoImage.isHidden, "showInfoImage should be hidden")
     }
 
@@ -81,7 +80,6 @@ class ChatTitleViewSpec: XCTestCase {
         instance.isTitleHidden = false
         XCTAssertFalse(instance.titleLabel.isHidden, "titleLabel should not be hidden")
         XCTAssertFalse(instance.titleImage.isHidden, "titleImage should not be hidden")
-        XCTAssertFalse(instance.titleButton.isHidden, "titleButton should not be hidden")
         XCTAssertFalse(instance.showInfoImage.isHidden, "showInfoImage should not be hidden")
     }
 }
