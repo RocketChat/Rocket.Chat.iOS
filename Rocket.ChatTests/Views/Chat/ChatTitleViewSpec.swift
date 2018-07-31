@@ -28,7 +28,7 @@ class ChatTitleViewSpec: XCTestCase {
 
         XCTAssertEqual(instance.state, .waitingForNetwork)
         XCTAssertFalse(instance.viewLoading.isHidden)
-        XCTAssertTrue(instance.buttonTitle.isHidden)
+        XCTAssertTrue(instance.isTitleHidden)
     }
 
     func testStateConnectedLabelsVisibility() {
@@ -38,7 +38,7 @@ class ChatTitleViewSpec: XCTestCase {
 
         instance.state = .connected
         XCTAssertTrue(instance.viewLoading.isHidden)
-        XCTAssertFalse(instance.buttonTitle.isHidden)
+        XCTAssertFalse(instance.isTitleHidden)
     }
 
     func testStateWaitingForNetworkLabelsVisibility() {
@@ -48,7 +48,7 @@ class ChatTitleViewSpec: XCTestCase {
 
         instance.state = .waitingForNetwork
         XCTAssertFalse(instance.viewLoading.isHidden)
-        XCTAssertTrue(instance.buttonTitle.isHidden)
+        XCTAssertTrue(instance.isTitleHidden)
     }
 
     func testStateConnectingLabelsVisibility() {
@@ -58,7 +58,30 @@ class ChatTitleViewSpec: XCTestCase {
 
         instance.state = .connecting
         XCTAssertFalse(instance.viewLoading.isHidden)
-        XCTAssertTrue(instance.buttonTitle.isHidden)
+        XCTAssertTrue(instance.isTitleHidden)
     }
 
+    func testIsTitleHiddenTrue() {
+        guard let instance = ChatTitleView.instantiateFromNib() else {
+            return XCTFail("instantion from nib should've worked")
+        }
+
+        instance.isTitleHidden = true
+        XCTAssertTrue(instance.titleLabel.isHidden, "titleLabel should be hidden")
+        XCTAssertTrue(instance.titleImage.isHidden, "titleImage should be hidden")
+        XCTAssertTrue(instance.titleButton.isHidden, "titleButton should be hidden")
+        XCTAssertTrue(instance.showInfoImage.isHidden, "showInfoImage should be hidden")
+    }
+
+    func testIsTitleHiddenFalse() {
+        guard let instance = ChatTitleView.instantiateFromNib() else {
+            return XCTFail("instantion from nib should've worked")
+        }
+
+        instance.isTitleHidden = false
+        XCTAssertFalse(instance.titleLabel.isHidden, "titleLabel should not be hidden")
+        XCTAssertFalse(instance.titleImage.isHidden, "titleImage should not be hidden")
+        XCTAssertFalse(instance.titleButton.isHidden, "titleButton should not be hidden")
+        XCTAssertFalse(instance.showInfoImage.isHidden, "showInfoImage should not be hidden")
+    }
 }

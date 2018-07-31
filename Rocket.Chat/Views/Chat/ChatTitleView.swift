@@ -22,7 +22,7 @@ final class ChatTitleView: UIView {
     @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var showInfoImage: UIImageView!
 
-    private var isTitleHidden: Bool {
+    var isTitleHidden: Bool {
         get {
             return titleLabel.isHidden
         }
