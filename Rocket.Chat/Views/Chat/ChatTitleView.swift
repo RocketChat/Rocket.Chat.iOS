@@ -9,18 +9,27 @@
 import UIKit
 
 protocol ChatTitleViewProtocol: class {
-    func titleViewButtonChannelDidPressed()
-    func titleViewButtonMoreDidPressed()
+    func titleViewChannelButtonPressed()
+    func titleViewSearchButtonPressed()
 }
 
 final class ChatTitleView: UIView {
 
     weak var delegate: ChatTitleViewProtocol?
 
-    @IBOutlet weak var buttonMore: UIButton!
-    @IBOutlet weak var buttonTitle: UIButton! {
-        didSet {
-            buttonTitle.titleLabel?.textColor = .RCDarkGray()
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleImage: UIImageView!
+    @IBOutlet weak var titleButton: UIButton!
+
+    private var isTitleHidden: Bool {
+        get {
+            return titleLabel.isHidden
+        }
+
+        set {
+            titleLabel.isHidden = newValue
+            titleImage.isHidden = newValue
+            titleButton.isHidden = newValue
         }
     }
 
@@ -43,10 +52,10 @@ final class ChatTitleView: UIView {
         didSet {
             guard let subscription = subscription?.validated() else { return }
             viewModel.subscription = subscription
-            buttonTitle.setTitle(viewModel.title, for: .normal)
+            titleLabel.text = viewModel.title
 
             let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
-            buttonTitle.setImage(image, for: .normal)
+            titleImage.image = image
 
             updateConnectionState()
         }
@@ -55,7 +64,7 @@ final class ChatTitleView: UIView {
     internal func updateConnectionState() {
         if state == .connecting || state == .waitingForNetwork {
             viewLoading?.isHidden = false
-            buttonTitle?.isHidden = true
+            isTitleHidden = true
 
             if state == .connecting {
                 labelLoading?.text = localized("connection.connecting.banner.message")
@@ -65,7 +74,7 @@ final class ChatTitleView: UIView {
                 labelLoading?.text = localized("connection.waiting_for_network.banner.message")
             }
         } else {
-            buttonTitle?.isHidden = false
+            isTitleHidden = false
             viewLoading?.isHidden = true
         }
     }
@@ -73,22 +82,11 @@ final class ChatTitleView: UIView {
     // MARK: IBAction
 
     @IBAction func buttonChannelDidPressed(_ sender: Any) {
-        delegate?.titleViewButtonChannelDidPressed()
+        delegate?.titleViewChannelButtonPressed()
     }
 
-    @IBAction func buttonMoreDidPressed(_ sender: Any) {
-        delegate?.titleViewButtonMoreDidPressed()
+    @IBAction func buttonSearchDidPressed(_ sender: Any) {
+        delegate?.titleViewSearchButtonPressed()
     }
 
-}
-
-// MARK: Themeable
-
-extension ChatTitleView {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        buttonMore.tintColor = theme.titleText
-        buttonTitle.setTitleColor(theme.titleText, for: .normal)
-    }
 }

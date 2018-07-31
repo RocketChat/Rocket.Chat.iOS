@@ -9,13 +9,11 @@
 import UIKit
 
 extension ChatViewController: ChatTitleViewProtocol {
-
-    func titleViewButtonChannelDidPressed() {
+    func titleViewChannelButtonPressed() {
         performSegue(withIdentifier: "Channel Actions", sender: nil)
     }
 
-    func titleViewButtonMoreDidPressed() {
-        performSegue(withIdentifier: "Channel Actions", sender: nil)
+    func titleViewSearchButtonPressed() {
+        self.showSearchMessages()
     }
-
 }
