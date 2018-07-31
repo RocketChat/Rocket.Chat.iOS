@@ -971,23 +971,6 @@ final class ChatViewController: SLKTextViewController {
 
         return true
     }
-
-    // MARK: IBAction
-
-    @IBAction func showSearchMessages() {
-        guard
-            let storyboard = storyboard,
-            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
-        else {
-            return
-        }
-
-        messageList.data.subscription = subscription
-        messageList.data.isSearchingMessages = true
-        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
-
-        present(searchMessagesNav, animated: true, completion: nil)
-    }
 }
 
 // MARK: UICollectionViewDataSource
