@@ -10,7 +10,6 @@ import UIKit
 
 protocol ChatTitleViewProtocol: class {
     func titleViewChannelButtonPressed()
-    func titleViewSearchButtonPressed()
 }
 
 final class ChatTitleView: UIView {
@@ -19,7 +18,6 @@ final class ChatTitleView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
-    @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var showInfoImage: UIImageView!
 
     var isTitleHidden: Bool {
@@ -30,7 +28,6 @@ final class ChatTitleView: UIView {
         set {
             titleLabel.isHidden = newValue
             titleImage.isHidden = newValue
-            titleButton.isHidden = newValue
             showInfoImage.isHidden = newValue
         }
     }
@@ -83,12 +80,10 @@ final class ChatTitleView: UIView {
 
     // MARK: IBAction
 
-    @IBAction func buttonChannelDidPressed(_ sender: Any) {
-        delegate?.titleViewChannelButtonPressed()
-    }
-
-    @IBAction func buttonSearchDidPressed(_ sender: Any) {
-        delegate?.titleViewSearchButtonPressed()
+    @IBAction func recognizeTapGesture(_ recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            delegate?.titleViewChannelButtonPressed()
+        }
     }
 
 }

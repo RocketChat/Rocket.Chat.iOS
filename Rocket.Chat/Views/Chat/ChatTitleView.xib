@@ -16,22 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIT-TU-fEF">
-                    <rect key="frame" x="329" y="0.0" width="46" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="46" id="lEp-ud-1rK"/>
-                    </constraints>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                    <state key="normal" image="Message Search"/>
-                    <connections>
-                        <action selector="buttonSearchDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="jky-nU-xNf"/>
-                    </connections>
-                </button>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSA-hf-f6V">
-                    <rect key="frame" x="16" y="0.0" width="313" height="44"/>
+                    <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cdS-HW-2AF">
-                            <rect key="frame" x="124.5" y="0.0" width="65.5" height="44"/>
+                            <rect key="frame" x="139.5" y="0.0" width="65.5" height="44"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-tD-R8X">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="44"/>
@@ -42,7 +31,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: auxiliaryText"/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: controlText"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
                             </subviews>
@@ -65,45 +54,33 @@
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Server Selector" translatesAutoresizingMaskIntoConstraints="NO" id="qdc-h6-oM3">
-                    <rect key="frame" x="93" y="17" width="12" height="12"/>
+                    <rect key="frame" x="92.5" y="17" width="12" height="12"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="12" id="NM8-fR-0on"/>
                         <constraint firstAttribute="height" constant="12" id="wI9-JE-wuq"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1M-6e-vj0">
-                    <rect key="frame" x="43" y="11.5" width="42" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="43" y="12" width="41.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: controlText"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeColor" value="textColor: bodyText"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0A-gc-rbk">
-                    <rect key="frame" x="16" y="0.0" width="313" height="44"/>
-                    <connections>
-                        <action selector="buttonChannelDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="iMA-gU-l2H"/>
-                    </connections>
-                </button>
             </subviews>
+            <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="a0A-gc-rbk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="2KF-Yw-Odk"/>
                 <constraint firstItem="d1M-6e-vj0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2tx-KF-6vh"/>
-                <constraint firstItem="TIT-TU-fEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="3rV-Pf-lq2"/>
-                <constraint firstAttribute="bottomMargin" secondItem="TIT-TU-fEF" secondAttribute="bottom" id="6eu-oN-v5W"/>
-                <constraint firstAttribute="bottom" secondItem="a0A-gc-rbk" secondAttribute="bottom" id="7Wj-Ls-oM6"/>
                 <constraint firstItem="qdc-h6-oM3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="1" id="7qC-Ru-jfT"/>
+                <constraint firstAttribute="trailingMargin" secondItem="oSA-hf-f6V" secondAttribute="trailing" id="Amo-5O-GY2"/>
                 <constraint firstItem="oSA-hf-f6V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DQ1-OV-3t8"/>
                 <constraint firstItem="d1M-6e-vj0" firstAttribute="leading" secondItem="r2R-yy-EGi" secondAttribute="trailing" constant="4" id="L9Y-3E-Wtm"/>
-                <constraint firstItem="a0A-gc-rbk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RZh-l9-7mR"/>
                 <constraint firstAttribute="bottom" secondItem="oSA-hf-f6V" secondAttribute="bottom" id="RzI-6F-E36"/>
-                <constraint firstItem="a0A-gc-rbk" firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="leading" id="UfN-vD-qfl"/>
                 <constraint firstItem="qdc-h6-oM3" firstAttribute="leading" secondItem="d1M-6e-vj0" secondAttribute="trailing" constant="8" id="W65-Ld-Uab"/>
-                <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
                 <constraint firstItem="r2R-yy-EGi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="blx-js-QYU"/>
                 <constraint firstItem="oSA-hf-f6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="qQV-zr-a4T"/>
-                <constraint firstItem="TIT-TU-fEF" firstAttribute="leading" secondItem="oSA-hf-f6V" secondAttribute="trailing" id="qW3-t7-0yX"/>
                 <constraint firstItem="r2R-yy-EGi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="8" id="suq-CP-veC"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -111,16 +88,20 @@
             <connections>
                 <outlet property="labelLoading" destination="1mu-Gh-mpc" id="4Bq-Ly-1xE"/>
                 <outlet property="showInfoImage" destination="qdc-h6-oM3" id="BdC-1F-9ki"/>
-                <outlet property="titleButton" destination="a0A-gc-rbk" id="p4I-DN-nL6"/>
                 <outlet property="titleImage" destination="r2R-yy-EGi" id="n8v-Bh-KBD"/>
                 <outlet property="titleLabel" destination="d1M-6e-vj0" id="N3K-Oi-icf"/>
                 <outlet property="viewLoading" destination="oSA-hf-f6V" id="Sah-7o-vW8"/>
+                <outletCollection property="gestureRecognizers" destination="HlR-jW-RHu" appends="YES" id="vTE-rM-sOD"/>
             </connections>
             <point key="canvasLocation" x="-99.5" y="77"/>
         </view>
+        <tapGestureRecognizer id="HlR-jW-RHu">
+            <connections>
+                <action selector="recognizeTapGesture:" destination="iN0-l3-epB" id="8MF-Zl-bu4"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="Message Search" width="20" height="20"/>
         <image name="Server Selector" width="12" height="9"/>
     </resources>
 </document>
