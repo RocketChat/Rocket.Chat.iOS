@@ -64,6 +64,13 @@
                         <constraint firstAttribute="width" constant="15" id="rzb-e6-Skm"/>
                     </constraints>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Server Selector" translatesAutoresizingMaskIntoConstraints="NO" id="qdc-h6-oM3">
+                    <rect key="frame" x="93" y="17" width="12" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="12" id="NM8-fR-0on"/>
+                        <constraint firstAttribute="height" constant="12" id="wI9-JE-wuq"/>
+                    </constraints>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1M-6e-vj0">
                     <rect key="frame" x="43" y="11.5" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -86,11 +93,13 @@
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="3rV-Pf-lq2"/>
                 <constraint firstAttribute="bottomMargin" secondItem="TIT-TU-fEF" secondAttribute="bottom" id="6eu-oN-v5W"/>
                 <constraint firstAttribute="bottom" secondItem="a0A-gc-rbk" secondAttribute="bottom" id="7Wj-Ls-oM6"/>
+                <constraint firstItem="qdc-h6-oM3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="1" id="7qC-Ru-jfT"/>
                 <constraint firstItem="oSA-hf-f6V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DQ1-OV-3t8"/>
                 <constraint firstItem="d1M-6e-vj0" firstAttribute="leading" secondItem="r2R-yy-EGi" secondAttribute="trailing" constant="4" id="L9Y-3E-Wtm"/>
                 <constraint firstItem="a0A-gc-rbk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RZh-l9-7mR"/>
                 <constraint firstAttribute="bottom" secondItem="oSA-hf-f6V" secondAttribute="bottom" id="RzI-6F-E36"/>
                 <constraint firstItem="a0A-gc-rbk" firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="leading" id="UfN-vD-qfl"/>
+                <constraint firstItem="qdc-h6-oM3" firstAttribute="leading" secondItem="d1M-6e-vj0" secondAttribute="trailing" constant="8" id="W65-Ld-Uab"/>
                 <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
                 <constraint firstItem="r2R-yy-EGi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="blx-js-QYU"/>
                 <constraint firstItem="oSA-hf-f6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="qQV-zr-a4T"/>
@@ -101,6 +110,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="labelLoading" destination="1mu-Gh-mpc" id="4Bq-Ly-1xE"/>
+                <outlet property="showInfoImage" destination="qdc-h6-oM3" id="BdC-1F-9ki"/>
                 <outlet property="titleButton" destination="a0A-gc-rbk" id="p4I-DN-nL6"/>
                 <outlet property="titleImage" destination="r2R-yy-EGi" id="n8v-Bh-KBD"/>
                 <outlet property="titleLabel" destination="d1M-6e-vj0" id="N3K-Oi-icf"/>
@@ -111,5 +121,6 @@
     </objects>
     <resources>
         <image name="Message Search" width="20" height="20"/>
+        <image name="Server Selector" width="12" height="9"/>
     </resources>
 </document>

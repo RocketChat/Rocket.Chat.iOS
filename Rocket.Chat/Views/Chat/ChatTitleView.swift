@@ -20,6 +20,7 @@ final class ChatTitleView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var titleButton: UIButton!
+    @IBOutlet weak var showInfoImage: UIImageView!
 
     private var isTitleHidden: Bool {
         get {
@@ -30,6 +31,7 @@ final class ChatTitleView: UIView {
             titleLabel.isHidden = newValue
             titleImage.isHidden = newValue
             titleButton.isHidden = newValue
+            showInfoImage.isHidden = newValue
         }
     }
 
