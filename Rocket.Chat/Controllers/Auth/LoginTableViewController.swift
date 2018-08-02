@@ -164,6 +164,12 @@ class LoginTableViewController: BaseTableViewController {
 
     // MARK: Actions
 
+    func authenticateWithDeepLinkCredentials(_ credentials: DeepLinkCredentials) {
+        view.layoutIfNeeded()
+        startLoading()
+        AuthManager.auth(token: credentials.token, completion: self.handleAuthenticationResponse)
+    }
+
     @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
         let siteURL = serverPublicSettings?.siteURL ?? ""
         OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
