@@ -16,8 +16,10 @@ enum AnalyticsProvider {
 }
 
 enum Event {
+    case showNewWorkspace
     case signup
     case login
+    case updateStatus
     case screenView(screenName: String)
     case messageSent(subscriptionType: String, server: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
@@ -26,7 +28,6 @@ enum Event {
     case updatedSubscriptionSorting(sorting: String, grouping: String)
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
-
 }
 
 enum UserProperty {
@@ -102,6 +103,8 @@ extension Event {
             return provider == .firebase ? AnalyticsEventSignUp : "sign_up"
         case .login:
             return provider == .firebase ? AnalyticsEventLogin : "login"
+        case .showNewWorkspace: return "show_new_workspace"
+        case .updateStatus: return "status_update"
         case .screenView: return "screen_view"
         case .messageSent: return "message_sent"
         case .mediaUpload: return "media_upload"
