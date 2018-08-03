@@ -16,7 +16,7 @@ enum AnalyticsProvider {
 }
 
 enum Event {
-    case newWorkspace
+    case showNewWorkspace
     case signup
     case login
     case updateStatus
@@ -103,7 +103,7 @@ extension Event {
             return provider == .firebase ? AnalyticsEventSignUp : "sign_up"
         case .login:
             return provider == .firebase ? AnalyticsEventLogin : "login"
-        case .newWorkspace: return "new_workspace"
+        case .showNewWorkspace: return "show_new_workspace"
         case .updateStatus: return "status_update"
         case .screenView: return "screen_view"
         case .messageSent: return "message_sent"

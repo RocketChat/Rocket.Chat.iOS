@@ -122,7 +122,7 @@ class WelcomeViewController: BaseViewController {
             return
         }
 
-        AnalyticsManager.log(event: .newWorkspace)
+        AnalyticsManager.log(event: .showNewWorkspace)
 
         let controller = SFSafariViewController(url: url)
         controller.modalPresentationStyle = .formSheet
