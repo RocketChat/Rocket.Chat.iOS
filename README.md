@@ -45,6 +45,26 @@ Make sure your server supports WebSocket as well as SSL. Apache supports WebSock
 
 Are you an iOS developer and would like to help? Found a bug that you would like to report or a missing feature that you would like to request? Great! We have written down a [Contribution guide](https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/CONTRIBUTING.md) so you can start easily.
 
+# Themes ☀️🌙
+
+<p align="center" style="color: gray;">
+Choose from 3 new themes to take you from day to night
+</p>
+
+<br />
+
+![Themes](https://user-images.githubusercontent.com/551004/43647513-35fea6d6-970e-11e8-9712-56e4b24e7a1b.png)
+
+# iPad
+
+<p align="center" style="color: gray;">
+We have developed an exclusive experience for iPad users: you can now multitask by<br />using Rocket.Chat at the same time as other apps
+</p>
+
+<br />
+
+![iPad](https://user-images.githubusercontent.com/551004/43647100-043903d6-970d-11e8-89c5-d7d677e26278.png)
+
 # Donate
 
 [![PayPal](https://camo.githubusercontent.com/f896f7d176663a1559376bb56aac4bdbbbe85ed1/68747470733a2f2f7777772e70617970616c6f626a656374732e636f6d2f656e5f55532f692f62746e2f62746e5f646f6e61746543435f4c472e676966)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZL94ZE6LGVUSN)
