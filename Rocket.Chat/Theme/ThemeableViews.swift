@@ -140,12 +140,14 @@ extension UITextField {
 extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
+
         if #available(iOS 11, *) {
             // Do nothing
         } else {
             backgroundImage = UIImage()
-            textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
         }
+
+        textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
         applyThemeFromRuntimeAttributes()
     }
 }

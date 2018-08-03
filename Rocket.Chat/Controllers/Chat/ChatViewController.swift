@@ -981,9 +981,9 @@ final class ChatViewController: SLKTextViewController {
     @IBAction func showSearchMessages() {
         guard
             let storyboard = storyboard,
-            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesListViewController") as? MessagesListViewController
-        else {
-            return
+            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
+            else {
+                return
         }
 
         messageList.data.subscription = subscription
