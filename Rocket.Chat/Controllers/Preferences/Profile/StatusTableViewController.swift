@@ -62,6 +62,8 @@ final class StatusTableViewController: BaseTableViewController {
         UserManager.setUserStatus(status: status) { _ in }
         viewModel.user?.updateStatus(status: status)
 
+        AnalyticsManager.log(event: .updateStatus)
+
         navigationController?.popViewController(animated: true)
     }
 

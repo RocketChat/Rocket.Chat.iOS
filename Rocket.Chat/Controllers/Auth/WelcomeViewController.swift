@@ -122,6 +122,8 @@ class WelcomeViewController: BaseViewController {
             return
         }
 
+        AnalyticsManager.log(event: .newWorkspace)
+
         let controller = SFSafariViewController(url: url)
         controller.modalPresentationStyle = .formSheet
         controller.preferredControlTintColor = view.tintColor
