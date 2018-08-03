@@ -5,7 +5,6 @@
 //  Created by Matheus Cardoso on 5/16/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
-
 import RealmSwift
 
 extension User {
@@ -20,11 +19,9 @@ extension User {
     func hasPermission(_ permission: PermissionType, subscription: Subscription? = nil, realm: Realm? = Realm.current) -> Bool {
         guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
 
-        let roles: [String]
+        var roles: [String] = Array(self.roles)
         if let subscription = subscription {
-            roles = rolesInSubscription(subscription)
-        } else {
-            roles = Array(self.roles)
+            roles += rolesInSubscription(subscription)
         }
 
         for userRole in roles {
