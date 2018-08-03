@@ -214,13 +214,7 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutUpload(_ command: UIKeyCommand) {
-        if let presented = chatViewController?.presentedViewController {
-            presented.dismiss(animated: true) { [weak self] in
-                self?.chatViewController?.buttonUploadDidPressed()
-            }
-        } else {
-            chatViewController?.buttonUploadDidPressed()
-        }
+        chatViewController?.toggleUpload()
     }
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
