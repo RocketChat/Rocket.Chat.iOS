@@ -114,14 +114,16 @@ extension MainSplitViewController {
 extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Message composer"),
+            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Type message"),
             UIKeyCommand(input: "p", modifierFlags: .command, action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
-            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
+            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
             UIKeyCommand(input: "1...9", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
             UIKeyCommand(input: "]", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
             UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
             UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
             UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
+            UIKeyCommand(input: "u", modifierFlags: .command, action: #selector(shortcutUpload(_:)), discoverabilityTitle: "Upload to room"),
+            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Search messages"),
             UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: "Scroll messages"),
             UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
             UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
@@ -208,6 +210,16 @@ extension MainSplitViewController {
             }
 
             viewController.selectRoomAt(position - 1)
+        }
+    }
+
+    @objc func shortcutUpload(_ command: UIKeyCommand) {
+        if let presented = chatViewController?.presentedViewController {
+            presented.dismiss(animated: true) { [weak self] in
+                self?.chatViewController?.buttonUploadDidPressed()
+            }
+        } else {
+            chatViewController?.buttonUploadDidPressed()
         }
     }
 

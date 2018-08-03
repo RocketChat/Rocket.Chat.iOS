@@ -1357,29 +1357,3 @@ extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
         return false
     }
 }
-
-// MARK: Actions
-
-extension ChatViewController {
-    var isActionsOpen: Bool {
-        return presentedViewController != nil
-    }
-
-    func toggleActions() {
-        if isActionsOpen {
-            closeActions()
-        } else {
-            openActions()
-        }
-    }
-
-    func openActions() {
-        performSegue(withIdentifier: "Channel Actions", sender: nil)
-    }
-
-    func closeActions() {
-        if isActionsOpen {
-            presentedViewController?.dismiss(animated: true, completion: nil)
-        }
-    }
-}
