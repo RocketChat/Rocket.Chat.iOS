@@ -1,13 +1,16 @@
-![Rocket.Chat logo](https://raw.githubusercontent.com/RocketChat/Rocket.Chat.Artwork/master/Logos/logo-dark.svg?sanitize=true)
+![](https://user-images.githubusercontent.com/551004/43643393-884b00a4-9701-11e8-94d8-14c46d1f3660.png)
 
+<p align="center">
+Take your conversations with you and never miss the action with our iOS mobile app, with features including brand new UI with 3 themes, new ways to sort and group conversations, and new onboarding experience
+</p>
 
-![Screenshot](https://user-images.githubusercontent.com/7317008/43209700-eb3ded88-904a-11e8-8ec4-9ac10a39f344.png)
+![Screenshot](https://user-images.githubusercontent.com/551004/43642867-8abfaeb8-96ff-11e8-8c53-838584eaecb6.jpg)
 
 <p align="center">
   <a href=https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8>
   <img alt="Download on the app store" src="https://user-images.githubusercontent.com/7317008/43209852-4ca39622-904b-11e8-8ce1-cdc3aee76ae9.png" width=160>
   </a>
- </p>
+</p>
  
 # Rocket.Chat iOS native application
 
