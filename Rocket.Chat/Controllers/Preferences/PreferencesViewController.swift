@@ -239,7 +239,7 @@ final class PreferencesViewController: BaseTableViewController {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
                 cellLanguageDidPressed()
-            } else if indexPath.row == 4 {
+            } else if indexPath.row == 5 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == kSectionInformation {
