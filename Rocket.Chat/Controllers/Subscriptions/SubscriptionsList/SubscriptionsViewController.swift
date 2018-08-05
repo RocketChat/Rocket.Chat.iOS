@@ -559,24 +559,24 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
 
-        let leave = UIContextualAction(style: .destructive, title: localized("subscriptions.list.actions.leave"), handler: { _, _, success in
-            let leaveRequest = SubscriptionLeaveRequest(rid: subscription.rid, subscriptionType: subscription.type)
-            API.current()?.fetch(leaveRequest, completion: nil)
+        let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
+        let favorite = UIContextualAction(style: .destructive, title: localized(favoriteTitle), handler: { _, _, success in
 
-            Realm.executeOnMainThread { realm in
-                realm.delete(subscription)
+            SubscriptionManager.toggleFavorite(subscription) { (response) in
+                DispatchQueue.main.async {
+                    if response.isError() {
+                        subscription.updateFavorite(!subscription.favorite)
+                    }
+                }
             }
 
+            subscription.updateFavorite(!subscription.favorite)
             success(true)
         })
 
-        leave.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
 
-        let shouldAddLeaveAction = subscription.type != .directMessage
-            && subscription.isJoined()
-            && subscription.roomOwner?.identifier != AuthManager.currentUser()?.identifier
-
-        let actions = [hide, shouldAddLeaveAction ? leave : nil].compactMap { $0 }
+        let actions = [hide, favorite].compactMap { $0 }
         return UISwipeActionsConfiguration(actions: actions)
     }
 }

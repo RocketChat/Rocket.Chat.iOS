@@ -156,7 +156,8 @@
 "subscriptions.list.date.yesterday" = "Yesterday"; //TODO
 "subscriptions.list.actions.read" = "Mark as\nRead"; // TODO
 "subscriptions.list.actions.unread" = "Mark as\nUnread"; // TODO
-"subscriptions.list.actions.leave" = "Leave\nChannel"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
 "subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
