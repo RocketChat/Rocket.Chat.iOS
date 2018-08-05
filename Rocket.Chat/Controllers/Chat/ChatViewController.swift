@@ -739,12 +739,12 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 if indexPathModifications.count > 0 {
-                    UIView.performWithoutAnimation {
-                        self.collectionView?.performBatchUpdates({
-                            self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                        }, completion: { _ in
+                    UIView.performWithoutAnimation { [weak self] in
+                        self?.collectionView?.performBatchUpdates({
+                            self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                        }, completion: { [weak self] _ in
                             if isAtBottom {
-                                self.scrollToBottom()
+                                self?.scrollToBottom()
                             }
                         })
                     }
@@ -977,9 +977,9 @@ final class ChatViewController: SLKTextViewController {
     @IBAction func showSearchMessages() {
         guard
             let storyboard = storyboard,
-            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesListViewController") as? MessagesListViewController
-        else {
-            return
+            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
+            else {
+                return
         }
 
         messageList.data.subscription = subscription
@@ -1010,14 +1010,17 @@ extension ChatViewController {
         guard
             dataController.data.count > indexPath.row,
             let subscription = subscription,
-            let obj = dataController.itemAt(indexPath),
-            obj.message?.validated() != nil
+            let obj = dataController.itemAt(indexPath)
         else {
             return cellForEmpty(at: indexPath)
         }
 
         if obj.type == .message {
-            return cellForMessage(obj, at: indexPath)
+            if obj.message?.validated() != nil {
+                return cellForMessage(obj, at: indexPath)
+            } else {
+                return cellForEmpty(at: indexPath)
+            }
         }
 
         if obj.type == .daySeparator {
@@ -1170,7 +1173,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 dataController.cacheCellHeight(for: obj.identifier, value: height)
-
                 return CGSize(width: fullWidth, height: height)
             }
         }

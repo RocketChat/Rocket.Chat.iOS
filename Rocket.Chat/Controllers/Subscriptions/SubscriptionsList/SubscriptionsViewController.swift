@@ -199,7 +199,7 @@ final class SubscriptionsViewController: BaseViewController {
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
         if #available(iOS 11.0, *) {
             searchBar = searchController.searchBar
@@ -490,14 +490,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         // When using iPads, we override the detail controller creating
         // a new instance.
-        if splitViewController?.detailViewController as? BaseNavigationController != nil {
+        if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
             controller.subscription = subscription
 
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
-        } else {
-            controller.subscription = subscription
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 

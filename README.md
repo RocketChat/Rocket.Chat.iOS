@@ -1,13 +1,18 @@
-![Rocket.Chat logo](https://raw.githubusercontent.com/RocketChat/Rocket.Chat.Artwork/master/Logos/logo-dark.svg?sanitize=true)
+![](https://user-images.githubusercontent.com/551004/43643393-884b00a4-9701-11e8-94d8-14c46d1f3660.png)
 
+<p align="center" style="color: gray;">
+Take your conversations with you and never miss the action with our <br />iOS mobile app, with features including brand new UI with 3 themes, new ways to sort<br />and group conversations, and new onboarding experience
+</p>
 
-![Screenshot](https://user-images.githubusercontent.com/7317008/43209700-eb3ded88-904a-11e8-8ec4-9ac10a39f344.png)
+<br />
 
-<p align="center">
+![Screenshot](https://user-images.githubusercontent.com/551004/43643732-af17fab0-9702-11e8-819f-405afa7c6b64.png)
+
+<p align="center">  
   <a href=https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8>
   <img alt="Download on the app store" src="https://user-images.githubusercontent.com/7317008/43209852-4ca39622-904b-11e8-8ce1-cdc3aee76ae9.png" width=160>
   </a>
- </p>
+</p>
  
 # Rocket.Chat iOS native application
 
@@ -39,6 +44,18 @@ Make sure your server supports WebSocket as well as SSL. Apache supports WebSock
 # Contribute
 
 Are you an iOS developer and would like to help? Found a bug that you would like to report or a missing feature that you would like to request? Great! We have written down a [Contribution guide](https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/CONTRIBUTING.md) so you can start easily.
+
+# Themes ☀️🌙
+
+Choose from 3 new themes to take you from day to night.
+
+![Themes](https://user-images.githubusercontent.com/551004/43647513-35fea6d6-970e-11e8-9712-56e4b24e7a1b.png)
+
+# iPad
+
+We have developed an exclusive experience for iPad users: you can now multitask by using Rocket.Chat at the same time as other apps.
+
+![iPad](https://user-images.githubusercontent.com/551004/43647100-043903d6-970d-11e8-89c5-d7d677e26278.png)
 
 # Donate
 

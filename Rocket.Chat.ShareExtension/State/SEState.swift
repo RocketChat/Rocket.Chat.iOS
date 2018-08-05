@@ -24,6 +24,14 @@ enum SEAction {
 struct SEState {
     var servers: [SEServer] = []
     var selectedServerIndex: Int = 0
+    var selectedServer: SEServer? {
+        guard selectedServerIndex < servers.count else {
+            return nil
+        }
+
+        return servers[selectedServerIndex]
+    }
+
     var rooms: [Subscription] = []
     var currentRoom = Subscription()
     var searchRooms: SESearchState = .none
@@ -34,14 +42,14 @@ struct SEState {
         let displayedRooms: [Subscription]
         switch searchRooms {
         case .none:
-            displayedRooms = rooms
+            displayedRooms = rooms.filter { $0.open }
         case .searching(let search):
             let search = search.lowercased()
             displayedRooms = rooms.filter {
                 $0.fname.lowercased().contains(search) || $0.name.lowercased().contains(search)
             }
         case .started:
-            displayedRooms = rooms
+            displayedRooms = rooms.filter { $0.open }
         }
         return displayedRooms.sorted(by: { $0.name < $1.name })
     }
