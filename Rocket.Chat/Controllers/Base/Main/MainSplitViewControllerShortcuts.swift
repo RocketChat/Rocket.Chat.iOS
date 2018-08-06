@@ -13,29 +13,29 @@ import UIKit
 extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: "Type message"),
-            UIKeyCommand(input: "p", modifierFlags: .command, action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: "Preferences"),
-            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: "Rooms search"),
-            UIKeyCommand(input: "1...9", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Room selection 1...9"),
-            UIKeyCommand(input: "]", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Next room"),
-            UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "Previous room"),
-            UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: "New room"),
-            UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Room actions"),
-            UIKeyCommand(input: "u", modifierFlags: .command, action: #selector(shortcutUpload(_:)), discoverabilityTitle: "Upload to room"),
-            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: "Search messages"),
-            UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: "Scroll messages"),
+            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: localized("shortcuts.type_message")),
+            UIKeyCommand(input: "p", modifierFlags: .command, action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: localized("shortcuts.preferences")),
+            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: localized("shortcuts.room_search")),
+            UIKeyCommand(input: "1...9", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.room_selection")),
+            UIKeyCommand(input: "]", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.next_room")),
+            UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.previous_room")),
+            UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.new_room")),
+            UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: localized("shortcuts.room_actions")),
+            UIKeyCommand(input: "u", modifierFlags: .command, action: #selector(shortcutUpload(_:)), discoverabilityTitle: localized("shortcuts.upload_room")),
+            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomMessageSearch(_:)), discoverabilityTitle: localized("shortcuts.search_messages")),
+            UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: localized("shortcuts.scroll_messages")),
             UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
             UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: "Reply to latest"),
-            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
-            UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
-            UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add server")
+            UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: localized("shortcuts.reply_latest")),
+            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection")),
+            UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection_numbers")),
+            UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.add_server"))
             ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
                 UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
             } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
                 UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
             } + [
-                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
+                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: localized("shortcuts.change_theme"))
         ]
     }
 
@@ -101,15 +101,18 @@ extension MainSplitViewController {
     @objc func shortcutSelectRoom(_ command: UIKeyCommand) {
         guard
             let viewController = subscriptionsViewController,
-            let input = command.input,
-            !isPresenting
+            let input = command.input
         else {
+            return
+        }
+
+        if input != "n" && isPresenting {
             return
         }
 
         switch input {
         case "n":
-            viewController.performSegue(withIdentifier: "toNewRoom", sender: nil)
+            viewController.toggleNewRoom()
         case "]":
             viewController.selectNextRoom()
         case "[":

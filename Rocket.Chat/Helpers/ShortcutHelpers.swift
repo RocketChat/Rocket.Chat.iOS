@@ -59,6 +59,34 @@ extension ChatViewController {
     }
 }
 
+// MARK: New Room Screen
+
+extension SubscriptionsViewController {
+    var isNewRoomOpen: Bool {
+        return (presentedViewController as? UINavigationController)?.viewControllers.first as? NewRoomViewController != nil
+    }
+
+    func toggleNewRoom() {
+        if isNewRoomOpen {
+            closeNewRoom()
+        } else {
+            openNewRoom()
+        }
+    }
+
+    func openNewRoom() {
+        doAfterDismissingPresented { [weak self] in
+            self?.performSegue(withIdentifier: "toNewRoom", sender: nil)
+        }
+    }
+
+    func closeNewRoom() {
+        if isNewRoomOpen {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
 // MARK: Upload Screen
 
 extension ChatViewController {
@@ -91,14 +119,15 @@ extension ChatViewController {
 
 extension ChatViewController {
     var isSearchMessagesOpen: Bool {
-        return (presentedViewController as? MessagesListViewController)?.data.isSearchingMessages == true
+        let controller = presentedViewController?.childViewControllers.first as? MessagesListViewController
+        return controller?.data.isSearchingMessages == true
     }
 
     func toggleSearchMessages() {
         if isSearchMessagesOpen {
-            openSearchMessages()
-        } else {
             closeSearchMessages()
+        } else {
+            openSearchMessages()
         }
     }
 

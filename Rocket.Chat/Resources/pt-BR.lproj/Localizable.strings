@@ -455,3 +455,21 @@
 "subscriptions.grouping.type" = "Agrupar por tipo";
 "subscriptions.grouping.favorites" = "Agrupar favoritos";
 "subscriptions.grouping.unread_top" = "Não lidos no topo";
+
+// Shortcuts
+"shortcuts.type_message" = "Escrever mensagem";
+"shortcuts.preferences" = "Preferências";
+"shortcuts.room_search" = "Buscas canais";
+"shortcuts.room_selection" = "Selecionar canal 1...9";
+"shortcuts.next_room" = "Próximo canal";
+"shortcuts.previous_room" = "Canal anterior";
+"shortcuts.new_room" = "Novo canal";
+"shortcuts.room_actions" = "Ações do canal";
+"shortcuts.upload_room" = "Fazer upload";
+"shortcuts.search_messages" = "Procurar mensagens";
+"shortcuts.scroll_messages" = "Rolar mensagens";
+"shortcuts.reply_latest" = "Responder à última";
+"shortcuts.server_selection" = "Selecionar servidor";
+"shortcuts.server_selection_numbers" = "Selecionar servidor 1...9";
+"shortcuts.add_server" = "Adicionar servidor";
+"shortcuts.change_theme" = "Mudar tema";
