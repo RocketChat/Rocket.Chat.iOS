@@ -61,7 +61,8 @@ class ChannelActionsViewController: BaseViewController {
                 isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: title(for: "mentions"), action: showMentionsList),
                 isDirectMessage ? nil : ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: title(for: "members"), action: showMembersList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Star"), title: title(for: "starred"), action: showStarredList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList)
+                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: title(for: "pinned"), action: showPinnedList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Notifications"), title: title(for: "notifications"), action: showNotificationsSettings)
             ], [
                 ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: title(for: "share"), detail: false, action: shareRoom)
             ]]
@@ -182,6 +183,10 @@ extension ChannelActionsViewController {
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
+    private func showNotificationsSettings() {
+        self.performSegue(withIdentifier: "toNotificationsSettings", sender: self)
+    }
+
     func showStarredList() {
         guard let userId = AuthManager.currentUser()?.identifier else {
             alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message"))
@@ -251,6 +256,10 @@ extension ChannelActionsViewController {
             if let segueData = sender as? ListSegueData {
                 filesList.data.title = segueData.title
             }
+        }
+
+        if let notificationsSettings = segue.destination as? NotificationsPreferencesViewController {
+            notificationsSettings.subscription = subscription
         }
     }
 

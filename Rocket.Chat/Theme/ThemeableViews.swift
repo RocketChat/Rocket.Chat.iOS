@@ -33,10 +33,14 @@ extension UIView: Themeable {
      */
 
     func applyTheme() {
-        guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        applyThemeBackgroundColor()
         self.subviews.forEach { $0.applyTheme() }
         applyThemeFromRuntimeAttributes()
+    }
+
+    func applyThemeBackgroundColor() {
+        guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
     }
 }
 
@@ -133,15 +137,19 @@ extension UITextField {
     }
 }
 
+// Due to a possible bug in iOS, search bars with .minimal
+// style are not able to be themed. Use .prominent or .default
+// searchBarStyle instead.
 extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
+        guard let theme = theme else { return }
         if #available(iOS 11, *) {
-            // Do nothing
-        } else {
-            backgroundImage = UIImage()
-            textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
+            barStyle = theme.appearence.barStyle
         }
+
+        backgroundImage = UIImage()
+        textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
         applyThemeFromRuntimeAttributes()
     }
 }
@@ -291,6 +299,26 @@ extension UIScrollView {
         guard let theme = theme else { return }
         indicatorStyle = theme.appearence.scrollViewIndicatorStyle
         applyThemeFromRuntimeAttributes()
+    }
+}
+
+extension UIPickerView {
+    override func applyTheme() {
+        guard let theme = theme else { return }
+        applyThemeBackgroundColor()
+        subviews.forEach {
+            if $0.frame.height > 0, $0.frame.height < 1 {
+                $0.backgroundColor = theme.mutedAccent
+            } else {
+                $0.applyTheme()
+            }
+        }
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        applyTheme()
     }
 }
 
