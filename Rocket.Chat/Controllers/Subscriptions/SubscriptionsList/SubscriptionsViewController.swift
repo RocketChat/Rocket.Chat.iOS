@@ -583,32 +583,6 @@ extension SubscriptionsViewController {
     }
 }
 
-// MARK: Preferences
-
-extension SubscriptionsViewController {
-    var isPreferencesOpen: Bool {
-        return presentedViewController as? PreferencesNavigationController != nil
-    }
-
-    func togglePreferences() {
-        if isPreferencesOpen {
-            closePreferences()
-        } else {
-            openPreferences()
-        }
-    }
-
-    func openPreferences() {
-        performSegue(withIdentifier: "Preferences", sender: nil)
-    }
-
-    func closePreferences() {
-        if let preferencesController = presentedViewController as? PreferencesNavigationController {
-            preferencesController.dismiss(animated: true, completion: nil)
-        }
-    }
-}
-
 // MARK: Room Selection Helpers
 
 extension SubscriptionsViewController {

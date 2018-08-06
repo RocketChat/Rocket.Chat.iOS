@@ -410,7 +410,8 @@
 		8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F88B1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift */; };
 		8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
-		801B0EF42114B2A300C0972E /* ChatControllerShortcutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF32114B2A300C0972E /* ChatControllerShortcutUtils.swift */; };
+		801B0EF42114B2A300C0972E /* ShortcutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */; };
+		801B0EF7211895E900C0972E /* MainSplitViewControllerShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
 		8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */; };
 		8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */; };
@@ -1251,7 +1252,8 @@
 		8013F88B1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunCommandRequestSpec.swift; sourceTree = "<group>"; };
 		8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManagerSpec.swift; sourceTree = "<group>"; };
-		801B0EF32114B2A300C0972E /* ChatControllerShortcutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerShortcutUtils.swift; sourceTree = "<group>"; };
+		801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutHelpers.swift; sourceTree = "<group>"; };
+		801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewControllerShortcuts.swift; sourceTree = "<group>"; };
 		801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserView.swift; sourceTree = "<group>"; };
 		8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
 		8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiPicker.xib; sourceTree = "<group>"; };
@@ -2255,9 +2257,9 @@
 		4174CB111D2D99840086DAC8 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				801B0EF5211895D800C0972E /* Main */,
 				4174CB141D2D99A30086DAC8 /* BaseNavigationController.swift */,
 				4174CB121D2D99960086DAC8 /* BaseViewController.swift */,
-				414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */,
 				99F530A020D0F08A004EC060 /* BaseTableViewController.swift */,
 			);
 			path = Base;
@@ -2560,6 +2562,7 @@
 				8052F75620B4ADC400B3B0CF /* Debounce.swift */,
 				80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */,
 				80B2D99020E549CC002F4149 /* StoryboardInitializable.swift */,
+				801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2675,7 +2678,6 @@
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
 				8039442D20B342BB002F317A /* AddUsersViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
-				801B0EF32114B2A300C0972E /* ChatControllerShortcutUtils.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2843,6 +2845,15 @@
 				8013F88B1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift */,
 			);
 			path = Command;
+			sourceTree = "<group>";
+		};
+		801B0EF5211895D800C0972E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */,
+				801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		8020CCF31FEAD8AA003424F4 /* EmojiPicker */ = {
@@ -4353,9 +4364,10 @@
 				4156250820BEDCD100D20576 /* ServersListViewModel.swift in Sources */,
 				8076FDB52048571200114F28 /* AuthUser.swift in Sources */,
 				80B2D98B20E5496E002F4149 /* UserDetailTableView.swift in Sources */,
-				801B0EF42114B2A300C0972E /* ChatControllerShortcutUtils.swift in Sources */,
+				801B0EF42114B2A300C0972E /* ShortcutHelpers.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
+				801B0EF7211895E900C0972E /* MainSplitViewControllerShortcuts.swift in Sources */,
 				806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */,
 				41B96362207E48260068F1A6 /* MessageTextValidator.swift in Sources */,
 				809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */,

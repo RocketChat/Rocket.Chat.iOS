@@ -1,113 +1,12 @@
 //
-//  MainSplitViewController.swift
+//  MainSplitViewControllerShortcuts.swift
 //  Rocket.Chat
 //
-//  Created by Rafael Kellermann Streit on 21/02/18.
+//  Created by Matheus Cardoso on 8/6/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
-
-final class MainSplitViewController: UISplitViewController {
-
-    let socketHandlerToken = String.random(5)
-
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
-    }
-
-    static var chatViewController: ChatViewController? {
-        guard
-            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
-            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
-        else {
-            return nil
-        }
-
-        return mainViewController.chatViewController
-    }
-
-    var chatViewController: ChatViewController? {
-        if let nav = detailViewController as? UINavigationController {
-            return nav.viewControllers.first as? ChatViewController
-        } else if let nav = viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
-            return nav.viewControllers[1] as? ChatViewController
-        }
-
-        return nil
-    }
-
-    var subscriptionsViewController: SubscriptionsViewController? {
-        return (viewControllers.first as? UINavigationController)?.viewControllers.first as? SubscriptionsViewController
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        ThemeManager.addObserver(self)
-
-        delegate = self
-        preferredDisplayMode = .allVisible
-
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-        SocketManager.reconnect()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        applyTheme()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return view.theme?.appearence.statusBarStyle ?? .default
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        guard
-            previousTraitCollection?.horizontalSizeClass != traitCollection.horizontalSizeClass,
-            traitCollection.horizontalSizeClass != .compact,
-            let nav = primaryViewController as? UINavigationController,
-            let subscriptions = nav.viewControllers.first as? SubscriptionsViewController,
-            let subscription = (detailViewController as? ChatViewController)?.subscription
-        else {
-            return
-        }
-
-        subscriptions.openChat(for: subscription)
-    }
-}
-
-// MARK: UISplitViewControllerDelegate
-
-extension MainSplitViewController: UISplitViewControllerDelegate {
-
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        return true
-    }
-
-}
-
-// MARK: SocketConnectionHandler
-
-extension MainSplitViewController: SocketConnectionHandler {
-
-    func socketDidChangeState(state: SocketConnectionState) {
-        if state == .waitingForNetwork || state == .disconnected {
-            SocketManager.reconnect()
-        }
-    }
-
-}
-
-// MARK: Themeable
-
-extension MainSplitViewController {
-    override func applyTheme() {
-        guard let theme = view.theme else { return }
-        view.backgroundColor = theme.mutedAccent
-        view.subviews.first?.backgroundColor = theme.mutedAccent
-    }
-}
 
 // MARK: Keyboard Shortcuts
 
@@ -131,17 +30,20 @@ extension MainSplitViewController {
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection"),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Server selection 1...9"),
             UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: "Add server")
-        ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
+            ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
                 UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
-        } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
-            UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
-        } + [
-            UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
+            } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
+                UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
+            } + [
+                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: "Change theme")
         ]
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
-        guard let textView = chatViewController?.textInputbar.textView else {
+        guard
+            !isPresenting,
+            let textView = chatViewController?.textInputbar.textView
+        else {
             return
         }
 
@@ -160,6 +62,10 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutRoomSearch(_ command: UIKeyCommand) {
+        guard !isPresenting else {
+            return
+        }
+
         if subscriptionsViewController?.searchBar?.isFirstResponder ?? false {
             subscriptionsViewController?.searchController?.dismiss(animated: true, completion: nil)
         } else {
@@ -168,7 +74,7 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutSelectServer(_ command: UIKeyCommand) {
-        guard let input = command.input else {
+        guard let input = command.input, !isPresenting else {
             return
         }
 
@@ -193,7 +99,11 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutSelectRoom(_ command: UIKeyCommand) {
-        guard let viewController = subscriptionsViewController, let input = command.input else {
+        guard
+            let viewController = subscriptionsViewController,
+            let input = command.input,
+            !isPresenting
+        else {
             return
         }
 
@@ -221,14 +131,19 @@ extension MainSplitViewController {
         chatViewController?.toggleActions()
     }
 
+    @objc func shortcutRoomMessageSearch(_ command: UIKeyCommand) {
+        chatViewController?.toggleSearchMessages()
+    }
+
     @objc func shortcutScrollMessages(_ command: UIKeyCommand) {
         guard
+            !isPresenting,
             let input = command.input,
             let offset = chatViewController?.collectionView?.contentOffset,
             let maxHeight = chatViewController?.collectionView?.contentSize.height,
             let collectionView = chatViewController?.collectionView
-        else {
-            return
+            else {
+                return
         }
 
         let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -50.0 : 50.0
@@ -240,6 +155,10 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutReplyLatest(_ command: UIKeyCommand) {
+        guard !isPresenting else {
+            return
+        }
+
         if let message = chatViewController?.subscription?.roomLastMessage {
             chatViewController?.reply(to: message)
         }
