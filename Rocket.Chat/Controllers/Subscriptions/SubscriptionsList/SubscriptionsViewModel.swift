@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import DifferenceKit
 
 class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
@@ -58,7 +59,7 @@ class SubscriptionsViewModel {
     }
 
     func buildSections() {
-        if let realm = realm {
+        if let realm = realm, assorter == nil {
             assorter = RealmAssorter<Subscription>(realm: realm)
             assorter?.didUpdateIndexPaths = didUpdateIndexPaths
         }
@@ -70,12 +71,15 @@ class SubscriptionsViewModel {
             return
         }
 
+        assorter.willReconstructSections()
+
         switch searchState {
         case .searching(let query):
             let queryData = queryBase.filterBy(name: query)
             assorter.registerSection(name: localized("subscriptions.search_results"), objects: queryData)
 
             API.current()?.client(SpotlightClient.self).search(query: query) { _, _ in }
+            assorter.registerModel(model: queryData)
         case .notSearching:
             var queryItems = queryBase
 
@@ -109,10 +113,16 @@ class SubscriptionsViewModel {
                 let title = assorter.numberOfSections > 0 ? localized("subscriptions.conversations") : ""
                 assorter.registerSection(name: title, objects: queryItems)
             }
+
+            assorter.registerModel(model: queryBase)
         }
     }
 
-    var didUpdateIndexPaths: IndexPathsChangesEvent?
+    var didUpdateIndexPaths: RealmAssorter<Subscription>.IndexPathsChangesEvent? {
+        didSet {
+            assorter?.didUpdateIndexPaths = self.didUpdateIndexPaths
+        }
+    }
     var didRebuildSections: (() -> Void)?
 }
 
@@ -152,5 +162,6 @@ extension SubscriptionsViewModel {
 private extension NSPredicate {
     var negation: NSPredicate {
         return NSCompoundPredicate(notPredicateWithSubpredicate: self)
+
     }
 }

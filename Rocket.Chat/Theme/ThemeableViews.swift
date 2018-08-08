@@ -55,7 +55,12 @@ extension UIView: ThemeProvider {
      */
 
     var theme: Theme? {
-        guard type(of: self).description() != "_UIAlertControllerView" else { return nil }
+        let exemptedInternalViews = [
+            "UISwipeActionStandardButton",
+            "_UIAlertControllerView"
+        ]
+
+        guard !exemptedInternalViews.contains(type(of: self).description()) else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
         if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
         return superview.theme
