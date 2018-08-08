@@ -56,41 +56,47 @@ final class SubscriptionsViewController: BaseViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
 
-        viewModel.didUpdateIndexPaths = { [weak self] changes in
+        viewModel.didUpdateIndexPaths = { [weak self] changes, completion in
             guard let tableView = self?.tableView else {
                 return
             }
+            print("DID RELOAD TABLE DATA")
 
             // Update back button title with the number of unreads
             self?.updateBackButton()
+            print("COUNT BEFORE UPDATE: \(tableView.numberOfSections)")
+            tableView.reload(using: changes, with: .automatic, setData: { _ in completion() })
+            print("COUNT AFTER UPDATE: \(tableView.numberOfSections)")
 
             // If there's no changes, let's not proceed.
-            if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
-                return
-            }
-
-            // Update TableView data if there's any change in the data
-            if self?.viewModel.numberOfSections ?? 2 > 1 {
-                tableView.reloadData()
-            } else {
-                if #available(iOS 11.0, *) {
-                    tableView.performBatchUpdates({
-                        tableView.deleteRows(at: changes.deletions, with: .automatic)
-                        tableView.insertRows(at: changes.insertions, with: .automatic)
-                        tableView.reloadRows(at: changes.modifications, with: .none)
-                    }, completion: nil)
-                } else {
-                    tableView.beginUpdates()
-                    tableView.deleteRows(at: changes.deletions, with: .automatic)
-                    tableView.insertRows(at: changes.insertions, with: .automatic)
-                    tableView.reloadRows(at: changes.modifications, with: .none)
-                    tableView.endUpdates()
-                }
-            }
+//            if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
+//                return
+//            }
+//
+//            // Update TableView data if there's any change in the data
+//            if self?.viewModel.numberOfSections ?? 2 > 1 {
+////                tableView.reloadData()
+//                print("DID CALL RELOAD DATA")
+//            } else {
+//                if #available(iOS 11.0, *) {
+//                    tableView.performBatchUpdates({
+//                        tableView.deleteRows(at: changes.deletions, with: .automatic)
+//                        tableView.insertRows(at: changes.insertions, with: .automatic)
+//                        tableView.reloadRows(at: changes.modifications, with: .none)
+//                    }, completion: nil)
+//                } else {
+//                    tableView.beginUpdates()
+//                    tableView.deleteRows(at: changes.deletions, with: .automatic)
+//                    tableView.insertRows(at: changes.insertions, with: .automatic)
+//                    tableView.reloadRows(at: changes.modifications, with: .none)
+//                    tableView.endUpdates()
+//                }
+//            }
         }
 
         viewModel.didRebuildSections = { [weak self] in
             self?.tableView?.reloadData()
+            print("DID REBUILD SECTION DATA")
         }
     }
 
@@ -116,7 +122,7 @@ final class SubscriptionsViewController: BaseViewController {
         }
 
         viewModel.buildSections()
-        tableView.reloadData()
+//        tableView.reloadData()
         titleView?.state = SocketManager.sharedInstance.state
     }
 
@@ -273,7 +279,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         viewModel.buildSections()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -283,7 +289,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         searchBar.text = ""
 
         viewModel.buildSections()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 
     func updateServerInformation() {
@@ -560,7 +566,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
         hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
 
         let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
-        let favorite = UIContextualAction(style: .destructive, title: localized(favoriteTitle), handler: { _, _, success in
+        let style: UIContextualAction.Style = SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) ? .destructive : .normal
+        let favorite = UIContextualAction(style: style, title: localized(favoriteTitle), handler: { _, _, success in
 
             SubscriptionManager.toggleFavorite(subscription) { (response) in
                 DispatchQueue.main.async {
@@ -604,7 +611,7 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
         viewModel.buildSections()
         updateSortingTitleDescription()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 
 }

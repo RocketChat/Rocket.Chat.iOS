@@ -49,6 +49,9 @@ def shared_pods
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
+
+  # Diffing
+  pod 'DifferenceKit'
 end
 
 target 'Rocket.Chat.ShareExtension' do
@@ -68,7 +71,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin', 'DifferenceKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
