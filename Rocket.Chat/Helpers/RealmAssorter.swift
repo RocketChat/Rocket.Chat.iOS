@@ -14,7 +14,7 @@ typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], 
 let subscriptionUpdatesHandlerQueue = DispatchQueue(label: "chat.rocket.subscription.updates.handler", qos: .background)
 
 class RealmAssorter<Object: RealmSwift.Object> {
-    typealias IndexPathsChangesEvent = (StagedChangeset<[Section<String, Object>]>, () -> Void) -> Void
+    typealias IndexPathsChangesEvent = (StagedChangeset<[Section<String, Object>]>, (_ newData: [Section<String, Object>]) -> Void) -> Void
 
     // MARK: RealmSection
 
@@ -86,9 +86,9 @@ class RealmAssorter<Object: RealmSwift.Object> {
             print("NEW COUNT \(newValue.map { $0.elements.count })")
 
             let changes = StagedChangeset(source: oldValue, target: newValue)
-            print(changes)
-            self.didUpdateIndexPaths?(changes) { [weak self] in
-                self?.sections = newValue
+//            print(changes)
+            self.didUpdateIndexPaths?(changes) { [weak self] newData in
+                self?.sections = newData
                 print("DID UPDATE CALLED")
                 print("Sections: \((self?.sections.map { $0.elements.count }) ?? [])")
             }

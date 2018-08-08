@@ -65,7 +65,9 @@ final class SubscriptionsViewController: BaseViewController {
             // Update back button title with the number of unreads
             self?.updateBackButton()
             print("COUNT BEFORE UPDATE: \(tableView.numberOfSections)")
-            tableView.reload(using: changes, with: .automatic, setData: { _ in completion() })
+            tableView.reload(using: changes, with: .fade, setData: { data in
+                completion(data)
+            })
             print("COUNT AFTER UPDATE: \(tableView.numberOfSections)")
 
             // If there's no changes, let's not proceed.
