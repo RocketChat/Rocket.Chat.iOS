@@ -75,15 +75,17 @@ extension UIImage {
         let jpegImage = UIImageJPEGRepresentation(self, 1.0) ?? Data()
         let imageSize = jpegImage.byteSize
 
-        if imageSize < maxSize {
+        if imageSize < maxSize && maxSize > 0 {
             return jpegImage
         }
 
         var percentSize = UIImage.percentSizeAfterCompression(forImageWithSize: imageSize, maxExpectedSize: maxSize)
         while true {
             let compressedImage = self.compressedImage(resizedWithPercentage: percentSize)
-            if compressedImage.byteSize < maxSize {
+            if compressedImage.byteSize < maxSize || percentSize == 0.0 {
                 return compressedImage
+            } else if percentSize < 0.1 {
+                percentSize = 0.0
             } else {
                 percentSize *= 0.8
             }
