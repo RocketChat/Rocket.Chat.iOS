@@ -305,9 +305,9 @@
 "chat.messages.files.list.empty" = "Nenhum ficheiro encontrado";
 
 // Upload Banner
-"chat.banner.upload.uploading" = "Uploading %@"; // TODO
-"chat.banner.upload.error" = "Failed uploading %@"; // TODO
-"chat.banner.upload.retry" = "Try again"; // TODO
+"chat.banner.upload.uploading" = "Enviando %@";
+"chat.banner.upload.error" = "Falha ao enviar %@";
+"chat.banner.upload.retry" = "Tente novamente";
 
 // Settings
 "myaccount.settings.title" = "Preferências";
