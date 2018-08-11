@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SubscriptionCellProtocol {
-    var subscription: Subscription? { get set }
+    var subscription: Subscription.UnmanagedType? { get set }
 }
 
 class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
@@ -17,9 +17,8 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
     internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
     internal let highlightedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09530179799)
 
-    var subscription: Subscription? {
+    var subscription: Subscription.UnmanagedType? {
         didSet {
-            guard subscription?.validated() != nil else { return }
             updateSubscriptionInformation()
         }
     }
@@ -72,7 +71,7 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
     }
 
     func updateSubscriptionInformation() {
-        guard let subscription = self.subscription else { return }
+        guard let subscription = self.subscription?.managedObject else { return }
         var user: User?
 
         if subscription.type == .directMessage {

@@ -13,38 +13,22 @@ typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], 
 
 let subscriptionUpdatesHandlerQueue = DispatchQueue(label: "chat.rocket.subscription.updates.handler", qos: .background)
 
-class RealmAssorter<Object: RealmSwift.Object> {
-    typealias IndexPathsChangesEvent = (StagedChangeset<[Section<String, Object>]>, (_ newData: [Section<String, Object>]) -> Void) -> Void
-
-    // MARK: RealmSection
-
-//    struct RealmSection<Model: Differentiable, Element: Differentiable>: DifferentiableSection {
-//        typealias Model = <#type#>
-//
-//        typealias Collection = <#type#>
-//
-//        public var model: String { return name }
-//        public var elements: RealmAssorter<Object>.RealmSection<Model, Element>.Collection
-//
-//        let name: String
-//        var objects: Results<Object>
-//
-//        static func make(name: String, results: Results<Object>) -> RealmSection {
-//            return RealmSection(name: name, objects: results)
-//        }
-//    }
+class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertable> {
+    typealias IndexPathsChangesEvent = (StagedChangeset<[Section<String, Object.UnmanagedType>]>, (_ newData: [Section<String, Object.UnmanagedType>]) -> Void) -> Void
 
     struct RealmSection {
         let name: String
         var objects: Results<Object>
 
-        var section: Section<String, Object> { return Section(model: name, elements: objects) }
+        var section: Section<String, Object.UnmanagedType> {
+            return Section(model: name, elements: objects.map { $0.unmanaged })
+        }
     }
 
     // MARK: RealmAssorter
 
     private let primaryKey: String
-    private var sections: [Section<String, Object>]
+    private var sections: [Section<String, Object.UnmanagedType>]
     private var tokens: [NotificationToken]
     private var results: [RealmSection]
 
@@ -79,7 +63,6 @@ class RealmAssorter<Object: RealmSwift.Object> {
         self.model = model.observe { _ in
             let oldValue = self.sections
             let newValue = self.results.map { $0.section }
-
             print("OLD SECTIONS \(oldValue.map { $0.model })")
             print("OLD COUNT \(oldValue.map { $0.elements.count })")
             print("NEW SECTIONS \(newValue.map { $0.model })")
@@ -100,6 +83,7 @@ class RealmAssorter<Object: RealmSwift.Object> {
 //        let oldValue = self.sections
 //        sections.append(Section(model: name, elements: objects))
         print("OLD REG SECTIONS \(sections.map { $0.model })")
+//        let abc = Array(objects.map { $0.unmanaged })
         results.append(RealmSection(name: name, objects: objects))
         print("NEW REG SECTIONS \(sections.map { $0.model })")
 //        let newValue = self.sections
@@ -157,7 +141,7 @@ extension RealmAssorter {
         return sections[section].model
     }
 
-    func objectForRowAtIndexPath(_ indexPath: IndexPath) -> Object {
+    func objectForRowAtIndexPath(_ indexPath: IndexPath) -> Object.UnmanagedType {
         return sections[indexPath.section].elements[indexPath.row]
     }
 }

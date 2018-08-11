@@ -153,7 +153,7 @@ extension SubscriptionsViewModel {
         return numberOfRows > 0 && !title.isEmpty ? 55 : 0
     }
 
-    func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
+    func subscriptionForRowAt(indexPath: IndexPath) -> Subscription.UnmanagedType? {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
 
