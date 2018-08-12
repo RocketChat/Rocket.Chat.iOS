@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit', :git => 'https://github.com/Sameesunkaria/DifferenceKit.git'
+  pod 'DifferenceKit'
 end
 
 def shared_pods

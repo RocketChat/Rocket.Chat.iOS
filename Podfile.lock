@@ -2,11 +2,11 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
-  - DifferenceKit (0.3.0):
-    - DifferenceKit/Core (= 0.3.0)
-    - DifferenceKit/UIExtensions (= 0.3.0)
-  - DifferenceKit/Core (0.3.0)
-  - DifferenceKit/UIExtensions (0.3.0):
+  - DifferenceKit (0.4.0):
+    - DifferenceKit/Core (= 0.4.0)
+    - DifferenceKit/UIExtensions (= 0.4.0)
+  - DifferenceKit/Core (0.4.0)
+  - DifferenceKit/UIExtensions (0.4.0):
     - DifferenceKit/Core
   - Fabric (1.7.9)
   - Firebase/Core (5.4.1):
@@ -58,7 +58,7 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
-  - DifferenceKit (from `https://github.com/Sameesunkaria/DifferenceKit.git`)
+  - DifferenceKit
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
@@ -81,6 +81,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
     - Crashlytics
+    - DifferenceKit
     - Fabric
     - Firebase
     - FirebaseAnalytics
@@ -103,8 +104,6 @@ SPEC REPOS:
     - SwiftyJSON
 
 EXTERNAL SOURCES:
-  DifferenceKit:
-    :git: https://github.com/Sameesunkaria/DifferenceKit.git
   MobilePlayer:
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
@@ -115,9 +114,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/rafaelks/SlackTextViewController.git
 
 CHECKOUT OPTIONS:
-  DifferenceKit:
-    :commit: 3549c1bdf26f7477a32707e3fce90bdfb939ce29
-    :git: https://github.com/Sameesunkaria/DifferenceKit.git
   MobilePlayer:
     :commit: c7160990d7b50d34a45514df4535011e64541340
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
@@ -134,7 +130,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
-  DifferenceKit: a9aa5baabd2be8829c6c41a3f7cad97065c0c2bd
+  DifferenceKit: 529d32c38c0a63196c7519cfb3d6e94cab3d23ee
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
@@ -160,6 +156,6 @@ SPEC CHECKSUMS:
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: c598c7f55ccf8930499d0d750af7686a99488b67
+PODFILE CHECKSUM: bca188e748312425c8e5bd4fb90489b4bd8b77e8
 
 COCOAPODS: 1.5.3
