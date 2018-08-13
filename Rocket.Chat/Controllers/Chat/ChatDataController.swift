@@ -311,7 +311,7 @@ final class ChatDataController {
             where obj.message?.identifier == message.identifier {
                 invalidateLayout(for: obj.identifier)
 
-                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && obj.message?.markedForDeletion == message.markedForDeletion {
                    return -1
                 }
 
