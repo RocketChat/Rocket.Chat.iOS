@@ -13,79 +13,42 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription
 
     var identifier: String?
-
     var privateType: String
-
     var type: SubscriptionType
-
     var rid: String
-
     var name: String
-
     var fname: String
-
     var unread: Int
-
     var userMentions: Int
-
     var groupMentions: Int
-
     var open: Bool
-
     var alert: Bool
-
     var favorite: Bool
-
     var createdAt: Date?
-
     var lastSeen: Date?
-
     var roomTopic: String?
-
     var roomDescription: String?
-
     var roomReadOnly: Bool
-
     var roomUpdatedAt: Date?
-
     var roomLastMessage: Message?
-
     var roomLastMessageText: String?
-
     var roomLastMessageDate: Date?
-
     var roomBroadcast: Bool
-
     var roomOwnerId: String?
-
     var otherUserId: String?
-
     var disableNotifications: Bool
-
     var hideUnreadStatus: Bool
-
     var desktopNotificationDuration: Int
-
     var privateDesktopNotifications: String
-
     var privateEmailNotifications: String
-
     var privateMobilePushNotifications: String
-
     var privateAudioNotifications: String
-
     var privateAudioNotificationsValue: String
-
     var desktopNotifications: SubscriptionNotificationsStatus
-
     var emailNotifications: SubscriptionNotificationsStatus
-
     var mobilePushNotifications: SubscriptionNotificationsStatus
-
     var audioNotifications: SubscriptionNotificationsStatus
-
     var audioNotificationValue: SubscriptionNotificationsAudioValue
-
     var privateOtherUserStatus: String?
 
     func avatarURL(auth: Auth? = nil) -> URL? {

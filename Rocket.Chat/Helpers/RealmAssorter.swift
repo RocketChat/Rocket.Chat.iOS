@@ -63,65 +63,18 @@ class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertable> {
         self.model = model.observe { _ in
             let oldValue = self.sections
             let newValue = self.results.map { $0.section }
-            print("OLD SECTIONS \(oldValue.map { $0.model })")
-            print("OLD COUNT \(oldValue.map { $0.elements.count })")
-            print("NEW SECTIONS \(newValue.map { $0.model })")
-            print("NEW COUNT \(newValue.map { $0.elements.count })")
 
             let changes = StagedChangeset(source: oldValue, target: newValue)
-//            print(changes)
+
             self.didUpdateIndexPaths?(changes) { [weak self] newData in
-                self?.sections = newData
-                print("DID UPDATE CALLED")
-                print("Sections: \((self?.sections.map { $0.elements.count }) ?? [])")
+                self!.sections = newData
             }
         }
     }
 
     func registerSection(name: String, objects: Results<Object>) {
-//        let sectionIndex = sections.count
-//        let oldValue = self.sections
-//        sections.append(Section(model: name, elements: objects))
-        print("OLD REG SECTIONS \(sections.map { $0.model })")
-//        let abc = Array(objects.map { $0.unmanaged })
         results.append(RealmSection(name: name, objects: objects))
-        print("NEW REG SECTIONS \(sections.map { $0.model })")
-//        let newValue = self.sections
-//
-//        let changes = StagedChangeset(source: oldValue, target: newValue)
-//        self.didUpdateIndexPaths?(changes) { [weak self] in
-//            self?.sections = newValue
-//            print("DID UPDATE CALLED")
-//            print("Sections: \((self?.sections.map { $0.elements.count }) ?? [])")
-//        }
-
-//        tokens.append(objects.observe { _ in
-//            let oldValue = self.sections
-//            let updatedSection = Section(model: name, elements: objects)
-//            var newValue = oldValue
-//            newValue[sectionIndex] = updatedSection
-
-//            let changes = StagedChangeset(source: oldValue, target: newValue)
-//            self.didUpdateIndexPaths?(changes) { [weak self] in
-//                self?.sections[sectionIndex] = updatedSection
-//            }
-
-//            switch changes {
-//            case .update( _, let deletions, let insertions, let modifications):
-//                self.didUpdateIndexPaths?((
-//                    deletions: deletions.map({ IndexPath(row: $0, section: sectionIndex) }),
-//                    insertions: insertions.map({ IndexPath(row: $0, section: sectionIndex) }),
-//                    modifications: modifications.map({ IndexPath(row: $0, section: sectionIndex) })
-//                ))
-//            default:
-//                self.didUpdateIndexPaths?((deletions: [], insertions: [], modifications: []))
-//            }
-//        })
     }
-
-//    func clearSections() {
-//        sections.removeAll()
-//    }
 
     var didUpdateIndexPaths: IndexPathsChangesEvent?
 }
