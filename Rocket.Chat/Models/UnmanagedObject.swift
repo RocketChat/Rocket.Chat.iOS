@@ -21,7 +21,7 @@ extension UnmanagedObject {
     }
 }
 
-protocol UnmanagedConvertable {
+protocol UnmanagedConvertible {
     associatedtype UnmanagedType: UnmanagedObject
     var unmanaged: UnmanagedType { get }
 }

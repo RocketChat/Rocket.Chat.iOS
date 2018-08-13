@@ -152,7 +152,7 @@ extension Subscription {
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-            else {
+        else {
                 return nil
         }
 
@@ -164,7 +164,7 @@ extension Subscription {
     }
 }
 
-extension Subscription: UnmanagedConvertable {
+extension Subscription: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedSubscription
     var unmanaged: UnmanagedSubscription {
         return UnmanagedSubscription(subscription: self)
