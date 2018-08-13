@@ -112,9 +112,9 @@
 		333207FF20766E4F00AD3290 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333207FE20766E4F00AD3290 /* NotificationViewController.xib */; };
 		33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */; };
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
-		334F78EC211DC639003D0C5A /* UnmamagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmamagedSubscription.swift */; };
+		334F78EC211DC639003D0C5A /* UnmanagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */; };
 		334F78EE211DCB79003D0C5A /* UnmanagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */; };
-		334F78EF211DE726003D0C5A /* UnmamagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmamagedSubscription.swift */; };
+		334F78EF211DE726003D0C5A /* UnmanagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */; };
 		334F78F0211DE72D003D0C5A /* UnmanagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */; };
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
 		3397604920EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */; };
@@ -938,7 +938,7 @@
 		333207FE20766E4F00AD3290 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentToTouchesWindow.swift; sourceTree = "<group>"; };
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
-		334F78EB211DC639003D0C5A /* UnmamagedSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmamagedSubscription.swift; sourceTree = "<group>"; };
+		334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedSubscription.swift; sourceTree = "<group>"; };
 		334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedObject.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeAttributesThemeableViewSpec.swift; sourceTree = "<group>"; };
@@ -3065,7 +3065,7 @@
 			isa = PBXGroup;
 			children = (
 				41DAE93D1D318F350098E068 /* Subscription.swift */,
-				334F78EB211DC639003D0C5A /* UnmamagedSubscription.swift */,
+				334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */,
 				8076FDC62048632300114F28 /* SubscriptionQueries.swift */,
 				8076FDC420485ABB00114F28 /* SubscriptionUser.swift */,
 				8076FDC220485A2200114F28 /* SubscriptionUtils.swift */,
@@ -4599,7 +4599,7 @@
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
-				334F78EC211DC639003D0C5A /* UnmamagedSubscription.swift in Sources */,
+				334F78EC211DC639003D0C5A /* UnmanagedSubscription.swift in Sources */,
 				80054D001FDB1FA200F5ECF9 /* Alert.swift in Sources */,
 				809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */,
 				8032E3E820362EF5009D33CE /* UpdateMessageRequest.swift in Sources */,
@@ -4912,7 +4912,7 @@
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
-				334F78EF211DE726003D0C5A /* UnmamagedSubscription.swift in Sources */,
+				334F78EF211DE726003D0C5A /* UnmanagedSubscription.swift in Sources */,
 				99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */,
 				80FE8DF0206587510099170E /* SEFileDetailView.swift in Sources */,
 				805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */,

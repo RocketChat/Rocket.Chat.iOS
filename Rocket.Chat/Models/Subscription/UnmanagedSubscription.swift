@@ -1,5 +1,5 @@
 //
-//  UnmamagedSubscription.swift
+//  UnmanagedSubscription.swift
 //  Rocket.Chat
 //
 //  Created by Samar Sunkaria on 8/10/18.
@@ -12,6 +12,7 @@ import DifferenceKit
 struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription
 
+    var managed: Subscription
     var identifier: String?
     var privateType: String
     var type: SubscriptionType
@@ -58,6 +59,7 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
 
 extension UnmanagedSubscription {
     init(subscription: Subscription) {
+        managed = subscription
         identifier = subscription.identifier
         privateType = subscription.privateType
         type = subscription.type
