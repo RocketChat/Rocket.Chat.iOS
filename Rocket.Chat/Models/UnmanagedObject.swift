@@ -11,14 +11,7 @@ import DifferenceKit
 
 protocol UnmanagedObject: Differentiable {
     associatedtype Object: BaseModel
-    var identifier: String? { get }
-}
-
-extension UnmanagedObject {
-    var managedObject: Object? {
-        guard let identifier = identifier else { return nil }
-        return Object.find(withIdentifier: identifier)
-    }
+    var managedObject: Object { get }
 }
 
 protocol UnmanagedConvertible {

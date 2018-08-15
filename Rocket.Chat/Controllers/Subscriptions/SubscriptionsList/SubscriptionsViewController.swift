@@ -480,7 +480,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject?.validated()
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated()
         else {
             return nil
         }
@@ -517,17 +517,17 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject?.validated()
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
         else {
             return nil
         }
 
-        let hide = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.hide"), handler: { _, _, success in
+        let hide = UIContextualAction(style: .destructive, title: localized("subscriptions.list.actions.hide"), handler: { _, _, success in
             let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(hideRequest, completion: nil)
 
             Realm.executeOnMainThread { realm in
-                realm.delete(subscription)
+                realm.delete(subscription.managedObject)
             }
 
             success(true)
@@ -539,15 +539,15 @@ extension SubscriptionsViewController: UITableViewDelegate {
         let style: UIContextualAction.Style = SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) ? .destructive : .normal
         let favorite = UIContextualAction(style: style, title: localized(favoriteTitle), handler: { _, _, success in
 
-            SubscriptionManager.toggleFavorite(subscription) { (response) in
+            SubscriptionManager.toggleFavorite(subscription.managedObject) { (response) in
                 DispatchQueue.main.async {
                     if response.isError() {
-                        subscription.updateFavorite(!subscription.favorite)
+                        subscription.managedObject.updateFavorite(!subscription.favorite)
                     }
                 }
             }
 
-            subscription.updateFavorite(!subscription.favorite)
+            subscription.managedObject.updateFavorite(!subscription.favorite)
             success(true)
         })
 
