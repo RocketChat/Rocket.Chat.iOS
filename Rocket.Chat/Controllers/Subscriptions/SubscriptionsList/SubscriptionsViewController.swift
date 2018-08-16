@@ -494,7 +494,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
                 success(true)
             })
 
-            markUnread.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markUnread)
         } else {
             let markRead = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.read"), handler: { _, _, success in
@@ -502,7 +502,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
                 success(true)
             })
 
-            markRead.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             actions.append(markRead)
         }
 
@@ -523,7 +523,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
             success(true)
         })
 
-        hide.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
 
         let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
         let style: UIContextualAction.Style = SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) ? .destructive : .normal
