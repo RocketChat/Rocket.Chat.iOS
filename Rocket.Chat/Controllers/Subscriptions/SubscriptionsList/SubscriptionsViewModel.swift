@@ -48,14 +48,26 @@ class SubscriptionsViewModel {
         }
     }
 
+    var reloadNotificationToken: NotificationToken?
     let realm: Realm?
 
     init(realm: Realm? = Realm.current) {
         self.realm = realm
+        observeAuth()
     }
 
     deinit {
         assorter?.invalidate()
+    }
+
+    func observeAuth() {
+        reloadNotificationToken = realm?.objects(Auth.self).observe({ [weak self] _ in
+            if AuthManager.isAuthenticated() != nil {
+                DispatchQueue.main.async {
+                    self?.reloadData?()
+                }
+            }
+        })
     }
 
     func buildSections() {
@@ -123,7 +135,8 @@ class SubscriptionsViewModel {
             assorter?.didUpdateIndexPaths = self.didUpdateIndexPaths
         }
     }
-    var didRebuildSections: (() -> Void)?
+
+    var reloadData: (() -> Void)?
 }
 
 // MARK: TableView

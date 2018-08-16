@@ -147,20 +147,18 @@ extension Subscription {
 // MARK: Avatar
 
 extension Subscription {
-    static func avatarURL(name: String, auth: Auth? = nil) -> URL? {
+    func avatarURL(auth: Auth? = nil) -> URL? {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
+            print("NOT AUTH")
             return nil
         }
 
+        print("Base URL: \(baseURL)")
         return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
-    }
-
-    func avatarURL(auth: Auth? = nil) -> URL? {
-        return Subscription.avatarURL(name: self.name, auth: auth)
     }
 }
 

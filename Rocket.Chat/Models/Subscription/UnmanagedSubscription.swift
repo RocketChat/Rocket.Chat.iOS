@@ -51,10 +51,6 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var audioNotifications: SubscriptionNotificationsStatus
     var audioNotificationValue: SubscriptionNotificationsAudioValue
     var privateOtherUserStatus: String?
-
-    func avatarURL(auth: Auth? = nil) -> URL? {
-        return Subscription.avatarURL(name: self.name, auth: auth)
-    }
 }
 
 extension UnmanagedSubscription {

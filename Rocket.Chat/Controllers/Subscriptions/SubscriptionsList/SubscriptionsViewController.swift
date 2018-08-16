@@ -69,7 +69,7 @@ final class SubscriptionsViewController: BaseViewController {
             })
         }
 
-        viewModel.didRebuildSections = { [weak self] in
+        viewModel.reloadData = { [weak self] in
             self?.tableView?.reloadData()
         }
     }
@@ -581,7 +581,6 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
         viewModel.buildSections()
         updateSortingTitleDescription()
-//        tableView.reloadData()
     }
 
 }
