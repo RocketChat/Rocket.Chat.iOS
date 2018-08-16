@@ -200,6 +200,11 @@
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
 "chat.unread_separator" = "novas mensagens";
+"chat.preview.actions.read" = "Mark as Read"; // TODO
+"chat.preview.actions.unread" = "Mark as Unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Lida por";

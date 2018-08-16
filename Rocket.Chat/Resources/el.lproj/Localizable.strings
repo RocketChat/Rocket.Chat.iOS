@@ -202,6 +202,11 @@
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
 "chat.unread_separator" = "νέα μηνύματα";
+"chat.preview.actions.read" = "Mark as Read"; // TODO
+"chat.preview.actions.unread" = "Mark as Unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Διαβάστηκε από";

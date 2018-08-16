@@ -207,6 +207,11 @@
 "chat.muted" = "Vous avez été mis en sourdine";
 "chat.loading_messages" = "Chargement des messages...";
 "chat.unread_separator" = "Nouveaux messages";
+"chat.preview.actions.read" = "Mark as Read"; // TODO
+"chat.preview.actions.unread" = "Mark as Unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Chat Message Actions
 "chat.message.actions.info" = "Information sur le message";
