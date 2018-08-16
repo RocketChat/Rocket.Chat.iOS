@@ -526,8 +526,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
 
         let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
-        let style: UIContextualAction.Style = SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) ? .destructive : .normal
-        let favorite = UIContextualAction(style: style, title: localized(favoriteTitle), handler: { _, _, success in
+        let favorite = UIContextualAction(style: .normal, title: localized(favoriteTitle), handler: { _, _, success in
             subscription.favoriteSubscription()
             success(true)
         })
