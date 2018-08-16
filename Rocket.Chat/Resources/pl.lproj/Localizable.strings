@@ -202,8 +202,8 @@
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
 "chat.unread_separator" = "nowe wiadomości";
-"chat.preview.actions.read" = "Mark as Read"; // TODO
-"chat.preview.actions.unread" = "Mark as Unread"; // TODO
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
 "chat.preview.actions.favorite" = "Favorite"; // TODO
 "chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
 "chat.preview.actions.hide" = "Hide"; // TODO
