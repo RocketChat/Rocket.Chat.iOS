@@ -153,11 +153,9 @@ extension Subscription {
             let baseURL = auth.baseURL(),
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
-            print("NOT AUTH")
             return nil
         }
 
-        print("Base URL: \(baseURL)")
         return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
     }
 }

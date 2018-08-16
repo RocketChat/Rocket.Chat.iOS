@@ -13,7 +13,7 @@ struct Log {
     static func debug(_ text: String?) {
         #if DEBUG
         guard let text = text else { return }
-        print(text)
+//        print(text)
         #endif
     }
 

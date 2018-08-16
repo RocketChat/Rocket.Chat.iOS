@@ -1328,6 +1328,51 @@ extension ChatViewController: SocketConnectionHandler {
 
 }
 
+// MARK: NavigationBar Transparency
+
+extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+}
+
+// MARK: UIPreviewActions
+
+extension ChatViewController {
+    override var previewActionItems: [UIPreviewActionItem] {
+        guard let subscription = subscription, subscription.open else { return [] }
+
+        let read = UIPreviewAction(title: localized("chat.preview.actions.read"), style: .default) { (_, _) in
+            subscription.markRead()
+        }
+
+        let unread = UIPreviewAction(title: localized("chat.preview.actions.unread"), style: .default) { (_, _) in
+            subscription.markUnread()
+        }
+
+        let favoriteTitle = subscription.favorite ? "chat.preview.actions.unfavorite" : "chat.preview.actions.favorite"
+        let favorite = UIPreviewAction(title: localized(favoriteTitle), style: .default) { (_, _) in
+            subscription.favoriteSubscription()
+        }
+
+        let hide = UIPreviewAction(title: localized("chat.preview.actions.hide"), style: .destructive) { (_, _) in
+            subscription.hideSubscription()
+        }
+
+        var actions = [UIPreviewActionItem]()
+
+        if subscription.alert {
+            actions.append(read)
+        } else {
+            actions.append(unread)
+        }
+
+        actions.append(contentsOf: [favorite, hide])
+
+        return actions
+    }
+}
+
 // MARK: Themeable
 
 extension ChatViewController {
@@ -1343,13 +1388,5 @@ extension ChatViewController {
         }
 
         updateMessageSendingPermission()
-    }
-}
-
-// MARK: NavigationBar Transparency
-
-extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
-    var isNavigationBarTransparent: Bool {
-        return false
     }
 }

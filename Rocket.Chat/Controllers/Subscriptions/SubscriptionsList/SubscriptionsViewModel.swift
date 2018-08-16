@@ -62,7 +62,7 @@ class SubscriptionsViewModel {
 
     func observeAuth() {
         reloadNotificationToken = realm?.objects(Auth.self).observe({ [weak self] _ in
-            if AuthManager.isAuthenticated() != nil {
+            if self?.realm?.objects(Auth.self).count == 1 {
                 DispatchQueue.main.async {
                     self?.reloadData?()
                 }

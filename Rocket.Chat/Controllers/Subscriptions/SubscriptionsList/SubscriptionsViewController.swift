@@ -480,7 +480,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated()
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated(),
+            subscription.open
         else {
             return nil
         }
@@ -489,10 +490,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         if !subscription.alert {
             let markUnread = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.unread"), handler: { _, _, success in
-                API.current()?.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
-                Realm.executeOnMainThread { _ in
-                    subscription.alert = true
-                }
+                subscription.markUnread()
                 success(true)
             })
 
@@ -500,10 +498,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
             actions.append(markUnread)
         } else {
             let markRead = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.read"), handler: { _, _, success in
-                API.current()?.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
-                Realm.executeOnMainThread { _ in
-                    subscription.alert = false
-                }
+                subscription.markRead()
                 success(true)
             })
 
@@ -517,19 +512,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated(),
+            subscription.open
         else {
-            return nil
+            return UISwipeActionsConfiguration(actions: [])
         }
 
         let hide = UIContextualAction(style: .destructive, title: localized("subscriptions.list.actions.hide"), handler: { _, _, success in
-            let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
-            API.current()?.fetch(hideRequest, completion: nil)
-
-            Realm.executeOnMainThread { realm in
-                realm.delete(subscription.managedObject)
-            }
-
+            subscription.hideSubscription()
             success(true)
         })
 
@@ -538,16 +528,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
         let style: UIContextualAction.Style = SubscriptionsSortingManager.selectedGroupingOptions.contains(.favorites) ? .destructive : .normal
         let favorite = UIContextualAction(style: style, title: localized(favoriteTitle), handler: { _, _, success in
-
-            SubscriptionManager.toggleFavorite(subscription.managedObject) { (response) in
-                DispatchQueue.main.async {
-                    if response.isError() {
-                        subscription.managedObject.updateFavorite(!subscription.favorite)
-                    }
-                }
-            }
-
-            subscription.managedObject.updateFavorite(!subscription.favorite)
+            subscription.favoriteSubscription()
             success(true)
         })
 
