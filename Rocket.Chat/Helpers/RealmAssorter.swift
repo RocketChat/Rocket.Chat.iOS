@@ -67,7 +67,7 @@ class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
             let changes = StagedChangeset(source: oldValue, target: newValue)
 
             self.didUpdateIndexPaths?(changes) { [weak self] newData in
-                self!.sections = newData
+                self?.sections = newData
             }
         }
     }
