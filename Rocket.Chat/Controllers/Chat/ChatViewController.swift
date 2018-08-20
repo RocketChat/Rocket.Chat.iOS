@@ -32,7 +32,7 @@ final class ChatViewController: SLKTextViewController {
     lazy var uploadClient = API.current()?.client(UploadClient.self)
     lazy var bannerView: ChatBannerView? = setupBanner()
 
-    lazy var buttonScrollToBottom: UIButton! = {
+    lazy var buttonScrollToBottom: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
         button.setImage(UIImage(named: "Float Button light"), for: .normal)
@@ -209,6 +209,10 @@ final class ChatViewController: SLKTextViewController {
         updateEmptyState()
 
         chatTitleView?.state = SocketManager.sharedInstance.state
+
+        if let subscription = subscription {
+            subscribe(for: subscription)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -220,6 +224,14 @@ final class ChatViewController: SLKTextViewController {
         dataController.invalidateLayout(for: nil)
         collectionView?.setNeedsLayout()
         collectionView?.reloadData()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+
+        if let subscription = subscription {
+            unsubscribe(for: subscription)
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -564,7 +576,7 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 self?.deleteMessage(msgId: msgId)
             }
         }
