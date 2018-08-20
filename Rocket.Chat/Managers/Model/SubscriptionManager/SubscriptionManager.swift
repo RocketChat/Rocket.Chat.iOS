@@ -27,7 +27,7 @@ struct SubscriptionManager {
     static func updateSubscriptions(_ auth: Auth, realm: Realm? = Realm.current, completion: (() -> Void)?) {
         realm?.refresh()
 
-        let validAuth = auth.isInvalidated ? AuthManager.isAuthenticated(realm: realm) : auth
+        let validAuth = auth.validated() ?? AuthManager.isAuthenticated(realm: realm)
         guard let auth = validAuth else {
             return
         }
