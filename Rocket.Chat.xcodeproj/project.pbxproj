@@ -740,6 +740,7 @@
 		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		99BC81102107E3020084C948 /* DeepLinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC810F2107E3020084C948 /* DeepLinkSpec.swift */; };
 		99C29A37212A66EC00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
+		99C29A38212A6BFA00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
 		99D77C6B20E474BF008F2438 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */; };
 		99D86ABA20D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D86AB920D0C5240036C127 /* LoginTableViewControllerAuthenticationHandler.swift */; };
@@ -4885,6 +4886,7 @@
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
 				807C7C022074307F006B600E /* KMPlaceholderTextView.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
+				99C29A38212A6BFA00521266 /* ObjectExtension.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
