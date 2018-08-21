@@ -143,6 +143,8 @@
 		33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */; };
 		33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */; };
 		33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */; };
+		33F67A40212BFC40004EB4A0 /* UnmanagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */; };
+		33F67A41212C0119004EB4A0 /* UnmanagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */; };
@@ -967,6 +969,7 @@
 		33D08E2D20BD9267008D03EF /* ThemePreferenceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePreferenceViewModel.swift; sourceTree = "<group>"; };
 		33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThemePreferenceCell.swift; path = Preferences/ThemePreferenceCell.swift; sourceTree = "<group>"; };
 		33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
+		33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedUser.swift; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsSortingSeparatorView.swift; sourceTree = "<group>"; };
@@ -3095,6 +3098,7 @@
 			isa = PBXGroup;
 			children = (
 				41A79C0E1D2F085F00A1968E /* User.swift */,
+				33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */,
 				8076FDD5204864E700114F28 /* UserQueries.swift */,
 				8076FDD72048654F00114F28 /* UserUtils.swift */,
 				80CC8A1820ACE320009D64DF /* UserPermissions.swift */,
@@ -4600,6 +4604,7 @@
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
 				80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */,
+				33F67A40212BFC40004EB4A0 /* UnmanagedUser.swift in Sources */,
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
@@ -4910,6 +4915,7 @@
 				80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */,
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
+				33F67A41212C0119004EB4A0 /* UnmanagedUser.swift in Sources */,
 				807C7C022074307F006B600E /* KMPlaceholderTextView.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,

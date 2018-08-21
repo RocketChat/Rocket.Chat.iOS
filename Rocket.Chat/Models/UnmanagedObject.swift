@@ -10,8 +10,10 @@ import RealmSwift
 import DifferenceKit
 
 protocol UnmanagedObject: Differentiable {
-    associatedtype Object: BaseModel
+    associatedtype Object: BaseModel & UnmanagedConvertible
     var managedObject: Object { get }
+
+    init(_: Object)
 }
 
 protocol UnmanagedConvertible {

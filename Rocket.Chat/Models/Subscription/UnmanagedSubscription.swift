@@ -51,10 +51,11 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var audioNotifications: SubscriptionNotificationsStatus
     var audioNotificationValue: SubscriptionNotificationsAudioValue
     var privateOtherUserStatus: String?
+    var directMessageUser: UnmanagedUser?
 }
 
 extension UnmanagedSubscription {
-    init(subscription: Subscription) {
+    init(_ subscription: Subscription) {
         managedObject = subscription
         identifier = subscription.identifier
         privateType = subscription.privateType
@@ -94,6 +95,7 @@ extension UnmanagedSubscription {
         audioNotifications = subscription.audioNotifications
         audioNotificationValue = subscription.audioNotificationValue
         privateOtherUserStatus = subscription.privateOtherUserStatus
+        directMessageUser = subscription.directMessageUser?.unmanaged
     }
 }
 

@@ -47,3 +47,10 @@ extension User {
         return lhs.identifier == rhs.identifier
     }
 }
+
+extension User: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedUser
+    var unmanaged: UnmanagedUser {
+        return UnmanagedUser(self)
+    }
+}

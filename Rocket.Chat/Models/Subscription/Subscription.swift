@@ -163,6 +163,6 @@ extension Subscription {
 extension Subscription: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedSubscription
     var unmanaged: UnmanagedSubscription {
-        return UnmanagedSubscription(subscription: self)
+        return UnmanagedSubscription(self)
     }
 }
