@@ -502,6 +502,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
                 }
 
                 markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                markUnread.image = #imageLiteral(resourceName: "Swipe unread")
                 return [markUnread]
 
             } else {
@@ -510,6 +511,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
                 }
 
                 markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                markRead.image = #imageLiteral(resourceName: "Swipe read")
                 return [markRead]
             }
 
@@ -519,6 +521,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
             }
 
             hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
+            hide.image = #imageLiteral(resourceName: "Swipe hide")
 
             let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
             let favorite = SwipeAction(style: .default, title: localized(favoriteTitle)) { _, _ in
@@ -526,6 +529,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
             }
 
             favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
+            favorite.image = subscription.favorite ? #imageLiteral(resourceName: "Swipe unfavorite") : #imageLiteral(resourceName: "Swipe favorite")
 
             return [hide, favorite]
         }

@@ -154,8 +154,8 @@
 "subscriptions.list.no_message" = "Nenhuma mensagem";
 "subscriptions.list.sent_an_attachment" = "enviou um anexo";
 "subscriptions.list.date.yesterday" = "Ontem";
-"subscriptions.list.actions.read" = "Marcar como\nLido";
-"subscriptions.list.actions.unread" = "Marcar como\n Não lido";
+"subscriptions.list.actions.read" = "Lido";
+"subscriptions.list.actions.unread" = "Não lido";
 "subscriptions.list.actions.favorite" = "Favorite"; // TODO
 "subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
 "subscriptions.list.actions.hide" = "Fechar";

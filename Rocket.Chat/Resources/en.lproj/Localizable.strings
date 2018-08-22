@@ -154,8 +154,8 @@
 "subscriptions.list.no_message" = "No message";
 "subscriptions.list.sent_an_attachment" = "sent an attachment";
 "subscriptions.list.date.yesterday" = "Yesterday";
-"subscriptions.list.actions.read" = "Mark as\nRead";
-"subscriptions.list.actions.unread" = "Mark as\nUnread";
+"subscriptions.list.actions.read" = "Read";
+"subscriptions.list.actions.unread" = "Unread";
 "subscriptions.list.actions.favorite" = "Favorite";
 "subscriptions.list.actions.unfavorite" = "Unfavorite";
 "subscriptions.list.actions.hide" = "Hide";
