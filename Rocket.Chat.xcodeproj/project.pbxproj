@@ -145,6 +145,7 @@
 		33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */; };
 		33F67A40212BFC40004EB4A0 /* UnmanagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */; };
 		33F67A41212C0119004EB4A0 /* UnmanagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */; };
+		33F67A44212D8F62004EB4A0 /* DifferenceKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F67A43212D8F62004EB4A0 /* DifferenceKitExtension.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */; };
@@ -970,6 +971,7 @@
 		33D08E3020BD92A5008D03EF /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThemePreferenceCell.swift; path = Preferences/ThemePreferenceCell.swift; sourceTree = "<group>"; };
 		33E33ED520E0E59B00EF4560 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		33F67A3F212BFC40004EB4A0 /* UnmanagedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedUser.swift; sourceTree = "<group>"; };
+		33F67A43212D8F62004EB4A0 /* DifferenceKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceKitExtension.swift; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsSortingSeparatorView.swift; sourceTree = "<group>"; };
@@ -2330,6 +2332,7 @@
 				80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */,
 				8076FDA8204853DE00114F28 /* RealmExecute.swift */,
 				8076FDA32048533000114F28 /* String+Random.swift */,
+				33F67A43212D8F62004EB4A0 /* DifferenceKitExtension.swift */,
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
 				412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */,
 				4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */,
@@ -4480,6 +4483,7 @@
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
 				33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */,
 				995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */,
+				33F67A44212D8F62004EB4A0 /* DifferenceKitExtension.swift in Sources */,
 				41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				8076FDB92048581F00114F28 /* AuthManagerCurrentUser.swift in Sources */,

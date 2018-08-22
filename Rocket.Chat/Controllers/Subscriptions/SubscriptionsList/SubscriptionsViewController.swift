@@ -65,7 +65,7 @@ final class SubscriptionsViewController: BaseViewController {
             // Update back button title with the number of unreads
             self?.updateBackButton()
 
-            tableView.reload(using: changes, with: .fade, setData: { data in
+            tableView.reload(using: changes, withDefault: .fade, reload: .none, setData: { data in
                 completion(data)
             })
         }
