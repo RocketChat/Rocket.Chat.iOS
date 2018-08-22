@@ -14,21 +14,21 @@ typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], 
 let subscriptionUpdatesHandlerQueue = DispatchQueue(label: "chat.rocket.subscription.updates.handler", qos: .background)
 
 class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
-    typealias IndexPathsChangesEvent = (StagedChangeset<[Section<String, Object.UnmanagedType>]>, (_ newData: [Section<String, Object.UnmanagedType>]) -> Void) -> Void
+    typealias IndexPathsChangesEvent = (StagedChangeset<[ArraySection<String, Object.UnmanagedType>]>, (_ newData: [ArraySection<String, Object.UnmanagedType>]) -> Void) -> Void
 
     struct RealmSection {
         let name: String
         var objects: Results<Object>
 
-        var section: Section<String, Object.UnmanagedType> {
-            return Section(model: name, elements: objects.map { $0.unmanaged })
+        var section: ArraySection<String, Object.UnmanagedType> {
+            return ArraySection(model: name, elements: objects.map { $0.unmanaged })
         }
     }
 
     // MARK: RealmAssorter
 
     private let primaryKey: String
-    private var sections: [Section<String, Object.UnmanagedType>]
+    private var sections: [ArraySection<String, Object.UnmanagedType>]
     private var tokens: [NotificationToken]
     private var results: [RealmSection]
 

@@ -32,6 +32,7 @@ def shared_pods
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'SwipeCellKit'
   ui_pods
 
   # Text Processing
@@ -76,7 +77,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin', 'DifferenceKit']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin', 'DifferenceKit', 'SwipeCellKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'

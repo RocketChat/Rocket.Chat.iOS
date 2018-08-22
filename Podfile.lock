@@ -2,11 +2,11 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
-  - DifferenceKit (0.4.1):
-    - DifferenceKit/Core (= 0.4.1)
-    - DifferenceKit/UIExtensions (= 0.4.1)
-  - DifferenceKit/Core (0.4.1)
-  - DifferenceKit/UIExtensions (0.4.1):
+  - DifferenceKit (0.5.0):
+    - DifferenceKit/Core (= 0.5.0)
+    - DifferenceKit/UIExtensions (= 0.5.0)
+  - DifferenceKit/Core (0.5.0)
+  - DifferenceKit/UIExtensions (0.5.0):
     - DifferenceKit/Core
   - Fabric (1.7.9)
   - Firebase/Core (5.4.1):
@@ -54,6 +54,7 @@ PODS:
   - Starscream (2.1.1)
   - SwiftLint (0.26.0)
   - SwiftyJSON (4.1.0)
+  - SwipeCellKit (2.4.3)
 
 DEPENDENCIES:
   - 1PasswordExtension
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - Starscream (~> 2)
   - SwiftLint
   - SwiftyJSON
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -102,6 +104,7 @@ SPEC REPOS:
     - Starscream
     - SwiftLint
     - SwiftyJSON
+    - SwipeCellKit
 
 EXTERNAL SOURCES:
   MobilePlayer:
@@ -130,7 +133,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
-  DifferenceKit: a99f32418940d2ac3022168e191e1efc145a2e00
+  DifferenceKit: 6fb7e9f433f548fd43f3fcbaad3d258f3a2282f7
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
@@ -155,7 +158,8 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwipeCellKit: cee9906e6d3a36e22ad1a852fba7f8fa0839d113
 
-PODFILE CHECKSUM: bca188e748312425c8e5bd4fb90489b4bd8b77e8
+PODFILE CHECKSUM: 2d29f07ced92afa94400d9b31d2b092280c27bb3
 
 COCOAPODS: 1.5.3

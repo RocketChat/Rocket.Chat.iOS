@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SwipeCellKit
 
 // swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController {
@@ -406,6 +407,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
+        (cell as? SwipeTableViewCell)?.delegate = self
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             cell.accessoryType = .none
@@ -480,9 +482,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
             splitViewController?.showDetailViewController(nav, sender: self)
         }
     }
+}
 
-    @available(iOS 11.0, *)
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+extension SubscriptionsViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+
         guard
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated(),
             subscription.open
@@ -490,55 +494,48 @@ extension SubscriptionsViewController: UITableViewDelegate {
             return nil
         }
 
-        var actions: [UIContextualAction] = []
+        switch orientation {
+        case .left:
+            if !subscription.alert {
+                let markUnread = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.unread")) { _, _ in
+                    subscription.markUnread()
+                }
 
-        if !subscription.alert {
-            let markUnread = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.unread"), handler: { _, _, success in
-                subscription.markUnread()
-                success(true)
-            })
+                markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                return [markUnread]
 
-            markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            actions.append(markUnread)
-        } else {
-            let markRead = UIContextualAction(style: .normal, title: localized("subscriptions.list.actions.read"), handler: { _, _, success in
-                subscription.markRead()
-                success(true)
-            })
+            } else {
+                let markRead = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.read")) { _, _ in
+                    subscription.markRead()
+                }
 
-            markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            actions.append(markRead)
+                markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                return [markRead]
+            }
+
+        case .right:
+            let hide = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.hide")) { _, _ in
+                subscription.hideSubscription()
+            }
+
+            hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
+
+            let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
+            let favorite = SwipeAction(style: .default, title: localized(favoriteTitle)) { _, _ in
+                subscription.favoriteSubscription()
+            }
+
+            favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
+
+            return [hide, favorite]
         }
-
-        return UISwipeActionsConfiguration(actions: actions)
     }
 
-    @available(iOS 11.0, *)
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated(),
-            subscription.open
-        else {
-            return UISwipeActionsConfiguration(actions: [])
-        }
-
-        let hide = UIContextualAction(style: .destructive, title: localized("subscriptions.list.actions.hide"), handler: { _, _, success in
-            subscription.hideSubscription()
-            success(true)
-        })
-
-        hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
-
-        let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
-        let favorite = UIContextualAction(style: .normal, title: localized(favoriteTitle), handler: { _, _, success in
-            subscription.favoriteSubscription()
-            success(true)
-        })
-
-        favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
-
-        let actions = [hide, favorite].compactMap { $0 }
-        return UISwipeActionsConfiguration(actions: actions)
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle =  .selection
+        options.transitionStyle = .border
+        return options
     }
 }
 
