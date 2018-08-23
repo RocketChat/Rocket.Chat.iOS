@@ -38,7 +38,7 @@
                 <constraint firstItem="gd8-ny-3Np" firstAttribute="leading" secondItem="SwS-x7-2jR" secondAttribute="leading" id="K5J-CV-6dJ"/>
                 <constraint firstItem="gd8-ny-3Np" firstAttribute="trailing" secondItem="SwS-x7-2jR" secondAttribute="trailing" id="MYk-K7-viX"/>
                 <constraint firstItem="SwS-x7-2jR" firstAttribute="trailing" secondItem="gOj-Q6-yQs" secondAttribute="trailing" constant="16" id="S8t-kq-5ZF"/>
-                <constraint firstItem="gOj-Q6-yQs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZmT-uy-R4W"/>
+                <constraint firstItem="gOj-Q6-yQs" firstAttribute="top" secondItem="SwS-x7-2jR" secondAttribute="top" constant="13.5" id="zGn-Dp-2U7"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
