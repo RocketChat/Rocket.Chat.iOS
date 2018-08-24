@@ -320,6 +320,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     @objc func recognizeTitleViewTapGesture(_ recognizer: UITapGestureRecognizer) {
+        guard #available(iOS 11.0, *) else {
+            return toggleServersList()
+        }
+
         if shouldRespondToTap(recognizer: recognizer, inset: 6) {
             toggleServersList()
         }

@@ -153,8 +153,9 @@ extension PushManager {
             AppManager.changeSelectedServer(index: index)
         } else {
              if let auth = AuthManager.isAuthenticated() {
-                if let subscription = Subscription.notificationSubscription(auth: auth) {
-                    AppManager.open(room: subscription)
+                let openSubscription = MainSplitViewController.chatViewController?.subscription
+                if let subscription = Subscription.notificationSubscription(auth: auth), subscription != openSubscription {
+                    AppManager.open(room: subscription, animated: false)
                 }
              }
         }

@@ -183,6 +183,12 @@ final class ConnectServerViewController: BaseViewController {
             controller.serverVersion = infoRequestHandler.version
             controller.serverURL = url
             controller.serverPublicSettings = serverPublicSettings
+
+            if let credentials = deepLinkCredentials {
+                _ = controller.view
+                controller.authenticateWithDeepLinkCredentials(credentials)
+                deepLinkCredentials = nil
+            }
         }
 
         if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
