@@ -145,8 +145,8 @@ extension MainSplitViewController {
             let offset = chatViewController?.collectionView?.contentOffset,
             let maxHeight = chatViewController?.collectionView?.contentSize.height,
             let collectionView = chatViewController?.collectionView
-            else {
-                return
+        else {
+            return
         }
 
         let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -50.0 : 50.0
