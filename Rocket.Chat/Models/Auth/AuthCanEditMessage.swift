@@ -21,15 +21,15 @@ extension Auth {
             let createdAt = message.createdAt,
             let user = user,
             let settings = settings
-            else {
-                return .unknown
+        else {
+            return .unknown
         }
 
         if !message.type.actionable {
             return .notActionable
         }
 
-        if user.hasPermission(.editMessage, realm: self.realm) {
+        if user.hasPermission(.editMessage, subscription: message.subscription, realm: self.realm) {
             return .allowed
         }
 
