@@ -1355,20 +1355,20 @@ extension ChatViewController {
         guard let subscription = subscription, subscription.open else { return [] }
 
         let read = UIPreviewAction(title: localized("chat.preview.actions.read"), style: .default) { (_, _) in
-            subscription.markRead()
+            API.current()?.client(SubscriptionsClient.self).markRead(subscription: subscription)
         }
 
         let unread = UIPreviewAction(title: localized("chat.preview.actions.unread"), style: .default) { (_, _) in
-            subscription.markUnread()
+            API.current()?.client(SubscriptionsClient.self).markUnread(subscription: subscription)
         }
 
         let favoriteTitle = subscription.favorite ? "chat.preview.actions.unfavorite" : "chat.preview.actions.favorite"
         let favorite = UIPreviewAction(title: localized(favoriteTitle), style: .default) { (_, _) in
-            subscription.favoriteSubscription()
+            API.current()?.client(SubscriptionsClient.self).favoriteSubscription(subscription: subscription)
         }
 
         let hide = UIPreviewAction(title: localized("chat.preview.actions.hide"), style: .destructive) { (_, _) in
-            subscription.hideSubscription()
+            API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
         }
 
         var actions = [UIPreviewActionItem]()

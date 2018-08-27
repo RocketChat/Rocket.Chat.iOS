@@ -498,7 +498,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
         case .left:
             if !subscription.alert {
                 let markUnread = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.unread")) { _, _ in
-                    subscription.markUnread()
+                    API.current()?.client(SubscriptionsClient.self).markUnread(subscription: subscription)
                 }
 
                 markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -507,7 +507,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
 
             } else {
                 let markRead = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.read")) { _, _ in
-                    subscription.markRead()
+                    API.current()?.client(SubscriptionsClient.self).markRead(subscription: subscription)
                 }
 
                 markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -517,7 +517,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
 
         case .right:
             let hide = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.hide")) { _, _ in
-                subscription.hideSubscription()
+                API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
             }
 
             hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
@@ -525,7 +525,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
 
             let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
             let favorite = SwipeAction(style: .default, title: localized(favoriteTitle)) { _, _ in
-                subscription.favoriteSubscription()
+                API.current()?.client(SubscriptionsClient.self).favoriteSubscription(subscription: subscription)
             }
 
             favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)

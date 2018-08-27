@@ -112,7 +112,6 @@
 		333207FF20766E4F00AD3290 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333207FE20766E4F00AD3290 /* NotificationViewController.xib */; };
 		33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */; };
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
-		334DFB182125AB5900042B03 /* SubscriptionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334DFB172125AB5900042B03 /* SubscriptionActions.swift */; };
 		334F78EC211DC639003D0C5A /* UnmanagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */; };
 		334F78EE211DCB79003D0C5A /* UnmanagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */; };
 		334F78EF211DE726003D0C5A /* UnmanagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */; };
@@ -942,7 +941,6 @@
 		333207FE20766E4F00AD3290 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentToTouchesWindow.swift; sourceTree = "<group>"; };
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
-		334DFB172125AB5900042B03 /* SubscriptionActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionActions.swift; sourceTree = "<group>"; };
 		334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedSubscription.swift; sourceTree = "<group>"; };
 		334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedObject.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -3078,7 +3076,6 @@
 				8076FDC420485ABB00114F28 /* SubscriptionUser.swift */,
 				8076FDC220485A2200114F28 /* SubscriptionUtils.swift */,
 				8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */,
-				334DFB172125AB5900042B03 /* SubscriptionActions.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -4561,7 +4558,6 @@
 				4124D835209A0533005374CD /* ChatDirectMessageHeaderCell.swift in Sources */,
 				413FB6DD1FE17E4500F010AA /* LoaderView.swift in Sources */,
 				8076FDC320485A2200114F28 /* SubscriptionUtils.swift in Sources */,
-				334DFB182125AB5900042B03 /* SubscriptionActions.swift in Sources */,
 				33D08E2420BD5EDC008D03EF /* ThemeableViewControllers.swift in Sources */,
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
 				33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */,
