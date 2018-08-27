@@ -286,7 +286,6 @@
 "chat.info.item.starred" = "Favorisiert";
 "chat.info.item.files" = "Dateien";
 "chat.info.item.mentions" = "Erwähnungen";
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.share" = "Teilen";
 
 // Members List

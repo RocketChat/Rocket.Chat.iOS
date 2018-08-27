@@ -3689,6 +3689,7 @@
 				FC8FBCDB0132F52FB242368E /* [CP] Embed Pods Frameworks */,
 				FD5E5CD0D343F2BAB726ADF9 /* 📦 Embed Pods Frameworks */,
 				807FB5672046E7DD00E21429 /* Embed App Extensions */,
+				805378D121344458004A3D16 /* Validate Strings */,
 			);
 			buildRules = (
 			);
@@ -4066,6 +4067,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		805378D121344458004A3D16 /* Validate Strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Validate Strings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/Scripts/Localize.swift";
 		};
 		D37272A11E13E60E00A25E1A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

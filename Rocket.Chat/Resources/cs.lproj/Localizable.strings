@@ -285,7 +285,6 @@
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.files" = "Files"; // TODO
 "chat.info.item.share" = "Share"; // TODO
 

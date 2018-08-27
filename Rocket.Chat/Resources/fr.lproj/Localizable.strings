@@ -272,6 +272,7 @@
 "chat.message.type.subscription_role_removed" = "%@ n'est plus %@ par %@";
 "chat.message.type.room_archived" = "Cette salle a été archivée par %@";
 "chat.message.type.room_unarchived" = "Cette salle a été désarchivée par %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
