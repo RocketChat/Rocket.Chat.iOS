@@ -2,11 +2,11 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
-  - DifferenceKit (0.5.0):
-    - DifferenceKit/Core (= 0.5.0)
-    - DifferenceKit/UIExtensions (= 0.5.0)
-  - DifferenceKit/Core (0.5.0)
-  - DifferenceKit/UIExtensions (0.5.0):
+  - DifferenceKit (0.5.2):
+    - DifferenceKit/Core (= 0.5.2)
+    - DifferenceKit/UIExtensions (= 0.5.2)
+  - DifferenceKit/Core (0.5.2)
+  - DifferenceKit/UIExtensions (0.5.2):
     - DifferenceKit/Core
   - Fabric (1.7.9)
   - Firebase/Core (5.4.1):
@@ -133,7 +133,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
-  DifferenceKit: 6fb7e9f433f548fd43f3fcbaad3d258f3a2282f7
+  DifferenceKit: 3999ddee5146dbd12d7418e2b907c6f5e2673805
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
