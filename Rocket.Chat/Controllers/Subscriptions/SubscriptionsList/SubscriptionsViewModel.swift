@@ -64,7 +64,7 @@ class SubscriptionsViewModel {
         reloadNotificationToken = realm?.objects(Auth.self).observe({ [weak self] _ in
             if self?.realm?.objects(Auth.self).count == 1 {
                 DispatchQueue.main.async {
-                    self?.reloadData?()
+                    self?.updateVisibleCells?()
                 }
             }
         })
@@ -137,7 +137,7 @@ class SubscriptionsViewModel {
         }
     }
 
-    var reloadData: (() -> Void)?
+    var updateVisibleCells: (() -> Void)?
 }
 
 // MARK: TableView

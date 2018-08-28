@@ -75,7 +75,7 @@ final class SubscriptionsViewController: BaseViewController {
             }, setData: { completion($0) })
         }
 
-        viewModel.reloadData = { [weak self] in
+        viewModel.updateVisibleCells = { [weak self] in
             for indexPath in self?.tableView.indexPathsForVisibleRows ?? [] {
                 if let cell = self?.tableView.cellForRow(at: indexPath) as? BaseSubscriptionCell {
                     self?.loadContents(for: cell, at: indexPath)
