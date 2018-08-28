@@ -65,9 +65,14 @@ final class SubscriptionsViewController: BaseViewController {
             // Update back button title with the number of unreads
             self?.updateBackButton()
 
-            tableView.reload(using: changes, withDefault: .fade, reload: .none, setData: { data in
-                completion(data)
-            })
+            tableView.reload(using: changes, with: .fade, updateRows: { indexPaths in
+                for indexPath in indexPaths {
+                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false,
+                        let cell = tableView.cellForRow(at: indexPath) as? BaseSubscriptionCell {
+                        self?.loadContents(for: cell, at: indexPath)
+                    }
+                }
+            }, setData: { completion($0) })
         }
 
         viewModel.reloadData = { [weak self] in
@@ -423,9 +428,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
-            cell.subscription = subscription
-        }
+        loadContents(for: cell, at: indexPath)
 
         return cell
     }
@@ -435,11 +438,15 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        loadContents(for: cell, at: indexPath)
+
+        return cell
+    }
+
+    func loadContents(for cell: BaseSubscriptionCell, at indexPath: IndexPath) {
         if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
             cell.subscription = subscription
         }
-
-        return cell
     }
 }
 
