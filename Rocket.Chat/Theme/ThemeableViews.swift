@@ -60,7 +60,11 @@ extension UIView: ThemeProvider {
             "_UIAlertControllerView"
         ]
 
-        guard !exemptedInternalViews.contains(type(of: self).description()) else { return nil }
+        let exemptedExternalViews = [
+            "SwipeCellKit.SwipeActionsView"
+        ]
+
+        guard !(exemptedInternalViews + exemptedExternalViews).contains(type(of: self).description()) else { return nil }
         guard let superview = superview else { return ThemeManager.theme }
         if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
         return superview.theme
