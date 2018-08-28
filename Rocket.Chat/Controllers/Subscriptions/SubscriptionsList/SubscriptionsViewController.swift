@@ -535,6 +535,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
                 API.current()?.client(SubscriptionsClient.self).favoriteSubscription(subscription: subscription)
             }
 
+            favorite.hidesWhenSelected = true
             favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
             favorite.image = subscription.favorite ? #imageLiteral(resourceName: "Swipe unfavorite") : #imageLiteral(resourceName: "Swipe favorite")
 
@@ -544,7 +545,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
 
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
-        options.expansionStyle =  .selection
+        options.expansionStyle = .selection
         options.transitionStyle = .border
         return options
     }
