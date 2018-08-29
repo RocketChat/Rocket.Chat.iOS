@@ -168,7 +168,7 @@ extension SocketManager {
 
             infoClient.fetchInfo(realm: currentRealm, completion: {
                 SubscriptionManager.updateSubscriptions(auth, realm: currentRealm) {
-                    let validAuth = auth.isInvalidated ? AuthManager.isAuthenticated(realm: currentRealm) : auth
+                    let validAuth = auth.validated() ?? AuthManager.isAuthenticated(realm: currentRealm)
                     guard let auth = validAuth else {
                         return
                     }
