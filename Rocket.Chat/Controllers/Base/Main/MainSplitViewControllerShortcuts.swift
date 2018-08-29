@@ -127,14 +127,26 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutUpload(_ command: UIKeyCommand) {
+        guard chatViewController?.subscription != nil else {
+            return
+        }
+
         chatViewController?.toggleUpload()
     }
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
+        guard chatViewController?.subscription != nil else {
+            return
+        }
+
         chatViewController?.toggleActions()
     }
 
     @objc func shortcutRoomMessageSearch(_ command: UIKeyCommand) {
+        guard chatViewController?.subscription != nil else {
+            return
+        }
+
         chatViewController?.toggleSearchMessages()
     }
 
