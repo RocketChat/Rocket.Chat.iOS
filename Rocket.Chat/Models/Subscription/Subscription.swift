@@ -146,9 +146,15 @@ extension Subscription {
         return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
     }
 
-    func setTemporaryMessagesFailed() {
+    func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
+        guard let user = user else {
+            return
+        }
+
         try? realm?.write {
-            messages.filter("temporary = true").forEach {
+            messages.filter("temporary = true").filter({
+                $0.user == user
+            }).forEach {
                 $0.temporary = false
                 $0.failed = true
             }
