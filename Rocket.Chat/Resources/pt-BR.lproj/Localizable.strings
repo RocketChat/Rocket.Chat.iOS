@@ -156,9 +156,9 @@
 "subscriptions.list.date.yesterday" = "Ontem";
 "subscriptions.list.actions.read" = "Lido";
 "subscriptions.list.actions.unread" = "Não lido";
-"subscriptions.list.actions.favorite" = "Favorite"; // TODO
-"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
-"subscriptions.list.actions.hide" = "Fechar";
+"subscriptions.list.actions.favorite" = "Favoritar";
+"subscriptions.list.actions.unfavorite" = "Desfavoritar";
+"subscriptions.list.actions.hide" = "Esconder";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
