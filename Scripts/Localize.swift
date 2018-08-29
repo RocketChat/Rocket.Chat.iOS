@@ -301,7 +301,6 @@ for file in localizationFiles {
     for k in masterLocalizationfile.keyValue.keys {
         if let v = file.keyValue[k] {
             if careAboutUntranslated && v == masterLocalizationfile.keyValue[k] {
-                file.
                 if !ignoredFromSameTranslation[file.name]!.contains(k) {
                     let str = "\(path)/\(file.name).lproj/Localizable.strings"
                         + ":\(file.linesNumbers[k]!): "
