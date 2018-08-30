@@ -282,6 +282,7 @@
 "chat.message.type.subscription_role_removed" = "%@ utracił rolę %@ przez %@";
 "chat.message.type.room_archived" = "Kanał został zarchiwizowany przez %@";
 "chat.message.type.room_unarchived" = "Kanał został od archiwizowany przez %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informacje";
@@ -293,7 +294,6 @@
 "chat.info.item.members" = "Członkowie";
 "chat.info.item.pinned" = "Przypięte";
 "chat.info.item.starred" = "Oznaczone gwiazdką";
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.mentions" = "Wzmianki";
 "chat.info.item.files" = "Pliki";
 "chat.info.item.share" = "Udostępnij";
