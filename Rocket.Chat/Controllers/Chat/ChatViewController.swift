@@ -206,6 +206,10 @@ final class ChatViewController: SLKTextViewController {
         ThemeManager.addObserver(navigationController?.navigationBar)
         setupAutoCompletionSeparator()
         textInputbar.applyTheme()
+
+        textInputbar.textView.inputAssistantItem.leadingBarButtonGroups = []
+        textInputbar.textView.inputAssistantItem.trailingBarButtonGroups = []
+
         updateEmptyState()
 
         chatTitleView?.state = SocketManager.sharedInstance.state

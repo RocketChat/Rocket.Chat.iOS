@@ -464,3 +464,21 @@
 "subscriptions.grouping.type" = "Group by type";
 "subscriptions.grouping.favorites" = "Group by favorites";
 "subscriptions.grouping.unread_top" = "Unread on top";
+
+// Shortcuts
+"shortcuts.type_message" = "Type message";
+"shortcuts.preferences" = "Preferences";
+"shortcuts.room_search" = "Rooms search";
+"shortcuts.room_selection" = "Room selection 1...9";
+"shortcuts.next_room" = "Next room";
+"shortcuts.previous_room" = "Previous room";
+"shortcuts.new_room" = "New room";
+"shortcuts.room_actions" = "Room actions";
+"shortcuts.upload_room" = "Upload to room";
+"shortcuts.search_messages" = "Search messages";
+"shortcuts.scroll_messages" = "Scroll messages";
+"shortcuts.reply_latest" = "Reply to latest";
+"shortcuts.server_selection" = "Server selection";
+"shortcuts.server_selection_numbers" = "Server selection 1...9";
+"shortcuts.add_server" = "Add server";
+"shortcuts.change_theme" = "Change theme";

@@ -328,16 +328,32 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func toggleServersList() {
+        if serversView != nil {
+            closeServersList()
+        } else {
+            openServersList()
+        }
+    }
+
+    func openServersList() {
+        guard serversView == nil else {
+            return
+        }
+
         sortingView?.close()
 
-        if let serversView = serversView {
-            titleView?.updateTitleImage(reverse: false)
-            serversView.close()
-        } else {
-            titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-            serversView?.delegate = self
+        titleView?.updateTitleImage(reverse: true)
+        serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
+        serversView?.delegate = self
+    }
+
+    func closeServersList() {
+        guard let serversView = serversView else {
+            return
         }
+
+        titleView?.updateTitleImage(reverse: false)
+        serversView.close()
     }
 
     private var frameForDropDownOverlay: CGRect {
@@ -469,6 +485,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        onSelectRowAt(indexPath)
+    }
+
+    func onSelectRowAt(_ indexPath: IndexPath) {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
 
         searchController?.searchBar.resignFirstResponder()
@@ -611,6 +631,37 @@ extension SubscriptionsViewController {
             titleView?.updateTitleImage(reverse: true)
         } else {
             titleView?.updateTitleImage(reverse: false)
+        }
+    }
+}
+
+// MARK: Room Selection Helpers
+
+extension SubscriptionsViewController {
+    func selectRoomAt(_ index: Int) {
+        guard
+            let indexPath = viewModel.indexPathForAbsoluteIndex(index),
+            indexPath.row >= 0 && indexPath.section >= 0
+        else {
+            return
+        }
+
+        onSelectRowAt(indexPath)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
+    func selectNextRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) + 1)
+        }
+    }
+
+    func selectPreviousRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) - 1)
         }
     }
 }
