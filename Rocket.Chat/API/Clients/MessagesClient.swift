@@ -171,6 +171,18 @@ struct MessagesClient: APIClient {
             return false
         }
 
+        // optimistic UI update
+
+        let message = Message(value: message)
+        try? realm?.write {
+            message.updatedAt = Date()
+            message.temporary = true
+            message.text = text
+            realm?.add(message, update: true)
+        }
+
+        // send request
+
         let request = UpdateMessageRequest(roomId: message.rid, msgId: id, text: text)
 
         api.fetch(request) { response in

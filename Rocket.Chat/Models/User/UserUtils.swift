@@ -10,17 +10,23 @@ import RealmSwift
 
 extension User {
     func displayName() -> String {
-        guard let settings = AuthSettingsManager.settings else {
-            return username ?? ""
+        guard let validatedUser = validated() else {
+            return ""
         }
 
-        if let name = name {
+        let username = validatedUser.username ?? ""
+
+        guard let settings = AuthSettingsManager.settings else {
+            return username
+        }
+
+        if let name = validatedUser.name {
             if settings.useUserRealName && !name.isEmpty {
                 return name
             }
         }
 
-        return username ?? ""
+        return username
     }
 
     func avatarURL(_ auth: Auth? = nil) -> URL? {

@@ -23,15 +23,15 @@ extension Auth {
             let createdAt = message.createdAt,
             let user = user,
             let settings = settings
-            else {
-                return .unknown
+        else {
+            return .unknown
         }
 
         if !message.type.actionable {
             return .notActionable
         }
 
-        if user.hasPermission(.forceDeleteMessage, realm: self.realm) {
+        if user.hasPermission(.forceDeleteMessage, subscription: message.subscription, realm: self.realm) {
             return .allowed
         }
 

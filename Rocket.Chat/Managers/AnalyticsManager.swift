@@ -97,6 +97,7 @@ struct AnalyticsManager {
 }
 
 extension Event {
+    // swiftlint:disable cyclomatic_complexity
     func name(for provider: AnalyticsProvider? = nil) -> String {
         switch self {
         case .signup:
