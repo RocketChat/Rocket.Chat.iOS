@@ -29,7 +29,8 @@ final class SubscriptionCell: BaseSubscriptionCell {
     }
 
     override func updateSubscriptionInformation() {
-        guard let subscription = self.subscription else { return }
+        guard let subscription = subscription else { return }
+
         labelLastMessage.text = subscription.roomLastMessageText
 
         if let roomLastMessage = subscription.roomLastMessage?.createdAt {
@@ -56,7 +57,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
     private func setDateColor() {
         guard
             let theme = theme,
-            let subscription = subscription?.validated()
+            let subscription = subscription
         else {
             return
         }

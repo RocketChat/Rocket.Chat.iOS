@@ -154,6 +154,11 @@
 "subscriptions.list.no_message" = "Nenhuma mensagem";
 "subscriptions.list.sent_an_attachment" = "enviou um anexo";
 "subscriptions.list.date.yesterday" = "Ontem";
+"subscriptions.list.actions.read" = "Lido";
+"subscriptions.list.actions.unread" = "Não lido";
+"subscriptions.list.actions.favorite" = "Favoritar";
+"subscriptions.list.actions.unfavorite" = "Desfavoritar";
+"subscriptions.list.actions.hide" = "Esconder";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
@@ -202,6 +207,11 @@
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
 "chat.unread_separator" = "novas mensagens";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Chat Message Actions
 "chat.message.actions.info" = "Informações da Mensagem";

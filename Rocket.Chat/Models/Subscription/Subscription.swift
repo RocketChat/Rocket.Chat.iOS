@@ -133,19 +133,6 @@ final class RoomRoles: Object {
 // MARK: Failed Messages
 
 extension Subscription {
-
-    func avatarURL(auth: Auth? = nil) -> URL? {
-        guard
-            let auth = auth ?? AuthManager.isAuthenticated(),
-            let baseURL = auth.baseURL(),
-            let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        else {
-            return nil
-        }
-
-        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
-    }
-
     func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
         guard let user = user else {
             return
@@ -160,5 +147,27 @@ extension Subscription {
             }
         }
     }
+}
 
+// MARK: Avatar
+
+extension Subscription {
+    func avatarURL(auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
+    }
+}
+
+extension Subscription: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedSubscription
+    var unmanaged: UnmanagedSubscription {
+        return UnmanagedSubscription(self)
+    }
 }
