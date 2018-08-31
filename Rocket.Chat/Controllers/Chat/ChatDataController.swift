@@ -248,7 +248,7 @@ final class ChatDataController {
         }
 
         func needsUnreadSeparator(_ obj: ChatData) -> Bool {
-            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.user, currentUser != objUser {
+            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.validated()?.user, currentUser != objUser {
                 if obj.timestamp > lastSeen && !unreadSeparator {
                     unreadSeparator = true
                     return true
@@ -308,14 +308,16 @@ final class ChatDataController {
 
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
-            where obj.message?.identifier == message.identifier {
+            where obj.message?.validated()?.identifier == message.identifier {
                 invalidateLayout(for: obj.identifier)
 
-                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && obj.message?.markedForDeletion == message.markedForDeletion {
+                let objMessage = obj.message?.validated()
+
+                if objMessage?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && objMessage?.markedForDeletion == message.markedForDeletion {
                    return -1
                 }
 
-                if let oldMessage = obj.message {
+                if let oldMessage = objMessage {
                     if !(oldMessage == message) {
                         MessageTextCacheManager.shared.update(for: message, with: nil)
                     }
@@ -340,7 +342,7 @@ final class ChatDataController {
 
     func oldestMessage() -> Message? {
         for obj in data where obj.type == .message {
-            return obj.message
+            return obj.message?.validated()
         }
 
         return nil

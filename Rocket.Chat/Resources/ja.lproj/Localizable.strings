@@ -202,6 +202,11 @@
 "chat.muted" = "あなたはミュートされました";
 "chat.loading_messages" = "メッセージの読み込み...";
 "chat.unread_separator" = "新しいメッセージ";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "読者";
@@ -467,7 +472,7 @@
 "shortcuts.room_selection" = "ルーム選択 1...9";
 "shortcuts.next_room" = "次のルーム";
 "shortcuts.previous_room" = "前のルーム";
-"shortcuts.new_room" = "新しいルーム;
+"shortcuts.new_room" = "新しいルーム";
 "shortcuts.room_actions" = "ルームアクション";
 "shortcuts.upload_room" = "ルームにアップロード";
 "shortcuts.search_messages" = "メッセージ検索";

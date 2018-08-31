@@ -56,17 +56,20 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
     func testSetTemporaryMessagesFailed() {
         let realm = testRealm()
 
+        let user = User.testInstance()
         let sub = Subscription.testInstance()
 
         let msg1 = Message.testInstance("msg1")
         msg1.subscription = sub
         msg1.failed = false
         msg1.temporary = true
+        msg1.user = user
 
         let msg2 = Message.testInstance("msg2")
         msg2.subscription = sub
         msg2.failed = false
         msg2.temporary = true
+        msg2.user = user
 
         try? realm.write {
             realm.add(sub, update: true)
@@ -74,7 +77,7 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
             realm.add(msg2, update: true)
         }
 
-        sub.setTemporaryMessagesFailed()
+        sub.setTemporaryMessagesFailed(user: user)
 
         XCTAssert(msg1.failed == true)
         XCTAssert(msg1.temporary == false)
