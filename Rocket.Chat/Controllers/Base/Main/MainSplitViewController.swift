@@ -16,27 +16,30 @@ final class MainSplitViewController: UISplitViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
+    static var current: MainSplitViewController? {
+        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? MainSplitViewController
+    }
+
     static var chatViewController: ChatViewController? {
-        guard
-            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
-            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
-        else {
-            return nil
+        return current?.chatViewController
+    }
+
+    static var subscriptionsViewController: SubscriptionsViewController? {
+        return current?.subscriptionsViewController
+    }
+
+    var chatViewController: ChatViewController? {
+        if let nav = detailViewController as? UINavigationController {
+            return nav.viewControllers.first as? ChatViewController
+        } else if let nav = viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
+            return nav.viewControllers[1] as? ChatViewController
         }
 
-        var controller: ChatViewController?
+        return nil
+    }
 
-        if let nav = mainViewController.detailViewController as? UINavigationController {
-            if let chatController = nav.viewControllers.first as? ChatViewController {
-                controller = chatController
-            }
-        } else if let nav = mainViewController.viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
-            if let chatController = nav.viewControllers[1] as? ChatViewController {
-                controller = chatController
-            }
-        }
-
-        return controller
+    var subscriptionsViewController: SubscriptionsViewController? {
+        return (viewControllers.first as? UINavigationController)?.viewControllers.first as? SubscriptionsViewController
     }
 
     override func awakeFromNib() {

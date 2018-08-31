@@ -40,7 +40,7 @@ final class ChatDataController {
     var data: [ChatData] = [] {
         didSet {
             messagesUsernames.removeAll()
-            messagesUsernames.formUnion(data.compactMap { $0.message?.user?.username })
+            messagesUsernames.formUnion(data.compactMap { $0.message?.validated()?.user?.validated()?.username })
         }
     }
 
@@ -311,7 +311,7 @@ final class ChatDataController {
             where obj.message?.identifier == message.identifier {
                 invalidateLayout(for: obj.identifier)
 
-                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && obj.message?.markedForDeletion == message.markedForDeletion {
                    return -1
                 }
 

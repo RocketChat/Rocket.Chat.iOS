@@ -154,6 +154,11 @@
 "subscriptions.list.no_message" = "Κανένα μήνυμα";
 "subscriptions.list.sent_an_attachment" = "στείλτε ένα συνημμένο";
 "subscriptions.list.date.yesterday" = "Εχθές";
+"subscriptions.list.actions.read" = "Read"; // TODO
+"subscriptions.list.actions.unread" = "Unread"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
+"subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
@@ -197,6 +202,11 @@
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
 "chat.unread_separator" = "νέα μηνύματα";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Διαβάστηκε από";
@@ -284,9 +294,10 @@
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
-"chat.info.item.mentions" = "Αναφέρθηκαν"; 
-"chat.info.item.files" = "Αρχεία"; 
-"chat.info.item.share" = "Κοινή Χρήση"; 
+"chat.info.item.notifications" = "Notifications"; // TODO
+"chat.info.item.mentions" = "Αναφέρθηκαν";
+"chat.info.item.files" = "Αρχεία";
+"chat.info.item.share" = "Κοινή Χρήση";
 
 // Members List
 "chat.members.list.title" = "Μέλη";
@@ -336,6 +347,55 @@
 "myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
 "myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
 "myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Notification Preferences"; // TODO
+"myaccount.settings.notifications.save" = "Save"; // TODO
+
+"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
+"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@"; // TODO
+"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
+"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list."; // TODO
+
+"myaccount.settings.notifications.inapp" = "In-app and Desktop"; // TODO
+"myaccount.settings.notifications.inapp.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop."; // TODO
+
+"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
+"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open."; // TODO
+
+"myaccount.settings.notifications.desktop" = "Desktop options"; // TODO
+"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
+"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
+"myaccount.settings.notifications.desktop.duration" = "Notification Duration"; // TODO
+
+"myaccount.settings.notifications.mail" = "Email"; // TODO
+"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
+
+"myaccount.settings.notifications.duration.default" = "Default"; // TODO
+"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+
+"alert.update_notifications_preferences_success.title" = "Preferences saved"; // TODO
+
+"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
+"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Default"; // TODO
+"subscription.notifications.status.nothing" = "Nothing"; // TODO
+"subscription.notifications.status.all" = "All"; // TODO
+"subscription.notifications.status.mentions" = "Mentions"; // TODO
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "None"; // TODO
+"subscription.notifications.audio.value.default" = "Default"; // TODO
+"subscription.notifications.audio.value.beep" = "Beep"; // TODO
+"subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
+"subscription.notifications.audio.value.ding" = "Ding"; // TODO
+"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
+"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
+"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -405,3 +465,21 @@
 "subscriptions.grouping.type" = "Ομαδοποίηση κατά τύπο";
 "subscriptions.grouping.favorites" = "Ομαδοποίηση κατά αγαπημένα";
 "subscriptions.grouping.unread_top" = "Αδιάβαστα στην κορυφή";
+
+// Shortcuts
+"shortcuts.type_message" = "Type message"; //TODO
+"shortcuts.preferences" = "Preferences"; //TODO
+"shortcuts.room_search" = "Rooms search"; //TODO
+"shortcuts.room_selection" = "Room selection 1...9"; //TODO
+"shortcuts.next_room" = "Next room"; //TODO
+"shortcuts.previous_room" = "Previous room"; //TODO
+"shortcuts.new_room" = "New room"; //TODO
+"shortcuts.room_actions" = "Room actions"; //TODO
+"shortcuts.upload_room" = "Upload to room"; //TODO
+"shortcuts.search_messages" = "Search messages"; //TODO
+"shortcuts.scroll_messages" = "Scroll messages"; //TODO
+"shortcuts.reply_latest" = "Reply to latest"; //TODO
+"shortcuts.server_selection" = "Server selection"; //TODO
+"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
+"shortcuts.add_server" = "Add server"; //TODO
+"shortcuts.change_theme" = "Change theme"; //TODO

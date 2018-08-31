@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9TE-I5-CEe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9TE-I5-CEe">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,13 @@
                         <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>
+                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
+                        <barButtonItem key="rightBarButtonItem" title="Search" image="Message Search" id="4kc-pW-qN4">
+                            <connections>
+                                <action selector="showSearchMessages" destination="A1E-cs-q8E" id="3yo-zH-BaF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
@@ -91,11 +97,20 @@
                         <segue destination="i6r-e5-U1B" kind="show" identifier="toMembersList" id="aJe-TZ-hwv"/>
                         <segue destination="GAd-ch-6WH" kind="show" identifier="toMessagesList" id="WM6-vo-bax"/>
                         <segue destination="bID-Vt-oVI" kind="show" identifier="toFilesList" id="nGj-Gp-c2c"/>
+                        <segue destination="p6h-N1-anN" kind="show" identifier="toNotificationsSettings" id="oBg-K6-le8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmq-ma-9mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3242" y="329"/>
+        </scene>
+        <!--NotificationsSettings-->
+        <scene sceneID="hUW-En-nol">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NotificationsSettings" id="p6h-N1-anN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jia-y9-YJm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3243" y="-280"/>
         </scene>
         <!--Members-->
         <scene sceneID="fGa-f1-0c5">
@@ -346,6 +361,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Message Search" width="20" height="20"/>
         <image name="audioLarge" width="100" height="100"/>
     </resources>
 </document>

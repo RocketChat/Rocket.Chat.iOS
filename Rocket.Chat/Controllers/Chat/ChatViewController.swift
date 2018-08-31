@@ -32,7 +32,7 @@ final class ChatViewController: SLKTextViewController {
     lazy var uploadClient = API.current()?.client(UploadClient.self)
     lazy var bannerView: ChatBannerView? = setupBanner()
 
-    lazy var buttonScrollToBottom: UIButton! = {
+    lazy var buttonScrollToBottom: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
         button.setImage(UIImage(named: "Float Button light"), for: .normal)
@@ -206,9 +206,17 @@ final class ChatViewController: SLKTextViewController {
         ThemeManager.addObserver(navigationController?.navigationBar)
         setupAutoCompletionSeparator()
         textInputbar.applyTheme()
+
+        textInputbar.textView.inputAssistantItem.leadingBarButtonGroups = []
+        textInputbar.textView.inputAssistantItem.trailingBarButtonGroups = []
+
         updateEmptyState()
 
         chatTitleView?.state = SocketManager.sharedInstance.state
+
+        if let subscription = subscription {
+            subscribe(for: subscription)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -220,6 +228,14 @@ final class ChatViewController: SLKTextViewController {
         dataController.invalidateLayout(for: nil)
         collectionView?.setNeedsLayout()
         collectionView?.reloadData()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+
+        if let subscription = subscription {
+            unsubscribe(for: subscription)
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -564,7 +580,7 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 self?.deleteMessage(msgId: msgId)
             }
         }
@@ -977,9 +993,9 @@ final class ChatViewController: SLKTextViewController {
     @IBAction func showSearchMessages() {
         guard
             let storyboard = storyboard,
-            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesListViewController") as? MessagesListViewController
-        else {
-            return
+            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
+            else {
+                return
         }
 
         messageList.data.subscription = subscription
@@ -1328,6 +1344,51 @@ extension ChatViewController: SocketConnectionHandler {
 
 }
 
+// MARK: NavigationBar Transparency
+
+extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
+    var isNavigationBarTransparent: Bool {
+        return false
+    }
+}
+
+// MARK: UIPreviewActions
+
+extension ChatViewController {
+    override var previewActionItems: [UIPreviewActionItem] {
+        guard let subscription = subscription, subscription.open else { return [] }
+
+        let read = UIPreviewAction(title: localized("chat.preview.actions.read"), style: .default) { (_, _) in
+            API.current()?.client(SubscriptionsClient.self).markRead(subscription: subscription)
+        }
+
+        let unread = UIPreviewAction(title: localized("chat.preview.actions.unread"), style: .default) { (_, _) in
+            API.current()?.client(SubscriptionsClient.self).markUnread(subscription: subscription)
+        }
+
+        let favoriteTitle = subscription.favorite ? "chat.preview.actions.unfavorite" : "chat.preview.actions.favorite"
+        let favorite = UIPreviewAction(title: localized(favoriteTitle), style: .default) { (_, _) in
+            API.current()?.client(SubscriptionsClient.self).favoriteSubscription(subscription: subscription)
+        }
+
+        let hide = UIPreviewAction(title: localized("chat.preview.actions.hide"), style: .destructive) { (_, _) in
+            API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+        }
+
+        var actions = [UIPreviewActionItem]()
+
+        if subscription.alert {
+            actions.append(read)
+        } else {
+            actions.append(unread)
+        }
+
+        actions.append(contentsOf: [favorite, hide])
+
+        return actions
+    }
+}
+
 // MARK: Themeable
 
 extension ChatViewController {
@@ -1343,13 +1404,5 @@ extension ChatViewController {
         }
 
         updateMessageSendingPermission()
-    }
-}
-
-// MARK: NavigationBar Transparency
-
-extension ChatViewController: PopPushDelegate, NavigationBarTransparency {
-    var isNavigationBarTransparent: Bool {
-        return false
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import DifferenceKit
 
 class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
@@ -47,18 +48,30 @@ class SubscriptionsViewModel {
         }
     }
 
+    var reloadNotificationToken: NotificationToken?
     let realm: Realm?
 
     init(realm: Realm? = Realm.current) {
         self.realm = realm
+        observeAuth()
     }
 
     deinit {
         assorter?.invalidate()
     }
 
+    func observeAuth() {
+        reloadNotificationToken = realm?.objects(Auth.self).observe({ [weak self] _ in
+            if self?.realm?.objects(Auth.self).count == 1 {
+                DispatchQueue.main.async {
+                    self?.updateVisibleCells?()
+                }
+            }
+        })
+    }
+
     func buildSections() {
-        if let realm = realm {
+        if let realm = realm, assorter == nil {
             assorter = RealmAssorter<Subscription>(realm: realm)
             assorter?.didUpdateIndexPaths = didUpdateIndexPaths
         }
@@ -70,12 +83,15 @@ class SubscriptionsViewModel {
             return
         }
 
+        assorter.willReconstructSections()
+
         switch searchState {
         case .searching(let query):
             let queryData = queryBase.filterBy(name: query)
             assorter.registerSection(name: localized("subscriptions.search_results"), objects: queryData)
 
             API.current()?.client(SpotlightClient.self).search(query: query) { _, _ in }
+            assorter.registerModel(model: queryData)
         case .notSearching:
             var queryItems = queryBase
 
@@ -106,14 +122,22 @@ class SubscriptionsViewModel {
                 let queryDataDirectMessages = filtered(using: "privateType == 'd'")
                 assorter.registerSection(name: localized("subscriptions.direct_messages"), objects: queryDataDirectMessages)
             } else {
-                let title = assorter.numberOfSections > 0 ? localized("subscriptions.conversations") : ""
+                let selectedGroupingOptions = SubscriptionsSortingManager.selectedGroupingOptions
+                let title = !selectedGroupingOptions.isEmpty ? localized("subscriptions.conversations") : ""
                 assorter.registerSection(name: title, objects: queryItems)
             }
+
+            assorter.registerModel(model: queryBase)
         }
     }
 
-    var didUpdateIndexPaths: IndexPathsChangesEvent?
-    var didRebuildSections: (() -> Void)?
+    var didUpdateIndexPaths: RealmAssorter<Subscription>.IndexPathsChangesEvent? {
+        didSet {
+            assorter?.didUpdateIndexPaths = self.didUpdateIndexPaths
+        }
+    }
+
+    var updateVisibleCells: (() -> Void)?
 }
 
 // MARK: TableView
@@ -143,7 +167,30 @@ extension SubscriptionsViewModel {
         return numberOfRows > 0 && !title.isEmpty ? 55 : 0
     }
 
-    func subscriptionForRowAt(indexPath: IndexPath) -> Subscription? {
+    func absoluteIndexForIndexPath(_ indexPath: IndexPath) -> Int {
+        return (0..<indexPath.section).reduce(0, { index, section in
+            return index + numberOfRowsInSection(section)
+        }) + indexPath.row
+    }
+
+    func indexPathForAbsoluteIndex(_ index: Int) -> IndexPath? {
+        var count = 0
+        let sections = (0..<numberOfSections).map({
+            (0..<numberOfRowsInSection($0))
+        }).enumerated()
+
+        for (section, rows) in sections {
+            if index > count + rows.count - 1 {
+                count += rows.count
+            } else {
+                return IndexPath(row: index - count, section: section)
+            }
+        }
+
+        return nil
+    }
+
+    func subscriptionForRowAt(indexPath: IndexPath) -> Subscription.UnmanagedType? {
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
 
@@ -152,5 +199,6 @@ extension SubscriptionsViewModel {
 private extension NSPredicate {
     var negation: NSPredicate {
         return NSCompoundPredicate(notPredicateWithSubpredicate: self)
+
     }
 }
