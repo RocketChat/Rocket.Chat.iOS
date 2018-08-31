@@ -154,11 +154,11 @@
 "subscriptions.list.no_message" = "メッセージなし";
 "subscriptions.list.sent_an_attachment" = "添付ファイルを送信しました";
 "subscriptions.list.date.yesterday" = "昨日";
-"subscriptions.list.actions.read" = "既読"; // TODO
-"subscriptions.list.actions.unread" = "未読"; // TODO
-"subscriptions.list.actions.favorite" = "お気に入り"; // TODO
-"subscriptions.list.actions.unfavorite" = "お気に入りを外す"; // TODO
-"subscriptions.list.actions.hide" = "隠す"; // TODO
+"subscriptions.list.actions.read" = "既読";
+"subscriptions.list.actions.unread" = "未読";
+"subscriptions.list.actions.favorite" = "お気に入り"; 
+"subscriptions.list.actions.unfavorite" = "お気に入りを外す"; 
+"subscriptions.list.actions.hide" = "隠す"; 
 
 // Servers
 "servers.add_new_team" = "新しいチームを追加";
@@ -461,19 +461,19 @@
 "subscriptions.grouping.unread_top" = "未読を先頭に表示";
 
 // Shortcuts
-"shortcuts.type_message" = "メッセージ入力"; //TODO
-"shortcuts.preferences" = "設定"; //TODO
-"shortcuts.room_search" = "ルーム検索"; //TODO
-"shortcuts.room_selection" = "ルーム選択 1...9"; //TODO
-"shortcuts.next_room" = "次のルーム"; //TODO
-"shortcuts.previous_room" = "前のルーム"; //TODO
-"shortcuts.new_room" = "新しいルーム; //TODO
-"shortcuts.room_actions" = "ルームアクション"; //TODO
-"shortcuts.upload_room" = "ルームにアップロード"; //TODO
-"shortcuts.search_messages" = "メッセージ検索"; //TODO
-"shortcuts.scroll_messages" = "メッセージスクロール"; //TODO
-"shortcuts.reply_latest" = "最新の返信"; //TODO
-"shortcuts.server_selection" = "サーバーの選択"; //TODO
-"shortcuts.server_selection_numbers" = "サーバーの選択 1...9"; //TODO
-"shortcuts.add_server" = "サーバーを追加"; //TODO
-"shortcuts.change_theme" = "テーマを変更"; //TODO
+"shortcuts.type_message" = "メッセージ入力";
+"shortcuts.preferences" = "設定";
+"shortcuts.room_search" = "ルーム検索";
+"shortcuts.room_selection" = "ルーム選択 1...9";
+"shortcuts.next_room" = "次のルーム";
+"shortcuts.previous_room" = "前のルーム";
+"shortcuts.new_room" = "新しいルーム;
+"shortcuts.room_actions" = "ルームアクション";
+"shortcuts.upload_room" = "ルームにアップロード";
+"shortcuts.search_messages" = "メッセージ検索";
+"shortcuts.scroll_messages" = "メッセージスクロール";
+"shortcuts.reply_latest" = "最新の返信";
+"shortcuts.server_selection" = "サーバーの選択";
+"shortcuts.server_selection_numbers" = "サーバーの選択 1...9";
+"shortcuts.add_server" = "サーバーを追加";
+"shortcuts.change_theme" = "テーマを変更";
