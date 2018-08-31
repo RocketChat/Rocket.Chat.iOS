@@ -194,6 +194,8 @@ final class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDe
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        AnalyticsManager.log(event: .replyNotification)
+
         PushManager.handleNotification(
             raw: response.notification.request.content.userInfo,
             reply: (response as? UNTextInputNotificationResponse)?.userText
