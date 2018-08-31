@@ -137,7 +137,7 @@ extension ChatViewController {
                 return
             }
 
-            var messageToResend: (identifier: String, text: String)? = nil
+            var messageToResend: (identifier: String, text: String)?
 
             Realm.executeOnMainThread { realm in
                 guard

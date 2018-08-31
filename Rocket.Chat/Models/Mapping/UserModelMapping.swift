@@ -45,7 +45,7 @@ extension User: ModelMappeable {
             }
 
             self.emails.removeAll()
-            self.emails.append(contentsOf: emails)
+            self.emails.append(objectsIn: emails)
         }
 
         mapRoles(values["roles"])
@@ -54,7 +54,7 @@ extension User: ModelMappeable {
     func mapRoles(_ values: JSON) {
         if let roles = values.array?.compactMap({ $0.string }) {
             self.roles.removeAll()
-            self.roles.append(contentsOf: roles)
+            self.roles.append(objectsIn: roles)
         }
     }
 }
