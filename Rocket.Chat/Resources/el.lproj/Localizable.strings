@@ -294,7 +294,6 @@
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.mentions" = "Αναφέρθηκαν";
 "chat.info.item.files" = "Αρχεία";
 "chat.info.item.share" = "Κοινή Χρήση";
