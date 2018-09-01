@@ -16,7 +16,7 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
-        permission.roles.append(contentsOf: ["admin", "user"])
+        permission.roles.append(objectsIn: ["admin", "user"])
 
         let realm = testRealm()
         try realm.write {
@@ -37,7 +37,7 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
-        permission.roles.append(contentsOf: ["admin", "user"])
+        permission.roles.append(objectsIn: ["admin", "user"])
 
         let realm = testRealm()
         try realm.write {
