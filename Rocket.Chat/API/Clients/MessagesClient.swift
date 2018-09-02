@@ -212,14 +212,14 @@ struct MessagesClient: APIClient {
         }
 
         let emoji = (emoji.first, emoji.last) == (":", ":") ? emoji : ":\(emoji):"
-        let reactions = message.reactions
+        let reactions = List(message.reactions)
         let message = Message(value: message)
         message.reactions = reactions
 
         if let reactionIndex = reactions.index(where: { $0.emoji == emoji }) {
             let reaction = MessageReaction(value: reactions[reactionIndex])
             if let usernameIndex = reaction.usernames.index(of: username) {
-                let usernames = reaction.usernames
+                let usernames = List(reaction.usernames)
                 usernames.remove(at: usernameIndex)
                 reaction.usernames = usernames
                 if usernames.isEmpty {
@@ -228,7 +228,7 @@ struct MessagesClient: APIClient {
                     reactions[reactionIndex] = reaction
                 }
             } else {
-                let usernames = reaction.usernames
+                let usernames = List(reaction.usernames)
                 usernames.append(username)
                 reaction.usernames = usernames
                 reactions[reactionIndex] = reaction
