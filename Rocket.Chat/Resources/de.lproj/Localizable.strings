@@ -154,7 +154,7 @@
 "subscriptions.list.no_message" = "Keine Nachricht";
 "subscriptions.list.sent_an_attachment" = "versende einen Anhang";
 "subscriptions.list.date.yesterday" = "Gestern";
-"subscriptions.list.actions.read" = "Lesen";
+"subscriptions.list.actions.read" = "Gelesen";
 "subscriptions.list.actions.unread" = "Ungelesen";
 "subscriptions.list.actions.favorite" = "Favorisieren";
 "subscriptions.list.actions.unfavorite" = "Defavorisieren";
@@ -356,11 +356,11 @@
 "myaccount.settings.notifications.show.title" = "Ungelesen Zähler anzeigen";
 "myaccount.settings.notifications.show.footer" = "Der Ungelesen Zähler wird als Banner rechts neben dem Kanal in der Liste angezeigt.";
 
-"myaccount.settings.notifications.inapp" = "In-app und Desktop";
+"myaccount.settings.notifications.inapp" = "In-App und Desktop";
 "myaccount.settings.notifications.inapp.alerts" = "Benachrichtigungen";
 "myaccount.settings.notifications.inapp.footer" = "Zeigt einen Banner am oberen Bildschirmrand an, wenn die Anwendung geöffnet ist und zeigt eine Benachrichtigung auf dem Desktop an.";
 
-"myaccount.settings.notifications.mobile" = "Mobile";
+"myaccount.settings.notifications.mobile" = "Mobil";
 "myaccount.settings.notifications.mobile.alerts" = "Benachrichtigungen";
 "myaccount.settings.notifications.mobile.footer" = "Diese Benachrichtigungen werden an Ihr Gerät gesendet, wenn die Anwendung nicht geöffnet ist.";
 
@@ -377,7 +377,7 @@
 
 "alert.update_notifications_preferences_success.title" = "Einstellungen gespeichert";
 
-"alert.update_notifications_preferences_save_error.title" = "FDie Benachrichtigungseinstellungen konnten nicht aktualisiert werden.";
+"alert.update_notifications_preferences_save_error.title" = "Die Benachrichtigungseinstellungen konnten nicht aktualisiert werden.";
 "alert.update_notifications_preferences_save_error.message" = "Beim Speichern Ihrer Benachrichtigungseinstellungen ist etwas schief gelaufen. Bitte versuchen Sie es noch einmal.";
 
 // Enum SubscriptionNotificationsStatus
