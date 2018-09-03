@@ -233,7 +233,7 @@ final class ChatViewController: SLKTextViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
 
-        if let subscription = subscription {
+        if let subscription = subscription?.validated() {
             unsubscribe(for: subscription)
         }
     }
@@ -1025,7 +1025,7 @@ extension ChatViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             dataController.data.count > indexPath.row,
-            let subscription = subscription,
+            let subscription = subscription?.validated(),
             let obj = dataController.itemAt(indexPath)
         else {
             return cellForEmpty(at: indexPath)
