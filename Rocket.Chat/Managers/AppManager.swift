@@ -117,10 +117,10 @@ struct AppManager {
 
 extension AppManager {
 
-    static func changeSelectedServer(index: Int) {
+    static func changeSelectedServer(index: Int, completion: (() -> Void)? = nil) {
         guard index != DatabaseManager.selectedIndex else {
             DatabaseManager.changeDatabaseInstance(index: index)
-            reloadApp()
+            reloadApp(completion: completion)
             return
         }
 
@@ -131,7 +131,7 @@ extension AppManager {
             AuthSettingsManager.shared.updateCachedSettings()
             AuthManager.recoverAuthIfNeeded()
 
-            reloadApp()
+            reloadApp(completion: completion)
         }
     }
 
@@ -185,7 +185,7 @@ extension AppManager {
         }
     }
 
-    static func reloadApp() {
+    static func reloadApp(completion: (() -> Void)? = nil) {
         SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
@@ -212,6 +212,8 @@ extension AppManager {
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
+
+                completion?()
             }
         }
     }
