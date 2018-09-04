@@ -173,7 +173,9 @@ final class SignupTableViewController: BaseTableViewController {
 
         startLoading()
         AuthManager.signup(with: name, email, password, customFields: customFields) { [weak self] response in
-            stopLoading()
+            DispatchQueue.main.async {
+                stopLoading()
+            }
 
             if response.isError() {
                 if let error = response.result["error"].dictionary {
@@ -182,6 +184,9 @@ final class SignupTableViewController: BaseTableViewController {
                         message: error["message"]?.string ?? localized("error.socket.default_error.message")
                     ).present()
                 }
+
+                return
+
             } else {
                 guard AuthSettingsManager.settings?.emailVerification == false else {
                     Alert(key: "alert.email_verification").present { _ in
@@ -210,7 +215,10 @@ final class SignupTableViewController: BaseTableViewController {
     }
 
     func authThenFetchInfo(email: String, password: String, startLoading: @escaping () -> Void, stopLoading: @escaping () -> Void) {
-        startLoading()
+        DispatchQueue.main.async {
+            startLoading()
+        }
+
         AuthManager.auth(email, password: password, completion: { [weak self] response in
             stopLoading()
             switch response {

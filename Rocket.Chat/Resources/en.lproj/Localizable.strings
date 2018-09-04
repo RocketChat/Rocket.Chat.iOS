@@ -119,7 +119,7 @@
 "auth.signup_title" = "Sign up";
 "auth.signup.button_register" = "Register";
 "auth.signup.button_next" = "Next";
-"auth.signup.custom_fields_title" = "Complete your register";
+"auth.signup.custom_fields_title" = "Complete your registration";
 
 "auth.login.login_title" = "Login";
 "auth.login.button_login_title" = "Login";

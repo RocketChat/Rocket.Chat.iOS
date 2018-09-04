@@ -11,14 +11,24 @@ import SwiftyJSON
 extension SocketError {
     enum Error {
         case invalidSession
+        case emailAlreadyExists
         case other(String)
 
-        init(rawValue: String) {
-            switch rawValue {
+        init(code: String) {
+            switch code {
             case "403", "401":
                 self = .invalidSession
             default:
-                self = .other(rawValue)
+                self = .other(code)
+            }
+        }
+
+        init?(reason: String) {
+            switch reason {
+            case "Email already exists.":
+                self = .emailAlreadyExists
+            default:
+                return nil
             }
         }
     }
@@ -35,16 +45,16 @@ extension SocketError {
 
 struct SocketError {
     let details: SocketError.Details
-    let error: SocketError.Error
     let reason: String
+    let error: SocketError.Error
     let message: String
     let type: String
     let isClientSafe: Bool
 
     init(json: JSON) {
         details = SocketError.Details(json: json["details"])
-        error = SocketError.Error(rawValue: json["error"].stringValue)
         reason = json["reason"].stringValue
+        error = SocketError.Error(reason: reason) ?? SocketError.Error(code: json["error"].stringValue)
         message = json["message"].stringValue
         type = json["errorType"].stringValue
         isClientSafe = json["isClientSafe"].boolValue
