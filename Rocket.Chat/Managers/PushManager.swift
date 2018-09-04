@@ -149,15 +149,21 @@ extension PushManager {
         // side effect: needed for Subscription.notificationSubscription()
         AppManager.initialRoomId = notification.roomId
 
-        if index != DatabaseManager.selectedIndex {
-            AppManager.changeSelectedServer(index: index)
-        } else {
-             if let auth = AuthManager.isAuthenticated() {
+        func openRoom() {
+            if let auth = AuthManager.isAuthenticated() {
                 let openSubscription = MainSplitViewController.chatViewController?.subscription
                 if let subscription = Subscription.notificationSubscription(auth: auth), subscription != openSubscription {
                     AppManager.open(room: subscription, animated: false)
                 }
-             }
+            }
+        }
+
+        if index != DatabaseManager.selectedIndex {
+            AppManager.changeSelectedServer(index: index) {
+                openRoom()
+            }
+        } else {
+            openRoom()
         }
 
         guard let realm = DatabaseManager.databaseInstace(index: index) else {
@@ -194,6 +200,8 @@ final class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDe
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        AnalyticsManager.log(event: .replyNotification)
+
         PushManager.handleNotification(
             raw: response.notification.request.content.userInfo,
             reply: (response as? UNTextInputNotificationResponse)?.userText

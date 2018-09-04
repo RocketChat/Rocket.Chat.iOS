@@ -646,6 +646,7 @@ extension SubscriptionsViewController {
             return
         }
 
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
         onSelectRowAt(indexPath)
 
         DispatchQueue.main.async { [weak self] in
