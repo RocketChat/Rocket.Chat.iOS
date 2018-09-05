@@ -133,7 +133,25 @@ final class RoomRoles: Object {
 // MARK: Failed Messages
 
 extension Subscription {
+    func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
+        guard let user = user else {
+            return
+        }
 
+        try? realm?.write {
+            messages.filter("temporary = true").filter({
+                $0.user == user
+            }).forEach {
+                $0.temporary = false
+                $0.failed = true
+            }
+        }
+    }
+}
+
+// MARK: Avatar
+
+extension Subscription {
     func avatarURL(auth: Auth? = nil) -> URL? {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
@@ -145,14 +163,11 @@ extension Subscription {
 
         return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
     }
+}
 
-    func setTemporaryMessagesFailed() {
-        try? realm?.write {
-            messages.filter("temporary = true").forEach {
-                $0.temporary = false
-                $0.failed = true
-            }
-        }
+extension Subscription: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedSubscription
+    var unmanaged: UnmanagedSubscription {
+        return UnmanagedSubscription(self)
     }
-
 }

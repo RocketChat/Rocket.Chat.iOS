@@ -154,6 +154,11 @@
 "subscriptions.list.no_message" = "No message"; //TODO
 "subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
 "subscriptions.list.date.yesterday" = "Yesterday"; //TODO
+"subscriptions.list.actions.read" = "Read"; // TODO
+"subscriptions.list.actions.unread" = "Unread"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
+"subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
 "servers.add_new_team" = "Agregar nuevo equipo";
@@ -197,6 +202,11 @@
 "chat.muted" = "Has sido silenciado";
 "chat.loading_messages" = "Cargando mensajes ...";
 "chat.unread_separator" = "nuevos mensajes";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Read by"; //TODO
@@ -272,6 +282,7 @@
 "chat.message.type.subscription_role_removed" = "%@ ya no es%@ por %@";
 "chat.message.type.room_archived" = "Esta habitación ha sido archivada por %@";
 "chat.message.type.room_unarchived" = "Esta habitación ha sido desarchivada por %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Información";
@@ -284,7 +295,6 @@
 "chat.info.item.pinned" = "Fijado";
 "chat.info.item.starred" = "Sembrado de estrellas";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.files" = "Files"; // TODO
 "chat.info.item.share" = "Share"; // TODO
 
@@ -454,3 +464,21 @@
 "subscriptions.grouping.type" = "Group by type"; //TODO
 "subscriptions.grouping.favorites" = "Group by favorites"; //TODO
 "subscriptions.grouping.unread_top" = "Unread on top"; //TODO
+
+// Shortcuts
+"shortcuts.type_message" = "Type message"; //TODO
+"shortcuts.preferences" = "Preferences"; //TODO
+"shortcuts.room_search" = "Rooms search"; //TODO
+"shortcuts.room_selection" = "Room selection 1...9"; //TODO
+"shortcuts.next_room" = "Next room"; //TODO
+"shortcuts.previous_room" = "Previous room"; //TODO
+"shortcuts.new_room" = "New room"; //TODO
+"shortcuts.room_actions" = "Room actions"; //TODO
+"shortcuts.upload_room" = "Upload to room"; //TODO
+"shortcuts.search_messages" = "Search messages"; //TODO
+"shortcuts.scroll_messages" = "Scroll messages"; //TODO
+"shortcuts.reply_latest" = "Reply to latest"; //TODO
+"shortcuts.server_selection" = "Server selection"; //TODO
+"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
+"shortcuts.add_server" = "Add server"; //TODO
+"shortcuts.change_theme" = "Change theme"; //TODO

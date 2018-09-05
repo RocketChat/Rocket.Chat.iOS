@@ -27,7 +27,7 @@ class ChannelActionsViewController: BaseViewController {
 
     var subscription: Subscription? {
         didSet {
-            guard let subscription = self.subscription else { return }
+            guard let subscription = self.subscription?.validated() else { return }
 
             let isDirectMessage = subscription.type == .directMessage
 
@@ -142,7 +142,7 @@ extension ChannelActionsViewController {
     }
 
     @objc func buttonFavoriteDidPressed(_ sender: Any) {
-        guard let subscription = self.subscription else { return }
+        guard let subscription = self.subscription?.validated() else { return }
 
         SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
             DispatchQueue.main.async {
@@ -223,7 +223,7 @@ extension ChannelActionsViewController {
     }
 
     func shareRoom() {
-        guard let url = subscription?.externalURL() else { return }
+        guard let url = subscription?.validated()?.externalURL() else { return }
         let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
 
         if shareRoomCell != nil && UIDevice.current.userInterfaceIdiom == .pad {

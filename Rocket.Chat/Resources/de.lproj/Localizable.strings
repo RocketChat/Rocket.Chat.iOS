@@ -154,6 +154,11 @@
 "subscriptions.list.no_message" = "Keine Nachricht";
 "subscriptions.list.sent_an_attachment" = "versende einen Anhang";
 "subscriptions.list.date.yesterday" = "Gestern";
+"subscriptions.list.actions.read" = "Gelesen";
+"subscriptions.list.actions.unread" = "Ungelesen";
+"subscriptions.list.actions.favorite" = "Favorisieren";
+"subscriptions.list.actions.unfavorite" = "Defavorisieren";
+"subscriptions.list.actions.hide" = "Verstecken";
 
 // Servers
 "servers.add_new_team" = "Neues Team hinzufügen";
@@ -197,6 +202,11 @@
 "chat.muted" = "Sie wurden stummgeschaltet";
 "chat.loading_messages" = "Nachrichten werden geladen...";
 "chat.unread_separator" = "ungelesen";
+"chat.preview.actions.read" = "Als gelesen markieren";
+"chat.preview.actions.unread" = "Als ungelesen markieren";
+"chat.preview.actions.favorite" = "Favorisieren";
+"chat.preview.actions.unfavorite" = "Defavorisieren";
+"chat.preview.actions.hide" = "Verstecken";
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Gelesen von";
@@ -286,7 +296,6 @@
 "chat.info.item.starred" = "Favorisiert";
 "chat.info.item.files" = "Dateien";
 "chat.info.item.mentions" = "Erwähnungen";
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.share" = "Teilen";
 
 // Members List
@@ -339,53 +348,53 @@
 "myaccount.settings.language.message" = "Die Sprache wurde geändert. Damit die Änderungen wirksam werden, muss die App neu gestartet werden.";
 
 // Notifications preferences
-"myaccount.settings.notifications.title" = "Notification Preferences"; // TODO
-"myaccount.settings.notifications.save" = "Save"; // TODO
+"myaccount.settings.notifications.title" = "Benachrichtigungseinstellungen";
+"myaccount.settings.notifications.save" = "Speichern";
 
-"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
-"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@"; // TODO
-"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
-"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list."; // TODO
+"myaccount.settings.notifications.receive.title" = "Benachrichtigungen erhalten";
+"myaccount.settings.notifications.receive.footer" = "Benachrichtigungen von %@ erhalten";
+"myaccount.settings.notifications.show.title" = "Ungelesen Zähler anzeigen";
+"myaccount.settings.notifications.show.footer" = "Der Ungelesen Zähler wird als Banner rechts neben dem Kanal in der Liste angezeigt.";
 
-"myaccount.settings.notifications.inapp" = "In-app and Desktop"; // TODO
-"myaccount.settings.notifications.inapp.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop."; // TODO
+"myaccount.settings.notifications.inapp" = "In-App und Desktop";
+"myaccount.settings.notifications.inapp.alerts" = "Benachrichtigungen";
+"myaccount.settings.notifications.inapp.footer" = "Zeigt einen Banner am oberen Bildschirmrand an, wenn die Anwendung geöffnet ist und zeigt eine Benachrichtigung auf dem Desktop an.";
 
-"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
-"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open."; // TODO
+"myaccount.settings.notifications.mobile" = "Mobil";
+"myaccount.settings.notifications.mobile.alerts" = "Benachrichtigungen";
+"myaccount.settings.notifications.mobile.footer" = "Diese Benachrichtigungen werden an Ihr Gerät gesendet, wenn die Anwendung nicht geöffnet ist.";
 
-"myaccount.settings.notifications.desktop" = "Desktop options"; // TODO
-"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
-"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
-"myaccount.settings.notifications.desktop.duration" = "Notification Duration"; // TODO
+"myaccount.settings.notifications.desktop" = "Desktop Optionen";
+"myaccount.settings.notifications.desktop.audio" = "Ton";
+"myaccount.settings.notifications.desktop.sound" = "Klingelton";
+"myaccount.settings.notifications.desktop.duration" = "Benachrichtigungsdauer";
 
-"myaccount.settings.notifications.mail" = "Email"; // TODO
-"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.mail" = "E-Mail";
+"myaccount.settings.notifications.email.alerts" = "Benachrichtigungen";
 
-"myaccount.settings.notifications.duration.default" = "Default"; // TODO
-"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+"myaccount.settings.notifications.duration.default" = "Standard";
+"myaccount.settings.notifications.duration.seconds" = "Sekunden";
 
-"alert.update_notifications_preferences_success.title" = "Preferences saved"; // TODO
+"alert.update_notifications_preferences_success.title" = "Einstellungen gespeichert";
 
-"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
-"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+"alert.update_notifications_preferences_save_error.title" = "Die Benachrichtigungseinstellungen konnten nicht aktualisiert werden.";
+"alert.update_notifications_preferences_save_error.message" = "Beim Speichern Ihrer Benachrichtigungseinstellungen ist etwas schief gelaufen. Bitte versuchen Sie es noch einmal.";
 
 // Enum SubscriptionNotificationsStatus
-"subscription.notifications.status.default" = "Default"; // TODO
-"subscription.notifications.status.nothing" = "Nothing"; // TODO
-"subscription.notifications.status.all" = "All"; // TODO
-"subscription.notifications.status.mentions" = "Mentions"; // TODO
+"subscription.notifications.status.default" = "Standard";
+"subscription.notifications.status.nothing" = "Keine";
+"subscription.notifications.status.all" = "Alle";
+"subscription.notifications.status.mentions" = "Erwähnungen";
 
 // Enum SubscriptionNotificationsAudioValue
-"subscription.notifications.audio.value.none" = "None"; // TODO
-"subscription.notifications.audio.value.default" = "Default"; // TODO
-"subscription.notifications.audio.value.beep" = "Beep"; // TODO
-"subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
-"subscription.notifications.audio.value.ding" = "Ding"; // TODO
-"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
-"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
-"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
+"subscription.notifications.audio.value.none" = "Keinen";
+"subscription.notifications.audio.value.default" = "Standard";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -455,3 +464,21 @@
 "subscriptions.grouping.type" = "Nach Art gruppieren";
 "subscriptions.grouping.favorites" = "Favoriten gruppieren";
 "subscriptions.grouping.unread_top" = "Ungelesene ganz oben";
+
+// Shortcuts
+"shortcuts.type_message" = "Nachricht schreiben";
+"shortcuts.preferences" = "Einstellungen";
+"shortcuts.room_search" = "Raumsuche";
+"shortcuts.room_selection" = "Raum auswahl 1...9";
+"shortcuts.next_room" = "Nächster Raum";
+"shortcuts.previous_room" = "Vorheriger Raum";
+"shortcuts.new_room" = "Neuer Raum";
+"shortcuts.room_actions" = "Raum Aktionen";
+"shortcuts.upload_room" = "Upload to room";
+"shortcuts.search_messages" = "Nachrichten durchsuchen";
+"shortcuts.scroll_messages" = "Nachrichten blättern";
+"shortcuts.reply_latest" = "Auf letzte Nachricht antworten";
+"shortcuts.server_selection" = "Serverauswahl";
+"shortcuts.server_selection_numbers" = "Serverauswahl 1...9";
+"shortcuts.add_server" = "Server hinzufügen";
+"shortcuts.change_theme" = "Theme wechseln";

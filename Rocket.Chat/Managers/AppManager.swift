@@ -117,10 +117,10 @@ struct AppManager {
 
 extension AppManager {
 
-    static func changeSelectedServer(index: Int) {
+    static func changeSelectedServer(index: Int, completion: (() -> Void)? = nil) {
         guard index != DatabaseManager.selectedIndex else {
             DatabaseManager.changeDatabaseInstance(index: index)
-            reloadApp()
+            reloadApp(completion: completion)
             return
         }
 
@@ -131,7 +131,7 @@ extension AppManager {
             AuthSettingsManager.shared.updateCachedSettings()
             AuthManager.recoverAuthIfNeeded()
 
-            reloadApp()
+            reloadApp(completion: completion)
         }
     }
 
@@ -185,7 +185,7 @@ extension AppManager {
         }
     }
 
-    static func reloadApp() {
+    static func reloadApp(completion: (() -> Void)? = nil) {
         SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
@@ -212,6 +212,8 @@ extension AppManager {
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
+
+                completion?()
             }
         }
     }
@@ -222,7 +224,7 @@ extension AppManager {
 extension AppManager {
 
     @discardableResult
-    static func open(room: Subscription) -> ChatViewController? {
+    static func open(room: Subscription, animated: Bool = true) -> ChatViewController? {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
             let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
@@ -235,8 +237,8 @@ extension AppManager {
                 controller.subscription = room
 
                 // Close all presenting controllers, modals & pushed
-                mainViewController.presentedViewController?.dismiss(animated: true, completion: nil)
-                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
+                mainViewController.presentedViewController?.dismiss(animated: animated, completion: nil)
+                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: animated, completion: nil)
 
                 let nav = BaseNavigationController(rootViewController: controller)
                 mainViewController.showDetailViewController(nav, sender: self)
@@ -247,11 +249,11 @@ extension AppManager {
 
             if let nav = mainViewController.viewControllers.first as? UINavigationController {
                 // Close all presenting controllers, modals & pushed
-                nav.presentedViewController?.dismiss(animated: true, completion: nil)
-                nav.popToRootViewController(animated: true)
+                nav.presentedViewController?.dismiss(animated: animated, completion: nil)
+                nav.popToRootViewController(animated: animated)
 
                 // Push the new controller to the stack
-                nav.pushViewController(controller, animated: true)
+                nav.pushViewController(controller, animated: animated)
 
                 return controller
             }

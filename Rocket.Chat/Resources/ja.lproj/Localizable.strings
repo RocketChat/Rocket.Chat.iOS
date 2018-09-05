@@ -1,0 +1,484 @@
+// Global
+"global.ok" = "OK";
+"global.yes" = "Yes";
+"global.no" = "No";
+"global.cancel" = "キャンセル";
+"global.error" = "エラー";
+
+// Errors
+"error.socket.default_error.title" = "すみません";
+"error.socket.default_error.message" = "問題が発生しました, もう一度試してください。";
+
+"error.login.title" = "すみません";
+"error.login.message" = "ログインの際に問題が発生しました。";
+
+"error.signup.title" = "すみません";
+"error.signup.empty_input.message" = "サインアップするにはすべてのフィールドが必要です。";
+
+"error.login_unauthorized.title" = "すみません";
+"error.login_unauthorized.message" = "あなたの資格情報は拒否されました もう一度試してください。";
+
+// Alerts
+"alert.connection.invalid_url.title" = "すみません";
+"alert.connection.invalid_url.message" = "このURLは無効です。URLを確認後、もう一度やり直してください。";
+
+"alert.connection.not_secured.title" = "すみません";
+"alert.connection.not_secured.message" = "サーバーへの安全な接続が確立できませんでした。サーバーがSSLをサポートしていることを確認してください。";
+
+"alert.connection.socket_error.title" = "すみません";
+"alert.connection.socket_error.message" = "サーバーに接続できませんでした。";
+
+"alert.connection.invalid_version.title" = "すみません";
+"alert.connection.invalid_version.message" = "接続先のサーバーがアプリケーションでサポートされていないバージョンを使用しています: %@.\n\nバージョン %@ が必要です。";
+
+"alert.settings.set_mail_app.title" = "すみません";
+"alert.settings.set_mail_app.message" = "メールアカウントがありません。メールを送信するためにはアカウントを設定してください。";
+
+"alert.feature.wip.title" = "すみません";
+"alert.feature.wip.message" = "この機能は開発中です。お待ちください。";
+
+"alert.insecure_image.title" = "安全でないリソース";
+"alert.insecure_image.message" = "この画像のリソースは安全でないため、ロードさせません。SSLリソースのみがリロードされます。";
+
+"alert.socket_error.invalid_user.title" = "セッションの有効期限切れ";
+"alert.socket_error.invalid_user.message" = "セッションの期限が切れました。もう一度ログインしてください。";
+
+"alert.login_service_error.title" = "認証エラー";
+"alert.login_service_error.message" = "このサービスを利用して認証ができませんでした。もう一度お試しください。";
+
+"alert.authorization_error.title" = "承認エラー";
+"alert.authorization_error.create_channel.description" = "あなたはチャンネルを作成することはできません。";
+
+"alert.unsupported_feature.title" = "サポートされていない機能";
+"alert.unsupported_feature.message" = "このバージョンは %@ です。 この機能はバージョン %@ 以上でサポートされています。";
+
+"alert.push_token_error.title" = "警告";
+"alert.push_token_error.message" = "0.60.0未満のバージョンのサーバーには問題があるため、このサーバーからプッシュ通知を受け取ることがあります。";
+
+"alert.upload_error.title" = "アップロードエラー";
+"alert.upload_error.message" = "ファイルアップロード時に問題が発生しました。もう一度お試しください。";
+
+"alert.upload_dialog.title" = "ファイルのアップロード";
+"alert.upload_dialog.placeholder.title" = "タイトル";
+"alert.upload_dialog.placeholder.description" = "説明";
+"alert.upload_dialog.action.upload" = "アップロード";
+
+"alert.email_verification.title" = "メールの確認";
+"alert.email_verification.message" = "登録を確認するためのメールを送信しています。メールが届かない場合は、もう一度やり直してください。";
+
+"alert.discarding_changes.title" = "保存されていない変更";
+"alert.discarding_changes.message" = "変更は保存されていないため、破棄されました。";
+"alert.load_profile_error.title" = "あなたのプロフィールを読み込めませんでした";
+"alert.load_profile_error.message" = "プロフィールの読み込み中に問題が発生しました。もう一度お試しください。";
+"alert.password_mismatch_error.title" = "パスワードが一致しません";
+"alert.password_mismatch_error.message" = "入力したパスワードが一致しません。もう一度やり直してください。";
+"alert.update_profile_error.title" = "更新に失敗しました";
+"alert.update_profile_error.message" = "プロフィールを更新する際に問題が発生しました。もう一度お試しください。";
+"alert.update_password_error.title" = "パスワードの変更に失敗しました";
+"alert.update_password_error.message" = "パスワードを更新する際に問題が発生しました。もう一度お試しください。";
+"alert.update_profile_empty_fields.title" = "空欄に記入をしてください";
+"alert.update_profile_empty_fields.message" = "プロフィール蘭の情報は全て入力が必須です。空白にはできません。";
+"alert.update_profile_invalid_email.title" = "無効なメールアドレス";
+"alert.update_profile_invalid_email.message" = "入力したメールアドレスは無効のアドレスです。修正後もう一度お試しください。";
+"alert.password_empty_fields.title" = "空欄に記入をしてください";
+"alert.password_empty_fields.message" = "パスワードとパスワード確認の欄に入力してパスワードを更新します。";
+"alert.update_profile_success.title" = "プロフィールの更新";
+"alert.update_password_success.title" = "パスワードの更新";
+
+"alert.logout.confirmation.title" = "このサーバーからログアウトする";
+"alert.logout.confirmation.message" = "\"%@\" からログアウトしてもよろしいですか?";
+"alert.logout.confirmation.confirm" = "はい、ログアウトします";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "サーバーがURLを変更しました";
+"connection.server.redirect.alert.message" = "サーバーのURLが次の様に変更されたようです:\n\n%@\n\nURLを更新しますか?";
+"connection.server.redirect.alert.confirm" = "URLを更新する";
+
+// Socket Connection
+"connection.title" = "サーバーに接続";
+"connection.button_connect" = "接続";
+"connection.offline.banner.message" = "現在オフライン状態です。もう一度接続してください。";
+"connection.connecting.banner.message" = "接続中...";
+"connection.waiting_for_network.banner.message" = "接続を待っています";
+
+// Onboarding
+"onboarding.label_welcome" = "Rocket Chatへようこそ";
+"onboarding.label_subtitle" = "オープンソースコミュニケーション";
+"onboarding.button_connect_server" = "サーバーに接続する";
+"onboarding.button_create_server" = "新しいワークスペースの作成";
+"onboarding.button_join_community_prefix" = "コミュニティに参加する";
+
+// Auth
+"auth.connect.button_connect" = "接続";
+"auth.connect.ssl_required" = "サーバーがSSLをサポートしている必要があります";
+"auth.connect.connecting" = "接続中です。";
+"auth.email_auth_prefix" = "メールアドレスから ";
+"auth.email_auth" = "ログイン";
+"auth.login_service_prefix" = "Continue with ";
+
+"auth.signup_title" = "サインアップ";
+"auth.signup.button_register" = "登録";
+"auth.signup.button_next" = "次";
+"auth.signup.custom_fields_title" = "登録を完了する";
+
+"auth.login.login_title" = "ログイン";
+"auth.login.button_login_title" = "ログイン";
+"auth.login.create_account_prefix" = "アカウントを持っていませんか?";
+"auth.login.create_account" = "\nアカウントを作成する";
+"auth.login.username.placeholder" = "メールアドレス or ユーザー名";
+"auth.login.password.placeholder" = "パスワード";
+"auth.login.buttonRegister" = "新しいアカウントを作成する";
+"auth.login.buttonResetPassword" = "パスワードをお忘れですか?";
+"auth.login.agree_label" = "続けることで、あなたは私達に同意します。";
+"auth.login.agree_and" = "と";
+"auth.login.agree_termsofservice" = "利用規約";
+"auth.login.agree_privacypolicy" = "個人情報保護方針";
+
+"auth.forgot_password.title" = "パスワードをお忘れですか?";
+"auth.forgot_password.message" = "メールアドレスを入力";
+"auth.forgot_password.success" = "このメールアドレスが登録されている場合、パスワードをリセットする方法が記述されたメールが届きます。メールが届かない場合は、もう一度やり直してください。";
+
+// Subscriptions
+"subscriptions.search" = "検索";
+"subscriptions.search_results" = "結果";
+"subscriptions.search.load_more_results" = "もっと結果を読み込む";
+"subscriptions.unreads" = "未読";
+"subscriptions.favorites" = "お気に入り";
+"subscriptions.channels" = "チャンネル";
+"subscriptions.groups" = "プライベートグループ";
+"subscriptions.direct_messages" = "ダイレクトメッセージ";
+"subscriptions.conversations" = "会話";
+"subscriptions.you" = "あなた";
+"subscriptions.messages" = "メッセージ";
+"subscriptions.list.you_initial" = "あなた";
+"subscriptions.list.no_message" = "メッセージなし";
+"subscriptions.list.sent_an_attachment" = "添付ファイルを送信しました";
+"subscriptions.list.date.yesterday" = "昨日";
+"subscriptions.list.actions.read" = "既読";
+"subscriptions.list.actions.unread" = "未読";
+"subscriptions.list.actions.favorite" = "お気に入り"; 
+"subscriptions.list.actions.unfavorite" = "お気に入りを外す"; 
+"subscriptions.list.actions.hide" = "隠す"; 
+
+// Servers
+"servers.add_new_team" = "新しいチームを追加";
+"servers.title" = "サーバー";
+"servers.add_new_server" = "サーバーを追加";
+"servers.action.disconnect" = "切断";
+"servers.action.disconnect.alert.title" = "サーバーから切断する";
+"servers.action.disconnect.alert.message" = "\"%@\" サーバーから切断しますか?";
+"servers.action.disconnect.alert.confirm" = "はい、切断します";
+
+// Status
+"status.online" = "オンライン";
+"status.away" = "離席中";
+"status.busy" = "取り込み中";
+"status.offline" = "オフライン";
+"status.invisible" = "状態を隠す";
+
+// New Room View
+"new_room.title" = "新しいチャンネル";
+"new_room.buttons.create" = "作ります";
+"new_room.cell.public_channel.title" = "パブリックチャンネル";
+"new_room.cell.public_channel.description" = "誰もがこのチャンネルにアクセスできます";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
+"new_room.cell.read_only.title" = "読み取り専用チャネル";
+"new_room.cell.read_only.description" = "許可されたユーザーだけが新しいメッセージを書くことができます";
+"new_room.group.channel.name" = "チャンネル名";
+"new_room.cell.channel_name.title" = "チャンネル名";
+"new_room.group.invite_users" = "メンバーを招待する";
+"new_room.cell.invite_users.placeholder" = "ユーザー名";
+
+// Notifications
+"notifications.action.reply" = "返信";
+
+// Chat
+"chat.channel_preview_view.title" = "これは #%@ のプレビューです";
+"chat.channel_preview_view.join" = "チャンネルに参加する";
+"chat.dm.start_conversation" = "%@ と会話を開始しました";
+"chat.channel.start_conversation" = "%@ で会話を開始しました";
+"chat.read_only" = "この部屋は読み取り専用です";
+"chat.muted" = "あなたはミュートされました";
+"chat.loading_messages" = "メッセージの読み込み...";
+"chat.unread_separator" = "新しいメッセージ";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
+
+// Read Receipts
+"chat.read_receipt_list.title" = "読者";
+"chat.read_receipt_list.title.loading" = "読み込み中...";
+"chat.read_receipt_list.title.empty" = "Read by no one";
+
+// Chat Message Actions
+"chat.message.actions.info" = "メッセージ情報";
+"chat.message.actions.react" = "リアクションする";
+"chat.message.actions.block" = "ユーザーからのメッセージをブロックする";
+"chat.message.actions.report" = "レポートメッセージ";
+"chat.message.actions.edit" = "編集";
+"chat.message.actions.copy" = "コピー";
+"chat.message.actions.pin" = "ピン";
+"chat.message.actions.unpin" = "ピン留を外す";
+"chat.message.actions.star" = "スター";
+"chat.message.actions.unstar" = "スターを外す";
+"chat.message.actions.quote" = "引用";
+"chat.message.actions.reply" = "返信";
+"chat.message.actions.delete" = "メッセージを削除";
+"chat.message.actions.delete.confirm.title" = "このメッセージを削除しますか ?";
+"chat.message.actions.delete.confirm.message" = "このメッセージを削除してもよろしいですか? このプロセスは元に戻すことはできません。";
+"chat.message.actions.delete.confirm.yes" = "はい、削除します";
+"chat.message.actions.discard" = "メッセージを破棄する";
+"chat.message.actions.discard.confirm.title" = "このメッセージを破棄しますか?";
+"chat.message.actions.discard.confirm.message" = "このメッセージはまだ送信されていません。 このメッセージを破棄しますか? このプロセスは元に戻すことはできません。";
+"chat.message.actions.discard.confirm.yes" = "はい、破棄します";
+"chat.message.actions.resend" = "再送信";
+"chat.message.actions.resend_all" = "全て再送信";
+"Send" = "送信";
+
+// Chat Message Report
+"chat.message.report.success.title" = "レポートメッセージ";
+"chat.message.report.success.message" = "メッセージが正常に報告されました。";
+
+// Chat Upload
+"chat.upload.uploading_image" = "画像のアップロード";
+"chat.upload.uploading_video" = "ビデオのアップロード";
+"chat.upload.uploading_file" = "\"%@\" アップロード";
+"chat.upload.take_photo" = "写真を撮る";
+"chat.upload.shoot_video" = "ビデオを撮る";
+"chat.upload.choose_from_library" = "ライブラリから選択";
+"chat.upload.import_file" = "添付ファイル";
+"chat.upload.draw" = "絵を描く";
+
+// Chat Download
+"chat.download.downloading_file" = "\"%@\" ダウンロード";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "タップしてファイルを開く";
+"chat.message.open_browser" = "ブラウザで開く";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "すみません";
+"chat.drawing.messageTitle" = "何か絵を描いてから送信してください。";
+"chat.drawing.fileName" = "お絵かき";
+"chat.drawing.settings.opacity" = "不透明度";
+"chat.drawing.settings.width" = "幅";
+"chat.drawing.settings.color.selected" = "選択中の色";
+"chat.drawing.settings.color.others" = "色を選択:";
+
+// Message Types
+"chat.message.type.room_name_changed" = "ルーム名を %@ から %@ へ変更しました。";
+"chat.message.type.user_added_by" = "%@ がユーザー %@ を追加しました。";
+"chat.message.type.user_removed_by" = "%@ がユーザー %@ を削除しました。";
+"chat.message.type.user_left" = "チャンネルを退去しました。";
+"chat.message.type.user_joined" = "チャンネルへ参加しました。";
+"chat.message.type.user_muted" = "%@にミュートされたユーザー %@";
+"chat.message.type.user_unmuted" = "ユーザー %@ は %@ によってミュートが解除されました";
+"chat.message.type.welcome" = "ようこそ %@";
+"chat.message.type.message_removed" = "メッセージを削除しました。";
+"chat.message.type.subscription_role_added" = "%@ は %@ によって %@ に設定されました"; 
+"chat.message.type.subscription_role_removed" = "%@ は %@ ではありません %@ です";
+"chat.message.type.room_archived" = "この部屋は %@ によってアーカイブされています";
+"chat.message.type.room_unarchived" = "この部屋は %@ によってアーカイブが解除されました";
+"chat.message.type.message_pinned" = "メッセージを固定しました:";
+
+// Chat Information
+"chat.info.title" = "情報";
+"chat.info.item.topic" = "トピック";
+"chat.info.item.no_topic" = "トッピックはありません";
+"chat.info.item.description" = "説明";
+"chat.info.item.no_description" = "説明はありません";
+"chat.info.item.members" = "メンバー";
+"chat.info.item.pinned" = "ピン留め";
+"chat.info.item.starred" = "スター";
+"chat.info.item.mentions" = "メンション";
+"chat.info.item.notifications" = "通知";
+"chat.info.item.files" = "ファイル";
+"chat.info.item.share" = "共有";
+
+// Members List
+"chat.members.list.title" = "メンバー";
+
+// Add Users
+"chat.add_users.title" = "ユーザーの追加";
+"chat.add_users.confirm.title" = "このユーザーを追加しますか?";
+"chat.add_users.confirm.message" = "'%@' を '%@' に追加しますか?";
+
+// Messages List
+"chat.messages.list.title" = "メッセージ";
+"chat.messages.list.empty" = "メッセージが見つかりません";
+"chat.messages.list.search.placeholder" = "メッセージ検索";
+"chat.messages.pinned.list.title" = "ピン留めされたメッセージ";
+"chat.messages.starred.list.title" = "スター付きのメッセージ";
+"chat.messages.mentions.list.title" = "メンション";
+"chat.messages.files.list.title" = "ファイル";
+"chat.messages.files.list.empty" = "ファイルが見つかりません";
+
+// Upload Banner
+"chat.banner.upload.uploading" = "%@ アップロード";
+"chat.banner.upload.error" = "%@ をアップロードできませんでした";
+"chat.banner.upload.retry" = "もう一度行う";
+
+// Settings
+"myaccount.settings.title" = "設定";
+"myaccount.settings.administration" = "管理";
+"myaccount.settings.logout" = "%@ からログアウト";
+"myaccount.settings.contactus" = "お問い合わせ";
+"myaccount.settings.profile" = "プロフィール";
+"myaccount.settings.license" = "ライセンス";
+"myaccount.settings.language" = "言語";
+"myaccount.settings.appicon" = "アプリケーションアイコン";
+"myaccount.settings.version" = "バージョン: %@ (%@)";
+"myaccount.settings.server_version" = "サーバーのバージョン: %@";
+"myaccount.settings.web_browser" = "Webブラウザ";
+"myaccount.settings.tracking.title" = "クラッシュレポートを送信する";
+"myaccount.settings.tracking.footer" = "クラッシュレポートには問題を特定して修正するための関連情報のみが含まれています。チャットの内容は含まれていません。";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "アイコンを選択する";
+"myaccount.settings.changeicon.header" = "デバイス上で表示されるRocket.Chatのアイコンを変更することができます。以下からアイコンを選択してください。";
+"myaccount.settings.changeicon.errortitle" = "アイコンを変更できません";
+"myaccount.settings.changeicon.iosversion" = "iOS 10.3未満のバージョンでは、アプリケーションのアイコンを変更する機能がサポートされていません。";
+
+// Change Language
+"myaccount.settings.language.title" = "言語を変更";
+"myaccount.settings.language.reset" = "デフォルトに戻す";
+"myaccount.settings.language.message" = "言語設定を変更しました。変更を有効にするにはRocket.Chatを再起動する必要があります。";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "通知設定";
+"myaccount.settings.notifications.save" = "保存";
+
+"myaccount.settings.notifications.receive.title" = "通知を受け取る";
+"myaccount.settings.notifications.receive.footer" = "%@ からの通知を受け取る";
+"myaccount.settings.notifications.show.title" = "未読カウンタを表示する";
+"myaccount.settings.notifications.show.footer" = "未読カウンタはリスト内のチャンネルの右側にバッジとして表示されます。";
+
+"myaccount.settings.notifications.inapp" = "アプリ内とデスクトップ";
+"myaccount.settings.notifications.inapp.alerts" = "アラート";
+"myaccount.settings.notifications.inapp.footer" = "アプリが開いている際に画面上部にバーナーを表示し、デスクトップに通知を表示します。";
+
+"myaccount.settings.notifications.mobile" = "プッシュ送信";
+"myaccount.settings.notifications.mobile.alerts" = "アラート";
+"myaccount.settings.notifications.mobile.footer" = "アプリが開いていない時で端末に通知が行われます。";
+
+"myaccount.settings.notifications.desktop" = "デスクトップオプション";
+"myaccount.settings.notifications.desktop.audio" = "オーディオ";
+"myaccount.settings.notifications.desktop.sound" = "サウンド";
+"myaccount.settings.notifications.desktop.duration" = "通知期間";
+
+"myaccount.settings.notifications.mail" = "メール";
+"myaccount.settings.notifications.email.alerts" = "アラート";
+
+"myaccount.settings.notifications.duration.default" = "デフォルト";
+"myaccount.settings.notifications.duration.seconds" = "秒";
+
+"alert.update_notifications_preferences_success.title" = "設定を保存しました";
+
+"alert.update_notifications_preferences_save_error.title" = "通知設定を更新できませんでした。";
+"alert.update_notifications_preferences_save_error.message" = "通知設定を保存している間に問題が発生しました。もう一度やり直してください。";
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "デフォルト";
+"subscription.notifications.status.nothing" = "なし";
+"subscription.notifications.status.all" = "全て";
+"subscription.notifications.status.mentions" = "メンション";
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "なし";
+"subscription.notifications.audio.value.default" = "デフォルト";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "アプリ内のブラウザ";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "ウェブブラウザ";
+"myaccount.settings.web_browser.footer" = "このアプリケーションはRocket.Chatでリンクを開く際に使用されます。";
+
+// Update Profile
+"myaccount.settings.profile.title" = "プロフィール";
+"myaccount.settings.editing_profile.title" = "プロフィール編集";
+"myaccount.settings.profile.actions.save" = "保存";
+"myaccount.settings.profile.actions.edit" = "編集";
+"myaccount.settings.profile.actions.change_password" = "パスワードの変更";
+"myaccount.settings.profile.section.profile" = "プロフィール";
+"myaccount.settings.profile.section.password" = "パスワード";
+"myaccount.settings.profile.name_placeholder" = "名前";
+"myaccount.settings.profile.username_placeholder" = "ユーザー名";
+"myaccount.settings.profile.email_placeholder" = "メール";
+"myaccount.settings.profile.status.title" = "状態";
+"myaccount.settings.profile.password_required.title" = "パスワードを入力";
+"myaccount.settings.profile.password_required.message" = "メールアドレスを更新する際にはパスワードが必要です。";
+"myaccount.settings.profile.password_required.placeholder" = "パスワード";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "新しいパスワード";
+"myaccount.settings.profile.new_password.section.password" = "パスワード";
+"myaccount.settings.profile.new_password.actions.save" = "保存";
+"myaccount.settings.profile.new_password.password_placeholder" = "新しいパスワード";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "パスワードの確認";
+"myaccount.settings.profile.new_password.password_required.title" = "パスワードを入力";
+"myaccount.settings.profile.new_password.password_required.message" = "新しいパスワードを設定する場合は、現在のパスワードが必要です。";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "パスワード";
+
+// User Action Sheet
+"user_action_sheet.info" = "情報";
+"user_action_sheet.remove" = "部屋から削除";
+"user_action_sheet.remove_confirm.title" = "このユーザーを削除しますか?";
+"user_action_sheet.remove_confirm.message" = "'%@' を部屋から削除してもよろしいですか?";
+
+// User Details
+"user_details.status" = "状態";
+"user_details.role" = "ロール";
+"user_details.roles" = "ロール";
+"user_details.email" = "メール";
+"user_details.emails" = "メール";
+"user_details.timezone" = "タイムゾーン";
+"user_details.message_button" = "メッセージ";
+"user_details.voice_call_button" = "音声通話";
+"user_details.video_call_button" = "ビデオ通話";
+
+// Theme
+"theme.settings.title" = "テーマ";
+"theme.settings.header" = "全てのテーマ";
+"theme.settings.footer" = "テーマを適用するとアプリの見た目が変わります。";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+"theme.black" = "Black";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "名前順";
+"subscriptions.sorting.title.activity" = "アクティビティ順";
+"subscriptions.sorting.alphabetical" = "アルファベット順";
+"subscriptions.sorting.activity" = "アクティビティ";
+"subscriptions.grouping.type" = "グループ別";
+"subscriptions.grouping.favorites" = "お気に入りのグループ";
+"subscriptions.grouping.unread_top" = "未読を先頭に表示";
+
+// Shortcuts
+"shortcuts.type_message" = "メッセージ入力";
+"shortcuts.preferences" = "設定";
+"shortcuts.room_search" = "ルーム検索";
+"shortcuts.room_selection" = "ルーム選択 1...9";
+"shortcuts.next_room" = "次のルーム";
+"shortcuts.previous_room" = "前のルーム";
+"shortcuts.new_room" = "新しいルーム";
+"shortcuts.room_actions" = "ルームアクション";
+"shortcuts.upload_room" = "ルームにアップロード";
+"shortcuts.search_messages" = "メッセージ検索";
+"shortcuts.scroll_messages" = "メッセージスクロール";
+"shortcuts.reply_latest" = "最新の返信";
+"shortcuts.server_selection" = "サーバーの選択";
+"shortcuts.server_selection_numbers" = "サーバーの選択 1...9";
+"shortcuts.add_server" = "サーバーを追加";
+"shortcuts.change_theme" = "テーマを変更";

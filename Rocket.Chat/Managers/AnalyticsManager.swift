@@ -20,6 +20,7 @@ enum Event {
     case signup
     case login
     case updateStatus
+    case replyNotification
     case screenView(screenName: String)
     case messageSent(subscriptionType: String, server: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
@@ -97,6 +98,7 @@ struct AnalyticsManager {
 }
 
 extension Event {
+    // swiftlint:disable cyclomatic_complexity
     func name(for provider: AnalyticsProvider? = nil) -> String {
         switch self {
         case .signup:
@@ -105,6 +107,7 @@ extension Event {
             return provider == .firebase ? AnalyticsEventLogin : "login"
         case .showNewWorkspace: return "show_new_workspace"
         case .updateStatus: return "status_update"
+        case .replyNotification: return "reply_notification"
         case .screenView: return "screen_view"
         case .messageSent: return "message_sent"
         case .mediaUpload: return "media_upload"

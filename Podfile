@@ -13,6 +13,10 @@ def ui_pods
   pod 'MBProgressHUD', '~> 1.1.0'
 end
 
+def diff_pods
+  pod 'DifferenceKit'
+end
+
 def shared_pods
   # Analytics
   pod 'Firebase/Core'
@@ -28,6 +32,7 @@ def shared_pods
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'SwipeCellKit'
   ui_pods
 
   # Text Processing
@@ -49,12 +54,16 @@ def shared_pods
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
+
+  # Diffing
+  diff_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
   pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
+  diff_pods
 end
 
 target 'Rocket.Chat' do
@@ -68,7 +77,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin', 'DifferenceKit', 'SwipeCellKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'

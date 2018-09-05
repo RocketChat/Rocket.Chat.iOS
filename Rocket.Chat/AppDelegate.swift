@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         PushManager.setupNotificationCenter()
         application.registerForRemoteNotifications()
+
         if let launchOptions = launchOptions,
            let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
             PushManager.handleNotification(raw: notification)

@@ -308,3 +308,42 @@ extension SubscriptionsClient {
         }
     }
 }
+
+// MARK: Subsctiption actions
+
+extension SubscriptionsClient {
+    func favoriteSubscription(subscription: Subscription) {
+        SubscriptionManager.toggleFavorite(subscription) { (response) in
+            DispatchQueue.main.async {
+                if response.isError() {
+                    subscription.updateFavorite(!subscription.favorite)
+                }
+            }
+        }
+
+        subscription.updateFavorite(!subscription.favorite)
+    }
+
+    func hideSubscription(subscription: Subscription) {
+        let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
+        api.fetch(hideRequest, completion: nil)
+
+        Realm.executeOnMainThread { realm in
+            realm.delete(subscription)
+        }
+    }
+
+    func markRead(subscription: Subscription) {
+        api.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
+        Realm.executeOnMainThread { _ in
+            subscription.alert = false
+        }
+    }
+
+    func markUnread(subscription: Subscription) {
+        api.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
+        Realm.executeOnMainThread { _ in
+            subscription.alert = true
+        }
+    }
+}
