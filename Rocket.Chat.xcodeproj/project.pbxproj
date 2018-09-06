@@ -117,6 +117,7 @@
 		334F78EF211DE726003D0C5A /* UnmanagedSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */; };
 		334F78F0211DE72D003D0C5A /* UnmanagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */; };
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
+		3367424A213EBBF800E6816E /* ListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33674249213EBBF800E6816E /* ListExtension.swift */; };
 		3397604920EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A1BB0520FE312900AFA7D4 /* ChatMessageVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412A95D51FD94ED000954AA6 /* ChatMessageVideoView.xib */; };
@@ -948,6 +949,7 @@
 		334F78EB211DC639003D0C5A /* UnmanagedSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedSubscription.swift; sourceTree = "<group>"; };
 		334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedObject.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		33674249213EBBF800E6816E /* ListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtension.swift; sourceTree = "<group>"; };
 		3397604820EA72EE0054758A /* RuntimeAttributesThemeableViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeAttributesThemeableViewSpec.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A1BB0620FF75D600AFA7D4 /* BaseSubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSubscriptionCell.swift; sourceTree = "<group>"; };
@@ -2338,6 +2340,7 @@
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
 				1496A87820FA4735005C2E14 /* EnumExtensions.swift */,
 				77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */,
+				33674249213EBBF800E6816E /* ListExtension.swift */,
 				41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */,
 				80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */,
 				8076FDA8204853DE00114F28 /* RealmExecute.swift */,
@@ -4556,6 +4559,7 @@
 				9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */,
 				80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
+				3367424A213EBBF800E6816E /* ListExtension.swift in Sources */,
 				80054CFC1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift in Sources */,
 				41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */,
 				99F530A120D0F08A004EC060 /* BaseTableViewController.swift in Sources */,

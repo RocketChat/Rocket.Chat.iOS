@@ -63,7 +63,7 @@ enum DeepLink {
     private static func parseAuthUrl(_ url: URL) -> DeepLink? {
         guard let host = url.queryParameters?["host"] else { return nil }
 
-        var credentials: DeepLinkCredentials? = nil
+        var credentials: DeepLinkCredentials?
 
         if let token = url.queryParameters?["token"], let userId = url.queryParameters?["userId"] {
             credentials = (token: token, userId: userId)
