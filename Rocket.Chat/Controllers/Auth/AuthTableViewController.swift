@@ -126,6 +126,7 @@ class AuthTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         title = serverURL.host
+        setupTableView()
 
         guard let settings = serverPublicSettings else { return }
 
@@ -135,8 +136,6 @@ class AuthTableViewController: BaseTableViewController {
         } else {
             emailAuthRow.registerButton.isHidden = settings.registrationForm != .isPublic
         }
-
-        setupTableView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
