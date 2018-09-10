@@ -121,24 +121,9 @@ extension MessageManager {
                 return Log.debug(response.result.string)
             }
 
-            let object = response.result["fields"]["args"][0]
-
-            currentRealm?.execute({ (realm) in
-                guard let subscriptionIdentifier = object["rid"].string else { return }
-                guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
-
-                let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.subscription = detachedSubscription
-                })
-
-                if message.user == nil {
-                    let user = User.getOrCreate(realm: realm, values: ["id": "rocket.cat", "username": "rocket.cat"], updates: nil)
-                    message.user = user
-                }
-
-                message.privateMessage = true
-                realm.add(message, update: true)
-            })
+            if let object = response.result["fields"]["args"].dictionary {
+                createSystemMessage(from: object, realm: currentRealm)
+            }
         }
     }
 
