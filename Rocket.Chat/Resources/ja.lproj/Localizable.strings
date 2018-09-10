@@ -97,6 +97,7 @@
 // Socket Connection
 "connection.title" = "サーバーに接続";
 "connection.button_connect" = "接続";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "現在オフライン状態です。もう一度接続してください。";
 "connection.connecting.banner.message" = "接続中...";
 "connection.waiting_for_network.banner.message" = "接続を待っています";

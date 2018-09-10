@@ -12,7 +12,6 @@ import semver
 
 final class ConnectServerViewController: BaseViewController {
 
-    internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
     internal let buttonConnectBottomSpacing: CGFloat = 24
@@ -22,10 +21,11 @@ final class ConnectServerViewController: BaseViewController {
 
     var shouldAutoConnect = false
     var url: URL? {
-        guard var urlText = textFieldServerURL.text else { return URL(string: defaultURL, scheme: "https") }
+        guard var urlText = textFieldServerURL.text else { return nil }
 
+        // Do not return URL in case text is nil
         if urlText.isEmpty {
-            urlText = defaultURL
+            return nil
         }
 
         // Remove all the whitespaces from the string
@@ -89,7 +89,7 @@ final class ConnectServerViewController: BaseViewController {
 
         selectedServer = DatabaseManager.selectedIndex
         infoRequestHandler.delegate = self
-        textFieldServerURL.placeholder = defaultURL
+        textFieldServerURL.placeholder = localized("connection.server_url.placeholder")
 
         if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()

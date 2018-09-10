@@ -97,6 +97,7 @@
 // Socket Connection
 "connection.title" = "Sign in to your server";
 "connection.button_connect" = "Connect";
+"connection.server_url.placeholder" = "your-company.rocket.chat";
 "connection.offline.banner.message" = "You're offline, try connecting again";
 "connection.connecting.banner.message" = "Connecting...";
 "connection.waiting_for_network.banner.message" = "Waiting for network";

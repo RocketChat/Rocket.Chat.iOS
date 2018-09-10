@@ -96,7 +96,8 @@
 
 // Socket Connection
 "connection.title" = "Συνδεθείτε στον εξυπηρετητή σας"; 
-"connection.button_connect" = "Σύνδεση"; 
+"connection.button_connect" = "Σύνδεση";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
 "connection.waiting_for_network.banner.message" = "Περιμένετε για το δίκτυο"; 
