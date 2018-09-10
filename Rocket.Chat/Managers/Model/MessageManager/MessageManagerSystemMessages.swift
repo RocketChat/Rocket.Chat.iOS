@@ -17,7 +17,7 @@ extension MessageManager {
         guard let subscriptionIdentifier = object["rid"]?.string else { return }
         guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
 
-        realm.execute({ (realm) in
+        try? realm.write {
             let message = Message.getOrCreate(realm: realm, values: JSON(object), updates: { (object) in
                 object?.subscription = detachedSubscription
             })
@@ -29,7 +29,7 @@ extension MessageManager {
 
             message.privateMessage = true
             realm.add(message, update: true)
-        })
+        }
     }
 
 }
