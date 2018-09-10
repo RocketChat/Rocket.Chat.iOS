@@ -30,6 +30,9 @@ extension AuthManager {
         Realm.execute({ (realm) in
             let users = realm.objects(User.self)
             users.setValue("offline", forKey: "privateStatus")
+
+            let messages = realm.objects(Message.self).filter("privateMessage = YES")
+            realm.delete(messages)
         })
 
         SocketManager.connect(socketURL) { (socket, _) in

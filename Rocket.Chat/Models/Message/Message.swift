@@ -98,8 +98,14 @@ final class Message: BaseModel {
         return  .text
     }
 
-    // Internal
+    // MARK: Internal
+
+    // These are the messages marked for deletion
     @objc dynamic var markedForDeletion: Bool = false
+
+    // Private messages get removed from the database
+    // when a new session starts
+    @objc dynamic var privateMessage: Bool = false
 }
 
 extension Message {
