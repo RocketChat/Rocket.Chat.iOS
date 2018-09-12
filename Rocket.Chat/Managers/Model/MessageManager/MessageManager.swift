@@ -121,7 +121,7 @@ extension MessageManager {
                 return Log.debug(response.result.string)
             }
 
-            if let object = response.result["fields"]["args"].dictionary {
+            if let object = response.result["fields"]["args"].array?.first?.dictionary {
                 createSystemMessage(from: object, realm: currentRealm)
             }
         }

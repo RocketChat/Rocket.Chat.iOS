@@ -15,9 +15,10 @@ extension MessageManager {
     static func createSystemMessage(from object: [String: JSON], realm: Realm? = Realm.current) {
         guard let realm = realm else { return }
         guard let subscriptionIdentifier = object["rid"]?.string else { return }
-        guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
 
-        try? realm.write {
+        realm.execute({ (realm) in
+            guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
+
             let message = Message.getOrCreate(realm: realm, values: JSON(object), updates: { (object) in
                 object?.subscription = detachedSubscription
             })
@@ -29,7 +30,7 @@ extension MessageManager {
 
             message.privateMessage = true
             realm.add(message, update: true)
-        }
+        })
     }
 
 }

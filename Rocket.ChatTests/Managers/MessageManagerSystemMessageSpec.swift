@@ -37,13 +37,19 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         if let basicObject = object.dictionary {
             MessageManager.createSystemMessage(from: basicObject, realm: realm)
 
-            let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
-            XCTAssertEqual(message?.text, messageText)
-            XCTAssertEqual(message?.user?.username, "rocket.cat")
-            XCTAssertNil(message?.avatar)
-            XCTAssertTrue(message?.privateMessage ?? false)
+            let expectation = XCTestExpectation(description: "message should have been created")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
+                XCTAssertEqual(message?.text, messageText)
+                XCTAssertEqual(message?.user?.username, "rocket.cat")
+                XCTAssertNil(message?.avatar)
+                XCTAssertTrue(message?.privateMessage ?? false)
+
+                expectation.fulfill()
+            })
+            wait(for: [expectation], timeout: 3)
         } else {
-            XCTFail()
+            XCTFail("basic object is not valid")
         }
     }
 
@@ -72,13 +78,19 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         if let basicObject = object.dictionary {
             MessageManager.createSystemMessage(from: basicObject, realm: realm)
 
-            let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
-            XCTAssertEqual(message?.text, messageText)
-            XCTAssertEqual(message?.user?.username, "rocket.cat")
-            XCTAssertEqual(message?.avatar, avatarURL)
-            XCTAssertTrue(message?.privateMessage ?? false)
+            let expectation = XCTestExpectation(description: "message should have been created")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
+                XCTAssertEqual(message?.text, messageText)
+                XCTAssertEqual(message?.user?.username, "rocket.cat")
+                XCTAssertEqual(message?.avatar, avatarURL)
+                XCTAssertTrue(message?.privateMessage ?? false)
+
+                expectation.fulfill()
+            })
+            wait(for: [expectation], timeout: 3)
         } else {
-            XCTFail()
+            XCTFail("basic object is not valid")
         }
     }
 
@@ -111,12 +123,18 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         if let basicObject = object.dictionary {
             MessageManager.createSystemMessage(from: basicObject, realm: realm)
 
-            let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
-            XCTAssertEqual(message?.text, messageText)
-            XCTAssertEqual(message?.user?.identifier, userIdentifier)
-            XCTAssertTrue(message?.privateMessage ?? false)
+            let expectation = XCTestExpectation(description: "message should have been created")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
+                XCTAssertEqual(message?.text, messageText)
+                XCTAssertEqual(message?.user?.identifier, userIdentifier)
+                XCTAssertTrue(message?.privateMessage ?? false)
+
+                expectation.fulfill()
+            })
+            wait(for: [expectation], timeout: 3)
         } else {
-            XCTFail()
+            XCTFail("basic object is not valid")
         }
     }
 
