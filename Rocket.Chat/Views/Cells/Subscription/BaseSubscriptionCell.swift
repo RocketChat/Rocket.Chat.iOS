@@ -72,7 +72,8 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
     }
 
     func updateSubscriptionInformation() {
-        guard let subscription = self.subscription?.managedObject else { return }
+        guard let subscription = self.subscription?.managedObject.validated() else { return }
+
         var user: User?
 
         if subscription.type == .directMessage {
