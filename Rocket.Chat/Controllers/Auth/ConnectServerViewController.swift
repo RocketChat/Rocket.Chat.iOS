@@ -100,6 +100,7 @@ final class ConnectServerViewController: BaseViewController {
         view.addGestureRecognizer(tapGesture)
 
         if shouldAutoConnect {
+            textFieldServerURL.text = "open.rocket.chat"
             connect()
         }
     }
