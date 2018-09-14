@@ -103,7 +103,7 @@
 
 // Onboarding
 "onboarding.label_welcome" = "Willkommen bei Rocket Chat";
-"onboarding.label_subtitle" = "Open Source Kommuniation";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Mit einem Server verbinden";
 "onboarding.button_create_server" = "Neuen Server erstellen";
 "onboarding.button_join_community_prefix" = "Der Community beitreten";

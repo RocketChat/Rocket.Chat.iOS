@@ -103,7 +103,7 @@
 
 // Onboarding
 "onboarding.label_welcome" = "Rocket Chatへようこそ";
-"onboarding.label_subtitle" = "オープンソースコミュニケーション";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "サーバーに接続する";
 "onboarding.button_create_server" = "新しいワークスペースの作成";
 "onboarding.button_join_community_prefix" = "コミュニティに参加する";
