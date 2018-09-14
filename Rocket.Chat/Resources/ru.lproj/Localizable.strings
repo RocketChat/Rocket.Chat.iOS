@@ -97,6 +97,7 @@
 // Socket Connection
 "connection.title" = "Войдите на ваш сервер";
 "connection.button_connect" = "Соединение";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
 "connection.waiting_for_network.banner.message" = "Ожидание сети";

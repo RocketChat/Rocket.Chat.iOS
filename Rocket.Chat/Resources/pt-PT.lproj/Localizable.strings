@@ -97,6 +97,7 @@
 // Socket Connection
 "connection.title" = "Entre no seu servidor";
 "connection.button_connect" = "Ligar";
+"connection.server_url.placeholder" = "sua-empresa.rocket.chat";
 "connection.offline.banner.message" = "Você está off-line, tente ligar-se novamente";
 "connection.connecting.banner.message" = "A ligar...";
 "connection.waiting_for_network.banner.message" = "Esperando por rede";
