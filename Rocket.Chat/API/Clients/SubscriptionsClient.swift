@@ -299,8 +299,13 @@ extension SubscriptionsClient {
         let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
         api.fetch(request, options: options) { response in
             if case let .resource(resource) = response {
-                try? realm?.write {
-                    realm?.add(resource.members?.compactMap { $0 } ?? [], update: true)
+                guard let realm = realm else { return }
+
+                try? realm.write {
+                    resource.members?.forEach({ (member) in
+                        let user = User.getOrCreate(realm: realm, values: member, updates: nil)
+                        realm.add(user, update: true)
+                    })
                 }
             }
 
