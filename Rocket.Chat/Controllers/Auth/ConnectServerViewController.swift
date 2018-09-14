@@ -55,6 +55,7 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var buttonConnect: StyledButton! {
         didSet {
             buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
+            buttonConnect.isEnabled = false
         }
     }
 
@@ -288,8 +289,25 @@ final class ConnectServerViewController: BaseViewController {
 
 extension ConnectServerViewController: UITextFieldDelegate {
 
+    func textFieldDidChange() {
+        buttonConnect.isEnabled = !(textFieldServerURL.text?.isEmpty ?? true)
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textFieldServerURL.text = ""
+        textFieldDidChange()
+        return true
+    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return !connecting
+        if !connecting {
+            if let text = textField.text, let textRange = Range(range, in: text) {
+                textField.text = text.replacingCharacters(in: textRange, with: string)
+                textFieldDidChange()
+            }
+        }
+
+        return false
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
