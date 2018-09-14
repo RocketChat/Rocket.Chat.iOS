@@ -82,6 +82,10 @@ final class ConnectServerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if shouldAutoConnect {
+            textFieldServerURL.text = "open.rocket.chat"
+        }
+
         if !(DatabaseManager.servers?.count ?? 0 > 0) {
             navigationItem.leftBarButtonItem = nil
         } else {
