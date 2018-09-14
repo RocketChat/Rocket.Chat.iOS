@@ -394,7 +394,7 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = cell.frame
 
         if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
-            controller.subscription = subscription.managedObject
+            controller.subscription = subscription.managedObject.validated()
             return controller
         }
 
@@ -489,7 +489,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func onSelectRowAt(_ indexPath: IndexPath) {
-        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
+        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated() else { return }
 
         searchController?.searchBar.resignFirstResponder()
 
