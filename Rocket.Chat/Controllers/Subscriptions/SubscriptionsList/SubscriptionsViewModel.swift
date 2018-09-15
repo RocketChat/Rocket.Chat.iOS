@@ -191,6 +191,15 @@ extension SubscriptionsViewModel {
     }
 
     func subscriptionForRowAt(indexPath: IndexPath) -> Subscription.UnmanagedType? {
+        guard
+            numberOfSections > indexPath.section,
+            indexPath.section >= 0,
+            numberOfRowsInSection(indexPath.section) > indexPath.row,
+            indexPath.row >= 0
+        else {
+            return nil
+        }
+
         return assorter?.objectForRowAtIndexPath(indexPath)
     }
 

@@ -11,6 +11,28 @@ import RealmSwift
 extension AuthManager {
 
     /**
+     This method removes all private/system messages from database. These
+     messages are currently being feeded from a WebSocket stream and they
+     are not suppose to remain visible in between sessions.
+     */
+    static internal func removeAllPrivateMessages(realm: Realm? = Realm.current) {
+        realm?.execute({ (realm) in
+            let messages = realm.objects(Message.self).filter("privateMessage = YES")
+            realm.delete(messages)
+        })
+    }
+
+    /**
+     This method turns all user's status into offline/invisible.
+     */
+    static internal func turnAllUsersOffline(realm: Realm? = Realm.current) {
+        realm?.execute({ (realm) in
+            let users = realm.objects(User.self)
+            users.setValue("offline", forKey: "privateStatus")
+        })
+    }
+
+    /**
      This method resumes a previous authentication with token
      stored in the Realm object.
 
@@ -26,11 +48,8 @@ extension AuthManager {
             return
         }
 
-        // Turn all users offline
-        Realm.execute({ (realm) in
-            let users = realm.objects(User.self)
-            users.setValue("offline", forKey: "privateStatus")
-        })
+        turnAllUsersOffline()
+        removeAllPrivateMessages()
 
         SocketManager.connect(socketURL) { (socket, _) in
             guard SocketManager.isConnected() else {

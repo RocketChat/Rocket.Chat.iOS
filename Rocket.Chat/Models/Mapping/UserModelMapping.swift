@@ -37,7 +37,7 @@ extension User: ModelMappeable {
                 let email = Email(value: [
                     "email": emailRaw["address"].stringValue,
                     "verified": emailRaw["verified"].boolValue
-                    ])
+                ])
 
                 guard !email.email.isEmpty else { return nil }
 
@@ -48,13 +48,12 @@ extension User: ModelMappeable {
             self.emails.append(objectsIn: emails)
         }
 
-        mapRoles(values["roles"])
-    }
+        if let rolesRaw = values["roles"].array {
+            let roles = rolesRaw.compactMap({ $0.string })
 
-    func mapRoles(_ values: JSON) {
-        if let roles = values.array?.compactMap({ $0.string }) {
             self.roles.removeAll()
             self.roles.append(objectsIn: roles)
         }
     }
+
 }

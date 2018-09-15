@@ -183,6 +183,7 @@ extension SocketManager {
                     PermissionManager.changes()
                     infoClient.fetchPermissions(realm: currentRealm)
                     CustomEmojiManager.sync(realm: currentRealm)
+                    MessageManager.subscribeSystemMessages()
 
                     commandsClient.fetchCommands(realm: currentRealm)
 

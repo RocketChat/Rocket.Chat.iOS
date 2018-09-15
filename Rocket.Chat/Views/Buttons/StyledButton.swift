@@ -38,6 +38,7 @@ final class StyledButton: UIButton {
     }
     @IBInspectable var cornerRadius: CGFloat = 2
     @IBInspectable var borderWidth: CGFloat = 1
+    @IBInspectable var buttonColorDisabled: UIColor = UIColor(red: 225/255, green: 229/255, blue: 232/255, alpha: 1)
     @IBInspectable var buttonColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var borderColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var textColor: UIColor = UIColor.white
@@ -81,6 +82,15 @@ final class StyledButton: UIButton {
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
 
+        if !isEnabled {
+            backgroundColor = buttonColorDisabled
+            layer.borderColor = UIColor.clear.cgColor
+            layer.borderWidth = 0
+            setTitleColor(.white, for: UIControlState())
+            setTitleShadowColor(nil, for: UIControlState())
+            return
+        }
+
         switch style {
         case .solid:
             backgroundColor = buttonColor
@@ -95,6 +105,12 @@ final class StyledButton: UIButton {
             layer.borderWidth = borderWidth
             setTitleColor(textColor, for: UIControlState())
             titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        }
+    }
+
+    override var isEnabled: Bool {
+        didSet {
+            applyStyle()
         }
     }
 

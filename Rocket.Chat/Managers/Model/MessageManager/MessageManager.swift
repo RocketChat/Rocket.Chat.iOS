@@ -104,6 +104,29 @@ extension MessageManager {
         }
     }
 
+    static func subscribeSystemMessages() {
+        guard let userIdentifier = AuthManager.currentUser()?.identifier else { return }
+
+        let eventName = "\(userIdentifier)/message"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-user",
+            "id": eventName,
+            "params": [eventName, false]
+        ] as [String: Any]
+
+        let currentRealm = Realm.current
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            guard !response.isError() else {
+                return Log.debug(response.result.string)
+            }
+
+            if let object = response.result["fields"]["args"].array?.first?.dictionary {
+                createSystemMessage(from: object, realm: currentRealm)
+            }
+        }
+    }
+
     static func subscribeDeleteMessage(_ subscription: Subscription, completion: @escaping (_ msgId: String) -> Void) {
         let eventName = "\(subscription.rid)/deleteMessage"
         let request = [
