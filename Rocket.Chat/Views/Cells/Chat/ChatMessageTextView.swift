@@ -55,7 +55,7 @@ final class ChatMessageTextView: UIView {
 
     private func updateLabels() {
         labelTitle.text = viewModel?.title
-        labelDescription.attributedText = NSMutableAttributedString(string: viewModel?.text ?? "").transformMarkdown()
+        labelDescription.attributedText = NSMutableAttributedString(string: viewModel?.text ?? "").transformMarkdown(with: self.theme)
 
         if viewModel?.title.count == 0 {
             labelTitleHeightConstraint.constant = 0
