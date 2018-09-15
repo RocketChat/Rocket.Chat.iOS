@@ -14,39 +14,37 @@ struct MarkdownColorAttributes {
     let codeBackgroundColor: UIColor
     let codeTextColor: UIColor
     let linkColor: UIColor
+
+    init(from theme: Theme) {
+        quoteBackgroundColor = theme.bannerBackground
+        codeBackgroundColor = theme.bannerBackground
+        codeTextColor = theme.controlText
+        linkColor = theme.hyperlink
+    }
 }
 
 class MarkdownManager {
     static let shared = MarkdownManager()
 
-    lazy var defaultParser = RCMarkdownParser()
+    lazy var defaultParser = RCMarkdownParser.initWithDefaultAttributes()
 
     lazy var lightParser: RCMarkdownParser = {
-        let parser = RCMarkdownParser()
-        parser.useColorAttributes(colorAttributes(for: .light))
+        let parser = RCMarkdownParser.initWithDefaultAttributes()
+        parser.useColorAttributes(MarkdownColorAttributes(from: .light))
         return parser
     }()
 
     lazy var darkParser: RCMarkdownParser = {
-        let parser = RCMarkdownParser()
-        parser.useColorAttributes(colorAttributes(for: .dark))
+        let parser = RCMarkdownParser.initWithDefaultAttributes()
+        parser.useColorAttributes(MarkdownColorAttributes(from: .dark))
         return parser
     }()
 
     lazy var blackParser: RCMarkdownParser = {
-        let parser = RCMarkdownParser()
-        parser.useColorAttributes(colorAttributes(for: .black))
+        let parser = RCMarkdownParser.initWithDefaultAttributes()
+        parser.useColorAttributes(MarkdownColorAttributes(from: .black))
         return parser
     }()
-
-    func colorAttributes(for theme: Theme) -> MarkdownColorAttributes {
-        return MarkdownColorAttributes(
-            quoteBackgroundColor: theme.bannerBackground,
-            codeBackgroundColor: theme.bannerBackground,
-            codeTextColor: theme.controlText,
-            linkColor: theme.hyperlink
-        )
-    }
 
     func transformAttributedString(_ attributedString: NSAttributedString) -> NSAttributedString {
         return defaultParser.attributedStringFromAttributedMarkdownString(attributedString)
