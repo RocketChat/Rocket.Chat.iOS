@@ -14,7 +14,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        func addAction(_ titleKey: String, image: UIImage, style: UIAlertActionStyle = .default, handler: @escaping (UIAlertAction) -> Void) {
+        func addAction(_ titleKey: String, image: UIImage, style: UIAlertAction.Style = .default, handler: @escaping (UIAlertAction) -> Void) {
             let action = UIAlertAction(title: localized(titleKey), style: style, handler: handler)
             action.image = image
             action.titleTextAlignment = .left
@@ -54,11 +54,14 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     }
 
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         var filename = String.random()
         var file: FileUpload?
 
-        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL,
+        if let assetURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as? URL,
             let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
             if let resource = PHAssetResource.assetResources(for: asset).first {
                 filename = resource.originalFilename
@@ -84,7 +87,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
             }
         }
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
@@ -92,7 +95,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
             )
         }
 
-        if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
+        if let videoURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL {
             let assetURL = AVURLAsset(url: videoURL)
             let semaphore = DispatchSemaphore(value: 0)
 
@@ -260,4 +263,14 @@ extension ChatViewController: DrawingControllerDelegate {
         uploadDialog(file)
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

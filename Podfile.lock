@@ -78,7 +78,7 @@ PODS:
   - Starscream (2.1.1)
   - SwiftLint (0.27.0)
   - SwiftyJSON (4.1.0)
-  - SwipeCellKit (2.4.3)
+  - SwipeCellKit (2.5.0)
 
 DEPENDENCIES:
   - 1PasswordExtension
@@ -101,7 +101,7 @@ DEPENDENCIES:
   - Starscream (~> 2)
   - SwiftLint
   - SwiftyJSON
-  - SwipeCellKit
+  - SwipeCellKit (~> 2.5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -184,8 +184,8 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  SwipeCellKit: cee9906e6d3a36e22ad1a852fba7f8fa0839d113
+  SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 48a437828feba2e992d06a92fbe46d60dc7a2a13
+PODFILE CHECKSUM: 25831cb49b521c5ba9bd08f9ffcbcbb2dd1bf677
 
 COCOAPODS: 1.5.3

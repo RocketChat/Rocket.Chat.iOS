@@ -59,7 +59,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }()
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -144,7 +144,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
 
         if let imageView = avatarButton.imageView {
-            avatarButton.bringSubview(toFront: imageView)
+            avatarButton.bringSubviewToFront(imageView)
         }
     }
 
@@ -342,7 +342,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
             }
             textField.isSecureTextEntry = true
 
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+            _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
             }
         })
@@ -523,11 +523,14 @@ extension EditProfileTableViewController: UINavigationControllerDelegate {}
 
 extension EditProfileTableViewController: UIImagePickerControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         let filename = String.random()
         var file: FileUpload?
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
@@ -577,4 +580,14 @@ extension EditProfileTableViewController {
             email.textColor = (authSettings?.isAllowedToEditName ?? false) ? theme.titleText : theme.auxiliaryText
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

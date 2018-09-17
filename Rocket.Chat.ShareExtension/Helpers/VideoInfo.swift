@@ -27,7 +27,7 @@ struct VideoInfo {
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
 
-        guard let cgImage = try? generator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil) else {
+        guard let cgImage = try? generator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil) else {
             return nil
         }
 

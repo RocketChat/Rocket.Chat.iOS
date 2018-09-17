@@ -72,7 +72,7 @@ extension UIImage {
 
     func compressedImage(forMaxExpectedSize maxSize: Int) -> Data {
 
-        let jpegImage = UIImageJPEGRepresentation(self, 1.0) ?? Data()
+        let jpegImage = self.jpegData(compressionQuality: 1.0) ?? Data()
         let imageSize = jpegImage.byteSize
 
         if imageSize < maxSize && maxSize > 0 {
@@ -94,7 +94,7 @@ extension UIImage {
 
     private func compressedImage(resizedWithPercentage percentage: CGFloat) -> Data {
         let resizedImage = self.resized(withPercentage: percentage) ?? UIImage()
-        return UIImageJPEGRepresentation(resizedImage, 0.5) ?? Data()
+        return resizedImage.jpegData(compressionQuality: 0.5) ?? Data()
     }
 
     private static func percentSizeAfterCompression(forImageWithSize size: Int, maxExpectedSize maxSize: Int) -> CGFloat {

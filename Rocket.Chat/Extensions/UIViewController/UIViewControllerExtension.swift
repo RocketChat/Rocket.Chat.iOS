@@ -80,14 +80,14 @@ extension UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(UIViewController.keyboardWillShow(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(UIViewController.keyboardWillHide(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -98,15 +98,15 @@ extension UIViewController {
 
     @objc internal func keyboardWillShow(_ notification: Foundation.Notification) {
         let userInfo = notification.userInfo
-        let value = userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        let value = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         let rawFrame = value?.cgRectValue ?? CGRect.zero
-        let duration = userInfo?[UIKeyboardAnimationDurationUserInfoKey] ?? 0
+        let duration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] ?? 0
         let scrollView = self.scrollViewInternal
 
         UIView.animate(
             withDuration: (duration as AnyObject).doubleValue,
             delay: 0,
-            options: UIViewAnimationOptions(),
+            options: UIView.AnimationOptions(),
             animations: {
                 guard let insets = scrollView?.contentInset else { return }
                 var newInsets = insets
@@ -121,13 +121,13 @@ extension UIViewController {
 
     @objc internal func keyboardWillHide(_ notification: Foundation.Notification) {
         let userInfo = notification.userInfo
-        let duration = userInfo?[UIKeyboardAnimationDurationUserInfoKey] ?? 0
+        let duration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] ?? 0
         let scrollView = self.scrollViewInternal
 
         UIView.animate(
             withDuration: (duration as AnyObject).doubleValue,
             delay: 0,
-            options: UIViewAnimationOptions(),
+            options: UIView.AnimationOptions(),
             animations: {
                 let insets = UIEdgeInsets.zero
                 scrollView?.contentInset = insets

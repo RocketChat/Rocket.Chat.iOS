@@ -14,9 +14,9 @@ extension Realm {
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: {
-            backgroundTaskId = UIBackgroundTaskInvalid
-        })
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background") {
+            backgroundTaskId = convertFromUIBackgroundTaskIdentifier(UIBackgroundTaskIdentifier.invalid)
+        }
 
         if let backgroundTaskId = backgroundTaskId {
             let config = self.configuration
@@ -83,4 +83,9 @@ extension Realm {
             realm.add(objects, update: true)
         })
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIBackgroundTaskIdentifier(_ input: UIBackgroundTaskIdentifier) -> Int {
+	return input.rawValue
 }
