@@ -55,13 +55,11 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
 
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         var filename = String.random()
         var file: FileUpload?
 
-        if let assetURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as? URL,
+        if let assetURL = info[.referenceURL] as? URL,
             let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
             if let resource = PHAssetResource.assetResources(for: asset).first {
                 filename = resource.originalFilename
@@ -87,7 +85,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             }
         }
 
-        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
@@ -95,7 +93,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             )
         }
 
-        if let videoURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL {
+        if let videoURL = info[.mediaURL] as? URL {
             let assetURL = AVURLAsset(url: videoURL)
             let semaphore = DispatchSemaphore(value: 0)
 
@@ -263,14 +261,4 @@ extension ChatViewController: DrawingControllerDelegate {
         uploadDialog(file)
     }
 
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }
