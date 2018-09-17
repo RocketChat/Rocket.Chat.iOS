@@ -73,9 +73,9 @@ class NotificationViewControllerSpec: XCTestCase {
         }
 
         if notificationVC.isDeviceWithNotch {
-            XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelStatusBar - 1, "Notification window level should be UIWindowLevelStatusBar - 1")
+            XCTAssert(notificaitonWindow.windowLevel == UIWindow.Level.statusBar - 1, "Notification window level should be UIWindowLevelStatusBar - 1")
         } else {
-            XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelAlert, "Notification window level should be UIWindowLevelAlert")
+            XCTAssert(notificaitonWindow.windowLevel == UIWindow.Level.alert, "Notification window level should be UIWindowLevelAlert")
         }
     }
 }

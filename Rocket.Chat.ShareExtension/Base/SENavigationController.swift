@@ -11,9 +11,7 @@ import MobileCoreServices
 
 final class SENavigationController: UINavigationController {
     func loadContent(_ store: SEStore) -> SEAction? {
-        let itemProviders = (extensionContext?.inputItems.first as? NSExtensionItem)?.attachments?.compactMap {
-            $0 as? NSItemProvider
-        } ?? []
+        let itemProviders = (extensionContext?.inputItems.first as? NSExtensionItem)?.attachments ?? []
 
         parseItemProviders(store, itemProviders)
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
