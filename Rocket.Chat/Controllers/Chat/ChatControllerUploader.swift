@@ -55,8 +55,20 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
 
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        dismiss(animated: true, completion: nil)
+        MBProgressHUD.showAdded(to: view, animated: true)
+
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.uploadMediaFromPicker(with: info)
+        }
+    }
+}
+
+// MARK: Upload media
+
+extension ChatViewController {
+    func uploadMediaFromPicker(with info: [String: Any]) {
         var filename = String.random()
-        var file: FileUpload?
 
         if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL,
             let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
@@ -67,64 +79,77 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
             let mimeType = UploadHelper.mimeTypeFor(assetURL)
 
             if mimeType == "image/gif" {
-                PHImageManager.default().requestImageData(for: asset, options: nil) { data, _, _, _ in
-                    guard let data = data else { return }
-
-                    let file = UploadHelper.file(
-                        for: data,
-                        name: "\(filename.components(separatedBy: ".").first ?? "image").gif",
-                        mimeType: "image/gif"
-                    )
-
-                    self.uploadDialog(file)
-                    self.dismiss(animated: true, completion: nil)
-                }
-
+                upload(gif: asset, filename: filename)
+                dismiss(animated: true, completion: nil)
                 return
             }
         }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            file = UploadHelper.file(
-                for: image.compressedForUpload,
-                name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
-                mimeType: "image/jpeg"
-            )
+            upload(image: image, filename: filename)
         }
 
         if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
-            let assetURL = AVURLAsset(url: videoURL)
-            let semaphore = DispatchSemaphore(value: 0)
-
-            UploadVideoCompression.toMediumQuality(sourceAsset: assetURL, completion: { (videoData, _) in
-                guard let videoData = videoData else {
-                    semaphore.signal()
-                    return
-                }
-
-                file = UploadHelper.file(
-                    for: videoData as Data,
-                    name: "\(filename.components(separatedBy: ".").first ?? "video").mp4",
-                    mimeType: "video/mp4"
-                )
-
-                semaphore.signal()
-            })
-
-            _ = semaphore.wait(timeout: .distantFuture)
+            upload(videoWithURL: videoURL, filename: filename)
         }
-
-        if let file = file {
-            uploadDialog(file)
-        }
-
-        dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
 
+    func upload(image: UIImage, filename: String) {
+        let file = UploadHelper.file(
+            for: image.compressedForUpload,
+            name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
+            mimeType: "image/jpeg"
+        )
+        upload(file)
+    }
+
+    func upload(videoWithURL videoURL: URL, filename: String) {
+        let assetURL = AVURLAsset(url: videoURL)
+        let semaphore = DispatchSemaphore(value: 0)
+
+        UploadVideoCompression.toMediumQuality(sourceAsset: assetURL, completion: { [weak self] (videoData, _) in
+            guard let videoData = videoData else {
+                semaphore.signal()
+                return
+            }
+
+            let file = UploadHelper.file(
+                for: videoData as Data,
+                name: "\(filename.components(separatedBy: ".").first ?? "video").mp4",
+                mimeType: "video/mp4"
+            )
+
+            semaphore.signal()
+            self?.upload(file)
+        })
+
+        _ = semaphore.wait(timeout: .distantFuture)
+    }
+
+    func upload(gif asset: PHAsset, filename: String) {
+        PHImageManager.default().requestImageData(for: asset, options: nil) { [weak self] data, _, _, _ in
+            guard let data = data else { return }
+
+            let file = UploadHelper.file(
+                for: data,
+                name: "\(filename.components(separatedBy: ".").first ?? "image").gif",
+                mimeType: "image/gif"
+            )
+
+            self?.upload(file)
+        }
+    }
+
+    func upload(_ file: FileUpload) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.uploadDialog(file)
+        }
+    }
 }
 
 // MARK: UIDocumentMenuDelegate
