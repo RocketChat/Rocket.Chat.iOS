@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit'
+  pod 'DifferenceKit/Core'
 end
 
 def shared_pods
@@ -94,9 +94,9 @@ post_install do |installer|
       end
     end
     if swift42Targets.include? target.name
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '4.2'
-        end
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
+      end
     end
   end
 end

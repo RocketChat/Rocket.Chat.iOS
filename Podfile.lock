@@ -2,12 +2,7 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.10.7):
     - Fabric (~> 1.7.11)
-  - DifferenceKit (0.5.3):
-    - DifferenceKit/Core (= 0.5.3)
-    - DifferenceKit/UIExtensions (= 0.5.3)
   - DifferenceKit/Core (0.5.3)
-  - DifferenceKit/UIExtensions (0.5.3):
-    - DifferenceKit/Core
   - Fabric (1.7.11)
   - Firebase/Core (5.8.0):
     - Firebase/CoreOnly
@@ -83,7 +78,7 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
-  - DifferenceKit
+  - DifferenceKit/Core
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
@@ -101,7 +96,7 @@ DEPENDENCIES:
   - Starscream (~> 2)
   - SwiftLint
   - SwiftyJSON
-  - SwipeCellKit (~> 2.5.0)
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -186,6 +181,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 25831cb49b521c5ba9bd08f9ffcbcbb2dd1bf677
+PODFILE CHECKSUM: 6b8602cb3bfdb2d5969e91f6f161923d47884c5c
 
 COCOAPODS: 1.5.3
