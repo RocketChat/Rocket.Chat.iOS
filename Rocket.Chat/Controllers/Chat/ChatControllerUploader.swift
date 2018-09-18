@@ -58,7 +58,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         dismiss(animated: true, completion: nil)
         MBProgressHUD.showAdded(to: view, animated: true)
 
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.uploadMediaFromPicker(with: info)
         }
     }
