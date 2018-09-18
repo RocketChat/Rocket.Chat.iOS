@@ -274,7 +274,8 @@ extension AppManager {
 
             if let identifier = replyMessageIdentifier {
                 if let message = Realm.current?.object(ofType: Message.self, forPrimaryKey: identifier) {
-                    controller?.reply(to: message)
+                    // TODO: Replace for our reply mechanism
+//                    controller?.reply(to: message)
                 }
             }
 

@@ -10,16 +10,17 @@ import Foundation
 
 extension ChatViewController {
 
-    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard
-            let currentText = textView.text,
-            let stringRange = Range(range, in: currentText)
-        else {
-            return true
-        }
-
-        let text = currentText.replacingCharacters(in: stringRange, with: text)
-        return MessageTextValidator.isSizeValid(text: text)
-    }
+    // TODO: Verify if it's still needed with our own composer
+//    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        guard
+//            let currentText = textView.text,
+//            let stringRange = Range(range, in: currentText)
+//        else {
+//            return true
+//        }
+//
+//        let text = currentText.replacingCharacters(in: stringRange, with: text)
+//        return MessageTextValidator.isSizeValid(text: text)
+//    }
 
 }
