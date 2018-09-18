@@ -12,6 +12,7 @@ protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
     func alertSuccess(title: String, completion: (() -> Void)?)
     func alertYesNo(title: String, message: String, yesStyle: UIAlertActionStyle, noStyle: UIAlertActionStyle, handler: @escaping (Bool) -> Void)
+    func alertDestructive(title: String, message: String, confirmString: String, declineString: String, handler: @escaping (Bool) -> Void)
 }
 
 extension UIViewController: Alerter {
@@ -58,6 +59,20 @@ extension UIViewController: Alerter {
                 completion?()
             })
         }
+    }
+
+    func alertDestructive(title: String, message: String, confirmString: String, declineString: String, handler: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: confirmString, style: .destructive, handler: { _ in
+            handler(true)
+        }))
+
+        alert.addAction(UIAlertAction(title: declineString, style: .cancel, handler: { _ in
+            handler(false)
+        }))
+
+        present(alert, animated: true, completion: nil)
     }
 }
 

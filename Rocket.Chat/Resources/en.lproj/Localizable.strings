@@ -160,6 +160,10 @@
 "subscriptions.list.actions.favorite" = "Favorite";
 "subscriptions.list.actions.unfavorite" = "Unfavorite";
 "subscriptions.list.actions.hide" = "Hide";
+"subscriptions.alert.hide.title" = "Hide Conversation";
+"subscriptions.alert.hide.message" = "Are you sure you want to hide this conversation? You will no longer be able to see this conversation amongst your other channels and direct messages. You can still search for the room and open the chat to unhide it.";
+"subscriptions.alert.hide.confirm" = "Hide";
+"subscriptions.alert.hide.decline" = "Cancel";
 
 // Servers
 "servers.add_new_team" = "Add new Team";

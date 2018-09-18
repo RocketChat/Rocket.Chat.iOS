@@ -1372,7 +1372,15 @@ extension ChatViewController {
         }
 
         let hide = UIPreviewAction(title: localized("chat.preview.actions.hide"), style: .destructive) { (_, _) in
-            API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+            UIWindow.topWindow.rootViewController?.alertDestructive(
+                title: localized("subscriptions.alert.hide.title"),
+                message: localized("subscriptions.alert.hide.message"),
+                confirmString: localized("subscriptions.alert.hide.confirm"),
+                declineString: localized("subscriptions.alert.hide.decline")) { confirmed in
+                    if confirmed {
+                        API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+                    }
+            }
         }
 
         var actions = [UIPreviewActionItem]()

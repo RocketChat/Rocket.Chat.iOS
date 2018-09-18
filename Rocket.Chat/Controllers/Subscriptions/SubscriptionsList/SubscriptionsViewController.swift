@@ -547,8 +547,16 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
             }
 
         case .right:
-            let hide = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.hide")) { _, _ in
-                API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+            let hide = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.hide")) { [weak self] _, _ in
+                self?.alertDestructive(
+                    title: localized("subscriptions.alert.hide.title"),
+                    message: localized("subscriptions.alert.hide.message"),
+                    confirmString: localized("subscriptions.alert.hide.confirm"),
+                    declineString: localized("subscriptions.alert.hide.decline")) { confirmed in
+                        if confirmed {
+                            API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+                        }
+                }
             }
 
             hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)

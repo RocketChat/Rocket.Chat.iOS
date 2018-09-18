@@ -159,7 +159,11 @@
 "subscriptions.list.actions.unread" = "未読";
 "subscriptions.list.actions.favorite" = "お気に入り"; 
 "subscriptions.list.actions.unfavorite" = "お気に入りを外す"; 
-"subscriptions.list.actions.hide" = "隠す"; 
+"subscriptions.list.actions.hide" = "隠す";
+"subscriptions.alert.hide.title" = "Hide Conversation"; // TODO
+"subscriptions.alert.hide.message" = "Are you sure you want to hide this conversation? You will no longer be able to see this conversation amongst your other channels and direct messages. You can still search for the room and open the chat to unhide it."; // TODO
+"subscriptions.alert.hide.confirm" = "Hide"; // TODO
+"subscriptions.alert.hide.decline" = "Cancel"; // TODO
 
 // Servers
 "servers.add_new_team" = "新しいチームを追加";

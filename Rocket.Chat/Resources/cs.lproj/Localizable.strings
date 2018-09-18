@@ -160,6 +160,10 @@
 "subscriptions.list.actions.favorite" = "Favorite"; // TODO
 "subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
 "subscriptions.list.actions.hide" = "Hide"; // TODO
+"subscriptions.alert.hide.title" = "Hide Conversation"; // TODO
+"subscriptions.alert.hide.message" = "Are you sure you want to hide this conversation? You will no longer be able to see this conversation amongst your other channels and direct messages. You can still search for the room and open the chat to unhide it."; // TODO
+"subscriptions.alert.hide.confirm" = "Hide"; // TODO
+"subscriptions.alert.hide.decline" = "Cancel"; // TODO
 
 // Servers
 "servers.add_new_team" = "Přidat nový tým";
