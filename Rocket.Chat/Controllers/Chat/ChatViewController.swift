@@ -192,8 +192,8 @@ final class ChatViewController: RocketChatViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        view.bringSubview(toFront: activityIndicatorContainer)
-        view.bringSubview(toFront: buttonScrollToBottom)
+        view.bringSubviewToFront(activityIndicatorContainer)
+        view.bringSubviewToFront(buttonScrollToBottom)
 //        view.bringSubview(toFront: textInputbar)
 
 //        setupReplyView()

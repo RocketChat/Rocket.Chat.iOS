@@ -72,10 +72,10 @@ class NotificationManagerSpec: XCTestCase {
             realm.add(object, update: true)
         }
 
-        var controller: ChatViewController?
+        var controller: MessagesViewController?
         if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {
             if let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController {
-                if let chatController = nav.viewControllers.first as? ChatViewController {
+                if let chatController = nav.viewControllers.first as? MessagesViewController {
                     chatController.subscription = subscription
                     controller = chatController
                 }

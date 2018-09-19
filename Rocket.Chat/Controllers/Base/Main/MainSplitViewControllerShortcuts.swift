@@ -132,7 +132,8 @@ extension MainSplitViewController {
             return
         }
 
-        chatViewController?.toggleUpload()
+        // TODO: Replace for our composer
+//        chatViewController?.toggleUpload()
     }
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
@@ -140,7 +141,8 @@ extension MainSplitViewController {
             return
         }
 
-        chatViewController?.toggleActions()
+        // TODO: Replace for our composer
+//        chatViewController?.toggleActions()
     }
 
     @objc func shortcutRoomMessageSearch(_ command: UIKeyCommand) {
@@ -148,7 +150,8 @@ extension MainSplitViewController {
             return
         }
 
-        chatViewController?.toggleSearchMessages()
+        // TODO: Replace for our composer
+//        chatViewController?.toggleSearchMessages()
     }
 
     @objc func shortcutScrollMessages(_ command: UIKeyCommand) {

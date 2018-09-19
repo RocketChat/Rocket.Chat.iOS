@@ -393,7 +393,7 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
 
         previewingContext.sourceRect = cell.frame
 
-        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {
             controller.subscription = subscription.managedObject.validated()
             return controller
         }
@@ -497,7 +497,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func openChat(for subscription: Subscription) {
-        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController else {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController else {
             return
         }
 
