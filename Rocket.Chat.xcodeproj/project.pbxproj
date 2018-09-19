@@ -754,6 +754,9 @@
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		99BC81102107E3020084C948 /* DeepLinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC810F2107E3020084C948 /* DeepLinkSpec.swift */; };
+		99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D812152D56E001A43E2 /* MessagesViewController.swift */; };
+		99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D84215300FD001A43E2 /* MessageSection.swift */; };
+		99BE4D882153013A001A43E2 /* MessageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D872153013A001A43E2 /* MessageSectionModel.swift */; };
 		99C29A37212A66EC00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
 		99C29A38212A6BFA00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
@@ -1588,6 +1591,9 @@
 		99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerAuthSettings.swift; sourceTree = "<group>"; };
 		99B802EC20BC3BD400230109 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		99BC810F2107E3020084C948 /* DeepLinkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkSpec.swift; sourceTree = "<group>"; };
+		99BE4D812152D56E001A43E2 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		99BE4D84215300FD001A43E2 /* MessageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSection.swift; sourceTree = "<group>"; };
+		99BE4D872153013A001A43E2 /* MessageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSectionModel.swift; sourceTree = "<group>"; };
 		99C29A36212A66EC00521266 /* ObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectExtension.swift; sourceTree = "<group>"; };
 		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -2469,6 +2475,7 @@
 		41A79C0D1D2F084F00A1968E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				99BE4D8621530117001A43E2 /* ChatModels */,
 				1496A87E20FA487E005C2E14 /* Notifications */,
 				8076FDAC2048566100114F28 /* Auth */,
 				41BD37D71E290D7400CBC4C2 /* Base */,
@@ -2705,6 +2712,7 @@
 		41E2FA021D414ECC00238DFD /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				99BE4D83215300D1001A43E2 /* ChatSections */,
 				41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */,
 				41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */,
 				419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */,
@@ -2723,6 +2731,7 @@
 				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
 				8039442D20B342BB002F317A /* AddUsersViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
+				99BE4D812152D56E001A43E2 /* MessagesViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3596,6 +3605,22 @@
 				80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		99BE4D83215300D1001A43E2 /* ChatSections */ = {
+			isa = PBXGroup;
+			children = (
+				99BE4D84215300FD001A43E2 /* MessageSection.swift */,
+			);
+			path = ChatSections;
+			sourceTree = "<group>";
+		};
+		99BE4D8621530117001A43E2 /* ChatModels */ = {
+			isa = PBXGroup;
+			children = (
+				99BE4D872153013A001A43E2 /* MessageSectionModel.swift */,
+			);
+			path = ChatModels;
 			sourceTree = "<group>";
 		};
 		99D888F92046239100E51306 /* User */ = {
@@ -4544,6 +4569,7 @@
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
 				33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */,
+				99BE4D882153013A001A43E2 /* MessageSectionModel.swift in Sources */,
 				995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */,
 				33F67A44212D8F62004EB4A0 /* DifferenceKitExtension.swift in Sources */,
 				41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */,
@@ -4574,6 +4600,7 @@
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
 				41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */,
 				41FC9E06209B39FE00FED485 /* SubscriptionLastMessage.swift in Sources */,
+				99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */,
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
 				4124D833209A0517005374CD /* ChatLoaderCell.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
@@ -4743,6 +4770,7 @@
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
