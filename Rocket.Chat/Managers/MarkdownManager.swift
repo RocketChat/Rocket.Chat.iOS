@@ -67,17 +67,17 @@ fileprivate extension RCMarkdownParser {
         let defaultFontSize = MessageTextFontAttributes.defaultFontSize
 
         let quoteAttributes = [
-            NSAttributedStringKey.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize),
-            NSAttributedStringKey.backgroundColor.rawValue: attributes.quoteBackgroundColor
+            NSAttributedString.Key.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize),
+            NSAttributedString.Key.backgroundColor.rawValue: attributes.quoteBackgroundColor
         ]
 
-        var codeAttributes: [String: Any] = [NSAttributedStringKey.backgroundColor.rawValue: attributes.codeBackgroundColor]
-        codeAttributes[NSAttributedStringKey.foregroundColor.rawValue] = attributes.codeTextColor
+        var codeAttributes: [String: Any] = [NSAttributedString.Key.backgroundColor.rawValue: attributes.codeBackgroundColor]
+        codeAttributes[NSAttributedString.Key.foregroundColor.rawValue] = attributes.codeTextColor
         if let codeFont = UIFont(name: "Courier New", size: defaultFontSize)?.bold() {
-            codeAttributes[NSAttributedStringKey.font.rawValue] = codeFont
+            codeAttributes[NSAttributedString.Key.font.rawValue] = codeFont
         }
 
-        let linkAttributes = [NSAttributedStringKey.foregroundColor.rawValue: attributes.linkColor]
+        let linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: attributes.linkColor]
 
         self.quoteAttributes = quoteAttributes
         self.quoteBlockAttributes = quoteAttributes
