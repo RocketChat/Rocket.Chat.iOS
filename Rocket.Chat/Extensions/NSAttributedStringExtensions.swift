@@ -98,6 +98,10 @@ extension NSMutableAttributedString {
         return MarkdownManager.shared.transformAttributedString(self)
     }
 
+    func transformMarkdown(with theme: Theme?) -> NSAttributedString {
+        return MarkdownManager.shared.transformAttributedString(self, with: theme)
+    }
+
     func highlightMentions(_ mentions: [Mention], currentUsername: String?) {
         var handledHighlights: [String] = []
         let shouldUseRealName = AuthSettingsManager.shared.settings?.useUserRealName ?? false
