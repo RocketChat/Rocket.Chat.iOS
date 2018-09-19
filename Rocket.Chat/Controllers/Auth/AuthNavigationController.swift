@@ -80,7 +80,7 @@ class AuthNavigationController: UINavigationController {
         navBar.barTintColor = .RCNavBarGray()
         navBar.isTranslucent = false
         navBar.tintColor = .white
-        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         if forceRedraw { forceNavigationToRedraw() }
         setNeedsStatusBarAppearanceUpdate()
     }

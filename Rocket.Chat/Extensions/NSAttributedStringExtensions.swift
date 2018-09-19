@@ -44,7 +44,7 @@ extension NSMutableAttributedString {
     func setFont(_ font: UIFont, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.font: font
+                NSAttributedString.Key.font: font
             ], range: attributeRange)
         }
     }
@@ -52,7 +52,7 @@ extension NSMutableAttributedString {
     func setFontColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.foregroundColor: color
+                NSAttributedString.Key.foregroundColor: color
             ], range: attributeRange)
         }
     }
@@ -60,7 +60,7 @@ extension NSMutableAttributedString {
     func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.backgroundColor: color
+                NSAttributedString.Key.backgroundColor: color
             ], range: attributeRange)
         }
     }
@@ -70,7 +70,7 @@ extension NSMutableAttributedString {
 
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.link: link
+                NSAttributedString.Key.link: link
             ], range: attributeRange)
         }
     }
@@ -80,7 +80,7 @@ extension NSMutableAttributedString {
 
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.link: link
+                NSAttributedString.Key.link: link
             ], range: attributeRange)
         }
     }
@@ -90,7 +90,7 @@ extension NSMutableAttributedString {
         paragraphStyle.lineSpacing = font.lineHeight * 0.1
 
         self.addAttributes([
-            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            NSAttributedString.Key.paragraphStyle: paragraphStyle
         ], range: NSRange(location: 0, length: self.length))
     }
 

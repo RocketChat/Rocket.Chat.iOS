@@ -31,7 +31,7 @@ struct AnalyticsCoordinator: LauncherProtocol {
         }
     }
 
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         if AnalyticsCoordinator.isUsageDataLoggingDisabled {
             return
         }

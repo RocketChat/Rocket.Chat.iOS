@@ -11,7 +11,7 @@ import MBProgressHUD
 protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
     func alertSuccess(title: String, completion: (() -> Void)?)
-    func alertYesNo(title: String, message: String, yesStyle: UIAlertActionStyle, noStyle: UIAlertActionStyle, handler: @escaping (Bool) -> Void)
+    func alertYesNo(title: String, message: String, yesStyle: UIAlertAction.Style, noStyle: UIAlertAction.Style, handler: @escaping (Bool) -> Void)
 }
 
 extension UIViewController: Alerter {
@@ -27,7 +27,7 @@ extension UIViewController: Alerter {
         present(alert, animated: true, completion: nil)
     }
 
-    func alertYesNo(title: String, message: String, yesStyle: UIAlertActionStyle = .default, noStyle: UIAlertActionStyle = .cancel, handler: @escaping (Bool) -> Void) {
+    func alertYesNo(title: String, message: String, yesStyle: UIAlertAction.Style = .default, noStyle: UIAlertAction.Style = .cancel, handler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: localized("global.yes"), style: yesStyle, handler: { _ in
@@ -81,7 +81,7 @@ struct Alert {
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
             let window = UIWindow.topWindow
-            window.windowLevel = UIWindowLevelAlert + 1
+            window.windowLevel = UIWindow.Level.alert + 1
 
             if actions.isEmpty {
                 window.rootViewController?.alert(title: title, message: message, handler: handler)

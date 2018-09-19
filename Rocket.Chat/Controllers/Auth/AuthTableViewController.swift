@@ -35,13 +35,13 @@ class AuthTableViewController: BaseTableViewController {
         let prefix = NSAttributedString(
             string: localized("auth.email_auth_prefix"),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .regular)
             ]
         )
         let service = NSAttributedString(
             string: localized("auth.email_auth"),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)
             ]
         )
 
@@ -157,7 +157,7 @@ class AuthTableViewController: BaseTableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if isMovingFromParentViewController {
+        if isMovingFromParent {
             SocketManager.removeConnectionHandler(token: socketHandlerToken)
         }
     }

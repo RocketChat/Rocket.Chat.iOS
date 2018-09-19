@@ -14,7 +14,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        func addAction(_ titleKey: String, image: UIImage, style: UIAlertActionStyle = .default, handler: @escaping (UIAlertAction) -> Void) {
+        func addAction(_ titleKey: String, image: UIImage, style: UIAlertAction.Style = .default, handler: @escaping (UIAlertAction) -> Void) {
             let action = UIAlertAction(title: localized(titleKey), style: style, handler: handler)
             action.image = image
             action.titleTextAlignment = .left
@@ -54,7 +54,7 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
     }
 
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         dismiss(animated: true, completion: nil)
         MBProgressHUD.showAdded(to: view, animated: true)
 
@@ -67,10 +67,10 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
 // MARK: Upload media
 
 extension ChatViewController {
-    func uploadMediaFromPicker(with info: [String: Any]) {
+    func uploadMediaFromPicker(with info: [UIImagePickerController.InfoKey: Any]) {
         var filename = String.random()
 
-        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL,
+        if let assetURL = info[.referenceURL] as? URL,
             let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
             if let resource = PHAssetResource.assetResources(for: asset).first {
                 filename = resource.originalFilename
@@ -85,11 +85,11 @@ extension ChatViewController {
             }
         }
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             upload(image: image, filename: filename)
         }
 
-        if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
+        if let videoURL = info[.mediaURL] as? URL {
             upload(videoWithURL: videoURL, filename: filename)
         }
     }

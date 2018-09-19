@@ -27,7 +27,7 @@ extension UITableView {
     ///              The collection should be set to dataSource of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        with animation: @autoclosure () -> UITableViewRowAnimation,
+        with animation: @autoclosure () -> UITableView.RowAnimation,
         updateRows: ([IndexPath]) -> Void,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void

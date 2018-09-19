@@ -34,7 +34,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
         let textField = UITextField(
             frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.nameHeight)
         )
-        NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
+        NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: UITextField.textDidChangeNotification, object: textField)
         return textField
     }()
 
@@ -43,7 +43,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
             frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: cellModel.descriptionHeight)
         )
         textView.font = nameTextField.font
-        NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextViewTextDidChange, object: textView)
+        NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: UITextView.textDidChangeNotification, object: textView)
         return textView
     }()
 

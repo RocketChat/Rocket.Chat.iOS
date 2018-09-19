@@ -123,14 +123,14 @@ final class ConnectServerViewController: BaseViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillDisappear(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
 
@@ -146,7 +146,7 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Keyboard Handling
 
     @objc func keyboardWillAppear(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             var viewRect = view.frame
             viewRect.size.height -= keyboardSize.height
 

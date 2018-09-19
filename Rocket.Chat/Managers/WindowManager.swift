@@ -87,7 +87,7 @@ final class WindowManager {
         - parameter name: The name of the Storyboard to be instantiated.
         - parameter transitionType: The transition to open new view controller.
      */
-    static func open(_ storyboard: Storyboard, viewControllerIdentifier: String? = nil, transitionType: String = kCATransitionFade) {
+    static func open(_ storyboard: Storyboard, viewControllerIdentifier: String? = nil, transitionType: CATransitionType = .fade) {
         var controller: UIViewController?
 
         if let identifier = viewControllerIdentifier {

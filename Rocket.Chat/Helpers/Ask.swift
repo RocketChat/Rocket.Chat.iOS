@@ -64,7 +64,7 @@ struct Ask {
         func present() {
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.rootViewController = UIViewController()
-            window.windowLevel = UIWindowLevelAlert + 1
+            window.windowLevel = UIWindow.Level.alert + 1
             window.makeKeyAndVisible()
             window.rootViewController?.ask(title: title, message: message, buttons: buttons, deleteOption: deleteOption)
         }

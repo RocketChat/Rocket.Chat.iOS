@@ -208,7 +208,7 @@ extension FilesListViewController {
         refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
 
         tableView.refreshControl = refreshControl
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
 
         let label = UILabel(frame: tableView.frame)
