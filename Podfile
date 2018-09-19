@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit'
+  pod 'DifferenceKit/Core'
 end
 
 def shared_pods
@@ -79,6 +79,7 @@ end
 
 post_install do |installer|
   swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
+  swift42Targets = ['SwipeCellKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '4.1'
@@ -91,6 +92,11 @@ post_install do |installer|
     if swift3Targets.include? target.name
       target.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '3.1'
+      end
+    end
+    if swift42Targets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
       end
     end
   end

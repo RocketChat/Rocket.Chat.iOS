@@ -3830,13 +3830,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = S6UPZG7ZR3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3858,18 +3858,19 @@
 					41DF76F21D2C50720028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = S6UPZG7ZR3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
 					41DF76FD1D2C50720028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = S6UPZG7ZR3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
 					807FB5572046E7DD00E21429 = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = S6UPZG7ZR3;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -5221,15 +5222,14 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Onone -D TEST \"-D\" \"COCOAPODS\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D TEST -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Test;
 		};
@@ -5256,7 +5256,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Test;
@@ -5274,8 +5274,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rocket.Chat.app/Rocket.Chat";
 			};
 			name = Test;
@@ -5289,8 +5288,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Rocket.Chat;
 			};
 			name = Test;
@@ -5419,15 +5417,14 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -Onone -D DEBUG \"-D\" \"COCOAPODS\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D DEBUG -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -5450,8 +5447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -5468,8 +5464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rocket.Chat.app/Rocket.Chat";
 			};
 			name = Debug;
@@ -5487,8 +5482,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rocket.Chat.app/Rocket.Chat";
 			};
 			name = Release;
@@ -5502,8 +5496,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Rocket.Chat;
 			};
 			name = Debug;
@@ -5517,8 +5510,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Rocket.Chat;
 			};
 			name = Release;
@@ -5594,8 +5586,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Beta;
 		};
@@ -5612,8 +5603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rocket.Chat.app/Rocket.Chat";
 			};
 			name = Beta;
@@ -5627,8 +5617,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-ChatUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Rocket.Chat;
 			};
 			name = Beta;
@@ -5656,7 +5645,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5683,7 +5672,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -5710,7 +5699,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Rocket_Chat-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Beta;

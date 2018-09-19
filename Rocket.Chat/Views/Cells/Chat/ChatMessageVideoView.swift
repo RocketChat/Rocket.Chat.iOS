@@ -65,12 +65,12 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
             let asset = AVAsset(url: videoURL)
             let imageGenerator = AVAssetImageGenerator(asset: asset)
             imageGenerator.appliesPreferredTrackTransform = true
-            let time = CMTimeMake(1, 1)
+            let time = CMTimeMake(value: 1, timescale: 1)
 
             do {
                 let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
                 let thumbnail = UIImage(cgImage: imageRef)
-                try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
+                try thumbnail.pngData()?.write(to: thumbURL, options: .atomic)
 
                 DispatchQueue.main.async {
                     self.stopLoadingPreview(thumbnail)

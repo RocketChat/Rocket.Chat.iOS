@@ -3,7 +3,7 @@ version: 2
 jobs:
   lint:
     macos:
-      xcode: "9.3.0"
+      xcode: "10.0.0"
     steps:
       - checkout
       - run:
@@ -15,7 +15,7 @@ jobs:
 
   test:
     macos:
-      xcode: "9.3.0"
+      xcode: "10.0.0"
     steps:
       - checkout
       - run:
@@ -34,6 +34,9 @@ jobs:
           name: Run tests on iPad iOS 11.3
           command: ./Scripts/test_without_building.sh "11.3" "iPad Air 2"
       - run:
+          name: Run tests on iPad iOS 11.3
+          command: ./Scripts/test_without_building.sh "12.0" "iPad Air 2"
+      - run:
           name: Run tests on iPhone iOS 10.3
           command: ./Scripts/test_without_building.sh "10.3.1" "iPhone 5s"
       - run:
@@ -41,7 +44,7 @@ jobs:
           command: ./Scripts/test_without_building_coverage.sh "11.3" "iPhone 8"
       - run:
           name: Run tests on iPhone (X series) iOS 11.3
-          command: ./Scripts/test_without_building_coverage.sh "11.3" "iPhone X"      
+          command: ./Scripts/test_without_building_coverage.sh "12.0" "iPhone XS"      
       - run:
           name: Codecov
           command: bash <(curl -s https://codecov.io/bash) -J 'Rocket.Chat'

@@ -8,14 +8,12 @@
 
 import Foundation
 
-// RKS NOTE: In Swift 4.2 we can iterate it
-enum SubscriptionsSortingOption: String {
+enum SubscriptionsSortingOption: String, CaseIterable {
     case activity
     case alphabetically
 }
 
-// RKS NOTE: In Swift 4.2 we can iterate it
-enum SubscriptionsGroupingOption: String {
+enum SubscriptionsGroupingOption: String, CaseIterable {
     case unread
     case type
     case favorites

@@ -65,8 +65,8 @@ final class StyledTextField: VOTextField {
         let placeholderAttributes = NSAttributedString(
             string: placeholderText,
             attributes: [
-                NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray(),
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .regular)
+                NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray(),
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)
             ]
         )
 

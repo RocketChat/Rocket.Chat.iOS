@@ -30,7 +30,7 @@ final class NewPasswordTableViewController: BaseTableViewController {
     }
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -92,7 +92,7 @@ final class NewPasswordTableViewController: BaseTableViewController {
             }
             textField.isSecureTextEntry = true
 
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+            _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 updatePasswordAction.isEnabled = !(textField.text?.isEmpty ?? false)
             }
         })

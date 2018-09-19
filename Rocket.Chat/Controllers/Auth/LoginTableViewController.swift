@@ -41,16 +41,16 @@ class LoginTableViewController: BaseTableViewController {
             let prefix = NSAttributedString(
                 string: localized("auth.login.create_account_prefix"),
                 attributes: [
-                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular),
-                    NSAttributedStringKey.foregroundColor: UIColor.RCTextFieldGray()
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                    NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray()
                 ]
             )
 
             let createAccount = NSAttributedString(
                 string: localized("auth.login.create_account"),
                 attributes: [
-                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
-                    NSAttributedStringKey.foregroundColor: UIColor.RCSkyBlue()
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
+                    NSAttributedString.Key.foregroundColor: UIColor.RCSkyBlue()
                 ]
             )
 
@@ -63,7 +63,7 @@ class LoginTableViewController: BaseTableViewController {
 
             let combinationRange = NSRange(location: 0, length: combinedString.length)
             combinedString.addAttributes(
-                [NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                [NSAttributedString.Key.paragraphStyle: paragraphStyle],
                 range: combinationRange
             )
 
@@ -217,7 +217,7 @@ class LoginTableViewController: BaseTableViewController {
             textField.textContentType = UITextContentType.emailAddress
             textField.keyboardType = .emailAddress
 
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+            _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 sendAction.isEnabled = textField.text?.isValidEmail ?? false
             }
         })

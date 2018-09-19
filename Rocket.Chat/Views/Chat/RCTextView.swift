@@ -77,7 +77,7 @@ class HighlightLayoutManager: NSLayoutManager {
 
     func addCustomEmojiIfNeeded() {
         message?.enumerateAttributes(in: NSRange(location: 0, length: message.length), options: [], using: { attributes, crange, _ in
-            if let attachment = attributes[NSAttributedStringKey.attachment] as? NSTextAttachment {
+            if let attachment = attributes[NSAttributedString.Key.attachment] as? NSTextAttachment {
                 DispatchQueue.main.async {
                     guard let position1 = self.textView.position(from: self.textView.beginningOfDocument, offset: crange.location) else { return }
                     guard let position2 = self.textView.position(from: position1, offset: crange.length) else { return }

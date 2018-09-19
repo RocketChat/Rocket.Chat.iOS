@@ -36,7 +36,7 @@ class Theme: NSObject {
         let barStyle: UIBarStyle
         let keyboardAppearence: UIKeyboardAppearance
         let statusBarStyle: UIStatusBarStyle
-        let scrollViewIndicatorStyle: UIScrollViewIndicatorStyle
+        let scrollViewIndicatorStyle: UIScrollView.IndicatorStyle
 
         static let dark = Appearence(
             barStyle: .black,

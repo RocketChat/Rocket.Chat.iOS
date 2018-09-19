@@ -24,8 +24,8 @@ extension MainSplitViewController {
             UIKeyCommand(input: "u", modifierFlags: .command, action: #selector(shortcutUpload(_:)), discoverabilityTitle: localized("shortcuts.upload_room")),
             UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomMessageSearch(_:)), discoverabilityTitle: localized("shortcuts.search_messages")),
             UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: localized("shortcuts.scroll_messages")),
-            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
             UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: localized("shortcuts.reply_latest")),
             UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection")),
             UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection_numbers")),
@@ -162,7 +162,7 @@ extension MainSplitViewController {
             return
         }
 
-        let heightDelta: CGFloat = input == UIKeyInputUpArrow ? -50.0 : 50.0
+        let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? -50.0 : 50.0
 
         UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
             let offset = min(offset.y + heightDelta, maxHeight)

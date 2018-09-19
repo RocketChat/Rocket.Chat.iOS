@@ -61,7 +61,7 @@ final class SubscriptionsSortingView: UIView {
     }
 
     private func animates(_ animations: @escaping VoidCompletion, completion: VoidCompletion? = nil) {
-        UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+        UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
             animations()
         }, completion: { finished in
             if finished {
