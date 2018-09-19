@@ -75,7 +75,7 @@ extension UIImage {
         let jpegImage = self.jpegData(compressionQuality: 1.0) ?? Data()
         let imageSize = jpegImage.byteSize
 
-        if imageSize < maxSize && maxSize > 0 {
+        if imageSize < maxSize || maxSize <= 0 {
             return jpegImage
         }
 
