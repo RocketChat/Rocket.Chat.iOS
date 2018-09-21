@@ -757,6 +757,8 @@
 		99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D812152D56E001A43E2 /* MessagesViewController.swift */; };
 		99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D84215300FD001A43E2 /* MessageSection.swift */; };
 		99BE4D882153013A001A43E2 /* MessageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D872153013A001A43E2 /* MessageSectionModel.swift */; };
+		99BE4D8A2153162A001A43E2 /* UnmanagedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D892153162A001A43E2 /* UnmanagedMessage.swift */; };
+		99BE4D8B2154688D001A43E2 /* UnmanagedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BE4D892153162A001A43E2 /* UnmanagedMessage.swift */; };
 		99C29A37212A66EC00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
 		99C29A38212A6BFA00521266 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C29A36212A66EC00521266 /* ObjectExtension.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
@@ -1594,6 +1596,7 @@
 		99BE4D812152D56E001A43E2 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		99BE4D84215300FD001A43E2 /* MessageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSection.swift; sourceTree = "<group>"; };
 		99BE4D872153013A001A43E2 /* MessageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSectionModel.swift; sourceTree = "<group>"; };
+		99BE4D892153162A001A43E2 /* UnmanagedMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedMessage.swift; sourceTree = "<group>"; };
 		99C29A36212A66EC00521266 /* ObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectExtension.swift; sourceTree = "<group>"; };
 		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		99D77C6A20E474BF008F2438 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -3139,6 +3142,7 @@
 				809B53151FE3D3DC00833DD2 /* MessageReaction.swift */,
 				8076FDD02048646500114F28 /* MessageReply.swift */,
 				41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */,
+				99BE4D892153162A001A43E2 /* UnmanagedMessage.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -4409,6 +4413,7 @@
 				8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
+				99BE4D8A2153162A001A43E2 /* UnmanagedMessage.swift in Sources */,
 				41FC9E0C209B3BAA00FED485 /* UploadMessageRequest.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
 				997FE19C210BA5B8000F6836 /* SubscriptionHideRequest.swift in Sources */,
@@ -4971,6 +4976,7 @@
 				8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */,
 				80977AC2204F37C200C41435 /* SEState.swift in Sources */,
 				803D86762106333900B1B697 /* SESubscriptionModelMapping.swift in Sources */,
+				99BE4D8B2154688D001A43E2 /* UnmanagedMessage.swift in Sources */,
 				804273E1204EBD51006DF420 /* APIRequest.swift in Sources */,
 				8076FDCA204863B900114F28 /* Channel.swift in Sources */,
 				8076FDBD2048598100114F28 /* Subscription.swift in Sources */,

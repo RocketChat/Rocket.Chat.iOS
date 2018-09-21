@@ -11,11 +11,17 @@ import DifferenceKit
 
 struct MessageSectionModel: Differentiable {
     let identifier: String
-    let message: Message
+    let message: UnmanagedMessage
+    let daySeparator: Date?
+    let isLoadingMore: Bool
+    let isNew: Bool
 
-    init(identifier: String, message: Message) {
-        self.identifier = identifier
+    init(message: UnmanagedMessage, daySeparator: Date?, isLoadingMore: Bool, isNew: Bool) {
+        self.identifier = message.identifier
         self.message = message
+        self.daySeparator = daySeparator
+        self.isLoadingMore = isLoadingMore
+        self.isNew = isNew
     }
 
     // MARK: Differentiable
@@ -25,6 +31,10 @@ struct MessageSectionModel: Differentiable {
     }
 
     func isContentEqual(to source: MessageSectionModel) -> Bool {
-        return message.text == source.message.text
+        return message.text == source.message.text &&
+            message.user == source.message.user &&
+            daySeparator == source.daySeparator &&
+            isLoadingMore == source.isLoadingMore &&
+            isNew == source.isNew
     }
 }
