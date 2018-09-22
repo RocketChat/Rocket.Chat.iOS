@@ -50,7 +50,7 @@ final class ChatViewController: SLKTextViewController {
             }
 
             func animates(_ animations: @escaping VoidCompletion) {
-                UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+                UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
                     animations()
                 }, completion: nil)
             }
@@ -188,11 +188,11 @@ final class ChatViewController: SLKTextViewController {
             action: nil
         )
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-        view.bringSubview(toFront: activityIndicatorContainer)
-        view.bringSubview(toFront: buttonScrollToBottom)
-        view.bringSubview(toFront: textInputbar)
+        view.bringSubviewToFront(activityIndicatorContainer)
+        view.bringSubviewToFront(buttonScrollToBottom)
+        view.bringSubviewToFront(textInputbar)
 
         setupReplyView()
         ThemeManager.addObserver(self)

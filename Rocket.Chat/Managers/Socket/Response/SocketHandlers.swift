@@ -74,7 +74,7 @@ extension SocketManager {
                 isPresentingInvalidSessionAlert = true
 
                 let alertWindow = UIWindow.topWindow
-                alertWindow.windowLevel = UIWindowLevelAlert + 1
+                alertWindow.windowLevel = UIWindow.Level.alert + 1
                 alertWindow.rootViewController?.present(invalidSessionAlert, animated: true)
             }
 

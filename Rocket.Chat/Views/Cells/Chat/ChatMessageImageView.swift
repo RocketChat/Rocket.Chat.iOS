@@ -59,7 +59,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             isLoadable = false
             detailText.text = ""
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
-            imageView.contentMode = UIViewContentMode.center
+            imageView.contentMode = UIView.ContentMode.center
             imageView.image =  UIImage(named: "Resource Unavailable")
             return nil
         }

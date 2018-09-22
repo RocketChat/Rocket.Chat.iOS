@@ -96,14 +96,15 @@
 
 // Socket Connection
 "connection.title" = "Συνδεθείτε στον εξυπηρετητή σας"; 
-"connection.button_connect" = "Σύνδεση"; 
+"connection.button_connect" = "Σύνδεση";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
 "connection.waiting_for_network.banner.message" = "Περιμένετε για το δίκτυο"; 
 
 // Onboarding
 "onboarding.label_welcome" = "Καλώς ορίσατε στο Rocket Chat"; 
-"onboarding.label_subtitle" = "Επικοινωνία Ανοιχτού Κώδικα"; 
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Συνδεθείτε σε ένα εξυπηρετητή"; 
 "onboarding.button_create_server" = "Συνδεθείτε σε ένα Χώρο Εργασίας"; 
 "onboarding.button_join_community_prefix" = "Συνδεθείτε με την κοινότητα"; 

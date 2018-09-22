@@ -59,7 +59,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }()
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -144,7 +144,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
 
         if let imageView = avatarButton.imageView {
-            avatarButton.bringSubview(toFront: imageView)
+            avatarButton.bringSubviewToFront(imageView)
         }
     }
 
@@ -342,7 +342,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
             }
             textField.isSecureTextEntry = true
 
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+            _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
             }
         })
@@ -523,11 +523,11 @@ extension EditProfileTableViewController: UINavigationControllerDelegate {}
 
 extension EditProfileTableViewController: UIImagePickerControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let filename = String.random()
         var file: FileUpload?
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",

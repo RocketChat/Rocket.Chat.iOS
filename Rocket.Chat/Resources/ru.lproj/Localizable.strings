@@ -97,13 +97,14 @@
 // Socket Connection
 "connection.title" = "Войдите на ваш сервер";
 "connection.button_connect" = "Соединение";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Вы в автономном режиме, попробуйте подключиться снова";
 "connection.connecting.banner.message" = "Соединение...";
 "connection.waiting_for_network.banner.message" = "Ожидание сети";
 
 // Onboarding
 "onboarding.label_welcome" = "Добро пожаловать в Rocket Chat";
-"onboarding.label_subtitle" = "Средство общения с открытым исходным кодом";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Соединиться с сервером";
 "onboarding.button_create_server" = "Создать новый сервер";
 "onboarding.button_join_community_prefix" = "Присоединиться к сообществу";

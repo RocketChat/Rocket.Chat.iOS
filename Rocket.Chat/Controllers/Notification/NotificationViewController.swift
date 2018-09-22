@@ -65,10 +65,10 @@ final class NotificationViewController: TopTransparentViewController {
 
         if #available(iOS 11.0, *), isDeviceWithNotch {
             visibleConstraint.constant = view.safeAreaInsets.top
-            view.window?.windowLevel = UIWindowLevelStatusBar - 1
+            view.window?.windowLevel = UIWindow.Level.statusBar - 1
         } else {
             visibleConstraint.constant = topInsetWithoutNotch
-            view.window?.windowLevel = UIWindowLevelAlert
+            view.window?.windowLevel = UIWindow.Level.alert
         }
     }
 

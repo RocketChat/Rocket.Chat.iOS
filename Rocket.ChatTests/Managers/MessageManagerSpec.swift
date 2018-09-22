@@ -209,4 +209,5 @@ extension MessageManagerSpec {
             XCTAssert(messages.count == 0, "fetchMessages() will not return userMuted or userUnmuted when they're hidden")
         })
     }
+
 }

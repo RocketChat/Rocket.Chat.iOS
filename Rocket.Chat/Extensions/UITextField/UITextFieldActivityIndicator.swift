@@ -13,7 +13,7 @@ extension UITextField {
         if let activityIndicator = subviews.compactMap({ $0 as? UIActivityIndicatorView }).first {
             return activityIndicator
         } else {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
 
             addSubview(activityIndicator)
 

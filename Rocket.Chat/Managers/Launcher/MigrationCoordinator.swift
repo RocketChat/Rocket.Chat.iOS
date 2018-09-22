@@ -11,7 +11,7 @@ import Realm
 import RealmSwift
 
 struct MigrationCoordinator: LauncherProtocol {
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         migrateUserDefaultsStandardToGroupIfNeeded()
     }
 

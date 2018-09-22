@@ -12,7 +12,6 @@ import semver
 
 final class ConnectServerViewController: BaseViewController {
 
-    internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
     internal let buttonConnectBottomSpacing: CGFloat = 24
@@ -22,10 +21,11 @@ final class ConnectServerViewController: BaseViewController {
 
     var shouldAutoConnect = false
     var url: URL? {
-        guard var urlText = textFieldServerURL.text else { return URL(string: defaultURL, scheme: "https") }
+        guard var urlText = textFieldServerURL.text else { return nil }
 
+        // Do not return URL in case text is nil
         if urlText.isEmpty {
-            urlText = defaultURL
+            return nil
         }
 
         // Remove all the whitespaces from the string
@@ -55,6 +55,7 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var buttonConnect: StyledButton! {
         didSet {
             buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
+            buttonConnect.isEnabled = false
         }
     }
 
@@ -81,6 +82,10 @@ final class ConnectServerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if shouldAutoConnect {
+            textFieldServerURL.text = "open.rocket.chat"
+        }
+
         if !(DatabaseManager.servers?.count ?? 0 > 0) {
             navigationItem.leftBarButtonItem = nil
         } else {
@@ -89,7 +94,7 @@ final class ConnectServerViewController: BaseViewController {
 
         selectedServer = DatabaseManager.selectedIndex
         infoRequestHandler.delegate = self
-        textFieldServerURL.placeholder = defaultURL
+        textFieldServerURL.placeholder = localized("connection.server_url.placeholder")
 
         if let nav = navigationController as? AuthNavigationController {
             nav.setTransparentTheme()
@@ -118,14 +123,14 @@ final class ConnectServerViewController: BaseViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillDisappear(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
 
@@ -141,7 +146,7 @@ final class ConnectServerViewController: BaseViewController {
     // MARK: Keyboard Handling
 
     @objc func keyboardWillAppear(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             var viewRect = view.frame
             viewRect.size.height -= keyboardSize.height
 
@@ -288,8 +293,25 @@ final class ConnectServerViewController: BaseViewController {
 
 extension ConnectServerViewController: UITextFieldDelegate {
 
+    func textFieldDidChange() {
+        buttonConnect.isEnabled = !(textFieldServerURL.text?.isEmpty ?? true)
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textFieldServerURL.text = ""
+        textFieldDidChange()
+        return true
+    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return !connecting
+        if !connecting {
+            if let text = textField.text, let textRange = Range(range, in: text) {
+                textField.text = text.replacingCharacters(in: textRange, with: string)
+                textFieldDidChange()
+            }
+        }
+
+        return false
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

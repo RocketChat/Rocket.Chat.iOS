@@ -134,14 +134,14 @@ final class SubscriptionsViewController: BaseViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),
-            name: Notification.Name.UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),
-            name: Notification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -149,20 +149,20 @@ final class SubscriptionsViewController: BaseViewController {
     @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else {
             tableView.contentInset.bottom = 0
             return
         }
 
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
-        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        let animationDuration: TimeInterval = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-            self.tableView.contentInset.bottom = notification.name == Notification.Name.UIKeyboardWillHide ? 0 : keyboardFrameInView.height
+            self.tableView.contentInset.bottom = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrameInView.height
         }, completion: nil)
     }
 
@@ -394,7 +394,7 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = cell.frame
 
         if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
-            controller.subscription = subscription.managedObject
+            controller.subscription = subscription.managedObject.validated()
             return controller
         }
 
@@ -489,7 +489,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func onSelectRowAt(_ indexPath: IndexPath) {
-        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
+        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated() else { return }
 
         searchController?.searchBar.resignFirstResponder()
 

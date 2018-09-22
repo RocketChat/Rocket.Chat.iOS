@@ -48,7 +48,7 @@ final class RoomRolesResource: APIResource {
         return raw?["roles"].arrayValue.map {
             let object = RoomRoles()
             object.user = User.getOrCreate(realm: realm, values: $0["u"], updates: nil)
-            object.roles.append(contentsOf: $0["roles"].arrayValue.compactMap({ $0.string }))
+            object.roles.append(objectsIn: $0["roles"].arrayValue.compactMap({ $0.string }))
             return object
         }
     }

@@ -42,7 +42,7 @@ final class ChatTitleView: UIView {
     @IBOutlet weak var labelLoading: UILabel!
 
     override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
+        return UIView.layoutFittingExpandedSize
     }
 
     let viewModel = ChatTitleViewModel()
