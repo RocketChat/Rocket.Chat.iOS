@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit'
+  pod 'DifferenceKit/Core'
 end
 
 def shared_pods
@@ -77,18 +77,25 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin', 'DifferenceKit', 'SwipeCellKit']
+  swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
+  swift42Targets = ['SwipeCellKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.1'
+      config.build_settings['SWIFT_VERSION'] = '4.1'
       if config.name == 'Debug'
-        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
+      else
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
       end
     end
-    if swift4Targets.include? target.name
+    if swift3Targets.include? target.name
       target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.0'
+        config.build_settings['SWIFT_VERSION'] = '3.1'
+      end
+    end
+    if swift42Targets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
       end
     end
   end

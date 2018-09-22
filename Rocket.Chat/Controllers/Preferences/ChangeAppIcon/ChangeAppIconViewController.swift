@@ -20,7 +20,7 @@ final class ChangeAppIconViewController: BaseViewController {
 
         collectionView?.register(
             ReusableViewText.nib,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: ReusableViewText.identifier
         )
     }
@@ -81,7 +81,7 @@ extension ChangeAppIconViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReusableViewText.identifier, for: indexPath) as? ReusableViewText {
                 view.labelText.text = viewModel.header
                 return view

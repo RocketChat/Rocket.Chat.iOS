@@ -119,7 +119,7 @@ extension ChatViewController {
 
 extension ChatViewController {
     var isSearchMessagesOpen: Bool {
-        let controller = presentedViewController?.childViewControllers.first as? MessagesListViewController
+        let controller = presentedViewController?.children.first as? MessagesListViewController
         return controller?.data.isSearchingMessages == true
     }
 

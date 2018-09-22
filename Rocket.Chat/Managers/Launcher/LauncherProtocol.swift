@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LauncherProtocol {
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?)
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?)
 }
 
 final class Launcher: LauncherProtocol {
@@ -24,7 +24,7 @@ final class Launcher: LauncherProtocol {
         ]
     }()
 
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         launchers.forEach { $0.prepareToLaunch(with: options) }
     }
 }

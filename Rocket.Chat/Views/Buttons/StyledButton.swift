@@ -38,6 +38,7 @@ final class StyledButton: UIButton {
     }
     @IBInspectable var cornerRadius: CGFloat = 2
     @IBInspectable var borderWidth: CGFloat = 1
+    @IBInspectable var buttonColorDisabled: UIColor = UIColor(red: 225/255, green: 229/255, blue: 232/255, alpha: 1)
     @IBInspectable var buttonColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var borderColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var textColor: UIColor = UIColor.white
@@ -53,7 +54,7 @@ final class StyledButton: UIButton {
     }
 
     lazy var loadingIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activity = UIActivityIndicatorView(style: .gray)
         return activity
     }()
 
@@ -81,20 +82,35 @@ final class StyledButton: UIButton {
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
 
+        if !isEnabled {
+            backgroundColor = buttonColorDisabled
+            layer.borderColor = UIColor.clear.cgColor
+            layer.borderWidth = 0
+            setTitleColor(.white, for: UIControl.State())
+            setTitleShadowColor(nil, for: UIControl.State())
+            return
+        }
+
         switch style {
         case .solid:
             backgroundColor = buttonColor
             layer.borderColor = borderColor.cgColor
             layer.borderWidth = borderWidth
-            setTitleColor(textColor, for: UIControlState())
-            setTitleShadowColor(nil, for: UIControlState())
+            setTitleColor(textColor, for: UIControl.State())
+            setTitleShadowColor(nil, for: UIControl.State())
             titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         case .outline:
             backgroundColor = UIColor.clear
             layer.borderColor = borderColor.cgColor
             layer.borderWidth = borderWidth
-            setTitleColor(textColor, for: UIControlState())
+            setTitleColor(textColor, for: UIControl.State())
             titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        }
+    }
+
+    override var isEnabled: Bool {
+        didSet {
+            applyStyle()
         }
     }
 
@@ -102,15 +118,15 @@ final class StyledButton: UIButton {
 
     func startLoading() {
         isLoading = true
-        titleBeforeLoading = title(for: UIControlState())
-        setTitle(nil, for: UIControlState())
+        titleBeforeLoading = title(for: UIControl.State())
+        setTitle(nil, for: UIControl.State())
 
         switch style {
         case .solid:
             if buttonColor.isBrightColor() {
-                loadingIndicator.activityIndicatorViewStyle = .gray
+                loadingIndicator.style = .gray
             } else {
-                loadingIndicator.activityIndicatorViewStyle = .white
+                loadingIndicator.style = .white
             }
         case .outline:
             loadingIndicator.color = borderColor
@@ -135,7 +151,7 @@ final class StyledButton: UIButton {
         isLoading = false
         loadingIndicator.stopAnimating()
         loadingIndicator.removeFromSuperview()
-        setTitle(titleBeforeLoading, for: UIControlState())
+        setTitle(titleBeforeLoading, for: UIControl.State())
     }
 
 }

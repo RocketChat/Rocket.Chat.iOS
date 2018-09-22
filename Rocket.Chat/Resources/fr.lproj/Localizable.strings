@@ -97,13 +97,14 @@
 // Socket Connection
 "connection.title" = "Connectez-vous à votre serveur";
 "connection.button_connect" = "Connexion";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Vous êtes déconnecté, veuillez réessayer";
 "connection.connecting.banner.message" = "Connexion en cours...";
 "connection.waiting_for_network.banner.message" = "En attente du réseau...";
 
 // Onboarding
 "onboarding.label_welcome" = "Bienvenue sur Rocket Chat";
-"onboarding.label_subtitle" = "Open Source Communication";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Se connecter à un serveur";
 "onboarding.button_create_server" = "Créer un nouvel espace de travail";
 "onboarding.button_join_community_prefix" = "Rejoignez la communauté";

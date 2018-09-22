@@ -31,7 +31,7 @@ class ChannelActionsViewController: BaseViewController {
 
             let isDirectMessage = subscription.type == .directMessage
 
-            var header: [Any?]? = nil
+            var header: [Any?]?
 
             if subscription.type == .directMessage {
                 header = [ChannelInfoUserCellData(user: subscription.directMessageUser)]

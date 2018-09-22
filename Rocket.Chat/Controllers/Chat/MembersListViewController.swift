@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MembersListViewData {
     var subscription: Subscription?
@@ -47,20 +48,32 @@ class MembersListViewData {
 
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
             let client = API.current()?.client(SubscriptionsClient.self)
+            let realm = Realm.current
+
             client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response in
                 guard let strongSelf = self else { return }
+                guard let realm = realm else { return }
+
                 switch response {
                 case .resource(let resource):
-                    strongSelf.showing += resource.count ?? 0
-                    strongSelf.total = resource.total ?? 0
+                    try? realm.write {
+                        var users: [User] = []
 
-                    if let members = resource.members {
-                        strongSelf.membersPages.append(members.compactMap { $0 })
+                        resource.members?.forEach({ (member) in
+                            let user = User.getOrCreate(realm: realm, values: member, updates: nil)
+                            users.append(user)
+                        })
+
+                        realm.add(users, update: true)
+                        strongSelf.membersPages.append(users)
                     }
 
+                    strongSelf.showing += resource.count ?? 0
+                    strongSelf.total = resource.total ?? 0
                     strongSelf.currentPage += 1
 
                     strongSelf.isLoadingMoreMembers = false
+
                     completion?()
                 case .error:
                     Alert.defaultError.present()
