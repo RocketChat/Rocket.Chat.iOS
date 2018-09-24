@@ -57,7 +57,7 @@ class HighlightLayoutManager: NSLayoutManager {
 
 @IBDesignable class RCTextView: UIView {
 
-    private var textView: UITextView!
+    var textView: UITextView!
     private var customEmojiViews: [EmojiView] = []
 
     weak var delegate: ChatMessageCellProtocol?
@@ -121,6 +121,7 @@ class HighlightLayoutManager: NSLayoutManager {
         let textContainer = NSTextContainer.init(size: bounds.size)
         layoutManager.addTextContainer(textContainer)
         textView = UITextView.init(frame: .zero, textContainer: textContainer)
+        textView.isScrollEnabled = false
         configureTextView()
 
         addSubview(textView)
