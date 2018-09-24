@@ -62,12 +62,12 @@ final class NotificationsPreferencesViewController: BaseTableViewController {
 
         let saveNotificationsRequest = SaveNotificationRequest(rid: subscription.rid, notificationPreferences: viewModel.notificationPreferences)
         API.current()?.fetch(saveNotificationsRequest) { [weak self] response in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch response {
             case .resource:
-                strongSelf.viewModel.updateCurrentPreferences()
-                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle)
+                self.viewModel.updateCurrentPreferences()
+                self.alertSuccess(title: self.viewModel.saveSuccessTitle)
             case .error:
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
             }

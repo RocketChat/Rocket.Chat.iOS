@@ -43,16 +43,16 @@ class AddUsersViewData {
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
         API.current()?.fetch(request, options: options) { [weak self] response in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             switch response {
             case .resource(let resource):
-                strongSelf.showing += resource.count ?? 0
-                strongSelf.total = resource.total ?? 0
-                strongSelf.usersPages.append(resource.users)
+                self.showing += resource.count ?? 0
+                self.total = resource.total ?? 0
+                self.usersPages.append(resource.users)
 
-                strongSelf.currentPage += 1
+                self.currentPage += 1
 
-                strongSelf.isLoadingMoreUsers = false
+                self.isLoadingMoreUsers = false
                 completion?()
             case .error:
                 Alert.defaultError.present()
