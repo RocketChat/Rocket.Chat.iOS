@@ -731,6 +731,9 @@
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
 		99619B4820CE3E8D00E1ACCA /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */; };
+		996735CD21581D160049BB63 /* BasicMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996735CC21581D150049BB63 /* BasicMessageCell.xib */; };
+		996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996735CE21582E790049BB63 /* BasicMessageCell.swift */; };
+		996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996735D121585CA70049BB63 /* BasicMessageChatItem.swift */; };
 		996A2653210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996A2652210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift */; };
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
@@ -1573,6 +1576,9 @@
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		99619B4720CE3E8D00E1ACCA /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		996735CC21581D150049BB63 /* BasicMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicMessageCell.xib; sourceTree = "<group>"; };
+		996735CE21582E790049BB63 /* BasicMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMessageCell.swift; sourceTree = "<group>"; };
+		996735D121585CA70049BB63 /* BasicMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMessageChatItem.swift; sourceTree = "<group>"; };
 		996A2652210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUnreadRequest.swift; sourceTree = "<group>"; };
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
@@ -2753,6 +2759,7 @@
 		41F167E51DAC450200775CCA /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				996735CA21581CE00049BB63 /* New Chat */,
 				80AC400920EECB93005082E1 /* ChatBannerView */,
 				41F167E81DAC4D4300775CCA /* ChatTitleView.swift */,
 				41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */,
@@ -3577,6 +3584,32 @@
 			path = "Web Browser";
 			sourceTree = "<group>";
 		};
+		996735CA21581CE00049BB63 /* New Chat */ = {
+			isa = PBXGroup;
+			children = (
+				996735D021585C600049BB63 /* ChatItems */,
+				996735CB21581CEC0049BB63 /* Cells */,
+			);
+			path = "New Chat";
+			sourceTree = "<group>";
+		};
+		996735CB21581CEC0049BB63 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				996735CC21581D150049BB63 /* BasicMessageCell.xib */,
+				996735CE21582E790049BB63 /* BasicMessageCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		996735D021585C600049BB63 /* ChatItems */ = {
+			isa = PBXGroup;
+			children = (
+				996735D121585CA70049BB63 /* BasicMessageChatItem.swift */,
+			);
+			path = ChatItems;
+			sourceTree = "<group>";
+		};
 		9977302520725B3A009AF465 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -4013,6 +4046,7 @@
 				14F8A297202E65C700175FDC /* Blue-40@2x.png in Resources */,
 				14F8A271202E653E00175FDC /* Grey-40@3x.png in Resources */,
 				0B92E66A20F767F8003DAB5A /* InfoPlist.strings in Resources */,
+				996735CD21581D160049BB63 /* BasicMessageCell.xib in Resources */,
 				14F8A292202E65C700175FDC /* Blue-29@3x.png in Resources */,
 				14F8A294202E65C700175FDC /* Blue-60@3x.png in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
@@ -4774,6 +4808,7 @@
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
+				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
@@ -4782,6 +4817,7 @@
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
 				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
+				996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				1496A87220FA469C005C2E14 /* Dynamic.swift in Sources */,
 				414E8A8F20A5DDF800615CE6 /* ChatControllerRolesController.swift in Sources */,
