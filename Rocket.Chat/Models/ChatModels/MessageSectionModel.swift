@@ -31,8 +31,8 @@ struct MessageSectionModel: Differentiable {
     }
 
     func isContentEqual(to source: MessageSectionModel) -> Bool {
-        return message.text == source.message.text &&
-            message.user == source.message.user &&
+        return
+            message.isContentEqual(to: source.message) &&
             daySeparator == source.daySeparator &&
             isLoadingMore == source.isLoadingMore &&
             isNew == source.isNew

@@ -16,6 +16,24 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var text: String
     var attachments: [Attachment]
     var user: UnmanagedUser?
+    var temporary: Bool
+    var failed: Bool
+    var mentions: [Mention]
+    var channels: [Channel]
+    var createdAt: Date?
+    var updatedAt: Date?
+}
+
+extension UnmanagedMessage {
+    static func == (lhs: UnmanagedMessage, rhs: UnmanagedMessage) -> Bool {
+        return
+            lhs.identifier == rhs.identifier &&
+            lhs.temporary == rhs.temporary &&
+            lhs.failed == rhs.failed &&
+            lhs.mentions.count == rhs.mentions.count &&
+            lhs.channels.count == rhs.channels.count &&
+            lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
+    }
 }
 
 extension UnmanagedMessage {
@@ -24,6 +42,13 @@ extension UnmanagedMessage {
         identifier = message.identifier ?? "" // FA NOTE: We must check if we have a valid identifier before calling this init. If a message doesn't have an identifier we should consider it invalid.
         text = message.text
         user = message.user?.unmanaged
+        temporary = message.temporary
+        failed = message.failed
+        mentions = message.mentions.map { $0 }
+        channels = message.channels.map { $0 }
+        createdAt = message.createdAt
+        updatedAt = message.updatedAt
+
         attachments = message.attachments.compactMap({ attachment in
             if attachment.isFile && attachment.fullFileURL() != nil {
                 return attachment
