@@ -364,18 +364,18 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         let client = API.current()?.client(UploadClient.self)
         client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] _ in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
-            if !strongSelf.isUpdatingUser {
-                strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+            if !self.isUpdatingUser {
+                self.alertSuccess(title: localized("alert.update_profile_success.title"))
             }
 
-            strongSelf.isUploadingAvatar = false
-            strongSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-            strongSelf.avatarView.refreshCurrentAvatar(withCachedData: avatarFile.data, completion: {
-                strongSelf.stopLoading()
+            self.isUploadingAvatar = false
+            self.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
+            self.avatarView.refreshCurrentAvatar(withCachedData: avatarFile.data, completion: {
+                self.stopLoading()
             })
-            strongSelf.avatarFile = nil
+            self.avatarFile = nil
         })
     }
 
@@ -396,7 +396,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
         api?.fetch(updateUserRequest) { [weak self] response in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch response {
             case .resource(let resource):
@@ -406,11 +406,11 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
                     return
                 }
 
-                strongSelf.user = resource.user
+                self.user = resource.user
                 stopLoading(true)
 
-                if !strongSelf.isUploadingAvatar {
-                    strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+                if !self.isUploadingAvatar {
+                    self.alertSuccess(title: localized("alert.update_profile_success.title"))
                 }
             case .error:
                 stopLoading(false)
