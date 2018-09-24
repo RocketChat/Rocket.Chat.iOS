@@ -51,6 +51,26 @@ final class MessagesViewController: RocketChatViewController {
 
 }
 
+extension MessagesViewController {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let section = data[indexPath.section]
+        let viewModel = section.viewModels()[indexPath.row]
+        if let height = heightCache[viewModel.differenceIdentifier] {
+            return CGSize(width: UIScreen.main.bounds.width, height: height)
+        } else {
+            let sizingCell = BasicMessageCell.sizingCell
+            sizingCell.prepareForReuse()
+            sizingCell.viewModel = viewModel
+            sizingCell.configure()
+            sizingCell.setNeedsLayout()
+            sizingCell.layoutIfNeeded()
+            let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            heightCache[viewModel.differenceIdentifier] = size.height
+            return size
+        }
+    }
+}
+
 extension MessagesViewController: UserActionSheetPresenter {
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
         presentActionSheetForUser(user, subscription: subscription, source: source)
