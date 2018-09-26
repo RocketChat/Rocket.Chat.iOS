@@ -39,9 +39,9 @@ extension UnmanagedMessage {
 }
 
 extension UnmanagedMessage {
-    init(_ message: Message) {
+    init?(_ message: Message) {
         guard let messageIdentifier = message.identifier else {
-            fatalError("message doesn't have an identifier, something is wrong here")
+            return nil
         }
 
         managedObject = message

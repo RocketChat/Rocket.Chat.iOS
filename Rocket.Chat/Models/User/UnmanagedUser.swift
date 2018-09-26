@@ -13,7 +13,7 @@ struct UnmanagedUser: UnmanagedObject, Equatable {
     typealias Object = User
 
     var managedObject: User
-    var username: String?
+    var username: String
     var name: String?
     var privateStatus: String
     var status: UserStatus
@@ -21,10 +21,14 @@ struct UnmanagedUser: UnmanagedObject, Equatable {
 }
 
 extension UnmanagedUser {
-    init(_ user: User) {
+    init?(_ user: User) {
+        guard let userUsername = user.username else {
+            return nil
+        }
+
         managedObject = user
 
-        username = user.username
+        username = userUsername
         name = user.name
         privateStatus = user.privateStatus
         status = user.status
@@ -35,5 +39,7 @@ extension UnmanagedUser {
 extension UnmanagedUser: Differentiable {
     typealias DifferenceIdentifier = String
 
-    var differenceIdentifier: String { return username ?? String.random() }
+    var differenceIdentifier: String {
+        return username
+    }
 }
