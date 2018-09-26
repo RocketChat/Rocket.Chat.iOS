@@ -13,8 +13,6 @@ import RocketChatViewController
 
 final class MessagesViewModel {
 
-    // MARK: Data Manipulation
-
     /**
      The array of values cached and already manipulated on this view model. This
      array is feeded from the Realm query, the observers on the query and the manipulations
