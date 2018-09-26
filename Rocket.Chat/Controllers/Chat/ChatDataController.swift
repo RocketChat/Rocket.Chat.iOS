@@ -8,132 +8,86 @@
 
 import Foundation
 
-enum ChatDataType {
-    case daySeparator
-    case unreadSeparator
-    case message
-    case loader
-    case header
-}
-
-struct ChatData {
-    var identifier = String.random(10)
-    var type: ChatDataType = .message
-    var timestamp: Date
-    var indexPath: IndexPath!
-    var height: CGFloat?
-
-    // This is only used for messages
-    var message: Message?
-
-    // Initializers
-    init(type: ChatDataType, timestamp: Date) {
-        self.type = type
-        self.timestamp = timestamp
-    }
-}
-
 final class ChatDataController {
-    var messagesUsernames: Set<String> = []
 
-    var dataCellHeight: [String: CGFloat] = [:]
-    var data: [ChatData] = [] {
+    var data: [MessageSection] = [] {
         didSet {
-            messagesUsernames.removeAll()
-            messagesUsernames.formUnion(data.compactMap { $0.message?.validated()?.user?.validated()?.username })
+
         }
     }
 
-    var loadedAllMessages = false
-    lazy var lastSeen: Date = {
-        return Date()
-    }()
-    var unreadSeparator = false
-    var dismissUnreadSeparator = false
+    func updateData() {
 
-    @discardableResult
-    func clear() -> [IndexPath] {
-        var indexPaths: [IndexPath] = []
+    }
 
-        for item in data {
-            indexPaths.append(item.indexPath)
-        }
+    func insert() {
 
+    }
+
+    func remove() {
+
+    }
+
+    func update(section: MessageSection?, callback: ) {
+
+    }
+
+    /**
+     Removes all data from the data controller instance.
+     */
+    func clear() {
         data = []
-        return indexPaths
     }
 
-    func cacheCellHeight(for identifier: String, value: CGFloat) {
-        dataCellHeight[identifier] = value
-    }
-
-    func invalidateLayout(for identifier: String?) {
-        if let identifier = identifier {
-            dataCellHeight.removeValue(forKey: identifier)
-        } else {
-            dataCellHeight = [:]
+    /**
+     Returns the instance of MessageSection in the data
+     if present. The index of the list is based in the section
+     of the indexPath instance.
+     */
+    func itemAt(_ indexPath: IndexPath) -> MessageSection? {
+        guard data.count > indexPath.section else {
+            return nil
         }
-    }
 
-    func itemAt(_ indexPath: IndexPath) -> ChatData? {
-        return data.filter { item in
-            return item.indexPath?.row == indexPath.row && item.indexPath?.section == indexPath.section
-        }.first
+        return data[indexPath.section]
     }
 
     func hasSequentialMessageAt(_ indexPath: IndexPath) -> Bool {
         let prevIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
 
         guard
-            let previousObject = itemAt(prevIndexPath),
-            let message = itemAt(indexPath)?.message
+            let previousObject = itemAt(prevIndexPath)?.object.base as? MessageSectionModel,
+            let object = itemAt(indexPath)?.object.base as? MessageSectionModel
         else {
             return false
         }
 
-        var previousMessage = previousObject.message
+        let previousMessage = previousObject.message
+        let message = object.message
 
-        if previousMessage == nil {
-            // Having an unread separator should not block the sequential messages
-            if previousObject.type != .unreadSeparator {
-                return false
-            }
-
-            // Here we get one object before the previous object to check
-            // if the message can be sequential
-            let prevIndexPath = IndexPath(row: prevIndexPath.row - 1, section: prevIndexPath.section)
-            if let message = itemAt(prevIndexPath)?.message {
-                previousMessage = message
-            }
-        }
-
-        guard
-            let prevMessage = previousMessage,
-            message.type.sequential && prevMessage.type.sequential &&
-            message.groupable && prevMessage.groupable
-        else {
+        guard message.groupable && previousMessage.groupable else {
             return false
         }
 
         // don't group deleted messages
-        if (message.markedForDeletion, prevMessage.markedForDeletion) != (false, false) {
+        if (message.markedForDeletion, previousMessage.markedForDeletion) != (false, false) {
             return false
         }
 
         // don't group failed messages
-        if (message.failed, prevMessage.failed) != (false, false) {
+        if (message.failed, previousMessage.failed) != (false, false) {
             return false
         }
 
         // unwrap dates
         guard
             let date = message.createdAt,
-            let prevDate = prevMessage.createdAt
+            let prevDate = previousMessage.createdAt
         else {
             return false
         }
 
-        let sameUser = message.user == prevMessage.user
+        let sameUser = message.user == previousMessage.user
 
         var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
         if let settings = AuthSettingsManager.settings {
@@ -142,23 +96,6 @@ final class ChatDataController {
 
         let recent = Int(date.timeIntervalSince(prevDate)) < timeLimit
         return sameUser && recent
-    }
-
-    func indexPathOf(_ identifier: String) -> IndexPath? {
-        return data.filter { item in
-            return item.identifier == identifier
-        }.compactMap { item in
-            item.indexPath
-        }.first
-    }
-
-    func indexPathOfMessage(identifier: String) -> IndexPath? {
-        return data.filter { item in
-            guard let messageIdentifier = item.message?.identifier else { return false }
-            return messageIdentifier == identifier
-        }.compactMap { item in
-            item.indexPath
-        }.first
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity

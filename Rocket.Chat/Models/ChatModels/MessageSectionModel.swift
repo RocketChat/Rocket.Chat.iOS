@@ -12,16 +12,15 @@ import DifferenceKit
 struct MessageSectionModel: Differentiable {
     let identifier: String
     let message: UnmanagedMessage
-    let daySeparator: Date?
-    let isLoadingMore: Bool
-    let isNew: Bool
 
-    init(message: UnmanagedMessage, daySeparator: Date?, isLoadingMore: Bool, isNew: Bool) {
+    let isSequential: Bool = false
+    let isLoadingMore: Bool = false
+    let isNew: Bool = false
+    let daySeparator: Date?
+
+    init(message: UnmanagedMessage) {
         self.identifier = message.identifier
         self.message = message
-        self.daySeparator = daySeparator
-        self.isLoadingMore = isLoadingMore
-        self.isNew = isNew
     }
 
     // MARK: Differentiable
