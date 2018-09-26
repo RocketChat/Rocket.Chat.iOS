@@ -15,6 +15,11 @@ final class MessagesViewModel {
 
     // MARK: Data Manipulation
 
+    /**
+     The array of values cached and already manipulated on this view model. This
+     array is feeded from the Realm query, the observers on the query and the manipulations
+     that are executed after getting the data.
+     */
     internal var data: [AnyChatSection] = [] {
         didSet {
             onDataChanged?()
@@ -24,6 +29,7 @@ final class MessagesViewModel {
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
+            lastSeen = subscription.lastSeen ?? Date()
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
@@ -31,12 +37,30 @@ final class MessagesViewModel {
         }
     }
 
+    // Variables required to fetch the messages of the Subscription
+    // to the view model.
     internal var messagesQueryToken: NotificationToken?
     internal var messagesQuery: Results<Message>?
+
+    /**
+     This block is going to be called every time there's
+     an update in the data of the view model.
+     */
     internal var onDataChanged: VoidCompletion?
 
+    /**
+     Last time user read the messages from the Subscription from this view model.
+     */
     internal var lastSeen = Date()
+
+    /**
+     If the view model is requesting new data from the API.
+     */
     internal var requestingData = false
+
+    /**
+     If there's more data to be fetched from the API.
+     */
     internal var hasMoreData = true
 
     // MARK: Life Cycle Controls
