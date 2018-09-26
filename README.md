@@ -28,6 +28,8 @@ Take your conversations with you and never miss the action with our <br />iOS mo
 
 You can signup to our TestFlight builds by acessing this link: https://testflight.apple.com/join/3gcYeoMr.
 
+We've also a channel in our developer community, you can [access here](https://open.rocket.chat/channel/ios-beta).
+
 # Reporting an Issue
 
 [Github Issues](https://github.com/RocketChat/Rocket.Chat.iOS/issues) are used to track todos, bugs, feature requests, and more.
