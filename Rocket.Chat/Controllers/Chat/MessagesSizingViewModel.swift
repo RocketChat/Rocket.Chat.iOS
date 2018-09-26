@@ -13,21 +13,21 @@ final class MessagesSizingViewModel {
     internal var cache: [AnyHashable: CGFloat] = [:]
 
     /**
-     Clear all height values cached
+     Clear all height values cached.
      */
     func clearCache() {
         cache = [:]
     }
 
     /**
-     Returns the cached height for the IndexPath
+     Returns the cached height for the IndexPath.
      */
     func height(for identifier: AnyHashable) -> CGFloat? {
         return cache[identifier]
     }
 
     /**
-     Returns the cached height for the IndexPath
+     Sets the cached height for the identified cell.
      */
     func set(height: CGFloat, for identifier: AnyHashable) {
         return cache[identifier] = height
