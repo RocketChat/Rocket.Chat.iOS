@@ -10,7 +10,7 @@ import Foundation
 
 final class MessagesSizingManager {
 
-    internal var cache: [AnyHashable: CGFloat] = [:]
+    internal var cache: [AnyHashable: NSValue] = [:]
 
     /**
      Clear all height values cached.
@@ -20,17 +20,17 @@ final class MessagesSizingManager {
     }
 
     /**
-     Returns the cached height for the IndexPath.
+     Returns the cached size for the IndexPath.
      */
-    func height(for identifier: AnyHashable) -> CGFloat? {
-        return cache[identifier]
+    func size(for identifier: AnyHashable) -> CGSize? {
+        return cache[identifier]?.cgSizeValue
     }
 
     /**
-     Sets the cached height for the identified cell.
+     Sets the cached size for the identified cell.
      */
-    func set(height: CGFloat, for identifier: AnyHashable) {
-        return cache[identifier] = height
+    func set(size: CGSize, for identifier: AnyHashable) {
+        return cache[identifier] = NSValue(cgSize: size)
     }
 
 }

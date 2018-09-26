@@ -64,8 +64,8 @@ extension MessagesViewController {
         }
 
         let sectionViewModel = section.viewModels()[indexPath.row]
-        if let height = viewSizingModel.height(for: sectionViewModel.differenceIdentifier) {
-            return CGSize(width: UIScreen.main.bounds.width, height: height)
+        if let size = viewSizingModel.size(for: sectionViewModel.differenceIdentifier) {
+            return size
         } else {
             let sizingCell = BasicMessageCell.sizingCell
             sizingCell.prepareForReuse()
@@ -75,7 +75,7 @@ extension MessagesViewController {
             sizingCell.layoutIfNeeded()
 
             let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            viewSizingModel.set(height: size.height, for: sectionViewModel.differenceIdentifier)
+            viewSizingModel.set(size: size, for: sectionViewModel.differenceIdentifier)
 
             return size
         }
