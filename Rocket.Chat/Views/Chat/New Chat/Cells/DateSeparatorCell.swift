@@ -38,11 +38,7 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell {
             return
         }
 
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day, .month, .year], from: viewModel.date)
-        if let newDate = calendar.date(from: components) {
-            date.text = RCDateFormatter.date(newDate)
-        }
+        date.text = viewModel.dateFormatted
     }
 
     override func prepareForReuse() {
