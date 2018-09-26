@@ -22,6 +22,8 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var channels: [Channel]
     var createdAt: Date?
     var updatedAt: Date?
+    var groupable: Bool
+    var markedForDeletion: Bool
 }
 
 extension UnmanagedMessage {
@@ -44,6 +46,8 @@ extension UnmanagedMessage {
         user = message.user?.unmanaged
         temporary = message.temporary
         failed = message.failed
+        groupable = message.groupable
+        markedForDeletion = message.markedForDeletion
         mentions = message.mentions.map { $0 }
         channels = message.channels.map { $0 }
         createdAt = message.createdAt

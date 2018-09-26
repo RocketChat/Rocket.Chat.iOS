@@ -8,12 +8,17 @@
 
 import Foundation
 
-final class ChatDataController {
+final class MessagesViewModel {
 
-    var data: [MessageSection] = [] {
-        didSet {
+    // MARK: Data Manipulation
 
-        }
+    var data: [MessageSection] = []
+
+    /**
+     Removes all data from the data controller instance.
+     */
+    func clear() {
+        data = []
     }
 
     func updateData() {
@@ -28,15 +33,8 @@ final class ChatDataController {
 
     }
 
-    func update(section: MessageSection?, callback: ) {
+    func update() {
 
-    }
-
-    /**
-     Removes all data from the data controller instance.
-     */
-    func clear() {
-        data = []
     }
 
     /**
@@ -69,21 +67,15 @@ final class ChatDataController {
             return false
         }
 
-        // don't group deleted messages
         if (message.markedForDeletion, previousMessage.markedForDeletion) != (false, false) {
             return false
         }
 
-        // don't group failed messages
         if (message.failed, previousMessage.failed) != (false, false) {
             return false
         }
 
-        // unwrap dates
-        guard
-            let date = message.createdAt,
-            let prevDate = previousMessage.createdAt
-        else {
+        guard let date = message.createdAt, let prevDate = previousMessage.createdAt else {
             return false
         }
 
@@ -94,194 +86,211 @@ final class ChatDataController {
             timeLimit = settings.messageGroupingPeriod
         }
 
-        let recent = Int(date.timeIntervalSince(prevDate)) < timeLimit
-        return sameUser && recent
+        return sameUser && Int(date.timeIntervalSince(prevDate)) < timeLimit
     }
 
-    // swiftlint:disable function_body_length cyclomatic_complexity
-    @discardableResult
-    func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
-        var indexPaths: [IndexPath] = []
-        var removedIndexPaths: [IndexPath] = []
-        var newItems: [ChatData] = []
-        var lastObj = data.last
-        var identifiers: [String] = items.map { $0.identifier }
+    // MARK: Sizing
 
-        func insertDaySeparator(from obj: ChatData) {
-            guard let calendar = NSCalendar(calendarIdentifier: .gregorian) else { return }
-            let date = obj.timestamp
-            let components = calendar.components([.day, .month, .year], from: date)
-            guard let newDate = calendar.date(from: components) else { return }
-            let separator = ChatData(type: .daySeparator, timestamp: newDate)
-            identifiers.append(separator.identifier)
-            newItems.append(separator)
-        }
+    var heightCache: [AnyHashable: CGFloat] = [:]
 
-        func insertUnreadSeparator() {
-            let separator = ChatData(type: .unreadSeparator, timestamp: lastSeen)
-            identifiers.append(separator.identifier)
-            newItems.append(separator)
-        }
-
-        if dismissUnreadSeparator {
-            for (idx, obj) in data.enumerated() where obj.type == .unreadSeparator {
-                data.remove(at: idx)
-                removedIndexPaths.append(obj.indexPath)
-            }
-
-            unreadSeparator = false
-            dismissUnreadSeparator = false
-        }
-
-        func updateLastSeen() {
-            if let mostRecentMessage = items.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first {
-                if mostRecentMessage.message?.user == AuthManager.currentUser() {
-                    lastSeen = mostRecentMessage.timestamp
-                } else if let secondMostRecentMessage = data.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first,
-                    mostRecentMessage.timestamp <= lastSeen && mostRecentMessage.timestamp > secondMostRecentMessage.timestamp {
-                    lastSeen = secondMostRecentMessage.timestamp
-                }
-            }
-        }
-
-        updateLastSeen()
-
-        if loadedAllMessages {
-            if data.filter({ $0.type == .header }).count == 0 {
-                let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
-                newItems.append(obj)
-                identifiers.append(obj.identifier)
-            }
-
-            let messages = data.filter({ $0.type == .message })
-            let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
-            if let firstMessage = firstMessage {
-                // Check if already contains some separator with this data
-                var insert = true
-                for obj in data.filter({ $0.type == .daySeparator })
-                    where firstMessage.timestamp.sameDayAs(obj.timestamp) {
-                        insert = false
-                }
-
-                if insert {
-                    insertDaySeparator(from: firstMessage)
-                }
-            }
-        }
-
-        // Has loader?
-        let loaders = data.filter({ $0.type == .loader })
-        if loadedAllMessages {
-            for (idx, obj) in loaders.enumerated() {
-                data.remove(at: idx)
-                removedIndexPaths.append(obj.indexPath)
-            }
-        } else {
-            if loaders.count == 0 {
-                let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0))
-                newItems.append(obj)
-                identifiers.append(obj.identifier)
-            }
-        }
-
-        func needsUnreadSeparator(_ obj: ChatData) -> Bool {
-            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.validated()?.user, currentUser != objUser {
-                if obj.timestamp > lastSeen && !unreadSeparator {
-                    unreadSeparator = true
-                    return true
-                }
-            }
-
-            return false
-        }
-
-        func needsDateSeparator(_ obj: ChatData) -> Bool {
-            if obj.type != .message { return false }
-
-            return data.filter({
-                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
-            }).count == 0 && newItems.filter({
-                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
-            }).count == 0
-        }
-
-        for newObj in items {
-            if let lastObj = lastObj {
-                if needsDateSeparator(lastObj) {
-                    insertDaySeparator(from: lastObj)
-                } else if needsDateSeparator(newObj) {
-                    insertDaySeparator(from: newObj)
-                }
-            }
-
-            if needsUnreadSeparator(newObj) {
-                insertUnreadSeparator()
-            }
-
-            newItems.append(newObj)
-            lastObj = newObj
-        }
-
-        data.append(contentsOf: newItems)
-        data.sort(by: { $0.timestamp < $1.timestamp })
-
-        var normalizeds: [ChatData] = []
-        for (idx, item) in data.enumerated() {
-            var customItem = item
-            let indexPath = IndexPath(item: idx, section: 0)
-            customItem.indexPath = indexPath
-            normalizeds.append(customItem)
-
-            for identifier in identifiers
-                where identifier == item.identifier {
-                    indexPaths.append(indexPath)
-                    break
-            }
-        }
-
-        data = normalizeds
-        return (indexPaths, removedIndexPaths)
+    /**
+     Returns the cached height for the IndexPath
+     */
+    func height(for identifier: AnyHashable) -> CGFloat? {
+        return heightCache[identifier]
     }
 
-    func update(_ message: Message) -> Int {
-        for (idx, obj) in data.enumerated()
-            where obj.message?.validated()?.identifier == message.identifier {
-                invalidateLayout(for: obj.identifier)
-
-                let objMessage = obj.message?.validated()
-
-                if objMessage?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && objMessage?.markedForDeletion == message.markedForDeletion {
-                   return -1
-                }
-
-                if let oldMessage = objMessage {
-                    if !(oldMessage == message) {
-                        MessageTextCacheManager.shared.update(for: message, with: nil)
-                    }
-                }
-
-                data[idx].message = message
-                return obj.indexPath.row
-        }
-
-        return -1
+    /**
+     Returns the cached height for the IndexPath
+     */
+    func set(height: CGFloat, for identifier: AnyHashable) {
+        return heightCache[identifier] = height
     }
 
-    @discardableResult
-    func delete(msgId: String) -> Int? {
-        if let index = data.index(where: { $0.message?.identifier == msgId }) {
-            data[index].message?.markedForDeletion = true
-            return index
-        }
-
-        return nil
-    }
-
-    func oldestMessage() -> Message? {
-        for obj in data where obj.type == .message {
-            return obj.message?.validated()
-        }
-
-        return nil
-    }
+//    // swiftlint:disable function_body_length cyclomatic_complexity
+//    @discardableResult
+//    func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
+//        var indexPaths: [IndexPath] = []
+//        var removedIndexPaths: [IndexPath] = []
+//        var newItems: [ChatData] = []
+//        var lastObj = data.last
+//        var identifiers: [String] = items.map { $0.identifier }
+//
+//        func insertDaySeparator(from obj: ChatData) {
+//            guard let calendar = NSCalendar(calendarIdentifier: .gregorian) else { return }
+//            let date = obj.timestamp
+//            let components = calendar.components([.day, .month, .year], from: date)
+//            guard let newDate = calendar.date(from: components) else { return }
+//            let separator = ChatData(type: .daySeparator, timestamp: newDate)
+//            identifiers.append(separator.identifier)
+//            newItems.append(separator)
+//        }
+//
+//        func insertUnreadSeparator() {
+//            let separator = ChatData(type: .unreadSeparator, timestamp: lastSeen)
+//            identifiers.append(separator.identifier)
+//            newItems.append(separator)
+//        }
+//
+//        if dismissUnreadSeparator {
+//            for (idx, obj) in data.enumerated() where obj.type == .unreadSeparator {
+//                data.remove(at: idx)
+//                removedIndexPaths.append(obj.indexPath)
+//            }
+//
+//            unreadSeparator = false
+//            dismissUnreadSeparator = false
+//        }
+//
+//        func updateLastSeen() {
+//            if let mostRecentMessage = items.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first {
+//                if mostRecentMessage.message?.user == AuthManager.currentUser() {
+//                    lastSeen = mostRecentMessage.timestamp
+//                } else if let secondMostRecentMessage = data.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first,
+//                    mostRecentMessage.timestamp <= lastSeen && mostRecentMessage.timestamp > secondMostRecentMessage.timestamp {
+//                    lastSeen = secondMostRecentMessage.timestamp
+//                }
+//            }
+//        }
+//
+//        updateLastSeen()
+//
+//        if loadedAllMessages {
+//            if data.filter({ $0.type == .header }).count == 0 {
+//                let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
+//                newItems.append(obj)
+//                identifiers.append(obj.identifier)
+//            }
+//
+//            let messages = data.filter({ $0.type == .message })
+//            let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
+//            if let firstMessage = firstMessage {
+//                // Check if already contains some separator with this data
+//                var insert = true
+//                for obj in data.filter({ $0.type == .daySeparator })
+//                    where firstMessage.timestamp.sameDayAs(obj.timestamp) {
+//                        insert = false
+//                }
+//
+//                if insert {
+//                    insertDaySeparator(from: firstMessage)
+//                }
+//            }
+//        }
+//
+//        // Has loader?
+//        let loaders = data.filter({ $0.type == .loader })
+//        if loadedAllMessages {
+//            for (idx, obj) in loaders.enumerated() {
+//                data.remove(at: idx)
+//                removedIndexPaths.append(obj.indexPath)
+//            }
+//        } else {
+//            if loaders.count == 0 {
+//                let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0))
+//                newItems.append(obj)
+//                identifiers.append(obj.identifier)
+//            }
+//        }
+//
+//        func needsUnreadSeparator(_ obj: ChatData) -> Bool {
+//            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.validated()?.user, currentUser != objUser {
+//                if obj.timestamp > lastSeen && !unreadSeparator {
+//                    unreadSeparator = true
+//                    return true
+//                }
+//            }
+//
+//            return false
+//        }
+//
+//        func needsDateSeparator(_ obj: ChatData) -> Bool {
+//            if obj.type != .message { return false }
+//
+//            return data.filter({
+//                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+//            }).count == 0 && newItems.filter({
+//                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+//            }).count == 0
+//        }
+//
+//        for newObj in items {
+//            if let lastObj = lastObj {
+//                if needsDateSeparator(lastObj) {
+//                    insertDaySeparator(from: lastObj)
+//                } else if needsDateSeparator(newObj) {
+//                    insertDaySeparator(from: newObj)
+//                }
+//            }
+//
+//            if needsUnreadSeparator(newObj) {
+//                insertUnreadSeparator()
+//            }
+//
+//            newItems.append(newObj)
+//            lastObj = newObj
+//        }
+//
+//        data.append(contentsOf: newItems)
+//        data.sort(by: { $0.timestamp < $1.timestamp })
+//
+//        var normalizeds: [ChatData] = []
+//        for (idx, item) in data.enumerated() {
+//            var customItem = item
+//            let indexPath = IndexPath(item: idx, section: 0)
+//            customItem.indexPath = indexPath
+//            normalizeds.append(customItem)
+//
+//            for identifier in identifiers
+//                where identifier == item.identifier {
+//                    indexPaths.append(indexPath)
+//                    break
+//            }
+//        }
+//
+//        data = normalizeds
+//        return (indexPaths, removedIndexPaths)
+//    }
+//
+//    func update(_ message: Message) -> Int {
+//        for (idx, obj) in data.enumerated()
+//            where obj.message?.validated()?.identifier == message.identifier {
+//                invalidateLayout(for: obj.identifier)
+//
+//                let objMessage = obj.message?.validated()
+//
+//                if objMessage?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && objMessage?.markedForDeletion == message.markedForDeletion {
+//                   return -1
+//                }
+//
+//                if let oldMessage = objMessage {
+//                    if !(oldMessage == message) {
+//                        MessageTextCacheManager.shared.update(for: message, with: nil)
+//                    }
+//                }
+//
+//                data[idx].message = message
+//                return obj.indexPath.row
+//        }
+//
+//        return -1
+//    }
+//
+//    @discardableResult
+//    func delete(msgId: String) -> Int? {
+//        if let index = data.index(where: { $0.message?.identifier == msgId }) {
+//            data[index].message?.markedForDeletion = true
+//            return index
+//        }
+//
+//        return nil
+//    }
+//
+//    func oldestMessage() -> Message? {
+//        for obj in data where obj.type == .message {
+//            return obj.message?.validated()
+//        }
+//
+//        return nil
+//    }
 }
