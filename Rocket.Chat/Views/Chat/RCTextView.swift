@@ -121,13 +121,14 @@ class HighlightLayoutManager: NSLayoutManager {
         let textContainer = NSTextContainer.init(size: bounds.size)
         layoutManager.addTextContainer(textContainer)
         textView = UITextView.init(frame: .zero, textContainer: textContainer)
-        textView.isScrollEnabled = false
         configureTextView()
 
         addSubview(textView)
     }
 
     private func configureTextView() {
+        textView.isScrollEnabled = false
+        textView.adjustsFontForContentSizeCategory = true
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.backgroundColor = .clear
