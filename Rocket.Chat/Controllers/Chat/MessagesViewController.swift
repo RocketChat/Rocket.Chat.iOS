@@ -35,6 +35,10 @@ final class MessagesViewController: RocketChatViewController {
             self.data = self.viewModel.data
             self.updateData()
         }
+
+        viewSubscriptionModel.onDataChanged = {
+            // TODO: handle updates on the Subscription object, such like title view
+        }
     }
 
     func openURL(url: URL) {

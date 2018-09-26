@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 final class MessagesSubscriptionViewModel {
 
@@ -14,12 +15,20 @@ final class MessagesSubscriptionViewModel {
         didSet {
             guard let subscription = subscription?.validated() else { return }
             subscribe(for: subscription)
+            subscriptionQueryToken = subscription.observe({ [weak self] _ in
+                self?.onDataChanged?()
+            })
         }
     }
+
+    internal var subscriptionQueryToken: NotificationToken?
+    internal var onDataChanged: VoidCompletion?
 
     // MARK: Life Cycle
 
     deinit {
+        subscriptionQueryToken?.invalidate()
+
         if let subscription = subscription?.validated() {
             unsubscribe(for: subscription)
         }
