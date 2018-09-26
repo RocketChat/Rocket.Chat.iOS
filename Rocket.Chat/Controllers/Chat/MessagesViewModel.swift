@@ -26,13 +26,19 @@ final class MessagesViewModel {
             guard let subscription = subscription?.validated() else { return }
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
-            loadHistoryRemotely()
+            fetchMessages(from: nil)
         }
     }
 
     internal var messagesQueryToken: NotificationToken?
     internal var messagesQuery: Results<Message>?
     internal var onDataChanged: VoidCompletion?
+
+    internal var requestingData = false
+
+    var numberOfSections: Int {
+        return data.count
+    }
 
     /**
      Removes all data from the data controller instance.
@@ -73,10 +79,23 @@ final class MessagesViewModel {
         data = updatedData
     }
 
-    func loadHistoryRemotely() {
-        guard let subscription = subscription?.validated()?.unmanaged else { return }
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { _ in
+    internal var oldestMessageDateBeingPresented: Date? {
+        if let object = data.last?.base.object.base as? MessageSectionModel {
+            return object.message.createdAt
+        }
 
+        return nil
+    }
+
+    func fetchMessages(from oldestMessage: Date?) {
+        guard !requestingData else { return }
+        guard let subscription = subscription?.validated()?.unmanaged else { return }
+
+        requestingData = true
+        MessageManager.getHistory(subscription, lastMessageDate: oldestMessage) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.requestingData = false
+            }
         }
     }
 

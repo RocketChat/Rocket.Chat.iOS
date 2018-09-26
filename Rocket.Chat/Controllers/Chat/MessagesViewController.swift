@@ -42,8 +42,19 @@ final class MessagesViewController: RocketChatViewController {
 }
 
 extension MessagesViewController {
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.numberOfSections - indexPath.section < 5 {
+            viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
+        }
+
+        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = data[indexPath.section]
+        guard let section = viewModel.itemAt(indexPath) else {
+            return .zero
+        }
 
         let sectionViewModel = section.viewModels()[indexPath.row]
         if let height = viewSizingModel.height(for: sectionViewModel.differenceIdentifier) {
@@ -62,10 +73,13 @@ extension MessagesViewController {
             return size
         }
     }
+
 }
 
 extension MessagesViewController: UserActionSheetPresenter {
+
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
         presentActionSheetForUser(user, subscription: subscription, source: source)
     }
+
 }
