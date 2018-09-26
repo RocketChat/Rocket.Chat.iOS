@@ -24,6 +24,7 @@ final class MessagesViewModel {
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
+            subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
             fetchMessages(from: nil)
@@ -37,6 +38,38 @@ final class MessagesViewModel {
     internal var lastSeen = Date()
     internal var requestingData = false
     internal var hasMoreData = true
+
+    // MARK: Life Cycle Controls
+
+    deinit {
+        messagesQueryToken?.invalidate()
+
+        if let subscription = subscription?.validated() {
+            unsubscribe(for: subscription)
+        }
+    }
+
+    // MARK: Subscriptions Control
+
+    /**
+     This method enables all kind of updates related to the messages
+     of the subscription attached to the view model.
+     */
+    internal func subscribe(for subscription: Subscription) {
+        MessageManager.changes(subscription)
+        MessageManager.subscribeDeleteMessage(subscription)
+    }
+
+    /**
+     This method will remove all the subscriptions related to
+     messages of the subscription attached to the view model.
+     */
+    internal func unsubscribe(for subscription: Subscription) {
+        SocketManager.unsubscribe(eventName: subscription.rid)
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
+    }
+
+    // MARK: Data
 
     /**
      The number of cached sections present in the list.

@@ -17,13 +17,39 @@ final class MessagesSubscriptionViewModel {
         }
     }
 
-    internal func subscribe(for subscription: Subscription) {
-        MessageManager.changes(subscription)
-        MessageManager.subscribeDeleteMessage(subscription)
+    // MARK: Life Cycle
+
+    deinit {
+        if let subscription = subscription?.validated() {
+            unsubscribe(for: subscription)
+        }
     }
 
-    internal func setTyping(value: Bool = false) {
-        // TODO
+    // MARK: Subscriptions Control
+
+    /**
+     This method enables all kind of updates related to the messages
+     of the subscription attached to the view model.
+     */
+    internal func subscribe(for subscription: Subscription) {
+        subscripeTypingEvent(for: subscription)
+    }
+
+    /**
+     This method will remove all the subscriptions related to
+     messages of the subscription attached to the view model.
+     */
+    internal func unsubscribe(for subscription: Subscription) {
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
+    }
+
+    internal func subscripeTypingEvent(for subscription: Subscription) {
+        guard let loggedUsername = AuthManager.currentUser()?.username else { return }
+
+        SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
+            guard let username = username, username != loggedUsername else { return }
+            // TODO: Handle typing here.
+        }
     }
 
 }
