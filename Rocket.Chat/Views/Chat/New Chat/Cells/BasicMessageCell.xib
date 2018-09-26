@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2D-qY-xoN">
-                        <rect key="frame" x="65" y="0.0" width="43.5" height="22"/>
+                        <rect key="frame" x="71" y="0.0" width="43.5" height="22"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-dW-pKk">
-                        <rect key="frame" x="118.5" y="2.5" width="35.5" height="17"/>
+                        <rect key="frame" x="124.5" y="2.5" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUK-HJ-1Sf" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="10" y="0.0" width="40" height="40"/>
+                        <rect key="frame" x="16" y="0.0" width="40" height="40"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="W8q-lN-Rhh"/>
@@ -40,7 +40,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cr2-8p-eRS" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="65" y="22" width="276" height="20"/>
+                        <rect key="frame" x="71" y="22" width="270" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="zQ8-gG-X3N"/>
@@ -50,16 +50,18 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="top" id="5oN-E3-3SA"/>
+                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="topMargin" id="5oN-E3-3SA"/>
                 <constraint firstItem="Cr2-8p-eRS" firstAttribute="top" secondItem="I2D-qY-xoN" secondAttribute="bottom" id="9vj-Io-bnn"/>
-                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="leading" secondItem="tSh-T8-5Jy" secondAttribute="leading" constant="10" id="HOb-mP-OP7"/>
+                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="leading" secondItem="tSh-T8-5Jy" secondAttribute="leadingMargin" id="HOb-mP-OP7"/>
                 <constraint firstItem="I2D-qY-xoN" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="top" id="KVg-Lt-rkc"/>
                 <constraint firstItem="3FX-dW-pKk" firstAttribute="centerY" secondItem="I2D-qY-xoN" secondAttribute="centerY" id="R3u-o3-ege"/>
                 <constraint firstAttribute="trailing" secondItem="Cr2-8p-eRS" secondAttribute="trailing" constant="34" id="eMq-QH-VD0"/>
                 <constraint firstItem="Cr2-8p-eRS" firstAttribute="leading" secondItem="jUK-HJ-1Sf" secondAttribute="trailing" constant="15" id="gDv-iX-t86"/>
                 <constraint firstItem="I2D-qY-xoN" firstAttribute="leading" secondItem="jUK-HJ-1Sf" secondAttribute="trailing" constant="15" id="jKv-3w-N0U"/>
+                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="3FX-dW-pKk" secondAttribute="trailing" id="lBY-Ue-s9E"/>
                 <constraint firstItem="3FX-dW-pKk" firstAttribute="leading" secondItem="I2D-qY-xoN" secondAttribute="trailing" constant="10" id="tEH-vV-Txs"/>
-                <constraint firstAttribute="bottom" secondItem="Cr2-8p-eRS" secondAttribute="bottom" id="vgX-MK-UpL"/>
+                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="jUK-HJ-1Sf" secondAttribute="bottom" id="tJy-cv-Lao"/>
+                <constraint firstAttribute="bottomMargin" secondItem="Cr2-8p-eRS" secondAttribute="bottom" id="vgX-MK-UpL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ISK-7O-71i"/>
             <size key="customSize" width="375" height="42"/>
