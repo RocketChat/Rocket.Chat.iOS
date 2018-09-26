@@ -794,11 +794,9 @@ final class ChatViewController: RocketChatViewController {
     }
 
     func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
-        guard let subscription = subscription?.validated() else { return }
+        guard let subscription = subscription?.validated()?.unmanaged else { return }
 
-        let tempSubscription = Subscription(value: subscription)
-
-        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] nextPageDate in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 

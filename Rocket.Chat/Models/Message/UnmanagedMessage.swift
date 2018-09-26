@@ -40,8 +40,12 @@ extension UnmanagedMessage {
 
 extension UnmanagedMessage {
     init(_ message: Message) {
+        guard let messageIdentifier = message.identifier else {
+            fatalError("message doesn't have an identifier, something is wrong here")
+        }
+
         managedObject = message
-        identifier = message.identifier ?? "" // FA NOTE: We must check if we have a valid identifier before calling this init. If a message doesn't have an identifier we should consider it invalid.
+        identifier = messageIdentifier
         text = message.text
         user = message.user?.unmanaged
         temporary = message.temporary

@@ -21,7 +21,7 @@ extension MessageManager {
 
     static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
+    static func getHistory(_ subscription: UnmanagedSubscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {

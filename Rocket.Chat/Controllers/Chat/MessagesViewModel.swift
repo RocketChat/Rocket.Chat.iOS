@@ -7,12 +7,32 @@
 //
 
 import Foundation
+import RealmSwift
+import DifferenceKit
+import RocketChatViewController
 
 final class MessagesViewModel {
 
     // MARK: Data Manipulation
 
-    var data: [MessageSection] = []
+    internal var data: [AnyChatSection] = [] {
+        didSet {
+            onDataChanged?()
+        }
+    }
+
+    internal var subscription: Subscription? {
+        didSet {
+            guard let subscription = subscription?.validated() else { return }
+            messagesQuery = subscription.fetchMessagesQueryResults()
+            messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
+            loadHistoryRemotely()
+        }
+    }
+
+    internal var messagesQueryToken: NotificationToken?
+    internal var messagesQuery: Results<Message>?
+    internal var onDataChanged: VoidCompletion?
 
     /**
      Removes all data from the data controller instance.
@@ -21,33 +41,43 @@ final class MessagesViewModel {
         data = []
     }
 
-    func updateData() {
-
-    }
-
-    func insert() {
-
-    }
-
-    func remove() {
-
-    }
-
-    func update() {
-
-    }
-
     /**
      Returns the instance of MessageSection in the data
      if present. The index of the list is based in the section
      of the indexPath instance.
      */
-    func itemAt(_ indexPath: IndexPath) -> MessageSection? {
+    func itemAt(_ indexPath: IndexPath) -> AnyChatSection? {
         guard data.count > indexPath.section else {
             return nil
         }
 
         return data[indexPath.section]
+    }
+
+    func section(for message: Message) -> AnyChatSection? {
+        guard let message = message.validated()?.unmanaged else { return nil }
+        let messageSectionModel = MessageSectionModel(message: message)
+        let messageSection = MessageSection(object: AnyDifferentiable(messageSectionModel))
+        return AnyChatSection(messageSection)
+    }
+
+    func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
+        var updatedData: [AnyChatSection] = []
+
+        messagesQuery?.forEach({ (object) in
+            if let section = section(for: object) {
+                updatedData.append(section)
+            }
+        })
+
+        data = updatedData
+    }
+
+    func loadHistoryRemotely() {
+        guard let subscription = subscription?.validated()?.unmanaged else { return }
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { _ in
+
+        }
     }
 
     func hasSequentialMessageAt(_ indexPath: IndexPath) -> Bool {
@@ -56,8 +86,8 @@ final class MessagesViewModel {
         guard
             let previousObject = itemAt(prevIndexPath)?.object.base as? MessageSectionModel,
             let object = itemAt(indexPath)?.object.base as? MessageSectionModel
-            else {
-                return false
+        else {
+            return false
         }
 
         let previousMessage = previousObject.message

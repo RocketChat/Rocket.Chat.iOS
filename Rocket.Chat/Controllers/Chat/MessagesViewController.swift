@@ -16,8 +16,11 @@ final class MessagesViewController: RocketChatViewController {
     let viewModel = MessagesViewModel()
     let viewSizingModel = MessagesSizingViewModel()
 
-    var subscription: Subscription!
-
+    var subscription: Subscription! {
+        didSet {
+            viewModel.subscription = subscription
+        }
+    }
 
     var sectionsToAddLater: [AnyChatSection] = []
 
@@ -26,28 +29,10 @@ final class MessagesViewController: RocketChatViewController {
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
 
-        var messageSections = Array(subscription.messages.map(Message.init).map { (message) -> AnyChatSection in
-            let messageSectionModel = MessageSectionModel(message: message.unmanaged)
-            let messageSection = MessageSection(object: AnyDifferentiable(messageSectionModel))
-            return AnyChatSection(messageSection)
-        })
-
-        if messageSections.count > 30 {
-            for index in 1..<20 {
-                sectionsToAddLater.append(messageSections[index])
-                messageSections.remove(at: index)
-            }
+        viewModel.onDataChanged = {
+            self.data = self.viewModel.data
+            self.updateData()
         }
-
-        data = messageSections
-        updateData()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        data.append(contentsOf: sectionsToAddLater)
-        updateData()
     }
 
     func openURL(url: URL) {
