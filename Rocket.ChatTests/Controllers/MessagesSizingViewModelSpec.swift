@@ -14,12 +14,12 @@ import XCTest
 final class MessagesSizingViewModelSpec: XCTestCase {
 
     func testInitialState() {
-        let model = MessagesSizingViewModel()
+        let model = MessagesSizingManager()
         XCTAssertEqual(model.cache.count, 0)
     }
 
     func testCacheHeightValue() {
-        let model = MessagesSizingViewModel()
+        let model = MessagesSizingManager()
         let identifier = "identifier"
         model.set(height: CGFloat(150.0), for: identifier)
         XCTAssertEqual(model.height(for: identifier), CGFloat(150.0))
@@ -27,7 +27,7 @@ final class MessagesSizingViewModelSpec: XCTestCase {
     }
 
     func testClearCache() {
-        let model = MessagesSizingViewModel()
+        let model = MessagesSizingManager()
         model.set(height: CGFloat(150.0), for: "identifier.1")
         model.set(height: CGFloat(175.0), for: "identifier.2")
         model.set(height: CGFloat(200.0), for: "identifier.3")

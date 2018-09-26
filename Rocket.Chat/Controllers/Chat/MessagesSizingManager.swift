@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class MessagesSizingViewModel {
+final class MessagesSizingManager {
 
     internal var cache: [AnyHashable: CGFloat] = [:]
 

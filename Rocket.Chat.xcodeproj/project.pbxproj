@@ -362,7 +362,7 @@
 		41F3704D20A31A3E00C5449E /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3704C20A31A3D00C5449E /* UIViewControllerExtension.swift */; };
 		41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */; };
 		41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */; };
-		41FB7138215B0FD6002B5187 /* MessagesSizingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FB7137215B0FD6002B5187 /* MessagesSizingViewModel.swift */; };
+		41FB7138215B0FD6002B5187 /* MessagesSizingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FB7137215B0FD6002B5187 /* MessagesSizingManager.swift */; };
 		41FB713A215B0FFA002B5187 /* MessagesSizingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FB7139215B0FFA002B5187 /* MessagesSizingViewModelSpec.swift */; };
 		41FB713C215B3841002B5187 /* MessagesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FB713B215B3841002B5187 /* MessagesViewModelSpec.swift */; };
 		41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBF4E620BC320E0080D00D /* ServersListView.swift */; };
@@ -1237,7 +1237,7 @@
 		41F3705320A3917D00C5449E /* ChatMessageActionButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageActionButtonsView.xib; sourceTree = "<group>"; };
 		41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURL.swift; sourceTree = "<group>"; };
 		41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewModelSpec.swift; sourceTree = "<group>"; };
-		41FB7137215B0FD6002B5187 /* MessagesSizingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSizingViewModel.swift; sourceTree = "<group>"; };
+		41FB7137215B0FD6002B5187 /* MessagesSizingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSizingManager.swift; sourceTree = "<group>"; };
 		41FB7139215B0FFA002B5187 /* MessagesSizingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSizingViewModelSpec.swift; sourceTree = "<group>"; };
 		41FB713B215B3841002B5187 /* MessagesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModelSpec.swift; sourceTree = "<group>"; };
 		41FBF4E620BC320E0080D00D /* ServersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListView.swift; sourceTree = "<group>"; };
@@ -2759,7 +2759,7 @@
 				99BE4D812152D56E001A43E2 /* MessagesViewController.swift */,
 				41A9B707215B0D0700CEB218 /* MessagesViewModel.swift */,
 				41BF4D6B215B47AD00588B35 /* MessagesSubscriptionViewModel.swift */,
-				41FB7137215B0FD6002B5187 /* MessagesSizingViewModel.swift */,
+				41FB7137215B0FD6002B5187 /* MessagesSizingManager.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -4710,7 +4710,7 @@
 				1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */,
 				8076FDC520485ABB00114F28 /* SubscriptionUser.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
-				41FB7138215B0FD6002B5187 /* MessagesSizingViewModel.swift in Sources */,
+				41FB7138215B0FD6002B5187 /* MessagesSizingManager.swift in Sources */,
 				995F711A20C7910800B7535F /* AuthTableViewControllerLoginServices.swift in Sources */,
 				809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResponse.swift in Sources */,
