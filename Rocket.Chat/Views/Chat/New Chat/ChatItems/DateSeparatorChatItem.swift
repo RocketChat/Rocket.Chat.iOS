@@ -15,15 +15,15 @@ struct DateSeparatorChatItem: ChatItem, Differentiable {
         return DateSeparatorCell.identifier
     }
 
-    var dateFormatted: String?
-    var date: Date {
-        didSet {
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.day, .month, .year], from: date)
-            if let newDate = calendar.date(from: components) {
-                dateFormatted = RCDateFormatter.date(newDate)
-            }
+    var date: Date
+    var dateFormatted: String? {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .month, .year], from: date)
+        if let newDate = calendar.date(from: components) {
+            return RCDateFormatter.date(newDate)
         }
+
+        return nil
     }
 
     var differenceIdentifier: String {
