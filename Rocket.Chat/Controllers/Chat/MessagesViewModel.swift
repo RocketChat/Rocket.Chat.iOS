@@ -38,6 +38,9 @@ final class MessagesViewModel {
     internal var requestingData = false
     internal var hasMoreData = true
 
+    /**
+     The number of cached sections present in the list.
+     */
     var numberOfSections: Int {
         return data.count
     }
@@ -101,6 +104,9 @@ final class MessagesViewModel {
         ))
     }
 
+    /**
+     This method is called on every update the messagesQuery get from Realm.
+    */
     func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
         var updatedData: [AnyChatSection] = []
 
@@ -118,6 +124,10 @@ final class MessagesViewModel {
         data = updatedData
     }
 
+    /**
+     This method will return the oldest date present in the list of messages. This is
+     the data cached in the view model and not in the database.
+     */
     internal var oldestMessageDateBeingPresented: Date? {
         if let object = data.last?.base.object.base as? MessageSectionModel {
             return object.message.createdAt
@@ -126,6 +136,15 @@ final class MessagesViewModel {
         return nil
     }
 
+    /**
+     This method requests a new page of messages to the API. If the view model
+     already detected that there's no more data to fetch, or it's currently
+     fetching a new page, the method won't be executed.
+
+     - parameters:
+        - oldestMessage: This is the parameter that will be sent to the server in
+            order to get the correct page of data.
+     */
     func fetchMessages(from oldestMessage: Date?) {
         guard !requestingData, hasMoreData else { return }
         guard let subscription = subscription?.validated()?.unmanaged else { return }

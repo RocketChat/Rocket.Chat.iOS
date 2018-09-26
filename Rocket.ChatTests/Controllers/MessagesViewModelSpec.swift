@@ -129,4 +129,20 @@ final class MessagesViewModelSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(model.numberOfSections, 1)
     }
 
+    func testOldestDatePresent() {
+        let model = MessagesViewModel()
+
+        let testDate = Date().addingTimeInterval(-10000)
+        let messageFirst = Message.testInstance()
+        let messageSecond = Message.testInstance()
+        messageSecond.createdAt = testDate
+
+        if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
+            model.data = [section1, section2]
+        }
+
+        XCTAssertEqual(model.numberOfSections, 2)
+        XCTAssertEqual(model.oldestMessageDateBeingPresented, testDate)
+    }
+
 }
