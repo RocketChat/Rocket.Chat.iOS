@@ -12,8 +12,8 @@ import RealmSwift
 import DifferenceKit
 
 final class MessagesViewController: RocketChatViewController {
-
-    let viewModel = MessagesViewModel()
+ 
+    let viewModel = MessagesViewModel(controllerContext: nil)
     let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingManager()
 
@@ -32,6 +32,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
 
+        viewModel.controllerContext = self
         viewModel.onDataChanged = {
             self.data = self.viewModel.data
             self.updateData()

@@ -24,6 +24,8 @@ final class MessagesViewModel {
         }
     }
 
+    weak var controllerContext: UIViewController? 
+
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
@@ -62,6 +64,10 @@ final class MessagesViewModel {
     internal var hasMoreData = true
 
     // MARK: Life Cycle Controls
+
+    init(controllerContext: UIViewController?) {
+        self.controllerContext = controllerContext
+    }
 
     deinit {
         messagesQueryToken?.invalidate()
@@ -155,7 +161,8 @@ final class MessagesViewModel {
         }
 
         return AnyChatSection(MessageSection(
-            object: AnyDifferentiable(messageSectionModel)
+            object: AnyDifferentiable(messageSectionModel),
+            controllerContext: controllerContext
         ))
     }
 

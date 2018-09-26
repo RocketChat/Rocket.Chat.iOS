@@ -11,7 +11,9 @@ import DifferenceKit
 import RocketChatViewController
 
 struct MessageSection: ChatSection {
+
     var object: AnyDifferentiable
+    var controllerContext: UIViewController?
 
     func viewModels() -> [AnyChatItem] {
         guard
