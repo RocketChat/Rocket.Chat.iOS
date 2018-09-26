@@ -127,7 +127,7 @@ final class MessagesViewModel {
     }
 
     func fetchMessages(from oldestMessage: Date?) {
-        guard !requestingData, !hasMoreData else { return }
+        guard !requestingData, hasMoreData else { return }
         guard let subscription = subscription?.validated()?.unmanaged else { return }
 
         requestingData = true

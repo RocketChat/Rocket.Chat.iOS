@@ -31,9 +31,8 @@ struct MessageSection: ChatSection {
 
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
-//        cell.viewModel = viewModel
-//        cell.configure()
-
+        cell.viewModel = viewModel
+        cell.configure()
         return cell
     }
 }
