@@ -12,37 +12,34 @@ import RealmSwift
 import DifferenceKit
 
 final class MessagesViewController: RocketChatViewController {
-    var subscription: Subscription!
-    var heightCache: [AnyHashable: CGFloat] = [:]
+
+    let viewModel = MessagesViewModel()
+    let viewSubscriptionModel = MessagesSubscriptionViewModel()
+    let viewSizingModel = MessagesSizingManager()
+
+    var subscription: Subscription! {
+        didSet {
+            viewModel.subscription = subscription
+            viewSubscriptionModel.subscription = subscription
+        }
+    }
+
     var sectionsToAddLater: [AnyChatSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
+        collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
 
-        var messageSections = Array(subscription.messages.map(Message.init).map { (message) -> AnyChatSection in
-            let messageSectionModel = MessageSectionModel(message: message.unmanaged, daySeparator: nil, isLoadingMore: false, isNew: false)
-            let messageSection = MessageSection(object: AnyDifferentiable(messageSectionModel))
-            return AnyChatSection(messageSection)
-        })
-
-        if messageSections.count > 30 {
-            for index in 1..<20 {
-                sectionsToAddLater.append(messageSections[index])
-                messageSections.remove(at: index)
-            }
+        viewModel.onDataChanged = {
+            self.data = self.viewModel.data
+            self.updateData()
         }
 
-        data = messageSections
-        updateData()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        data.append(contentsOf: sectionsToAddLater)
-        updateData()
+        viewSubscriptionModel.onDataChanged = {
+            // TODO: handle updates on the Subscription object, such like title view
+        }
     }
 
     func openURL(url: URL) {
@@ -52,27 +49,44 @@ final class MessagesViewController: RocketChatViewController {
 }
 
 extension MessagesViewController {
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.numberOfSections - indexPath.section < 5 {
+            viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
+        }
+
+        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = data[indexPath.section]
-        let viewModel = section.viewModels()[indexPath.row]
-        if let height = heightCache[viewModel.differenceIdentifier] {
-            return CGSize(width: UIScreen.main.bounds.width, height: height)
+        guard let section = viewModel.itemAt(indexPath) else {
+            return .zero
+        }
+
+        let sectionViewModel = section.viewModels()[indexPath.row]
+        if let size = viewSizingModel.size(for: sectionViewModel.differenceIdentifier) {
+            return size
         } else {
             let sizingCell = BasicMessageCell.sizingCell
             sizingCell.prepareForReuse()
-            sizingCell.viewModel = viewModel
+            sizingCell.viewModel = sectionViewModel
             sizingCell.configure()
             sizingCell.setNeedsLayout()
             sizingCell.layoutIfNeeded()
+
             let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            heightCache[viewModel.differenceIdentifier] = size.height
+            viewSizingModel.set(size: size, for: sectionViewModel.differenceIdentifier)
+
             return size
         }
     }
+
 }
 
 extension MessagesViewController: UserActionSheetPresenter {
+
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
         presentActionSheetForUser(user, subscription: subscription, source: source)
     }
+
 }

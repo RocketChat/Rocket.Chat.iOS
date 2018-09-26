@@ -123,7 +123,7 @@ extension Message {
 extension Message: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedMessage
 
-    var unmanaged: UnmanagedMessage {
+    var unmanaged: UnmanagedMessage? {
         return UnmanagedMessage(self)
     }
 }

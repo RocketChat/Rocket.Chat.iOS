@@ -78,7 +78,7 @@ final class ChatDataController {
     func itemAt(_ indexPath: IndexPath) -> ChatData? {
         return data.filter { item in
             return item.indexPath?.row == indexPath.row && item.indexPath?.section == indexPath.section
-        }.first
+            }.first
     }
 
     func hasSequentialMessageAt(_ indexPath: IndexPath) -> Bool {
@@ -87,8 +87,8 @@ final class ChatDataController {
         guard
             let previousObject = itemAt(prevIndexPath),
             let message = itemAt(indexPath)?.message
-        else {
-            return false
+            else {
+                return false
         }
 
         var previousMessage = previousObject.message
@@ -110,9 +110,9 @@ final class ChatDataController {
         guard
             let prevMessage = previousMessage,
             message.type.sequential && prevMessage.type.sequential &&
-            message.groupable && prevMessage.groupable
-        else {
-            return false
+                message.groupable && prevMessage.groupable
+            else {
+                return false
         }
 
         // don't group deleted messages
@@ -129,8 +129,8 @@ final class ChatDataController {
         guard
             let date = message.createdAt,
             let prevDate = prevMessage.createdAt
-        else {
-            return false
+            else {
+                return false
         }
 
         let sameUser = message.user == prevMessage.user
@@ -147,18 +147,18 @@ final class ChatDataController {
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-        }.compactMap { item in
-            item.indexPath
-        }.first
+            }.compactMap { item in
+                item.indexPath
+            }.first
     }
 
     func indexPathOfMessage(identifier: String) -> IndexPath? {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-        }.compactMap { item in
-            item.indexPath
-        }.first
+            }.compactMap { item in
+                item.indexPath
+            }.first
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -314,7 +314,7 @@ final class ChatDataController {
                 let objMessage = obj.message?.validated()
 
                 if objMessage?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 && objMessage?.markedForDeletion == message.markedForDeletion {
-                   return -1
+                    return -1
                 }
 
                 if let oldMessage = objMessage {

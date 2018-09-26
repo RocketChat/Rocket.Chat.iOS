@@ -13,10 +13,10 @@ protocol UnmanagedObject: Differentiable {
     associatedtype Object: BaseModel & UnmanagedConvertible
     var managedObject: Object { get }
 
-    init(_: Object)
+    init?(_: Object)
 }
 
 protocol UnmanagedConvertible {
     associatedtype UnmanagedType: UnmanagedObject
-    var unmanaged: UnmanagedType { get }
+    var unmanaged: UnmanagedType? { get }
 }

@@ -216,10 +216,6 @@ final class ChatViewController: RocketChatViewController {
         updateEmptyState()
 
         chatTitleView?.state = SocketManager.sharedInstance.state
-
-        if let subscription = subscription {
-            subscribe(for: subscription)
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -231,14 +227,6 @@ final class ChatViewController: RocketChatViewController {
         dataController.invalidateLayout(for: nil)
         collectionView.setNeedsLayout()
         collectionView.reloadData()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-
-        if let subscription = subscription?.validated() {
-            unsubscribe(for: subscription)
-        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -588,22 +576,6 @@ final class ChatViewController: RocketChatViewController {
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
-    internal func subscribe(for subscription: Subscription) {
-        MessageManager.changes(subscription)
-        MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            DispatchQueue.main.async { [weak self] in
-                self?.deleteMessage(msgId: msgId)
-            }
-        }
-        registerTypingEvent(subscription)
-    }
-
-    internal func unsubscribe(for subscription: Subscription) {
-        SocketManager.unsubscribe(eventName: subscription.rid)
-        SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
-        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
-    }
-
     internal func updateEmptyState() {
         if self.subscription == nil {
             title = ""
@@ -702,34 +674,6 @@ final class ChatViewController: RocketChatViewController {
 
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
-        subscribe(for: subscription)
-    }
-
-    func registerTypingEvent(_ subscription: Subscription) {
-        // TODO: Replace
-//        typingIndicatorView?.interval = 0
-        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
-
-        let loggedUsername = user.username
-        SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username != loggedUsername else { return }
-
-            DispatchQueue.main.async {
-                let isAtBottom = self?.chatLogIsAtBottom()
-
-                // TODO: Replace
-                if flag {
-//                    self?.typingIndicatorView?.insertUsername(username)
-                } else {
-//                    self?.typingIndicatorView?.removeUsername(username)
-                }
-
-                if let isAtBottom = isAtBottom,
-                    isAtBottom == true {
-                    self?.scrollToBottom(true)
-                }
-            }
-        }
     }
 
     private func updateMessagesQueryNotificationBlock() {
@@ -794,11 +738,9 @@ final class ChatViewController: RocketChatViewController {
     }
 
     func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
-        guard let subscription = subscription?.validated() else { return }
+        guard let subscription = subscription?.validated()?.unmanaged else { return }
 
-        let tempSubscription = Subscription(value: subscription)
-
-        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] nextPageDate in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 
