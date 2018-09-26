@@ -16,7 +16,7 @@ struct MessageSectionModel: Differentiable {
     let isSequential: Bool = false
     let isLoadingMore: Bool = false
     let isNew: Bool = false
-    let daySeparator: Date?
+    let daySeparator: Date? = nil
 
     init(message: UnmanagedMessage) {
         self.identifier = message.identifier

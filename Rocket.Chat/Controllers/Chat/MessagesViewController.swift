@@ -14,6 +14,7 @@ import DifferenceKit
 final class MessagesViewController: RocketChatViewController {
 
     let viewModel = MessagesViewModel()
+    let viewSizingModel = MessagesSizingViewModel()
 
     var subscription: Subscription!
 
@@ -60,7 +61,7 @@ extension MessagesViewController {
         let section = data[indexPath.section]
 
         let sectionViewModel = section.viewModels()[indexPath.row]
-        if let height = viewModel.height(for: sectionViewModel.differenceIdentifier) {
+        if let height = viewSizingModel.height(for: sectionViewModel.differenceIdentifier) {
             return CGSize(width: UIScreen.main.bounds.width, height: height)
         } else {
             let sizingCell = BasicMessageCell.sizingCell
@@ -71,7 +72,7 @@ extension MessagesViewController {
             sizingCell.layoutIfNeeded()
 
             let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            viewModel.set(height: size.height, for: sectionViewModel.differenceIdentifier)
+            viewSizingModel.set(height: size.height, for: sectionViewModel.differenceIdentifier)
 
             return size
         }
