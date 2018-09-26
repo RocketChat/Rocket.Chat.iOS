@@ -13,10 +13,12 @@ struct MessageSectionModel: Differentiable {
     let identifier: String
     let message: UnmanagedMessage
 
-    let isSequential: Bool = false
-    let isLoadingMore: Bool = false
-    let isNew: Bool = false
-    let daySeparator: Date? = nil
+    var daySeparator: Date? = nil
+    var isSequential: Bool = false
+
+    var containsLoader: Bool = false
+    var containsUnreadMessageIndicator: Bool = false
+    var containsDateSeparator: Bool { return daySeparator != nil }
 
     init(message: UnmanagedMessage) {
         self.identifier = message.identifier
@@ -33,7 +35,8 @@ struct MessageSectionModel: Differentiable {
         return
             message.isContentEqual(to: source.message) &&
             daySeparator == source.daySeparator &&
-            isLoadingMore == source.isLoadingMore &&
-            isNew == source.isNew
+            containsLoader == source.containsLoader &&
+            containsUnreadMessageIndicator == source.containsUnreadMessageIndicator &&
+            isSequential == source.isSequential
     }
 }
