@@ -14,11 +14,13 @@ import DifferenceKit
 final class MessagesViewController: RocketChatViewController {
 
     let viewModel = MessagesViewModel()
+    let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingViewModel()
 
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
+            viewSubscriptionModel.subscription = subscription
         }
     }
 

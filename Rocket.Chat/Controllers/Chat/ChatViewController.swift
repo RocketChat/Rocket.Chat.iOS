@@ -590,11 +590,7 @@ final class ChatViewController: RocketChatViewController {
 
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
-        MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            DispatchQueue.main.async { [weak self] in
-                self?.deleteMessage(msgId: msgId)
-            }
-        }
+        MessageManager.subscribeDeleteMessage(subscription)
         registerTypingEvent(subscription)
     }
 

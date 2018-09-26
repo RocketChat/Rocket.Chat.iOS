@@ -127,7 +127,7 @@ extension MessageManager {
         }
     }
 
-    static func subscribeDeleteMessage(_ subscription: Subscription, completion: @escaping (_ msgId: String) -> Void) {
+    static func subscribeDeleteMessage(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)/deleteMessage"
         let request = [
             "msg": "sub",
@@ -144,7 +144,6 @@ extension MessageManager {
                 currentRealm?.execute({ realm in
                     guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
                     realm.delete(message)
-                    completion(msgId)
                 })
             }
         }
