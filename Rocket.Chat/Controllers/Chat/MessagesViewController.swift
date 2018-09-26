@@ -12,8 +12,12 @@ import RealmSwift
 import DifferenceKit
 
 final class MessagesViewController: RocketChatViewController {
+
+    let viewModel = MessagesViewModel()
+
     var subscription: Subscription!
-    var heightCache: [AnyHashable: CGFloat] = [:]
+
+
     var sectionsToAddLater: [AnyChatSection] = []
 
     override func viewDidLoad() {
@@ -22,7 +26,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
 
         var messageSections = Array(subscription.messages.map(Message.init).map { (message) -> AnyChatSection in
-            let messageSectionModel = MessageSectionModel(message: message.unmanaged, daySeparator: nil, isLoadingMore: false, isNew: false)
+            let messageSectionModel = MessageSectionModel(message: message.unmanaged)
             let messageSection = MessageSection(object: AnyDifferentiable(messageSectionModel))
             return AnyChatSection(messageSection)
         })
@@ -54,18 +58,21 @@ final class MessagesViewController: RocketChatViewController {
 extension MessagesViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section = data[indexPath.section]
-        let viewModel = section.viewModels()[indexPath.row]
-        if let height = heightCache[viewModel.differenceIdentifier] {
+
+        let sectionViewModel = section.viewModels()[indexPath.row]
+        if let height = viewModel.height(for: sectionViewModel.differenceIdentifier) {
             return CGSize(width: UIScreen.main.bounds.width, height: height)
         } else {
             let sizingCell = BasicMessageCell.sizingCell
             sizingCell.prepareForReuse()
-            sizingCell.viewModel = viewModel
+            sizingCell.viewModel = sectionViewModel
             sizingCell.configure()
             sizingCell.setNeedsLayout()
             sizingCell.layoutIfNeeded()
+
             let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            heightCache[viewModel.differenceIdentifier] = size.height
+            viewModel.set(height: size.height, for: sectionViewModel.differenceIdentifier)
+
             return size
         }
     }
