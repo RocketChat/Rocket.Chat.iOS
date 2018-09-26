@@ -30,6 +30,7 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidLoad()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
+        collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
 
         viewModel.onDataChanged = {
             self.data = self.viewModel.data

@@ -21,12 +21,20 @@ struct MessageSection: ChatSection {
             return []
         }
 
-        let basicMessageItem = BasicMessageChatItem(
+        var cells: [AnyChatItem] = []
+
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
+            ).wrapped)
+        }
+
+        cells.append(BasicMessageChatItem(
             user: user,
             message: object.message
-        ).wrapped
+        ).wrapped)
 
-        return [basicMessageItem]
+        return cells
     }
 
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell {

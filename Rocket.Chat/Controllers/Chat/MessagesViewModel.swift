@@ -208,14 +208,14 @@ final class MessagesViewModel {
             let createdAt = message.createdAt,
             let previousCreatedAt = previousMessage.createdAt
         else {
-            return nil
+            return message.createdAt
         }
 
         if createdAt.sameDayAs(previousCreatedAt) {
             return nil
         }
 
-        return message.createdAt
+        return createdAt
     }
 
     /**

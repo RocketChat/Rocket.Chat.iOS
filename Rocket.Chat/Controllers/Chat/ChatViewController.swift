@@ -674,7 +674,6 @@ final class ChatViewController: RocketChatViewController {
 
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
-        subscribe(for: subscription)
     }
 
     private func updateMessagesQueryNotificationBlock() {
