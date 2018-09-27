@@ -20,6 +20,24 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell {
         return cell
     }()
 
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarContainerView.bounds
+                avatarContainerView.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+        }
+    }
+
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var text: RCTextView!
@@ -77,6 +95,13 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell {
     func updateText(force: Bool = false) {
         guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
             return
+        }
+
+        avatarView.emoji = viewModel.message.emoji
+        avatarView.user = viewModel.message.user?.managedObject
+
+        if let avatar = viewModel.message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
