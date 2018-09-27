@@ -21,6 +21,7 @@ enum Event {
     case login
     case updateStatus
     case replyNotification
+    case openAdmin
     case screenView(screenName: String)
     case messageSent(subscriptionType: String, server: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
@@ -108,6 +109,7 @@ extension Event {
         case .showNewWorkspace: return "show_new_workspace"
         case .updateStatus: return "status_update"
         case .replyNotification: return "reply_notification"
+        case .openAdmin: return "open_admin"
         case .screenView: return "screen_view"
         case .messageSent: return "message_sent"
         case .mediaUpload: return "media_upload"

@@ -51,7 +51,7 @@ class MembersListViewData {
             let realm = Realm.current
 
             client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 guard let realm = realm else { return }
 
                 switch response {
@@ -65,14 +65,14 @@ class MembersListViewData {
                         })
 
                         realm.add(users, update: true)
-                        strongSelf.membersPages.append(users)
+                        self.membersPages.append(users)
                     }
 
-                    strongSelf.showing += resource.count ?? 0
-                    strongSelf.total = resource.total ?? 0
-                    strongSelf.currentPage += 1
+                    self.showing += resource.count ?? 0
+                    self.total = resource.total ?? 0
+                    self.currentPage += 1
 
-                    strongSelf.isLoadingMoreMembers = false
+                    self.isLoadingMoreMembers = false
 
                     completion?()
                 case .error:
