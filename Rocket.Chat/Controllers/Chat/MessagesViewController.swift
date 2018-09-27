@@ -12,7 +12,7 @@ import RealmSwift
 import DifferenceKit
 
 final class MessagesViewController: RocketChatViewController {
- 
+
     let viewModel = MessagesViewModel(controllerContext: nil)
     let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingManager()

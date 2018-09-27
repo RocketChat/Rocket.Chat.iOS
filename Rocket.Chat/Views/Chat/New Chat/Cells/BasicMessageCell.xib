@@ -26,14 +26,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-dW-pKk">
-                        <rect key="frame" x="118.5" y="3" width="33" height="16"/>
+                        <rect key="frame" x="124.5" y="3" width="33" height="16"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUK-HJ-1Sf" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUK-HJ-1Sf">
                         <rect key="frame" x="16" y="0.0" width="40" height="40"/>
-                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="W8q-lN-Rhh"/>
                             <constraint firstAttribute="width" constant="40" id="nqL-QP-b31"/>
@@ -66,6 +66,7 @@
             <viewLayoutGuide key="safeArea" id="ISK-7O-71i"/>
             <size key="customSize" width="375" height="42"/>
             <connections>
+                <outlet property="avatarContainerView" destination="jUK-HJ-1Sf" id="QUo-9F-vxp"/>
                 <outlet property="avatarLeadingConstraint" destination="HOb-mP-OP7" id="xPf-4R-ypj"/>
                 <outlet property="avatarWidthConstraint" destination="nqL-QP-b31" id="D0t-cA-Lod"/>
                 <outlet property="date" destination="3FX-dW-pKk" id="jSH-or-ILG"/>

@@ -36,6 +36,15 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell {
             avatarLeadingConstraint.constant
     }
 
+    weak var longPressGesture: UILongPressGestureRecognizer?
+    weak var usernameTapGesture: UITapGestureRecognizer?
+    weak var avatarTapGesture: UITapGestureRecognizer?
+    weak var delegate: ChatMessageCellProtocol? {
+        didSet {
+            text.delegate = delegate
+        }
+    }
+
     var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
     var contentViewWidthConstraint: NSLayoutConstraint!
@@ -48,6 +57,8 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
         contentViewWidthConstraint.isActive = true
+
+        insertGesturesIfNeeded()
     }
 
     func configure() {
@@ -98,7 +109,57 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell {
         username.text = ""
         date.text = ""
         text.message = nil
+        avatarView.prepareForReuse()
         textHeightConstraint.constant = initialTextHeightConstant
+    }
+
+    func insertGesturesIfNeeded() {
+        if longPressGesture == nil {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
+            gesture.minimumPressDuration = 0.325
+            gesture.delegate = self
+            addGestureRecognizer(gesture)
+
+            longPressGesture = gesture
+        }
+
+        if usernameTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            username.addGestureRecognizer(gesture)
+
+            usernameTapGesture = gesture
+        }
+
+        if avatarTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            avatarView.addGestureRecognizer(gesture)
+
+            avatarTapGesture = gesture
+        }
+    }
+
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(viewModel.message.managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(viewModel.message.managedObject, view: username, recognizer: recognizer)
+    }
+}
+
+extension BasicMessageCell: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }
 

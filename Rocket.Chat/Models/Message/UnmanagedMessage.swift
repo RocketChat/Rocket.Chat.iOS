@@ -24,6 +24,8 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var updatedAt: Date?
     var groupable: Bool
     var markedForDeletion: Bool
+    var emoji: String?
+    var avatar: String?
 }
 
 extension UnmanagedMessage {
@@ -56,6 +58,8 @@ extension UnmanagedMessage {
         channels = message.channels.map { $0 }
         createdAt = message.createdAt
         updatedAt = message.updatedAt
+        emoji = message.emoji
+        avatar = message.avatar
 
         attachments = message.attachments.compactMap({ attachment in
             if attachment.isFile && attachment.fullFileURL() != nil {
