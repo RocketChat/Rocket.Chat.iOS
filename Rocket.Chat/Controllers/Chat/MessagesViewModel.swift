@@ -24,7 +24,7 @@ final class MessagesViewModel {
         }
     }
 
-    weak var controllerContext: UIViewController? 
+    weak var controllerContext: UIViewController?
 
     internal var subscription: Subscription? {
         didSet {

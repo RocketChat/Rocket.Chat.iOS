@@ -9,11 +9,21 @@
 import Foundation
 import DifferenceKit
 import RocketChatViewController
+import MobilePlayer
+import FLAnimatedImage
+import SimpleImageViewer
 
-struct MessageSection: ChatSection {
-
+final class MessageSection: ChatSection {
     var object: AnyDifferentiable
     var controllerContext: UIViewController?
+    var messagesController: MessagesViewController? {
+        return controllerContext as? MessagesViewController
+    }
+
+    init(object: AnyDifferentiable, controllerContext: UIViewController?) {
+        self.object = object
+        self.controllerContext = controllerContext
+    }
 
     func viewModels() -> [AnyChatItem] {
         guard
