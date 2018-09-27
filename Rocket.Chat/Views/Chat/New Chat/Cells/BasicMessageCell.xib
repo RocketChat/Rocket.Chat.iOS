@@ -50,7 +50,7 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="topMargin" id="5oN-E3-3SA"/>
+                <constraint firstItem="jUK-HJ-1Sf" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="top" id="5oN-E3-3SA"/>
                 <constraint firstItem="Cr2-8p-eRS" firstAttribute="top" secondItem="I2D-qY-xoN" secondAttribute="bottom" id="9vj-Io-bnn"/>
                 <constraint firstItem="jUK-HJ-1Sf" firstAttribute="leading" secondItem="tSh-T8-5Jy" secondAttribute="leadingMargin" id="HOb-mP-OP7"/>
                 <constraint firstItem="I2D-qY-xoN" firstAttribute="top" secondItem="tSh-T8-5Jy" secondAttribute="top" id="KVg-Lt-rkc"/>
