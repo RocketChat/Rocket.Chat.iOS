@@ -194,9 +194,9 @@ class AuthTableViewController: BaseTableViewController {
         let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
-            try? realm.write {
+            realm.execute({ _ in
                 loginService.serverUrl = url
-            }
+            })
         }
 
         if loginService.service == "wordpress" {
@@ -213,9 +213,9 @@ class AuthTableViewController: BaseTableViewController {
                 loginService.mapWordPress()
             } // missing implementation for wp-oauth-server
 
-            try? realm.write {
+            realm.execute({ _ in
                 realm.add(loginService, update: true)
-            }
+            })
         }
 
         switch loginService.type {

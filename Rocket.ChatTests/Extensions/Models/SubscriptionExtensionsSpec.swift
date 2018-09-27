@@ -18,10 +18,10 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         let sub1 = Subscription.testInstance("sub1")
         let sub2 = Subscription.testInstance("sub2")
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(sub1, update: true)
             realm.add(sub2, update: true)
-        }
+        })
 
         let objects = realm.objects(Subscription.self).filterBy(name: "sub1")
 
@@ -49,12 +49,12 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         sub3.auth = auth
         sub3.open = false
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(sub1, update: true)
             realm.add(sub2, update: true)
             realm.add(sub3, update: true)
             realm.add(auth, update: true)
-        }
+        })
 
         guard let subscriptions = Subscription.all(realm: realm) else {
             fatalError("subscriptions must return values")

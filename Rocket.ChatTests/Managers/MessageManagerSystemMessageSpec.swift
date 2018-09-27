@@ -21,9 +21,9 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         let subscription = Subscription()
         subscription.rid = subscriptionIdentifier
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(subscription)
-        }
+        })
 
         let messageIdentifier = "systemMessageBasic_1"
         let messageText = "Basic"
@@ -60,9 +60,9 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         let subscription = Subscription()
         subscription.rid = subscriptionIdentifier
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(subscription)
-        }
+        })
 
         let messageIdentifier = "systemMessageBasic_2"
         let messageText = "Basic with Avatar"
@@ -106,9 +106,9 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
         user.identifier = userIdentifier
         user.username = userIdentifier
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(subscription)
-        }
+        })
 
         let messageIdentifier = "systemMessageBasic_2"
         let messageText = "Basic with Avatar"
