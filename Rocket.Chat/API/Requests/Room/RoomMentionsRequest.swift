@@ -20,7 +20,7 @@ final class RoomMentionsRequest: APIRequest {
 
     init(roomId: String) {
         self.roomId = roomId
-        self.query = "roomId=\(roomId)"
+        self.query = "sort={\"_updatedAt\":-1}&roomId=\(roomId)"
     }
 }
 
