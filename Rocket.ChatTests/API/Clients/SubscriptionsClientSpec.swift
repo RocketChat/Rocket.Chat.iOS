@@ -56,8 +56,6 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
-
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
         XCTAssertEqual(realm.objects(Subscription.self).count, 2)
     }
@@ -102,8 +100,6 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
-
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
         let subs = realm.objects(Subscription.self)
@@ -140,8 +136,6 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             ],
             "success": true
         ])
-
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
 
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
@@ -185,8 +179,6 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             ],
             "success": true
         ])
-
-        let expectation = XCTestExpectation(description: "subscription read only field was updated correctly")
 
         client.fetchRooms(updatedSince: nil, realm: realm)
 

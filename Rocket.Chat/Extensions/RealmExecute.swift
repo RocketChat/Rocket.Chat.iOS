@@ -14,14 +14,20 @@ extension Realm {
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
-        #if TEST
-        try? self.write {
-            execution(self)
-        }
+        var forceSameThread = false
 
-        completion?()
-        return
+        #if TEST
+        forceSameThread = true
         #endif
+
+        if forceSameThread {
+            try? self.write {
+                execution(self)
+            }
+
+            completion?()
+            return
+        }
 
         backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background") {
             backgroundTaskId = UIBackgroundTaskIdentifier.invalid
