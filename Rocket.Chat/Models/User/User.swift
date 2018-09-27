@@ -50,7 +50,7 @@ extension User {
 
 extension User: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedUser
-    var unmanaged: UnmanagedUser {
+    var unmanaged: UnmanagedUser? {
         return UnmanagedUser(self)
     }
 }

@@ -21,7 +21,7 @@ class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
         var objects: Results<Object>
 
         var section: ArraySection<String, Object.UnmanagedType> {
-            return ArraySection(model: name, elements: objects.map { $0.unmanaged })
+            return ArraySection(model: name, elements: objects.compactMap { $0.unmanaged })
         }
     }
 

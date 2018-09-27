@@ -13,7 +13,7 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription
 
     var managedObject: Subscription
-    var identifier: String?
+    var identifier: String
     var privateType: String
     var type: SubscriptionType
     var rid: String
@@ -55,9 +55,15 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
 }
 
 extension UnmanagedSubscription {
-    init(_ subscription: Subscription) {
+
+    // swiftlint:disable function_body_length
+    init?(_ subscription: Subscription) {
+        guard let subscriptionIdentifier = subscription.identifier else {
+            return nil
+        }
+
         managedObject = subscription
-        identifier = subscription.identifier
+        identifier = subscriptionIdentifier
         privateType = subscription.privateType
         type = subscription.type
         rid = subscription.rid
@@ -97,6 +103,7 @@ extension UnmanagedSubscription {
         privateOtherUserStatus = subscription.privateOtherUserStatus
         directMessageUser = subscription.directMessageUser?.unmanaged
     }
+
 }
 
 extension UnmanagedSubscription: Differentiable {

@@ -69,7 +69,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
-            presentActionsFor(message, view: view)
+//            presentActionsFor(message, view: view)
         }
     }
 
