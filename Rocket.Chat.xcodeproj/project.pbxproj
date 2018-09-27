@@ -5215,10 +5215,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -D TEST -D COCOAPODS";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D TEST";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5413,13 +5414,13 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) -D DEBUG -D COCOAPODS";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -5577,7 +5578,7 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"BETA\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D BETA";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
