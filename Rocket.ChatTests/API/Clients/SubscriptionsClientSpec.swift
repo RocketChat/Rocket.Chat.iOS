@@ -17,9 +17,9 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         super.setUp()
 
         let realm = testRealm()
-        try? realm.write {
+        realm.execute({ _ in
             realm.deleteAll()
-        }
+        })
     }
 
     func testFetchSubscriptionsList() {
@@ -28,9 +28,9 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         let client = SubscriptionsClient(api: api)
         let auth = Auth.testInstance()
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth, update: true)
-        }
+        })
 
         api.nextResult = JSON([
             "result": [
@@ -56,17 +56,8 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
-
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if realm.objects(Subscription.self).count == 2 {
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 5)
+        XCTAssertEqual(realm.objects(Subscription.self).count, 2)
     }
 
     func testSubscriptionsUpdate() {
@@ -80,10 +71,10 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.name = "internal"
         subscription.auth = auth
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
-        }
+        })
 
         api.nextResult = JSON([
             "update": [
@@ -109,18 +100,11 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
-
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let subs = realm.objects(Subscription.self)
-            if subs.count == 2, subs[0].name == "general" {
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 5)
+        let subs = realm.objects(Subscription.self)
+        XCTAssertEqual(subs.count, 2)
+        XCTAssertEqual(subs[0].name, "general")
     }
 
     func testSubscriptionsRemove() {
@@ -133,10 +117,10 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.identifier = "subscription-identifier"
         subscription.auth = auth
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
-        }
+        })
 
         api.nextResult = JSON([
             "remove": [
@@ -153,17 +137,11 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
-
         client.fetchSubscriptions(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let subscription = realm.objects(Subscription.self).first, subscription.auth == nil {
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 5)
+        let object = realm.objects(Subscription.self).first
+        XCTAssertNotNil(object)
+        XCTAssertNil(object?.auth)
     }
 
     func testSubscriptionsRoomMapping() {
@@ -178,10 +156,10 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.identifier = "subscription-identifier"
         subscription.auth = auth
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
-        }
+        })
 
         api.nextResult = JSON([
             "update": [
@@ -202,17 +180,11 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        let expectation = XCTestExpectation(description: "subscription read only field was updated correctly")
-
         client.fetchRooms(updatedSince: nil, realm: realm)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let subscription = realm.objects(Subscription.self).first, subscription.roomReadOnly == true {
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 5)
+        let object = realm.objects(Subscription.self).first
+        XCTAssertNotNil(object)
+        XCTAssertTrue(object?.roomReadOnly ?? false)
     }
 
     func testFetchRoles() {
@@ -223,11 +195,11 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         let user = User.testInstance("test-user")
         let user2 = User.testInstance("test-user2")
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(user, update: true)
             realm.add(user2, update: true)
             realm.add(subscription, update: true)
-        }
+        })
 
         api.nextResult = JSON([
             "roles": [
@@ -255,25 +227,16 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         client.fetchRoles(subscription: subscription, realm: realm)
 
-        let expectation = XCTestExpectation(description: "subscription has correct roles for user")
+        guard
+            let subscriptionObject = realm.objects(Subscription.self).first,
+            let userObject = User.find(username: "test-user-username", realm: realm),
+            let user2Object = User.find(username: "test-user2-username", realm: realm)
+        else {
+            XCTFail("no results were found")
+            return
+        }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-            guard
-                let subscription = realm.objects(Subscription.self).first,
-                let user = User.find(username: "test-user-username", realm: realm),
-                let user2 = User.find(username: "test-user2-username", realm: realm)
-            else {
-                XCTFail("no results were found")
-                return
-            }
-
-            if user.rolesInSubscription(subscription).count == 2, user2.rolesInSubscription(subscription).count == 1 {
-                expectation.fulfill()
-            } else {
-                XCTFail("no results were found")
-            }
-        })
-
-        wait(for: [expectation], timeout: 3)
+        XCTAssertEqual(userObject.rolesInSubscription(subscriptionObject).count, 2)
+        XCTAssertEqual(user2Object.rolesInSubscription(subscriptionObject).count, 1)
     }
 }

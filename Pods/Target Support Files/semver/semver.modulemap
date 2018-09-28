@@ -1,0 +1,6 @@
+framework module semver {
+  umbrella header "semver-umbrella.h"
+
+  export *
+  module * { export * }
+}
