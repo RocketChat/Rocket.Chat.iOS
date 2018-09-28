@@ -22,19 +22,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEy-8J-xdI" userLabel="Emoji View" customClass="EmojiView" customModule="Rocket_Chat" customModuleProvider="target">
-                    <rect key="frame" x="6" y="3" width="18" height="18"/>
+                    <rect key="frame" x="7" y="3" width="18" height="18"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s03-Lq-brP" userLabel="Count Label">
-                    <rect key="frame" x="26" y="4" width="17" height="16"/>
+                    <rect key="frame" x="27" y="4" width="15" height="16"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="s03-Lq-brP" secondAttribute="trailing" constant="6" id="3VF-Zm-Zde"/>
+                <constraint firstAttribute="trailing" secondItem="s03-Lq-brP" secondAttribute="trailing" constant="7" id="3VF-Zm-Zde"/>
                 <constraint firstItem="EEy-8J-xdI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.75" id="3aT-9g-20X"/>
-                <constraint firstItem="EEy-8J-xdI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="Bfn-2C-pcr"/>
+                <constraint firstItem="EEy-8J-xdI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="Bfn-2C-pcr"/>
                 <constraint firstItem="s03-Lq-brP" firstAttribute="leading" secondItem="EEy-8J-xdI" secondAttribute="trailing" constant="2" id="EGq-BK-jEc"/>
                 <constraint firstItem="EEy-8J-xdI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EPb-t4-FC7"/>
                 <constraint firstItem="EEy-8J-xdI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.75" id="oUY-EH-gGf"/>
