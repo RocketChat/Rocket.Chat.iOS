@@ -122,16 +122,3 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         loading = false
     }
 }
-
-// MARK: Theming
-
-//extension VideoMessageCell {
-//
-//    override func applyTheme() {
-//        super.applyTheme()
-//
-//        let theme = self.theme ?? .light
-//
-//    }
-//
-//}

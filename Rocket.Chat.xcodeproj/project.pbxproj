@@ -295,6 +295,9 @@
 		419EB5B5215E52BC00E591BF /* VideoMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */; };
 		419EB5B7215E52EA00E591BF /* VideoMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */; };
 		419EB5B9215E52F300E591BF /* VideoMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419EB5B8215E52F300E591BF /* VideoMessageCell.xib */; };
+		419EB5BB215E69F200E591BF /* ReactionsChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */; };
+		419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5BC215E69FF00E591BF /* ReactionsCell.swift */; };
+		419EB5BF215E6A0C00E591BF /* ReactionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */; };
 		419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419ECCA31F3CA21A005F224B /* DownloadManager.swift */; };
 		419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */; };
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
@@ -1164,6 +1167,9 @@
 		419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageChatItem.swift; sourceTree = "<group>"; };
 		419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageCell.swift; sourceTree = "<group>"; };
 		419EB5B8215E52F300E591BF /* VideoMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoMessageCell.xib; sourceTree = "<group>"; };
+		419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsChatItem.swift; sourceTree = "<group>"; };
+		419EB5BC215E69FF00E591BF /* ReactionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsCell.swift; sourceTree = "<group>"; };
+		419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionsCell.xib; sourceTree = "<group>"; };
 		419ECCA31F3CA21A005F224B /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		419ECCA51F3CA58A005F224B /* ChatControllerDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerDocuments.swift; sourceTree = "<group>"; };
 		41A6191A1FA7065400CFFA69 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3645,6 +3651,8 @@
 				419EB5B0215E3C1400E591BF /* AudioMessageCell.swift */,
 				419EB5B8215E52F300E591BF /* VideoMessageCell.xib */,
 				419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */,
+				419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */,
+				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3657,6 +3665,7 @@
 				996E7420215DFE0700842818 /* SequentialMessageChatItem.swift */,
 				419EB5AE215E3C0A00E591BF /* AudioMessageChatItem.swift */,
 				419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */,
+				419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -4143,6 +4152,7 @@
 				14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */,
 				80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */,
 				14F8A23D202E5D0600175FDC /* Red-29@3x.png in Resources */,
+				419EB5BF215E6A0C00E591BF /* ReactionsCell.xib in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
 				14F8A256202E64B200175FDC /* BnW-83.5@2x.png in Resources */,
 				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
@@ -4537,6 +4547,7 @@
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				33FB9D4420D0EE7F005AF504 /* ServerInfoCell.swift in Sources */,
 				41F3704D20A31A3E00C5449E /* UIViewControllerExtension.swift in Sources */,
+				419EB5BB215E69F200E591BF /* ReactionsChatItem.swift in Sources */,
 				1496A86C20FA4644005C2E14 /* NotificationsCellProtocol.swift in Sources */,
 				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,
 				41BF4D6C215B47AD00588B35 /* MessagesSubscriptionViewModel.swift in Sources */,
@@ -4880,6 +4891,7 @@
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,

@@ -102,8 +102,9 @@ final class MessagesViewModelSpec: XCTestCase, RealmTestCase {
         let model = MessagesViewModel()
 
         let testCaseMessage = Message.testInstance()
+
         let testCaseMessagePrevious = Message.testInstance()
-        testCaseMessagePrevious.createdAt = Date().addingTimeInterval(-10000)
+        testCaseMessagePrevious.createdAt = Calendar.current.date(byAdding: .month, value: -1, to: Date())
 
         let previousSection = model.section(for: testCaseMessagePrevious)
         guard let section = model.section(for: testCaseMessage, previous: previousSection) else {
