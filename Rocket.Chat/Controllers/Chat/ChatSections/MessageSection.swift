@@ -47,8 +47,6 @@ final class MessageSection: ChatSection {
             if attachment.type == .audio {
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
-                    title: attachment.title,
-                    description: attachment.description,
                     audioURL: attachment.fullFileURL()
                 ).wrapped)
             }

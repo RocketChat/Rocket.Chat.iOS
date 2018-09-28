@@ -12,20 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fPh-Fy-OLx" customClass="AudioMessageCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="580-PY-UFd">
-                        <rect key="frame" x="16" y="0.0" width="343" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he5-oi-hGX">
-                        <rect key="frame" x="16" y="31" width="270" height="54"/>
+                        <rect key="frame" x="70" y="0.0" width="270" height="54"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Rf-vx-LhR">
                                 <rect key="frame" x="10" y="9" width="36" height="36"/>
@@ -71,41 +65,29 @@
                             <constraint firstItem="nZ2-7t-5TH" firstAttribute="leading" secondItem="0Rf-vx-LhR" secondAttribute="trailing" constant="10" id="uwl-Ey-VUX"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-d4-6Cg">
-                        <rect key="frame" x="16" y="95" width="343" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailingMargin" secondItem="uUe-d4-6Cg" secondAttribute="trailing" id="0js-FE-wgA"/>
-                <constraint firstItem="580-PY-UFd" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" id="RZG-5p-09A"/>
-                <constraint firstItem="uUe-d4-6Cg" firstAttribute="top" secondItem="he5-oi-hGX" secondAttribute="bottom" constant="10" id="VZp-Ir-Fpu"/>
-                <constraint firstItem="he5-oi-hGX" firstAttribute="top" secondItem="580-PY-UFd" secondAttribute="bottom" constant="10" id="auP-Go-bOU"/>
-                <constraint firstItem="he5-oi-hGX" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" id="bG4-7G-hML"/>
-                <constraint firstAttribute="trailingMargin" secondItem="580-PY-UFd" secondAttribute="trailing" id="bTb-Eo-ZDm"/>
-                <constraint firstItem="580-PY-UFd" firstAttribute="top" secondItem="fPh-Fy-OLx" secondAttribute="topMargin" id="lcu-SV-IXT"/>
-                <constraint firstAttribute="bottom" secondItem="uUe-d4-6Cg" secondAttribute="bottom" id="pXA-96-tkl"/>
-                <constraint firstItem="uUe-d4-6Cg" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" id="xKd-eE-Mdl"/>
+                <constraint firstItem="he5-oi-hGX" firstAttribute="top" secondItem="fPh-Fy-OLx" secondAttribute="top" id="KZ4-EH-ESn"/>
+                <constraint firstAttribute="bottom" secondItem="he5-oi-hGX" secondAttribute="bottom" id="SS6-OV-T24"/>
+                <constraint firstItem="he5-oi-hGX" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" constant="54" id="bG4-7G-hML"/>
+                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="he5-oi-hGX" secondAttribute="trailing" id="iXh-aU-e9L"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Zf4-T5-0UG"/>
-            <size key="customSize" width="375" height="138"/>
+            <size key="customSize" width="375" height="76"/>
             <connections>
                 <outlet property="activityIndicatorView" destination="51v-ui-pTq" id="deg-5X-VG7"/>
                 <outlet property="buttonPlay" destination="0Rf-vx-LhR" id="cPC-21-pGe"/>
                 <outlet property="labelAudioTime" destination="0G3-jd-0vg" id="wU2-Mz-PU0"/>
-                <outlet property="labelDescription" destination="uUe-d4-6Cg" id="7lS-PG-6xs"/>
-                <outlet property="labelTitle" destination="580-PY-UFd" id="inr-0K-0g0"/>
                 <outlet property="slider" destination="nZ2-7t-5TH" id="GmR-bP-U1v"/>
+                <outlet property="viewPlayerBackground" destination="he5-oi-hGX" id="H9T-aY-DE7"/>
             </connections>
-            <point key="canvasLocation" x="109.59999999999999" y="-17.091454272863569"/>
+            <point key="canvasLocation" x="109.59999999999999" y="-44.977511244377816"/>
         </collectionViewCell>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>
     <resources>
-        <image name="Player Play" width="36" height="36"/>
+        <image name="Player Play" width="18" height="20"/>
     </resources>
 </document>

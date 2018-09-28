@@ -16,8 +16,6 @@ struct AudioMessageChatItem: ChatItem, Differentiable {
     }
 
     var identifier: String
-    var title: String?
-    var description: String?
     var audioURL: URL?
 
     var localAudioURL: URL? {
@@ -29,9 +27,6 @@ struct AudioMessageChatItem: ChatItem, Differentiable {
     }
 
     func isContentEqual(to source: AudioMessageChatItem) -> Bool {
-        return
-            title == source.title &&
-            description == source.description &&
-            audioURL == source.audioURL
+        return identifier == source.identifier && audioURL == source.audioURL
     }
 }

@@ -41,13 +41,27 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var viewPlayerBackground: UIView! {
+        didSet {
+            viewPlayerBackground.layer.cornerRadius = 4
+        }
+    }
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var labelAudioTime: UILabel!
+
+    @IBOutlet weak var slider: UISlider! {
+        didSet {
+            slider.value = 0
+            slider.setThumbImage(UIImage(named: "Player Progress Button"), for: .normal)
+        }
+    }
+
+    @IBOutlet weak var labelAudioTime: UILabel! {
+        didSet {
+            labelAudioTime.font = labelAudioTime.font.bold()
+        }
+    }
 
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
@@ -83,8 +97,6 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
             return
         }
 
-        labelTitle.text = viewModel.title
-        labelDescription.text = viewModel.description
         updateAudio(viewModel: viewModel)
     }
 
@@ -99,11 +111,15 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func updatePlayingState() {
+        let theme = self.theme ?? Theme.light
+
         if playing {
-            buttonPlay.setImage(UIImage(named: "Player Pause"), for: .normal)
+            let image = UIImage(named: "Player Pause")?.imageWithTint(theme.hyperlink)
+            buttonPlay.setImage(image, for: .normal)
             player?.play()
         } else {
-            buttonPlay.setImage(UIImage(named: "Player Play"), for: .normal)
+            let image = UIImage(named: "Player Play")?.imageWithTint(theme.hyperlink)
+            buttonPlay.setImage(image, for: .normal)
             player?.stop()
         }
     }
@@ -139,8 +155,6 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        labelTitle.text = nil
-        labelDescription.text = nil
     }
 
     // MARK: IBAction
@@ -158,7 +172,25 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         playing = !playing
     }
 
+
 }
+
+// MARK: Theming
+
+extension AudioMessageCell {
+
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        viewPlayerBackground.backgroundColor = theme.auxiliaryBackground
+        labelAudioTime.textColor = theme.auxiliaryText
+        updatePlayingState()
+    }
+
+}
+
+// MARK: AVAudioPlayerDelegate
 
 extension AudioMessageCell: AVAudioPlayerDelegate {
 
