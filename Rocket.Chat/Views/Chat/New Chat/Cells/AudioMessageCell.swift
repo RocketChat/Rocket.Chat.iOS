@@ -125,6 +125,7 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func updateAudio(viewModel: AudioMessageChatItem) {
+        guard !playing, !loading else { return }
         guard let url = viewModel.audioURL, let localURL = viewModel.localAudioURL else {
             Log.debug("[WARNING]: Audio without audio URL - \(viewModel.differenceIdentifier)")
             return
@@ -155,6 +156,10 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        slider.value = 0
+        labelAudioTime.text = "--:--"
+        playing = false
+        loading = false
     }
 
     // MARK: IBAction
@@ -171,7 +176,6 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         playing = !playing
     }
-
 
 }
 
