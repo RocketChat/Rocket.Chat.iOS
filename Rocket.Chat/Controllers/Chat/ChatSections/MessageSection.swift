@@ -50,6 +50,15 @@ final class MessageSection: ChatSection {
                     audioURL: attachment.fullFileURL()
                 ).wrapped)
             }
+
+            if attachment.type == .video {
+                cells.append(VideoMessageChatItem(
+                    identifier: identifier,
+                    descriptionText: attachment.descriptionText,
+                    videoURL: attachment.fullFileURL(),
+                    videoThumbPath: attachment.videoThumbPath
+                ).wrapped)
+            }
         }
 
         if !object.isSequential {
