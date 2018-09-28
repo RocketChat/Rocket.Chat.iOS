@@ -35,7 +35,7 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func configure() {
-        updateText()
+        
     }
 
     override func prepareForReuse() {

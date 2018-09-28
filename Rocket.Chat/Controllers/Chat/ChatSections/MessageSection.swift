@@ -41,6 +41,16 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
+        for attachment in object.message.attachments {
+            if attachment.type == .audio {
+                cells.append(AudioMessageChatItem(
+                    title: attachment.title,
+                    description: attachment.description,
+                    audioURL: attachment.fullFileURL()
+                ).wrapped)
+            }
+        }
+
         if !object.isSequential {
             cells.append(BasicMessageChatItem(
                 user: user,

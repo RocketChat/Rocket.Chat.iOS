@@ -55,7 +55,6 @@
                             <constraint firstItem="0G3-jd-0vg" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="g1Y-t6-Qmm"/>
                             <constraint firstItem="0Rf-vx-LhR" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="o1D-AA-iPo"/>
                             <constraint firstAttribute="height" constant="54" id="poN-fz-jHO"/>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="ttl-Zj-MT4"/>
                             <constraint firstItem="nZ2-7t-5TH" firstAttribute="leading" secondItem="0Rf-vx-LhR" secondAttribute="trailing" constant="10" id="uwl-Ey-VUX"/>
                         </constraints>
                     </view>
@@ -77,11 +76,14 @@
                 <constraint firstAttribute="trailingMargin" secondItem="580-PY-UFd" secondAttribute="trailing" id="bTb-Eo-ZDm"/>
                 <constraint firstItem="580-PY-UFd" firstAttribute="top" secondItem="fPh-Fy-OLx" secondAttribute="topMargin" id="lcu-SV-IXT"/>
                 <constraint firstAttribute="bottom" secondItem="uUe-d4-6Cg" secondAttribute="bottom" id="pXA-96-tkl"/>
-                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="he5-oi-hGX" secondAttribute="trailing" id="ubZ-jW-4c4"/>
                 <constraint firstItem="uUe-d4-6Cg" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" id="xKd-eE-Mdl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Zf4-T5-0UG"/>
             <size key="customSize" width="375" height="138"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="uUe-d4-6Cg" id="yi1-cd-uiV"/>
+                <outlet property="titleLabel" destination="580-PY-UFd" id="x92-sz-76X"/>
+            </connections>
             <point key="canvasLocation" x="109.59999999999999" y="-17.091454272863569"/>
         </collectionViewCell>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
