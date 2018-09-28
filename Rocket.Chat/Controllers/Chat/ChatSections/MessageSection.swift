@@ -33,6 +33,9 @@ final class MessageSection: ChatSection {
             return []
         }
 
+        // The list is inverted, so we need to add items
+        // on the inverse order. What we want to show in the top
+        // needs to go last.
         var cells: [AnyChatItem] = []
 
         if let daySeparator = object.daySeparator {

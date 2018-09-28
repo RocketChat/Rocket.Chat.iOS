@@ -1,0 +1,6 @@
+framework module RCMarkdownParser {
+  umbrella header "RCMarkdownParser-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -39,15 +39,7 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         let subscription = Subscription.testInstance()
 
         client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user, realm: realm)
-
-        let expectation = XCTestExpectation(description: "message updated in realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-            if realm.objects(Message.self).first?.temporary == false {
-                expectation.fulfill()
-            }
-        })
-
-        wait(for: [expectation], timeout: 2)
+        XCTAssertFalse(realm.objects(Message.self).first?.temporary ?? true)
     }
 
     func testUpdateMessage() {
@@ -58,9 +50,9 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         let message = Message.testInstance()
         message.identifier = "message-identifier"
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(message)
-        }
+        })
 
         api.nextResult = JSON([
             "success": true,
@@ -83,14 +75,7 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         ])
 
         client.updateMessage(message, text: "edit-test", realm: realm)
-
-        let expectation = XCTestExpectation(description: "message updated in realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-            if realm.objects(Message.self).first?.text == "edit-test" {
-                expectation.fulfill()
-            }
-        })
-        wait(for: [expectation], timeout: 2)
+        XCTAssertEqual(realm.objects(Message.self).first?.text, "edit-test")
     }
 
     func testReactMessage() {
@@ -128,9 +113,9 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
 
         message.identifier = "message-identifier"
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(message)
-        }
+        })
 
         let result = client.reactMessage(message, emoji: ":grin:", user: user, realm: realm)
 

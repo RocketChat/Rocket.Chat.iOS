@@ -168,10 +168,10 @@ class UserSpec: XCTestCase, RealmTestCase {
         permission.roles.append("admin")
 
         let realm = testRealm()
-        try realm.write {
+        realm.execute({ _ in
             realm.add(user)
             realm.add(permission)
-        }
+        })
 
         XCTAssertTrue(user.canViewAdminPanel(realm: realm), "user cannot view admin panel by default")
     }
