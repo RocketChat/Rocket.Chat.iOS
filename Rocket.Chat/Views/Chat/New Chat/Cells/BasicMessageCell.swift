@@ -184,18 +184,25 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 }
 
+// MARK: UIGestureRecognizerDelegate
+
 extension BasicMessageCell: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 }
 
+// MARK: Theming
+
 extension BasicMessageCell {
+
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
+
+        let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
         username.textColor = theme.titleText
         updateText(force: true)
     }
+
 }

@@ -75,8 +75,8 @@ extension MessageManagerSpec {
 
             let messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 2, "fetchMessages() will return all messages related to the subscription")
-            XCTAssert(messages[0].identifier == message2.identifier, "fetchMessages() will return messages ordered by date")
-            XCTAssert(messages[1].identifier == message1.identifier, "fetchMessages() will return messages ordered by date")
+            XCTAssert(messages[1].identifier == message2.identifier, "fetchMessages() will return messages ordered by date")
+            XCTAssert(messages[0].identifier == message1.identifier, "fetchMessages() will return messages ordered by date")
         })
     }
 

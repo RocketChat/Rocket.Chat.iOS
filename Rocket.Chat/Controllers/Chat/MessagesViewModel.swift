@@ -24,6 +24,10 @@ final class MessagesViewModel {
         }
     }
 
+    /**
+     The controller context that will be used to respond
+     delegates from the cells.
+     */
     weak var controllerContext: UIViewController?
 
     internal var subscription: Subscription? {
@@ -65,7 +69,7 @@ final class MessagesViewModel {
 
     // MARK: Life Cycle Controls
 
-    init(controllerContext: UIViewController?) {
+    init(controllerContext: UIViewController? = nil) {
         self.controllerContext = controllerContext
     }
 

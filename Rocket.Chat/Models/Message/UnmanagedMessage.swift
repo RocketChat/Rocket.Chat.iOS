@@ -20,6 +20,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var failed: Bool
     var mentions: [Mention]
     var channels: [Channel]
+    var reactions: [MessageReaction]
     var createdAt: Date?
     var updatedAt: Date?
     var groupable: Bool
@@ -56,6 +57,7 @@ extension UnmanagedMessage {
         markedForDeletion = message.markedForDeletion
         mentions = message.mentions.map { $0 }
         channels = message.channels.map { $0 }
+        reactions = message.reactions.map { $0 }
         createdAt = message.createdAt
         updatedAt = message.updatedAt
         emoji = message.emoji
