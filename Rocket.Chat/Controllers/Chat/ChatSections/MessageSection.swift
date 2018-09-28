@@ -41,10 +41,17 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
-        cells.append(BasicMessageChatItem(
-            user: user,
-            message: object.message
-        ).wrapped)
+        if !object.isSequential {
+            cells.append(BasicMessageChatItem(
+                user: user,
+                message: object.message
+            ).wrapped)
+        } else {
+            cells.append(SequentialMessageChatItem(
+                user: user,
+                message: object.message
+            ).wrapped)
+        }
 
         return cells
     }
@@ -53,6 +60,10 @@ final class MessageSection: ChatSection {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
 
         if let cell = cell as? BasicMessageCell {
+            cell.delegate = self
+        }
+
+        if let cell = cell as? SequentialMessageCell {
             cell.delegate = self
         }
 

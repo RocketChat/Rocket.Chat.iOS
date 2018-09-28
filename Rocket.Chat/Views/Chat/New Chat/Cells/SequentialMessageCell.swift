@@ -1,64 +1,36 @@
 //
-//  BasicMessageCell.swift
+//  SequentialMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 23/09/18.
+//  Created by Filipe Alvarenga on 28/09/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
-    static let identifier = String(describing: BasicMessageCell.self)
-
-    // MARK: SizingCell
+final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
+    static let identifier = String(describing: SequentialMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = BasicMessageCell.instantiateFromNib() else {
-            return BasicMessageCell()
+        guard let cell = SequentialMessageCell.instantiateFromNib() else {
+            return SequentialMessageCell()
         }
 
         return cell
     }()
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarContainerView.bounds
-                avatarContainerView.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
-        }
-    }
-
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
-
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var text: RCTextView!
 
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
         return textLeadingConstraint.constant +
-            textTrailingConstraint.constant +
-            avatarWidthConstraint.constant +
-            avatarLeadingConstraint.constant
+            textTrailingConstraint.constant
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
-    weak var usernameTapGesture: UITapGestureRecognizer?
-    weak var avatarTapGesture: UITapGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol? {
         didSet {
             text.delegate = delegate
@@ -82,28 +54,12 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func configure() {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
-
-        if let createdAt = viewModel.message.createdAt {
-            date.text = RCDateFormatter.time(createdAt)
-        }
-
-        username.text = viewModel.user.username
         updateText()
     }
 
     func updateText(force: Bool = false) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+        guard let viewModel = viewModel?.base as? SequentialMessageChatItem else {
             return
-        }
-
-        avatarView.emoji = viewModel.message.emoji
-        avatarView.user = viewModel.message.user?.managedObject
-
-        if let avatar = viewModel.message.avatar {
-            avatarView.avatarURL = URL(string: avatar)
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
@@ -133,10 +89,7 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        username.text = ""
-        date.text = ""
         text.message = nil
-        avatarView.prepareForReuse()
         textHeightConstraint.constant = initialTextHeightConstant
     }
 
@@ -149,22 +102,6 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
             longPressGesture = gesture
         }
-
-        if usernameTapGesture == nil {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
-            gesture.delegate = self
-            username.addGestureRecognizer(gesture)
-
-            usernameTapGesture = gesture
-        }
-
-        if avatarTapGesture == nil {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
-            gesture.delegate = self
-            avatarView.addGestureRecognizer(gesture)
-
-            avatarTapGesture = gesture
-        }
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
@@ -174,28 +111,17 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
         delegate?.handleLongPressMessageCell(viewModel.message.managedObject, view: contentView, recognizer: recognizer)
     }
-
-    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
-
-        delegate?.handleUsernameTapMessageCell(viewModel.message.managedObject, view: username, recognizer: recognizer)
-    }
 }
 
-extension BasicMessageCell: UIGestureRecognizerDelegate {
+extension SequentialMessageCell: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 }
 
-extension BasicMessageCell {
+extension SequentialMessageCell {
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
-        date.textColor = theme.auxiliaryText
-        username.textColor = theme.titleText
         updateText(force: true)
     }
 }

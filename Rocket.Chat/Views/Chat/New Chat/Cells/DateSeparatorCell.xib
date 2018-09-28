@@ -21,6 +21,9 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsU-BY-HGb">
                         <rect key="frame" x="182.5" y="16" width="37.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="idZ-Vh-JKI"/>
+                        </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -47,10 +50,11 @@
                 <constraint firstItem="lsU-BY-HGb" firstAttribute="leading" secondItem="5QV-mv-f4w" secondAttribute="trailing" constant="16" id="9uF-U2-yTZ"/>
                 <constraint firstItem="lsU-BY-HGb" firstAttribute="centerX" secondItem="3Dz-xY-guZ" secondAttribute="centerX" id="GGp-wf-8cj"/>
                 <constraint firstItem="5QV-mv-f4w" firstAttribute="centerY" secondItem="3Dz-xY-guZ" secondAttribute="centerY" id="MDf-wl-ASQ"/>
+                <constraint firstAttribute="bottom" secondItem="lsU-BY-HGb" secondAttribute="bottom" constant="16" id="MUp-Oq-zsV"/>
                 <constraint firstAttribute="trailingMargin" secondItem="MxU-P6-BP8" secondAttribute="trailing" constant="16" id="SHL-ap-n5Y"/>
                 <constraint firstItem="MxU-P6-BP8" firstAttribute="leading" secondItem="lsU-BY-HGb" secondAttribute="trailingMargin" constant="16" id="acv-ba-ASw"/>
                 <constraint firstItem="5QV-mv-f4w" firstAttribute="leading" secondItem="3Dz-xY-guZ" secondAttribute="leadingMargin" constant="16" id="dZZ-ml-c8T"/>
-                <constraint firstItem="lsU-BY-HGb" firstAttribute="centerY" secondItem="3Dz-xY-guZ" secondAttribute="centerY" id="emp-jk-6Ha"/>
+                <constraint firstItem="lsU-BY-HGb" firstAttribute="top" secondItem="3Dz-xY-guZ" secondAttribute="top" constant="16" id="kxs-g7-L4s"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="sR8-O8-gZG"/>
             <size key="customSize" width="402" height="50"/>

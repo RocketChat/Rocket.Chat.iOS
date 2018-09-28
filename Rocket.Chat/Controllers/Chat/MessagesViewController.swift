@@ -11,6 +11,24 @@ import RocketChatViewController
 import RealmSwift
 import DifferenceKit
 
+protocol SizingCell: class {
+    static var sizingCell: UICollectionViewCell & ChatCell { get }
+    static func size(for viewModel: AnyChatItem) -> CGSize
+}
+
+extension SizingCell {
+    static func size(for viewModel: AnyChatItem) -> CGSize {
+        var mutableSizingCell = sizingCell
+        mutableSizingCell.prepareForReuse()
+        mutableSizingCell.viewModel = viewModel
+        mutableSizingCell.configure()
+        mutableSizingCell.setNeedsLayout()
+        mutableSizingCell.layoutIfNeeded()
+
+        return mutableSizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
+}
+
 final class MessagesViewController: RocketChatViewController {
 
     let viewModel = MessagesViewModel(controllerContext: nil)
@@ -30,6 +48,7 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidLoad()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
+        collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
 
         viewModel.controllerContext = self
@@ -68,14 +87,11 @@ extension MessagesViewController {
         if let size = viewSizingModel.size(for: sectionViewModel.differenceIdentifier) {
             return size
         } else {
-            let sizingCell = BasicMessageCell.sizingCell
-            sizingCell.prepareForReuse()
-            sizingCell.viewModel = sectionViewModel
-            sizingCell.configure()
-            sizingCell.setNeedsLayout()
-            sizingCell.layoutIfNeeded()
+            guard let sizingCell = UINib(nibName: sectionViewModel.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
+                return .zero
+            }
 
-            let size = sizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            let size = type(of: sizingCell).size(for: sectionViewModel)
             viewSizingModel.set(size: size, for: sectionViewModel.differenceIdentifier)
 
             return size
