@@ -38,9 +38,10 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
 
-        if let daySeparator = object.daySeparator {
-            cells.append(DateSeparatorChatItem(
-                date: daySeparator
+        if !object.message.reactions.isEmpty {
+            cells.append(ReactionsChatItem(
+                messageIdentifier: object.message.identifier,
+                reactions: object.message.reactions
             ).wrapped)
         }
 
@@ -51,6 +52,15 @@ final class MessageSection: ChatSection {
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
                     audioURL: attachment.fullFileURL()
+                ).wrapped)
+            }
+
+            if attachment.type == .video {
+                cells.append(VideoMessageChatItem(
+                    identifier: identifier,
+                    descriptionText: attachment.descriptionText,
+                    videoURL: attachment.fullFileURL(),
+                    videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
             }
         }
@@ -64,6 +74,12 @@ final class MessageSection: ChatSection {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
+            ).wrapped)
+        }
+
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
             ).wrapped)
         }
 

@@ -47,11 +47,14 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 }
 
+// MARK: Theming
+
 extension DateSeparatorCell {
 
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
+
+        let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
     }
 
