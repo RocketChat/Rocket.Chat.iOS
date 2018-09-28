@@ -19,12 +19,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: ./Scripts/before_install.sh
-      - run:
-          name: Update Dependencies
-          command: ./Scripts/update_dependencies.sh
-      - run:
           name: Build for testing
           command: ./Scripts/build_for_testing.sh
       - run:
@@ -64,4 +58,3 @@ workflows:
       - test:
           requires:
             - lint
-

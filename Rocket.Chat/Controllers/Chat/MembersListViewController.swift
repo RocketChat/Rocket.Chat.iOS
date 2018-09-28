@@ -56,7 +56,7 @@ class MembersListViewData {
 
                 switch response {
                 case .resource(let resource):
-                    try? realm.write {
+                    realm.execute({ _ in
                         var users: [User] = []
 
                         resource.members?.forEach({ (member) in
@@ -66,7 +66,7 @@ class MembersListViewData {
 
                         realm.add(users, update: true)
                         self.membersPages.append(users)
-                    }
+                    })
 
                     self.showing += resource.count ?? 0
                     self.total = resource.total ?? 0

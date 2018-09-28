@@ -30,9 +30,9 @@ extension LoginTableViewController {
             }
 
             if let realm = Realm.current, let auth = AuthManager.isAuthenticated(realm: realm), let version = serverVersion {
-                try? realm.write {
+                realm.execute({ _ in
                     auth.serverVersion = version.description
-                }
+                })
             }
         case .error(let error):
             stopLoading()

@@ -62,9 +62,9 @@ class CustomEmojiSpec: XCTestCase, RealmTestCase {
 
         let realm = testRealm()
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(emojis)
-        }
+        })
 
         XCTAssert(CustomEmoji.withShortname(":customemoji-0:", realm: realm) == emojis[0])
         XCTAssert(CustomEmoji.withShortname(":customemoji-1:", realm: realm) == emojis[1])
