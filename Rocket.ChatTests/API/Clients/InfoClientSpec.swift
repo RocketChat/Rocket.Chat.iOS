@@ -24,19 +24,12 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": "true"
         ])
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(Auth.testInstance())
-        }
+        })
 
         client.fetchInfo(realm: realm)
-
-        let expectation = XCTestExpectation(description: "correct info added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-            if AuthManager.isAuthenticated(realm: realm)?.serverVersion == "0.59.3" {
-                expectation.fulfill()
-            }
-        })
-        wait(for: [expectation], timeout: 3)
+        XCTAssertEqual(AuthManager.isAuthenticated(realm: realm)?.serverVersion, "0.59.3")
     }
 
     //swiftlint:disable function_body_length
@@ -88,20 +81,12 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(Auth.testInstance())
-        }
-
-        client.fetchLoginServices(realm: realm)
-
-        let expectation = XCTestExpectation(description: "login services added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if realm.objects(LoginService.self).count == 2 {
-                expectation.fulfill()
-            }
         })
 
-        wait(for: [expectation], timeout: 3)
+        client.fetchLoginServices(realm: realm)
+        XCTAssertEqual(realm.objects(LoginService.self).count, 2)
     }
 
     func testFetchPermissions() {
@@ -127,14 +112,6 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         ])
 
         client.fetchPermissions(realm: realm)
-
-        let expectation = XCTestExpectation(description: "permissions added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if realm.objects(Permission.self).count == 2 {
-                expectation.fulfill()
-            }
-        })
-
-        wait(for: [expectation], timeout: 3)
+        XCTAssertEqual(realm.objects(Permission.self).count, 2)
     }
 }

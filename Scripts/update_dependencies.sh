@@ -1,4 +1,6 @@
 #!/bin/bash
+# RKS NOTE: Our CI is not using dependencies anymore.
+# This file is being deprecated.
 
 set -e
 

@@ -183,7 +183,7 @@ final class MessagesViewModel {
         // RKS NOTE: Apply loader to the latest object
         // has more data.
 
-        data = updatedData
+        data = updatedData.reversed()
     }
 
     /**

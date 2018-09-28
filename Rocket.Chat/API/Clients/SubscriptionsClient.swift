@@ -301,12 +301,12 @@ extension SubscriptionsClient {
             if case let .resource(resource) = response {
                 guard let realm = realm else { return }
 
-                try? realm.write {
+                realm.execute({ _ in 
                     resource.members?.forEach({ (member) in
                         let user = User.getOrCreate(realm: realm, values: member, updates: nil)
                         realm.add(user, update: true)
                     })
-                }
+                })
             }
 
             completion(response)
