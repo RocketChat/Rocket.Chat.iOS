@@ -15,9 +15,14 @@ struct AudioMessageChatItem: ChatItem, Differentiable {
         return AudioMessageCell.identifier
     }
 
+    var identifier: String
     var title: String?
     var description: String?
     var audioURL: URL?
+
+    var localAudioURL: URL? {
+        return DownloadManager.localFileURLFor(identifier)
+    }
 
     var differenceIdentifier: String {
         return audioURL?.absoluteString ?? ""

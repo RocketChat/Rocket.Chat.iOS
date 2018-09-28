@@ -34,10 +34,21 @@
                                     <constraint firstAttribute="width" constant="36" id="vSA-6g-1ke"/>
                                 </constraints>
                                 <state key="normal" image="Player Play"/>
+                                <connections>
+                                    <action selector="didPressPlayButton:" destination="fPh-Fy-OLx" eventType="touchUpInside" id="Ts2-K8-wS1"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nZ2-7t-5TH">
                                 <rect key="frame" x="54" y="12" width="135" height="31"/>
+                                <connections>
+                                    <action selector="didFinishSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchUpInside" id="915-aU-Bs3"/>
+                                    <action selector="didFinishSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchUpOutside" id="VIh-rj-5t9"/>
+                                    <action selector="didStartSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchDragInside" id="RM4-mA-zR0"/>
+                                </connections>
                             </slider>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="51v-ui-pTq">
+                                <rect key="frame" x="240" y="17" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G3-jd-0vg">
                                 <rect key="frame" x="197" y="19" width="63" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -52,6 +63,8 @@
                             <constraint firstAttribute="width" constant="270" id="IUF-Xm-7ER"/>
                             <constraint firstItem="nZ2-7t-5TH" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="Ksq-lC-WCy"/>
                             <constraint firstItem="0G3-jd-0vg" firstAttribute="leading" secondItem="nZ2-7t-5TH" secondAttribute="trailing" constant="10" id="SIF-xW-ufw"/>
+                            <constraint firstItem="51v-ui-pTq" firstAttribute="centerY" secondItem="0Rf-vx-LhR" secondAttribute="centerY" id="es5-Vi-5d1"/>
+                            <constraint firstAttribute="trailing" secondItem="51v-ui-pTq" secondAttribute="trailing" constant="10" id="exn-0y-U4b"/>
                             <constraint firstItem="0G3-jd-0vg" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="g1Y-t6-Qmm"/>
                             <constraint firstItem="0Rf-vx-LhR" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="o1D-AA-iPo"/>
                             <constraint firstAttribute="height" constant="54" id="poN-fz-jHO"/>
@@ -81,8 +94,12 @@
             <viewLayoutGuide key="safeArea" id="Zf4-T5-0UG"/>
             <size key="customSize" width="375" height="138"/>
             <connections>
-                <outlet property="descriptionLabel" destination="uUe-d4-6Cg" id="yi1-cd-uiV"/>
-                <outlet property="titleLabel" destination="580-PY-UFd" id="x92-sz-76X"/>
+                <outlet property="activityIndicatorView" destination="51v-ui-pTq" id="deg-5X-VG7"/>
+                <outlet property="buttonPlay" destination="0Rf-vx-LhR" id="cPC-21-pGe"/>
+                <outlet property="labelAudioTime" destination="0G3-jd-0vg" id="wU2-Mz-PU0"/>
+                <outlet property="labelDescription" destination="uUe-d4-6Cg" id="7lS-PG-6xs"/>
+                <outlet property="labelTitle" destination="580-PY-UFd" id="inr-0K-0g0"/>
+                <outlet property="slider" destination="nZ2-7t-5TH" id="GmR-bP-U1v"/>
             </connections>
             <point key="canvasLocation" x="109.59999999999999" y="-17.091454272863569"/>
         </collectionViewCell>

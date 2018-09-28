@@ -42,8 +42,11 @@ final class MessageSection: ChatSection {
         }
 
         for attachment in object.message.attachments {
+            guard let identifier = attachment.identifier else { continue }
+
             if attachment.type == .audio {
                 cells.append(AudioMessageChatItem(
+                    identifier: identifier,
                     title: attachment.title,
                     description: attachment.description,
                     audioURL: attachment.fullFileURL()
