@@ -9,10 +9,10 @@
 import UIKit
 import RocketChatViewController
 
-final class DateSeparatorCell: UICollectionViewCell, ChatCell {
+final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: DateSeparatorCell.self)
 
-    static let sizingCell: DateSeparatorCell = {
+    static let sizingCell: UICollectionViewCell & ChatCell = {
         guard let cell = DateSeparatorCell.instantiateFromNib() else {
             return DateSeparatorCell()
         }
