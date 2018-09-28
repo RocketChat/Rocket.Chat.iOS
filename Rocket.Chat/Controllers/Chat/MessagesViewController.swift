@@ -84,6 +84,14 @@ extension MessagesViewController {
 
 }
 
+extension MessagesViewController: ChatDataUpdateDelegate {
+
+    func didUpdateChatData(newData: [AnyChatSection]) {
+        viewModel.data = newData
+    }
+
+}
+
 extension MessagesViewController: UserActionSheetPresenter {
 
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
