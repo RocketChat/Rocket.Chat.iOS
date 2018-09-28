@@ -56,10 +56,10 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         google.identifier = "googleid"
         google.service = "google"
 
-        try realm.write {
+        realm.execute({ _ in
             realm.add(github)
             realm.add(google)
-        }
+        })
 
         XCTAssertEqual(LoginService.find(service: "github", realm: realm), github, "Finds LoginService correctly")
     }

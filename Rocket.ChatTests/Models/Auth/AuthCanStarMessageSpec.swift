@@ -20,34 +20,34 @@ class AuthCanStarMessageSpec: XCTestCase, RealmTestCase {
         let message = Message.testInstance()
         message.identifier = "mid"
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth)
             auth.settings?.messageAllowStarring = true
-        }
+        })
 
         // User & Server have permission
         XCTAssertEqual(auth.canStarMessage(message), .allowed)
 
         // Message is not actionable
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .notActionable)
 
         // Server permission doesn't allow to pin
-        try? realm.write {
+        realm.execute({ _ in
             message.internalType = MessageType.text.rawValue
             auth.settings?.messageAllowStarring = false
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .notAllowed)
 
         // Settings is nil
-        try? realm.write {
+        realm.execute({ _ in
             auth.settings = nil
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .unknown)
     }

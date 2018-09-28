@@ -19,9 +19,9 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
         permission.roles.append(objectsIn: ["admin", "user"])
 
         let realm = testRealm()
-        try realm.write {
+        realm.execute({ _ in
             realm.add(permission)
-        }
+        })
 
         guard let roles = PermissionManager.roles(for: permissionType, realm: realm) else {
             XCTFail("roles is not nil")
@@ -40,9 +40,9 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
         permission.roles.append(objectsIn: ["admin", "user"])
 
         let realm = testRealm()
-        try realm.write {
+        realm.execute({ _ in
             realm.add(permission)
-        }
+        })
 
         let user = User()
         user.roles.append("user")
