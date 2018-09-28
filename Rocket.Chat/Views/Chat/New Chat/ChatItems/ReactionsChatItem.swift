@@ -12,7 +12,7 @@ import RocketChatViewController
 
 struct ReactionsChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return VideoMessageCell.identifier
+        return ReactionsCell.identifier
     }
 
     var messageIdentifier: String

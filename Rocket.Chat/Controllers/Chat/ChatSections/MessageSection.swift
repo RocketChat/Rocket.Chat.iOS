@@ -38,9 +38,10 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
 
-        if let daySeparator = object.daySeparator {
-            cells.append(DateSeparatorChatItem(
-                date: daySeparator
+        if !object.message.reactions.isEmpty {
+            cells.append(ReactionsChatItem(
+                messageIdentifier: object.message.identifier,
+                reactions: object.message.reactions
             ).wrapped)
         }
 
@@ -73,6 +74,12 @@ final class MessageSection: ChatSection {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
+            ).wrapped)
+        }
+
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
             ).wrapped)
         }
 
