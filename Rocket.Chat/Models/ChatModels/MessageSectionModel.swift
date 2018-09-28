@@ -13,7 +13,7 @@ struct MessageSectionModel: Differentiable {
     let identifier: String
     let message: UnmanagedMessage
 
-    var daySeparator: Date? = nil
+    var daySeparator: Date?
     var isSequential: Bool = false
 
     var containsLoader: Bool = false

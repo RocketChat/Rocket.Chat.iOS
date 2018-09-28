@@ -33,13 +33,10 @@ final class MessageSection: ChatSection {
             return []
         }
 
+        // The list is inverted, so we need to add items
+        // on the inverse order. What we want to show in the top
+        // needs to go last.
         var cells: [AnyChatItem] = []
-
-        if let daySeparator = object.daySeparator {
-            cells.append(DateSeparatorChatItem(
-                date: daySeparator
-            ).wrapped)
-        }
 
         if !object.isSequential {
             cells.append(BasicMessageChatItem(
@@ -50,6 +47,12 @@ final class MessageSection: ChatSection {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
+            ).wrapped)
+        }
+
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
             ).wrapped)
         }
 
