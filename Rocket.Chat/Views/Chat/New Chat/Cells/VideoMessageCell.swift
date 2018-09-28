@@ -122,4 +122,3 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         loading = false
     }
 }
-
