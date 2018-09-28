@@ -35,12 +35,6 @@ final class MessageSection: ChatSection {
 
         var cells: [AnyChatItem] = []
 
-        if let daySeparator = object.daySeparator {
-            cells.append(DateSeparatorChatItem(
-                date: daySeparator
-            ).wrapped)
-        }
-
         if !object.isSequential {
             cells.append(BasicMessageChatItem(
                 user: user,
@@ -50,6 +44,12 @@ final class MessageSection: ChatSection {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
+            ).wrapped)
+        }
+
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
             ).wrapped)
         }
 
