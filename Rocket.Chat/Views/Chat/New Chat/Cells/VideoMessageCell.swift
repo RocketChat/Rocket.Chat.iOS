@@ -60,8 +60,10 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     func updateLoadingState() {
         if loading {
+            buttonPlayer.isHidden = true
             activityIndicatorView.startAnimating()
         } else {
+            buttonPlayer.isHidden = false
             activityIndicatorView.stopAnimating()
         }
     }
@@ -116,6 +118,8 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        imageViewThumb.image = nil
+        loading = false
     }
 }
 
