@@ -290,3 +290,17 @@ final class MessagesViewModel {
     }
 
 }
+
+extension MessagesViewModel {
+    func sendTextMessage(text: String) {
+        guard
+            let subscription = subscription,
+            text.count > 0
+        else {
+            return
+        }
+
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
+        client.sendMessage(text: text, subscription: subscription)
+    }
+}

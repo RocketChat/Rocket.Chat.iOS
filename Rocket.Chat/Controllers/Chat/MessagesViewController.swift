@@ -47,6 +47,8 @@ final class MessagesViewController: RocketChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        composerView.delegate = self
+
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)

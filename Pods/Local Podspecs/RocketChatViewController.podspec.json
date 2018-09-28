@@ -17,13 +17,13 @@
   },
   "social_media_url": "https://twitter.com/RocketChat",
   "platforms": {
-    "ios": "10.0"
+    "ios": "11.0"
   },
   "subspecs": [
     {
       "name": "ViewController",
       "platforms": {
-        "ios": "10.0"
+        "ios": "11.0"
       },
       "source_files": "RocketChatViewController/Classes/**/*",
       "dependencies": {
@@ -35,7 +35,7 @@
     {
       "name": "Composer",
       "platforms": {
-        "ios": "10.0"
+        "ios": "11.0"
       },
       "source_files": "Composer/Classes/**/*",
       "resources": [

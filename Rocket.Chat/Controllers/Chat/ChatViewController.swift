@@ -534,7 +534,7 @@ final class ChatViewController: RocketChatViewController {
         client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
     }
 
-    private func sendTextMessage(text: String) {
+    func sendTextMessage(text: String) {
         guard
             let subscription = subscription,
             text.count > 0
