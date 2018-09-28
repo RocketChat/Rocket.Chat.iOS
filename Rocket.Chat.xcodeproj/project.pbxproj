@@ -743,6 +743,9 @@
 		996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996735CE21582E790049BB63 /* BasicMessageCell.swift */; };
 		996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996735D121585CA70049BB63 /* BasicMessageChatItem.swift */; };
 		996A2653210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996A2652210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift */; };
+		996E741D215DFBDB00842818 /* SequentialMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 996E741C215DFBDB00842818 /* SequentialMessageCell.xib */; };
+		996E741F215DFBF400842818 /* SequentialMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996E741E215DFBF400842818 /* SequentialMessageCell.swift */; };
+		996E7421215DFE0700842818 /* SequentialMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996E7420215DFE0700842818 /* SequentialMessageChatItem.swift */; };
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
@@ -1596,6 +1599,9 @@
 		996735CE21582E790049BB63 /* BasicMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMessageCell.swift; sourceTree = "<group>"; };
 		996735D121585CA70049BB63 /* BasicMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicMessageChatItem.swift; sourceTree = "<group>"; };
 		996A2652210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUnreadRequest.swift; sourceTree = "<group>"; };
+		996E741C215DFBDB00842818 /* SequentialMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SequentialMessageCell.xib; sourceTree = "<group>"; };
+		996E741E215DFBF400842818 /* SequentialMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialMessageCell.swift; sourceTree = "<group>"; };
+		996E7420215DFE0700842818 /* SequentialMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialMessageChatItem.swift; sourceTree = "<group>"; };
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
@@ -3619,6 +3625,8 @@
 				996735CE21582E790049BB63 /* BasicMessageCell.swift */,
 				41BF4D71215B4CC800588B35 /* DateSeparatorCell.xib */,
 				41BF4D6F215B4CBD00588B35 /* DateSeparatorCell.swift */,
+				996E741C215DFBDB00842818 /* SequentialMessageCell.xib */,
+				996E741E215DFBF400842818 /* SequentialMessageCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3628,6 +3636,7 @@
 			children = (
 				996735D121585CA70049BB63 /* BasicMessageChatItem.swift */,
 				41BF4D6D215B4CA100588B35 /* DateSeparatorChatItem.swift */,
+				996E7420215DFE0700842818 /* SequentialMessageChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -4028,6 +4037,7 @@
 				14F8A26F202E653E00175FDC /* Grey-83.5@2x.png in Resources */,
 				33A5C9CE206A565800FE1C8F /* people.json in Resources */,
 				33A5C9D1206A565800FE1C8F /* activity.json in Resources */,
+				996E741D215DFBDB00842818 /* SequentialMessageCell.xib in Resources */,
 				14F8A25F202E64B200175FDC /* BnW-40@2x.png in Resources */,
 				14F8A227202E5CBF00175FDC /* Black-83.5@2x.png in Resources */,
 				14F8A23C202E5D0600175FDC /* Red-60@3x.png in Resources */,
@@ -4782,6 +4792,7 @@
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,
 				41D3668820C0323100970B99 /* SubscriptionsSortingViewModel.swift in Sources */,
 				800E22861F8507E400DA84F1 /* RoomMessagesRequest.swift in Sources */,
+				996E7421215DFE0700842818 /* SequentialMessageChatItem.swift in Sources */,
 				8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */,
@@ -4834,6 +4845,7 @@
 				33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
 				8076FDBB2048591A00114F28 /* AuthManagerRecover.swift in Sources */,
+				996E741F215DFBF400842818 /* SequentialMessageCell.swift in Sources */,
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
