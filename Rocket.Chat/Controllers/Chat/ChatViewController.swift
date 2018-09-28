@@ -858,10 +858,10 @@ final class ChatViewController: RocketChatViewController {
             }
 
             DispatchQueue.main.async {
-                collectionView.performBatchUpdates({
+                self.collectionView.performBatchUpdates({
                     let (indexPaths, removedIndexPaths) = self.dataController.insert(chatData)
-                    collectionView.insertItems(at: indexPaths)
-                    collectionView.deleteItems(at: removedIndexPaths)
+                    self.collectionView.insertItems(at: indexPaths)
+                    self.collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
                     self.isAppendingMessages = false
                     completion?()
