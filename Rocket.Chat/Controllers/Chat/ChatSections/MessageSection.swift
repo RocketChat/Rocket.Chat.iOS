@@ -38,6 +38,23 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
 
+        if let daySeparator = object.daySeparator {
+            cells.append(DateSeparatorChatItem(
+                date: daySeparator
+            ).wrapped)
+        }
+
+        for attachment in object.message.attachments {
+            guard let identifier = attachment.identifier else { continue }
+
+            if attachment.type == .audio {
+                cells.append(AudioMessageChatItem(
+                    identifier: identifier,
+                    audioURL: attachment.fullFileURL()
+                ).wrapped)
+            }
+        }
+
         if !object.isSequential {
             cells.append(BasicMessageChatItem(
                 user: user,
@@ -47,12 +64,6 @@ final class MessageSection: ChatSection {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
-            ).wrapped)
-        }
-
-        if let daySeparator = object.daySeparator {
-            cells.append(DateSeparatorChatItem(
-                date: daySeparator
             ).wrapped)
         }
 
