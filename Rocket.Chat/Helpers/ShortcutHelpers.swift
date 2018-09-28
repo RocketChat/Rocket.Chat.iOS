@@ -91,7 +91,9 @@ extension SubscriptionsViewController {
 
 extension ChatViewController {
     var isUploadOpen: Bool {
-        return (presentedViewController as? UIAlertController)?.popoverPresentationController?.sourceView == leftButton
+        return false
+        // TODO: Replace for our own upload mechanism
+//        return (presentedViewController as? UIAlertController)?.popoverPresentationController?.sourceView == leftButton
     }
 
     func toggleUpload() {

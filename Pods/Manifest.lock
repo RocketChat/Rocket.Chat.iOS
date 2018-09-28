@@ -2,7 +2,12 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.10.7):
     - Fabric (~> 1.7.11)
+  - DifferenceKit (0.5.3):
+    - DifferenceKit/Core (= 0.5.3)
+    - DifferenceKit/UIExtensions (= 0.5.3)
   - DifferenceKit/Core (0.5.3)
+  - DifferenceKit/UIExtensions (0.5.3):
+    - DifferenceKit/Core
   - Fabric (1.7.11)
   - Firebase/Core (5.8.0):
     - Firebase/CoreOnly
@@ -66,6 +71,12 @@ PODS:
   - Realm/Headers (3.9.0)
   - RealmSwift (3.9.0):
     - Realm (= 3.9.0)
+  - RocketChatViewController (0.1.0):
+    - RocketChatViewController/Composer (= 0.1.0)
+    - RocketChatViewController/ViewController (= 0.1.0)
+  - RocketChatViewController/Composer (0.1.0)
+  - RocketChatViewController/ViewController (0.1.0):
+    - DifferenceKit (~> 0.5.3)
   - semver (1.1.0)
   - SimpleImageViewer (1.2.0):
     - FLAnimatedImage
@@ -90,6 +101,7 @@ DEPENDENCIES:
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
   - ReachabilitySwift
   - RealmSwift
+  - RocketChatViewController (from `https://github.com/RocketChat/RocketChatViewController`)
   - semver
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
@@ -131,6 +143,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
+  RocketChatViewController:
+    :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
@@ -143,6 +157,9 @@ CHECKOUT OPTIONS:
   RCMarkdownParser:
     :commit: c34d9ccef689c55b9eae69f3c65283da8d8b0c6c
     :git: https://github.com/RocketChat/RCMarkdownParser.git
+  RocketChatViewController:
+    :commit: 78c7a695512fb04ccbd4934b4e933c4512b012ab
+    :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
     :git: https://github.com/cardoso/SimpleImageViewer.git
@@ -173,6 +190,7 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
+  RocketChatViewController: 91965475dbf784f2b52a7bb5b0c0b63fb1047bc2
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
@@ -181,6 +199,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 6b8602cb3bfdb2d5969e91f6f161923d47884c5c
+PODFILE CHECKSUM: b8ecb80eb8dc863ec6655fa8f1d92cc5f6ca5f0a
 
 COCOAPODS: 1.5.3

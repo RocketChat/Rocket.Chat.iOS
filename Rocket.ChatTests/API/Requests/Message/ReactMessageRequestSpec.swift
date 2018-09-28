@@ -44,3 +44,4 @@ class ReactMessageRequestSpec: APITestCase {
         XCTAssertNil(nilResult.success, "success is nil if raw is nil")
     }
 }
+

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-extension ChatViewController {
+extension MessageSection {
     func presentActionsFor(_ message: Message, view: UIView) {
         guard !message.temporary, message.type.actionable else { return }
 
@@ -36,7 +36,7 @@ extension ChatViewController {
             presenter.sourceRect = view.bounds
         }
 
-        present(alert, animated: true, completion: nil)
+        messagesController?.present(alert, animated: true, completion: nil)
     }
 
     // swiftlint:disable function_body_length
@@ -65,12 +65,14 @@ extension ChatViewController {
             UIPasteboard.general.string = message.text
         })
 
-        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
-            self?.reply(to: message)
+        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { (_) in
+            // TODO: Replace for our reply mechanism
+//            self?.reply(to: message)
         })
 
-        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
-            self?.reply(to: message, onlyQuote: true)
+        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { (_) in
+            // TODO: Replace for our reply mechanism
+//            self?.reply(to: message, onlyQuote: true)
         })
 
         var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
@@ -95,9 +97,9 @@ extension ChatViewController {
         }
 
         if auth.canBlockMessage(message) == .allowed {
-            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { (_) in
                 MessageManager.blockMessagesFrom(messageUser, completion: {
-                    self?.updateSubscriptionInfo()
+//                    self?.updateSubscriptionInfo()
                 })
             })
 
@@ -106,9 +108,10 @@ extension ChatViewController {
 
         if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-                self.messageToEdit = message
-                self.editText(message.text)
-                self.applyTheme()
+//                self.messagesController?.messageToEdit = message
+                // TODO: Replace for our own edit text mechanism
+//                self.editText(message.text)
+                self.messagesController?.applyTheme()
             })
 
             actions.append(edit)
@@ -131,7 +134,7 @@ extension ChatViewController {
 
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
             guard
-                let subscription = self.subscription,
+                let subscription = self.messagesController?.subscription,
                 let client = API.current()?.client(MessagesClient.self)
             else {
                 return
@@ -152,13 +155,14 @@ extension ChatViewController {
             }
 
             guard let message = messageToResend else { return }
-            self.dataController.delete(msgId: message.identifier)
+            // TODO: Replace
+//            self.dataController.delete(msgId: message.identifier)
             client.sendMessage(text: message.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
             guard
-                let subscription = self.subscription,
+                let subscription = self.messagesController?.subscription.validated(),
                 let client = API.current()?.client(MessagesClient.self)
             else {
                 return
@@ -173,7 +177,8 @@ extension ChatViewController {
             }
 
             messagesToResend.forEach {
-                self.dataController.delete(msgId: $0.identifier)
+                // TODO: Replace
+//                self.dataController.delete(msgId: $0.identifier)
                 client.sendMessage(text: $0.text, subscription: subscription)
             }
         })
@@ -188,7 +193,7 @@ extension ChatViewController {
     // MARK: Actions
 
     fileprivate func react(message: Message, view: UIView) {
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
 
         let controller = EmojiPickerController()
         controller.modalPresentationStyle = .popover
@@ -208,11 +213,12 @@ extension ChatViewController {
         controller.customEmojis = CustomEmoji.emojis()
         ThemeManager.addObserver(controller.view)
 
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            self.navigationController?.pushViewController(controller, animated: true)
-        } else {
-            self.present(controller, animated: true)
-        }
+        // TODO: Replace
+//        if UIDevice.current.userInterfaceIdiom == .phone {
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        } else {
+//            self.present(controller, animated: true)
+//        }
     }
 
     fileprivate func delete(message: Message) {
@@ -227,9 +233,9 @@ extension ChatViewController {
     fileprivate func discard(message: Message) {
         Ask(key: "chat.message.actions.discard.confirm", buttons: [
             (title: localized("global.no"), handler: nil),
-            (title: localized("chat.message.actions.discard.confirm.yes"), handler: { [weak self] _ in
+            (title: localized("chat.message.actions.discard.confirm.yes"), handler: { _ in
                 guard let msgId = message.identifier else { return }
-                self?.deleteMessage(msgId: msgId)
+//                self?.deleteMessage(msgId: msgId)
             })
         ], deleteOption: 1).present()
     }

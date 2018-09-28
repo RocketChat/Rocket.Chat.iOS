@@ -20,7 +20,7 @@ final class MainSplitViewController: UISplitViewController {
         return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? MainSplitViewController
     }
 
-    static var chatViewController: ChatViewController? {
+    static var chatViewController: MessagesViewController? {
         return current?.chatViewController
     }
 
@@ -28,11 +28,11 @@ final class MainSplitViewController: UISplitViewController {
         return current?.subscriptionsViewController
     }
 
-    var chatViewController: ChatViewController? {
+    var chatViewController: MessagesViewController? {
         if let nav = detailViewController as? UINavigationController {
-            return nav.viewControllers.first as? ChatViewController
+            return nav.viewControllers.first as? MessagesViewController
         } else if let nav = viewControllers.first as? UINavigationController, nav.viewControllers.count >= 2 {
-            return nav.viewControllers[1] as? ChatViewController
+            return nav.viewControllers[1] as? MessagesViewController
         }
 
         return nil

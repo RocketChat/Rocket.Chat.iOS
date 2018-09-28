@@ -69,7 +69,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
-            presentActionsFor(message, view: view)
+//            presentActionsFor(message, view: view)
         }
     }
 
@@ -126,7 +126,8 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
     }
 
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
-        textView.resignFirstResponder()
+        // TODO: Adjust for our composer
+//        textView.resignFirstResponder()
 
         if thumbnail.animatedImage != nil || thumbnail.image != nil {
             let configuration = ImageViewerConfiguration { config in
@@ -146,12 +147,12 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
     }
 
     func viewDidCollapseChange(view: UIView) {
-        guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
-        guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
+        let origin = collectionView.convert(CGPoint.zero, from: view)
+        guard let indexPath = collectionView.indexPathForItem(at: origin) else { return }
 
         let item = dataController.itemAt(indexPath)
         dataController.invalidateLayout(for: item?.identifier)
-        collectionView?.reloadItems(at: [indexPath])
+        collectionView.reloadItems(at: [indexPath])
     }
 
 }

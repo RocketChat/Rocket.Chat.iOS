@@ -46,8 +46,9 @@ extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINa
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = leftButton
-            presenter.sourceRect = leftButton.bounds
+            // TODO: Adjust for our composer
+//            presenter.sourceView = leftButton
+//            presenter.sourceRect = leftButton.bounds
         }
 
         present(alert, animated: true, completion: nil)
@@ -160,8 +161,9 @@ extension ChatViewController: UIDocumentMenuDelegate {
         documentPicker.delegate = self
 
         if let presenter = documentPicker.popoverPresentationController {
-            presenter.sourceView = leftButton
-            presenter.sourceRect = leftButton.bounds
+            // TODO: Adjust for our composer
+//            presenter.sourceView = leftButton
+//            presenter.sourceRect = leftButton.bounds
         }
 
         present(documentPicker, animated: true, completion: nil)
@@ -181,8 +183,9 @@ extension ChatViewController: UIDocumentPickerDelegate {
         importMenu.modalPresentationStyle = .formSheet
 
         if let presenter = importMenu.popoverPresentationController {
-            presenter.sourceView = leftButton
-            presenter.sourceRect = leftButton.bounds
+            // TODO: Adjust for our composer
+//            presenter.sourceView = leftButton
+//            presenter.sourceRect = leftButton.bounds
         }
 
         self.present(importMenu, animated: true, completion: nil)
