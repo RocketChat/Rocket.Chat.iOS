@@ -55,7 +55,9 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(AudioMessageCell.nib, forCellWithReuseIdentifier: AudioMessageCell.identifier)
         collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
         collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
+        collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
 
+        dataUpdateDelegate = self
         viewModel.controllerContext = self
         viewModel.onDataChanged = {
             self.data = self.viewModel.data
@@ -109,6 +111,14 @@ extension MessagesViewController: ChatDataUpdateDelegate {
 
     func didUpdateChatData(newData: [AnyChatSection]) {
         viewModel.data = newData
+    }
+
+}
+
+extension MessagesViewController: UIDocumentInteractionControllerDelegate {
+
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
 
 }
