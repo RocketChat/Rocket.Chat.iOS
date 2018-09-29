@@ -20,6 +20,8 @@ final class MessageSection: ChatSection {
         return controllerContext as? MessagesViewController
     }
 
+    var documentController: UIDocumentInteractionController?
+
     init(object: AnyDifferentiable, controllerContext: UIViewController?) {
         self.object = object
         self.controllerContext = controllerContext
@@ -48,20 +50,25 @@ final class MessageSection: ChatSection {
         for attachment in object.message.attachments {
             guard let identifier = attachment.identifier else { continue }
 
-            if attachment.type == .audio {
+            switch attachment.type {
+            case .audio:
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
                     audioURL: attachment.fullFileURL()
                 ).wrapped)
-            }
-
-            if attachment.type == .video {
+            case .video:
                 cells.append(VideoMessageChatItem(
                     identifier: identifier,
                     descriptionText: attachment.descriptionText,
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
+            default:
+                if attachment.isFile {
+                    cells.append(FileMessageChatItem(
+                        attachment: attachment
+                    ).wrapped)
+                }
             }
         }
 
@@ -94,6 +101,10 @@ final class MessageSection: ChatSection {
         }
 
         if let cell = cell as? SequentialMessageCell {
+            cell.delegate = self
+        }
+
+        if let cell = cell as? FileMessageCell {
             cell.delegate = self
         }
 
@@ -236,7 +247,32 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     func openFileFromCell(attachment: Attachment) {
-//        openDocument(attachment: attachment)
+        openDocument(attachment: attachment)
+    }
+
+    func openDocument(attachment: Attachment) {
+        guard let fileURL = attachment.fullFileURL() else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        // Open document itself
+        func open() {
+            documentController = UIDocumentInteractionController(url: localFileURL)
+            documentController?.delegate = messagesController
+            documentController?.presentPreview(animated: true)
+        }
+
+        // Checks if we do have the file in the system, before downloading it
+        if DownloadManager.fileExists(localFileURL) {
+            open()
+        } else {
+            // Download file and cache it to be used later
+            DownloadManager.download(url: fileURL, to: localFileURL) {
+                DispatchQueue.main.async {
+                    open()
+                }
+            }
+        }
     }
 
     func viewDidCollapseChange(view: UIView) {
