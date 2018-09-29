@@ -15,22 +15,18 @@ final class AutocompleteCell: UITableViewCell {
 
     @IBOutlet weak var avatarViewContainer: AvatarView! {
         didSet {
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-            avatarView.labelInitialsFontSize = 15
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        avatarView.labelInitialsFontSize = 15
+        return avatarView
+    }()
 
     @IBOutlet weak var labelTitle: UILabel!
-
 }

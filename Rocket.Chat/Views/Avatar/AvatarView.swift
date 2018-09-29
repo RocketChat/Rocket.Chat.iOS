@@ -93,14 +93,45 @@ final class AvatarView: UIView {
         }
     }
 
-    @IBOutlet weak var labelInitials: UILabel!
+    lazy var labelInitials: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        label.textAlignment = .center
+
+        addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            label.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+        return label
+    }()
+
     var labelInitialsFontSize: CGFloat? {
         didSet {
-            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 16)
+            labelInitials.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 16)
         }
     }
 
-    @IBOutlet weak var imageView: FLAnimatedImageView!
+    lazy var imageView: FLAnimatedImageView = {
+        let imageView = FLAnimatedImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+        return imageView
+    }()
 
     internal func initialsFor(_ username: String) -> String {
         guard username.count > 0 else {
@@ -148,7 +179,7 @@ final class AvatarView: UIView {
             initials = initialsFor(username)
         }
 
-        labelInitials?.text = initials.uppercased()
+        labelInitials.text = initials.uppercased()
         backgroundColor = color
     }
 
@@ -179,13 +210,12 @@ final class AvatarView: UIView {
         imageView.animatedImage = nil
         labelInitials.text = ""
     }
-
 }
 
 // MARK: Themeable
 
 extension AvatarView {
     override func applyTheme() {
-        labelInitials?.textColor = .white
+        labelInitials.textColor = .white
     }
 }

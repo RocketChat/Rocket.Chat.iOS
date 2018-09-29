@@ -12,11 +12,6 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class AvatarViewSpec: XCTestCase {
-
-    func testInitializeFromNib() {
-        XCTAssertNotNil(AvatarView.instantiateFromNib(), "instantiation from nib will work")
-    }
-
     func testAvatarInitials() {
         guard let avatarView = AvatarView.instantiateFromNib() else {
             XCTAssert(false)

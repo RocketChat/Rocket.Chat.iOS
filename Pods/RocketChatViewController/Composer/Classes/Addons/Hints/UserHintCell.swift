@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class UserHintCell: UITableViewCell {
+public class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's avatar image view
      */
-    public let avatarView: UIImageView = tap(UIImageView()) {
+    public let avatarView: AvatarView = tap(AvatarView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.avatarCornerRadius
@@ -108,23 +108,21 @@ public class UserHintCell: UITableViewCell {
 
 // MARK: Consts
 
-private extension UserHintCell {
-    /**
-     Constants for sizes and margins in the cell view.
-     */
-    private struct Consts {
-        static var intrinsicHeight: CGFloat = 54
+/**
+ Constants for sizes and margins in the cell view.
+ */
+private struct Consts {
+    static var intrinsicHeight: CGFloat = 54
 
-        static var avatarWidth: CGFloat = 30
-        static var avatarHeight: CGFloat = 30
-        static var avatarLeading: CGFloat = 15
-        static var avatarCornerRadius: CGFloat = 4
+    static var avatarWidth: CGFloat = 30
+    static var avatarHeight: CGFloat = 30
+    static var avatarLeading: CGFloat = 15
+    static var avatarCornerRadius: CGFloat = 4
 
-        static var nameLeading: CGFloat = 15
-        static var nameBottom: CGFloat = 0
+    static var nameLeading: CGFloat = 15
+    static var nameBottom: CGFloat = 0
 
-        static var usernameLeading: CGFloat = 15
-        static var usernameTop: CGFloat = 0
-        static var usernameColor: UIColor = #colorLiteral(red: 0.6196078431, green: 0.6352941176, blue: 0.6588235294, alpha: 1)
-    }
+    static var usernameLeading: CGFloat = 15
+    static var usernameTop: CGFloat = 0
+    static var usernameColor: UIColor = #colorLiteral(red: 0.6196078431, green: 0.6352941176, blue: 0.6588235294, alpha: 1)
 }

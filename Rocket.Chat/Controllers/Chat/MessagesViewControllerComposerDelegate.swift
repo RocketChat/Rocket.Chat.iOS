@@ -90,10 +90,21 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func hintsView(_ hintsView: HintsView, cellForHintAt index: Int) -> UITableViewCell {
         let hint = viewModel.hints[index]
+
+        if viewModel.hintPrefixedWord.first == "@", let user = User.find(username: hint) {
+            let cell = hintsView.dequeueReusableCell(withType: UserHintCell<AvatarView>.self)
+
+            cell.avatarView.user = user
+            cell.usernameLabel.text = hint
+            cell.nameLabel.text = user.name
+
+            return cell
+        }
+
         let cell = hintsView.dequeueReusableCell(withType: TextHintCell.self)
-        cell?.prefixLabel.text = String(viewModel.hintPrefixedWord.first ?? " ")
-        cell?.valueLabel.text = String(hint)
-        return cell ?? UITableViewCell()
+        cell.prefixLabel.text = String(viewModel.hintPrefixedWord.first ?? " ")
+        cell.valueLabel.text = String(hint)
+        return cell
     }
 
     func hintsView(_ hintsView: HintsView, didSelectHintAt index: Int) {

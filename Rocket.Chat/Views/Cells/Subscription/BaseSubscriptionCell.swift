@@ -32,17 +32,14 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         }
     }
 
-    weak var avatarView: AvatarView!
+    var avatarView = AvatarView()
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
             avatarViewContainer.layer.masksToBounds = true
 
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 

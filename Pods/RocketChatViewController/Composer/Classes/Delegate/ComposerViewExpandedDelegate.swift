@@ -111,7 +111,6 @@ public extension ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didUpdateAddonView view: UIView?, at slot: ComposerAddonSlot, index: UInt) {
         if let view = view as? HintsView {
-            view.registerCellTypes(UserHintCell.self, TextHintCell.self)
             view.hintsDelegate = self
         }
 
