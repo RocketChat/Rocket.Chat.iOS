@@ -55,6 +55,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
         collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
 
+        dataUpdateDelegate = self
         viewModel.controllerContext = self
         viewModel.onDataChanged = {
             self.data = self.viewModel.data
