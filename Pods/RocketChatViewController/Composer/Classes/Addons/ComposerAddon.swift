@@ -24,4 +24,8 @@ public extension ComposerAddon {
     public static var hints: ComposerAddon {
         return ComposerAddon(viewType: HintsView.self)
     }
+
+    public static var editing: ComposerAddon {
+        return ComposerAddon(viewType: EditingView.self)
+    }
 }

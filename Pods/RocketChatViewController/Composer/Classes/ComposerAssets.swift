@@ -19,6 +19,8 @@ private var addButtonImage = imageNamed("Add Button")
 private var sendButtonImage = imageNamed("Send Button")
 private var micButtonImage = imageNamed("Mic Button")
 
+private var cancelReplyButtonImage = imageNamed("Cancel Reply Button")
+
 public struct ComposerAsset<T> {
     let raw: T
     init(_ raw: T) {
@@ -37,5 +39,9 @@ public extension ComposerAsset where T == UIImage {
 
     public static var micButton: ComposerAsset<T> {
         return micButtonImage
+    }
+
+    public static var cancelReplyButton: ComposerAsset<T> {
+        return cancelReplyButtonImage
     }
 }

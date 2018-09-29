@@ -46,6 +46,10 @@ public class ComposerTextView: UITextView {
         }
     }
 
+    public override var intrinsicContentSize: CGSize {
+        return CGSize(width: super.intrinsicContentSize.width, height: contentSize.height)
+    }
+
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         commonInit()
@@ -61,6 +65,7 @@ public class ComposerTextView: UITextView {
         notificationCenter.addObserver(self, selector: #selector(textDidChange), name: .UITextViewTextDidChange, object: nil)
 
         placeholderLabel.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
+        self.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
 
         placeholderLabel.font = font
         placeholderLabel.textColor = placeholderColor
@@ -126,6 +131,34 @@ public extension ComposerTextView {
                 self.contentSize = CGSize(width: contentSize.width, height: sizeThatFits(CGSize(width: contentSize.width, height: .greatestFiniteMagnitude)).height)
                 text = ""
             }
+        }
+    }
+}
+
+// MARK: Helper Methods
+
+public extension ComposerTextView {
+    var rangeOfNearestWordToSelection: Range<String.Index>? {
+        guard let range = Range(selectedRange, in: text) else {
+            return nil
+        }
+
+        let wordRanges = Array(text.indices).filter {
+            text[$0] != " " && ($0 == text.startIndex || text[text.index(before: $0)] == " ")
+        }.map { index -> Range<String.Index> in
+                if let spaceIndex = text[index...].firstIndex(of: " ") {
+                    return index..<spaceIndex
+                }
+
+                return index..<text.endIndex
+        }
+
+        return wordRanges.first {
+            if range.lowerBound == text.startIndex {
+                return $0.lowerBound == text.startIndex
+            }
+
+            return range.lowerBound == $0.lowerBound || $0.contains(text.index(before: range.lowerBound))
         }
     }
 }
