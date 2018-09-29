@@ -48,6 +48,7 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidLoad()
 
         composerView.delegate = self
+        composerView.applyTheme()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)

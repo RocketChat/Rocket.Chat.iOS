@@ -8,6 +8,7 @@
 
 import UIKit
 import SlackTextViewController
+import RocketChatViewController
 
 extension UIView: Themeable {
 
@@ -249,6 +250,7 @@ extension UITextView {
         super.applyTheme()
         guard let theme = theme else { return }
         tintColor = theme.hyperlink
+        textColor = theme.bodyText
         applyThemeFromRuntimeAttributes()
     }
 }
@@ -333,11 +335,22 @@ extension UIPickerView {
 
 // MARK: External class extensions
 
-extension SLKTextInputbar {
+extension HintsView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        textView.keyboardAppearance = theme.appearence.keyboardAppearence
+        backgroundColor = theme.backgroundColor
+        applyThemeFromRuntimeAttributes()
+    }
+}
+
+extension TextHintCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor
+        prefixLabel.backgroundColor = theme.auxiliaryBackground
+        prefixLabel.textColor = theme.tintColor
         applyThemeFromRuntimeAttributes()
     }
 
@@ -347,15 +360,30 @@ extension SLKTextInputbar {
     }
 }
 
-extension SLKTextView {
+extension ComposerView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
-        backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1021854048)
-        textColor = theme.bodyText
+        containerView.backgroundColor = theme.focusedBackground
+        // textColor = theme.bodyText
         tintColor = theme.tintColor
+        topSeparatorView.backgroundColor = theme.mutedAccent
         applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme()
+    }
+}
+
+extension ComposerTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        placeholderLabel.textColor = theme.auxiliaryText
+        backgroundColor = theme.focusedBackground
     }
 }
 
