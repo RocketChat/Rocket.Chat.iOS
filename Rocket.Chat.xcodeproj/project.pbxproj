@@ -733,6 +733,7 @@
 		9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */; };
 		993B7B3C215F07020067B962 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993B7B3B215F07020067B962 /* FileMessageCell.xib */; };
 		993B7B3E215F0A270067B962 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3D215F0A270067B962 /* FileMessageCell.swift */; };
+		993B7B40215F0B730067B962 /* FileMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */; };
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
@@ -1601,6 +1602,7 @@
 		9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomFieldsTableViewController.swift; sourceTree = "<group>"; };
 		993B7B3B215F07020067B962 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
 		993B7B3D215F0A270067B962 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
+		993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageChatItem.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
@@ -3672,6 +3674,7 @@
 				419EB5AE215E3C0A00E591BF /* AudioMessageChatItem.swift */,
 				419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */,
 				419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */,
+				993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -4792,6 +4795,7 @@
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */,
 				33D08E2A20BD5F24008D03EF /* TopTransparentViewController.swift in Sources */,
+				993B7B40215F0B730067B962 /* FileMessageChatItem.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
 				801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */,
 				4112DC591FFFB9B2005995E1 /* ModelHandler.swift in Sources */,

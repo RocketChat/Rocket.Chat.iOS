@@ -36,11 +36,19 @@ final class FileMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func configure() {
+        guard let viewModel = viewModel?.base as? FileMessageChatItem else {
+            return
+        }
 
+        fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }
 
     @IBAction func didTapFileButton() {
-//        delegate?.openFileFromCell(attachment: <#T##Attachment#>)
+        guard let viewModel = viewModel?.base as? FileMessageChatItem else {
+            return
+        }
+
+        delegate?.openFileFromCell(attachment: viewModel.attachment)
     }
 }
 
