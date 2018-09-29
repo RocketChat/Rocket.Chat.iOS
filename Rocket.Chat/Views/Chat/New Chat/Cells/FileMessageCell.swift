@@ -51,9 +51,3 @@ final class FileMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         delegate?.openFileFromCell(attachment: viewModel.attachment)
     }
 }
-
-extension FileMessageCell {
-    override func applyTheme() {
-        super.applyTheme()
-    }
-}

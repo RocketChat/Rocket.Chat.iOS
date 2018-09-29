@@ -40,14 +40,6 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
 
-        object.message.attachments.forEach { attachment in
-            if attachment.isFile {
-                cells.append(FileMessageChatItem(
-                    attachment: attachment
-                ).wrapped)
-            }
-        }
-
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
                 messageIdentifier: object.message.identifier,
@@ -58,20 +50,25 @@ final class MessageSection: ChatSection {
         for attachment in object.message.attachments {
             guard let identifier = attachment.identifier else { continue }
 
-            if attachment.type == .audio {
+            switch attachment.type {
+            case .audio:
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
                     audioURL: attachment.fullFileURL()
                 ).wrapped)
-            }
-
-            if attachment.type == .video {
+            case .video:
                 cells.append(VideoMessageChatItem(
                     identifier: identifier,
                     descriptionText: attachment.descriptionText,
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
+            default:
+                if attachment.isFile {
+                    cells.append(FileMessageChatItem(
+                        attachment: attachment
+                    ).wrapped)
+                }
             }
         }
 
