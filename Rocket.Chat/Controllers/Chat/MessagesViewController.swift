@@ -111,6 +111,14 @@ extension MessagesViewController: ChatDataUpdateDelegate {
 
 }
 
+extension MessagesViewController: UIDocumentInteractionControllerDelegate {
+
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+
+}
+
 extension MessagesViewController: UserActionSheetPresenter {
 
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {

@@ -20,6 +20,8 @@ final class MessageSection: ChatSection {
         return controllerContext as? MessagesViewController
     }
 
+    var documentController: UIDocumentInteractionController?
+
     init(object: AnyDifferentiable, controllerContext: UIViewController?) {
         self.object = object
         self.controllerContext = controllerContext
@@ -236,7 +238,32 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     func openFileFromCell(attachment: Attachment) {
-//        openDocument(attachment: attachment)
+        openDocument(attachment: attachment)
+    }
+
+    func openDocument(attachment: Attachment) {
+        guard let fileURL = attachment.fullFileURL() else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        // Open document itself
+        func open() {
+            documentController = UIDocumentInteractionController(url: localFileURL)
+            documentController?.delegate = messagesController
+            documentController?.presentPreview(animated: true)
+        }
+
+        // Checks if we do have the file in the system, before downloading it
+        if DownloadManager.fileExists(localFileURL) {
+            open()
+        } else {
+            // Download file and cache it to be used later
+            DownloadManager.download(url: fileURL, to: localFileURL) {
+                DispatchQueue.main.async {
+                    open()
+                }
+            }
+        }
     }
 
     func viewDidCollapseChange(view: UIView) {
