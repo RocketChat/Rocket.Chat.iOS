@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlackTextViewController
 import RocketChatViewController
 
 extension UIView: Themeable {
