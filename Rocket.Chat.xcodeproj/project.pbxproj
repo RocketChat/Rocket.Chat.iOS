@@ -731,6 +731,8 @@
 		9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */; };
 		9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */; };
 		9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */; };
+		993B7B3C215F07020067B962 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993B7B3B215F07020067B962 /* FileMessageCell.xib */; };
+		993B7B3E215F0A270067B962 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3D215F0A270067B962 /* FileMessageCell.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */; };
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
@@ -1597,6 +1599,8 @@
 		9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFieldTableViewCell.xib; sourceTree = "<group>"; };
 		9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldTableViewCell.swift; sourceTree = "<group>"; };
 		9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomFieldsTableViewController.swift; sourceTree = "<group>"; };
+		993B7B3B215F07020067B962 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
+		993B7B3D215F0A270067B962 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
@@ -3653,6 +3657,8 @@
 				419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */,
 				419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */,
 				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
+				993B7B3B215F07020067B962 /* FileMessageCell.xib */,
+				993B7B3D215F0A270067B962 /* FileMessageCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4082,6 +4088,7 @@
 				14F8A244202E5D0600175FDC /* Red-83.5@2x.png in Resources */,
 				14F8A259202E64B200175FDC /* BnW-40@3x.png in Resources */,
 				14F8A245202E5D0600175FDC /* Red-76@3x.png in Resources */,
+				993B7B3C215F07020067B962 /* FileMessageCell.xib in Resources */,
 				80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */,
 				14F8A25A202E64B200175FDC /* BnW-29@2x.png in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
@@ -4819,6 +4826,7 @@
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
 				80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */,
 				33F67A40212BFC40004EB4A0 /* UnmanagedUser.swift in Sources */,
+				993B7B3E215F0A270067B962 /* FileMessageCell.swift in Sources */,
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
