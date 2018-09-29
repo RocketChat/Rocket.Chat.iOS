@@ -40,6 +40,14 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
 
+        object.message.attachments.forEach { attachment in
+            if attachment.isFile {
+                cells.append(FileMessageChatItem(
+                    attachment: attachment
+                ).wrapped)
+            }
+        }
+
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
                 messageIdentifier: object.message.identifier,
@@ -96,6 +104,10 @@ final class MessageSection: ChatSection {
         }
 
         if let cell = cell as? SequentialMessageCell {
+            cell.delegate = self
+        }
+
+        if let cell = cell as? FileMessageCell {
             cell.delegate = self
         }
 
