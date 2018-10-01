@@ -25,73 +25,25 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
-        viewModel.hints = []
-        viewModel.hintPrefixedWord = word
-
-        guard
-            let realm = Realm.current,
-            let prefix = viewModel.hintPrefixedWord.first
-        else {
-            return
-        }
-
-        let word = String(word.dropFirst())
-
-        if prefix == "@" {
-            viewModel.hints = User.search(usernameContaining: word, preference: []).map { $0.0 }
-
-            if "here".contains(word) || word.count == 0 {
-                viewModel.hints.append("here")
-            }
-
-            if "all".contains(word) || word.count == 0 {
-                viewModel.hints.append("all")
-            }
-        } else if prefix == "#" {
-            let filter = "auth != nil && (privateType == 'c' || privateType == 'p')\(word.isEmpty ? "" : "&& name BEGINSWITH[c] %@")"
-
-            let channels = realm.objects(Subscription.self).filter(filter, word)
-
-            for channel in channels {
-                viewModel.hints.append(channel.name)
-            }
-
-        } else if prefix == "/" {
-            let commands: Results<Command>
-            if word.count > 0 {
-                commands = realm.objects(Command.self).filter("command BEGINSWITH[c] %@", word)
-            } else {
-                commands = realm.objects(Command.self)
-            }
-
-            commands.forEach {
-                viewModel.hints.append($0.command)
-            }
-        } else if prefix == ":" {
-            let emojis = EmojiSearcher.standard.search(shortname: word.lowercased(), custom: CustomEmoji.emojis())
-
-            emojis.forEach {
-                viewModel.hints.append($0.suggestion)
-            }
-        }
+        composerViewModel.didChangeHintPrefixedWord(word: word)
     }
 
     func hintPrefixes(for composerView: ComposerView) -> [Character] {
-        return ["/", "#", "@", ":"]
+        return composerViewModel.hintPrefixes
     }
 
     func isHinting(in composerView: ComposerView) -> Bool {
-        return viewModel.hints.count > 0
+        return composerViewModel.hints.count > 0
     }
 
     func numberOfHints(in hintsView: HintsView) -> Int {
-        return viewModel.hints.count
+        return composerViewModel.hints.count
     }
 
     func hintsView(_ hintsView: HintsView, cellForHintAt index: Int) -> UITableViewCell {
-        let hint = viewModel.hints[index]
+        let hint = composerViewModel.hints[index]
 
-        if viewModel.hintPrefixedWord.first == "@", let user = User.find(username: hint) {
+        if composerViewModel.hintPrefixedWord.first == "@", let user = User.find(username: hint) {
             let cell = hintsView.dequeueReusableCell(withType: UserHintCell<AvatarView>.self)
 
             cell.avatarView.user = user
@@ -102,7 +54,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         }
 
         let cell = hintsView.dequeueReusableCell(withType: TextHintCell.self)
-        cell.prefixLabel.text = String(viewModel.hintPrefixedWord.first ?? " ")
+        cell.prefixLabel.text = String(composerViewModel.hintPrefixedWord.first ?? " ")
         cell.valueLabel.text = String(hint)
         return cell
     }
@@ -110,11 +62,11 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func hintsView(_ hintsView: HintsView, didSelectHintAt index: Int) {
         if let range = composerView.textView.rangeOfNearestWordToSelection {
             let oldWord = composerView.textView.text[range]
-            let newWord = (oldWord.first?.description ?? "") + viewModel.hints[index]
+            let newWord = (oldWord.first?.description ?? "") + composerViewModel.hints[index]
             composerView.textView.text = composerView.textView.text.replacingCharacters(in: range, with: newWord)
         }
 
-        viewModel.hints = []
+        composerViewModel.hints = []
 
         UIView.animate(withDuration: 0.2) {
             hintsView.reloadData()

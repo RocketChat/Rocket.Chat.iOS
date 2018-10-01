@@ -288,9 +288,6 @@ final class MessagesViewModel {
 
         return sameUser && Int(date.timeIntervalSince(prevDate)) < timeLimit
     }
-
-    var hints = [String]()
-    var hintPrefixedWord = ""
 }
 
 extension MessagesViewModel {
