@@ -63,6 +63,10 @@ final class MessageSection: ChatSection {
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
+            case .textAttachment where attachment.fields.count > 0:
+                cells.append(TextAttachmentChatItem(
+                    attachment: attachment
+                ).wrapped)
             default:
                 if attachment.isFile {
                     cells.append(FileMessageChatItem(
