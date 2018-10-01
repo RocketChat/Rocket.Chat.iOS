@@ -59,7 +59,7 @@
                                     <constraint firstAttribute="width" constant="10" id="g0f-mf-7bS"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NyW-LS-2g2">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NyW-LS-2g2">
                                 <rect key="frame" x="15" y="75.5" width="240" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Oeh-SX-0Sj"/>

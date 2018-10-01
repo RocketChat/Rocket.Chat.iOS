@@ -772,6 +772,8 @@
 		9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B59B2093E60C007D277C /* RoomFilesRequest.swift */; };
 		998E649621619DF700E7C45A /* TextAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E649521619DF700E7C45A /* TextAttachmentCell.xib */; };
 		998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E64972161ADE200E7C45A /* TextAttachmentCell.swift */; };
+		998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E64992161B3E300E7C45A /* AttachmentFieldView.xib */; };
+		998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1642,6 +1644,8 @@
 		9987B59B2093E60C007D277C /* RoomFilesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomFilesRequest.swift; sourceTree = "<group>"; };
 		998E649521619DF700E7C45A /* TextAttachmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAttachmentCell.xib; sourceTree = "<group>"; };
 		998E64972161ADE200E7C45A /* TextAttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentCell.swift; sourceTree = "<group>"; };
+		998E64992161B3E300E7C45A /* AttachmentFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentFieldView.xib; sourceTree = "<group>"; };
+		998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentFieldView.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3664,6 +3668,8 @@
 				993B7B3D215F0A270067B962 /* FileMessageCell.swift */,
 				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
 				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
+				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
+				998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4120,6 +4126,7 @@
 				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				14F8A299202E65C700175FDC /* Blue-40@3x.png in Resources */,
 				14F8A283202E659000175FDC /* White-83.5@2x.png in Resources */,
+				998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */,
 				4113BF70208E23F000A9D4D8 /* Preferences.storyboard in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				14F8A22C202E5CBF00175FDC /* Black-76@3x.png in Resources */,
@@ -4711,6 +4718,7 @@
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				80AC400C20EEE8F5005082E1 /* ChatViewControllerBanner.swift in Sources */,
+				998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */,
 				9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */,
 				0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */,
 				9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */,
