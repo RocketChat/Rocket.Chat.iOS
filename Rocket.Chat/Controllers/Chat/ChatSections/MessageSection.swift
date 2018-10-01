@@ -54,7 +54,7 @@ final class MessageSection: ChatSection {
             case .audio:
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
-                    audioURL: attachment.fullFileURL()
+                    audioURL: attachment.fullAudioURL()
                 ).wrapped)
             case .video:
                 cells.append(VideoMessageChatItem(
@@ -62,6 +62,13 @@ final class MessageSection: ChatSection {
                     descriptionText: attachment.descriptionText,
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
+                ).wrapped)
+            case .image:
+                cells.append(ImageMessageChatItem(
+                    identifier: identifier,
+                    title: attachment.title,
+                    descriptionText: attachment.descriptionText,
+                    imageURL: attachment.fullImageURL()
                 ).wrapped)
             default:
                 if attachment.isFile {
