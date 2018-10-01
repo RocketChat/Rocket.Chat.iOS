@@ -70,7 +70,6 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cmw-Jo-XRK" secondAttribute="bottom" constant="3" id="8AV-N5-w9j"/>
                             <constraint firstItem="Gbv-W5-I0m" firstAttribute="leading" secondItem="cmw-Jo-XRK" secondAttribute="trailing" constant="9" id="8gN-6u-n10"/>
-                            <constraint firstAttribute="height" constant="107" id="Bmh-rI-riU"/>
                             <constraint firstItem="cmw-Jo-XRK" firstAttribute="top" secondItem="o4N-fB-seu" secondAttribute="top" constant="3" id="EG5-dw-rIz"/>
                             <constraint firstAttribute="trailing" secondItem="Gbv-W5-I0m" secondAttribute="trailing" constant="15" id="GIS-Sg-MBN"/>
                             <constraint firstItem="NyW-LS-2g2" firstAttribute="leading" secondItem="cmw-Jo-XRK" secondAttribute="trailing" constant="9" id="IAr-wP-qdc"/>

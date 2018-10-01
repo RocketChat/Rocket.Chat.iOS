@@ -45,14 +45,16 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
             textContainerTrailingConstraint.constant
     }
 
-
     weak var delegate: ChatMessageCellProtocol?
 
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
+    var fieldsStackHeightInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
@@ -105,5 +107,16 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         attachmentFieldViews.forEach { view in
             fieldsStackView.addArrangedSubview(view)
         }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        fieldsStackView.arrangedSubviews.forEach { subview in
+            fieldsStackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+
+        fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
     }
 }
