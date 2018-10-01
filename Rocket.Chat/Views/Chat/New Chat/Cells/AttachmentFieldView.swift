@@ -15,4 +15,11 @@ class AttachmentFieldView: UIView {
 
     @IBOutlet weak var fieldHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var valueTopConstraint: NSLayoutConstraint!
+
+    lazy var contentSize: CGSize = .zero
+
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
+
 }

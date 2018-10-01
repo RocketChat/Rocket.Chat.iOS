@@ -60,5 +60,50 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     func configure() {
+        guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
+            return
+        }
+
+        title.text = viewModel.attachment.title
+
+        if let subtitleText = viewModel.attachment.descriptionText {
+            // TODO: Adjust constraints for valid subtitle
+            subtitle.text = subtitleText
+        } else {
+            // TODO: Adjust constraints for no subtitle
+        }
+
+        var stackViewHeight: CGFloat = 0
+        var attachmentFieldViews: [AttachmentFieldView] = []
+
+        for attachmentField in viewModel.attachment.fields {
+            guard let attachmentFieldView = AttachmentFieldView.instantiateFromNib() else {
+                continue
+            }
+
+            attachmentFieldView.field.text = attachmentField.title
+            attachmentFieldView.value.text = attachmentField.value
+
+            let maxSize = CGSize(width: fieldLabelWidth, height: .greatestFiniteMagnitude)
+            let valueTextHeight = attachmentFieldView.value.sizeThatFits(maxSize).height
+
+            let fieldViewHeight = attachmentFieldView.fieldHeightConstraint.constant +
+                attachmentFieldView.valueTopConstraint.constant +
+                valueTextHeight
+
+            stackViewHeight += fieldViewHeight
+            attachmentFieldView.contentSize = CGSize(width: fieldLabelWidth, height: fieldViewHeight)
+            attachmentFieldView.invalidateIntrinsicContentSize()
+            attachmentFieldViews.append(attachmentFieldView)
+        }
+
+        stackViewHeight += fieldsStackView.spacing * CGFloat(attachmentFieldViews.count - 1)
+        fieldsStackViewHeightConstraint.constant = stackViewHeight
+
+        layoutIfNeeded()
+
+        attachmentFieldViews.forEach { view in
+            fieldsStackView.addArrangedSubview(view)
+        }
     }
 }
