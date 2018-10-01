@@ -18,7 +18,7 @@ struct TextAttachmentChatItem: ChatItem, Differentiable {
     var attachment: Attachment
 
     var differenceIdentifier: String {
-        return attachment.title
+        return attachment.identifier ?? attachment.title
     }
 
     func isContentEqual(to source: TextAttachmentChatItem) -> Bool {
