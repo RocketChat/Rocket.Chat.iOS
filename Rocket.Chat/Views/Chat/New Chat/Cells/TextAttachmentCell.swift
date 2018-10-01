@@ -30,6 +30,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
@@ -49,12 +50,42 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
 
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
+    var subtitleHeightConstraint: NSLayoutConstraint!
+    var emptySubtitleHeightConstraint: NSLayoutConstraint!
+    var textContainerHeightInitialConstant: CGFloat = 0
     var fieldsStackHeightInitialConstant: CGFloat = 0
+    var subtitleHeightInitialConstant: CGFloat = 0
+    var subtitleTopInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        emptySubtitleHeightConstraint = NSLayoutConstraint(
+            item: subtitle,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 0,
+            constant: 0
+        )
+
+        subtitleHeightConstraint = NSLayoutConstraint(
+            item: subtitle,
+            attribute: .height,
+            relatedBy: .greaterThanOrEqual,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 0,
+            constant: 16
+        )
+
+        emptySubtitleHeightConstraint.isActive = false
+        subtitleHeightConstraint.isActive = true
+
         fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
+        subtitleTopInitialConstant = subtitleTopConstraint.constant
+        subtitleHeightInitialConstant = subtitleHeightConstraint.constant
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
@@ -68,15 +99,25 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
 
         title.text = viewModel.attachment.title
 
-        if let subtitleText = viewModel.attachment.descriptionText {
-            // TODO: Adjust constraints for valid subtitle
+        if let subtitleText = viewModel.attachment.text {
+            emptySubtitleHeightConstraint.isActive = false
+            subtitleHeightConstraint.isActive = true
+            subtitleTopConstraint.constant = subtitleTopInitialConstant
+            subtitleHeightConstraint.constant = subtitleHeightInitialConstant
             subtitle.text = subtitleText
         } else {
-            // TODO: Adjust constraints for no subtitle
+            subtitleHeightConstraint.isActive = false
+            emptySubtitleHeightConstraint.isActive = true
+            subtitleTopConstraint.constant = 0
+            emptySubtitleHeightConstraint.constant = 0
+            subtitle.text = ""
         }
 
+        let maxSize = CGSize(width: fieldLabelWidth, height: .greatestFiniteMagnitude)
         var stackViewHeight: CGFloat = 0
         var attachmentFieldViews: [AttachmentFieldView] = []
+
+        resetFieldsStackView()
 
         for attachmentField in viewModel.attachment.fields {
             guard let attachmentFieldView = AttachmentFieldView.instantiateFromNib() else {
@@ -86,9 +127,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
             attachmentFieldView.field.text = attachmentField.title
             attachmentFieldView.value.text = attachmentField.value
 
-            let maxSize = CGSize(width: fieldLabelWidth, height: .greatestFiniteMagnitude)
             let valueTextHeight = attachmentFieldView.value.sizeThatFits(maxSize).height
-
             let fieldViewHeight = attachmentFieldView.fieldHeightConstraint.constant +
                 attachmentFieldView.valueTopConstraint.constant +
                 valueTextHeight
@@ -109,13 +148,17 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
+    func resetFieldsStackView() {
         fieldsStackView.arrangedSubviews.forEach { subview in
             fieldsStackView.removeArrangedSubview(subview)
             subview.removeFromSuperview()
         }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        resetFieldsStackView()
 
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
     }

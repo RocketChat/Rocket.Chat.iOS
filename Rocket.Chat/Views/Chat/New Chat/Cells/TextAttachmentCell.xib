@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="txK-6f-uxq" customClass="TextAttachmentCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4N-fB-seu">
-                        <rect key="frame" x="71" y="0.0" width="270" height="107"/>
+                        <rect key="frame" x="71" y="0.0" width="270" height="104"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSx-Xs-2vQ">
                                 <rect key="frame" x="15" y="15" width="222" height="16"/>
@@ -32,16 +32,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbv-W5-I0m">
-                                <rect key="frame" x="15" y="41" width="240" height="19.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="U91-i5-i1f"/>
-                                </constraints>
+                                <rect key="frame" x="15" y="41" width="240" height="16.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmw-Jo-XRK">
-                                <rect key="frame" x="3" y="3" width="3" height="101"/>
+                                <rect key="frame" x="3" y="3" width="3" height="98"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="3" id="hEe-iq-EVc"/>
@@ -60,7 +57,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NyW-LS-2g2">
-                                <rect key="frame" x="15" y="75.5" width="240" height="16"/>
+                                <rect key="frame" x="15" y="72.5" width="240" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Oeh-SX-0Sj"/>
                                 </constraints>
@@ -111,6 +108,7 @@
                 <outlet property="statusViewLeadingConstraint" destination="SMh-5Y-9ye" id="b4Z-fx-8eh"/>
                 <outlet property="statusViewWidthConstraint" destination="hEe-iq-EVc" id="S4l-VX-dgt"/>
                 <outlet property="subtitle" destination="Gbv-W5-I0m" id="ypl-tb-4ZY"/>
+                <outlet property="subtitleTopConstraint" destination="bjK-rF-85x" id="GDY-tK-2fx"/>
                 <outlet property="textContainer" destination="o4N-fB-seu" id="PbO-oR-44i"/>
                 <outlet property="textContainerLeadingConstraint" destination="ncY-AD-6ym" id="rSQ-TW-hsZ"/>
                 <outlet property="textContainerTrailingConstraint" destination="FHQ-cf-Yb2" id="f1m-di-i36"/>
