@@ -52,7 +52,6 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     var contentViewWidthConstraint: NSLayoutConstraint!
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
-    var textContainerHeightInitialConstant: CGFloat = 0
     var fieldsStackHeightInitialConstant: CGFloat = 0
     var subtitleHeightInitialConstant: CGFloat = 0
     var subtitleTopInitialConstant: CGFloat = 0
