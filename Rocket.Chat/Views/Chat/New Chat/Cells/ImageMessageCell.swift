@@ -31,6 +31,7 @@ final class ImageMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
+    @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
@@ -67,4 +68,16 @@ final class ImageMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
+    // MARK: IBAction
+
+    @IBAction func buttonImageHandlerDidPressed(_ sender: Any) {
+        guard
+            let viewModel = viewModel?.base as? ImageMessageChatItem,
+            let imageURL = viewModel.imageURL
+        else {
+            return
+        }
+
+        delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
+    }
 }
