@@ -770,6 +770,8 @@
 		9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B5972093E523007D277C /* FileTableViewCell.swift */; };
 		9987B59A2093E526007D277C /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9987B5982093E524007D277C /* FileTableViewCell.xib */; };
 		9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B59B2093E60C007D277C /* RoomFilesRequest.swift */; };
+		998E649621619DF700E7C45A /* TextAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E649521619DF700E7C45A /* TextAttachmentCell.xib */; };
+		998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E64972161ADE200E7C45A /* TextAttachmentCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1638,6 +1640,8 @@
 		9987B5972093E523007D277C /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		9987B5982093E524007D277C /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		9987B59B2093E60C007D277C /* RoomFilesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomFilesRequest.swift; sourceTree = "<group>"; };
+		998E649521619DF700E7C45A /* TextAttachmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAttachmentCell.xib; sourceTree = "<group>"; };
+		998E64972161ADE200E7C45A /* TextAttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3658,6 +3662,8 @@
 				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
 				993B7B3B215F07020067B962 /* FileMessageCell.xib */,
 				993B7B3D215F0A270067B962 /* FileMessageCell.swift */,
+				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
+				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4052,6 +4058,7 @@
 				411D40CD20D28150001A1035 /* ChannelInfoBasicCell.xib in Resources */,
 				33A5C9CC206A565800FE1C8F /* regional.json in Resources */,
 				412EF3C62050507C001689A3 /* ReusableViewText.xib in Resources */,
+				998E649621619DF700E7C45A /* TextAttachmentCell.xib in Resources */,
 				14F8A224202E5CBF00175FDC /* Black-60@3x.png in Resources */,
 				14F8A23F202E5D0600175FDC /* Red-29@2x.png in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
@@ -4899,6 +4906,7 @@
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */,
 				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
