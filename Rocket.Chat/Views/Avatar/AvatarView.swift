@@ -11,7 +11,6 @@ import FLAnimatedImage
 import Nuke
 
 final class AvatarView: UIView {
-
     var avatarPlaceholder: UIImage?
     var imageURL: URL? {
         didSet {
@@ -97,6 +96,7 @@ final class AvatarView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
+        label.text = "?"
         label.textAlignment = .center
 
         addSubview(label)
@@ -209,6 +209,15 @@ final class AvatarView: UIView {
         imageView.image = nil
         imageView.animatedImage = nil
         labelInitials.text = ""
+    }
+
+    init() {
+        super.init(frame: .zero)
+        backgroundColor = .black
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
 
