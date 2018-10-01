@@ -103,6 +103,7 @@
                 <outlet property="fieldsStackView" destination="NyW-LS-2g2" id="UhF-uA-U9H"/>
                 <outlet property="fieldsStackViewHeightConstraint" destination="Oeh-SX-0Sj" id="PZk-VK-wrG"/>
                 <outlet property="fieldsStackViewLeadingConstraint" destination="IAr-wP-qdc" id="H8S-dc-n4H"/>
+                <outlet property="fieldsStackViewTopConstraint" destination="ylK-BL-XCn" id="3TC-AX-B2O"/>
                 <outlet property="fieldsStackViewTrailingConstraint" destination="rgW-a0-NEa" id="p06-3e-jaf"/>
                 <outlet property="statusView" destination="cmw-Jo-XRK" id="W9A-xq-Gp4"/>
                 <outlet property="statusViewLeadingConstraint" destination="SMh-5Y-9ye" id="b4Z-fx-8eh"/>

@@ -31,6 +31,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fieldsStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
@@ -52,6 +53,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     var contentViewWidthConstraint: NSLayoutConstraint!
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
+    var fieldsStackTopInitialConstant: CGFloat = 0
     var fieldsStackHeightInitialConstant: CGFloat = 0
     var subtitleHeightInitialConstant: CGFloat = 0
     var subtitleTopInitialConstant: CGFloat = 0
@@ -82,6 +84,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         emptySubtitleHeightConstraint.isActive = false
         subtitleHeightConstraint.isActive = true
 
+        fieldsStackTopInitialConstant = fieldsStackViewTopConstraint.constant
         fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
@@ -97,6 +100,29 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         }
 
         title.text = viewModel.attachment.title
+
+        if viewModel.attachment.collapsed {
+            configureCollapsedState(with: viewModel)
+        } else {
+            configureExpandedState(with: viewModel)
+        }
+    }
+
+    func configureCollapsedState(with viewModel: TextAttachmentChatItem) {
+        arrow.image = #imageLiteral(resourceName: "Attachment Collapsed Light")
+        subtitleHeightConstraint.isActive = false
+        emptySubtitleHeightConstraint.isActive = true
+        subtitleTopConstraint.constant = 0
+        emptySubtitleHeightConstraint.constant = 0
+        subtitle.text = ""
+
+        resetFieldsStackView()
+        fieldsStackViewTopConstraint.constant = 0
+        fieldsStackViewHeightConstraint.constant = 0
+    }
+
+    func configureExpandedState(with viewModel: TextAttachmentChatItem) {
+        arrow.image = #imageLiteral(resourceName: "Attachment Expanded Light")
 
         if let subtitleText = viewModel.attachment.text {
             emptySubtitleHeightConstraint.isActive = false
@@ -117,6 +143,8 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         var attachmentFieldViews: [AttachmentFieldView] = []
 
         resetFieldsStackView()
+        fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
+        fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
 
         for attachmentField in viewModel.attachment.fields {
             guard let attachmentFieldView = AttachmentFieldView.instantiateFromNib() else {
@@ -158,7 +186,6 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         super.prepareForReuse()
 
         resetFieldsStackView()
-
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
     }
 }
