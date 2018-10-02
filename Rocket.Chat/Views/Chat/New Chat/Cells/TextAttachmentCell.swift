@@ -151,8 +151,9 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
                 continue
             }
 
+            let attributedValue = NSMutableAttributedString(string: attachmentField.value).transformMarkdown(with: theme)
             attachmentFieldView.field.text = attachmentField.title
-            attachmentFieldView.value.text = attachmentField.value
+            attachmentFieldView.value.attributedText = attributedValue
 
             let valueTextHeight = attachmentFieldView.value.sizeThatFits(maxSize).height
             let fieldViewHeight = attachmentFieldView.fieldHeightConstraint.constant +
