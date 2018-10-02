@@ -77,6 +77,8 @@ class LoginTableViewController: BaseTableViewController {
         }
     }
 
+    @IBOutlet weak var viewPasswordButton: UIButton!
+
     var serverVersion: Version?
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
@@ -183,6 +185,11 @@ class LoginTableViewController: BaseTableViewController {
             self?.authenticateWithUsernameOrEmail()
         }
     }
+    
+    @IBAction func viewPasswordPressed(_ sender: UIButton) {
+        textFieldPassword.isSecureTextEntry = !textFieldPassword.isSecureTextEntry
+    }
+    
 
     @IBAction func forgotPasswordPressed(_ sender: UIButton) {
         let alert = UIAlertController(

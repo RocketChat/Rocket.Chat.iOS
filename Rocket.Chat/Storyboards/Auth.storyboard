@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -544,7 +543,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i30-m3-yKn" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="4" width="345" height="48"/>
+                                                    <rect key="frame" x="15" y="4" width="310" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="dFH-8r-lM2"/>
                                                         <constraint firstAttribute="height" constant="48" id="pIf-gP-eEk"/>
@@ -559,12 +558,23 @@
                                                         <outlet property="delegate" destination="w7q-9e-4D3" id="9TW-es-peq"/>
                                                     </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R12-tf-DaY">
+                                                    <rect key="frame" x="325" y="10" width="35" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="yL7-4O-R29"/>
+                                                    </constraints>
+                                                    <state key="normal" image="eye"/>
+                                                    <connections>
+                                                        <action selector="viewPasswordPressed:" destination="w7q-9e-4D3" eventType="touchUpInside" id="SHp-Pp-B55"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="i30-m3-yKn" firstAttribute="leading" secondItem="DPa-lb-a9g" secondAttribute="leading" priority="999" constant="15" id="0wQ-5n-mAE"/>
-                                                <constraint firstItem="i30-m3-yKn" firstAttribute="centerX" secondItem="DPa-lb-a9g" secondAttribute="centerX" id="3NW-js-yPE"/>
+                                                <constraint firstItem="i30-m3-yKn" firstAttribute="leading" secondItem="DPa-lb-a9g" secondAttribute="leading" constant="15" id="0wQ-5n-mAE"/>
+                                                <constraint firstItem="R12-tf-DaY" firstAttribute="centerY" secondItem="i30-m3-yKn" secondAttribute="centerY" id="8N7-ct-Ucx"/>
                                                 <constraint firstAttribute="bottom" secondItem="i30-m3-yKn" secondAttribute="bottom" constant="4" id="FP2-8Y-uop"/>
-                                                <constraint firstAttribute="trailing" secondItem="i30-m3-yKn" secondAttribute="trailing" priority="999" constant="15" id="eeL-vF-uAz"/>
+                                                <constraint firstItem="R12-tf-DaY" firstAttribute="leading" secondItem="i30-m3-yKn" secondAttribute="trailing" id="Shq-ir-xw3"/>
+                                                <constraint firstAttribute="trailing" secondItem="R12-tf-DaY" secondAttribute="trailing" constant="15" id="uCJ-bG-e09"/>
                                                 <constraint firstItem="i30-m3-yKn" firstAttribute="top" secondItem="DPa-lb-a9g" secondAttribute="top" constant="4" id="zgi-7P-8rV"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -730,13 +740,14 @@
                         <outlet property="onePasswordButton" destination="OZq-1v-PFB" id="QsK-Cb-bff"/>
                         <outlet property="textFieldPassword" destination="i30-m3-yKn" id="H3k-Zh-b6t"/>
                         <outlet property="textFieldUsername" destination="4sT-R7-k6m" id="uli-YQ-OI7"/>
+                        <outlet property="viewPasswordButton" destination="R12-tf-DaY" id="eFA-m0-6H3"/>
                         <segue destination="em6-TJ-1CF" kind="show" identifier="TwoFactor" id="9kY-lU-ad7"/>
                         <segue destination="0XD-Z9-Dv5" kind="show" identifier="RequestUsername" id="B9E-PP-gIC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="19"/>
+            <point key="canvasLocation" x="608.79999999999995" y="18.440779610194905"/>
         </scene>
         <!--Title-->
         <scene sceneID="00e-2E-wLI">
@@ -1270,7 +1281,7 @@ to mention you in messages</string>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0ry-Re-0rp" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="261" width="345" height="48"/>
+                                <rect key="frame" x="15" y="260.5" width="345" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="auth.connect.urlfield"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="FPD-J2-pee"/>
@@ -1293,7 +1304,7 @@ to mention you in messages</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-94-7gd" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="329" width="345" height="48"/>
+                                <rect key="frame" x="15" y="328.5" width="345" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="4j9-aU-py3"/>
                                     <constraint firstAttribute="height" constant="48" id="Cvd-OB-wcp"/>
@@ -1393,6 +1404,7 @@ to mention you in messages</string>
         <image name="OnePassword-Button" width="27" height="27"/>
         <image name="connectServer" width="30" height="30"/>
         <image name="disclosureIndicator" width="7" height="14"/>
+        <image name="eye" width="36" height="36"/>
         <image name="keyBlack" width="20" height="20"/>
         <image name="logoSmall" width="31" height="26"/>
         <image name="mailBlack" width="20" height="20"/>
