@@ -25,20 +25,19 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarContainerView.bounds
-                avatarContainerView.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    let avatarView: AvatarView = {
+        let avatarView = AvatarView()
+
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+
+        return avatarView
+    }()
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!

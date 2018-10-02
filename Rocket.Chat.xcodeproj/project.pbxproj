@@ -326,7 +326,6 @@
 		41BFA0AA2146D23D008B9611 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A82146D23C008B9611 /* MessageManager.swift */; };
 		41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */; };
 		41C275DF1D848005003C88CF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C275DE1D848005003C88CF /* AvatarView.swift */; };
-		41C275E11D84815C003C88CF /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C275E01D84815C003C88CF /* AvatarView.xib */; };
 		41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C45AEE1DFAD42800D9969C /* ChatDataController.swift */; };
 		41C955FA20A3931C00FC8314 /* ChatMessageActionButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F3705320A3917D00C5449E /* ChatMessageActionButtonsView.xib */; };
 		41C955FC20A3937A00FC8314 /* ChatMessageActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */; };
@@ -657,6 +656,7 @@
 		80CC8A1920ACE320009D64DF /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1820ACE320009D64DF /* UserPermissions.swift */; };
 		80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */; };
 		80CCD3B7215EA992002AFE83 /* MessagesViewControllerComposerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCD3B6215EA992002AFE83 /* MessagesViewControllerComposerDelegate.swift */; };
+		80CCD3BC216235B1002AFE83 /* MessagesComposerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCD3BB216235B1002AFE83 /* MessagesComposerViewModel.swift */; };
 		80D0CE5C204FFAA50056B17F /* SEServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE5B204FFAA50056B17F /* SEServerCell.xib */; };
 		80D0CE60205016B40056B17F /* SEServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE5F205016B40056B17F /* SEServerCell.swift */; };
 		80D0CE62205023710056B17F /* SECell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE61205023710056B17F /* SECell.swift */; };
@@ -1206,7 +1206,6 @@
 		41BFA0A82146D23C008B9611 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManager.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManager.swift; sourceTree = SOURCE_ROOT; };
 		41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSystemMessages.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManagerSystemMessages.swift; sourceTree = SOURCE_ROOT; };
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		41C275E01D84815C003C88CF /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
 		41C45AEE1DFAD42800D9969C /* ChatDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataController.swift; sourceTree = "<group>"; };
 		41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageActionButtonsView.swift; sourceTree = "<group>"; };
 		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLoaderCell.xib; sourceTree = "<group>"; };
@@ -1530,6 +1529,7 @@
 		80CC8A1820ACE320009D64DF /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		80CC8A1A20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatControllerUserActionPresenter.swift; sourceTree = "<group>"; };
 		80CCD3B6215EA992002AFE83 /* MessagesViewControllerComposerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerComposerDelegate.swift; sourceTree = "<group>"; };
+		80CCD3BB216235B1002AFE83 /* MessagesComposerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesComposerViewModel.swift; sourceTree = "<group>"; };
 		80D0CE5B204FFAA50056B17F /* SEServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEServerCell.xib; sourceTree = "<group>"; };
 		80D0CE5F205016B40056B17F /* SEServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerCell.swift; sourceTree = "<group>"; };
 		80D0CE61205023710056B17F /* SECell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECell.swift; sourceTree = "<group>"; };
@@ -2651,7 +2651,6 @@
 			isa = PBXGroup;
 			children = (
 				41C275DE1D848005003C88CF /* AvatarView.swift */,
-				41C275E01D84815C003C88CF /* AvatarView.xib */,
 			);
 			path = Avatar;
 			sourceTree = "<group>";
@@ -2797,6 +2796,7 @@
 				41BF4D6B215B47AD00588B35 /* MessagesSubscriptionViewModel.swift */,
 				41FB7137215B0FD6002B5187 /* MessagesSizingManager.swift */,
 				80CCD3B6215EA992002AFE83 /* MessagesViewControllerComposerDelegate.swift */,
+				80CCD3BB216235B1002AFE83 /* MessagesComposerViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -4064,7 +4064,6 @@
 				14F8A224202E5CBF00175FDC /* Black-60@3x.png in Resources */,
 				14F8A23F202E5D0600175FDC /* Red-29@2x.png in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
-				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				14F8A261202E64B200175FDC /* BnW-76@3x.png in Resources */,
 				41FC9E0E209B44CD00FED485 /* ChatLoaderCell.xib in Resources */,
 				809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */,
@@ -4788,6 +4787,7 @@
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
 				4135A64421623F1300C1741A /* ImageMessageCell.swift in Sources */,
 				33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */,
+				80CCD3BC216235B1002AFE83 /* MessagesComposerViewModel.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
 				8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */,

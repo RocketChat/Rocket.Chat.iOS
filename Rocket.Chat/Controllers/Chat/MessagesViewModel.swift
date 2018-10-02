@@ -288,7 +288,6 @@ final class MessagesViewModel {
 
         return sameUser && Int(date.timeIntervalSince(prevDate)) < timeLimit
     }
-
 }
 
 extension MessagesViewModel {
