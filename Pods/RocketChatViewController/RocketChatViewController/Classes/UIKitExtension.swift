@@ -25,7 +25,6 @@ public extension UICollectionView {
     ///              The collection should be set to dataSource of UICollectionView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        updateRows: ([IndexPath]) -> Void,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -68,7 +67,7 @@ public extension UICollectionView {
                 }
 
                 if !changeset.elementUpdated.isEmpty {
-                    updateRows(changeset.elementUpdated.map { IndexPath(item: $0.element, section: $0.section) })
+                    reloadItems(at: changeset.elementUpdated.map { IndexPath(item: $0.element, section: $0.section) })
                 }
 
                 for (source, target) in changeset.elementMoved {

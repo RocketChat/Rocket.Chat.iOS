@@ -64,5 +64,9 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
             viewModel.sendTextMessage(text: composerView.textView.text)
             composerView.textView.text = ""
         }
+
+        if button == composerView.leftButton {
+            buttonUploadDidPressed()
+        }
     }
 }
