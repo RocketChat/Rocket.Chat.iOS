@@ -142,6 +142,23 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         }
     }
 
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+        // TODO: Adjust for our composer
+        // textView.resignFirstResponder()
+
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
+                config.imageView = thumbnail
+                config.allowSharing = true
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+//             openImage(attachment: attachment)
+        }
+    }
+
     func openFileFromCell(attachment: Attachment) {
         openDocument(attachment: attachment)
     }
