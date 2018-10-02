@@ -34,6 +34,7 @@ final class MessagesViewController: RocketChatViewController {
     let viewModel = MessagesViewModel(controllerContext: nil)
     let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingManager()
+    let composerViewModel = MessagesComposerViewModel()
 
     var subscription: Subscription! {
         didSet {
