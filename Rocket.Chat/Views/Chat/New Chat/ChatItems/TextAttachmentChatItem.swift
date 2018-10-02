@@ -9,6 +9,7 @@
 import Foundation
 import DifferenceKit
 import RocketChatViewController
+import RealmSwift
 
 struct TextAttachmentChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
@@ -23,5 +24,11 @@ struct TextAttachmentChatItem: ChatItem, Differentiable {
 
     func isContentEqual(to source: TextAttachmentChatItem) -> Bool {
         return attachment.collapsed == source.attachment.collapsed && attachment.fields == source.attachment.fields
+    }
+
+    func toggleAttachmentFields() {
+        Realm.executeOnMainThread({ _ in
+            self.attachment.collapsed = !self.attachment.collapsed
+        })
     }
 }

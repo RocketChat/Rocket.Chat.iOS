@@ -112,6 +112,10 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         }
 
+        if let cell = cell as? TextAttachmentCell {
+            cell.delegate = self
+        }
+
         cell.viewModel = viewModel
         cell.configure()
         return cell
@@ -279,12 +283,8 @@ extension MessageSection: ChatMessageCellProtocol {
         }
     }
 
-    func viewDidCollapseChange(view: UIView) {
-//        let origin = collectionView.convert(CGPoint.zero, from: view)
-//        guard let indexPath = collectionView.indexPathForItem(at: origin) else { return }
-//
-//        let item = dataController.itemAt(indexPath)
-//        dataController.invalidateLayout(for: item?.identifier)
-//        collectionView.reloadItems(at: [indexPath])
+    func viewDidCollapseChange(viewModel: AnyChatItem) {
+        messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
+        update()
     }
 }

@@ -92,6 +92,10 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
         contentViewWidthConstraint.isActive = true
+
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
+        gesture.delegate = self
+        textContainer.addGestureRecognizer(gesture)
     }
 
     func configure() {
@@ -183,10 +187,28 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
+    @objc func didTapTextContainerView() {
+        guard
+            let viewModel = viewModel,
+            let textAttachmentViewModel = viewModel.base as? TextAttachmentChatItem
+        else {
+            return
+        }
+
+        textAttachmentViewModel.toggleAttachmentFields()
+        delegate?.viewDidCollapseChange(viewModel: viewModel)
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
 
         resetFieldsStackView()
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
+    }
+}
+
+extension TextAttachmentCell: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }
