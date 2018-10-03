@@ -13,7 +13,7 @@ extension MessagesViewController {
     var replyView: ReplyView? {
         return composerView.componentStackView.arrangedSubviews.first {
             $0 as? ReplyView != nil
-            } as? ReplyView
+        } as? ReplyView
     }
 
     func reply(to message: Message, onlyQuote: Bool = false) {

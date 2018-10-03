@@ -11,6 +11,7 @@ import RealmSwift
 
 final class MessagesComposerViewModel {
     var replyString = ""
+    var messageToEdit: Message?
 
     let hintPrefixes: [Character] = ["/", "#", "@", ":"]
 

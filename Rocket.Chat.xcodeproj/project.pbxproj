@@ -463,6 +463,7 @@
 		802A4E24204D73100072CD23 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E23204D730F0072CD23 /* AppGroup.swift */; };
 		802C8959216314CF00C6B9B2 /* MessagesViewControllerUploading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C8958216314CF00C6B9B2 /* MessagesViewControllerUploading.swift */; };
 		802C895C21639B8900C6B9B2 /* MessagesViewControllerBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C895B21639B8900C6B9B2 /* MessagesViewControllerBanner.swift */; };
+		802C895E2165393600C6B9B2 /* MessagesViewControllerEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */; };
 		80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3B1FD75BE1006AD9EF /* VOTextField.swift */; };
 		80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */; };
 		80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80307E431FD75DC0006AD9EF /* VoiceOver.strings */; };
@@ -1357,6 +1358,7 @@
 		802A4E23204D730F0072CD23 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		802C8958216314CF00C6B9B2 /* MessagesViewControllerUploading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerUploading.swift; sourceTree = "<group>"; };
 		802C895B21639B8900C6B9B2 /* MessagesViewControllerBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerBanner.swift; sourceTree = "<group>"; };
+		802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerEditing.swift; sourceTree = "<group>"; };
 		80307E3B1FD75BE1006AD9EF /* VOTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOTextField.swift; sourceTree = "<group>"; };
 		80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOLocalized.swift; sourceTree = "<group>"; };
 		80307E421FD75DC0006AD9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/VoiceOver.strings; sourceTree = "<group>"; };
@@ -2803,6 +2805,7 @@
 				802C895B21639B8900C6B9B2 /* MessagesViewControllerBanner.swift */,
 				80CCD3BB216235B1002AFE83 /* MessagesComposerViewModel.swift */,
 				41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */,
+				802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -4808,6 +4811,7 @@
 				334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				411D40CA20D27A5E001A1035 /* ChannelInfoDescriptionCell.swift in Sources */,
+				802C895E2165393600C6B9B2 /* MessagesViewControllerEditing.swift in Sources */,
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */,
 				33D08E2A20BD5F24008D03EF /* TopTransparentViewController.swift in Sources */,
