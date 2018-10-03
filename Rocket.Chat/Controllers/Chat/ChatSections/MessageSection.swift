@@ -54,7 +54,7 @@ final class MessageSection: ChatSection {
             case .audio:
                 cells.append(AudioMessageChatItem(
                     identifier: identifier,
-                    audioURL: attachment.fullFileURL()
+                    audioURL: attachment.fullAudioURL()
                 ).wrapped)
             case .video:
                 cells.append(VideoMessageChatItem(
@@ -62,6 +62,13 @@ final class MessageSection: ChatSection {
                     descriptionText: attachment.descriptionText,
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
+                ).wrapped)
+            case .image:
+                cells.append(ImageMessageChatItem(
+                    identifier: identifier,
+                    title: attachment.title,
+                    descriptionText: attachment.descriptionText,
+                    imageURL: attachment.fullImageURL()
                 ).wrapped)
             default:
                 if attachment.isFile {
@@ -98,13 +105,11 @@ final class MessageSection: ChatSection {
 
         if let cell = cell as? BasicMessageCell {
             cell.delegate = self
-        }
-
-        if let cell = cell as? SequentialMessageCell {
+        } else if let cell = cell as? SequentialMessageCell {
             cell.delegate = self
-        }
-
-        if let cell = cell as? FileMessageCell {
+        } else if let cell = cell as? FileMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? ImageMessageCell {
             cell.delegate = self
         }
 
@@ -229,6 +234,7 @@ extension MessageSection: ChatMessageCellProtocol {
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
+    // TODO: This one can be removed once we remove from the protocol
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
         // TODO: Adjust for our composer
         //        textView.resignFirstResponder()
@@ -243,6 +249,21 @@ extension MessageSection: ChatMessageCellProtocol {
             messagesController?.present(ImageViewerController(configuration: configuration), animated: true)
         } else {
 //            openImage(attachment: attachment)
+        }
+    }
+
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
+                config.imageView = thumbnail
+                config.allowSharing = true
+            }
+
+            messagesController?.present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+            //            openImage(attachment: attachment)
         }
     }
 

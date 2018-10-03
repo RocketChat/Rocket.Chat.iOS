@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="600" height="163"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-2T-bvi">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-2T-bvi">
                         <rect key="frame" x="74" y="0.0" width="220" height="117"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="z4g-2T-bvi" secondAttribute="height" multiplier="282:150" id="eL9-fe-3vV"/>
