@@ -63,6 +63,10 @@ final class MessageSection: ChatSection {
                     videoURL: attachment.fullFileURL(),
                     videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
+            case .textAttachment where attachment.fields.count > 0:
+                cells.append(TextAttachmentChatItem(
+                    attachment: attachment
+                ).wrapped)
             case .image:
                 cells.append(ImageMessageChatItem(
                     identifier: identifier,
@@ -110,6 +114,10 @@ final class MessageSection: ChatSection {
         } else if let cell = cell as? FileMessageCell {
             cell.delegate = self
         } else if let cell = cell as? ImageMessageCell {
+            cell.delegate = self
+        }
+
+        if let cell = cell as? TextAttachmentCell {
             cell.delegate = self
         }
 
@@ -296,12 +304,8 @@ extension MessageSection: ChatMessageCellProtocol {
         }
     }
 
-    func viewDidCollapseChange(view: UIView) {
-//        let origin = collectionView.convert(CGPoint.zero, from: view)
-//        guard let indexPath = collectionView.indexPathForItem(at: origin) else { return }
-//
-//        let item = dataController.itemAt(indexPath)
-//        dataController.invalidateLayout(for: item?.identifier)
-//        collectionView.reloadItems(at: [indexPath])
+    func viewDidCollapseChange(viewModel: AnyChatItem) {
+        messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
+        update()
     }
 }

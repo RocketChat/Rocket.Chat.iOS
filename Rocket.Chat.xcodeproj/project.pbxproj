@@ -773,6 +773,11 @@
 		9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B5972093E523007D277C /* FileTableViewCell.swift */; };
 		9987B59A2093E526007D277C /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9987B5982093E524007D277C /* FileTableViewCell.xib */; };
 		9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B59B2093E60C007D277C /* RoomFilesRequest.swift */; };
+		998E649621619DF700E7C45A /* TextAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E649521619DF700E7C45A /* TextAttachmentCell.xib */; };
+		998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E64972161ADE200E7C45A /* TextAttachmentCell.swift */; };
+		998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E64992161B3E300E7C45A /* AttachmentFieldView.xib */; };
+		998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */; };
+		998E649E2161B6DF00E7C45A /* TextAttachmentChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1644,6 +1649,11 @@
 		9987B5972093E523007D277C /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		9987B5982093E524007D277C /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		9987B59B2093E60C007D277C /* RoomFilesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomFilesRequest.swift; sourceTree = "<group>"; };
+		998E649521619DF700E7C45A /* TextAttachmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAttachmentCell.xib; sourceTree = "<group>"; };
+		998E64972161ADE200E7C45A /* TextAttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentCell.swift; sourceTree = "<group>"; };
+		998E64992161B3E300E7C45A /* AttachmentFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentFieldView.xib; sourceTree = "<group>"; };
+		998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentFieldView.swift; sourceTree = "<group>"; };
+		998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentChatItem.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3664,6 +3674,10 @@
 				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
 				993B7B3B215F07020067B962 /* FileMessageCell.xib */,
 				993B7B3D215F0A270067B962 /* FileMessageCell.swift */,
+				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
+				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
+				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
+				998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */,
 				4135A64521623F2A00C1741A /* ImageMessageCell.xib */,
 				4135A64321623F1300C1741A /* ImageMessageCell.swift */,
 			);
@@ -3680,6 +3694,7 @@
 				419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */,
 				419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */,
 				993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */,
+				998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */,
 				4135A64721623F3600C1741A /* ImageMessageChatItem.swift */,
 			);
 			path = ChatItems;
@@ -4061,6 +4076,7 @@
 				411D40CD20D28150001A1035 /* ChannelInfoBasicCell.xib in Resources */,
 				33A5C9CC206A565800FE1C8F /* regional.json in Resources */,
 				412EF3C62050507C001689A3 /* ReusableViewText.xib in Resources */,
+				998E649621619DF700E7C45A /* TextAttachmentCell.xib in Resources */,
 				14F8A224202E5CBF00175FDC /* Black-60@3x.png in Resources */,
 				14F8A23F202E5D0600175FDC /* Red-29@2x.png in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
@@ -4121,6 +4137,7 @@
 				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				14F8A299202E65C700175FDC /* Blue-40@3x.png in Resources */,
 				14F8A283202E659000175FDC /* White-83.5@2x.png in Resources */,
+				998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */,
 				4113BF70208E23F000A9D4D8 /* Preferences.storyboard in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				14F8A22C202E5CBF00175FDC /* Black-76@3x.png in Resources */,
@@ -4694,6 +4711,7 @@
 				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				41E9F025215D4C6B00B2C9E7 /* TestingCoordinator.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
+				998E649E2161B6DF00E7C45A /* TextAttachmentChatItem.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
@@ -4714,6 +4732,7 @@
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				80AC400C20EEE8F5005082E1 /* ChatViewControllerBanner.swift in Sources */,
+				998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */,
 				9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */,
 				0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */,
 				9987B59C2093E60D007D277C /* RoomFilesRequest.swift in Sources */,
@@ -4911,6 +4930,7 @@
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */,
 				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,

@@ -11,10 +11,13 @@ import SafariServices
 import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
+import RocketChatViewController
 
 extension ReactorListViewController: UserActionSheetPresenter { }
 
 extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
+    func viewDidCollapseChange(viewModel: AnyChatItem) {}
+
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
