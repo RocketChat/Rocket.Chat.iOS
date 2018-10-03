@@ -34,6 +34,7 @@ final class MessagesViewController: RocketChatViewController {
     let viewModel = MessagesViewModel(controllerContext: nil)
     let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingManager()
+    let composerViewModel = MessagesComposerViewModel()
 
     var subscription: Subscription! {
         didSet {
@@ -56,6 +57,8 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
         collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
         collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
+        collectionView.register(TextAttachmentCell.nib, forCellWithReuseIdentifier: TextAttachmentCell.identifier)
+        collectionView.register(ImageMessageCell.nib, forCellWithReuseIdentifier: ImageMessageCell.identifier)
 
         dataUpdateDelegate = self
         viewModel.controllerContext = self

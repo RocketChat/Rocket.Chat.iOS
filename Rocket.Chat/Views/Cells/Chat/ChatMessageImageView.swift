@@ -11,6 +11,7 @@ import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView)
 }
 
 final class ChatMessageImageView: ChatMessageAttachmentView {

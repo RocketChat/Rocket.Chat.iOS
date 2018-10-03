@@ -11,10 +11,13 @@ import SafariServices
 import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
+import RocketChatViewController
 
 extension ReactorListViewController: UserActionSheetPresenter { }
 
 extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
+    func viewDidCollapseChange(viewModel: AnyChatItem) {}
+
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
@@ -139,6 +142,23 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
             present(ImageViewerController(configuration: configuration), animated: true)
         } else {
             openImage(attachment: attachment)
+        }
+    }
+
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+        // TODO: Adjust for our composer
+        // textView.resignFirstResponder()
+
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
+                config.imageView = thumbnail
+                config.allowSharing = true
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+//             openImage(attachment: attachment)
         }
     }
 
