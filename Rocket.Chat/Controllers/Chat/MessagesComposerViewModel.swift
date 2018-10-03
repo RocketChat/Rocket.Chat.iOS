@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 
 final class MessagesComposerViewModel {
+    var replyString = ""
+
     let hintPrefixes: [Character] = ["/", "#", "@", ":"]
 
     var hints: [String] = []
