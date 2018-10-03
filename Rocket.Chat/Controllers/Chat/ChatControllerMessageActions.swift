@@ -106,9 +106,7 @@ extension MessageSection {
 
         if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-//                self.messagesController?.messageToEdit = message
-                // TODO: Replace for our own edit text mechanism
-//                self.editText(message.text)
+                self.messagesController?.editMessage(message)
                 self.messagesController?.applyTheme()
             })
 

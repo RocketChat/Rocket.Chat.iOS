@@ -78,19 +78,31 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: EditingView
 
     func editingViewDidHide(_ editingView: EditingView) {
-        return
+        stopEditingMessage()
+
+        UIView.animate(withDuration: 0.2) {
+            self.composerView.leftButton.show()
+        }
     }
 
     func editingViewDidShow(_ editingView: EditingView) {
-        return
+        UIView.animate(withDuration: 0.2) {
+            self.composerView.leftButton.hide()
+        }
     }
 
     // MARK: Button
 
     func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
         if button === composerView.rightButton {
-            viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
+            if composerViewModel.messageToEdit != nil {
+                commitMessageEdit()
+            } else {
+                viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
+            }
+
             composerView.textView.text = ""
+
             stopReplying()
         }
 
