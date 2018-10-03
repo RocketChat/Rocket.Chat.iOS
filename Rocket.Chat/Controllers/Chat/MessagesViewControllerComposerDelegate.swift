@@ -15,7 +15,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     }
 
     func replyViewDidHide(_ replyView: ReplyView) {
-        return
+        composerViewModel.replyString = ""
     }
 
     func replyViewDidShow(_ replyView: ReplyView) {
@@ -89,8 +89,13 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
         if button === composerView.rightButton {
-            viewModel.sendTextMessage(text: composerView.textView.text)
+            viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
             composerView.textView.text = ""
+            stopReplying()
+        }
+
+        if button == composerView.leftButton {
+            buttonUploadDidPressed()
         }
 
         if button == composerView.leftButton {
