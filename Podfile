@@ -30,7 +30,7 @@ def shared_pods
 
   # UI
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
-  pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
+  pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController', :branch => 'improve_composer'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'SwipeCellKit'
