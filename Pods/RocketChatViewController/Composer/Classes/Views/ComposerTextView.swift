@@ -10,11 +10,27 @@
 
 import UIKit
 
+public protocol ComposerTextViewDelegate: class {
+    func maximumHeight(for composerTextView: ComposerTextView) -> CGFloat
+}
+
+public class FallbackComposerTextViewDelegate: ComposerTextViewDelegate {
+    public func maximumHeight(for composerTextView: ComposerTextView) -> CGFloat {
+        return 200.0
+    }
+}
+
 public class ComposerTextView: UITextView {
     public let placeholderLabel: UILabel = UILabel()
     public let placeholderColor: UIColor = UIColor(red: 0.0, green: 0.0, blue: 0.0980392, alpha: 0.22)
 
     private var placeholderLabelConstraints = [NSLayoutConstraint]()
+
+    public weak var textViewDelegate: ComposerTextViewDelegate?
+    let fallbackDelegate = FallbackComposerTextViewDelegate()
+    var currentDelegate: ComposerTextViewDelegate {
+        return textViewDelegate ?? fallbackDelegate
+    }
 
     public override var font: UIFont! {
         didSet {
@@ -47,7 +63,8 @@ public class ComposerTextView: UITextView {
     }
 
     public override var intrinsicContentSize: CGSize {
-        return CGSize(width: super.intrinsicContentSize.width, height: contentSize.height)
+        let height = min(contentSize.height, currentDelegate.maximumHeight(for: self))
+        return CGSize(width: super.intrinsicContentSize.width, height: height)
     }
 
     public override init(frame: CGRect, textContainer: NSTextContainer?) {

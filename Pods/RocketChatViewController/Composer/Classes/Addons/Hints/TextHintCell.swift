@@ -74,7 +74,7 @@ public class TextHintCell<PrefixView: UIView>: UITableViewCell {
      */
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // prefixLabel
+            // prefixView
 
             prefixView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutMargins.left),
             prefixView.centerYAnchor.constraint(equalTo: centerYAnchor),
