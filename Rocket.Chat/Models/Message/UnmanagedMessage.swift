@@ -75,7 +75,7 @@ extension UnmanagedMessage {
                 return attachment
             case .audio where attachment.audioURL != nil:
                 return attachment
-            case .textAttachment where attachment.fields.count > 0:
+            case .textAttachment:
                 return attachment
             default:
                 break
