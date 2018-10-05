@@ -8,19 +8,19 @@
 
 import UIKit
 
-public class TextHintCell: UITableViewCell {
+public class TextHintCell<PrefixView: UIView>: UITableViewCell {
     /*
-     The hint's prefix label
+     The hint's prefix view
      */
-    public let prefixLabel: UILabel = tap(UILabel()) {
+    public let prefixView: PrefixView = tap(PrefixView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.prefixCornerRadius
         $0.clipsToBounds = true
         $0.backgroundColor = Consts.prefixBackgroundColor
 
-        $0.textAlignment = .center
-        $0.textColor = #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
+        ($0 as? UILabel)?.textAlignment = .center
+        ($0 as? UILabel)?.textColor = #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.prefixWidth),
@@ -65,7 +65,7 @@ public class TextHintCell: UITableViewCell {
      Adds buttons and other UI elements as subviews.
      */
     private func addSubviews() {
-        addSubview(prefixLabel)
+        addSubview(prefixView)
         addSubview(valueLabel)
     }
 
@@ -74,14 +74,14 @@ public class TextHintCell: UITableViewCell {
      */
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // prefixLabel
+            // prefixView
 
-            prefixLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutMargins.left),
-            prefixLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            prefixView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutMargins.left),
+            prefixView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             // valueLabel
 
-            valueLabel.leadingAnchor.constraint(equalTo: prefixLabel.trailingAnchor, constant: Consts.valueLeading),
+            valueLabel.leadingAnchor.constraint(equalTo: prefixView.trailingAnchor, constant: Consts.valueLeading),
             valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
@@ -89,19 +89,17 @@ public class TextHintCell: UITableViewCell {
 
 // MARK: Consts
 
-private extension TextHintCell {
-    /**
-     Constants for sizes and margins in the cell view.
-     */
-    private struct Consts {
-        static var intrinsicHeight: CGFloat = 54
+/**
+ Constants for sizes and margins in the cell view.
+ */
+private struct Consts {
+    static var intrinsicHeight: CGFloat = 54
 
-        static var prefixWidth: CGFloat = 30
-        static var prefixHeight: CGFloat = 30
-        static var prefixLeading: CGFloat = 15
-        static var prefixCornerRadius: CGFloat = 4
-        static var prefixBackgroundColor: UIColor = #colorLiteral(red: 0.9450980392, green: 0.9490196078, blue: 0.9568627451, alpha: 1)
+    static var prefixWidth: CGFloat = 30
+    static var prefixHeight: CGFloat = 30
+    static var prefixLeading: CGFloat = 15
+    static var prefixCornerRadius: CGFloat = 4
+    static var prefixBackgroundColor: UIColor = #colorLiteral(red: 0.9450980392, green: 0.9490196078, blue: 0.9568627451, alpha: 1)
 
-        static var valueLeading: CGFloat = 15
-    }
+    static var valueLeading: CGFloat = 15
 }

@@ -25,12 +25,4 @@ public class ComposerButton: UIButton {
         alpha = 1
         invalidateIntrinsicContentSize()
     }
-
-    public override func contentHuggingPriority(for axis: UILayoutConstraintAxis) -> UILayoutPriority {
-        if axis == .horizontal {
-            return .defaultHigh
-        }
-
-        return super.contentHuggingPriority(for: axis)
-    }
 }

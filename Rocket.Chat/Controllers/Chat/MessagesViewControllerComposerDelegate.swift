@@ -43,26 +43,44 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func hintsView(_ hintsView: HintsView, cellForHintAt index: Int) -> UITableViewCell {
         let hint = composerViewModel.hints[index]
 
-        if composerViewModel.hintPrefixedWord.first == "@", let user = User.find(username: hint) {
+        switch hint {
+        case .user(let user):
             let cell = hintsView.dequeueReusableCell(withType: UserHintCell<AvatarView>.self)
-
             cell.avatarView.user = user
-            cell.usernameLabel.text = hint
+            cell.usernameLabel.text = user.username
             cell.nameLabel.text = user.name
+            return cell
 
+        case .emoji(let emoji, let suggestion):
+            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<EmojiView>.self)
+            cell.prefixView.setEmoji(emoji)
+            cell.valueLabel.text = emoji.shortname
+            return cell
+
+        case .command(let command):
+            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            cell.prefixView.text = "/"
+            cell.valueLabel.text = command.command
+            return cell
+
+        case .room(let room):
+            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            cell.prefixView.text = "#"
+            cell.valueLabel.text = room.name
+            return cell
+
+        case .userGroup(let userGroup):
+            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            cell.prefixView.text = "@"
+            cell.valueLabel.text = userGroup
             return cell
         }
-
-        let cell = hintsView.dequeueReusableCell(withType: TextHintCell.self)
-        cell.prefixLabel.text = String(composerViewModel.hintPrefixedWord.first ?? " ")
-        cell.valueLabel.text = String(hint)
-        return cell
     }
 
     func hintsView(_ hintsView: HintsView, didSelectHintAt index: Int) {
         if let range = composerView.textView.rangeOfNearestWordToSelection {
             let oldWord = composerView.textView.text[range]
-            let newWord = (oldWord.first?.description ?? "") + composerViewModel.hints[index]
+            let newWord = (oldWord.first?.description ?? "") + composerViewModel.hints[index].suggestion
             composerView.textView.text = composerView.textView.text.replacingCharacters(in: range, with: newWord)
         }
 

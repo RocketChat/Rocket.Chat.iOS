@@ -21,8 +21,6 @@ public struct ReplyViewModel {
 }
 
 public protocol ReplyViewDelegate {
-    func viewModel(for replyView: ReplyView) -> ReplyViewModel
-
     func replyViewDidHide(_ replyView: ReplyView)
     func replyViewDidShow(_ replyView: ReplyView)
 }

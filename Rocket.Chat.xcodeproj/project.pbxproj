@@ -461,6 +461,7 @@
 		8029B2F42059C1840067157B /* UIAlertController+StatusReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029B2F32059C1840067157B /* UIAlertController+StatusReport.swift */; };
 		802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E102049C7340072CD23 /* SENavigationController.swift */; };
 		802A4E24204D73100072CD23 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E23204D730F0072CD23 /* AppGroup.swift */; };
+		802C896121658F3400C6B9B2 /* EmojiViewSetEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C896021658F3400C6B9B2 /* EmojiViewSetEmoji.swift */; };
 		802C8959216314CF00C6B9B2 /* MessagesViewControllerUploading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C8958216314CF00C6B9B2 /* MessagesViewControllerUploading.swift */; };
 		802C895C21639B8900C6B9B2 /* MessagesViewControllerBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C895B21639B8900C6B9B2 /* MessagesViewControllerBanner.swift */; };
 		802C895E2165393600C6B9B2 /* MessagesViewControllerEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */; };
@@ -1367,6 +1368,7 @@
 		8029B2F32059C1840067157B /* UIAlertController+StatusReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+StatusReport.swift"; sourceTree = "<group>"; };
 		802A4E102049C7340072CD23 /* SENavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigationController.swift; sourceTree = "<group>"; };
 		802A4E23204D730F0072CD23 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		802C896021658F3400C6B9B2 /* EmojiViewSetEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewSetEmoji.swift; sourceTree = "<group>"; };
 		802C8958216314CF00C6B9B2 /* MessagesViewControllerUploading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerUploading.swift; sourceTree = "<group>"; };
 		802C895B21639B8900C6B9B2 /* MessagesViewControllerBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerBanner.swift; sourceTree = "<group>"; };
 		802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerEditing.swift; sourceTree = "<group>"; };
@@ -2427,6 +2429,7 @@
 		4174CB1D1D2DB3270086DAC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				802C895F21658F2600C6B9B2 /* EmojiView */,
 				8013F8631FD5E11100EE1A4E /* API */,
 				414EFF901E54FE35004F001F /* Models */,
 				8052F75A20B7522900B3B0CF /* UIAlertAction */,
@@ -3073,6 +3076,14 @@
 				802498F01F7A9BB4005477EC /* MeRequestSpec.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		802C895F21658F2600C6B9B2 /* EmojiView */ = {
+			isa = PBXGroup;
+			children = (
+				802C896021658F3400C6B9B2 /* EmojiViewSetEmoji.swift */,
+			);
+			path = EmojiView;
 			sourceTree = "<group>";
 		};
 		80307E3A1FD75BD3006AD9EF /* VoiceOver */ = {
@@ -4985,6 +4996,7 @@
 				41FC9E0B209B3B3100FED485 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				80B2D98820E5496E002F4149 /* UserDetailViewModel.swift in Sources */,
+				802C896121658F3400C6B9B2 /* EmojiViewSetEmoji.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */,
 				8062E327209E19BB0044F407 /* AuthClient.swift in Sources */,
 				8045F49F20D05A1700AA0F3C /* ReadReceiptListViewController.swift in Sources */,
