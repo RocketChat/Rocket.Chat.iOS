@@ -787,6 +787,9 @@
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99B15BCD20FD4589005A528F /* DatabaseManagerAuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */; };
 		99B15BCF20FD4681005A528F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F8DD81F599EF100AF7786 /* DatabaseManager.swift */; };
+		99B4A7B02164681200C80FF2 /* QuoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B4A7AF2164681200C80FF2 /* QuoteCell.xib */; };
+		99B4A7B22164683200C80FF2 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4A7B12164683200C80FF2 /* QuoteCell.swift */; };
+		99B4A7B4216479CD00C80FF2 /* QuoteChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */; };
 		99B802ED20BC3BD400230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EE20BC3EF700230109 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B802EC20BC3BD400230109 /* ImageManager.swift */; };
 		99B802EF20BC3F0800230109 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
@@ -1665,6 +1668,9 @@
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManager.swift; sourceTree = "<group>"; };
 		99B15BCC20FD4589005A528F /* DatabaseManagerAuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerAuthSettings.swift; sourceTree = "<group>"; };
+		99B4A7AF2164681200C80FF2 /* QuoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteCell.xib; sourceTree = "<group>"; };
+		99B4A7B12164683200C80FF2 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
+		99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteChatItem.swift; sourceTree = "<group>"; };
 		99B802EC20BC3BD400230109 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		99BC810F2107E3020084C948 /* DeepLinkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkSpec.swift; sourceTree = "<group>"; };
 		99BE4D812152D56E001A43E2 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -3689,6 +3695,8 @@
 				998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */,
 				4135A64521623F2A00C1741A /* ImageMessageCell.xib */,
 				4135A64321623F1300C1741A /* ImageMessageCell.swift */,
+				99B4A7AF2164681200C80FF2 /* QuoteCell.xib */,
+				99B4A7B12164683200C80FF2 /* QuoteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3705,6 +3713,7 @@
 				993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */,
 				998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */,
 				4135A64721623F3600C1741A /* ImageMessageChatItem.swift */,
+				99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -4156,6 +4165,7 @@
 				996735CD21581D160049BB63 /* BasicMessageCell.xib in Resources */,
 				14F8A292202E65C700175FDC /* Blue-29@3x.png in Resources */,
 				14F8A294202E65C700175FDC /* Blue-60@3x.png in Resources */,
+				99B4A7B02164681200C80FF2 /* QuoteCell.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
 				14F8A240202E5D0600175FDC /* Red-76@2x.png in Resources */,
 				41FC9E0D209B44A500FED485 /* ChatMessageDaySeparator.xib in Resources */,
@@ -4724,6 +4734,7 @@
 				998E649E2161B6DF00E7C45A /* TextAttachmentChatItem.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
+				99B4A7B22164683200C80FF2 /* QuoteCell.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
 				33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */,
@@ -4797,6 +4808,7 @@
 				33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */,
 				806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */,
 				8076FDB2204856CC00114F28 /* AuthCanEditMessage.swift in Sources */,
+				99B4A7B4216479CD00C80FF2 /* QuoteChatItem.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
 				0B80EE5920FC614600E7E43B /* RCPickerView.swift in Sources */,
 				99C577EE207E4F1500CE9B4D /* File.swift in Sources */,

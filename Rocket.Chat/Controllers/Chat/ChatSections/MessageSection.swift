@@ -67,6 +67,10 @@ final class MessageSection: ChatSection {
                 cells.append(TextAttachmentChatItem(
                     attachment: attachment
                 ).wrapped)
+            case .textAttachment:
+                cells.append(QuoteChatItem(
+                    attachment: attachment
+                ).wrapped)
             case .image:
                 cells.append(ImageMessageChatItem(
                     identifier: identifier,
@@ -115,9 +119,9 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         } else if let cell = cell as? ImageMessageCell {
             cell.delegate = self
-        }
-
-        if let cell = cell as? TextAttachmentCell {
+        } else if let cell = cell as? TextAttachmentCell {
+            cell.delegate = self
+        } else if let cell = cell as? QuoteCell {
             cell.delegate = self
         }
 
