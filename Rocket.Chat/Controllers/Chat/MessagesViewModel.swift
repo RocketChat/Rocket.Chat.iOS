@@ -302,4 +302,9 @@ extension MessagesViewModel {
         guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.sendMessage(text: text, subscription: subscription)
     }
+
+    func editTextMessage(_ message: Message, text: String) {
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
+        client.updateMessage(message, text: text)
+    }
 }

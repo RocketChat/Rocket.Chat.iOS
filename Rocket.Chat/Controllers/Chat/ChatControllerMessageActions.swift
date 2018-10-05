@@ -65,14 +65,12 @@ extension MessageSection {
             UIPasteboard.general.string = message.text
         })
 
-        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { (_) in
-            // TODO: Replace for our reply mechanism
-//            self?.reply(to: message)
+        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
+            (self?.controllerContext as? MessagesViewController)?.reply(to: message)
         })
 
-        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { (_) in
-            // TODO: Replace for our reply mechanism
-//            self?.reply(to: message, onlyQuote: true)
+        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
+            (self?.controllerContext as? MessagesViewController)?.reply(to: message, onlyQuote: true)
         })
 
         var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
@@ -108,9 +106,7 @@ extension MessageSection {
 
         if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-//                self.messagesController?.messageToEdit = message
-                // TODO: Replace for our own edit text mechanism
-//                self.editText(message.text)
+                self.messagesController?.editMessage(message)
                 self.messagesController?.applyTheme()
             })
 

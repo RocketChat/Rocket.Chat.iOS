@@ -109,9 +109,8 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         WebBrowserManager.open(url: url)
     }
 
-    func openURLFromCell(url: MessageURL) {
-        guard let targetURL = url.targetURL else { return }
-        guard let destinyURL = URL(string: targetURL) else { return }
+    func openURLFromCell(url: String) {
+        guard let destinyURL = URL(string: url) else { return }
         WebBrowserManager.open(url: destinyURL)
     }
 
