@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ChatMessageURLViewProtocol: class {
-    func openURLFromCell(url: MessageURL)
+    func openURLFromCell(url: String)
 }
 
 final class ChatMessageURLView: UIView {
@@ -60,7 +60,7 @@ final class ChatMessageURLView: UIView {
     }
 
     @objc func viewDidTapped(_ sender: Any) {
-        delegate?.openURLFromCell(url: url)
+//        delegate?.openURLFromCell(url: url)
     }
 }
 
