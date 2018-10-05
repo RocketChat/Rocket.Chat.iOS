@@ -94,18 +94,20 @@ struct MessagesClient: APIClient {
 
     // swiftlint:enable function_body_length
 
-    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+    func sendMessage(text: String, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+        let subscriptionManaged = subscription.managedObject
+
         let message = Message()
         message.internalType = ""
         message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
-        message.subscription = subscription
+        message.subscription = subscriptionManaged
         message.user = user
         message.identifier = id
         message.temporary = true
 
-        sendMessage(message, subscription: subscription, realm: realm)
+        sendMessage(message, subscription: subscriptionManaged, realm: realm)
     }
 
     @discardableResult

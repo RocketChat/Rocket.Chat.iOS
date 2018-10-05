@@ -291,11 +291,9 @@ final class MessagesViewModel {
 }
 
 extension MessagesViewModel {
+
     func sendTextMessage(text: String) {
-        guard
-            let subscription = subscription,
-            text.count > 0
-        else {
+        guard let subscription = subscription?.validated()?.unmanaged, text.count > 0 else {
             return
         }
 
@@ -307,4 +305,5 @@ extension MessagesViewModel {
         guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.updateMessage(message, text: text)
     }
+
 }

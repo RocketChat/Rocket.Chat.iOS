@@ -536,7 +536,7 @@ final class ChatViewController: RocketChatViewController {
 
     func sendTextMessage(text: String) {
         guard
-            let subscription = subscription,
+            let subscription = subscription?.validated()?.unmanaged,
             text.count > 0
         else {
             return
