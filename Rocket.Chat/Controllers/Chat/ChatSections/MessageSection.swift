@@ -87,6 +87,15 @@ final class MessageSection: ChatSection {
             }
         }
 
+        object.message.urls.forEach { messageURL in
+            cells.append(MessageURLChatItem(
+                url: messageURL.url,
+                imageURL: messageURL.imageURL,
+                title: messageURL.title,
+                subtitle: messageURL.subtitle
+            ).wrapped)
+        }
+
         if !object.isSequential {
             cells.append(BasicMessageChatItem(
                 user: user,
@@ -122,6 +131,8 @@ final class MessageSection: ChatSection {
         } else if let cell = cell as? TextAttachmentCell {
             cell.delegate = self
         } else if let cell = cell as? QuoteCell {
+            cell.delegate = self
+        } else if let cell = cell as? MessageURLCell {
             cell.delegate = self
         }
 
@@ -227,9 +238,8 @@ extension MessageSection: ChatMessageCellProtocol {
         WebBrowserManager.open(url: url)
     }
 
-    func openURLFromCell(url: MessageURL) {
-        guard let targetURL = url.targetURL else { return }
-        guard let destinyURL = URL(string: targetURL) else { return }
+    func openURLFromCell(url: String) {
+        guard let destinyURL = URL(string: url) else { return }
         WebBrowserManager.open(url: destinyURL)
     }
 

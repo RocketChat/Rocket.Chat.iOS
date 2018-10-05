@@ -9,6 +9,13 @@
 import Foundation
 import DifferenceKit
 
+struct UnmanagedMessageURL {
+    var url: String
+    var title: String
+    var subtitle: String
+    var imageURL: String?
+}
+
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
     var identifier: String
@@ -20,6 +27,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var failed: Bool
     var mentions: [Mention]
     var channels: [Channel]
+    var urls: [UnmanagedMessageURL]
     var reactions: [MessageReaction]
     var createdAt: Date?
     var updatedAt: Date?
@@ -62,6 +70,24 @@ extension UnmanagedMessage {
         updatedAt = message.updatedAt
         emoji = message.emoji
         avatar = message.avatar
+
+        urls = message.urls.compactMap({ messageURL in
+            guard
+                let title = messageURL.title,
+                let subtitle = messageURL.textDescription,
+                let url = messageURL.targetURL,
+                messageURL.isValid()
+            else {
+                return nil
+            }
+
+            return UnmanagedMessageURL(
+                url: url,
+                title: title,
+                subtitle: subtitle,
+                imageURL: messageURL.imageURL
+            )
+        })
 
         attachments = message.attachments.compactMap({ attachment in
             if attachment.isFile && attachment.fullFileURL() != nil {
