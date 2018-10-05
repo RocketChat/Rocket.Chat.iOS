@@ -100,13 +100,9 @@
             <size key="customSize" width="375" height="166"/>
             <connections>
                 <outlet property="activityIndicator" destination="Soe-tp-c3F" id="9Gw-nl-1tJ"/>
-                <outlet property="containerLeadingConstraint" destination="sPZ-Ll-RsM" id="IfL-nC-c4f"/>
-                <outlet property="containerTrailingConstraint" destination="H6l-jv-hJz" id="hhR-Q4-l7R"/>
                 <outlet property="containerView" destination="DRa-SQ-UjJ" id="xHG-yf-UoP"/>
                 <outlet property="host" destination="JBg-lq-cbz" id="rYQ-au-Oef"/>
                 <outlet property="subtitle" destination="aSO-ZR-gNc" id="d6p-35-V2y"/>
-                <outlet property="subtitleLeadingConstraint" destination="8St-xn-Kea" id="aX5-5b-Jup"/>
-                <outlet property="subtitleTrailingConstraint" destination="mcF-PF-are" id="aBc-4K-QR6"/>
                 <outlet property="thumbnail" destination="2cU-ro-6J9" id="wZf-8K-Ocy"/>
                 <outlet property="thumbnailHeightConstraint" destination="Jlz-g1-2Lh" id="AgD-IS-e73"/>
                 <outlet property="title" destination="L5p-uh-3Ft" id="Zj1-7A-YLS"/>

@@ -28,10 +28,6 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var host: UILabel!
 
     @IBOutlet weak var thumbnailHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var subtitleLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var subtitleTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
 
     weak var delegate: ChatMessageCellProtocol?
 
