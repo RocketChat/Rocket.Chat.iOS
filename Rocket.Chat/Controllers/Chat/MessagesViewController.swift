@@ -91,7 +91,7 @@ extension MessagesViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let section = viewModel.itemAt(indexPath) else {
+        guard let section = viewModel.itemAt(indexPath), indexPath.row < section.viewModels().count else {
             return .zero
         }
 

@@ -18,19 +18,13 @@ final class MessagesViewModel {
      array is feeded from the Realm query, the observers on the query and the manipulations
      that are executed after getting the data.
      */
-    internal var data: [AnyChatSection] = []
-    internal var dataSorted: [AnyChatSection] {
-        return data.sorted { (section1, section2) -> Bool in
-            guard
-                let object1 = section1.object.base as? MessageSectionModel,
-                let object2 = section2.object.base as? MessageSectionModel
-            else {
-                return false
-            }
+    internal var data: [AnyChatSection] = [] {
+        didSet {
 
-            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
         }
     }
+
+    internal var dataSorted: [AnyChatSection] = []
 
     /**
      The controller context that will be used to respond
@@ -139,11 +133,11 @@ final class MessagesViewModel {
      - returns: The instance of AnyChatSection if exists.
      */
     func itemAt(_ indexPath: IndexPath) -> AnyChatSection? {
-        guard data.count > indexPath.section else {
+        guard dataSorted.count > indexPath.section else {
             return nil
         }
 
-        return data[indexPath.section]
+        return dataSorted[indexPath.section]
     }
 
     /**
@@ -176,6 +170,22 @@ final class MessagesViewModel {
             object: AnyDifferentiable(messageSectionModel),
             controllerContext: controllerContext
         ))
+    }
+
+    /**
+     Sort the data list based on data and cache it.
+     */
+    internal func cacheDataSorted() {
+        dataSorted = data.sorted { (section1, section2) -> Bool in
+            guard
+                let object1 = section1.object.base as? MessageSectionModel,
+                let object2 = section2.object.base as? MessageSectionModel
+            else {
+                return false
+            }
+
+            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+        }
     }
 
     /**
@@ -228,12 +238,19 @@ final class MessagesViewModel {
                 }
 
                 if modified < data.count {
-                    if let section = section(for: message) {
+                    var previous: AnyChatSection?
+
+                    if modified > 0  {
+                        previous = data[modified - 1]
+                    }
+
+                    if let section = section(for: message, previous: previous) {
                         data[modified] = section
                     }
                 }
             }
 
+            cacheDataSorted()
             onDataChanged?()
         case .error(let error):
             fatalError("\(error)")
