@@ -18,9 +18,17 @@ final class MessagesViewModel {
      array is feeded from the Realm query, the observers on the query and the manipulations
      that are executed after getting the data.
      */
-    internal var data: [AnyChatSection] = [] {
-        didSet {
-            onDataChanged?()
+    internal var data: [AnyChatSection] = []
+    internal var dataSorted: [AnyChatSection] {
+        return data.sorted { (section1, section2) -> Bool in
+            guard
+                let object1 = section1.object.base as? MessageSectionModel,
+                let object2 = section2.object.base as? MessageSectionModel
+            else {
+                return false
+            }
+
+            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
         }
     }
 
@@ -174,20 +182,62 @@ final class MessagesViewModel {
      This method is called on every update the messagesQuery get from Realm.
     */
     func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
-        var updatedData: [AnyChatSection] = []
+        guard let messagesQuery = self.messagesQuery else { return }
 
-        var previousSection: AnyChatSection?
-        messagesQuery?.forEach({ (object) in
-            if let section = section(for: object, previous: previousSection) {
-                updatedData.append(section)
-                previousSection = section
+        switch changes {
+        case .initial:
+            var sections: [AnyChatSection] = []
+
+            var previousSection: AnyChatSection?
+            messagesQuery.forEach({ (object) in
+                if let section = section(for: object, previous: previousSection) {
+                    sections.append(section)
+                    previousSection = section
+                }
+            })
+
+            // RKS NOTE: Apply loader to the latest object
+            // has more data.
+
+            data = sections
+            onDataChanged?()
+        case .update(_, let deletions, let insertions, let modifications):
+            for deletion in deletions {
+                data.remove(at: deletion)
             }
-        })
 
-        // RKS NOTE: Apply loader to the latest object
-        // has more data.
+            for insertion in insertions {
+                guard
+                    insertion < messagesQuery.count,
+                    let message = messagesQuery[insertion].validated()
+                else {
+                    continue
+                }
 
-        data = updatedData.reversed()
+                if let section = section(for: message) {
+                    data.append(section)
+                }
+            }
+
+            for modified in modifications {
+                guard
+                    modified < messagesQuery.count,
+                    let message = messagesQuery[modified].validated()
+                else {
+                    continue
+                }
+
+                if modified < data.count {
+                    if let section = section(for: message) {
+                        data[modified] = section
+                    }
+                }
+            }
+
+            onDataChanged?()
+        case .error(let error):
+            fatalError("\(error)")
+        }
     }
 
     /**
@@ -237,12 +287,8 @@ final class MessagesViewModel {
      - returns: The day that needs to be displayed in the separator if any.
      */
     func daySeparator(message: UnmanagedMessage, previousMessage: UnmanagedMessage) -> Date? {
-        guard
-            let createdAt = message.createdAt,
-            let previousCreatedAt = previousMessage.createdAt
-        else {
-            return message.createdAt
-        }
+        let createdAt = message.createdAt
+        let previousCreatedAt = previousMessage.createdAt
 
         if createdAt.sameDayAs(previousCreatedAt) {
             return nil
@@ -275,9 +321,8 @@ final class MessagesViewModel {
             return false
         }
 
-        guard let date = message.createdAt, let prevDate = previousMessage.createdAt else {
-            return false
-        }
+        let date = message.createdAt
+        let prevDate = previousMessage.createdAt
 
         let sameUser = message.user == previousMessage.user
 

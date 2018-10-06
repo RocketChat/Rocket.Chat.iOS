@@ -11,7 +11,9 @@ import DifferenceKit
 
 struct MessageSectionModel: Differentiable {
     let identifier: String
-    let message: UnmanagedMessage
+
+    var messageDate: Date
+    var message: UnmanagedMessage
 
     var daySeparator: Date?
     var isSequential: Bool = false
@@ -23,6 +25,7 @@ struct MessageSectionModel: Differentiable {
     init(message: UnmanagedMessage) {
         self.identifier = message.identifier
         self.message = message
+        self.messageDate = message.createdAt
     }
 
     // MARK: Differentiable
