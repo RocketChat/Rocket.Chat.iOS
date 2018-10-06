@@ -206,10 +206,8 @@ final class MessagesViewModel {
                 }
             })
 
-            // RKS NOTE: Apply loader to the latest object
-            // has more data.
-
             data = sections
+            cacheDataSorted()
             onDataChanged?()
         case .update(_, let deletions, let insertions, let modifications):
             for deletion in deletions {
@@ -240,7 +238,7 @@ final class MessagesViewModel {
                 if modified < data.count {
                     var previous: AnyChatSection?
 
-                    if modified > 0  {
+                    if modified > 0 {
                         previous = data[modified - 1]
                     }
 
