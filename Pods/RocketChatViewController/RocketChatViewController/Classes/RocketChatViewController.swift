@@ -295,7 +295,9 @@ open class RocketChatViewController: UICollectionViewController {
         }
     }
 
-    @objc open func updateData() {
+    @objc open func updateData(with target: [Any]) {
+        guard let target = target as? [AnyChatSection] else { return }
+
         updateDataQueue.addOperation { [weak self] in
             guard
                 let strongSelf = self,
@@ -305,13 +307,15 @@ open class RocketChatViewController: UICollectionViewController {
             }
 
             DispatchQueue.main.async {
-                let changeset = StagedChangeset(source: strongSelf.internalData, target: strongSelf.data.map({ $0.toArraySection }))
+                let changeset = StagedChangeset(source: strongSelf.internalData, target: target.map({ $0.toArraySection }))
                 collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
                     strongSelf.internalData = newData
 
                     let newSections = newData.map { $0.model }
                     strongSelf.data = newSections
                     strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
+
+                    assert(newSections.count == newData.count)
                 }
             }
         }

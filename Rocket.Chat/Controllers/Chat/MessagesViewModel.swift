@@ -173,7 +173,7 @@ final class MessagesViewModel {
     }
 
     /**
-     Sort the data list based on data and cache it.
+     Sort the data list based on data and cache it in a local variable.
      */
     internal func cacheDataSorted() {
         dataSorted = data.sorted { (section1, section2) -> Bool in

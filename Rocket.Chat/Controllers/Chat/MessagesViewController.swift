@@ -65,8 +65,7 @@ final class MessagesViewController: RocketChatViewController {
         dataUpdateDelegate = self
         viewModel.controllerContext = self
         viewModel.onDataChanged = {
-            self.data = self.viewModel.dataSorted
-            self.updateData()
+            self.updateData(with: self.viewModel.dataSorted)
         }
 
         viewSubscriptionModel.onDataChanged = {
@@ -91,11 +90,16 @@ extension MessagesViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let section = viewModel.itemAt(indexPath), indexPath.row < section.viewModels().count else {
+        guard
+            indexPath.section < data.count,
+            indexPath.row < data[indexPath.section].viewModels().count
+        else {
             return .zero
         }
 
+        let section = data[indexPath.section]
         let sectionViewModel = section.viewModels()[indexPath.row]
+
         if let size = viewSizingModel.size(for: sectionViewModel.differenceIdentifier) {
             return size
         } else {
