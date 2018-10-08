@@ -319,7 +319,7 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
+        // TODO: Trigger reload
         messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-        update()
     }
 }

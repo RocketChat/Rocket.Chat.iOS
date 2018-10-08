@@ -85,9 +85,8 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
             return
         }
 
-        if let createdAt = viewModel.message.createdAt {
-            date.text = RCDateFormatter.time(createdAt)
-        }
+        let createdAt = viewModel.message.createdAt
+        date.text = RCDateFormatter.time(createdAt)
 
         username.text = viewModel.user.username
         updateText()

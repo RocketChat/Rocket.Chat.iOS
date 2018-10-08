@@ -106,7 +106,7 @@ extension Subscription {
     }
 
     func fetchMessagesQueryResults() -> Results<Message> {
-        var filteredMessages = self.messages.filter("userBlocked == false")
+        var filteredMessages = self.messages.filter("userBlocked == false AND identifier != NULL AND createdAt != NULL")
 
         if let hiddenTypes = AuthSettingsManager.settings?.hiddenTypes {
             for hiddenType in hiddenTypes {

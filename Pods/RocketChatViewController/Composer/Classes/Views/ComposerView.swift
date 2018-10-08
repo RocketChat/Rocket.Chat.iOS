@@ -88,7 +88,7 @@ public class ComposerView: UIView {
     public let textView = tap(ComposerTextView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
-        $0.text = "oi"
+        $0.text = ""
         $0.placeholderLabel.text = "Type a message"
         $0.placeholderLabel.font = .preferredFont(forTextStyle: .body)
         $0.placeholderLabel.adjustsFontForContentSizeCategory = true

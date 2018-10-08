@@ -29,7 +29,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var channels: [Channel]
     var urls: [UnmanagedMessageURL]
     var reactions: [MessageReaction]
-    var createdAt: Date?
+    var createdAt: Date
     var updatedAt: Date?
     var groupable: Bool
     var markedForDeletion: Bool
@@ -51,7 +51,14 @@ extension UnmanagedMessage {
 
 extension UnmanagedMessage {
     init?(_ message: Message) {
-        guard let messageIdentifier = message.identifier else {
+        guard
+            let messageIdentifier = message.identifier,
+            let messageCreatedAt = message.createdAt
+        else {
+            #if DEBUG
+            fatalError("message object is not completed")
+            #endif
+
             return nil
         }
 
@@ -66,7 +73,7 @@ extension UnmanagedMessage {
         mentions = message.mentions.map { $0 }
         channels = message.channels.map { $0 }
         reactions = message.reactions.map { $0 }
-        createdAt = message.createdAt
+        createdAt = messageCreatedAt
         updatedAt = message.updatedAt
         emoji = message.emoji
         avatar = message.avatar

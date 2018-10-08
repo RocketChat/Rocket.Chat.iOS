@@ -9,10 +9,6 @@
 import UIKit
 import DifferenceKit
 
-fileprivate extension NSNotification.Name {
-    static let triggerDataUpdate = NSNotification.Name("TRIGGER_DATA_UPDATE")
-}
-
 public extension UICollectionView {
     public func dequeueChatCell(withReuseIdentifier reuseIdetifier: String, for indexPath: IndexPath) -> ChatCell {
         guard let cell = dequeueReusableCell(withReuseIdentifier: reuseIdetifier, for: indexPath) as? ChatCell else {
@@ -128,15 +124,6 @@ public protocol ChatSection {
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell
 }
 
-public extension ChatSection {
-    public func update() {
-        NotificationCenter.default.post(
-            name: .triggerDataUpdate,
-            object: nil
-        )
-    }
-}
-
 /**
     A single split of an object that binds an UICollectionViewCell and can be differentiated.
 
@@ -228,7 +215,6 @@ open class RocketChatViewController: UICollectionViewController {
         return true
     }
 
-    open var data: [AnyChatSection] = []
     private var internalData: [ArraySection<AnyChatSection, AnyChatItem>] = []
 
     open weak var dataUpdateDelegate: ChatDataUpdateDelegate?
@@ -247,22 +233,7 @@ open class RocketChatViewController: UICollectionViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         setupChatViews()
-        registerObservers()
         startAvoidingKeyboard()
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    func registerObservers() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(updateData),
-            name: .triggerDataUpdate,
-            object: nil
-        )
     }
 
     func setupChatViews() {
@@ -295,7 +266,7 @@ open class RocketChatViewController: UICollectionViewController {
         }
     }
 
-    @objc open func updateData() {
+    open func updateData(with target: [AnyChatSection]) {
         updateDataQueue.addOperation { [weak self] in
             guard
                 let strongSelf = self,
@@ -305,13 +276,14 @@ open class RocketChatViewController: UICollectionViewController {
             }
 
             DispatchQueue.main.async {
-                let changeset = StagedChangeset(source: strongSelf.internalData, target: strongSelf.data.map({ $0.toArraySection }))
+                let changeset = StagedChangeset(source: strongSelf.internalData, target: target.map({ $0.toArraySection }))
                 collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
                     strongSelf.internalData = newData
 
                     let newSections = newData.map { $0.model }
-                    strongSelf.data = newSections
                     strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
+
+                    assert(newSections.count == newData.count)
                 }
             }
         }
@@ -348,22 +320,28 @@ extension RocketChatViewController: UICollectionViewDelegateFlowLayout {}
 
 extension RocketChatViewController {
     func startAvoidingKeyboard() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(_onKeyboardFrameWillChangeNotificationReceived(_:)),
-                                               name: NSNotification.Name.UIKeyboardWillChangeFrame,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(_onKeyboardFrameWillChangeNotificationReceived(_:)),
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
     }
 
     func stopAvoidingKeyboard() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.UIKeyboardWillChangeFrame,
-                                                  object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
     }
 
     @objc private func _onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-                return
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
         }
 
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)

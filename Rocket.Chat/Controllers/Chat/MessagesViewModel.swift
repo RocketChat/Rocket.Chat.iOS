@@ -18,11 +18,8 @@ final class MessagesViewModel {
      array is feeded from the Realm query, the observers on the query and the manipulations
      that are executed after getting the data.
      */
-    internal var data: [AnyChatSection] = [] {
-        didSet {
-            onDataChanged?()
-        }
-    }
+    internal var data: [AnyChatSection] = []
+    internal var dataSorted: [AnyChatSection] = []
 
     /**
      The controller context that will be used to respond
@@ -122,20 +119,18 @@ final class MessagesViewModel {
     }
 
     /**
-     Returns the instance of MessageSection in the data
-     if present. The index of the list is based in the section
-     of the indexPath instance.
-
-     - parameters:
-        - indexPath: The indexPath of the item for lookup.
-     - returns: The instance of AnyChatSection if exists.
+     Returns the specific cell item model for the IndexPath requested.
      */
-    func itemAt(_ indexPath: IndexPath) -> AnyChatSection? {
-        guard data.count > indexPath.section else {
+    func item(for indexPath: IndexPath) -> AnyChatItem? {
+        guard
+            indexPath.section < dataSorted.count,
+            indexPath.row < dataSorted[indexPath.section].viewModels().count
+        else {
             return nil
         }
 
-        return data[indexPath.section]
+        let section = dataSorted[indexPath.section]
+        return section.viewModels()[indexPath.row]
     }
 
     /**
@@ -152,17 +147,21 @@ final class MessagesViewModel {
     func section(for message: Message, previous: AnyChatSection? = nil) -> AnyChatSection? {
         guard let message = message.validated()?.unmanaged else { return nil }
 
-        var messageSectionModel = MessageSectionModel(message: message)
+        var sequential = false
+        var separator: Date?
 
         if let previous = previous, let previousObject = previous.base.object.base as? MessageSectionModel {
             let previousMessage = previousObject.message
 
-            let sequential = isSequential(message: message, previousMessage: previousMessage)
-            messageSectionModel.isSequential = sequential
-
-            let separator = daySeparator(message: message, previousMessage: previousMessage)
-            messageSectionModel.daySeparator = separator
+            sequential = isSequential(message: message, previousMessage: previousMessage)
+            separator = daySeparator(message: message, previousMessage: previousMessage)
         }
+
+        let messageSectionModel = MessageSectionModel(
+            message: message,
+            daySeparator: separator,
+            sequential: sequential
+        )
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
@@ -171,23 +170,85 @@ final class MessagesViewModel {
     }
 
     /**
+     Sort the data list based on data and cache it in a local variable.
+     */
+    internal func cacheDataSorted() {
+        dataSorted = data.sorted { (section1, section2) -> Bool in
+            guard
+                let object1 = section1.object.base as? MessageSectionModel,
+                let object2 = section2.object.base as? MessageSectionModel
+            else {
+                return false
+            }
+
+            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+        }
+    }
+
+    /**
      This method is called on every update the messagesQuery get from Realm.
     */
     func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
-        var updatedData: [AnyChatSection] = []
+        guard let messagesQuery = self.messagesQuery else { return }
 
-        var previousSection: AnyChatSection?
-        messagesQuery?.forEach({ (object) in
-            if let section = section(for: object, previous: previousSection) {
-                updatedData.append(section)
-                previousSection = section
+        switch changes {
+        case .initial:
+            var sections: [AnyChatSection] = []
+
+            var previousSection: AnyChatSection?
+//            let messages = subscription?.fetchMessages(40, lastMessageDate: nil)
+            messagesQuery.forEach({ (object) in
+                if let section = section(for: object, previous: previousSection) {
+                    sections.append(section)
+                    previousSection = section
+                }
+            })
+
+            data = sections
+            cacheDataSorted()
+            onDataChanged?()
+        case .update(_, let deletions, let insertions, let modifications):
+            for deletion in deletions where deletion < data.count {
+                data.remove(at: deletion)
             }
-        })
 
-        // RKS NOTE: Apply loader to the latest object
-        // has more data.
+            for insertion in insertions {
+                guard
+                    insertion < messagesQuery.count,
+                    let message = messagesQuery[insertion].validated()
+                else {
+                    continue
+                }
 
-        data = updatedData.reversed()
+                if let section = section(for: message) {
+                    data.append(section)
+                }
+            }
+
+            for modified in modifications where modified < data.count {
+                guard
+                    modified < messagesQuery.count,
+                    let message = messagesQuery[modified].validated()
+                else {
+                    continue
+                }
+
+                var previous: AnyChatSection?
+
+                if modified > 0 {
+                    previous = data[modified - 1]
+                }
+
+                if let section = section(for: message, previous: previous) {
+                    data[modified] = section
+                }
+            }
+
+            cacheDataSorted()
+            onDataChanged?()
+        case .error(let error):
+            fatalError("\(error)")
+        }
     }
 
     /**
@@ -213,10 +274,23 @@ final class MessagesViewModel {
      */
     func fetchMessages(from oldestMessage: Date?) {
         guard !requestingData, hasMoreData else { return }
-        guard let subscription = subscription?.validated()?.unmanaged else { return }
+        guard let subscription = subscription?.validated() else { return }
+        guard let subscriptionDetached = subscription.unmanaged else { return }
+
+        let messages = subscription.fetchMessages(50, lastMessageDate: oldestMessage)
+        for message in messages {
+            if let section = section(for: message) {
+                data.append(section)
+            }
+        }
+
+        if messages.count > 0 {
+            cacheDataSorted()
+            onDataChanged?()
+        }
 
         requestingData = true
-        MessageManager.getHistory(subscription, lastMessageDate: oldestMessage) { [weak self] oldest in
+        MessageManager.getHistory(subscriptionDetached, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
@@ -237,12 +311,8 @@ final class MessagesViewModel {
      - returns: The day that needs to be displayed in the separator if any.
      */
     func daySeparator(message: UnmanagedMessage, previousMessage: UnmanagedMessage) -> Date? {
-        guard
-            let createdAt = message.createdAt,
-            let previousCreatedAt = previousMessage.createdAt
-        else {
-            return message.createdAt
-        }
+        let createdAt = message.createdAt
+        let previousCreatedAt = previousMessage.createdAt
 
         if createdAt.sameDayAs(previousCreatedAt) {
             return nil
@@ -275,9 +345,8 @@ final class MessagesViewModel {
             return false
         }
 
-        guard let date = message.createdAt, let prevDate = previousMessage.createdAt else {
-            return false
-        }
+        let date = message.createdAt
+        let prevDate = previousMessage.createdAt
 
         let sameUser = message.user == previousMessage.user
 
@@ -291,11 +360,9 @@ final class MessagesViewModel {
 }
 
 extension MessagesViewModel {
+
     func sendTextMessage(text: String) {
-        guard
-            let subscription = subscription,
-            text.count > 0
-        else {
+        guard let subscription = subscription?.validated()?.unmanaged, text.count > 0 else {
             return
         }
 
@@ -307,4 +374,5 @@ extension MessagesViewModel {
         guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.updateMessage(message, text: text)
     }
+
 }
