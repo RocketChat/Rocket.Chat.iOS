@@ -266,9 +266,7 @@ open class RocketChatViewController: UICollectionViewController {
         }
     }
 
-    @objc open func updateData(with target: [Any]) {
-        guard let target = target as? [AnyChatSection] else { return }
-
+    open func updateData(with target: [AnyChatSection]) {
         updateDataQueue.addOperation { [weak self] in
             guard
                 let strongSelf = self,
