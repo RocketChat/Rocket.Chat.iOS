@@ -90,25 +90,19 @@ extension MessagesViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard
-            indexPath.section < data.count,
-            indexPath.row < data[indexPath.section].viewModels().count
-        else {
+        guard let item = viewModel.item(for: indexPath) else {
             return .zero
         }
 
-        let section = data[indexPath.section]
-        let sectionViewModel = section.viewModels()[indexPath.row]
-
-        if let size = viewSizingModel.size(for: sectionViewModel.differenceIdentifier) {
+        if let size = viewSizingModel.size(for: item.differenceIdentifier) {
             return size
         } else {
-            guard let sizingCell = UINib(nibName: sectionViewModel.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
+            guard let sizingCell = UINib(nibName: item.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
                 return .zero
             }
 
-            let size = type(of: sizingCell).size(for: sectionViewModel)
-            viewSizingModel.set(size: size, for: sectionViewModel.differenceIdentifier)
+            let size = type(of: sizingCell).size(for: item)
+            viewSizingModel.set(size: size, for: item.differenceIdentifier)
 
             return size
         }

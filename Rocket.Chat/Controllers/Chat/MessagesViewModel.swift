@@ -119,6 +119,21 @@ final class MessagesViewModel {
     }
 
     /**
+     Returns the specific cell item model for the IndexPath requested.
+     */
+    func item(for indexPath: IndexPath) -> AnyChatItem? {
+        guard
+            indexPath.section < dataSorted.count,
+            indexPath.row < dataSorted[indexPath.section].viewModels().count
+        else {
+            return nil
+        }
+
+        let section = dataSorted[indexPath.section]
+        return section.viewModels()[indexPath.row]
+    }
+
+    /**
      Creates the AnyChatSection object based on an instance of Message
      and set some attributes based on the previous message (if any) such like:
      if the message is sequential, if there's any separator to be added

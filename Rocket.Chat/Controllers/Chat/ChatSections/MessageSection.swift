@@ -320,6 +320,5 @@ extension MessageSection: ChatMessageCellProtocol {
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
         messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-        update()
     }
 }
