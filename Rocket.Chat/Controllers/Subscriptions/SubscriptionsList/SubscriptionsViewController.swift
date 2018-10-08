@@ -561,7 +561,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
 
             favorite.hidesWhenSelected = true
             favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
-            favorite.image = subscription.favorite ? #imageLiteral(resourceName: "Swipe unfavorite") : #imageLiteral(resourceName: "Swipe favorite")
+            favorite.image = subscription.favorite ? #imageLiteral(resourceName: "Swipe favorite") : #imageLiteral(resourceName: "Swipe unfavorite")
 
             return [hide, favorite]
         }
