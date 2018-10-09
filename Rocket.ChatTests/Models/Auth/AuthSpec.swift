@@ -113,7 +113,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         // standard test
 
@@ -158,7 +158,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         // different user
 
         realm.execute({ _ in
-            message.user = user2
+            message.userIdentifier = user2.identifier
         })
 
         XCTAssert(auth.canDeleteMessage(message) == .differentUser)
@@ -167,7 +167,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         realm.execute({ _ in
             auth.settings?.messageAllowDeleting = false
-            message.user = user1
+            message.userIdentifier = user1.identifier
         })
 
         XCTAssert(auth.canDeleteMessage(message) == .serverBlocked)
@@ -179,7 +179,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         forcePermission.roles.append("admin")
 
         realm.execute({ _ in
-            message.user = user2
+            message.userIdentifier = user2.identifier
             realm.add(forcePermission)
             user1.roles.append("admin")
         })
@@ -221,7 +221,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         // standard test
 
@@ -266,7 +266,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         // different user
 
         realm.execute({ _ in
-            message.user = user2
+            message.userIdentifier = user2.identifier
         })
 
         XCTAssert(auth.canEditMessage(message) == .differentUser)
@@ -275,7 +275,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         realm.execute({ _ in
             auth.settings?.messageAllowEditing = false
-            message.user = user1
+            message.userIdentifier = user1.identifier
         })
 
         XCTAssert(auth.canEditMessage(message) == .serverBlocked)
@@ -288,7 +288,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         realm.execute({ _ in
             user1.roles.append("admin")
-            message.user = user2
+            message.userIdentifier = user2.identifier
             realm.add(permission)
         })
 
@@ -309,7 +309,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user2
+        message.userIdentifier = user2.identifier
 
         // block-message
 
@@ -324,7 +324,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         // my own message
 
         realm.execute({ _ in
-            message.user = user1
+            message.userIdentifier = user1.identifier
         })
 
         XCTAssert(auth.canBlockMessage(message) == .myOwn)
@@ -356,7 +356,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.pinMessage.rawValue
@@ -385,7 +385,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         // Server permission doesn't allow to pin
         realm.execute({ _ in
             auth.settings?.messageAllowPinning = false
-            message.user = user1
+            message.userIdentifier = user1.identifier
             message.internalType = MessageType.text.rawValue
         })
 

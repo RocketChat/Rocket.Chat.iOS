@@ -34,7 +34,7 @@ class SubscriptionLastMessageSpec: XCTestCase {
         let message = Message()
         message.identifier = String.random(20)
         message.text = "**foo** *bar* [testing link](https://foo.bar)"
-        message.user = user
+        message.userIdentifier = user.identifier
 
         let lastMessage = Subscription.lastMessageText(lastMessage: message)
         XCTAssertEqual(lastMessage, "user_username: foo bar testing link")

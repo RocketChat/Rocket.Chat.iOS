@@ -63,13 +63,13 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
         msg1.subscription = sub
         msg1.failed = false
         msg1.temporary = true
-        msg1.user = user
+        msg1.userIdentifier = user.identifier
 
         let msg2 = Message.testInstance("msg2")
         msg2.subscription = sub
         msg2.failed = false
         msg2.temporary = true
-        msg2.user = user
+        msg2.userIdentifier = user.identifier
 
         realm.execute({ _ in
             realm.add(sub, update: true)

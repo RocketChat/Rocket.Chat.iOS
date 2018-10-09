@@ -46,7 +46,7 @@ class ChatDataControllerSpec: XCTestCase {
         let message = Message()
         message.identifier = "TESTMESSAGE"
         message.text = "Foobar"
-        message.user = User()
+        message.userIdentifier = "foo"
         return message
     }
 

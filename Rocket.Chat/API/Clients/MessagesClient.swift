@@ -103,7 +103,7 @@ struct MessagesClient: APIClient {
         message.createdAt = Date.serverDate
         message.text = text
         message.subscription = subscriptionManaged
-        message.user = user
+        message.userIdentifier = user?.identifier
         message.identifier = id
         message.temporary = true
 

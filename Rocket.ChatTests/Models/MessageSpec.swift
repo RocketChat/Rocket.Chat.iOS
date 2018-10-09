@@ -18,7 +18,7 @@ extension Message {
 
     static func testInstance(_ name: String = "message") -> Message {
         let message = Message()
-        message.user = User.testInstance()
+        message.userIdentifier = User.testInstance().identifier
         message.text = "\(name)-text"
         message.rid = "\(name)-rid"
         message.subscription = Subscription.testInstance()
@@ -76,7 +76,7 @@ class MessageSpec: XCTestCase {
         let message = Message()
         message.identifier = "message-object-1"
         message.text = "text"
-        message.user = user
+        message.userIdentifier = user.identifier
         message.subscription = subscription
 
         XCTAssert(message.identifier == "message-object-1", "Message relationship with Subscription is OK")
@@ -235,7 +235,7 @@ extension MessageSpec: RealmTestCase {
         let message = Message()
         message.subscription = subscription
         message.text = "foobar"
-        message.user = userOther
+        message.userIdentifier = userOther.identifier
 
         XCTAssertTrue(message.isBroadcastReplyAvailable(realm: realm))
     }

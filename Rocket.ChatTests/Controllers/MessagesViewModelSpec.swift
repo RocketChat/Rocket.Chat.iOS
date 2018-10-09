@@ -18,7 +18,6 @@ final class MessagesViewModelSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(model.data.count, 0)
         XCTAssertFalse(model.requestingData)
         XCTAssertTrue(model.hasMoreData)
-        XCTAssertNil(model.itemAt(IndexPath(row: 0, section: 0)))
     }
 
     func testSectionCreationBasic() {
@@ -32,7 +31,6 @@ final class MessagesViewModelSpec: XCTestCase, RealmTestCase {
         if let object = section.base.object.base as? MessageSectionModel {
             XCTAssertEqual(object.message.identifier, testCaseMessage.identifier)
             XCTAssertFalse(object.isSequential)
-            XCTAssertFalse(object.containsLoader)
             XCTAssertFalse(object.containsDateSeparator)
             XCTAssertFalse(object.containsUnreadMessageIndicator)
         } else {

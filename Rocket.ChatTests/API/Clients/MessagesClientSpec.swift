@@ -36,7 +36,10 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         ])
 
         let user = User.testInstance()
-        let subscription = Subscription.testInstance()
+        guard let subscription = Subscription.testInstance().unmanaged else {
+            XCTFail()
+            return
+        }
 
         client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user, realm: realm)
         XCTAssertFalse(realm.objects(Message.self).first?.temporary ?? true)
