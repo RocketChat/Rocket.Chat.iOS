@@ -79,9 +79,9 @@ class MessageSpec: XCTestCase {
         message.userIdentifier = user.identifier
         message.subscription = subscription
 
-        XCTAssert(message.identifier == "message-object-1", "Message relationship with Subscription is OK")
-        XCTAssert(message.subscription?.identifier == "message-subscription-1", "Message relationship with Subscription is OK")
-        XCTAssert(message.user?.identifier == "message-user-1", "Message relationship with Subscription is OK")
+        XCTAssertEqual(message.identifier, "message-object-1", "Message relationship with Subscription is OK")
+        XCTAssertEqual(message.subscription?.identifier, "message-subscription-1", "Message relationship with Subscription is OK")
+        XCTAssertEqual(message.user?.identifier, "message-user-1", "Message relationship with User is OK")
     }
 
     func testMessageObjectFromJSON() {

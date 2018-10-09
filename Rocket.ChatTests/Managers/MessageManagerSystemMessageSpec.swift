@@ -41,7 +41,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
                 XCTAssertEqual(message?.text, messageText)
-                XCTAssertEqual(message?.user?.username, "rocket.cat")
+                XCTAssertEqual(message?.userIdentifier, "rocket.cat")
                 XCTAssertNil(message?.avatar)
                 XCTAssertTrue(message?.privateMessage ?? false)
 
@@ -82,7 +82,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
                 XCTAssertEqual(message?.text, messageText)
-                XCTAssertEqual(message?.user?.username, "rocket.cat")
+                XCTAssertEqual(message?.userIdentifier, "rocket.cat")
                 XCTAssertEqual(message?.avatar, avatarURL)
                 XCTAssertTrue(message?.privateMessage ?? false)
 
@@ -127,7 +127,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase, RealmTestCase {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 let message = realm.objects(Message.self).filter("identifier = '\(messageIdentifier)'").first
                 XCTAssertEqual(message?.text, messageText)
-                XCTAssertEqual(message?.user?.identifier, userIdentifier)
+                XCTAssertEqual(message?.userIdentifier, userIdentifier)
                 XCTAssertTrue(message?.privateMessage ?? false)
 
                 expectation.fulfill()
