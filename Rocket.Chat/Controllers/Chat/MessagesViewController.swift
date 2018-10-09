@@ -65,6 +65,7 @@ final class MessagesViewController: RocketChatViewController {
         dataUpdateDelegate = self
         viewModel.controllerContext = self
         viewModel.onDataChanged = {
+            Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataSorted.count) values.")
             self.updateData(with: self.viewModel.dataSorted)
         }
 
