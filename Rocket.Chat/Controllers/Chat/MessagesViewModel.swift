@@ -237,7 +237,7 @@ final class MessagesViewModel {
                     if let object = section.object.base as? MessageSectionModel {
                         return
                             object.differenceIdentifier == message.identifier &&
-                            message != object.message
+                            !message.isContentEqual(to: object.message)
                     }
 
                     return false
