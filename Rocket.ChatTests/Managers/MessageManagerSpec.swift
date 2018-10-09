@@ -29,13 +29,14 @@ class MessageManagerSpec: XCTestCase {
 extension MessageManagerSpec {
 
     func testAllMessagesReturnsOnlyRelatedToSubscription() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription1 = Subscription()
             subscription1.identifier = "subs1"
 
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription1
+            message1.createdAt = Date()
 
             let subscription2 = Subscription()
             subscription2.identifier = "subs2"
@@ -43,6 +44,7 @@ extension MessageManagerSpec {
             let message2 = Message()
             message2.identifier = "msg2"
             message2.subscription = subscription2
+            message2.createdAt = Date()
 
             realm.add([subscription1, subscription2, message1, message2], update: true)
 
@@ -57,7 +59,7 @@ extension MessageManagerSpec {
     }
 
     func testAllMessagesReturnsMessagesOrderedByDate() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
 
@@ -81,7 +83,7 @@ extension MessageManagerSpec {
     }
 
     func testHideMessagesUserJoined() {
-        Realm.executeOnMainThread { realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
             realm.add([subscription])
@@ -91,6 +93,7 @@ extension MessageManagerSpec {
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription
+            message1.createdAt = Date()
             realm.add([message1])
 
             message1.internalType = MessageType.userJoined.rawValue
@@ -101,11 +104,11 @@ extension MessageManagerSpec {
             AuthSettingsManager.settings?.hideMessageUserJoined = true
             messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 0, "fetchMessages() will not return userJoined when it's hidden")
-        }
+        })
     }
 
     func testHideMessagesUserLeft() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
             realm.add([subscription])
@@ -115,6 +118,7 @@ extension MessageManagerSpec {
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription
+            message1.createdAt = Date()
             realm.add([message1])
 
             // userLeft
@@ -131,7 +135,7 @@ extension MessageManagerSpec {
     }
 
     func testHideMessagesUserAdded() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
             realm.add([subscription])
@@ -141,6 +145,7 @@ extension MessageManagerSpec {
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription
+            message1.createdAt = Date()
             realm.add([message1])
 
             // userAdded
@@ -157,7 +162,7 @@ extension MessageManagerSpec {
     }
 
     func testHideMessagesUserRemoved() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
             realm.add([subscription])
@@ -167,6 +172,7 @@ extension MessageManagerSpec {
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription
+            message1.createdAt = Date()
             realm.add([message1])
 
             message1.internalType = MessageType.userRemoved.rawValue
@@ -181,7 +187,7 @@ extension MessageManagerSpec {
     }
 
     func testHideMessagesUserMutedUnmuted() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
             realm.add([subscription])
@@ -191,6 +197,7 @@ extension MessageManagerSpec {
             let message1 = Message()
             message1.identifier = "msg1"
             message1.subscription = subscription
+            message1.createdAt = Date()
             realm.add([message1])
 
             message1.internalType = MessageType.userMuted.rawValue
@@ -199,6 +206,7 @@ extension MessageManagerSpec {
             message2.identifier = "message2"
             message2.internalType = MessageType.userUnmuted.rawValue
             message2.subscription = subscription
+            message2.createdAt = Date()
             realm.add([message2])
 
             AuthSettingsManager.settings?.hideMessageUserMutedUnmuted = false
