@@ -225,22 +225,36 @@ final class MessagesViewModel {
                 }
             }
 
-            for modified in modifications where modified < data.count {
+            for modified in modifications {
                 guard
                     modified < messagesQuery.count,
-                    let message = messagesQuery[modified].validated()
+                    let message = messagesQuery[modified].validated()?.unmanaged
                 else {
                     continue
                 }
 
-                var previous: AnyChatSection?
+                let index = data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return
+                            object.differenceIdentifier == message.identifier &&
+                            !message.isContentEqual(to: object.message)
+                    }
 
-                if modified > 0 {
-                    previous = data[modified - 1]
-                }
+                    return false
+                })
 
-                if let section = section(for: message, previous: previous) {
-                    data[modified] = section
+                if let index = index {
+                    var previous: AnyChatSection?
+
+                    if index < data.count - 1 {
+                        previous = data[index + 1]
+                    }
+
+                    if let newSection = section(for: message.managedObject, previous: previous) {
+                        data[index] = newSection
+                    }
+                } else {
+                    continue
                 }
             }
 
