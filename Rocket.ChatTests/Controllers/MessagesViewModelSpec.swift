@@ -11,7 +11,7 @@ import XCTest
 
 @testable import Rocket_Chat
 
-final class MessagesViewModelSpec: XCTestCase, RealmTestCase {
+final class MessagesViewModelSpec: XCTestCase {
 
     func testInitialState() {
         let model = MessagesViewModel()

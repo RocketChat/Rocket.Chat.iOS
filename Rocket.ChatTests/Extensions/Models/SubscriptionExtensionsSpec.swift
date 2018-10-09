@@ -8,17 +8,21 @@
 
 import Foundation
 import XCTest
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
+class SubscriptionExtensionsSpec: XCTestCase {
     func testFilterByName() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let sub1 = Subscription.testInstance("sub1")
         let sub2 = Subscription.testInstance("sub2")
 
-        realm.execute({ _ in
+        realm.execute({ realm in
             realm.add(sub1, update: true)
             realm.add(sub2, update: true)
         })
@@ -35,7 +39,7 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
     }
 
     func testLinkingObjectsFilterByName() {
-        let realm = testRealm()
+        let realm = Realm.current
 
         let auth = Auth.testInstance()
 
@@ -49,14 +53,14 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         sub3.auth = auth
         sub3.open = false
 
-        realm.execute({ _ in
+        realm?.execute({ realm in
             realm.add(sub1, update: true)
             realm.add(sub2, update: true)
             realm.add(sub3, update: true)
             realm.add(auth, update: true)
         })
 
-        guard let subscriptions = Subscription.all(realm: realm) else {
+        guard let subscriptions = Subscription.all() else {
             fatalError("subscriptions must return values")
         }
 

@@ -17,7 +17,7 @@ class AuthSettingsManagerSpec: XCTestCase {
         super.setUp()
 
         // Clear all the Auth objects in Realm
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
@@ -58,7 +58,7 @@ class AuthSettingsManagerSpec: XCTestCase {
     }
 
     func testInternalCachedSettingsUpdatedFromAuth() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let settings = AuthSettings()
             settings.cdnPrefixURL = "foo.bar.baz"
 
@@ -75,7 +75,7 @@ class AuthSettingsManagerSpec: XCTestCase {
     }
 
     func testUpdateCachedSettings() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let settings = AuthSettings()
             settings.cdnPrefixURL = "foo.bar.baz"
 

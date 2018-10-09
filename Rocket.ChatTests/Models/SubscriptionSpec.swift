@@ -29,20 +29,13 @@ extension Subscription {
 // swiftlint:disable type_body_length file_length
 class SubscriptionSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ (realm) in
-            realm.deleteAll()
-        })
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
     }
 
     func testSubscriptionObject() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 
@@ -62,9 +55,9 @@ class SubscriptionSpec: XCTestCase {
 
             let results = realm.objects(Subscription.self)
             let first = results.first
-            XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "subs-from-data", "Subscription object was created with success")
-            XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
+            XCTAssertEqual(results.count, 1, "Subscription object was created with success")
+            XCTAssertEqual(first?.identifier, "subs-from-data", "Subscription object was created with success")
+            XCTAssertEqual(auth.subscriptions.first?.identifier, first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
 
@@ -81,7 +74,7 @@ class SubscriptionSpec: XCTestCase {
             "ls": ["$date": 123456789]
         ])
 
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 
@@ -93,9 +86,9 @@ class SubscriptionSpec: XCTestCase {
 
             let results = realm.objects(Subscription.self)
             let first = results.first
-            XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "subs-from-json-1", "Subscription object was created with success")
-            XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
+            XCTAssertEqual(results.count, 1, "Subscription object was created with success")
+            XCTAssertEqual(first?.identifier, "subs-from-json-1", "Subscription object was created with success")
+            XCTAssertEqual(auth.subscriptions.first?.identifier, first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
 
@@ -259,11 +252,12 @@ class SubscriptionSpec: XCTestCase {
             ]
         ])
 
-        let subscription = Subscription()
+        let subscription = Subscription.testInstance()
 
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             subscription.mapRoom(object, realm: realm)
-        }
+            realm.add(subscription, update: true)
+        })
 
         XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
         XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
@@ -291,9 +285,9 @@ class SubscriptionSpec: XCTestCase {
             ]
         ])
 
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             subscription.mapRoom(object1, realm: realm)
-        }
+        })
 
         XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
         XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
@@ -315,9 +309,9 @@ class SubscriptionSpec: XCTestCase {
             ]
         ])
 
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             subscription.mapRoom(object2, realm: realm)
-        }
+        })
 
         XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))
         XCTAssertEqual(subscription.roomLastMessageText, "rafaelks.test.2: Testing.")
@@ -449,9 +443,9 @@ class SubscriptionSpec: XCTestCase {
         let subscription = Subscription()
         subscription.roomOwnerId = user.identifier
 
-        Realm.executeOnMainThread { realm in
+        Realm.execute({ realm in
             realm.add(user)
-        }
+        })
 
         XCTAssertEqual(subscription.roomOwner, user, "roomOwner is correct")
     }
@@ -463,9 +457,9 @@ class SubscriptionSpec: XCTestCase {
         let subscription = Subscription()
         subscription.otherUserId = user.identifier
 
-        Realm.executeOnMainThread { realm in
+        Realm.execute({ realm in
             realm.add(user)
-        }
+        })
 
         XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
     }

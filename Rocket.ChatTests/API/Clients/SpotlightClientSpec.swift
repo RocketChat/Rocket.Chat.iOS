@@ -8,13 +8,24 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
 // swiftlint:disable function_body_length
-class SpotlightClientSpec: XCTestCase, RealmTestCase {
+class SpotlightClientSpec: XCTestCase {
+
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
+    }
+
     func testSearch() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
+
         let api = MockAPI()
         let client = SpotlightClient(api: api)
 

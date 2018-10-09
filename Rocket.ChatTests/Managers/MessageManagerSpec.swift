@@ -13,20 +13,10 @@ import RealmSwift
 
 class MessageManagerSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        // Clear all the Message objects in Realm
-        Realm.executeOnMainThread({ realm in
-            realm.deleteAll()
-        })
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
     }
-
-}
-
-// MARK: Realm Data Tests
-
-extension MessageManagerSpec {
 
     func testAllMessagesReturnsOnlyRelatedToSubscription() {
         Realm.execute({ realm in

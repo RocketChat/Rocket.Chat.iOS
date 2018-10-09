@@ -7,13 +7,18 @@
 //
 
 import Foundation
+import RealmSwift
 import XCTest
 
 @testable import Rocket_Chat
 
-class UserExtensionsSpec: XCTestCase, RealmTestCase {
+class UserExtensionsSpec: XCTestCase {
     func testSearchUsernameContaining() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
+
         AuthSettingsManager.settings?.useUserRealName = false
 
         (0..<10).forEach {

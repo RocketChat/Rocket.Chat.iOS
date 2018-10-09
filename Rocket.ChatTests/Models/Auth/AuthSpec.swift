@@ -26,23 +26,12 @@ extension Auth {
 }
 
 // swiftlint:disable type_body_length file_length
-class AuthSpec: XCTestCase, RealmTestCase {
+class AuthSpec: XCTestCase {
 
-    // MARK: Setup
-
-    override func setUp() {
-        super.setUp()
-
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ realm in
-            realm.deleteAll()
-        })
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
     }
-
-    // MARK: Tests
 
     func testAuthObject() {
         let serverURL = "http://foobar.com"
@@ -100,7 +89,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -208,7 +200,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
     // swiftlint:disable function_body_length
     func testCanEditMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -296,7 +291,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
     }
 
     func testCanBlockMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -341,7 +339,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
     }
 
     func testCanPinMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"

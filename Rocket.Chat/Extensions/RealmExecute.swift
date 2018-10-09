@@ -21,8 +21,12 @@ extension Realm {
         #endif
 
         if forceSameThread {
-            try? self.write {
+            if self.isInWriteTransaction {
                 execution(self)
+            } else {
+                try? self.write {
+                    execution(self)
+                }
             }
 
             completion?()
@@ -60,8 +64,12 @@ extension Realm {
 
     static func executeOnMainThread(realm: Realm? = nil, _ execution: @escaping (Realm) -> Void) {
         if let realm = realm {
-            try? realm.write {
+            if realm.isInWriteTransaction {
                 execution(realm)
+            } else {
+                try? realm.write {
+                    execution(realm)
+                }
             }
 
             return
@@ -69,10 +77,22 @@ extension Realm {
 
         guard let currentRealm = Realm.current else { return }
 
-        try? currentRealm.write {
+        if currentRealm.isInWriteTransaction {
             execution(currentRealm)
+        } else {
+            try? currentRealm.write {
+                execution(currentRealm)
+            }
         }
     }
+
+    #if TEST
+    static func clearDatabase() {
+        Realm.execute({ realm in
+            realm.deleteAll()
+        })
+    }
+    #endif
 
     // MARK: Mutate
 

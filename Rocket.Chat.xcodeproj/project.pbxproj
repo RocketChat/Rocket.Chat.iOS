@@ -170,6 +170,7 @@
 		4112DC581FFFB9B2005995E1 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112DC551FFFB9B1005995E1 /* BaseModel.swift */; };
 		4112DC591FFFB9B2005995E1 /* ModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112DC561FFFB9B1005995E1 /* ModelHandler.swift */; };
 		4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112DC571FFFB9B1005995E1 /* ModelMappeable.swift */; };
+		41132159216D1BA70061FA11 /* UserModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BD37E01E290F2900CBC4C2 /* UserModelMapping.swift */; };
 		4113BF70208E23F000A9D4D8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4102E3A91E532323004BAA82 /* Preferences.storyboard */; };
 		411498E11FC7A85400D66542 /* ChatTitleViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E01FC7A85400D66542 /* ChatTitleViewModelSpec.swift */; };
 		411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */; };
@@ -469,7 +470,6 @@
 		80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */; };
 		80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80307E431FD75DC0006AD9EF /* VoiceOver.strings */; };
 		8032E3E820362EF5009D33CE /* UpdateMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */; };
-		803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803782B61FB4751D00DED049 /* RealmTestCase.swift */; };
 		8039441120AF1334002F317A /* RoomKickRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441020AF1334002F317A /* RoomKickRequest.swift */; };
 		8039441320AF17F1002F317A /* RoomKickRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */; };
 		8039441820AF620C002F317A /* ResourceSharedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039441720AF620C002F317A /* ResourceSharedProperties.swift */; };
@@ -1381,7 +1381,6 @@
 		80307E471FD75DD2006AD9EF /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		80307E481FD75DD5006AD9EF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMessageRequest.swift; sourceTree = "<group>"; };
-		803782B61FB4751D00DED049 /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
 		8039441020AF1334002F317A /* RoomKickRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomKickRequest.swift; sourceTree = "<group>"; };
 		8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomKickRequestSpec.swift; sourceTree = "<group>"; };
 		8039441720AF620C002F317A /* ResourceSharedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSharedProperties.swift; sourceTree = "<group>"; };
@@ -2786,7 +2785,6 @@
 				33230AAF20EA6A970031C71D /* Theme */,
 				4171ABA31E7C0556009FC3F0 /* Views */,
 				41DF76F91D2C50720028DBF8 /* Info.plist */,
-				803782B61FB4751D00DED049 /* RealmTestCase.swift */,
 			);
 			path = Rocket.ChatTests;
 			sourceTree = "<group>";
@@ -5026,7 +5024,6 @@
 				D18675EE1F716FBC00406FB4 /* LoginRequestSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				412435C820CAC89C00A3602D /* SubscriptionsSortingViewModelSpec.swift in Sources */,
-				803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */,
 				35E892C4201BF2C900B4BE5A /* AlertSpec.swift in Sources */,
 				994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */,
 				80AE2540203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift in Sources */,
@@ -5212,6 +5209,7 @@
 				803D866D2106307C00B1B697 /* SubscriptionModelMapping.swift in Sources */,
 				803D866C21062F7400B1B697 /* SEStateAPI.swift in Sources */,
 				806DB94320687697004ED8ED /* Alert.swift in Sources */,
+				41132159216D1BA70061FA11 /* UserModelMapping.swift in Sources */,
 				80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */,
 				8062E33620A5ED200044F407 /* APIRequestOption.swift in Sources */,
 				800640F72049BA25006D990F /* SEScene.swift in Sources */,

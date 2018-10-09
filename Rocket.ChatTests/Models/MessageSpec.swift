@@ -32,16 +32,9 @@ extension Message {
 
 class MessageSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ (realm) in
-            realm.deleteAll()
-        })
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
     }
 
     func testStarred() {
@@ -78,6 +71,13 @@ class MessageSpec: XCTestCase {
         message.text = "text"
         message.userIdentifier = user.identifier
         message.subscription = subscription
+
+        Realm.execute({ realm in
+            realm.add(auth, update: true)
+            realm.add(subscription, update: true)
+            realm.add(user, update: true)
+            realm.add(message, update: true)
+        })
 
         XCTAssertEqual(message.identifier, "message-object-1", "Message relationship with Subscription is OK")
         XCTAssertEqual(message.subscription?.identifier, "message-subscription-1", "Message relationship with Subscription is OK")
@@ -186,29 +186,39 @@ extension MessageSpec {
     }
 
     func testReplyString() {
+        let user = User.testInstance()
         let message = Message.testInstance()
 
-        message.subscription?.type = .channel
-        XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
-        message.subscription?.type = .group
-        XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
-        message.subscription?.type = .directMessage
-        XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
+        Realm.execute({ realm in
+            realm.add(user, update: true)
 
-        message.identifier = nil
-        XCTAssertNil(message.replyString, "replyString is nil when message identifier is nil")
-        message.subscription?.auth?.settings?.siteURL = nil
-        XCTAssertNil(message.replyString, "replyString is nil when there's no siteURL")
+            message.userIdentifier = user.identifier
+            realm.add(message, update: true)
+        })
+
+        Realm.execute({ realm in
+            message.subscription?.type = .channel
+            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
+
+            message.subscription?.type = .group
+            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
+
+            message.subscription?.type = .directMessage
+            XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
+        })
     }
 
 }
 
 // MARK: Broadcast
 
-extension MessageSpec: RealmTestCase {
+extension MessageSpec {
 
     func testMessageBroadcastTrue() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
 
         let auth = Auth()
         auth.serverURL = "https://foo.com/"
@@ -223,7 +233,7 @@ extension MessageSpec: RealmTestCase {
         let userOther = User()
         userOther.identifier = "2"
 
-        Realm.executeOnMainThread(realm: realm, { realm in
+        realm.execute({ realm in
             realm.add(auth)
             realm.add(user)
         })

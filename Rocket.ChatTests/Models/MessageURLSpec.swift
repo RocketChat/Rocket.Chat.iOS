@@ -27,19 +27,6 @@ extension MessageURL {
 
 class MessageURLSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ (realm) in
-            realm.deleteAll()
-        })
-
-    }
-
     func testMessageURLObject() {
         let object = MessageURL.testInstance()
 
