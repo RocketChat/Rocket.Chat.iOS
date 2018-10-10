@@ -27,7 +27,8 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
         return textLeadingConstraint.constant +
-            textTrailingConstraint.constant
+            textTrailingConstraint.constant +
+            adjustedHorizontalInsets
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -40,16 +41,11 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         initialTextHeightConstant = textHeightConstraint.constant
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
 
         insertGesturesIfNeeded()
     }
@@ -64,7 +60,6 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
-            contentViewWidthConstraint.constant = UIScreen.main.bounds.width
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
