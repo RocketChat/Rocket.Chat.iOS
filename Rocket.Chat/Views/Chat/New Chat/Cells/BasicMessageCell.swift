@@ -65,6 +65,7 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     var viewModel: AnyChatItem?
+    var adjustedHorizontalInsets: CGFloat = 0
     var initialTextHeightConstant: CGFloat = 0
     var contentViewWidthConstraint: NSLayoutConstraint!
 

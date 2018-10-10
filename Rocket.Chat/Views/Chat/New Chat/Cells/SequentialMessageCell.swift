@@ -37,6 +37,7 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
     var contentViewWidthConstraint: NSLayoutConstraint!

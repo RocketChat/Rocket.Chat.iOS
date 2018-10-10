@@ -20,6 +20,7 @@ final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
 

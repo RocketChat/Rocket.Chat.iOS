@@ -22,6 +22,7 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
 
     @IBOutlet weak var date: UILabel!
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
 

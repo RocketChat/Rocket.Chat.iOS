@@ -31,6 +31,7 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
 
     weak var delegate: ChatMessageCellProtocol?
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
     var thumbnailHeightInitialConstant: CGFloat = 0

@@ -63,6 +63,7 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
 

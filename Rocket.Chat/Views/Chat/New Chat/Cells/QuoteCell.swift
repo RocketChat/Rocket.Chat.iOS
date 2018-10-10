@@ -44,6 +44,7 @@ final class QuoteCell: UICollectionViewCell, ChatCell, SizingCell {
     var isCollapsible = false
     weak var delegate: ChatMessageCellProtocol?
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
     var contentViewWidthConstraint: NSLayoutConstraint!
 
