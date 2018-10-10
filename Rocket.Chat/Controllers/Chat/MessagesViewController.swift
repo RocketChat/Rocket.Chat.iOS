@@ -44,7 +44,7 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
-    var sectionsToAddLater: [AnyChatSection] = []
+    lazy var screenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +73,22 @@ final class MessagesViewController: RocketChatViewController {
         viewSubscriptionModel.onDataChanged = {
             // TODO: handle updates on the Subscription object, such like title view
         }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        let topIndexPath = visibleIndexPaths.sorted().last
+
+        screenSize = size
+
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.viewSizingModel.clearCache()
+            self?.collectionView.reloadData()
+        }, completion: { [weak self] _ in
+            if let indexPath = topIndexPath {
+                self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+            }
+        })
     }
 
     func openURL(url: URL) {
@@ -105,7 +121,7 @@ extension MessagesViewController {
 
             let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
             var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
-            size = CGSize(width: UIScreen.main.bounds.width - horizontalMargins, height: size.height)
+            size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
 
             return size
