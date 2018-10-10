@@ -13,13 +13,14 @@ import DifferenceKit
 
 protocol SizingCell: class {
     static var sizingCell: UICollectionViewCell & ChatCell { get }
-    static func size(for viewModel: AnyChatItem) -> CGSize
+    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize
 }
 
 extension SizingCell {
-    static func size(for viewModel: AnyChatItem) -> CGSize {
+    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize {
         var mutableSizingCell = sizingCell
         mutableSizingCell.prepareForReuse()
+        mutableSizingCell.adjustedHorizontalInsets = horizontalMargins
         mutableSizingCell.viewModel = viewModel
         mutableSizingCell.configure()
         mutableSizingCell.setNeedsLayout()
@@ -101,7 +102,9 @@ extension MessagesViewController {
                 return .zero
             }
 
-            let size = type(of: sizingCell).size(for: item)
+            let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
+            var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
+            size = CGSize(width: UIScreen.main.bounds.width - horizontalMargins, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
 
             return size
