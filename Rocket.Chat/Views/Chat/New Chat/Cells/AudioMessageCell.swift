@@ -65,7 +65,6 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     deinit {
         updateTimer?.invalidate()
@@ -73,10 +72,6 @@ final class AudioMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
 
         updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
