@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-hh-2qT" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="74" y="0.0" width="506" height="35"/>
+                        <rect key="frame" x="71" y="0.0" width="514" height="35"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="AKV-Pb-j8b"/>
@@ -30,9 +30,9 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="zsI-hh-2qT" firstAttribute="leading" secondItem="sxZ-FJ-hEk" secondAttribute="leadingMargin" constant="54" id="akr-GI-zHM"/>
+                <constraint firstItem="zsI-hh-2qT" firstAttribute="leading" secondItem="sxZ-FJ-hEk" secondAttribute="leading" constant="71" id="akr-GI-zHM"/>
                 <constraint firstItem="zsI-hh-2qT" firstAttribute="top" secondItem="sxZ-FJ-hEk" secondAttribute="top" id="e2w-XC-JP4"/>
-                <constraint firstAttribute="trailingMargin" secondItem="zsI-hh-2qT" secondAttribute="trailing" id="kbQ-Hz-NtM"/>
+                <constraint firstAttribute="trailing" secondItem="zsI-hh-2qT" secondAttribute="trailing" constant="15" id="kbQ-Hz-NtM"/>
                 <constraint firstAttribute="bottom" secondItem="zsI-hh-2qT" secondAttribute="bottom" id="rdc-ep-0lr"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="D9b-lN-ByO"/>
