@@ -123,3 +123,26 @@ extension Subscription {
         })
     }
 }
+
+// MARK: Failed Messages
+
+extension Subscription {
+
+    func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
+        guard let user = user else {
+            return
+        }
+
+        Realm.executeOnMainThread { realm in
+            self.messages.filter("temporary = true").filter({
+                $0.user == user
+            }).forEach {
+                $0.temporary = false
+                $0.failed = true
+                realm.add($0, update: true)
+            }
+        }
+    }
+
+}
+

@@ -7,15 +7,20 @@
 //
 
 import XCTest
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class APIExtensionsSpec: XCTestCase, RealmTestCase {
+class APIExtensionsSpec: XCTestCase {
     func testCurrent() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
+
         var auth = Auth.testInstance()
 
-        realm.execute({ _ in
+        realm.execute({ realm in
             realm.add(auth)
         })
 
@@ -25,7 +30,7 @@ class APIExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(api?.authToken, "auth-token")
         XCTAssertEqual(api?.version, Version(1, 2, 3))
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             auth.serverVersion = "invalid"
             realm.add(auth, update: true)
         })

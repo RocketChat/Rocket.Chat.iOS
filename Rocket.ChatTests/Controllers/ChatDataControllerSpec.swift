@@ -28,17 +28,9 @@ class ChatDataControllerSpec: XCTestCase {
         let user = User()
         user.identifier = "TESTUSER"
 
-        Realm.executeOnMainThread({ (realm) in
+        Realm.execute({ (realm) in
             realm.add(user)
             realm.add(auth)
-        })
-    }
-
-    override func tearDown() {
-        super.tearDown()
-        Realm.executeOnMainThread({ (realm) in
-            realm.delete(realm.objects(Auth.self))
-            realm.delete(realm.objects(User.self))
         })
     }
 
@@ -46,7 +38,8 @@ class ChatDataControllerSpec: XCTestCase {
         let message = Message()
         message.identifier = "TESTMESSAGE"
         message.text = "Foobar"
-        message.user = User()
+        message.userIdentifier = "foo"
+        message.createdAt = Date()
         return message
     }
 
@@ -97,17 +90,6 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 2, "obj1 found in correct row")
         XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 3, "obj2 found in correct row")
         XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 4, "obj3 found in correct row")
-
-        // Test with unread separator
-        _ = controller.clear()
-
-        obj3.timestamp = Date().addingTimeInterval(1.0)
-
-        controller.insert([obj2, obj1, obj3])
-
-        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 2, "obj1 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 3, "obj2 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 5, "obj3 found in correct row")
     }
 
     func testIndexPathOfMessage() {
@@ -248,27 +230,6 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
         XCTAssertEqual(controller.data.filter({ $0.type == .loader }).count, 0, "data will have 0 loader")
         XCTAssertEqual(controller.data.filter({ $0.type == .header }).count, 1, "data will have 1 header")
-    }
-
-    func testUnreadSeparatorObject() {
-        let controller = ChatDataController()
-        controller.lastSeen = Date().addingTimeInterval(-1)
-        controller.loadedAllMessages = true
-
-        var obj1 = ChatData(type: .message, timestamp: Date().addingTimeInterval(-2))
-        obj1.message = generateMessage()
-
-        var obj2 = ChatData(type: .message, timestamp: Date())
-        obj2.message = generateMessage()
-
-        let (indexPaths, _) = controller.insert([obj1, obj2])
-        XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-        XCTAssertEqual(indexPaths.count, 5, "indexPaths will have two results")
-
-        let unreadSeparators = controller.data.filter({ $0.type == .unreadSeparator })
-
-        XCTAssertEqual(unreadSeparators.count, 1, "data will have 1 unread separator")
-        XCTAssertEqual(unreadSeparators.first?.indexPath.row, 3, "unread separator will be in the right place")
     }
 
     func testHasSequentialMessage() {

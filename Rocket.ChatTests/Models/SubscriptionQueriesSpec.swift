@@ -7,13 +7,18 @@
 //
 
 import XCTest
+import RealmSwift
+
 @testable import Rocket_Chat
 
-class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
+class SubscriptionManagerQueriesSpec: XCTestCase {
+
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
+    }
 
     func testFindByRoomId() throws {
-        let realm = testRealm()
-
         let sub1 = Subscription()
         sub1.identifier = "sub1-identifier"
         sub1.rid = "sub1-rid"
@@ -22,18 +27,16 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
         sub2.identifier = "sub2-identifier"
         sub2.rid = "sub2-rid"
 
-        realm.execute({ _ in
-            realm.add(sub1)
-            realm.add(sub2)
+        Realm.current?.execute({ realm in
+            realm.add(sub1, update: true)
+            realm.add(sub2, update: true)
         })
 
-        XCTAssertEqual(Subscription.find(rid: "sub2-rid", realm: realm), sub2)
-        XCTAssertEqual(Subscription.find(rid: "sub1-rid", realm: realm), sub1)
+        XCTAssertEqual(Subscription.find(rid: "sub2-rid"), sub2)
+        XCTAssertEqual(Subscription.find(rid: "sub1-rid"), sub1)
     }
 
     func testFindByNameAndType() throws {
-        let realm = testRealm()
-
         let sub1 = Subscription()
         sub1.identifier = "sub1-identifier"
         sub1.name = "sub1-name"
@@ -44,18 +47,16 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
         sub2.name = "sub2-name"
         sub2.type = .channel
 
-        realm.execute({ _ in
-            realm.add(sub1)
-            realm.add(sub2)
+        Realm.current?.execute({ realm in
+            realm.add(sub1, update: true)
+            realm.add(sub2, update: true)
         })
 
-        XCTAssertEqual(Subscription.find(name: "sub1-name", subscriptionType: [.directMessage], realm: realm), sub1)
-        XCTAssertEqual(Subscription.find(name: "sub2-name", subscriptionType: [.channel], realm: realm), sub2)
+        XCTAssertEqual(Subscription.find(name: "sub1-name", subscriptionType: [.directMessage]), sub1)
+        XCTAssertEqual(Subscription.find(name: "sub2-name", subscriptionType: [.channel]), sub2)
     }
 
     func testSetTemporaryMessagesFailed() {
-        let realm = testRealm()
-
         let user = User.testInstance()
         let sub = Subscription.testInstance()
 
@@ -63,15 +64,16 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
         msg1.subscription = sub
         msg1.failed = false
         msg1.temporary = true
-        msg1.user = user
+        msg1.userIdentifier = user.identifier
 
         let msg2 = Message.testInstance("msg2")
         msg2.subscription = sub
         msg2.failed = false
         msg2.temporary = true
-        msg2.user = user
+        msg2.userIdentifier = user.identifier
 
-        realm.execute({ _ in
+        Realm.current?.execute({ realm in
+            realm.add(user, update: true)
             realm.add(sub, update: true)
             realm.add(msg1, update: true)
             realm.add(msg2, update: true)
@@ -79,11 +81,11 @@ class SubscriptionManagerQueriesSpec: XCTestCase, RealmTestCase {
 
         sub.setTemporaryMessagesFailed(user: user)
 
-        XCTAssert(msg1.failed == true)
-        XCTAssert(msg1.temporary == false)
+        XCTAssertTrue(msg1.failed)
+        XCTAssertFalse(msg1.temporary)
 
-        XCTAssert(msg2.failed == true)
-        XCTAssert(msg2.temporary == false)
+        XCTAssertTrue(msg2.failed)
+        XCTAssertFalse(msg2.temporary)
     }
 
 }

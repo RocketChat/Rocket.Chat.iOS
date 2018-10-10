@@ -8,27 +8,26 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
+class SubscriptionsClientSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
 
-        let realm = testRealm()
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.deleteAll()
         })
     }
 
     func testFetchSubscriptionsList() {
-        let realm = testRealm()
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)
         let auth = Auth.testInstance()
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(auth, update: true)
         })
 
@@ -56,12 +55,11 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm)
-        XCTAssertEqual(realm.objects(Subscription.self).count, 2)
+        client.fetchSubscriptions(updatedSince: nil)
+        XCTAssertEqual(Realm.current?.objects(Subscription.self).count, 2)
     }
 
     func testSubscriptionsUpdate() {
-        let realm = testRealm()
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)
         let auth = Auth.testInstance()
@@ -71,7 +69,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.name = "internal"
         subscription.auth = auth
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
         })
@@ -100,15 +98,14 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm)
+        client.fetchSubscriptions(updatedSince: nil)
 
-        let subs = realm.objects(Subscription.self)
-        XCTAssertEqual(subs.count, 2)
-        XCTAssertEqual(subs[0].name, "general")
+        let subs = Realm.current?.objects(Subscription.self)
+        XCTAssertEqual(subs?.count, 2)
+        XCTAssertEqual(subs?[0].name, "general")
     }
 
     func testSubscriptionsRemove() {
-        let realm = testRealm()
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)
         let auth = Auth.testInstance()
@@ -117,7 +114,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.identifier = "subscription-identifier"
         subscription.auth = auth
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
         })
@@ -137,15 +134,14 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm)
+        client.fetchSubscriptions(updatedSince: nil)
 
-        let object = realm.objects(Subscription.self).first
+        let object = Realm.current?.objects(Subscription.self).first
         XCTAssertNotNil(object)
         XCTAssertNil(object?.auth)
     }
 
     func testSubscriptionsRoomMapping() {
-        let realm = testRealm()
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)
         let auth = Auth.testInstance()
@@ -156,7 +152,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         subscription.identifier = "subscription-identifier"
         subscription.auth = auth
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(auth, update: true)
             realm.add(subscription, update: true)
         })
@@ -180,22 +176,21 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        client.fetchRooms(updatedSince: nil, realm: realm)
+        client.fetchRooms(updatedSince: nil)
 
-        let object = realm.objects(Subscription.self).first
+        let object = Realm.current?.objects(Subscription.self).first
         XCTAssertNotNil(object)
         XCTAssertTrue(object?.roomReadOnly ?? false)
     }
 
     func testFetchRoles() {
-        let realm = testRealm()
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)
         let subscription = Subscription.testInstance("test-roles")
         let user = User.testInstance("test-user")
         let user2 = User.testInstance("test-user2")
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(user, update: true)
             realm.add(user2, update: true)
             realm.add(subscription, update: true)
@@ -225,12 +220,13 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        client.fetchRoles(subscription: subscription, realm: realm)
+        client.fetchRoles(subscription: subscription)
 
         guard
+            let realm = Realm.current,
             let subscriptionObject = realm.objects(Subscription.self).first,
-            let userObject = User.find(username: "test-user-username", realm: realm),
-            let user2Object = User.find(username: "test-user2-username", realm: realm)
+            let userObject = User.find(username: "test-user-username"),
+            let user2Object = User.find(username: "test-user2-username")
         else {
             XCTFail("no results were found")
             return

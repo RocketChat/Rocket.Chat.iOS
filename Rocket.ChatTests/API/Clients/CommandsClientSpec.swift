@@ -8,13 +8,18 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class CommandsClientSpec: XCTestCase, RealmTestCase {
+class CommandsClientSpec: XCTestCase {
     func testFetchCommands() {
+        guard let realm = Realm.current else {
+            XCTFail()
+            return
+        }
+
         let api = MockAPI()
-        let realm = testRealm()
         let client = CommandsClient(api: api)
 
         api.nextResult = JSON([
