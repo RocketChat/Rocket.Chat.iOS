@@ -23,7 +23,6 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     var loading = false {
         didSet {
@@ -41,14 +40,6 @@ final class VideoMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
     @IBOutlet weak var buttonPlayer: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-    }
 
     func configure() {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
