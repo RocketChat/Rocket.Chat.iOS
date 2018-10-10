@@ -22,16 +22,8 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
 
     @IBOutlet weak var date: UILabel!
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-    }
 
     func configure() {
         guard let viewModel = viewModel?.base as? DateSeparatorChatItem else {

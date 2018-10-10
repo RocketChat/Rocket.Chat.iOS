@@ -44,13 +44,14 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
             statusViewWidthConstraint.constant -
             fieldsStackViewLeadingConstraint.constant -
             fieldsStackViewTrailingConstraint.constant -
-            textContainerTrailingConstraint.constant
+            textContainerTrailingConstraint.constant -
+            adjustedHorizontalInsets
     }
 
     weak var delegate: ChatMessageCellProtocol?
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
     var fieldsStackTopInitialConstant: CGFloat = 0
@@ -88,10 +89,6 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
         gesture.delegate = self

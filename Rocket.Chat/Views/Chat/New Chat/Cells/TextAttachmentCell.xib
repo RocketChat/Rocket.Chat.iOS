@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4N-fB-seu">
-                        <rect key="frame" x="71" y="0.0" width="270" height="104"/>
+                        <rect key="frame" x="70" y="0.0" width="271" height="104"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSx-Xs-2vQ">
-                                <rect key="frame" x="15" y="15" width="222" height="16"/>
+                                <rect key="frame" x="15" y="15" width="223" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="pL7-ou-kut"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbv-W5-I0m">
-                                <rect key="frame" x="15" y="41" width="240" height="16.5"/>
+                                <rect key="frame" x="15" y="41" width="241" height="16.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,14 +50,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iix-1s-RRD">
-                                <rect key="frame" x="245" y="18" width="10" height="10"/>
+                                <rect key="frame" x="246" y="18" width="10" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="U2r-Qa-ATe"/>
                                     <constraint firstAttribute="width" constant="10" id="g0f-mf-7bS"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NyW-LS-2g2">
-                                <rect key="frame" x="15" y="72.5" width="240" height="16"/>
+                                <rect key="frame" x="15" y="72.5" width="241" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Oeh-SX-0Sj"/>
                                 </constraints>
@@ -94,7 +94,7 @@
                 <constraint firstAttribute="bottom" secondItem="o4N-fB-seu" secondAttribute="bottom" id="BAc-Gg-HAA"/>
                 <constraint firstAttribute="trailing" secondItem="o4N-fB-seu" secondAttribute="trailing" constant="34" id="FHQ-cf-Yb2"/>
                 <constraint firstItem="o4N-fB-seu" firstAttribute="top" secondItem="txK-6f-uxq" secondAttribute="top" id="dau-di-Jky"/>
-                <constraint firstItem="o4N-fB-seu" firstAttribute="leading" secondItem="txK-6f-uxq" secondAttribute="leading" constant="71" id="ncY-AD-6ym"/>
+                <constraint firstItem="o4N-fB-seu" firstAttribute="leading" secondItem="txK-6f-uxq" secondAttribute="leading" constant="70" id="ncY-AD-6ym"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Cgj-EO-7nn"/>
             <size key="customSize" width="375" height="76"/>

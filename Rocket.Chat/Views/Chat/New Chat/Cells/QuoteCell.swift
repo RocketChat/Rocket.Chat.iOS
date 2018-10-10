@@ -35,7 +35,8 @@ final class QuoteCell: UICollectionViewCell, ChatCell, SizingCell {
             containerLeadingConstraint.constant -
             textLeadingConstraint.constant -
             textTrailingConstraint.constant -
-            containerTrailingConstraint.constant
+            containerTrailingConstraint.constant -
+            adjustedHorizontalInsets
     }
 
     internal let collapsedTextMaxHeight: CGFloat = 60
@@ -44,8 +45,8 @@ final class QuoteCell: UICollectionViewCell, ChatCell, SizingCell {
     var isCollapsible = false
     weak var delegate: ChatMessageCellProtocol?
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,10 +62,6 @@ final class QuoteCell: UICollectionViewCell, ChatCell, SizingCell {
         )
 
         textHeightConstraint.isActive = true
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self

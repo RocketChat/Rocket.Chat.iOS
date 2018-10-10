@@ -28,21 +28,27 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var host: UILabel!
 
     @IBOutlet weak var thumbnailHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
+    var containerWidth: CGFloat {
+        return
+            UIScreen.main.bounds.width -
+            containerLeadingConstraint.constant -
+            containerTrailingConstraint.constant -
+            adjustedHorizontalInsets
+    }
 
     weak var delegate: ChatMessageCellProtocol?
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
     var thumbnailHeightInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         thumbnailHeightInitialConstant = thumbnailHeightConstraint.constant
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
@@ -53,6 +59,8 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
         guard let viewModel = viewModel?.base as? MessageURLChatItem else {
             return
         }
+
+        containerWidthConstraint.constant = containerWidth
 
         if let image = viewModel.imageURL, let imageURL = URL(string: image) {
             thumbnailHeightConstraint.constant = thumbnailHeightInitialConstant

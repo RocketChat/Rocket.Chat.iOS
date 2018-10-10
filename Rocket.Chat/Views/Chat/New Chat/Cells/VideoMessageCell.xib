@@ -20,27 +20,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-2T-bvi">
-                        <rect key="frame" x="74" y="0.0" width="220" height="117"/>
+                        <rect key="frame" x="70" y="0.0" width="220" height="117"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="z4g-2T-bvi" secondAttribute="height" multiplier="282:150" id="eL9-fe-3vV"/>
                             <constraint firstAttribute="width" constant="220" id="txN-D2-6Tv"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywi-9d-Vch">
-                        <rect key="frame" x="74" y="0.0" width="220" height="117"/>
+                        <rect key="frame" x="70" y="0.0" width="220" height="117"/>
                         <state key="normal" image="Player Video"/>
                         <connections>
                             <action selector="buttonPlayDidPressed:" destination="5br-Ep-JfF" eventType="touchUpInside" id="J4p-GM-a8D"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asW-Tn-BOA">
-                        <rect key="frame" x="74" y="127" width="220" height="36"/>
+                        <rect key="frame" x="70" y="127" width="220" height="36"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="A73-vC-LGB">
-                        <rect key="frame" x="174" y="48.5" width="20" height="20"/>
+                        <rect key="frame" x="170" y="48.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="NAJ-IZ-aq2"/>
                             <constraint firstAttribute="height" constant="20" id="dR5-xw-uvL"/>
@@ -54,7 +54,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4g-2T-bvi" secondAttribute="trailing" id="DBX-tx-1vc"/>
                 <constraint firstItem="asW-Tn-BOA" firstAttribute="top" secondItem="z4g-2T-bvi" secondAttribute="bottom" constant="10" id="G8I-hg-MnE"/>
                 <constraint firstItem="ywi-9d-Vch" firstAttribute="top" secondItem="z4g-2T-bvi" secondAttribute="top" id="GoH-p2-PaV"/>
-                <constraint firstItem="z4g-2T-bvi" firstAttribute="leading" secondItem="5br-Ep-JfF" secondAttribute="leadingMargin" constant="54" id="TAA-fu-e2L"/>
+                <constraint firstItem="z4g-2T-bvi" firstAttribute="leading" secondItem="5br-Ep-JfF" secondAttribute="leading" constant="70" id="TAA-fu-e2L"/>
                 <constraint firstItem="ywi-9d-Vch" firstAttribute="leading" secondItem="z4g-2T-bvi" secondAttribute="leading" id="Uha-Pi-nqm"/>
                 <constraint firstItem="A73-vC-LGB" firstAttribute="centerY" secondItem="ywi-9d-Vch" secondAttribute="centerY" id="c4s-HY-3Bl"/>
                 <constraint firstItem="ywi-9d-Vch" firstAttribute="width" secondItem="z4g-2T-bvi" secondAttribute="width" id="emp-5b-LRm"/>

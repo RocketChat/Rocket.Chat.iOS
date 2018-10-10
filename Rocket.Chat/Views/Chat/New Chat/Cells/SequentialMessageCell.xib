@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQf-8m-OUh" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="71" y="0.0" width="270" height="20"/>
+                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQf-8m-OUh" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="70" y="0.0" width="290" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Za6-ue-cn4"/>
@@ -30,8 +30,8 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="aQf-8m-OUh" firstAttribute="leading" secondItem="cJP-dJ-Ai1" secondAttribute="leading" constant="71" id="6yy-g1-EQR"/>
-                <constraint firstAttribute="trailing" secondItem="aQf-8m-OUh" secondAttribute="trailing" constant="34" id="Ue0-XN-Loq"/>
+                <constraint firstItem="aQf-8m-OUh" firstAttribute="leading" secondItem="cJP-dJ-Ai1" secondAttribute="leading" constant="70" id="6yy-g1-EQR"/>
+                <constraint firstAttribute="trailing" secondItem="aQf-8m-OUh" secondAttribute="trailing" constant="15" id="Ue0-XN-Loq"/>
                 <constraint firstItem="aQf-8m-OUh" firstAttribute="top" secondItem="cJP-dJ-Ai1" secondAttribute="top" id="Z65-wQ-luG"/>
                 <constraint firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" id="hBc-i3-Jkp"/>
             </constraints>

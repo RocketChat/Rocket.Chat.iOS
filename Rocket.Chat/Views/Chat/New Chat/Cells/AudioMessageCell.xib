@@ -71,8 +71,8 @@
             <constraints>
                 <constraint firstItem="he5-oi-hGX" firstAttribute="top" secondItem="fPh-Fy-OLx" secondAttribute="top" id="KZ4-EH-ESn"/>
                 <constraint firstAttribute="bottom" secondItem="he5-oi-hGX" secondAttribute="bottom" id="SS6-OV-T24"/>
-                <constraint firstItem="he5-oi-hGX" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" constant="54" id="bG4-7G-hML"/>
-                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="he5-oi-hGX" secondAttribute="trailing" id="iXh-aU-e9L"/>
+                <constraint firstItem="he5-oi-hGX" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leading" constant="70" id="bG4-7G-hML"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="he5-oi-hGX" secondAttribute="trailing" id="iXh-aU-e9L"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Zf4-T5-0UG"/>
             <size key="customSize" width="375" height="76"/>

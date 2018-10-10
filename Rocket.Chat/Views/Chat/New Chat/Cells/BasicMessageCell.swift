@@ -49,10 +49,12 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
-        return textLeadingConstraint.constant +
+        return
+            textLeadingConstraint.constant +
             textTrailingConstraint.constant +
             avatarWidthConstraint.constant +
-            avatarLeadingConstraint.constant
+            avatarLeadingConstraint.constant +
+            adjustedHorizontalInsets
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -65,18 +67,13 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     var viewModel: AnyChatItem?
+    var adjustedHorizontalInsets: CGFloat = 0
     var initialTextHeightConstant: CGFloat = 0
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         initialTextHeightConstant = textHeightConstraint.constant
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-
         insertGesturesIfNeeded()
     }
 
@@ -105,7 +102,6 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
-            contentViewWidthConstraint.constant = UIScreen.main.bounds.width
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
