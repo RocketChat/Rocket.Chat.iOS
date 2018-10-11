@@ -203,6 +203,9 @@
 		412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */; };
 		412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */; };
 		412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
+		412DF58E216F8A1F005161A4 /* UnmanagedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */; };
+		412DF58F216F901D005161A4 /* UnmanagedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */; };
+		412DF591216F9EC3005161A4 /* UnmanagedMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */; };
 		412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */; };
 		412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */; };
 		412EF3C62050507C001689A3 /* ReusableViewText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412EF3C52050507C001689A3 /* ReusableViewText.xib */; };
@@ -1088,6 +1091,8 @@
 		412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageTextView.xib; sourceTree = "<group>"; };
 		412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextView.swift; sourceTree = "<group>"; };
 		412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorCSSColorsExtension.swift; sourceTree = "<group>"; };
+		412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedAttachment.swift; sourceTree = "<group>"; };
+		412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedMessageSpec.swift; sourceTree = "<group>"; };
 		412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageURLView.swift; sourceTree = "<group>"; };
 		412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageURLView.xib; sourceTree = "<group>"; };
 		412EF3C52050507C001689A3 /* ReusableViewText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReusableViewText.xib; sourceTree = "<group>"; };
@@ -2102,6 +2107,15 @@
 			path = Uploader;
 			sourceTree = "<group>";
 		};
+		412DF58C216F8A0A005161A4 /* Attachment */ = {
+			isa = PBXGroup;
+			children = (
+				41900C261D9FE35400308EF4 /* Attachment.swift */,
+				412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */,
+			);
+			path = Attachment;
+			sourceTree = "<group>";
+		};
 		414A1FF41D4631F600093E10 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -2292,6 +2306,7 @@
 				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
 				80247B3E1FE8582700878833 /* MessageReactionSpec.swift */,
 				4161333F1D46E6A800E09DA2 /* MessageSpec.swift */,
+				412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */,
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
 				808792371FB14B3300EFE77F /* PermissionSpec.swift */,
 				41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */,
@@ -2566,6 +2581,7 @@
 		41A79C0D1D2F084F00A1968E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				412DF58C216F8A0A005161A4 /* Attachment */,
 				99BE4D8621530117001A43E2 /* ChatModels */,
 				1496A87E20FA487E005C2E14 /* Notifications */,
 				8076FDAC2048566100114F28 /* Auth */,
@@ -2576,7 +2592,6 @@
 				8076FDCF2048644300114F28 /* Message */,
 				8076FDC120485A0B00114F28 /* Subscription */,
 				8076FDD4204864D400114F28 /* User */,
-				41900C261D9FE35400308EF4 /* Attachment.swift */,
 				41A87BAC1DA66E700000EE80 /* AuthSettings.swift */,
 				33A7AD9D207A2F95000E9D0F /* ChatNotification.swift */,
 				334F78ED211DCB79003D0C5A /* UnmanagedObject.swift */,
@@ -4871,6 +4886,7 @@
 				801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */,
 				4112DC591FFFB9B2005995E1 /* ModelHandler.swift in Sources */,
 				419D78831FBDB7E0005FC7A2 /* InfoRequestHandler.swift in Sources */,
+				412DF58E216F8A1F005161A4 /* UnmanagedAttachment.swift in Sources */,
 				99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */,
 				0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */,
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
@@ -5127,6 +5143,7 @@
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
 				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
+				412DF591216F9EC3005161A4 /* UnmanagedMessageSpec.swift in Sources */,
 				33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */,
 				990FF6D8207438D4007B4A53 /* RoomMentionsRequestSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
@@ -5172,6 +5189,7 @@
 				80D0CE60205016B40056B17F /* SEServerCell.swift in Sources */,
 				803D866821062D7E00B1B697 /* SubscriptionsRequest.swift in Sources */,
 				8076FDCC204863DF00114F28 /* AuthExtensions.swift in Sources */,
+				412DF58F216F901D005161A4 /* UnmanagedAttachment.swift in Sources */,
 				80D0CE64205034280056B17F /* SEServerCellModel.swift in Sources */,
 				8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */,
 				80D0CE6C205080AA0056B17F /* SERoomCellModel.swift in Sources */,

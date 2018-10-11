@@ -15,13 +15,13 @@ struct FileMessageChatItem: ChatItem, Differentiable {
         return FileMessageCell.identifier
     }
 
-    var attachment: Attachment
+    var attachment: UnmanagedAttachment
 
     var differenceIdentifier: String {
-        return attachment.fullFileURL()?.absoluteString ?? attachment.titleLink
+        return attachment.fullFileURL?.absoluteString ?? attachment.titleLink
     }
 
     func isContentEqual(to source: FileMessageChatItem) -> Bool {
-        return attachment.fullFileURL() == source.attachment.fullFileURL()
+        return attachment.fullFileURL == source.attachment.fullFileURL
     }
 }

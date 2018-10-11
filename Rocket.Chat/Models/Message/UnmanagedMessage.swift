@@ -9,11 +9,26 @@
 import Foundation
 import DifferenceKit
 
-struct UnmanagedMessageURL {
+struct UnmanagedMessageURL: Equatable {
     var url: String
     var title: String
     var subtitle: String
     var imageURL: String?
+}
+
+struct UnmanagedMention: Equatable {
+    var userId: String?
+    var realName: String?
+    var username: String?
+}
+
+struct UnmanagedChannel: Equatable {
+    var name: String
+}
+
+struct UnmanagedMessageReaction: Equatable {
+    var emoji: String
+    var usernames: [String]
 }
 
 struct UnmanagedMessage: UnmanagedObject, Equatable {
@@ -21,14 +36,15 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var identifier: String
     var managedObject: Message
     var text: String
-    var attachments: [Attachment]
+    var attachments: [UnmanagedAttachment]
+    var userIdentifier: String?
     var user: UnmanagedUser?
     var temporary: Bool
     var failed: Bool
-    var mentions: [Mention]
-    var channels: [Channel]
+    var mentions: [UnmanagedMention]
+    var channels: [UnmanagedChannel]
     var urls: [UnmanagedMessageURL]
-    var reactions: [MessageReaction]
+    var reactions: [UnmanagedMessageReaction]
     var createdAt: Date
     var updatedAt: Date?
     var groupable: Bool
@@ -65,25 +81,45 @@ extension UnmanagedMessage {
         managedObject = message
         identifier = messageIdentifier
         text = message.text
+        userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
         temporary = message.temporary
         failed = message.failed
         groupable = message.groupable
         markedForDeletion = message.markedForDeletion
-        mentions = message.mentions.map { $0 }
-        channels = message.channels.map { $0 }
-        reactions = message.reactions.map { $0 }
         createdAt = messageCreatedAt
         updatedAt = message.updatedAt
         emoji = message.emoji
         avatar = message.avatar
 
-        urls = message.urls.compactMap({ messageURL in
+        mentions = message.mentions.compactMap {
+            return UnmanagedMention(
+                userId: $0.userId,
+                realName: $0.realName,
+                username: $0.username
+            )
+        }
+
+        channels = message.channels.compactMap {
+            guard let name = $0.name else { return nil }
+            return UnmanagedChannel(name: name)
+        }
+
+        reactions = message.reactions.compactMap {
+            guard let emoji = $0.emoji else { return nil }
+
+            return UnmanagedMessageReaction(
+                emoji: emoji,
+                usernames: $0.usernames.compactMap({ $0 })
+            )
+        }
+
+        urls = message.urls.compactMap {
             guard
-                let title = messageURL.title,
-                let subtitle = messageURL.textDescription,
-                let url = messageURL.targetURL,
-                messageURL.isValid()
+                let title = $0.title,
+                let subtitle = $0.textDescription,
+                let url = $0.targetURL,
+                $0.isValid()
             else {
                 return nil
             }
@@ -92,30 +128,13 @@ extension UnmanagedMessage {
                 url: url,
                 title: title,
                 subtitle: subtitle,
-                imageURL: messageURL.imageURL
+                imageURL: $0.imageURL
             )
-        })
+        }
 
-        attachments = message.attachments.compactMap({ attachment in
-            if attachment.isFile && attachment.fullFileURL() != nil {
-                return attachment
-            }
-
-            switch attachment.type {
-            case .image where attachment.imageURL != nil:
-                return attachment
-            case .video where attachment.videoURL != nil:
-                return attachment
-            case .audio where attachment.audioURL != nil:
-                return attachment
-            case .textAttachment:
-                return attachment
-            default:
-                break
-            }
-
-            return nil
-        })
+        attachments = message.attachments.compactMap {
+            return UnmanagedAttachment($0)
+        }
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol ChatMessageVideoViewProtocol: class {
-    func openVideoFromCell(attachment: Attachment)
+    func openVideoFromCell(attachment: UnmanagedAttachment)
 }
 
 final class ChatMessageVideoView: ChatMessageAttachmentView {
@@ -92,6 +92,8 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
-        delegate?.openVideoFromCell(attachment: attachment)
+        if let unmanaged = UnmanagedAttachment(attachment) {
+            delegate?.openVideoFromCell(attachment: unmanaged)
+        }
     }
 }
