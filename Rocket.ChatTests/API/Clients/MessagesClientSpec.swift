@@ -44,7 +44,7 @@ class MessagesClientSpec: XCTestCase {
 
         let user = User.testInstance()
         guard let subscription = Subscription.testInstance().unmanaged else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

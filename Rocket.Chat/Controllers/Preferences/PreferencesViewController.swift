@@ -202,7 +202,7 @@ final class PreferencesViewController: BaseTableViewController {
         else {
             return
         }
-        
+
         AnalyticsManager.log(event: .openAdmin)
 
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {

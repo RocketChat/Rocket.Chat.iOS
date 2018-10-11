@@ -48,7 +48,12 @@ extension MessageManager {
             let subscriptionIdentifier = subscription.identifier
 
             currentRealm?.execute({ (realm) in
-                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
+                guard let detachedSubscription = realm.object(
+                    ofType: Subscription.self,
+                    forPrimaryKey: subscriptionIdentifier
+                ) else {
+                    return
+                }
 
                 list?.forEach { object in
                     let mockNewMessage = Message()

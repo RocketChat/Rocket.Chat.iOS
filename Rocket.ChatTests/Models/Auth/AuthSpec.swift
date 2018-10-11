@@ -90,7 +90,7 @@ class AuthSpec: XCTestCase {
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -201,7 +201,7 @@ class AuthSpec: XCTestCase {
     // swiftlint:disable function_body_length
     func testCanEditMessage() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -292,7 +292,7 @@ class AuthSpec: XCTestCase {
 
     func testCanBlockMessage() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -340,7 +340,7 @@ class AuthSpec: XCTestCase {
 
     func testCanPinMessage() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

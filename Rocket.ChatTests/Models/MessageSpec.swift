@@ -12,6 +12,8 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// swiftlint:disable file_length
+
 // MARK: Test Instance
 
 extension Message {
@@ -196,7 +198,7 @@ extension MessageSpec {
             realm.add(message, update: true)
         })
 
-        Realm.execute({ realm in
+        Realm.execute({ _ in
             message.subscription?.type = .channel
             XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
 
@@ -216,7 +218,7 @@ extension MessageSpec {
 
     func testMessageBroadcastTrue() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

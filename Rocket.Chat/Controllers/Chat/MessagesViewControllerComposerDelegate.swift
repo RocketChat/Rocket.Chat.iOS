@@ -51,7 +51,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
             cell.nameLabel.text = user.name
             return cell
 
-        case .emoji(let emoji, let suggestion):
+        case .emoji(let emoji, _):
             let cell = hintsView.dequeueReusableCell(withType: TextHintCell<EmojiView>.self)
             cell.prefixView.setEmoji(emoji)
             cell.valueLabel.text = emoji.shortname
