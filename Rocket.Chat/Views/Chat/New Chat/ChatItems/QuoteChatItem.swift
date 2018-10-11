@@ -29,8 +29,10 @@ struct QuoteChatItem: ChatItem, Differentiable {
     }
 
     func toggle() {
+        let filter = "identifier = '\(self.attachment.identifier)'"
+
         Realm.executeOnMainThread({ realm in
-            if let attachment = realm.objects(Attachment.self).filter("identifier = '\(self.attachment.identifier)'").first {
+            if let attachment = realm.objects(Attachment.self).filter(filter).first {
                 attachment.collapsed = !self.attachment.collapsed
                 realm.add(attachment, update: true)
             }
