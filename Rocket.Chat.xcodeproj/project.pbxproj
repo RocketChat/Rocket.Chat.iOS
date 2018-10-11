@@ -205,6 +205,7 @@
 		412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		412DF58E216F8A1F005161A4 /* UnmanagedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */; };
 		412DF58F216F901D005161A4 /* UnmanagedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */; };
+		412DF591216F9EC3005161A4 /* UnmanagedMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */; };
 		412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */; };
 		412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */; };
 		412EF3C62050507C001689A3 /* ReusableViewText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412EF3C52050507C001689A3 /* ReusableViewText.xib */; };
@@ -1091,6 +1092,7 @@
 		412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextView.swift; sourceTree = "<group>"; };
 		412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorCSSColorsExtension.swift; sourceTree = "<group>"; };
 		412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedAttachment.swift; sourceTree = "<group>"; };
+		412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedMessageSpec.swift; sourceTree = "<group>"; };
 		412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageURLView.swift; sourceTree = "<group>"; };
 		412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageURLView.xib; sourceTree = "<group>"; };
 		412EF3C52050507C001689A3 /* ReusableViewText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReusableViewText.xib; sourceTree = "<group>"; };
@@ -2304,6 +2306,7 @@
 				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
 				80247B3E1FE8582700878833 /* MessageReactionSpec.swift */,
 				4161333F1D46E6A800E09DA2 /* MessageSpec.swift */,
+				412DF590216F9EC3005161A4 /* UnmanagedMessageSpec.swift */,
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
 				808792371FB14B3300EFE77F /* PermissionSpec.swift */,
 				41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */,
@@ -5140,6 +5143,7 @@
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
 				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
+				412DF591216F9EC3005161A4 /* UnmanagedMessageSpec.swift in Sources */,
 				33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */,
 				990FF6D8207438D4007B4A53 /* RoomMentionsRequestSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,

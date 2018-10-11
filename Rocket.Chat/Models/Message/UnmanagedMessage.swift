@@ -37,6 +37,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var managedObject: Message
     var text: String
     var attachments: [UnmanagedAttachment]
+    var userIdentifier: String?
     var user: UnmanagedUser?
     var temporary: Bool
     var failed: Bool
@@ -80,6 +81,7 @@ extension UnmanagedMessage {
         managedObject = message
         identifier = messageIdentifier
         text = message.text
+        userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
         temporary = message.temporary
         failed = message.failed
