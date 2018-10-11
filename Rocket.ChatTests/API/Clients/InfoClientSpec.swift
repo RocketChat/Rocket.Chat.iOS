@@ -112,9 +112,10 @@ class InfoClientSpec: XCTestCase {
                     "admin"
                 ]
             ]
-        ])
+            ])
 
         client.fetchPermissions()
-        XCTAssertEqual(realm.objects(Permission.self).count, 2)
+        XCTAssertEqual(realm.objects(Rocket_Chat.Permission.self).count, 2)
     }
+
 }
