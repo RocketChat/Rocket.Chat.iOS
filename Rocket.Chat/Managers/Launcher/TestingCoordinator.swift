@@ -22,7 +22,7 @@ struct TestingCoordinator: LauncherProtocol {
         #if TEST
         Realm.clearDatabase()
 
-        for (idx, _) in (DatabaseManager.servers ?? []).enumerated() {
+        for idx in (DatabaseManager.servers ?? []).indices {
             DatabaseManager.removeDatabase(at: idx)
         }
 

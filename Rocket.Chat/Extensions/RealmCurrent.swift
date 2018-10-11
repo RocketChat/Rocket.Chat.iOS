@@ -17,17 +17,15 @@ let realmTestingConfiguration = Realm.Configuration(
 )
 
 extension Realm {
+
+    #if TEST
     static var current: Realm? {
-        var isTesting = false
+        return try? Realm(configuration: realmTestingConfiguration)
+    }
+    #endif
 
-        #if TEST
-        isTesting = true
-        #endif
-
-        if isTesting {
-            return try? Realm(configuration: realmTestingConfiguration)
-        }
-
+    #if !TEST
+    static var current: Realm? {
         if let configuration = realmConfiguration {
             return try? Realm(configuration: configuration)
         } else {
@@ -38,4 +36,6 @@ extension Realm {
             return try? Realm(configuration: configuration)
         }
     }
+    #endif
+
 }

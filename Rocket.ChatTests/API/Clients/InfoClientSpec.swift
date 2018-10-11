@@ -90,7 +90,7 @@ class InfoClientSpec: XCTestCase {
 
     func testFetchPermissions() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -115,6 +115,6 @@ class InfoClientSpec: XCTestCase {
         ])
 
         client.fetchPermissions()
-        XCTAssertEqual(2, 2)
+        XCTAssertEqual(realm.objects(Permission.self).count, 2)
     }
 }

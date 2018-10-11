@@ -12,6 +12,8 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// swiftlint:disable file_length
+
 // MARK: Test Instance
 
 extension Message {

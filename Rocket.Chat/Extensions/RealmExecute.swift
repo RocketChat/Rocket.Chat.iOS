@@ -11,27 +11,23 @@ import RealmSwift
 extension Realm {
     static let writeQueue = DispatchQueue(label: "chat.rocket.realm.write", qos: .background)
 
+    #if TEST
+    func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
+        if isInWriteTransaction {
+            execution(self)
+        } else {
+            try? write {
+                execution(self)
+            }
+        }
+
+        completion?()
+    }
+    #endif
+
+    #if !TEST
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
-
-        var forceSameThread = false
-
-        #if TEST
-        forceSameThread = true
-        #endif
-
-        if forceSameThread {
-            if self.isInWriteTransaction {
-                execution(self)
-            } else {
-                try? self.write {
-                    execution(self)
-                }
-            }
-
-            completion?()
-            return
-        }
 
         backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background") {
             backgroundTaskId = UIBackgroundTaskIdentifier.invalid
@@ -57,6 +53,7 @@ extension Realm {
             }
         }
     }
+    #endif
 
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         Realm.current?.execute(execution, completion: completion)

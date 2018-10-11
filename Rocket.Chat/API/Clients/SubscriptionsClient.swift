@@ -146,7 +146,7 @@ struct SubscriptionsClient: APIClient {
             switch result {
             case .resource(let resource):
                 if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
-                    Realm.executeOnMainThread(realm: currentRealm) { realm in
+                    Realm.executeOnMainThread(realm: currentRealm) { _ in
                         let subscriptionCopy = Subscription(value: subscription)
 
                         subscriptionCopy.usersRoles.removeAll()

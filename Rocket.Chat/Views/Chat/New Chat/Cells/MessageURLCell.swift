@@ -65,7 +65,7 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
         if let image = viewModel.imageURL, let imageURL = URL(string: image) {
             thumbnailHeightConstraint.constant = thumbnailHeightInitialConstant
             activityIndicator.startAnimating()
-            ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, error in
+            ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
                 self?.activityIndicator.stopAnimating()
             }
         } else {

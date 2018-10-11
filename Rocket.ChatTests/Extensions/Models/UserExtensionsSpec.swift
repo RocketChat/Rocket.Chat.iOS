@@ -15,7 +15,7 @@ import XCTest
 class UserExtensionsSpec: XCTestCase {
     func testSearchUsernameContaining() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

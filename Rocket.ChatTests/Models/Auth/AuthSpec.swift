@@ -90,7 +90,7 @@ class AuthSpec: XCTestCase {
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
