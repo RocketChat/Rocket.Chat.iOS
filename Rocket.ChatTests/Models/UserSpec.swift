@@ -163,7 +163,7 @@ class UserSpec: XCTestCase {
 
     func testUserCanViewAdminPanelTrue() throws {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

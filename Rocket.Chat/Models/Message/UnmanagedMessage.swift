@@ -56,7 +56,7 @@ extension UnmanagedMessage {
             let messageCreatedAt = message.createdAt
         else {
             #if DEBUG
-            fatalError("message object is not completed")
+            fatalError("message object is not complete")
             #endif
 
             return nil

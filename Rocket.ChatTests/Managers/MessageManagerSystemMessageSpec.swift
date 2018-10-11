@@ -16,7 +16,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase {
 
     func testSystemMessageCreationBasic() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -52,7 +52,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase {
 
     func testSystemMessageCreationBasicWithAvatar() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -90,7 +90,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase {
 
     func testSystemMessageCreationWithCustomUser() {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 

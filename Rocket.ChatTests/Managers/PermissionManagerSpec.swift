@@ -13,7 +13,7 @@ import RealmSwift
 class PermissionManagerSpec: XCTestCase {
     func testRolesForPermission() throws {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
@@ -38,7 +38,7 @@ class PermissionManagerSpec: XCTestCase {
 
     func testUserHasPermission() throws {
         guard let realm = Realm.current else {
-            XCTFail()
+            XCTFail("realm could not be instantiated")
             return
         }
 
