@@ -77,4 +77,46 @@ final class UnmanagedMessageSpec: XCTestCase {
         XCTAssertEqual(unmanagedMessage.channels.first?.name, "mention-channel")
     }
 
+    func testURLsMapping() {
+        let testMessage = Message.testInstance()
+
+        let messageURL = MessageURL()
+        messageURL.textDescription = "text-description"
+        messageURL.title = "title"
+        messageURL.targetURL = "target-url"
+        messageURL.imageURL = "image-url"
+        testMessage.urls.append(messageURL)
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertEqual(unmanagedMessage.identifier, testMessage.identifier)
+        XCTAssertEqual(unmanagedMessage.urls.count, 1)
+        XCTAssertEqual(unmanagedMessage.urls.first?.title, "title")
+        XCTAssertEqual(unmanagedMessage.urls.first?.subtitle, "text-description")
+        XCTAssertEqual(unmanagedMessage.urls.first?.imageURL, "image-url")
+        XCTAssertEqual(unmanagedMessage.urls.first?.url, "target-url")
+    }
+
+    func testReactionsMapping() {
+        let testMessage = Message.testInstance()
+
+        let reaction = MessageReaction()
+        reaction.emoji = ":+1:"
+        reaction.usernames.append("username")
+        testMessage.reactions.append(reaction)
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertEqual(unmanagedMessage.identifier, testMessage.identifier)
+        XCTAssertEqual(unmanagedMessage.reactions.count, 1)
+        XCTAssertEqual(unmanagedMessage.reactions.first?.emoji, ":+1:")
+        XCTAssertEqual(unmanagedMessage.reactions.first?.usernames.first, "username")
+    }
+
 }
