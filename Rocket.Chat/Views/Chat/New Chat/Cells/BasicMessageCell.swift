@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
+final class BasicMessageCell: MessageHeaderCell, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
@@ -66,8 +66,6 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    var viewModel: AnyChatItem?
-    var adjustedHorizontalInsets: CGFloat = 0
     var initialTextHeightConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -77,28 +75,14 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         insertGesturesIfNeeded()
     }
 
-    func configure() {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
-
-        let createdAt = viewModel.message.createdAt
-        date.text = RCDateFormatter.time(createdAt)
-
-        username.text = viewModel.user.username
+    override func configure() {
+        configure(with: avatarView, date: date, and: username)
         updateText()
     }
 
     func updateText(force: Bool = false) {
         guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
             return
-        }
-
-        avatarView.emoji = viewModel.message.emoji
-        avatarView.user = viewModel.message.user?.managedObject
-
-        if let avatar = viewModel.message.avatar {
-            avatarView.avatarURL = URL(string: avatar)
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
