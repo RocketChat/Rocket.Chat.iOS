@@ -729,6 +729,7 @@
 		9914183B2166AF63007D2AA2 /* MessageURLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9914183A2166AF63007D2AA2 /* MessageURLCell.xib */; };
 		9914183D2166C626007D2AA2 /* MessageURLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914183C2166C626007D2AA2 /* MessageURLCell.swift */; };
 		9914183F2166CFA4007D2AA2 /* MessageURLChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */; };
+		991AB00621718D0F0097AE4C /* MessageHeaderChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */; };
 		9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */; };
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */; };
@@ -748,6 +749,7 @@
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
 		994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */; };
 		994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */; };
+		99549ED2216FE4F50037D6A5 /* MessageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99549ED1216FE4F50037D6A5 /* MessageHeaderCell.swift */; };
 		995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710A20C7822A00B7535F /* AuthTableViewController.swift */; };
 		995F710E20C7837300B7535F /* AuthSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */; };
 		995F711020C7842100B7535F /* LoginServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F710F20C7842100B7535F /* LoginServiceTableViewCell.swift */; };
@@ -1614,6 +1616,7 @@
 		9914183A2166AF63007D2AA2 /* MessageURLCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageURLCell.xib; sourceTree = "<group>"; };
 		9914183C2166C626007D2AA2 /* MessageURLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageURLCell.swift; sourceTree = "<group>"; };
 		9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageURLChatItem.swift; sourceTree = "<group>"; };
+		991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeaderChatItem.swift; sourceTree = "<group>"; };
 		9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequestSpec.swift; sourceTree = "<group>"; };
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileViewController.swift; sourceTree = "<group>"; };
@@ -1633,6 +1636,7 @@
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
 		994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModelSpec.swift; sourceTree = "<group>"; };
 		994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordTableViewController.swift; sourceTree = "<group>"; };
+		99549ED1216FE4F50037D6A5 /* MessageHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeaderCell.swift; sourceTree = "<group>"; };
 		995F710A20C7822A00B7535F /* AuthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTableViewController.swift; sourceTree = "<group>"; };
 		995F710D20C7837300B7535F /* AuthSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSeparatorTableViewCell.swift; sourceTree = "<group>"; };
 		995F710F20C7842100B7535F /* LoginServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTableViewCell.swift; sourceTree = "<group>"; };
@@ -3690,6 +3694,7 @@
 		996735CB21581CEC0049BB63 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				99549ED1216FE4F50037D6A5 /* MessageHeaderCell.swift */,
 				996735CC21581D150049BB63 /* BasicMessageCell.xib */,
 				996735CE21582E790049BB63 /* BasicMessageCell.swift */,
 				41BF4D71215B4CC800588B35 /* DateSeparatorCell.xib */,
@@ -3721,6 +3726,7 @@
 		996735D021585C600049BB63 /* ChatItems */ = {
 			isa = PBXGroup;
 			children = (
+				991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */,
 				996735D121585CA70049BB63 /* BasicMessageChatItem.swift */,
 				41BF4D6D215B4CA100588B35 /* DateSeparatorChatItem.swift */,
 				996E7420215DFE0700842818 /* SequentialMessageChatItem.swift */,
@@ -4562,6 +4568,7 @@
 				8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */,
 				99B15BCD20FD4589005A528F /* DatabaseManagerAuthSettings.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
+				99549ED2216FE4F50037D6A5 /* MessageHeaderCell.swift in Sources */,
 				8039441120AF1334002F317A /* RoomKickRequest.swift in Sources */,
 				33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
@@ -4748,6 +4755,7 @@
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				41FC9E08209B3A6300FED485 /* NSAttributedStringExtensions.swift in Sources */,
+				991AB00621718D0F0097AE4C /* MessageHeaderChatItem.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */,
 				41E9F025215D4C6B00B2C9E7 /* TestingCoordinator.swift in Sources */,
 				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
