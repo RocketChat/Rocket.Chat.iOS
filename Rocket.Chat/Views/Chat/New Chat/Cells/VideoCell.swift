@@ -2,19 +2,20 @@
 //  VideoMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 15/10/18.
+//  Created by Rafael Streit on 28/09/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
+import AVFoundation
 import RocketChatViewController
 
-final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
-    static let identifier = String(describing: VideoMessageCell.self)
+final class VideoCell: BaseVideoMessageCell, SizingCell {
+    static let identifier = String(describing: VideoCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = VideoMessageCell.instantiateFromNib() else {
-            return VideoMessageCell()
+        guard let cell = VideoCell.instantiateFromNib() else {
+            return VideoCell()
         }
 
         return cell
@@ -26,16 +27,6 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
-
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
@@ -53,7 +44,6 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
 
         labelDescription.text = viewModel.descriptionText
-        configure(with: avatarView, date: date, and: username)
         updateVideo(with: imageViewThumb)
     }
 
