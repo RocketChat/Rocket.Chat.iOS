@@ -16,10 +16,10 @@ struct TextAttachmentChatItem: ChatItem, Differentiable {
         return TextAttachmentCell.identifier
     }
 
-    var attachment: Attachment
+    var attachment: UnmanagedAttachment
 
     var differenceIdentifier: String {
-        return attachment.identifier ?? attachment.title
+        return attachment.identifier
     }
 
     func isContentEqual(to source: TextAttachmentChatItem) -> Bool {
@@ -27,8 +27,13 @@ struct TextAttachmentChatItem: ChatItem, Differentiable {
     }
 
     func toggleAttachmentFields() {
-        Realm.executeOnMainThread({ _ in
-            self.attachment.collapsed = !self.attachment.collapsed
+        let filter = "identifier = '\(self.attachment.identifier)'"
+
+        Realm.executeOnMainThread({ realm in
+            if let attachment = realm.objects(Attachment.self).filter(filter).first {
+                attachment.collapsed = !self.attachment.collapsed
+                realm.add(attachment, update: true)
+            }
         })
     }
 }

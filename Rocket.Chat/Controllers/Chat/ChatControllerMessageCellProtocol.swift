@@ -16,6 +16,7 @@ import RocketChatViewController
 extension ReactorListViewController: UserActionSheetPresenter { }
 
 extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
+
     func viewDidCollapseChange(viewModel: AnyChatItem) {}
 
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
@@ -114,8 +115,8 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         WebBrowserManager.open(url: destinyURL)
     }
 
-    func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
+    func openVideoFromCell(attachment: UnmanagedAttachment) {
+        guard let videoURL = attachment.fullVideoURL else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
         controller.activityItems = [attachment.title, videoURL]
@@ -127,7 +128,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
         // TODO: Adjust for our composer
 //        textView.resignFirstResponder()
 
@@ -161,7 +162,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         }
     }
 
-    func openFileFromCell(attachment: Attachment) {
+    func openFileFromCell(attachment: UnmanagedAttachment) {
         openDocument(attachment: attachment)
     }
 

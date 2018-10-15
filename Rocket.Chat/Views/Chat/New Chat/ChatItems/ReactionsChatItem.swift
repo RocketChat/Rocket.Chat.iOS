@@ -16,7 +16,7 @@ struct ReactionsChatItem: ChatItem, Differentiable {
     }
 
     var messageIdentifier: String
-    var reactions: [MessageReaction] = []
+    var reactions: [UnmanagedMessageReaction] = []
     var reactionsModels: ReactionListViewModel {
         guard let username = AuthManager.currentUser()?.username else { return
             ReactionListViewModel(reactionViewModels: [])
@@ -24,7 +24,7 @@ struct ReactionsChatItem: ChatItem, Differentiable {
 
         let models = Array(reactions.map { reaction -> ReactionViewModel in
             let highlight = reaction.usernames.contains(username)
-            let emoji = reaction.emoji ?? "?"
+            let emoji = reaction.emoji
             let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
 
             return ReactionViewModel(

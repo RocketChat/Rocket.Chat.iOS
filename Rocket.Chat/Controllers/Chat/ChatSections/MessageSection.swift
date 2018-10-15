@@ -49,14 +49,12 @@ final class MessageSection: ChatSection {
         }
 
         for attachment in object.message.attachments {
-            guard let identifier = attachment.identifier else { continue }
-
             switch attachment.type {
             case .audio:
                 if object.message.text.isEmpty {
                     cells.append(AudioMessageChatItem(
-                        identifier: identifier,
-                        audioURL: attachment.fullAudioURL(),
+                        identifier: attachment.identifier,
+                        audioURL: attachment.fullAudioURL,
                         hasText: false,
                         user: user,
                         message: object.message
@@ -65,8 +63,8 @@ final class MessageSection: ChatSection {
                     shouldAppendMessageHeader = false
                 } else {
                     cells.append(AudioMessageChatItem(
-                        identifier: identifier,
-                        audioURL: attachment.fullAudioURL(),
+                        identifier: attachment.identifier,
+                        audioURL: attachment.fullAudioURL,
                         hasText: true,
                         user: nil,
                         message: nil
@@ -74,9 +72,9 @@ final class MessageSection: ChatSection {
                 }
             case .video:
                 cells.append(VideoMessageChatItem(
-                    identifier: identifier,
+                    identifier: attachment.identifier,
                     descriptionText: attachment.descriptionText,
-                    videoURL: attachment.fullFileURL(),
+                    videoURL: attachment.fullFileURL,
                     videoThumbPath: attachment.videoThumbPath
                 ).wrapped)
             case .textAttachment where attachment.fields.count > 0:
@@ -89,10 +87,10 @@ final class MessageSection: ChatSection {
                 ).wrapped)
             case .image:
                 cells.append(ImageMessageChatItem(
-                    identifier: identifier,
+                    identifier: attachment.identifier,
                     title: attachment.title,
                     descriptionText: attachment.descriptionText,
-                    imageURL: attachment.fullImageURL()
+                    imageURL: attachment.fullImageURL
                 ).wrapped)
             default:
                 if attachment.isFile {
@@ -262,11 +260,11 @@ extension MessageSection: ChatMessageCellProtocol {
         WebBrowserManager.open(url: destinyURL)
     }
 
-    func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
+    func openVideoFromCell(attachment: UnmanagedAttachment) {
+        guard let videoURL = attachment.fullVideoURL else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
-        controller.activityItems = [attachment.title, videoURL]
+        controller.activityItems = [attachment.title ?? "", videoURL]
         messagesController?.present(controller, animated: true, completion: nil)
     }
 
@@ -276,7 +274,7 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     // TODO: This one can be removed once we remove from the protocol
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
         // TODO: Adjust for our composer
         //        textView.resignFirstResponder()
 
@@ -308,13 +306,13 @@ extension MessageSection: ChatMessageCellProtocol {
         }
     }
 
-    func openFileFromCell(attachment: Attachment) {
+    func openFileFromCell(attachment: UnmanagedAttachment) {
         openDocument(attachment: attachment)
     }
 
-    func openDocument(attachment: Attachment) {
-        guard let fileURL = attachment.fullFileURL() else { return }
-        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+    func openDocument(attachment: UnmanagedAttachment) {
+        guard let fileURL = attachment.fullFileURL else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink ?? "") else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
         // Open document itself
