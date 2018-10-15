@@ -102,7 +102,7 @@ final class MessagesViewController: RocketChatViewController {
 extension MessagesViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if viewModel.numberOfSections - indexPath.section < 5 {
+        if viewModel.numberOfSections - indexPath.section <= 5 {
             viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
         }
 
