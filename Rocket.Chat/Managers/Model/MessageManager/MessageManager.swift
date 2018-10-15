@@ -12,7 +12,7 @@ import RealmSwift
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
 struct MessageManager {
-    static let historySize = 60
+    static let historySize = 30
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
