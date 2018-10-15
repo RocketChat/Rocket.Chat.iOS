@@ -56,6 +56,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
         collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
         collectionView.register(AudioMessageCell.nib, forCellWithReuseIdentifier: AudioMessageCell.identifier)
+        collectionView.register(VideoCell.nib, forCellWithReuseIdentifier: VideoCell.identifier)
         collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
         collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
         collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
