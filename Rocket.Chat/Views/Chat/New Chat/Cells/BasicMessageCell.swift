@@ -22,15 +22,7 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
-
-    let avatarView: AvatarView = {
+    lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
         avatarView.layer.cornerRadius = 4
@@ -38,6 +30,14 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
         return avatarView
     }()
+
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -66,8 +66,8 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    var viewModel: AnyChatItem?
     var adjustedHorizontalInsets: CGFloat = 0
+    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -84,21 +84,21 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
 
         let createdAt = viewModel.message.createdAt
         date.text = RCDateFormatter.time(createdAt)
-
         username.text = viewModel.user.username
-        updateText()
-    }
-
-    func updateText(force: Bool = false) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
 
         avatarView.emoji = viewModel.message.emoji
         avatarView.user = viewModel.message.user?.managedObject
 
         if let avatar = viewModel.message.avatar {
             avatarView.avatarURL = URL(string: avatar)
+        }
+
+        updateText()
+    }
+
+    func updateText(force: Bool = false) {
+        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+            return
         }
 
         if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {

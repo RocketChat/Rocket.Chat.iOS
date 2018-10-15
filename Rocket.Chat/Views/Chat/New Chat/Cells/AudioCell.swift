@@ -2,33 +2,24 @@
 //  AudioMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 15/10/18.
+//  Created by Rafael Streit on 28/09/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import UIKit
 import Foundation
 import AVFoundation
 import RocketChatViewController
 
-final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
-    static let identifier = String(describing: AudioMessageCell.self)
+final class AudioCell: BaseAudioMessageCell, SizingCell {
+    static let identifier = String(describing: AudioCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = AudioMessageCell.instantiateFromNib() else {
-            return AudioMessageCell()
+        guard let cell = AudioCell.instantiateFromNib() else {
+            return AudioCell()
         }
 
         return cell
     }()
-
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
 
     @IBOutlet weak var viewPlayerBackground: UIView! {
         didSet {
@@ -36,8 +27,6 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
 
@@ -77,7 +66,6 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     }
 
     override func configure() {
-        configure(with: avatarView, date: date, and: username)
         updateAudio()
     }
 
@@ -108,7 +96,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
 
 // MARK: Theming
 
-extension AudioMessageCell {
+extension AudioCell {
     override func applyTheme() {
         super.applyTheme()
 
@@ -121,7 +109,7 @@ extension AudioMessageCell {
 
 // MARK: AVAudioPlayerDelegate
 
-extension AudioMessageCell {
+extension AudioCell {
     override func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         slider.value = 0.0
     }
