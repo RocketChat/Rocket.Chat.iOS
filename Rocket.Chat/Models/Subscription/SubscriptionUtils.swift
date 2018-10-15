@@ -98,8 +98,15 @@ extension Subscription {
             messages = messages.filter("createdAt < %@", lastMessageDate)
         }
 
-        for index in 0..<min(limit, messages.count) {
-            limitedMessages.append(messages[index])
+        let totalMessagesIndexes = messages.count - 1
+        for index in 0..<limit {
+            let reversedIndex = totalMessagesIndexes - index
+
+            guard totalMessagesIndexes >= reversedIndex, reversedIndex > 0 else {
+                return limitedMessages
+            }
+
+            limitedMessages.append(messages[reversedIndex])
         }
 
         return limitedMessages

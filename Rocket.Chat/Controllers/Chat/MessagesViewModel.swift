@@ -196,8 +196,9 @@ final class MessagesViewModel {
             var sections: [AnyChatSection] = []
 
             var previousSection: AnyChatSection?
-//            let messages = subscription?.fetchMessages(40, lastMessageDate: nil)
-            messagesQuery.forEach({ (object) in
+            let messages = subscription?.fetchMessages(40, lastMessageDate: nil) ?? []
+
+            messages.forEach({ (object) in
                 if let section = section(for: object, previous: previousSection) {
                     sections.append(section)
                     previousSection = section
