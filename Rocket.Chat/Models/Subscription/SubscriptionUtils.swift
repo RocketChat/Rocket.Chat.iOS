@@ -102,7 +102,7 @@ extension Subscription {
         for index in 0..<limit {
             let reversedIndex = totalMessagesIndexes - index
 
-            guard totalMessagesIndexes >= reversedIndex, reversedIndex > 0 else {
+            guard totalMessagesIndexes >= reversedIndex, reversedIndex >= 0 else {
                 return limitedMessages
             }
 

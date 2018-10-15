@@ -188,81 +188,90 @@ final class MessagesViewModel {
     /**
      This method is called on every update the messagesQuery get from Realm.
     */
-    func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
+    internal func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
         guard let messagesQuery = self.messagesQuery else { return }
 
         switch changes {
         case .initial:
-            var sections: [AnyChatSection] = []
+            // Ignore the initial query, since we're firing the initial results directly
+            // on the fetchMessages() query when this query is created.
+            break
 
-            var previousSection: AnyChatSection?
-            let messages = subscription?.fetchMessages(40, lastMessageDate: nil) ?? []
-
-            messages.forEach({ (object) in
-                if let section = section(for: object, previous: previousSection) {
-                    sections.append(section)
-                    previousSection = section
-                }
-            })
-
-            data = sections
-            cacheDataSorted()
-            onDataChanged?()
         case .update(_, let deletions, let insertions, let modifications):
-            for deletion in deletions where deletion < data.count {
-                data.remove(at: deletion)
-            }
-
-            for insertion in insertions {
-                guard
-                    insertion < messagesQuery.count,
-                    let message = messagesQuery[insertion].validated()
-                else {
-                    continue
-                }
-
-                if let section = section(for: message) {
-                    data.append(section)
-                }
-            }
-
-            for modified in modifications {
-                guard
-                    modified < messagesQuery.count,
-                    let message = messagesQuery[modified].validated()?.unmanaged
-                else {
-                    continue
-                }
-
-                let index = data.firstIndex(where: { (section) -> Bool in
-                    if let object = section.object.base as? MessageSectionModel {
-                        return
-                            object.differenceIdentifier == message.identifier &&
-                            !message.isContentEqual(to: object.message)
-                    }
-
-                    return false
-                })
-
-                if let index = index {
-                    var previous: AnyChatSection?
-
-                    if index < data.count - 1 {
-                        previous = data[index + 1]
-                    }
-
-                    if let newSection = section(for: message.managedObject, previous: previous) {
-                        data[index] = newSection
-                    }
-                } else {
-                    continue
-                }
-            }
+            handle(deletions: deletions, on: messagesQuery)
+            handle(insertions: insertions, on: messagesQuery)
+            handle(modifications: modifications, on: messagesQuery)
 
             cacheDataSorted()
             onDataChanged?()
+
         case .error(let error):
             fatalError("\(error)")
+        }
+    }
+
+    /**
+     Handle all deletions from Realm observer on the messages query.
+     */
+    internal func handle(deletions: [Int], on messagesQuery: Results<Message>) {
+        for deletion in deletions where deletion < data.count {
+            data.remove(at: deletion)
+        }
+    }
+
+    /**
+     Handle all insertions from Realm observer on the messages query.
+     */
+    internal func handle(insertions: [Int], on messagesQuery: Results<Message>) {
+        for insertion in insertions {
+            guard
+                insertion < messagesQuery.count,
+                let message = messagesQuery[insertion].validated()
+            else {
+                continue
+            }
+
+            if let section = section(for: message) {
+                data.append(section)
+            }
+        }
+    }
+
+    /**
+     Handle all modifications from Realm observer on the messages query.
+     */
+    internal func handle(modifications: [Int], on messagesQuery: Results<Message>) {
+        for modified in modifications {
+            guard
+                modified < messagesQuery.count,
+                let message = messagesQuery[modified].validated()?.unmanaged
+            else {
+                continue
+            }
+
+            let index = data.firstIndex(where: { (section) -> Bool in
+                if let object = section.object.base as? MessageSectionModel {
+                    return
+                        object.differenceIdentifier == message.identifier &&
+                            !message.isContentEqual(to: object.message)
+                }
+
+                return false
+            })
+
+            if let index = index {
+                var previous: AnyChatSection?
+
+                if index < data.count - 1 {
+                    previous = data[index + 1]
+                }
+
+                if let newSection = section(for: message.managedObject, previous: previous) {
+                    data[index] = newSection
+                }
+            } else {
+                continue
+            }
         }
     }
 
@@ -292,7 +301,7 @@ final class MessagesViewModel {
         guard let subscription = subscription?.validated() else { return }
         guard let subscriptionDetached = subscription.unmanaged else { return }
 
-        let messages = subscription.fetchMessages(50, lastMessageDate: oldestMessage)
+        let messages = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
         for message in messages {
             if let section = section(for: message) {
                 data.append(section)
