@@ -39,6 +39,7 @@ final class MessageSection: ChatSection {
         // on the inverse order. What we want to show in the top
         // needs to go last.
         var cells: [AnyChatItem] = []
+        var shouldAppendMessageHeader = true
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
@@ -52,10 +53,25 @@ final class MessageSection: ChatSection {
 
             switch attachment.type {
             case .audio:
-                cells.append(AudioMessageChatItem(
-                    identifier: identifier,
-                    audioURL: attachment.fullAudioURL()
-                ).wrapped)
+                if object.message.text.isEmpty {
+                    cells.append(AudioMessageChatItem(
+                        identifier: identifier,
+                        audioURL: attachment.fullAudioURL(),
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(AudioMessageChatItem(
+                        identifier: identifier,
+                        audioURL: attachment.fullAudioURL(),
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             case .video:
                 cells.append(VideoMessageChatItem(
                     identifier: identifier,
@@ -96,12 +112,12 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
-        if !object.isSequential {
+        if !object.isSequential && !object.message.text.isEmpty {
             cells.append(BasicMessageChatItem(
                 user: user,
                 message: object.message
             ).wrapped)
-        } else {
+        } else if object.isSequential {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message

@@ -731,6 +731,8 @@
 		9914183F2166CFA4007D2AA2 /* MessageURLChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */; };
 		991AB00621718D0F0097AE4C /* MessageHeaderChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */; };
 		991AB00821744E640097AE4C /* BaseAudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */; };
+		991AB00A217458790097AE4C /* AudioMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991AB009217458790097AE4C /* AudioMessageCell.xib */; };
+		991AB00C217459690097AE4C /* AudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00B217459690097AE4C /* AudioMessageCell.swift */; };
 		9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */; };
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */; };
@@ -1619,6 +1621,8 @@
 		9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageURLChatItem.swift; sourceTree = "<group>"; };
 		991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeaderChatItem.swift; sourceTree = "<group>"; };
 		991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioMessageCell.swift; sourceTree = "<group>"; };
+		991AB009217458790097AE4C /* AudioMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioMessageCell.xib; sourceTree = "<group>"; };
+		991AB00B217459690097AE4C /* AudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageCell.swift; sourceTree = "<group>"; };
 		9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequestSpec.swift; sourceTree = "<group>"; };
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileViewController.swift; sourceTree = "<group>"; };
@@ -3704,6 +3708,8 @@
 				996E741C215DFBDB00842818 /* SequentialMessageCell.xib */,
 				996E741E215DFBF400842818 /* SequentialMessageCell.swift */,
 				991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */,
+				991AB009217458790097AE4C /* AudioMessageCell.xib */,
+				991AB00B217459690097AE4C /* AudioMessageCell.swift */,
 				419EB5B2215E3C2200E591BF /* AudioCell.xib */,
 				419EB5B0215E3C1400E591BF /* AudioCell.swift */,
 				419EB5B8215E52F300E591BF /* VideoMessageCell.xib */,
@@ -4172,6 +4178,7 @@
 				806465EC1FED19B9001F27DB /* EmojiView.xib in Resources */,
 				41833F4E1DEF16B600E54655 /* Keys.plist in Resources */,
 				4124FCC91F7A6BF9008ED4C3 /* ChannelInfoActionCell.xib in Resources */,
+				991AB00A217458790097AE4C /* AudioMessageCell.xib in Resources */,
 				995F711C20C7978C00B7535F /* LoginServiceTableViewCell.xib in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
 				140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */,
@@ -4878,6 +4885,7 @@
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */,
 				33D08E2A20BD5F24008D03EF /* TopTransparentViewController.swift in Sources */,
+				991AB00C217459690097AE4C /* AudioMessageCell.swift in Sources */,
 				993B7B40215F0B730067B962 /* FileMessageChatItem.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
 				801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */,

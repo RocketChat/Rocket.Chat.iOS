@@ -13,20 +13,32 @@ class MessageHeaderCell: UICollectionViewCell, ChatCell {
     var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
 
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+
+        return avatarView
+    }()
+
     func configure() {}
 
     func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
-        guard let viewModel = viewModel?.base as? MessageHeaderChatItem else {
+        guard
+            let viewModel = viewModel?.base as? MessageHeaderChatItem,
+            let user = viewModel.user
+        else {
             return
         }
 
         date.text = viewModel.dateFormatted
-        username.text = viewModel.user.username
-        avatarView.emoji = viewModel.emoji.isEmpty ? nil : viewModel.emoji
-        avatarView.user = viewModel.user.managedObject
+        username.text = user.username
+        avatarView.emoji = viewModel.emoji
+        avatarView.user = user.managedObject
 
-        if !viewModel.avatar.isEmpty {
-            avatarView.avatarURL = URL(string: viewModel.avatar)
+        if let avatar = viewModel.avatar {
+            avatarView.avatarURL = URL(string: avatar)
         }
     }
 }

@@ -10,17 +10,13 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-final class BasicMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+struct BasicMessageChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return BasicMessageCell.identifier
     }
 
+    var user: UnmanagedUser
     var message: UnmanagedMessage
-
-    init(user: UnmanagedUser, message: UnmanagedMessage) {
-        self.message = message
-        super.init(user: user, avatar: message.avatar ?? "", emoji: message.emoji ?? "", date: message.createdAt)
-    }
 
     var differenceIdentifier: String {
         return user.differenceIdentifier + message.identifier

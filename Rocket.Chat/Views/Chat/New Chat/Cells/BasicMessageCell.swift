@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: MessageHeaderCell, SizingCell {
+final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
@@ -22,15 +22,7 @@ final class BasicMessageCell: MessageHeaderCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
-
-    let avatarView: AvatarView = {
+    lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
         avatarView.layer.cornerRadius = 4
@@ -38,6 +30,14 @@ final class BasicMessageCell: MessageHeaderCell, SizingCell {
 
         return avatarView
     }()
+
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -66,6 +66,8 @@ final class BasicMessageCell: MessageHeaderCell, SizingCell {
         }
     }
 
+    var adjustedHorizontalInsets: CGFloat = 0
+    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -75,8 +77,22 @@ final class BasicMessageCell: MessageHeaderCell, SizingCell {
         insertGesturesIfNeeded()
     }
 
-    override func configure() {
-        configure(with: avatarView, date: date, and: username)
+    func configure() {
+        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+            return
+        }
+
+        let createdAt = viewModel.message.createdAt
+        date.text = RCDateFormatter.time(createdAt)
+        username.text = viewModel.user.username
+
+        avatarView.emoji = viewModel.message.emoji
+        avatarView.user = viewModel.message.user?.managedObject
+
+        if let avatar = viewModel.message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
+        }
+
         updateText()
     }
 

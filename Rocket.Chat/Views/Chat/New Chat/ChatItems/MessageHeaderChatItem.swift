@@ -9,15 +9,19 @@
 import Foundation
 
 class MessageHeaderChatItem {
-    var user: UnmanagedUser
-    var avatar: String
-    var emoji: String
-    var date: Date
+    var user: UnmanagedUser?
+    var avatar: String?
+    var emoji: String?
+    var date: Date?
     var dateFormatted: String {
+        guard let date = date else {
+            return ""
+        }
+
         return RCDateFormatter.time(date)
     }
 
-    init(user: UnmanagedUser, avatar: String, emoji: String, date: Date) {
+    init(user: UnmanagedUser?, avatar: String?, emoji: String?, date: Date?) {
         self.user = user
         self.avatar = avatar
         self.emoji = emoji
