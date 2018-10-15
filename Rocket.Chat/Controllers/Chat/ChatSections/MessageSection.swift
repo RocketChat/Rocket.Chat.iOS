@@ -110,7 +110,7 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
-        if !object.isSequential && !object.message.text.isEmpty {
+        if !object.isSequential && shouldAppendMessageHeader {
             cells.append(BasicMessageChatItem(
                 user: user,
                 message: object.message
