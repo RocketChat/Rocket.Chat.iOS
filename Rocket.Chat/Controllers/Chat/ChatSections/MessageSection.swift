@@ -71,12 +71,29 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .video:
-                cells.append(VideoMessageChatItem(
-                    identifier: attachment.identifier,
-                    descriptionText: attachment.descriptionText,
-                    videoURL: attachment.fullFileURL,
-                    videoThumbPath: attachment.videoThumbPath
-                ).wrapped)
+                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    cells.append(VideoMessageChatItem(
+                        identifier: attachment.identifier,
+                        descriptionText: attachment.descriptionText,
+                        videoURL: attachment.fullFileURL,
+                        videoThumbPath: attachment.videoThumbPath,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(VideoMessageChatItem(
+                        identifier: attachment.identifier,
+                        descriptionText: attachment.descriptionText,
+                        videoURL: attachment.fullFileURL,
+                        videoThumbPath: attachment.videoThumbPath,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             case .textAttachment where attachment.fields.count > 0:
                 cells.append(TextAttachmentChatItem(
                     attachment: attachment
