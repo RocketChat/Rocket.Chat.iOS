@@ -294,8 +294,8 @@
 		419D78831FBDB7E0005FC7A2 /* InfoRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */; };
 		419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */; };
 		419EB5AF215E3C0A00E591BF /* AudioMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5AE215E3C0A00E591BF /* AudioMessageChatItem.swift */; };
-		419EB5B1215E3C1400E591BF /* AudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B0215E3C1400E591BF /* AudioMessageCell.swift */; };
-		419EB5B3215E3C2200E591BF /* AudioMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419EB5B2215E3C2200E591BF /* AudioMessageCell.xib */; };
+		419EB5B1215E3C1400E591BF /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B0215E3C1400E591BF /* AudioCell.swift */; };
+		419EB5B3215E3C2200E591BF /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419EB5B2215E3C2200E591BF /* AudioCell.xib */; };
 		419EB5B5215E52BC00E591BF /* VideoMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */; };
 		419EB5B7215E52EA00E591BF /* VideoMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */; };
 		419EB5B9215E52F300E591BF /* VideoMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419EB5B8215E52F300E591BF /* VideoMessageCell.xib */; };
@@ -730,6 +730,7 @@
 		9914183D2166C626007D2AA2 /* MessageURLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914183C2166C626007D2AA2 /* MessageURLCell.swift */; };
 		9914183F2166CFA4007D2AA2 /* MessageURLChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */; };
 		991AB00621718D0F0097AE4C /* MessageHeaderChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */; };
+		991AB00821744E640097AE4C /* BaseAudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */; };
 		9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */; };
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */; };
@@ -1187,8 +1188,8 @@
 		419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestHandler.swift; sourceTree = "<group>"; };
 		419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestHandlerSpec.swift; sourceTree = "<group>"; };
 		419EB5AE215E3C0A00E591BF /* AudioMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageChatItem.swift; sourceTree = "<group>"; };
-		419EB5B0215E3C1400E591BF /* AudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageCell.swift; sourceTree = "<group>"; };
-		419EB5B2215E3C2200E591BF /* AudioMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioMessageCell.xib; sourceTree = "<group>"; };
+		419EB5B0215E3C1400E591BF /* AudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
+		419EB5B2215E3C2200E591BF /* AudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageChatItem.swift; sourceTree = "<group>"; };
 		419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageCell.swift; sourceTree = "<group>"; };
 		419EB5B8215E52F300E591BF /* VideoMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoMessageCell.xib; sourceTree = "<group>"; };
@@ -1617,6 +1618,7 @@
 		9914183C2166C626007D2AA2 /* MessageURLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageURLCell.swift; sourceTree = "<group>"; };
 		9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageURLChatItem.swift; sourceTree = "<group>"; };
 		991AB00521718D0F0097AE4C /* MessageHeaderChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeaderChatItem.swift; sourceTree = "<group>"; };
+		991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioMessageCell.swift; sourceTree = "<group>"; };
 		9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequestSpec.swift; sourceTree = "<group>"; };
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileViewController.swift; sourceTree = "<group>"; };
@@ -3701,8 +3703,9 @@
 				41BF4D6F215B4CBD00588B35 /* DateSeparatorCell.swift */,
 				996E741C215DFBDB00842818 /* SequentialMessageCell.xib */,
 				996E741E215DFBF400842818 /* SequentialMessageCell.swift */,
-				419EB5B2215E3C2200E591BF /* AudioMessageCell.xib */,
-				419EB5B0215E3C1400E591BF /* AudioMessageCell.swift */,
+				991AB00721744E640097AE4C /* BaseAudioMessageCell.swift */,
+				419EB5B2215E3C2200E591BF /* AudioCell.xib */,
+				419EB5B0215E3C1400E591BF /* AudioCell.swift */,
 				419EB5B8215E52F300E591BF /* VideoMessageCell.xib */,
 				419EB5B6215E52EA00E591BF /* VideoMessageCell.swift */,
 				419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */,
@@ -4209,7 +4212,7 @@
 				14F8A287202E659000175FDC /* White-40@2x.png in Resources */,
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
-				419EB5B3215E3C2200E591BF /* AudioMessageCell.xib in Resources */,
+				419EB5B3215E3C2200E591BF /* AudioCell.xib in Resources */,
 				333032A02073940800A9514D /* RCEmojiKit.strings in Resources */,
 				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
@@ -4675,12 +4678,13 @@
 				1496A87C20FA481B005C2E14 /* SaveNotificationRequest.swift in Sources */,
 				9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
+				991AB00821744E640097AE4C /* BaseAudioMessageCell.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
 				4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */,
 				418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */,
 				80235D1B1F74070100A56CA5 /* RoomMembersRequest.swift in Sources */,
-				419EB5B1215E3C1400E591BF /* AudioMessageCell.swift in Sources */,
+				419EB5B1215E3C1400E591BF /* AudioCell.swift in Sources */,
 				1496A86F20FA4644005C2E14 /* NotificationsSwitchCell.swift in Sources */,
 				3330329A20738E1500A9514D /* SubscriptionManagerRooms.swift in Sources */,
 				1496A87020FA4644005C2E14 /* NotificationsPreferencesViewModel.swift in Sources */,

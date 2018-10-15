@@ -12,7 +12,7 @@ import RocketChatViewController
 
 struct AudioMessageChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return AudioMessageCell.identifier
+        return AudioCell.identifier
     }
 
     var identifier: String
