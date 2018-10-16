@@ -800,6 +800,8 @@
 		999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999075102176222300CAB7C8 /* FileMessageCell.xib */; };
 		99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99907512217622A900CAB7C8 /* FileMessageCell.swift */; };
 		9990751521765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */; };
+		99907517217666C000CAB7C8 /* TextAttachmentMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99907516217666C000CAB7C8 /* TextAttachmentMessageCell.xib */; };
+		999075192176673800CAB7C8 /* TextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999075182176673800CAB7C8 /* TextAttachmentMessageCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1699,6 +1701,8 @@
 		999075102176222300CAB7C8 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
 		99907512217622A900CAB7C8 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextAttachmentMessageCell.swift; sourceTree = "<group>"; };
+		99907516217666C000CAB7C8 /* TextAttachmentMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAttachmentMessageCell.xib; sourceTree = "<group>"; };
+		999075182176673800CAB7C8 /* TextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentMessageCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3754,6 +3758,8 @@
 				993B7B3B215F07020067B962 /* FileCell.xib */,
 				993B7B3D215F0A270067B962 /* FileCell.swift */,
 				9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */,
+				99907516217666C000CAB7C8 /* TextAttachmentMessageCell.xib */,
+				999075182176673800CAB7C8 /* TextAttachmentMessageCell.swift */,
 				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
 				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
 				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
@@ -4284,6 +4290,7 @@
 				41DE688120C6EBE600AA5EC8 /* SubscriptionSortingCell.xib in Resources */,
 				41FBF4EB20BD8C650080D00D /* ServerCell.xib in Resources */,
 				14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */,
+				99907517217666C000CAB7C8 /* TextAttachmentMessageCell.xib in Resources */,
 				80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */,
 				33A5C9D2206A565800FE1C8F /* nature.json in Resources */,
 				14F8A26E202E653E00175FDC /* Grey-76@3x.png in Resources */,
@@ -4661,6 +4668,7 @@
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
+				999075192176673800CAB7C8 /* TextAttachmentMessageCell.swift in Sources */,
 				0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */,
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,

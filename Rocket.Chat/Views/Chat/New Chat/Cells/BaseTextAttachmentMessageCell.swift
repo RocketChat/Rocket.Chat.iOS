@@ -13,6 +13,8 @@ class BaseTextAttachmentMessageCell: MessageHeaderCell {
 
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
+    var avatarLeadingInitialConstant: CGFloat = 0
+    var avatarWidthInitialConstant: CGFloat = 0
     var textContainerLeadingInitialConstant: CGFloat = 0
     var statusViewLeadingInitialConstant: CGFloat = 0
     var statusViewWidthInitialConstant: CGFloat = 0
@@ -26,6 +28,8 @@ class BaseTextAttachmentMessageCell: MessageHeaderCell {
     var fieldLabelWidth: CGFloat {
         return
             UIScreen.main.bounds.width -
+            avatarLeadingInitialConstant -
+            avatarWidthInitialConstant
             textContainerLeadingInitialConstant -
             statusViewLeadingInitialConstant -
             statusViewWidthInitialConstant -
