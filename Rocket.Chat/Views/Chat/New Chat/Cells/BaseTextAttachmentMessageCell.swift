@@ -29,7 +29,7 @@ class BaseTextAttachmentMessageCell: MessageHeaderCell {
         return
             UIScreen.main.bounds.width -
             avatarLeadingInitialConstant -
-            avatarWidthInitialConstant
+            avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -
             statusViewLeadingInitialConstant -
             statusViewWidthInitialConstant -

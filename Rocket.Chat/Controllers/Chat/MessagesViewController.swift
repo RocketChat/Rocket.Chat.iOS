@@ -62,6 +62,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(FileCell.nib, forCellWithReuseIdentifier: FileCell.identifier)
         collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
         collectionView.register(TextAttachmentCell.nib, forCellWithReuseIdentifier: TextAttachmentCell.identifier)
+        collectionView.register(TextAttachmentMessageCell.nib, forCellWithReuseIdentifier: TextAttachmentMessageCell.identifier)
         collectionView.register(ImageMessageCell.nib, forCellWithReuseIdentifier: ImageMessageCell.identifier)
         collectionView.register(QuoteCell.nib, forCellWithReuseIdentifier: QuoteCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
