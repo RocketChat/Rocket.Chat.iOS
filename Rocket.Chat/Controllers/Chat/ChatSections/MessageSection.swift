@@ -96,9 +96,23 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:
-                cells.append(TextAttachmentChatItem(
-                    attachment: attachment
-                ).wrapped)
+                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             case .textAttachment where !attachment.isFile:
                 cells.append(QuoteChatItem(
                     attachment: attachment
