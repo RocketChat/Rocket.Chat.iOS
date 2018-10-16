@@ -155,7 +155,7 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         } else if let cell = cell as? SequentialMessageCell {
             cell.delegate = self
-        } else if let cell = cell as? FileMessageCell {
+        } else if let cell = cell as? FileCell {
             cell.delegate = self
         } else if let cell = cell as? ImageMessageCell {
             cell.delegate = self

@@ -747,8 +747,8 @@
 		9938A08520D3077800714AB4 /* CustomFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */; };
 		9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */; };
 		9938A08920D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */; };
-		993B7B3C215F07020067B962 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993B7B3B215F07020067B962 /* FileMessageCell.xib */; };
-		993B7B3E215F0A270067B962 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3D215F0A270067B962 /* FileMessageCell.swift */; };
+		993B7B3C215F07020067B962 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993B7B3B215F07020067B962 /* FileCell.xib */; };
+		993B7B3E215F0A270067B962 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3D215F0A270067B962 /* FileCell.swift */; };
 		993B7B40215F0B730067B962 /* FileMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994C90B42174B50B00383AFF /* BaseVideoMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994C90B32174B50B00383AFF /* BaseVideoMessageCell.swift */; };
@@ -796,6 +796,9 @@
 		998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E64992161B3E300E7C45A /* AttachmentFieldView.xib */; };
 		998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */; };
 		998E649E2161B6DF00E7C45A /* TextAttachmentChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */; };
+		9990750F2176202400CAB7C8 /* BaseFileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */; };
+		999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999075102176222300CAB7C8 /* FileMessageCell.xib */; };
+		99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99907512217622A900CAB7C8 /* FileMessageCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1642,8 +1645,8 @@
 		9938A08420D3077800714AB4 /* CustomFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFieldTableViewCell.xib; sourceTree = "<group>"; };
 		9938A08620D3141C00714AB4 /* CustomFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldTableViewCell.swift; sourceTree = "<group>"; };
 		9938A08820D3164D00714AB4 /* SignupCustomFieldsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomFieldsTableViewController.swift; sourceTree = "<group>"; };
-		993B7B3B215F07020067B962 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
-		993B7B3D215F0A270067B962 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
+		993B7B3B215F07020067B962 /* FileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		993B7B3D215F0A270067B962 /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageChatItem.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994C90B32174B50B00383AFF /* BaseVideoMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVideoMessageCell.swift; sourceTree = "<group>"; };
@@ -1691,6 +1694,9 @@
 		998E64992161B3E300E7C45A /* AttachmentFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentFieldView.xib; sourceTree = "<group>"; };
 		998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentFieldView.swift; sourceTree = "<group>"; };
 		998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentChatItem.swift; sourceTree = "<group>"; };
+		9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFileMessageCell.swift; sourceTree = "<group>"; };
+		999075102176222300CAB7C8 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
+		99907512217622A900CAB7C8 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3740,8 +3746,11 @@
 				419EB5B6215E52EA00E591BF /* VideoCell.swift */,
 				419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */,
 				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
-				993B7B3B215F07020067B962 /* FileMessageCell.xib */,
-				993B7B3D215F0A270067B962 /* FileMessageCell.swift */,
+				9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */,
+				999075102176222300CAB7C8 /* FileMessageCell.xib */,
+				99907512217622A900CAB7C8 /* FileMessageCell.swift */,
+				993B7B3B215F07020067B962 /* FileCell.xib */,
+				993B7B3D215F0A270067B962 /* FileCell.swift */,
 				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
 				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
 				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
@@ -4187,7 +4196,7 @@
 				14F8A244202E5D0600175FDC /* Red-83.5@2x.png in Resources */,
 				14F8A259202E64B200175FDC /* BnW-40@3x.png in Resources */,
 				14F8A245202E5D0600175FDC /* Red-76@3x.png in Resources */,
-				993B7B3C215F07020067B962 /* FileMessageCell.xib in Resources */,
+				993B7B3C215F07020067B962 /* FileCell.xib in Resources */,
 				80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */,
 				14F8A25A202E64B200175FDC /* BnW-29@2x.png in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
@@ -4259,6 +4268,7 @@
 				14F8A284202E659000175FDC /* White-60@2x.png in Resources */,
 				14F8A286202E659000175FDC /* White-29@2x.png in Resources */,
 				14F8A282202E659000175FDC /* White-76@3x.png in Resources */,
+				999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */,
 				14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */,
 				4135A64621623F2A00C1741A /* ImageMessageCell.xib in Resources */,
 				80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */,
@@ -4949,7 +4959,7 @@
 				80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */,
 				80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */,
 				33F67A40212BFC40004EB4A0 /* UnmanagedUser.swift in Sources */,
-				993B7B3E215F0A270067B962 /* FileMessageCell.swift in Sources */,
+				993B7B3E215F0A270067B962 /* FileCell.swift in Sources */,
 				8013F8761FD6B5E000EE1A4E /* VersionMiddleware.swift in Sources */,
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
@@ -5024,6 +5034,7 @@
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */,
+				9990750F2176202400CAB7C8 /* BaseFileMessageCell.swift in Sources */,
 				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				80CC8A1B20ACEA6A009D64DF /* ChatControllerUserActionPresenter.swift in Sources */,
@@ -5031,6 +5042,7 @@
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
 				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
+				99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,

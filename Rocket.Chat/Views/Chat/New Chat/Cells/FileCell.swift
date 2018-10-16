@@ -2,34 +2,24 @@
 //  FileMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 16/10/18.
+//  Created by Filipe Alvarenga on 28/09/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RocketChatViewController
 
-class FileMessageCell: BaseFileMessageCell {
-    static let identifier = String(describing: FileMessageCell.self)
+final class FileCell: BaseFileMessageCell, SizingCell {
+    static let identifier = String(describing: FileCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = FileMessageCell.instantiateFromNib() else {
-            return FileMessageCell()
+        guard let cell = FileCell.instantiateFromNib() else {
+            return FileCell()
         }
 
         return cell
     }()
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
-
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var fileButton: UIButton!
 
     override func configure() {
@@ -37,7 +27,6 @@ class FileMessageCell: BaseFileMessageCell {
             return
         }
 
-        configure(with: avatarView, date: date, and: username)
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }
 

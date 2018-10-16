@@ -12,7 +12,7 @@ import RocketChatViewController
 
 struct FileMessageChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return FileMessageCell.identifier
+        return FileCell.identifier
     }
 
     var attachment: UnmanagedAttachment
