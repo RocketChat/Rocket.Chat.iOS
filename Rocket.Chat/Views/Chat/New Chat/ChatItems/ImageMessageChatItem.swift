@@ -12,7 +12,7 @@ import RocketChatViewController
 
 struct ImageMessageChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return ImageMessageCell.identifier
+        return ImageCell.identifier
     }
 
     var identifier: String

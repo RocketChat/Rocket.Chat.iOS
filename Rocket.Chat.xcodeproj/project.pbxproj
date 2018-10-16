@@ -212,8 +212,8 @@
 		412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F8DD81F599EF100AF7786 /* DatabaseManager.swift */; };
 		4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */; };
 		4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */; };
-		4135A64421623F1300C1741A /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64321623F1300C1741A /* ImageMessageCell.swift */; };
-		4135A64621623F2A00C1741A /* ImageMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A64521623F2A00C1741A /* ImageMessageCell.xib */; };
+		4135A64421623F1300C1741A /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64321623F1300C1741A /* ImageCell.swift */; };
+		4135A64621623F2A00C1741A /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A64521623F2A00C1741A /* ImageCell.xib */; };
 		4135A64821623F3600C1741A /* ImageMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64721623F3600C1741A /* ImageMessageChatItem.swift */; };
 		413996171F3B44500075F96E /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413996161F3B44500075F96E /* UploadHelper.swift */; };
 		413FB6BF1FE17D7D00F010AA /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */; };
@@ -802,6 +802,9 @@
 		9990751521765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */; };
 		99907517217666C000CAB7C8 /* TextAttachmentMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99907516217666C000CAB7C8 /* TextAttachmentMessageCell.xib */; };
 		999075192176673800CAB7C8 /* TextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999075182176673800CAB7C8 /* TextAttachmentMessageCell.swift */; };
+		9990751B21766DF000CAB7C8 /* ImageMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9990751A21766DF000CAB7C8 /* ImageMessageCell.xib */; };
+		9990751D21766ECE00CAB7C8 /* BaseImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751C21766ECE00CAB7C8 /* BaseImageMessageCell.swift */; };
+		9990751F2176714700CAB7C8 /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751E2176714700CAB7C8 /* ImageMessageCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1113,8 +1116,8 @@
 		412F8DD81F599EF100AF7786 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageImageView.swift; sourceTree = "<group>"; };
 		4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageImageView.xib; sourceTree = "<group>"; };
-		4135A64321623F1300C1741A /* ImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageCell.swift; sourceTree = "<group>"; };
-		4135A64521623F2A00C1741A /* ImageMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageMessageCell.xib; sourceTree = "<group>"; };
+		4135A64321623F1300C1741A /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		4135A64521623F2A00C1741A /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		4135A64721623F3600C1741A /* ImageMessageChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageChatItem.swift; sourceTree = "<group>"; };
 		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelper.swift; sourceTree = "<group>"; };
 		413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
@@ -1703,6 +1706,9 @@
 		9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextAttachmentMessageCell.swift; sourceTree = "<group>"; };
 		99907516217666C000CAB7C8 /* TextAttachmentMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAttachmentMessageCell.xib; sourceTree = "<group>"; };
 		999075182176673800CAB7C8 /* TextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentMessageCell.swift; sourceTree = "<group>"; };
+		9990751A21766DF000CAB7C8 /* ImageMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageMessageCell.xib; sourceTree = "<group>"; };
+		9990751C21766ECE00CAB7C8 /* BaseImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageMessageCell.swift; sourceTree = "<group>"; };
+		9990751E2176714700CAB7C8 /* ImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3764,8 +3770,11 @@
 				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
 				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
 				998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */,
-				4135A64521623F2A00C1741A /* ImageMessageCell.xib */,
-				4135A64321623F1300C1741A /* ImageMessageCell.swift */,
+				9990751C21766ECE00CAB7C8 /* BaseImageMessageCell.swift */,
+				9990751A21766DF000CAB7C8 /* ImageMessageCell.xib */,
+				9990751E2176714700CAB7C8 /* ImageMessageCell.swift */,
+				4135A64521623F2A00C1741A /* ImageCell.xib */,
+				4135A64321623F1300C1741A /* ImageCell.swift */,
 				99B4A7AF2164681200C80FF2 /* QuoteCell.xib */,
 				99B4A7B12164683200C80FF2 /* QuoteCell.swift */,
 				9914183A2166AF63007D2AA2 /* MessageURLCell.xib */,
@@ -4225,6 +4234,7 @@
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
 				140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */,
 				9914183B2166AF63007D2AA2 /* MessageURLCell.xib in Resources */,
+				9990751B21766DF000CAB7C8 /* ImageMessageCell.xib in Resources */,
 				8041C0442028C828007E21FA /* ReactorListView.xib in Resources */,
 				8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */,
 				80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */,
@@ -4279,7 +4289,7 @@
 				14F8A282202E659000175FDC /* White-76@3x.png in Resources */,
 				999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */,
 				14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */,
-				4135A64621623F2A00C1741A /* ImageMessageCell.xib in Resources */,
+				4135A64621623F2A00C1741A /* ImageCell.xib in Resources */,
 				80AC400420EECB03005082E1 /* ChatBannerView.xib in Resources */,
 				14F8A23D202E5D0600175FDC /* Red-29@3x.png in Resources */,
 				419EB5BF215E6A0C00E591BF /* ReactionsCell.xib in Resources */,
@@ -4730,6 +4740,7 @@
 				412719461E6B403700461FEE /* RegisterUsernameTableViewController.swift in Sources */,
 				806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */,
 				1496A87C20FA481B005C2E14 /* SaveNotificationRequest.swift in Sources */,
+				9990751F2176714700CAB7C8 /* ImageMessageCell.swift in Sources */,
 				9938A08720D3141C00714AB4 /* CustomFieldTableViewCell.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
 				991AB00821744E640097AE4C /* BaseAudioMessageCell.swift in Sources */,
@@ -4808,6 +4819,7 @@
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */,
 				33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */,
+				9990751D21766ECE00CAB7C8 /* BaseImageMessageCell.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
 				414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */,
@@ -4913,7 +4925,7 @@
 				8076FDC320485A2200114F28 /* SubscriptionUtils.swift in Sources */,
 				33D08E2420BD5EDC008D03EF /* ThemeableViewControllers.swift in Sources */,
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
-				4135A64421623F1300C1741A /* ImageMessageCell.swift in Sources */,
+				4135A64421623F1300C1741A /* ImageCell.swift in Sources */,
 				33D08E3120BD92A5008D03EF /* ThemePreferenceCell.swift in Sources */,
 				80CCD3BC216235B1002AFE83 /* MessagesComposerViewModel.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
