@@ -1,25 +1,35 @@
 //
-//  TextAttachmentCell.swift
+//  TextAttachmentMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 30/09/18.
+//  Created by Filipe Alvarenga on 16/10/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 import RocketChatViewController
 
-final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
-    static let identifier = String(describing: TextAttachmentCell.self)
+final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell {
+    static let identifier = String(describing: TextAttachmentMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = TextAttachmentCell.instantiateFromNib() else {
-            return TextAttachmentCell()
+        guard let cell = TextAttachmentMessageCell.instantiateFromNib() else {
+            return TextAttachmentMessageCell()
         }
 
         return cell
     }()
 
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
+
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var textContainer: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
@@ -27,6 +37,8 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
 
+    @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
@@ -67,6 +79,8 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
+        avatarLeadingInitialConstant = avatarLeadingConstraint.constant
+        avatarWidthInitialConstant = avatarWidthConstraint.constant
         textContainerLeadingInitialConstant = textContainerLeadingConstraint.constant
         statusViewLeadingInitialConstant = statusViewLeadingConstraint.constant
         statusViewWidthInitialConstant = statusViewWidthConstraint.constant
@@ -85,6 +99,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         title.text = viewModel.attachment.title
+        configure(with: avatarView, date: date, and: username)
 
         if viewModel.attachment.collapsed {
             configureCollapsedState(with: viewModel)

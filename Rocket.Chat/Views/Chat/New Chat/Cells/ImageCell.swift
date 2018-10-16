@@ -2,36 +2,27 @@
 //  ImageMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 16/10/18.
+//  Created by Rafael Streit on 01/10/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RocketChatViewController
 import FLAnimatedImage
 
-class ImageMessageCell: BaseImageMessageCell, SizingCell {
-    static let identifier = String(describing: ImageMessageCell.self)
+final class ImageCell: BaseImageMessageCell, SizingCell {
+    static let identifier = String(describing: ImageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = ImageMessageCell.instantiateFromNib() else {
-            return ImageMessageCell()
+        guard let cell = ImageCell.instantiateFromNib() else {
+            return ImageCell()
         }
 
         return cell
     }()
 
-    @IBOutlet weak var avatarContainerView: UIView! {
-        didSet {
-            avatarContainerView.layer.cornerRadius = 4
-            avatarView.frame = avatarContainerView.bounds
-            avatarContainerView.addSubview(avatarView)
-        }
-    }
-
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
             imageView.layer.cornerRadius = 3
@@ -49,7 +40,6 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
             return
         }
 
-        configure(with: avatarView, date: date, and: username)
         labelTitle.text = viewModel.title
         labelDescription.text = viewModel.descriptionText
 

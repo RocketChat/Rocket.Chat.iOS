@@ -27,6 +27,7 @@ final class MessageSection: ChatSection {
         self.controllerContext = controllerContext
     }
 
+    // swiftlint:disable function_body_length
     func viewModels() -> [AnyChatItem] {
         guard
             let object = object.base as? MessageSectionModel,
@@ -95,25 +96,70 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:
-                cells.append(TextAttachmentChatItem(
-                    attachment: attachment
-                ).wrapped)
-            case .textAttachment:
+                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
+            case .textAttachment where !attachment.isFile:
                 cells.append(QuoteChatItem(
                     attachment: attachment
                 ).wrapped)
             case .image:
-                cells.append(ImageMessageChatItem(
-                    identifier: attachment.identifier,
-                    title: attachment.title,
-                    descriptionText: attachment.descriptionText,
-                    imageURL: attachment.fullImageURL
-                ).wrapped)
+                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             default:
                 if attachment.isFile {
-                    cells.append(FileMessageChatItem(
-                        attachment: attachment
-                    ).wrapped)
+                    if object.message.text.isEmpty && shouldAppendMessageHeader {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: true,
+                            user: nil,
+                            message: nil
+                        ).wrapped)
+                    }
                 }
             }
         }
@@ -155,11 +201,17 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         } else if let cell = cell as? SequentialMessageCell {
             cell.delegate = self
+        } else if let cell = cell as? FileCell {
+            cell.delegate = self
         } else if let cell = cell as? FileMessageCell {
             cell.delegate = self
         } else if let cell = cell as? ImageMessageCell {
             cell.delegate = self
+        } else if let cell = cell as? ImageCell {
+            cell.delegate = self
         } else if let cell = cell as? TextAttachmentCell {
+            cell.delegate = self
+        } else if let cell = cell as? TextAttachmentMessageCell {
             cell.delegate = self
         } else if let cell = cell as? QuoteCell {
             cell.delegate = self

@@ -59,8 +59,11 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(VideoCell.nib, forCellWithReuseIdentifier: VideoCell.identifier)
         collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
         collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
+        collectionView.register(FileCell.nib, forCellWithReuseIdentifier: FileCell.identifier)
         collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
         collectionView.register(TextAttachmentCell.nib, forCellWithReuseIdentifier: TextAttachmentCell.identifier)
+        collectionView.register(TextAttachmentMessageCell.nib, forCellWithReuseIdentifier: TextAttachmentMessageCell.identifier)
+        collectionView.register(ImageCell.nib, forCellWithReuseIdentifier: ImageCell.identifier)
         collectionView.register(ImageMessageCell.nib, forCellWithReuseIdentifier: ImageMessageCell.identifier)
         collectionView.register(QuoteCell.nib, forCellWithReuseIdentifier: QuoteCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
@@ -118,7 +121,11 @@ extension MessagesViewController {
             return size
         } else {
             guard let sizingCell = UINib(nibName: item.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
-                return .zero
+                fatalError("""
+                            Failed to reference sizing cell instance. Please,
+                            check the relatedReuseIdentifier and make sure all
+                            the chat components conform to SizingCell protocol
+                            """)
             }
 
             let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
