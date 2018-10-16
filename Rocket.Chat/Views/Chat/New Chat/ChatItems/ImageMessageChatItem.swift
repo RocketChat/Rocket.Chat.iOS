@@ -10,15 +10,25 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-struct ImageMessageChatItem: ChatItem, Differentiable {
+final class ImageMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return ImageCell.identifier
+        return hasText ? ImageCell.identifier : ImageMessageCell.identifier
     }
 
     var identifier: String
     var title: String?
     var descriptionText: String?
     var imageURL: URL?
+    let hasText: Bool
+
+    init(identifier: String, title: String?, descriptionText: String?, imageURL: URL?, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+        self.identifier = identifier
+        self.title = title
+        self.descriptionText = descriptionText
+        self.imageURL = imageURL
+        self.hasText = hasText
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+    }
 
     var differenceIdentifier: String {
         return identifier

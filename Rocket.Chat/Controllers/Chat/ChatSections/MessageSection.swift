@@ -118,12 +118,29 @@ final class MessageSection: ChatSection {
                     attachment: attachment
                 ).wrapped)
             case .image:
-                cells.append(ImageMessageChatItem(
-                    identifier: attachment.identifier,
-                    title: attachment.title,
-                    descriptionText: attachment.descriptionText,
-                    imageURL: attachment.fullImageURL
-                ).wrapped)
+                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             default:
                 if attachment.isFile {
                     if object.message.text.isEmpty && shouldAppendMessageHeader {
