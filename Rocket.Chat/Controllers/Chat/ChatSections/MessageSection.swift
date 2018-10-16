@@ -27,6 +27,7 @@ final class MessageSection: ChatSection {
         self.controllerContext = controllerContext
     }
 
+    // swiftlint:disable function_body_length
     func viewModels() -> [AnyChatItem] {
         guard
             let object = object.base as? MessageSectionModel,
@@ -98,7 +99,7 @@ final class MessageSection: ChatSection {
                 cells.append(TextAttachmentChatItem(
                     attachment: attachment
                 ).wrapped)
-            case .textAttachment:
+            case .textAttachment where !attachment.isFile:
                 cells.append(QuoteChatItem(
                     attachment: attachment
                 ).wrapped)
@@ -111,9 +112,23 @@ final class MessageSection: ChatSection {
                 ).wrapped)
             default:
                 if attachment.isFile {
-                    cells.append(FileMessageChatItem(
-                        attachment: attachment
-                    ).wrapped)
+                    if object.message.text.isEmpty && shouldAppendMessageHeader {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: true,
+                            user: nil,
+                            message: nil
+                        ).wrapped)
+                    }
                 }
             }
         }
