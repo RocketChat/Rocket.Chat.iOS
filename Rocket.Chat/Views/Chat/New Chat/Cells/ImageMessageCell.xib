@@ -70,6 +70,9 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPF-d9-svF">
                         <rect key="frame" x="71" y="47.5" width="220" height="117"/>
+                        <connections>
+                            <action selector="buttonImageHandlerDidPressed:" destination="Mvf-ry-D1z" eventType="touchUpInside" id="QfI-yf-Ifa"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
