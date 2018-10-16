@@ -119,7 +119,11 @@ extension MessagesViewController {
             return size
         } else {
             guard let sizingCell = UINib(nibName: item.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
-                return .zero
+                fatalError("""
+                            Failed to reference sizing cell instance. Please,
+                            check the relatedReuseIdentifier and make sure all
+                            the chat components conform to SizingCell protocol
+                            """)
             }
 
             let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
