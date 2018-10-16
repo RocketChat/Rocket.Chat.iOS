@@ -113,9 +113,11 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
             emptySubtitleHeightConstraint.isActive = false
             subtitleHeightConstraint.isActive = true
             subtitleTopConstraint.constant = subtitleTopInitialConstant
-            subtitleHeightConstraint.constant = subtitleHeightInitialConstant
             subtitle.text = subtitleText
-            layoutIfNeeded()
+
+            let maxSize = CGSize(width: fieldLabelWidth, height: .greatestFiniteMagnitude)
+            let subtitleHeight = subtitle.sizeThatFits(maxSize).height
+            subtitleHeightConstraint.constant = subtitleHeight
         } else {
             subtitleHeightConstraint.isActive = false
             emptySubtitleHeightConstraint.isActive = true
@@ -125,8 +127,6 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         fieldsStackViewHeightConstraint.constant = configure(stackView: fieldsStackView)
-
-        layoutIfNeeded()
     }
 
     override func prepareForReuse() {
@@ -135,5 +135,6 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         reset(stackView: fieldsStackView)
         fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
+        subtitleTopConstraint.constant = subtitleTopInitialConstant
     }
 }
