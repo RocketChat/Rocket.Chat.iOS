@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
+final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     static let identifier = String(describing: TextAttachmentCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -36,28 +36,6 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerTrailingConstraint: NSLayoutConstraint!
-    var fieldLabelWidth: CGFloat {
-        return
-            UIScreen.main.bounds.width -
-            textContainerLeadingConstraint.constant -
-            statusViewLeadingConstraint.constant -
-            statusViewWidthConstraint.constant -
-            fieldsStackViewLeadingConstraint.constant -
-            fieldsStackViewTrailingConstraint.constant -
-            textContainerTrailingConstraint.constant -
-            adjustedHorizontalInsets
-    }
-
-    weak var delegate: ChatMessageCellProtocol?
-
-    var adjustedHorizontalInsets: CGFloat = 0
-    var viewModel: AnyChatItem?
-    var subtitleHeightConstraint: NSLayoutConstraint!
-    var emptySubtitleHeightConstraint: NSLayoutConstraint!
-    var fieldsStackTopInitialConstant: CGFloat = 0
-    var fieldsStackHeightInitialConstant: CGFloat = 0
-    var subtitleHeightInitialConstant: CGFloat = 0
-    var subtitleTopInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -89,13 +67,19 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         fieldsStackHeightInitialConstant = fieldsStackViewHeightConstraint.constant
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
+        textContainerLeadingInitialConstant = textContainerLeadingConstraint.constant
+        statusViewLeadingInitialConstant = statusViewLeadingConstraint.constant
+        statusViewWidthInitialConstant = statusViewWidthConstraint.constant
+        fieldsStackViewLeadingInitialConstant = fieldsStackViewLeadingConstraint.constant
+        fieldsStackViewTrailingInitialConstant = fieldsStackViewTrailingConstraint.constant
+        textContainerTrailingInitialConstant = textContainerTrailingConstraint.constant
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
         gesture.delegate = self
         textContainer.addGestureRecognizer(gesture)
     }
 
-    func configure() {
+    override func configure() {
         guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
             return
         }
@@ -117,7 +101,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
         emptySubtitleHeightConstraint.constant = 0
         subtitle.text = ""
 
-        resetFieldsStackView()
+        reset(stackView: fieldsStackView)
         fieldsStackViewTopConstraint.constant = 0
         fieldsStackViewHeightConstraint.constant = 0
     }
@@ -131,6 +115,7 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
             subtitleTopConstraint.constant = subtitleTopInitialConstant
             subtitleHeightConstraint.constant = subtitleHeightInitialConstant
             subtitle.text = subtitleText
+            layoutIfNeeded()
         } else {
             subtitleHeightConstraint.isActive = false
             emptySubtitleHeightConstraint.isActive = true
@@ -139,73 +124,16 @@ final class TextAttachmentCell: UICollectionViewCell, ChatCell, SizingCell {
             subtitle.text = ""
         }
 
-        let maxSize = CGSize(width: fieldLabelWidth, height: .greatestFiniteMagnitude)
-        var stackViewHeight: CGFloat = 0
-        var attachmentFieldViews: [AttachmentFieldView] = []
-
-        resetFieldsStackView()
-        fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
-        fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
-
-        for attachmentField in viewModel.attachment.fields {
-            guard let attachmentFieldView = AttachmentFieldView.instantiateFromNib() else {
-                continue
-            }
-
-            let attributedValue = NSMutableAttributedString(string: attachmentField.value).transformMarkdown(with: theme)
-            attachmentFieldView.field.text = attachmentField.title
-            attachmentFieldView.value.attributedText = attributedValue
-
-            let valueTextHeight = attachmentFieldView.value.sizeThatFits(maxSize).height
-            let fieldViewHeight = attachmentFieldView.fieldHeightConstraint.constant +
-                attachmentFieldView.valueTopConstraint.constant +
-                valueTextHeight
-
-            stackViewHeight += fieldViewHeight
-            attachmentFieldView.contentSize = CGSize(width: fieldLabelWidth, height: fieldViewHeight)
-            attachmentFieldView.invalidateIntrinsicContentSize()
-            attachmentFieldViews.append(attachmentFieldView)
-        }
-
-        stackViewHeight += fieldsStackView.spacing * CGFloat(attachmentFieldViews.count - 1)
-        fieldsStackViewHeightConstraint.constant = stackViewHeight
+        fieldsStackViewHeightConstraint.constant = configure(stackView: fieldsStackView)
 
         layoutIfNeeded()
-
-        attachmentFieldViews.forEach { view in
-            fieldsStackView.addArrangedSubview(view)
-        }
-    }
-
-    func resetFieldsStackView() {
-        fieldsStackView.arrangedSubviews.forEach { subview in
-            fieldsStackView.removeArrangedSubview(subview)
-            subview.removeFromSuperview()
-        }
-    }
-
-    @objc func didTapTextContainerView() {
-        guard
-            let viewModel = viewModel,
-            let textAttachmentViewModel = viewModel.base as? TextAttachmentChatItem
-        else {
-            return
-        }
-
-        textAttachmentViewModel.toggleAttachmentFields()
-        delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        resetFieldsStackView()
+        reset(stackView: fieldsStackView)
+        fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
-    }
-}
-
-extension TextAttachmentCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }

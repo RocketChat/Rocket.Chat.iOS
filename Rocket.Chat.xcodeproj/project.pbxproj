@@ -799,6 +799,7 @@
 		9990750F2176202400CAB7C8 /* BaseFileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */; };
 		999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999075102176222300CAB7C8 /* FileMessageCell.xib */; };
 		99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99907512217622A900CAB7C8 /* FileMessageCell.swift */; };
+		9990751521765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1697,6 +1698,7 @@
 		9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFileMessageCell.swift; sourceTree = "<group>"; };
 		999075102176222300CAB7C8 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
 		99907512217622A900CAB7C8 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
+		9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextAttachmentMessageCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3751,6 +3753,7 @@
 				99907512217622A900CAB7C8 /* FileMessageCell.swift */,
 				993B7B3B215F07020067B962 /* FileCell.xib */,
 				993B7B3D215F0A270067B962 /* FileCell.swift */,
+				9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */,
 				998E649521619DF700E7C45A /* TextAttachmentCell.xib */,
 				998E64972161ADE200E7C45A /* TextAttachmentCell.swift */,
 				998E64992161B3E300E7C45A /* AttachmentFieldView.xib */,
@@ -4610,6 +4613,7 @@
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
 				995F710E20C7837300B7535F /* AuthSeparatorTableViewCell.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
+				9990751521765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift in Sources */,
 				8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */,
 				99B15BCD20FD4589005A528F /* DatabaseManagerAuthSettings.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
