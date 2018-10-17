@@ -15,8 +15,8 @@ struct MessageSectionModel: Differentiable {
     let messageDate: Date
     let message: UnmanagedMessage
 
-    var daySeparator: Date?
-    var isSequential: Bool
+    let daySeparator: Date?
+    let isSequential: Bool
 
     let containsUnreadMessageIndicator: Bool
     var containsDateSeparator: Bool { return daySeparator != nil }
