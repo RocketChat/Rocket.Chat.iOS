@@ -144,24 +144,8 @@ final class MessagesViewModel {
         - previous: The previous section to be presented before this one on the list.
      - returns: AnyChatSection instance based on MessageSectionModel.
     */
-    func section(for message: Message, previous: AnyChatSection? = nil) -> AnyChatSection? {
-        guard let message = message.validated()?.unmanaged else { return nil }
-
-        var sequential = false
-        var separator: Date?
-
-        if let previous = previous, let previousObject = previous.base.object.base as? MessageSectionModel {
-            let previousMessage = previousObject.message
-
-            sequential = isSequential(message: message, previousMessage: previousMessage)
-            separator = daySeparator(message: message, previousMessage: previousMessage)
-        }
-
-        let messageSectionModel = MessageSectionModel(
-            message: message,
-            daySeparator: separator,
-            sequential: sequential
-        )
+    func section(for message: UnmanagedMessage) -> AnyChatSection? {
+        let messageSectionModel = MessageSectionModel(message: message)
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
@@ -183,6 +167,14 @@ final class MessagesViewModel {
 
             return object1.messageDate.compare(object2.messageDate) == .orderedDescending
         }
+
+        normalizeDataSorted()
+    }
+
+    /**
+     */
+    internal func normalizeDataSorted() {
+
     }
 
     /**
@@ -226,7 +218,7 @@ final class MessagesViewModel {
         for insertion in insertions {
             guard
                 insertion < messagesQuery.count,
-                let message = messagesQuery[insertion].validated()
+                let message = messagesQuery[insertion].validated()?.unmanaged
             else {
                 continue
             }
@@ -253,20 +245,14 @@ final class MessagesViewModel {
                 if let object = section.object.base as? MessageSectionModel {
                     return
                         object.differenceIdentifier == message.identifier &&
-                            !message.isContentEqual(to: object.message)
+                        !message.isContentEqual(to: object.message)
                 }
 
                 return false
             })
 
             if let index = index {
-                var previous: AnyChatSection?
-
-                if index < data.count - 1 {
-                    previous = data[index + 1]
-                }
-
-                if let newSection = section(for: message.managedObject, previous: previous) {
+                if let newSection = section(for: message) {
                     data[index] = newSection
                 }
             } else {
@@ -299,22 +285,27 @@ final class MessagesViewModel {
     func fetchMessages(from oldestMessage: Date?) {
         guard !requestingData, hasMoreData else { return }
         guard let subscription = subscription?.validated() else { return }
-        guard let subscriptionDetached = subscription.unmanaged else { return }
+        guard let subscriptionUnmanaged = subscription.unmanaged else { return }
 
-        let messages = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
-        for message in messages {
-            if let section = section(for: message) {
-                data.append(section)
+        let messagesFromDatabase = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
+        messagesFromDatabase.forEach {
+            guard
+                let message = $0.validated()?.unmanaged,
+                let section = section(for: message)
+            else {
+                return
             }
+
+            data.append(section)
         }
 
-        if messages.count > 0 {
+        if messagesFromDatabase.count > 0 {
             cacheDataSorted()
             onDataChanged?()
         }
 
         requestingData = true
-        MessageManager.getHistory(subscriptionDetached, lastMessageDate: oldestMessage) { [weak self] oldest in
+        MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
