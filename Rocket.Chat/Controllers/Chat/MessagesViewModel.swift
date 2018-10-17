@@ -293,7 +293,7 @@ final class MessagesViewModel {
      separators and unread marks.
      */
     internal func updateData() {
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.cacheDataSorted()
             self?.normalizeDataSorted()
 
