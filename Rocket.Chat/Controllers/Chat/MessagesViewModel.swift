@@ -311,8 +311,8 @@ final class MessagesViewModel {
             guard
                 let object1 = section1.object.base as? MessageSectionModel,
                 let object2 = section2.object.base as? MessageSectionModel
-                else {
-                    return false
+            else {
+                return false
             }
 
             return object1.messageDate.compare(object2.messageDate) == .orderedDescending
