@@ -805,6 +805,9 @@
 		9990751B21766DF000CAB7C8 /* ImageMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9990751A21766DF000CAB7C8 /* ImageMessageCell.xib */; };
 		9990751D21766ECE00CAB7C8 /* BaseImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751C21766ECE00CAB7C8 /* BaseImageMessageCell.swift */; };
 		9990751F2176714700CAB7C8 /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751E2176714700CAB7C8 /* ImageMessageCell.swift */; };
+		999075212177669600CAB7C8 /* BaseQuoteMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999075202177669600CAB7C8 /* BaseQuoteMessageCell.swift */; };
+		999075232177792E00CAB7C8 /* QuoteMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999075222177792E00CAB7C8 /* QuoteMessageCell.xib */; };
+		999075252177795700CAB7C8 /* QuoteMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999075242177795700CAB7C8 /* QuoteMessageCell.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
@@ -1709,6 +1712,9 @@
 		9990751A21766DF000CAB7C8 /* ImageMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageMessageCell.xib; sourceTree = "<group>"; };
 		9990751C21766ECE00CAB7C8 /* BaseImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageMessageCell.swift; sourceTree = "<group>"; };
 		9990751E2176714700CAB7C8 /* ImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageCell.swift; sourceTree = "<group>"; };
+		999075202177669600CAB7C8 /* BaseQuoteMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuoteMessageCell.swift; sourceTree = "<group>"; };
+		999075222177792E00CAB7C8 /* QuoteMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteMessageCell.xib; sourceTree = "<group>"; };
+		999075242177795700CAB7C8 /* QuoteMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteMessageCell.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
@@ -3775,6 +3781,9 @@
 				9990751E2176714700CAB7C8 /* ImageMessageCell.swift */,
 				4135A64521623F2A00C1741A /* ImageCell.xib */,
 				4135A64321623F1300C1741A /* ImageCell.swift */,
+				999075202177669600CAB7C8 /* BaseQuoteMessageCell.swift */,
+				999075222177792E00CAB7C8 /* QuoteMessageCell.xib */,
+				999075242177795700CAB7C8 /* QuoteMessageCell.swift */,
 				99B4A7AF2164681200C80FF2 /* QuoteCell.xib */,
 				99B4A7B12164683200C80FF2 /* QuoteCell.swift */,
 				9914183A2166AF63007D2AA2 /* MessageURLCell.xib */,
@@ -4183,6 +4192,7 @@
 				14F8A23F202E5D0600175FDC /* Red-29@2x.png in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				14F8A261202E64B200175FDC /* BnW-76@3x.png in Resources */,
+				999075232177792E00CAB7C8 /* QuoteMessageCell.xib in Resources */,
 				41FC9E0E209B44CD00FED485 /* ChatLoaderCell.xib in Resources */,
 				809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */,
 				41C955FA20A3931C00FC8314 /* ChatMessageActionButtonsView.xib in Resources */,
@@ -4769,6 +4779,7 @@
 				80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */,
 				8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */,
 				8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */,
+				999075212177669600CAB7C8 /* BaseQuoteMessageCell.swift in Sources */,
 				419EB5B7215E52EA00E591BF /* VideoCell.swift in Sources */,
 				80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */,
 				41D3668720C0323100970B99 /* SubscriptionsSortingView.swift in Sources */,
@@ -4916,6 +4927,7 @@
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
 				41FB7138215B0FD6002B5187 /* MessagesSizingManager.swift in Sources */,
 				995F711A20C7910800B7535F /* AuthTableViewControllerLoginServices.swift in Sources */,
+				999075252177795700CAB7C8 /* QuoteMessageCell.swift in Sources */,
 				809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResponse.swift in Sources */,
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,

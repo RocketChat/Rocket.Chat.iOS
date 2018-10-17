@@ -1,20 +1,20 @@
 //
-//  QuoteCell.swift
+//  QuoteMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 03/10/18.
+//  Created by Filipe Alvarenga on 17/10/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 import RocketChatViewController
 
-final class QuoteCell: BaseQuoteMessageCell, SizingCell {
-    static let identifier = String(describing: QuoteCell.self)
+final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
+    static let identifier = String(describing: QuoteMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = QuoteCell.instantiateFromNib() else {
-            return QuoteCell()
+        guard let cell = QuoteMessageCell.instantiateFromNib() else {
+            return QuoteMessageCell()
         }
 
         return cell
@@ -25,6 +25,8 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
 
+    @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
@@ -45,6 +47,8 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
 
         textHeightConstraint.isActive = true
 
+        avatarLeadingInitialConstant = avatarLeadingConstraint.constant
+        avatarWidthInitialConstant = avatarWidthConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
         textLeadingInitialConstant = textLeadingConstraint.constant
         textTrailingInitialConstant = textTrailingConstraint.constant
