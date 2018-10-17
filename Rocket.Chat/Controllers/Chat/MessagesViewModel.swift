@@ -154,51 +154,6 @@ final class MessagesViewModel {
     }
 
     /**
-     Sort the data list based on data and cache it in a local variable.
-     */
-    internal func cacheDataSorted() {
-        dataSorted = data.sorted { (section1, section2) -> Bool in
-            guard
-                let object1 = section1.object.base as? MessageSectionModel,
-                let object2 = section2.object.base as? MessageSectionModel
-            else {
-                return false
-            }
-
-            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
-        }
-
-        normalizeDataSorted()
-    }
-
-    /**
-     */
-    internal func normalizeDataSorted() {
-        let dataSortedMaxIndex = dataSorted.count - 1
-
-        for (idx, object) in dataSorted.enumerated() {
-            guard
-                idx < dataSortedMaxIndex,
-                var messageSection1 = object.object.base as? MessageSectionModel,
-                let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel
-            else {
-                continue
-            }
-
-            let message = messageSection1.message
-            let previousMessage = messageSection2.message
-
-            messageSection1.isSequential = isSequential(message: message, previousMessage: previousMessage)
-            messageSection1.daySeparator = daySeparator(message: message, previousMessage: previousMessage)
-
-            dataSorted[idx] = AnyChatSection(MessageSection(
-                object: AnyDifferentiable(messageSection1),
-                controllerContext: controllerContext
-            ))
-        }
-    }
-
-    /**
      This method is called on every update the messagesQuery get from Realm.
     */
     internal func handleDataUpdates(changes: RealmCollectionChange<Results<Message>>) {
@@ -214,10 +169,7 @@ final class MessagesViewModel {
             handle(deletions: deletions, on: messagesQuery)
             handle(insertions: insertions, on: messagesQuery)
             handle(modifications: modifications, on: messagesQuery)
-
-            cacheDataSorted()
-            onDataChanged?()
-
+            updateData()
         case .error(let error):
             fatalError("\(error)")
         }
@@ -321,8 +273,7 @@ final class MessagesViewModel {
         }
 
         if messagesFromDatabase.count > 0 {
-            cacheDataSorted()
-            onDataChanged?()
+            updateData()
         }
 
         requestingData = true
@@ -335,6 +286,69 @@ final class MessagesViewModel {
     }
 
     // MARK: Data Manipulation
+
+    /**
+     This method updates the dataSorted array property with the correct
+     sorting and also the properties related to sequential messages, day
+     separators and unread marks.
+     */
+    internal func updateData() {
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            self?.cacheDataSorted()
+            self?.normalizeDataSorted()
+
+            DispatchQueue.main.async {
+                self?.onDataChanged?()
+            }
+        }
+    }
+
+    /**
+     Sort the data list based on data and cache it in a local variable.
+     */
+    internal func cacheDataSorted() {
+        dataSorted = data.sorted { (section1, section2) -> Bool in
+            guard
+                let object1 = section1.object.base as? MessageSectionModel,
+                let object2 = section2.object.base as? MessageSectionModel
+                else {
+                    return false
+            }
+
+            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+        }
+    }
+
+    /**
+     Anything related to the section that refers to sequential messages, day separators
+     and unread marks is done on this method. A loop in the whole list of messages
+     is executed on every update to make sure that there's no duplicated separators
+     and everything looks good to the user on the final result.
+     */
+    internal func normalizeDataSorted() {
+        let dataSortedMaxIndex = dataSorted.count - 1
+
+        for (idx, object) in dataSorted.enumerated() {
+            guard
+                idx < dataSortedMaxIndex,
+                var messageSection1 = object.object.base as? MessageSectionModel,
+                let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel
+                else {
+                    continue
+            }
+
+            let message = messageSection1.message
+            let previousMessage = messageSection2.message
+
+            messageSection1.isSequential = isSequential(message: message, previousMessage: previousMessage)
+            messageSection1.daySeparator = daySeparator(message: message, previousMessage: previousMessage)
+
+            dataSorted[idx] = AnyChatSection(MessageSection(
+                object: AnyDifferentiable(messageSection1),
+                controllerContext: controllerContext
+            ))
+        }
+    }
 
     /**
      Returns if the message object is the first message of a day, and in this case
@@ -384,7 +398,7 @@ final class MessagesViewModel {
         let date = message.createdAt
         let prevDate = previousMessage.createdAt
 
-        let sameUser = message.user == previousMessage.user
+        let sameUser = message.userIdentifier == previousMessage.userIdentifier
 
         var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
         if let settings = AuthSettingsManager.settings {
