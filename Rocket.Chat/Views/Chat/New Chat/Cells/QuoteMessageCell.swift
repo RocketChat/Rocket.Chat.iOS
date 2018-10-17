@@ -1,30 +1,42 @@
 //
-//  QuoteCell.swift
+//  QuoteMessageCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 03/10/18.
+//  Created by Filipe Alvarenga on 17/10/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 import RocketChatViewController
 
-final class QuoteCell: BaseQuoteMessageCell, SizingCell {
-    static let identifier = String(describing: QuoteCell.self)
+final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
+    static let identifier = String(describing: QuoteMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = QuoteCell.instantiateFromNib() else {
-            return QuoteCell()
+        guard let cell = QuoteMessageCell.instantiateFromNib() else {
+            return QuoteMessageCell()
         }
 
         return cell
     }()
 
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
+
+    @IBOutlet weak var messageUsername: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
 
+    @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
@@ -45,6 +57,8 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
 
         textHeightConstraint.isActive = true
 
+        avatarLeadingInitialConstant = avatarLeadingConstraint.constant
+        avatarWidthInitialConstant = avatarWidthConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
         textLeadingInitialConstant = textLeadingConstraint.constant
         textTrailingInitialConstant = textTrailingConstraint.constant
@@ -59,6 +73,8 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
+
+        configure(with: avatarView, date: date, and: messageUsername)
 
         let attachmentText = viewModel.attachment.text ?? viewModel.attachment.descriptionText ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)

@@ -41,6 +41,7 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
         var shouldAppendMessageHeader = true
+        let sanitizedMessage = object.message.text.removingWhitespaces().removingNewLines()
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
@@ -52,7 +53,7 @@ final class MessageSection: ChatSection {
         for attachment in object.message.attachments {
             switch attachment.type {
             case .audio:
-                if object.message.text.isEmpty {
+                if sanitizedMessage.isEmpty {
                     cells.append(AudioMessageChatItem(
                         identifier: attachment.identifier,
                         audioURL: attachment.fullAudioURL,
@@ -72,7 +73,7 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .video:
-                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(VideoMessageChatItem(
                         identifier: attachment.identifier,
                         descriptionText: attachment.descriptionText,
@@ -96,7 +97,7 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:
-                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(TextAttachmentChatItem(
                         attachment: attachment,
                         hasText: false,
@@ -114,11 +115,25 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where !attachment.isFile:
-                cells.append(QuoteChatItem(
-                    attachment: attachment
-                ).wrapped)
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                    cells.append(QuoteChatItem(
+                        attachment: attachment,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(QuoteChatItem(
+                        attachment: attachment,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             case .image:
-                if object.message.text.isEmpty && shouldAppendMessageHeader {
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(ImageMessageChatItem(
                         identifier: attachment.identifier,
                         title: attachment.title,
@@ -143,7 +158,7 @@ final class MessageSection: ChatSection {
                 }
             default:
                 if attachment.isFile {
-                    if object.message.text.isEmpty && shouldAppendMessageHeader {
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                         cells.append(FileMessageChatItem(
                             attachment: attachment,
                             hasText: false,
@@ -214,6 +229,8 @@ final class MessageSection: ChatSection {
         } else if let cell = cell as? TextAttachmentMessageCell {
             cell.delegate = self
         } else if let cell = cell as? QuoteCell {
+            cell.delegate = self
+        } else if let cell = cell as? QuoteMessageCell {
             cell.delegate = self
         } else if let cell = cell as? MessageURLCell {
             cell.delegate = self
