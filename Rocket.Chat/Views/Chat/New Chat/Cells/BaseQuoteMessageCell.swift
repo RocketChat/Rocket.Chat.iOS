@@ -38,7 +38,7 @@ class BaseQuoteMessageCell: MessageHeaderCell {
             let viewModel = viewModel,
             let quoteViewModel = viewModel.base as? QuoteChatItem
         else {
-                return
+            return
         }
 
         quoteViewModel.toggle()

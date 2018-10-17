@@ -20,6 +20,16 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
+
+    @IBOutlet weak var messageUsername: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
@@ -63,6 +73,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
+
+        configure(with: avatarView, date: date, and: messageUsername)
 
         let attachmentText = viewModel.attachment.text ?? viewModel.attachment.descriptionText ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)

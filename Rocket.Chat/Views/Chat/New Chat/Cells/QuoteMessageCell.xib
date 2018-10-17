@@ -113,6 +113,7 @@
                 <outlet property="containerTrailingConstraint" destination="zsz-UH-Wza" id="56v-Bh-irC"/>
                 <outlet property="containerView" destination="VLV-ym-FZM" id="5AH-9a-qaj"/>
                 <outlet property="date" destination="gwN-MP-7q4" id="aLN-fr-tzJ"/>
+                <outlet property="messageUsername" destination="2Xs-I6-bTg" id="ZAZ-PN-4a4"/>
                 <outlet property="text" destination="YC5-ts-L8T" id="wtP-No-OjQ"/>
                 <outlet property="textLeadingConstraint" destination="W73-Vt-GqB" id="vpS-3J-ViD"/>
                 <outlet property="textTrailingConstraint" destination="WtL-sW-5eJ" id="JGd-tg-5hS"/>
