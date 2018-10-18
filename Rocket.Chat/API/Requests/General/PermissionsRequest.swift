@@ -12,7 +12,7 @@ class PermissionsRequest: APIRequest {
     typealias APIResourceType = PermissionsResource
 
     let requiredVersion: Version = Version(0, 61, 0)
-    let path = "/api/v1/permissions"
+    let path = "/api/v1/permissions.list"
 }
 
 class PermissionsResource: APIResource {
