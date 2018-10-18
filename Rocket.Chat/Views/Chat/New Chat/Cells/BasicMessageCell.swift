@@ -196,7 +196,6 @@ extension BasicMessageCell {
         let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
         username.textColor = theme.titleText
-        updateText(force: true)
+        updateText()
     }
-
 }
