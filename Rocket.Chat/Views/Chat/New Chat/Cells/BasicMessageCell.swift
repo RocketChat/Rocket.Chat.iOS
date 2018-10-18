@@ -96,12 +96,12 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         updateText()
     }
 
-    func updateText(force: Bool = false) {
+    func updateText() {
         guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
             return
         }
 
-        if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
