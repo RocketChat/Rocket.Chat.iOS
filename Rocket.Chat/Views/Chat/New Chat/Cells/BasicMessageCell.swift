@@ -22,15 +22,6 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
         return cell
     }()
 
-    lazy var avatarView: AvatarView = {
-        let avatarView = AvatarView()
-
-        avatarView.layer.cornerRadius = 4
-        avatarView.layer.masksToBounds = true
-
-        return avatarView
-    }()
-
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
@@ -43,15 +34,21 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var text: RCTextView!
 
+    @IBOutlet weak var readReceiptButton: UIButton!
+
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
         return
             textLeadingConstraint.constant +
             textTrailingConstraint.constant +
+            readReceiptWidthConstraint.constant +
+            readReceiptTrailingConstraint.constant +
             avatarWidthConstraint.constant +
             avatarLeadingConstraint.constant +
             adjustedHorizontalInsets
@@ -66,8 +63,6 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
         }
     }
 
-    var adjustedHorizontalInsets: CGFloat = 0
-    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -77,22 +72,9 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
         insertGesturesIfNeeded()
     }
 
-    func configure() {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
-
-        let createdAt = viewModel.message.createdAt
-        date.text = RCDateFormatter.time(createdAt)
-        username.text = viewModel.user.username
-
-        avatarView.emoji = viewModel.message.emoji
-        avatarView.user = viewModel.message.user?.managedObject
-
-        if let avatar = viewModel.message.avatar {
-            avatarView.avatarURL = URL(string: avatar)
-        }
-
+    override func configure() {
+        configure(with: avatarView, date: date, and: username)
+        configure(readReceipt: readReceiptButton, with: [readReceiptWidthConstraint, readReceiptTrailingConstraint])
         updateText()
     }
 
