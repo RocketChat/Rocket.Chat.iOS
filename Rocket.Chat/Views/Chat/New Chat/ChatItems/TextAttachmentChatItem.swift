@@ -11,7 +11,7 @@ import DifferenceKit
 import RocketChatViewController
 import RealmSwift
 
-final class TextAttachmentChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class TextAttachmentChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? TextAttachmentCell.identifier : TextAttachmentMessageCell.identifier
     }

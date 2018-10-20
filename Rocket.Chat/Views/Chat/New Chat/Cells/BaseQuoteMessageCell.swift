@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseQuoteMessageCell: MessageHeaderCell {
+class BaseQuoteMessageCell: BaseMessageCell {
     internal let collapsedTextMaxHeight: CGFloat = 60
     var textHeightConstraint: NSLayoutConstraint!
     var avatarLeadingInitialConstant: CGFloat = 0

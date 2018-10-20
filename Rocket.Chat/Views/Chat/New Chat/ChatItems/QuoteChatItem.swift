@@ -11,7 +11,7 @@ import DifferenceKit
 import RocketChatViewController
 import RealmSwift
 
-final class QuoteChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class QuoteChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? QuoteCell.identifier : QuoteMessageCell.identifier
     }

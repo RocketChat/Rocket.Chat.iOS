@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import RocketChatViewController
 
-class BaseAudioMessageCell: MessageHeaderCell {
+class BaseAudioMessageCell: BaseMessageCell {
     var updateTimer: Timer?
     var playing = false
     var loading = false

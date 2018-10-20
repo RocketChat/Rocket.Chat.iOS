@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class MessageHeaderCell: UICollectionViewCell, ChatCell {
+class BaseMessageCell: UICollectionViewCell, ChatCell {
     var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
 
@@ -22,11 +22,15 @@ class MessageHeaderCell: UICollectionViewCell, ChatCell {
         return avatarView
     }()
 
+    var settings: AuthSettings? {
+        return AuthManager.isAuthenticated()?.settings
+    }
+
     func configure() {}
 
     func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
         guard
-            let viewModel = viewModel?.base as? MessageHeaderChatItem,
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
         else {
             return

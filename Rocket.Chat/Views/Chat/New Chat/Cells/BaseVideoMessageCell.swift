@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class BaseVideoMessageCell: MessageHeaderCell {
+class BaseVideoMessageCell: BaseMessageCell {
     var loading = false
 
     func updateLoadingState(with buttonPlayer: UIButton, and activityIndicatorView: UIActivityIndicatorView) {

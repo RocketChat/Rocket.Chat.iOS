@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseImageMessageCell: MessageHeaderCell {
+class BaseImageMessageCell: BaseMessageCell {
     weak var delegate: ChatMessageCellProtocol?
 
     func loadImage(on imageView: UIImageView, startLoadingBlock: () -> Void, stopLoadingBlock: @escaping () -> Void) {

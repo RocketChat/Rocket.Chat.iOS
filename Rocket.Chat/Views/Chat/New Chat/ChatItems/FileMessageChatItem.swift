@@ -10,7 +10,7 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-final class FileMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class FileMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? FileCell.identifier : FileMessageCell.identifier
     }

@@ -10,7 +10,7 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-final class ImageMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class ImageMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? ImageCell.identifier : ImageMessageCell.identifier
     }

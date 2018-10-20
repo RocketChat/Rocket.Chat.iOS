@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTextAttachmentMessageCell: MessageHeaderCell {
+class BaseTextAttachmentMessageCell: BaseMessageCell {
     weak var delegate: ChatMessageCellProtocol?
 
     var subtitleHeightConstraint: NSLayoutConstraint!

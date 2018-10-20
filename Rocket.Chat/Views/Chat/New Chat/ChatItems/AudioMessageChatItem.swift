@@ -10,7 +10,7 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-class AudioMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+class AudioMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? AudioCell.identifier : AudioMessageCell.identifier
     }
