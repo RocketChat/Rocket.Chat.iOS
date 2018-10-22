@@ -38,8 +38,10 @@ class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
     func configure() {}
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
-//        if let message = message {
-//            delegate?.openReplyMessage(message: message)
-//        }
+        guard let viewModel = viewModel?.base as? MessageActionsChatItem else {
+            return
+        }
+
+        delegate?.openReplyMessage(message: viewModel.message)
     }
 }

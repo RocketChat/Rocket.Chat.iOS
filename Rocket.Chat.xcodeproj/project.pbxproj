@@ -784,6 +784,7 @@
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
 		9977D857217E942200FE5EC6 /* MessageActionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9977D856217E942200FE5EC6 /* MessageActionsCell.xib */; };
 		9977D859217E94C400FE5EC6 /* MessageActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */; };
+		9977D85B217E999800FE5EC6 /* MessageActionsChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */; };
 		997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */; };
 		997FE19C210BA5B8000F6836 /* SubscriptionHideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */; };
 		99805D7520C191BE00741B8E /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99805D7420C191BE00741B8E /* StyledTextField.swift */; };
@@ -1693,6 +1694,7 @@
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
 		9977D856217E942200FE5EC6 /* MessageActionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageActionsCell.xib; sourceTree = "<group>"; };
 		9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionsCell.swift; sourceTree = "<group>"; };
+		9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionsChatItem.swift; sourceTree = "<group>"; };
 		997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLeaveRequest.swift; sourceTree = "<group>"; };
 		997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHideRequest.swift; sourceTree = "<group>"; };
 		99805D7420C191BE00741B8E /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
@@ -3813,6 +3815,7 @@
 				4135A64721623F3600C1741A /* ImageMessageChatItem.swift */,
 				99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */,
 				9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */,
+				9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -5094,6 +5097,7 @@
 				414E8A8F20A5DDF800615CE6 /* ChatControllerRolesController.swift in Sources */,
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
+				9977D85B217E999800FE5EC6 /* MessageActionsChatItem.swift in Sources */,
 				33230AAE20E8D5C40031C71D /* RuntimeAttributesThemeableView.swift in Sources */,
 				41FC9E0B209B3B3100FED485 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,

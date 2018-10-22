@@ -354,7 +354,7 @@ extension MessageSection: ChatMessageCellProtocol {
         messagesController?.present(controller, animated: true, completion: nil)
     }
 
-    func openReplyMessage(message: Message) {
+    func openReplyMessage(message: UnmanagedMessage) {
         guard let username = message.user?.username else { return }
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
