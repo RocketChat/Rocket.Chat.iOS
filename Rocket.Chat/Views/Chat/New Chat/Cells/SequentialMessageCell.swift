@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
+final class SequentialMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: SequentialMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -21,13 +21,18 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }()
 
     @IBOutlet weak var text: RCTextView!
+    @IBOutlet weak var readReceiptButton: UIButton!
 
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
         return textLeadingConstraint.constant +
             textTrailingConstraint.constant +
+            readReceiptWidthConstraint.constant +
+            readReceiptTrailingConstraint.constant +
             adjustedHorizontalInsets
     }
 
@@ -38,8 +43,6 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    var adjustedHorizontalInsets: CGFloat = 0
-    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -50,7 +53,8 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         insertGesturesIfNeeded()
     }
 
-    func configure() {
+    override func configure() {
+        configure(readReceipt: readReceiptButton)
         updateText()
     }
 

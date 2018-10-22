@@ -10,7 +10,7 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-final class FileMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class FileMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? FileCell.identifier : FileMessageCell.identifier
     }
@@ -21,7 +21,7 @@ final class FileMessageChatItem: MessageHeaderChatItem, ChatItem, Differentiable
     init(attachment: UnmanagedAttachment, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
         self.attachment = attachment
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
     }
 
     var differenceIdentifier: String {

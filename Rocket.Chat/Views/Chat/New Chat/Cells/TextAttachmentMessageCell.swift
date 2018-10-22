@@ -36,6 +36,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
+    @IBOutlet weak var readReceiptButton: UIButton!
 
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
@@ -48,6 +49,8 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -87,6 +90,8 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         fieldsStackViewLeadingInitialConstant = fieldsStackViewLeadingConstraint.constant
         fieldsStackViewTrailingInitialConstant = fieldsStackViewTrailingConstraint.constant
         textContainerTrailingInitialConstant = textContainerTrailingConstraint.constant
+        readReceiptWidthInitialConstant = readReceiptButtonWidthConstraint.constant
+        readReceiptTrailingInitialConstant = readReceiptTrailingConstraint.constant
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
         gesture.delegate = self
@@ -99,6 +104,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         }
 
         title.text = viewModel.attachment.title
+        configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
 
         if viewModel.attachment.collapsed {

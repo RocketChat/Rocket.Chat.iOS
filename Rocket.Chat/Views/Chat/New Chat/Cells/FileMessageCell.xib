@@ -43,7 +43,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77c-Q0-V4A">
-                        <rect key="frame" x="70" y="28" width="271" height="56"/>
+                        <rect key="frame" x="70" y="28" width="268" height="56"/>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.8980392157" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="L3y-nv-66F"/>
@@ -63,11 +63,19 @@
                             <action selector="didTapFileButton" destination="NIc-jT-YTw" eventType="touchUpInside" id="HB0-l5-cmK"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAE-Yz-N3K">
+                        <rect key="frame" x="340" y="64" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ASx-bR-B4q"/>
+                            <constraint firstAttribute="width" constant="20" id="rn6-oL-Xjx"/>
+                        </constraints>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="77c-Q0-V4A" firstAttribute="leading" secondItem="Xz9-fC-5sz" secondAttribute="trailing" constant="15" id="1cR-oN-uRb"/>
+                <constraint firstItem="KAE-Yz-N3K" firstAttribute="leading" secondItem="77c-Q0-V4A" secondAttribute="trailing" constant="2" id="3sD-Pn-uQC"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2Ny-2K-8d9" secondAttribute="trailing" id="922-2K-1n4"/>
                 <constraint firstItem="Xz9-fC-5sz" firstAttribute="top" secondItem="NIc-jT-YTw" secondAttribute="top" id="A0I-9z-4cc"/>
                 <constraint firstItem="2Ny-2K-8d9" firstAttribute="leading" secondItem="G3R-LJ-LXz" secondAttribute="trailing" constant="10" id="EOK-fX-vlK"/>
@@ -75,9 +83,11 @@
                 <constraint firstItem="2Ny-2K-8d9" firstAttribute="centerY" secondItem="G3R-LJ-LXz" secondAttribute="centerY" id="KkU-VO-5Lg"/>
                 <constraint firstItem="G3R-LJ-LXz" firstAttribute="top" secondItem="NIc-jT-YTw" secondAttribute="top" id="TZP-4B-2qB"/>
                 <constraint firstAttribute="bottom" secondItem="77c-Q0-V4A" secondAttribute="bottom" id="Uor-jY-LJ8"/>
+                <constraint firstItem="KAE-Yz-N3K" firstAttribute="bottom" secondItem="77c-Q0-V4A" secondAttribute="bottom" id="Zh6-Cw-wuf"/>
                 <constraint firstItem="77c-Q0-V4A" firstAttribute="top" secondItem="G3R-LJ-LXz" secondAttribute="bottom" constant="7.5" id="aL4-N0-GGn"/>
                 <constraint firstItem="G3R-LJ-LXz" firstAttribute="leading" secondItem="Xz9-fC-5sz" secondAttribute="trailing" constant="15" id="kRE-b5-sjW"/>
-                <constraint firstAttribute="trailing" secondItem="77c-Q0-V4A" secondAttribute="trailing" constant="34" id="vRZ-Et-GJZ"/>
+                <constraint firstAttribute="trailing" secondItem="KAE-Yz-N3K" secondAttribute="trailing" constant="15" id="lXT-oT-Z5s"/>
+                <constraint firstAttribute="trailing" secondItem="77c-Q0-V4A" secondAttribute="trailing" constant="37" id="vRZ-Et-GJZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="7jS-HR-rnx"/>
             <size key="customSize" width="375" height="40"/>
@@ -85,6 +95,7 @@
                 <outlet property="avatarContainerView" destination="Xz9-fC-5sz" id="MLy-5y-6tn"/>
                 <outlet property="date" destination="2Ny-2K-8d9" id="tJC-ju-yZt"/>
                 <outlet property="fileButton" destination="77c-Q0-V4A" id="EfI-o8-Lz3"/>
+                <outlet property="readReceiptButton" destination="KAE-Yz-N3K" id="RcC-1Q-Ltt"/>
                 <outlet property="username" destination="G3R-LJ-LXz" id="Bli-LY-BQq"/>
             </connections>
             <point key="canvasLocation" x="509.60000000000002" y="-293.25337331334333"/>

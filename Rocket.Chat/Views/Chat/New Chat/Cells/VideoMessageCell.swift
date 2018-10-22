@@ -45,6 +45,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     }
 
     @IBOutlet weak var buttonPlayer: UIButton!
+    @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
     override func configure() {
@@ -53,6 +54,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
 
         labelDescription.text = viewModel.descriptionText
+        configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
         updateVideo(with: imageViewThumb)
     }

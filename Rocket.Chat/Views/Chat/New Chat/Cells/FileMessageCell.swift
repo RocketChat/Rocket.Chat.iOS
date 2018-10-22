@@ -31,12 +31,14 @@ class FileMessageCell: BaseFileMessageCell, SizingCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var fileButton: UIButton!
+    @IBOutlet weak var readReceiptButton: UIButton!
 
     override func configure() {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
         }
 
+        configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }

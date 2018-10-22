@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseQuoteMessageCell: MessageHeaderCell {
+class BaseQuoteMessageCell: BaseMessageCell {
     internal let collapsedTextMaxHeight: CGFloat = 60
     var textHeightConstraint: NSLayoutConstraint!
     var avatarLeadingInitialConstant: CGFloat = 0
@@ -17,6 +17,8 @@ class BaseQuoteMessageCell: MessageHeaderCell {
     var textLeadingInitialConstant: CGFloat = 0
     var textTrailingInitialConstant: CGFloat = 0
     var containerTrailingInitialConstant: CGFloat = 0
+    var readReceiptWidthInitialConstant: CGFloat = 0
+    var readReceiptTrailingInitialConstant: CGFloat = 0
     var textLabelWidth: CGFloat {
         return
             UIScreen.main.bounds.width -
@@ -26,6 +28,8 @@ class BaseQuoteMessageCell: MessageHeaderCell {
             textLeadingInitialConstant -
             textTrailingInitialConstant -
             containerTrailingInitialConstant -
+            readReceiptWidthInitialConstant -
+            readReceiptTrailingInitialConstant -
             adjustedHorizontalInsets
     }
 

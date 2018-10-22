@@ -11,7 +11,7 @@ import DifferenceKit
 import RocketChatViewController
 import RealmSwift
 
-final class QuoteChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
+final class QuoteChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? QuoteCell.identifier : QuoteMessageCell.identifier
     }
@@ -22,7 +22,7 @@ final class QuoteChatItem: MessageHeaderChatItem, ChatItem, Differentiable {
     init(attachment: UnmanagedAttachment, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
         self.attachment = attachment
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
     }
 
     var differenceIdentifier: String {

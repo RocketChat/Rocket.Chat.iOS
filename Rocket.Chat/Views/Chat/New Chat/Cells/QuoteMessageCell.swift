@@ -34,14 +34,17 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
-
+    @IBOutlet weak var readReceiptButton: UIButton!
+    
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -63,6 +66,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
         textLeadingInitialConstant = textLeadingConstraint.constant
         textTrailingInitialConstant = textTrailingConstraint.constant
         containerTrailingInitialConstant = containerTrailingConstraint.constant
+        readReceiptWidthInitialConstant = readReceiptWidthConstraint.constant
+        readReceiptTrailingInitialConstant = readReceiptTrailingConstraint.constant
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
@@ -74,6 +79,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
             return
         }
 
+        configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: messageUsername)
 
         let attachmentText = viewModel.attachment.text ?? viewModel.attachment.descriptionText ?? ""

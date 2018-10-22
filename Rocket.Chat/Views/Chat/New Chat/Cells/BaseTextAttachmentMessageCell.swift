@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTextAttachmentMessageCell: MessageHeaderCell {
+class BaseTextAttachmentMessageCell: BaseMessageCell {
     weak var delegate: ChatMessageCellProtocol?
 
     var subtitleHeightConstraint: NSLayoutConstraint!
@@ -25,6 +25,8 @@ class BaseTextAttachmentMessageCell: MessageHeaderCell {
     var fieldsStackHeightInitialConstant: CGFloat = 0
     var subtitleHeightInitialConstant: CGFloat = 0
     var subtitleTopInitialConstant: CGFloat = 0
+    var readReceiptWidthInitialConstant: CGFloat = 0
+    var readReceiptTrailingInitialConstant: CGFloat = 0
     var fieldLabelWidth: CGFloat {
         return
             UIScreen.main.bounds.width -
@@ -36,6 +38,8 @@ class BaseTextAttachmentMessageCell: MessageHeaderCell {
             fieldsStackViewLeadingInitialConstant -
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
+            readReceiptWidthInitialConstant -
+            readReceiptTrailingInitialConstant -
             adjustedHorizontalInsets
     }
 

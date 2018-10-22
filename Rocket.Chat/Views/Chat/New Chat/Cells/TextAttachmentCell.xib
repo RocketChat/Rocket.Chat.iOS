@@ -92,9 +92,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="o4N-fB-seu" secondAttribute="bottom" id="BAc-Gg-HAA"/>
-                <constraint firstAttribute="trailing" secondItem="o4N-fB-seu" secondAttribute="trailing" constant="34" id="FHQ-cf-Yb2"/>
                 <constraint firstItem="o4N-fB-seu" firstAttribute="top" secondItem="txK-6f-uxq" secondAttribute="top" id="dau-di-Jky"/>
                 <constraint firstItem="o4N-fB-seu" firstAttribute="leading" secondItem="txK-6f-uxq" secondAttribute="leading" constant="70" id="ncY-AD-6ym"/>
+                <constraint firstAttribute="trailing" secondItem="o4N-fB-seu" secondAttribute="trailing" constant="34" id="pNt-Qg-AFJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Cgj-EO-7nn"/>
             <size key="customSize" width="375" height="76"/>
@@ -112,10 +112,10 @@
                 <outlet property="subtitleTopConstraint" destination="bjK-rF-85x" id="GDY-tK-2fx"/>
                 <outlet property="textContainer" destination="o4N-fB-seu" id="PbO-oR-44i"/>
                 <outlet property="textContainerLeadingConstraint" destination="ncY-AD-6ym" id="rSQ-TW-hsZ"/>
-                <outlet property="textContainerTrailingConstraint" destination="FHQ-cf-Yb2" id="f1m-di-i36"/>
+                <outlet property="textContainerTrailingConstraint" destination="pNt-Qg-AFJ" id="t87-YG-bNe"/>
                 <outlet property="title" destination="cSx-Xs-2vQ" id="T4Q-H6-mjE"/>
             </connections>
-            <point key="canvasLocation" x="109.59999999999999" y="-45.42728635682159"/>
+            <point key="canvasLocation" x="109.59999999999999" y="-45.877061469265371"/>
         </collectionViewCell>
     </objects>
 </document>

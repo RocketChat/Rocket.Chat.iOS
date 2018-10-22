@@ -40,6 +40,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var userIdentifier: String?
     var user: UnmanagedUser?
     var temporary: Bool
+    var unread: Bool
     var failed: Bool
     var mentions: [UnmanagedMention]
     var channels: [UnmanagedChannel]
@@ -84,6 +85,7 @@ extension UnmanagedMessage {
         userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
         temporary = message.temporary
+        unread = message.unread
         failed = message.failed
         groupable = message.groupable
         markedForDeletion = message.markedForDeletion
