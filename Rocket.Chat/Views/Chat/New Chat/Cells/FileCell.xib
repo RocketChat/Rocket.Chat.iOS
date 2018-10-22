@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fef-tc-ORb">
-                        <rect key="frame" x="70" y="0.0" width="271" height="56"/>
+                        <rect key="frame" x="70" y="0.0" width="268" height="56"/>
                         <color key="backgroundColor" red="0.88235294117647056" green="0.89803921568627454" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="56" id="gpU-z9-wYR"/>
@@ -47,7 +47,7 @@
                 <constraint firstItem="Fef-tc-ORb" firstAttribute="top" secondItem="o5P-P6-s4x" secondAttribute="top" id="HRd-k5-91W"/>
                 <constraint firstAttribute="bottom" secondItem="Fef-tc-ORb" secondAttribute="bottom" id="k3J-kZ-5HF"/>
                 <constraint firstItem="Fef-tc-ORb" firstAttribute="leading" secondItem="o5P-P6-s4x" secondAttribute="leading" constant="70" id="oxc-gc-1iG"/>
-                <constraint firstAttribute="trailing" secondItem="Fef-tc-ORb" secondAttribute="trailing" constant="34" id="uT0-rI-ArF"/>
+                <constraint firstAttribute="trailing" secondItem="Fef-tc-ORb" secondAttribute="trailing" constant="37" id="uT0-rI-ArF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Jgr-GV-nUi"/>
             <size key="customSize" width="375" height="76"/>

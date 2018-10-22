@@ -27,7 +27,7 @@ final class ImageMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         self.descriptionText = descriptionText
         self.imageURL = imageURL
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
     }
 
     var differenceIdentifier: String {
