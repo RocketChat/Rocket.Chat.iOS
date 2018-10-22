@@ -22,7 +22,7 @@ final class TextAttachmentChatItem: BaseMessageChatItem, ChatItem, Differentiabl
     init(attachment: UnmanagedAttachment, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
         self.attachment = attachment
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
     }
 
     var differenceIdentifier: String {

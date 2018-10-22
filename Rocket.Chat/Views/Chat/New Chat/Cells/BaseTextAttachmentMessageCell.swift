@@ -25,6 +25,8 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     var fieldsStackHeightInitialConstant: CGFloat = 0
     var subtitleHeightInitialConstant: CGFloat = 0
     var subtitleTopInitialConstant: CGFloat = 0
+    var readReceiptWidthInitialConstant: CGFloat = 0
+    var readReceiptTrailingInitialConstant: CGFloat = 0
     var fieldLabelWidth: CGFloat {
         return
             UIScreen.main.bounds.width -
@@ -36,6 +38,8 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             fieldsStackViewLeadingInitialConstant -
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
+            readReceiptWidthInitialConstant -
+            readReceiptTrailingInitialConstant -
             adjustedHorizontalInsets
     }
 
