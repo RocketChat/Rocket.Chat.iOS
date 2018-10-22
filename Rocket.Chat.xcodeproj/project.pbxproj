@@ -782,6 +782,8 @@
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
+		9977D857217E942200FE5EC6 /* MessageActionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9977D856217E942200FE5EC6 /* MessageActionsCell.xib */; };
+		9977D859217E94C400FE5EC6 /* MessageActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */; };
 		997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */; };
 		997FE19C210BA5B8000F6836 /* SubscriptionHideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */; };
 		99805D7520C191BE00741B8E /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99805D7420C191BE00741B8E /* StyledTextField.swift */; };
@@ -1689,6 +1691,8 @@
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
+		9977D856217E942200FE5EC6 /* MessageActionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageActionsCell.xib; sourceTree = "<group>"; };
+		9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionsCell.swift; sourceTree = "<group>"; };
 		997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionLeaveRequest.swift; sourceTree = "<group>"; };
 		997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHideRequest.swift; sourceTree = "<group>"; };
 		99805D7420C191BE00741B8E /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
@@ -3788,6 +3792,8 @@
 				99B4A7B12164683200C80FF2 /* QuoteCell.swift */,
 				9914183A2166AF63007D2AA2 /* MessageURLCell.xib */,
 				9914183C2166C626007D2AA2 /* MessageURLCell.swift */,
+				9977D856217E942200FE5EC6 /* MessageActionsCell.xib */,
+				9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4283,6 +4289,7 @@
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
 				419EB5B3215E3C2200E591BF /* AudioCell.xib in Resources */,
 				333032A02073940800A9514D /* RCEmojiKit.strings in Resources */,
+				9977D857217E942200FE5EC6 /* MessageActionsCell.xib in Resources */,
 				994C90B62174BA5100383AFF /* VideoMessageCell.xib in Resources */,
 				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
@@ -4693,6 +4700,7 @@
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
+				9977D859217E94C400FE5EC6 /* MessageActionsCell.swift in Sources */,
 				805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */,
 				33D08E2520BD5EDC008D03EF /* ThemeableViews.swift in Sources */,
 				0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */,
