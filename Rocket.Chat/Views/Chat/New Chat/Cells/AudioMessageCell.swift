@@ -40,7 +40,8 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
-
+    @IBOutlet weak var readReceiptButton: UIButton!
+    
     @IBOutlet weak var slider: UISlider! {
         didSet {
             slider.value = 0
@@ -77,6 +78,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     }
 
     override func configure() {
+        configure(readReceipt: readReceiptButton, with: readReceiptButton.constraints)
         configure(with: avatarView, date: date, and: username)
         updateAudio()
     }
