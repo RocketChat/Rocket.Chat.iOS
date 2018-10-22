@@ -41,6 +41,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
     }
 
     @IBOutlet weak var buttonImageHandler: UIButton!
+    @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
@@ -49,6 +50,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
             return
         }
 
+        configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
         labelTitle.text = viewModel.title
         labelDescription.text = viewModel.descriptionText
