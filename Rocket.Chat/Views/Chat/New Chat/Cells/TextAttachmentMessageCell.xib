@@ -148,6 +148,7 @@
                 <outlet property="fieldsStackViewLeadingConstraint" destination="HP0-OI-Fri" id="1wD-Nz-mii"/>
                 <outlet property="fieldsStackViewTopConstraint" destination="2CI-PD-M2M" id="BPi-Qb-5fe"/>
                 <outlet property="fieldsStackViewTrailingConstraint" destination="KTg-uE-EXA" id="JMF-Za-sDN"/>
+                <outlet property="readReceiptButton" destination="ewD-2R-aDF" id="5cR-mj-Xpu"/>
                 <outlet property="readReceiptButtonWidthConstraint" destination="7X1-xt-i31" id="yZb-cI-jtG"/>
                 <outlet property="readReceiptTrailingConstraint" destination="7ok-Pd-Be6" id="rOp-5P-ogv"/>
                 <outlet property="statusView" destination="H6h-hd-Zp9" id="0dJ-4W-oUX"/>
