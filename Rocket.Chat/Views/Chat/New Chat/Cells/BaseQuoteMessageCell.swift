@@ -17,6 +17,8 @@ class BaseQuoteMessageCell: BaseMessageCell {
     var textLeadingInitialConstant: CGFloat = 0
     var textTrailingInitialConstant: CGFloat = 0
     var containerTrailingInitialConstant: CGFloat = 0
+    var readReceiptWidthInitialConstant: CGFloat = 0
+    var readReceiptTrailingInitialConstant: CGFloat = 0
     var textLabelWidth: CGFloat {
         return
             UIScreen.main.bounds.width -
@@ -26,6 +28,8 @@ class BaseQuoteMessageCell: BaseMessageCell {
             textLeadingInitialConstant -
             textTrailingInitialConstant -
             containerTrailingInitialConstant -
+            readReceiptWidthInitialConstant -
+            readReceiptTrailingInitialConstant -
             adjustedHorizontalInsets
     }
 

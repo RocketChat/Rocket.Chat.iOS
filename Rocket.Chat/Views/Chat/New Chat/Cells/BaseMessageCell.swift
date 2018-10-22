@@ -54,7 +54,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             return
         }
 
-        if !settings.messageReadReceiptEnabled {
+        if settings.messageReadReceiptEnabled {
             button.isHidden = false
         } else {
             button.isHidden = true
