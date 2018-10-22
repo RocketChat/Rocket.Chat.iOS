@@ -54,7 +54,7 @@ final class SequentialMessageCell: BaseMessageCell, SizingCell {
     }
 
     override func configure() {
-        configure(readReceipt: readReceiptButton, with: readReceiptButton.constraints)
+        configure(readReceipt: readReceiptButton)
         updateText()
     }
 

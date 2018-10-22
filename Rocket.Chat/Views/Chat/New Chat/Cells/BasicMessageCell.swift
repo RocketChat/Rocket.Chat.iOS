@@ -74,7 +74,7 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
 
     override func configure() {
         configure(with: avatarView, date: date, and: username)
-        configure(readReceipt: readReceiptButton, with: [readReceiptWidthConstraint, readReceiptTrailingConstraint])
+        configure(readReceipt: readReceiptButton)
         updateText()
     }
 

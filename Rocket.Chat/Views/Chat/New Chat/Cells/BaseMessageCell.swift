@@ -46,7 +46,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         }
     }
 
-    func configure(readReceipt button: UIButton, with constraints: [NSLayoutConstraint]) {
+    func configure(readReceipt button: UIButton) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let settings = settings
@@ -54,7 +54,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             return
         }
 
-        if settings.messageReadReceiptEnabled {
+        if !settings.messageReadReceiptEnabled {
             button.isHidden = false
         } else {
             button.isHidden = true
