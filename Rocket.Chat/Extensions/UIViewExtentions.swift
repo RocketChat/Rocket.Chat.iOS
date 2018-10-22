@@ -47,22 +47,22 @@ extension UIView {
     }
 
     func getWidthConstraints() -> [NSLayoutConstraint] {
-        return getAllConstraints().filter( {
+        return getAllConstraints().filter({
             ($0.firstAttribute == .width && $0.firstItem as? UIView == self) ||
                 ($0.secondAttribute == .width && $0.secondItem as? UIView == self)
-        } )
+        })
     }
 
     func changeWidth(to value: CGFloat) {
-        getAllConstraints().filter( {
+        getAllConstraints().filter({
             $0.firstAttribute == .width &&
                 $0.relation == .equal &&
                 $0.secondAttribute == .notAnAttribute
-        } ).forEach( {$0.constant = value })
+        }).forEach({ $0.constant = value })
     }
 
     func changeLeading(to value: CGFloat) {
-        getAllConstraints().filter( {
+        getAllConstraints().filter({
             $0.firstAttribute == .leading &&
                 $0.firstItem as? UIView == self
         }).forEach({$0.constant = value})
