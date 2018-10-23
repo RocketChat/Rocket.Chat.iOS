@@ -68,6 +68,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(QuoteCell.nib, forCellWithReuseIdentifier: QuoteCell.identifier)
         collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
+        collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
 
         dataUpdateDelegate = self
         viewModel.controllerContext = self

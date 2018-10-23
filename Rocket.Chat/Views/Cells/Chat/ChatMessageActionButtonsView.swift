@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ChatMessageActionButtonsViewProtocol: class {
-    func openReplyMessage(message: Message)
+    func openReplyMessage(message: UnmanagedMessage)
 }
 
 final class ChatMessageActionButtonsView: UIView {
@@ -34,7 +34,7 @@ final class ChatMessageActionButtonsView: UIView {
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
         if let message = message {
-            delegate?.openReplyMessage(message: message)
+//            delegate?.openReplyMessage(message: message)
         }
     }
 

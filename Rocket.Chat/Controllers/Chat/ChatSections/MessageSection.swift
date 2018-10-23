@@ -50,6 +50,12 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
+        if object.message.isBroadcastReplyAvailable() {
+            cells.append(MessageActionsChatItem(
+                message: object.message
+            ).wrapped)
+        }
+
         for attachment in object.message.attachments {
             switch attachment.type {
             case .audio:
@@ -234,6 +240,8 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         } else if let cell = cell as? MessageURLCell {
             cell.delegate = self
+        } else if let cell = cell as? MessageActionsCell {
+            cell.delegate = self
         }
 
         let adjustedContentInsets = messagesController?.collectionView.adjustedContentInset ?? .zero
@@ -354,7 +362,7 @@ extension MessageSection: ChatMessageCellProtocol {
         messagesController?.present(controller, animated: true, completion: nil)
     }
 
-    func openReplyMessage(message: Message) {
+    func openReplyMessage(message: UnmanagedMessage) {
         guard let username = message.user?.username else { return }
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
