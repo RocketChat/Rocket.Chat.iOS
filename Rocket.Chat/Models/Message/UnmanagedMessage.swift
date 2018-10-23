@@ -36,9 +36,11 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var identifier: String
     var managedObject: Message
     var text: String
+    var type: MessageType
     var attachments: [UnmanagedAttachment]
     var userIdentifier: String?
     var user: UnmanagedUser?
+    var subscription: UnmanagedSubscription?
     var temporary: Bool
     var unread: Bool
     var failed: Bool
@@ -82,8 +84,10 @@ extension UnmanagedMessage {
         managedObject = message
         identifier = messageIdentifier
         text = message.text
+        type = message.type
         userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
+        subscription = message.subscription?.unmanaged
         temporary = message.temporary
         unread = message.unread
         failed = message.failed
@@ -137,6 +141,39 @@ extension UnmanagedMessage {
         attachments = message.attachments.compactMap {
             return UnmanagedAttachment($0)
         }
+    }
+
+    /**
+        This method will return if the reply button
+        in a broadcast room needs to be displayed or
+        not for the message. If the subscription is not
+        a broadcast type, it'll return false.
+     */
+    func isBroadcastReplyAvailable() -> Bool {
+        guard
+            !temporary,
+            !failed,
+            !markedForDeletion,
+            subscription?.roomBroadcast ?? false,
+            !isSystemMessage(),
+            let currentUser = AuthManager.currentUser(),
+            currentUser.identifier != user?.identifier
+        else {
+            return false
+        }
+
+        return true
+    }
+
+    func isSystemMessage() -> Bool {
+        return !(
+            type == .text ||
+            type == .audio ||
+            type == .image ||
+            type == .video ||
+            type == .textAttachment ||
+            type == .url
+        )
     }
 }
 

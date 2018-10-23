@@ -50,6 +50,12 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
+        if object.message.isBroadcastReplyAvailable() {
+            cells.append(MessageActionsChatItem(
+                message: object.message
+            ).wrapped)
+        }
+
         for attachment in object.message.attachments {
             switch attachment.type {
             case .audio:
@@ -233,6 +239,8 @@ final class MessageSection: ChatSection {
         } else if let cell = cell as? QuoteMessageCell {
             cell.delegate = self
         } else if let cell = cell as? MessageURLCell {
+            cell.delegate = self
+        } else if let cell = cell as? MessageActionsCell {
             cell.delegate = self
         }
 

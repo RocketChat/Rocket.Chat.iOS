@@ -12,7 +12,7 @@ import RocketChatViewController
 
 struct MessageActionsChatItem: ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return MessageURLCell.identifier
+        return MessageActionsCell.identifier
     }
 
     let message: UnmanagedMessage
