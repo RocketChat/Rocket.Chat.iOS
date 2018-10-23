@@ -19,14 +19,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTq-7J-Pgb">
-                        <rect key="frame" x="70" y="8" width="90" height="35"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTq-7J-Pgb">
+                        <rect key="frame" x="70" y="8" width="107" height="44"/>
+                        <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="Rgv-16-xxc"/>
-                            <constraint firstAttribute="height" constant="35" id="g3Z-IK-0za"/>
+                            <constraint firstAttribute="width" constant="107" id="Rgv-16-xxc"/>
+                            <constraint firstAttribute="height" constant="44" id="g3Z-IK-0za"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                        <state key="normal" title="Reply"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                        <state key="normal" title="Reply" image="back"/>
                         <connections>
                             <action selector="buttonReplyDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="Dze-UD-vMt"/>
                         </connections>
@@ -36,8 +38,8 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="pTq-7J-Pgb" firstAttribute="leading" secondItem="u6p-Dz-igp" secondAttribute="leading" constant="70" id="TFg-HW-lwi"/>
-                <constraint firstAttribute="bottom" secondItem="pTq-7J-Pgb" secondAttribute="bottom" constant="12" id="V1i-ve-A01"/>
                 <constraint firstItem="pTq-7J-Pgb" firstAttribute="top" secondItem="u6p-Dz-igp" secondAttribute="top" constant="8" id="We7-gC-6uz"/>
+                <constraint firstAttribute="bottom" secondItem="pTq-7J-Pgb" secondAttribute="bottom" constant="3" id="ofT-ZI-Ya7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="oHh-zw-8Kd"/>
             <size key="customSize" width="375" height="44"/>
@@ -47,4 +49,7 @@
             <point key="canvasLocation" x="109.59999999999999" y="-60.719640179910051"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="back" width="20" height="20"/>
+    </resources>
 </document>

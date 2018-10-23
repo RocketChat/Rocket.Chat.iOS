@@ -22,10 +22,8 @@ class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
 
     @IBOutlet weak var replyButton: UIButton! {
         didSet {
-            let buttonColor = UIColor.RCBlue()
-            replyButton.tintColor = buttonColor
-            replyButton.layer.borderColor = buttonColor.cgColor
-            replyButton.layer.borderWidth = 1
+            let image = UIImage(named: "back")?.imageWithTint(.white, alpha: 0.0)
+            replyButton.setImage(image, for: .normal)
             replyButton.layer.cornerRadius = 4
             replyButton.setTitle(localized("chat.message.actions.reply"), for: .normal)
         }
@@ -43,5 +41,13 @@ class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
         }
 
         delegate?.openReplyMessage(message: viewModel.message)
+    }
+}
+
+extension MessageActionsCell {
+    override func applyTheme() {
+        super.applyTheme()
+        replyButton.setTitleColor(.white, for: .normal)
+        replyButton.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
     }
 }
