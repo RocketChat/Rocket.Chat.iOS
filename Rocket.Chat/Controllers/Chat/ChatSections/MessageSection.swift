@@ -50,7 +50,7 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
-        if !object.message.isBroadcastReplyAvailable() {
+        if object.message.isBroadcastReplyAvailable() {
             cells.append(MessageActionsChatItem(
                 message: object.message
             ).wrapped)

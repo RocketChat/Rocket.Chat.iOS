@@ -27,7 +27,7 @@
                             <constraint firstAttribute="height" constant="44" id="g3Z-IK-0za"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="11" maxY="0.0"/>
                         <state key="normal" title="Reply" image="back"/>
                         <connections>
                             <action selector="buttonReplyDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="Dze-UD-vMt"/>
