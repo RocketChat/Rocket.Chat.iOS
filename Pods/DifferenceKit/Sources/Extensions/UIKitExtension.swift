@@ -17,7 +17,7 @@ public extension UITableView {
     ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        with animation: @autoclosure () -> UITableViewRowAnimation,
+        with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -54,12 +54,12 @@ public extension UITableView {
     ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        deleteSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        deleteRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        deleteSectionsAnimation: @autoclosure () -> RowAnimation,
+        insertSectionsAnimation: @autoclosure () -> RowAnimation,
+        reloadSectionsAnimation: @autoclosure () -> RowAnimation,
+        deleteRowsAnimation: @autoclosure () -> RowAnimation,
+        insertRowsAnimation: @autoclosure () -> RowAnimation,
+        reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -67,6 +67,8 @@ public extension UITableView {
             setData(data)
             return reloadData()
         }
+
+        let contentOffset = self.contentOffset
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
@@ -110,6 +112,10 @@ public extension UITableView {
                 }
             }
         }
+
+        if contentSize.height > bounds.size.height {
+            setContentOffset(contentOffset, animated: false)
+        }
     }
 
     private func _performBatchUpdates(_ updates: () -> Void) {
@@ -145,6 +151,8 @@ public extension UICollectionView {
             setData(data)
             return reloadData()
         }
+
+        let contentOffset = self.contentOffset
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
@@ -187,6 +195,10 @@ public extension UICollectionView {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
             })
+        }
+
+        if contentSize.height > bounds.size.height {
+            setContentOffset(contentOffset, animated: false)
         }
     }
 }

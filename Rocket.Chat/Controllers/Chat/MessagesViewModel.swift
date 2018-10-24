@@ -20,6 +20,7 @@ final class MessagesViewModel {
      */
     internal var data: [AnyChatSection] = []
     internal var dataSorted: [AnyChatSection] = []
+    internal var dataNormalized: [ArraySection<AnyChatSection, AnyChatItem>] = []
 
     /**
      The controller context that will be used to respond
@@ -123,25 +124,21 @@ final class MessagesViewModel {
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
         guard
-            indexPath.section < dataSorted.count,
-            indexPath.row < dataSorted[indexPath.section].viewModels().count
+            indexPath.section < dataNormalized.count,
+            indexPath.row < dataNormalized[indexPath.section].elements.count
         else {
             return nil
         }
 
-        let section = dataSorted[indexPath.section]
-        return section.viewModels()[indexPath.row]
+        let section = dataNormalized[indexPath.section]
+        return section.elements[indexPath.row]
     }
 
     /**
-     Creates the AnyChatSection object based on an instance of Message
-     and set some attributes based on the previous message (if any) such like:
-     if the message is sequential, if there's any separator to be added
-     and more.
+     Creates the AnyChatSection object based on an instance of Message.
 
      - parameters:
         - message: The message object present in the section.
-        - previous: The previous section to be presented before this one on the list.
      - returns: AnyChatSection instance based on MessageSectionModel.
     */
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
@@ -351,6 +348,8 @@ final class MessagesViewModel {
                 controllerContext: controllerContext
             ))
         }
+
+        dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
     }
 
     /**
