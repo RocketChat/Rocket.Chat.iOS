@@ -23,8 +23,10 @@ final class MessagesViewModelSpec: XCTestCase {
     func testSectionCreationBasic() {
         let model = MessagesViewModel()
 
-        let testCaseMessage = Message.testInstance()
-        guard let section = model.section(for: testCaseMessage) else {
+        guard
+            let testCaseMessage = Message.testInstance().validated()?.unmanaged,
+            let section = model.section(for: testCaseMessage)
+        else {
             return XCTFail("section must be created")
         }
 
@@ -38,90 +40,10 @@ final class MessagesViewModelSpec: XCTestCase {
         }
     }
 
-    func testSectionSequentialTrue() {
-        let model = MessagesViewModel()
-
-        let testCaseMessage = Message.testInstance()
-        let testCaseMessagePrevious = Message.testInstance()
-
-        let previousSection = model.section(for: testCaseMessagePrevious)
-        guard let section = model.section(for: testCaseMessage, previous: previousSection) else {
-            return XCTFail("section must be created")
-        }
-
-        if let object = section.base.object.base as? MessageSectionModel {
-            XCTAssertEqual(object.message.identifier, testCaseMessage.identifier)
-            XCTAssertTrue(object.isSequential)
-        } else {
-            XCTFail("object must be a MessageSectionModel instance")
-        }
-    }
-
-    func testSectionSequentialFalse() {
-        let model = MessagesViewModel()
-
-        let testCaseMessage = Message.testInstance()
-        let testCaseMessagePrevious = Message.testInstance()
-        testCaseMessagePrevious.groupable = false
-
-        let previousSection = model.section(for: testCaseMessagePrevious)
-        guard let section = model.section(for: testCaseMessage, previous: previousSection) else {
-            return XCTFail("section must be created")
-        }
-
-        if let object = section.base.object.base as? MessageSectionModel {
-            XCTAssertEqual(object.message.identifier, testCaseMessage.identifier)
-            XCTAssertFalse(object.isSequential)
-        } else {
-            XCTFail("object must be a MessageSectionModel instance")
-        }
-    }
-
-    func testSectionDaySeparatorFalse() {
-        let model = MessagesViewModel()
-
-        let testCaseMessage = Message.testInstance()
-        let testCaseMessagePrevious = Message.testInstance()
-
-        let previousSection = model.section(for: testCaseMessagePrevious)
-        guard let section = model.section(for: testCaseMessage, previous: previousSection) else {
-            return XCTFail("section must be created")
-        }
-
-        if let object = section.base.object.base as? MessageSectionModel {
-            XCTAssertEqual(object.message.identifier, testCaseMessage.identifier)
-            XCTAssertFalse(object.containsDateSeparator)
-        } else {
-            XCTFail("object must be a MessageSectionModel instance")
-        }
-    }
-
-    func testSectionDaySeparatorTrue() {
-        let model = MessagesViewModel()
-
-        let testCaseMessage = Message.testInstance()
-
-        let testCaseMessagePrevious = Message.testInstance()
-        testCaseMessagePrevious.createdAt = Calendar.current.date(byAdding: .month, value: -1, to: Date())
-
-        let previousSection = model.section(for: testCaseMessagePrevious)
-        guard let section = model.section(for: testCaseMessage, previous: previousSection) else {
-            return XCTFail("section must be created")
-        }
-
-        if let object = section.base.object.base as? MessageSectionModel {
-            XCTAssertEqual(object.message.identifier, testCaseMessage.identifier)
-            XCTAssertTrue(object.containsDateSeparator)
-        } else {
-            XCTFail("object must be a MessageSectionModel instance")
-        }
-    }
-
     func testNumberOfSections() {
         let model = MessagesViewModel()
 
-        let testCaseMessage = Message.testInstance()
-        if let section = model.section(for: testCaseMessage) {
+        if let testCaseMessage = Message.testInstance().validated()?.unmanaged, let section = model.section(for: testCaseMessage) {
             model.data = [section]
         }
 
@@ -132,8 +54,13 @@ final class MessagesViewModelSpec: XCTestCase {
         let model = MessagesViewModel()
 
         let testDate = Date().addingTimeInterval(-10000)
-        let messageFirst = Message.testInstance()
-        let messageSecond = Message.testInstance()
+        guard
+            let messageFirst = Message.testInstance().validated()?.unmanaged,
+            var messageSecond = Message.testInstance().validated()?.unmanaged
+        else {
+            return
+        }
+
         messageSecond.createdAt = testDate
 
         if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {

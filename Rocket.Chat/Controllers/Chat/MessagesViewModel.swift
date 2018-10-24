@@ -135,14 +135,10 @@ final class MessagesViewModel {
     }
 
     /**
-     Creates the AnyChatSection object based on an instance of Message
-     and set some attributes based on the previous message (if any) such like:
-     if the message is sequential, if there's any separator to be added
-     and more.
+     Creates the AnyChatSection object based on an instance of Message.
 
      - parameters:
         - message: The message object present in the section.
-        - previous: The previous section to be presented before this one on the list.
      - returns: AnyChatSection instance based on MessageSectionModel.
     */
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
