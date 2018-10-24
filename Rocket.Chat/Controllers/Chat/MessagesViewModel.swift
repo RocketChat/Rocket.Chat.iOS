@@ -20,6 +20,7 @@ final class MessagesViewModel {
      */
     internal var data: [AnyChatSection] = []
     internal var dataSorted: [AnyChatSection] = []
+    internal var dataNormalized: [ArraySection<AnyChatSection, AnyChatItem>] = []
 
     /**
      The controller context that will be used to respond
@@ -123,14 +124,14 @@ final class MessagesViewModel {
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
         guard
-            indexPath.section < dataSorted.count,
-            indexPath.row < dataSorted[indexPath.section].viewModels().count
+            indexPath.section < dataNormalized.count,
+            indexPath.row < dataNormalized[indexPath.section].elements.count
         else {
             return nil
         }
 
-        let section = dataSorted[indexPath.section]
-        return section.viewModels()[indexPath.row]
+        let section = dataNormalized[indexPath.section]
+        return section.elements[indexPath.row]
     }
 
     /**
@@ -351,6 +352,8 @@ final class MessagesViewModel {
                 controllerContext: controllerContext
             ))
         }
+
+        dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
     }
 
     /**

@@ -155,10 +155,10 @@ public class ComposerView: UIView {
 
         containerView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
 
-        backgroundColor = .white
-
         addSubviews()
         setupConstraints()
+
+        containerView.backgroundColor = .white
     }
 
     /**
@@ -181,6 +181,10 @@ public class ComposerView: UIView {
         textView.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: layoutMargins.left)
     }()
 
+    lazy var containerViewLeadingConstraint: NSLayoutConstraint = {
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor)
+    }()
+
     /**
      Sets up constraints between the UI elements in the composer.
      */
@@ -188,7 +192,7 @@ public class ComposerView: UIView {
         NSLayoutConstraint.activate([
             // containerView constraints
 
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerViewLeadingConstraint,
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
@@ -238,6 +242,16 @@ public class ComposerView: UIView {
         super.willMove(toSuperview: newSuperview)
 
         reloadAddons()
+    }
+
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for view in self.subviews {
+            if view.isUserInteractionEnabled, view.point(inside: self.convert(point, to: view), with: event) {
+                return true
+            }
+        }
+
+        return false
     }
 }
 
