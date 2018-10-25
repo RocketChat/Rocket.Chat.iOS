@@ -102,7 +102,7 @@ final class MessagesViewModelSpec: XCTestCase {
         XCTAssertFalse(object2.isSequential)
     }
 
-    func testLoaderPresence() {
+    func testLoaderPresenceTrue() {
         let model = MessagesViewModel()
 
         guard
@@ -128,7 +128,42 @@ final class MessagesViewModelSpec: XCTestCase {
         }
 
         XCTAssertFalse(object1.containsLoader)
+        XCTAssertFalse(object1.containsHeader)
         XCTAssertTrue(object2.containsLoader)
+        XCTAssertFalse(object2.containsHeader)
+    }
+
+    func testLoaderPresenceFalse() {
+        let model = MessagesViewModel()
+
+        guard
+            let messageFirst = Message.testInstance().validated()?.unmanaged,
+            let messageSecond = Message.testInstance().validated()?.unmanaged
+        else {
+            return XCTFail("messages must be created")
+        }
+
+        if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
+            model.hasMoreData = false
+            model.requestingData = false
+            model.data = [section1, section2]
+            model.cacheDataSorted()
+            model.normalizeDataSorted()
+        }
+
+        XCTAssertEqual(model.numberOfSections, 2)
+
+        guard
+            let object1 = model.dataSorted[0].object.base as? MessageSectionModel,
+            let object2 = model.dataSorted[1].object.base as? MessageSectionModel
+        else {
+            return XCTFail("objects must be valid sections")
+        }
+
+        XCTAssertFalse(object1.containsLoader)
+        XCTAssertFalse(object1.containsHeader)
+        XCTAssertFalse(object2.containsLoader)
+        XCTAssertTrue(object2.containsHeader)
     }
 
 }
