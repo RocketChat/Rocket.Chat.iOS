@@ -28,7 +28,7 @@
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="Button" image="iconFilesGeneric">
+                        <state key="normal" title="Button" image="files">
                             <color key="titleColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -58,6 +58,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="iconFilesGeneric" width="20" height="20"/>
+        <image name="files" width="32" height="32"/>
     </resources>
 </document>
