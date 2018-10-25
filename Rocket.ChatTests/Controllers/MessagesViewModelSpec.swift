@@ -58,7 +58,7 @@ final class MessagesViewModelSpec: XCTestCase {
             let messageFirst = Message.testInstance().validated()?.unmanaged,
             var messageSecond = Message.testInstance().validated()?.unmanaged
         else {
-            return
+            return XCTFail("messages must be created")
         }
 
         messageSecond.createdAt = testDate
@@ -69,6 +69,66 @@ final class MessagesViewModelSpec: XCTestCase {
 
         XCTAssertEqual(model.numberOfSections, 2)
         XCTAssertEqual(model.oldestMessageDateBeingPresented, testDate)
+    }
+
+    func testSequentialMessages() {
+        let model = MessagesViewModel()
+
+        guard
+            let messageFirst = Message.testInstance().validated()?.unmanaged,
+            var messageSecond = Message.testInstance().validated()?.unmanaged
+        else {
+            return XCTFail("messages must be created")
+        }
+
+        messageSecond.createdAt = Date().addingTimeInterval(-1)
+
+        if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
+            model.data = [section1, section2]
+            model.cacheDataSorted()
+            model.normalizeDataSorted()
+        }
+
+        XCTAssertEqual(model.numberOfSections, 2)
+
+        guard
+            let object1 = model.dataSorted[0].object.base as? MessageSectionModel,
+            let object2 = model.dataSorted[1].object.base as? MessageSectionModel
+        else {
+            return XCTFail("objects must be valid sections")
+        }
+
+        XCTAssertTrue(object1.isSequential)
+        XCTAssertFalse(object2.isSequential)
+    }
+
+    func testLoaderPresence() {
+        let model = MessagesViewModel()
+
+        guard
+            let messageFirst = Message.testInstance().validated()?.unmanaged,
+            let messageSecond = Message.testInstance().validated()?.unmanaged
+        else {
+            return XCTFail("messages must be created")
+        }
+
+        if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
+            model.data = [section1, section2]
+            model.cacheDataSorted()
+            model.normalizeDataSorted()
+        }
+
+        XCTAssertEqual(model.numberOfSections, 2)
+
+        guard
+            let object1 = model.dataSorted[0].object.base as? MessageSectionModel,
+            let object2 = model.dataSorted[1].object.base as? MessageSectionModel
+        else {
+            return XCTFail("objects must be valid sections")
+        }
+
+        XCTAssertFalse(object1.containsLoader)
+        XCTAssertTrue(object2.containsLoader)
     }
 
 }
