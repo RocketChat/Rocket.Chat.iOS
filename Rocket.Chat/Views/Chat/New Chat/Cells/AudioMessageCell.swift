@@ -115,7 +115,9 @@ extension AudioMessageCell {
         super.applyTheme()
 
         let theme = self.theme ?? .light
-        viewPlayerBackground.backgroundColor = theme.auxiliaryBackground
+        date.textColor = theme.auxiliaryText
+        username.textColor = theme.titleText
+        viewPlayerBackground.backgroundColor = theme.chatComponentBackground
         labelAudioTime.textColor = theme.auxiliaryText
         updatePlayingState(with: buttonPlay)
     }
