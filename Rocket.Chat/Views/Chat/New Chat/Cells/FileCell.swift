@@ -20,7 +20,13 @@ final class FileCell: BaseFileMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var fileButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton! {
+        didSet {
+            fileButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            fileButton.titleLabel?.minimumScaleFactor = 0.8
+            fileButton.titleLabel?.numberOfLines = 2
+        }
+    }
 
     override func configure() {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
@@ -36,5 +42,15 @@ final class FileCell: BaseFileMessageCell, SizingCell {
         }
 
         delegate?.openFileFromCell(attachment: viewModel.attachment)
+    }
+}
+
+extension FileCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        fileButton.backgroundColor = theme.chatComponentBackground
+        fileButton.setTitleColor(theme.titleText, for: .normal)
     }
 }
