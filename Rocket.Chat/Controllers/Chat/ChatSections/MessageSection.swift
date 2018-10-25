@@ -27,7 +27,7 @@ final class MessageSection: ChatSection {
         self.controllerContext = controllerContext
     }
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func viewModels() -> [AnyChatItem] {
         guard
             let object = object.base as? MessageSectionModel,
@@ -209,6 +209,12 @@ final class MessageSection: ChatSection {
         if let daySeparator = object.daySeparator {
             cells.append(DateSeparatorChatItem(
                 date: daySeparator
+            ).wrapped)
+        }
+
+        if object.containsUnreadMessageIndicator {
+            cells.append(UnreadMarkerChatItem(
+                identifier: object.message.identifier
             ).wrapped)
         }
 

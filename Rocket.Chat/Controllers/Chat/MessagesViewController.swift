@@ -54,6 +54,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
+        collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
         collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
         collectionView.register(AudioMessageCell.nib, forCellWithReuseIdentifier: AudioMessageCell.identifier)
         collectionView.register(VideoCell.nib, forCellWithReuseIdentifier: VideoCell.identifier)
@@ -82,6 +83,11 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        markAsRead()
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         let topIndexPath = visibleIndexPaths.sorted().last
@@ -100,6 +106,11 @@ final class MessagesViewController: RocketChatViewController {
 
     func openURL(url: URL) {
         WebBrowserManager.open(url: url)
+    }
+
+    private func markAsRead() {
+        guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
+        API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
 }

@@ -54,6 +54,7 @@ final class MessagesViewModel {
      Last time user read the messages from the Subscription from this view model.
      */
     internal var lastSeen = Date()
+    internal var hasUnreadMarker = false
 
     /**
      If the view model is requesting new data from the API.
@@ -323,6 +324,8 @@ final class MessagesViewModel {
      and everything looks good to the user on the final result.
      */
     internal func normalizeDataSorted() {
+        hasUnreadMarker = false
+
         let dataSortedMaxIndex = dataSorted.count - 1
 
         for (idx, object) in dataSorted.enumerated() {
@@ -336,17 +339,23 @@ final class MessagesViewModel {
 
             let message = messageSection1.message
             let previousMessage = messageSection2.message
+            let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
 
             let section = MessageSectionModel(
                 message: message,
                 daySeparator: daySeparator(message: message, previousMessage: previousMessage),
-                sequential: isSequential(message: message, previousMessage: previousMessage)
+                sequential: isSequential(message: message, previousMessage: previousMessage),
+                unreadIndicator: unreadMarker
             )
 
             dataSorted[idx] = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
                 controllerContext: controllerContext
             ))
+
+            if unreadMarker {
+                hasUnreadMarker = true
+            }
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
