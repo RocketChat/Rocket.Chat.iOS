@@ -329,23 +329,30 @@ final class MessagesViewModel {
         let dataSortedMaxIndex = dataSorted.count - 1
 
         for (idx, object) in dataSorted.enumerated() {
-            guard
-                idx < dataSortedMaxIndex,
-                let messageSection1 = object.object.base as? MessageSectionModel,
-                let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel
-            else {
-                continue
-            }
+            guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
 
             let message = messageSection1.message
-            let previousMessage = messageSection2.message
             let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+            var separator: Date?
+            var sequential = false
+            var loader = false
+            var header = false
+
+            if idx == dataSortedMaxIndex {
+                loader = hasMoreData
+                header = !hasMoreData
+            } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
+                separator = daySeparator(message: message, previousMessage: messageSection2.message)
+                sequential = isSequential(message: message, previousMessage: messageSection2.message)
+            }
 
             let section = MessageSectionModel(
                 message: message,
-                daySeparator: daySeparator(message: message, previousMessage: previousMessage),
-                sequential: isSequential(message: message, previousMessage: previousMessage),
-                unreadIndicator: unreadMarker
+                daySeparator: separator,
+                sequential: sequential,
+                unreadIndicator: unreadMarker,
+                loader: loader,
+                header: header
             )
 
             dataSorted[idx] = AnyChatSection(MessageSection(
