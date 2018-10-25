@@ -75,6 +75,7 @@ extension UIView: ThemeProvider {
         return Theme(
             backgroundColor: theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
+            chatComponentBackground: theme.chatComponentBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
@@ -83,7 +84,7 @@ extension UIView: ThemeProvider {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
+            brightBlue: theme.brightBlue,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence
@@ -248,7 +249,7 @@ extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlink
+        tintColor = theme.brightBlue
         applyThemeFromRuntimeAttributes()
     }
 }

@@ -41,7 +41,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var readReceiptButton: UIButton!
-    
+
     @IBOutlet weak var slider: UISlider! {
         didSet {
             slider.value = 0
