@@ -15,7 +15,7 @@ struct SubscriptionsClient: APIClient {
         self.api = api
     }
 
-    func markAsRead(subscription: Subscription) {
+    func markAsRead(subscription: UnmanagedSubscription) {
         let req = SubscriptionReadRequest(rid: subscription.rid)
         let subscriptionIdentifier = subscription.rid
 
