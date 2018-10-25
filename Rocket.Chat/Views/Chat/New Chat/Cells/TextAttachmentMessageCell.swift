@@ -104,6 +104,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         }
 
         title.text = viewModel.attachment.title
+        statusView.backgroundColor = viewModel.attachment.color != nil ? UIColor(hex: viewModel.attachment.color) : .lightGray
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
 

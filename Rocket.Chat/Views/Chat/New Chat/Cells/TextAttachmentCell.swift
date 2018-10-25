@@ -36,7 +36,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerTrailingConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -85,6 +85,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         title.text = viewModel.attachment.title
+        statusView.backgroundColor = viewModel.attachment.color != nil ? UIColor(hex: viewModel.attachment.color) : .lightGray
 
         if viewModel.attachment.collapsed {
             configureCollapsedState(with: viewModel)
