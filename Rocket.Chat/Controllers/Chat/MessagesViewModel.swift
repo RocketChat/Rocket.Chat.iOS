@@ -339,8 +339,8 @@ final class MessagesViewModel {
             var header = false
 
             if idx == dataSortedMaxIndex {
-                loader = hasMoreData
-                header = !hasMoreData
+                loader = hasMoreData || requestingData
+                header = !hasMoreData && !requestingData
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
