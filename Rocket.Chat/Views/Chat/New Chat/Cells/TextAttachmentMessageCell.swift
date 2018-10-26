@@ -160,3 +160,16 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         subtitleTopConstraint.constant = subtitleTopInitialConstant
     }
 }
+
+extension TextAttachmentMessageCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        textContainer.backgroundColor = theme.chatComponentBackground
+        username.textColor = theme.titleText
+        date.textColor = theme.auxiliaryText
+        title.textColor = theme.controlText
+        subtitle.textColor = theme.bodyText
+    }
+}
