@@ -50,8 +50,8 @@ extension DateSeparatorCell {
 
         let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
-        leftLine.backgroundColor = theme == .light ? theme.auxiliaryBackground : theme.controlText
-        rightLine.backgroundColor = theme == .light ? theme.auxiliaryBackground : theme.controlText
+        leftLine.backgroundColor = theme.auxiliaryText
+        rightLine.backgroundColor = theme.auxiliaryText
     }
 
 }
