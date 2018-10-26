@@ -116,7 +116,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     }
 
     func configureCollapsedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Collapsed Light")
+        arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
         subtitleHeightConstraint.isActive = false
         emptySubtitleHeightConstraint.isActive = true
         subtitleTopConstraint.constant = 0
@@ -129,7 +129,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     }
 
     func configureExpandedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Expanded Light")
+        arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
 
         if let subtitleText = viewModel.attachment.text {
             emptySubtitleHeightConstraint.isActive = false
