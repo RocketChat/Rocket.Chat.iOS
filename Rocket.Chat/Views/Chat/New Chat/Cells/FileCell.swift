@@ -20,6 +20,8 @@ final class FileCell: BaseFileMessageCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var fileButton: UIButton! {
         didSet {
             fileButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -31,6 +33,14 @@ final class FileCell: BaseFileMessageCell, SizingCell {
     override func configure() {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
+        }
+
+        if let description = viewModel.attachment.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
         }
 
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
@@ -50,6 +60,7 @@ extension FileCell {
         super.applyTheme()
 
         let theme = self.theme ?? .light
+        labelDescription.textColor = theme.controlText
         fileButton.backgroundColor = theme.chatComponentBackground
         fileButton.setTitleColor(theme.titleText, for: .normal)
     }

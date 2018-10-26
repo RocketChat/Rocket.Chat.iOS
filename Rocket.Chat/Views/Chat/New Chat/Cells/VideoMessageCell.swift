@@ -81,4 +81,3 @@ extension VideoMessageCell {
         labelDescription.textColor = theme.controlText
     }
 }
-
