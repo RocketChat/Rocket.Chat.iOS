@@ -83,6 +83,11 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyTheme()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         markAsRead()
@@ -174,14 +179,4 @@ extension MessagesViewController: UserActionSheetPresenter {
         presentActionSheetForUser(user, subscription: subscription, source: source)
     }
 
-}
-
-extension MessagesViewController {
-    override func applyTheme() {
-        super.applyTheme()
-
-        view.subviews.forEach { view in
-            view.applyTheme()
-        }
-    }
 }
