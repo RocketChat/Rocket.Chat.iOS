@@ -21,6 +21,7 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var imageView: FLAnimatedImageView! {
@@ -41,7 +42,14 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         }
 
         labelTitle.text = viewModel.title
-        labelDescription.text = viewModel.descriptionText
+
+        if let description = viewModel.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
+        }
 
         loadImage(on: imageView, startLoadingBlock: { [weak self] in
             self?.activityIndicator.startAnimating()
@@ -61,5 +69,15 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
+    }
+}
+
+extension ImageCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        labelTitle.textColor = theme.bodyText
+        labelDescription.textColor = theme.bodyText
     }
 }

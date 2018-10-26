@@ -35,7 +35,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var readReceiptButton: UIButton!
-    
+
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
@@ -44,7 +44,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 

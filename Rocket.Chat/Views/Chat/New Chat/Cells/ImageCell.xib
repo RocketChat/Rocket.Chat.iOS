@@ -80,6 +80,7 @@
                 <outlet property="buttonImageHandler" destination="tRb-V3-HtJ" id="AOZ-2o-5yR"/>
                 <outlet property="imageView" destination="GYC-ZL-Gqr" id="33k-yD-AM6"/>
                 <outlet property="labelDescription" destination="HHK-Vx-kXg" id="HaI-N7-Et4"/>
+                <outlet property="labelDescriptionTopConstraint" destination="nyo-wX-4T1" id="R1c-3l-uT0"/>
                 <outlet property="labelTitle" destination="92V-FL-buo" id="v1Q-YE-bpC"/>
             </connections>
             <point key="canvasLocation" x="208" y="93.553223388305852"/>

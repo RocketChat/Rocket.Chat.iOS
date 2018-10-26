@@ -21,6 +21,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
@@ -53,7 +54,14 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
         labelTitle.text = viewModel.title
-        labelDescription.text = viewModel.descriptionText
+
+        if let description = viewModel.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
+        }
 
         loadImage(on: imageView, startLoadingBlock: { [weak self] in
             self?.activityIndicator.startAnimating()
@@ -73,5 +81,17 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
+    }
+}
+
+extension ImageMessageCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        username.textColor = theme.titleText
+        date.textColor = theme.auxiliaryText
+        labelTitle.textColor = theme.bodyText
+        labelDescription.textColor = theme.bodyText
     }
 }

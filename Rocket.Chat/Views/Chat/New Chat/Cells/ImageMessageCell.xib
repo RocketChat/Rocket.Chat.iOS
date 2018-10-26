@@ -121,6 +121,7 @@
                 <outlet property="date" destination="TSF-fA-OzI" id="aL1-zN-HB7"/>
                 <outlet property="imageView" destination="qbH-Cx-iaB" id="DrK-gk-0nu"/>
                 <outlet property="labelDescription" destination="nOH-Qd-Yis" id="HrX-B0-aVU"/>
+                <outlet property="labelDescriptionTopConstraint" destination="Qg6-UI-Wio" id="cnM-Yj-Tqn"/>
                 <outlet property="labelTitle" destination="GOM-rA-iwa" id="Y7H-sk-3p3"/>
                 <outlet property="readReceiptButton" destination="iEs-cS-Etq" id="3Cy-OY-uJI"/>
                 <outlet property="username" destination="3gf-yt-VmX" id="cOL-9B-PpG"/>
