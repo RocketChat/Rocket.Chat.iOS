@@ -94,3 +94,15 @@ extension MessageURLCell: UIGestureRecognizerDelegate {
         return false
     }
 }
+
+extension MessageURLCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        containerView.backgroundColor = theme.chatComponentBackground
+        host.textColor = theme.auxiliaryText
+        title.textColor = theme.brightBlue
+        subtitle.textColor = theme.controlText
+    }
+}

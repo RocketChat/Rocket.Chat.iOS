@@ -48,6 +48,6 @@ extension MessageActionsCell {
     override func applyTheme() {
         super.applyTheme()
         replyButton.setTitleColor(.white, for: .normal)
-        replyButton.backgroundColor = #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
+        replyButton.backgroundColor = theme?.brightBlue
     }
 }
