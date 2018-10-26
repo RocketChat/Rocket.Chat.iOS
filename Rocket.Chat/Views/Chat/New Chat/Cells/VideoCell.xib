@@ -71,6 +71,7 @@
                 <outlet property="buttonPlayer" destination="ywi-9d-Vch" id="s1I-bI-SmI"/>
                 <outlet property="imageViewThumb" destination="z4g-2T-bvi" id="tHQ-Kz-EZX"/>
                 <outlet property="labelDescription" destination="asW-Tn-BOA" id="fXu-Zh-bRB"/>
+                <outlet property="labelDescriptionTopConstraint" destination="G8I-hg-MnE" id="0kE-5T-buX"/>
             </connections>
             <point key="canvasLocation" x="203.19999999999999" y="88.605697151424295"/>
         </collectionViewCell>

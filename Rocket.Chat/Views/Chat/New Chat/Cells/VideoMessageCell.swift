@@ -26,6 +26,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
     }
 
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
@@ -53,7 +54,14 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
             return
         }
 
-        labelDescription.text = viewModel.descriptionText
+        if let description = viewModel.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
+        }
+
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
         updateVideo(with: imageViewThumb)

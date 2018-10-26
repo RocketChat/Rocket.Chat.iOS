@@ -113,6 +113,7 @@
                 <outlet property="date" destination="KUj-cD-keZ" id="TQl-2h-6r3"/>
                 <outlet property="imageViewThumb" destination="s1u-Ou-cVE" id="TPj-IX-oA7"/>
                 <outlet property="labelDescription" destination="Y69-8B-MjX" id="31k-jE-7Mi"/>
+                <outlet property="labelDescriptionTopConstraint" destination="8Jo-m1-gmx" id="DjK-jf-Pe4"/>
                 <outlet property="readReceiptButton" destination="HLN-yP-YyT" id="JNH-ih-70m"/>
                 <outlet property="username" destination="NE9-Ca-Wkv" id="Kdw-2p-1cD"/>
             </connections>
