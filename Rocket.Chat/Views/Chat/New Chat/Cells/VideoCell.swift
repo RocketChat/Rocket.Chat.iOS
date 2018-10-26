@@ -59,12 +59,11 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     }
 }
 
-extension VideoMessageCell {
+extension VideoCell {
     override func applyTheme() {
         super.applyTheme()
 
         let theme = self.theme ?? .light
-        date.textColor = theme.auxiliaryText
-        username.textColor = theme.titleText
+        labelDescription.textColor = theme.controlText
     }
 }
