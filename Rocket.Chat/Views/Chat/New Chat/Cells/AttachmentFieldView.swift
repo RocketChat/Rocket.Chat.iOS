@@ -27,6 +27,7 @@ extension AttachmentFieldView {
         super.applyTheme()
 
         let theme = self.theme ?? .light
+        backgroundColor = .clear
         field.textColor = theme.auxiliaryText
         value.textColor = theme.controlText
     }

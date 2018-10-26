@@ -146,6 +146,7 @@ extension TextAttachmentCell {
 
         let theme = self.theme ?? .light
         textContainer.backgroundColor = theme.chatComponentBackground
+        fieldsStackView.backgroundColor = .clear
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
     }
