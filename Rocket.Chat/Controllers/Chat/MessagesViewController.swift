@@ -175,3 +175,13 @@ extension MessagesViewController: UserActionSheetPresenter {
     }
 
 }
+
+extension MessagesViewController {
+    override func applyTheme() {
+        super.applyTheme()
+
+        view.subviews.forEach { view in
+            view.applyTheme()
+        }
+    }
+}
