@@ -35,7 +35,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var readReceiptButton: UIButton!
-    
+
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
@@ -44,7 +44,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -95,10 +95,10 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
             arrow.alpha = 1
 
             if viewModel.attachment.collapsed {
-                arrow.image = #imageLiteral(resourceName: "Attachment Collapsed Light")
+                arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
                 textHeightConstraint.constant = collapsedTextMaxHeight
             } else {
-                arrow.image = #imageLiteral(resourceName: "Attachment Expanded Light")
+                arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
                 textHeightConstraint.constant = textHeight
             }
         } else {
@@ -106,5 +106,18 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
             textHeightConstraint.constant = textHeight
             arrow.alpha = 0
         }
+    }
+}
+
+extension QuoteMessageCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        containerView.backgroundColor = theme.chatComponentBackground
+        messageUsername.textColor = theme.titleText
+        date.textColor = theme.auxiliaryText
+        username.textColor = theme.brightBlue
+        text.textColor = theme.bodyText
     }
 }

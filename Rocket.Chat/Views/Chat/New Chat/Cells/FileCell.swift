@@ -20,11 +20,27 @@ final class FileCell: BaseFileMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var fileButton: UIButton!
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var fileButton: UIButton! {
+        didSet {
+            fileButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            fileButton.titleLabel?.minimumScaleFactor = 0.8
+            fileButton.titleLabel?.numberOfLines = 2
+        }
+    }
 
     override func configure() {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
+        }
+
+        if let description = viewModel.attachment.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
         }
 
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
@@ -36,5 +52,16 @@ final class FileCell: BaseFileMessageCell, SizingCell {
         }
 
         delegate?.openFileFromCell(attachment: viewModel.attachment)
+    }
+}
+
+extension FileCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        labelDescription.textColor = theme.controlText
+        fileButton.backgroundColor = theme.chatComponentBackground
+        fileButton.setTitleColor(theme.titleText, for: .normal)
     }
 }

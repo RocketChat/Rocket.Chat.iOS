@@ -27,6 +27,7 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
         }
     }
 
+    @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
@@ -43,7 +44,14 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
             return
         }
 
-        labelDescription.text = viewModel.descriptionText
+        if let description = viewModel.descriptionText, description.isEmpty {
+            labelDescription.text = description
+            labelDescriptionTopConstraint.constant = 10
+        } else {
+            labelDescription.text = ""
+            labelDescriptionTopConstraint.constant = 0
+        }
+
         updateVideo(with: imageViewThumb)
     }
 
@@ -56,5 +64,14 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
 
         imageViewThumb.image = nil
         loading = false
+    }
+}
+
+extension VideoCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        labelDescription.textColor = theme.controlText
     }
 }

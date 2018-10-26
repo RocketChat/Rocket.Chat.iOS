@@ -60,6 +60,8 @@
             <size key="customSize" width="402" height="50"/>
             <connections>
                 <outlet property="date" destination="lsU-BY-HGb" id="jzL-1Q-n1n"/>
+                <outlet property="leftLine" destination="5QV-mv-f4w" id="pTO-uH-Td2"/>
+                <outlet property="rightLine" destination="MxU-P6-BP8" id="2rP-qF-04A"/>
             </connections>
             <point key="canvasLocation" x="-113.59999999999999" y="-99.850074962518747"/>
         </collectionViewCell>

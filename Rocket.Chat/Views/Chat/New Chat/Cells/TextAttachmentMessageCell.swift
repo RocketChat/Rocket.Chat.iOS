@@ -104,6 +104,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         }
 
         title.text = viewModel.attachment.title
+        statusView.backgroundColor = viewModel.attachment.color != nil ? UIColor(hex: viewModel.attachment.color) : .lightGray
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
 
@@ -115,7 +116,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     }
 
     func configureCollapsedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Collapsed Light")
+        arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
         subtitleHeightConstraint.isActive = false
         emptySubtitleHeightConstraint.isActive = true
         subtitleTopConstraint.constant = 0
@@ -128,7 +129,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     }
 
     func configureExpandedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Expanded Light")
+        arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
 
         if let subtitleText = viewModel.attachment.text {
             emptySubtitleHeightConstraint.isActive = false
@@ -157,5 +158,19 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
         subtitleTopConstraint.constant = subtitleTopInitialConstant
+    }
+}
+
+extension TextAttachmentMessageCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        textContainer.backgroundColor = theme.chatComponentBackground
+        fieldsStackView.backgroundColor = .clear
+        username.textColor = theme.titleText
+        date.textColor = theme.auxiliaryText
+        title.textColor = theme.controlText
+        subtitle.textColor = theme.bodyText
     }
 }

@@ -45,7 +45,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIg-3A-23j">
                         <rect key="frame" x="70" y="28" width="268" height="54"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4a-En-6WC">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4a-En-6WC">
                                 <rect key="frame" x="10" y="9" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="0Gi-rr-E4u"/>
@@ -130,6 +130,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Player Play" width="36" height="36"/>
+        <image name="Player Play" width="18" height="20"/>
     </resources>
 </document>

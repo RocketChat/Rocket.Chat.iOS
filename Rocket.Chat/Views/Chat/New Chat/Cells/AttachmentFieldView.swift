@@ -9,7 +9,6 @@
 import UIKit
 
 class AttachmentFieldView: UIView {
-
     @IBOutlet weak var field: UILabel!
     @IBOutlet weak var value: UILabel!
 
@@ -21,5 +20,15 @@ class AttachmentFieldView: UIView {
     override var intrinsicContentSize: CGSize {
         return contentSize
     }
+}
 
+extension AttachmentFieldView {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        backgroundColor = .clear
+        field.textColor = theme.auxiliaryText
+        value.textColor = theme.controlText
+    }
 }

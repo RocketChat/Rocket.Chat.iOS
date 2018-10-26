@@ -14,6 +14,7 @@ class SubscriptionsSortingHeaderView: UIView {
         return Theme(
             backgroundColor: theme.appearence == .light ? theme.backgroundColor : theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
+            chatComponentBackground: theme.chatComponentBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
@@ -22,7 +23,7 @@ class SubscriptionsSortingHeaderView: UIView {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
+            brightBlue: theme.brightBlue,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence

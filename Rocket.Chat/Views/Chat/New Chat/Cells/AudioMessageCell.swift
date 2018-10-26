@@ -41,7 +41,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var readReceiptButton: UIButton!
-    
+
     @IBOutlet weak var slider: UISlider! {
         didSet {
             slider.value = 0
@@ -115,7 +115,9 @@ extension AudioMessageCell {
         super.applyTheme()
 
         let theme = self.theme ?? .light
-        viewPlayerBackground.backgroundColor = theme.auxiliaryBackground
+        date.textColor = theme.auxiliaryText
+        username.textColor = theme.titleText
+        viewPlayerBackground.backgroundColor = theme.chatComponentBackground
         labelAudioTime.textColor = theme.auxiliaryText
         updatePlayingState(with: buttonPlay)
     }

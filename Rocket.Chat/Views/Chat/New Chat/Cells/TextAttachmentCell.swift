@@ -36,7 +36,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     @IBOutlet weak var fieldsStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerTrailingConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -85,6 +85,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         title.text = viewModel.attachment.title
+        statusView.backgroundColor = viewModel.attachment.color != nil ? UIColor(hex: viewModel.attachment.color) : .lightGray
 
         if viewModel.attachment.collapsed {
             configureCollapsedState(with: viewModel)
@@ -94,7 +95,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     }
 
     func configureCollapsedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Collapsed Light")
+        arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
         subtitleHeightConstraint.isActive = false
         emptySubtitleHeightConstraint.isActive = true
         subtitleTopConstraint.constant = 0
@@ -107,7 +108,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     }
 
     func configureExpandedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = #imageLiteral(resourceName: "Attachment Expanded Light")
+        arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
 
         if let subtitleText = viewModel.attachment.text {
             emptySubtitleHeightConstraint.isActive = false
@@ -136,5 +137,17 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         fieldsStackViewTopConstraint.constant = fieldsStackTopInitialConstant
         fieldsStackViewHeightConstraint.constant = fieldsStackHeightInitialConstant
         subtitleTopConstraint.constant = subtitleTopInitialConstant
+    }
+}
+
+extension TextAttachmentCell {
+    override func applyTheme() {
+        super.applyTheme()
+
+        let theme = self.theme ?? .light
+        textContainer.backgroundColor = theme.chatComponentBackground
+        fieldsStackView.backgroundColor = .clear
+        title.textColor = theme.controlText
+        subtitle.textColor = theme.bodyText
     }
 }
