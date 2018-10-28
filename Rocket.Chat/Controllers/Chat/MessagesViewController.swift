@@ -78,14 +78,11 @@ final class MessagesViewController: RocketChatViewController {
             self.updateData(with: self.viewModel.dataNormalized)
         }
 
+        ThemeManager.addObserver(self)
+
         viewSubscriptionModel.onDataChanged = {
             // TODO: handle updates on the Subscription object, such like title view
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyTheme()
     }
 
     override func viewDidAppear(_ animated: Bool) {
