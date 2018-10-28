@@ -114,7 +114,7 @@ class Theme: NSObject {
     static let dark = Theme(
         backgroundColor: #colorLiteral(red: 0.01176470588, green: 0.0431372549, blue: 0.1058823529, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.0431372549, green: 0.09411764706, blue: 0.1725490196, alpha: 1),
-        chatComponentBackground: #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 0.1),
+        chatComponentBackground: #colorLiteral(red: 0.1007164493, green: 0.1329644322, blue: 0.1973000765, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.02950551261, green: 0.06437566387, blue: 0.1180220504, alpha: 1),
         bannerBackground: #colorLiteral(red: 0.05490196078, green: 0.1215686275, blue: 0.2196078431, alpha: 1),
         titleText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
@@ -132,7 +132,7 @@ class Theme: NSObject {
     static let black = Theme(
         backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
         focusedBackground: #colorLiteral(red: 0.05332512842, green: 0.05332512842, blue: 0.05332512842, alpha: 1),
-        chatComponentBackground: #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 0.1),
+        chatComponentBackground: #colorLiteral(red: 0.08947405964, green: 0.09412670881, blue: 0.1027644202, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0.03411494007, green: 0.03411494007, blue: 0.03411494007, alpha: 1),
         bannerBackground: #colorLiteral(red: 0.1215686275, green: 0.137254902, blue: 0.1607843137, alpha: 1),
         titleText: #colorLiteral(red: 0.9785086513, green: 0.9786720872, blue: 0.9784870744, alpha: 1),
