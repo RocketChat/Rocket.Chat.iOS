@@ -188,13 +188,6 @@ extension UIRefreshControl {
 }
 
 extension UICollectionView {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor
-        applyThemeFromRuntimeAttributes()
-    }
-
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
         view.applyTheme()
