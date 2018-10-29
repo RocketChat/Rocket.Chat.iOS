@@ -1,5 +1,5 @@
 //
-//  Themeable.swift
+//  Theme.swift
 //  Rocket.Chat
 //
 //  Created by Samar Sunkaria on 3/25/18.
@@ -28,7 +28,7 @@ class Theme: NSObject {
     @objc let auxiliaryText: UIColor
     @objc let tintColor: UIColor
     @objc let auxiliaryTintColor: UIColor
-    @objc let brightBlue: UIColor
+    @objc let actionTintColor: UIColor
     @objc let mutedAccent: UIColor
     @objc let strongAccent: UIColor
     let appearence: Appearence
@@ -65,7 +65,7 @@ class Theme: NSObject {
          auxiliaryText: UIColor,
          tintColor: UIColor,
          auxiliaryTintColor: UIColor,
-         brightBlue: UIColor,
+         actionTintColor: UIColor,
          mutedAccent: UIColor,
          strongAccent: UIColor?,
          appearence: Appearence) {
@@ -81,7 +81,7 @@ class Theme: NSObject {
         self.auxiliaryText = auxiliaryText
         self.tintColor = tintColor
         self.auxiliaryTintColor = auxiliaryTintColor
-        self.brightBlue = brightBlue
+        self.actionTintColor = actionTintColor
         self.mutedAccent = mutedAccent
 
         if let strongAccent = strongAccent {
@@ -105,7 +105,7 @@ class Theme: NSObject {
         auxiliaryText: #colorLiteral(red: 0.6117647059, green: 0.6352941176, blue: 0.6588235294, alpha: 1),
         tintColor: .RCBlue(),
         auxiliaryTintColor: #colorLiteral(red: 0.03921568627, green: 0.2666666667, blue: 0.4117647059, alpha: 1),
-        brightBlue: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        actionTintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.8, alpha: 1),
         strongAccent: nil,
         appearence: .light
@@ -123,7 +123,7 @@ class Theme: NSObject {
         auxiliaryText: #colorLiteral(red: 0.5732198682, green: 0.5927470883, blue: 0.638310602, alpha: 1),
         tintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
         auxiliaryTintColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        brightBlue: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        actionTintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.1672673633, green: 0.1672673633, blue: 0.1769603646, alpha: 1),
         strongAccent: nil,
         appearence: .dark
@@ -139,9 +139,9 @@ class Theme: NSObject {
         bodyText: #colorLiteral(red: 0.9111283446, green: 0.9229556015, blue: 0.9294117647, alpha: 1),
         controlText: #colorLiteral(red: 0.8549193462, green: 0.8697612629, blue: 0.903159703, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6980392157, green: 0.7224261515, blue: 0.7773035386, alpha: 1),
-        tintColor: #colorLiteral(red: 0.1176899746, green: 0.6068716645, blue: 0.9971964955, alpha: 1),
+        tintColor: #colorLiteral(red: 0.1176470588, green: 0.6078431373, blue: 0.9960784314, alpha: 1),
         auxiliaryTintColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
-        brightBlue: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        actionTintColor: #colorLiteral(red: 0.1176470588, green: 0.631372549, blue: 0.9960784314, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.156862745, green: 0.156862745, blue: 0.16, alpha: 1),
         strongAccent: nil,
         appearence: .dark
