@@ -49,6 +49,8 @@ final class MessagesViewController: RocketChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ThemeManager.addObserver(self)
+
         composerView.delegate = self
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
@@ -81,11 +83,6 @@ final class MessagesViewController: RocketChatViewController {
         viewSubscriptionModel.onDataChanged = {
             // TODO: handle updates on the Subscription object, such like title view
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyTheme()
     }
 
     override func viewDidAppear(_ animated: Bool) {
