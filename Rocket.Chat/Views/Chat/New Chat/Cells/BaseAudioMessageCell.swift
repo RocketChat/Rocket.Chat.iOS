@@ -53,12 +53,12 @@ class BaseAudioMessageCell: BaseMessageCell {
 
         if playing {
             let image = UIImage(named: "Player Pause")?.withRenderingMode(.alwaysTemplate)
-            buttonPlay.imageView?.tintColor = theme.brightBlue
+            buttonPlay.imageView?.tintColor = theme.actionTintColor
             buttonPlay.setImage(image, for: .normal)
             player?.play()
         } else {
             let image = UIImage(named: "Player Play")?.withRenderingMode(.alwaysTemplate)
-            buttonPlay.imageView?.tintColor = theme.brightBlue
+            buttonPlay.imageView?.tintColor = theme.actionTintColor
             buttonPlay.setImage(image, for: .normal)
             player?.stop()
         }

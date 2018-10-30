@@ -102,7 +102,7 @@ extension MessageURLCell {
         let theme = self.theme ?? .light
         containerView.backgroundColor = theme.chatComponentBackground
         host.textColor = theme.auxiliaryText
-        title.textColor = theme.brightBlue
+        title.textColor = theme.actionTintColor
         subtitle.textColor = theme.controlText
     }
 }

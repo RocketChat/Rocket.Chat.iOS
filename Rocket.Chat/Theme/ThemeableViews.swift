@@ -84,7 +84,7 @@ extension UIView: ThemeProvider {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            brightBlue: theme.brightBlue,
+            actionTintColor: theme.actionTintColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence
@@ -249,7 +249,7 @@ extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.brightBlue
+        tintColor = theme.actionTintColor
         applyThemeFromRuntimeAttributes()
     }
 }
@@ -308,6 +308,15 @@ extension UIScrollView {
         super.applyTheme()
         guard let theme = theme else { return }
         indicatorStyle = theme.appearence.scrollViewIndicatorStyle
+        applyThemeFromRuntimeAttributes()
+    }
+}
+
+extension UISlider {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        tintColor = theme.actionTintColor
         applyThemeFromRuntimeAttributes()
     }
 }

@@ -209,7 +209,7 @@ extension SubscriptionsSortingView {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            brightBlue: theme.brightBlue,
+            actionTintColor: theme.actionTintColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence

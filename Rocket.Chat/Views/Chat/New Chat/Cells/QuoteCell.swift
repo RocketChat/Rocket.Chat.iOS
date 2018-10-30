@@ -93,7 +93,7 @@ extension QuoteCell {
 
         let theme = self.theme ?? .light
         containerView.backgroundColor = theme.chatComponentBackground
-        username.textColor = theme.brightBlue
+        username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
     }
 }
