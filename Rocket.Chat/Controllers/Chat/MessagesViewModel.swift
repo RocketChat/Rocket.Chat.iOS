@@ -290,13 +290,15 @@ final class MessagesViewModel {
      sorting and also the properties related to sequential messages, day
      separators and unread marks.
      */
-    internal func updateData() {
+    internal func updateData(shouldUpdateUI: Bool = true) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.cacheDataSorted()
             self?.normalizeDataSorted()
 
-            DispatchQueue.main.async {
-                self?.onDataChanged?()
+            if shouldUpdateUI {
+                DispatchQueue.main.async {
+                    self?.onDataChanged?()
+                }
             }
         }
     }
