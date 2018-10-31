@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="txK-6f-uxq" customClass="TextAttachmentCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4N-fB-seu">
-                        <rect key="frame" x="70" y="0.0" width="271" height="104"/>
+                        <rect key="frame" x="70" y="5" width="271" height="104"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSx-Xs-2vQ">
                                 <rect key="frame" x="15" y="15" width="223" height="16"/>
@@ -91,8 +91,8 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="o4N-fB-seu" secondAttribute="bottom" id="BAc-Gg-HAA"/>
-                <constraint firstItem="o4N-fB-seu" firstAttribute="top" secondItem="txK-6f-uxq" secondAttribute="top" id="dau-di-Jky"/>
+                <constraint firstAttribute="bottom" secondItem="o4N-fB-seu" secondAttribute="bottom" constant="10" id="BAc-Gg-HAA"/>
+                <constraint firstItem="o4N-fB-seu" firstAttribute="top" secondItem="txK-6f-uxq" secondAttribute="top" constant="5" id="UOr-Sx-KFl"/>
                 <constraint firstItem="o4N-fB-seu" firstAttribute="leading" secondItem="txK-6f-uxq" secondAttribute="leading" constant="70" id="ncY-AD-6ym"/>
                 <constraint firstAttribute="trailing" secondItem="o4N-fB-seu" secondAttribute="trailing" constant="34" id="pNt-Qg-AFJ"/>
             </constraints>
