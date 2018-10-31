@@ -160,6 +160,7 @@ extension MessagesViewController: ChatDataUpdateDelegate {
 
     func didUpdateChatData(newData: [AnyChatSection]) {
         viewModel.data = newData
+        viewModel.updateData()
     }
 
 }
