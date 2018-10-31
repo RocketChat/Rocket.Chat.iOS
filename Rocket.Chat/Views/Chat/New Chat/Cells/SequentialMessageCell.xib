@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cJP-dJ-Ai1" customClass="SequentialMessageCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQf-8m-OUh" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
@@ -40,8 +40,8 @@
                 <constraint firstItem="aQf-8m-OUh" firstAttribute="leading" secondItem="cJP-dJ-Ai1" secondAttribute="leading" constant="70" id="6yy-g1-EQR"/>
                 <constraint firstItem="prl-FX-Ikw" firstAttribute="leading" secondItem="aQf-8m-OUh" secondAttribute="trailing" constant="2" id="AxZ-c0-jaD"/>
                 <constraint firstAttribute="trailing" secondItem="prl-FX-Ikw" secondAttribute="trailing" constant="15" id="TSu-b7-SYv"/>
-                <constraint firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" constant="10" id="miu-Yc-hLX"/>
-                <constraint firstItem="aQf-8m-OUh" firstAttribute="top" secondItem="cJP-dJ-Ai1" secondAttribute="top" id="olF-Ex-311"/>
+                <constraint firstItem="aQf-8m-OUh" firstAttribute="top" secondItem="cJP-dJ-Ai1" secondAttribute="top" id="aws-mh-01l"/>
+                <constraint firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" constant="5" id="miu-Yc-hLX"/>
                 <constraint firstItem="prl-FX-Ikw" firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" id="ygh-6T-eMv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="37C-iT-i78"/>
