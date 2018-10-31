@@ -54,7 +54,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
             return
         }
 
-        if let description = viewModel.descriptionText, description.isEmpty {
+        if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description
             labelDescriptionTopConstraint.constant = 10
         } else {

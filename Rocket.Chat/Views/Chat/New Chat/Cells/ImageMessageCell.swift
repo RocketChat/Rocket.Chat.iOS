@@ -55,7 +55,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         configure(with: avatarView, date: date, and: username)
         labelTitle.text = viewModel.title
 
-        if let description = viewModel.descriptionText, description.isEmpty {
+        if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description
             labelDescriptionTopConstraint.constant = 10
         } else {
