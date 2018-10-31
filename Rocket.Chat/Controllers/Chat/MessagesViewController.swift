@@ -44,7 +44,7 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
-    lazy var screenSize = UIScreen.main.bounds.size
+    lazy var screenSize = view.frame.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
