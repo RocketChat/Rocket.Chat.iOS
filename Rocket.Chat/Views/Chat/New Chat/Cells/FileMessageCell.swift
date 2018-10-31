@@ -46,7 +46,7 @@ class FileMessageCell: BaseFileMessageCell, SizingCell {
             return
         }
 
-        if let description = viewModel.attachment.descriptionText, description.isEmpty {
+        if let description = viewModel.attachment.descriptionText, !description.isEmpty {
             labelDescription.text = description
             labelDescriptionTopConstraint.constant = 10
         } else {
