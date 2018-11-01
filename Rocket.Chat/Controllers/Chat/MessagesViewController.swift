@@ -57,20 +57,19 @@ final class MessagesViewController: RocketChatViewController {
         didSet {
             guard oldValue != scrollToBottomButtonIsVisible
             else {
-//                scrollToBottomButtonIsVisible = !scrollToBottomButtonIsVisible
                 return
             }
 
-            func animates(_ animations: @escaping VoidCompletion, _ completion: VoidCompletion? = nil) {
+            func animates(_ animations: @escaping VoidCompletion) {
                 UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
                     animations()
                 }, completion: nil)
             }
 
             if self.scrollToBottomButtonIsVisible {
-//                if buttonScrollToBottom.superview == nil {
+                if buttonScrollToBottom.superview == nil {
                     view.addSubview(buttonScrollToBottom)
-//                }
+                }
 
                 var frame = buttonScrollToBottom.frame
                 frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
@@ -85,15 +84,9 @@ final class MessagesViewController: RocketChatViewController {
                 frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
                 frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height
 
-//                animates({
-//                    self.buttonScrollToBottom.frame = frame
-//                    self.buttonScrollToBottom.alpha = 0
-//                })
                 animates({
                     self.buttonScrollToBottom.frame = frame
                     self.buttonScrollToBottom.alpha = 0
-                }, {
-                    self.buttonScrollToBottom.removeFromSuperview()
                 })
             }
         }
