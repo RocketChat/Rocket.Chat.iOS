@@ -202,7 +202,6 @@ open class RocketChatViewController: UICollectionViewController {
     open override var inputAccessoryView: UIView? {
         composerView.layoutMargins = view.layoutMargins
         composerView.directionalLayoutMargins = systemMinimumLayoutMargins
-        
         return composerView
     }
 
@@ -223,6 +222,9 @@ open class RocketChatViewController: UICollectionViewController {
 
     open var isInverted = true
     open var isSelfSizing = false
+
+    fileprivate var keyboardHeight: CGFloat = 0.0
+
     private let invertedTransform = CGAffineTransform(scaleX: 1, y: -1)
 
     override open func viewDidLoad() {
@@ -230,6 +232,11 @@ open class RocketChatViewController: UICollectionViewController {
         setupChatViews()
         startAvoidingKeyboard()
         registerObservers()
+    }
+
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        adjustContentSizeIfNeeded()
     }
 
     func registerObservers() {
@@ -248,17 +255,8 @@ open class RocketChatViewController: UICollectionViewController {
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.keyboardDismissMode = .interactive
-        collectionView.contentInsetAdjustmentBehavior = .always
+        collectionView.contentInsetAdjustmentBehavior = isInverted ? .never : .always
 
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-
-        collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.scrollsToTop = false
 
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout, isSelfSizing {
@@ -288,6 +286,40 @@ open class RocketChatViewController: UICollectionViewController {
             }
         }
     }
+}
+
+// MARK: Content Adjustment
+
+extension RocketChatViewController {
+
+    fileprivate var topHeight: CGFloat {
+        var top = navigationController?.navigationBar.frame.height ?? 0.0
+        top += UIApplication.shared.statusBarFrame.height
+        return top
+    }
+
+    fileprivate var bottomHeight: CGFloat {
+        var composer = keyboardHeight > 0.0 ? keyboardHeight : composerView.frame.height
+        composer += view.safeAreaInsets.bottom
+        return composer
+    }
+
+    fileprivate func adjustContentSizeIfNeeded() {
+        guard let collectionView = collectionView else { return }
+
+        var contentInset = collectionView.contentInset
+
+        if isInverted {
+            contentInset.bottom = topHeight
+            contentInset.top = contentInset.bottom > 0.0 ? bottomHeight : contentInset.top
+        } else {
+            contentInset.bottom = bottomHeight
+        }
+
+        collectionView.contentInset = contentInset
+        collectionView.scrollIndicatorInsets = contentInset
+    }
+
 }
 
 extension RocketChatViewController {
@@ -339,7 +371,8 @@ extension RocketChatViewController {
     @objc private func _onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let collectionView = collectionView
         else {
             return
         }
@@ -354,11 +387,16 @@ extension RocketChatViewController {
         let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-            self.additionalSafeAreaInsets.top = intersection.height
+            self.keyboardHeight = intersection.height
+
+            // Update contentOffset with new keyboard size
+            var contentOffset = collectionView.contentOffset
+            contentOffset.y -= intersection.height
+            collectionView.contentOffset = contentOffset
+
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
-
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object as AnyObject === view, keyPath == "frame" {
