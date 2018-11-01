@@ -66,6 +66,19 @@ final class MessagesViewModel {
      */
     internal var hasMoreData = true
 
+    /**
+     The OperationQueue responsible for sorting the data
+     and organizing it. Operation is required to prevent
+     manipulating data that was changed.
+     */
+    private let updateDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .background
+
+        return operationQueue
+    }()
+
     // MARK: Life Cycle Controls
 
     init(controllerContext: UIViewController? = nil) {
@@ -291,7 +304,7 @@ final class MessagesViewModel {
      separators and unread marks.
      */
     internal func updateData(shouldUpdateUI: Bool = true) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        updateDataQueue.addOperation { [weak self] in
             self?.cacheDataSorted()
             self?.normalizeDataSorted()
 

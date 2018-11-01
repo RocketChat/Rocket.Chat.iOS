@@ -126,6 +126,8 @@ final class MessagesViewController: RocketChatViewController {
         viewModel.controllerContext = self
         viewModel.onDataChanged = {
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
+
+            // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
         }
 
