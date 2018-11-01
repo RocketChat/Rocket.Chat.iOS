@@ -215,7 +215,7 @@ open class RocketChatViewController: UICollectionViewController {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .utility
 
         return operationQueue
     }()
@@ -273,15 +273,18 @@ open class RocketChatViewController: UICollectionViewController {
                 return
             }
 
+            let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
+
             DispatchQueue.main.async {
-                let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
-                collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
-                    strongSelf.internalData = newData
+                UIView.performWithoutAnimation {
+                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
+                        strongSelf.internalData = newData
 
-                    let newSections = newData.map { $0.model }
-                    strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
+                        let newSections = newData.map { $0.model }
+                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
 
-                    assert(newSections.count == newData.count)
+                        assert(newSections.count == newData.count)
+                    }
                 }
             }
         }
@@ -293,9 +296,13 @@ open class RocketChatViewController: UICollectionViewController {
 extension RocketChatViewController {
 
     fileprivate var topHeight: CGFloat {
-        var top = navigationController?.navigationBar.frame.height ?? 0.0
-        top += UIApplication.shared.statusBarFrame.height
-        return top
+        if navigationController?.navigationBar.isTranslucent ?? false {
+            var top = navigationController?.navigationBar.frame.height ?? 0.0
+            top += UIApplication.shared.statusBarFrame.height
+            return top
+        }
+
+        return 0.0
     }
 
     fileprivate var bottomHeight: CGFloat {
@@ -311,7 +318,7 @@ extension RocketChatViewController {
 
         if isInverted {
             contentInset.bottom = topHeight
-            contentInset.top = contentInset.bottom > 0.0 ? bottomHeight : contentInset.top
+            contentInset.top = bottomHeight
         } else {
             contentInset.bottom = bottomHeight
         }
