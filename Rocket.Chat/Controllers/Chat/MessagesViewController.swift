@@ -93,6 +93,9 @@ final class MessagesViewController: RocketChatViewController {
     }
 
     lazy var screenSize = view.frame.size
+    var isInLandscape: Bool {
+        return screenSize.width / screenSize.height > 1 ? true : false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,7 +237,13 @@ extension MessagesViewController {
                             """)
             }
 
-            let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
+            var horizontalMargins: CGFloat
+            if isInLandscape {
+                horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+            } else {
+                horizontalMargins = 0
+            }
+
             var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
             size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
