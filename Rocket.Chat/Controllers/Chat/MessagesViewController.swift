@@ -73,7 +73,7 @@ final class MessagesViewController: RocketChatViewController {
 
                 var frame = buttonScrollToBottom.frame
                 frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
-                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height - buttonScrollToBottomSize - collectionView.layoutMargins.bottom - composerView.frame.height
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height - buttonScrollToBottomSize - collectionView.layoutMargins.top - composerView.frame.height
 
                 animates({
                     self.buttonScrollToBottom.frame = frame
