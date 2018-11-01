@@ -57,19 +57,20 @@ final class MessagesViewController: RocketChatViewController {
         didSet {
             guard oldValue != scrollToBottomButtonIsVisible
             else {
+//                scrollToBottomButtonIsVisible = !scrollToBottomButtonIsVisible
                 return
             }
 
-            func animates(_ animations: @escaping VoidCompletion) {
+            func animates(_ animations: @escaping VoidCompletion, _ completion: VoidCompletion? = nil) {
                 UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
                     animations()
                 }, completion: nil)
             }
 
             if self.scrollToBottomButtonIsVisible {
-                if buttonScrollToBottom.superview == nil {
+//                if buttonScrollToBottom.superview == nil {
                     view.addSubview(buttonScrollToBottom)
-                }
+//                }
 
                 var frame = buttonScrollToBottom.frame
                 frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
@@ -84,9 +85,15 @@ final class MessagesViewController: RocketChatViewController {
                 frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
                 frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height
 
+//                animates({
+//                    self.buttonScrollToBottom.frame = frame
+//                    self.buttonScrollToBottom.alpha = 0
+//                })
                 animates({
                     self.buttonScrollToBottom.frame = frame
                     self.buttonScrollToBottom.alpha = 0
+                }, {
+                    self.buttonScrollToBottom.removeFromSuperview()
                 })
             }
         }
@@ -144,13 +151,25 @@ final class MessagesViewController: RocketChatViewController {
         let topIndexPath = visibleIndexPaths.sorted().last
 
         screenSize = size
+        let shouldResetScrollToBottom = scrollToBottomButtonIsVisible
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.viewSizingModel.clearCache()
             self?.collectionView.reloadData()
         }, completion: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+
+            if shouldResetScrollToBottom {
+                if self.scrollToBottomButtonIsVisible {
+                    self.scrollToBottomButtonIsVisible = false
+                    self.scrollToBottomButtonIsVisible = true
+                }
+            }
+
             if let indexPath = topIndexPath {
-                self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
             }
         })
     }
@@ -226,7 +245,6 @@ extension MessagesViewController {
             var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
             size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
-
             return size
         }
     }
