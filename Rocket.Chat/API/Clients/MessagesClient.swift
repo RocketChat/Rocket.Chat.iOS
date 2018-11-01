@@ -95,7 +95,7 @@ struct MessagesClient: APIClient {
     // swiftlint:enable function_body_length
 
     func sendMessage(text: String, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
-        let subscriptionManaged = subscription.managedObject
+        guard let subscriptionManaged = subscription.managedObject else { return }
 
         let message = Message()
         message.internalType = ""

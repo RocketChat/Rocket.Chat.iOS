@@ -46,7 +46,8 @@ final class MessagesViewModel {
 
     /**
      This block is going to be called every time there's
-     an update in the data of the view model.
+     an update in the data of the view model. This is not
+     called in the main thread.
      */
     internal var onDataChanged: VoidCompletion?
 
@@ -75,7 +76,16 @@ final class MessagesViewModel {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         operationQueue.qualityOfService = .userInitiated
+        return operationQueue
+    }()
 
+    /**
+     The OperationQueue responsible for querying the data from Realm.
+     */
+    private let queryDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInitiated
         return operationQueue
     }()
 
@@ -271,20 +281,23 @@ final class MessagesViewModel {
         guard let subscription = subscription?.validated() else { return }
         guard let subscriptionUnmanaged = subscription.unmanaged else { return }
 
-        let messagesFromDatabase = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
-        messagesFromDatabase.forEach {
-            guard
-                let message = $0.validated()?.unmanaged,
-                let section = section(for: message)
-            else {
-                return
+        queryDataQueue.addOperation { [weak self] in
+            guard let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid) else { return }
+            let messagesFromDatabase = subscriptionValid.fetchMessages(30, lastMessageDate: oldestMessage)
+            messagesFromDatabase.forEach {
+                guard
+                    let message = $0.validated()?.unmanaged,
+                    let section = self?.section(for: message)
+                else {
+                    return
+                }
+
+                self?.data.append(section)
             }
 
-            data.append(section)
-        }
-
-        if messagesFromDatabase.count > 0 {
-            updateData()
+            if messagesFromDatabase.count > 0 {
+                self?.updateData()
+            }
         }
 
         requestingData = true

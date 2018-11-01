@@ -12,7 +12,6 @@ import DifferenceKit
 struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription
 
-    var managedObject: Subscription
     var identifier: String
     var privateType: String
     var type: SubscriptionType
@@ -52,6 +51,10 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var audioNotificationValue: SubscriptionNotificationsAudioValue
     var privateOtherUserStatus: String?
     var directMessageUser: UnmanagedUser?
+
+    var managedObject: Subscription? {
+        return Subscription.find(withIdentifier: identifier)?.validated()
+    }
 }
 
 extension UnmanagedSubscription {
@@ -62,7 +65,6 @@ extension UnmanagedSubscription {
             return nil
         }
 
-        managedObject = subscription
         identifier = subscriptionIdentifier
         privateType = subscription.privateType
         type = subscription.type

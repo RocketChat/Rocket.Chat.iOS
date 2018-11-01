@@ -11,7 +11,7 @@ import DifferenceKit
 
 protocol UnmanagedObject: Differentiable {
     associatedtype Object: BaseModel & UnmanagedConvertible
-    var managedObject: Object { get }
+    var managedObject: Object? { get }
 
     init?(_: Object)
 }

@@ -34,7 +34,6 @@ struct UnmanagedMessageReaction: Equatable {
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
     var identifier: String
-    var managedObject: Message
     var text: String
     var type: MessageType
     var attachments: [UnmanagedAttachment]
@@ -54,6 +53,10 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var markedForDeletion: Bool
     var emoji: String?
     var avatar: String?
+
+    var managedObject: Message? {
+        return Message.find(withIdentifier: identifier)?.validated()
+    }
 }
 
 extension UnmanagedMessage {
@@ -81,7 +84,6 @@ extension UnmanagedMessage {
             return nil
         }
 
-        managedObject = message
         identifier = messageIdentifier
         text = message.text
         type = message.type
