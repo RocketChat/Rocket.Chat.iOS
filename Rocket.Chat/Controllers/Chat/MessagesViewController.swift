@@ -37,6 +37,11 @@ final class MessagesViewController: RocketChatViewController {
     let viewSizingModel = MessagesSizingManager()
     let composerViewModel = MessagesComposerViewModel()
 
+    // TODO: Move to another view model
+    let socketHandlerToken = String.random(5)
+
+    var chatTitleView: ChatTitleView?
+
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
@@ -97,8 +102,16 @@ final class MessagesViewController: RocketChatViewController {
         return screenSize.width / screenSize.height > 1 ? true : false
     }
 
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupTitleView()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         ThemeManager.addObserver(self)
         composerView.delegate = self
@@ -127,15 +140,17 @@ final class MessagesViewController: RocketChatViewController {
 
         dataUpdateDelegate = self
         viewModel.controllerContext = self
-        viewModel.onDataChanged = {
+        viewModel.onDataChanged = { [weak self] in
+            guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
 
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
         }
 
-        viewSubscriptionModel.onDataChanged = {
-            // TODO: handle updates on the Subscription object, such like title view
+        viewSubscriptionModel.onDataChanged = { [weak self] in
+            guard let self = self else { return }
+            self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
         }
     }
 
@@ -172,6 +187,29 @@ final class MessagesViewController: RocketChatViewController {
         })
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
+            if let controller = nav.viewControllers.first as? ChannelActionsViewController {
+                if let subscription = self.subscription {
+                    controller.subscription = subscription
+                }
+            }
+        }
+    }
+
+    // MARK: TitleView
+
+    private func setupTitleView() {
+        let view = ChatTitleView.instantiateFromNib()
+        view?.subscription = subscription
+        view?.delegate = self
+        navigationItem.titleView = view
+        chatTitleView = view
+        chatTitleView?.applyTheme()
+    }
+
+    // MARK: IBAction
+
     @objc func buttonScrollToBottomDidPressed() {
         scrollToBottom(true)
     }
@@ -193,6 +231,8 @@ final class MessagesViewController: RocketChatViewController {
     func openURL(url: URL) {
         WebBrowserManager.open(url: url)
     }
+
+    // MARK: Reading Status
 
     private func markAsRead() {
         guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
@@ -288,7 +328,16 @@ extension MessagesViewController: UserActionSheetPresenter {
 
 }
 
+extension MessagesViewController: ChatTitleViewProtocol {
+
+    func titleViewChannelButtonPressed() {
+        performSegue(withIdentifier: "Channel Actions", sender: nil)
+    }
+
+}
+
 extension MessagesViewController {
+
     override func applyTheme() {
         super.applyTheme()
         guard let theme = view.theme else { return }
@@ -296,4 +345,19 @@ extension MessagesViewController {
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
     }
+
 }
+
+extension MessagesViewController: SocketConnectionHandler {
+
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[ChatViewController] socketDidChangeState: \(state)")
+        chatTitleView?.state = state
+
+        if state == .connected {
+            viewModel.fetchMessages(from: nil)
+        }
+    }
+
+}
+
