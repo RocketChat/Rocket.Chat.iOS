@@ -75,7 +75,7 @@ final class MessagesViewModel {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
         return operationQueue
     }()
 
@@ -85,7 +85,7 @@ final class MessagesViewModel {
     private let queryDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
         return operationQueue
     }()
 
@@ -281,6 +281,8 @@ final class MessagesViewModel {
         guard let subscription = subscription?.validated() else { return }
         guard let subscriptionUnmanaged = subscription.unmanaged else { return }
 
+        requestingData = true
+
         queryDataQueue.addOperation { [weak self] in
             guard let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid) else { return }
             let messagesFromDatabase = subscriptionValid.fetchMessages(30, lastMessageDate: oldestMessage)
@@ -296,11 +298,12 @@ final class MessagesViewModel {
             }
 
             if messagesFromDatabase.count > 0 {
-                self?.updateData()
+                DispatchQueue.main.async {
+                    self?.updateData()
+                }
             }
         }
 
-        requestingData = true
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
                 self?.requestingData = false

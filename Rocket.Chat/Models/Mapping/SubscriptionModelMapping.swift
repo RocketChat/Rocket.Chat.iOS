@@ -133,7 +133,7 @@ extension Subscription: ModelMappeable {
 
             let message = Message()
             message.map(values["lastMessage"], realm: realm)
-            message.subscription = self
+            message.rid = rid
 
             if !(self.roomLastMessage == message) {
                 realm?.add(message, update: true)

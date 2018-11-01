@@ -92,7 +92,8 @@ extension Subscription {
 
     func fetchMessages(_ limit: Int = 20, lastMessageDate: Date? = nil) -> [Message] {
         var limitedMessages: [Message] = []
-        var messages = fetchMessagesQueryResults()
+
+        guard var messages = fetchMessagesQueryResults() else { return [] }
 
         if let lastMessageDate = lastMessageDate {
             messages = messages.filter("createdAt < %@", lastMessageDate)
@@ -112,8 +113,10 @@ extension Subscription {
         return limitedMessages
     }
 
-    func fetchMessagesQueryResults() -> Results<Message> {
-        var filteredMessages = self.messages.filter("userBlocked == false AND identifier != NULL AND createdAt != NULL")
+    func fetchMessagesQueryResults() -> Results<Message>? {
+        guard var filteredMessages = self.messages?.filter("userBlocked == false AND identifier != NULL AND createdAt != NULL") else {
+            return nil
+        }
 
         if let hiddenTypes = AuthSettingsManager.settings?.hiddenTypes {
             for hiddenType in hiddenTypes {
@@ -141,7 +144,7 @@ extension Subscription {
         }
 
         Realm.executeOnMainThread { realm in
-            self.messages.filter("temporary = true").filter({
+            self.messages?.filter("temporary = true").filter({
                 $0.user == user
             }).forEach {
                 $0.temporary = false
