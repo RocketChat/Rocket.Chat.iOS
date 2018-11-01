@@ -129,8 +129,6 @@ final class MessagesViewController: RocketChatViewController {
             self.updateData(with: self.viewModel.dataNormalized)
         }
 
-        ThemeManager.addObserver(self)
-
         viewSubscriptionModel.onDataChanged = {
             // TODO: handle updates on the Subscription object, such like title view
         }
