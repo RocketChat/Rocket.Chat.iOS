@@ -44,13 +44,60 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    private let buttonScrollToBottomSize = CGFloat(70)
+    lazy var buttonScrollToBottom: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
+        button.setImage(UIImage(named: "Float Button light"), for: .normal)
+        button.addTarget(self, action: #selector(buttonScrollToBottomDidPressed), for: .touchUpInside)
+        return button
+    }()
+
+    var scrollToBottomButtonIsVisible: Bool = false {
+        didSet {
+            guard oldValue != scrollToBottomButtonIsVisible
+            else {
+                return
+            }
+
+            func animates(_ animations: @escaping VoidCompletion) {
+                UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
+                    animations()
+                }, completion: nil)
+            }
+
+            if self.scrollToBottomButtonIsVisible {
+                if buttonScrollToBottom.superview == nil {
+                    view.addSubview(buttonScrollToBottom)
+                }
+
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height - buttonScrollToBottomSize - collectionView.layoutMargins.bottom - composerView.frame.height
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 1
+                })
+            } else {
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 0
+                })
+            }
+        }
+    }
+
     lazy var screenSize = view.frame.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ThemeManager.addObserver(self)
-
         composerView.delegate = self
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
@@ -72,6 +119,8 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
         collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
+
+        view.bringSubviewToFront(buttonScrollToBottom)
 
         dataUpdateDelegate = self
         viewModel.controllerContext = self
@@ -106,6 +155,24 @@ final class MessagesViewController: RocketChatViewController {
                 self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
             }
         })
+    }
+
+    @objc func buttonScrollToBottomDidPressed() {
+        scrollToBottom(true)
+    }
+
+    @objc internal func scrollToBottom(_ animated: Bool = false) {
+        let offset = CGPoint(x: 0, y: -composerView.frame.height)
+        collectionView.setContentOffset(offset, animated: animated)
+        scrollToBottomButtonIsVisible = false
+    }
+
+    internal func resetScrollToBottomButtonPosition() {
+        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+    }
+
+    private func chatLogIsAtBottom() -> Bool {
+        return collectionView.contentOffset.y <= -composerView.frame.height
     }
 
     func openURL(url: URL) {
@@ -177,6 +244,14 @@ extension MessagesViewController: ChatDataUpdateDelegate {
 
 }
 
+extension MessagesViewController {
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        resetScrollToBottomButtonPosition()
+    }
+
+}
+
 extension MessagesViewController: UIDocumentInteractionControllerDelegate {
 
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
@@ -191,4 +266,14 @@ extension MessagesViewController: UserActionSheetPresenter {
         presentActionSheetForUser(user, subscription: subscription, source: source)
     }
 
+}
+
+extension MessagesViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+        let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+        let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
+        buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
+    }
 }
