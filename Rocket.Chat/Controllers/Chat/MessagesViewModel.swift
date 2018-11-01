@@ -74,7 +74,7 @@ final class MessagesViewModel {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .background
+        operationQueue.qualityOfService = .userInitiated
 
         return operationQueue
     }()
