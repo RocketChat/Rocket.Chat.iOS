@@ -273,9 +273,9 @@ open class RocketChatViewController: UICollectionViewController {
                 return
             }
 
-            let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
-
             DispatchQueue.main.async {
+                let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
+
                 UIView.performWithoutAnimation {
                     collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
                         strongSelf.internalData = newData
