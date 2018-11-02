@@ -215,7 +215,7 @@ open class RocketChatViewController: UICollectionViewController {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInteractive
+        operationQueue.qualityOfService = .utility
 
         return operationQueue
     }()

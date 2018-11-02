@@ -143,7 +143,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core-UIKitExtension/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -168,7 +168,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Test" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core-UIKitExtension/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -192,7 +192,7 @@ if [[ "$CONFIGURATION" == "Test" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core-UIKitExtension/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -216,7 +216,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core-UIKitExtension/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
