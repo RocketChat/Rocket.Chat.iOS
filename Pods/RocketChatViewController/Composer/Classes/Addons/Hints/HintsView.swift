@@ -53,9 +53,9 @@ public class HintsView: UITableView {
         didSet {
             invalidateIntrinsicContentSize()
 
-            /*UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.2) {
                 self.layoutIfNeeded()
-            }*/
+            }
         }
     }
 
@@ -168,7 +168,7 @@ extension HintsView: UITableViewDelegate {
             return
         }
 
-        header.backgroundView?.backgroundColor = .white
+        header.backgroundView?.backgroundColor = backgroundColor
         header.textLabel?.text = currentDelegate.title(for: self)
         header.textLabel?.textColor = #colorLiteral(red: 0.6196078431, green: 0.6352941176, blue: 0.6588235294, alpha: 1)
     }

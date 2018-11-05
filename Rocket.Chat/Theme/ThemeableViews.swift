@@ -124,8 +124,8 @@ extension UIButton {
             let theme = theme,
             textField.clearButton === self,
             type(of: textField).description() != "UISearchBarTextField"
-        else {
-            return
+            else {
+                return
         }
 
         self.setImage(self.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -250,6 +250,7 @@ extension UITextView {
         super.applyTheme()
         guard let theme = theme else { return }
         tintColor = theme.actionTintColor
+        textColor = theme.bodyText
         applyThemeFromRuntimeAttributes()
     }
 }
@@ -343,27 +344,28 @@ extension UIPickerView {
 
 // MARK: External class extensions
 
+extension ComposerAddonStackView {
+    public override func addArrangedSubview(_ view: UIView) {
+        super.addArrangedSubview(view)
+        view.applyTheme()
+    }
+}
+
 extension HintsView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        applyThemeFromRuntimeAttributes()
-    }
-}
-
-extension TextHintCell {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor
-        prefixLabel.backgroundColor = theme.auxiliaryBackground
-        prefixLabel.textColor = theme.tintColor
+        self.backgroundView?.backgroundColor = theme.backgroundColor
         applyThemeFromRuntimeAttributes()
     }
 
-    open override func insertSubview(_ view: UIView, at index: Int) {
-        super.insertSubview(view, at: index)
-        view.applyTheme()
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? TextHintCell<UILabel>, let theme = theme {
+            cell.backgroundColor = theme.backgroundColor
+            cell.prefixView.backgroundColor = theme.auxiliaryBackground
+            cell.prefixView.textColor = theme.tintColor
+            cell.applyThemeFromRuntimeAttributes()
+        }
     }
 }
 
@@ -373,7 +375,6 @@ extension ComposerView {
         guard let theme = theme else { return }
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
         containerView.backgroundColor = theme.focusedBackground
-        // textColor = theme.bodyText
         tintColor = theme.tintColor
         topSeparatorView.backgroundColor = theme.mutedAccent
         applyThemeFromRuntimeAttributes()
