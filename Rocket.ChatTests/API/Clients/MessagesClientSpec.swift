@@ -21,7 +21,6 @@ class MessagesClientSpec: XCTestCase {
 
     func testSendMessage() {
         let api = MockAPI()
-        let realm = Realm.current
         let client = MessagesClient(api: api)
 
         api.nextResult = JSON([
@@ -43,13 +42,22 @@ class MessagesClientSpec: XCTestCase {
         ])
 
         let user = User.testInstance()
-        guard let subscription = Subscription.testInstance().unmanaged else {
+        let subscription = Subscription.testInstance()
+        subscription.rid = "GENERAL"
+
+        guard let subscriptionUnmanaged = subscription.unmanaged else {
             XCTFail("realm could not be instantiated")
             return
         }
 
-        client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user)
-        XCTAssertFalse(realm?.objects(Message.self).first?.temporary ?? true)
+        client.sendMessage(text: "test", subscription: subscriptionUnmanaged, id: "a43SYFpMdjEAdM0mrH", user: user)
+
+        if let message = Realm.current?.objects(Message.self).first {
+            XCTAssertNotNil(message)
+            XCTAssertFalse(message.temporary)
+        } else {
+            XCTFail("message was not created")
+        }
     }
 
     func testUpdateMessage() {
