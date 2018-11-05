@@ -19,11 +19,11 @@ import SwiftyJSON
 extension Message {
 
     static func testInstance(_ name: String = "message") -> Message {
+        let subscription = Subscription.testInstance()
         let message = Message()
         message.userIdentifier = User.testInstance().identifier
         message.text = "\(name)-text"
-        message.rid = "\(name)-rid"
-        message.subscription = Subscription.testInstance()
+        message.rid = subscription.rid
         message.identifier = "\(name)-identifier"
         message.subscription?.type = .channel
         message.createdAt = Date()
@@ -72,7 +72,7 @@ class MessageSpec: XCTestCase {
         message.identifier = "message-object-1"
         message.text = "text"
         message.userIdentifier = user.identifier
-        message.subscription = subscription
+        message.rid = subscription.rid
 
         Realm.execute({ realm in
             realm.add(auth, update: true)
@@ -245,7 +245,7 @@ extension MessageSpec {
         subscription.roomBroadcast = true
 
         let message = Message()
-        message.subscription = subscription
+        message.rid = subscription.rid
         message.text = "foobar"
         message.userIdentifier = userOther.identifier
 
@@ -258,7 +258,7 @@ extension MessageSpec {
         subscription.roomBroadcast = true
 
         let message = Message()
-        message.subscription = subscription
+        message.rid = subscription.rid
         message.internalType = MessageType.roomArchived.rawValue
 
         XCTAssertFalse(message.isBroadcastReplyAvailable())
@@ -270,7 +270,7 @@ extension MessageSpec {
         subscription.roomBroadcast = true
 
         let message = Message()
-        message.subscription = subscription
+        message.rid = subscription.rid
         message.text = "foobar"
         message.temporary = true
 
@@ -283,7 +283,7 @@ extension MessageSpec {
         subscription.roomBroadcast = true
 
         let message = Message()
-        message.subscription = subscription
+        message.rid = subscription.rid
         message.text = "foobar"
         message.failed = true
 
@@ -296,7 +296,7 @@ extension MessageSpec {
         subscription.roomBroadcast = true
 
         let message = Message()
-        message.subscription = subscription
+        message.rid = subscription.rid
         message.text = "foobar"
         message.failed = true
 

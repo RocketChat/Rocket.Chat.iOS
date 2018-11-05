@@ -61,13 +61,13 @@ class SubscriptionManagerQueriesSpec: XCTestCase {
         let sub = Subscription.testInstance()
 
         let msg1 = Message.testInstance("msg1")
-        msg1.subscription = sub
+        msg1.rid = sub.rid
         msg1.failed = false
         msg1.temporary = true
         msg1.userIdentifier = user.identifier
 
         let msg2 = Message.testInstance("msg2")
-        msg2.subscription = sub
+        msg2.rid = sub.rid
         msg2.failed = false
         msg2.temporary = true
         msg2.userIdentifier = user.identifier
