@@ -55,6 +55,11 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
             let cell = hintsView.dequeueReusableCell(withType: TextHintCell<EmojiView>.self)
             cell.prefixView.setEmoji(emoji)
             cell.valueLabel.text = emoji.shortname
+
+            if cell.valueLabel.text?.first != ":" {
+                cell.valueLabel.text = ":\(cell.valueLabel.text ?? ""):"
+            }
+
             return cell
 
         case .command(let command):
