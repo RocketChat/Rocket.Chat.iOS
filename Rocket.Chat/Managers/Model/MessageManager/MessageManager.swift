@@ -66,7 +66,7 @@ extension MessageManager {
                     }
 
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.subscription = detachedSubscription
+                        object?.rid = detachedSubscription.rid
                     })
 
                     realm.add(message, update: true)
@@ -100,7 +100,7 @@ extension MessageManager {
             currentRealm?.execute({ (realm) in
                 guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
                 let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.subscription = detachedSubscription
+                    object?.rid = detachedSubscription.rid
                 })
 
                 message.temporary = false

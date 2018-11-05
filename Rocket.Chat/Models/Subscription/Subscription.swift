@@ -110,8 +110,6 @@ final class Subscription: BaseModel {
         set { privateAudioNotificationsValue = newValue.rawValue }
     }
 
-    let messages = LinkingObjects(fromType: Message.self, property: "subscription")
-
     let usersRoles = List<RoomRoles>()
 
     // MARK: Internal
@@ -122,6 +120,14 @@ final class Subscription: BaseModel {
         } else {
             return nil
         }
+    }
+
+    var messages: Results<Message>? {
+        return Realm.current?.objects(Message.self).filter("rid == '\(rid)'")
+    }
+
+    static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
+        return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
 }
 

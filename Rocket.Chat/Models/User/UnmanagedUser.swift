@@ -12,13 +12,16 @@ import DifferenceKit
 struct UnmanagedUser: UnmanagedObject, Equatable {
     typealias Object = User
 
-    var managedObject: User
     var identifier: String
     var username: String
     var name: String?
     var privateStatus: String
     var status: UserStatus
     var utcOffset: Double
+
+    var managedObject: User? {
+        return User.find(withIdentifier: identifier)?.validated()
+    }
 }
 
 extension UnmanagedUser {
@@ -29,8 +32,6 @@ extension UnmanagedUser {
         else {
             return nil
         }
-
-        managedObject = user
 
         identifier = userIdentifier
         username = userUsername

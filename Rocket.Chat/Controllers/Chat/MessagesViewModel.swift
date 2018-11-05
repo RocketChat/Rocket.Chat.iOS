@@ -46,7 +46,8 @@ final class MessagesViewModel {
 
     /**
      This block is going to be called every time there's
-     an update in the data of the view model.
+     an update in the data of the view model. This is not
+     called in the main thread.
      */
     internal var onDataChanged: VoidCompletion?
 
@@ -65,6 +66,28 @@ final class MessagesViewModel {
      If there's more data to be fetched from the API.
      */
     internal var hasMoreData = true
+
+    /**
+     The OperationQueue responsible for sorting the data
+     and organizing it. Operation is required to prevent
+     manipulating data that was changed.
+     */
+    private let updateDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
+
+    /**
+     The OperationQueue responsible for querying the data from Realm.
+     */
+    private let queryDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
 
     // MARK: Life Cycle Controls
 
@@ -125,14 +148,14 @@ final class MessagesViewModel {
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
         guard
-            indexPath.section < dataNormalized.count,
-            indexPath.row < dataNormalized[indexPath.section].elements.count
+            indexPath.section < dataSorted.count,
+            indexPath.row < dataSorted[indexPath.section].viewModels().count
         else {
             return nil
         }
 
-        let section = dataNormalized[indexPath.section]
-        return section.elements[indexPath.row]
+        let section = dataSorted[indexPath.section]
+        return section.viewModels()[indexPath.row]
     }
 
     /**
@@ -254,27 +277,40 @@ final class MessagesViewModel {
             order to get the correct page of data.
      */
     func fetchMessages(from oldestMessage: Date?) {
-        guard !requestingData, hasMoreData else { return }
+        guard !requestingData, (hasMoreData || oldestMessage == nil) else { return }
         guard let subscription = subscription?.validated() else { return }
         guard let subscriptionUnmanaged = subscription.unmanaged else { return }
 
-        let messagesFromDatabase = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
-        messagesFromDatabase.forEach {
-            guard
-                let message = $0.validated()?.unmanaged,
-                let section = section(for: message)
-            else {
-                return
+        requestingData = true
+
+        queryDataQueue.addOperation { [weak self] in
+            guard let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid) else { return }
+            let messagesFromDatabase = subscriptionValid.fetchMessages(30, lastMessageDate: oldestMessage)
+            messagesFromDatabase.forEach {
+                guard let message = $0.validated()?.unmanaged else { return }
+
+                let index = self?.data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return object.differenceIdentifier == message.identifier
+                    }
+
+                    return false
+                })
+
+                if index != nil {
+                    return
+                } else if let section = self?.section(for: message) {
+                    self?.data.append(section)
+                }
             }
 
-            data.append(section)
+            if messagesFromDatabase.count > 0 {
+                DispatchQueue.main.async {
+                    self?.updateData()
+                }
+            }
         }
 
-        if messagesFromDatabase.count > 0 {
-            updateData()
-        }
-
-        requestingData = true
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
                 self?.requestingData = false
@@ -291,7 +327,7 @@ final class MessagesViewModel {
      separators and unread marks.
      */
     internal func updateData(shouldUpdateUI: Bool = true) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        updateDataQueue.addOperation { [weak self] in
             self?.cacheDataSorted()
             self?.normalizeDataSorted()
 
