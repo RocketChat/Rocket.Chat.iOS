@@ -1,5 +1,5 @@
 framework module DifferenceKit {
-  umbrella header "DifferenceKit-Core-UIKitExtension-umbrella.h"
+  umbrella header "DifferenceKit-umbrella.h"
 
   export *
   module * { export * }
