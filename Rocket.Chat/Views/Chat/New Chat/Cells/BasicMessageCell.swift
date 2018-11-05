@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
+final class BasicMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
@@ -25,18 +25,8 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarContainerView.bounds
-                avatarContainerView.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
-        }
-    }
-
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
         }
     }
 
@@ -44,16 +34,24 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var text: RCTextView!
 
+    @IBOutlet weak var readReceiptButton: UIButton!
+
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
-        return textLeadingConstraint.constant +
+        return
+            textLeadingConstraint.constant +
             textTrailingConstraint.constant +
+            readReceiptWidthConstraint.constant +
+            readReceiptTrailingConstraint.constant +
             avatarWidthConstraint.constant +
-            avatarLeadingConstraint.constant
+            avatarLeadingConstraint.constant +
+            adjustedHorizontalInsets
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -65,49 +63,27 @@ final class BasicMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         initialTextHeightConstant = textHeightConstraint.constant
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-
         insertGesturesIfNeeded()
     }
 
-    func configure() {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
-            return
-        }
-
-        if let createdAt = viewModel.message.createdAt {
-            date.text = RCDateFormatter.time(createdAt)
-        }
-
-        username.text = viewModel.user.username
+    override func configure() {
+        configure(with: avatarView, date: date, and: username)
+        configure(readReceipt: readReceiptButton)
         updateText()
     }
 
-    func updateText(force: Bool = false) {
+    func updateText() {
         guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
             return
         }
 
-        avatarView.emoji = viewModel.message.emoji
-        avatarView.user = viewModel.message.user?.managedObject
-
-        if let avatar = viewModel.message.avatar {
-            avatarView.avatarURL = URL(string: avatar)
-        }
-
-        if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
-            contentViewWidthConstraint.constant = UIScreen.main.bounds.width
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
@@ -202,7 +178,6 @@ extension BasicMessageCell {
         let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
         username.textColor = theme.titleText
-        updateText(force: true)
+        updateText()
     }
-
 }

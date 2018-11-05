@@ -65,14 +65,12 @@ extension MessageSection {
             UIPasteboard.general.string = message.text
         })
 
-        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { (_) in
-            // TODO: Replace for our reply mechanism
-//            self?.reply(to: message)
+        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
+            (self?.controllerContext as? MessagesViewController)?.reply(to: message)
         })
 
-        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { (_) in
-            // TODO: Replace for our reply mechanism
-//            self?.reply(to: message, onlyQuote: true)
+        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
+            (self?.controllerContext as? MessagesViewController)?.reply(to: message, onlyQuote: true)
         })
 
         var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
@@ -108,9 +106,7 @@ extension MessageSection {
 
         if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-//                self.messagesController?.messageToEdit = message
-                // TODO: Replace for our own edit text mechanism
-//                self.editText(message.text)
+                self.messagesController?.editMessage(message)
                 self.messagesController?.applyTheme()
             })
 
@@ -131,10 +127,9 @@ extension MessageSection {
     // swiftlint:enable function_body_length
 
     func actionsForFailedMessage(_ message: Message) -> [UIAlertAction] {
-
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
             guard
-                let subscription = self.messagesController?.subscription,
+                let subscription = self.messagesController?.subscription.validated()?.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
             else {
                 return
@@ -145,7 +140,7 @@ extension MessageSection {
             Realm.executeOnMainThread { realm in
                 guard
                     let identifier = message.identifier,
-                    let failedMessage = subscription.messages.filter("identifier = %@", identifier).first
+                    let failedMessage = subscription.managedObject.messages.filter("identifier = %@", identifier).first
                 else {
                     return
                 }
@@ -155,14 +150,13 @@ extension MessageSection {
             }
 
             guard let message = messageToResend else { return }
-            // TODO: Replace
-//            self.dataController.delete(msgId: message.identifier)
+            // self.dataController.delete(msgId: message.identifier)
             client.sendMessage(text: message.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
             guard
-                let subscription = self.messagesController?.subscription.validated(),
+                let subscription = self.messagesController?.subscription.validated()?.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
             else {
                 return
@@ -171,14 +165,13 @@ extension MessageSection {
             var messagesToResend: [(identifier: String, text: String)] = []
 
             Realm.executeOnMainThread { realm in
-                let failedMessages = subscription.messages.filter("failed = true")
+                let failedMessages = subscription.managedObject.messages.filter("failed = true")
                 messagesToResend = failedMessages.map { (identifier: $0.identifier ?? "", text: $0.text) }
                 realm.delete(failedMessages)
             }
 
             messagesToResend.forEach {
-                // TODO: Replace
-//                self.dataController.delete(msgId: $0.identifier)
+                // self.dataController.delete(msgId: $0.identifier)
                 client.sendMessage(text: $0.text, subscription: subscription)
             }
         })
@@ -234,7 +227,7 @@ extension MessageSection {
         Ask(key: "chat.message.actions.discard.confirm", buttons: [
             (title: localized("global.no"), handler: nil),
             (title: localized("chat.message.actions.discard.confirm.yes"), handler: { _ in
-                guard let msgId = message.identifier else { return }
+//                guard let msgId = message.identifier else { return }
 //                self?.deleteMessage(msgId: msgId)
             })
         ], deleteOption: 1).present()

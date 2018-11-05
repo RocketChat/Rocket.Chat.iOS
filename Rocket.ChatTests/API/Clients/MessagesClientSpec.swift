@@ -8,13 +8,20 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class MessagesClientSpec: XCTestCase, RealmTestCase {
+class MessagesClientSpec: XCTestCase {
+
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
+    }
+
     func testSendMessage() {
         let api = MockAPI()
-        let realm = testRealm()
+        let realm = Realm.current
         let client = MessagesClient(api: api)
 
         api.nextResult = JSON([
@@ -36,21 +43,24 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         ])
 
         let user = User.testInstance()
-        let subscription = Subscription.testInstance()
+        guard let subscription = Subscription.testInstance().unmanaged else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
 
-        client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user, realm: realm)
-        XCTAssertFalse(realm.objects(Message.self).first?.temporary ?? true)
+        client.sendMessage(text: "test", subscription: subscription, id: "a43SYFpMdjEAdM0mrH", user: user)
+        XCTAssertFalse(realm?.objects(Message.self).first?.temporary ?? true)
     }
 
     func testUpdateMessage() {
         let api = MockAPI()
-        let realm = testRealm()
+        let realm = Realm.current
         let client = MessagesClient(api: api)
 
         let message = Message.testInstance()
         message.identifier = "message-identifier"
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(message)
         })
 
@@ -74,13 +84,12 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
             ]
         ])
 
-        client.updateMessage(message, text: "edit-test", realm: realm)
-        XCTAssertEqual(realm.objects(Message.self).first?.text, "edit-test")
+        client.updateMessage(message, text: "edit-test")
+        XCTAssertEqual(realm?.objects(Message.self).first?.text, "edit-test")
     }
 
     func testReactMessage() {
         let api = MockAPI()
-        let realm = testRealm()
         let client = MessagesClient(api: api)
 
         let user = User.testInstance()
@@ -113,22 +122,22 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
 
         message.identifier = "message-identifier"
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(message)
         })
 
-        let result = client.reactMessage(message, emoji: ":grin:", user: user, realm: realm)
+        let result = client.reactMessage(message, emoji: ":grin:", user: user)
 
         XCTAssert(result, "react method accepts parameters")
         XCTAssert(message.reactions.count == 1, "reaction count remains one after adding to existing reaction")
         XCTAssert(message.reactions[0].usernames.count == 2, "reaction username count increases by one after adding to existing reaction")
 
-        client.reactMessage(message, emoji: ":party_parrot:", user: user, realm: realm)
+        client.reactMessage(message, emoji: ":party_parrot:", user: user)
 
         XCTAssert(message.reactions.count == 2, "reaction count remains one after adding new reaction")
         XCTAssert(message.reactions[1].usernames.count == 1, "reaction username count is one after adding new reaction")
 
-        client.reactMessage(message, emoji: ":party_parrot:", user: user, realm: realm)
+        client.reactMessage(message, emoji: ":party_parrot:", user: user)
 
         XCTAssert(message.reactions.count == 1, "reaction count decreases by one after removing reaction")
     }

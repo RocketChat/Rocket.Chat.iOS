@@ -10,7 +10,8 @@ import UIKit
 import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView)
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView)
 }
 
 final class ChatMessageImageView: ChatMessageAttachmentView {
@@ -94,7 +95,9 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
 
     @objc func didTapView() {
         if isLoadable {
-            delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+            if let unmanaged = UnmanagedAttachment(attachment) {
+                delegate?.openImageFromCell(attachment: unmanaged, thumbnail: imageView)
+            }
         } else {
             guard let imageURL = attachment.fullImageURL() else { return }
 

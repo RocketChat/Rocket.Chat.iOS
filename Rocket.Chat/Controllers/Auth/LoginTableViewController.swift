@@ -216,6 +216,7 @@ class LoginTableViewController: BaseTableViewController {
             textField.placeholder = "john.appleseed@apple.com"
             textField.textContentType = UITextContentType.emailAddress
             textField.keyboardType = .emailAddress
+            textField.clearButtonMode = .whileEditing
 
             _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 sendAction.isEnabled = textField.text?.isValidEmail ?? false

@@ -9,19 +9,46 @@
 import Foundation
 import DifferenceKit
 
+struct UnmanagedMessageURL: Equatable {
+    var url: String
+    var title: String
+    var subtitle: String
+    var imageURL: String?
+}
+
+struct UnmanagedMention: Equatable {
+    var userId: String?
+    var realName: String?
+    var username: String?
+}
+
+struct UnmanagedChannel: Equatable {
+    var name: String
+}
+
+struct UnmanagedMessageReaction: Equatable {
+    var emoji: String
+    var usernames: [String]
+}
+
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
     var identifier: String
     var managedObject: Message
     var text: String
-    var attachments: [Attachment]
+    var type: MessageType
+    var attachments: [UnmanagedAttachment]
+    var userIdentifier: String?
     var user: UnmanagedUser?
+    var subscription: UnmanagedSubscription?
     var temporary: Bool
+    var unread: Bool
     var failed: Bool
-    var mentions: [Mention]
-    var channels: [Channel]
-    var reactions: [MessageReaction]
-    var createdAt: Date?
+    var mentions: [UnmanagedMention]
+    var channels: [UnmanagedChannel]
+    var urls: [UnmanagedMessageURL]
+    var reactions: [UnmanagedMessageReaction]
+    var createdAt: Date
     var updatedAt: Date?
     var groupable: Bool
     var markedForDeletion: Bool
@@ -43,46 +70,110 @@ extension UnmanagedMessage {
 
 extension UnmanagedMessage {
     init?(_ message: Message) {
-        guard let messageIdentifier = message.identifier else {
+        guard
+            let messageIdentifier = message.identifier,
+            let messageCreatedAt = message.createdAt
+        else {
+            #if DEBUG
+            fatalError("message object is not complete")
+            #endif
+
             return nil
         }
 
         managedObject = message
         identifier = messageIdentifier
         text = message.text
+        type = message.type
+        userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
+        subscription = message.subscription?.unmanaged
         temporary = message.temporary
+        unread = message.unread
         failed = message.failed
         groupable = message.groupable
         markedForDeletion = message.markedForDeletion
-        mentions = message.mentions.map { $0 }
-        channels = message.channels.map { $0 }
-        reactions = message.reactions.map { $0 }
-        createdAt = message.createdAt
+        createdAt = messageCreatedAt
         updatedAt = message.updatedAt
         emoji = message.emoji
         avatar = message.avatar
 
-        attachments = message.attachments.compactMap({ attachment in
-            if attachment.isFile && attachment.fullFileURL() != nil {
-                return attachment
+        mentions = message.mentions.compactMap {
+            return UnmanagedMention(
+                userId: $0.userId,
+                realName: $0.realName,
+                username: $0.username
+            )
+        }
+
+        channels = message.channels.compactMap {
+            guard let name = $0.name else { return nil }
+            return UnmanagedChannel(name: name)
+        }
+
+        reactions = message.reactions.compactMap {
+            guard let emoji = $0.emoji else { return nil }
+
+            return UnmanagedMessageReaction(
+                emoji: emoji,
+                usernames: $0.usernames.compactMap({ $0 })
+            )
+        }
+
+        urls = message.urls.compactMap {
+            guard
+                let title = $0.title,
+                let subtitle = $0.textDescription,
+                let url = $0.targetURL,
+                $0.isValid()
+            else {
+                return nil
             }
 
-            switch attachment.type {
-            case .image where attachment.imageURL != nil:
-                return attachment
-            case .video where attachment.videoURL != nil:
-                return attachment
-            case .audio where attachment.audioURL != nil:
-                return attachment
-            case .textAttachment where attachment.fields.count > 0:
-                return attachment
-            default:
-                break
-            }
+            return UnmanagedMessageURL(
+                url: url,
+                title: title,
+                subtitle: subtitle,
+                imageURL: $0.imageURL
+            )
+        }
 
-            return nil
-        })
+        attachments = message.attachments.compactMap {
+            return UnmanagedAttachment($0)
+        }
+    }
+
+    /**
+        This method will return if the reply button
+        in a broadcast room needs to be displayed or
+        not for the message. If the subscription is not
+        a broadcast type, it'll return false.
+     */
+    func isBroadcastReplyAvailable() -> Bool {
+        guard
+            !temporary,
+            !failed,
+            !markedForDeletion,
+            subscription?.roomBroadcast ?? false,
+            !isSystemMessage(),
+            let currentUser = AuthManager.currentUser(),
+            currentUser.identifier != user?.identifier
+        else {
+            return false
+        }
+
+        return true
+    }
+
+    func isSystemMessage() -> Bool {
+        return !(
+            type == .text ||
+            type == .audio ||
+            type == .image ||
+            type == .video ||
+            type == .textAttachment ||
+            type == .url
+        )
     }
 }
 

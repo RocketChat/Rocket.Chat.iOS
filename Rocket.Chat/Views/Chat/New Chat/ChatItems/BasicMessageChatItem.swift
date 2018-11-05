@@ -10,22 +10,27 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-struct BasicMessageChatItem: ChatItem, Differentiable {
+final class BasicMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return BasicMessageCell.identifier
     }
 
-    var user: UnmanagedUser
     var message: UnmanagedMessage
 
+    init(user: UnmanagedUser, message: UnmanagedMessage) {
+        self.message = message
+
+        super.init(user: user, avatar: message.avatar, emoji: message.emoji, date: message.createdAt, isUnread: message.unread)
+    }
+
     var differenceIdentifier: String {
-        return user.differenceIdentifier + message.identifier
+        return (user?.differenceIdentifier ?? "") + message.identifier
     }
 
     func isContentEqual(to source: BasicMessageChatItem) -> Bool {
         return
-            user.name == source.user.name &&
-            user.username == source.user.username &&
+            user?.name == source.user?.name &&
+            user?.username == source.user?.username &&
             message.temporary == source.message.temporary &&
             message.failed == source.message.failed &&
             message.text == source.message.text &&

@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Да, отменить";
 "chat.message.actions.resend" = "Отправить повторно";
 "chat.message.actions.resend_all" = "Отправить повторно все";
-"Send" = "Отправить"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Жалоба отправлена";

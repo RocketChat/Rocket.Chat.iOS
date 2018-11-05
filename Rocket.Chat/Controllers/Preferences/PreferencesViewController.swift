@@ -29,20 +29,17 @@ final class PreferencesViewController: BaseTableViewController {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelProfileName: UILabel!
     @IBOutlet weak var labelProfileStatus: UILabel!
@@ -205,7 +202,7 @@ final class PreferencesViewController: BaseTableViewController {
         else {
             return
         }
-        
+
         AnalyticsManager.log(event: .openAdmin)
 
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {

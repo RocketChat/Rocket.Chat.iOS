@@ -53,7 +53,7 @@ final class Message: BaseModel {
     @objc dynamic var rid = ""
     @objc dynamic var createdAt: Date?
     @objc dynamic var updatedAt: Date?
-    @objc dynamic var user: User?
+    @objc dynamic var userIdentifier: String?
     @objc dynamic var text = ""
 
     @objc dynamic var userBlocked: Bool = false
@@ -96,6 +96,14 @@ final class Message: BaseModel {
         }
 
         return  .text
+    }
+
+    var user: User? {
+        if let userIdentifier = self.userIdentifier {
+            return User.find(withIdentifier: userIdentifier)
+        }
+
+        return nil
     }
 
     // MARK: Internal

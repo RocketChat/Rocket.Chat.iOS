@@ -10,13 +10,21 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-struct AudioMessageChatItem: ChatItem, Differentiable {
+class AudioMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
-        return AudioMessageCell.identifier
+        return hasText ? AudioCell.identifier : AudioMessageCell.identifier
     }
 
-    var identifier: String
-    var audioURL: URL?
+    let identifier: String
+    let audioURL: URL?
+    let hasText: Bool
+
+    init(identifier: String, audioURL: URL?, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+        self.identifier = identifier
+        self.audioURL = audioURL
+        self.hasText = hasText
+        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
+    }
 
     var localAudioURL: URL? {
         return DownloadManager.localFileURLFor(identifier)

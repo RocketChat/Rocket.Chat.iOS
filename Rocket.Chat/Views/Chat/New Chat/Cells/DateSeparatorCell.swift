@@ -20,18 +20,12 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var leftLine: UIView!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var rightLine: UIView!
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-    }
 
     func configure() {
         guard let viewModel = viewModel?.base as? DateSeparatorChatItem else {
@@ -56,6 +50,8 @@ extension DateSeparatorCell {
 
         let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
+        leftLine.backgroundColor = theme.auxiliaryText
+        rightLine.backgroundColor = theme.auxiliaryText
     }
 
 }

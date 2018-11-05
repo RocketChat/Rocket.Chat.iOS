@@ -20,8 +20,8 @@ final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
+    var adjustedHorizontalInsets: CGFloat = 0
     var viewModel: AnyChatItem?
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var reactionsList: ReactionListView! {
         didSet {
@@ -38,14 +38,6 @@ final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
 //                self.delegate?.handleLongPress(reactionListView: self.reactionsListView, reactionView: view)
             }
         }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
     }
 
     func configure() {

@@ -28,7 +28,7 @@
       "source_files": "RocketChatViewController/Classes/**/*",
       "dependencies": {
         "DifferenceKit": [
-          "~> 0.5.3"
+          "~> 0.7.2"
         ]
       }
     },

@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
+final class SequentialMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: SequentialMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -21,13 +21,19 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
     }()
 
     @IBOutlet weak var text: RCTextView!
+    @IBOutlet weak var readReceiptButton: UIButton!
 
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     var textHorizontalMargins: CGFloat {
         return textLeadingConstraint.constant +
-            textTrailingConstraint.constant
+            textTrailingConstraint.constant +
+            readReceiptWidthConstraint.constant +
+            readReceiptTrailingConstraint.constant +
+            adjustedHorizontalInsets
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -37,33 +43,27 @@ final class SequentialMessageCell: UICollectionViewCell, ChatCell, SizingCell {
         }
     }
 
-    var viewModel: AnyChatItem?
     var initialTextHeightConstant: CGFloat = 0
-    var contentViewWidthConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         initialTextHeightConstant = textHeightConstraint.constant
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        contentViewWidthConstraint.isActive = true
-
         insertGesturesIfNeeded()
     }
 
-    func configure() {
+    override func configure() {
+        configure(readReceipt: readReceiptButton)
         updateText()
     }
 
-    func updateText(force: Bool = false) {
+    func updateText() {
         guard let viewModel = viewModel?.base as? SequentialMessageChatItem else {
             return
         }
 
-        if let message = force ? MessageTextCacheManager.shared.update(for: viewModel.message.managedObject, with: theme) : MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
-            contentViewWidthConstraint.constant = UIScreen.main.bounds.width
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
@@ -120,8 +120,10 @@ extension SequentialMessageCell: UIGestureRecognizerDelegate {
 }
 
 extension SequentialMessageCell {
+
     override func applyTheme() {
         super.applyTheme()
-        updateText(force: true)
+        updateText()
     }
+
 }

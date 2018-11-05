@@ -23,9 +23,8 @@ extension MessageManager {
                 object?.subscription = detachedSubscription
             })
 
-            if message.user == nil {
-                let user = User.getOrCreate(realm: realm, values: ["id": "rocket.cat", "username": "rocket.cat"], updates: nil)
-                message.user = user
+            if message.userIdentifier == nil {
+                message.userIdentifier = "rocket.cat"
             }
 
             message.privateMessage = true

@@ -130,25 +130,6 @@ final class RoomRoles: Object {
     var roles = List<String>()
 }
 
-// MARK: Failed Messages
-
-extension Subscription {
-    func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
-        guard let user = user else {
-            return
-        }
-
-        try? realm?.write {
-            messages.filter("temporary = true").filter({
-                $0.user == user
-            }).forEach {
-                $0.temporary = false
-                $0.failed = true
-            }
-        }
-    }
-}
-
 // MARK: Avatar
 
 extension Subscription {

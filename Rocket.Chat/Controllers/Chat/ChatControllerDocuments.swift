@@ -24,8 +24,8 @@ extension ChatViewController: UIDocumentInteractionControllerDelegate {
 
 extension ChatViewController {
 
-    func openDocument(attachment: Attachment) {
-        guard let fileURL = attachment.fullFileURL() else { return }
+    func openDocument(attachment: UnmanagedAttachment) {
+        guard let fileURL = attachment.fullFileURL else { return }
         guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
@@ -49,9 +49,9 @@ extension ChatViewController {
         }
     }
 
-    func openImage(attachment: Attachment) {
-        guard let fileURL = attachment.fullFileURL() else { return }
-        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+    func openImage(attachment: UnmanagedAttachment) {
+        guard let fileURL = attachment.fullFileURL else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink ?? "") else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
         func open() {

@@ -66,6 +66,8 @@ public class ComposerView: UIView {
         $0.setBackgroundImage(ComposerAsset.addButton.raw, for: .normal)
 
         $0.addTarget(self, action: #selector(touchUpInside(button:)), for: .touchUpInside)
+
+        $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
     /**
@@ -76,6 +78,8 @@ public class ComposerView: UIView {
         $0.setBackgroundImage(ComposerAsset.sendButton.raw, for: .normal)
 
         $0.addTarget(self, action: #selector(touchUpInside(button:)), for: .touchUpInside)
+
+        $0.setContentHuggingPriority(.required, for: .horizontal)
     }
 
     /**
@@ -84,7 +88,7 @@ public class ComposerView: UIView {
     public let textView = tap(ComposerTextView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
-        $0.text = "oi"
+        $0.text = ""
         $0.placeholderLabel.text = "Type a message"
         $0.placeholderLabel.font = .preferredFont(forTextStyle: .body)
         $0.placeholderLabel.adjustsFontForContentSizeCategory = true
@@ -151,10 +155,10 @@ public class ComposerView: UIView {
 
         containerView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
 
-        backgroundColor = .white
-
         addSubviews()
         setupConstraints()
+
+        containerView.backgroundColor = .white
     }
 
     /**
@@ -177,16 +181,18 @@ public class ComposerView: UIView {
         textView.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: layoutMargins.left)
     }()
 
+    lazy var containerViewLeadingConstraint: NSLayoutConstraint = {
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor)
+    }()
+
     /**
      Sets up constraints between the UI elements in the composer.
      */
     private func setupConstraints() {
-        let textViewLeading =
-
         NSLayoutConstraint.activate([
             // containerView constraints
 
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerViewLeadingConstraint,
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
@@ -236,6 +242,16 @@ public class ComposerView: UIView {
         super.willMove(toSuperview: newSuperview)
 
         reloadAddons()
+    }
+
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for view in self.subviews {
+            if view.isUserInteractionEnabled, view.point(inside: self.convert(point, to: view), with: event) {
+                return true
+            }
+        }
+
+        return false
     }
 }
 

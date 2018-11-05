@@ -19,6 +19,10 @@ final class MessagesSizingManager {
         cache = [:]
     }
 
+    func invalidateLayout(for identifier: AnyHashable) {
+        cache.removeValue(forKey: identifier)
+    }
+
     /**
      Returns the cached size for the IndexPath.
      */

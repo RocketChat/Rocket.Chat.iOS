@@ -27,6 +27,7 @@ final class MessageSection: ChatSection {
         self.controllerContext = controllerContext
     }
 
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func viewModels() -> [AnyChatItem] {
         guard
             let object = object.base as? MessageSectionModel,
@@ -39,6 +40,8 @@ final class MessageSection: ChatSection {
         // on the inverse order. What we want to show in the top
         // needs to go last.
         var cells: [AnyChatItem] = []
+        var shouldAppendMessageHeader = true
+        let sanitizedMessage = object.message.text.removingWhitespaces().removingNewLines()
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
@@ -47,37 +50,156 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
-        for attachment in object.message.attachments {
-            guard let identifier = attachment.identifier else { continue }
+        if object.message.isBroadcastReplyAvailable() {
+            cells.append(MessageActionsChatItem(
+                message: object.message
+            ).wrapped)
+        }
 
+        for attachment in object.message.attachments {
             switch attachment.type {
             case .audio:
-                cells.append(AudioMessageChatItem(
-                    identifier: identifier,
-                    audioURL: attachment.fullFileURL()
-                ).wrapped)
+                if sanitizedMessage.isEmpty {
+                    cells.append(AudioMessageChatItem(
+                        identifier: attachment.identifier,
+                        audioURL: attachment.fullAudioURL,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(AudioMessageChatItem(
+                        identifier: attachment.identifier,
+                        audioURL: attachment.fullAudioURL,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             case .video:
-                cells.append(VideoMessageChatItem(
-                    identifier: identifier,
-                    descriptionText: attachment.descriptionText,
-                    videoURL: attachment.fullFileURL(),
-                    videoThumbPath: attachment.videoThumbPath
-                ).wrapped)
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                    cells.append(VideoMessageChatItem(
+                        identifier: attachment.identifier,
+                        descriptionText: attachment.descriptionText,
+                        videoURL: attachment.fullFileURL,
+                        videoThumbPath: attachment.videoThumbPath,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(VideoMessageChatItem(
+                        identifier: attachment.identifier,
+                        descriptionText: attachment.descriptionText,
+                        videoURL: attachment.fullFileURL,
+                        videoThumbPath: attachment.videoThumbPath,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
+            case .textAttachment where attachment.fields.count > 0:
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(TextAttachmentChatItem(
+                        attachment: attachment,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
+            case .textAttachment where !attachment.isFile:
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                    cells.append(QuoteChatItem(
+                        attachment: attachment,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(QuoteChatItem(
+                        attachment: attachment,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
+            case .image:
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: false,
+                        user: user,
+                        message: object.message
+                    ).wrapped)
+
+                    shouldAppendMessageHeader = false
+                } else {
+                    cells.append(ImageMessageChatItem(
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        descriptionText: attachment.descriptionText,
+                        imageURL: attachment.fullImageURL,
+                        hasText: true,
+                        user: nil,
+                        message: nil
+                    ).wrapped)
+                }
             default:
                 if attachment.isFile {
-                    cells.append(FileMessageChatItem(
-                        attachment: attachment
-                    ).wrapped)
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.append(FileMessageChatItem(
+                            attachment: attachment,
+                            hasText: true,
+                            user: nil,
+                            message: nil
+                        ).wrapped)
+                    }
                 }
             }
         }
 
-        if !object.isSequential {
+        object.message.urls.forEach { messageURL in
+            cells.append(MessageURLChatItem(
+                url: messageURL.url,
+                imageURL: messageURL.imageURL,
+                title: messageURL.title,
+                subtitle: messageURL.subtitle
+            ).wrapped)
+        }
+
+        if !object.isSequential && shouldAppendMessageHeader {
             cells.append(BasicMessageChatItem(
                 user: user,
                 message: object.message
             ).wrapped)
-        } else {
+        } else if object.isSequential {
             cells.append(SequentialMessageChatItem(
                 user: user,
                 message: object.message
@@ -90,6 +212,12 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
+        if object.containsUnreadMessageIndicator {
+            cells.append(UnreadMarkerChatItem(
+                identifier: object.message.identifier
+            ).wrapped)
+        }
+
         return cells
     }
 
@@ -98,16 +226,33 @@ final class MessageSection: ChatSection {
 
         if let cell = cell as? BasicMessageCell {
             cell.delegate = self
-        }
-
-        if let cell = cell as? SequentialMessageCell {
+        } else if let cell = cell as? SequentialMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? FileCell {
+            cell.delegate = self
+        } else if let cell = cell as? FileMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? ImageMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? ImageCell {
+            cell.delegate = self
+        } else if let cell = cell as? TextAttachmentCell {
+            cell.delegate = self
+        } else if let cell = cell as? TextAttachmentMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? QuoteCell {
+            cell.delegate = self
+        } else if let cell = cell as? QuoteMessageCell {
+            cell.delegate = self
+        } else if let cell = cell as? MessageURLCell {
+            cell.delegate = self
+        } else if let cell = cell as? MessageActionsCell {
             cell.delegate = self
         }
 
-        if let cell = cell as? FileMessageCell {
-            cell.delegate = self
-        }
-
+        let adjustedContentInsets = messagesController?.collectionView.adjustedContentInset ?? .zero
+        let adjustedHoritonzalInsets = adjustedContentInsets.left + adjustedContentInsets.right
+        cell.adjustedHorizontalInsets = adjustedHoritonzalInsets
         cell.viewModel = viewModel
         cell.configure()
         return cell
@@ -210,26 +355,26 @@ extension MessageSection: ChatMessageCellProtocol {
         WebBrowserManager.open(url: url)
     }
 
-    func openURLFromCell(url: MessageURL) {
-        guard let targetURL = url.targetURL else { return }
-        guard let destinyURL = URL(string: targetURL) else { return }
+    func openURLFromCell(url: String) {
+        guard let destinyURL = URL(string: url) else { return }
         WebBrowserManager.open(url: destinyURL)
     }
 
-    func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
+    func openVideoFromCell(attachment: UnmanagedAttachment) {
+        guard let videoURL = attachment.fullVideoURL else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
-        controller.activityItems = [attachment.title, videoURL]
+        controller.activityItems = [attachment.title ?? "", videoURL]
         messagesController?.present(controller, animated: true, completion: nil)
     }
 
-    func openReplyMessage(message: Message) {
+    func openReplyMessage(message: UnmanagedMessage) {
         guard let username = message.user?.username else { return }
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
+    // TODO: This one can be removed once we remove from the protocol
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
         // TODO: Adjust for our composer
         //        textView.resignFirstResponder()
 
@@ -246,13 +391,28 @@ extension MessageSection: ChatMessageCellProtocol {
         }
     }
 
-    func openFileFromCell(attachment: Attachment) {
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
+                config.imageView = thumbnail
+                config.allowSharing = true
+            }
+
+            messagesController?.present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+            //            openImage(attachment: attachment)
+        }
+    }
+
+    func openFileFromCell(attachment: UnmanagedAttachment) {
         openDocument(attachment: attachment)
     }
 
-    func openDocument(attachment: Attachment) {
-        guard let fileURL = attachment.fullFileURL() else { return }
-        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+    func openDocument(attachment: UnmanagedAttachment) {
+        guard let fileURL = attachment.fullFileURL else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink ?? "") else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
         // Open document itself
@@ -275,12 +435,8 @@ extension MessageSection: ChatMessageCellProtocol {
         }
     }
 
-    func viewDidCollapseChange(view: UIView) {
-//        let origin = collectionView.convert(CGPoint.zero, from: view)
-//        guard let indexPath = collectionView.indexPathForItem(at: origin) else { return }
-//
-//        let item = dataController.itemAt(indexPath)
-//        dataController.invalidateLayout(for: item?.identifier)
-//        collectionView.reloadItems(at: [indexPath])
+    func viewDidCollapseChange(viewModel: AnyChatItem) {
+        // TODO: Trigger reload
+        messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
     }
 }

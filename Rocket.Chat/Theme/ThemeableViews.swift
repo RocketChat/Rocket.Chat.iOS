@@ -75,6 +75,7 @@ extension UIView: ThemeProvider {
         return Theme(
             backgroundColor: theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
+            chatComponentBackground: theme.chatComponentBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
@@ -83,7 +84,7 @@ extension UIView: ThemeProvider {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
+            actionTintColor: theme.actionTintColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence
@@ -248,8 +249,7 @@ extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.hyperlink
-        textColor = theme.bodyText
+        tintColor = theme.actionTintColor
         applyThemeFromRuntimeAttributes()
     }
 }
@@ -312,6 +312,15 @@ extension UIScrollView {
     }
 }
 
+extension UISlider {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        tintColor = theme.actionTintColor
+        applyThemeFromRuntimeAttributes()
+    }
+}
+
 extension UIPickerView {
     override func applyTheme() {
         guard let theme = theme else { return }
@@ -338,7 +347,6 @@ extension HintsView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor
         applyThemeFromRuntimeAttributes()
     }
 }

@@ -11,18 +11,28 @@ import DifferenceKit
 
 struct MessageSectionModel: Differentiable {
     let identifier: String
+
+    let messageDate: Date
     let message: UnmanagedMessage
 
-    var daySeparator: Date?
-    var isSequential: Bool = false
+    let daySeparator: Date?
+    let isSequential: Bool
 
-    var containsLoader: Bool = false
-    var containsUnreadMessageIndicator: Bool = false
+    let containsLoader: Bool
+    let containsHeader: Bool
+    let containsUnreadMessageIndicator: Bool
+
     var containsDateSeparator: Bool { return daySeparator != nil }
 
-    init(message: UnmanagedMessage) {
+    init(message: UnmanagedMessage, daySeparator: Date? = nil, sequential: Bool = false, unreadIndicator: Bool = false, loader: Bool = false, header: Bool = false) {
         self.identifier = message.identifier
         self.message = message
+        self.messageDate = message.createdAt
+        self.daySeparator = daySeparator
+        self.isSequential = sequential
+        self.containsUnreadMessageIndicator = unreadIndicator
+        self.containsLoader = loader
+        self.containsHeader = header
     }
 
     // MARK: Differentiable
@@ -35,7 +45,6 @@ struct MessageSectionModel: Differentiable {
         return
             message.isContentEqual(to: source.message) &&
             daySeparator == source.daySeparator &&
-            containsLoader == source.containsLoader &&
             containsUnreadMessageIndicator == source.containsUnreadMessageIndicator &&
             isSequential == source.isSequential
     }

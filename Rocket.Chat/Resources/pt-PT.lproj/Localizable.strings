@@ -202,12 +202,12 @@
 "chat.read_only" = "Esta sala é apenas de leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
-"chat.unread_separator" = "novas mensagens";
-"chat.preview.actions.read" = "Mark as read"; // TODO
-"chat.preview.actions.unread" = "Mark as unread"; // TODO
-"chat.preview.actions.favorite" = "Favorite"; // TODO
-"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
-"chat.preview.actions.hide" = "Hide"; // TODO
+"chat.unread_separator" = "Novas Mensagens";
+"chat.preview.actions.read" = "Marcar como lido";
+"chat.preview.actions.unread" = "Marcar como não lido";
+"chat.preview.actions.favorite" = "Favoritar";
+"chat.preview.actions.unfavorite" = "Desfavoritar";
+"chat.preview.actions.hide" = "Esconder";
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Lida por";
@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Sim, descartar";
 "chat.message.actions.resend" = "Reeenviar";
 "chat.message.actions.resend_all" = "Reenviar todas";
-"Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Mensagem Relatada";

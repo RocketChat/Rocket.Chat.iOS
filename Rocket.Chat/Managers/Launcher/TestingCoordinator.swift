@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 /**
  Testing build is suppose to always start with a clean database.
@@ -19,7 +20,9 @@ struct TestingCoordinator: LauncherProtocol {
 
     func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         #if TEST
-        for (idx, _) in (DatabaseManager.servers ?? []).enumerated() {
+        Realm.clearDatabase()
+
+        for idx in (DatabaseManager.servers ?? []).indices {
             DatabaseManager.removeDatabase(at: idx)
         }
 

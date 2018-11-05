@@ -12,7 +12,7 @@ import RealmSwift
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
 struct MessageManager {
-    static let historySize = 60
+    static let historySize = 30
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
@@ -48,7 +48,12 @@ extension MessageManager {
             let subscriptionIdentifier = subscription.identifier
 
             currentRealm?.execute({ (realm) in
-                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
+                guard let detachedSubscription = realm.object(
+                    ofType: Subscription.self,
+                    forPrimaryKey: subscriptionIdentifier
+                ) else {
+                    return
+                }
 
                 list?.forEach { object in
                     let mockNewMessage = Message()

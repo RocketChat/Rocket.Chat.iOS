@@ -25,7 +25,7 @@ extension LoginService {
     }
 }
 
-class LoginServiceSpec: XCTestCase, RealmTestCase {
+class LoginServiceSpec: XCTestCase {
     let testJSON = JSON(parseJSON: """
         {
             \"mergeUsers\" : false,
@@ -46,8 +46,6 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         """)
 
     func testFind() throws {
-        let realm = testRealm()
-
         let github = LoginService()
         github.identifier = "githubid"
         github.service = "github"
@@ -56,12 +54,12 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         google.identifier = "googleid"
         google.service = "google"
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(github)
             realm.add(google)
         })
 
-        XCTAssertEqual(LoginService.find(service: "github", realm: realm), github, "Finds LoginService correctly")
+        XCTAssertEqual(LoginService.find(service: "github"), github, "Finds LoginService correctly")
     }
 
     func testMap() {

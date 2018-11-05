@@ -238,7 +238,6 @@
 "chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";

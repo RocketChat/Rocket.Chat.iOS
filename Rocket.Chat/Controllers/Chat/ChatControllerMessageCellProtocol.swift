@@ -11,10 +11,14 @@ import SafariServices
 import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
+import RocketChatViewController
 
 extension ReactorListViewController: UserActionSheetPresenter { }
 
 extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
+
+    func viewDidCollapseChange(viewModel: AnyChatItem) {}
+
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
@@ -106,26 +110,25 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         WebBrowserManager.open(url: url)
     }
 
-    func openURLFromCell(url: MessageURL) {
-        guard let targetURL = url.targetURL else { return }
-        guard let destinyURL = URL(string: targetURL) else { return }
+    func openURLFromCell(url: String) {
+        guard let destinyURL = URL(string: url) else { return }
         WebBrowserManager.open(url: destinyURL)
     }
 
-    func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
+    func openVideoFromCell(attachment: UnmanagedAttachment) {
+        guard let videoURL = attachment.fullVideoURL else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
         controller.activityItems = [attachment.title, videoURL]
         present(controller, animated: true, completion: nil)
     }
 
-    func openReplyMessage(message: Message) {
+    func openReplyMessage(message: UnmanagedMessage) {
         guard let username = message.user?.username else { return }
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
         // TODO: Adjust for our composer
 //        textView.resignFirstResponder()
 
@@ -142,7 +145,24 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         }
     }
 
-    func openFileFromCell(attachment: Attachment) {
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+        // TODO: Adjust for our composer
+        // textView.resignFirstResponder()
+
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
+                config.imageView = thumbnail
+                config.allowSharing = true
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+//             openImage(attachment: attachment)
+        }
+    }
+
+    func openFileFromCell(attachment: UnmanagedAttachment) {
         openDocument(attachment: attachment)
     }
 

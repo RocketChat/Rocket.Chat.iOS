@@ -14,11 +14,6 @@ import UIKit
  */
 public protocol ComposerViewDelegate: class {
     /**
-     Asks the delegate which height should be the maximum for the composer (not counting addons).
-     */
-    func maximumHeight(for composerView: ComposerView) -> CGFloat
-
-    /**
      Asks the how many addons to place in the composer.
      */
     func numberOfAddons(in composerView: ComposerView, at slot: ComposerAddonSlot) -> UInt
@@ -45,10 +40,6 @@ public protocol ComposerViewDelegate: class {
 }
 
 public extension ComposerViewDelegate {
-    func maximumHeight(for composerView: ComposerView) -> CGFloat {
-        return UIScreen.main.bounds.height
-    }
-
     func numberOfAddons(in composerView: ComposerView, at slot: ComposerAddonSlot) -> UInt {
         return 0
     }

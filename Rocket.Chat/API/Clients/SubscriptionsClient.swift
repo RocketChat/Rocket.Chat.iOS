@@ -15,7 +15,7 @@ struct SubscriptionsClient: APIClient {
         self.api = api
     }
 
-    func markAsRead(subscription: Subscription) {
+    func markAsRead(subscription: UnmanagedSubscription) {
         let req = SubscriptionReadRequest(rid: subscription.rid)
         let subscriptionIdentifier = subscription.rid
 
@@ -146,7 +146,7 @@ struct SubscriptionsClient: APIClient {
             switch result {
             case .resource(let resource):
                 if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
-                    try? currentRealm?.write {
+                    Realm.executeOnMainThread(realm: currentRealm) { _ in
                         let subscriptionCopy = Subscription(value: subscription)
 
                         subscriptionCopy.usersRoles.removeAll()

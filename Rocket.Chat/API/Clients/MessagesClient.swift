@@ -17,15 +17,15 @@ struct MessagesClient: APIClient {
         guard let id = message.identifier else { return }
         let subscriptionIdentifier = subscription.rid
 
-        try? realm?.write {
+        Realm.executeOnMainThread(realm: realm) { (realm) in
             if let subscriptionMutable = Subscription.find(rid: subscriptionIdentifier, realm: realm) {
                 subscriptionMutable.roomLastMessage = message
                 subscriptionMutable.roomLastMessageDate = message.createdAt
                 subscriptionMutable.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
-                realm?.add(subscriptionMutable, update: true)
+                realm.add(subscriptionMutable, update: true)
             }
 
-            realm?.add(message, update: true)
+            realm.add(message, update: true)
         }
 
         func updateMessage(json: JSON) {
@@ -37,12 +37,12 @@ struct MessagesClient: APIClient {
 
             AnalyticsManager.log(event: .messageSent(subscriptionType: subscription.type.rawValue, server: server))
 
-            try? realm?.write {
+            Realm.executeOnMainThread(realm: realm) { (realm) in
                 message.temporary = false
                 message.failed = false
                 message.updatedAt = Date()
                 message.map(json, realm: realm)
-                realm?.add(message, update: true)
+                realm.add(message, update: true)
             }
 
             MessageTextCacheManager.shared.update(for: message)
@@ -54,11 +54,11 @@ struct MessagesClient: APIClient {
                     return
                 }
 
-                try? realm?.write {
+                Realm.executeOnMainThread(realm: realm) { (realm) in
                     message.temporary = false
                     message.failed = true
                     message.updatedAt = Date()
-                    realm?.add(message, update: true)
+                    realm.add(message, update: true)
                 }
 
                 MessageTextCacheManager.shared.update(for: message, with: nil)
@@ -94,18 +94,20 @@ struct MessagesClient: APIClient {
 
     // swiftlint:enable function_body_length
 
-    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+    func sendMessage(text: String, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+        let subscriptionManaged = subscription.managedObject
+
         let message = Message()
         message.internalType = ""
         message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
-        message.subscription = subscription
-        message.user = user
+        message.subscription = subscriptionManaged
+        message.userIdentifier = user?.identifier
         message.identifier = id
         message.temporary = true
 
-        sendMessage(message, subscription: subscription, realm: realm)
+        sendMessage(message, subscription: subscriptionManaged, realm: realm)
     }
 
     @discardableResult
@@ -174,11 +176,11 @@ struct MessagesClient: APIClient {
         // optimistic UI update
 
         let message = Message(value: message)
-        try? realm?.write {
+        Realm.executeOnMainThread(realm: realm) { realm in
             message.updatedAt = Date()
             message.temporary = true
             message.text = text
-            realm?.add(message, update: true)
+            realm.add(message, update: true)
         }
 
         // send request
@@ -192,8 +194,8 @@ struct MessagesClient: APIClient {
                     return Alert.defaultError.present()
                 }
 
-                try? realm?.write {
-                    realm?.add(message, update: true)
+                Realm.executeOnMainThread(realm: realm) { realm in
+                    realm.add(message, update: true)
                 }
 
                 MessageTextCacheManager.shared.update(for: message)
@@ -243,8 +245,8 @@ struct MessagesClient: APIClient {
         message.reactions = reactions
         message.updatedAt = Date()
 
-        try? realm?.write {
-            realm?.add(message, update: true)
+        Realm.executeOnMainThread(realm: realm) { realm in
+            realm.add(message, update: true)
         }
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
