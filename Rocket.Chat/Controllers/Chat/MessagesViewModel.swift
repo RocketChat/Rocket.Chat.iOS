@@ -277,7 +277,7 @@ final class MessagesViewModel {
             order to get the correct page of data.
      */
     func fetchMessages(from oldestMessage: Date?) {
-        guard !requestingData, hasMoreData else { return }
+        guard !requestingData, (hasMoreData || oldestMessage == nil) else { return }
         guard let subscription = subscription?.validated() else { return }
         guard let subscriptionUnmanaged = subscription.unmanaged else { return }
 
@@ -287,14 +287,21 @@ final class MessagesViewModel {
             guard let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid) else { return }
             let messagesFromDatabase = subscriptionValid.fetchMessages(30, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
-                guard
-                    let message = $0.validated()?.unmanaged,
-                    let section = self?.section(for: message)
-                else {
-                    return
-                }
+                guard let message = $0.validated()?.unmanaged else { return }
 
-                self?.data.append(section)
+                let index = self?.data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return object.differenceIdentifier == message.identifier
+                    }
+
+                    return false
+                })
+
+                if index != nil {
+                    return
+                } else if let section = self?.section(for: message) {
+                    self?.data.append(section)
+                }
             }
 
             if messagesFromDatabase.count > 0 {

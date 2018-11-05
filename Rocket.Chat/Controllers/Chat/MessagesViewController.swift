@@ -355,9 +355,9 @@ extension MessagesViewController: SocketConnectionHandler {
         chatTitleView?.state = state
 
         if state == .connected {
+            viewModel.requestingData = false
             viewModel.fetchMessages(from: nil)
         }
     }
 
 }
-
