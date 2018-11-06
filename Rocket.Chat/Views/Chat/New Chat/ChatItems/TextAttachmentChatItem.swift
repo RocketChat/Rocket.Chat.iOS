@@ -11,36 +11,33 @@ import DifferenceKit
 import RocketChatViewController
 import RealmSwift
 
-final class TextAttachmentChatItem: BaseMessageChatItem, ChatItem, Differentiable {
+final class TextAttachmentChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return hasText ? TextAttachmentCell.identifier : TextAttachmentMessageCell.identifier
     }
 
-    var attachment: UnmanagedAttachment
+    let identifier: String
+    let title: String
+    let subtitle: String?
+    let fields: [UnmanagedField]
+    let color: String?
     let hasText: Bool
 
-    init(attachment: UnmanagedAttachment, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
-        self.attachment = attachment
+    init(identifier: String, fields: [UnmanagedField], title: String, subtitle: String?, color: String?, collapsed: Bool, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+        self.identifier = identifier
+        self.title = title
+        self.subtitle = subtitle
+        self.color = color
+        self.fields = fields
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
+        super.init(collapsed: collapsed, user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
     }
 
     var differenceIdentifier: String {
-        return attachment.identifier
+        return identifier
     }
 
     func isContentEqual(to source: TextAttachmentChatItem) -> Bool {
-        return attachment.collapsed == source.attachment.collapsed && attachment.fields == source.attachment.fields
-    }
-
-    func toggleAttachmentFields() {
-        let filter = "identifier = '\(self.attachment.identifier)'"
-
-        Realm.executeOnMainThread({ realm in
-            if let attachment = realm.objects(Attachment.self).filter(filter).first {
-                attachment.collapsed = !self.attachment.collapsed
-                realm.add(attachment, update: true)
-            }
-        })
+        return collapsed == source.collapsed && fields == source.fields
     }
 }

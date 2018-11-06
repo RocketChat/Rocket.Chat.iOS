@@ -54,7 +54,7 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
 
         reset(stackView: stackView)
 
-        for attachmentField in viewModel.attachment.fields {
+        for attachmentField in viewModel.fields {
             guard let attachmentFieldView = AttachmentFieldView.instantiateFromNib() else {
                 continue
             }
@@ -98,7 +98,6 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             return
         }
 
-        textAttachmentViewModel.toggleAttachmentFields()
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }
