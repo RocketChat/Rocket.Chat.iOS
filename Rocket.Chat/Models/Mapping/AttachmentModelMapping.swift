@@ -37,7 +37,7 @@ extension Attachment: ModelMappeable {
             self.titleLink = titleLink
         }
 
-        self.collapsed = values["collapsed"].bool ?? false
+        self.collapsed = values["collapsed"].bool ?? true
         self.text = values["text"].string
         self.descriptionText = values["description"].string
         self.thumbURL = values["thumb_url"].string

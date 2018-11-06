@@ -103,12 +103,12 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
             return
         }
 
-        title.text = viewModel.attachment.title
-        statusView.backgroundColor = viewModel.attachment.color != nil ? UIColor(hex: viewModel.attachment.color) : .lightGray
+        title.text = viewModel.title
+        statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)
 
-        if viewModel.attachment.collapsed {
+        if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
         } else {
             configureExpandedState(with: viewModel)
@@ -131,7 +131,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
     func configureExpandedState(with viewModel: TextAttachmentChatItem) {
         arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
 
-        if let subtitleText = viewModel.attachment.text {
+        if let subtitleText = viewModel.subtitle {
             emptySubtitleHeightConstraint.isActive = false
             subtitleHeightConstraint.isActive = true
             subtitleTopConstraint.constant = subtitleTopInitialConstant

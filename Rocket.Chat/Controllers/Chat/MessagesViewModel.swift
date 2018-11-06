@@ -170,7 +170,8 @@ final class MessagesViewModel {
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
-            controllerContext: controllerContext
+            controllerContext: controllerContext,
+            collapsibleItemsState: [:]
         ))
     }
 
@@ -370,6 +371,7 @@ final class MessagesViewModel {
             guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
 
             let message = messageSection1.message
+            let collpsibleItemsState = (object.base as? MessageSection)?.collapsibleItemsState ?? [:]
             let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
             var separator: Date?
             var sequential = false
@@ -395,7 +397,8 @@ final class MessagesViewModel {
 
             dataSorted[idx] = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
-                controllerContext: controllerContext
+                controllerContext: controllerContext,
+                collapsibleItemsState: collpsibleItemsState
             ))
 
             if unreadMarker {

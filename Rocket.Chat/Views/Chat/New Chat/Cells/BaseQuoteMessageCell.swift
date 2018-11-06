@@ -45,7 +45,6 @@ class BaseQuoteMessageCell: BaseMessageCell {
             return
         }
 
-        quoteViewModel.toggle()
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }
