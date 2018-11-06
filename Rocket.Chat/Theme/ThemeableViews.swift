@@ -397,6 +397,11 @@ extension ComposerView {
         guard let theme = theme else { return }
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
         containerView.backgroundColor = theme.focusedBackground
+
+        if theme == Theme.light {
+            containerView.backgroundColor = theme.backgroundColor
+        }
+
         tintColor = theme.tintColor
         topSeparatorView.backgroundColor = theme.mutedAccent
         applyThemeFromRuntimeAttributes()
@@ -414,6 +419,10 @@ extension ComposerTextView {
         guard let theme = theme else { return }
         placeholderLabel.textColor = theme.auxiliaryText
         backgroundColor = theme.focusedBackground
+
+        if theme == Theme.light {
+            backgroundColor = theme.backgroundColor
+        }
     }
 }
 
