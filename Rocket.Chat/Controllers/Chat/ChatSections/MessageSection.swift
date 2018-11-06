@@ -21,9 +21,9 @@ final class MessageSection: ChatSection {
     }
 
     var documentController: UIDocumentInteractionController?
-    var collapsibleItemsState: [String: Bool]
+    var collapsibleItemsState: [AnyHashable: Bool]
 
-    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [String: Bool]) {
+    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool]) {
         self.object = object
         self.controllerContext = controllerContext
         self.collapsibleItemsState = collapsibleItemsState
@@ -105,9 +105,16 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:
+                let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
+
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(TextAttachmentChatItem(
-                        attachment: attachment,
+                        identifier: attachment.identifier,
+                        fields: attachment.fields,
+                        title: attachment.title,
+                        subtitle: attachment.text,
+                        color: attachment.color,
+                        collapsed: collapsed,
                         hasText: false,
                         user: user,
                         message: object.message
@@ -116,7 +123,12 @@ final class MessageSection: ChatSection {
                     shouldAppendMessageHeader = false
                 } else {
                     cells.append(TextAttachmentChatItem(
-                        attachment: attachment,
+                        identifier: attachment.identifier,
+                        fields: attachment.fields,
+                        title: attachment.title,
+                        subtitle: attachment.text,
+                        color: attachment.color,
+                        collapsed: collapsed,
                         hasText: true,
                         user: nil,
                         message: nil
@@ -447,11 +459,11 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
-        guard let viewModel = viewModel.base as? QuoteChatItem else {
+        guard let textAttachmentViewModel = viewModel.base as? QuoteChatItem ?? viewModel.base as? TextAttachmentChatItem else {
             return
         }
 
-        collapsibleItemsState[viewModel.differenceIdentifier] = !viewModel.collapsed
+        collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
         messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
         messagesController?.viewModel.updateData()
     }
