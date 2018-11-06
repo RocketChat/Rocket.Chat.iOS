@@ -89,6 +89,12 @@ class TextHintEmojiViewCell: UITableViewCell {
             valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        prefixView.emojiImageView?.image = nil
+        prefixView.emojiImageView?.animatedImage = nil
+    }
 }
 
 // MARK: Consts
