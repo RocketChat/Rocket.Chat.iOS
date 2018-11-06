@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TextHintCell<PrefixView: UIView>: UITableViewCell {
+open class TextHintCell<PrefixView: UIView>: UITableViewCell {
     /*
      The hint's prefix view
      */
@@ -38,7 +38,7 @@ public class TextHintCell<PrefixView: UIView>: UITableViewCell {
         $0.adjustsFontForContentSizeCategory = true
     }
 
-    public override var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         let height = layoutMargins.top + layoutMargins.bottom + valueLabel.intrinsicContentSize.height
         return CGSize(width: super.intrinsicContentSize.width, height: height)
     }
