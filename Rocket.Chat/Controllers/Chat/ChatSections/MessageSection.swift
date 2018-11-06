@@ -21,10 +21,12 @@ final class MessageSection: ChatSection {
     }
 
     var documentController: UIDocumentInteractionController?
+    var collapsibleItemsState: [String: Bool]
 
-    init(object: AnyDifferentiable, controllerContext: UIViewController?) {
+    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [String: Bool]) {
         self.object = object
         self.controllerContext = controllerContext
+        self.collapsibleItemsState = collapsibleItemsState
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -121,9 +123,15 @@ final class MessageSection: ChatSection {
                     ).wrapped)
                 }
             case .textAttachment where !attachment.isFile:
+                let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
+                let text = attachment.text ?? attachment.descriptionText
+
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(QuoteChatItem(
-                        attachment: attachment,
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        text: text,
+                        collapsed: collapsed,
                         hasText: false,
                         user: user,
                         message: object.message
@@ -132,7 +140,10 @@ final class MessageSection: ChatSection {
                     shouldAppendMessageHeader = false
                 } else {
                     cells.append(QuoteChatItem(
-                        attachment: attachment,
+                        identifier: attachment.identifier,
+                        title: attachment.title,
+                        text: text,
+                        collapsed: collapsed,
                         hasText: true,
                         user: nil,
                         message: nil
