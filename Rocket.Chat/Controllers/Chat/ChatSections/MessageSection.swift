@@ -447,7 +447,12 @@ extension MessageSection: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
-        // TODO: Trigger reload
+        guard let viewModel = viewModel.base as? QuoteChatItem else {
+            return
+        }
+
+        collapsibleItemsState[viewModel.differenceIdentifier] = !viewModel.collapsed
         messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
+        messagesController?.viewModel.updateData()
     }
 }
