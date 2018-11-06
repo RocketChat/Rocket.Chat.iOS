@@ -16,33 +16,42 @@ final class QuoteChatItem: BaseMessageChatItem, ChatItem, Differentiable {
         return hasText ? QuoteCell.identifier : QuoteMessageCell.identifier
     }
 
-    var attachment: UnmanagedAttachment
+    let identifier: String
+    let title: String
+    let text: String?
+    let collapsed: Bool
     let hasText: Bool
 
-    init(attachment: UnmanagedAttachment, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
-        self.attachment = attachment
+    init(identifier: String,
+         title: String,
+         text: String?,
+         collapsed: Bool,
+         hasText: Bool,
+         user: UnmanagedUser?,
+         message: UnmanagedMessage?) {
+
+        self.identifier = identifier
+        self.title = title
+        self.text = text
+        self.collapsed = collapsed
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
+
+        super.init(
+            user: user,
+            avatar: message?.avatar,
+            emoji: message?.emoji,
+            date: message?.createdAt,
+            isUnread: message?.unread ?? false
+        )
     }
 
     var differenceIdentifier: String {
-        return attachment.identifier
+        return identifier
     }
 
     func isContentEqual(to source: QuoteChatItem) -> Bool {
-        return attachment.title == source.attachment.title &&
-            attachment.text == source.attachment.text &&
-            attachment.collapsed == source.attachment.collapsed
-    }
-
-    func toggle() {
-        let filter = "identifier = '\(self.attachment.identifier)'"
-
-        Realm.executeOnMainThread({ realm in
-            if let attachment = realm.objects(Attachment.self).filter(filter).first {
-                attachment.collapsed = !self.attachment.collapsed
-                realm.add(attachment, update: true)
-            }
-        })
+        return title == source.title &&
+            text == source.text &&
+            collapsed == source.collapsed
     }
 }
