@@ -75,7 +75,7 @@ final class MessagesViewModel {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInteractive
+        operationQueue.qualityOfService = .userInitiated
         return operationQueue
     }()
 
@@ -85,7 +85,7 @@ final class MessagesViewModel {
     private let queryDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInteractive
+        operationQueue.qualityOfService = .userInitiated
         return operationQueue
     }()
 
@@ -218,7 +218,17 @@ final class MessagesViewModel {
                 continue
             }
 
-            if let section = section(for: message) {
+            let index = data.firstIndex(where: { (section) -> Bool in
+                if let object = section.object.base as? MessageSectionModel {
+                    return object.differenceIdentifier == message.identifier
+                }
+
+                return false
+            })
+
+            if index != nil {
+                return
+            } else if let section = section(for: message) {
                 data.append(section)
             }
         }
