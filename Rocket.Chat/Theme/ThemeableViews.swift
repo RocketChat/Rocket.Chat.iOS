@@ -369,6 +369,28 @@ extension HintsView {
     }
 }
 
+extension UserHintAvatarViewCell {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        usernameLabel.textColor = theme?.auxiliaryText
+    }
+}
+
+extension TextHintLabelCell {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        prefixView.textColor = theme?.actionTintColor
+        prefixView.backgroundColor = theme?.auxiliaryBackground
+    }
+}
+
+extension TextHintEmojiViewCell {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        prefixView.backgroundColor = theme?.auxiliaryBackground
+    }
+}
+
 extension ComposerView {
     override func applyTheme() {
         super.applyTheme()

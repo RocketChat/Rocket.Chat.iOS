@@ -512,6 +512,9 @@
 		8045F4A420D30B8300AA0F3C /* UISearchBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */; };
 		8045F4AB20D3115900AA0F3C /* UITextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */; };
 		8045F4AD20D313C100AA0F3C /* UITextFieldActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */; };
+		80461ACB2190FF06003F1F32 /* UserHintAvatarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80461ACA2190FF06003F1F32 /* UserHintAvatarViewCell.swift */; };
+		80461ACD2191D0D1003F1F32 /* TextHintEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80461ACC2191D0D1003F1F32 /* TextHintEmojiViewCell.swift */; };
+		80461ACF2191D24D003F1F32 /* TextHintLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80461ACE2191D24D003F1F32 /* TextHintLabelCell.swift */; };
 		8052F75720B4ADC400B3B0CF /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75620B4ADC400B3B0CF /* Debounce.swift */; };
 		8052F75920B7522100B3B0CF /* UIAlertActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */; };
 		8052F75C20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */; };
@@ -1439,6 +1442,9 @@
 		8045F4A320D30B8300AA0F3C /* UISearchBarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarTextField.swift; sourceTree = "<group>"; };
 		8045F4AA20D3115900AA0F3C /* UITextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldClearButton.swift; sourceTree = "<group>"; };
 		8045F4AC20D313C100AA0F3C /* UITextFieldActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldActivityIndicator.swift; sourceTree = "<group>"; };
+		80461ACA2190FF06003F1F32 /* UserHintAvatarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHintAvatarViewCell.swift; sourceTree = "<group>"; };
+		80461ACC2191D0D1003F1F32 /* TextHintEmojiViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHintEmojiViewCell.swift; sourceTree = "<group>"; };
+		80461ACE2191D24D003F1F32 /* TextHintLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHintLabelCell.swift; sourceTree = "<group>"; };
 		8052F75620B4ADC400B3B0CF /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		8052F75820B7522100B3B0CF /* UIAlertActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionImage.swift; sourceTree = "<group>"; };
 		8052F75B20B7529800B3B0CF /* UIAlertActionTitleTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionTitleTextAlignment.swift; sourceTree = "<group>"; };
@@ -2291,6 +2297,7 @@
 		416133301D46CA3100E09DA2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				80461AC92190F931003F1F32 /* Hints */,
 				995F710C20C7833500B7535F /* Auth */,
 				416133351D46CA7400E09DA2 /* Chat */,
 				4153E80320504BC800FBC26B /* Preferences */,
@@ -3202,6 +3209,16 @@
 				8039443120B3988F002F317A /* PagedResource.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		80461AC92190F931003F1F32 /* Hints */ = {
+			isa = PBXGroup;
+			children = (
+				80461ACA2190FF06003F1F32 /* UserHintAvatarViewCell.swift */,
+				80461ACC2191D0D1003F1F32 /* TextHintEmojiViewCell.swift */,
+				80461ACE2191D24D003F1F32 /* TextHintLabelCell.swift */,
+			);
+			path = Hints;
 			sourceTree = "<group>";
 		};
 		8052F75A20B7522900B3B0CF /* UIAlertAction */ = {
@@ -5049,6 +5066,7 @@
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
 				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
+				80461ACF2191D24D003F1F32 /* TextHintLabelCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
@@ -5074,6 +5092,7 @@
 				1496A86D20FA4644005C2E14 /* NotificationsChooseCell.swift in Sources */,
 				8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */,
 				8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */,
+				80461ACD2191D0D1003F1F32 /* TextHintEmojiViewCell.swift in Sources */,
 				994C90B42174B50B00383AFF /* BaseVideoMessageCell.swift in Sources */,
 				33A1BB0720FF75D600AFA7D4 /* BaseSubscriptionCell.swift in Sources */,
 				806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */,
@@ -5123,6 +5142,7 @@
 				8067DA9B206BC71A005E3369 /* ReactMessageRequest.swift in Sources */,
 				99619B4820CE3E8D00E1ACCA /* WelcomeViewController.swift in Sources */,
 				996A2653210AB38900DEE7F0 /* SubscriptionUnreadRequest.swift in Sources */,
+				80461ACB2190FF06003F1F32 /* UserHintAvatarViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

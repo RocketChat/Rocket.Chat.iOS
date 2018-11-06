@@ -5,14 +5,27 @@
 //  Created by Matheus Cardoso on 9/12/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
+// NOTE: This is a 'manual' specialization of the generic UserHintCell class
+// This is because we can't extend generic classes with @objc methods
+// Which doesn't allow us to do themes properly.
+// In Swift 5 there's a better workaround:
+// TODO: Make this an empty subclass when Swift 5 is released.
+// class UserHintAvatarViewCell: UserHintCell<AvatarView> { }
+//
 
 import UIKit
 
-open class UserHintCell<AvatarView: UIView>: UITableViewCell {
+@discardableResult func tap<Object>(_ object: Object, transform: (inout Object) throws -> Void) rethrows -> Object {
+    var object = object
+    try transform(&object)
+    return object
+}
+
+class UserHintAvatarViewCell: UITableViewCell {
     /*
      The user's avatar image view
      */
-    open let avatarView: AvatarView = tap(AvatarView()) {
+    let avatarView: AvatarView = tap(AvatarView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.avatarCornerRadius
@@ -27,7 +40,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's name label
      */
-    open let nameLabel: UILabel = tap(UILabel()) {
+    let nameLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .body)
@@ -37,7 +50,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's username label
      */
-    open let usernameLabel: UILabel = tap(UILabel()) {
+    let usernameLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .footnote)
@@ -46,21 +59,21 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
         $0.textColor = Consts.usernameColor
     }
 
-    open override var intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize {
         let height = layoutMargins.top +
-                     layoutMargins.bottom +
-                     nameLabel.intrinsicContentSize.height +
-                     usernameLabel.intrinsicContentSize.height
+            layoutMargins.bottom +
+            nameLabel.intrinsicContentSize.height +
+            usernameLabel.intrinsicContentSize.height
 
         return CGSize(width: super.intrinsicContentSize.width, height: height)
     }
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -94,7 +107,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             // nameLabel
-            
+
             nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Consts.nameLeading),
             nameLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: Consts.nameBottom),
 
