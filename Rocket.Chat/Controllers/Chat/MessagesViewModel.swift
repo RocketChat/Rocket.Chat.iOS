@@ -343,9 +343,7 @@ final class MessagesViewModel {
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {
-                DispatchQueue.main.async {
-                    self?.onDataChanged?()
-                }
+                self?.onDataChanged?()
             }
         }
     }
