@@ -341,7 +341,7 @@ extension MessageSection: ChatMessageCellProtocol {
         }
 
         if recognizer.state == .began {
-            presentActionsFor(message, view: view)
+            messagesController?.presentActionsFor(message, view: view)
         }
     }
 

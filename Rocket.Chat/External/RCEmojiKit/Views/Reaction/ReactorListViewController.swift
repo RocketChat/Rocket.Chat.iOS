@@ -65,3 +65,11 @@ final class ReactorListViewController: UIViewController, Closeable {
         }
     }
 }
+
+extension ReactorListViewController {
+
+    func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
+        presentActionSheetForUser(user, subscription: subscription, source: source)
+    }
+
+}
