@@ -60,7 +60,7 @@ class AvatarViewSpec: XCTestCase {
         let user = User()
         user.username = "foo.bar"
 
-        avatarView.user = user
+        avatarView.username = user.username
         XCTAssertEqual(avatarView.labelInitials.text, "FB", "label text will be FB")
         XCTAssertEqual(avatarView.backgroundColor, UIColor(hex: "#00BCD4"), "background color is not black")
     }
@@ -70,7 +70,7 @@ class AvatarViewSpec: XCTestCase {
 
         let user = User()
 
-        avatarView.user = user
+        avatarView.username = user.username
         XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
         XCTAssertEqual(avatarView.backgroundColor, .black, "background color is black")
     }

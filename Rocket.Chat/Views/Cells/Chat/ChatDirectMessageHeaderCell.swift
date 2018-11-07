@@ -43,7 +43,7 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        avatarView.user = nil
+        avatarView.username = nil
         labelUser.text = ""
         labelStartConversation.text = ""
     }
@@ -56,7 +56,7 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
         }
 
         labelUser.text = user.displayName()
-        avatarView.user = user
+        avatarView.username = user.username
 
         let startText = localized("chat.dm.start_conversation")
         labelStartConversation.text = String(format: startText, user.displayName())

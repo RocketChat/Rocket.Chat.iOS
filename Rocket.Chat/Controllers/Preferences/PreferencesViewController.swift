@@ -149,7 +149,7 @@ final class PreferencesViewController: BaseTableViewController {
     }
 
     private func updateUserInformation() {
-        avatarView.user = viewModel.user
+        avatarView.username = viewModel.user?.username
         labelProfileName.text = viewModel.userName
         labelProfileStatus.text = viewModel.userStatus.lowercased()
     }

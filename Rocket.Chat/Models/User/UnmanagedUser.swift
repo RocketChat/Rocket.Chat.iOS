@@ -18,6 +18,7 @@ struct UnmanagedUser: UnmanagedObject, Equatable {
     var privateStatus: String
     var status: UserStatus
     var utcOffset: Double
+    var avatarURL: URL?
 
     var managedObject: User? {
         return User.find(withIdentifier: identifier)?.validated()
@@ -39,6 +40,7 @@ extension UnmanagedUser {
         privateStatus = user.privateStatus
         status = user.status
         utcOffset = user.utcOffset
+        avatarURL = user.avatarURL()
     }
 }
 

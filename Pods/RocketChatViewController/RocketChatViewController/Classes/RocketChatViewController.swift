@@ -148,7 +148,7 @@ public protocol ChatCell {
 }
 
 public protocol ChatDataUpdateDelegate: class {
-    func didUpdateChatData(newData: [AnyChatSection])
+    func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable])
 }
 
 /**
@@ -215,7 +215,7 @@ open class RocketChatViewController: UICollectionViewController {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
 
         return operationQueue
     }()
@@ -266,22 +266,38 @@ open class RocketChatViewController: UICollectionViewController {
 
     open func updateData(with target: [ArraySection<AnyChatSection, AnyChatItem>]) {
         updateDataQueue.addOperation { [weak self] in
-            guard
-                let strongSelf = self,
-                let collectionView = strongSelf.collectionView
-            else {
-                return
-            }
-
-            let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
-
             DispatchQueue.main.async {
+                guard
+                    let strongSelf = self,
+                    let collectionView = strongSelf.collectionView
+                else {
+                    return
+                }
+
                 UIView.performWithoutAnimation {
-                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
+                    let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
+                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData, changes in
                         strongSelf.internalData = newData
 
                         let newSections = newData.map { $0.model }
-                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
+                        var updatedItems = [AnyHashable]()
+
+                        for (sectionIndex, section) in newSections.enumerated() {
+                            guard let changes = changes else {
+                                break
+                            }
+
+                            if changes.sectionUpdated.contains(sectionIndex) {
+                                for (itemIndex, item) in changes.elementUpdated.enumerated() {
+                                    if item.section == sectionIndex {
+                                        let elementIdentifier = section.viewModels()[itemIndex].differenceIdentifier
+                                        updatedItems.append(elementIdentifier)
+                                    }
+                                }
+                            }
+                        }
+
+                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
 
                         assert(newSections.count == newData.count)
                     }

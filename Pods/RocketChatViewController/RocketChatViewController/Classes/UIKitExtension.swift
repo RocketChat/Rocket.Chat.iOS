@@ -26,21 +26,21 @@ public extension UICollectionView {
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C, Changeset<C>?) -> Void
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
-            setData(data)
+            setData(data, nil)
             return reloadData()
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
-                setData(data)
+                setData(data, changeset)
                 return reloadData()
             }
 
             performBatchUpdates({
-                setData(changeset.data)
+                setData(changeset.data, changeset)
 
                 if !changeset.sectionDeleted.isEmpty {
                     deleteSections(IndexSet(changeset.sectionDeleted))
