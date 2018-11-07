@@ -491,7 +491,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func onSelectRowAt(_ indexPath: IndexPath) {
         guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
 
-        searchController?.searchBar.resignFirstResponder()
+        guard searchController?.searchBar.isFirstResponder == false else {
+            searchController?.searchBar.resignFirstResponder()
+            searchController?.dismiss(animated: false, completion: {
+                self.openChat(for: subscription)
+            })
+
+            return
+        }
 
         openChat(for: subscription)
     }
