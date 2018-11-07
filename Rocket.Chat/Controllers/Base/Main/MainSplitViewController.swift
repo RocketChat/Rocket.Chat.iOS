@@ -69,7 +69,7 @@ final class MainSplitViewController: UISplitViewController {
             traitCollection.horizontalSizeClass != .compact,
             let nav = primaryViewController as? UINavigationController,
             let subscriptions = nav.viewControllers.first as? SubscriptionsViewController,
-            let subscription = (detailViewController as? ChatViewController)?.subscription
+            let subscription = (detailViewController as? MessagesViewController)?.subscription
         else {
             return
         }

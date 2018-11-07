@@ -80,7 +80,6 @@ PODS:
   - semver (1.1.0)
   - SimpleImageViewer (1.2.0):
     - FLAnimatedImage
-  - SlackTextViewController (1.9.6)
   - Starscream (2.1.1)
   - SwiftLint (0.27.0)
   - SwiftyJSON (4.1.0)
@@ -104,7 +103,6 @@ DEPENDENCIES:
   - RocketChatViewController (from `https://github.com/RocketChat/RocketChatViewController`)
   - semver
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
-  - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
   - Starscream (~> 2)
   - SwiftLint
   - SwiftyJSON
@@ -147,8 +145,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
-  SlackTextViewController:
-    :git: https://github.com/rafaelks/SlackTextViewController.git
 
 CHECKOUT OPTIONS:
   MobilePlayer:
@@ -163,9 +159,6 @@ CHECKOUT OPTIONS:
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
     :git: https://github.com/cardoso/SimpleImageViewer.git
-  SlackTextViewController:
-    :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
-    :git: https://github.com/rafaelks/SlackTextViewController.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
@@ -193,12 +186,11 @@ SPEC CHECKSUMS:
   RocketChatViewController: e863b6b8bb3ffa0ff7d608e485c0d3a8f5a6eb7a
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
-  SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: b8ecb80eb8dc863ec6655fa8f1d92cc5f6ca5f0a
+PODFILE CHECKSUM: babc64504b7066666d8306070124455b34911787
 
 COCOAPODS: 1.5.3

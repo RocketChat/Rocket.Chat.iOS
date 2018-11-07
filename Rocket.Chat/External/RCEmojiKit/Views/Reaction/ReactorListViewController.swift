@@ -8,6 +8,8 @@
 
 import Foundation
 
+extension ReactorListViewController: UserActionSheetPresenter {}
+
 final class ReactorListViewController: UIViewController, Closeable {
     override var preferredContentSize: CGSize {
         set { }
