@@ -154,7 +154,7 @@ CHECKOUT OPTIONS:
     :commit: c34d9ccef689c55b9eae69f3c65283da8d8b0c6c
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   RocketChatViewController:
-    :commit: 0e9a630ed072882d4893a6216d5a22d1af8b0c2c
+    :commit: e6b2d8dc1fd78c31d96b193d5069a12705453c25
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52

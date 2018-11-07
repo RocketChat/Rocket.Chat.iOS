@@ -274,29 +274,15 @@ open class RocketChatViewController: UICollectionViewController {
                     return
                 }
 
+                let source = strongSelf.internalData
+
                 UIView.performWithoutAnimation {
-                    let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
+                    let changeset = StagedChangeset(source: source, target: target)
                     collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData, changes in
                         strongSelf.internalData = newData
 
                         let newSections = newData.map { $0.model }
-                        var updatedItems = [AnyHashable]()
-
-                        for (sectionIndex, section) in newSections.enumerated() {
-                            guard let changes = changes else {
-                                break
-                            }
-
-                            if changes.sectionUpdated.contains(sectionIndex) {
-                                for (itemIndex, item) in changes.elementUpdated.enumerated() {
-                                    if item.section == sectionIndex {
-                                        let elementIdentifier = section.viewModels()[itemIndex].differenceIdentifier
-                                        updatedItems.append(elementIdentifier)
-                                    }
-                                }
-                            }
-                        }
-
+                        let updatedItems = strongSelf.updatedItems(from: source, with: changes)
                         strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
 
                         assert(newSections.count == newData.count)
@@ -304,6 +290,28 @@ open class RocketChatViewController: UICollectionViewController {
                 }
             }
         }
+    }
+
+    func updatedItems(from data: [ArraySection<AnyChatSection, AnyChatItem>], with changes: Changeset<[ArraySection<AnyChatSection, AnyChatItem>]>?) -> [AnyHashable] {
+        guard let changes = changes else {
+            return []
+        }
+
+        var updatedItems = [AnyHashable]()
+
+        changes.elementUpdated.forEach { item in
+            let section = data[item.section]
+            let elementId = section.elements[item.element].differenceIdentifier
+            updatedItems.append(elementId)
+        }
+
+        changes.elementDeleted.forEach { item in
+            let section = data[item.section]
+            let elementId = section.elements[item.element].differenceIdentifier
+            updatedItems.append(elementId)
+        }
+
+        return updatedItems
     }
 }
 

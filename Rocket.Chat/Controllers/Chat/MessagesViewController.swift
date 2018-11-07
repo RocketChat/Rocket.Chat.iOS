@@ -115,6 +115,7 @@ final class MessagesViewController: RocketChatViewController {
 
         ThemeManager.addObserver(self)
         composerView.delegate = self
+        composerView.applyTheme()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
@@ -301,6 +302,7 @@ extension MessagesViewController {
 extension MessagesViewController: ChatDataUpdateDelegate {
 
     func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable]) {
+        updatedItems.forEach { viewSizingModel.invalidateLayout(for: $0) }
         viewModel.data = newData
         viewModel.updateData(shouldUpdateUI: false)
     }

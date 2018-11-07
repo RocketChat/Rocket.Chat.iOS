@@ -5,22 +5,26 @@
 //  Created by Matheus Cardoso on 9/12/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
+// NOTE: This is a 'manual' specialization of the generic TextHintCell class
+// This is because we can't extend generic classes with @objc methods
+// Which doesn't allow us to do themes properly.
+// In Swift 5 there's a better workaround:
+// TODO: Make this an empty subclass when Swift 5 is released.
+// class TextHintEmojiViewCell: TextHintCell<EmojiView> { }
+//
 
 import UIKit
 
-open class TextHintCell<PrefixView: UIView>: UITableViewCell {
+class TextHintEmojiViewCell: UITableViewCell {
     /*
      The hint's prefix view
      */
-    open let prefixView: PrefixView = tap(PrefixView()) {
+    let prefixView: EmojiView = tap(EmojiView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.prefixCornerRadius
         $0.clipsToBounds = true
         $0.backgroundColor = Consts.prefixBackgroundColor
-
-        ($0 as? UILabel)?.textAlignment = .center
-        ($0 as? UILabel)?.textColor = #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.prefixWidth),
@@ -31,24 +35,24 @@ open class TextHintCell<PrefixView: UIView>: UITableViewCell {
     /*
      The hint's value label
      */
-    open let valueLabel: UILabel = tap(UILabel()) {
+    let valueLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .body)
         $0.adjustsFontForContentSizeCategory = true
     }
 
-    open override var intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize {
         let height = layoutMargins.top + layoutMargins.bottom + valueLabel.intrinsicContentSize.height
         return CGSize(width: super.intrinsicContentSize.width, height: height)
     }
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -84,6 +88,12 @@ open class TextHintCell<PrefixView: UIView>: UITableViewCell {
             valueLabel.leadingAnchor.constraint(equalTo: prefixView.trailingAnchor, constant: Consts.valueLeading),
             valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        prefixView.emojiImageView?.image = nil
+        prefixView.emojiImageView?.animatedImage = nil
     }
 }
 
