@@ -300,7 +300,7 @@ extension MessagesViewController {
 
 extension MessagesViewController: ChatDataUpdateDelegate {
 
-    func didUpdateChatData(newData: [AnyChatSection]) {
+    func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable]) {
         viewModel.data = newData
         viewModel.updateData(shouldUpdateUI: false)
     }
