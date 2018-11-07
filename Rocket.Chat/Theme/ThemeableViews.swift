@@ -391,6 +391,16 @@ extension TextHintEmojiViewCell {
     }
 }
 
+extension ReplyView {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        backgroundView.backgroundColor = theme?.auxiliaryBackground
+        nameLabel.textColor = theme?.actionTintColor
+        timeLabel.textColor = theme?.auxiliaryText
+        closeButton.tintColor = theme?.auxiliaryText
+    }
+}
+
 extension ComposerView {
     override func applyTheme() {
         super.applyTheme()
