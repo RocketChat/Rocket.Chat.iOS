@@ -75,7 +75,7 @@ final class MessagesViewModel {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
         return operationQueue
     }()
 
@@ -85,7 +85,7 @@ final class MessagesViewModel {
     private let queryDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
         return operationQueue
     }()
 
@@ -287,20 +287,31 @@ final class MessagesViewModel {
         - oldestMessage: This is the parameter that will be sent to the server in
             order to get the correct page of data.
      */
-    func fetchMessages(from oldestMessage: Date?) {
-        guard !requestingData, (hasMoreData || oldestMessage == nil) else { return }
-        guard let subscription = subscription?.validated() else { return }
-        guard let subscriptionUnmanaged = subscription.unmanaged else { return }
+    func fetchMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
+        guard
+            !requestingData,
+            hasMoreData || oldestMessage == nil,
+            let subscription = subscription?.validated(),
+            let subscriptionUnmanaged = subscription.unmanaged
+        else {
+            return
+        }
 
         requestingData = true
 
         queryDataQueue.addOperation { [weak self] in
-            guard let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid) else { return }
-            let messagesFromDatabase = subscriptionValid.fetchMessages(30, lastMessageDate: oldestMessage)
+            guard
+                let self = self,
+                let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid)
+            else {
+                return
+            }
+
+            let messagesFromDatabase = subscriptionValid.fetchMessages(20, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
 
-                let index = self?.data.firstIndex(where: { (section) -> Bool in
+                let index = self.data.firstIndex(where: { (section) -> Bool in
                     if let object = section.object.base as? MessageSectionModel {
                         return object.differenceIdentifier == message.identifier
                     }
@@ -310,14 +321,21 @@ final class MessagesViewModel {
 
                 if index != nil {
                     return
-                } else if let section = self?.section(for: message) {
-                    self?.data.append(section)
+                } else if let section = self.section(for: message) {
+                    self.data.append(section)
                 }
             }
 
             if messagesFromDatabase.count > 0 {
-                DispatchQueue.main.async {
-                    self?.updateData()
+                self.updateData()
+
+                if prepareAnotherPage {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [weak self] in
+                        self?.fetchMessages(
+                            from: self?.oldestMessageDateBeingPresented,
+                            prepareAnotherPage: false
+                        )
+                    })
                 }
             }
         }
