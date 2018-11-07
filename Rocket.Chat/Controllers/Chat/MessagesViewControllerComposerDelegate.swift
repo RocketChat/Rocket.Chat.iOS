@@ -46,7 +46,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         switch hint {
         case .user(let user):
             let cell = hintsView.dequeueReusableCell(withType: UserHintAvatarViewCell.self)
-            cell.avatarView.user = user
+            cell.avatarView.username = user.username
             cell.usernameLabel.text = user.username
             cell.nameLabel.text = user.name
             return cell
