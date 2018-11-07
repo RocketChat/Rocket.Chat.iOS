@@ -80,11 +80,9 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         updateStatus(subscription: subscription, user: user)
 
         if let user = user {
-            avatarView.subscription = nil
-            avatarView.user = user
+            avatarView.username = user.username
         } else {
-            avatarView.user = nil
-            avatarView.subscription = subscription
+            avatarView.username = subscription.name
         }
 
         labelName.text = subscription.displayName()

@@ -283,7 +283,6 @@ open class RocketChatViewController: UICollectionViewController {
 
                         let newSections = newData.map { $0.model }
                         let updatedItems = strongSelf.updatedItems(from: source, with: changes)
-
                         strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
 
                         assert(newSections.count == newData.count)
@@ -313,7 +312,8 @@ open class RocketChatViewController: UICollectionViewController {
         }
 
         return updatedItems
-    }}
+    }
+}
 
 // MARK: Content Adjustment
 

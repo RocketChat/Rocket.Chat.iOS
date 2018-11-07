@@ -245,7 +245,7 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.emoji = message.emoji
-        avatarView.user = message.user
+        avatarView.username = message.user?.username
 
         if let avatar = message.avatar {
             avatarView.avatarURL = URL(string: avatar)

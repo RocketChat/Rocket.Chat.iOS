@@ -50,27 +50,6 @@ final class MessagesViewModelSpec: XCTestCase {
         XCTAssertEqual(model.numberOfSections, 1)
     }
 
-    func testOldestDatePresent() {
-        let model = MessagesViewModel()
-
-        let testDate = Date().addingTimeInterval(-10000)
-        guard
-            let messageFirst = Message.testInstance().validated()?.unmanaged,
-            var messageSecond = Message.testInstance().validated()?.unmanaged
-        else {
-            return XCTFail("messages must be created")
-        }
-
-        messageSecond.createdAt = testDate
-
-        if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
-            model.data = [section1, section2]
-        }
-
-        XCTAssertEqual(model.numberOfSections, 2)
-        XCTAssertEqual(model.oldestMessageDateBeingPresented, testDate)
-    }
-
     func testSequentialMessages() {
         let model = MessagesViewModel()
 

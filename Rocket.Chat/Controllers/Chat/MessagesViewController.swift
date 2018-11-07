@@ -197,6 +197,17 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    // MARK: Pagination
+
+    func loadNextPageIfNeeded() {
+        guard let collectionView = collectionView else { return }
+
+        let bottomEdge = collectionView.contentOffset.y + collectionView.frame.size.height
+        if bottomEdge >= collectionView.contentSize.height - 200 {
+            viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+        }
+    }
+
     // MARK: TitleView
 
     private func setupTitleView() {
@@ -255,14 +266,6 @@ extension MessagesViewController {
         return .zero
     }
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if viewModel.numberOfSections - indexPath.section <= 5 {
-            viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
-        }
-
-        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
-    }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let item = viewModel.item(for: indexPath) else {
             return .zero
@@ -309,6 +312,7 @@ extension MessagesViewController {
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         resetScrollToBottomButtonPosition()
+        loadNextPageIfNeeded()
     }
 
 }
