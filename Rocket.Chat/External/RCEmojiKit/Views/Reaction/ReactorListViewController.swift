@@ -8,6 +8,8 @@
 
 import Foundation
 
+extension ReactorListViewController: UserActionSheetPresenter {}
+
 final class ReactorListViewController: UIViewController, Closeable {
     override var preferredContentSize: CGSize {
         set { }
@@ -64,12 +66,4 @@ final class ReactorListViewController: UIViewController, Closeable {
             navigationController?.navigationBar.topItem?.title = ""
         }
     }
-}
-
-extension ReactorListViewController {
-
-    func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
-        presentActionSheetForUser(user, subscription: subscription, source: source)
-    }
-
 }

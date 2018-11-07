@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import DifferenceKit
+import RocketChatViewController
+import MobilePlayer
+import FLAnimatedImage
+import SimpleImageViewer
+import RealmSwift
 
 extension MessageSection: ChatMessageCellProtocol {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
@@ -67,7 +73,7 @@ extension MessageSection: ChatMessageCellProtocol {
         }
 
         if recognizer.state == .began {
-            messagesController?.presentActionsFor(message, view: view)
+            presentActionsFor(message, view: view)
         }
     }
 
@@ -317,7 +323,7 @@ extension MessageSection {
             guard
                 let subscription = self.messagesController?.subscription.validated()?.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
-                else {
+            else {
                     return
             }
 
@@ -327,7 +333,7 @@ extension MessageSection {
                 guard
                     let identifier = message.identifier,
                     let failedMessage = subscription.managedObject?.messages?.filter("identifier = %@", identifier).first
-                    else {
+                else {
                         return
                 }
 
@@ -354,7 +360,7 @@ extension MessageSection {
                 guard
                     let subscription = subscription.managedObject,
                     let failedMessages = subscription.messages?.filter("failed = true")
-                    else {
+                else {
                         return
                 }
 

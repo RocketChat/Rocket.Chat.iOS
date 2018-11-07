@@ -365,36 +365,3 @@ extension MessagesViewController: SocketConnectionHandler {
     }
 
 }
-
-extension MessagesViewController {
-
-    func presentActionsFor(_ message: Message, view: UIView) {
-        guard !message.temporary, message.type.actionable else { return }
-
-        var actions: [UIAlertAction] = []
-
-        if !message.failed {
-            actions = actionsForMessage(message, view: view)
-        } else {
-            actions = actionsForFailedMessage(message)
-        }
-
-        if actions.count == 0 {
-            return
-        }
-
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        actions.forEach(alert.addAction)
-
-        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = view
-            presenter.sourceRect = view.bounds
-        }
-
-        present(alert, animated: true, completion: nil)
-    }
-
-}
