@@ -45,32 +45,37 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
         switch hint {
         case .user(let user):
-            let cell = hintsView.dequeueReusableCell(withType: UserHintCell<AvatarView>.self)
+            let cell = hintsView.dequeueReusableCell(withType: UserHintAvatarViewCell.self)
             cell.avatarView.username = user.username
             cell.usernameLabel.text = user.username
             cell.nameLabel.text = user.name
             return cell
 
         case .emoji(let emoji, _):
-            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<EmojiView>.self)
+            let cell = hintsView.dequeueReusableCell(withType: TextHintEmojiViewCell.self)
             cell.prefixView.setEmoji(emoji)
             cell.valueLabel.text = emoji.shortname
+
+            if cell.valueLabel.text?.first != ":" {
+                cell.valueLabel.text = ":\(cell.valueLabel.text ?? ""):"
+            }
+
             return cell
 
         case .command(let command):
-            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            let cell = hintsView.dequeueReusableCell(withType: TextHintLabelCell.self)
             cell.prefixView.text = "/"
             cell.valueLabel.text = command.command
             return cell
 
         case .room(let room):
-            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            let cell = hintsView.dequeueReusableCell(withType: TextHintLabelCell.self)
             cell.prefixView.text = "#"
             cell.valueLabel.text = room.name
             return cell
 
         case .userGroup(let userGroup):
-            let cell = hintsView.dequeueReusableCell(withType: TextHintCell<UILabel>.self)
+            let cell = hintsView.dequeueReusableCell(withType: TextHintLabelCell.self)
             cell.prefixView.text = "@"
             cell.valueLabel.text = userGroup
             return cell
