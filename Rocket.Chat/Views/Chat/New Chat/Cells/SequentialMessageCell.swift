@@ -59,11 +59,14 @@ final class SequentialMessageCell: BaseMessageCell, SizingCell {
     }
 
     func updateText() {
-        guard let viewModel = viewModel?.base as? SequentialMessageChatItem else {
+        guard
+            let viewModel = viewModel?.base as? SequentialMessageChatItem,
+            let managedObject = viewModel.message.managedObject
+        else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: managedObject, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
@@ -105,11 +108,14 @@ final class SequentialMessageCell: BaseMessageCell, SizingCell {
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+        guard
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let managedObject = viewModel.message.managedObject
+        else {
             return
         }
 
-        delegate?.handleLongPressMessageCell(viewModel.message.managedObject, view: contentView, recognizer: recognizer)
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 }
 

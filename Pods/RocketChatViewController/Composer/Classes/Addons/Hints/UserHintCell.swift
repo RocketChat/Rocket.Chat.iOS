@@ -48,9 +48,9 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
 
     open override var intrinsicContentSize: CGSize {
         let height = layoutMargins.top +
-                     layoutMargins.bottom +
-                     nameLabel.intrinsicContentSize.height +
-                     usernameLabel.intrinsicContentSize.height
+            layoutMargins.bottom +
+            nameLabel.intrinsicContentSize.height +
+            usernameLabel.intrinsicContentSize.height
 
         return CGSize(width: super.intrinsicContentSize.width, height: height)
     }
@@ -94,7 +94,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             // nameLabel
-            
+
             nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Consts.nameLeading),
             nameLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: Consts.nameBottom),
 

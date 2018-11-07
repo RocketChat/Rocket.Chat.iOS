@@ -394,7 +394,7 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = cell.frame
 
         if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {
-            controller.subscription = subscription.managedObject.validated()
+            controller.subscription = subscription.managedObject
             return controller
         }
 
@@ -489,7 +489,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func onSelectRowAt(_ indexPath: IndexPath) {
-        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated() else { return }
+        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
 
         searchController?.searchBar.resignFirstResponder()
 
@@ -519,7 +519,7 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
 
         guard
-            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject.validated(),
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject,
             subscription.open
         else {
             return nil

@@ -845,6 +845,7 @@
 		99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */; };
 		99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */; };
 		99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */; };
+		99EA7A99219181750023BB63 /* BaseTextAttachmentChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EA7A98219181750023BB63 /* BaseTextAttachmentChatItem.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
 		99F530A120D0F08A004EC060 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F530A020D0F08A004EC060 /* BaseTableViewController.swift */; };
@@ -1756,6 +1757,7 @@
 		99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequest.swift; sourceTree = "<group>"; };
 		99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListControllerSearch.swift; sourceTree = "<group>"; };
 		99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequestSpec.swift; sourceTree = "<group>"; };
+		99EA7A98219181750023BB63 /* BaseTextAttachmentChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextAttachmentChatItem.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
 		99F530A020D0F08A004EC060 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
@@ -3837,6 +3839,7 @@
 				419EB5B4215E52BC00E591BF /* VideoMessageChatItem.swift */,
 				419EB5BA215E69F200E591BF /* ReactionsChatItem.swift */,
 				993B7B3F215F0B730067B962 /* FileMessageChatItem.swift */,
+				99EA7A98219181750023BB63 /* BaseTextAttachmentChatItem.swift */,
 				998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */,
 				4135A64721623F3600C1741A /* ImageMessageChatItem.swift */,
 				99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */,
@@ -5043,6 +5046,7 @@
 				809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */,
 				8032E3E820362EF5009D33CE /* UpdateMessageRequest.swift in Sources */,
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
+				99EA7A99219181750023BB63 /* BaseTextAttachmentChatItem.swift in Sources */,
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,
 				41D3668820C0323100970B99 /* SubscriptionsSortingViewModel.swift in Sources */,
 				800E22861F8507E400DA84F1 /* RoomMessagesRequest.swift in Sources */,

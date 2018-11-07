@@ -140,7 +140,7 @@ extension MessageSection {
             Realm.executeOnMainThread { realm in
                 guard
                     let identifier = message.identifier,
-                    let failedMessage = subscription.managedObject.messages.filter("identifier = %@", identifier).first
+                    let failedMessage = subscription.managedObject?.messages?.filter("identifier = %@", identifier).first
                 else {
                     return
                 }
@@ -165,7 +165,13 @@ extension MessageSection {
             var messagesToResend: [(identifier: String, text: String)] = []
 
             Realm.executeOnMainThread { realm in
-                let failedMessages = subscription.managedObject.messages.filter("failed = true")
+                guard
+                    let subscription = subscription.managedObject,
+                    let failedMessages = subscription.messages?.filter("failed = true")
+                else {
+                    return
+                }
+
                 messagesToResend = failedMessages.map { (identifier: $0.identifier ?? "", text: $0.text) }
                 realm.delete(failedMessages)
             }

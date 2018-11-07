@@ -48,7 +48,6 @@ enum MessageType: String {
 }
 
 final class Message: BaseModel {
-    @objc dynamic var subscription: Subscription?
     @objc dynamic var internalType: String = ""
     @objc dynamic var rid = ""
     @objc dynamic var createdAt: Date?
@@ -104,6 +103,10 @@ final class Message: BaseModel {
         }
 
         return nil
+    }
+
+    var subscription: Subscription? {
+        return Subscription.find(rid: rid)
     }
 
     // MARK: Internal

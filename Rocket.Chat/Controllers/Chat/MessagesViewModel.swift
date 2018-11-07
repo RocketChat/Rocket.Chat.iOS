@@ -46,7 +46,8 @@ final class MessagesViewModel {
 
     /**
      This block is going to be called every time there's
-     an update in the data of the view model.
+     an update in the data of the view model. This is not
+     called in the main thread.
      */
     internal var onDataChanged: VoidCompletion?
 
@@ -65,6 +66,33 @@ final class MessagesViewModel {
      If there's more data to be fetched from the API.
      */
     internal var hasMoreData = true
+
+    /**
+     The oldest message requested from the API at the moment.
+     */
+    internal var oldestMessageDateFromRemote: Date?
+
+    /**
+     The OperationQueue responsible for sorting the data
+     and organizing it. Operation is required to prevent
+     manipulating data that was changed.
+     */
+    private let updateDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
+
+    /**
+     The OperationQueue responsible for querying the data from Realm.
+     */
+    private let queryDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
 
     // MARK: Life Cycle Controls
 
@@ -147,7 +175,8 @@ final class MessagesViewModel {
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
-            controllerContext: controllerContext
+            controllerContext: controllerContext,
+            collapsibleItemsState: [:]
         ))
     }
 
@@ -194,7 +223,17 @@ final class MessagesViewModel {
                 continue
             }
 
-            if let section = section(for: message) {
+            let index = data.firstIndex(where: { (section) -> Bool in
+                if let object = section.object.base as? MessageSectionModel {
+                    return object.differenceIdentifier == message.identifier
+                }
+
+                return false
+            })
+
+            if index != nil {
+                return
+            } else if let section = section(for: message) {
                 data.append(section)
             }
         }
@@ -233,18 +272,6 @@ final class MessagesViewModel {
     }
 
     /**
-     This method will return the oldest date present in the list of messages. This is
-     the data cached in the view model and not in the database.
-     */
-    internal var oldestMessageDateBeingPresented: Date? {
-        if let object = data.last?.base.object.base as? MessageSectionModel {
-            return object.message.createdAt
-        }
-
-        return nil
-    }
-
-    /**
      This method requests a new page of messages to the API. If the view model
      already detected that there's no more data to fetch, or it's currently
      fetching a new page, the method won't be executed.
@@ -253,30 +280,66 @@ final class MessagesViewModel {
         - oldestMessage: This is the parameter that will be sent to the server in
             order to get the correct page of data.
      */
-    func fetchMessages(from oldestMessage: Date?) {
-        guard !requestingData, hasMoreData else { return }
-        guard let subscription = subscription?.validated() else { return }
-        guard let subscriptionUnmanaged = subscription.unmanaged else { return }
+    func fetchMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
+        guard
+            !requestingData,
+            hasMoreData || oldestMessage == nil,
+            let subscription = subscription?.validated(),
+            let subscriptionUnmanaged = subscription.unmanaged
+        else {
+            return
+        }
 
-        let messagesFromDatabase = subscription.fetchMessages(30, lastMessageDate: oldestMessage)
-        messagesFromDatabase.forEach {
+        requestingData = true
+
+        queryDataQueue.addOperation { [weak self] in
             guard
-                let message = $0.validated()?.unmanaged,
-                let section = section(for: message)
+                let self = self,
+                let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid)
             else {
                 return
             }
 
-            data.append(section)
+            let pageSize = self.data.isEmpty || !prepareAnotherPage ? 30 : 10
+            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
+            messagesFromDatabase.forEach {
+                guard let message = $0.validated()?.unmanaged else { return }
+
+                let index = self.data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return object.differenceIdentifier == message.identifier
+                    }
+
+                    return false
+                })
+
+                if index != nil {
+                    return
+                } else if let section = self.section(for: message) {
+                    self.data.append(section)
+                }
+            }
+
+            if messagesFromDatabase.count > 0 {
+                self.updateData()
+
+                if prepareAnotherPage {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                        self?.fetchMessages(
+                            from: self?.oldestMessageDateFromRemote,
+                            prepareAnotherPage: false
+                        )
+                    })
+                }
+            }
         }
 
-        if messagesFromDatabase.count > 0 {
-            updateData()
-        }
-
-        requestingData = true
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
+                if let oldest = oldest {
+                    self?.oldestMessageDateFromRemote = oldest
+                }
+
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
             }
@@ -291,14 +354,12 @@ final class MessagesViewModel {
      separators and unread marks.
      */
     internal func updateData(shouldUpdateUI: Bool = true) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        updateDataQueue.addOperation { [weak self] in
             self?.cacheDataSorted()
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {
-                DispatchQueue.main.async {
-                    self?.onDataChanged?()
-                }
+                self?.onDataChanged?()
             }
         }
     }
@@ -334,6 +395,7 @@ final class MessagesViewModel {
             guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
 
             let message = messageSection1.message
+            let collpsibleItemsState = (object.base as? MessageSection)?.collapsibleItemsState ?? [:]
             let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
             var separator: Date?
             var sequential = false
@@ -359,7 +421,8 @@ final class MessagesViewModel {
 
             dataSorted[idx] = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
-                controllerContext: controllerContext
+                controllerContext: controllerContext,
+                collapsibleItemsState: collpsibleItemsState
             ))
 
             if unreadMarker {

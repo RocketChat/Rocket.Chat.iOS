@@ -29,18 +29,6 @@ extension User {
         return username
     }
 
-    func avatarURL(_ auth: Auth? = nil) -> URL? {
-        guard
-            !isInvalidated,
-            let username = username,
-            let auth = auth ?? AuthManager.isAuthenticated()
-        else {
-            return nil
-        }
-
-        return User.avatarURL(forUsername: username, auth: auth)
-    }
-
     func canViewAdminPanel(realm: Realm? = Realm.current) -> Bool {
         return hasPermission(.viewPrivilegedSetting, realm: realm) ||
             hasPermission(.viewStatistics, realm: realm) ||
@@ -48,15 +36,4 @@ extension User {
             hasPermission(.viewRoomAdministration, realm: realm)
     }
 
-    static func avatarURL(forUsername username: String, auth: Auth? = nil) -> URL? {
-        guard
-            let auth = auth ?? AuthManager.isAuthenticated(),
-            let baseURL = auth.baseURL(),
-            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        else {
-            return nil
-        }
-
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
-    }
 }

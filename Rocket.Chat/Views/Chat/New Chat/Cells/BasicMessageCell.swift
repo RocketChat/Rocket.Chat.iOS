@@ -79,11 +79,14 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
     }
 
     func updateText() {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+        guard
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let managedObject = viewModel.message.managedObject
+        else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: viewModel.message.managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: managedObject, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
@@ -144,19 +147,25 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+        guard
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let managedObject = viewModel.message.managedObject
+        else {
             return
         }
 
-        delegate?.handleLongPressMessageCell(viewModel.message.managedObject, view: contentView, recognizer: recognizer)
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 
     @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        guard let viewModel = viewModel?.base as? BasicMessageChatItem else {
+        guard
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let managedObject = viewModel.message.managedObject
+        else {
             return
         }
 
-        delegate?.handleUsernameTapMessageCell(viewModel.message.managedObject, view: username, recognizer: recognizer)
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }
 }
 

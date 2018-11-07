@@ -82,9 +82,9 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: messageUsername)
 
-        let attachmentText = viewModel.attachment.text ?? viewModel.attachment.descriptionText ?? ""
+        let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
-        username.text = viewModel.attachment.title
+        username.text = viewModel.title
         text.attributedText = attributedText
 
         let maxSize = CGSize(width: textLabelWidth, height: .greatestFiniteMagnitude)
@@ -94,7 +94,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
             isCollapsible = true
             arrow.alpha = 1
 
-            if viewModel.attachment.collapsed {
+            if viewModel.collapsed {
                 arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
                 textHeightConstraint.constant = collapsedTextMaxHeight
             } else {

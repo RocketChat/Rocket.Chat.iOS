@@ -37,6 +37,11 @@ final class MessagesViewController: RocketChatViewController {
     let viewSizingModel = MessagesSizingManager()
     let composerViewModel = MessagesComposerViewModel()
 
+    // TODO: Move to another view model
+    let socketHandlerToken = String.random(5)
+
+    var chatTitleView: ChatTitleView?
+
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
@@ -44,13 +49,71 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
-    lazy var screenSize = UIScreen.main.bounds.size
+    private let buttonScrollToBottomSize = CGFloat(70)
+    lazy var buttonScrollToBottom: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
+        button.setImage(UIImage(named: "Float Button light"), for: .normal)
+        button.addTarget(self, action: #selector(buttonScrollToBottomDidPressed), for: .touchUpInside)
+        return button
+    }()
+
+    var scrollToBottomButtonIsVisible: Bool = false {
+        didSet {
+            guard oldValue != scrollToBottomButtonIsVisible
+            else {
+                return
+            }
+
+            func animates(_ animations: @escaping VoidCompletion) {
+                UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
+                    animations()
+                }, completion: nil)
+            }
+
+            if self.scrollToBottomButtonIsVisible {
+                if buttonScrollToBottom.superview == nil {
+                    view.addSubview(buttonScrollToBottom)
+                }
+
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height - buttonScrollToBottomSize - collectionView.layoutMargins.top - composerView.frame.height
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 1
+                })
+            } else {
+                var frame = buttonScrollToBottom.frame
+                frame.origin.x = collectionView.frame.width - buttonScrollToBottomSize - view.layoutMargins.right
+                frame.origin.y = collectionView.frame.origin.y + collectionView.frame.height
+
+                animates({
+                    self.buttonScrollToBottom.frame = frame
+                    self.buttonScrollToBottom.alpha = 0
+                })
+            }
+        }
+    }
+
+    lazy var screenSize = view.frame.size
+    var isInLandscape: Bool {
+        return screenSize.width / screenSize.height > 1 ? true : false
+    }
+
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ThemeManager.addObserver(self)
+        setupTitleView()
 
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        ThemeManager.addObserver(self)
         composerView.delegate = self
         composerView.applyTheme()
 
@@ -74,17 +137,21 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
         collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
 
+        view.bringSubviewToFront(buttonScrollToBottom)
+
         dataUpdateDelegate = self
         viewModel.controllerContext = self
-        viewModel.onDataChanged = {
+        viewModel.onDataChanged = { [weak self] in
+            guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
+
+            // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
         }
 
-        ThemeManager.addObserver(self)
-
-        viewSubscriptionModel.onDataChanged = {
-            // TODO: handle updates on the Subscription object, such like title view
+        viewSubscriptionModel.onDataChanged = { [weak self] in
+            guard let self = self else { return }
+            self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
         }
     }
 
@@ -98,20 +165,86 @@ final class MessagesViewController: RocketChatViewController {
         let topIndexPath = visibleIndexPaths.sorted().last
 
         screenSize = size
+        let shouldResetScrollToBottom = scrollToBottomButtonIsVisible
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.viewSizingModel.clearCache()
             self?.collectionView.reloadData()
         }, completion: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+
+            if shouldResetScrollToBottom {
+                if self.scrollToBottomButtonIsVisible {
+                    self.scrollToBottomButtonIsVisible = false
+                    self.scrollToBottomButtonIsVisible = true
+                }
+            }
+
             if let indexPath = topIndexPath {
-                self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
             }
         })
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
+            if let controller = nav.viewControllers.first as? ChannelActionsViewController {
+                if let subscription = self.subscription {
+                    controller.subscription = subscription
+                }
+            }
+        }
+    }
+
+    // MARK: Pagination
+
+    func loadNextPageIfNeeded() {
+        guard let collectionView = collectionView else { return }
+
+        let bottomEdge = collectionView.contentOffset.y + collectionView.frame.size.height
+        if bottomEdge >= collectionView.contentSize.height - 200 {
+            viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+        }
+    }
+
+    // MARK: TitleView
+
+    private func setupTitleView() {
+        let view = ChatTitleView.instantiateFromNib()
+        view?.subscription = subscription
+        view?.delegate = self
+        navigationItem.titleView = view
+        chatTitleView = view
+        chatTitleView?.applyTheme()
+    }
+
+    // MARK: IBAction
+
+    @objc func buttonScrollToBottomDidPressed() {
+        scrollToBottom(true)
+    }
+
+    @objc internal func scrollToBottom(_ animated: Bool = false) {
+        let offset = CGPoint(x: 0, y: -composerView.frame.height)
+        collectionView.setContentOffset(offset, animated: animated)
+        scrollToBottomButtonIsVisible = false
+    }
+
+    internal func resetScrollToBottomButtonPosition() {
+        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+    }
+
+    private func chatLogIsAtBottom() -> Bool {
+        return collectionView.contentOffset.y <= -composerView.frame.height
     }
 
     func openURL(url: URL) {
         WebBrowserManager.open(url: url)
     }
+
+    // MARK: Reading Status
 
     private func markAsRead() {
         guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
@@ -134,14 +267,6 @@ extension MessagesViewController {
         return .zero
     }
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if viewModel.numberOfSections - indexPath.section <= 5 {
-            viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
-        }
-
-        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
-    }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let item = viewModel.item(for: indexPath) else {
             return .zero
@@ -158,11 +283,16 @@ extension MessagesViewController {
                             """)
             }
 
-            let horizontalMargins = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
+            var horizontalMargins: CGFloat
+            if isInLandscape {
+                horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+            } else {
+                horizontalMargins = 0
+            }
+
             var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
             size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
-
             return size
         }
     }
@@ -171,9 +301,19 @@ extension MessagesViewController {
 
 extension MessagesViewController: ChatDataUpdateDelegate {
 
-    func didUpdateChatData(newData: [AnyChatSection]) {
+    func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable]) {
+        updatedItems.forEach { viewSizingModel.invalidateLayout(for: $0) }
         viewModel.data = newData
         viewModel.updateData(shouldUpdateUI: false)
+    }
+
+}
+
+extension MessagesViewController {
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        resetScrollToBottomButtonPosition()
+        loadNextPageIfNeeded()
     }
 
 }
@@ -190,6 +330,40 @@ extension MessagesViewController: UserActionSheetPresenter {
 
     func presentActionSheetForUser(_ user: User, source: (view: UIView?, rect: CGRect?)?) {
         presentActionSheetForUser(user, subscription: subscription, source: source)
+    }
+
+}
+
+extension MessagesViewController: ChatTitleViewProtocol {
+
+    func titleViewChannelButtonPressed() {
+        performSegue(withIdentifier: "Channel Actions", sender: nil)
+    }
+
+}
+
+extension MessagesViewController {
+
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+        let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+        let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
+        buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
+    }
+
+}
+
+extension MessagesViewController: SocketConnectionHandler {
+
+    func socketDidChangeState(state: SocketConnectionState) {
+        Log.debug("[ChatViewController] socketDidChangeState: \(state)")
+        chatTitleView?.state = state
+
+        if state == .connected {
+            viewModel.requestingData = false
+            viewModel.fetchMessages(from: nil)
+        }
     }
 
 }

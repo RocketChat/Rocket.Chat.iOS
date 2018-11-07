@@ -20,7 +20,7 @@ extension MessageManager {
             guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
 
             let message = Message.getOrCreate(realm: realm, values: JSON(object), updates: { (object) in
-                object?.subscription = detachedSubscription
+                object?.rid = detachedSubscription.rid
             })
 
             if message.userIdentifier == nil {

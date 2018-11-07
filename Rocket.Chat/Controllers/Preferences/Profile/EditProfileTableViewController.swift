@@ -188,7 +188,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }
 
     func bindUserData() {
-        avatarView.user = user
+        avatarView.username = user?.username
         name.text = user?.name
         username.text = user?.username
         email.text = user?.emails.first?.email
