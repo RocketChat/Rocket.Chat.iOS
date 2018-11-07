@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlackTextViewController
 
 extension UIView: Themeable {
 
@@ -342,32 +341,6 @@ extension UIPickerView {
 }
 
 // MARK: External class extensions
-
-extension SLKTextInputbar {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        textView.keyboardAppearance = theme.appearence.keyboardAppearence
-        applyThemeFromRuntimeAttributes()
-    }
-
-    open override func insertSubview(_ view: UIView, at index: Int) {
-        super.insertSubview(view, at: index)
-        view.applyTheme()
-    }
-}
-
-extension SLKTextView {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
-        backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1021854048)
-        textColor = theme.bodyText
-        tintColor = theme.tintColor
-        applyThemeFromRuntimeAttributes()
-    }
-}
 
 extension MBProgressHUD {
     override var theme: Theme? { return nil }
