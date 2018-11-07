@@ -204,7 +204,7 @@ final class MessagesViewController: RocketChatViewController {
 
         let bottomEdge = collectionView.contentOffset.y + collectionView.frame.size.height
         if bottomEdge >= collectionView.contentSize.height - 200 {
-            viewModel.fetchMessages(from: viewModel.oldestMessageDateBeingPresented)
+            viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
         }
     }
 
