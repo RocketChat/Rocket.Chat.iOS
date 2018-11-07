@@ -68,6 +68,11 @@ final class MessagesViewModel {
     internal var hasMoreData = true
 
     /**
+     The oldest message requested from the API at the moment.
+     */
+    internal var oldestMessageDateFromRemote: Date?
+
+    /**
      The OperationQueue responsible for sorting the data
      and organizing it. Operation is required to prevent
      manipulating data that was changed.
@@ -267,18 +272,6 @@ final class MessagesViewModel {
     }
 
     /**
-     This method will return the oldest date present in the list of messages. This is
-     the data cached in the view model and not in the database.
-     */
-    internal var oldestMessageDateBeingPresented: Date? {
-        if let object = data.last?.base.object.base as? MessageSectionModel {
-            return object.message.createdAt
-        }
-
-        return nil
-    }
-
-    /**
      This method requests a new page of messages to the API. If the view model
      already detected that there's no more data to fetch, or it's currently
      fetching a new page, the method won't be executed.
@@ -333,7 +326,7 @@ final class MessagesViewModel {
                 if prepareAnotherPage {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
                         self?.fetchMessages(
-                            from: self?.oldestMessageDateBeingPresented,
+                            from: self?.oldestMessageDateFromRemote,
                             prepareAnotherPage: false
                         )
                     })
@@ -343,6 +336,10 @@ final class MessagesViewModel {
 
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
+                if let oldest = oldest {
+                    self?.oldestMessageDateFromRemote = oldest
+                }
+
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
             }
