@@ -148,7 +148,7 @@ public protocol ChatCell {
 }
 
 public protocol ChatDataUpdateDelegate: class {
-    func didUpdateChatData(newData: [AnyChatSection])
+    func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable])
 }
 
 /**
@@ -215,7 +215,7 @@ open class RocketChatViewController: UICollectionViewController {
     private let updateDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
-        operationQueue.qualityOfService = .userInitiated
+        operationQueue.qualityOfService = .userInteractive
 
         return operationQueue
     }()
@@ -266,22 +266,25 @@ open class RocketChatViewController: UICollectionViewController {
 
     open func updateData(with target: [ArraySection<AnyChatSection, AnyChatItem>]) {
         updateDataQueue.addOperation { [weak self] in
-            guard
-                let strongSelf = self,
-                let collectionView = strongSelf.collectionView
-            else {
-                return
-            }
-
-            let changeset = StagedChangeset(source: strongSelf.internalData, target: target)
-
             DispatchQueue.main.async {
+                guard
+                    let strongSelf = self,
+                    let collectionView = strongSelf.collectionView
+                else {
+                    return
+                }
+
+                let source = strongSelf.internalData
+
                 UIView.performWithoutAnimation {
-                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData in
+                    let changeset = StagedChangeset(source: source, target: target)
+                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData, changes in
                         strongSelf.internalData = newData
 
                         let newSections = newData.map { $0.model }
-                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections)
+                        let updatedItems = strongSelf.updatedItems(from: source, with: changes)
+
+                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
 
                         assert(newSections.count == newData.count)
                     }
@@ -289,7 +292,28 @@ open class RocketChatViewController: UICollectionViewController {
             }
         }
     }
-}
+
+    func updatedItems(from data: [ArraySection<AnyChatSection, AnyChatItem>], with changes: Changeset<[ArraySection<AnyChatSection, AnyChatItem>]>?) -> [AnyHashable] {
+        guard let changes = changes else {
+            return []
+        }
+
+        var updatedItems = [AnyHashable]()
+
+        changes.elementUpdated.forEach { item in
+            let section = data[item.section]
+            let elementId = section.elements[item.element].differenceIdentifier
+            updatedItems.append(elementId)
+        }
+
+        changes.elementDeleted.forEach { item in
+            let section = data[item.section]
+            let elementId = section.elements[item.element].differenceIdentifier
+            updatedItems.append(elementId)
+        }
+
+        return updatedItems
+    }}
 
 // MARK: Content Adjustment
 
