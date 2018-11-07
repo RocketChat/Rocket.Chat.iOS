@@ -307,7 +307,8 @@ final class MessagesViewModel {
                 return
             }
 
-            let messagesFromDatabase = subscriptionValid.fetchMessages(20, lastMessageDate: oldestMessage)
+            let pageSize = self.data.isEmpty || !prepareAnotherPage ? 30 : 10
+            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
 
@@ -330,7 +331,7 @@ final class MessagesViewModel {
                 self.updateData()
 
                 if prepareAnotherPage {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [weak self] in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
                         self?.fetchMessages(
                             from: self?.oldestMessageDateBeingPresented,
                             prepareAnotherPage: false
