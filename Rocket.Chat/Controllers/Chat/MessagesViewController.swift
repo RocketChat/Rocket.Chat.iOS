@@ -297,7 +297,8 @@ extension MessagesViewController {
 
 extension MessagesViewController: ChatDataUpdateDelegate {
 
-    func didUpdateChatData(newData: [AnyChatSection]) {
+    func didUpdateChatData(newData: [AnyChatSection], updatedItems: [AnyHashable]) {
+        updatedItems.forEach { viewSizingModel.invalidateLayout(for: $0) }
         viewModel.data = newData
         viewModel.updateData(shouldUpdateUI: false)
     }
