@@ -440,6 +440,8 @@ extension ComposerTextView {
         if theme == Theme.light {
             backgroundColor = theme.backgroundColor
         }
+
+        keyboardAppearance = theme.appearence.keyboardAppearence
     }
 }
 
