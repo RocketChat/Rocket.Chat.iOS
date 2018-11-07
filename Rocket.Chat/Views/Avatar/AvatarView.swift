@@ -33,22 +33,6 @@ final class AvatarView: UIView {
         }
     }
 
-    var subscription: Subscription? {
-        didSet {
-            if subscription != nil {
-                updateAvatar()
-            }
-        }
-    }
-
-    var user: User? {
-        didSet {
-            if user != nil {
-                updateAvatar()
-            }
-        }
-    }
-
     var emoji: String? {
         didSet {
             if emoji != nil {
@@ -78,17 +62,12 @@ final class AvatarView: UIView {
             backgroundColor = .clear
         } else if let avatarURL = avatarURL {
             imageURL = avatarURL
-        } else if let user = user?.validated() {
-            setAvatarWithInitials(forUsername: user.username)
+        } else if let username = username {
+            setAvatarWithInitials(forUsername: username)
 
-            if let avatarURL = user.avatarURL() {
+            if let avatarURL = User.avatarURL(forUsername: username) {
                 imageURL = avatarURL
             }
-        } else if let avatarURL = subscription?.avatarURL() {
-            setAvatarWithInitials(forUsername: subscription?.name)
-            imageURL = avatarURL
-        } else if let username = username, let avatarURL = User.avatarURL(forUsername: username) {
-            imageURL = avatarURL
         }
     }
 
@@ -202,8 +181,7 @@ final class AvatarView: UIView {
         avatarPlaceholder = nil
         avatarURL = nil
         imageURL = nil
-        user = nil
-        subscription = nil
+        username = nil
         emoji = nil
 
         imageView.image = nil

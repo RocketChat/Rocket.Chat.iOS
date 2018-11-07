@@ -39,10 +39,12 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         date.text = viewModel.dateFormatted
         username.text = user.username
         avatarView.emoji = viewModel.emoji
-        avatarView.user = user.managedObject
+        avatarView.username = user.username
 
         if let avatar = viewModel.avatar {
             avatarView.avatarURL = URL(string: avatar)
+        } else {
+            avatarView.avatarURL = user.avatarURL
         }
     }
 
