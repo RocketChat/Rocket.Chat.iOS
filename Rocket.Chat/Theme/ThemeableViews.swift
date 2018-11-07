@@ -401,6 +401,13 @@ extension ReplyView {
     }
 }
 
+extension EditingView {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        closeButton.tintColor = theme?.auxiliaryText
+    }
+}
+
 extension ComposerView {
     override func applyTheme() {
         super.applyTheme()
