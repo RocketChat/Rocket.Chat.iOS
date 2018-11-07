@@ -728,6 +728,7 @@
 		991AB00A217458790097AE4C /* AudioMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991AB009217458790097AE4C /* AudioMessageCell.xib */; };
 		991AB00C217459690097AE4C /* AudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991AB00B217459690097AE4C /* AudioMessageCell.swift */; };
 		9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */; };
+		992358DF2193767300265233 /* MessageSectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992358DE2193767300265233 /* MessageSectionExtension.swift */; };
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */; };
 		992B5AB8209A2890009C8123 /* RoomFilesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */; };
@@ -1630,6 +1631,7 @@
 		991AB009217458790097AE4C /* AudioMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioMessageCell.xib; sourceTree = "<group>"; };
 		991AB00B217459690097AE4C /* AudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageCell.swift; sourceTree = "<group>"; };
 		9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequestSpec.swift; sourceTree = "<group>"; };
+		992358DE2193767300265233 /* MessageSectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSectionExtension.swift; sourceTree = "<group>"; };
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		992B5AB5209A14B5009C8123 /* AudioFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileViewController.swift; sourceTree = "<group>"; };
 		992B5AB7209A2890009C8123 /* RoomFilesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFilesRequestSpec.swift; sourceTree = "<group>"; };
@@ -3834,6 +3836,7 @@
 			isa = PBXGroup;
 			children = (
 				99BE4D84215300FD001A43E2 /* MessageSection.swift */,
+				992358DE2193767300265233 /* MessageSectionExtension.swift */,
 			);
 			path = ChatSections;
 			sourceTree = "<group>";
@@ -4709,6 +4712,7 @@
 				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
 				8076FDA42048533000114F28 /* String+Random.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
+				992358DF2193767300265233 /* MessageSectionExtension.swift in Sources */,
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				411D40CE20D28150001A1035 /* ChannelInfoBasicCell.swift in Sources */,
