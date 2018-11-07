@@ -85,7 +85,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func hintsView(_ hintsView: HintsView, didSelectHintAt index: Int) {
         if let range = composerView.textView.rangeOfNearestWordToSelection {
             let oldWord = composerView.textView.text[range]
-            let newWord = (oldWord.first?.description ?? "") + composerViewModel.hints[index].suggestion
+            let newWord = (oldWord.first?.description ?? "") + composerViewModel.hints[index].suggestion + " "
             composerView.textView.text = composerView.textView.text.replacingCharacters(in: range, with: newWord)
         }
 
