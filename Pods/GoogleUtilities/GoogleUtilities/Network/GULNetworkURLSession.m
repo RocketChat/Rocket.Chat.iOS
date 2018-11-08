@@ -28,8 +28,11 @@
   /// Session ID generated randomly with a fixed prefix.
   NSString *_sessionID;
 
-  /// The session configuration.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+  /// The session configuration. NSURLSessionConfiguration' is only available on iOS 7.0 or newer.
   NSURLSessionConfiguration *_sessionConfig;
+#pragma clang diagnostic pop
 
   /// The path to the directory where all temporary files are stored before uploading.
   NSURL *_networkDirectoryURL;
@@ -92,7 +95,8 @@
 /// Sends an async POST request using NSURLSession for iOS >= 7.0, and returns an ID of the
 /// connection.
 - (NSString *)sessionIDFromAsyncPOSTRequest:(NSURLRequest *)request
-                          completionHandler:(GULNetworkURLSessionCompletionHandler)handler {
+                          completionHandler:(GULNetworkURLSessionCompletionHandler)handler
+    API_AVAILABLE(ios(7.0)) {
   // NSURLSessionUploadTask does not work with NSData in the background.
   // To avoid this issue, write the data to a temporary file to upload it.
   // Make a temporary file with the data subset.
@@ -154,8 +158,7 @@
   }
 
   // Save the session into memory.
-  NSMapTable *sessionIdentifierToFetcherMap = [[self class] sessionIDToFetcherMap];
-  [sessionIdentifierToFetcherMap setObject:self forKey:_sessionID];
+  [[self class] setSessionInFetcherMap:self forSessionID:_sessionID];
 
   _request = [request copy];
 
@@ -169,7 +172,8 @@
 
 /// Sends an async GET request using NSURLSession for iOS >= 7.0, and returns an ID of the session.
 - (NSString *)sessionIDFromAsyncGETRequest:(NSURLRequest *)request
-                         completionHandler:(GULNetworkURLSessionCompletionHandler)handler {
+                         completionHandler:(GULNetworkURLSessionCompletionHandler)handler
+    API_AVAILABLE(ios(7.0)) {
   if (_backgroundNetworkEnabled) {
     _sessionConfig = [self backgroundSessionConfigWithSessionID:_sessionID];
   } else {
@@ -196,8 +200,7 @@
   }
 
   // Save the session into memory.
-  NSMapTable *sessionIdentifierToFetcherMap = [[self class] sessionIDToFetcherMap];
-  [sessionIdentifierToFetcherMap setObject:self forKey:_sessionID];
+  [[self class] setSessionInFetcherMap:self forSessionID:_sessionID];
 
   _request = [request copy];
 
@@ -215,7 +218,7 @@
 /// be called with the downloaded data.
 - (void)URLSession:(NSURLSession *)session
                  downloadTask:(NSURLSessionDownloadTask *)task
-    didFinishDownloadingToURL:(NSURL *)url {
+    didFinishDownloadingToURL:(NSURL *)url API_AVAILABLE(ios(7.0)) {
   if (!url.path) {
     [_loggerDelegate
         GULNetwork_logWithLevel:kGULNetworkLogLevelError
@@ -238,7 +241,8 @@
 }
 
 #if TARGET_OS_IOS || TARGET_OS_TV
-- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
+    API_AVAILABLE(ios(7.0)) {
   [_loggerDelegate GULNetwork_logWithLevel:kGULNetworkLogLevelDebug
                                messageCode:kGULNetworkMessageCodeURLSession003
                                    message:@"Background session finished"
@@ -249,7 +253,7 @@
 
 - (void)URLSession:(NSURLSession *)session
                     task:(NSURLSessionTask *)task
-    didCompleteWithError:(NSError *)error {
+    didCompleteWithError:(NSError *)error API_AVAILABLE(ios(7.0)) {
   // Avoid any chance of recursive behavior leading to it being used repeatedly.
   GULNetworkURLSessionCompletionHandler handler = _completionHandler;
   _completionHandler = nil;
@@ -278,13 +282,25 @@
   // Try to clean up stale files again.
   [self maybeRemoveTempFilesAtURL:_networkDirectoryURL
                      expiringTime:kGULNetworkTempFolderExpireTime];
+
+  // Invalidate the session only if it's owned by this class.
+  NSString *sessionID = session.configuration.identifier;
+  if ([sessionID hasPrefix:kGULNetworkBackgroundSessionConfigIDPrefix]) {
+    [session finishTasksAndInvalidate];
+
+    // Explicitly remove the session so it won't be reused. The weak map table should
+    // remove the session on deallocation, but dealloc may not happen immediately after
+    // calling `finishTasksAndInvalidate`.
+    [[self class] setSessionInFetcherMap:nil forSessionID:sessionID];
+  }
 }
 
 - (void)URLSession:(NSURLSession *)session
                    task:(NSURLSessionTask *)task
     didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
       completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
-                                  NSURLCredential *credential))completionHandler {
+                                  NSURLCredential *credential))completionHandler
+    API_AVAILABLE(ios(7.0)) {
   // The handling is modeled after GTMSessionFetcher.
   if ([challenge.protectionSpace.authenticationMethod
           isEqualToString:NSURLAuthenticationMethodServerTrust]) {
@@ -427,7 +443,8 @@
 }
 
 /// Creates a background session configuration with the session ID using the supported method.
-- (NSURLSessionConfiguration *)backgroundSessionConfigWithSessionID:(NSString *)sessionID {
+- (NSURLSessionConfiguration *)backgroundSessionConfigWithSessionID:(NSString *)sessionID
+    API_AVAILABLE(ios(7.0)) {
 #if (TARGET_OS_OSX && defined(MAC_OS_X_VERSION_10_10) &&         \
      MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10) || \
     TARGET_OS_TV ||                                              \
@@ -523,18 +540,20 @@
 
 /// Gets the fetcher with the session ID.
 + (instancetype)fetcherWithSessionIdentifier:(NSString *)sessionIdentifier {
-  NSMapTable *sessionIdentifierToFetcherMap = [self sessionIDToFetcherMap];
-  GULNetworkURLSession *session = [sessionIdentifierToFetcherMap objectForKey:sessionIdentifier];
+  GULNetworkURLSession *session = [self sessionFromFetcherMapForSessionID:sessionIdentifier];
   if (!session && [sessionIdentifier hasPrefix:kGULNetworkBackgroundSessionConfigIDPrefix]) {
     session = [[GULNetworkURLSession alloc] initWithNetworkLoggerDelegate:nil];
     [session setSessionID:sessionIdentifier];
-    [sessionIdentifierToFetcherMap setObject:session forKey:sessionIdentifier];
+    [self setSessionInFetcherMap:session forSessionID:sessionIdentifier];
   }
   return session;
 }
 
 /// Returns a map of the fetcher by session ID. Creates a map if it is not created.
-+ (NSMapTable *)sessionIDToFetcherMap {
+/// When reading and writing from/to the session map, don't use this method directly.
+/// To avoid thread safety issues, use one of the helper methods at the bottom of the
+/// file: setSessionInFetcherMap:forSessionID:, sessionFromFetcherMapForSessionID:
++ (NSMapTable<NSString *, GULNetworkURLSession *> *)sessionIDToFetcherMap {
   static NSMapTable *sessionIDToFetcherMap;
 
   static dispatch_once_t sessionMapOnceToken;
@@ -542,6 +561,16 @@
     sessionIDToFetcherMap = [NSMapTable strongToWeakObjectsMapTable];
   });
   return sessionIDToFetcherMap;
+}
+
++ (NSLock *)sessionIDToFetcherMapReadWriteLock {
+  static NSLock *lock;
+
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lock = [[NSLock alloc] init];
+  });
+  return lock;
 }
 
 /// Returns a map of system provided completion handler by session ID. Creates a map if it is not
@@ -619,7 +648,7 @@
                           task:(NSURLSessionTask *)task
     willPerformHTTPRedirection:(NSHTTPURLResponse *)response
                     newRequest:(NSURLRequest *)request
-             completionHandler:(void (^)(NSURLRequest *))completionHandler {
+             completionHandler:(void (^)(NSURLRequest *))completionHandler API_AVAILABLE(ios(7.0)) {
   NSArray *nonAllowedRedirectionCodes = @[
     @(kGULNetworkHTTPStatusCodeFound), @(kGULNetworkHTTPStatusCodeMovedPermanently),
     @(kGULNetworkHTTPStatusCodeMovedTemporarily), @(kGULNetworkHTTPStatusCodeMultipleChoices)
@@ -643,6 +672,34 @@
 
 #pragma mark - Helper Methods
 
++ (void)setSessionInFetcherMap:(GULNetworkURLSession *)session forSessionID:(NSString *)sessionID {
+  [[self sessionIDToFetcherMapReadWriteLock] lock];
+  GULNetworkURLSession *existingSession =
+      [[[self class] sessionIDToFetcherMap] objectForKey:sessionID];
+  if (existingSession) {
+    // Invalidating doesn't seem like the right thing to do here since it may cancel an active
+    // background transfer if the background session is handling multiple requests. The old
+    // session will be dropped from the map table, but still complete its request.
+    NSString *message = [NSString stringWithFormat:@"Discarding session: %@", existingSession];
+    [existingSession->_loggerDelegate GULNetwork_logWithLevel:kGULNetworkLogLevelInfo
+                                                  messageCode:kGULNetworkMessageCodeURLSession019
+                                                      message:message];
+  }
+  if (session) {
+    [[[self class] sessionIDToFetcherMap] setObject:session forKey:sessionID];
+  } else {
+    [[[self class] sessionIDToFetcherMap] removeObjectForKey:sessionID];
+  }
+  [[self sessionIDToFetcherMapReadWriteLock] unlock];
+}
+
++ (nullable GULNetworkURLSession *)sessionFromFetcherMapForSessionID:(NSString *)sessionID {
+  [[self sessionIDToFetcherMapReadWriteLock] lock];
+  GULNetworkURLSession *session = [[[self class] sessionIDToFetcherMap] objectForKey:sessionID];
+  [[self sessionIDToFetcherMapReadWriteLock] unlock];
+  return session;
+}
+
 - (void)callCompletionHandler:(GULNetworkURLSessionCompletionHandler)handler
                  withResponse:(NSHTTPURLResponse *)response
                          data:(NSData *)data
@@ -661,8 +718,9 @@
   }
 }
 
+// Always use the request parameters even if the default session configuration is more restrictive.
 - (void)populateSessionConfig:(NSURLSessionConfiguration *)sessionConfig
-                  withRequest:(NSURLRequest *)request {
+                  withRequest:(NSURLRequest *)request API_AVAILABLE(ios(7.0)) {
   sessionConfig.HTTPAdditionalHeaders = request.allHTTPHeaderFields;
   sessionConfig.timeoutIntervalForRequest = request.timeoutInterval;
   sessionConfig.timeoutIntervalForResource = request.timeoutInterval;
