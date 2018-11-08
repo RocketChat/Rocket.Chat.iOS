@@ -88,6 +88,7 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
+  - DifferenceKit/Core
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
@@ -190,6 +191,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 63feabcc5977cccb103ab74d744fea0dac2d733b
+PODFILE CHECKSUM: 5d62982fe6d8cd234f28edafc23b27595439d854
 
 COCOAPODS: 1.5.3

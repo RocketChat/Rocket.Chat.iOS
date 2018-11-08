@@ -143,6 +143,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -151,7 +152,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework"
@@ -166,6 +166,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
 fi
 if [[ "$CONFIGURATION" == "Test" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -174,7 +175,6 @@ if [[ "$CONFIGURATION" == "Test" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
@@ -188,6 +188,7 @@ if [[ "$CONFIGURATION" == "Test" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -196,7 +197,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
@@ -210,6 +210,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework"
@@ -218,7 +219,6 @@ if [[ "$CONFIGURATION" == "Beta" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework"

@@ -13,6 +13,10 @@ def ui_pods
   pod 'MBProgressHUD', '~> 1.1.0'
 end
 
+def diff_pods
+  pod 'DifferenceKit/Core'
+end
+
 def shared_pods
   # Analytics
   pod 'Firebase/Core'
@@ -47,6 +51,9 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
+  # DiffKit
+  diff_pods
+
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
@@ -56,15 +63,14 @@ target 'Rocket.Chat.ShareExtension' do
   pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
+  diff_pods
 end
 
 target 'Rocket.Chat' do
-  # Shared pods
   shared_pods
 end
 
 target 'Rocket.ChatTests' do
-  # Shared pods
   shared_pods
 end
 
