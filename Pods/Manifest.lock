@@ -62,10 +62,10 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Nuke (7.3.2)
-  - Nuke-FLAnimatedImage-Plugin (5.0):
+  - Nuke (7.5.1)
+  - Nuke-FLAnimatedImage-Plugin (6.0):
     - FLAnimatedImage (~> 1.0)
-    - Nuke (~> 7.0)
+    - Nuke (~> 7.5)
   - OAuthSwift (1.2.2)
   - RCMarkdownParser (3.0.6)
   - ReachabilitySwift (4.2.1)
@@ -179,8 +179,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Nuke: a9a31bbd6c6723753ab024ef22057dcaaf046c1b
-  Nuke-FLAnimatedImage-Plugin: 6dfb9335ce298eaff9fdfed8d20d1bbfb2a6c326
+  Nuke: 3814db501e55f17951451839c726ffd91641e9a5
+  Nuke-FLAnimatedImage-Plugin: e4c39d13061a08ac0bdcb0cd7a23882f4a43f4a6
   OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427

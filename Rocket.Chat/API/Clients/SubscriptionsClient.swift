@@ -301,7 +301,7 @@ extension SubscriptionsClient {
             if case let .resource(resource) = response {
                 guard let realm = realm else { return }
 
-                realm.execute({ _ in 
+                realm.execute({ _ in
                     resource.members?.forEach({ (member) in
                         let user = User.getOrCreate(realm: realm, values: member, updates: nil)
                         realm.add(user, update: true)
