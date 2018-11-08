@@ -32,7 +32,15 @@ enum MessageType: String {
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
 
+    case roomChangedPrivacy = "room_changed_privacy"
+    case roomChangedTopic = "room_changed_topic"
+    case roomChangedAnnouncement = "room_changed_announcement"
+    case roomChangedDescription = "room_changed_description"
+
+    case jitsiStartedCall = "jitsi_call_started"
+
     case messagePinned = "message_pinned"
+    case messageSnippeted = "message_snippeted"
 
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
