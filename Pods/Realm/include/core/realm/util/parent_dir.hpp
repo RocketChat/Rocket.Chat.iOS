@@ -34,4 +34,4 @@ std::string parent_dir(const std::string& path);
 } // namespace util
 } // namespace realm
 
-#endif // REALM_UTIL_LOAD_FILE_HPP
+#endif // REALM_UTIL_PARENT_DIR_HPP

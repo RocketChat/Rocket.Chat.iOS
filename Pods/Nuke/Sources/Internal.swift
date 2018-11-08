@@ -30,7 +30,7 @@ internal final class RateLimiter {
     private var pending = LinkedList<Task>() // fast append, fast remove first
     private var isExecutingPendingTasks = false
 
-    private typealias Task = (_CancellationToken, () -> Void)
+    private typealias Task = (CancellationToken, () -> Void)
 
     /// Initializes the `RateLimiter` with the given configuration.
     /// - parameter queue: Queue on which to execute pending tasks.
@@ -42,7 +42,7 @@ internal final class RateLimiter {
         self.bucket = TokenBucket(rate: Double(rate), burst: Double(burst))
     }
 
-    func execute(token: _CancellationToken, _ closure: @escaping () -> Void) {
+    func execute(token: CancellationToken, _ closure: @escaping () -> Void) {
         let task = Task(token, closure)
         if !pending.isEmpty || !_execute(task) {
             pending.append(task)
@@ -118,37 +118,39 @@ internal final class RateLimiter {
 // MARK: - Operation
 
 internal final class Operation: Foundation.Operation {
-    enum State { case executing, finished }
-
-    // `queue` here is basically to make TSan happy. In reality the calls to
-    // `_setState` are guaranteed to never run concurrently in different ways.
-    private var _state: State?
-    private func _setState(_ newState: State) {
-        willChangeValue(forKey: "isExecuting")
-        if newState == .finished {
-            willChangeValue(forKey: "isFinished")
-        }
-        queue.sync(flags: .barrier) {
-            _state = newState
-        }
-        didChangeValue(forKey: "isExecuting")
-        if newState == .finished {
-            didChangeValue(forKey: "isFinished")
-        }
-    }
-
-    private var _didFinish: Int32 = 0
+    private var _isExecuting = false
+    private var _isFinished = false
+    private var _isFinishCalled: Int32 = 0
 
     override var isExecuting: Bool {
-        return queue.sync { _state == .executing }
+        set {
+            guard _isExecuting != newValue else {
+                fatalError("Invalid state, operation is already (not) executing")
+            }
+            willChangeValue(forKey: "isExecuting")
+            _isExecuting = newValue
+            didChangeValue(forKey: "isExecuting")
+        }
+        get {
+            return _isExecuting
+        }
     }
     override var isFinished: Bool {
-        return queue.sync { _state == .finished }
+        set {
+            guard !_isFinished else {
+                fatalError("Invalid state, operation is already finished")
+            }
+            willChangeValue(forKey: "isFinished")
+            _isFinished = newValue
+            didChangeValue(forKey: "isFinished")
+        }
+        get {
+            return _isFinished
+        }
     }
 
-    typealias Starter = (_ fulfill: @escaping () -> Void) -> Void
+    typealias Starter = (_ finish: @escaping () -> Void) -> Void
     private let starter: Starter
-    private let queue = DispatchQueue(label: "com.github.kean.Nuke.Operation", attributes: .concurrent)
 
     init(starter: @escaping Starter) {
         self.starter = starter
@@ -156,10 +158,10 @@ internal final class Operation: Foundation.Operation {
 
     override func start() {
         guard !isCancelled else {
-            _setState(.finished)
+            isFinished = true
             return
         }
-        _setState(.executing)
+        isExecuting = true
         starter { [weak self] in
             self?._finish()
         }
@@ -167,8 +169,9 @@ internal final class Operation: Foundation.Operation {
 
     private func _finish() {
         // Make sure that we ignore if `finish` is called more than once.
-        if OSAtomicCompareAndSwap32Barrier(0, 1, &_didFinish) {
-            _setState(.finished)
+        if OSAtomicCompareAndSwap32Barrier(0, 1, &_isFinishCalled) {
+            isExecuting = false
+            isFinished = true
         }
     }
 }
@@ -250,15 +253,15 @@ internal final class LinkedList<Element> {
 /// Manages cancellation tokens and signals them when cancellation is requested.
 ///
 /// All `CancellationTokenSource` methods are thread safe.
-internal final class _CancellationTokenSource {
+internal final class CancellationTokenSource {
     /// Returns `true` if cancellation has been requested.
     var isCancelling: Bool {
         return _lock.sync { _observers == nil }
     }
 
     /// Creates a new token associated with the source.
-    var token: _CancellationToken {
-        return _CancellationToken(source: self)
+    var token: CancellationToken {
+        return CancellationToken(source: self)
     }
 
     private var _observers: ContiguousArray<() -> Void>? = []
@@ -308,10 +311,11 @@ private let _lock = NSLock()
 /// The registered objects can respond in whatever manner is appropriate.
 ///
 /// All `CancellationToken` methods are thread safe.
-internal struct _CancellationToken {
-    fileprivate let source: _CancellationTokenSource? // no-op when `nil`
+internal struct CancellationToken {
+    fileprivate let source: CancellationTokenSource? // no-op when `nil`
 
     /// Returns `true` if cancellation has been requested for this token.
+    /// Returns `false` if the source was deallocated.
     var isCancelling: Bool {
         return source?.isCancelling ?? false
     }
@@ -321,11 +325,6 @@ internal struct _CancellationToken {
     /// and synchronously.
     func register(_ closure: @escaping () -> Void) {
         source?.register(closure)
-    }
-
-    /// Special no-op token which does nothing.
-    static var noOp: _CancellationToken {
-        return _CancellationToken(source: nil)
     }
 }
 
@@ -513,30 +512,6 @@ struct TaskMetrics {
 
     mutating func end() {
         endDate = Date()
-    }
-}
-
-final class DisposableOperation: Hashable {
-    // When all registered tasks remove references to image processing
-    // session the wrapped operation gets deallocated.
-    deinit {
-        operation?.cancel()
-    }
-
-    weak var operation: Foundation.Operation?
-
-    init(_ operation: Foundation.Operation) {
-        self.operation = operation
-    }
-
-    // MARK: - Hashable
-
-    public static func == (lhs: DisposableOperation, rhs: DisposableOperation) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
     }
 }
 
