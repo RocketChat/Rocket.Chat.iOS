@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
+class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
     static let identifier = String(describing: MessageActionsCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {

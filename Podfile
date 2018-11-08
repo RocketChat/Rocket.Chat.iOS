@@ -13,10 +13,6 @@ def ui_pods
   pod 'MBProgressHUD', '~> 1.1.0'
 end
 
-def diff_pods
-  pod 'DifferenceKit/Core'
-end
-
 def shared_pods
   # Analytics
   pod 'Firebase/Core'
@@ -54,16 +50,12 @@ def shared_pods
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
-
-  # Diffing
-  diff_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
   pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
-  diff_pods
 end
 
 target 'Rocket.Chat' do

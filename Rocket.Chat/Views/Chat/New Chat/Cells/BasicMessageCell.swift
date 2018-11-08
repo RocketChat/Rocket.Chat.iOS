@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: BaseMessageCell, SizingCell {
+final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
