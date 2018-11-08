@@ -29,7 +29,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
     }
 
     override func updateSubscriptionInformation() {
-        guard let subscription = subscription?.managedObject.validated() else { return }
+        guard let subscription = subscription?.managedObject else { return }
 
         labelLastMessage.text = subscription.roomLastMessageText
 

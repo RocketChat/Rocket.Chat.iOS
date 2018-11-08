@@ -48,12 +48,11 @@ enum MessageType: String {
 }
 
 final class Message: BaseModel {
-    @objc dynamic var subscription: Subscription?
     @objc dynamic var internalType: String = ""
     @objc dynamic var rid = ""
     @objc dynamic var createdAt: Date?
     @objc dynamic var updatedAt: Date?
-    @objc dynamic var user: User?
+    @objc dynamic var userIdentifier: String?
     @objc dynamic var text = ""
 
     @objc dynamic var userBlocked: Bool = false
@@ -98,6 +97,18 @@ final class Message: BaseModel {
         return  .text
     }
 
+    var user: User? {
+        if let userIdentifier = self.userIdentifier {
+            return User.find(withIdentifier: userIdentifier)
+        }
+
+        return nil
+    }
+
+    var subscription: Subscription? {
+        return Subscription.find(rid: rid)
+    }
+
     // MARK: Internal
 
     // These are the messages marked for deletion
@@ -117,5 +128,13 @@ extension Message {
             lhs.mentions.count == rhs.mentions.count &&
             lhs.channels.count == rhs.channels.count &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
+    }
+}
+
+extension Message: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedMessage
+
+    var unmanaged: UnmanagedMessage? {
+        return UnmanagedMessage(self)
     }
 }

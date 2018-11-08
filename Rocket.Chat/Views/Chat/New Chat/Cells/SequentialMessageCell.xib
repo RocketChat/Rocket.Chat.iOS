@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cJP-dJ-Ai1" customClass="SequentialMessageCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQf-8m-OUh" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="70" y="0.0" width="268" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Za6-ue-cn4"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prl-FX-Ikw">
+                        <rect key="frame" x="340" y="0.0" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="pBg-j1-r96"/>
+                            <constraint firstAttribute="width" constant="20" id="ziC-M7-ddE"/>
+                        </constraints>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="aQf-8m-OUh" firstAttribute="leading" secondItem="cJP-dJ-Ai1" secondAttribute="leading" constant="70" id="6yy-g1-EQR"/>
+                <constraint firstItem="prl-FX-Ikw" firstAttribute="leading" secondItem="aQf-8m-OUh" secondAttribute="trailing" constant="2" id="AxZ-c0-jaD"/>
+                <constraint firstAttribute="trailing" secondItem="prl-FX-Ikw" secondAttribute="trailing" constant="15" id="TSu-b7-SYv"/>
+                <constraint firstItem="aQf-8m-OUh" firstAttribute="top" secondItem="cJP-dJ-Ai1" secondAttribute="top" id="aws-mh-01l"/>
+                <constraint firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" constant="5" id="miu-Yc-hLX"/>
+                <constraint firstItem="prl-FX-Ikw" firstAttribute="bottom" secondItem="aQf-8m-OUh" secondAttribute="bottom" id="ygh-6T-eMv"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="37C-iT-i78"/>
+            <size key="customSize" width="375" height="43"/>
+            <connections>
+                <outlet property="readReceiptButton" destination="prl-FX-Ikw" id="3RS-Fa-44z"/>
+                <outlet property="readReceiptTrailingConstraint" destination="TSu-b7-SYv" id="OKI-1d-aN6"/>
+                <outlet property="readReceiptWidthConstraint" destination="ziC-M7-ddE" id="s2v-Ls-6Va"/>
+                <outlet property="text" destination="aQf-8m-OUh" id="O7S-Le-KIR"/>
+                <outlet property="textHeightConstraint" destination="Za6-ue-cn4" id="GzS-um-1zb"/>
+                <outlet property="textLeadingConstraint" destination="6yy-g1-EQR" id="2PX-08-GUd"/>
+                <outlet property="textTrailingConstraint" destination="AxZ-c0-jaD" id="td0-DA-sF4"/>
+            </connections>
+            <point key="canvasLocation" x="509.60000000000002" y="-292.80359820089956"/>
+        </collectionViewCell>
+    </objects>
+</document>

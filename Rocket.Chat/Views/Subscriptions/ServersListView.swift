@@ -211,6 +211,7 @@ extension ServersListView {
         return Theme(
             backgroundColor: theme.appearence == .light ? theme.backgroundColor : theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
+            chatComponentBackground: theme.chatComponentBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
@@ -219,7 +220,7 @@ extension ServersListView {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
+            actionTintColor: theme.actionTintColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence

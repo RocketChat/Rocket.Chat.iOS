@@ -12,16 +12,8 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class AvatarViewSpec: XCTestCase {
-
-    func testInitializeFromNib() {
-        XCTAssertNotNil(AvatarView.instantiateFromNib(), "instantiation from nib will work")
-    }
-
     func testAvatarInitials() {
-        guard let avatarView = AvatarView.instantiateFromNib() else {
-            XCTAssert(false)
-            return
-        }
+        let avatarView = AvatarView()
 
         XCTAssertTrue(avatarView.initialsFor("") == "?")
         XCTAssertTrue(avatarView.initialsFor("?") == "?")
@@ -49,10 +41,9 @@ class AvatarViewSpec: XCTestCase {
     }
 
     func testAvatarUpdatesFromImageURLChangesAvatarInitials() {
-        guard
-            let avatarView = AvatarView.instantiateFromNib(),
-            let imageURL = URL(string: "http://foo.com")
-        else {
+        let avatarView = AvatarView()
+
+        guard let imageURL = URL(string: "http://foo.com") else {
             XCTAssert(false)
             return
         }
@@ -64,47 +55,35 @@ class AvatarViewSpec: XCTestCase {
     }
 
     func testAvatarUpdatesFromUserChanges() {
-        guard let avatarView = AvatarView.instantiateFromNib() else {
-            XCTAssert(false)
-            return
-        }
+        let avatarView = AvatarView()
 
         let user = User()
         user.username = "foo.bar"
 
-        avatarView.user = user
+        avatarView.username = user.username
         XCTAssertEqual(avatarView.labelInitials.text, "FB", "label text will be FB")
         XCTAssertEqual(avatarView.backgroundColor, UIColor(hex: "#00BCD4"), "background color is not black")
     }
 
     func testAvatarUpdatesFromUserChangesEmptyUsername() {
-        guard let avatarView = AvatarView.instantiateFromNib() else {
-            XCTAssert(false)
-            return
-        }
+        let avatarView = AvatarView()
 
         let user = User()
 
-        avatarView.user = user
+        avatarView.username = user.username
         XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
         XCTAssertEqual(avatarView.backgroundColor, .black, "background color is black")
     }
 
     func testUpdateFontSizeValidNumber() {
-        guard let avatarView = AvatarView.instantiateFromNib() else {
-            XCTAssert(false)
-            return
-        }
+        let avatarView = AvatarView()
 
         avatarView.labelInitialsFontSize = 10
         XCTAssertEqual(avatarView.labelInitials.font.pointSize, 10, "label size will be changed")
     }
 
     func testUpdateFontSizeInvalidNumber() {
-        guard let avatarView = AvatarView.instantiateFromNib() else {
-            XCTAssert(false)
-            return
-        }
+        let avatarView = AvatarView()
 
         avatarView.labelInitialsFontSize = nil
         XCTAssertEqual(avatarView.labelInitials.font.pointSize, 16, "label size will be the default")

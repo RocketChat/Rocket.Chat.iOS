@@ -32,17 +32,14 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         }
     }
 
-    weak var avatarView: AvatarView!
+    var avatarView = AvatarView()
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
             avatarViewContainer.layer.masksToBounds = true
 
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
@@ -72,7 +69,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
     }
 
     func updateSubscriptionInformation() {
-        guard let subscription = self.subscription?.managedObject.validated() else { return }
+        guard let subscription = self.subscription?.managedObject else { return }
 
         var user: User?
 
@@ -83,11 +80,9 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         updateStatus(subscription: subscription, user: user)
 
         if let user = user {
-            avatarView.subscription = nil
-            avatarView.user = user
+            avatarView.username = user.username
         } else {
-            avatarView.user = nil
-            avatarView.subscription = subscription
+            avatarView.username = subscription.name
         }
 
         labelName.text = subscription.displayName()

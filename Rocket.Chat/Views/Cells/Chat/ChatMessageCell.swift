@@ -48,20 +48,17 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
@@ -248,7 +245,7 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.emoji = message.emoji
-        avatarView.user = message.user
+        avatarView.username = message.user?.username
 
         if let avatar = message.avatar {
             avatarView.avatarURL = URL(string: avatar)

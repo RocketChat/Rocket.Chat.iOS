@@ -11,7 +11,6 @@ import FLAnimatedImage
 import Nuke
 
 final class AvatarView: UIView {
-
     var avatarPlaceholder: UIImage?
     var imageURL: URL? {
         didSet {
@@ -29,22 +28,6 @@ final class AvatarView: UIView {
     var avatarURL: URL? {
         didSet {
             if avatarURL != nil {
-                updateAvatar()
-            }
-        }
-    }
-
-    var subscription: Subscription? {
-        didSet {
-            if subscription != nil {
-                updateAvatar()
-            }
-        }
-    }
-
-    var user: User? {
-        didSet {
-            if user != nil {
                 updateAvatar()
             }
         }
@@ -79,28 +62,55 @@ final class AvatarView: UIView {
             backgroundColor = .clear
         } else if let avatarURL = avatarURL {
             imageURL = avatarURL
-        } else if let user = user?.validated() {
-            setAvatarWithInitials(forUsername: user.username)
+        } else if let username = username {
+            setAvatarWithInitials(forUsername: username)
 
-            if let avatarURL = user.avatarURL() {
+            if let avatarURL = User.avatarURL(forUsername: username) {
                 imageURL = avatarURL
             }
-        } else if let avatarURL = subscription?.avatarURL() {
-            setAvatarWithInitials(forUsername: subscription?.name)
-            imageURL = avatarURL
-        } else if let username = username, let avatarURL = User.avatarURL(forUsername: username) {
-            imageURL = avatarURL
         }
     }
 
-    @IBOutlet weak var labelInitials: UILabel!
+    lazy var labelInitials: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        label.text = "?"
+        label.textAlignment = .center
+
+        addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            label.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+        return label
+    }()
+
     var labelInitialsFontSize: CGFloat? {
         didSet {
-            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 16)
+            labelInitials.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 16)
         }
     }
 
-    @IBOutlet weak var imageView: FLAnimatedImageView!
+    lazy var imageView: FLAnimatedImageView = {
+        let imageView = FLAnimatedImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+
+        return imageView
+    }()
 
     internal func initialsFor(_ username: String) -> String {
         guard username.count > 0 else {
@@ -148,7 +158,7 @@ final class AvatarView: UIView {
             initials = initialsFor(username)
         }
 
-        labelInitials?.text = initials.uppercased()
+        labelInitials.text = initials.uppercased()
         backgroundColor = color
     }
 
@@ -171,8 +181,7 @@ final class AvatarView: UIView {
         avatarPlaceholder = nil
         avatarURL = nil
         imageURL = nil
-        user = nil
-        subscription = nil
+        username = nil
         emoji = nil
 
         imageView.image = nil
@@ -180,12 +189,21 @@ final class AvatarView: UIView {
         labelInitials.text = ""
     }
 
+    init() {
+        super.init(frame: .zero)
+        backgroundColor = .black
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
 
 // MARK: Themeable
 
 extension AvatarView {
     override func applyTheme() {
-        labelInitials?.textColor = .white
+        super.applyTheme()
+        labelInitials.textColor = .white
     }
 }

@@ -12,8 +12,7 @@ import DifferenceKit
 struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription
 
-    var managedObject: Subscription
-    var identifier: String?
+    var identifier: String
     var privateType: String
     var type: SubscriptionType
     var rid: String
@@ -52,12 +51,21 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var audioNotificationValue: SubscriptionNotificationsAudioValue
     var privateOtherUserStatus: String?
     var directMessageUser: UnmanagedUser?
+
+    var managedObject: Subscription? {
+        return Subscription.find(withIdentifier: identifier)?.validated()
+    }
 }
 
 extension UnmanagedSubscription {
-    init(_ subscription: Subscription) {
-        managedObject = subscription
-        identifier = subscription.identifier
+
+    // swiftlint:disable function_body_length
+    init?(_ subscription: Subscription) {
+        guard let subscriptionIdentifier = subscription.identifier else {
+            return nil
+        }
+
+        identifier = subscriptionIdentifier
         privateType = subscription.privateType
         type = subscription.type
         rid = subscription.rid
@@ -97,6 +105,7 @@ extension UnmanagedSubscription {
         privateOtherUserStatus = subscription.privateOtherUserStatus
         directMessageUser = subscription.directMessageUser?.unmanaged
     }
+
 }
 
 extension UnmanagedSubscription: Differentiable {

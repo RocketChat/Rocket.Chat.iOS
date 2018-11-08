@@ -57,7 +57,7 @@ class HighlightLayoutManager: NSLayoutManager {
 
 @IBDesignable class RCTextView: UIView {
 
-    private var textView: UITextView!
+    var textView: UITextView!
     private var customEmojiViews: [EmojiView] = []
 
     weak var delegate: ChatMessageCellProtocol?
@@ -127,6 +127,8 @@ class HighlightLayoutManager: NSLayoutManager {
     }
 
     private func configureTextView() {
+        textView.isScrollEnabled = false
+        textView.adjustsFontForContentSizeCategory = true
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.backgroundColor = .clear

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import RocketChatViewController
 
 protocol ChatMessageTextViewProtocol: class {
-    func viewDidCollapseChange(view: UIView)
-    func openFileFromCell(attachment: Attachment)
+    func viewDidCollapseChange(viewModel: AnyChatItem)
+    func openFileFromCell(attachment: UnmanagedAttachment)
 }
 
 final class ChatMessageTextView: UIView {
@@ -104,12 +105,12 @@ final class ChatMessageTextView: UIView {
     @objc func viewDidTapped(_ sender: Any) {
         if viewModel?.isFile == false {
             viewModel?.toggleCollapse()
-            delegate?.viewDidCollapseChange(view: self)
+//            delegate?.viewDidCollapseChange(view: self)
         }
 
         if let attachment = viewModel?.attachment {
-            if attachment.titleLinkDownload {
-                delegate?.openFileFromCell(attachment: attachment)
+            if attachment.titleLinkDownload, let unmanaged = UnmanagedAttachment(attachment) {
+                delegate?.openFileFromCell(attachment: unmanaged)
             }
         }
     }

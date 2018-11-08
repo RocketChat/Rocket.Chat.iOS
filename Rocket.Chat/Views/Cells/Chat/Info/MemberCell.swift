@@ -56,20 +56,17 @@ final class MemberCell: UITableViewCell {
             avatarViewContainer.layer.masksToBounds = true
             avatarViewContainer.layer.cornerRadius = 5
 
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var nameLabel: UILabel!
 
@@ -77,7 +74,7 @@ final class MemberCell: UITableViewCell {
         didSet {
             statusView.backgroundColor = data?.statusColor
             nameLabel.text = data?.nameText
-            avatarView.user = data?.member
+            avatarView.username = data?.member.username
         }
     }
 

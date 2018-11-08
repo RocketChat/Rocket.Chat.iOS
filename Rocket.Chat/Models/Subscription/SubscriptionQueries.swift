@@ -9,9 +9,6 @@
 import RealmSwift
 
 extension Subscription {
-    static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
-        return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
-    }
 
     static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.current) -> Subscription? {
         let predicate = NSPredicate(
@@ -26,4 +23,5 @@ extension Subscription {
         guard let roomId = AppManager.initialRoomId else { return nil }
         return auth.subscriptions.filter("rid = %@", roomId).first
     }
+
 }

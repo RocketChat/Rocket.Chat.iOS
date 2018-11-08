@@ -92,21 +92,31 @@ extension Subscription {
 
     func fetchMessages(_ limit: Int = 20, lastMessageDate: Date? = nil) -> [Message] {
         var limitedMessages: [Message] = []
-        var messages = fetchMessagesQueryResults()
+
+        guard var messages = fetchMessagesQueryResults() else { return [] }
 
         if let lastMessageDate = lastMessageDate {
             messages = messages.filter("createdAt < %@", lastMessageDate)
         }
 
-        for index in 0..<min(limit, messages.count) {
-            limitedMessages.append(messages[index])
+        let totalMessagesIndexes = messages.count - 1
+        for index in 0..<limit {
+            let reversedIndex = totalMessagesIndexes - index
+
+            guard totalMessagesIndexes >= reversedIndex, reversedIndex >= 0 else {
+                return limitedMessages
+            }
+
+            limitedMessages.append(messages[reversedIndex])
         }
 
         return limitedMessages
     }
 
-    func fetchMessagesQueryResults() -> Results<Message> {
-        var filteredMessages = self.messages.filter("userBlocked == false")
+    func fetchMessagesQueryResults() -> Results<Message>? {
+        guard var filteredMessages = self.messages?.filter("userBlocked == false AND identifier != NULL AND createdAt != NULL") else {
+            return nil
+        }
 
         if let hiddenTypes = AuthSettingsManager.settings?.hiddenTypes {
             for hiddenType in hiddenTypes {
@@ -114,7 +124,7 @@ extension Subscription {
             }
         }
 
-        return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
+        return filteredMessages.sorted(byKeyPath: "createdAt", ascending: true)
     }
 
     func updateFavorite(_ favorite: Bool) {
@@ -122,4 +132,26 @@ extension Subscription {
             self.favorite = favorite
         })
     }
+}
+
+// MARK: Failed Messages
+
+extension Subscription {
+
+    func setTemporaryMessagesFailed(user: User? = AuthManager.currentUser()) {
+        guard let user = user else {
+            return
+        }
+
+        Realm.executeOnMainThread { realm in
+            self.messages?.filter("temporary = true").filter({
+                $0.user == user
+            }).forEach {
+                $0.temporary = false
+                $0.failed = true
+                realm.add($0, update: true)
+            }
+        }
+    }
+
 }

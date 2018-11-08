@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Oui, abandonner";
 "chat.message.actions.resend" = "Renvoyer";
 "chat.message.actions.resend_all" = "Renvoyer tous les messages";
-"Send" = "Envoyer"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message signalé";

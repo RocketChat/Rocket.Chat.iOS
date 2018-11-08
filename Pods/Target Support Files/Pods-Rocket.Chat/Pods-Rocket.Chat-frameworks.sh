@@ -158,12 +158,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Test" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
@@ -180,12 +181,13 @@ if [[ "$CONFIGURATION" == "Test" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
@@ -202,12 +204,13 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework"
@@ -225,12 +228,13 @@ if [[ "$CONFIGURATION" == "Beta" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/semver/semver.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DifferenceKit-Core/DifferenceKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

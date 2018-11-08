@@ -50,7 +50,37 @@ extension User {
 
 extension User: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedUser
-    var unmanaged: UnmanagedUser {
+    var unmanaged: UnmanagedUser? {
         return UnmanagedUser(self)
     }
+}
+
+// MARK: Avatar URL
+
+extension User {
+
+    func avatarURL(_ auth: Auth? = nil) -> URL? {
+        guard
+            !isInvalidated,
+            let username = username,
+            let auth = auth ?? AuthManager.isAuthenticated()
+        else {
+            return nil
+        }
+
+        return User.avatarURL(forUsername: username, auth: auth)
+    }
+
+    static func avatarURL(forUsername username: String, auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
+    }
+
 }

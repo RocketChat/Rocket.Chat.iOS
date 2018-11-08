@@ -19,7 +19,7 @@ struct MarkdownColorAttributes {
         quoteBackgroundColor = theme.bannerBackground
         codeBackgroundColor = theme.bannerBackground
         codeTextColor = theme.controlText
-        linkColor = theme.hyperlink
+        linkColor = theme.actionTintColor
     }
 }
 

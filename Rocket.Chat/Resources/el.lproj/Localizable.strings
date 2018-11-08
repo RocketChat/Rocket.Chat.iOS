@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Ναι, να απορριφθεί";
 "chat.message.actions.resend" = "Ξαναστέλνω";
 "chat.message.actions.resend_all" = "Τα ξαναστέλνω όλα";
-"Send" = "Αποστολή"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Το Μήνυμα Αναφέρθηκε";

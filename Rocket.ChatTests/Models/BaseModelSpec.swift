@@ -13,28 +13,8 @@ import RealmSwift
 
 class BaseModelSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        Realm.executeOnMainThread({ realm in
-            for obj in realm.objects(BaseModel.self) {
-                realm.delete(obj)
-            }
-        })
-    }
-
-    override func tearDown() {
-        super.tearDown()
-
-        Realm.executeOnMainThread({ realm in
-            for obj in realm.objects(BaseModel.self) {
-                realm.delete(obj)
-            }
-        })
-    }
-
     func testBaseModelBasicInstructions() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let object = BaseModel()
             object.identifier = "123"
             realm.add(object)
@@ -54,7 +34,7 @@ class BaseModelSpec: XCTestCase {
         let object3 = BaseModel()
         object1.identifier = "3"
 
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             realm.add(object1)
             realm.add(object2)
             realm.add(object3)
@@ -72,13 +52,13 @@ class BaseModelSpec: XCTestCase {
         let object3 = BaseModel()
         object3.identifier = "obj3"
 
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             realm.add(object1)
             realm.add(object2)
             realm.add(object3)
         })
 
-        Realm.executeOnMainThread({ _ in
+        Realm.execute({ _ in
             XCTAssert(BaseModel.delete(withIdentifier: "obj1"))
             XCTAssert(BaseModel.delete(withIdentifier: "obj3"))
             XCTAssert(BaseModel.delete(withIdentifier: "obj3") == false)

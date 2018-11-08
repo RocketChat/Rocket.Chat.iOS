@@ -8,13 +8,13 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class InfoClientSpec: XCTestCase, RealmTestCase {
+class InfoClientSpec: XCTestCase {
     func testFetchInfo() {
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
@@ -24,18 +24,17 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": "true"
         ])
 
-        realm.execute({ _ in
+        Realm.execute({ realm in
             realm.add(Auth.testInstance())
         })
 
-        client.fetchInfo(realm: realm)
-        XCTAssertEqual(AuthManager.isAuthenticated(realm: realm)?.serverVersion, "0.59.3")
+        client.fetchInfo()
+        XCTAssertEqual(AuthManager.isAuthenticated()?.serverVersion, "0.59.3")
     }
 
     //swiftlint:disable function_body_length
     func testFetchLoginServices() {
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
@@ -81,17 +80,21 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        realm.execute({ _ in
-            realm.add(Auth.testInstance())
+        Realm.execute({ realm in
+            realm.add(Auth.testInstance(), update: true)
         })
 
-        client.fetchLoginServices(realm: realm)
-        XCTAssertEqual(realm.objects(LoginService.self).count, 2)
+        client.fetchLoginServices()
+        XCTAssertEqual(Realm.current?.objects(LoginService.self).count, 2)
     }
 
     func testFetchPermissions() {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
@@ -109,9 +112,10 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                     "admin"
                 ]
             ]
-        ])
+            ])
 
-        client.fetchPermissions(realm: realm)
-        XCTAssertEqual(realm.objects(Permission.self).count, 2)
+        client.fetchPermissions()
+        XCTAssertEqual(realm.objects(Rocket_Chat.Permission.self).count, 2)
     }
+
 }

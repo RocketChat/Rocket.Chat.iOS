@@ -49,7 +49,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
-        guard let avatarView = AvatarView.instantiateFromNib() else { return AvatarView() }
+        let avatarView = AvatarView()
         avatarView.isUserInteractionEnabled = false
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.layer.cornerRadius = 15
@@ -188,7 +188,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }
 
     func bindUserData() {
-        avatarView.user = user
+        avatarView.username = user?.username
         name.text = user?.name
         username.text = user?.username
         email.text = user?.emails.first?.email

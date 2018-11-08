@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Ja, verwerfen";
 "chat.message.actions.resend" = "Erneut senden";
 "chat.message.actions.resend_all" = "Alle erneut senden";
-"Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Nachricht gemeldet";

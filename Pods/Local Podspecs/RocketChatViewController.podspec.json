@@ -1,0 +1,46 @@
+{
+  "name": "RocketChatViewController",
+  "version": "0.1.0",
+  "summary": "RocketChatViewController is a light weight library that allows you to implement a chat on iOS.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/RocketChat/RocketChatViewController",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Rocket Chat": "ofilipealvarenga@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/RocketChat/RocketChatViewController",
+    "tag": "0.1.0"
+  },
+  "social_media_url": "https://twitter.com/RocketChat",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "subspecs": [
+    {
+      "name": "ViewController",
+      "platforms": {
+        "ios": "11.0"
+      },
+      "source_files": "RocketChatViewController/Classes/**/*",
+      "dependencies": {
+        "DifferenceKit": [
+          "~> 0.7.2"
+        ]
+      }
+    },
+    {
+      "name": "Composer",
+      "platforms": {
+        "ios": "11.0"
+      },
+      "source_files": "Composer/Classes/**/*",
+      "resources": [
+        "Composer/Assets/Assets.xcassets"
+      ]
+    }
+  ]
+}
