@@ -390,6 +390,7 @@ final class MessagesViewModel {
         hasUnreadMarker = false
 
         let dataSortedMaxIndex = dataSorted.count - 1
+        let currentTheme = controllerContext?.view.theme ?? .light
 
         for (idx, object) in dataSorted.enumerated() {
             guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
@@ -424,6 +425,12 @@ final class MessagesViewModel {
                 controllerContext: controllerContext,
                 collapsibleItemsState: collpsibleItemsState
             ))
+
+            // Cache the processed result of the message text
+            // on this loop to avoid doing that in the main thread.
+            if let managedObject = message.managedObject {
+                MessageTextCacheManager.shared.message(for: managedObject, with: currentTheme)
+            }
 
             if unreadMarker {
                 hasUnreadMarker = true
