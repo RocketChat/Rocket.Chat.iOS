@@ -70,6 +70,7 @@ final class MessageTextCacheManager {
         return finalText
     }
 
+    @discardableResult
     func message(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
