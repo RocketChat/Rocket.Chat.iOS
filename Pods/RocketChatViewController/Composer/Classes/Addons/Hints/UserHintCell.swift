@@ -12,7 +12,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's avatar image view
      */
-    open let avatarView: AvatarView = tap(AvatarView()) {
+    public let avatarView: AvatarView = tap(AvatarView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.avatarCornerRadius
@@ -27,7 +27,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's name label
      */
-    open let nameLabel: UILabel = tap(UILabel()) {
+    public let nameLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .body)
@@ -37,7 +37,7 @@ open class UserHintCell<AvatarView: UIView>: UITableViewCell {
     /*
      The user's username label
      */
-    open let usernameLabel: UILabel = tap(UILabel()) {
+    public let usernameLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .footnote)
