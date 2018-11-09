@@ -314,10 +314,20 @@ public extension ComposerView {
 }
 
 // MARK: UITextView Delegate
-
 extension ComposerView: UITextViewDelegate {
     @objc public func textViewDidChangeSelection(_ textView: UITextView) {
         currentDelegate.composerViewDidChangeSelection(self)
         return
+    }
+
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // it would be good if we could support "soft return"
+        // (shift+enter) to allow the user to type newlines
+        // but as of iOS 12, it's not possible yet :(
+        if text == "\n" {
+            return currentDelegate.composerViewShouldReturn(self)
+        }
+
+        return true
     }
 }
