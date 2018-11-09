@@ -152,15 +152,17 @@ final class MessagesViewModel {
      Returns the specific cell item model for the IndexPath requested.
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
-        guard
-            indexPath.section < dataSorted.count,
-            indexPath.row < dataSorted[indexPath.section].viewModels().count
-        else {
+        guard indexPath.section < dataSorted.count else {
             return nil
         }
 
-        let section = dataSorted[indexPath.section]
-        return section.viewModels()[indexPath.row]
+        let viewModels = dataSorted[indexPath.section].viewModels()
+
+        guard indexPath.row < viewModels.count else {
+            return nil
+        }
+
+        return viewModels[indexPath.row]
     }
 
     /**
