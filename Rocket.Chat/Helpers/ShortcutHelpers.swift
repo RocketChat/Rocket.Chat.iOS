@@ -112,7 +112,7 @@ extension MessagesViewController {
 
     func openUpload() {
         controller?.doAfterDismissingPresented { [weak self] in
-            self?.buttonUploadDidPressed()
+            self?.uploadButtonPressed()
         }
     }
 
