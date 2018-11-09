@@ -251,6 +251,19 @@ final class MessagesViewController: RocketChatViewController {
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
+    // MARK: Sizing
+
+    func messageWidth() -> CGFloat {
+        var horizontalMargins: CGFloat
+        if isInLandscape {
+            horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+        } else {
+            horizontalMargins = 0
+        }
+
+        return screenSize.width - horizontalMargins
+    }
+
 }
 
 extension MessagesViewController {
