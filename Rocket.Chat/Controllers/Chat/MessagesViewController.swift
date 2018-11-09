@@ -20,7 +20,7 @@ extension SizingCell {
     static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize {
         var mutableSizingCell = sizingCell
         mutableSizingCell.prepareForReuse()
-        mutableSizingCell.adjustedHorizontalInsets = cellWidth
+        mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
         mutableSizingCell.configure()
         mutableSizingCell.setNeedsLayout()

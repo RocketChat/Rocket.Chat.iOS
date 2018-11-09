@@ -251,7 +251,7 @@ final class MessageSection: ChatSection {
             cell.delegate = self
         }
 
-        cell.adjustedHorizontalInsets = messagesController?.messageWidth() ?? 0
+        cell.messageWidth = messagesController?.messageWidth() ?? 0
         cell.viewModel = viewModel
         cell.configure()
         return cell
