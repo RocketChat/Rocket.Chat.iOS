@@ -148,8 +148,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleSearchMessages()
+        chatViewController?.toggleSearchMessages()
     }
 
     @objc func shortcutScrollMessages(_ command: UIKeyCommand) {

@@ -219,6 +219,7 @@ final class MessagesViewController: RocketChatViewController {
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
+        setupSearchMessagesButton()
     }
 
     // MARK: IBAction
@@ -367,4 +368,31 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+// MARK: Message Searching
+
+extension MessagesViewController {
+    func setupSearchMessagesButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .search,
+            target: self,
+            action: #selector(showSearchMessages)
+        )
+    }
+
+    @objc func showSearchMessages() {
+        guard
+            let storyboard = storyboard,
+            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
+            else {
+                return
+        }
+
+        messageList.data.subscription = subscription
+        messageList.data.isSearchingMessages = true
+        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
+
+        present(searchMessagesNav, animated: true, completion: nil)
+    }
 }

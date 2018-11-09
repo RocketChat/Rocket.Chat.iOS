@@ -150,3 +150,32 @@ extension MessagesViewController {
         }
     }
 }
+
+// MARK: Message Searching
+
+extension MessagesViewController {
+    var isSearchMessagesOpen: Bool {
+        let controller = presentedViewController?.children.first as? MessagesListViewController
+        return controller?.data.isSearchingMessages == true
+    }
+
+    func toggleSearchMessages() {
+        if isSearchMessagesOpen {
+            closeSearchMessages()
+        } else {
+            openSearchMessages()
+        }
+    }
+
+    func openSearchMessages() {
+        doAfterDismissingPresented { [weak self] in
+            self?.showSearchMessages()
+        }
+    }
+
+    func closeSearchMessages() {
+        if isSearchMessagesOpen {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
