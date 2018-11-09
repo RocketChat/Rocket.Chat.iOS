@@ -153,14 +153,14 @@ final class MessagesViewModel {
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
         guard
-            indexPath.section < dataNormalized.count,
-            indexPath.row < dataNormalized[indexPath.section].elements.count
+            indexPath.section < dataSorted.count,
+            indexPath.row < dataSorted[indexPath.section].viewModels().count
         else {
             return nil
         }
 
-        let section = dataNormalized[indexPath.section]
-        return section.elements[indexPath.row]
+        let section = dataSorted[indexPath.section]
+        return section.viewModels()[indexPath.row]
     }
 
     /**
