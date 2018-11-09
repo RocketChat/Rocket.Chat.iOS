@@ -51,12 +51,12 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
+  # DiffKit
+  diff_pods
+
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
-
-  # Diffing
-  diff_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
@@ -67,12 +67,10 @@ target 'Rocket.Chat.ShareExtension' do
 end
 
 target 'Rocket.Chat' do
-  # Shared pods
   shared_pods
 end
 
 target 'Rocket.ChatTests' do
-  # Shared pods
   shared_pods
 end
 

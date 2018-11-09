@@ -16,16 +16,16 @@ A powerful **image loading** and **caching** system. It makes simple tasks like 
 - [RxNuke](https://github.com/kean/RxNuke) - [RxSwift](https://github.com/ReactiveX/RxSwift) extensions
 - Automates [prefetching](https://kean.github.io/post/image-preheating) with [Preheat](https://github.com/kean/Preheat) (*deprecated in iOS 10*)
 
-# <a name="h_getting_started"></a>Quick Start
+# <a name="h_getting_started"></a>Getting Started
 
 > Upgrading from the previous version? Use a [**Migration Guide**](https://github.com/kean/Nuke/blob/master/Documentation/Migrations).
 
-- Basic [**Usage Guide**](#h_usage), the best place to start
+- [**Quick Start Guide**](#h_usage)
   - [Load Image into Image View](#load-image-into-image-view)
   - [Placeholders, Transitions and More](#placeholders-transitions-and-more)
   - [Image Requests](#image-requests), [Process an Image](#process-an-image)
-  - [Image Pipeline](#image-pipeline), [Configuring Image Pipeline](#configuring-image-pipeline)
 - [**Advanced Usage Guide**](#advanced-usage)
+  - [Image Pipeline](#image-pipeline), [Configuring Image Pipeline](#configuring-image-pipeline)
   - [Memory Cache](#memory-cache), [HTTP Disk Cache](#http-disk-cache), [Aggressive Disk Cache](#aggressive-disk-cache)
   - [Preheat Images](#preheat-images)
   - [Progressive Decoding](#progressive-decoding), [Animated Images](#animated-images), [WebP](#webp)
@@ -38,7 +38,7 @@ A powerful **image loading** and **caching** system. It makes simple tasks like 
 
 More information is available in [**Documentation**](https://github.com/kean/Nuke/blob/master/Documentation/) directory and a full [**API Reference**](https://kean.github.io/Nuke/reference/7.3/index.html). When you are ready to install Nuke you can follow an [**Installation Guide**](https://github.com/kean/Nuke/blob/master/Documentation/Guides/Installation%20Guide.md) - all major package managers are supported.
 
-# <a name="h_usage"></a>Usage
+# <a name="h_usage"></a>Quick Start
 
 #### Load Image into Image View
 
@@ -64,7 +64,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
 
 #### Placeholders, Transitions and More
 
-Use an  `options` parameter (`ImageLoadingOptions`)  to customize the way images are loaded and displayed. You can provide a placeholder, select one of the built-in transitions or provide a custom one.
+Use an  `options` parameter (`ImageLoadingOptions`)  to customize the way images are loaded and displayed. You can provide a placeholder, select one of the built-in transitions or provide a custom one. When using transitions, be aware that UIKit may keep a reference to the image, preventing it from being removed for long animations or loading many transitions at once.
 
 ```swift
 Nuke.loadImage(
@@ -83,7 +83,7 @@ There is a very common scenario when the placeholder (or the failure image) need
 let options = ImageLoadingOptions(
     placeholder: UIImage(named: "placeholder"),
     failureImage: UIImage(named: "failure_image"),
-    contentModes = .init(
+    contentModes: .init(
         success: .scaleAspectFill,
         failure: .center,
         placeholder: .center
@@ -135,6 +135,8 @@ All those APIs are built on top of `ImageProcessing` protocol which you can also
 
 > See [Core Image Integration Guide](https://github.com/kean/Nuke/blob/master/Documentation/Guides/Core%20Image%20Integration%20Guide.md) for info about using Core Image with Nuke
 
+# Advanced Usage
+
 #### Image Pipeline
 
 Use `ImagePipeline` directly to load images without a view.
@@ -175,8 +177,6 @@ let pipeline = ImagePipeline {
 // When you're done you can make the pipeline a shared one:
 ImagePipeline.shared = pipeline
 ```
-
-# Advanced Usage
 
 #### Memory Cache
 
@@ -230,25 +230,28 @@ If you enable aggressive disk cache, make sure that you also disable native URL 
 
 > `DataCache` type implements public `DataCaching` protocol which can be used for implementing custom data caches.
 
-#### Preheat Images
+#### Prefetching Images
 
-[Preheating](https://kean.github.io/post/image-preheating) (prefetching) means loading images ahead of time in anticipation of their use. Nuke provides a `ImagePreheater` class that does just that.
+[Prefethcing](https://kean.github.io/post/image-preheating) images in advance reduces the wait time for users. Nuke provides an `ImagePreheater` to do just that:
 
 ```swift
-let preheater = ImagePreheater(pipeline: ImagePipeline.shared)
+let preheater = ImagePreheater()
+preheater.startPreheating(with: urls)
 
-let requests = urls.map {
-    var request = ImageRequest(url: $0)
-    request.priority = .low
-    return request
-}
-
-// User enters the screen:
-preheater.startPreheating(for: requests)
-
-// User leaves the screen:
-preheater.stopPreheating(for: requests)
+// Cancels all of the preheating tasks created for the given requests.
+preheater.stopPreheating(with: urls)
 ```
+
+There are trade-offs, prefetching takes up users's data and puts an extra pressure on CPU and memory. To reduce the CPU and memory usage you have an option to choose only the disk cache as a prefetching destination:
+
+```swift
+// The preheater with `.diskCache` destination will skip image data decoding
+// entirely to reduce CPU and memory usage. It will still load the image data
+// and store it in disk caches to be used later.
+let preheater = ImagePreheater(destination: .diskCache)
+```
+
+To make sure that the prefetching requests don't interfere with normal requests it's best to reduce their priority.
 
 You can use Nuke in combination with [Preheat](https://github.com/kean/Preheat) library which automates preheating of content in `UICollectionView` and `UITableView`. On iOS 10.0 you might want to use new [prefetching APIs](https://developer.apple.com/reference/uikit/uitableviewdatasourceprefetching) provided by iOS instead.
 
@@ -433,7 +436,7 @@ Nuke is fully asynchronous and works great under stress. `ImagePipeline` schedul
 
 Another important performance characteristic is memory usage. Nuke uses a custom memory cache with [LRU (least recently used)](https://en.wikipedia.org/wiki/Cache_algorithms#Examples) replacement algorithm. It has a limit which prevents it from using more than ~20% of available RAM. As a good citizen, `ImageCache` automatically evicts images on memory warnings and removes most of the images when the application enters background.
 
-### Performance Metrics (Beta)
+### Performance Metrics
 
 When optimizing performance, it's important to measure. Nuke collects detailed performance metrics during the execution of each image task:
 

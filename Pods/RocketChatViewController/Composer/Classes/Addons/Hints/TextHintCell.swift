@@ -12,7 +12,7 @@ open class TextHintCell<PrefixView: UIView>: UITableViewCell {
     /*
      The hint's prefix view
      */
-    open let prefixView: PrefixView = tap(PrefixView()) {
+    public let prefixView: PrefixView = tap(PrefixView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.layer.cornerRadius = Consts.prefixCornerRadius
@@ -31,7 +31,7 @@ open class TextHintCell<PrefixView: UIView>: UITableViewCell {
     /*
      The hint's value label
      */
-    open let valueLabel: UILabel = tap(UILabel()) {
+    public let valueLabel: UILabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
         $0.font = .preferredFont(forTextStyle: .body)
