@@ -127,7 +127,8 @@ extension MessagesViewController {
 
 extension MessagesViewController {
     var isActionsOpen: Bool {
-        return (presentedViewController as? UINavigationController)?.viewControllers.first as? ChannelActionsViewController != nil
+        let controller = (presentedViewController as? UINavigationController)?.viewControllers.first
+        return controller as? ChannelActionsViewController != nil
     }
 
     func toggleActions() {
