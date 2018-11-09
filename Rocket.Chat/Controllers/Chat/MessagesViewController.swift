@@ -42,6 +42,8 @@ final class MessagesViewController: RocketChatViewController {
 
     var chatTitleView: ChatTitleView?
 
+    var emptyStateImageView: UIImageView?
+
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
@@ -110,6 +112,7 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidLoad()
 
         setupTitleView()
+        updateEmptyState()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -187,6 +190,11 @@ final class MessagesViewController: RocketChatViewController {
                 self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
             }
         })
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateEmptyStateFrame()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -358,6 +366,8 @@ extension MessagesViewController {
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
+
+        emptyStateImageView?.image = UIImage(named: "Empty State \(themeName ?? "light")")
     }
 
 }
@@ -374,4 +384,36 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+// MARK: EmptyState
+
+extension MessagesViewController {
+    func updateEmptyState() {
+        if subscription == nil {
+            title = ""
+            composerView.isHidden = true
+
+            chatTitleView?.removeFromSuperview()
+            emptyStateImageView?.removeFromSuperview()
+
+            guard let theme = view.theme else { return }
+            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
+            let imageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            view.addSubview(imageView)
+
+            emptyStateImageView = imageView
+
+            updateEmptyStateFrame()
+        } else {
+            emptyStateImageView?.removeFromSuperview()
+        }
+    }
+
+    func updateEmptyStateFrame() {
+        emptyStateImageView?.frame = view.bounds
+    }
 }
