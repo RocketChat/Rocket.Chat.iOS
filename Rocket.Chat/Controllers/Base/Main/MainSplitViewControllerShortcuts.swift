@@ -176,8 +176,7 @@ extension MainSplitViewController {
         }
 
         if let message = chatViewController?.subscription?.roomLastMessage {
-            // TODO: Replace for our reply mechanism
-//            chatViewController?.reply(to: message)
+            chatViewController?.reply(to: message)
         }
     }
 

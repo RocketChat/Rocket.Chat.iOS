@@ -60,8 +60,7 @@ final class MessagesViewController: RocketChatViewController {
 
     var scrollToBottomButtonIsVisible: Bool = false {
         didSet {
-            guard oldValue != scrollToBottomButtonIsVisible
-            else {
+            guard oldValue != scrollToBottomButtonIsVisible else {
                 return
             }
 
@@ -385,8 +384,8 @@ extension MessagesViewController {
         guard
             let storyboard = storyboard,
             let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
-            else {
-                return
+        else {
+            return
         }
 
         messageList.data.subscription = subscription
