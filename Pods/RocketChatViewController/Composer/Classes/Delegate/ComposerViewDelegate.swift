@@ -24,7 +24,7 @@ public protocol ComposerViewDelegate: class {
     func composerView(_ composerView: ComposerView, addonAt slot: ComposerAddonSlot, index: UInt) -> ComposerAddon?
 
     /**
-     Asks the delegate if the text field should process the pressing of the return button.
+     Asks the delegate if the composer view should process the pressing of the return button.
      */
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool
 
