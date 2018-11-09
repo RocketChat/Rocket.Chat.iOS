@@ -382,8 +382,8 @@ extension MessagesViewController {
 
     @objc func showSearchMessages() {
         guard
-            let storyboard = storyboard,
-            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesList") as? MessagesListViewController
+            let controller = storyboard?.instantiateViewController(withIdentifier: "MessagesList"),
+            let messageList = controller as? MessagesListViewController
         else {
             return
         }
