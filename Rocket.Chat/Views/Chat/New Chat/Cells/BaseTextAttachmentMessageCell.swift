@@ -29,7 +29,7 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     var readReceiptTrailingInitialConstant: CGFloat = 0
     var fieldLabelWidth: CGFloat {
         return
-            UIScreen.main.bounds.width -
+            adjustedHorizontalInsets -
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -
@@ -39,8 +39,7 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant -
-            adjustedHorizontalInsets
+            readReceiptTrailingInitialConstant
     }
 
     func configure(stackView: UIStackView) -> CGFloat {

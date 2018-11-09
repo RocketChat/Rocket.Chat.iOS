@@ -28,12 +28,13 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
-    var textHorizontalMargins: CGFloat {
-        return textLeadingConstraint.constant +
-            textTrailingConstraint.constant +
-            readReceiptWidthConstraint.constant +
-            readReceiptTrailingConstraint.constant +
-            adjustedHorizontalInsets
+    var textWidth: CGFloat {
+        return
+            adjustedHorizontalInsets -
+            textLeadingConstraint.constant -
+            textTrailingConstraint.constant -
+            readReceiptWidthConstraint.constant -
+            readReceiptTrailingConstraint.constant
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -75,12 +76,8 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
 
             text.message = message
 
-            // FA NOTE: Using UIScreen.main bounds is fine because we are not using
-            // section insets, but in the future we can create a mechanism that
-            // discounts the UICollectionView's section insets from the main screen's bounds
-            let screenWidth = UIScreen.main.bounds.width
             let maxSize = CGSize(
-                width: screenWidth - textHorizontalMargins,
+                width: textWidth,
                 height: .greatestFiniteMagnitude
             )
 
