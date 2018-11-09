@@ -99,7 +99,7 @@ final class MessagesViewController: RocketChatViewController {
 
     lazy var screenSize = view.frame.size
     var isInLandscape: Bool {
-        return screenSize.width / screenSize.height > 1 ? true : false
+        return screenSize.width / screenSize.height > 1 && UIDevice.current.userInterfaceIdiom == .phone
     }
 
     deinit {
