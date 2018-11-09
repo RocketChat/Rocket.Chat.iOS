@@ -20,7 +20,7 @@ final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     @IBOutlet weak var reactionsList: ReactionListView! {

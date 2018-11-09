@@ -21,7 +21,7 @@ class BaseQuoteMessageCell: BaseMessageCell {
     var readReceiptTrailingInitialConstant: CGFloat = 0
     var textLabelWidth: CGFloat {
         return
-            adjustedHorizontalInsets -
+            messageWidth -
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             containerLeadingInitialConstant -

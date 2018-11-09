@@ -33,14 +33,14 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
     var containerWidth: CGFloat {
         return
-            adjustedHorizontalInsets -
+            messageWidth -
             containerLeadingConstraint.constant -
             containerTrailingConstraint.constant
     }
 
     weak var delegate: ChatMessageCellProtocol?
 
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
     var thumbnailHeightInitialConstant: CGFloat = 0
 

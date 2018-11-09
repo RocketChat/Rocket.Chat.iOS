@@ -29,7 +29,7 @@ final class UnreadMarkerCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var separatorLeft: UIView!
     @IBOutlet weak var separatorRight: UIView!
 
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     func configure() {

@@ -45,7 +45,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     var textWidth: CGFloat {
         return
-            adjustedHorizontalInsets -
+            messageWidth -
             textLeadingConstraint.constant -
             textTrailingConstraint.constant -
             readReceiptWidthConstraint.constant -

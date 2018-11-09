@@ -29,7 +29,7 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     var readReceiptTrailingInitialConstant: CGFloat = 0
     var fieldLabelWidth: CGFloat {
         return
-            adjustedHorizontalInsets -
+            messageWidth -
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -

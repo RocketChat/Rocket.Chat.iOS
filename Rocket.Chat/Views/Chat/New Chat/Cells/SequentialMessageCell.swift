@@ -30,7 +30,7 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     var textWidth: CGFloat {
         return
-            adjustedHorizontalInsets -
+            messageWidth -
             textLeadingConstraint.constant -
             textTrailingConstraint.constant -
             readReceiptWidthConstraint.constant -
