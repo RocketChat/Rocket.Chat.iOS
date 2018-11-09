@@ -42,5 +42,4 @@ extension MessagesViewController {
 
         self.composerViewModel.replyString = ""
     }
-
 }

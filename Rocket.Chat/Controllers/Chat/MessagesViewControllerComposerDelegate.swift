@@ -118,23 +118,18 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
         if button === composerView.rightButton {
-            if composerViewModel.messageToEdit != nil {
-                commitMessageEdit()
-            } else {
-                viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
-            }
-
-            composerView.textView.text = ""
-
-            stopReplying()
+            sendButtonPressed()
         }
 
         if button == composerView.leftButton {
-            buttonUploadDidPressed()
+            uploadButtonPressed()
         }
+    }
 
-        if button == composerView.leftButton {
-            buttonUploadDidPressed()
-        }
+    // MARK: Return
+
+    func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
+        sendButtonPressed()
+        return false
     }
 }
