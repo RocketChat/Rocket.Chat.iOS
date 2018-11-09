@@ -21,7 +21,7 @@ class BaseQuoteMessageCell: BaseMessageCell {
     var readReceiptTrailingInitialConstant: CGFloat = 0
     var textLabelWidth: CGFloat {
         return
-            UIScreen.main.bounds.width -
+            messageWidth -
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             containerLeadingInitialConstant -
@@ -29,8 +29,7 @@ class BaseQuoteMessageCell: BaseMessageCell {
             textTrailingInitialConstant -
             containerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant -
-            adjustedHorizontalInsets
+            readReceiptTrailingInitialConstant
     }
 
     var isCollapsible = false
@@ -39,8 +38,7 @@ class BaseQuoteMessageCell: BaseMessageCell {
     @objc func didTapContainerView() {
         guard
             isCollapsible,
-            let viewModel = viewModel,
-            let quoteViewModel = viewModel.base as? QuoteChatItem
+            let viewModel = viewModel
         else {
             return
         }

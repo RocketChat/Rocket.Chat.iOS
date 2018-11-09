@@ -26,7 +26,12 @@ final class MessagesViewModel {
      The controller context that will be used to respond
      delegates from the cells.
      */
-    weak var controllerContext: UIViewController?
+    var currentTheme: Theme = .light
+    weak var controllerContext: UIViewController? {
+        didSet {
+            currentTheme = controllerContext?.view.theme ?? .light
+        }
+    }
 
     internal var subscription: Subscription? {
         didSet {
@@ -392,7 +397,6 @@ final class MessagesViewModel {
         hasUnreadMarker = false
 
         let dataSortedMaxIndex = dataSorted.count - 1
-        let currentTheme = controllerContext?.view.theme ?? .light
 
         for (idx, object) in dataSorted.enumerated() {
             guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }

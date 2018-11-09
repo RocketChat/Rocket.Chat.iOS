@@ -10,7 +10,7 @@ import UIKit
 import RocketChatViewController
 
 class BaseMessageCell: UICollectionViewCell, ChatCell {
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     lazy var avatarView: AvatarView = {
