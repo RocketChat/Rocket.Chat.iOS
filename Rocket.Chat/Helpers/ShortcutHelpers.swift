@@ -122,3 +122,31 @@ extension MessagesViewController {
         }
     }
 }
+
+// MARK: Room Actions
+
+extension MessagesViewController {
+    var isActionsOpen: Bool {
+        return (presentedViewController as? UINavigationController)?.viewControllers.first as? ChannelActionsViewController != nil
+    }
+
+    func toggleActions() {
+        if isActionsOpen {
+            closeActions()
+        } else {
+            openActions()
+        }
+    }
+
+    func openActions() {
+        doAfterDismissingPresented { [weak self] in
+            self?.performSegue(withIdentifier: "Channel Actions", sender: nil)
+        }
+    }
+
+    func closeActions() {
+        if isActionsOpen {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}

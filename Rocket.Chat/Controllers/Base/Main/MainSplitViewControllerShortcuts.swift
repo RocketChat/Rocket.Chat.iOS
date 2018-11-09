@@ -140,8 +140,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleActions()
+        chatViewController?.toggleActions()
     }
 
     @objc func shortcutRoomMessageSearch(_ command: UIKeyCommand) {
