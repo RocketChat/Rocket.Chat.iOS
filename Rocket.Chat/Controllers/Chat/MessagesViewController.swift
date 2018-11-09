@@ -13,14 +13,14 @@ import DifferenceKit
 
 protocol SizingCell: class {
     static var sizingCell: UICollectionViewCell & ChatCell { get }
-    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize
+    static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize
 }
 
 extension SizingCell {
-    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize {
+    static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize {
         var mutableSizingCell = sizingCell
         mutableSizingCell.prepareForReuse()
-        mutableSizingCell.adjustedHorizontalInsets = horizontalMargins
+        mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
         mutableSizingCell.configure()
         mutableSizingCell.setNeedsLayout()
@@ -101,7 +101,7 @@ final class MessagesViewController: RocketChatViewController {
 
     lazy var screenSize = view.frame.size
     var isInLandscape: Bool {
-        return screenSize.width / screenSize.height > 1 ? true : false
+        return screenSize.width / screenSize.height > 1 && UIDevice.current.userInterfaceIdiom == .phone
     }
 
     deinit {
@@ -260,6 +260,19 @@ final class MessagesViewController: RocketChatViewController {
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
+    // MARK: Sizing
+
+    func messageWidth() -> CGFloat {
+        var horizontalMargins: CGFloat
+        if isInLandscape {
+            horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+        } else {
+            horizontalMargins = 0
+        }
+
+        return screenSize.width - horizontalMargins
+    }
+
 }
 
 extension MessagesViewController {
@@ -292,15 +305,9 @@ extension MessagesViewController {
                             """)
             }
 
-            var horizontalMargins: CGFloat
-            if isInLandscape {
-                horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
-            } else {
-                horizontalMargins = 0
-            }
-
-            var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
-            size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
+            let cellWidth = messageWidth()
+            var size = type(of: sizingCell).size(for: item, with: cellWidth)
+            size = CGSize(width: cellWidth, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
             return size
         }

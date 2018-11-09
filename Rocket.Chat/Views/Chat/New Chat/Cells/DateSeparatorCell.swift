@@ -24,7 +24,7 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var rightLine: UIView!
 
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     func configure() {

@@ -142,7 +142,7 @@ public extension ChatItem where Self: Differentiable {
  */
 
 public protocol ChatCell {
-    var adjustedHorizontalInsets: CGFloat { get set }
+    var messageWidth: CGFloat { get set }
     var viewModel: AnyChatItem? { get set }
     func configure()
 }
