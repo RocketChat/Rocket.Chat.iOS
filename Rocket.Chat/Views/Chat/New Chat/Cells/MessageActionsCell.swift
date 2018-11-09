@@ -30,7 +30,7 @@ class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCel
     }
 
     weak var delegate: ChatMessageCellProtocol?
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     func configure() {}
