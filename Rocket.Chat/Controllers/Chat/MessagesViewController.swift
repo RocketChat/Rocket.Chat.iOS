@@ -114,8 +114,9 @@ final class MessagesViewController: RocketChatViewController {
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         ThemeManager.addObserver(self)
+        ThemeManager.addObserver(composerView)
+
         composerView.delegate = self
-        composerView.applyTheme()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
