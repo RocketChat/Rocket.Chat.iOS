@@ -132,8 +132,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleUpload()
+        chatViewController?.toggleUpload()
     }
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {

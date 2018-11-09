@@ -86,3 +86,39 @@ extension SubscriptionsViewController {
         }
     }
 }
+
+// MARK: Upload
+
+extension MessagesViewController {
+    private var controller: UIViewController? {
+        return composerView.window?.rootViewController
+    }
+
+    private var alertController: UIAlertController? {
+        return controller?.presentedViewController as? UIAlertController
+    }
+
+    var isUploadOpen: Bool {
+        return alertController?.popoverPresentationController?.sourceView == composerView.leftButton
+    }
+
+    func toggleUpload() {
+        if isUploadOpen {
+            closeUpload()
+        } else {
+            openUpload()
+        }
+    }
+
+    func openUpload() {
+        controller?.doAfterDismissingPresented { [weak self] in
+            self?.buttonUploadDidPressed()
+        }
+    }
+
+    func closeUpload() {
+        if isUploadOpen {
+            alertController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
