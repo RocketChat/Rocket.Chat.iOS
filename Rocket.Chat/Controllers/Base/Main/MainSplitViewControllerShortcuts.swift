@@ -40,22 +40,22 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
-        // TODO: Adjust for our own composer
-//        guard
-//            !isPresenting,
-//            let textView = chatViewController?.textInputbar.textView
-//        else {
-//            return
-//        }
-//
-//        if textView.isFirstResponder {
-//            textView.resignFirstResponder()
-//        } else {
-//            textView.becomeFirstResponder()
-//            subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
-//                self?.chatViewController?.keyboardFrame?.updateFrame()
-//            }
-//        }
+        guard
+            !isPresenting,
+            let textView = chatViewController?.composerView.textView
+        else {
+            return
+        }
+
+        if textView.isFirstResponder {
+            textView.resignFirstResponder()
+        } else {
+            textView.becomeFirstResponder()
+            subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
+                self?.chatViewController?.becomeFirstResponder()
+                textView.becomeFirstResponder()
+            }
+        }
     }
 
     @objc func shortcutTogglePreferences(_ command: UIKeyCommand) {
