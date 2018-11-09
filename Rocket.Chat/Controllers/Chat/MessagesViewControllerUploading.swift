@@ -11,7 +11,7 @@ import Photos
 import MobileCoreServices
 
 extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func buttonUploadDidPressed() {
+    func uploadButtonPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         func addAction(_ titleKey: String, image: UIImage, style: UIAlertAction.Style = .default, handler: @escaping (UIAlertAction) -> Void) {
