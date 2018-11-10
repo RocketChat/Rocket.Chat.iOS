@@ -32,6 +32,7 @@
 #include <initializer_list>
 
 #include <realm/util/safe_int_ops.hpp>
+#include <realm/util/backtrace.hpp>
 
 namespace realm {
 namespace util {
@@ -554,7 +555,7 @@ template<class T> inline auto CircularBuffer<T>::at(size_type i) -> reference
 {
     if (REALM_LIKELY(i < m_size))
         return operator[](i);
-    throw std::out_of_range{"Index"};
+    throw util::out_of_range{"Index"};
 }
 
 template<class T> inline auto CircularBuffer<T>::at(size_type i) const -> const_reference
@@ -679,7 +680,7 @@ template<class T> void CircularBuffer<T>::reserve(size_type capacity)
     // iterator to the first element.
     size_type min_allocated_size = capacity;
     if (REALM_UNLIKELY(int_add_with_overflow_detect(min_allocated_size, 1)))
-        throw std::overflow_error{"Capacity"};
+        throw util::overflow_error{"Capacity"};
 
     if (min_allocated_size <= m_allocated_size)
         return;

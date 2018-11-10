@@ -65,9 +65,9 @@ void setValue(__unsafe_unretained RLMObjectBase *const obj, NSUInteger colIndex,
 }
 
 template<typename Fn>
-void translateError(Fn&& fn) {
+auto translateError(Fn&& fn) {
     try {
-        fn();
+        return fn();
     }
     catch (std::exception const& e) {
         @throw RLMException(e);
@@ -108,8 +108,8 @@ void setValue(__unsafe_unretained RLMObjectBase *const obj, NSUInteger colIndex,
 
 void setValue(__unsafe_unretained RLMObjectBase *const obj, NSUInteger colIndex,
               __unsafe_unretained RLMObjectBase *const val) {
+    RLMVerifyInWriteTransaction(obj);
     if (!val) {
-        RLMVerifyInWriteTransaction(obj);
         obj->_row.nullify_link(colIndex);
         return;
     }
@@ -528,6 +528,7 @@ void RLMReplaceSharedSchemaMethod(Class accessorClass, RLMObjectSchema *schema) 
 }
 
 void RLMDynamicValidatedSet(RLMObjectBase *obj, NSString *propName, id val) {
+    RLMVerifyAttached(obj);
     RLMObjectSchema *schema = obj->_objectSchema;
     RLMProperty *prop = schema[propName];
     if (!prop) {
@@ -557,7 +558,9 @@ id RLMDynamicGet(__unsafe_unretained RLMObjectBase *const obj, __unsafe_unretain
     realm::Object o(obj->_realm->_realm, *obj->_info->objectSchema, obj->_row);
     RLMAccessorContext c(obj);
     c.currentProperty = prop;
-    return RLMCoerceToNil(o.get_property_value<id>(c, prop.columnName.UTF8String));
+    return translateError([&] {
+        return RLMCoerceToNil(o.get_property_value<id>(c, prop.columnName.UTF8String));
+    });
 }
 
 id RLMDynamicGetByName(__unsafe_unretained RLMObjectBase *const obj,
@@ -623,6 +626,11 @@ id RLMAccessorContext::propertyValue(__unsafe_unretained id const obj, size_t pr
     if ([obj isKindOfClass:_info.rlmObjectSchema.objectClass] && prop.swiftIvar) {
         if (prop.array) {
             return static_cast<RLMListBase *>(object_getIvar(obj, prop.swiftIvar))._rlmArray;
+        }
+        else if (prop.swiftIvar == RLMDummySwiftIvar) {
+            // FIXME: An invalid property which we're pretending is nil until 4.0
+            // https://github.com/realm/realm-cocoa/issues/5784
+            return NSNull.null;
         }
         else { // optional
             value = RLMGetOptional(static_cast<RLMOptionalBase *>(object_getIvar(obj, prop.swiftIvar)));

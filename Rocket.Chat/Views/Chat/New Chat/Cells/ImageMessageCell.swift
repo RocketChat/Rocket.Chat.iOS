@@ -10,7 +10,7 @@ import UIKit
 import RocketChatViewController
 import FLAnimatedImage
 
-class ImageMessageCell: BaseImageMessageCell, SizingCell {
+class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell {
     static let identifier = String(describing: ImageMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {

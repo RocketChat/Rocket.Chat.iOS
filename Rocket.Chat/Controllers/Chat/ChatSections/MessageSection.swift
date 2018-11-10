@@ -247,35 +247,11 @@ final class MessageSection: ChatSection {
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
 
-        if let cell = cell as? BasicMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? SequentialMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? FileCell {
-            cell.delegate = self
-        } else if let cell = cell as? FileMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? ImageMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? ImageCell {
-            cell.delegate = self
-        } else if let cell = cell as? TextAttachmentCell {
-            cell.delegate = self
-        } else if let cell = cell as? TextAttachmentMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? QuoteCell {
-            cell.delegate = self
-        } else if let cell = cell as? QuoteMessageCell {
-            cell.delegate = self
-        } else if let cell = cell as? MessageURLCell {
-            cell.delegate = self
-        } else if let cell = cell as? MessageActionsCell {
+        if var cell = cell as? BaseMessageCellProtocol {
             cell.delegate = self
         }
 
-        let adjustedContentInsets = messagesController?.collectionView.adjustedContentInset ?? .zero
-        let adjustedHoritonzalInsets = adjustedContentInsets.left + adjustedContentInsets.right
-        cell.adjustedHorizontalInsets = adjustedHoritonzalInsets
+        cell.messageWidth = messagesController?.messageWidth() ?? 0
         cell.viewModel = viewModel
         cell.configure()
         return cell

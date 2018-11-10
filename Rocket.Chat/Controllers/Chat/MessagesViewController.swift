@@ -13,14 +13,14 @@ import DifferenceKit
 
 protocol SizingCell: class {
     static var sizingCell: UICollectionViewCell & ChatCell { get }
-    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize
+    static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize
 }
 
 extension SizingCell {
-    static func size(for viewModel: AnyChatItem, with horizontalMargins: CGFloat) -> CGSize {
+    static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize {
         var mutableSizingCell = sizingCell
         mutableSizingCell.prepareForReuse()
-        mutableSizingCell.adjustedHorizontalInsets = horizontalMargins
+        mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
         mutableSizingCell.configure()
         mutableSizingCell.setNeedsLayout()
@@ -42,6 +42,8 @@ final class MessagesViewController: RocketChatViewController {
 
     var chatTitleView: ChatTitleView?
 
+    var emptyStateImageView: UIImageView?
+
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
@@ -60,8 +62,7 @@ final class MessagesViewController: RocketChatViewController {
 
     var scrollToBottomButtonIsVisible: Bool = false {
         didSet {
-            guard oldValue != scrollToBottomButtonIsVisible
-            else {
+            guard oldValue != scrollToBottomButtonIsVisible else {
                 return
             }
 
@@ -99,7 +100,7 @@ final class MessagesViewController: RocketChatViewController {
 
     lazy var screenSize = view.frame.size
     var isInLandscape: Bool {
-        return screenSize.width / screenSize.height > 1 ? true : false
+        return screenSize.width / screenSize.height > 1 && UIDevice.current.userInterfaceIdiom == .phone
     }
 
     deinit {
@@ -110,12 +111,15 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidLoad()
 
         setupTitleView()
+        updateEmptyState()
+        updateSearchMessagesButton()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         ThemeManager.addObserver(self)
+        ThemeManager.addObserver(composerView)
+
         composerView.delegate = self
-        composerView.applyTheme()
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
@@ -188,6 +192,11 @@ final class MessagesViewController: RocketChatViewController {
         })
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateEmptyStateFrame()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
             if let controller = nav.viewControllers.first as? ChannelActionsViewController {
@@ -251,6 +260,19 @@ final class MessagesViewController: RocketChatViewController {
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
+    // MARK: Sizing
+
+    func messageWidth() -> CGFloat {
+        var horizontalMargins: CGFloat
+        if isInLandscape {
+            horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+        } else {
+            horizontalMargins = 0
+        }
+
+        return screenSize.width - horizontalMargins
+    }
+
 }
 
 extension MessagesViewController {
@@ -283,15 +305,9 @@ extension MessagesViewController {
                             """)
             }
 
-            var horizontalMargins: CGFloat
-            if isInLandscape {
-                horizontalMargins = collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
-            } else {
-                horizontalMargins = 0
-            }
-
-            var size = type(of: sizingCell).size(for: item, with: horizontalMargins)
-            size = CGSize(width: screenSize.width - horizontalMargins, height: size.height)
+            let cellWidth = messageWidth()
+            var size = type(of: sizingCell).size(for: item, with: cellWidth)
+            size = CGSize(width: cellWidth, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
             return size
         }
@@ -350,6 +366,8 @@ extension MessagesViewController {
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
+
+        emptyStateImageView?.image = UIImage(named: "Empty State \(themeName ?? "light")")
     }
 
 }
@@ -366,4 +384,68 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+// MARK: Message Searching
+
+extension MessagesViewController {
+    func updateSearchMessagesButton() {
+        if subscription != nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .search,
+                target: self,
+                action: #selector(showSearchMessages)
+            )
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+
+    @objc func showSearchMessages() {
+        guard
+            let controller = storyboard?.instantiateViewController(withIdentifier: "MessagesList"),
+            let messageList = controller as? MessagesListViewController
+        else {
+            return
+        }
+
+        messageList.data.subscription = subscription
+        messageList.data.isSearchingMessages = true
+        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
+
+        present(searchMessagesNav, animated: true, completion: nil)
+
+    }
+}
+
+// MARK: EmptyState
+
+extension MessagesViewController {
+    func updateEmptyState() {
+        if subscription == nil {
+            title = ""
+            composerView.isHidden = true
+
+            chatTitleView?.removeFromSuperview()
+            emptyStateImageView?.removeFromSuperview()
+
+            guard let theme = view.theme else { return }
+            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
+            let imageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            view.addSubview(imageView)
+
+            emptyStateImageView = imageView
+
+            updateEmptyStateFrame()
+        } else {
+            emptyStateImageView?.removeFromSuperview()
+        }
+    }
+
+    func updateEmptyStateFrame() {
+        emptyStateImageView?.frame = view.bounds
+    }
 }

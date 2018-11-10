@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: BaseMessageCell, SizingCell {
+final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
@@ -43,15 +43,15 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
-    var textHorizontalMargins: CGFloat {
+    var textWidth: CGFloat {
         return
-            textLeadingConstraint.constant +
-            textTrailingConstraint.constant +
-            readReceiptWidthConstraint.constant +
-            readReceiptTrailingConstraint.constant +
-            avatarWidthConstraint.constant +
-            avatarLeadingConstraint.constant +
-            adjustedHorizontalInsets
+            messageWidth -
+            textLeadingConstraint.constant -
+            textTrailingConstraint.constant -
+            readReceiptWidthConstraint.constant -
+            readReceiptTrailingConstraint.constant -
+            avatarWidthConstraint.constant -
+            avatarLeadingConstraint.constant
     }
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -95,12 +95,8 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
 
             text.message = message
 
-            // FA NOTE: Using UIScreen.main bounds is fine because we are not using
-            // section insets, but in the future we can create a mechanism that
-            // discounts the UICollectionView's section insets from the main screen's bounds
-            let screenWidth = UIScreen.main.bounds.width
             let maxSize = CGSize(
-                width: screenWidth - textHorizontalMargins,
+                width: textWidth,
                 height: .greatestFiniteMagnitude
             )
 

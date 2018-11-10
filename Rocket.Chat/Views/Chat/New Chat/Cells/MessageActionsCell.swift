@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
+class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
     static let identifier = String(describing: MessageActionsCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -30,7 +30,7 @@ class MessageActionsCell: UICollectionViewCell, ChatCell, SizingCell {
     }
 
     weak var delegate: ChatMessageCellProtocol?
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     func configure() {}

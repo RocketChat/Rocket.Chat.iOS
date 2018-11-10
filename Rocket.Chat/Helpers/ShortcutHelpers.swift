@@ -86,3 +86,97 @@ extension SubscriptionsViewController {
         }
     }
 }
+
+// MARK: Upload
+
+extension MessagesViewController {
+    private var controller: UIViewController? {
+        return composerView.window?.rootViewController
+    }
+
+    private var alertController: UIAlertController? {
+        return controller?.presentedViewController as? UIAlertController
+    }
+
+    var isUploadOpen: Bool {
+        return alertController?.popoverPresentationController?.sourceView == composerView.leftButton
+    }
+
+    func toggleUpload() {
+        if isUploadOpen {
+            closeUpload()
+        } else {
+            openUpload()
+        }
+    }
+
+    func openUpload() {
+        controller?.doAfterDismissingPresented { [weak self] in
+            self?.uploadButtonPressed()
+        }
+    }
+
+    func closeUpload() {
+        if isUploadOpen {
+            alertController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: Room Actions
+
+extension MessagesViewController {
+    var isActionsOpen: Bool {
+        let controller = (presentedViewController as? UINavigationController)?.viewControllers.first
+        return controller as? ChannelActionsViewController != nil
+    }
+
+    func toggleActions() {
+        if isActionsOpen {
+            closeActions()
+        } else {
+            openActions()
+        }
+    }
+
+    func openActions() {
+        doAfterDismissingPresented { [weak self] in
+            self?.performSegue(withIdentifier: "Channel Actions", sender: nil)
+        }
+    }
+
+    func closeActions() {
+        if isActionsOpen {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: Message Searching
+
+extension MessagesViewController {
+    var isSearchMessagesOpen: Bool {
+        let controller = presentedViewController?.children.first as? MessagesListViewController
+        return controller?.data.isSearchingMessages == true
+    }
+
+    func toggleSearchMessages() {
+        if isSearchMessagesOpen {
+            closeSearchMessages()
+        } else {
+            openSearchMessages()
+        }
+    }
+
+    func openSearchMessages() {
+        doAfterDismissingPresented { [weak self] in
+            self?.showSearchMessages()
+        }
+    }
+
+    func closeSearchMessages() {
+        if isSearchMessagesOpen {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}

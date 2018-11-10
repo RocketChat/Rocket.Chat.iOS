@@ -40,22 +40,22 @@ extension MainSplitViewController {
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
-        // TODO: Adjust for our own composer
-//        guard
-//            !isPresenting,
-//            let textView = chatViewController?.textInputbar.textView
-//        else {
-//            return
-//        }
-//
-//        if textView.isFirstResponder {
-//            textView.resignFirstResponder()
-//        } else {
-//            textView.becomeFirstResponder()
-//            subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
-//                self?.chatViewController?.keyboardFrame?.updateFrame()
-//            }
-//        }
+        guard
+            !isPresenting,
+            let textView = chatViewController?.composerView.textView
+        else {
+            return
+        }
+
+        if textView.isFirstResponder {
+            textView.resignFirstResponder()
+        } else {
+            textView.becomeFirstResponder()
+            subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
+                self?.chatViewController?.becomeFirstResponder()
+                textView.becomeFirstResponder()
+            }
+        }
     }
 
     @objc func shortcutTogglePreferences(_ command: UIKeyCommand) {
@@ -132,8 +132,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleUpload()
+        chatViewController?.toggleUpload()
     }
 
     @objc func shortcutRoomActions(_ command: UIKeyCommand) {
@@ -141,8 +140,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleActions()
+        chatViewController?.toggleActions()
     }
 
     @objc func shortcutRoomMessageSearch(_ command: UIKeyCommand) {
@@ -150,8 +148,7 @@ extension MainSplitViewController {
             return
         }
 
-        // TODO: Replace for our composer
-//        chatViewController?.toggleSearchMessages()
+        chatViewController?.toggleSearchMessages()
     }
 
     @objc func shortcutScrollMessages(_ command: UIKeyCommand) {
@@ -179,8 +176,7 @@ extension MainSplitViewController {
         }
 
         if let message = chatViewController?.subscription?.roomLastMessage {
-            // TODO: Replace for our reply mechanism
-//            chatViewController?.reply(to: message)
+            chatViewController?.reply(to: message)
         }
     }
 

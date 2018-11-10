@@ -142,7 +142,7 @@ public extension ChatItem where Self: Differentiable {
  */
 
 public protocol ChatCell {
-    var adjustedHorizontalInsets: CGFloat { get set }
+    var messageWidth: CGFloat { get set }
     var viewModel: AnyChatItem? { get set }
     func configure()
 }
@@ -216,12 +216,14 @@ open class RocketChatViewController: UICollectionViewController {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         operationQueue.qualityOfService = .userInteractive
-
+        operationQueue.underlyingQueue = DispatchQueue.main
         return operationQueue
     }()
 
     open var isInverted = true
     open var isSelfSizing = false
+
+    fileprivate let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
     fileprivate var keyboardHeight: CGFloat = 0.0
 
@@ -248,6 +250,8 @@ open class RocketChatViewController: UICollectionViewController {
             return
         }
 
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kEmptyCellIdentifier)
+
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.backgroundColor = .white
 
@@ -265,28 +269,27 @@ open class RocketChatViewController: UICollectionViewController {
     }
 
     open func updateData(with target: [ArraySection<AnyChatSection, AnyChatItem>]) {
+        updateDataQueue.cancelAllOperations()
         updateDataQueue.addOperation { [weak self] in
-            DispatchQueue.main.async {
-                guard
-                    let strongSelf = self,
-                    let collectionView = strongSelf.collectionView
+            guard
+                let strongSelf = self,
+                let collectionView = strongSelf.collectionView
                 else {
                     return
-                }
+            }
 
-                let source = strongSelf.internalData
+            let source = strongSelf.internalData
 
-                UIView.performWithoutAnimation {
-                    let changeset = StagedChangeset(source: source, target: target)
-                    collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData, changes in
-                        strongSelf.internalData = newData
+            UIView.performWithoutAnimation {
+                let changeset = StagedChangeset(source: source, target: target)
+                collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { newData, changes in
+                    strongSelf.internalData = newData
 
-                        let newSections = newData.map { $0.model }
-                        let updatedItems = strongSelf.updatedItems(from: source, with: changes)
-                        strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
+                    let newSections = newData.map { $0.model }
+                    let updatedItems = strongSelf.updatedItems(from: source, with: changes)
+                    strongSelf.dataUpdateDelegate?.didUpdateChatData(newData: newSections, updatedItems: updatedItems)
 
-                        assert(newSections.count == newData.count)
-                    }
+                    assert(newSections.count == newData.count)
                 }
             }
         }
@@ -364,8 +367,13 @@ extension RocketChatViewController {
 
     open override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let sectionController = internalData[indexPath.section].model
-        let viewModel = sectionController.viewModels()[indexPath.row]
+        let viewModels = sectionController.viewModels()
 
+        if indexPath.row >= viewModels.count {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: kEmptyCellIdentifier, for: indexPath)
+        }
+
+        let viewModel = viewModels[indexPath.row]
         guard let chatCell = sectionController.cell(for: viewModel, on: collectionView, at: indexPath) as? UICollectionViewCell else {
             fatalError("The object conforming to BindableCell is not a UICollectionViewCell as it must be")
         }
@@ -435,3 +443,4 @@ extension RocketChatViewController {
         }
     }
 }
+

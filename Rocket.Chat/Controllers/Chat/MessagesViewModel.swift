@@ -26,7 +26,12 @@ final class MessagesViewModel {
      The controller context that will be used to respond
      delegates from the cells.
      */
-    weak var controllerContext: UIViewController?
+    var currentTheme: Theme = .light
+    weak var controllerContext: UIViewController? {
+        didSet {
+            currentTheme = controllerContext?.view.theme ?? .light
+        }
+    }
 
     internal var subscription: Subscription? {
         didSet {
@@ -152,15 +157,17 @@ final class MessagesViewModel {
      Returns the specific cell item model for the IndexPath requested.
      */
     func item(for indexPath: IndexPath) -> AnyChatItem? {
-        guard
-            indexPath.section < dataNormalized.count,
-            indexPath.row < dataNormalized[indexPath.section].elements.count
-        else {
+        guard indexPath.section < dataSorted.count else {
             return nil
         }
 
-        let section = dataNormalized[indexPath.section]
-        return section.elements[indexPath.row]
+        let viewModels = dataSorted[indexPath.section].viewModels()
+
+        guard indexPath.row < viewModels.count else {
+            return nil
+        }
+
+        return viewModels[indexPath.row]
     }
 
     /**
@@ -424,6 +431,12 @@ final class MessagesViewModel {
                 controllerContext: controllerContext,
                 collapsibleItemsState: collpsibleItemsState
             ))
+
+            // Cache the processed result of the message text
+            // on this loop to avoid doing that in the main thread.
+            if let managedObject = message.managedObject {
+                MessageTextCacheManager.shared.message(for: managedObject, with: currentTheme)
+            }
 
             if unreadMarker {
                 hasUnreadMarker = true

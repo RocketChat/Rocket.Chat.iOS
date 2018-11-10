@@ -54,16 +54,21 @@ public:
     /// as the client file identifier and the synchronization progress as they
     /// are stored in that snapshot.
     ///
-    /// Note: The value of `progress.upload.last_integrated_server_version` is
-    /// not important to the caller, as long as the caller is the
-    /// synchronization client (`_impl::ClientImplBase`). The caller merely
-    /// passes the returned value back to find_uploadable_changesets() or
-    /// set_sync_progress(), so if the history implementation does not care
-    /// about the value of `progress.upload.last_integrated_server_version`, it
-    /// is allowed to not persist it. However, the implementation of
-    /// find_uploadable_changesets() must still be prepared for its value to be
-    /// determined by an incoming DOWNLAOD message, rather than being whatever
-    /// was returned by get_status().
+    /// Note: The value of `progress.upload.last_integrated_server_version` may
+    /// currently be wrong when the caller is the synchronization client
+    /// (`_impl::ClientImplBase`), in the sense that the server version number
+    /// may not actually be the version upon which the client version was based.
+    /// On the client, it must therefore only be used in a limited capacity,
+    /// namely to report download progress to the server. The number reflects a
+    /// lower bound on the server version that any changeset produced by the
+    /// client in the future can be based upon. The caller passes the returned
+    /// value back to find_uploadable_changesets() or set_sync_progress(), so if
+    /// the history implementation does not care about the value of
+    /// `progress.upload.last_integrated_server_version`, it is allowed to not
+    /// persist it. However, the implementation of find_uploadable_changesets()
+    /// must still be prepared for its value to be determined by an incoming
+    /// DOWNLOAD message, rather than being whatever was returned by
+    /// get_status().
     ///
     /// The returned current client version is the version produced by the last
     /// changeset in the history. The type of version returned here, is the one

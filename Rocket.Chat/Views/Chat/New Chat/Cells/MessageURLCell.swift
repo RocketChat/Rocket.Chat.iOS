@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
+final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
     static let identifier = String(describing: MessageURLCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -33,15 +33,14 @@ final class MessageURLCell: UICollectionViewCell, ChatCell, SizingCell {
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
     var containerWidth: CGFloat {
         return
-            UIScreen.main.bounds.width -
+            messageWidth -
             containerLeadingConstraint.constant -
-            containerTrailingConstraint.constant -
-            adjustedHorizontalInsets
+            containerTrailingConstraint.constant
     }
 
     weak var delegate: ChatMessageCellProtocol?
 
-    var adjustedHorizontalInsets: CGFloat = 0
+    var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
     var thumbnailHeightInitialConstant: CGFloat = 0
 
