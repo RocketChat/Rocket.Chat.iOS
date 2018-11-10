@@ -62,8 +62,7 @@ final class MessagesViewController: RocketChatViewController {
 
     var scrollToBottomButtonIsVisible: Bool = false {
         didSet {
-            guard oldValue != scrollToBottomButtonIsVisible
-            else {
+            guard oldValue != scrollToBottomButtonIsVisible else {
                 return
             }
 
@@ -113,6 +112,7 @@ final class MessagesViewController: RocketChatViewController {
 
         setupTitleView()
         updateEmptyState()
+        updateSearchMessagesButton()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -384,6 +384,38 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+// MARK: Message Searching
+
+extension MessagesViewController {
+    func updateSearchMessagesButton() {
+        if subscription != nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .search,
+                target: self,
+                action: #selector(showSearchMessages)
+            )
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+
+    @objc func showSearchMessages() {
+        guard
+            let controller = storyboard?.instantiateViewController(withIdentifier: "MessagesList"),
+            let messageList = controller as? MessagesListViewController
+        else {
+            return
+        }
+
+        messageList.data.subscription = subscription
+        messageList.data.isSearchingMessages = true
+        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
+
+        present(searchMessagesNav, animated: true, completion: nil)
+
+    }
 }
 
 // MARK: EmptyState
