@@ -48,6 +48,8 @@ final class MessagesViewController: RocketChatViewController {
         didSet {
             viewModel.subscription = subscription
             viewSubscriptionModel.subscription = subscription
+
+            recoverDraftMessage()
         }
     }
 
@@ -157,6 +159,8 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
         }
+
+        startDraftMessage()
     }
 
     override func viewDidAppear(_ animated: Bool) {
