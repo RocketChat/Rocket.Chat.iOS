@@ -35,4 +35,3 @@ extension MessagesViewController {
         emptyStateImageView?.frame = view.bounds
     }
 }
-
