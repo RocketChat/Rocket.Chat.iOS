@@ -65,8 +65,11 @@ extension UnmanagedMessage {
             lhs.identifier == rhs.identifier &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
-            lhs.mentions.count == rhs.mentions.count &&
-            lhs.channels.count == rhs.channels.count &&
+            lhs.mentions == rhs.mentions &&
+            lhs.channels == rhs.channels &&
+            lhs.attachments == rhs.attachments &&
+            lhs.urls == rhs.urls &&
+            lhs.reactions == rhs.reactions &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
     }
 }
