@@ -24,9 +24,7 @@ struct AnalyticsCoordinator: LauncherProtocol {
     static func toggleCrashReporting(disabled: Bool) {
         UserDefaults.standard.set(disabled, forKey: kCrashReportingDisabledKey)
 
-        if disabled {
-            anonymizeCrashReports()
-        } else {
+        if !disabled {
             AnalyticsCoordinator().prepareToLaunch(with: nil)
         }
     }

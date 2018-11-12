@@ -257,8 +257,6 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            AnalyticsCoordinator.anonymizeCrashReports()
-
             DraftMessageManager.clearServerDraftMessages()
 
             Realm.executeOnMainThread({ (realm) in
