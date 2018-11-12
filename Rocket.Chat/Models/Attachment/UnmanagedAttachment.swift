@@ -15,7 +15,7 @@ struct UnmanagedField: Equatable {
     let value: String
 }
 
-struct UnmanagedAttachment {
+struct UnmanagedAttachment: Equatable {
     var identifier: String
     var type: MessageType
 
