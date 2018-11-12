@@ -1,0 +1,24 @@
+/* 
+  RCEmojiKit.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/27/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+"emojipicker.title" = "Scegli la reazione";
+"searchbar.placeholder" = "Cerca un emoji";
+
+"categories.recent" = "USATI SPESSO";
+"categories.custom" = "PERSONALIZZATI";
+"categories.people" = "SMILEYS & PERSONE";
+"categories.nature" = "ANIMALI & NATURA";
+"categories.food" = "CIBO & BEVANDE";
+"categories.activity" = "ATTIVITA'";
+"categories.travel" = "VIAGGI & LUOGHI";
+"categories.objects" = "OGGETTI";
+"categories.symbols" = "SIMBOLI";
+"categories.flags" = "BANDIERE";
+
+"reactorlist.title" = "Reazioni";
+

@@ -1,0 +1,485 @@
+// Global
+"global.ok" = "OK";
+"global.yes" = "Si";
+"global.no" = "No";
+"global.cancel" = "Cancellare";
+"global.error" = "Errore";
+
+// Errors
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "È successo qualcosa, per favore riprova.";
+
+"error.login.title" = "Oops!";
+"error.login.message" = "È successo qualcosa durante il tentativo di accesso.";
+
+"error.signup.title" = "Oops!";
+"error.signup.empty_input.message" = "Tutti i campi sono obbligatori per la registrazione.";
+
+"error.login_unauthorized.title" = "Oops!";
+"error.login_unauthorized.message" = "Le tue credenziali sono state respinte! Per favore riprova."
+
+// Alerts
+"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.message" = "L'URL che hai inserito non è valido. Controllalo e riprova, per favore!";
+
+"alert.connection.not_secured.title" = "Oops!";
+"alert.connection.not_secured.message" = "Impossibile stabilire una connessione sicura al server. Assicurati che il server supporti SSL.";
+
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Impossibile connettersi a questo server!";
+
+"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.message" = "Il server a cui stai tentando di connetterti utilizza una versione che non è più supportata dall'app: %@.\n\nSi richiede la versione %@.";
+
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "Nessun account di posta. Si prega di configurare un account di posta elettronica al fine di inviare e-mail.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "Stiamo ancora lavorando su questa funzione, restate sintonizzati!";
+
+"alert.insecure_image.title" = "Risorsa non sicura";
+"alert.insecure_image.message" = "La risorsa dell'immagine non è sicura e pertanto non è stata caricata. Sono consentite solo le risorse SSL.";
+
+"alert.socket_error.invalid_user.title" = "Sessione scaduta";
+"alert.socket_error.invalid_user.message" = "La tua sessione è scaduta. Per favore esegui l'accesso di nuovo.";
+
+"alert.login_service_error.title" = "Errore di autenticazione";
+"alert.login_service_error.message" = "Impossibile autenticarsi usando questo servizio. Per favore riprova.";
+
+"alert.authorization_error.title" = "Errore di autorizzazione";
+"alert.authorization_error.create_channel.description" = "Non puoi creare canali";
+
+"alert.unsupported_feature.title" = "Funzionalità non supportata";
+"alert.unsupported_feature.message" = "La versione di questo server è: %@. Questa funzione è supportata solo nelle versioni %@ e successive.";
+
+"alert.push_token_error.title" = "Attenzione";
+"alert.push_token_error.message" = "È ancora possibile che si ricevano notifiche push da questo server a causa di un problema con i server della versione inferiore a 0.60.0.";
+
+"alert.upload_error.title" = "Errore di caricamento";
+"alert.upload_error.message" = "È successo qualcosa di sbagliato durante il caricamento del tuo file. Per favore riprova.";
+
+"alert.upload_dialog.title" = "Caricare un file";
+"alert.upload_dialog.placeholder.title" = "Titolo";
+"alert.upload_dialog.placeholder.description" = "Descrizione";
+"alert.upload_dialog.action.upload" = "Carica";
+
+"alert.email_verification.title" = "Verifica e-mail";
+"alert.email_verification.message" = "Ti abbiamo inviato un'email per confermare la tua registrazione. Se non ricevi un'email a breve, torna indietro e riprova.";
+
+"alert.discarding_changes.title" = "Modifiche non salvate";
+"alert.discarding_changes.message" = "Le tue modifiche non salvate sono state scartate.";
+"alert.load_profile_error.title" = "Impossibile caricare il tuo profilo";
+"alert.load_profile_error.message" = "Si è verificato un problema durante il caricamento del profilo. Per favore riprova.";
+"alert.password_mismatch_error.title" = "La tua password non corrisponde";
+"alert.password_mismatch_error.message" = "Il campo di conferma non corrisponde alla password che hai fornito. Si prega di controllare e riprovare. Si prega di controllare e riprovare.";
+"alert.update_profile_error.title" = "Aggiornamento non riuscito";
+"alert.update_profile_error.message" = "Si è verificato un problema durante l'aggiornamento del tuo profilo. Per favore riprova.";
+"alert.update_password_error.title" = "Impossibile cambiare la password";
+"alert.update_password_error.message" = "Si è verificato un problema durante la modifica della password. Per favore riprova.";
+"alert.update_profile_empty_fields.title" = "Si prega di compilare i campi vuoti";
+"alert.update_profile_empty_fields.message" = "Tutte le informazioni del tuo profilo sono obbligatorie e non possono rimanere vuote";
+"alert.update_profile_invalid_email.title" = "E-mail non valida";
+"alert.update_profile_invalid_email.message" = "Sembra che l'e-mail inserita non sia valida. Si prega di risolvere il problema e riprovare.";
+"alert.password_empty_fields.title" = "Si prega di compilare i campi vuoti";
+"alert.password_empty_fields.message" = "Riempi sia la password che i campi di conferma per aggiornare la tua password.";
+"alert.update_profile_success.title" = "Profilo aggiornato";
+"alert.update_password_success.title" = "Password aggiornata";
+
+"alert.logout.confirmation.title" = "Uscire da questo server";
+"alert.logout.confirmation.message" = "Sei sicuro di voler uscire da \"%@\"?";
+"alert.logout.confirmation.confirm" = "Si, esci";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "Il server ha cambiato il suo URL";
+"connection.server.redirect.alert.message" = "Sembra che questo server abbia cambiato il suo URL in:\n\n%@\n\nVuoi aggiornare l'URL?";
+"connection.server.redirect.alert.confirm" = "Si, cambia l'URL";
+
+// Socket Connection
+"connection.title" = "Accedi al tuo server";
+"connection.button_connect" = "Connetti";
+"connection.server_url.placeholder" = "la-tua-società.rocket.chat";
+"connection.offline.banner.message" = "Sei offline, prova a connetterti di nuovo";
+"connection.connecting.banner.message" = "In connessione...";
+"connection.waiting_for_network.banner.message" = "In attesa della rete";
+
+// Onboarding
+"onboarding.label_welcome" = "Benvenuto in Rocket Chat";
+"onboarding.label_subtitle" = "Open Source Communication";
+"onboarding.button_connect_server" = "Connessione a un server";
+"onboarding.button_create_server" = "Crea un nuovo spazio di lavoro";
+"onboarding.button_join_community_prefix" = "Connessione alla comunità";
+
+// Auth
+"auth.connect.button_connect" = "Connetti";
+"auth.connect.ssl_required" = "È necessario che il tuo server supporti SSL";
+"auth.connect.connecting" = "Connessione in corso. Attendere";
+"auth.email_auth_prefix" = "Entra con ";
+"auth.email_auth" = "e-mail";
+"auth.login_service_prefix" = "Continua con";
+
+"auth.signup_title" = "Iscrizione";
+"auth.signup.button_register" = "Registrati";
+"auth.signup.button_next" = "Avanti";
+"auth.signup.custom_fields_title" = "Completa la tua registrazione";
+
+"auth.login.login_title" = "Entra";
+"auth.login.button_login_title" = "Entra";
+"auth.login.create_account_prefix" = "Non hai un utente ?";
+"auth.login.create_account" = "\nCreare un utente";
+"auth.login.username.placeholder" = "E-mail o nome utente";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Crea il nuovo utente";
+"auth.login.buttonResetPassword" = "Password dimenticata";
+"auth.login.agree_label" = "Procedendo accetti i nostri";
+"auth.login.agree_and" = "e";
+"auth.login.agree_termsofservice" = "Termini di servizio";
+"auth.login.agree_privacypolicy" = "Politica sulla riservatezza";
+
+"auth.forgot_password.title" = "Hai dimenticato la tua password ?";
+"auth.forgot_password.message" = "Inserisci la tua e-mail";
+"auth.forgot_password.success" = "Se questa email è stata registrata, invieremo le istruzioni su come reimpostare la password. Se non ricevi un'email a breve, torna indietro e riprova.";
+
+// Subscriptions
+"subscriptions.search" = "Ricerca";
+"subscriptions.search_results" = "Risultati";
+"subscriptions.search.load_more_results" = "Carica piu' risultati";
+"subscriptions.unreads" = "Non letti";
+"subscriptions.favorites" = "Preferiti";
+"subscriptions.channels" = "Canali";
+"subscriptions.groups" = "Gruppi privati";
+"subscriptions.direct_messages" = "Messaggi diretti";
+"subscriptions.conversations" = "Conversazioni";
+"subscriptions.you" = "Tu";
+"subscriptions.messages" = "Messaggi";
+"subscriptions.list.you_initial" = "Tu";
+"subscriptions.list.no_message" = "Nessun messaggio";
+"subscriptions.list.sent_an_attachment" = "Spedito un allegato";
+"subscriptions.list.date.yesterday" = "Ieri";
+"subscriptions.list.actions.read" = "Letti";
+"subscriptions.list.actions.unread" = "Non letti";
+"subscriptions.list.actions.favorite" = "Preferito";
+"subscriptions.list.actions.unfavorite" = "Non preferito";
+"subscriptions.list.actions.hide" = "Nascosto";
+
+// Servers
+"servers.add_new_team" = "Aggiungi un nuovo Gruppo";
+"servers.title" = "Server";
+"servers.add_new_server" = "Aggiungi un server";
+"servers.action.disconnect" = "Disconnetti";
+"servers.action.disconnect.alert.title" = "Disconnetti dal server";
+"servers.action.disconnect.alert.message" = "Vuoi disconnetterti dal server \"%@\" ?";
+"servers.action.disconnect.alert.confirm" = "Si, disconnetti";
+
+// Status
+"status.online" = "Presente";
+"status.away" = "Non disponibile";
+"status.busy" = "Occupato";
+"status.offline" = "Non presente";
+"status.invisible" = "Non visibile";
+
+// New Room View
+"new_room.title" = "Nuovo Canale";
+"new_room.buttons.create" = "Crea";
+"new_room.cell.public_channel.title" = "Canale pubblico";
+"new_room.cell.public_channel.description" = "Tutti possono accedere a questo canale";
+"new_room.cell.public_channel.description.public_only" = "Puoi solo creare canali pubblici";
+"new_room.cell.public_channel.description.private_only" = "Puoi solo creare canali privati";
+"new_room.cell.read_only.title" = "Canale di sola lettura";
+"new_room.cell.read_only.description" = "Solo i membri autorizzati possono scrivere nuovi messaggi";
+"new_room.group.channel.name" = "Nome Canale";
+"new_room.cell.channel_name.title" = "Nome Canale";
+"new_room.group.invite_users" = "Invita utenti";
+"new_room.cell.invite_users.placeholder" = "Nomi utente";
+
+// Notifications
+"notifications.action.reply" = "Risposta";
+
+// Chat
+"chat.channel_preview_view.title" = "Questa è un'anteprima di #%@";
+"chat.channel_preview_view.join" = "Unisciti al canale";
+"chat.dm.start_conversation" = "Questo è l'inizio della tua conversazione con %@";
+"chat.channel.start_conversation" = "Questo è l'inizio della conversazione su %@";
+"chat.read_only" = "Questa stanza è di sola lettura";
+"chat.muted" = "Sei stato disattivato";
+"chat.loading_messages" = "Caricamento dei messaggi ...";
+"chat.unread_separator" = "Nuovi messaggi";
+"chat.preview.actions.read" = "Segna come letto";
+"chat.preview.actions.unread" = "Segna come non letto";
+"chat.preview.actions.favorite" = "Preferito";
+"chat.preview.actions.unfavorite" = "Non preferito";
+"chat.preview.actions.hide" = "Nascondi";
+
+// Read Receipts
+"chat.read_receipt_list.title" = "Letto da";
+"chat.read_receipt_list.title.loading" = "Caricamento in corso...";
+"chat.read_receipt_list.title.empty" = "Letto da nessuno";
+
+// Chat Message Actions
+"chat.message.actions.info" = "Informazioni messaggio";
+"chat.message.actions.react" = "Aggiungi reazione";
+"chat.message.actions.block" = "Blocca i messaggi dall'utente";
+"chat.message.actions.report" = "Segnala un messaggio";
+"chat.message.actions.edit" = "Modifica";
+"chat.message.actions.copy" = "Copia";
+"chat.message.actions.pin" = "Evidenzia";
+"chat.message.actions.unpin" = "Non evidenziare";
+"chat.message.actions.star" = "Speciale";
+"chat.message.actions.unstar" = "Rimuovi Speciale";
+"chat.message.actions.quote" = "Citazione";
+"chat.message.actions.reply" = "Risposta";
+"chat.message.actions.delete" = "Cancella messaggio";
+"chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
+"chat.message.actions.delete.confirm.message" = "Sei sicuro di voler cancellare questo messaggio? Questo processo non può essere annullato.";
+"chat.message.actions.delete.confirm.yes" = "Si, cancella";
+"chat.message.actions.discard" = "Scarta il messaggio";
+"chat.message.actions.discard.confirm.title" = "Vuoi scartare questo messaggio ?";
+"chat.message.actions.discard.confirm.message" = "Questo messaggio non è stato ancora inviato. Vuoi scartarlo ? Questo processo non può essere annullato.";
+"chat.message.actions.discard.confirm.yes" = "Si, scartalo";
+"chat.message.actions.resend" = "Invia di nuovo";
+"chat.message.actions.resend_all" = "Invia di nuovo tutto";
+"Send" = "Inviare"; //SLKTextInputbar.m
+
+// Chat Message Report
+"chat.message.report.success.title" = "Messaggio segnalato";
+"chat.message.report.success.message" = "Messaggio segnalato con successo, grazie!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Caricamento dell'immagine";
+"chat.upload.uploading_video" = "Caricamento del video";
+"chat.upload.uploading_file" = "Caricamento \"%@\"";
+"chat.upload.take_photo" = "Scattare una foto";
+"chat.upload.shoot_video" = "Registrare un video";
+"chat.upload.choose_from_library" = "Scegliere dalla libreria";
+"chat.upload.import_file" = "Aggiungere dei documenti";
+"chat.upload.draw" = "Disegnare qualcosa";
+
+// Chat Download
+"chat.download.downloading_file" = "Scarico \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Tocca per aprire il file";
+"chat.message.open_browser" = "Apri nel Browser";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Devi disegnare qualcosa prima di inviarlo.";
+"chat.drawing.fileName" = "Nome disegno";
+"chat.drawing.settings.opacity" = "Opacita'";
+"chat.drawing.settings.width" = "Larghezza";
+"chat.drawing.settings.color.selected" = "Colore selezionato";
+"chat.drawing.settings.color.others" = "Scegli un colore qui sotto:";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Nome della stanza cambiato in: %@ da %@";
+"chat.message.type.user_added_by" = "Utente %@ aggiunto da %@";
+"chat.message.type.user_removed_by" = "Utente %@ rimosso da %@";
+"chat.message.type.user_left" = "Ha lasciato il canale";
+"chat.message.type.user_joined" = "È entrato nel canale";
+"chat.message.type.user_muted" = "Utente %@ disattivato da %@";
+"chat.message.type.user_unmuted" = "Utente %@ riattivato da %@";
+"chat.message.type.welcome" = "Benvenuto %@";
+"chat.message.type.message_removed" = "Messaggio rimosso";
+"chat.message.type.subscription_role_added" = "Per %@ il ruolo %@ e' stato aggiunto da %@";
+"chat.message.type.subscription_role_removed" = "Per %@ il ruolo %@ e' stato rimosso da %@";
+"chat.message.type.room_archived" = "Questa stanza è stata archiviata da %@";
+"chat.message.type.room_unarchived" = "Questa stanza è stata ripristinata da %@";
+"chat.message.type.message_pinned" = "Appunto sul messaggio:";
+
+// Chat Information
+"chat.info.title" = "Informazioni";
+"chat.info.item.topic" = "Argomento";
+"chat.info.item.no_topic" = "Nessun argomento";
+"chat.info.item.description" = "Descrizione";
+"chat.info.item.no_description" = "Nessuna descrizione";
+"chat.info.item.members" = "Componenti";
+"chat.info.item.pinned" = "Evidenziati";
+"chat.info.item.starred" = "Speciali";
+"chat.info.item.mentions" = "Menzioni";
+"chat.info.item.notifications" = "Notifiche";
+"chat.info.item.files" = "Documenti";
+"chat.info.item.share" = "Condivisioni";
+
+// Members List
+"chat.members.list.title" = "Componenti";
+
+// Add Users
+"chat.add_users.title" = "Aggiungere Utenti";
+"chat.add_users.confirm.title" = "Aggiungi questo utente ?";
+"chat.add_users.confirm.message" = "Sei sicuro di voler aggiungere '%@' a '%@'?";
+
+// Messages List
+"chat.messages.list.title" = "Messaggi";
+"chat.messages.list.empty" = "Nessun messaggio trovato";
+"chat.messages.list.search.placeholder" = "Cerca messaggi";
+"chat.messages.pinned.list.title" = "Messaggi importanti";
+"chat.messages.starred.list.title" = "Messaggi speciali";
+"chat.messages.mentions.list.title" = "Menzioni";
+"chat.messages.files.list.title" = "Documenti";
+"chat.messages.files.list.empty" = "Lista documenti vuota";
+
+// Upload Banner
+"chat.banner.upload.uploading" = "Caricamento di %@";
+"chat.banner.upload.error" = "Caricamento di %@ fallito";
+"chat.banner.upload.retry" = "Riprova";
+
+// Settings
+"myaccount.settings.title" = "Preferenze";
+"myaccount.settings.administration" = "Amministrazione";
+"myaccount.settings.logout" = "Disconnettersi da %@";
+"myaccount.settings.contactus" = "Contattaci";
+"myaccount.settings.profile" = "Profilo";
+"myaccount.settings.license" = "Licenza";
+"myaccount.settings.language" = "Lingua";
+"myaccount.settings.appicon" = "Icona Applicazione";
+"myaccount.settings.version" = "Versione: %@ (%@)";
+"myaccount.settings.server_version" = "Versione Server: %@";
+"myaccount.settings.web_browser" = "Web Browser";
+"myaccount.settings.tracking.title" = "Inviare Rapporto di arresto anomalo (crash)";
+"myaccount.settings.tracking.footer" = "Non monitoriamo mai il contenuto delle tue chat. Il rapporto di arresto anomalo contiene solo informazioni rilevanti per noi per identificare i problemi e risolverlo";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Scegli una Icona";
+"myaccount.settings.changeicon.header" = "Puoi cambiare l'aspetto della tua icona per Rocket.Chat sul tuo dispositivo. Scegli una delle seguenti icone, a seconda di quale ti piace di più.";
+"myaccount.settings.changeicon.errortitle" = "Non posso cambiare icona";
+"myaccount.settings.changeicon.iosversion" = "Le icone delle applicazioni alternative non sono supportate nella versione iOS inferiore a 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Cambiare Lingua";
+"myaccount.settings.language.reset" = "Rimettere lingua predefinita";
+"myaccount.settings.language.message" = "Hai cambiato le impostazioni della lingua. È necessario riavviare Rocket.Chat prima che le nuove impostazioni abbiano effetto.";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Preferenze di Notifica";
+"myaccount.settings.notifications.save" = "Salvare";
+
+"myaccount.settings.notifications.receive.title" = "Ricevere Notifiche";
+"myaccount.settings.notifications.receive.footer" = "Ricevere notifiche da  %@";
+"myaccount.settings.notifications.show.title" = "Mostra contatore di notifiche non lette";
+"myaccount.settings.notifications.show.footer" = "Il contatore di notifiche non lette è visualizzato come un badge sulla destra del canale, nella lista.";
+
+"myaccount.settings.notifications.inapp" = "App e Scrivania";
+"myaccount.settings.notifications.inapp.alerts" = "Avvisi";
+"myaccount.settings.notifications.inapp.footer" = "Visualizza un banner nella parte superiore dello schermo quando l'app è aperta e visualizza una notifica sulla scrivania.";
+
+"myaccount.settings.notifications.mobile" = "Notifiche Push";
+"myaccount.settings.notifications.mobile.alerts" = "Avvisi";
+"myaccount.settings.notifications.mobile.footer" = "Queste notifiche vengono inviate al tuo dispositivo quando l'app non è aperta.";
+
+"myaccount.settings.notifications.desktop" = "Opzioni per la Scrivania";
+"myaccount.settings.notifications.desktop.audio" = "Audio";
+"myaccount.settings.notifications.desktop.sound" = "Suono";
+"myaccount.settings.notifications.desktop.duration" = "Durata notifica";
+
+"myaccount.settings.notifications.mail" = "E-mail";
+"myaccount.settings.notifications.email.alerts" = "Avvisi";
+
+"myaccount.settings.notifications.duration.default" = "Valori predefiniti";
+"myaccount.settings.notifications.duration.seconds" = "Secondi";
+
+"alert.update_notifications_preferences_success.title" = "Preferenze salvate";
+
+"alert.update_notifications_preferences_save_error.title" = "Impossibile aggiornare le preferenze di notifica";
+"alert.update_notifications_preferences_save_error.message" = "È successo qualcosa durante il salvataggio delle preferenze di notifica. Per favore, riprova.";
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Predefinito";
+"subscription.notifications.status.nothing" = "Nessuno";
+"subscription.notifications.status.all" = "Tutti";
+"subscription.notifications.status.mentions" = "Menzioni";
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "Nessuno";
+"subscription.notifications.audio.value.default" = "Predefinito";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "Browser interno";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Web browser";
+"myaccount.settings.web_browser.footer" = "Questa applicazione verrà utilizzata per aprire i collegamenti in Rocket Chat.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Profilo";
+"myaccount.settings.editing_profile.title" = "Editare profilo";
+"myaccount.settings.profile.actions.save" = "Salvare";
+"myaccount.settings.profile.actions.edit" = "Editare";
+"myaccount.settings.profile.actions.change_password" = "Cambiare la tua password";
+"myaccount.settings.profile.section.profile" = "Profilo";
+"myaccount.settings.profile.section.password" = "Password";
+"myaccount.settings.profile.name_placeholder" = "Nome";
+"myaccount.settings.profile.username_placeholder" = "Nome Utente";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.status.title" = "Stato";
+"myaccount.settings.profile.password_required.title" = "Inserire la password";
+"myaccount.settings.profile.password_required.message" = "La tua password è richiesta quando aggiorni la tua e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Password";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Nuova password";
+"myaccount.settings.profile.new_password.section.password" = "Password";
+"myaccount.settings.profile.new_password.actions.save" = "Salvare";
+"myaccount.settings.profile.new_password.password_placeholder" = "Nuova password";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Conferma password";
+"myaccount.settings.profile.new_password.password_required.title" = "Inserisci la tua password";
+"myaccount.settings.profile.new_password.password_required.message" = "La tua password attuale è richiesta quando si imposta una nuova password.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password";
+
+// User Action Sheet
+"user_action_sheet.info" = "Informazioni";
+"user_action_sheet.remove" = "Rimuovere dalla stanza";
+"user_action_sheet.remove_confirm.title" = "Rimuovere questo utente ?";
+"user_action_sheet.remove_confirm.message" = "Sei sicuro di voler rimuovere '%@' dalla stanza?";
+
+// User Details
+"user_details.status" = "Stato";
+"user_details.role" = "Ruolo";
+"user_details.roles" = "Ruoli";
+"user_details.email" = "E-mail";
+"user_details.emails" = "E-mails";
+"user_details.timezone" = "Fuso orario";
+"user_details.message_button" = "Messaggio";
+"user_details.voice_call_button" = "Chiamata vocale";
+"user_details.video_call_button" = "Chiamata video";
+
+// Theme
+"theme.settings.title" = "Temi";
+"theme.settings.header" = "Tutti i temi";
+"theme.settings.footer" = "L'applicazione di un tema cambierà l'aspetto dell'app.";
+"theme.light" = "Chiaro";
+"theme.dark" = "Scuro";
+"theme.black" = "Nero";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "Ordinamento per nome";
+"subscriptions.sorting.title.activity" = "Ordinamento per attività";
+"subscriptions.sorting.alphabetical" = "Alfabetico";
+"subscriptions.sorting.activity" = "Attività";
+"subscriptions.grouping.type" = "Raggruppa per tipo";
+"subscriptions.grouping.favorites" = "Raggruppa per preferiti";
+"subscriptions.grouping.unread_top" = "Non letti sopra";
+
+// Shortcuts
+"shortcuts.type_message" = "Scrivi un messaggio";
+"shortcuts.preferences" = "Preferenze";
+"shortcuts.room_search" = "Ricerca stanze";
+"shortcuts.room_selection" = "Selezione stanza 1...9";
+"shortcuts.next_room" = "Prossima stanza";
+"shortcuts.previous_room" = "Precedente stanza";
+"shortcuts.new_room" = "Nuova stanza";
+"shortcuts.room_actions" = "Azioni stanza";
+"shortcuts.upload_room" = "Carica nella stanza";
+"shortcuts.search_messages" = "Cerca messaggi";
+"shortcuts.scroll_messages" = "Scorri messaggi";
+"shortcuts.reply_latest" = "Rispondi all'ultimo";
+"shortcuts.server_selection" = "Scelta server";
+"shortcuts.server_selection_numbers" = "Scelta server 1...9";
+"shortcuts.add_server" = "Aggiungi server";
+"shortcuts.change_theme" = "Cambia tema";

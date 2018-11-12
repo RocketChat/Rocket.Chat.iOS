@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 2/28/18.
+  Copyright © 2018 Rocket.Chat. All rights reserved.
+*/
+
+"global.ok" = "Ok";
+
+"alert.no_servers.title" = "Nessun Server";
+"alert.no_servers.message" = "Devi essere connesso ad almeno un server Rocket.Chat per condividere qualcosa.";
+
+"servers.title" = "Servers";
+
+"rooms.title" = "Selezione Stanze";
+"rooms.section.server" = "Selezione Server";
+"rooms.section.favorites" = "Preferiti";
+"rooms.section.channels" = "Canali";;
+"rooms.section.groups" = "Gruppi Privati";
+"rooms.section.directMessages" = "Messaggi Diretti";
+
+"compose.title" = "Condividi";
+"compose.send" = "Invia";
+"compose.cancel" = "Cancella";
+"compose.destination.to" = "A: ";
+"compose.file.name.placeholder" = "Nome file";
+"compose.file.description.placeholder" = "Descrizione file";
+
+"report.success.title" = "Successo";
+"report.success.message" = "Il contenuto è stato inviato con successo.";
+"report.error.title" = "Errore";
+"report.error.message" = "Qualcosa non è andato bene durante la condivisione.";
+"report.cancelled.message" = "Il messaggio non è stato inviato perché il trasferimento è stato annullato.";
