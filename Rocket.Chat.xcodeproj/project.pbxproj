@@ -442,6 +442,8 @@
 		801B0EF7211895E900C0972E /* MainSplitViewControllerShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
 		8020C3D52199DDA400AA7133 /* MessagesViewControllerDrafting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */; };
+		8020C3D82199F75A00AA7133 /* MessageViewControllerEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D72199F75A00AA7133 /* MessageViewControllerEmptyState.swift */; };
+		8020C3DA2199F78800AA7133 /* MessageViewControllerSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D92199F78800AA7133 /* MessageViewControllerSearching.swift */; };
 		8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */; };
 		8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */; };
 		8020CCF51FEAD8C9003424F4 /* EmojiPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */; };
@@ -1371,6 +1373,8 @@
 		801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewControllerShortcuts.swift; sourceTree = "<group>"; };
 		801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserView.swift; sourceTree = "<group>"; };
 		8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerDrafting.swift; sourceTree = "<group>"; };
+		8020C3D72199F75A00AA7133 /* MessageViewControllerEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewControllerEmptyState.swift; sourceTree = "<group>"; };
+		8020C3D92199F78800AA7133 /* MessageViewControllerSearching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewControllerSearching.swift; sourceTree = "<group>"; };
 		8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
 		8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiPicker.xib; sourceTree = "<group>"; };
 		8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerController.swift; sourceTree = "<group>"; };
@@ -2877,6 +2881,8 @@
 				802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */,
 				80F533E52195A33B00B7292E /* MessagesViewControllerSending.swift */,
 				8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */,
+				8020C3D72199F75A00AA7133 /* MessageViewControllerEmptyState.swift */,
+				8020C3D92199F78800AA7133 /* MessageViewControllerSearching.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -4933,6 +4939,7 @@
 				8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */,
 				99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */,
 				802C8959216314CF00C6B9B2 /* MessagesViewControllerUploading.swift in Sources */,
+				8020C3DA2199F78800AA7133 /* MessageViewControllerSearching.swift in Sources */,
 				41A9B708215B0D0700CEB218 /* MessagesViewModel.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
@@ -4994,6 +5001,7 @@
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,
 				41D3668820C0323100970B99 /* SubscriptionsSortingViewModel.swift in Sources */,
 				800E22861F8507E400DA84F1 /* RoomMessagesRequest.swift in Sources */,
+				8020C3D82199F75A00AA7133 /* MessageViewControllerEmptyState.swift in Sources */,
 				996E7421215DFE0700842818 /* SequentialMessageChatItem.swift in Sources */,
 				8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
