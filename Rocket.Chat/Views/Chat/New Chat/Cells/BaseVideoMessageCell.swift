@@ -49,18 +49,18 @@ class BaseVideoMessageCell: BaseMessageCell {
             imageGenerator.appliesPreferredTrackTransform = true
             let time = CMTimeMake(value: 1, timescale: 1)
 
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: imageRef)
+                try thumbnail.pngData()?.write(to: thumbURL, options: .atomic)
 
-                do {
-                    let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-                    let thumbnail = UIImage(cgImage: imageRef)
-                    try thumbnail.pngData()?.write(to: thumbURL, options: .atomic)
-
+                DispatchQueue.main.async { [weak self] in
                     imageView.image = thumbnail
-                    self.loading = false
-                } catch {
-                    self.loading = false
+                    self?.loading = false
+                }
+            } catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.loading = false
                 }
             }
         }
