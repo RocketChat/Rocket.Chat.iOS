@@ -41,7 +41,7 @@ class BaseVideoMessageCell: BaseMessageCell {
 
         loading = true
 
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
 
             let asset = AVAsset(url: videoURL)
