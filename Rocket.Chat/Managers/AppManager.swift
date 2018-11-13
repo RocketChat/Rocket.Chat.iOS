@@ -190,10 +190,6 @@ extension AppManager {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
-                    if let currentUser = AuthManager.currentUser() {
-                        AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
-                    }
-
                     WindowManager.open(.subscriptions)
 
                     let server = AuthManager.selectedServerHost()
