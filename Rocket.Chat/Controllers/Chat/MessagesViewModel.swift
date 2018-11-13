@@ -307,7 +307,7 @@ final class MessagesViewModel {
                 return
             }
 
-            let pageSize = self.data.isEmpty || !prepareAnotherPage ? 30 : 10
+            let pageSize = 30
             let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
@@ -375,15 +375,17 @@ final class MessagesViewModel {
      Sort the data list based on data and cache it in a local variable.
      */
     internal func cacheDataSorted() {
-        dataSorted = data.sorted { (section1, section2) -> Bool in
-            guard
-                let object1 = section1.object.base as? MessageSectionModel,
-                let object2 = section2.object.base as? MessageSectionModel
-            else {
-                return false
-            }
+        DispatchQueue.main.sync {
+            dataSorted = data.sorted { (section1, section2) -> Bool in
+                guard
+                    let object1 = section1.object.base as? MessageSectionModel,
+                    let object2 = section2.object.base as? MessageSectionModel
+                else {
+                    return false
+                }
 
-            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+                return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+            }
         }
     }
 
@@ -443,7 +445,9 @@ final class MessagesViewModel {
             }
         }
 
-        dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
+        DispatchQueue.main.sync {
+            dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
+        }
     }
 
     /**
