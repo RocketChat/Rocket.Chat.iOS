@@ -43,6 +43,7 @@ final class MessagesViewController: RocketChatViewController {
     var chatTitleView: ChatTitleView?
 
     var emptyStateImageView: UIImageView?
+    var documentController: UIDocumentInteractionController?
 
     var subscription: Subscription! {
         didSet {
@@ -258,10 +259,6 @@ final class MessagesViewController: RocketChatViewController {
 
     private func chatLogIsAtBottom() -> Bool {
         return collectionView.contentOffset.y <= -composerView.frame.height
-    }
-
-    func openURL(url: URL) {
-        WebBrowserManager.open(url: url)
     }
 
     // MARK: Reading Status

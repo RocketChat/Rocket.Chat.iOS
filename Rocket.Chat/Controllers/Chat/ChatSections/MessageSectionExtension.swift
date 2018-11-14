@@ -14,11 +14,10 @@ import FLAnimatedImage
 import SimpleImageViewer
 import RealmSwift
 
-extension MessageSection: ChatMessageCellProtocol {
+extension MessagesViewController: ChatMessageCellProtocol {
+
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
-
         // set up controller
-
         let controller = ReactorListViewController()
         controller.modalPresentationStyle = .popover
         _ = controller.view
@@ -44,16 +43,16 @@ extension MessageSection: ChatMessageCellProtocol {
 
         // present (push on iPhone, popover on iPad)
 
-        if messagesController?.traitCollection.horizontalSizeClass == .compact {
-            messagesController?.navigationController?.pushViewController(controller, animated: true)
+        if traitCollection.horizontalSizeClass == .compact {
+            navigationController?.pushViewController(controller, animated: true)
         } else {
             if let presenter = controller.popoverPresentationController {
                 presenter.sourceView = reactionView
                 presenter.sourceRect = reactionView.bounds
-                presenter.backgroundColor = messagesController?.view.theme?.focusedBackground
+                presenter.backgroundColor = view.theme?.focusedBackground
             }
 
-            messagesController?.present(controller, animated: true)
+            present(controller, animated: true)
         }
 
         // on select reactor
@@ -63,15 +62,11 @@ extension MessageSection: ChatMessageCellProtocol {
                 return
             }
 
-            controller.presentActionSheetForUser(user, subscription: self.messagesController?.subscription, source: (controller.view, rect))
+            controller.presentActionSheetForUser(user, subscription: self.subscription, source: (controller.view, rect))
         }
     }
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let view = messagesController?.view else {
-            return
-        }
-
         if recognizer.state == .began {
             presentActionsFor(message, view: view)
         }
@@ -87,7 +82,7 @@ extension MessageSection: ChatMessageCellProtocol {
         _ = controller.view
 
         if UIDevice.current.userInterfaceIdiom == .phone {
-            messagesController?.navigationController?.pushViewController(controller, animated: true)
+            navigationController?.pushViewController(controller, animated: true)
         } else {
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.modalPresentationStyle = .popover
@@ -97,13 +92,13 @@ extension MessageSection: ChatMessageCellProtocol {
                 presenter.sourceRect = source.0.bounds
             }
 
-            messagesController?.present(navigationController, animated: true)
+            present(navigationController, animated: true)
         }
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         guard let user = message.user else { return }
-        messagesController?.presentActionSheetForUser(user, subscription: messagesController?.subscription, source: (view, nil))
+        presentActionSheetForUser(user, subscription: subscription, source: (view, nil))
     }
 
     func openURL(url: URL) {
@@ -120,7 +115,7 @@ extension MessageSection: ChatMessageCellProtocol {
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
         controller.activityItems = [attachment.title ?? "", videoURL]
-        messagesController?.present(controller, animated: true, completion: nil)
+        present(controller, animated: true, completion: nil)
     }
 
     func openReplyMessage(message: UnmanagedMessage) {
@@ -140,7 +135,7 @@ extension MessageSection: ChatMessageCellProtocol {
                 config.imageView = thumbnail
                 config.allowSharing = true
             }
-            messagesController?.present(ImageViewerController(configuration: configuration), animated: true)
+            present(ImageViewerController(configuration: configuration), animated: true)
         } else {
             //            openImage(attachment: attachment)
         }
@@ -155,7 +150,7 @@ extension MessageSection: ChatMessageCellProtocol {
                 config.allowSharing = true
             }
 
-            messagesController?.present(ImageViewerController(configuration: configuration), animated: true)
+            present(ImageViewerController(configuration: configuration), animated: true)
         } else {
             //            openImage(attachment: attachment)
         }
@@ -173,7 +168,7 @@ extension MessageSection: ChatMessageCellProtocol {
         // Open document itself
         func open() {
             documentController = UIDocumentInteractionController(url: localFileURL)
-            documentController?.delegate = messagesController
+            documentController?.delegate = self
             documentController?.presentPreview(animated: true)
         }
 
@@ -195,13 +190,13 @@ extension MessageSection: ChatMessageCellProtocol {
             return
         }
 
-        collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
-        messagesController?.viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-        messagesController?.viewModel.updateData()
+//        collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
+//        viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
+//        viewModel.updateData()
     }
 }
 
-extension MessageSection {
+extension MessagesViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
         guard !message.temporary, message.type.actionable else { return }
 
@@ -228,7 +223,7 @@ extension MessageSection {
             presenter.sourceRect = view.bounds
         }
 
-        messagesController?.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     // swiftlint:disable function_body_length
@@ -237,8 +232,8 @@ extension MessageSection {
             let messageUser = message.user,
             let auth = AuthManager.isAuthenticated(),
             let client = API.current()?.client(MessagesClient.self)
-            else {
-                return []
+        else {
+            return []
         }
 
         let info = (auth.settings?.messageReadReceiptStoreUsers ?? false) ? UIAlertAction(title: localized("chat.message.actions.info"), style: .default, handler: { _ in
@@ -249,27 +244,27 @@ extension MessageSection {
             self.react(message: message, view: view)
         })
 
-        let report = UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
+        let report = UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { _ in
             self.report(message: message)
         })
 
-        let copy = UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
+        let copy = UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { _ in
             UIPasteboard.general.string = message.text
         })
 
-        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
-            (self?.controllerContext as? MessagesViewController)?.reply(to: message)
+        let replyAction = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { _ in
+            self.reply(to: message)
         })
 
-        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
-            (self?.controllerContext as? MessagesViewController)?.reply(to: message, onlyQuote: true)
+        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { _ in
+            self.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [info, react, reply, quote, copy, report].compactMap { $0 }
+        var actions = [info, react, replyAction, quote, copy, report].compactMap { $0 }
 
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
-            let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+            let pin = UIAlertAction(title: pinMessage, style: .default, handler: { _ in
                 client.pinMessage(message, pin: !message.pinned)
             })
 
@@ -279,7 +274,7 @@ extension MessageSection {
         if auth.canStarMessage(message) == .allowed, let userId = auth.user?.identifier {
             let isStarred = message.starred.contains(userId)
             let starMessage = isStarred ? localized("chat.message.actions.unstar") : localized("chat.message.actions.star")
-            let star = UIAlertAction(title: starMessage, style: .default, handler: { (_) in
+            let star = UIAlertAction(title: starMessage, style: .default, handler: { _ in
                 client.starMessage(message, star: !isStarred)
             })
 
@@ -287,7 +282,7 @@ extension MessageSection {
         }
 
         if auth.canBlockMessage(message) == .allowed {
-            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { (_) in
+            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { _ in
                 MessageManager.blockMessagesFrom(messageUser, completion: {
                     //                    self?.updateSubscriptionInfo()
                 })
@@ -297,9 +292,9 @@ extension MessageSection {
         }
 
         if  auth.canEditMessage(message) == .allowed {
-            let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-                self.messagesController?.editMessage(message)
-                self.messagesController?.applyTheme()
+            let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { _ in
+                self.editMessage(message)
+                self.applyTheme()
             })
 
             actions.append(edit)
@@ -321,10 +316,10 @@ extension MessageSection {
     func actionsForFailedMessage(_ message: Message) -> [UIAlertAction] {
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
             guard
-                let subscription = self.messagesController?.subscription.validated()?.unmanaged,
+                let subscription = self.subscription.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
             else {
-                    return
+                return
             }
 
             var messageToResend: (identifier: String, text: String)?
@@ -334,7 +329,7 @@ extension MessageSection {
                     let identifier = message.identifier,
                     let failedMessage = subscription.managedObject?.messages?.filter("identifier = %@", identifier).first
                 else {
-                        return
+                    return
                 }
 
                 messageToResend = (identifier: identifier, text: failedMessage.text)
@@ -348,10 +343,10 @@ extension MessageSection {
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
             guard
-                let subscription = self.messagesController?.subscription.validated()?.unmanaged,
+                let subscription = self.subscription.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
-                else {
-                    return
+            else {
+                return
             }
 
             var messagesToResend: [(identifier: String, text: String)] = []
@@ -361,7 +356,7 @@ extension MessageSection {
                     let subscription = subscription.managedObject,
                     let failedMessages = subscription.messages?.filter("failed = true")
                 else {
-                        return
+                    return
                 }
 
                 messagesToResend = failedMessages.map { (identifier: $0.identifier ?? "", text: $0.text) }
@@ -384,7 +379,7 @@ extension MessageSection {
     // MARK: Actions
 
     fileprivate func react(message: Message, view: UIView) {
-        //        self.view.endEditing(true)
+        self.composerView.resignFirstResponder()
 
         let controller = EmojiPickerController()
         controller.modalPresentationStyle = .popover
@@ -404,12 +399,11 @@ extension MessageSection {
         controller.customEmojis = CustomEmoji.emojis()
         ThemeManager.addObserver(controller.view)
 
-        // TODO: Replace
-        //        if UIDevice.current.userInterfaceIdiom == .phone {
-        //            self.navigationController?.pushViewController(controller, animated: true)
-        //        } else {
-        //            self.present(controller, animated: true)
-        //        }
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            self.present(controller, animated: true)
+        }
     }
 
     fileprivate func delete(message: Message) {
@@ -418,17 +412,17 @@ extension MessageSection {
             (title: localized("chat.message.actions.delete.confirm.yes"), handler: { _ in
                 API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: false)
             })
-            ], deleteOption: 1).present()
+        ], deleteOption: 1).present()
     }
 
     fileprivate func discard(message: Message) {
         Ask(key: "chat.message.actions.discard.confirm", buttons: [
             (title: localized("global.no"), handler: nil),
             (title: localized("chat.message.actions.discard.confirm.yes"), handler: { _ in
-                //                guard let msgId = message.identifier else { return }
-                //                self?.deleteMessage(msgId: msgId)
+                guard let msgId = message.identifier else { return }
+//                self?.deleteMessage(msgId: msgId)
             })
-            ], deleteOption: 1).present()
+        ], deleteOption: 1).present()
     }
 
     fileprivate func report(message: Message) {

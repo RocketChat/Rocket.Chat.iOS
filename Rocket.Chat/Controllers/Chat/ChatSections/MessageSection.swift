@@ -20,7 +20,6 @@ final class MessageSection: ChatSection {
         return controllerContext as? MessagesViewController
     }
 
-    var documentController: UIDocumentInteractionController?
     var collapsibleItemsState: [AnyHashable: Bool]
 
     init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool]) {
@@ -47,7 +46,7 @@ final class MessageSection: ChatSection {
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
-                messageIdentifier: object.message.identifier,
+                message: object.message,
                 reactions: object.message.reactions
             ).wrapped)
         }
@@ -252,7 +251,7 @@ final class MessageSection: ChatSection {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
 
         if var cell = cell as? BaseMessageCellProtocol {
-            cell.delegate = self
+            cell.delegate = self.messagesController
         }
 
         cell.messageWidth = messagesController?.messageWidth() ?? 0
