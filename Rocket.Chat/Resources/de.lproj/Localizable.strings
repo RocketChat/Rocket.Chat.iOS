@@ -289,6 +289,11 @@
 "chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
 "chat.message.type.room_unarchived" = "Dieser Raum wurde wiederhergestellt von %@";
 "chat.message.type.message_pinned" = "hat eine Nachricht fixiert:";
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";

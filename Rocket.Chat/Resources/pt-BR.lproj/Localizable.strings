@@ -289,6 +289,11 @@
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
 "chat.message.type.message_pinned" = "Pinou uma mensagem:";
+"chat.message.type.message_snippeted" = "Criou um snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Privacidade da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_topic" = "Tópico da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_announcement" = "Anúncio da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_description" = "Descrição da sala alterou para \"%@\" por %@";
 
 // Chat Information
 "chat.info.title" = "Informações";
