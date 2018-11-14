@@ -284,10 +284,10 @@
 "chat.message.type.room_unarchived" = "Cette salle a été désarchivée par %@";
 "chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 "chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed by %@ to \"%@\""; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed by %@ to \"%@\""; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed by %@ to \"%@\""; // TODO
-"chat.message.type.room_changed_description" = "Room description changed by %@ to \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";

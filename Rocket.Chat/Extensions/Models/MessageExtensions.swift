@@ -139,29 +139,29 @@ extension Message {
         case .roomChangedPrivacy:
             return String(
                 format: localized("chat.message.type.room_changed_privacy"),
-                self.user?.displayName() ?? "",
-                text
+                text,
+                self.user?.displayName() ?? ""
             )
 
         case .roomChangedTopic:
             return String(
                 format: localized("chat.message.type.room_changed_topic"),
-                self.user?.displayName() ?? "",
-                text
+                text,
+                self.user?.displayName() ?? ""
             )
 
         case .roomChangedAnnouncement:
             return String(
                 format: localized("chat.message.type.room_changed_announcement"),
-                self.user?.displayName() ?? "",
-                text
+                text,
+                self.user?.displayName() ?? ""
             )
 
         case .roomChangedDescription:
             return String(
                 format: localized("chat.message.type.room_changed_description"),
-                self.user?.displayName() ?? "",
-                text
+                text,
+                self.user?.displayName() ?? ""
             )
 
         default:
