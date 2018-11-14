@@ -241,6 +241,10 @@ final class MessageSection: ChatSection {
             ).wrapped)
         }
 
+        if object.containsLoader {
+            cells.append(LoaderChatItem().wrapped)
+        }
+
         return cells
     }
 
