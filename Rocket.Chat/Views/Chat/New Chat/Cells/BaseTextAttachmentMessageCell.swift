@@ -90,10 +90,7 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     }
 
     @objc func didTapTextContainerView() {
-        guard
-            let viewModel = viewModel,
-            let textAttachmentViewModel = viewModel.base as? TextAttachmentChatItem
-        else {
+        guard let viewModel = viewModel else {
             return
         }
 

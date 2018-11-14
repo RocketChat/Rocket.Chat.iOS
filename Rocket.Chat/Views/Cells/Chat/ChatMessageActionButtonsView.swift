@@ -33,8 +33,8 @@ final class ChatMessageActionButtonsView: UIView {
     // MARK: IBAction
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
-        if let message = message {
-//            delegate?.openReplyMessage(message: message)
+        if let message = message?.unmanaged {
+            delegate?.openReplyMessage(message: message)
         }
     }
 

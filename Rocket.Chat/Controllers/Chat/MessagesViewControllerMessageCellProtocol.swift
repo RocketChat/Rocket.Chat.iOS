@@ -1,5 +1,5 @@
 //
-//  MessageSectionExtension.swift
+//  MessagesViewControllerMessageCellProtocol.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 07/11/18.
@@ -114,7 +114,7 @@ extension MessagesViewController: ChatMessageCellProtocol {
         guard let videoURL = attachment.fullVideoURL else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
-        controller.activityItems = [attachment.title ?? "", videoURL]
+        controller.activityItems = [attachment.title, videoURL]
         present(controller, animated: true, completion: nil)
     }
 
@@ -162,7 +162,7 @@ extension MessagesViewController: ChatMessageCellProtocol {
 
     func openDocument(attachment: UnmanagedAttachment) {
         guard let fileURL = attachment.fullFileURL else { return }
-        guard let filename = DownloadManager.filenameFor(attachment.titleLink ?? "") else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
         // Open document itself
@@ -190,9 +190,10 @@ extension MessagesViewController: ChatMessageCellProtocol {
             return
         }
 
-//        collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
-//        viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-//        viewModel.updateData()
+        // TODO
+        // collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
+        viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
+        self.viewModel.updateData()
     }
 }
 
@@ -420,7 +421,10 @@ extension MessagesViewController {
             (title: localized("global.no"), handler: nil),
             (title: localized("chat.message.actions.discard.confirm.yes"), handler: { _ in
                 guard let msgId = message.identifier else { return }
-//                self?.deleteMessage(msgId: msgId)
+
+                Realm.execute({ _ in
+                    Message.delete(withIdentifier: msgId)
+                })
             })
         ], deleteOption: 1).present()
     }
