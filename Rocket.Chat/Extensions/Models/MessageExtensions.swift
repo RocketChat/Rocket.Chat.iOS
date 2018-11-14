@@ -133,7 +133,7 @@ extension Message {
         case .messageSnippeted:
             return String(
                 format: localized("chat.message.type.message_snippeted"),
-                self.snippetName
+                self.snippetName ?? ""
             )
 
         case .roomChangedPrivacy:
