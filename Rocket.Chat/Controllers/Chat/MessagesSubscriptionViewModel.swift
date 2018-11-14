@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+public typealias TypingChangedBlock = (String?) -> Void
+
 final class MessagesSubscriptionViewModel {
 
     internal var subscription: Subscription? {
@@ -23,6 +25,7 @@ final class MessagesSubscriptionViewModel {
 
     internal var subscriptionQueryToken: NotificationToken?
     internal var onDataChanged: VoidCompletion?
+    internal var onTypingChanged: TypingChangedBlock?
 
     // MARK: Life Cycle
 
@@ -57,7 +60,7 @@ final class MessagesSubscriptionViewModel {
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
             guard let username = username, username != loggedUsername else { return }
-            // TODO: Handle typing here.
+            self?.onTypingChanged?(flag ? username : nil)
         }
     }
 

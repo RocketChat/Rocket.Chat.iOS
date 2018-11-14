@@ -161,6 +161,12 @@ final class MessagesViewController: RocketChatViewController {
             self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
         }
 
+        viewSubscriptionModel.onTypingChanged = { [weak self] username in
+            DispatchQueue.main.async {
+                self?.chatTitleView?.updateTypingStatus(username: username)
+            }
+        }
+
         startDraftMessage()
     }
 

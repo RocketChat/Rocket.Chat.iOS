@@ -19,6 +19,11 @@ final class ChatTitleView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var showInfoImage: UIImageView!
+    @IBOutlet weak var typingLabel: UILabel! {
+        didSet {
+            typingLabel.text = ""
+        }
+    }
 
     var isTitleHidden: Bool {
         get {
@@ -78,12 +83,35 @@ final class ChatTitleView: UIView {
         }
     }
 
+    internal func updateTypingStatus(username: String?) {
+        if let username = username {
+            typingLabel.text = "\(username) is typing..."
+        } else {
+            typingLabel.text = nil
+        }
+
+        UIView.animate(withDuration: 0.15) {
+            self.layoutIfNeeded()
+        }
+    }
+
     // MARK: IBAction
 
     @IBAction func recognizeTapGesture(_ recognizer: UITapGestureRecognizer) {
         if recognizer.state == .ended {
             delegate?.titleViewChannelButtonPressed()
         }
+    }
+
+}
+
+// MARK: Themeable
+
+extension ChatTitleView {
+
+    override func applyTheme() {
+        super.applyTheme()
+        typingLabel.textColor = theme?.auxiliaryText
     }
 
 }
