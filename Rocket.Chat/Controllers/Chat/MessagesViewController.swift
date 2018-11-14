@@ -125,6 +125,7 @@ final class MessagesViewController: RocketChatViewController {
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
+        collectionView.register(LoaderCell.nib, forCellWithReuseIdentifier: LoaderCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
         collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
         collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
