@@ -19,5 +19,6 @@ extension MessagesViewController {
         composerView.textView.text = ""
 
         stopReplying()
+        updateDraftMessage()
     }
 }
