@@ -362,7 +362,10 @@ final class MessagesViewModel {
      */
     internal func updateData(shouldUpdateUI: Bool = true) {
         updateDataQueue.addOperation { [weak self] in
-            self?.cacheDataSorted()
+            DispatchQueue.main.sync {
+                self?.cacheDataSorted()
+            }
+
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {
@@ -375,17 +378,15 @@ final class MessagesViewModel {
      Sort the data list based on data and cache it in a local variable.
      */
     internal func cacheDataSorted() {
-        DispatchQueue.main.sync {
-            dataSorted = data.sorted { (section1, section2) -> Bool in
-                guard
-                    let object1 = section1.object.base as? MessageSectionModel,
-                    let object2 = section2.object.base as? MessageSectionModel
-                else {
-                    return false
-                }
-
-                return object1.messageDate.compare(object2.messageDate) == .orderedDescending
+        dataSorted = data.sorted { (section1, section2) -> Bool in
+            guard
+                let object1 = section1.object.base as? MessageSectionModel,
+                let object2 = section2.object.base as? MessageSectionModel
+            else {
+                return false
             }
+
+            return object1.messageDate.compare(object2.messageDate) == .orderedDescending
         }
     }
 
@@ -445,9 +446,7 @@ final class MessagesViewModel {
             }
         }
 
-        DispatchQueue.main.sync {
-            dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
-        }
+        dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
     }
 
     /**
