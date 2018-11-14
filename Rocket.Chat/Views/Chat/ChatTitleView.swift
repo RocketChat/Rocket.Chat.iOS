@@ -52,9 +52,9 @@ final class ChatTitleView: UIView {
 
     let viewModel = ChatTitleViewModel()
 
-    var subscription: Subscription? {
+    var subscription: UnmanagedSubscription? {
         didSet {
-            guard let subscription = subscription?.validated() else { return }
+            guard let subscription = subscription else { return }
             viewModel.subscription = subscription
             titleLabel.text = viewModel.title
 
@@ -83,9 +83,18 @@ final class ChatTitleView: UIView {
         }
     }
 
-    internal func updateTypingStatus(username: String?) {
-        if let username = username {
-            typingLabel.text = "\(username) is typing..."
+    internal func updateTypingStatus(usernames: [String]) {
+        if usernames.count == 1 {
+            if usernames.first == titleLabel.text {
+                typingLabel.text = localized("chat.typing")
+            } else if let username = usernames.first {
+                typingLabel.text = String(format: localized("chat.user_is_typing"), username)
+            }
+        } else if usernames.count == 2 {
+            let usernames = usernames.joined(separator: ", ")
+            typingLabel.text = String(format: localized("chat.users_are_typing"), usernames)
+        } else if usernames.count > 2 {
+            typingLabel.text = localized("chat.several_typing")
         } else {
             typingLabel.text = nil
         }

@@ -11,18 +11,18 @@ import Foundation
 final class ChatTitleViewModel {
 
     internal var user: User?
-    var subscription: Subscription? {
+    var subscription: UnmanagedSubscription? {
         didSet {
-            guard let subscription = subscription?.validated() else {
+            guard let subscription = subscription else {
                 return
             }
 
-            user = subscription.directMessageUser
+            user = subscription.directMessageUser?.managedObject
         }
     }
 
     var title: String {
-        return subscription?.displayName() ?? ""
+        return subscription?.managedObject?.displayName() ?? ""
     }
 
     var iconColor: UIColor {

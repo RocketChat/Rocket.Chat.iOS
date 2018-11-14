@@ -268,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Color seleccionado";
 "chat.drawing.settings.color.others" = "Elige el color a continuación:";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODO
+
 // Message Types
 "chat.message.type.room_name_changed" = "El nombre de la habitación cambió a: %@ by %@";
 "chat.message.type.user_added_by" = "Usuario %@ añadido por %@";
