@@ -67,6 +67,9 @@ final class Message: BaseModel {
     @objc dynamic var pinned: Bool = false
     @objc dynamic var unread: Bool = false
 
+    @objc dynamic var snippetName: String?
+    @objc dynamic var snippetId: String?
+
     @objc dynamic var alias = ""
     @objc dynamic var avatar: String?
     @objc dynamic var emoji: String?
