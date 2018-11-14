@@ -269,6 +269,12 @@
 "chat.drawing.settings.color.selected" = "Selected color"; // TODO
 "chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODOS
+
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
 "chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";
