@@ -130,6 +130,40 @@ extension Message {
         case .messagePinned:
             return localized("chat.message.type.message_pinned")
 
+        case .messageSnippeted:
+            return String(
+                format: localized("chat.message.type.message_snippeted"),
+                text
+            )
+
+        case .roomChangedPrivacy:
+            return String(
+                format: localized("chat.message.type.room_changed_privacy"),
+                self.user?.displayName() ?? "",
+                text
+            )
+
+        case .roomChangedTopic:
+            return String(
+                format: localized("chat.message.type.room_changed_topic"),
+                self.user?.displayName() ?? "",
+                text
+            )
+
+        case .roomChangedAnnouncement:
+            return String(
+                format: localized("chat.message.type.room_changed_announcement"),
+                self.user?.displayName() ?? "",
+                text
+            )
+
+        case .roomChangedDescription:
+            return String(
+                format: localized("chat.message.type.room_changed_description"),
+                self.user?.displayName() ?? "",
+                text
+            )
+
         default:
             break
         }
