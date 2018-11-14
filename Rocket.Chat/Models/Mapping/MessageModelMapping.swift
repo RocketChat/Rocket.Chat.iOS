@@ -27,6 +27,8 @@ extension Message: ModelMappeable {
         self.pinned = values["pinned"].bool ?? false
         self.unread = values["unread"].bool ?? false
         self.groupable = values["groupable"].bool ?? true
+        self.snippetName = values["snippetName"].string
+        self.snippetId = values["snippetId"].string
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)

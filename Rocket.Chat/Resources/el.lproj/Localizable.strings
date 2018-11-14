@@ -282,7 +282,12 @@
 "chat.message.type.subscription_role_removed" = "%@ δεν ισχύει πλέον %@ για %@";
 "chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
 "chat.message.type.room_unarchived" = "Αυτό το δωμάτιο αποαρχειοθετήθηκε από %@";
-"chat.message.type.message_pinned" = "Καρφιτσώθηκε ένα μήνυμα:"; 
+"chat.message.type.message_pinned" = "Καρφιτσώθηκε ένα μήνυμα:";
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";

@@ -283,6 +283,11 @@
 "chat.message.type.room_archived" = "This room has been archived by %@";
 "chat.message.type.room_unarchived" = "This room has been unarchived by %@";
 "chat.message.type.message_pinned" = "Pinned a message:";
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@";
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@";
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@";
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@";
 
 // Chat Information
 "chat.info.title" = "Info";
