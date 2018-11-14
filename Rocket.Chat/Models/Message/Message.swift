@@ -37,8 +37,6 @@ enum MessageType: String {
     case roomChangedAnnouncement = "room_changed_announcement"
     case roomChangedDescription = "room_changed_description"
 
-    case jitsiStartedCall = "jitsi_call_started"
-
     case messagePinned = "message_pinned"
     case messageSnippeted = "message_snippeted"
 
