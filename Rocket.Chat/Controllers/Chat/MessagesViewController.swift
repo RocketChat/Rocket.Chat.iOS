@@ -42,6 +42,8 @@ final class MessagesViewController: RocketChatViewController {
 
     var chatTitleView: ChatTitleView?
 
+    var chatPreviewModeView: ChatPreviewModeView?
+
     var emptyStateImageView: UIImageView?
 
     var subscription: Subscription! {
@@ -162,6 +164,7 @@ final class MessagesViewController: RocketChatViewController {
         }
 
         startDraftMessage()
+        updateJoinedView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
