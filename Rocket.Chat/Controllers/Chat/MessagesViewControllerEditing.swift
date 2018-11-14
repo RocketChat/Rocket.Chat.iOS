@@ -23,6 +23,7 @@ extension MessagesViewController {
     func editMessage(_ message: Message) {
         composerViewModel.messageToEdit = message
         composerView.textView.text = message.text
+        composerView.textView.becomeFirstResponder()
 
         UIView.animate(withDuration: 0.2) {
             self.editingView?.isHidden = false

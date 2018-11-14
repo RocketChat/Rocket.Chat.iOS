@@ -48,6 +48,8 @@ final class MessagesViewController: RocketChatViewController {
         didSet {
             viewModel.subscription = subscription
             viewSubscriptionModel.subscription = subscription
+
+            recoverDraftMessage()
         }
     }
 
@@ -123,6 +125,7 @@ final class MessagesViewController: RocketChatViewController {
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
+        collectionView.register(LoaderCell.nib, forCellWithReuseIdentifier: LoaderCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
         collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
         collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
@@ -157,6 +160,8 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
         }
+
+        startDraftMessage()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -384,68 +389,4 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
-}
-
-// MARK: Message Searching
-
-extension MessagesViewController {
-    func updateSearchMessagesButton() {
-        if subscription != nil {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .search,
-                target: self,
-                action: #selector(showSearchMessages)
-            )
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
-    }
-
-    @objc func showSearchMessages() {
-        guard
-            let controller = storyboard?.instantiateViewController(withIdentifier: "MessagesList"),
-            let messageList = controller as? MessagesListViewController
-        else {
-            return
-        }
-
-        messageList.data.subscription = subscription
-        messageList.data.isSearchingMessages = true
-        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
-
-        present(searchMessagesNav, animated: true, completion: nil)
-
-    }
-}
-
-// MARK: EmptyState
-
-extension MessagesViewController {
-    func updateEmptyState() {
-        if subscription == nil {
-            title = ""
-            composerView.isHidden = true
-
-            chatTitleView?.removeFromSuperview()
-            emptyStateImageView?.removeFromSuperview()
-
-            guard let theme = view.theme else { return }
-            let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
-
-            let imageView = UIImageView(image: UIImage(named: "Empty State \(themeName ?? "light")"))
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            view.addSubview(imageView)
-
-            emptyStateImageView = imageView
-
-            updateEmptyStateFrame()
-        } else {
-            emptyStateImageView?.removeFromSuperview()
-        }
-    }
-
-    func updateEmptyStateFrame() {
-        emptyStateImageView?.frame = view.bounds
-    }
 }
