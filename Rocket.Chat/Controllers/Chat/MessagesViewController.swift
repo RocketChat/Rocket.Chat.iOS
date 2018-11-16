@@ -32,6 +32,14 @@ extension SizingCell {
 
 final class MessagesViewController: RocketChatViewController {
 
+    @objc override var bottomHeight: CGFloat {
+        if subscription.isJoined() {
+            return super.bottomHeight
+        }
+
+        return (chatPreviewModeView?.frame.height ?? 0.0) + view.safeAreaInsets.bottom
+    }
+
     let viewModel = MessagesViewModel(controllerContext: nil)
     let viewSubscriptionModel = MessagesSubscriptionViewModel()
     let viewSizingModel = MessagesSizingManager()

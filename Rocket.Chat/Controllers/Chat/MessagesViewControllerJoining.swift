@@ -41,6 +41,11 @@ extension MessagesViewController {
         } else {
             composerView.isHidden = true
             showChatPreviewModeView()
+
+            if let view = chatPreviewModeView {
+                collectionView.contentInset.top = -(view.frame.height + view.bottomInset)
+                collectionView.scrollIndicatorInsets = collectionView.contentInset
+            }
         }
     }
 
