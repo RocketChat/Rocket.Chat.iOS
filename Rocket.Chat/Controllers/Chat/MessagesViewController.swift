@@ -229,11 +229,13 @@ final class MessagesViewController: RocketChatViewController {
             self.isScrollingToBottom = false
         }
 
+        var fromPosition = buttonScrollToBottom.layer.position
+        fromPosition.y -= keyboardHeight
         var position = buttonScrollToBottom.layer.position
         position.y = collectionView.bounds.height + buttonScrollToBottomLayerY
 
         let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
-        positionAnimation.fromValue = buttonScrollToBottom.layer.position
+        positionAnimation.fromValue = fromPosition
         positionAnimation.toValue = position
 
         buttonScrollToBottom.layer.position = position
@@ -249,8 +251,9 @@ final class MessagesViewController: RocketChatViewController {
         CATransaction.commit()
     }
 
-    func hideScrollToBottom() {
-        guard scrollToBottomButtonIsVisible, !isScrollingToBottom else {
+    func hideScrollToBottom(forceUpdate: Bool = false) {
+        let isScrollToBottomVisible = forceUpdate ? true : scrollToBottomButtonIsVisible
+        guard isScrollToBottomVisible, !isScrollingToBottom else {
             return
         }
 
@@ -339,7 +342,7 @@ final class MessagesViewController: RocketChatViewController {
     }
 
     private func chatLogIsAtBottom() -> Bool {
-        return collectionView.contentOffset.y <= -composerView.frame.height
+        return (collectionView.contentOffset.y + keyboardHeight) <= -composerView.frame.height
     }
 
     func openURL(url: URL) {
