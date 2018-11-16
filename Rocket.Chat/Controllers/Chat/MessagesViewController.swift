@@ -54,12 +54,13 @@ final class MessagesViewController: RocketChatViewController {
     }
 
     private let buttonScrollToBottomSize = CGFloat(70)
+    var keyboardHeight: CGFloat = 0
     var buttonScrollToBottomConstraint: NSLayoutConstraint!
     var buttonScrollToBottomLayerY: CGFloat {
-        return -composerView.layer.bounds.height - buttonScrollToBottomSize / 2 - collectionView.layoutMargins.top
+        return -composerView.layer.bounds.height - buttonScrollToBottomSize / 2 - collectionView.layoutMargins.top - keyboardHeight
     }
     var buttonScrollToBottomY: CGFloat {
-        return -composerView.intrinsicContentSize.height - collectionView.layoutMargins.top
+        return -composerView.intrinsicContentSize.height - collectionView.layoutMargins.top - keyboardHeight
     }
 
     lazy var buttonScrollToBottom: UIButton = {
@@ -117,6 +118,20 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
 
         setupScrollToBottom()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
 
         dataUpdateDelegate = self
         viewModel.controllerContext = self
