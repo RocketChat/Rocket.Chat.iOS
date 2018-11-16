@@ -38,11 +38,13 @@ class BaseQuoteMessageCell: BaseMessageCell {
     @objc func didTapContainerView() {
         guard
             isCollapsible,
-            let viewModel = viewModel
+            let viewModel = viewModel,
+            let chatItem = viewModel.base as? QuoteChatItem
         else {
             return
         }
 
+        messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }

@@ -254,6 +254,10 @@ final class MessageSection: ChatSection {
             cell.delegate = self.messagesController
         }
 
+        if let cell = cell as? BaseMessageCell {
+            cell.messageSection = self
+        }
+
         cell.messageWidth = messagesController?.messageWidth() ?? 0
         cell.viewModel = viewModel
         cell.configure()

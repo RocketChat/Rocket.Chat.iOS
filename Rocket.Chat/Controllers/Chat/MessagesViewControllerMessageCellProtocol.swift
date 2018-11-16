@@ -186,12 +186,6 @@ extension MessagesViewController: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
-        guard let textAttachmentViewModel = viewModel.base as? QuoteChatItem ?? viewModel.base as? TextAttachmentChatItem else {
-            return
-        }
-
-        // TODO
-        // collapsibleItemsState[viewModel.differenceIdentifier] = !textAttachmentViewModel.collapsed
         viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
         self.viewModel.updateData()
     }
