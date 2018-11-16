@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
+final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
     static let identifier = String(describing: ReactionsCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -23,21 +23,45 @@ final class ReactionsCell: UICollectionViewCell, ChatCell, SizingCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
+    weak var delegate: ChatMessageCellProtocol?
+
     @IBOutlet weak var reactionsList: ReactionListView! {
         didSet {
             reactionsList.reactionTapRecognized = { view, sender in
-//                let client = API.current()?.client(MessagesClient.self)
-//                client?.reactMessage(self.message, emoji: view.model.emoji)
-//
-//                if self.isAddingReaction(emoji: view.model.emoji) {
-//                    UserReviewManager.shared.requestReview()
-//                }
+                guard
+                    let viewModel = self.viewModel?.base as? ReactionsChatItem,
+                    let message = viewModel.message.managedObject
+                else {
+                    return
+                }
+
+                let client = API.current()?.client(MessagesClient.self)
+                client?.reactMessage(message, emoji: view.model.emoji)
+
+                if self.isAddingReaction(emoji: view.model.emoji) {
+                    UserReviewManager.shared.requestReview()
+                }
             }
 
             reactionsList.reactionLongPressRecognized = { view, sender in
-//                self.delegate?.handleLongPress(reactionListView: self.reactionsListView, reactionView: view)
+                self.delegate?.handleLongPress(reactionListView: self.reactionsList, reactionView: view)
             }
         }
+    }
+
+    private func isAddingReaction(emoji tappedEmoji: String) -> Bool {
+        guard
+            let viewModel = viewModel?.base as? ReactionsChatItem,
+            let currentUser = AuthManager.currentUser()?.username
+        else {
+            return false
+        }
+
+        if Array(viewModel.reactions).first(where: { $0.emoji == tappedEmoji && $0.usernames.contains(currentUser) }) != nil {
+            return false
+        }
+
+        return true
     }
 
     func configure() {

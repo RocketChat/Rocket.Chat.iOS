@@ -92,11 +92,12 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     @objc func didTapTextContainerView() {
         guard
             let viewModel = viewModel,
-            let textAttachmentViewModel = viewModel.base as? TextAttachmentChatItem
+            let chatItem = viewModel.base as? TextAttachmentChatItem
         else {
             return
         }
 
+        messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }
