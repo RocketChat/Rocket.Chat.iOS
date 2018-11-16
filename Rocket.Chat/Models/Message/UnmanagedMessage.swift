@@ -53,6 +53,8 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var markedForDeletion: Bool
     var emoji: String?
     var avatar: String?
+    var snippetName: String?
+    var snippetId: String?
 
     var managedObject: Message? {
         return Message.find(withIdentifier: identifier)?.validated()
@@ -102,6 +104,8 @@ extension UnmanagedMessage {
         updatedAt = message.updatedAt
         emoji = message.emoji
         avatar = message.avatar
+        snippetName = message.snippetName
+        snippetId = message.snippetId
 
         mentions = message.mentions.compactMap {
             return UnmanagedMention(

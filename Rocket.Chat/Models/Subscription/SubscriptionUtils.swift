@@ -9,20 +9,9 @@
 import RealmSwift
 
 extension Subscription {
-    func displayName() -> String {
-        guard let settings = AuthSettingsManager.settings else {
-            return name
-        }
-
-        if type != .directMessage {
-            return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
-        }
-
-        return settings.useUserRealName && !fname.isEmpty ? fname : name
-    }
 
     func isValid() -> Bool {
-        return self.rid.count > 0
+        return !self.rid.isEmpty
     }
 
     func isJoined() -> Bool {

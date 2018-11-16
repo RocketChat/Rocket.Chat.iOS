@@ -9,25 +9,6 @@
 import RealmSwift
 
 extension User {
-    func displayName() -> String {
-        guard let validatedUser = validated() else {
-            return ""
-        }
-
-        let username = validatedUser.username ?? ""
-
-        guard let settings = AuthSettingsManager.settings else {
-            return username
-        }
-
-        if let name = validatedUser.name {
-            if settings.useUserRealName && !name.isEmpty {
-                return name
-            }
-        }
-
-        return username
-    }
 
     func canViewAdminPanel(realm: Realm? = Realm.current) -> Bool {
         return hasPermission(.viewPrivilegedSetting, realm: realm) ||

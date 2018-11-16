@@ -307,7 +307,7 @@ final class MessagesViewModel {
                 return
             }
 
-            let pageSize = self.data.isEmpty || !prepareAnotherPage ? 30 : 10
+            let pageSize = 30
             let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
@@ -362,7 +362,10 @@ final class MessagesViewModel {
      */
     internal func updateData(shouldUpdateUI: Bool = true) {
         updateDataQueue.addOperation { [weak self] in
-            self?.cacheDataSorted()
+            DispatchQueue.main.sync {
+                self?.cacheDataSorted()
+            }
+
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {

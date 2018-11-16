@@ -32,7 +32,13 @@ enum MessageType: String {
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
 
+    case roomChangedPrivacy = "room_changed_privacy"
+    case roomChangedTopic = "room_changed_topic"
+    case roomChangedAnnouncement = "room_changed_announcement"
+    case roomChangedDescription = "room_changed_description"
+
     case messagePinned = "message_pinned"
+    case messageSnippeted = "message_snippeted"
 
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
@@ -58,6 +64,9 @@ final class Message: BaseModel {
     @objc dynamic var userBlocked: Bool = false
     @objc dynamic var pinned: Bool = false
     @objc dynamic var unread: Bool = false
+
+    @objc dynamic var snippetName: String?
+    @objc dynamic var snippetId: String?
 
     @objc dynamic var alias = ""
     @objc dynamic var avatar: String?

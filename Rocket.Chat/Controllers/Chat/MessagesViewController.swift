@@ -47,7 +47,7 @@ final class MessagesViewController: RocketChatViewController {
     var subscription: Subscription! {
         didSet {
             viewModel.subscription = subscription
-            viewSubscriptionModel.subscription = subscription
+            viewSubscriptionModel.subscription = subscription.unmanaged
 
             recoverDraftMessage()
         }
@@ -100,6 +100,7 @@ final class MessagesViewController: RocketChatViewController {
 
         collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
         collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
+        collectionView.register(LoaderCell.nib, forCellWithReuseIdentifier: LoaderCell.identifier)
         collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
         collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
         collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
@@ -147,6 +148,12 @@ final class MessagesViewController: RocketChatViewController {
         viewSubscriptionModel.onDataChanged = { [weak self] in
             guard let self = self else { return }
             self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
+        }
+
+        viewSubscriptionModel.onTypingChanged = { [weak self] usernames in
+            DispatchQueue.main.async {
+                self?.chatTitleView?.updateTypingStatus(usernames: usernames)
+            }
         }
 
         startDraftMessage()
@@ -321,7 +328,7 @@ final class MessagesViewController: RocketChatViewController {
 
     private func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
-        view?.subscription = subscription
+        view?.subscription = subscription?.unmanaged
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
