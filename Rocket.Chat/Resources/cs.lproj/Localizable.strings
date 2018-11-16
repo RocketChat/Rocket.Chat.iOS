@@ -269,6 +269,12 @@
 "chat.drawing.settings.color.selected" = "Selected color"; // TODO
 "chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODOS
+
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
 "chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";
@@ -284,6 +290,11 @@
 "chat.message.type.room_archived" = "Tato místnost byla archivována uživatelem %@";
 "chat.message.type.room_unarchived" = "Tato místnost byla vyndána z archivu uživatelem %@";
 "chat.message.type.message_pinned" = "Pinned a message:"; // TODO
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";

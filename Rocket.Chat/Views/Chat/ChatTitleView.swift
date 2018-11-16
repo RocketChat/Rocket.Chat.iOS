@@ -19,6 +19,11 @@ final class ChatTitleView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var showInfoImage: UIImageView!
+    @IBOutlet weak var typingLabel: UILabel! {
+        didSet {
+            typingLabel.text = ""
+        }
+    }
 
     var isTitleHidden: Bool {
         get {
@@ -47,9 +52,9 @@ final class ChatTitleView: UIView {
 
     let viewModel = ChatTitleViewModel()
 
-    var subscription: Subscription? {
+    var subscription: UnmanagedSubscription? {
         didSet {
-            guard let subscription = subscription?.validated() else { return }
+            guard let subscription = subscription else { return }
             viewModel.subscription = subscription
             titleLabel.text = viewModel.title
 
@@ -78,12 +83,44 @@ final class ChatTitleView: UIView {
         }
     }
 
+    internal func updateTypingStatus(usernames: [String]) {
+        if usernames.count == 1 {
+            if usernames.first == titleLabel.text {
+                typingLabel.text = localized("chat.typing")
+            } else if let username = usernames.first {
+                typingLabel.text = String(format: localized("chat.user_is_typing"), username)
+            }
+        } else if usernames.count == 2 {
+            let usernames = usernames.joined(separator: ", ")
+            typingLabel.text = String(format: localized("chat.users_are_typing"), usernames)
+        } else if usernames.count > 2 {
+            typingLabel.text = localized("chat.several_typing")
+        } else {
+            typingLabel.text = nil
+        }
+
+        UIView.animate(withDuration: 0.15) {
+            self.layoutIfNeeded()
+        }
+    }
+
     // MARK: IBAction
 
     @IBAction func recognizeTapGesture(_ recognizer: UITapGestureRecognizer) {
         if recognizer.state == .ended {
             delegate?.titleViewChannelButtonPressed()
         }
+    }
+
+}
+
+// MARK: Themeable
+
+extension ChatTitleView {
+
+    override func applyTheme() {
+        super.applyTheme()
+        typingLabel.textColor = theme?.auxiliaryText
     }
 
 }

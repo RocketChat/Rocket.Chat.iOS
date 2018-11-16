@@ -332,6 +332,8 @@
 		41BFA0AA2146D23D008B9611 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A82146D23C008B9611 /* MessageManager.swift */; };
 		41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */; };
 		41C275DF1D848005003C88CF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C275DE1D848005003C88CF /* AvatarView.swift */; };
+		41C56D59219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */; };
+		41C56D5A219C7AD40087115F /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		41C955FA20A3931C00FC8314 /* ChatMessageActionButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F3705320A3917D00C5449E /* ChatMessageActionButtonsView.xib */; };
 		41C955FC20A3937A00FC8314 /* ChatMessageActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */; };
 		41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41CD52D420BEFA3B00336892 /* New Room.storyboard */; };
@@ -1255,6 +1257,7 @@
 		41BFA0A82146D23C008B9611 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManager.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManager.swift; sourceTree = SOURCE_ROOT; };
 		41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSystemMessages.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManagerSystemMessages.swift; sourceTree = SOURCE_ROOT; };
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerPersistencyExtension.swift; sourceTree = "<group>"; };
 		41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageActionButtonsView.swift; sourceTree = "<group>"; };
 		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLoaderCell.xib; sourceTree = "<group>"; };
 		41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoaderCell.swift; sourceTree = "<group>"; };
@@ -2222,6 +2225,7 @@
 				41BFA0A52146CF09008B9611 /* MessageManager */,
 				3330329F2073905900A9514D /* SubscriptionManager */,
 				411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */,
+				41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */,
 				805DEC341FFC03380033151B /* CustomEmojiManager.swift */,
 				8073719D1F9688B200D53ADF /* LoginServiceManager.swift */,
 				806401341FB09F8A00990572 /* PermissionManager.swift */,
@@ -4696,6 +4700,7 @@
 				33FD181D20D253AE00380BEC /* BaseNavigationBar.swift in Sources */,
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
+				41C56D59219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
 				999075192176673800CAB7C8 /* TextAttachmentMessageCell.swift in Sources */,
 				0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */,
@@ -5351,6 +5356,7 @@
 				805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */,
 				80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
+				41C56D5A219C7AD40087115F /* AuthSettingsManager.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,

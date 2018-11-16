@@ -268,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Selecionar cor";
 "chat.drawing.settings.color.others" = "Escolha uma cor:";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ estão digitando...";
+"chat.user_is_typing" = "%@ está digitando...";
+"chat.typing" = "digitando...";
+"chat.several_typing" = "muitos usuários estão digitando...";
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
 "chat.message.type.user_added_by" = "Usuário %@ adicionado por %@";
@@ -283,6 +289,11 @@
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
 "chat.message.type.message_pinned" = "Pinou uma mensagem:";
+"chat.message.type.message_snippeted" = "Criou um snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Privacidade da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_topic" = "Tópico da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_announcement" = "Anúncio da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_description" = "Descrição da sala alterou para \"%@\" por %@";
 
 // Chat Information
 "chat.info.title" = "Informações";

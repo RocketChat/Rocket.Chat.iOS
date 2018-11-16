@@ -152,6 +152,24 @@ extension Subscription {
     }
 }
 
+// MARK: Display Name
+
+extension Subscription {
+    func displayName() -> String {
+        guard let settings = AuthSettingsManager.settings else {
+            return name
+        }
+
+        if type != .directMessage {
+            return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
+        }
+
+        return settings.useUserRealName && !fname.isEmpty ? fname : name
+    }
+}
+
+// MARK: Unmanaged Object
+
 extension Subscription: UnmanagedConvertible {
     typealias UnmanagedType = UnmanagedSubscription
 
