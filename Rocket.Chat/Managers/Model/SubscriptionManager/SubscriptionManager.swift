@@ -70,11 +70,20 @@ struct SubscriptionManager {
 
             currentRealm?.execute({ (realm) in
                 guard let auth = AuthManager.isAuthenticated(realm: realm), auth.serverURL == serverURL else { return }
-                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.auth = msg == "removed" ? nil : auth
-                })
 
-                realm.add(subscription, update: true)
+                let subscription: Subscription
+
+                if let rid = object["rid"].string, rid != "", let sub = Subscription.find(rid: rid) {
+                    subscription = sub
+                } else {
+                    return
+                }
+
+                if msg == "removed" {
+                    realm.delete(subscription)
+                } else {
+                    realm.add(subscription, update: true)
+                }
             })
         }
     }

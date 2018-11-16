@@ -48,10 +48,13 @@ final class MessagesViewController: RocketChatViewController {
 
     var subscription: Subscription! {
         didSet {
-            viewModel.subscription = subscription
-            viewSubscriptionModel.subscription = subscription.unmanaged
+            let sub: Subscription? = subscription
+
+            viewModel.subscription = sub
+            viewSubscriptionModel.subscription = sub?.unmanaged
 
             recoverDraftMessage()
+            updateEmptyState()
         }
     }
 
@@ -161,6 +164,12 @@ final class MessagesViewController: RocketChatViewController {
         viewSubscriptionModel.onDataChanged = { [weak self] in
             guard let self = self else { return }
             self.chatTitleView?.subscription = self.viewSubscriptionModel.subscription
+            self.updateJoinedView()
+
+            if self.viewSubscriptionModel.subscription?.managedObject == nil {
+                self.navigationController?.popToRootViewController(animated: true)
+                self.subscription = nil
+            }
         }
 
         viewSubscriptionModel.onTypingChanged = { [weak self] usernames in
