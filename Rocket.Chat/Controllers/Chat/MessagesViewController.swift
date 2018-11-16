@@ -291,11 +291,18 @@ final class MessagesViewController: RocketChatViewController {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.height - composerView.intrinsicContentSize.height
+
+            if scrollToBottomButtonIsVisible {
+                showScrollToBottom(forceUpdate: true)
+            }
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
         keyboardHeight = 0
+        if scrollToBottomButtonIsVisible {
+            showScrollToBottom(forceUpdate: true)
+        }
     }
 
     // MARK: Pagination
