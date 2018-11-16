@@ -71,11 +71,11 @@ struct SubscriptionManager {
             currentRealm?.execute({ (realm) in
                 guard let auth = AuthManager.isAuthenticated(realm: realm), auth.serverURL == serverURL else { return }
 
-                let subscription: Subscription
-
-                if let rid = object["rid"].string, rid != "", let sub = Subscription.find(rid: rid) {
-                    subscription = sub
-                } else {
+                guard
+                    let rid = object["rid"].string,
+                    rid != "",
+                    let subscription = Subscription.find(rid: rid)
+                else {
                     return
                 }
 
