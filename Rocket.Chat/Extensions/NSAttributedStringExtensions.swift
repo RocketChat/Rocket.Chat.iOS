@@ -133,8 +133,8 @@ extension NSMutableAttributedString {
                     background = .attention
                     font = .white
                 } else {
-                    background = .clear
-                    font = .link
+                    background = .secondAction
+                    font = .primaryAction
                 }
 
                 let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")
@@ -164,7 +164,7 @@ extension NSMutableAttributedString {
                 for range in ranges {
                     let range = NSRange(range, in: string)
                     setChannel(channel, range: range)
-                    setFontColor(.link, range: range)
+                    setFontColor(.primaryAction, range: range)
                 }
             }
         }
