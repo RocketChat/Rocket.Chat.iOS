@@ -334,7 +334,7 @@ final class MessagesViewController: RocketChatViewController {
     }
 
     @objc internal func scrollToBottom(_ animated: Bool = false) {
-        let offset = CGPoint(x: 0, y: -composerView.frame.height)
+        let offset = CGPoint(x: 0, y: -composerView.frame.height - keyboardHeight)
         collectionView.setContentOffset(offset, animated: animated)
         hideScrollToBottom()
     }
