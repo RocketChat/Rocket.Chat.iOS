@@ -72,8 +72,7 @@ struct SubscriptionManager {
                 guard let auth = AuthManager.isAuthenticated(realm: realm), auth.serverURL == serverURL else { return }
 
                 guard
-                    let rid = object["rid"].string,
-                    rid != "",
+                    let rid = object["rid"].string, !rid.isEmpty,
                     let subscription = Subscription.find(rid: rid)
                 else {
                     return
