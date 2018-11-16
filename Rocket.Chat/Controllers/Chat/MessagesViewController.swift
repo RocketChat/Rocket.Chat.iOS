@@ -71,72 +71,7 @@ final class MessagesViewController: RocketChatViewController {
     }()
 
     var isScrollingToBottom: Bool = false
-    var scrollToBottomButtonIsVisible: Bool = false {
-        didSet {
-            guard oldValue != scrollToBottomButtonIsVisible, !isScrollingToBottom else {
-                return
-            }
-
-            isScrollingToBottom = true
-            if self.scrollToBottomButtonIsVisible {
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(0.5)
-                CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-                CATransaction.setCompletionBlock {
-                    self.buttonScrollToBottomConstraint.constant = self.buttonScrollToBottomY
-                    self.scrollToBottomButtonIsVisible = true
-                    self.isScrollingToBottom = false
-                }
-
-                var position = buttonScrollToBottom.layer.position
-                position.y = collectionView.bounds.height + (-composerView.layer.bounds.height - buttonScrollToBottomSize / 2 - collectionView.layoutMargins.top)
-
-                let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
-                positionAnimation.fromValue = buttonScrollToBottom.layer.position
-                positionAnimation.toValue = position
-
-                buttonScrollToBottom.layer.position = position
-                buttonScrollToBottom.layer.add(positionAnimation, forKey: #keyPath(CALayer.position))
-
-                let alphaAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-                alphaAnimation.fromValue = 0
-                alphaAnimation.toValue = 1
-
-                buttonScrollToBottom.layer.opacity = 1
-                buttonScrollToBottom.layer.add(alphaAnimation, forKey: #keyPath(CALayer.opacity))
-
-                CATransaction.commit()
-            } else {
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(0.5)
-                CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-                CATransaction.setCompletionBlock {
-                    self.buttonScrollToBottomConstraint.constant = 200
-                    self.scrollToBottomButtonIsVisible = false
-                    self.isScrollingToBottom = false
-                }
-
-                var position = buttonScrollToBottom.layer.position
-                position.y = collectionView.bounds.height + 200
-
-                let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
-                positionAnimation.fromValue = buttonScrollToBottom.layer.position
-                positionAnimation.toValue = position
-
-                buttonScrollToBottom.layer.position = position
-                buttonScrollToBottom.layer.add(positionAnimation, forKey: #keyPath(CALayer.position))
-
-                let alphaAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-                alphaAnimation.fromValue = 1
-                alphaAnimation.toValue = 0
-
-                buttonScrollToBottom.layer.opacity = 0
-                buttonScrollToBottom.layer.add(alphaAnimation, forKey: #keyPath(CALayer.opacity))
-
-                CATransaction.commit()
-            }
-        }
-    }
+    var scrollToBottomButtonIsVisible: Bool = false
 
     lazy var screenSize = view.frame.size
     var isInLandscape: Bool {
