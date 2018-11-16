@@ -173,9 +173,7 @@ final class MessagesViewController: RocketChatViewController {
 
             if shouldResetScrollToBottom {
                 if self.scrollToBottomButtonIsVisible {
-                    self.scrollToBottomButtonIsVisible = false
-                    self.isScrollingToBottom = false
-                    self.scrollToBottomButtonIsVisible = true
+                    self.showScrollToBottom(forceUpdate: true)
                 }
             }
 
@@ -215,6 +213,88 @@ final class MessagesViewController: RocketChatViewController {
         ])
     }
 
+    func showScrollToBottom(forceUpdate: Bool = false) {
+        let isScrollToBottomVisible = forceUpdate ? false : scrollToBottomButtonIsVisible
+        guard !isScrollToBottomVisible, !isScrollingToBottom else {
+            return
+        }
+
+        isScrollingToBottom = true
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0.25)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+        CATransaction.setCompletionBlock {
+            self.buttonScrollToBottomConstraint.constant = self.buttonScrollToBottomY
+            self.scrollToBottomButtonIsVisible = true
+            self.isScrollingToBottom = false
+        }
+
+        var position = buttonScrollToBottom.layer.position
+        position.y = collectionView.bounds.height + buttonScrollToBottomLayerY
+
+        let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
+        positionAnimation.fromValue = buttonScrollToBottom.layer.position
+        positionAnimation.toValue = position
+
+        buttonScrollToBottom.layer.position = position
+        buttonScrollToBottom.layer.add(positionAnimation, forKey: #keyPath(CALayer.position))
+
+        let alphaAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        alphaAnimation.fromValue = 0
+        alphaAnimation.toValue = 1
+
+        buttonScrollToBottom.layer.opacity = 1
+        buttonScrollToBottom.layer.add(alphaAnimation, forKey: #keyPath(CALayer.opacity))
+
+        CATransaction.commit()
+    }
+
+    func hideScrollToBottom() {
+        guard scrollToBottomButtonIsVisible, !isScrollingToBottom else {
+            return
+        }
+
+        isScrollingToBottom = true
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0.25)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+        CATransaction.setCompletionBlock {
+            self.buttonScrollToBottomConstraint.constant = 200
+            self.scrollToBottomButtonIsVisible = false
+            self.isScrollingToBottom = false
+        }
+
+        var position = buttonScrollToBottom.layer.position
+        position.y = collectionView.bounds.height + 200
+
+        let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
+        positionAnimation.fromValue = buttonScrollToBottom.layer.position
+        positionAnimation.toValue = position
+
+        buttonScrollToBottom.layer.position = position
+        buttonScrollToBottom.layer.add(positionAnimation, forKey: #keyPath(CALayer.position))
+
+        let alphaAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        alphaAnimation.fromValue = 1
+        alphaAnimation.toValue = 0
+
+        buttonScrollToBottom.layer.opacity = 0
+        buttonScrollToBottom.layer.add(alphaAnimation, forKey: #keyPath(CALayer.opacity))
+
+        CATransaction.commit()
+    }
+
+    override func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height - composerView.intrinsicContentSize.height
+        }
+    }
+
+    override func keyboardWillHide(_ notification: Notification) {
+        keyboardHeight = 0
+    }
+
     // MARK: Pagination
 
     func loadNextPageIfNeeded() {
@@ -246,11 +326,16 @@ final class MessagesViewController: RocketChatViewController {
     @objc internal func scrollToBottom(_ animated: Bool = false) {
         let offset = CGPoint(x: 0, y: -composerView.frame.height)
         collectionView.setContentOffset(offset, animated: animated)
-        scrollToBottomButtonIsVisible = false
+        hideScrollToBottom()
     }
 
     internal func resetScrollToBottomButtonPosition() {
-        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+        guard !isScrollingToBottom else { return }
+        if !chatLogIsAtBottom() {
+            showScrollToBottom()
+        } else {
+            hideScrollToBottom()
+        }
     }
 
     private func chatLogIsAtBottom() -> Bool {
