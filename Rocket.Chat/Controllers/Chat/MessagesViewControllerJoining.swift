@@ -25,8 +25,6 @@ extension MessagesViewController {
                 previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
 
-            collectionView?.bottomAnchor.constraint(equalTo: previewView.topAnchor).isActive = true
-
             chatPreviewModeView = previewView
             updateChatPreviewModeViewConstraints()
 
