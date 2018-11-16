@@ -421,7 +421,10 @@ extension MessagesViewController: ChatDataUpdateDelegate {
 extension MessagesViewController {
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        resetScrollToBottomButtonPosition()
+        if scrollView.isDragging {
+            resetScrollToBottomButtonPosition()
+        }
+
         loadNextPageIfNeeded()
     }
 
