@@ -60,6 +60,5 @@ extension MessagesViewController: ChatPreviewModeViewProtocol {
         })
 
         self.subscription = subscription
-        updateJoinedView()
     }
 }
