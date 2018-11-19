@@ -77,7 +77,7 @@ final class MessageTextCacheManager {
         var resultText: NSAttributedString?
         let key = cachedKey(for: identifier)
 
-        if let cachedVersion = cache.object(forKey: key), cachedVersion.theme == theme {
+        if let cachedVersion = cache.object(forKey: key), theme == nil || cachedVersion.theme == theme {
             resultText = cachedVersion.string
         } else if let result = update(for: message, with: theme) {
             resultText = result
