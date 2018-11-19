@@ -140,6 +140,7 @@ final class MessageSection: ChatSection {
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(QuoteChatItem(
                         identifier: attachment.identifier,
+                        purpose: "Replied",
                         title: attachment.title,
                         text: text,
                         collapsed: collapsed,
@@ -152,6 +153,7 @@ final class MessageSection: ChatSection {
                 } else {
                     cells.append(QuoteChatItem(
                         identifier: attachment.identifier,
+                        purpose: "Replied",
                         title: attachment.title,
                         text: text,
                         collapsed: collapsed,
