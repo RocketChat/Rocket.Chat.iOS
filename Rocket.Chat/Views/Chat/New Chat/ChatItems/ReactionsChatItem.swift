@@ -15,7 +15,7 @@ struct ReactionsChatItem: ChatItem, Differentiable {
         return ReactionsCell.identifier
     }
 
-    var messageIdentifier: String
+    var message: UnmanagedMessage
     var reactions: [UnmanagedMessageReaction] = []
     var reactionsModels: ReactionListViewModel {
         guard let username = AuthManager.currentUser()?.username else { return
@@ -40,7 +40,7 @@ struct ReactionsChatItem: ChatItem, Differentiable {
     }
 
     var differenceIdentifier: String {
-        return "reactions-\(messageIdentifier)"
+        return "reactions-\(message.identifier)"
     }
 
     func isContentEqual(to source: ReactionsChatItem) -> Bool {

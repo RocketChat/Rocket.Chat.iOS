@@ -12,6 +12,7 @@ import RocketChatViewController
 class BaseMessageCell: UICollectionViewCell, ChatCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
+    var messageSection: MessageSection?
 
     lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()

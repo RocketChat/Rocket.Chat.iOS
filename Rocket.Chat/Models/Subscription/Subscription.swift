@@ -139,7 +139,7 @@ final class RoomRoles: Object {
 // MARK: Avatar
 
 extension Subscription {
-    func avatarURL(auth: Auth? = nil) -> URL? {
+    static func avatarURL(for name: String, auth: Auth? = nil) -> URL? {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
