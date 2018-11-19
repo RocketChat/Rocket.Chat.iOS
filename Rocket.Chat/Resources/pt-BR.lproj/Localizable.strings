@@ -493,3 +493,7 @@
 "shortcuts.server_selection_numbers" = "Selecionar servidor 1...9";
 "shortcuts.add_server" = "Adicionar servidor";
 "shortcuts.change_theme" = "Mudar tema";
+
+// Chat Components
+"chat.components.quote.replied" = "Respondido";
+"chat.components.quote.pinned" = "Pinado";

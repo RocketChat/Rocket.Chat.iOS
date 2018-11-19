@@ -128,7 +128,7 @@ extension Message {
             )
 
         case .messagePinned:
-            return localized("chat.message.type.message_pinned")
+            return ""
 
         case .messageSnippeted:
             return String(

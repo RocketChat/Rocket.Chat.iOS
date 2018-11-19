@@ -147,12 +147,12 @@ final class MessageSection: ChatSection {
                 let purpose: String
                 switch object.message.type {
                 case .messagePinned:
-                    purpose = "Pinned"
+                    purpose = localized("chat.components.quote.pinned")
                 default:
-                    purpose = "Replied"
+                    purpose = localized("chat.components.quote.replied")
                 }
 
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                if (sanitizedMessage.isEmpty && shouldAppendMessageHeader) {
                     cells.append(QuoteChatItem(
                         identifier: attachment.identifier,
                         purpose: purpose,
