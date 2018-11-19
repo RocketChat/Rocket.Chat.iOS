@@ -21,10 +21,11 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
     }()
 
     @IBOutlet weak var containerView: UIView!
+
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
-
+    @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
@@ -60,6 +61,8 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
             return
         }
 
+        purpose.text = viewModel.purpose
+
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
         username.text = viewModel.title
@@ -93,6 +96,7 @@ extension QuoteCell {
 
         let theme = self.theme ?? .light
         containerView.backgroundColor = theme.chatComponentBackground
+        purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
     }
