@@ -33,7 +33,9 @@ struct UnmanagedMessageReaction: Equatable {
 
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
+
     var identifier: String
+    var rid: String
     var text: String
     var type: MessageType
     var attachments: [UnmanagedAttachment]
@@ -90,6 +92,7 @@ extension UnmanagedMessage {
         }
 
         identifier = messageIdentifier
+        rid = message.rid
         text = message.text
         type = message.type
         userIdentifier = message.userIdentifier

@@ -244,6 +244,12 @@ final class MessageSection: ChatSection {
             cells.append(LoaderChatItem().wrapped)
         }
 
+        if object.containsHeader {
+            cells.append(HeaderChatItem(
+                rid: object.message.rid
+            ).wrapped)
+        }
+
         return cells
     }
 

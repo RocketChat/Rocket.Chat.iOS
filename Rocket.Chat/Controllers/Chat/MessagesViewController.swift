@@ -119,6 +119,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
         collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
+        collectionView.register(HeaderCell.nib, forCellWithReuseIdentifier: HeaderCell.identifier)
 
         setupScrollToBottom()
 
