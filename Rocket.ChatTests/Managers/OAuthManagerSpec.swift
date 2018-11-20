@@ -40,10 +40,21 @@ class OAuthManagerSpec: XCTestCase {
         let loginService = LoginService()
         loginService.service = "github"
 
+        // without path
+
         let serverURL: URL! = URL(string: "https://open.rocket.chat")
         let expectedURL: URL! = URL(string: "https://open.rocket.chat/_oauth/github")
 
         XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURL), expectedURL, "callbackURL returns expected url")
+
+        // with path
+
+        let serverURLWithPath: URL! = URL(string: "https://open.rocket.chat/path")
+        let expectedURLWithPath: URL! = URL(string: "https://open.rocket.chat/path/_oauth/github")
+
+        XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURLWithPath), expectedURLWithPath, "callbackURL returns expected url with path")
+
+        // malformed
 
         let malformedServerURL: URL! = URL(string: "open.rocket.chat")
 
