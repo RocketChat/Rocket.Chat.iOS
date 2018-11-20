@@ -63,6 +63,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
 
         textHeightConstraint.isActive = true
 
+        purposeHeightInitialConstant = purposeHeightConstraint.constant
         avatarLeadingInitialConstant = avatarLeadingConstraint.constant
         avatarWidthInitialConstant = avatarWidthConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
@@ -86,7 +87,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
         configure(with: avatarView, date: date, and: messageUsername)
 
         purpose.text = viewModel.purpose
-        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightConstraint.constant
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
@@ -112,8 +113,6 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
             textHeightConstraint.constant = textHeight
             arrow.alpha = 0
         }
-
-        layoutIfNeeded()
     }
 }
 

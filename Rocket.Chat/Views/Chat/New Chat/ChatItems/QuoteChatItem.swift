@@ -54,6 +54,7 @@ final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable 
     func isContentEqual(to source: QuoteChatItem) -> Bool {
         return title == source.title &&
             text == source.text &&
-            collapsed == source.collapsed
+            collapsed == source.collapsed &&
+            purpose.isEmpty == source.purpose.isEmpty
     }
 }

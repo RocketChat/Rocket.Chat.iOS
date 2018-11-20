@@ -45,7 +45,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLV-ym-FZM">
                         <rect key="frame" x="70" y="38.5" width="268" height="90.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHB-nk-DRf" userLabel="Purpose">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHB-nk-DRf" userLabel="Purpose">
                                 <rect key="frame" x="15" y="16" width="33" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Bzq-Pz-Bcu"/>
@@ -54,7 +54,7 @@
                                 <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35A-7N-lVK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35A-7N-lVK">
                                 <rect key="frame" x="15" y="32" width="220" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Q8D-cT-E1v"/>
@@ -144,7 +144,7 @@
                 <outlet property="textTrailingConstraint" destination="WtL-sW-5eJ" id="JGd-tg-5hS"/>
                 <outlet property="username" destination="35A-7N-lVK" id="qXC-Wb-gJE"/>
             </connections>
-            <point key="canvasLocation" x="509.60000000000002" y="-285.60719640179911"/>
+            <point key="canvasLocation" x="346" y="-294"/>
         </collectionViewCell>
     </objects>
     <resources>
