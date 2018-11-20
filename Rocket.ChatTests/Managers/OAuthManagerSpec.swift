@@ -40,25 +40,29 @@ class OAuthManagerSpec: XCTestCase {
         let loginService = LoginService()
         loginService.service = "github"
 
-        // without path
-
         let serverURL: URL! = URL(string: "https://open.rocket.chat")
         let expectedURL: URL! = URL(string: "https://open.rocket.chat/_oauth/github")
 
         XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURL), expectedURL, "callbackURL returns expected url")
+    }
 
-        // with path
+    func testCallbackUrlWithPath() {
+        let loginService = LoginService()
+        loginService.service = "github"
 
-        let serverURLWithPath: URL! = URL(string: "https://open.rocket.chat/path")
-        let expectedURLWithPath: URL! = URL(string: "https://open.rocket.chat/path/_oauth/github")
+        let serverURL: URL! = URL(string: "https://open.rocket.chat/path")
+        let expectedURL: URL! = URL(string: "https://open.rocket.chat/path/_oauth/github")
 
-        XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURLWithPath), expectedURLWithPath, "callbackURL returns expected url with path")
+        XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURL), expectedURL, "callbackURL returns expected url with path")
+    }
 
-        // malformed
+    func testCallbackUrlMalformed() {
+        let loginService = LoginService()
+        loginService.service = "github"
 
-        let malformedServerURL: URL! = URL(string: "open.rocket.chat")
+        let serverURL: URL! = URL(string: "open.rocket.chat")
 
-        XCTAssertNil(OAuthManager.callbackUrl(for: loginService, server: malformedServerURL), "callbackURL returns nil with malformed server URL")
+        XCTAssertNil(OAuthManager.callbackUrl(for: loginService, server: serverURL), "callbackURL returns nil with malformed server URL")
     }
 
     func testState() {
