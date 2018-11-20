@@ -1,5 +1,5 @@
 //
-//  MessageViewControllerEmptyState.swift
+//  MessagesViewControllerEmptyState.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 11/12/18.
