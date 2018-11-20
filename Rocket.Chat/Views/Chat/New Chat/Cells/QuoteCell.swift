@@ -48,6 +48,7 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
 
         textHeightConstraint.isActive = true
 
+        purposeHeightInitialConstant = purposeHeightConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
         textLeadingInitialConstant = textLeadingConstraint.constant
         textTrailingInitialConstant = textTrailingConstraint.constant
@@ -64,7 +65,7 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         }
 
         purpose.text = viewModel.purpose
-        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightConstraint.constant
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
