@@ -49,7 +49,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
-        guard let avatarView = AvatarView.instantiateFromNib() else { return AvatarView() }
+        let avatarView = AvatarView()
         avatarView.isUserInteractionEnabled = false
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.layer.cornerRadius = 15
@@ -59,7 +59,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }()
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -144,7 +144,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
 
         if let imageView = avatarButton.imageView {
-            avatarButton.bringSubview(toFront: imageView)
+            avatarButton.bringSubviewToFront(imageView)
         }
     }
 
@@ -188,7 +188,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     }
 
     func bindUserData() {
-        avatarView.user = user
+        avatarView.username = user?.username
         name.text = user?.name
         username.text = user?.username
         email.text = user?.emails.first?.email
@@ -342,7 +342,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
             }
             textField.isSecureTextEntry = true
 
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+            _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
             }
         })
@@ -364,18 +364,18 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         let client = API.current()?.client(UploadClient.self)
         client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] _ in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
-            if !strongSelf.isUpdatingUser {
-                strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+            if !self.isUpdatingUser {
+                self.alertSuccess(title: localized("alert.update_profile_success.title"))
             }
 
-            strongSelf.isUploadingAvatar = false
-            strongSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-            strongSelf.avatarView.refreshCurrentAvatar(withCachedData: avatarFile.data, completion: {
-                strongSelf.stopLoading()
+            self.isUploadingAvatar = false
+            self.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
+            self.avatarView.refreshCurrentAvatar(withCachedData: avatarFile.data, completion: {
+                self.stopLoading()
             })
-            strongSelf.avatarFile = nil
+            self.avatarFile = nil
         })
     }
 
@@ -396,7 +396,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
         api?.fetch(updateUserRequest) { [weak self] response in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch response {
             case .resource(let resource):
@@ -406,11 +406,11 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
                     return
                 }
 
-                strongSelf.user = resource.user
+                self.user = resource.user
                 stopLoading(true)
 
-                if !strongSelf.isUploadingAvatar {
-                    strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+                if !self.isUploadingAvatar {
+                    self.alertSuccess(title: localized("alert.update_profile_success.title"))
                 }
             case .error:
                 stopLoading(false)
@@ -523,11 +523,11 @@ extension EditProfileTableViewController: UINavigationControllerDelegate {}
 
 extension EditProfileTableViewController: UIImagePickerControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let filename = String.random()
         var file: FileUpload?
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",

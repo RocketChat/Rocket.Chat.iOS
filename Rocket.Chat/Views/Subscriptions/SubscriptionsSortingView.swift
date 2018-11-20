@@ -61,7 +61,7 @@ final class SubscriptionsSortingView: UIView {
     }
 
     private func animates(_ animations: @escaping VoidCompletion, completion: VoidCompletion? = nil) {
-        UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: {
+        UIView.animate(withDuration: 0.15, delay: 0, options: UIView.AnimationOptions(rawValue: 7 << 16), animations: {
             animations()
         }, completion: { finished in
             if finished {
@@ -200,6 +200,7 @@ extension SubscriptionsSortingView {
         return Theme(
             backgroundColor: theme.appearence == .light ? theme.backgroundColor : theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
+            chatComponentBackground: theme.chatComponentBackground,
             auxiliaryBackground: theme.auxiliaryBackground,
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
@@ -208,7 +209,7 @@ extension SubscriptionsSortingView {
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
-            hyperlink: theme.hyperlink,
+            actionTintColor: theme.actionTintColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence

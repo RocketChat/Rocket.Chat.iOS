@@ -73,6 +73,7 @@ class MessagesListViewData {
 
     var query: String?
     private var isLoadingMoreMessages = false
+    private var hasMoreMessages = true
 
     func searchMessages(withText text: String, completion: (() -> Void)? = nil) {
         guard let subscription = subscription else {
@@ -96,7 +97,7 @@ class MessagesListViewData {
     }
 
     func loadMoreMessages(completion: (() -> Void)? = nil) {
-        guard !isLoadingMoreMessages else { return }
+        guard !isLoadingMoreMessages && hasMoreMessages else { return }
 
         if isListingMentions {
             loadMentions(completion: completion)
@@ -114,6 +115,7 @@ class MessagesListViewData {
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
             case .resource(let resource):
+                self?.hasMoreMessages = resource.count ?? 0 > 0
                 self?.handleMessages(
                     fetchingWith: resource.fetchMessagesFromRealm,
                     showing: resource.count,
@@ -135,6 +137,7 @@ class MessagesListViewData {
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
             case .resource(let resource):
+                self?.hasMoreMessages = resource.count ?? 0 > 0
                 self?.handleMessages(
                     fetchingWith: resource.fetchMessagesFromRealm,
                     showing: resource.count,

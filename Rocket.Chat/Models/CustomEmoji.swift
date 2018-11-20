@@ -74,7 +74,7 @@ extension CustomEmoji: ModelMappeable {
 
         if let aliases = values["aliases"].array?.compactMap({ $0.string }) {
             self.aliases.removeAll()
-            self.aliases.append(contentsOf: aliases)
+            self.aliases.append(objectsIn: aliases)
         }
 
         name = values["name"].stringValue

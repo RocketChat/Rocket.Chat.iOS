@@ -18,7 +18,7 @@ class ChatMessageAttachmentView: UIView {
 
         let attributedString = NSMutableAttributedString(
             string: text,
-            attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)]
+            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0)]
         )
 
         let labelWidth = availableWidth - 55

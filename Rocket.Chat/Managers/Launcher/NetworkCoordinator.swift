@@ -9,7 +9,7 @@
 import Foundation
 
 struct NetworkCoordinator: LauncherProtocol {
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         NetworkManager.shared.start()
     }
 }

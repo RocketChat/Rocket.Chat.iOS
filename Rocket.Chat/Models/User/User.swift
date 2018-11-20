@@ -47,3 +47,66 @@ extension User {
         return lhs.identifier == rhs.identifier
     }
 }
+
+extension User: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedUser
+    var unmanaged: UnmanagedUser? {
+        return UnmanagedUser(self)
+    }
+}
+
+// MARK: Display Name
+
+extension User {
+
+    func displayName() -> String {
+        guard let validatedUser = validated() else {
+            return ""
+        }
+
+        let username = validatedUser.username ?? ""
+
+        guard let settings = AuthSettingsManager.settings else {
+            return username
+        }
+
+        if let name = validatedUser.name {
+            if settings.useUserRealName && !name.isEmpty {
+                return name
+            }
+        }
+
+        return username
+    }
+
+}
+
+// MARK: Avatar URL
+
+extension User {
+
+    func avatarURL(_ auth: Auth? = nil) -> URL? {
+        guard
+            !isInvalidated,
+            let username = username,
+            let auth = auth ?? AuthManager.isAuthenticated()
+        else {
+            return nil
+        }
+
+        return User.avatarURL(forUsername: username, auth: auth)
+    }
+
+    static func avatarURL(forUsername username: String, auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
+    }
+
+}

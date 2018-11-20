@@ -31,7 +31,7 @@ final class EmojiAutocompleteCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: attributedString.string)
 
             if let range = attributedString.string.range(of: string) {
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: NSRange(range, in: attributedString.string))
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(range, in: attributedString.string))
 
                 shortnameLabel.attributedText = attributedString
             }

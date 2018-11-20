@@ -27,6 +27,8 @@ extension Message: ModelMappeable {
         self.pinned = values["pinned"].bool ?? false
         self.unread = values["unread"].bool ?? false
         self.groupable = values["groupable"].bool ?? true
+        self.snippetName = values["snippetName"].string
+        self.snippetId = values["snippetId"].string
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
@@ -45,18 +47,19 @@ extension Message: ModelMappeable {
         }
 
         if let userIdentifier = values["u"]["_id"].string {
+            self.userIdentifier = userIdentifier
+            self.userBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
+
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
-                    self.user = user
+                    user.map(values["u"], realm: realm)
+                    realm.add(user, update: true)
                 } else {
                     let user = User()
                     user.map(values["u"], realm: realm)
-                    self.user = user
+                    realm.add(user, update: true)
                 }
             }
-
-            let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
-            self.userBlocked = isBlocked
         }
 
         // Starred

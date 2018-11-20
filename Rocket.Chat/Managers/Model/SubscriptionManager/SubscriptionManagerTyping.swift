@@ -9,14 +9,14 @@
 import Foundation
 
 extension SubscriptionManager {
-    static func subscribeTypingEvent(_ subscription: Subscription, completion: @escaping (String?, Bool) -> Void) {
+    static func subscribeTypingEvent(_ subscription: UnmanagedSubscription, completion: @escaping (String?, Bool) -> Void) {
         let eventName = "\(subscription.rid)/typing"
         let request = [
             "msg": "sub",
             "name": "stream-notify-room",
             "id": eventName,
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -30,7 +30,12 @@ extension SubscriptionManager {
     }
 
     static func sendTypingStatus(_ subscription: Subscription, isTyping: Bool, completion: MessageCompletion? = nil) {
-        guard let username = AuthManager.currentUser()?.username else { return }
+        guard
+            let username = AuthManager.currentUser()?.username,
+            let subscription = subscription.validated()
+        else {
+            return
+        }
 
         let request = [
             "msg": "method",

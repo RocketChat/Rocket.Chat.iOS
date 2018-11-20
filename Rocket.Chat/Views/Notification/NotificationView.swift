@@ -23,20 +23,17 @@ class NotificationView: UIView {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 2
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 2
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     func displayNotification(title: String, body: String, username: String) {
         titleLabel.text = title

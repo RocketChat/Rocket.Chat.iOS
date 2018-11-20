@@ -16,7 +16,7 @@ enum SEError: Error {
 class SEViewController: UIViewController, SEStoreSubscriber {
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         activityIndicator.layer.cornerRadius = 10
         activityIndicator.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -67,7 +67,7 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),
-            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
 
@@ -77,7 +77,7 @@ class SEViewController: UIViewController, SEStoreSubscriber {
     func stopAvoidingKeyboard() {
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
     }
@@ -85,7 +85,7 @@ class SEViewController: UIViewController, SEStoreSubscriber {
     @objc func onKeyboardFrameWillChange(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else {
             return
         }
@@ -94,10 +94,10 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)
 
-        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        let animationDuration: TimeInterval = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
             let keyboardDisappeared = keyboardFrameInView == .zero

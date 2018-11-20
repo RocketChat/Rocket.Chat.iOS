@@ -28,7 +28,7 @@ extension Auth {
             return .notActionable
         }
 
-        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage, realm: self.realm) {
+        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage, subscription: message.subscription, realm: self.realm) {
             return .notAllowed
         }
 

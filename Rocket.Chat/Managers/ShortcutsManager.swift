@@ -77,19 +77,19 @@ struct ShortcutsManager {
             let type: String
             let title: String
             let subtitle: String
-            let userInfo: [String: Any]
+            let userInfo: [String: NSSecureCoding]
 
             switch shortcut.type {
             case .server(let url, let index):
                 type = URL(string: url)?.host ?? url
                 title = shortcut.name
                 subtitle = url
-                userInfo = [serverIndexKey: index]
+                userInfo = [serverIndexKey: index as NSSecureCoding]
             case .room(let roomId, let server, let serverURL):
                 type = "\(serverURL)-\(shortcut.name)"
                 title = shortcut.name
                 subtitle = server
-                userInfo = [roomIdKey: roomId, serverUrlKey: serverURL]
+                userInfo = [roomIdKey: roomId as NSSecureCoding, serverUrlKey: serverURL as NSSecureCoding]
             }
 
             return UIMutableApplicationShortcutItem(type: type, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo: userInfo)

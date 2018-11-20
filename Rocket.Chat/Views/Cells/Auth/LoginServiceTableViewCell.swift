@@ -46,13 +46,13 @@ class LoginServiceTableViewCell: UITableViewCell {
             let prefix = NSAttributedString(
                 string: localized("auth.login_service_prefix"),
                 attributes: [
-                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .regular)
                 ]
             )
             let service = NSAttributedString(
                 string: loginService.service?.capitalized ?? "",
                 attributes: [
-                    NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)
                 ]
             )
 

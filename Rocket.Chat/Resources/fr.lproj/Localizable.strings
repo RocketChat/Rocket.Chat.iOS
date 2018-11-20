@@ -97,13 +97,14 @@
 // Socket Connection
 "connection.title" = "Connectez-vous à votre serveur";
 "connection.button_connect" = "Connexion";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Vous êtes déconnecté, veuillez réessayer";
 "connection.connecting.banner.message" = "Connexion en cours...";
 "connection.waiting_for_network.banner.message" = "En attente du réseau...";
 
 // Onboarding
 "onboarding.label_welcome" = "Bienvenue sur Rocket Chat";
-"onboarding.label_subtitle" = "Open Source Communication";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Se connecter à un serveur";
 "onboarding.button_create_server" = "Créer un nouvel espace de travail";
 "onboarding.button_join_community_prefix" = "Rejoignez la communauté";
@@ -154,6 +155,11 @@
 "subscriptions.list.no_message" = "Pas de message";
 "subscriptions.list.sent_an_attachment" = "a envoyé un fichier";
 "subscriptions.list.date.yesterday" = "Hier";
+"subscriptions.list.actions.read" = "Read"; // TODO
+"subscriptions.list.actions.unread" = "Unread"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
+"subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
 "servers.add_new_team" = "Ajouter une équipe";
@@ -202,6 +208,11 @@
 "chat.muted" = "Vous avez été mis en sourdine";
 "chat.loading_messages" = "Chargement des messages...";
 "chat.unread_separator" = "Nouveaux messages";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Chat Message Actions
 "chat.message.actions.info" = "Information sur le message";
@@ -226,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Oui, abandonner";
 "chat.message.actions.resend" = "Renvoyer";
 "chat.message.actions.resend_all" = "Renvoyer tous les messages";
-"Send" = "Envoyer"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message signalé";
@@ -258,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Couleur sélectionnée";
 "chat.drawing.settings.color.others" = "Choisir une couleur ci-dessous :";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODO
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nom de la salle changée pour : %@ by %@";
 "chat.message.type.user_added_by" = "Utilisateur %@ ajouté par %@";
@@ -272,6 +288,12 @@
 "chat.message.type.subscription_role_removed" = "%@ n'est plus %@ par %@";
 "chat.message.type.room_archived" = "Cette salle a été archivée par %@";
 "chat.message.type.room_unarchived" = "Cette salle a été désarchivée par %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -453,3 +475,21 @@
 "subscriptions.grouping.type" = "Grouper par type";
 "subscriptions.grouping.favorites" = "Grouper les favoris";
 "subscriptions.grouping.unread_top" = "Non-lus en premier";
+
+// Shortcuts
+"shortcuts.type_message" = "Type message"; //TODO
+"shortcuts.preferences" = "Preferences"; //TODO
+"shortcuts.room_search" = "Rooms search"; //TODO
+"shortcuts.room_selection" = "Room selection 1...9"; //TODO
+"shortcuts.next_room" = "Next room"; //TODO
+"shortcuts.previous_room" = "Previous room"; //TODO
+"shortcuts.new_room" = "New room"; //TODO
+"shortcuts.room_actions" = "Room actions"; //TODO
+"shortcuts.upload_room" = "Upload to room"; //TODO
+"shortcuts.search_messages" = "Search messages"; //TODO
+"shortcuts.scroll_messages" = "Scroll messages"; //TODO
+"shortcuts.reply_latest" = "Reply to latest"; //TODO
+"shortcuts.server_selection" = "Server selection"; //TODO
+"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
+"shortcuts.add_server" = "Add server"; //TODO
+"shortcuts.change_theme" = "Change theme"; //TODO

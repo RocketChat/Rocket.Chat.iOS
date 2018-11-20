@@ -15,7 +15,7 @@ struct SubscriptionsClient: APIClient {
         self.api = api
     }
 
-    func markAsRead(subscription: Subscription) {
+    func markAsRead(subscription: UnmanagedSubscription) {
         let req = SubscriptionReadRequest(rid: subscription.rid)
         let subscriptionIdentifier = subscription.rid
 
@@ -146,7 +146,7 @@ struct SubscriptionsClient: APIClient {
             switch result {
             case .resource(let resource):
                 if let subscription = Subscription.find(rid: rid, realm: currentRealm) {
-                    try? currentRealm?.write {
+                    Realm.executeOnMainThread(realm: currentRealm) { _ in
                         let subscriptionCopy = Subscription(value: subscription)
 
                         subscriptionCopy.usersRoles.removeAll()
@@ -299,12 +299,56 @@ extension SubscriptionsClient {
         let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
         api.fetch(request, options: options) { response in
             if case let .resource(resource) = response {
-                try? realm?.write {
-                    realm?.add(resource.members?.compactMap { $0 } ?? [], update: true)
-                }
+                guard let realm = realm else { return }
+
+                realm.execute({ _ in
+                    resource.members?.forEach({ (member) in
+                        let user = User.getOrCreate(realm: realm, values: member, updates: nil)
+                        realm.add(user, update: true)
+                    })
+                })
             }
 
             completion(response)
+        }
+    }
+}
+
+// MARK: Subsctiption actions
+
+extension SubscriptionsClient {
+    func favoriteSubscription(subscription: Subscription) {
+        SubscriptionManager.toggleFavorite(subscription) { (response) in
+            DispatchQueue.main.async {
+                if response.isError() {
+                    subscription.updateFavorite(!subscription.favorite)
+                }
+            }
+        }
+
+        subscription.updateFavorite(!subscription.favorite)
+    }
+
+    func hideSubscription(subscription: Subscription) {
+        let hideRequest = SubscriptionHideRequest(rid: subscription.rid, subscriptionType: subscription.type)
+        api.fetch(hideRequest, completion: nil)
+
+        Realm.executeOnMainThread { realm in
+            realm.delete(subscription)
+        }
+    }
+
+    func markRead(subscription: Subscription) {
+        api.fetch(SubscriptionReadRequest(rid: subscription.rid), completion: nil)
+        Realm.executeOnMainThread { _ in
+            subscription.alert = false
+        }
+    }
+
+    func markUnread(subscription: Subscription) {
+        api.fetch(SubscriptionUnreadRequest(rid: subscription.rid), completion: nil)
+        Realm.executeOnMainThread { _ in
+            subscription.alert = true
         }
     }
 }

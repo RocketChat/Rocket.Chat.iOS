@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -11,6 +11,10 @@ end
 
 def ui_pods
   pod 'MBProgressHUD', '~> 1.1.0'
+end
+
+def diff_pods
+  pod 'DifferenceKit/Core'
 end
 
 def shared_pods
@@ -25,9 +29,10 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
+  pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'SwipeCellKit'
   ui_pods
 
   # Text Processing
@@ -46,6 +51,9 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
+  # DiffKit
+  diff_pods
+
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
@@ -55,31 +63,37 @@ target 'Rocket.Chat.ShareExtension' do
   pod 'Nuke-FLAnimatedImage-Plugin'
   database_pods
   ui_pods
+  diff_pods
 end
 
 target 'Rocket.Chat' do
-  # Shared pods
   shared_pods
 end
 
 target 'Rocket.ChatTests' do
-  # Shared pods
   shared_pods
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'Nuke', 'Nuke-FLAnimatedImage-Plugin']
+  swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
+  swift42Targets = ['SwipeCellKit']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.1'
+      config.build_settings['SWIFT_VERSION'] = '4.1'
       if config.name == 'Debug'
-        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
+      else
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
       end
     end
-    if swift4Targets.include? target.name
+    if swift3Targets.include? target.name
       target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.0'
+        config.build_settings['SWIFT_VERSION'] = '3.1'
+      end
+    end
+    if swift42Targets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.2'
       end
     end
   end

@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SwipeCellKit
 
 // swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController {
@@ -56,7 +57,7 @@ final class SubscriptionsViewController: BaseViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
 
-        viewModel.didUpdateIndexPaths = { [weak self] changes in
+        viewModel.didUpdateIndexPaths = { [weak self] changes, completion in
             guard let tableView = self?.tableView else {
                 return
             }
@@ -64,33 +65,22 @@ final class SubscriptionsViewController: BaseViewController {
             // Update back button title with the number of unreads
             self?.updateBackButton()
 
-            // If there's no changes, let's not proceed.
-            if (changes.insertions.count + changes.deletions.count + changes.modifications.count) == 0 {
-                return
-            }
-
-            // Update TableView data if there's any change in the data
-            if self?.viewModel.numberOfSections ?? 2 > 1 {
-                tableView.reloadData()
-            } else {
-                if #available(iOS 11.0, *) {
-                    tableView.performBatchUpdates({
-                        tableView.deleteRows(at: changes.deletions, with: .automatic)
-                        tableView.insertRows(at: changes.insertions, with: .automatic)
-                        tableView.reloadRows(at: changes.modifications, with: .none)
-                    }, completion: nil)
-                } else {
-                    tableView.beginUpdates()
-                    tableView.deleteRows(at: changes.deletions, with: .automatic)
-                    tableView.insertRows(at: changes.insertions, with: .automatic)
-                    tableView.reloadRows(at: changes.modifications, with: .none)
-                    tableView.endUpdates()
+            tableView.reload(using: changes, with: .fade, updateRows: { indexPaths in
+                for indexPath in indexPaths {
+                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false,
+                        let cell = tableView.cellForRow(at: indexPath) as? BaseSubscriptionCell {
+                        self?.loadContents(for: cell, at: indexPath)
+                    }
                 }
-            }
+            }, setData: { completion($0) })
         }
 
-        viewModel.didRebuildSections = { [weak self] in
-            self?.tableView?.reloadData()
+        viewModel.updateVisibleCells = { [weak self] in
+            for indexPath in self?.tableView.indexPathsForVisibleRows ?? [] {
+                if let cell = self?.tableView.cellForRow(at: indexPath) as? BaseSubscriptionCell {
+                    self?.loadContents(for: cell, at: indexPath)
+                }
+            }
         }
     }
 
@@ -116,7 +106,6 @@ final class SubscriptionsViewController: BaseViewController {
         }
 
         viewModel.buildSections()
-        tableView.reloadData()
         titleView?.state = SocketManager.sharedInstance.state
     }
 
@@ -145,14 +134,14 @@ final class SubscriptionsViewController: BaseViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),
-            name: Notification.Name.UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),
-            name: Notification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -160,20 +149,20 @@ final class SubscriptionsViewController: BaseViewController {
     @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else {
             tableView.contentInset.bottom = 0
             return
         }
 
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
-        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        let animationDuration: TimeInterval = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-            self.tableView.contentInset.bottom = notification.name == Notification.Name.UIKeyboardWillHide ? 0 : keyboardFrameInView.height
+            self.tableView.contentInset.bottom = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrameInView.height
         }, completion: nil)
     }
 
@@ -273,7 +262,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         viewModel.buildSections()
-        tableView.reloadData()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -283,7 +271,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         searchBar.text = ""
 
         viewModel.buildSections()
-        tableView.reloadData()
     }
 
     func updateServerInformation() {
@@ -341,16 +328,32 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func toggleServersList() {
+        if serversView != nil {
+            closeServersList()
+        } else {
+            openServersList()
+        }
+    }
+
+    func openServersList() {
+        guard serversView == nil else {
+            return
+        }
+
         sortingView?.close()
 
-        if let serversView = serversView {
-            titleView?.updateTitleImage(reverse: false)
-            serversView.close()
-        } else {
-            titleView?.updateTitleImage(reverse: true)
-            serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-            serversView?.delegate = self
+        titleView?.updateTitleImage(reverse: true)
+        serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
+        serversView?.delegate = self
+    }
+
+    func closeServersList() {
+        guard let serversView = serversView else {
+            return
         }
+
+        titleView?.updateTitleImage(reverse: false)
+        serversView.close()
     }
 
     private var frameForDropDownOverlay: CGRect {
@@ -390,8 +393,8 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
 
         previewingContext.sourceRect = cell.frame
 
-        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
-            controller.subscription = subscription
+        if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {
+            controller.subscription = subscription.managedObject
             return controller
         }
 
@@ -420,16 +423,16 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SubscriptionCellProtocol else { return }
-        guard let subscription = cell.subscription?.validated() else { return }
         guard let selectedSubscription = MainSplitViewController.chatViewController?.subscription?.validated() else { return }
 
-        if subscription.identifier == selectedSubscription.identifier {
+        if cell.subscription?.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
+        (cell as? SwipeTableViewCell)?.delegate = self
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             cell.accessoryType = .none
@@ -445,9 +448,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
-            cell.subscription = subscription
-        }
+        loadContents(for: cell, at: indexPath)
 
         return cell
     }
@@ -457,11 +458,15 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        loadContents(for: cell, at: indexPath)
+
+        return cell
+    }
+
+    func loadContents(for cell: BaseSubscriptionCell, at indexPath: IndexPath) {
         if let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) {
             cell.subscription = subscription
         }
-
-        return cell
     }
 }
 
@@ -480,15 +485,26 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath) else { return }
+        onSelectRowAt(indexPath)
+    }
 
-        searchController?.searchBar.resignFirstResponder()
+    func onSelectRowAt(_ indexPath: IndexPath) {
+        guard let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject else { return }
+
+        guard searchController?.searchBar.isFirstResponder == false else {
+            searchController?.searchBar.resignFirstResponder()
+            searchController?.dismiss(animated: false, completion: {
+                self.openChat(for: subscription)
+            })
+
+            return
+        }
 
         openChat(for: subscription)
     }
 
     func openChat(for subscription: Subscription) {
-        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController else {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController else {
             return
         }
 
@@ -503,6 +519,66 @@ extension SubscriptionsViewController: UITableViewDelegate {
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
         }
+    }
+}
+
+extension SubscriptionsViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+
+        guard
+            let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject,
+            subscription.open
+        else {
+            return nil
+        }
+
+        switch orientation {
+        case .left:
+            if !subscription.alert {
+                let markUnread = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.unread")) { _, _ in
+                    API.current()?.client(SubscriptionsClient.self).markUnread(subscription: subscription)
+                }
+
+                markUnread.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                markUnread.image = #imageLiteral(resourceName: "Swipe unread")
+                return [markUnread]
+
+            } else {
+                let markRead = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.read")) { _, _ in
+                    API.current()?.client(SubscriptionsClient.self).markRead(subscription: subscription)
+                }
+
+                markRead.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                markRead.image = #imageLiteral(resourceName: "Swipe read")
+                return [markRead]
+            }
+
+        case .right:
+            let hide = SwipeAction(style: .destructive, title: localized("subscriptions.list.actions.hide")) { _, _ in
+                API.current()?.client(SubscriptionsClient.self).hideSubscription(subscription: subscription)
+            }
+
+            hide.backgroundColor = #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1)
+            hide.image = #imageLiteral(resourceName: "Swipe hide")
+
+            let favoriteTitle = subscription.favorite ? "subscriptions.list.actions.unfavorite" : "subscriptions.list.actions.favorite"
+            let favorite = SwipeAction(style: .default, title: localized(favoriteTitle)) { _, _ in
+                API.current()?.client(SubscriptionsClient.self).favoriteSubscription(subscription: subscription)
+            }
+
+            favorite.hidesWhenSelected = true
+            favorite.backgroundColor = #colorLiteral(red: 1, green: 0.7333333333, blue: 0, alpha: 1)
+            favorite.image = subscription.favorite ? #imageLiteral(resourceName: "Swipe unfavorite") : #imageLiteral(resourceName: "Swipe favorite")
+
+            return [hide, favorite]
+        }
+    }
+
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.transitionStyle = .border
+        return options
     }
 }
 
@@ -529,7 +605,6 @@ extension SubscriptionsViewController: SubscriptionsSortingViewDelegate {
 
         viewModel.buildSections()
         updateSortingTitleDescription()
-        tableView.reloadData()
     }
 
 }
@@ -563,6 +638,38 @@ extension SubscriptionsViewController {
             titleView?.updateTitleImage(reverse: true)
         } else {
             titleView?.updateTitleImage(reverse: false)
+        }
+    }
+}
+
+// MARK: Room Selection Helpers
+
+extension SubscriptionsViewController {
+    func selectRoomAt(_ index: Int) {
+        guard
+            let indexPath = viewModel.indexPathForAbsoluteIndex(index),
+            indexPath.row >= 0 && indexPath.section >= 0
+        else {
+            return
+        }
+
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        onSelectRowAt(indexPath)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
+    func selectNextRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) + 1)
+        }
+    }
+
+    func selectPreviousRoom() {
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) - 1)
         }
     }
 }

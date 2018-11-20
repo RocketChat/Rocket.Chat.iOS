@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlackTextViewController
 
 protocol KeyboardFrameViewDelegate: class {
     func keyboardDidChangeFrame(frame: CGRect?)
@@ -28,7 +27,7 @@ final class KeyboardFrameView: UIView {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardDidChangeFrameNotificationReceived),
-            name: Notification.Name.UIKeyboardDidChangeFrame,
+            name: UIResponder.keyboardDidChangeFrameNotification,
             object: nil
         )
     }

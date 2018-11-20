@@ -8,10 +8,20 @@
 
 import Foundation
 
+final class MessageAttributedString {
+    let string: NSAttributedString
+    let theme: Theme?
+
+    init(string: NSAttributedString, theme: Theme?) {
+        self.string = string
+        self.theme = theme
+    }
+}
+
 final class MessageTextCacheManager {
 
     static let shared = MessageTextCacheManager()
-    let cache = NSCache<NSString, NSAttributedString>()
+    let cache = NSCache<NSString, MessageAttributedString>()
 
     internal func cachedKey(for identifier: String) -> NSString {
         return NSString(string: "\(identifier)-cachedattrstring")
@@ -48,32 +58,27 @@ final class MessageTextCacheManager {
         let channels = Array(message.channels.compactMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
-        let attributedString = text.transformMarkdown()
+        let attributedString = text.transformMarkdown(with: theme)
         let finalText = NSMutableAttributedString(attributedString: attributedString)
-
-        // Set text color for markdown quotes
-        finalText.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: finalText.length), options: []) { (value, range, _) in
-            if let backgroundColor = value as? UIColor, backgroundColor != .clear {
-                finalText.addAttribute(.foregroundColor, value: UIColor.darkGray, range: range)
-            }
-        }
 
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, currentUsername: username)
         finalText.highlightChannels(channels)
 
-        cache.setObject(finalText, forKey: key)
+        let cachedObject = MessageAttributedString(string: finalText, theme: theme)
+        cache.setObject(cachedObject, forKey: key)
         return finalText
     }
 
+    @discardableResult
     func message(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
 
         var resultText: NSAttributedString?
         let key = cachedKey(for: identifier)
 
-        if let cachedVersion = cache.object(forKey: key) {
-            resultText = cachedVersion
+        if let cachedVersion = cache.object(forKey: key), cachedVersion.theme == theme {
+            resultText = cachedVersion.string
         } else if let result = update(for: message, with: theme) {
             resultText = result
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct TimestampCoordinator: LauncherProtocol {
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+    func prepareToLaunch(with options: [UIApplication.LaunchOptionsKey: Any]?) {
         ServerManager.timestampSync()
     }
 }

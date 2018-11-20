@@ -21,7 +21,7 @@ extension User {
 
         var roles: [String] = Array(self.roles)
         if let subscription = subscription {
-            roles += rolesInSubscription(subscription)
+            roles.append(contentsOf: rolesInSubscription(subscription))
         }
 
         for userRole in roles {

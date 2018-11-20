@@ -10,18 +10,22 @@ import XCTest
 import RealmSwift
 @testable import Rocket_Chat
 
-class PermissionManagerSpec: XCTestCase, RealmTestCase {
+class PermissionManagerSpec: XCTestCase {
     func testRolesForPermission() throws {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let permissionType = PermissionType.createDirectMessages
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
-        permission.roles.append(contentsOf: ["admin", "user"])
+        permission.roles.append(objectsIn: ["admin", "user"])
 
-        let realm = testRealm()
-        try realm.write {
+        realm.execute({ realm in
             realm.add(permission)
-        }
+        })
 
         guard let roles = PermissionManager.roles(for: permissionType, realm: realm) else {
             XCTFail("roles is not nil")
@@ -33,16 +37,20 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
     }
 
     func testUserHasPermission() throws {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let permissionType = PermissionType.createDirectMessages
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
-        permission.roles.append(contentsOf: ["admin", "user"])
+        permission.roles.append(objectsIn: ["admin", "user"])
 
-        let realm = testRealm()
-        try realm.write {
-            realm.add(permission)
-        }
+        realm.execute({ realm in
+            realm.add(permission, update: true)
+        })
 
         let user = User()
         user.roles.append("user")

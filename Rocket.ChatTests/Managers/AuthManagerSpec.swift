@@ -17,7 +17,7 @@ class AuthManagerSpec: XCTestCase {
         super.setUp()
 
         // Clear all the Auth objects in Realm
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
@@ -35,7 +35,7 @@ extension AuthManagerSpec {
     }
 
     func testIsAuthenticatedUserAuthenticated() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.com"
 
@@ -46,7 +46,7 @@ extension AuthManagerSpec {
     }
 
     func testIsAuthenticatedReturnsLastAccessed() {
-        Realm.executeOnMainThread({ realm in
+        Realm.execute({ realm in
             let auth1 = Auth()
             auth1.serverURL = "one"
             auth1.lastAccess = Date()

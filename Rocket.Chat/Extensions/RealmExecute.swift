@@ -11,12 +11,27 @@ import RealmSwift
 extension Realm {
     static let writeQueue = DispatchQueue(label: "chat.rocket.realm.write", qos: .background)
 
+    #if TEST
+    func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
+        if isInWriteTransaction {
+            execution(self)
+        } else {
+            try? write {
+                execution(self)
+            }
+        }
+
+        completion?()
+    }
+    #endif
+
+    #if !TEST
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: {
-            backgroundTaskId = UIBackgroundTaskInvalid
-        })
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background") {
+            backgroundTaskId = UIBackgroundTaskIdentifier.invalid
+        }
 
         if let backgroundTaskId = backgroundTaskId {
             let config = self.configuration
@@ -38,6 +53,7 @@ extension Realm {
             }
         }
     }
+    #endif
 
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         Realm.current?.execute(execution, completion: completion)
@@ -45,8 +61,12 @@ extension Realm {
 
     static func executeOnMainThread(realm: Realm? = nil, _ execution: @escaping (Realm) -> Void) {
         if let realm = realm {
-            try? realm.write {
+            if realm.isInWriteTransaction {
                 execution(realm)
+            } else {
+                try? realm.write {
+                    execution(realm)
+                }
             }
 
             return
@@ -54,10 +74,22 @@ extension Realm {
 
         guard let currentRealm = Realm.current else { return }
 
-        try? currentRealm.write {
+        if currentRealm.isInWriteTransaction {
             execution(currentRealm)
+        } else {
+            try? currentRealm.write {
+                execution(currentRealm)
+            }
         }
     }
+
+    #if TEST
+    static func clearDatabase() {
+        Realm.execute({ realm in
+            realm.deleteAll()
+        })
+    }
+    #endif
 
     // MARK: Mutate
 

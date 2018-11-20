@@ -55,8 +55,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
     override func viewWillAppear(_ animated: Bool) {
         let center = NotificationCenter.default
-        center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         // remove title from back button
 
@@ -76,8 +76,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
         guard
             let userInfo = notification.userInfo,
-            let rect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+            let rect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
         else {
             return
         }
@@ -97,7 +97,7 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
         guard
             let userInfo = notification.userInfo,
-            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+            let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
         else {
             return
         }

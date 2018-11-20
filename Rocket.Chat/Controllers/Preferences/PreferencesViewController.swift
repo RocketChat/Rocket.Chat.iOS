@@ -29,20 +29,17 @@ final class PreferencesViewController: BaseTableViewController {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelProfileName: UILabel!
     @IBOutlet weak var labelProfileStatus: UILabel!
@@ -152,7 +149,7 @@ final class PreferencesViewController: BaseTableViewController {
     }
 
     private func updateUserInformation() {
-        avatarView.user = viewModel.user
+        avatarView.username = viewModel.user?.username
         labelProfileName.text = viewModel.userName
         labelProfileStatus.text = viewModel.userStatus.lowercased()
     }
@@ -206,6 +203,8 @@ final class PreferencesViewController: BaseTableViewController {
             return
         }
 
+        AnalyticsManager.log(event: .openAdmin)
+
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {
             controller.url = adminURL
             controller.navigationBar.topItem?.title = viewModel.administration
@@ -239,7 +238,7 @@ final class PreferencesViewController: BaseTableViewController {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
                 cellLanguageDidPressed()
-            } else if indexPath.row == 5 {
+            } else if indexPath.row == 4 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == kSectionInformation {

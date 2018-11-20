@@ -32,7 +32,13 @@ enum MessageType: String {
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
 
+    case roomChangedPrivacy = "room_changed_privacy"
+    case roomChangedTopic = "room_changed_topic"
+    case roomChangedAnnouncement = "room_changed_announcement"
+    case roomChangedDescription = "room_changed_description"
+
     case messagePinned = "message_pinned"
+    case messageSnippeted = "message_snippeted"
 
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
@@ -48,17 +54,19 @@ enum MessageType: String {
 }
 
 final class Message: BaseModel {
-    @objc dynamic var subscription: Subscription?
     @objc dynamic var internalType: String = ""
     @objc dynamic var rid = ""
     @objc dynamic var createdAt: Date?
     @objc dynamic var updatedAt: Date?
-    @objc dynamic var user: User?
+    @objc dynamic var userIdentifier: String?
     @objc dynamic var text = ""
 
     @objc dynamic var userBlocked: Bool = false
     @objc dynamic var pinned: Bool = false
     @objc dynamic var unread: Bool = false
+
+    @objc dynamic var snippetName: String?
+    @objc dynamic var snippetId: String?
 
     @objc dynamic var alias = ""
     @objc dynamic var avatar: String?
@@ -98,8 +106,26 @@ final class Message: BaseModel {
         return  .text
     }
 
-    // Internal
+    var user: User? {
+        if let userIdentifier = self.userIdentifier {
+            return User.find(withIdentifier: userIdentifier)
+        }
+
+        return nil
+    }
+
+    var subscription: Subscription? {
+        return Subscription.find(rid: rid)
+    }
+
+    // MARK: Internal
+
+    // These are the messages marked for deletion
     @objc dynamic var markedForDeletion: Bool = false
+
+    // Private messages get removed from the database
+    // when a new session starts
+    @objc dynamic var privateMessage: Bool = false
 }
 
 extension Message {
@@ -111,5 +137,13 @@ extension Message {
             lhs.mentions.count == rhs.mentions.count &&
             lhs.channels.count == rhs.channels.count &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
+    }
+}
+
+extension Message: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedMessage
+
+    var unmanaged: UnmanagedMessage? {
+        return UnmanagedMessage(self)
     }
 }

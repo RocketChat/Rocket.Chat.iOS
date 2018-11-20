@@ -29,7 +29,7 @@ extension MessagesListViewController: UISearchBarDelegate {
         })
 
         if let timer = searchTimer {
-            RunLoop.main.add(timer, forMode: .commonModes)
+            RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
         }
     }
 }

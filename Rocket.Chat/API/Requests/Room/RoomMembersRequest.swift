@@ -53,12 +53,8 @@ final class RoomMembersRequest: APIRequest {
 }
 
 class RoomMembersResource: APIResource {
-    var members: [User?]? {
-        return raw?["members"].arrayValue.map {
-            let user = User()
-            user.map($0, realm: nil)
-            return user
-        }
+    var members: [JSON]? {
+        return raw?["members"].arrayValue
     }
 
     var count: Int? {

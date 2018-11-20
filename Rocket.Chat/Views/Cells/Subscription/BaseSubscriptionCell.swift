@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 protocol SubscriptionCellProtocol {
-    var subscription: Subscription? { get set }
+    var subscription: Subscription.UnmanagedType? { get set }
 }
 
-class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
+class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
     internal let defaultBackgroundColor = UIColor.white
     internal let selectedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.19921875)
     internal let highlightedBackgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09530179799)
 
-    var subscription: Subscription? {
+    var subscription: Subscription.UnmanagedType? {
         didSet {
-            guard subscription?.validated() != nil else { return }
             updateSubscriptionInformation()
         }
     }
@@ -32,17 +32,14 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
         }
     }
 
-    weak var avatarView: AvatarView!
+    var avatarView = AvatarView()
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
             avatarViewContainer.layer.masksToBounds = true
 
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
@@ -72,7 +69,8 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
     }
 
     func updateSubscriptionInformation() {
-        guard let subscription = self.subscription else { return }
+        guard let subscription = self.subscription?.managedObject else { return }
+
         var user: User?
 
         if subscription.type == .directMessage {
@@ -81,12 +79,10 @@ class BaseSubscriptionCell: UITableViewCell, SubscriptionCellProtocol {
 
         updateStatus(subscription: subscription, user: user)
 
-        if let user = user {
-            avatarView.subscription = nil
-            avatarView.user = user
+        if let username = user?.username {
+            avatarView.avatarURL = User.avatarURL(forUsername: username)
         } else {
-            avatarView.user = nil
-            avatarView.subscription = subscription
+            avatarView.avatarURL = Subscription.avatarURL(for: subscription.name)
         }
 
         labelName.text = subscription.displayName()

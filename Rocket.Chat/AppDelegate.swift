@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var notificationWindow: TransparentToTouchesWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
 
         PushManager.setupNotificationCenter()
         application.registerForRemoteNotifications()
+
         if let launchOptions = launchOptions,
            let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
             PushManager.handleNotification(raw: notification)
@@ -32,10 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthManager.persistAuthInformation(auth)
             AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.subscriptions)
-
-            if let user = auth.user {
-                AnalyticsCoordinator.identifyCrashReports(withUser: user)
-            }
         } else {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
@@ -48,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initNotificationWindow() {
         notificationWindow = TransparentToTouchesWindow(frame: UIScreen.main.bounds)
         notificationWindow?.rootViewController = NotificationViewController.shared
-        notificationWindow?.windowLevel = UIWindowLevelAlert
+        notificationWindow?.windowLevel = UIWindow.Level.alert
         notificationWindow?.makeKeyAndVisible()
         notificationWindow?.isHidden = true
     }
@@ -84,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ShortcutsManager.sync()
     }
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if let url = userActivity.webpageURL, AppManager.handleDeepLink(url) != nil {
             return true
         }
@@ -92,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         if AppManager.handleDeepLink(url) != nil {
             return true
         }

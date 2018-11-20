@@ -97,13 +97,14 @@
 // Socket Connection
 "connection.title" = "Zaloguj się na serwer";
 "connection.button_connect" = "Połącz";
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
 "connection.connecting.banner.message" = "Łączenie...";
 "connection.waiting_for_network.banner.message" = "Oczekiwanie na sieć";
 
 // Onboarding
 "onboarding.label_welcome" = "Witamy w Rocket Chat";
-"onboarding.label_subtitle" = "Komunikator Open Source";
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Połącz z serwerem";
 "onboarding.button_create_server" = "Utwórz nowy obszar roboczy";
 "onboarding.button_join_community_prefix" = "Dołącz do społeczości";
@@ -154,6 +155,11 @@
 "subscriptions.list.no_message" = "Brak wiadomości";
 "subscriptions.list.sent_an_attachment" = "wysłano załącznik";
 "subscriptions.list.date.yesterday" = "Wczoraj";
+"subscriptions.list.actions.read" = "Read"; // TODO
+"subscriptions.list.actions.unread" = "Unread"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
+"subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
 "servers.add_new_team" = "Dodaj nowy Zespół";
@@ -197,6 +203,11 @@
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
 "chat.unread_separator" = "nowe wiadomości";
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Przeczytane przez";
@@ -226,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Tak, odrzuć";
 "chat.message.actions.resend" = "Wyślij ponownie";
 "chat.message.actions.resend_all" = "Wyślij wszystko ponownie";
-"Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Wiadomość zgłoszona";
@@ -258,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Wybrany kolor";
 "chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODO
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
 "chat.message.type.user_added_by" = "Użytkownik %@ został dodany przez %@";
@@ -272,6 +288,12 @@
 "chat.message.type.subscription_role_removed" = "%@ utracił rolę %@ przez %@";
 "chat.message.type.room_archived" = "Kanał został zarchiwizowany przez %@";
 "chat.message.type.room_unarchived" = "Kanał został od archiwizowany przez %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informacje";
@@ -283,7 +305,6 @@
 "chat.info.item.members" = "Członkowie";
 "chat.info.item.pinned" = "Przypięte";
 "chat.info.item.starred" = "Oznaczone gwiazdką";
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.mentions" = "Wzmianki";
 "chat.info.item.files" = "Pliki";
 "chat.info.item.share" = "Udostępnij";
@@ -454,3 +475,21 @@
 "subscriptions.grouping.type" = "Grupuj po typie";
 "subscriptions.grouping.favorites" = "Grupuj po ulubionych";
 "subscriptions.grouping.unread_top" = "Nieprzeczytane na górze";
+
+// Shortcuts
+"shortcuts.type_message" = "Type message"; //TODO
+"shortcuts.preferences" = "Preferences"; //TODO
+"shortcuts.room_search" = "Rooms search"; //TODO
+"shortcuts.room_selection" = "Room selection 1...9"; //TODO
+"shortcuts.next_room" = "Next room"; //TODO
+"shortcuts.previous_room" = "Previous room"; //TODO
+"shortcuts.new_room" = "New room"; //TODO
+"shortcuts.room_actions" = "Room actions"; //TODO
+"shortcuts.upload_room" = "Upload to room"; //TODO
+"shortcuts.search_messages" = "Search messages"; //TODO
+"shortcuts.scroll_messages" = "Scroll messages"; //TODO
+"shortcuts.reply_latest" = "Reply to latest"; //TODO
+"shortcuts.server_selection" = "Server selection"; //TODO
+"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
+"shortcuts.add_server" = "Add server"; //TODO
+"shortcuts.change_theme" = "Change theme"; //TODO

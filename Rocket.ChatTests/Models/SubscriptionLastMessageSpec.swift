@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RealmSwift
 
 @testable import Rocket_Chat
 
@@ -34,7 +35,12 @@ class SubscriptionLastMessageSpec: XCTestCase {
         let message = Message()
         message.identifier = String.random(20)
         message.text = "**foo** *bar* [testing link](https://foo.bar)"
-        message.user = user
+        message.userIdentifier = user.identifier
+
+        Realm.execute({ realm in
+            realm.add(user, update: true)
+            realm.add(message, update: true)
+        })
 
         let lastMessage = Subscription.lastMessageText(lastMessage: message)
         XCTAssertEqual(lastMessage, "user_username: foo bar testing link")

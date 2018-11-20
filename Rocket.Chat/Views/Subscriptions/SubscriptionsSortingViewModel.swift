@@ -10,8 +10,8 @@ import Foundation
 
 final class SubscriptionsSortingViewModel {
 
-    internal let sortingOptions: [SubscriptionsSortingOption] = [.activity, .alphabetically]
-    internal let groupingOptions: [SubscriptionsGroupingOption] = [.type, .favorites, .unread]
+    internal let sortingOptions = SubscriptionsSortingOption.allCases
+    internal let groupingOptions = SubscriptionsGroupingOption.allCases
 
     internal var listSeparatorHeight: CGFloat = 10.0
     internal var viewHeight: CGFloat {

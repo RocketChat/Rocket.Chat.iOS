@@ -11,43 +11,41 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
-class AuthCanStarMessageSpec: XCTestCase, RealmTestCase {
+class AuthCanStarMessageSpec: XCTestCase {
     func testCanStarMessage() {
-        let realm = testRealm()
-
         let auth = Auth.testInstance()
 
         let message = Message.testInstance()
         message.identifier = "mid"
 
-        try? realm.write {
+        Realm.execute({ realm in
             realm.add(auth)
             auth.settings?.messageAllowStarring = true
-        }
+        })
 
         // User & Server have permission
         XCTAssertEqual(auth.canStarMessage(message), .allowed)
 
         // Message is not actionable
-        try? realm.write {
+        Realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .notActionable)
 
         // Server permission doesn't allow to pin
-        try? realm.write {
+        Realm.execute({ _ in
             message.internalType = MessageType.text.rawValue
             auth.settings?.messageAllowStarring = false
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .notAllowed)
 
         // Settings is nil
-        try? realm.write {
+        Realm.execute({ _ in
             auth.settings = nil
-        }
+        })
 
         XCTAssertEqual(auth.canStarMessage(message), .unknown)
     }

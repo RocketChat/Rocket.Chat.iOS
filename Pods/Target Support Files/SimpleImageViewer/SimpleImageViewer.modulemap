@@ -1,0 +1,6 @@
+framework module SimpleImageViewer {
+  umbrella header "SimpleImageViewer-umbrella.h"
+
+  export *
+  module * { export * }
+}

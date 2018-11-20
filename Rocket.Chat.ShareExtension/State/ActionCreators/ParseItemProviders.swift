@@ -69,7 +69,7 @@ extension NSItemProvider {
 
                 image = image.resizeWith(width: 1024) ?? image
 
-                if let data = UIImageJPEGRepresentation(image, 0.9) {
+                if let data = image.jpegData(compressionQuality: 0.9) {
                     let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data, fileUrl: item as? URL)
                     let content = store.state.content + [SEContent(type: .file(file))]
                     DispatchQueue.main.async {

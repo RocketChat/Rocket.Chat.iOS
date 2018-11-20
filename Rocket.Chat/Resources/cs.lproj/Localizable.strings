@@ -97,13 +97,14 @@
 // Socket Connection
 "connection.title" = "Sign in to your server"; // TODO
 "connection.button_connect" = "Connect"; // TODO
+"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
 "connection.offline.banner.message" = "Jste offline, zkuste se znovu připojit";
 "connection.connecting.banner.message" = "Connecting..."; // TODO
 "connection.waiting_for_network.banner.message" = "Waiting for network"; // TODO
 
 // Onboarding
 "onboarding.label_welcome" = "Welcome to Rocket Chat"; // TODO
-"onboarding.label_subtitle" = "Open Source Communication"; // TODO
+"onboarding.label_subtitle" = "Team Communication"; // TODO
 "onboarding.button_connect_server" = "Connect to a server"; // TODO
 "onboarding.button_create_server" = "Create a new workspace"; // TODO
 "onboarding.button_join_community_prefix" = "Join the community"; // TODO
@@ -119,7 +120,7 @@
 "auth.signup_title" = "Sign up"; // TODO
 "auth.signup.button_register" = "Register"; // TODO
 "auth.signup.button_next" = "Next"; // TODO
-"auth.signup.custom_fields_title" = "Complete your register"; // TODO
+"auth.signup.custom_fields_title" = "Complete your registration"; // TODO
 
 "auth.login.login_title" = "Login"; // TODO
 "auth.login.button_login_title" = "Login"; // TODO
@@ -154,6 +155,11 @@
 "subscriptions.list.no_message" = "No message"; //TODO
 "subscriptions.list.sent_an_attachment" = "sent an attachment"; //TODO
 "subscriptions.list.date.yesterday" = "Yesterday"; //TODO
+"subscriptions.list.actions.read" = "Read"; // TODO
+"subscriptions.list.actions.unread" = "Unread"; // TODO
+"subscriptions.list.actions.favorite" = "Favorite"; // TODO
+"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
+"subscriptions.list.actions.hide" = "Hide"; // TODO
 
 // Servers
 "servers.add_new_team" = "Přidat nový tým";
@@ -195,8 +201,14 @@
 "chat.channel.start_conversation" = "Toto je začátek konverzace %@";
 "chat.read_only" = "Tato místnost je pouze pro čtení";
 "chat.muted" = "You have been muted";
-"chat.loading_messages" = "Loading messages..."; //TODO
-"chat.unread_separator" = "new messages"; //TODO
+"chat.loading_messages" = "Loading messages..."; // TODO
+"chat.unread_separator" = "new messages"; // TODO
+"chat.preview.actions.read" = "Mark as read"; // TODO
+"chat.preview.actions.unread" = "Mark as unread"; // TODO
+"chat.preview.actions.favorite" = "Favorite"; // TODO
+"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
+"chat.preview.actions.hide" = "Hide"; // TODO
+
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Read by"; //TODO
@@ -226,7 +238,6 @@
 "chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";
@@ -258,6 +269,12 @@
 "chat.drawing.settings.color.selected" = "Selected color"; // TODO
 "chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODOS
+
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
 "chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";
@@ -273,6 +290,11 @@
 "chat.message.type.room_archived" = "Tato místnost byla archivována uživatelem %@";
 "chat.message.type.room_unarchived" = "Tato místnost byla vyndána z archivu uživatelem %@";
 "chat.message.type.message_pinned" = "Pinned a message:"; // TODO
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -285,7 +307,6 @@
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.notifications" = "Notifications"; // TODO
 "chat.info.item.files" = "Files"; // TODO
 "chat.info.item.share" = "Share"; // TODO
 
@@ -455,3 +476,21 @@
 "subscriptions.grouping.type" = "Group by type"; //TODO
 "subscriptions.grouping.favorites" = "Group by favorites"; //TODO
 "subscriptions.grouping.unread_top" = "Unread on top"; //TODO
+
+// Shortcuts
+"shortcuts.type_message" = "Type message"; //TODO
+"shortcuts.preferences" = "Preferences"; //TODO
+"shortcuts.room_search" = "Rooms search"; //TODO
+"shortcuts.room_selection" = "Room selection 1...9"; //TODO
+"shortcuts.next_room" = "Next room"; //TODO
+"shortcuts.previous_room" = "Previous room"; //TODO
+"shortcuts.new_room" = "New room"; //TODO
+"shortcuts.room_actions" = "Room actions"; //TODO
+"shortcuts.upload_room" = "Upload to room"; //TODO
+"shortcuts.search_messages" = "Search messages"; //TODO
+"shortcuts.scroll_messages" = "Scroll messages"; //TODO
+"shortcuts.reply_latest" = "Reply to latest"; //TODO
+"shortcuts.server_selection" = "Server selection"; //TODO
+"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
+"shortcuts.add_server" = "Add server"; //TODO
+"shortcuts.change_theme" = "Change theme"; //TODO

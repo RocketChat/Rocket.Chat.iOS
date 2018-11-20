@@ -17,7 +17,7 @@ class UploadHelperSpec: XCTestCase {
 
         guard
             let image = UIImage(named: "logoSmall"),
-            let data = UIImagePNGRepresentation(image)
+            let data = image.pngData()
         else {
             return XCTAssertTrue(false, "File wasn't created successfuly")
         }
@@ -52,7 +52,7 @@ class UploadHelperSpec: XCTestCase {
     func testFileSize() {
         guard
             let image = UIImage(named: "logoSmall"),
-            let data = UIImagePNGRepresentation(image)
+            let data = image.pngData()
         else {
             return XCTAssertTrue(false, "File data isn't valid")
         }

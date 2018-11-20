@@ -24,6 +24,12 @@ Take your conversations with you and never miss the action with our <br />iOS mo
 
 [About Rocket.Chat](https://github.com/RocketChat/Rocket.Chat/#about-rocketchat)
 
+# Beta Access (TestFlight)
+
+You can signup to our TestFlight builds by acessing this link: https://testflight.apple.com/join/3gcYeoMr.
+
+For discussion and feedback on the latest TestFlight build, please access the [#ios-beta](https://open.rocket.chat/channel/ios-beta) channel on our community server.
+
 # Reporting an Issue
 
 [Github Issues](https://github.com/RocketChat/Rocket.Chat.iOS/issues) are used to track todos, bugs, feature requests, and more.

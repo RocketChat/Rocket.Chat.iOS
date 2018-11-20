@@ -15,7 +15,7 @@ extension UIWindow {
     static var topWindow: UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIViewController()
-        window.windowLevel = UIWindowLevelNormal
+        window.windowLevel = UIWindow.Level.normal
         window.makeKeyAndVisible()
 
         return window

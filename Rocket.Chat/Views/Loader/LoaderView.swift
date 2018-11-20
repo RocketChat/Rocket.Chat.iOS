@@ -37,7 +37,7 @@ class LoaderView: UIView {
         let duration: CFTimeInterval = 1.4
         let beginTime = CACurrentMediaTime()
         let beginTimes: [CFTimeInterval] = [0, 0.16, 0.32]
-        let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        let timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
 
         // Animation

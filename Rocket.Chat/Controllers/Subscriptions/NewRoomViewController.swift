@@ -99,8 +99,8 @@ final class NewRoomViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         let user = NewRoomViewController.user
         let createPrivate = user?.hasPermission(.createPrivateChannels) ?? false
@@ -295,8 +295,8 @@ extension NewRoomViewController {
 
     @objc func keyboardWillChangeFrame(_ notification: Notification) {
         guard let info = notification.userInfo else { return }
-        guard let animationDuration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
-        guard let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let animationDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardHeight = keyboardFrame.cgRectValue.height
         guard let contentInsets = getTableViewInsets(keyboardHeight: keyboardHeight) else { return }

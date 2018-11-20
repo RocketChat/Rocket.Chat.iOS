@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol ChatMessageVideoViewProtocol: class {
-    func openVideoFromCell(attachment: Attachment)
+    func openVideoFromCell(attachment: UnmanagedAttachment)
 }
 
 final class ChatMessageVideoView: ChatMessageAttachmentView {
@@ -61,16 +61,16 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
             }
         }
 
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .background).async {
             let asset = AVAsset(url: videoURL)
             let imageGenerator = AVAssetImageGenerator(asset: asset)
             imageGenerator.appliesPreferredTrackTransform = true
-            let time = CMTimeMake(1, 1)
+            let time = CMTimeMake(value: 1, timescale: 1)
 
             do {
                 let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
                 let thumbnail = UIImage(cgImage: imageRef)
-                try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
+                try thumbnail.pngData()?.write(to: thumbURL, options: .atomic)
 
                 DispatchQueue.main.async {
                     self.stopLoadingPreview(thumbnail)
@@ -92,6 +92,8 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
-        delegate?.openVideoFromCell(attachment: attachment)
+        if let unmanaged = UnmanagedAttachment(attachment) {
+            delegate?.openVideoFromCell(attachment: unmanaged)
+        }
     }
 }
