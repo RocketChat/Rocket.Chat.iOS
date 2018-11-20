@@ -24,6 +24,9 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyn-h1-OvH" userLabel="Purpose">
                                 <rect key="frame" x="15" y="16" width="33" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="lLa-2i-bko"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -56,12 +59,12 @@
                             <constraint firstAttribute="trailing" secondItem="xIq-TW-qcq" secondAttribute="trailing" constant="15" id="5jv-jT-5GF"/>
                             <constraint firstItem="xIq-TW-qcq" firstAttribute="leading" secondItem="B3H-28-ZKR" secondAttribute="leading" constant="15" id="FdE-Ja-I2D"/>
                             <constraint firstAttribute="bottom" secondItem="xIq-TW-qcq" secondAttribute="bottom" constant="15" id="GnU-Q9-eGF"/>
-                            <constraint firstItem="Alc-xZ-4VT" firstAttribute="centerY" secondItem="Oyn-h1-OvH" secondAttribute="centerY" id="LHw-Sx-p6W"/>
                             <constraint firstItem="Oyn-h1-OvH" firstAttribute="top" secondItem="B3H-28-ZKR" secondAttribute="top" constant="16" id="M6R-FW-xXh"/>
                             <constraint firstAttribute="trailing" secondItem="Alc-xZ-4VT" secondAttribute="trailing" constant="15" id="fUn-qs-O2E"/>
                             <constraint firstItem="TOv-60-iaq" firstAttribute="leading" secondItem="B3H-28-ZKR" secondAttribute="leading" constant="15" id="j1v-Sb-zqI"/>
                             <constraint firstItem="xIq-TW-qcq" firstAttribute="top" secondItem="TOv-60-iaq" secondAttribute="bottom" constant="4" id="lhJ-IE-s0Q"/>
                             <constraint firstItem="Alc-xZ-4VT" firstAttribute="leading" secondItem="TOv-60-iaq" secondAttribute="trailing" constant="8" id="rbc-Rn-vCT"/>
+                            <constraint firstItem="Alc-xZ-4VT" firstAttribute="top" secondItem="B3H-28-ZKR" secondAttribute="top" constant="19" id="saI-os-EY4"/>
                             <constraint firstItem="TOv-60-iaq" firstAttribute="top" secondItem="Oyn-h1-OvH" secondAttribute="bottom" id="wb5-Yx-ZIx"/>
                             <constraint firstItem="Oyn-h1-OvH" firstAttribute="leading" secondItem="B3H-28-ZKR" secondAttribute="leading" constant="15" id="xL5-7d-kPm"/>
                         </constraints>
@@ -88,6 +91,7 @@
                 <outlet property="containerTrailingConstraint" destination="mSe-Bf-D1Y" id="4V4-H2-U19"/>
                 <outlet property="containerView" destination="B3H-28-ZKR" id="MmB-sC-5t0"/>
                 <outlet property="purpose" destination="Oyn-h1-OvH" id="oW7-Fg-Tql"/>
+                <outlet property="purposeHeightConstraint" destination="lLa-2i-bko" id="Oge-PB-OiO"/>
                 <outlet property="text" destination="xIq-TW-qcq" id="pz0-57-C11"/>
                 <outlet property="textLeadingConstraint" destination="FdE-Ja-I2D" id="Vyo-t4-y6h"/>
                 <outlet property="textTrailingConstraint" destination="5jv-jT-5GF" id="LNT-8H-WPu"/>

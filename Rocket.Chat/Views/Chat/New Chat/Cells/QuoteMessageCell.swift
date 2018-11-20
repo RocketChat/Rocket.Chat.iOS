@@ -46,6 +46,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var purposeHeightConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -84,6 +86,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
         configure(with: avatarView, date: date, and: messageUsername)
 
         purpose.text = viewModel.purpose
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightConstraint.constant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
@@ -109,6 +112,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
             textHeightConstraint.constant = textHeight
             arrow.alpha = 0
         }
+
+        layoutIfNeeded()
     }
 }
 

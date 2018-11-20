@@ -31,6 +31,8 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var purposeHeightConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -62,6 +64,7 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         }
 
         purpose.text = viewModel.purpose
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightConstraint.constant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)

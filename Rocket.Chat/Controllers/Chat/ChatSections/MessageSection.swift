@@ -149,7 +149,7 @@ final class MessageSection: ChatSection {
                 case .messagePinned:
                     purpose = localized("chat.components.quote.pinned")
                 default:
-                    purpose = localized("chat.components.quote.replied")
+                    purpose = ""
                 }
 
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
