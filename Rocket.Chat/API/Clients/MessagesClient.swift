@@ -46,7 +46,9 @@ struct MessagesClient: APIClient {
                 realm.add(message, update: true)
             }
 
-            MessageTextCacheManager.shared.update(for: message)
+            if let unmanagedMessage = message.unmanaged {
+                MessageTextCacheManager.shared.update(for: unmanagedMessage)
+            }
         }
 
         func setMessageOffline() {
@@ -62,7 +64,9 @@ struct MessagesClient: APIClient {
                     realm.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message, with: nil)
+                if let unmanagedMessage = message.unmanaged {
+                    MessageTextCacheManager.shared.update(for: unmanagedMessage)
+                }
             }
         }
 
@@ -195,7 +199,9 @@ struct MessagesClient: APIClient {
                     realm.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                if let unmanagedMessage = message.unmanaged {
+                    MessageTextCacheManager.shared.update(for: unmanagedMessage)
+                }
             case .error: Alert.defaultError.present()
             }
         }

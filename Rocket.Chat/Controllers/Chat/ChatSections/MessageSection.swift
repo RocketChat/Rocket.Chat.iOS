@@ -43,13 +43,9 @@ final class MessageSection: ChatSection {
         var cells: [AnyChatItem] = []
         var shouldAppendMessageHeader = true
 
-        var sanitizedMessage: String
-        if let message = object.message.managedObject {
-            sanitizedMessage = MessageTextCacheManager.shared.message(for: message)?.string ?? ""
-        } else {
-            sanitizedMessage = object.message.text
-        }
-        sanitizedMessage = sanitizedMessage.removingWhitespaces().removingNewLines()
+        let sanitizedMessage = MessageTextCacheManager.shared.message(for: object.message)?.string
+            .removingWhitespaces()
+            .removingNewLines() ?? ""
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(

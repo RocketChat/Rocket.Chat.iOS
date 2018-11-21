@@ -31,6 +31,14 @@ struct UnmanagedMessageReaction: Equatable {
     var usernames: [String]
 }
 
+extension Message: UnmanagedConvertible {
+    typealias UnmanagedType = UnmanagedMessage
+
+    var unmanaged: UnmanagedMessage? {
+        return UnmanagedMessage(self)
+    }
+}
+
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
     var identifier: String
@@ -52,6 +60,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var groupable: Bool
     var markedForDeletion: Bool
     var emoji: String?
+    var role: String
     var avatar: String?
     var snippetName: String?
     var snippetId: String?
@@ -103,6 +112,7 @@ extension UnmanagedMessage {
         createdAt = messageCreatedAt
         updatedAt = message.updatedAt
         emoji = message.emoji
+        role = message.role
         avatar = message.avatar
         snippetName = message.snippetName
         snippetId = message.snippetId
@@ -151,12 +161,15 @@ extension UnmanagedMessage {
             return UnmanagedAttachment($0)
         }
     }
+}
+
+extension UnmanagedMessage {
 
     /**
-        This method will return if the reply button
-        in a broadcast room needs to be displayed or
-        not for the message. If the subscription is not
-        a broadcast type, it'll return false.
+     This method will return if the reply button
+     in a broadcast room needs to be displayed or
+     not for the message. If the subscription is not
+     a broadcast type, it'll return false.
      */
     func isBroadcastReplyAvailable() -> Bool {
         guard
@@ -167,8 +180,8 @@ extension UnmanagedMessage {
             !isSystemMessage(),
             let currentUser = AuthManager.currentUser(),
             currentUser.identifier != user?.identifier
-        else {
-            return false
+            else {
+                return false
         }
 
         return true
@@ -177,13 +190,141 @@ extension UnmanagedMessage {
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
-            type == .audio ||
-            type == .image ||
-            type == .video ||
-            type == .textAttachment ||
-            type == .url
+                type == .audio ||
+                type == .image ||
+                type == .video ||
+                type == .textAttachment ||
+                type == .url
         )
     }
+
+    // swiftlint:disable function_body_length cyclomatic_complexity
+    func textNormalized() -> String {
+        let text = Emojione.transform(string: self.text)
+
+        switch type {
+        case .roomNameChanged:
+            return String(
+                format: localized("chat.message.type.room_name_changed"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .userAdded:
+            return String(
+                format: localized("chat.message.type.user_added_by"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .userRemoved:
+            return String(
+                format: localized("chat.message.type.user_removed_by"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .userJoined:
+            return localized("chat.message.type.user_joined")
+
+        case .userLeft:
+            return localized("chat.message.type.user_left")
+
+        case .userMuted:
+            return String(
+                format: localized("chat.message.type.user_muted"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .userUnmuted:
+            return String(
+                format: localized("chat.message.type.user_unmuted"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .welcome:
+            return String(
+                format: localized("chat.message.type.welcome"),
+                text
+            )
+
+        case .messageRemoved:
+            return localized("chat.message.type.message_removed")
+
+        case .subscriptionRoleAdded:
+            return String(
+                format: localized("chat.message.type.subscription_role_added"),
+                text,
+                role,
+                self.user?.displayName ?? ""
+            )
+
+        case .subscriptionRoleRemoved:
+            return String(
+                format: localized("chat.message.type.subscription_role_removed"),
+                text,
+                role,
+                self.user?.displayName ?? ""
+            )
+
+        case .roomArchived:
+            return String(
+                format: localized("chat.message.type.room_archived"),
+                text
+            )
+
+        case .roomUnarchived:
+            return String(
+                format: localized("chat.message.type.room_unarchived"),
+                text
+            )
+
+        case .messagePinned:
+            return ""
+
+        case .messageSnippeted:
+            return String(
+                format: localized("chat.message.type.message_snippeted"),
+                self.snippetName ?? ""
+            )
+
+        case .roomChangedPrivacy:
+            return String(
+                format: localized("chat.message.type.room_changed_privacy"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .roomChangedTopic:
+            return String(
+                format: localized("chat.message.type.room_changed_topic"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .roomChangedAnnouncement:
+            return String(
+                format: localized("chat.message.type.room_changed_announcement"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        case .roomChangedDescription:
+            return String(
+                format: localized("chat.message.type.room_changed_description"),
+                text,
+                self.user?.displayName ?? ""
+            )
+
+        default:
+            break
+        }
+
+        return text
+    }
+
 }
 
 extension UnmanagedMessage: Differentiable {

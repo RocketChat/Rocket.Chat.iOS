@@ -33,7 +33,7 @@ extension SizingCell {
 final class MessagesViewController: RocketChatViewController {
 
     @objc override var bottomHeight: CGFloat {
-        if subscription.isJoined() {
+        if subscription?.isJoined() ?? true {
             return super.bottomHeight
         }
 
