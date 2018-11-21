@@ -12,13 +12,13 @@ public protocol EditingViewDelegate: class {
     func editingViewDidShow(_ editingView: EditingView)
 }
 
-public class EditingView: UIView {
+public class EditingView: UIView, ComposerLocalizable {
     public weak var delegate: EditingViewDelegate?
 
     public let titleLabel = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
 
-        $0.text = "Editing Message"
+        $0.text = localized(.editingViewTitle)
         $0.font = .preferredFont(forTextStyle: .headline)
         $0.adjustsFontForContentSizeCategory = true
 

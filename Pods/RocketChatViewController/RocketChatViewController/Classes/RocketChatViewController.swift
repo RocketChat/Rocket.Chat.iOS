@@ -322,7 +322,7 @@ open class RocketChatViewController: UICollectionViewController {
 
 extension RocketChatViewController {
 
-    fileprivate var topHeight: CGFloat {
+    @objc open var topHeight: CGFloat {
         if navigationController?.navigationBar.isTranslucent ?? false {
             var top = navigationController?.navigationBar.frame.height ?? 0.0
             top += UIApplication.shared.statusBarFrame.height
