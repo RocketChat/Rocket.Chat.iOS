@@ -180,6 +180,14 @@ final class MessagesViewModel {
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
         let messageSectionModel = MessageSectionModel(message: message)
 
+        if let existingSection = dataNormalized.filter({ $0.model.differenceIdentifier == AnyHashable(message.differenceIdentifier) }).first {
+            return AnyChatSection(MessageSection(
+                object: AnyDifferentiable(messageSectionModel),
+                controllerContext: controllerContext,
+                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:]
+            ))
+        }
+
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
             controllerContext: controllerContext,
