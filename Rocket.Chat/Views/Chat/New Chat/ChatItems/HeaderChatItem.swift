@@ -26,7 +26,7 @@ struct HeaderChatItem: ChatItem, Differentiable {
             if let user = subscription.directMessageUser {
                 return User.avatarURL(forUsername: user.username)
             } else {
-
+                return Subscription.avatarURL(for: subscription.name)
             }
         }
 
@@ -34,11 +34,17 @@ struct HeaderChatItem: ChatItem, Differentiable {
     }
 
     var title: String {
-        return subscription?.name ?? ""
+        return subscription?.displayName ?? ""
     }
 
     var descriptionText: String {
-        return subscription?.name ?? ""
+        guard let subscription = subscription else { return "" }
+
+        if subscription.type == .directMessage {
+            return String(format: localized("chat.dm.start_conversation"), subscription.displayName)
+        }
+
+        return String(format: localized("chat.channel.start_conversation"), subscription.displayName)
     }
 
     var differenceIdentifier: String {

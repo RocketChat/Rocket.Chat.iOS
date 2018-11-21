@@ -20,11 +20,37 @@ final class HeaderCell: UICollectionViewCell, ChatCell, SizingCell {
         return cell
     }()
 
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+
+        return avatarView
+    }()
+
+    @IBOutlet weak var avatarContainerView: UIView! {
+        didSet {
+            avatarContainerView.layer.cornerRadius = 4
+            avatarView.frame = avatarContainerView.bounds
+            avatarContainerView.addSubview(avatarView)
+        }
+    }
+
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
+
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
     func configure() {
-        
+        guard let viewModel = viewModel?.base as? HeaderChatItem else {
+            return
+        }
+
+        labelName.text = viewModel.title
+        labelDescription.text = viewModel.descriptionText
+        avatarView.avatarURL = viewModel.avatarURL
     }
 
 }
