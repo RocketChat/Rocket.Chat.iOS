@@ -270,10 +270,10 @@
 "chat.drawing.settings.color.others" = "Scegli un colore qui sotto:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
-"chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.users_are_typing" = "%@ stanno scrivendo...";
+"chat.user_is_typing" = "%@ sta scrivendo...";
+"chat.typing" = "scrivendo...";
+"chat.several_typing" = "alcuni utenti stanno scrivendo...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome della stanza cambiato in: %@ da %@";
@@ -290,11 +290,11 @@
 "chat.message.type.room_archived" = "Questa stanza è stata archiviata da %@";
 "chat.message.type.room_unarchived" = "Questa stanza è stata ripristinata da %@";
 "chat.message.type.message_pinned" = "Appunto sul messaggio:";
-"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
+"chat.message.type.message_snippeted" = "Creato un ritaglio del messaggio: \"%@\"";
+"chat.message.type.room_changed_privacy" = "La riservatezza della stanza è stata cambiata in \"%@\" da %@";
+"chat.message.type.room_changed_topic" = "L'argomento della stanza è stato cambiato in \"%@\" da %@";
+"chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
+"chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
 
 // Chat Information
 "chat.info.title" = "Informazioni";
