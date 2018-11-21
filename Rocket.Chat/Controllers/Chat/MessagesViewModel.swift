@@ -437,11 +437,17 @@ final class MessagesViewModel {
                 header: header
             )
 
-            dataSorted[idx] = AnyChatSection(MessageSection(
+            let chatSection = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
                 controllerContext: controllerContext,
                 collapsibleItemsState: collpsibleItemsState
             ))
+
+            dataSorted[idx] = chatSection
+
+            if let indexOfSection = data.firstIndex(of: chatSection) {
+                data[indexOfSection] = chatSection
+            }
 
             // Cache the processed result of the message text
             // on this loop to avoid doing that in the main thread.
@@ -532,4 +538,10 @@ extension MessagesViewModel {
         client.updateMessage(message, text: text)
     }
 
+}
+
+extension AnyChatSection: Equatable {
+    public static func == (lhs: AnyChatSection, rhs: AnyChatSection) -> Bool {
+        return lhs.differenceIdentifier == rhs.differenceIdentifier
+    }
 }
