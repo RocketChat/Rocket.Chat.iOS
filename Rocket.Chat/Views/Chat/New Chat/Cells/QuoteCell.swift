@@ -21,14 +21,17 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
     }()
 
     @IBOutlet weak var containerView: UIView!
+
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
-
+    @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var purposeHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,6 +48,7 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
 
         textHeightConstraint.isActive = true
 
+        purposeHeightInitialConstant = purposeHeightConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
         textLeadingInitialConstant = textLeadingConstraint.constant
         textTrailingInitialConstant = textTrailingConstraint.constant
@@ -59,6 +63,9 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
+
+        purpose.text = viewModel.purpose
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
@@ -93,6 +100,7 @@ extension QuoteCell {
 
         let theme = self.theme ?? .light
         containerView.backgroundColor = theme.chatComponentBackground
+        purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
     }

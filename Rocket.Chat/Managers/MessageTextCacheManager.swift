@@ -36,10 +36,8 @@ final class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
-        guard let identifier = message.identifier else { return nil }
-
-        let key = cachedKey(for: identifier)
+    @discardableResult func update(for message: UnmanagedMessage, with theme: Theme? = nil) -> NSMutableAttributedString? {
+        let key = cachedKey(for: message.identifier)
 
         let text = NSMutableAttributedString(attributedString:
             NSAttributedString(string: message.textNormalized()).applyingCustomEmojis(CustomEmoji.emojiStrings)
@@ -54,8 +52,8 @@ final class MessageTextCacheManager {
             text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
-        let mentions = Array(message.mentions.compactMap { $0 })
-        let channels = Array(message.channels.compactMap { $0.name })
+        let mentions = message.mentions
+        let channels = message.channels.compactMap { $0.name }
         let username = AuthManager.currentUser()?.username
 
         let attributedString = text.transformMarkdown(with: theme)
@@ -71,13 +69,11 @@ final class MessageTextCacheManager {
     }
 
     @discardableResult
-    func message(for message: Message, with theme: Theme? = nil) -> NSMutableAttributedString? {
-        guard let identifier = message.identifier else { return nil }
-
+    func message(for message: UnmanagedMessage, with theme: Theme? = nil) -> NSMutableAttributedString? {
         var resultText: NSAttributedString?
-        let key = cachedKey(for: identifier)
+        let key = cachedKey(for: message.identifier)
 
-        if let cachedVersion = cache.object(forKey: key), cachedVersion.theme == theme {
+        if let cachedVersion = cache.object(forKey: key), theme == nil || cachedVersion.theme == theme {
             resultText = cachedVersion.string
         } else if let result = update(for: message, with: theme) {
             resultText = result

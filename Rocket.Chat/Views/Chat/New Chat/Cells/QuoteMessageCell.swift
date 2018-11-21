@@ -31,6 +31,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var arrow: UIImageView!
@@ -44,6 +45,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
     @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var purposeHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +63,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
 
         textHeightConstraint.isActive = true
 
+        purposeHeightInitialConstant = purposeHeightConstraint.constant
         avatarLeadingInitialConstant = avatarLeadingConstraint.constant
         avatarWidthInitialConstant = avatarWidthConstraint.constant
         containerLeadingInitialConstant = containerLeadingConstraint.constant
@@ -81,6 +85,9 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
 
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: messageUsername)
+
+        purpose.text = viewModel.purpose
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
 
         let attachmentText = viewModel.text ?? ""
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
@@ -117,6 +124,7 @@ extension QuoteMessageCell {
         containerView.backgroundColor = theme.chatComponentBackground
         messageUsername.textColor = theme.titleText
         date.textColor = theme.auxiliaryText
+        purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
     }

@@ -42,7 +42,10 @@ final class MessageSection: ChatSection {
         // needs to go last.
         var cells: [AnyChatItem] = []
         var shouldAppendMessageHeader = true
-        let sanitizedMessage = object.message.text.removingWhitespaces().removingNewLines()
+
+        let sanitizedMessage = MessageTextCacheManager.shared.message(for: object.message)?.string
+            .removingWhitespaces()
+            .removingNewLines() ?? ""
 
         if !object.message.reactions.isEmpty {
             cells.append(ReactionsChatItem(
@@ -137,9 +140,18 @@ final class MessageSection: ChatSection {
                 let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
                 let text = attachment.text ?? attachment.descriptionText
 
+                let purpose: String
+                switch object.message.type {
+                case .messagePinned:
+                    purpose = localized("chat.components.quote.pinned")
+                default:
+                    purpose = ""
+                }
+
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(QuoteChatItem(
                         identifier: attachment.identifier,
+                        purpose: purpose,
                         title: attachment.title,
                         text: text,
                         collapsed: collapsed,
@@ -152,6 +164,7 @@ final class MessageSection: ChatSection {
                 } else {
                     cells.append(QuoteChatItem(
                         identifier: attachment.identifier,
+                        purpose: purpose,
                         title: attachment.title,
                         text: text,
                         collapsed: collapsed,

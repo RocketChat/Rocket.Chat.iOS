@@ -17,11 +17,13 @@ final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable 
     }
 
     let identifier: String
+    let purpose: String
     let title: String
     let text: String?
     let hasText: Bool
 
     init(identifier: String,
+         purpose: String,
          title: String,
          text: String?,
          collapsed: Bool,
@@ -30,6 +32,7 @@ final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable 
          message: UnmanagedMessage?) {
 
         self.identifier = identifier
+        self.purpose = purpose
         self.title = title
         self.text = text
         self.hasText = hasText
@@ -51,6 +54,7 @@ final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable 
     func isContentEqual(to source: QuoteChatItem) -> Bool {
         return title == source.title &&
             text == source.text &&
-            collapsed == source.collapsed
+            collapsed == source.collapsed &&
+            purpose.isEmpty == source.purpose.isEmpty
     }
 }

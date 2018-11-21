@@ -21,6 +21,8 @@ class SubscriptionLastMessageSpec: XCTestCase {
     func testEmptyUserMessage() {
         let message = Message()
         message.text = "foo"
+        message.createdAt = Date()
+        message.identifier = String.random()
 
         let lastMessage = Subscription.lastMessageText(lastMessage: message)
         XCTAssertEqual(lastMessage, "No message")
@@ -34,6 +36,7 @@ class SubscriptionLastMessageSpec: XCTestCase {
 
         let message = Message()
         message.identifier = String.random(20)
+        message.createdAt = Date()
         message.text = "**foo** *bar* [testing link](https://foo.bar)"
         message.userIdentifier = user.identifier
 
