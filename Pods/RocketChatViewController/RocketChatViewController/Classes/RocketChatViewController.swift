@@ -332,7 +332,7 @@ extension RocketChatViewController {
         return 0.0
     }
 
-    fileprivate var bottomHeight: CGFloat {
+    @objc open var bottomHeight: CGFloat {
         var composer = keyboardHeight > 0.0 ? keyboardHeight : composerView.frame.height
         composer += view.safeAreaInsets.bottom
         return composer
