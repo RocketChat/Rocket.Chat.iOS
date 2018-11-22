@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-hh-2qT" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="71" y="0.0" width="514" height="35"/>
+                        <rect key="frame" x="75" y="0.0" width="505" height="35"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="AKV-Pb-j8b"/>
@@ -31,9 +31,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="zsI-hh-2qT" secondAttribute="bottom" constant="5" id="Jfd-JE-HiJ"/>
-                <constraint firstItem="zsI-hh-2qT" firstAttribute="leading" secondItem="sxZ-FJ-hEk" secondAttribute="leading" constant="71" id="akr-GI-zHM"/>
-                <constraint firstAttribute="trailing" secondItem="zsI-hh-2qT" secondAttribute="trailing" constant="15" id="kbQ-Hz-NtM"/>
+                <constraint firstItem="zsI-hh-2qT" firstAttribute="leading" secondItem="sxZ-FJ-hEk" secondAttribute="leadingMargin" constant="55" id="mlq-te-TbH"/>
                 <constraint firstItem="zsI-hh-2qT" firstAttribute="top" secondItem="sxZ-FJ-hEk" secondAttribute="top" id="sLz-Ms-I0X"/>
+                <constraint firstAttribute="trailingMargin" secondItem="zsI-hh-2qT" secondAttribute="trailing" id="zyh-2U-jrr"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="D9b-lN-ByO"/>
             <size key="customSize" width="600" height="35"/>
