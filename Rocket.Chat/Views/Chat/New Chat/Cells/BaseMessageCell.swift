@@ -63,9 +63,9 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             button.isHidden = true
             button.changeWidth(to: 0)
             button.changeLeading(to: 0)
-        }
 
-        let image = UIImage(named: "Read")?.imageWithTint(viewModel.isUnread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
-        button.setImage(image, for: .normal)
+            let image = UIImage(named: "Read")?.imageWithTint(viewModel.isUnread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
+            button.setImage(image, for: .normal)
+        }
     }
 }
