@@ -69,7 +69,7 @@ extension UnmanagedMessage {
             lhs.failed == rhs.failed &&
             lhs.mentions == rhs.mentions &&
             lhs.channels == rhs.channels &&
-            lhs.attachments == rhs.attachments &&
+            lhs.attachments.elementsEqual(rhs.attachments) &&
             lhs.urls == rhs.urls &&
             lhs.reactions == rhs.reactions &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970

@@ -189,6 +189,7 @@ extension MessagesViewController: ChatMessageCellProtocol {
         viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
 
         var newCollapsedState = true
+
         if let indexOfSection = self.viewModel.sectionIndex(for: viewModel),
             let section = self.viewModel.section(for: indexOfSection)?.base as? MessageSection {
             if let collapsed = section.collapsibleItemsState[viewModel.differenceIdentifier] {
