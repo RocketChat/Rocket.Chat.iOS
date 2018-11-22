@@ -15,6 +15,7 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         return hasText ? VideoCell.identifier : VideoMessageCell.identifier
     }
 
+    let attachment: UnmanagedAttachment
     let identifier: String
     let descriptionText: String?
     let videoURL: URL?
@@ -22,6 +23,7 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
     let hasText: Bool
 
     init(
+        attachment: UnmanagedAttachment,
         identifier: String,
         descriptionText: String?,
         videoURL: URL?,
@@ -31,6 +33,7 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         message: UnmanagedMessage?
         ) {
 
+        self.attachment = attachment
         self.identifier = identifier
         self.descriptionText = descriptionText
         self.videoURL = videoURL
