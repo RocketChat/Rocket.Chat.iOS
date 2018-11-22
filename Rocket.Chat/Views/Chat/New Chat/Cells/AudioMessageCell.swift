@@ -77,10 +77,12 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         updateTimer = setupPlayerTimer(with: slider, and: labelAudioTime)
     }
 
-    override func configure() {
-        configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
-        updateAudio()
+    override func configure(completeRendering: Bool) {
+        if completeRendering {
+            configure(readReceipt: readReceiptButton)
+            configure(with: avatarView, date: date, and: username)
+            updateAudio()
+        }
     }
 
     override func prepareForReuse() {

@@ -41,7 +41,7 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
     }
     @IBOutlet weak var readReceiptButton: UIButton!
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
         }
@@ -55,7 +55,11 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
+
+        if completeRendering {
+            configure(with: avatarView, date: date, and: username)
+        }
+
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }
 

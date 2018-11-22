@@ -27,8 +27,11 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
-    func configure() {
-        guard let viewModel = viewModel?.base as? DateSeparatorChatItem else {
+    func configure(completeRendering: Bool) {
+        guard
+            completeRendering,
+            let viewModel = viewModel?.base as? DateSeparatorChatItem
+        else {
             return
         }
 

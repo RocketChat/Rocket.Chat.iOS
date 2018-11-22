@@ -32,9 +32,7 @@ final class UnreadMarkerCell: UICollectionViewCell, ChatCell, SizingCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
-    func configure() {
-        // Do nothing
-    }
+    func configure(completeRendering: Bool) {}
 }
 
 // MARK: Theming

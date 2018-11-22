@@ -98,16 +98,18 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, BaseMessag
         textContainer.addGestureRecognizer(gesture)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
             return
         }
 
-        let emptyTitle = localized("chat.components.text_attachment.no_title")
-        title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
-        statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
-        configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
+        if completeRendering {
+            let emptyTitle = localized("chat.components.text_attachment.no_title")
+            title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
+            statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+            configure(readReceipt: readReceiptButton)
+            configure(with: avatarView, date: date, and: username)
+        }
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)

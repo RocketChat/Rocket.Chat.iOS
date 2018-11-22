@@ -49,7 +49,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
@@ -62,9 +62,11 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
             labelDescriptionTopConstraint.constant = 0
         }
 
-        configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
-        updateVideo(with: imageViewThumb)
+        if completeRendering {
+            configure(readReceipt: readReceiptButton)
+            configure(with: avatarView, date: date, and: username)
+            updateVideo(with: imageViewThumb)
+        }
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {

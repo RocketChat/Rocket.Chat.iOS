@@ -79,7 +79,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, BaseMessageCellPr
         textContainer.addGestureRecognizer(gesture)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
             return
         }

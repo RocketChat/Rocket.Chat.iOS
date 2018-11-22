@@ -27,7 +27,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         return AuthManager.isAuthenticated()?.settings
     }
 
-    func configure() {}
+    func configure(completeRendering: Bool) {}
 
     func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
         guard

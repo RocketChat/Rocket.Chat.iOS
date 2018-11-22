@@ -59,7 +59,7 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         containerView.addGestureRecognizer(gesture)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }

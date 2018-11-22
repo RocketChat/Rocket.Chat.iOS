@@ -39,7 +39,7 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var buttonPlayer: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
@@ -52,7 +52,9 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
             labelDescriptionTopConstraint.constant = 0
         }
 
-        updateVideo(with: imageViewThumb)
+        if completeRendering {
+            updateVideo(with: imageViewThumb)
+        }
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {

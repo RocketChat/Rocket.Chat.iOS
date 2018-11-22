@@ -78,13 +78,15 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
         containerView.addGestureRecognizer(gesture)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
 
-        configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: messageUsername)
+        if completeRendering {
+            configure(readReceipt: readReceiptButton)
+            configure(with: avatarView, date: date, and: messageUsername)
+        }
 
         purpose.text = viewModel.purpose
         purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant

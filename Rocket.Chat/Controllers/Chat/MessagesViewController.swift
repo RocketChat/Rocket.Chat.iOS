@@ -22,9 +22,9 @@ extension SizingCell {
         mutableSizingCell.prepareForReuse()
         mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
-        mutableSizingCell.configure()
+        mutableSizingCell.configure(completeRendering: false)
         mutableSizingCell.setNeedsLayout()
-        mutableSizingCell.layoutIfNeeded()
+        // mutableSizingCell.layoutIfNeeded()
 
         return mutableSizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
