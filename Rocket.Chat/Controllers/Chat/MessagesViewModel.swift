@@ -153,6 +153,23 @@ final class MessagesViewModel {
         requestingData = false
     }
 
+    func sectionIndex(for item: AnyChatItem) -> Int? {
+        let section = dataSorted.filter({ $0.viewModels().contains(where: { $0.differenceIdentifier == item.differenceIdentifier }) }).first
+        if let section = section {
+            return dataSorted.firstIndex(of: section)
+        }
+
+        return nil
+    }
+
+    func section(for index: Int) -> AnyChatSection? {
+        guard index < dataSorted.count else {
+            return nil
+        }
+
+        return dataSorted[index]
+    }
+
     /**
      Returns the specific cell item model for the IndexPath requested.
      */
