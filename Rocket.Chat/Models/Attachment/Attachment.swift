@@ -16,7 +16,7 @@ class AttachmentField: Object {
     @objc dynamic var value: String = ""
 }
 
-class Attachment: Object {
+class Attachment: BaseModel {
     var type: MessageType {
         guard let validatedAttachment = validated() else {
             // FA NOTE: Returning the default MessageType for an invalidated object since there's no invalid MessageType
@@ -42,7 +42,6 @@ class Attachment: Object {
         return titleLinkDownload && !titleLink.isEmpty
     }
 
-    @objc dynamic var identifier: String?
     @objc dynamic var collapsed: Bool = false
     @objc dynamic var text: String?
     @objc dynamic var descriptionText: String?
