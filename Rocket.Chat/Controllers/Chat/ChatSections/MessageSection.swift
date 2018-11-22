@@ -85,6 +85,7 @@ final class MessageSection: ChatSection {
             case .video:
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
                     cells.append(VideoMessageChatItem(
+                        attachment: attachment,
                         identifier: attachment.identifier,
                         descriptionText: attachment.descriptionText,
                         videoURL: attachment.fullFileURL,
@@ -97,6 +98,7 @@ final class MessageSection: ChatSection {
                     shouldAppendMessageHeader = false
                 } else {
                     cells.append(VideoMessageChatItem(
+                        attachment: attachment,
                         identifier: attachment.identifier,
                         descriptionText: attachment.descriptionText,
                         videoURL: attachment.fullFileURL,

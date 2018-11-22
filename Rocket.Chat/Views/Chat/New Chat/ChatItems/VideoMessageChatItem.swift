@@ -15,19 +15,36 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         return hasText ? VideoCell.identifier : VideoMessageCell.identifier
     }
 
+    let attachment: UnmanagedAttachment
     let identifier: String
     let descriptionText: String?
     let videoURL: URL?
     let videoThumbPath: URL?
     let hasText: Bool
 
-    init(identifier: String, descriptionText: String?, videoURL: URL?, videoThumbPath: URL?, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+    init(
+        attachment: UnmanagedAttachment,
+        identifier: String,
+        descriptionText: String?,
+        videoURL: URL?,
+        videoThumbPath: URL?,
+        hasText: Bool,
+        user: UnmanagedUser?,
+        message: UnmanagedMessage?) {
+
+        self.attachment = attachment
         self.identifier = identifier
         self.descriptionText = descriptionText
         self.videoURL = videoURL
         self.videoThumbPath = videoThumbPath
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+
+        super.init(
+            user: user,
+            avatar: message?.avatar,
+            emoji: message?.emoji,
+            date: message?.createdAt
+        )
     }
 
     var differenceIdentifier: String {
