@@ -78,9 +78,11 @@
             <size key="customSize" width="375" height="40"/>
             <connections>
                 <outlet property="avatarContainerView" destination="jUK-HJ-1Sf" id="QUo-9F-vxp"/>
+                <outlet property="avatarLeadingConstraint" destination="m5z-W1-5lf" id="68a-N4-X6V"/>
                 <outlet property="avatarWidthConstraint" destination="nqL-QP-b31" id="D0t-cA-Lod"/>
                 <outlet property="date" destination="3FX-dW-pKk" id="jSH-or-ILG"/>
                 <outlet property="readReceiptButton" destination="nz7-HR-gAg" id="y6x-bN-sbc"/>
+                <outlet property="readReceiptTrailingConstraint" destination="eMI-IC-viz" id="KHs-0Y-cwG"/>
                 <outlet property="readReceiptWidthConstraint" destination="0MA-1u-JG8" id="EzR-t2-cel"/>
                 <outlet property="text" destination="Cr2-8p-eRS" id="YOI-ga-hdD"/>
                 <outlet property="textHeightConstraint" destination="zQ8-gG-X3N" id="4R5-ks-5mm"/>
