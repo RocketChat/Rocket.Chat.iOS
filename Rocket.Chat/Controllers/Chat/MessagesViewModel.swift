@@ -468,9 +468,7 @@ final class MessagesViewModel {
 
             // Cache the processed result of the message text
             // on this loop to avoid doing that in the main thread.
-            if let managedObject = message.managedObject {
-                MessageTextCacheManager.shared.message(for: managedObject, with: currentTheme)
-            }
+            MessageTextCacheManager.shared.message(for: message, with: currentTheme)
 
             if unreadMarker {
                 hasUnreadMarker = true

@@ -103,7 +103,8 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, BaseMessag
             return
         }
 
-        title.text = viewModel.title
+        let emptyTitle = localized("chat.components.text_attachment.no_title")
+        title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
         statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
         configure(readReceipt: readReceiptButton)
         configure(with: avatarView, date: date, and: username)

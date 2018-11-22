@@ -38,7 +38,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         }
 
         date.text = viewModel.dateFormatted
-        username.text = user.username
+        username.text = viewModel.alias ?? user.username
         avatarView.emoji = viewModel.emoji
         avatarView.username = user.username
 

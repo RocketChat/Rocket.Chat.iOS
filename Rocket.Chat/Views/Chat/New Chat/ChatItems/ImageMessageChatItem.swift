@@ -21,13 +21,30 @@ final class ImageMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
     var imageURL: URL?
     let hasText: Bool
 
-    init(identifier: String, title: String?, descriptionText: String?, imageURL: URL?, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+    init(
+        identifier: String,
+        title: String?,
+        descriptionText: String?,
+        imageURL: URL?,
+        hasText: Bool,
+        user: UnmanagedUser?,
+        message: UnmanagedMessage?
+        ) {
+
         self.identifier = identifier
         self.title = title
         self.descriptionText = descriptionText
         self.imageURL = imageURL
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
+
+        super.init(
+            user: user,
+            avatar: message?.avatar,
+            emoji: message?.emoji,
+            alias: message?.alias,
+            date: message?.createdAt,
+            isUnread: message?.unread ?? false
+        )
     }
 
     var differenceIdentifier: String {

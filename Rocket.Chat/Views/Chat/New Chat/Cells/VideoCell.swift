@@ -56,7 +56,11 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
-        // delegate?.openVideoFromCell(attachment: attachment)
+        guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
+            return
+        }
+
+        delegate?.openVideoFromCell(attachment: viewModel.attachment)
     }
 
     override func prepareForReuse() {

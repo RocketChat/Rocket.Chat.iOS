@@ -80,13 +80,12 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 
     func updateText() {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
+            let viewModel = viewModel?.base as? BasicMessageChatItem
         else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
