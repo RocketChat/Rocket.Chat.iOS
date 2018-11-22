@@ -111,6 +111,8 @@
                 <outlet property="subtitle" destination="Gbv-W5-I0m" id="ypl-tb-4ZY"/>
                 <outlet property="subtitleTopConstraint" destination="bjK-rF-85x" id="GDY-tK-2fx"/>
                 <outlet property="textContainer" destination="o4N-fB-seu" id="PbO-oR-44i"/>
+                <outlet property="textContainerLeadingConstraint" destination="aBe-ed-WT3" id="I8O-Bk-mDd"/>
+                <outlet property="textContainerTrailingConstraint" destination="daZ-pA-KKz" id="pII-QW-Hpf"/>
                 <outlet property="title" destination="cSx-Xs-2vQ" id="T4Q-H6-mjE"/>
             </connections>
             <point key="canvasLocation" x="109.59999999999999" y="-45.877061469265371"/>
