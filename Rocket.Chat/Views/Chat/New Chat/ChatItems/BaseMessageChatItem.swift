@@ -23,7 +23,15 @@ class BaseMessageChatItem {
         return RCDateFormatter.time(date)
     }
 
-    init(user: UnmanagedUser?, avatar: String?, emoji: String?, alias: String?, date: Date?, isUnread: Bool = false) {
+    init(
+        user: UnmanagedUser?,
+        avatar: String?,
+        emoji: String?,
+        alias: String?,
+        date: Date?,
+        isUnread: Bool = false
+        ) {
+
         self.user = user
         self.avatar = avatar
         self.emoji = emoji
