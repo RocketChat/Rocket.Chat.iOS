@@ -87,6 +87,8 @@
             <size key="customSize" width="375" height="95.5"/>
             <connections>
                 <outlet property="arrow" destination="Alc-xZ-4VT" id="6y1-zb-TlC"/>
+                <outlet property="containerLeadingConstraint" destination="Nfx-bO-iIr" id="n9u-mv-5ms"/>
+                <outlet property="containerTrailingConstraint" destination="cvY-lq-42z" id="adZ-eZ-2AL"/>
                 <outlet property="containerView" destination="B3H-28-ZKR" id="MmB-sC-5t0"/>
                 <outlet property="purpose" destination="Oyn-h1-OvH" id="oW7-Fg-Tql"/>
                 <outlet property="purposeHeightConstraint" destination="lLa-2i-bko" id="Oge-PB-OiO"/>

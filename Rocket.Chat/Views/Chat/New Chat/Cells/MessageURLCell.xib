@@ -66,6 +66,7 @@
                         <color key="backgroundColor" red="0.95294117649999999" green="0.95686274510000002" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JBg-lq-cbz" firstAttribute="leading" secondItem="DRa-SQ-UjJ" secondAttribute="leading" constant="15" id="0qD-C4-WKD"/>
+                            <constraint firstAttribute="width" constant="288" id="15d-ef-PPh"/>
                             <constraint firstItem="Soe-tp-c3F" firstAttribute="centerX" secondItem="2cU-ro-6J9" secondAttribute="centerX" id="2W2-ak-Aba"/>
                             <constraint firstAttribute="trailing" secondItem="2cU-ro-6J9" secondAttribute="trailing" id="8F5-SJ-vQa"/>
                             <constraint firstItem="aSO-ZR-gNc" firstAttribute="leading" secondItem="DRa-SQ-UjJ" secondAttribute="leading" constant="15" id="8St-xn-Kea"/>
@@ -100,7 +101,10 @@
             <size key="customSize" width="375" height="166"/>
             <connections>
                 <outlet property="activityIndicator" destination="Soe-tp-c3F" id="9Gw-nl-1tJ"/>
+                <outlet property="containerLeadingConstraint" destination="hNb-8E-yxx" id="PbK-sM-Rao"/>
+                <outlet property="containerTrailingConstraint" destination="DN7-rQ-VM3" id="rcF-hB-sPu"/>
                 <outlet property="containerView" destination="DRa-SQ-UjJ" id="xHG-yf-UoP"/>
+                <outlet property="containerWidthConstraint" destination="15d-ef-PPh" id="8Uu-mW-Rxs"/>
                 <outlet property="host" destination="JBg-lq-cbz" id="rYQ-au-Oef"/>
                 <outlet property="subtitle" destination="aSO-ZR-gNc" id="d6p-35-V2y"/>
                 <outlet property="thumbnail" destination="2cU-ro-6J9" id="wZf-8K-Ocy"/>
