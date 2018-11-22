@@ -186,28 +186,29 @@ extension MessagesViewController: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
-        if let indexOfSection = self.viewModel.sectionIndex(for: viewModel),
-                let section = self.viewModel.section(for: indexOfSection)?.base as? MessageSection {
-            if let collapsed = section.collapsibleItemsState[viewModel.differenceIdentifier] {
-                section.collapsibleItemsState[viewModel.differenceIdentifier] = !collapsed
-            } else {
-                var collapsed = true
+        viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
 
-                switch viewModel.base {
-                case let chatItem as TextAttachmentChatItem:
-                    collapsed = chatItem.collapsed
-                case let chatItem as QuoteChatItem:
-                    collapsed = chatItem.collapsed
-                default:
-                    break
+        var newCollapsedState = true
+        if let indexOfSection = self.viewModel.sectionIndex(for: viewModel),
+            let section = self.viewModel.section(for: indexOfSection)?.base as? MessageSection {
+            if let collapsed = section.collapsibleItemsState[viewModel.differenceIdentifier] {
+                newCollapsedState = !collapsed
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = newCollapsedState
+            } else {
+                if let chatItem = viewModel.base as? BaseTextAttachmentChatItem {
+                    newCollapsedState = !chatItem.collapsed
                 }
 
-                section.collapsibleItemsState[viewModel.differenceIdentifier] = !collapsed
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = newCollapsedState
             }
         }
 
-        viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-        self.viewModel.updateData()
+        Realm.executeOnMainThread { realm in
+            if let attachment = realm.objects(Attachment.self).filter("identifier = %@", viewModel.differenceIdentifier.description).first {
+                attachment.collapsed = newCollapsedState
+                realm.add(attachment, update: true)
+            }
+        }
     }
 }
 
