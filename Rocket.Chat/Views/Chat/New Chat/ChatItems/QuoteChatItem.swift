@@ -42,6 +42,7 @@ final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable 
             user: user,
             avatar: message?.avatar,
             emoji: message?.emoji,
+            alias: message?.alias,
             date: message?.createdAt,
             isUnread: message?.unread ?? false
         )

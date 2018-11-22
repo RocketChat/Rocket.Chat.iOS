@@ -30,7 +30,8 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         videoThumbPath: URL?,
         hasText: Bool,
         user: UnmanagedUser?,
-        message: UnmanagedMessage?) {
+        message: UnmanagedMessage?
+        ) {
 
         self.attachment = attachment
         self.identifier = identifier
@@ -43,6 +44,7 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
             user: user,
             avatar: message?.avatar,
             emoji: message?.emoji,
+            alias: message?.alias,
             date: message?.createdAt
         )
     }
