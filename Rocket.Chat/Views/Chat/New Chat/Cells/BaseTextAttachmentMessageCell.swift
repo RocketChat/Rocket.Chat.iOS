@@ -97,12 +97,6 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             return
         }
 
-        if let collapsed = messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] {
-            messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !collapsed
-        } else {
-            messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
-        }
-
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }

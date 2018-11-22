@@ -186,6 +186,26 @@ extension MessagesViewController: ChatMessageCellProtocol {
     }
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
+        if let indexOfSection = self.viewModel.sectionIndex(for: viewModel),
+                let section = self.viewModel.section(for: indexOfSection)?.base as? MessageSection {
+            if let collapsed = section.collapsibleItemsState[viewModel.differenceIdentifier] {
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = !collapsed
+            } else {
+                var collapsed = true
+
+                switch viewModel.base {
+                case let chatItem as TextAttachmentChatItem:
+                    collapsed = chatItem.collapsed
+                case let chatItem as QuoteChatItem:
+                    collapsed = chatItem.collapsed
+                default:
+                    break
+                }
+
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = !collapsed
+            }
+        }
+
         viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
         self.viewModel.updateData()
     }
