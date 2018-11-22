@@ -12,6 +12,7 @@ class BaseMessageChatItem {
     let user: UnmanagedUser?
     let avatar: String?
     let emoji: String?
+    let alias: String?
     let date: Date?
     let isUnread: Bool
     var dateFormatted: String {
@@ -22,10 +23,11 @@ class BaseMessageChatItem {
         return RCDateFormatter.time(date)
     }
 
-    init(user: UnmanagedUser?, avatar: String?, emoji: String?, date: Date?, isUnread: Bool = false) {
+    init(user: UnmanagedUser?, avatar: String?, emoji: String?, alias: String?, date: Date?, isUnread: Bool = false) {
         self.user = user
         self.avatar = avatar
         self.emoji = emoji
+        self.alias = alias
         self.date = date
         self.isUnread = isUnread
     }
