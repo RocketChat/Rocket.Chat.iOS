@@ -73,8 +73,12 @@ extension Message: ModelMappeable {
             self.attachments.removeAll()
 
             attachments.forEach {
+                guard let attachmentValue = try? $0.merged(with: JSON(dictionaryLiteral: ("messageIdentifier", values["_id"].stringValue))) else {
+                    return
+                }
+
                 let obj = Attachment()
-                obj.map($0, realm: realm)
+                obj.map(attachmentValue, realm: realm)
                 self.attachments.append(obj)
             }
         }
