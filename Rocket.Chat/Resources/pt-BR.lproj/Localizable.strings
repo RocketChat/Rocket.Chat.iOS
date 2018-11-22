@@ -497,3 +497,4 @@
 // Chat Components
 "chat.components.quote.replied" = "Respondido";
 "chat.components.quote.pinned" = "Pinado";
+"chat.components.text_attachment.no_title" = "Sem título";

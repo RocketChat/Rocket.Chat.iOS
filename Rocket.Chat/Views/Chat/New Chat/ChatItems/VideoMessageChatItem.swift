@@ -21,13 +21,29 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
     let videoThumbPath: URL?
     let hasText: Bool
 
-    init(identifier: String, descriptionText: String?, videoURL: URL?, videoThumbPath: URL?, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+    init(
+        identifier: String,
+        descriptionText: String?,
+        videoURL: URL?,
+        videoThumbPath: URL?,
+        hasText: Bool,
+        user: UnmanagedUser?,
+        message: UnmanagedMessage?
+        ) {
+
         self.identifier = identifier
         self.descriptionText = descriptionText
         self.videoURL = videoURL
         self.videoThumbPath = videoThumbPath
         self.hasText = hasText
-        super.init(user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt)
+
+        super.init(
+            user: user,
+            avatar: message?.avatar,
+            emoji: message?.emoji,
+            alias: message?.alias,
+            date: message?.createdAt
+        )
     }
 
     var differenceIdentifier: String {

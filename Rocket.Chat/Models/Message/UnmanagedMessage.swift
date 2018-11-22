@@ -62,6 +62,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var emoji: String?
     var role: String
     var avatar: String?
+    var alias: String?
     var snippetName: String?
     var snippetId: String?
 
@@ -114,6 +115,7 @@ extension UnmanagedMessage {
         emoji = message.emoji
         role = message.role
         avatar = message.avatar
+        alias = message.alias.isEmpty ? nil : message.alias
         snippetName = message.snippetName
         snippetId = message.snippetId
 

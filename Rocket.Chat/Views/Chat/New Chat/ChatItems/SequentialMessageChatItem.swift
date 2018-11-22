@@ -19,7 +19,15 @@ final class SequentialMessageChatItem: BaseMessageChatItem, ChatItem, Differenti
 
     init(user: UnmanagedUser, message: UnmanagedMessage) {
         self.message = message
-        super.init(user: user, avatar: message.avatar, emoji: message.emoji, date: message.createdAt, isUnread: message.unread)
+
+        super.init(
+            user: user,
+            avatar: message.avatar,
+            emoji: message.emoji,
+            alias: message.alias,
+            date: message.createdAt,
+            isUnread: message.unread
+        )
     }
 
     var differenceIdentifier: String {
