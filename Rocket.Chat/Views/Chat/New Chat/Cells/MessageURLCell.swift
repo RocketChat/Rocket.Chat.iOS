@@ -74,11 +74,9 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
             thumbnailHeightConstraint.constant = 0
         }
 
-        if completeRendering {
-            host.text = URL(string: viewModel.url)?.host
-            title.text = viewModel.title
-            subtitle.text = viewModel.subtitle
-        }
+        host.text = URL(string: viewModel.url)?.host
+        title.text = viewModel.title
+        subtitle.text = viewModel.subtitle
     }
 
     @objc func didTapContainerView() {
