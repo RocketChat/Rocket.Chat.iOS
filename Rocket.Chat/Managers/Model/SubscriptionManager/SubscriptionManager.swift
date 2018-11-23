@@ -65,7 +65,7 @@ struct SubscriptionManager {
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
-            let msg = response.result["fields"]["args"][0]
+            let msg = response.result["fields"]["args"][0].stringValue
             let object = response.result["fields"]["args"][1]
 
             currentRealm?.execute({ (realm) in
@@ -81,6 +81,7 @@ struct SubscriptionManager {
                 if msg == "removed" {
                     realm.delete(subscription)
                 } else {
+                    subscription.map(object, realm: realm)
                     realm.add(subscription, update: true)
                 }
             })
