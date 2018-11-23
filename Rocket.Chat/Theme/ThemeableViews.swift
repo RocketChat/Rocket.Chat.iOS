@@ -64,7 +64,18 @@ extension UIView: ThemeProvider {
             "SwipeCellKit.SwipeActionsView"
         ]
 
+        let exemptedSuperviews = [
+            "UIActivityIndicatorView"
+        ]
+
         guard !(exemptedInternalViews + exemptedExternalViews).contains(type(of: self).description()) else { return nil }
+
+        if let superview = superview {
+            if !(exemptedSuperviews).contains(type(of: superview).description()) {
+                return nil
+            }
+        }
+
         if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
         return ThemeManager.theme
     }

@@ -6,14 +6,11 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SafariServices
-import OnePasswordExtension
 import RealmSwift
 import MBProgressHUD
 
-class AuthTableViewController: BaseTableViewController {
+final class AuthTableViewController: BaseTableViewController {
 
     internal let kLoginProvidersSection: Int = 0
     internal var kLoginProvidersCollapsedMax: Int {
@@ -32,16 +29,19 @@ class AuthTableViewController: BaseTableViewController {
             return EmailAuthTableViewCell()
         }
 
+        let font = UIFont.preferredFont(forTextStyle: .body)
         let prefix = NSAttributedString(
             string: localized("auth.email_auth_prefix"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
         )
         let service = NSAttributedString(
             string: localized("auth.email_auth"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                NSAttributedString.Key.font: font.bold() ?? font,
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
         )
 
@@ -90,7 +90,7 @@ class AuthTableViewController: BaseTableViewController {
             let serverURL = serverURL,
             let serverVersion = serverVersion
         else {
-                return nil
+            return nil
         }
 
         return API(host: serverURL, version: serverVersion)
@@ -140,7 +140,6 @@ class AuthTableViewController: BaseTableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         setupLoginServices()
     }
 
