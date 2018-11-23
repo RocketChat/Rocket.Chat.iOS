@@ -26,6 +26,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
 
         labelDate.text = nil
         labelLastMessage.text = nil
+        labelName.text = nil
     }
 
     override func updateSubscriptionInformation() {
@@ -57,7 +58,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
     private func setDateColor() {
         guard
             let theme = theme,
-            let subscription = subscription
+            let subscription = subscription?.managedObject
         else {
             return
         }
