@@ -340,6 +340,8 @@
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Licence";
 "myaccount.settings.language" = "Langue";
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "Icône de l'application";
 "myaccount.settings.version" = "Version : %@ (%@)";
 "myaccount.settings.server_version" = "Version du serveur: %@";
