@@ -46,13 +46,14 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+
         labelTitle.text = viewModel.title
 
         if let description = viewModel.descriptionText, !description.isEmpty {
@@ -63,11 +64,13 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
             labelDescriptionTopConstraint.constant = 0
         }
 
-        loadImage(on: imageView, startLoadingBlock: { [weak self] in
-            self?.activityIndicator.startAnimating()
-        }, stopLoadingBlock: { [weak self] in
-            self?.activityIndicator.stopAnimating()
-        })
+        if completeRendering {
+            loadImage(on: imageView, startLoadingBlock: { [weak self] in
+                self?.activityIndicator.startAnimating()
+            }, stopLoadingBlock: { [weak self] in
+                self?.activityIndicator.stopAnimating()
+            })
+        }
     }
 
     // MARK: IBAction

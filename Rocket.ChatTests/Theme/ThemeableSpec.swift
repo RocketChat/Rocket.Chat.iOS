@@ -18,9 +18,6 @@ class ThemeableSpec: XCTestCase {
             super.applyTheme()
             themeApplied = true
         }
-
-        override var theme: Theme? { return internalTheme }
-        var internalTheme: Theme? = Theme.light
     }
 
     func testApplyThemeCalledOnSubview() {
@@ -29,22 +26,6 @@ class ThemeableSpec: XCTestCase {
         view.addSubview(subview)
         view.applyTheme()
         XCTAssert(subview.themeApplied, "Apply theme should be called on subview.")
-    }
-
-    func testSettingThemeOnSuperview() {
-        let view = MockThemeableView()
-        let subview = UIView()
-        view.addSubview(subview)
-        view.internalTheme = .dark
-        XCTAssertEqual(subview.theme, view.internalTheme, "View should acquire its superview's theme.")
-    }
-
-    func testSettingThemeOnSubview() {
-        let view = UIView()
-        let subview = MockThemeableView()
-        view.addSubview(subview)
-        subview.internalTheme = nil
-        XCTAssertNil(subview.theme, "View should be able to override its parent's theme.")
     }
 
     func testNotThemeableView() {

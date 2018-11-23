@@ -22,10 +22,9 @@ extension SizingCell {
         mutableSizingCell.prepareForReuse()
         mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
-        mutableSizingCell.configure()
+        mutableSizingCell.configure(completeRendering: false)
         mutableSizingCell.setNeedsLayout()
         mutableSizingCell.layoutIfNeeded()
-
         return mutableSizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
@@ -425,16 +424,29 @@ extension MessagesViewController {
         if let size = viewSizingModel.size(for: item.differenceIdentifier) {
             return size
         } else {
-            guard let sizingCell = UINib(nibName: item.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
+            let identifier = item.relatedReuseIdentifier
+            var sizingCell: Any?
+
+            if let cachedSizingCell = viewSizingModel.view(for: identifier) as? SizingCell {
+                sizingCell = cachedSizingCell
+            } else {
+                sizingCell = UINib(nibName: identifier, bundle: nil).instantiate() as? SizingCell
+
+                if let sizingCell = sizingCell {
+                    viewSizingModel.set(view: sizingCell, for: identifier)
+                }
+            }
+
+            guard let cell = sizingCell as? SizingCell else {
                 fatalError("""
-                            Failed to reference sizing cell instance. Please,
-                            check the relatedReuseIdentifier and make sure all
-                            the chat components conform to SizingCell protocol
-                            """)
+                    Failed to reference sizing cell instance. Please,
+                    check the relatedReuseIdentifier and make sure all
+                    the chat components conform to SizingCell protocol
+                """)
             }
 
             let cellWidth = messageWidth()
-            var size = type(of: sizingCell).size(for: item, with: cellWidth)
+            var size = type(of: cell).size(for: item, with: cellWidth)
             size = CGSize(width: cellWidth, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
             return size
