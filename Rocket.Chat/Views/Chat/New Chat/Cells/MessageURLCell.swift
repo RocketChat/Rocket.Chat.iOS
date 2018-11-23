@@ -54,7 +54,7 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         containerView.addGestureRecognizer(gesture)
     }
 
-    func configure() {
+    func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? MessageURLChatItem else {
             return
         }
@@ -63,9 +63,12 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
 
         if let image = viewModel.imageURL, let imageURL = URL(string: image) {
             thumbnailHeightConstraint.constant = thumbnailHeightInitialConstant
-            activityIndicator.startAnimating()
-            ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
-                self?.activityIndicator.stopAnimating()
+
+            if completeRendering {
+                activityIndicator.startAnimating()
+                ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         } else {
             thumbnailHeightConstraint.constant = 0

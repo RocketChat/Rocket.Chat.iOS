@@ -27,9 +27,9 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         return AuthManager.isAuthenticated()?.settings
     }
 
-    func configure() {}
+    func configure(completeRendering: Bool) {}
 
-    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
+    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel, completeRendering: Bool) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
@@ -39,13 +39,16 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
 
         date.text = viewModel.dateFormatted
         username.text = viewModel.alias ?? user.username
-        avatarView.emoji = viewModel.emoji
-        avatarView.username = user.username
 
-        if let avatar = viewModel.avatar {
-            avatarView.avatarURL = URL(string: avatar)
-        } else {
-            avatarView.avatarURL = user.avatarURL
+        if completeRendering {
+            avatarView.emoji = viewModel.emoji
+            avatarView.username = user.username
+
+            if let avatar = viewModel.avatar {
+                avatarView.avatarURL = URL(string: avatar)
+            } else {
+                avatarView.avatarURL = user.avatarURL
+            }
         }
     }
 
@@ -63,9 +66,9 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             button.isHidden = true
             button.changeWidth(to: 0)
             button.changeLeading(to: 0)
-        }
 
-        let image = UIImage(named: "Read")?.imageWithTint(viewModel.isUnread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
-        button.setImage(image, for: .normal)
+            let image = viewModel.isUnread ? UIImage(named: "Unread") : UIImage(named: "Read")
+            button.setImage(image, for: .normal)
+        }
     }
 }

@@ -275,7 +275,7 @@ final class MessageSection: ChatSection {
 
         cell.messageWidth = messagesController?.messageWidth() ?? 0
         cell.viewModel = viewModel
-        cell.configure()
+        cell.configure(completeRendering: true)
         return cell
     }
 }
