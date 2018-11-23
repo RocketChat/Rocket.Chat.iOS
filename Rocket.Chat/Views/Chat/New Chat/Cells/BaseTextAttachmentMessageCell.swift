@@ -97,7 +97,6 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             return
         }
 
-        messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }
