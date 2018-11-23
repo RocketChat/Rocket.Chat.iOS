@@ -11,6 +11,7 @@ import Foundation
 final class MessagesSizingManager {
 
     internal var cache: [AnyHashable: NSValue] = [:]
+    internal var nibsCache: [AnyHashable: Any] = [:]
 
     /**
      Clear all height values cached.
@@ -35,6 +36,20 @@ final class MessagesSizingManager {
      */
     func set(size: CGSize, for identifier: AnyHashable) {
         return cache[identifier] = NSValue(cgSize: size)
+    }
+
+    /**
+     Returns the cached view for identifier.
+     */
+    func view(for identifier: AnyHashable) -> Any? {
+        return nibsCache[identifier]
+    }
+
+    /**
+     Sets the cached view to specific identifier.
+     */
+    func set(view: Any, for identifier: AnyHashable) {
+        return nibsCache[identifier] = view
     }
 
 }
