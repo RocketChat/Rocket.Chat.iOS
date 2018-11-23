@@ -340,6 +340,8 @@
 "myaccount.settings.profile" = "Λογαριασμός"; 
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 "myaccount.settings.server_version" = "Έκδοση Εξυπηρετητή: %@"; 
