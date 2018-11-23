@@ -36,13 +36,15 @@ class AuthTableViewController: BaseTableViewController {
         let prefix = NSAttributedString(
             string: localized("auth.email_auth_prefix"),
             attributes: [
-                NSAttributedString.Key.font: font
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
         )
         let service = NSAttributedString(
             string: localized("auth.email_auth"),
             attributes: [
-                NSAttributedString.Key.font: font.bold() ?? font
+                NSAttributedString.Key.font: font.bold() ?? font,
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
         )
 
@@ -50,7 +52,6 @@ class AuthTableViewController: BaseTableViewController {
         combinedString.append(service)
 
         emailAuthRow.loginButton.setAttributedTitle(combinedString, for: .normal)
-        emailAuthRow.loginButton.textColor = .white
         emailAuthRow.loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         emailAuthRow.registerButton.addTarget(self, action: #selector(showSignup), for: .touchUpInside)
 

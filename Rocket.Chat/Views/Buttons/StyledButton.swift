@@ -110,11 +110,7 @@ final class StyledButton: UIButton {
 
         switch style {
         case .solid:
-            if buttonColor.isBrightColor() {
-                loadingIndicator.style = .gray
-            } else {
-                loadingIndicator.style = .white
-            }
+            loadingIndicator.style = .white
         case .outline:
             loadingIndicator.color = borderColor
             loadingIndicator.tintColor = borderColor

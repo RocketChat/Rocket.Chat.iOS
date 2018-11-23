@@ -131,4 +131,13 @@ class WelcomeViewController: BaseViewController {
 
         present(controller, animated: true, completion: nil)
     }
+
+    // MARK: Theme
+
+    override func applyTheme() {
+        super.applyTheme()
+
+        createServerButtton.setTitleColor(.white, for: .normal)
+        createServerButtton.backgroundColor = UIColor.RCSkyBlue()
+    }
 }
