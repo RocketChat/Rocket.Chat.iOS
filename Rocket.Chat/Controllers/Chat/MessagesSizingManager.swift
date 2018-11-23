@@ -18,6 +18,7 @@ final class MessagesSizingManager {
      */
     func clearCache() {
         cache = [:]
+        nibsCache = [:]
     }
 
     func invalidateLayout(for identifier: AnyHashable) {
