@@ -111,6 +111,8 @@ final class StyledButton: UIButton {
         switch style {
         case .solid:
             loadingIndicator.style = .white
+            loadingIndicator.color = .white
+            loadingIndicator.tintColor = .white
         case .outline:
             loadingIndicator.color = borderColor
             loadingIndicator.tintColor = borderColor
