@@ -24,8 +24,7 @@ extension SizingCell {
         mutableSizingCell.viewModel = viewModel
         mutableSizingCell.configure(completeRendering: false)
         mutableSizingCell.setNeedsLayout()
-        // mutableSizingCell.layoutIfNeeded()
-
+        mutableSizingCell.layoutIfNeeded()
         return mutableSizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
