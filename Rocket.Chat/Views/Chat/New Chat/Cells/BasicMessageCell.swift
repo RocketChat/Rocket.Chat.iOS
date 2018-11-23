@@ -170,9 +170,11 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 // MARK: UIGestureRecognizerDelegate
 
 extension BasicMessageCell: UIGestureRecognizerDelegate {
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
+
 }
 
 // MARK: Theming
@@ -187,4 +189,5 @@ extension BasicMessageCell {
         username.textColor = theme.titleText
         updateText()
     }
+
 }

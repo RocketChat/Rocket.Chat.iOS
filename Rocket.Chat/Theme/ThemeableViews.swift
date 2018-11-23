@@ -65,9 +65,8 @@ extension UIView: ThemeProvider {
         ]
 
         guard !(exemptedInternalViews + exemptedExternalViews).contains(type(of: self).description()) else { return nil }
-        guard let superview = superview else { return ThemeManager.theme }
         if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
-        return superview.theme
+        return ThemeManager.theme
     }
 
     private var themeForPopover: Theme? {
