@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import semver
 
 final class ConnectServerViewController: BaseViewController {
 

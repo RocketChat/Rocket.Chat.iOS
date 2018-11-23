@@ -24,6 +24,7 @@ final class StyledTextField: VOTextField {
 
         leftView = iconView
         leftViewMode = .always
+
         applyStyle()
     }
 
@@ -62,15 +63,12 @@ final class StyledTextField: VOTextField {
 
         textColor = UIColor.RCTextFieldGray()
 
-        let textFont = UIFont.preferredFont(forTextStyle: .body)
-        font = textFont
-
         let placeholderText = placeholder ?? ""
         let placeholderAttributes = NSAttributedString(
             string: placeholderText,
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray(),
-                NSAttributedString.Key.font: textFont
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
             ]
         )
 
@@ -79,6 +77,14 @@ final class StyledTextField: VOTextField {
         layer.cornerRadius = 2
         layer.borderWidth = 1.5
         layer.borderColor = UIColor.RCTextFieldBorderGray().cgColor
+    }
+
+    override func applyTheme() {
+        super.applyTheme()
+
+        font = UIFont.preferredFont(forTextStyle: .body)
+
+        applyStyle()
     }
 
 }

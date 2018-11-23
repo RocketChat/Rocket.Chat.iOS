@@ -6,13 +6,11 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SafariServices
 import RealmSwift
 import MBProgressHUD
 
-class AuthTableViewController: BaseTableViewController {
+final class AuthTableViewController: BaseTableViewController {
 
     internal let kLoginProvidersSection: Int = 0
     internal var kLoginProvidersCollapsedMax: Int {
@@ -92,7 +90,7 @@ class AuthTableViewController: BaseTableViewController {
             let serverURL = serverURL,
             let serverVersion = serverVersion
         else {
-                return nil
+            return nil
         }
 
         return API(host: serverURL, version: serverVersion)
@@ -142,7 +140,6 @@ class AuthTableViewController: BaseTableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         setupLoginServices()
     }
 

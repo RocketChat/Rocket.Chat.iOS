@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class WelcomeViewController: BaseViewController {
+final class WelcomeViewController: BaseViewController {
 
     internal var joinCommunitySegue = "JoinCommunity"
     internal let communityServerURL = "\nopen.rocket.chat"

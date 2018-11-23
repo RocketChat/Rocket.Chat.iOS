@@ -120,7 +120,6 @@ class LoginTableViewController: BaseTableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         textFieldUsername.becomeFirstResponder()
     }
 
@@ -172,16 +171,13 @@ class LoginTableViewController: BaseTableViewController {
 
     @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
         let siteURL = serverPublicSettings?.siteURL ?? ""
-        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
-            if login == nil {
-                return
-            }
 
-            guard let self = self else { return }
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { (login, error) in
+            guard error == nil, let login = login else { return }
 
-            self.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
-            self.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
-            self.temporary2FACode = login?[AppExtensionTOTPKey] as? String
+            self.textFieldUsername.text = login[AppExtensionUsernameKey] as? String
+            self.textFieldPassword.text = login[AppExtensionPasswordKey] as? String
+            self.temporary2FACode = login[AppExtensionTOTPKey] as? String
             self.authenticateWithUsernameOrEmail()
         }
     }
