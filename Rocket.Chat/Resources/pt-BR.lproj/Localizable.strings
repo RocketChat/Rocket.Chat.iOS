@@ -340,6 +340,8 @@
 "myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
 "myaccount.settings.language" = "Idioma";
+"myaccount.settings.review" = "Avalie este App";
+"myaccount.settings.share" = "Compartilhe este App";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do servidor: %@";
