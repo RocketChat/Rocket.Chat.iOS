@@ -35,13 +35,13 @@ class AuthTableViewController: BaseTableViewController {
         let prefix = NSAttributedString(
             string: localized("auth.email_auth_prefix"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
             ]
         )
         let service = NSAttributedString(
             string: localized("auth.email_auth"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
             ]
         )
 

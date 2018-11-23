@@ -56,6 +56,7 @@ final class ConnectServerViewController: BaseViewController {
         didSet {
             buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
             buttonConnect.isEnabled = false
+            buttonConnect.style = .solid
         }
     }
 

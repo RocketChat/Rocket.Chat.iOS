@@ -54,7 +54,7 @@ final class StyledButton: UIButton {
     }
 
     lazy var loadingIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .gray)
+        let activity = UIActivityIndicatorView(style: .white)
         return activity
     }()
 
@@ -65,7 +65,6 @@ final class StyledButton: UIButton {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         applyStyle()
     }
 
@@ -152,6 +151,11 @@ final class StyledButton: UIButton {
         loadingIndicator.stopAnimating()
         loadingIndicator.removeFromSuperview()
         setTitle(titleBeforeLoading, for: UIControl.State())
+    }
+
+    override func applyTheme() {
+        super.applyTheme()
+        applyStyle()
     }
 
 }

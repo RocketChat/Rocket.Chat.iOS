@@ -18,6 +18,7 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var welcomeLabel: UILabel! {
         didSet {
             welcomeLabel.text = localized("onboarding.label_welcome")
+            welcomeLabel.font = welcomeLabel.font.bold()
         }
     }
 
@@ -53,14 +54,14 @@ class WelcomeViewController: BaseViewController {
             let title = NSAttributedString(
                 string: localized("onboarding.button_join_community_prefix"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .semibold),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
                     NSAttributedString.Key.foregroundColor: UIColor.RCSkyBlue()
                 ]
             )
             let serverURL = NSAttributedString(
                 string: communityServerURL,
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline),
                     NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray()
                 ]
             )

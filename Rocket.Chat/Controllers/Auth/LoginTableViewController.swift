@@ -41,7 +41,7 @@ class LoginTableViewController: BaseTableViewController {
             let prefix = NSAttributedString(
                 string: localized("auth.login.create_account_prefix"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray()
                 ]
             )
@@ -49,7 +49,7 @@ class LoginTableViewController: BaseTableViewController {
             let createAccount = NSAttributedString(
                 string: localized("auth.login.create_account"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCSkyBlue()
                 ]
             )

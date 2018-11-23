@@ -61,12 +61,16 @@ final class StyledTextField: VOTextField {
         clearButtonMode = .whileEditing
 
         textColor = UIColor.RCTextFieldGray()
+
+        let textFont = UIFont.preferredFont(forTextStyle: .body)
+        font = textFont
+
         let placeholderText = placeholder ?? ""
         let placeholderAttributes = NSAttributedString(
             string: placeholderText,
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray(),
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)
+                NSAttributedString.Key.font: textFont
             ]
         )
 
