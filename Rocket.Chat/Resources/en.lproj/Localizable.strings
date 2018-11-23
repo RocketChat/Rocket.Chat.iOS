@@ -341,11 +341,13 @@
 "myaccount.settings.license" = "License";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
+"myaccount.settings.review" = "Review this App";
+"myaccount.settings.share" = "Share this App";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.server_version" = "Server Version: %@";
 "myaccount.settings.web_browser" = "Web Browser";
 "myaccount.settings.tracking.title" = "Send Crash Report";
-"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it.";
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identify problems and fix it.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
@@ -493,3 +495,8 @@
 "shortcuts.server_selection_numbers" = "Server selection 1...9";
 "shortcuts.add_server" = "Add server";
 "shortcuts.change_theme" = "Change theme";
+
+// Chat Components
+"chat.components.quote.replied" = "Replied";
+"chat.components.quote.pinned" = "Pinned";
+"chat.components.text_attachment.no_title" = "No title";

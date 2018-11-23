@@ -139,11 +139,3 @@ extension Message {
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
     }
 }
-
-extension Message: UnmanagedConvertible {
-    typealias UnmanagedType = UnmanagedMessage
-
-    var unmanaged: UnmanagedMessage? {
-        return UnmanagedMessage(self)
-    }
-}

@@ -341,12 +341,14 @@
 "myaccount.settings.profile" = "Profile"; // TODO
 "myaccount.settings.license" = "License"; // TODO
 "myaccount.settings.language" = "Language"; // TODO
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "Application Icon"; // TODO
 "myaccount.settings.version" = "Version: %@ (%@)"; // TODO
 "myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
-"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identify problems and fix it."; // TODO
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon"; // TODO:
@@ -494,3 +496,8 @@
 "shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
 "shortcuts.add_server" = "Add server"; //TODO
 "shortcuts.change_theme" = "Change theme"; //TODO
+
+// Chat Components
+"chat.components.quote.replied" = "Replied"; //TODO
+"chat.components.quote.pinned" = "Pinned"; //TODO
+"chat.components.text_attachment.no_title" = "No title"; //TODO

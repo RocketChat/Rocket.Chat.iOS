@@ -340,6 +340,8 @@
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";
 "myaccount.settings.language" = "Sprache";
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "App Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.server_version" = "Server Version: %@";
@@ -493,3 +495,8 @@
 "shortcuts.server_selection_numbers" = "Serverauswahl 1...9";
 "shortcuts.add_server" = "Server hinzufügen";
 "shortcuts.change_theme" = "Theme wechseln";
+
+// Chat Components
+"chat.components.quote.replied" = "Replied"; //TODO
+"chat.components.quote.pinned" = "Pinned"; //TODO
+"chat.components.text_attachment.no_title" = "No title"; //TODO

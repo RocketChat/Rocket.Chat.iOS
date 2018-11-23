@@ -54,20 +54,19 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
         insertGesturesIfNeeded()
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         configure(readReceipt: readReceiptButton)
         updateText()
     }
 
     func updateText() {
         guard
-            let viewModel = viewModel?.base as? SequentialMessageChatItem,
-            let managedObject = viewModel.message.managedObject
+            let viewModel = viewModel?.base as? SequentialMessageChatItem
         else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {

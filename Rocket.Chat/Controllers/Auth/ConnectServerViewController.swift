@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import semver
 
 final class ConnectServerViewController: BaseViewController {
 
@@ -56,6 +55,7 @@ final class ConnectServerViewController: BaseViewController {
         didSet {
             buttonConnect.setTitle(localized("connection.button_connect"), for: .normal)
             buttonConnect.isEnabled = false
+            buttonConnect.style = .solid
         }
     }
 

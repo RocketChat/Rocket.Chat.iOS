@@ -129,7 +129,11 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: Return
 
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
-        sendButtonPressed()
-        return false
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            sendButtonPressed()
+            return false
+        }
+
+        return true
     }
 }

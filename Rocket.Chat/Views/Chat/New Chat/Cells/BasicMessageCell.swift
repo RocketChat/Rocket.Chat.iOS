@@ -72,21 +72,20 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
         insertGesturesIfNeeded()
     }
 
-    override func configure() {
-        configure(with: avatarView, date: date, and: username)
+    override func configure(completeRendering: Bool) {
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
         configure(readReceipt: readReceiptButton)
         updateText()
     }
 
     func updateText() {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
+            let viewModel = viewModel?.base as? BasicMessageChatItem
         else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: managedObject, with: theme) {
+        if let message = MessageTextCacheManager.shared.message(for: viewModel.message, with: theme) {
             if viewModel.message.temporary {
                 message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if viewModel.message.failed {
@@ -168,9 +167,11 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 // MARK: UIGestureRecognizerDelegate
 
 extension BasicMessageCell: UIGestureRecognizerDelegate {
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
+
 }
 
 // MARK: Theming
@@ -185,4 +186,5 @@ extension BasicMessageCell {
         username.textColor = theme.titleText
         updateText()
     }
+
 }

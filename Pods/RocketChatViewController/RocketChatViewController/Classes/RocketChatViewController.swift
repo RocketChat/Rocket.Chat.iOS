@@ -144,7 +144,7 @@ public extension ChatItem where Self: Differentiable {
 public protocol ChatCell {
     var messageWidth: CGFloat { get set }
     var viewModel: AnyChatItem? { get set }
-    func configure()
+    func configure(completeRendering: Bool)
 }
 
 public protocol ChatDataUpdateDelegate: class {
@@ -322,7 +322,7 @@ open class RocketChatViewController: UICollectionViewController {
 
 extension RocketChatViewController {
 
-    fileprivate var topHeight: CGFloat {
+    @objc open var topHeight: CGFloat {
         if navigationController?.navigationBar.isTranslucent ?? false {
             var top = navigationController?.navigationBar.frame.height ?? 0.0
             top += UIApplication.shared.statusBarFrame.height

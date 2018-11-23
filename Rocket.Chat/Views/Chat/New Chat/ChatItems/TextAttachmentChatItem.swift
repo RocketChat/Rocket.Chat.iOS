@@ -23,14 +23,34 @@ final class TextAttachmentChatItem: BaseTextAttachmentChatItem, ChatItem, Differ
     let color: String?
     let hasText: Bool
 
-    init(identifier: String, fields: [UnmanagedField], title: String, subtitle: String?, color: String?, collapsed: Bool, hasText: Bool, user: UnmanagedUser?, message: UnmanagedMessage?) {
+    init(
+        identifier: String,
+        fields: [UnmanagedField],
+        title: String,
+        subtitle: String?,
+        color: String?,
+        collapsed: Bool,
+        hasText: Bool,
+        user: UnmanagedUser?,
+        message: UnmanagedMessage?
+        ) {
+
         self.identifier = identifier
         self.title = title
         self.subtitle = subtitle
         self.color = color
         self.fields = fields
         self.hasText = hasText
-        super.init(collapsed: collapsed, user: user, avatar: message?.avatar, emoji: message?.emoji, date: message?.createdAt, isUnread: message?.unread ?? false)
+
+        super.init(
+            collapsed: collapsed,
+            user: user,
+            avatar: message?.avatar,
+            emoji: message?.emoji,
+            alias: message?.alias,
+            date: message?.createdAt,
+            isUnread: message?.unread ?? false
+        )
     }
 
     var differenceIdentifier: String {
