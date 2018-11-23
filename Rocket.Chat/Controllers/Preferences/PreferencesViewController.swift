@@ -98,7 +98,6 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
-
     @IBOutlet weak var labelApp: UILabel! {
         didSet {
             labelApp.text = viewModel.appicon
