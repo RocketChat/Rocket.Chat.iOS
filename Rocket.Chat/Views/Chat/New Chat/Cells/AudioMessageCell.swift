@@ -78,9 +78,10 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
+        configure(readReceipt: readReceiptButton)
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+
         if completeRendering {
-            configure(readReceipt: readReceiptButton)
-            configure(with: avatarView, date: date, and: username)
             updateAudio()
         }
     }

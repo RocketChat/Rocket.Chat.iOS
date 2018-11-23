@@ -55,10 +55,7 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
         }
 
         configure(readReceipt: readReceiptButton)
-
-        if completeRendering {
-            configure(with: avatarView, date: date, and: username)
-        }
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
 
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }

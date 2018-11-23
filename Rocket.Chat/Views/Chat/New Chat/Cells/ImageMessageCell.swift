@@ -51,10 +51,8 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
             return
         }
 
-        if completeRendering {
-            configure(readReceipt: readReceiptButton)
-            configure(with: avatarView, date: date, and: username)
-        }
+        configure(readReceipt: readReceiptButton)
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
 
         labelTitle.text = viewModel.title
 

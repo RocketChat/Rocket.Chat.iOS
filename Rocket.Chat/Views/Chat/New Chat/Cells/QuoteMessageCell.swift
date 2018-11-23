@@ -83,10 +83,8 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
             return
         }
 
-        if completeRendering {
-            configure(readReceipt: readReceiptButton)
-            configure(with: avatarView, date: date, and: messageUsername)
-        }
+        configure(readReceipt: readReceiptButton)
+        configure(with: avatarView, date: date, and: messageUsername, completeRendering: completeRendering)
 
         purpose.text = viewModel.purpose
         purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant

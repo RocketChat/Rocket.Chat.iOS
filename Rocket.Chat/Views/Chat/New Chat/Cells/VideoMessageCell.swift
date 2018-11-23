@@ -62,9 +62,10 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
             labelDescriptionTopConstraint.constant = 0
         }
 
+        configure(readReceipt: readReceiptButton)
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+
         if completeRendering {
-            configure(readReceipt: readReceiptButton)
-            configure(with: avatarView, date: date, and: username)
             updateVideo(with: imageViewThumb)
         }
     }

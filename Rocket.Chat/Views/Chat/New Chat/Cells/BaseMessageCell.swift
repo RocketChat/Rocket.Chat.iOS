@@ -29,7 +29,7 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
 
     func configure(completeRendering: Bool) {}
 
-    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
+    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel, completeRendering: Bool) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
@@ -39,13 +39,16 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
 
         date.text = viewModel.dateFormatted
         username.text = viewModel.alias ?? user.username
-        avatarView.emoji = viewModel.emoji
-        avatarView.username = user.username
 
-        if let avatar = viewModel.avatar {
-            avatarView.avatarURL = URL(string: avatar)
-        } else {
-            avatarView.avatarURL = user.avatarURL
+        if completeRendering {
+            avatarView.emoji = viewModel.emoji
+            avatarView.username = user.username
+
+            if let avatar = viewModel.avatar {
+                avatarView.avatarURL = URL(string: avatar)
+            } else {
+                avatarView.avatarURL = user.avatarURL
+            }
         }
     }
 

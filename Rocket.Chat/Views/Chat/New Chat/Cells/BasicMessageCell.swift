@@ -73,10 +73,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
     }
 
     override func configure(completeRendering: Bool) {
-        if completeRendering {
-            configure(with: avatarView, date: date, and: username)
-        }
-
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
         configure(readReceipt: readReceiptButton)
         updateText()
     }
