@@ -162,7 +162,7 @@ extension MainSplitViewController {
             return
         }
 
-        let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? -50.0 : 50.0
+        let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? 50.0 : -50.0
 
         UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
             let offset = min(offset.y + heightDelta, maxHeight)
