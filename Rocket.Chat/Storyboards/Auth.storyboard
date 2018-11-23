@@ -401,13 +401,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressSignupButton" destination="hl8-Pc-62u" eventType="touchUpInside" id="3je-yu-mIB"/>
@@ -590,13 +586,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedLoginButton" destination="w7q-9e-4D3" eventType="touchUpInside" id="3Ej-TY-ugw"/>
@@ -631,13 +623,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Bold"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
@@ -678,13 +666,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Bold"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
@@ -735,7 +719,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="19"/>
+            <point key="canvasLocation" x="608.79999999999995" y="18.440779610194905"/>
         </scene>
         <!--Title-->
         <scene sceneID="00e-2E-wLI">
@@ -957,13 +941,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedConfirmButton" destination="em6-TJ-1CF" eventType="touchUpInside" id="WaP-fx-a3S"/>
@@ -1047,13 +1027,9 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                            <real key="value" value="18"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                             <integer key="value" value="0"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="didPressRegisterButton" destination="uXD-hs-Lir" eventType="touchUpInside" id="uRp-cm-Lps"/>
@@ -1204,7 +1180,7 @@ to mention you in messages</string>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="A50-Ml-Atq"/>
                                                         <constraint firstAttribute="height" constant="48" id="Ako-o5-FD4"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Register"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
@@ -1213,13 +1189,9 @@ to mention you in messages</string>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedRegisterButton" destination="0XD-Z9-Dv5" eventType="touchUpInside" id="2ss-Ra-2IJ"/>
@@ -1404,11 +1376,11 @@ to mention you in messages</string>
         <image name="usernameBlack" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cXi-ex-hQo"/>
-        <segue reference="uxe-wj-78g"/>
-        <segue reference="B9E-PP-gIC"/>
-        <segue reference="9kY-lU-ad7"/>
+        <segue reference="ANZ-nn-OTA"/>
+        <segue reference="jjd-tI-Nfg"/>
+        <segue reference="pMy-PV-X3C"/>
+        <segue reference="iQF-0t-Wye"/>
         <segue reference="tMH-P7-q5C"/>
-        <segue reference="kz9-vv-nLs"/>
+        <segue reference="dnh-fI-fQN"/>
     </inferredMetricsTieBreakers>
 </document>

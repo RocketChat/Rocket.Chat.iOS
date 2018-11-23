@@ -19,30 +19,15 @@ final class StyledButton: UIButton {
     // MARK: - Properties
 
     var style = Style.solid
-    var fontWeight = UIFont.Weight.regular
-    @IBInspectable var fontWeightDescription: String = "Regular" {
-        didSet {
-            switch fontWeightDescription {
-            case "Regular":
-                fontWeight = UIFont.Weight.regular
-            case "Light":
-                fontWeight = UIFont.Weight.light
-            case "Medium":
-                fontWeight = UIFont.Weight.medium
-            case "Bold":
-                fontWeight = UIFont.Weight.bold
-            default:
-                fontWeight = UIFont.Weight.regular
-            }
-        }
-    }
+    var fontTraits: UIFontDescriptor.SymbolicTraits?
+    var fontStyle: UIFont.TextStyle = .body
+
     @IBInspectable var cornerRadius: CGFloat = 2
     @IBInspectable var borderWidth: CGFloat = 1
     @IBInspectable var buttonColorDisabled: UIColor = UIColor(red: 225/255, green: 229/255, blue: 232/255, alpha: 1)
     @IBInspectable var buttonColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var borderColor: UIColor = UIColor.RCSkyBlue()
     @IBInspectable var textColor: UIColor = UIColor.white
-    @IBInspectable var fontSize: CGFloat = 16.0
     @IBInspectable var styleRaw: Int = 0 {
         didSet {
             guard let style = Style(rawValue: styleRaw) else {
@@ -90,20 +75,23 @@ final class StyledButton: UIButton {
             return
         }
 
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
+        setTitleColor(textColor, for: UIControl.State())
+
+        var font = UIFont.preferredFont(forTextStyle: fontStyle)
+        if let fontTraits = fontTraits {
+            font = font.withTraits(fontTraits) ?? font
+        }
+
+        titleLabel?.font = font
+
         switch style {
         case .solid:
             backgroundColor = buttonColor
-            layer.borderColor = borderColor.cgColor
-            layer.borderWidth = borderWidth
-            setTitleColor(textColor, for: UIControl.State())
             setTitleShadowColor(nil, for: UIControl.State())
-            titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         case .outline:
             backgroundColor = UIColor.clear
-            layer.borderColor = borderColor.cgColor
-            layer.borderWidth = borderWidth
-            setTitleColor(textColor, for: UIControl.State())
-            titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
         }
     }
 

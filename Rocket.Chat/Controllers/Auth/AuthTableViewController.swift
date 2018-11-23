@@ -32,16 +32,17 @@ class AuthTableViewController: BaseTableViewController {
             return EmailAuthTableViewCell()
         }
 
+        let font = UIFont.preferredFont(forTextStyle: .body)
         let prefix = NSAttributedString(
             string: localized("auth.email_auth_prefix"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
+                NSAttributedString.Key.font: font
             ]
         )
         let service = NSAttributedString(
             string: localized("auth.email_auth"),
             attributes: [
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
+                NSAttributedString.Key.font: font.bold() ?? font
             ]
         )
 
@@ -49,6 +50,7 @@ class AuthTableViewController: BaseTableViewController {
         combinedString.append(service)
 
         emailAuthRow.loginButton.setAttributedTitle(combinedString, for: .normal)
+        emailAuthRow.loginButton.textColor = .white
         emailAuthRow.loginButton.addTarget(self, action: #selector(showLogin), for: .touchUpInside)
         emailAuthRow.registerButton.addTarget(self, action: #selector(showSignup), for: .touchUpInside)
 
