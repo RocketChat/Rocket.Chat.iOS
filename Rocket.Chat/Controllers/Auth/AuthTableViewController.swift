@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import SafariServices
-import OnePasswordExtension
 import RealmSwift
 import MBProgressHUD
 

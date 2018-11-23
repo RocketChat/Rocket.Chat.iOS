@@ -177,10 +177,12 @@ class LoginTableViewController: BaseTableViewController {
                 return
             }
 
-            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
-            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
-            self?.temporary2FACode = login?[AppExtensionTOTPKey] as? String
-            self?.authenticateWithUsernameOrEmail()
+            guard let self = self else { return }
+
+            self.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
+            self.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
+            self.temporary2FACode = login?[AppExtensionTOTPKey] as? String
+            self.authenticateWithUsernameOrEmail()
         }
     }
 
