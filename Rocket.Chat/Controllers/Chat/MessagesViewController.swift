@@ -30,7 +30,7 @@ extension SizingCell {
     }
 }
 
-final class MessagesViewController: RocketChatViewController {
+final class MessagesViewController: RocketChatViewController, Dimmable {
 
     @objc override var bottomHeight: CGFloat {
         if subscription?.isJoined() ?? true {

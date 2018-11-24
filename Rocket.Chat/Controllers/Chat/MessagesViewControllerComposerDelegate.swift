@@ -26,6 +26,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
         composerViewModel.didChangeHintPrefixedWord(word: word)
+
+        if word.isEmpty {
+            stopDimming()
+        } else {
+            startDimming()
+        }
     }
 
     func hintPrefixes(for composerView: ComposerView) -> [Character] {
@@ -129,7 +135,11 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: Return
 
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
-        sendButtonPressed()
-        return false
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            sendButtonPressed()
+            return false
+        }
+
+        return true
     }
 }
