@@ -72,8 +72,8 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
         insertGesturesIfNeeded()
     }
 
-    override func configure() {
-        configure(with: avatarView, date: date, and: username)
+    override func configure(completeRendering: Bool) {
+        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
         configure(readReceipt: readReceiptButton)
         updateText()
     }
@@ -167,9 +167,11 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 // MARK: UIGestureRecognizerDelegate
 
 extension BasicMessageCell: UIGestureRecognizerDelegate {
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
+
 }
 
 // MARK: Theming
@@ -184,4 +186,5 @@ extension BasicMessageCell {
         username.textColor = theme.titleText
         updateText()
     }
+
 }

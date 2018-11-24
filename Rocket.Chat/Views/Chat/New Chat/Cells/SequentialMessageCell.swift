@@ -54,7 +54,7 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
         insertGesturesIfNeeded()
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         configure(readReceipt: readReceiptButton)
         updateText()
     }

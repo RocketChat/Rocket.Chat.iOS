@@ -33,7 +33,7 @@ class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCel
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
-    func configure() {}
+    func configure(completeRendering: Bool) {}
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
         guard let viewModel = viewModel?.base as? MessageActionsChatItem else {

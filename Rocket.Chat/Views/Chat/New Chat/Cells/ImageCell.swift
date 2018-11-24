@@ -36,7 +36,7 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
@@ -51,11 +51,13 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
             labelDescriptionTopConstraint.constant = 0
         }
 
-        loadImage(on: imageView, startLoadingBlock: { [weak self] in
-            self?.activityIndicator.startAnimating()
-        }, stopLoadingBlock: { [weak self] in
-            self?.activityIndicator.stopAnimating()
-        })
+        if completeRendering {
+            loadImage(on: imageView, startLoadingBlock: { [weak self] in
+                self?.activityIndicator.startAnimating()
+            }, stopLoadingBlock: { [weak self] in
+                self?.activityIndicator.stopAnimating()
+            })
+        }
     }
 
     // MARK: IBAction

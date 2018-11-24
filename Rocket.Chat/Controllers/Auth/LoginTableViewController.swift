@@ -41,7 +41,7 @@ class LoginTableViewController: BaseTableViewController {
             let prefix = NSAttributedString(
                 string: localized("auth.login.create_account_prefix"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray()
                 ]
             )
@@ -49,7 +49,7 @@ class LoginTableViewController: BaseTableViewController {
             let createAccount = NSAttributedString(
                 string: localized("auth.login.create_account"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCSkyBlue()
                 ]
             )
@@ -120,7 +120,6 @@ class LoginTableViewController: BaseTableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         textFieldUsername.becomeFirstResponder()
     }
 
@@ -172,15 +171,14 @@ class LoginTableViewController: BaseTableViewController {
 
     @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
         let siteURL = serverPublicSettings?.siteURL ?? ""
-        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
-            if login == nil {
-                return
-            }
 
-            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
-            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
-            self?.temporary2FACode = login?[AppExtensionTOTPKey] as? String
-            self?.authenticateWithUsernameOrEmail()
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { (login, error) in
+            guard error == nil, let login = login else { return }
+
+            self.textFieldUsername.text = login[AppExtensionUsernameKey] as? String
+            self.textFieldPassword.text = login[AppExtensionPasswordKey] as? String
+            self.temporary2FACode = login[AppExtensionTOTPKey] as? String
+            self.authenticateWithUsernameOrEmail()
         }
     }
 

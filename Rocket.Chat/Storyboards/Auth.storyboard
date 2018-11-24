@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +23,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Bs5-Ep-8ni"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -33,7 +32,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Rkj-eJ-fCz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.32941176470588235" green="0.34509803921568627" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -56,7 +55,7 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4q4-bw-dA7">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Connect to a server"/>
                                         <connections>
@@ -97,7 +96,7 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-RK-wuE">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Join the community">
                                             <color key="titleColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,16 +123,9 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-JP-D1F">
                                 <rect key="frame" x="15" y="531" width="345" height="60"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusWhite" translatesAutoresizingMaskIntoConstraints="NO" id="oyk-aw-9G2">
-                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="F7J-qQ-h8v"/>
-                                            <constraint firstAttribute="width" constant="30" id="VKV-Q7-rcg"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFU-jq-KHv">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Create a new workspace">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -142,6 +134,13 @@
                                             <action selector="showCreateServer" destination="Myv-ng-Lw2" eventType="touchUpInside" id="mSq-9u-wC0"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plusWhite" translatesAutoresizingMaskIntoConstraints="NO" id="oyk-aw-9G2">
+                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="F7J-qQ-h8v"/>
+                                            <constraint firstAttribute="width" constant="30" id="VKV-Q7-rcg"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -393,22 +392,15 @@
                                                         <constraint firstAttribute="height" constant="48" id="Qkp-Sd-XT9"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="VWN-wG-oPy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Register"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressSignupButton" destination="hl8-Pc-62u" eventType="touchUpInside" id="3je-yu-mIB"/>
@@ -504,7 +496,7 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="ot6-S3-NSs"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="username"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="usernameBlack"/>
@@ -514,7 +506,7 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" alpha="0.40000000596046448" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-1v-PFB">
-                                                    <rect key="frame" x="320" y="19.5" width="25" height="25"/>
+                                                    <rect key="frame" x="295" y="19.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="FY6-vN-hIc"/>
                                                         <constraint firstAttribute="height" constant="25" id="uWD-Az-CBz"/>
@@ -532,7 +524,7 @@
                                                 <constraint firstItem="4sT-R7-k6m" firstAttribute="centerX" secondItem="JJ8-9d-OxX" secondAttribute="centerX" id="cBS-JW-niz"/>
                                                 <constraint firstAttribute="bottom" secondItem="4sT-R7-k6m" secondAttribute="bottom" constant="4" id="fff-Li-GQG"/>
                                                 <constraint firstAttribute="trailing" secondItem="4sT-R7-k6m" secondAttribute="trailing" priority="999" constant="15" id="pR0-Qp-iss"/>
-                                                <constraint firstItem="4sT-R7-k6m" firstAttribute="trailing" secondItem="OZq-1v-PFB" secondAttribute="trailing" constant="15" id="wdV-gd-66a"/>
+                                                <constraint firstItem="4sT-R7-k6m" firstAttribute="trailing" secondItem="OZq-1v-PFB" secondAttribute="trailing" constant="40" id="wdV-gd-66a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -550,7 +542,7 @@
                                                         <constraint firstAttribute="height" constant="48" id="pIf-gP-eEk"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="leftIcon" value="keyBlack"/>
@@ -582,22 +574,15 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="cmO-I7-pRv"/>
                                                         <constraint firstAttribute="height" constant="48" id="dLL-vq-YJ3"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Login"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedLoginButton" destination="w7q-9e-4D3" eventType="touchUpInside" id="3Ej-TY-ugw"/>
@@ -626,19 +611,12 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="44H-Pu-ap6"/>
                                                         <constraint firstAttribute="height" constant="48" id="bwb-wR-mhx"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Forgot your password?"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Bold"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
@@ -673,19 +651,15 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="XGa-S5-fmy"/>
                                                         <constraint firstAttribute="height" constant="38" id="uqi-GG-UQS"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Don't have an account?"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Bold"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
@@ -736,7 +710,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="19"/>
+            <point key="canvasLocation" x="608.79999999999995" y="18.440779610194905"/>
         </scene>
         <!--Title-->
         <scene sceneID="00e-2E-wLI">
@@ -793,7 +767,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="aOJ-b7-JPy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.047058823529411764" green="0.050980392156862744" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -818,7 +792,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="ra8-gU-zYk"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -949,22 +923,15 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="TEL-yQ-pDW"/>
                                                         <constraint firstAttribute="height" constant="48" id="dYA-ta-Lb8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Confirm"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedConfirmButton" destination="em6-TJ-1CF" eventType="touchUpInside" id="WaP-fx-a3S"/>
@@ -1039,22 +1006,15 @@
                                         <constraint firstAttribute="height" constant="48" id="PHc-gC-7hA"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="hVp-be-5c8"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <state key="normal" title="Register"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                            <color key="value" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                            <real key="value" value="18"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                             <integer key="value" value="0"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="didPressRegisterButton" destination="uXD-hs-Lir" eventType="touchUpInside" id="uRp-cm-Lps"/>
@@ -1205,7 +1165,7 @@ to mention you in messages</string>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="A50-Ml-Atq"/>
                                                         <constraint firstAttribute="height" constant="48" id="Ako-o5-FD4"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <state key="normal" title="Register"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
@@ -1214,13 +1174,9 @@ to mention you in messages</string>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="styleRaw">
                                                             <integer key="value" value="0"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="fontWeightDescription" value="Medium"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didPressedRegisterButton" destination="0XD-Z9-Dv5" eventType="touchUpInside" id="2ss-Ra-2IJ"/>
@@ -1270,7 +1226,7 @@ to mention you in messages</string>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server URL" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0ry-Re-0rp" customClass="StyledTextField" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="261" width="345" height="48"/>
+                                <rect key="frame" x="15" y="260.5" width="345" height="48"/>
                                 <accessibility key="accessibilityConfiguration" identifier="auth.connect.urlfield"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="FPD-J2-pee"/>
@@ -1293,11 +1249,12 @@ to mention you in messages</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-94-7gd" customClass="StyledButton" customModule="Rocket_Chat" customModuleProvider="target">
-                                <rect key="frame" x="15" y="329" width="345" height="48"/>
+                                <rect key="frame" x="15" y="328.5" width="345" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="345" id="4j9-aU-py3"/>
                                     <constraint firstAttribute="height" constant="48" id="Cvd-OB-wcp"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Connect"/>
                                 <connections>
                                     <action selector="buttonConnectDidPressed:" destination="clK-Fu-Ez0" eventType="touchUpInside" id="naf-zh-gOb"/>
@@ -1405,7 +1362,7 @@ to mention you in messages</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cXi-ex-hQo"/>
-        <segue reference="jjd-tI-Nfg"/>
+        <segue reference="Ivf-BH-9zE"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>
         <segue reference="tMH-P7-q5C"/>
