@@ -33,10 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthManager.persistAuthInformation(auth)
             AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.subscriptions)
-
-            if let user = auth.user {
-                AnalyticsCoordinator.identifyCrashReports(withUser: user)
-            }
         } else {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
