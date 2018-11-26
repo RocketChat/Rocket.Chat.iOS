@@ -28,9 +28,9 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         composerViewModel.didChangeHintPrefixedWord(word: word)
 
         if word.isEmpty {
-            stopDimming()
+            parent?.stopDimming()
         } else {
-            startDimming()
+            parent?.startDimming()
         }
     }
 

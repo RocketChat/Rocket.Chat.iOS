@@ -7,10 +7,12 @@
 
 import UIKit
 
-class DimView: UIView { }
-protocol Dimmable { }
+let kDimViewAlpha: CGFloat = 0.6
+let kDimViewAnimationDuration = 0.25
 
-extension Dimmable where Self: UIViewController {
+class DimView: UIView { }
+
+extension UIViewController {
     var dimViewTag: Int {
         return "Dim_View".hashValue
     }
@@ -22,7 +24,7 @@ extension Dimmable where Self: UIViewController {
             let dimView = DimView(frame: view.frame)
             dimView.tag = dimViewTag
             dimView.backgroundColor = .black
-            dimView.alpha = 0.6
+            dimView.alpha = kDimViewAlpha
 
             view.addSubview(dimView)
             return dimView
@@ -32,9 +34,18 @@ extension Dimmable where Self: UIViewController {
     func startDimming() {
         view.bringSubviewToFront(dimView)
         dimView.isHidden = false
+
+        UIView.animate(withDuration: kDimViewAnimationDuration) { [dimView] in
+            dimView.alpha = kDimViewAlpha
+        }
     }
 
     func stopDimming() {
-        dimView.isHidden = true
+
+        UIView.animate(withDuration: kDimViewAnimationDuration, animations: { [dimView] in
+            dimView.alpha = 0
+        }, completion: { [dimView] _ in
+            dimView.isHidden = true
+        })
     }
 }
