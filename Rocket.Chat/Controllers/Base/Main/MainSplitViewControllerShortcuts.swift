@@ -35,7 +35,9 @@ extension MainSplitViewController {
             } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
                 UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
             } + [
-                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: localized("shortcuts.change_theme"))
+                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: localized("shortcuts.change_theme")),
+                UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(shortcutSend(_:)), discoverabilityTitle: localized("shortcuts.send")),
+                UIKeyCommand(input: "\r", modifierFlags: .alternate, action: #selector(shortcutNewline(_:)), discoverabilityTitle: localized("shortcuts.new_line"))
         ]
     }
 
@@ -188,5 +190,24 @@ extension MainSplitViewController {
                 ThemeManager.theme = ThemeManager.themes.first?.theme ?? .light
             }
         }
+    }
+
+    @objc func shortcutSend(_ command: UIKeyCommand) {
+        guard
+            !isPresenting,
+            let controller = chatViewController
+        else {
+            return
+        }
+
+        controller.sendButtonPressed()
+    }
+
+    @objc func shortcutNewline(_ command: UIKeyCommand) {
+        guard !isPresenting else {
+            return
+        }
+
+        chatViewController?.composerView.textView.text += "\n"
     }
 }

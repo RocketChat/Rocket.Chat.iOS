@@ -479,22 +479,24 @@
 "subscriptions.grouping.unread_top" = "Não lidas no topo";
 
 // Shortcuts
-"shortcuts.type_message" = "Type message"; //TODO
-"shortcuts.preferences" = "Preferences"; //TODO
-"shortcuts.room_search" = "Rooms search"; //TODO
-"shortcuts.room_selection" = "Room selection 1...9"; //TODO
-"shortcuts.next_room" = "Next room"; //TODO
-"shortcuts.previous_room" = "Previous room"; //TODO
-"shortcuts.new_room" = "New room"; //TODO
-"shortcuts.room_actions" = "Room actions"; //TODO
-"shortcuts.upload_room" = "Upload to room"; //TODO
-"shortcuts.search_messages" = "Search messages"; //TODO
-"shortcuts.scroll_messages" = "Scroll messages"; //TODO
-"shortcuts.reply_latest" = "Reply to latest"; //TODO
-"shortcuts.server_selection" = "Server selection"; //TODO
-"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
-"shortcuts.add_server" = "Add server"; //TODO
-"shortcuts.change_theme" = "Change theme"; //TODO
+"shortcuts.type_message" = "Escrever mensagem";
+"shortcuts.preferences" = "Preferências";
+"shortcuts.room_search" = "Buscas canais";
+"shortcuts.room_selection" = "Selecionar canal 1...9";
+"shortcuts.next_room" = "Próximo canal";
+"shortcuts.previous_room" = "Canal anterior";
+"shortcuts.new_room" = "Novo canal";
+"shortcuts.room_actions" = "Ações do canal";
+"shortcuts.upload_room" = "Fazer upload";
+"shortcuts.search_messages" = "Procurar mensagens";
+"shortcuts.scroll_messages" = "Rolar mensagens";
+"shortcuts.reply_latest" = "Responder à última";
+"shortcuts.server_selection" = "Selecionar servidor";
+"shortcuts.server_selection_numbers" = "Selecionar servidor 1...9";
+"shortcuts.add_server" = "Adicionar servidor";
+"shortcuts.change_theme" = "Mudar tema";
+"shortcuts.send" = "Enviar";
+"shortcuts.new_line" = "Nova linha";
 
 // Chat Components
 "chat.components.quote.replied" = "Respondido";
