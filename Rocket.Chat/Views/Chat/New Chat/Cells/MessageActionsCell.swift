@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
+class MessageActionsCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
     static let identifier = String(describing: MessageActionsCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -30,17 +30,34 @@ class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCel
     }
 
     weak var delegate: ChatMessageCellProtocol?
-    var messageWidth: CGFloat = 0
-    var viewModel: AnyChatItem?
 
-    func configure(completeRendering: Bool) {}
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
+    }
+
+    override func configure(completeRendering: Bool) {}
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
-        guard let viewModel = viewModel?.base as? MessageActionsChatItem else {
+        guard
+            let viewModel = viewModel?.base as? MessageActionsChatItem,
+            let message = viewModel.message
+        else {
             return
         }
 
-        delegate?.openReplyMessage(message: viewModel.message)
+        delegate?.openReplyMessage(message: message)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 }
 
