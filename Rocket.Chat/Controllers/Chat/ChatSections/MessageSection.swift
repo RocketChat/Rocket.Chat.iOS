@@ -227,7 +227,8 @@ final class MessageSection: ChatSection {
                 url: messageURL.url,
                 imageURL: messageURL.imageURL,
                 title: messageURL.title,
-                subtitle: messageURL.subtitle
+                subtitle: messageURL.subtitle,
+                message: object.message
             ).wrapped)
         }
 
