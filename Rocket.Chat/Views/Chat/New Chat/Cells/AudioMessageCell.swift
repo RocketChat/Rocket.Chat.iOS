@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import RocketChatViewController
 
-final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
+final class AudioMessageCell: BaseAudioMessageCell, BaseMessageCellProtocol, SizingCell {
     static let identifier = String(describing: AudioMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -125,8 +125,8 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
 
     override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message?.managedObject
+            let viewModel = viewModel?.base as? AudioMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
         }
