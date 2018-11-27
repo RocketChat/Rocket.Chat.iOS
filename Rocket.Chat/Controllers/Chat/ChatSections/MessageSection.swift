@@ -136,7 +136,7 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .textAttachment where !attachment.isFile:
@@ -173,7 +173,7 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .image:
@@ -197,7 +197,7 @@ final class MessageSection: ChatSection {
                         imageURL: attachment.fullImageURL,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             default:
@@ -216,7 +216,7 @@ final class MessageSection: ChatSection {
                             attachment: attachment,
                             hasText: true,
                             user: nil,
-                            message: nil
+                            message: object.message
                         ).wrapped)
                     }
                 }
