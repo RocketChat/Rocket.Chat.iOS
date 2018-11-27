@@ -14,6 +14,10 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
     var viewModel: AnyChatItem?
     var messageSection: MessageSection?
 
+    weak var longPressGesture: UILongPressGestureRecognizer?
+    weak var usernameTapGesture: UITapGestureRecognizer?
+    weak var avatarTapGesture: UITapGestureRecognizer?
+
     lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
@@ -71,4 +75,46 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             button.setImage(image, for: .normal)
         }
     }
+
+    func insertGesturesIfNeeded(with username: UILabel?) {
+        if longPressGesture == nil {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
+            gesture.minimumPressDuration = 0.325
+            gesture.delegate = self
+            addGestureRecognizer(gesture)
+
+            longPressGesture = gesture
+        }
+
+        if usernameTapGesture == nil && username != nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            username?.addGestureRecognizer(gesture)
+
+            usernameTapGesture = gesture
+        }
+
+        if avatarTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            avatarView.addGestureRecognizer(gesture)
+
+            avatarTapGesture = gesture
+        }
+    }
+
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) { }
+
+    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) { }
+
+}
+
+// MARK: UIGestureRecognizerDelegate
+
+extension BaseMessageCell: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+
 }

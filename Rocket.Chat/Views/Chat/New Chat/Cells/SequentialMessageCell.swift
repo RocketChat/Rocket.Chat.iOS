@@ -37,7 +37,6 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
             readReceiptTrailingConstraint.constant
     }
 
-    weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol? {
         didSet {
             text.delegate = delegate
@@ -51,7 +50,7 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
 
         initialTextHeightConstant = textHeightConstraint.constant
 
-        insertGesturesIfNeeded()
+        insertGesturesIfNeeded(with: nil)
     }
 
     override func configure(completeRendering: Bool) {
@@ -112,12 +111,6 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
         }
 
         delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-}
-
-extension SequentialMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }
 

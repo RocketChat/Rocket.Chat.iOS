@@ -91,18 +91,11 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
 
     @objc func didTapTextContainerView() {
         guard
-            let viewModel = viewModel,
-            let chatItem = viewModel.base as? TextAttachmentChatItem
+            let viewModel = viewModel
         else {
             return
         }
 
         delegate?.viewDidCollapseChange(viewModel: viewModel)
-    }
-}
-
-extension BaseTextAttachmentMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }

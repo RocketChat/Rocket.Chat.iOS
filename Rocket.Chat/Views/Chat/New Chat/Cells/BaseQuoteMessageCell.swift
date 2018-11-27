@@ -50,9 +50,3 @@ class BaseQuoteMessageCell: BaseMessageCell {
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 }
-
-extension BaseQuoteMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-}
