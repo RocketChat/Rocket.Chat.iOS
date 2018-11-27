@@ -153,6 +153,7 @@ extension AudioMessageCell {
 
 extension AudioMessageCell {
     override func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playing = false
         slider.value = 0.0
     }
 }
