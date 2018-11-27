@@ -91,20 +91,9 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
         textHeightConstraint.constant = initialTextHeightConstant
     }
 
-    func insertGesturesIfNeeded() {
-        if longPressGesture == nil {
-            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
-            gesture.minimumPressDuration = 0.325
-            gesture.delegate = self
-            addGestureRecognizer(gesture)
-
-            longPressGesture = gesture
-        }
-    }
-
-    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let viewModel = viewModel?.base as? SequentialMessageChatItem,
             let managedObject = viewModel.message.managedObject
         else {
             return
