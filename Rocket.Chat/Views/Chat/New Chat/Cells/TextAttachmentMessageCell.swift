@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, BaseMessageCellProtocol, SizingCell {
+final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell {
     static let identifier = String(describing: TextAttachmentMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -96,6 +96,8 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, BaseMessag
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
         gesture.delegate = self
         textContainer.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: username)
     }
 
     override func configure(completeRendering: Bool) {
@@ -153,6 +155,28 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, BaseMessag
         }
 
         fieldsStackViewHeightConstraint.constant = configure(stackView: fieldsStackView)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }
 
     override func prepareForReuse() {

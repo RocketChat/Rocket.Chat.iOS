@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class TextAttachmentCell: BaseTextAttachmentMessageCell, BaseMessageCellProtocol, SizingCell {
+final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     static let identifier = String(describing: TextAttachmentCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -77,6 +77,8 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, BaseMessageCellPr
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextContainerView))
         gesture.delegate = self
         textContainer.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: nil)
     }
 
     override func configure(completeRendering: Bool) {
@@ -128,6 +130,17 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, BaseMessageCellPr
         }
 
         fieldsStackViewHeightConstraint.constant = configure(stackView: fieldsStackView)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 
     override func prepareForReuse() {

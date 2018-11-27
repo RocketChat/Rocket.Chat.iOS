@@ -9,7 +9,7 @@
 import Foundation
 import RocketChatViewController
 
-final class FileCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
+final class FileCell: BaseFileMessageCell, SizingCell {
     static let identifier = String(describing: FileCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
