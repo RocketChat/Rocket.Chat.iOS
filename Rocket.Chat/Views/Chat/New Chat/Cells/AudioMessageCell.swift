@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import RocketChatViewController
 
-final class AudioMessageCell: BaseAudioMessageCell, BaseMessageCellProtocol, SizingCell {
+final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     static let identifier = String(describing: AudioMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -67,8 +67,6 @@ final class AudioMessageCell: BaseAudioMessageCell, BaseMessageCellProtocol, Siz
         }
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-
     deinit {
         updateTimer?.invalidate()
     }
@@ -114,7 +112,7 @@ final class AudioMessageCell: BaseAudioMessageCell, BaseMessageCellProtocol, Siz
 
     override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? AudioMessageChatItem,
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
@@ -125,7 +123,7 @@ final class AudioMessageCell: BaseAudioMessageCell, BaseMessageCellProtocol, Siz
 
     override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? AudioMessageChatItem,
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return

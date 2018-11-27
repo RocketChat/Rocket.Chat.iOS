@@ -79,7 +79,7 @@ final class MessageSection: ChatSection {
                         audioURL: attachment.fullAudioURL,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .video:
@@ -105,7 +105,7 @@ final class MessageSection: ChatSection {
                         videoThumbPath: attachment.videoThumbPath,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:

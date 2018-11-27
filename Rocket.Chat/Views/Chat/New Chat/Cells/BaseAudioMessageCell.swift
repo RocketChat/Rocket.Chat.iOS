@@ -11,10 +11,12 @@ import Foundation
 import AVFoundation
 import RocketChatViewController
 
-class BaseAudioMessageCell: BaseMessageCell {
+class BaseAudioMessageCell: BaseMessageCell, BaseMessageCellProtocol {
     var updateTimer: Timer?
     var playing = false
     var loading = false
+
+    weak var delegate: ChatMessageCellProtocol?
 
     private var player: AVAudioPlayer? {
         didSet {
