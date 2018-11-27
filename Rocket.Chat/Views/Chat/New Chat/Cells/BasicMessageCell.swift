@@ -77,19 +77,20 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 
     func updateText() {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let message = viewModel.message
         else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: viewModel.message, with: theme) {
-            if viewModel.message.temporary {
-                message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
-            } else if viewModel.message.failed {
-                message.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
+        if let messageText = MessageTextCacheManager.shared.message(for: message, with: theme) {
+            if message.temporary {
+                messageText.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
+            } else if message.failed {
+                messageText.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
             }
 
-            text.message = message
+            text.message = messageText
 
             let maxSize = CGSize(
                 width: textWidth,
@@ -114,7 +115,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
     override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         guard
             let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
+            let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
         }
@@ -125,7 +126,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
     override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
         guard
             let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
+            let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
         }

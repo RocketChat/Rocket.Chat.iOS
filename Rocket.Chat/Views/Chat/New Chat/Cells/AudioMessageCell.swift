@@ -67,6 +67,8 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         }
     }
 
+    weak var delegate: ChatMessageCellProtocol?
+
     deinit {
         updateTimer?.invalidate()
     }
@@ -75,6 +77,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         super.awakeFromNib()
 
         updateTimer = setupPlayerTimer(with: slider, and: labelAudioTime)
+        insertGesturesIfNeeded(with: username)
     }
 
     override func configure(completeRendering: Bool) {
@@ -107,6 +110,28 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
 
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         pressPlayButton(sender)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? AudioMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let managedObject = viewModel.message?.managedObject
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }
 
 }
