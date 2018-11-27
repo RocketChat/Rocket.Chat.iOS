@@ -30,6 +30,11 @@ final class FileCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
+    }
+
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
@@ -52,6 +57,17 @@ final class FileCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
         }
 
         delegate?.openFileFromCell(attachment: viewModel.attachment)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 }
 

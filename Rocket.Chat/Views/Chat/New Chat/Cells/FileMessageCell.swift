@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
+class FileMessageCell: BaseFileMessageCell, SizingCell {
     static let identifier = String(describing: FileMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -41,6 +41,11 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
     }
     @IBOutlet weak var readReceiptButton: UIButton!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: username)
+    }
+
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
@@ -66,6 +71,28 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
         }
 
         delegate?.openFileFromCell(attachment: viewModel.attachment)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }
 }
 

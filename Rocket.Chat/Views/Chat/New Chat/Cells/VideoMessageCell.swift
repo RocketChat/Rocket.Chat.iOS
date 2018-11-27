@@ -86,7 +86,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
 
     override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? VideoMessageChatItem,
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
@@ -97,7 +97,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
 
     override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
         guard
-            let viewModel = viewModel?.base as? VideoMessageChatItem,
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
         else {
             return
