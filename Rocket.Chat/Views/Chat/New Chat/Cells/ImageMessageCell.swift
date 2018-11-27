@@ -10,7 +10,7 @@ import UIKit
 import RocketChatViewController
 import FLAnimatedImage
 
-class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell {
+class ImageMessageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -45,6 +45,11 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: username)
+    }
 
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
@@ -84,6 +89,28 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
         }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }
 }
 
