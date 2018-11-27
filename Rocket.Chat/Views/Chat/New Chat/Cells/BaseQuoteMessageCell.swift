@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseQuoteMessageCell: BaseMessageCell {
+class BaseQuoteMessageCell: BaseMessageCell, BaseMessageCellProtocol {
     internal let collapsedTextMaxHeight: CGFloat = 60
 
     var textHeightConstraint: NSLayoutConstraint!
