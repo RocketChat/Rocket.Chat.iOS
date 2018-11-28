@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseImageMessageCell: BaseMessageCell, BaseMessageCellProtocol {
+class BaseImageMessageCell: BaseMessageCell {
     func loadImage(on imageView: UIImageView, startLoadingBlock: () -> Void, stopLoadingBlock: @escaping () -> Void) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return

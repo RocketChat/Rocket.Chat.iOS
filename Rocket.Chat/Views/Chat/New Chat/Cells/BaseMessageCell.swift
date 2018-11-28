@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class BaseMessageCell: UICollectionViewCell, ChatCell {
+class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
     var messageSection: MessageSection?

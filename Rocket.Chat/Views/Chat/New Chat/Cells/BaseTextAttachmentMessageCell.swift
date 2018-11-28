@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTextAttachmentMessageCell: BaseMessageCell, BaseMessageCellProtocol {
+class BaseTextAttachmentMessageCell: BaseMessageCell {
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
     var avatarLeadingInitialConstant: CGFloat = 0
