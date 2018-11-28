@@ -94,17 +94,6 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
             arrow.alpha = 0
         }
     }
-
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
 }
 
 extension QuoteCell {

@@ -87,17 +87,6 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
 
         delegate?.openURLFromCell(url: messageURLChatItem.url)
     }
-
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
 }
 
 extension MessageURLCell {

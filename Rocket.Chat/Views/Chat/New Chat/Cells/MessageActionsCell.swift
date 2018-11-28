@@ -46,17 +46,6 @@ class MessageActionsCell: BaseMessageCell, SizingCell {
 
         delegate?.openReplyMessage(message: message)
     }
-
-//    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-//        guard
-//            let viewModel = viewModel?.base as? BaseMessageChatItem,
-//            let managedObject = viewModel.message?.managedObject?.validated()
-//        else {
-//            return
-//        }
-//
-//        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-//    }
 }
 
 extension MessageActionsCell {

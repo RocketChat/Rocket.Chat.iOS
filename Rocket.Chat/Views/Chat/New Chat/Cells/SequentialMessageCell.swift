@@ -91,17 +91,6 @@ final class SequentialMessageCell: BaseMessageCell, SizingCell {
         text.message = nil
         textHeightConstraint.constant = initialTextHeightConstant
     }
-
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? SequentialMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
 }
 
 extension SequentialMessageCell {

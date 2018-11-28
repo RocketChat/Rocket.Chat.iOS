@@ -111,28 +111,6 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
         avatarView.prepareForReuse()
         textHeightConstraint.constant = initialTextHeightConstant
     }
-
-//    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-//        guard
-//            let viewModel = viewModel?.base as? BasicMessageChatItem,
-//            let managedObject = viewModel.message?.managedObject?.validated()
-//        else {
-//            return
-//        }
-//
-//        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-//    }
-//
-//    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-//        guard
-//            let viewModel = viewModel?.base as? BasicMessageChatItem,
-//            let managedObject = viewModel.message?.managedObject?.validated()
-//        else {
-//            return
-//        }
-//
-//        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
-//    }
 }
 
 // MARK: Theming

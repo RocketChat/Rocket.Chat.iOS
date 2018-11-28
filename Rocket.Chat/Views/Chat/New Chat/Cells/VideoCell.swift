@@ -70,17 +70,6 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
         delegate?.openVideoFromCell(attachment: viewModel.attachment)
     }
 
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? VideoMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
 

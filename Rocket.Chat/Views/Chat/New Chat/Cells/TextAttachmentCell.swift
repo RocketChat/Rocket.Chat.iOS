@@ -132,17 +132,6 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         fieldsStackViewHeightConstraint.constant = configure(stackView: fieldsStackView)
     }
 
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
 

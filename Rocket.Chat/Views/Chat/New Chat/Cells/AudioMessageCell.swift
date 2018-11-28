@@ -109,29 +109,6 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         pressPlayButton(sender)
     }
-
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-
-    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
-    }
-
 }
 
 // MARK: Theming
