@@ -113,8 +113,8 @@ struct SubscriptionsClient: APIClient {
                         guard
                             let rid = object["_id"].string,
                             let subscription = Subscription.find(rid: rid, realm: realm)
-                        else {
-                            return
+                            else {
+                                return
                         }
 
                         subscription.mapRoom(object, realm: realm)
@@ -179,7 +179,7 @@ struct SubscriptionsClient: APIClient {
             "msg": "method",
             "method": "subscriptions/get",
             "params": params
-        ] as [String: Any]
+            ] as [String: Any]
 
         let currentRealm = realm
 
@@ -295,21 +295,35 @@ struct SubscriptionsClient: APIClient {
 // MARK: Members List
 
 extension SubscriptionsClient {
-    func fetchMembersList(subscription: Subscription, options: APIRequestOptionSet = [], realm: Realm? = Realm.current, completion: @escaping (APIResponse<RoomMembersResource>) -> Void) {
+    func fetchMembersList(
+        subscription: Subscription,
+        options: APIRequestOptionSet = [],
+        realm: Realm? = Realm.current,
+        completion: @escaping (
+            _ response: APIResponse<RoomMembersResource>,
+            _ users: [UnmanagedUser]?
+        ) -> Void
+    ) {
         let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
         api.fetch(request, options: options) { response in
-            if case let .resource(resource) = response {
-                guard let realm = realm else { return }
-
-                realm.execute({ _ in
-                    resource.members?.forEach({ (member) in
+            switch response {
+            case .resource(let resource):
+                var users = [UnmanagedUser]()
+                realm?.execute({ realm in
+                    resource.members?.forEach { member in
                         let user = User.getOrCreate(realm: realm, values: member, updates: nil)
                         realm.add(user, update: true)
-                    })
-                })
-            }
 
-            completion(response)
+                        if let unmanaged = user.unmanaged {
+                            users.append(unmanaged)
+                        }
+                    }
+                }) {
+                    completion(response, users)
+                }
+            case .error:
+                completion(response, nil)
+            }
         }
     }
 }

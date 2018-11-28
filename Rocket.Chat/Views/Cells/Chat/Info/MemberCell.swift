@@ -9,11 +9,11 @@
 import UIKit
 
 struct MemberCellData {
-    let member: User
+    let member: UnmanagedUser
 
     var nameText: String {
         let utcText = "(UTC \(member.utcOffset))"
-        return "\(member.displayName()) \(utcText)"
+        return "\(member.displayName) \(utcText)"
     }
 
     var statusColor: UIColor {
@@ -90,13 +90,13 @@ extension MemberCell: ReactorPresenter {
         set {
             guard !newValue.isEmpty else { return }
 
-            if let user = User.find(username: newValue) {
+            if let user = User.find(username: newValue)?.unmanaged {
                 data = MemberCellData(member: user)
                 return
             }
 
             User.fetch(by: .username(newValue), completion: { user in
-                guard let user = user else { return }
+                guard let user = user?.unmanaged else { return }
                 self.data = MemberCellData(member: user)
             })
         }
