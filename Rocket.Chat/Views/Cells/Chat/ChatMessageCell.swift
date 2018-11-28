@@ -16,6 +16,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
     func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect))
+    func handleReviewRequest()
 }
 
 final class ChatMessageCell: UICollectionViewCell {

@@ -34,7 +34,7 @@ final class UserReviewManager {
     }
 
     private var availableForReview: Bool {
-        return nextDateForReview < Date()
+        return true
     }
 
     internal func calculateNextDateForReview() -> Date {
