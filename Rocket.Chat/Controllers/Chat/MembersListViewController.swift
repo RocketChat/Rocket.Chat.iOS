@@ -217,7 +217,11 @@ extension MembersListViewController: UITableViewDelegate, UserActionSheetPresent
             return
         }
 
-        presentActionSheetForUser(managed, subscription: subscription, source: (tableView, rect)) { [weak self] action in
+        presentActionSheetForUser(
+            managed,
+            subscription: subscription,
+            source: (tableView, rect)
+        ) { [weak self] action in
             if case .remove = action {
                 self?.refreshMembers()
             }

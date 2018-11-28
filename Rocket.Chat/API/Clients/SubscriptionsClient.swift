@@ -318,9 +318,9 @@ extension SubscriptionsClient {
                             users.append(unmanaged)
                         }
                     }
-                }) {
+                }, completion: {
                     completion(response, users)
-                }
+                })
             case .error:
                 completion(response, nil)
             }
