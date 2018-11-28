@@ -496,6 +496,8 @@
 "shortcuts.server_selection_numbers" = "Scelta server 1...9";
 "shortcuts.add_server" = "Aggiungi server";
 "shortcuts.change_theme" = "Cambia tema";
+"shortcuts.send" = "Send"; //TODO
+"shortcuts.new_line" = "New line"; //TODO
 
 // Chat Components
 "chat.components.quote.replied" = "Replied"; //TODO
