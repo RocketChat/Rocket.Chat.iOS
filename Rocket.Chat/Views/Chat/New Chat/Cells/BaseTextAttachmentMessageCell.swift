@@ -9,8 +9,6 @@
 import UIKit
 
 class BaseTextAttachmentMessageCell: BaseMessageCell, BaseMessageCellProtocol {
-    weak var delegate: ChatMessageCellProtocol?
-
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
     var avatarLeadingInitialConstant: CGFloat = 0

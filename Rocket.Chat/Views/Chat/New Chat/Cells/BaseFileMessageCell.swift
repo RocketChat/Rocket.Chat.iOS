@@ -9,6 +9,4 @@
 import UIKit
 import RocketChatViewController
 
-class BaseFileMessageCell: BaseMessageCell, BaseMessageCellProtocol {
-    weak var delegate: ChatMessageCellProtocol?
-}
+class BaseFileMessageCell: BaseMessageCell, BaseMessageCellProtocol { }

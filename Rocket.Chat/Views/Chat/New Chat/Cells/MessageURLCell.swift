@@ -38,8 +38,6 @@ final class MessageURLCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell
             containerTrailingConstraint.constant
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-
     var thumbnailHeightInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {

@@ -14,10 +14,13 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
     var viewModel: AnyChatItem?
     var messageSection: MessageSection?
 
+    weak var delegate: ChatMessageCellProtocol?
+
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var usernameTapGesture: UITapGestureRecognizer?
     weak var avatarTapGesture: UITapGestureRecognizer?
 
+    weak var usernameLabel: UILabel!
     lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
@@ -40,6 +43,8 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         else {
             return
         }
+
+        usernameLabel = username
 
         date.text = viewModel.dateFormatted
         username.text = viewModel.message?.alias ?? user.username
@@ -103,9 +108,28 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         }
     }
 
-    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) { }
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
 
-    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) { }
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated(),
+            let username = usernameLabel
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
+    }
 
 }
 

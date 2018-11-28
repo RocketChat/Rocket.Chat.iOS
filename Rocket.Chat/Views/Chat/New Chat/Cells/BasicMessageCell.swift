@@ -54,7 +54,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
             avatarLeadingConstraint.constant
     }
 
-    weak var delegate: ChatMessageCellProtocol? {
+    override var delegate: ChatMessageCellProtocol? {
         didSet {
             text.delegate = delegate
         }
@@ -112,27 +112,27 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
         textHeightConstraint.constant = initialTextHeightConstant
     }
 
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-
-    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
-    }
+//    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+//        guard
+//            let viewModel = viewModel?.base as? BasicMessageChatItem,
+//            let managedObject = viewModel.message?.managedObject?.validated()
+//        else {
+//            return
+//        }
+//
+//        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+//    }
+//
+//    override func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+//        guard
+//            let viewModel = viewModel?.base as? BasicMessageChatItem,
+//            let managedObject = viewModel.message?.managedObject?.validated()
+//        else {
+//            return
+//        }
+//
+//        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
+//    }
 }
 
 // MARK: Theming

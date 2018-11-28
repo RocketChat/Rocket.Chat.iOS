@@ -37,7 +37,7 @@ final class SequentialMessageCell: BaseMessageCell, BaseMessageCellProtocol, Siz
             readReceiptTrailingConstraint.constant
     }
 
-    weak var delegate: ChatMessageCellProtocol? {
+    override var delegate: ChatMessageCellProtocol? {
         didSet {
             text.delegate = delegate
         }

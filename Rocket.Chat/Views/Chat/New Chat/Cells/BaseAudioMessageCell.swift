@@ -16,8 +16,6 @@ class BaseAudioMessageCell: BaseMessageCell, BaseMessageCellProtocol {
     var playing = false
     var loading = false
 
-    weak var delegate: ChatMessageCellProtocol?
-
     private var player: AVAudioPlayer? {
         didSet {
             player?.delegate = self

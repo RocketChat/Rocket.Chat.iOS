@@ -35,7 +35,6 @@ class BaseQuoteMessageCell: BaseMessageCell, BaseMessageCellProtocol {
     }
 
     var isCollapsible = false
-    weak var delegate: ChatMessageCellProtocol?
 
     @objc func didTapContainerView() {
         guard

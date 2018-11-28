@@ -29,8 +29,6 @@ class MessageActionsCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
         }
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-
     override func awakeFromNib() {
         super.awakeFromNib()
         insertGesturesIfNeeded(with: nil)
@@ -49,16 +47,16 @@ class MessageActionsCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
         delegate?.openReplyMessage(message: message)
     }
 
-    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
+//    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+//        guard
+//            let viewModel = viewModel?.base as? BaseMessageChatItem,
+//            let managedObject = viewModel.message?.managedObject?.validated()
+//        else {
+//            return
+//        }
+//
+//        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+//    }
 }
 
 extension MessageActionsCell {
