@@ -806,7 +806,6 @@
 		998E649A2161B3E300E7C45A /* AttachmentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998E64992161B3E300E7C45A /* AttachmentFieldView.xib */; };
 		998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */; };
 		998E649E2161B6DF00E7C45A /* TextAttachmentChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */; };
-		9990750F2176202400CAB7C8 /* BaseFileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */; };
 		999075112176222300CAB7C8 /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 999075102176222300CAB7C8 /* FileMessageCell.xib */; };
 		99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99907512217622A900CAB7C8 /* FileMessageCell.swift */; };
 		9990751521765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */; };
@@ -1726,7 +1725,6 @@
 		998E64992161B3E300E7C45A /* AttachmentFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentFieldView.xib; sourceTree = "<group>"; };
 		998E649B2161B4D900E7C45A /* AttachmentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentFieldView.swift; sourceTree = "<group>"; };
 		998E649D2161B6DF00E7C45A /* TextAttachmentChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentChatItem.swift; sourceTree = "<group>"; };
-		9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFileMessageCell.swift; sourceTree = "<group>"; };
 		999075102176222300CAB7C8 /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
 		99907512217622A900CAB7C8 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		9990751421765B9600CAB7C8 /* BaseTextAttachmentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextAttachmentMessageCell.swift; sourceTree = "<group>"; };
@@ -3799,7 +3797,6 @@
 				419EB5B6215E52EA00E591BF /* VideoCell.swift */,
 				419EB5BE215E6A0C00E591BF /* ReactionsCell.xib */,
 				419EB5BC215E69FF00E591BF /* ReactionsCell.swift */,
-				9990750E2176202400CAB7C8 /* BaseFileMessageCell.swift */,
 				999075102176222300CAB7C8 /* FileMessageCell.xib */,
 				99907512217622A900CAB7C8 /* FileMessageCell.swift */,
 				993B7B3B215F07020067B962 /* FileCell.xib */,
@@ -5098,7 +5095,6 @@
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */,
-				9990750F2176202400CAB7C8 /* BaseFileMessageCell.swift in Sources */,
 				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,

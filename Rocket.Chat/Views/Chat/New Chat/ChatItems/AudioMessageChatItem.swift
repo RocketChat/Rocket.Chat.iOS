@@ -26,11 +26,7 @@ class AudioMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
 
         super.init(
             user: user,
-            avatar: message?.avatar,
-            emoji: message?.emoji,
-            alias: message?.alias,
-            date: message?.createdAt,
-            isUnread: message?.unread ?? false
+            message: message
         )
     }
 

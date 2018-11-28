@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
+final class MessageURLCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: MessageURLCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -38,10 +38,6 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
             containerTrailingConstraint.constant
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-
-    var messageWidth: CGFloat = 0
-    var viewModel: AnyChatItem?
     var thumbnailHeightInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -52,9 +48,11 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: nil)
     }
 
-    func configure(completeRendering: Bool) {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? MessageURLChatItem else {
             return
         }
@@ -88,12 +86,6 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         }
 
         delegate?.openURLFromCell(url: messageURLChatItem.url)
-    }
-}
-
-extension MessageURLCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }
 

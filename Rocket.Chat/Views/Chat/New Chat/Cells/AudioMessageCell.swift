@@ -75,6 +75,7 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         super.awakeFromNib()
 
         updateTimer = setupPlayerTimer(with: slider, and: labelAudioTime)
+        insertGesturesIfNeeded(with: username)
     }
 
     override func configure(completeRendering: Bool) {
@@ -108,7 +109,6 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         pressPlayButton(sender)
     }
-
 }
 
 // MARK: Theming
@@ -130,6 +130,7 @@ extension AudioMessageCell {
 
 extension AudioMessageCell {
     override func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playing = false
         slider.value = 0.0
     }
 }

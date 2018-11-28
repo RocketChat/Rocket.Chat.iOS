@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
+class FileMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: FileMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -40,6 +40,11 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
         }
     }
     @IBOutlet weak var readReceiptButton: UIButton!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: username)
+    }
 
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {

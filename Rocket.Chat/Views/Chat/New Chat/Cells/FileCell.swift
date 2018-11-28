@@ -9,7 +9,7 @@
 import Foundation
 import RocketChatViewController
 
-final class FileCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
+final class FileCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: FileCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -28,6 +28,11 @@ final class FileCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
             fileButton.titleLabel?.minimumScaleFactor = 0.8
             fileButton.titleLabel?.numberOfLines = 2
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
     }
 
     override func configure(completeRendering: Bool) {

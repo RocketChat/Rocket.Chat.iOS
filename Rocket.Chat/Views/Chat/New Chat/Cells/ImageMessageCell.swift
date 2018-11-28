@@ -10,7 +10,7 @@ import UIKit
 import RocketChatViewController
 import FLAnimatedImage
 
-class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell {
+class ImageMessageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -45,6 +45,11 @@ class ImageMessageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCel
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: username)
+    }
 
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
