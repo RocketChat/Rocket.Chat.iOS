@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell {
+final class QuoteCell: BaseQuoteMessageCell, SizingCell {
     static let identifier = String(describing: QuoteCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -57,6 +57,8 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: nil)
     }
 
     override func configure(completeRendering: Bool) {

@@ -35,7 +35,6 @@ class BaseQuoteMessageCell: BaseMessageCell {
     }
 
     var isCollapsible = false
-    weak var delegate: ChatMessageCellProtocol?
 
     @objc func didTapContainerView() {
         guard
@@ -48,11 +47,5 @@ class BaseQuoteMessageCell: BaseMessageCell {
 
         messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
-    }
-}
-
-extension BaseQuoteMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }
