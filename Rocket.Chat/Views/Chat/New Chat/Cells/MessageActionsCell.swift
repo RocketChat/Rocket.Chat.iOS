@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
+class MessageActionsCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: MessageActionsCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -29,18 +29,22 @@ class MessageActionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCel
         }
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-    var messageWidth: CGFloat = 0
-    var viewModel: AnyChatItem?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
+    }
 
-    func configure(completeRendering: Bool) {}
+    override func configure(completeRendering: Bool) {}
 
     @IBAction func buttonReplyDidPressed(sender: Any) {
-        guard let viewModel = viewModel?.base as? MessageActionsChatItem else {
+        guard
+            let viewModel = viewModel?.base as? MessageActionsChatItem,
+            let message = viewModel.message
+        else {
             return
         }
 
-        delegate?.openReplyMessage(message: viewModel.message)
+        delegate?.openReplyMessage(message: message)
     }
 }
 

@@ -9,8 +9,6 @@
 import UIKit
 
 class BaseImageMessageCell: BaseMessageCell {
-    weak var delegate: ChatMessageCellProtocol?
-
     func loadImage(on imageView: UIImageView, startLoadingBlock: () -> Void, stopLoadingBlock: @escaping () -> Void) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return

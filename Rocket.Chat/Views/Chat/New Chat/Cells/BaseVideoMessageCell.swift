@@ -9,10 +9,8 @@
 import UIKit
 import AVFoundation
 
-class BaseVideoMessageCell: BaseMessageCell, BaseMessageCellProtocol {
+class BaseVideoMessageCell: BaseMessageCell {
     var loading = false
-
-    weak var delegate: ChatMessageCellProtocol?
 
     func updateLoadingState(with buttonPlayer: UIButton, and activityIndicatorView: UIActivityIndicatorView) {
         if loading {

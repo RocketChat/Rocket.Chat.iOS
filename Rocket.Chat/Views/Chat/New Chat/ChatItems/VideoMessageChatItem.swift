@@ -42,10 +42,7 @@ final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
 
         super.init(
             user: user,
-            avatar: message?.avatar,
-            emoji: message?.emoji,
-            alias: message?.alias,
-            date: message?.createdAt
+            message: message
         )
     }
 

@@ -14,22 +14,14 @@ class BaseTextAttachmentChatItem: BaseMessageChatItem {
     init(
         collapsed: Bool,
         user: UnmanagedUser?,
-        avatar: String?,
-        emoji: String?,
-        alias: String?,
-        date: Date?,
-        isUnread: Bool = false
+        message: UnmanagedMessage?
         ) {
 
         self.collapsed = collapsed
 
         super.init(
             user: user,
-            avatar: avatar,
-            emoji: emoji,
-            alias: alias,
-            date: date,
-            isUnread: isUnread
+            message: message
         )
     }
 }
