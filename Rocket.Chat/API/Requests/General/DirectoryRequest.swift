@@ -28,11 +28,11 @@ final class DirectoryRequest: APIRequest {
 }
 
 final class DirectoryResource: APIResource, PagedResource {
-    var users: [User] {
-        return raw?["result"].arrayValue.map {
+    var users: [UnmanagedUser] {
+        return raw?["result"].arrayValue.compactMap {
             let user = User()
             user.map($0, realm: nil)
-            return user
+            return user.unmanaged
         } ?? []
     }
 }
