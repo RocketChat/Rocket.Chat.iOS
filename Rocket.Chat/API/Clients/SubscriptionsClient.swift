@@ -113,8 +113,8 @@ struct SubscriptionsClient: APIClient {
                         guard
                             let rid = object["_id"].string,
                             let subscription = Subscription.find(rid: rid, realm: realm)
-                            else {
-                                return
+                        else {
+                            return
                         }
 
                         subscription.mapRoom(object, realm: realm)
@@ -179,7 +179,7 @@ struct SubscriptionsClient: APIClient {
             "msg": "method",
             "method": "subscriptions/get",
             "params": params
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = realm
 
