@@ -97,6 +97,11 @@ final class MessagesViewController: RocketChatViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
+    var allowResignFirstResponder = true
+    override var canResignFirstResponder: Bool {
+        return allowResignFirstResponder
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
