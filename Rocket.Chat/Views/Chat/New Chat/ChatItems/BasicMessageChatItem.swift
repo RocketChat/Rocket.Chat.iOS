@@ -15,32 +15,33 @@ final class BasicMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
         return BasicMessageCell.identifier
     }
 
-    var message: UnmanagedMessage
-
     init(user: UnmanagedUser, message: UnmanagedMessage) {
-        self.message = message
-
         super.init(
             user: user,
-            avatar: message.avatar,
-            emoji: message.emoji,
-            alias: message.alias,
-            date: message.createdAt,
-            isUnread: message.unread
+            message: message
         )
     }
 
     var differenceIdentifier: String {
-        return (user?.differenceIdentifier ?? "") + message.identifier
+        return (user?.differenceIdentifier ?? "") + (message?.identifier ?? "")
     }
 
     func isContentEqual(to source: BasicMessageChatItem) -> Bool {
+        guard
+            let user = user,
+            let sourceUser = source.user,
+            let message = message,
+            let sourceMessage = source.message
+        else {
+            return false
+        }
+
         return
-            user?.name == source.user?.name &&
-            user?.username == source.user?.username &&
-            message.temporary == source.message.temporary &&
-            message.failed == source.message.failed &&
-            message.text == source.message.text &&
-            message.updatedAt?.timeIntervalSince1970 == source.message.updatedAt?.timeIntervalSince1970
+            user.name == sourceUser.name &&
+            user.username == sourceUser.username &&
+            message.temporary == sourceMessage.temporary &&
+            message.failed == sourceMessage.failed &&
+            message.text == sourceMessage.text &&
+            message.updatedAt?.timeIntervalSince1970 == sourceMessage.updatedAt?.timeIntervalSince1970
     }
 }

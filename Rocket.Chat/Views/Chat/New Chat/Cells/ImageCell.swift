@@ -10,7 +10,7 @@ import Foundation
 import RocketChatViewController
 import FLAnimatedImage
 
-final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell {
+final class ImageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -35,6 +35,11 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
     @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
+    }
 
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
@@ -71,6 +76,17 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
         }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
+    }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
 }
 

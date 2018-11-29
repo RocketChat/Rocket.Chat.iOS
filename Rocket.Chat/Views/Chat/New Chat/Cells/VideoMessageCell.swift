@@ -49,6 +49,12 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        insertGesturesIfNeeded(with: username)
+    }
+
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return

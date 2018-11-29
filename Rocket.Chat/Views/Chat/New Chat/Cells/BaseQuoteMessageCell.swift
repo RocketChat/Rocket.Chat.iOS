@@ -10,6 +10,7 @@ import UIKit
 
 class BaseQuoteMessageCell: BaseMessageCell {
     internal let collapsedTextMaxHeight: CGFloat = 60
+
     var textHeightConstraint: NSLayoutConstraint!
     var purposeHeightInitialConstant: CGFloat = 0
     var avatarLeadingInitialConstant: CGFloat = 0
@@ -34,7 +35,6 @@ class BaseQuoteMessageCell: BaseMessageCell {
     }
 
     var isCollapsible = false
-    weak var delegate: ChatMessageCellProtocol?
 
     @objc func didTapContainerView() {
         guard
@@ -47,11 +47,5 @@ class BaseQuoteMessageCell: BaseMessageCell {
 
         messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
-    }
-}
-
-extension BaseQuoteMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }

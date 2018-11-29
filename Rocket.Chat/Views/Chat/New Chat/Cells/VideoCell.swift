@@ -39,6 +39,11 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var buttonPlayer: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: nil)
+    }
+
     override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return

@@ -56,6 +56,7 @@ final class MessageSection: ChatSection {
 
         if object.message.isBroadcastReplyAvailable() {
             cells.append(MessageActionsChatItem(
+                user: nil,
                 message: object.message
             ).wrapped)
         }
@@ -79,7 +80,7 @@ final class MessageSection: ChatSection {
                         audioURL: attachment.fullAudioURL,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .video:
@@ -105,7 +106,7 @@ final class MessageSection: ChatSection {
                         videoThumbPath: attachment.videoThumbPath,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .textAttachment where attachment.fields.count > 0:
@@ -135,7 +136,7 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .textAttachment where !attachment.isFile:
@@ -172,7 +173,7 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             case .image:
@@ -196,7 +197,7 @@ final class MessageSection: ChatSection {
                         imageURL: attachment.fullImageURL,
                         hasText: true,
                         user: nil,
-                        message: nil
+                        message: object.message
                     ).wrapped)
                 }
             default:
@@ -215,7 +216,7 @@ final class MessageSection: ChatSection {
                             attachment: attachment,
                             hasText: true,
                             user: nil,
-                            message: nil
+                            message: object.message
                         ).wrapped)
                     }
                 }
@@ -227,7 +228,8 @@ final class MessageSection: ChatSection {
                 url: messageURL.url,
                 imageURL: messageURL.imageURL,
                 title: messageURL.title,
-                subtitle: messageURL.subtitle
+                subtitle: messageURL.subtitle,
+                message: object.message
             ).wrapped)
         }
 

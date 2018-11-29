@@ -183,6 +183,7 @@ final class MessagesViewController: RocketChatViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         markAsRead()
+        becomeFirstResponder()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

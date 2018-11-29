@@ -496,6 +496,8 @@
 "shortcuts.server_selection_numbers" = "サーバーの選択 1...9";
 "shortcuts.add_server" = "サーバーを追加";
 "shortcuts.change_theme" = "テーマを変更";
+"shortcuts.send" = "Send"; //TODO
+"shortcuts.new_line" = "New line"; //TODO
 
 // Chat Components
 "chat.components.quote.replied" = "Replied"; //TODO
