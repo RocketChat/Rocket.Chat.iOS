@@ -104,6 +104,13 @@
                             <constraint firstAttribute="height" constant="20" id="Faw-Tl-Wuo"/>
                         </constraints>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="5jY-Ef-yD5">
+                        <rect key="frame" x="164.5" y="13.5" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="khI-Ze-5L3"/>
+                            <constraint firstAttribute="width" constant="14" id="mh9-yw-Rli"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,7 +118,9 @@
                 <constraint firstItem="PsP-Kd-ppp" firstAttribute="leading" secondItem="fZs-9i-Ibr" secondAttribute="leadingMargin" id="1ec-v1-PgY"/>
                 <constraint firstItem="Qtj-p7-U8D" firstAttribute="leading" secondItem="VLV-ym-FZM" secondAttribute="trailing" constant="2" id="4dC-M8-wUS"/>
                 <constraint firstItem="2Xs-I6-bTg" firstAttribute="leading" secondItem="PsP-Kd-ppp" secondAttribute="trailing" constant="15" id="9JR-M4-Pki"/>
+                <constraint firstItem="5jY-Ef-yD5" firstAttribute="leading" secondItem="gwN-MP-7q4" secondAttribute="trailing" constant="7" id="Jv5-O1-uPd"/>
                 <constraint firstAttribute="trailingMargin" secondItem="Qtj-p7-U8D" secondAttribute="trailing" id="KHv-bj-lkr"/>
+                <constraint firstItem="5jY-Ef-yD5" firstAttribute="centerY" secondItem="gwN-MP-7q4" secondAttribute="centerY" id="L3J-KE-Xyg"/>
                 <constraint firstAttribute="bottom" secondItem="VLV-ym-FZM" secondAttribute="bottom" constant="10" id="QPL-0l-GCh"/>
                 <constraint firstItem="2Xs-I6-bTg" firstAttribute="top" secondItem="fZs-9i-Ibr" secondAttribute="top" constant="10" id="QWo-LD-25J"/>
                 <constraint firstItem="VLV-ym-FZM" firstAttribute="leading" secondItem="PsP-Kd-ppp" secondAttribute="trailing" constant="15" id="ZWL-Zv-mat"/>
@@ -139,6 +148,7 @@
                 <outlet property="readReceiptButton" destination="Qtj-p7-U8D" id="R2N-db-5Aq"/>
                 <outlet property="readReceiptTrailingConstraint" destination="KHv-bj-lkr" id="Msu-ss-RJ5"/>
                 <outlet property="readReceiptWidthConstraint" destination="CXE-At-th5" id="ghw-CF-Vcv"/>
+                <outlet property="statusView" destination="5jY-Ef-yD5" id="PX5-FA-yaC"/>
                 <outlet property="text" destination="YC5-ts-L8T" id="wtP-No-OjQ"/>
                 <outlet property="textLeadingConstraint" destination="W73-Vt-GqB" id="vpS-3J-ViD"/>
                 <outlet property="textTrailingConstraint" destination="WtL-sW-5eJ" id="JGd-tg-5hS"/>
@@ -149,5 +159,6 @@
     </objects>
     <resources>
         <image name="Attachment Expanded Light" width="10" height="10"/>
+        <image name="Exclamation" width="20" height="20"/>
     </resources>
 </document>

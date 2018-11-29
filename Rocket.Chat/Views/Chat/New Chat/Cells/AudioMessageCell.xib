@@ -95,6 +95,13 @@
                             <constraint firstAttribute="width" constant="20" id="NfV-y1-Hgn"/>
                         </constraints>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="8zU-Ko-XSN">
+                        <rect key="frame" x="164.5" y="13.5" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="Bc3-pc-bNL"/>
+                            <constraint firstAttribute="width" constant="14" id="f0b-8Z-Bxr"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -112,6 +119,8 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gqQ-7Y-e1W" secondAttribute="trailing" id="Y2m-xC-ery"/>
                 <constraint firstItem="bD8-TP-sDP" firstAttribute="leading" secondItem="mIg-3A-23j" secondAttribute="trailing" constant="2" id="fxm-4A-Iue"/>
                 <constraint firstItem="cOf-P7-qbg" firstAttribute="top" secondItem="W55-eo-cDo" secondAttribute="top" constant="10" id="g8W-lW-vml"/>
+                <constraint firstItem="8zU-Ko-XSN" firstAttribute="centerY" secondItem="gqQ-7Y-e1W" secondAttribute="centerY" id="wLl-PR-V9j"/>
+                <constraint firstItem="8zU-Ko-XSN" firstAttribute="leading" secondItem="gqQ-7Y-e1W" secondAttribute="trailing" constant="7" id="xj8-Rt-ike"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="jb1-2H-Z3Z"/>
             <size key="customSize" width="375" height="40"/>
@@ -123,6 +132,7 @@
                 <outlet property="labelAudioTime" destination="Kk1-Sy-dKF" id="IFZ-xc-wRH"/>
                 <outlet property="readReceiptButton" destination="bD8-TP-sDP" id="xEa-h7-aTV"/>
                 <outlet property="slider" destination="6BH-eA-cnf" id="mlE-5P-YmZ"/>
+                <outlet property="statusView" destination="8zU-Ko-XSN" id="vcC-0Y-7cA"/>
                 <outlet property="username" destination="cOf-P7-qbg" id="v9d-WX-E9K"/>
                 <outlet property="viewPlayerBackground" destination="mIg-3A-23j" id="SnC-EF-9US"/>
             </connections>
@@ -130,6 +140,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Exclamation" width="20" height="20"/>
         <image name="Player Play" width="36" height="36"/>
     </resources>
 </document>

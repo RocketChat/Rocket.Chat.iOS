@@ -30,10 +30,10 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var textContainer: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
     @IBOutlet weak var readReceiptButton: UIButton!
@@ -112,7 +112,13 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)

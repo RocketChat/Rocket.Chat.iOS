@@ -117,6 +117,13 @@
                             <constraint firstAttribute="width" constant="20" id="7X1-xt-i31"/>
                         </constraints>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="JWq-pX-Sem">
+                        <rect key="frame" x="164.5" y="13.5" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="14" id="Esp-l6-1Fs"/>
+                            <constraint firstAttribute="height" constant="14" id="v7X-t6-zlv"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,6 +133,7 @@
                 <constraint firstItem="bt2-RL-aQl" firstAttribute="top" secondItem="d0h-PO-VBc" secondAttribute="top" constant="10" id="7bd-y8-afG"/>
                 <constraint firstItem="YWf-f7-WSQ" firstAttribute="leading" secondItem="d0h-PO-VBc" secondAttribute="leadingMargin" id="8Ly-uI-Wto"/>
                 <constraint firstItem="YWf-f7-WSQ" firstAttribute="top" secondItem="d0h-PO-VBc" secondAttribute="top" constant="10" id="AXK-xi-7bQ"/>
+                <constraint firstItem="JWq-pX-Sem" firstAttribute="centerY" secondItem="h3e-Nd-u2z" secondAttribute="centerY" id="LPs-ZL-vz6"/>
                 <constraint firstItem="PGp-Ce-Jx5" firstAttribute="top" secondItem="bt2-RL-aQl" secondAttribute="bottom" constant="7.5" id="OGS-JN-ykJ"/>
                 <constraint firstAttribute="bottom" secondItem="PGp-Ce-Jx5" secondAttribute="bottom" constant="10" id="V2u-7r-eRK"/>
                 <constraint firstItem="ewD-2R-aDF" firstAttribute="leading" secondItem="PGp-Ce-Jx5" secondAttribute="trailing" constant="2" id="YcA-da-9Sx"/>
@@ -133,6 +141,7 @@
                 <constraint firstItem="h3e-Nd-u2z" firstAttribute="centerY" secondItem="bt2-RL-aQl" secondAttribute="centerY" id="gvN-T7-8mG"/>
                 <constraint firstItem="bt2-RL-aQl" firstAttribute="leading" secondItem="YWf-f7-WSQ" secondAttribute="trailing" constant="15" id="ikr-Pq-Dvq"/>
                 <constraint firstItem="PGp-Ce-Jx5" firstAttribute="leading" secondItem="YWf-f7-WSQ" secondAttribute="trailing" constant="15" id="pc5-49-vcr"/>
+                <constraint firstItem="JWq-pX-Sem" firstAttribute="leading" secondItem="h3e-Nd-u2z" secondAttribute="trailing" constant="7" id="tzx-Ax-kzg"/>
                 <constraint firstItem="ewD-2R-aDF" firstAttribute="bottom" secondItem="PGp-Ce-Jx5" secondAttribute="bottom" id="umS-5z-YfW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="DWc-Bk-BVY"/>
@@ -151,7 +160,7 @@
                 <outlet property="readReceiptButton" destination="ewD-2R-aDF" id="5cR-mj-Xpu"/>
                 <outlet property="readReceiptButtonWidthConstraint" destination="7X1-xt-i31" id="yZb-cI-jtG"/>
                 <outlet property="readReceiptTrailingConstraint" destination="ZR0-rq-jWk" id="Anz-5b-j9K"/>
-                <outlet property="statusView" destination="H6h-hd-Zp9" id="0dJ-4W-oUX"/>
+                <outlet property="statusView" destination="JWq-pX-Sem" id="p0J-3C-YX9"/>
                 <outlet property="statusViewLeadingConstraint" destination="zOJ-hl-yDz" id="Ekt-ET-im6"/>
                 <outlet property="statusViewWidthConstraint" destination="LJl-UE-JPk" id="txb-o2-fIL"/>
                 <outlet property="subtitle" destination="mIA-jP-bcW" id="JiJ-nY-dma"/>
@@ -165,4 +174,7 @@
             <point key="canvasLocation" x="509.60000000000002" y="-293.25337331334333"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Exclamation" width="20" height="20"/>
+    </resources>
 </document>
