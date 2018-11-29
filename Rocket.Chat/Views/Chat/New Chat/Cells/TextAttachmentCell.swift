@@ -87,7 +87,11 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         title.text = viewModel.title
-        statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+        if let color = viewModel.color {
+            statusView.backgroundColor = SystemMessageColor(rawValue: color).color
+        } else {
+            statusView.backgroundColor = .lightGray
+        }
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
