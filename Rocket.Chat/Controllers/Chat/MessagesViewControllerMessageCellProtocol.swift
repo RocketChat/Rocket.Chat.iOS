@@ -15,6 +15,12 @@ import SimpleImageViewer
 import RealmSwift
 
 extension MessagesViewController: ChatMessageCellProtocol {
+    func handleReviewRequest() {
+        allowResignFirstResponder = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.allowResignFirstResponder = true
+        }
+    }
 
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
         // set up controller
