@@ -46,6 +46,8 @@ struct MessageSectionModel: Differentiable {
             message.isContentEqual(to: source.message) &&
             daySeparator == source.daySeparator &&
             containsUnreadMessageIndicator == source.containsUnreadMessageIndicator &&
-            isSequential == source.isSequential
+            isSequential == source.isSequential &&
+            containsHeader == source.containsHeader &&
+            containsLoader == source.containsLoader
     }
 }

@@ -368,12 +368,14 @@ final class MessagesViewModel {
 
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
-                if let oldest = oldest {
-                    self?.oldestMessageDateFromRemote = oldest
-                }
-
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
+
+                if let oldest = oldest {
+                    self?.oldestMessageDateFromRemote = oldest
+                } else {
+                    self?.updateData()
+                }
             }
         }
     }

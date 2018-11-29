@@ -43,7 +43,7 @@ final class HeaderCell: UICollectionViewCell, ChatCell, SizingCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
-    func configure() {
+    func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? HeaderChatItem else {
             return
         }
