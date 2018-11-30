@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="155"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bt2-RL-aQl">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bt2-RL-aQl">
                         <rect key="frame" x="71" y="10" width="43.5" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="mvm-EI-Vdq"/>
@@ -28,7 +28,7 @@
                         <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-Nd-u2z">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-Nd-u2z">
                         <rect key="frame" x="124.5" y="12.5" width="33" height="16"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -132,6 +132,7 @@
                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="h3e-Nd-u2z" secondAttribute="trailing" id="6uk-IC-MRy"/>
                 <constraint firstItem="bt2-RL-aQl" firstAttribute="top" secondItem="d0h-PO-VBc" secondAttribute="top" constant="10" id="7bd-y8-afG"/>
                 <constraint firstItem="YWf-f7-WSQ" firstAttribute="leading" secondItem="d0h-PO-VBc" secondAttribute="leadingMargin" id="8Ly-uI-Wto"/>
+                <constraint firstItem="DWc-Bk-BVY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JWq-pX-Sem" secondAttribute="trailing" constant="8" id="8ma-q8-K8L"/>
                 <constraint firstItem="YWf-f7-WSQ" firstAttribute="top" secondItem="d0h-PO-VBc" secondAttribute="top" constant="10" id="AXK-xi-7bQ"/>
                 <constraint firstItem="JWq-pX-Sem" firstAttribute="centerY" secondItem="h3e-Nd-u2z" secondAttribute="centerY" id="LPs-ZL-vz6"/>
                 <constraint firstItem="PGp-Ce-Jx5" firstAttribute="top" secondItem="bt2-RL-aQl" secondAttribute="bottom" constant="7.5" id="OGS-JN-ykJ"/>
