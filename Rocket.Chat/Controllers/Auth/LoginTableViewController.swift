@@ -310,3 +310,9 @@ extension LoginTableViewController: UITextFieldDelegate {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension LoginTableViewController {
+    override func applyTheme() { }
+}

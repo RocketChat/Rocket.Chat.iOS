@@ -357,3 +357,9 @@ extension AuthTableViewController {
         }
     }
 }
+
+// MARK: Disable Theming
+
+extension AuthTableViewController {
+    override func applyTheme() { }
+}

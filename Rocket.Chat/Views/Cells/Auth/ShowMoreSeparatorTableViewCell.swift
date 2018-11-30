@@ -21,3 +21,7 @@ class ShowMoreSeparatorTableViewCell: UITableViewCell {
     }
 
 }
+
+extension ShowMoreSeparatorTableViewCell {
+    override func applyTheme() { }
+}

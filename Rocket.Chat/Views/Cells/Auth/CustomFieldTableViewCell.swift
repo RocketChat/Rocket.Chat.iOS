@@ -47,3 +47,7 @@ class CustomFieldTableViewCell: UITableViewCell {
     }
 
 }
+
+extension CustomFieldTableViewCell {
+    override func applyTheme() { }
+}
