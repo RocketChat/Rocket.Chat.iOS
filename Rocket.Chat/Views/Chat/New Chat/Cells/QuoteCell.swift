@@ -20,7 +20,12 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
@@ -105,5 +110,6 @@ extension QuoteCell {
         purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

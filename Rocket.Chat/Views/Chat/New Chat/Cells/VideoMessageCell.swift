@@ -41,6 +41,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
+            imageViewThumb.layer.borderWidth = 1
             imageViewThumb.layer.cornerRadius = 4
             imageViewThumb.clipsToBounds = true
         }
@@ -107,5 +108,6 @@ extension VideoMessageCell {
         date.textColor = theme.auxiliaryText
         username.textColor = theme.titleText
         labelDescription.textColor = theme.controlText
+        imageViewThumb.layer.borderColor = theme.borderColor.cgColor
     }
 }

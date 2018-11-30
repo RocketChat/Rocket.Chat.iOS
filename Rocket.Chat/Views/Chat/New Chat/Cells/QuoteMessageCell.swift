@@ -31,7 +31,12 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var statusView: UIImageView!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+        }
+    }
+
     @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
@@ -136,5 +141,6 @@ extension QuoteMessageCell {
         purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

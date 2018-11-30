@@ -20,7 +20,13 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!
@@ -98,5 +104,6 @@ extension MessageURLCell {
         host.textColor = theme.auxiliaryText
         title.textColor = theme.actionTintColor
         subtitle.textColor = theme.controlText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }
