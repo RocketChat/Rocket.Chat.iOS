@@ -104,7 +104,7 @@ class Theme: NSObject {
         bannerBackground: #colorLiteral(red: 0.9450980392, green: 0.9490196078, blue: 0.9568627451, alpha: 1),
         titleText: #colorLiteral(red: 0.05143930763, green: 0.0585193634, blue: 0.07106169313, alpha: 1),
         bodyText: #colorLiteral(red: 0.1843137255, green: 0.2039215686, blue: 0.2392156863, alpha: 1),
-        borderColor: .RCBorderColor(),
+        borderColor: #colorLiteral(red: 0.8823529412, green: 0.8980392157, blue: 0.9098039216, alpha: 1),
         controlText: #colorLiteral(red: 0.3294117647, green: 0.3450980392, blue: 0.368627451, alpha: 1),
         auxiliaryText: #colorLiteral(red: 0.6117647059, green: 0.6352941176, blue: 0.6588235294, alpha: 1),
         tintColor: .RCBlue(),

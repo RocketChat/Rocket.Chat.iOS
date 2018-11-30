@@ -36,7 +36,6 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
             imageView.layer.cornerRadius = 4
-            imageView.layer.borderColor = UIColor.RCBorderColor().cgColor
             imageView.layer.borderWidth = 1
             imageView.clipsToBounds = true
         }
@@ -102,5 +101,6 @@ extension ImageMessageCell {
         date.textColor = theme.auxiliaryText
         labelTitle.textColor = theme.bodyText
         labelDescription.textColor = theme.bodyText
+        imageView.layer.borderColor = theme.borderColor.cgColor
     }
 }

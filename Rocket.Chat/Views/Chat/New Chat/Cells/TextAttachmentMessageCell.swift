@@ -33,7 +33,6 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
 
     @IBOutlet weak var textContainer: UIView! {
         didSet {
-            textContainer.layer.borderColor = UIColor.RCBorderColor().cgColor
             textContainer.layer.borderWidth = 1
             textContainer.layer.cornerRadius = 4
         }
@@ -185,5 +184,6 @@ extension TextAttachmentMessageCell {
         date.textColor = theme.auxiliaryText
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
     }
 }

@@ -22,7 +22,6 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
 
     @IBOutlet weak var containerView: UIView! {
         didSet {
-            containerView.layer.borderColor = UIColor.RCBorderColor().cgColor
             containerView.layer.borderWidth = 1
             containerView.layer.cornerRadius = 4
         }
@@ -111,5 +110,6 @@ extension QuoteCell {
         purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

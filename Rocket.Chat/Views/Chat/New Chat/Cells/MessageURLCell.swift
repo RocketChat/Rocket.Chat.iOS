@@ -22,7 +22,6 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
 
     @IBOutlet weak var containerView: UIView! {
         didSet {
-            containerView.layer.borderColor = UIColor.RCBorderColor().cgColor
             containerView.layer.borderWidth = 1
             containerView.layer.cornerRadius = 4
         }
@@ -105,5 +104,6 @@ extension MessageURLCell {
         host.textColor = theme.auxiliaryText
         title.textColor = theme.actionTintColor
         subtitle.textColor = theme.controlText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

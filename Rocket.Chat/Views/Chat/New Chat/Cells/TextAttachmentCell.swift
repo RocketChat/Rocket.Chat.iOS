@@ -22,7 +22,6 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
 
     @IBOutlet weak var textContainer: UIView! {
         didSet {
-            textContainer.layer.borderColor = UIColor.RCBorderColor().cgColor
             textContainer.layer.borderWidth = 1
         }
     }
@@ -157,5 +156,6 @@ extension TextAttachmentCell {
         fieldsStackView.backgroundColor = .clear
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
     }
 }
