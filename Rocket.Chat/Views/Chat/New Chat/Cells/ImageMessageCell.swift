@@ -32,6 +32,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
@@ -57,7 +58,13 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         labelTitle.text = viewModel.title
 
