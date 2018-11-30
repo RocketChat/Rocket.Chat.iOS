@@ -87,11 +87,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         }
 
         title.text = viewModel.title
-        if let color = viewModel.color {
-            statusView.backgroundColor = SystemMessageColor(rawValue: color).color
-        } else {
-            statusView.backgroundColor = .lightGray
-        }
+        configure(statusView: statusView)
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
@@ -155,5 +151,7 @@ extension TextAttachmentCell {
         fieldsStackView.backgroundColor = .clear
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+
+        configure(statusView: statusView)
     }
 }
