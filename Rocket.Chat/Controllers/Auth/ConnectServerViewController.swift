@@ -347,3 +347,9 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension ConnectServerViewController {
+    override func applyTheme() { }
+}
