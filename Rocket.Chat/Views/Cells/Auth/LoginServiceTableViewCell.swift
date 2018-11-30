@@ -75,3 +75,9 @@ class LoginServiceTableViewCell: UITableViewCell {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension LoginServiceTableViewCell {
+    override func applyTheme() { }
+}

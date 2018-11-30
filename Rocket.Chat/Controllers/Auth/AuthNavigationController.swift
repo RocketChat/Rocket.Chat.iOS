@@ -90,3 +90,9 @@ class AuthNavigationController: UINavigationController {
         isNavigationBarHidden = false
     }
 }
+
+// MARK: Disable Theming
+
+extension AuthNavigationController {
+    override func applyTheme() { }
+}

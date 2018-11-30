@@ -13,3 +13,9 @@ class AuthSeparatorTableViewCell: UITableViewCell {
     static let rowHeight: CGFloat = 31
 
 }
+
+// MARK: Disable Theming
+
+extension AuthSeparatorTableViewCell {
+    override func applyTheme() { }
+}
