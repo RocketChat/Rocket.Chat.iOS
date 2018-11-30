@@ -11,34 +11,46 @@ import RealmSwift
 
 extension RoomMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
-        let realm = Realm.current
-        return raw?["messages"].arrayValue.map { json in
-            let message = Message()
-            message.map(json, realm: realm)
-            return message
+        var messages = [Message]()
+        raw?["messages"].arrayValue.forEach { json in
+            Realm.executeOnMainThread({ realm in
+                let message = Message.getOrCreate(realm: realm, values: json, updates: nil)
+                message.map(json, realm: realm)
+                messages.append(message)
+            })
         }
+
+        return messages
     }
 }
 
 extension RoomMentionsResource {
     func fetchMessagesFromRealm() -> [Message]? {
-        let realm = Realm.current
-        return raw?["mentions"].arrayValue.map { json in
-            let message = Message()
-            message.map(json, realm: realm)
-            return message
+        var messages = [Message]()
+        raw?["mentions"].arrayValue.forEach { json in
+            Realm.executeOnMainThread({ realm in
+                let message = Message.getOrCreate(realm: realm, values: json, updates: nil)
+                message.map(json, realm: realm)
+                messages.append(message)
+            })
         }
+
+        return messages
     }
 }
 
 extension SearchMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
-        let realm = Realm.current
-        return raw?["messages"].arrayValue.map { json in
-            let message = Message()
-            message.map(json, realm: realm)
-            return message
+        var messages = [Message]()
+        raw?["messages"].arrayValue.forEach { json in
+            Realm.executeOnMainThread({ realm in
+                let message = Message.getOrCreate(realm: realm, values: json, updates: nil)
+                message.map(json, realm: realm)
+                messages.append(message)
+            })
         }
+
+        return messages
     }
 }
 
