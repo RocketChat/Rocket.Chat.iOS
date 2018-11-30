@@ -91,8 +91,11 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
             return
         }
 
-        title.text = viewModel.title
-        statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+        if completeRendering {
+            let emptyTitle = localized("chat.components.text_attachment.no_title")
+            title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
+            configure(statusView: statusView)
+        }
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
@@ -157,5 +160,7 @@ extension TextAttachmentCell {
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
         textContainer.layer.borderColor = theme.borderColor.cgColor
+
+        configure(statusView: statusView)
     }
 }
