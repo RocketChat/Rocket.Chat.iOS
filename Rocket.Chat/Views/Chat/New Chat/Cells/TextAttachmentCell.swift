@@ -86,8 +86,11 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
             return
         }
 
-        title.text = viewModel.title
-        configure(statusView: statusView)
+        if completeRendering {
+            let emptyTitle = localized("chat.components.text_attachment.no_title")
+            title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
+            configure(statusView: statusView)
+        }
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
