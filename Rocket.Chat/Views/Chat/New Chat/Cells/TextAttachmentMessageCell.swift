@@ -30,7 +30,14 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var textContainer: UIView!
+
+    @IBOutlet weak var textContainer: UIView! {
+        didSet {
+            textContainer.layer.borderWidth = 1
+            textContainer.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var statusView: UIView!
@@ -177,6 +184,7 @@ extension TextAttachmentMessageCell {
         date.textColor = theme.auxiliaryText
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
 
         configure(statusView: statusView)
     }

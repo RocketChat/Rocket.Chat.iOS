@@ -105,3 +105,9 @@ extension OAuthViewController: WKNavigationDelegate {
         dismissWebViewController()
     }
 }
+
+// MARK: Disable Theming
+
+extension OAuthViewController {
+    override func applyTheme() { }
+}

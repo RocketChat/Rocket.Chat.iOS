@@ -114,8 +114,8 @@ extension ReactionView {
 
         let colors: (UIColor, UIColor, UIColor) = {
             switch theme {
-            case .light: return model.highlight ? (#colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 0.5), #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 1)) : (#colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), #colorLiteral(red: 0.8823529412, green: 0.8980392157, blue: 0.9098039216, alpha: 1), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-            default: return model.highlight ? (#colorLiteral(red: 0, green: 0.56, blue: 0.9882352941, alpha: 0.69), #colorLiteral(red: 0, green: 0.5516742082, blue: 0.9960784314, alpha: 0.26), #colorLiteral(red: 0, green: 0.4999999989, blue: 1, alpha: 0.05)) : (#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.33), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.09), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.01))
+            case .light: return model.highlight ? (#colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 0.5), #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 1)) : (#colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), theme.borderColor, #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+            default: return model.highlight ? (#colorLiteral(red: 0, green: 0.56, blue: 0.9882352941, alpha: 0.69), #colorLiteral(red: 0, green: 0.5516742082, blue: 0.9960784314, alpha: 0.26), #colorLiteral(red: 0, green: 0.4999999989, blue: 1, alpha: 0.05)) : (#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.33), theme.borderColor, #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.01))
             }
         }()
 
