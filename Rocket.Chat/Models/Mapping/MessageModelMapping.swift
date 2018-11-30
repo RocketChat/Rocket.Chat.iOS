@@ -78,7 +78,7 @@ extension Message: ModelMappeable {
                 }
 
                 if let realm = realm {
-                    let obj = Attachment.getOrCreate(realm: realm, values: values, updates: nil)
+                    let obj = Attachment.getOrCreate(realm: realm, values: attachmentValue, updates: nil)
                     obj.map(attachmentValue, realm: realm)
                     realm.add(obj, update: true)
                     self.attachments.append(obj)
