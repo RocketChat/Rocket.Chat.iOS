@@ -37,6 +37,7 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
@@ -70,7 +71,13 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         if completeRendering {
             updateVideo(with: imageViewThumb)

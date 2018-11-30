@@ -30,7 +30,7 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
 
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
-
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var containerView: UIView! {
         didSet {
             containerView.layer.borderWidth = 1
@@ -92,7 +92,13 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: messageUsername, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: messageUsername,
+            completeRendering: completeRendering
+        )
 
         purpose.text = viewModel.purpose
         purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
