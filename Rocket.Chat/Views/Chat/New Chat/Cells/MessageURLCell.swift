@@ -41,7 +41,9 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
         return
             messageWidth -
             containerLeadingConstraint.constant -
-            containerTrailingConstraint.constant
+            containerTrailingConstraint.constant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     var thumbnailHeightInitialConstant: CGFloat = 0

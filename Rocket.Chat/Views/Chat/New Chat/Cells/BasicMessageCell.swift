@@ -51,7 +51,9 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
             readReceiptWidthConstraint.constant -
             readReceiptTrailingConstraint.constant -
             avatarWidthConstraint.constant -
-            avatarLeadingConstraint.constant
+            avatarLeadingConstraint.constant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     override var delegate: ChatMessageCellProtocol? {
