@@ -23,6 +23,8 @@ final class AudioCell: BaseAudioMessageCell, SizingCell {
 
     @IBOutlet weak var viewPlayerBackground: UIView! {
         didSet {
+            viewPlayerBackground.layer.borderColor = UIColor.RCBorderColor().cgColor
+            viewPlayerBackground.layer.borderWidth = 1
             viewPlayerBackground.layer.cornerRadius = 4
         }
     }

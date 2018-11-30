@@ -20,7 +20,14 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderColor = UIColor.RCBorderColor().cgColor
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!

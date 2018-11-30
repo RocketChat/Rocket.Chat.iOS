@@ -20,7 +20,13 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderColor = UIColor.RCBorderColor().cgColor
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!

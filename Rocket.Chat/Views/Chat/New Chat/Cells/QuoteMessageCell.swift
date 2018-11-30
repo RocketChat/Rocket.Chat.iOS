@@ -30,7 +30,14 @@ final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
 
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var containerView: UIView!
+
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderColor = UIColor.RCBorderColor().cgColor
+            containerView.layer.borderWidth = 1
+        }
+    }
+
     @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!

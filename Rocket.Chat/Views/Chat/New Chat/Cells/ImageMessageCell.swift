@@ -35,9 +35,10 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
-            imageView.layer.cornerRadius = 3
-            imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
+            imageView.layer.cornerRadius = 4
+            imageView.layer.borderColor = UIColor.RCBorderColor().cgColor
             imageView.layer.borderWidth = 1
+            imageView.clipsToBounds = true
         }
     }
 

@@ -40,6 +40,8 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
+            imageViewThumb.layer.borderColor = UIColor.RCBorderColor().cgColor
+            imageViewThumb.layer.borderWidth = 1
             imageViewThumb.layer.cornerRadius = 4
             imageViewThumb.clipsToBounds = true
         }

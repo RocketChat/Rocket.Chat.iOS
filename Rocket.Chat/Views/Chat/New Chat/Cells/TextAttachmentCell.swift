@@ -20,7 +20,13 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var textContainer: UIView!
+    @IBOutlet weak var textContainer: UIView! {
+        didSet {
+            textContainer.layer.borderColor = UIColor.RCBorderColor().cgColor
+            textContainer.layer.borderWidth = 1
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var statusView: UIView!
