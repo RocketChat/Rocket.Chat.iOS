@@ -23,6 +23,7 @@ final class AudioCell: BaseAudioMessageCell, SizingCell {
 
     @IBOutlet weak var viewPlayerBackground: UIView! {
         didSet {
+            viewPlayerBackground.layer.borderWidth = 1
             viewPlayerBackground.layer.cornerRadius = 4
         }
     }
@@ -106,6 +107,7 @@ extension AudioCell {
         viewPlayerBackground.backgroundColor = theme.chatComponentBackground
         labelAudioTime.textColor = theme.auxiliaryText
         updatePlayingState(with: buttonPlay)
+        viewPlayerBackground.layer.borderColor = theme.borderColor.cgColor
     }
 }
 

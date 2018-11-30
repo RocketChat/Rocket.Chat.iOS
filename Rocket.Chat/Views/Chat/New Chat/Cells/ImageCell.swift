@@ -26,9 +26,9 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
 
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
-            imageView.layer.cornerRadius = 3
-            imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
+            imageView.layer.cornerRadius = 4
             imageView.layer.borderWidth = 1
+            imageView.clipsToBounds = true
         }
     }
 
@@ -97,5 +97,6 @@ extension ImageCell {
         let theme = self.theme ?? .light
         labelTitle.textColor = theme.bodyText
         labelDescription.textColor = theme.bodyText
+        imageView.layer.borderColor = theme.borderColor.cgColor
     }
 }
