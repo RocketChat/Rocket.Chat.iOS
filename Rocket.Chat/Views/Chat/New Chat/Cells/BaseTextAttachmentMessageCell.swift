@@ -37,7 +37,9 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant
+            readReceiptTrailingInitialConstant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     func configure(stackView: UIStackView) -> CGFloat {
