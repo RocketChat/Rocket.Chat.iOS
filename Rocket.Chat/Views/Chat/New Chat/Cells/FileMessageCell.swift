@@ -31,6 +31,7 @@ class FileMessageCell: BaseMessageCell, SizingCell {
     @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var fileButton: UIButton! {
         didSet {
@@ -60,7 +61,13 @@ class FileMessageCell: BaseMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }

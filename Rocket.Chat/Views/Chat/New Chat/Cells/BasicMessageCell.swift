@@ -32,6 +32,7 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var text: RCTextView!
 
     @IBOutlet weak var readReceiptButton: UIButton!
@@ -72,7 +73,14 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
+
         configure(readReceipt: readReceiptButton)
         updateText()
     }
