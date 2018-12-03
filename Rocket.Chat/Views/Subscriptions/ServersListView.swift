@@ -216,6 +216,7 @@ extension ServersListView {
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
             bodyText: theme.bodyText,
+            borderColor: theme.borderColor,
             controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,

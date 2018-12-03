@@ -30,10 +30,16 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var textContainer: UIView!
+    @IBOutlet weak var statusView: UIImageView!
+    @IBOutlet weak var textContainer: UIView! {
+        didSet {
+            textContainer.layer.borderWidth = 1
+            textContainer.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
     @IBOutlet weak var readReceiptButton: UIButton!
@@ -108,11 +114,17 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         if completeRendering {
             let emptyTitle = localized("chat.components.text_attachment.no_title")
             title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
-            statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+            configure(statusView: statusView)
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
@@ -177,5 +189,8 @@ extension TextAttachmentMessageCell {
         date.textColor = theme.auxiliaryText
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
+
+        configure(statusView: statusView)
     }
 }

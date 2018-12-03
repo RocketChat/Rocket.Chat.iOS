@@ -31,6 +31,7 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
+            imageViewThumb.layer.borderWidth = 1
             imageViewThumb.layer.cornerRadius = 4
             imageViewThumb.clipsToBounds = true
         }
@@ -84,5 +85,6 @@ extension VideoCell {
 
         let theme = self.theme ?? .light
         labelDescription.textColor = theme.controlText
+        imageViewThumb.layer.borderColor = theme.borderColor.cgColor
     }
 }

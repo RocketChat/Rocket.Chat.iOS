@@ -97,6 +97,11 @@ final class MessagesViewController: RocketChatViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
+    var allowResignFirstResponder = true
+    override var canResignFirstResponder: Bool {
+        return allowResignFirstResponder
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -182,6 +187,7 @@ final class MessagesViewController: RocketChatViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         markAsRead()
+        becomeFirstResponder()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

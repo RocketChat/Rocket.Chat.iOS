@@ -40,6 +40,7 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
 
                 if self.isAddingReaction(emoji: view.model.emoji) {
                     UserReviewManager.shared.requestReview()
+                    self.delegate?.handleReviewRequest()
                 }
             }
 

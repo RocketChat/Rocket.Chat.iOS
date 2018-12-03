@@ -37,7 +37,9 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant
+            readReceiptTrailingInitialConstant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     func configure(stackView: UIStackView) -> CGFloat {
@@ -78,6 +80,18 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
         }
 
         return stackViewHeight
+    }
+
+    func configure(statusView: UIView) {
+        guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
+            return
+        }
+
+        if let color = viewModel.color {
+            statusView.backgroundColor = SystemMessageColor(rawValue: color).color
+        } else {
+            statusView.backgroundColor = .lightGray
+        }
     }
 
     func reset(stackView: UIStackView) {

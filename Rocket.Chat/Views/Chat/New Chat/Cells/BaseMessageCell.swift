@@ -36,7 +36,13 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
 
     func configure(completeRendering: Bool) {}
 
-    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel, completeRendering: Bool) {
+    func configure(
+        with avatarView: AvatarView,
+        date: UILabel,
+        status: UIImageView,
+        and username: UILabel,
+        completeRendering: Bool
+    ) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
@@ -48,6 +54,14 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
 
         date.text = viewModel.dateFormatted
         username.text = viewModel.message?.alias ?? user.username
+
+        if viewModel.message?.failed == true {
+            status.isHidden = false
+            status.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            status.tintColor = .red
+        } else {
+            status.isHidden = true
+        }
 
         if completeRendering {
             avatarView.emoji = viewModel.message?.emoji

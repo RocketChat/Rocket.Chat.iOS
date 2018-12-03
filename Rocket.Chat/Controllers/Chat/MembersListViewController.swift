@@ -30,12 +30,12 @@ class MembersListViewData {
         return subscription?.canInviteUsers() ?? false
     }
 
-    var membersPages: [[User]] = []
-    var members: FlattenCollection<[[User]]> {
+    var membersPages: [[UnmanagedUser]] = []
+    var members: FlattenCollection<[[UnmanagedUser]]> {
         return membersPages.joined()
     }
 
-    func member(at index: Int) -> User {
+    func member(at index: Int) -> UnmanagedUser {
         return members[members.index(members.startIndex, offsetBy: index)]
     }
 
@@ -48,36 +48,25 @@ class MembersListViewData {
 
             let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
             let client = API.current()?.client(SubscriptionsClient.self)
-            let realm = Realm.current
 
-            client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response in
-                guard let self = self else { return }
-                guard let realm = realm else { return }
-
-                switch response {
-                case .resource(let resource):
-                    realm.execute({ _ in
-                        var users: [User] = []
-
-                        resource.members?.forEach({ (member) in
-                            let user = User.getOrCreate(realm: realm, values: member, updates: nil)
-                            users.append(user)
-                        })
-
-                        realm.add(users, update: true)
-                        self.membersPages.append(users)
-                    })
-
-                    self.showing += resource.count ?? 0
-                    self.total = resource.total ?? 0
-                    self.currentPage += 1
-
-                    self.isLoadingMoreMembers = false
-
-                    completion?()
-                case .error:
-                    Alert.defaultError.present()
+            client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response, users in
+                guard
+                    let self = self,
+                    let users = users,
+                    case let .resource(resource) = response
+                else {
+                    return Alert.defaultError.present()
                 }
+
+                self.membersPages.append(users)
+
+                self.showing += resource.count ?? 0
+                self.total = resource.total ?? 0
+                self.currentPage += 1
+
+                self.isLoadingMoreMembers = false
+
+                completion?()
             }
         }
     }
@@ -223,7 +212,16 @@ extension MembersListViewController: UITableViewDelegate, UserActionSheetPresent
         let user = data.member(at: indexPath.row)
         let subscription = data.subscription
         let rect = tableView.rectForRow(at: indexPath)
-        presentActionSheetForUser(user, subscription: subscription, source: (tableView, rect)) { [weak self] action in
+
+        guard let managed = user.managedObject else {
+            return
+        }
+
+        presentActionSheetForUser(
+            managed,
+            subscription: subscription,
+            source: (tableView, rect)
+        ) { [weak self] action in
             if case .remove = action {
                 self?.refreshMembers()
             }

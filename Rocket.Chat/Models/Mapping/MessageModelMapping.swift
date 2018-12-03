@@ -73,12 +73,22 @@ extension Message: ModelMappeable {
             self.attachments.removeAll()
 
             attachments.forEach {
-                guard let attachmentValue = try? $0.merged(with: JSON(dictionaryLiteral: ("messageIdentifier", values["_id"].stringValue))) else {
+                guard var attachmentValue = try? $0.merged(with: JSON(dictionaryLiteral: ("messageIdentifier", values["_id"].stringValue))) else {
                     return
                 }
 
                 if let realm = realm {
-                    let obj = Attachment.getOrCreate(realm: realm, values: values, updates: nil)
+                    var obj: Attachment!
+
+                    // FA NOTE: We are not using Object.getOrCreate method here on purpose since
+                    // we have to map the local modifications before mapping the current JSON on the object.
+                    if let primaryKey = attachmentValue.rawString()?.md5(), let existingObj = realm.object(ofType: Attachment.self, forPrimaryKey: primaryKey) {
+                        obj = existingObj
+                        attachmentValue["collapsed"] = JSON(existingObj.collapsed)
+                    } else {
+                        obj = Attachment()
+                    }
+
                     obj.map(attachmentValue, realm: realm)
                     realm.add(obj, update: true)
                     self.attachments.append(obj)

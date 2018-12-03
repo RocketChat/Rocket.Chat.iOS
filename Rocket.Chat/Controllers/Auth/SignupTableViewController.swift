@@ -335,3 +335,9 @@ extension SignupTableViewController: UITextFieldDelegate {
         nextTextField?.becomeFirstResponder()
     }
 }
+
+// MARK: Disable Theming
+
+extension SignupTableViewController {
+    override func applyTheme() { }
+}
