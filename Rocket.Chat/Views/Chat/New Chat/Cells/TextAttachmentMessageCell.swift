@@ -115,7 +115,7 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         if completeRendering {
             let emptyTitle = localized("chat.components.text_attachment.no_title")
             title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
-            configure(statusView: statusColor)
+            configure(statusColor: statusColor)
         }
 
         configure(readReceipt: readReceiptButton)
@@ -192,6 +192,6 @@ extension TextAttachmentMessageCell {
         subtitle.textColor = theme.bodyText
         textContainer.layer.borderColor = theme.borderColor.cgColor
 
-        configure(statusView: statusColor)
+        configure(statusColor: statusColor)
     }
 }
