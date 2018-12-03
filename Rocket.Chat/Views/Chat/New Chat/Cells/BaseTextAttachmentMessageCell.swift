@@ -14,8 +14,8 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     var avatarLeadingInitialConstant: CGFloat = 0
     var avatarWidthInitialConstant: CGFloat = 0
     var textContainerLeadingInitialConstant: CGFloat = 0
-    var statusViewLeadingInitialConstant: CGFloat = 0
-    var statusViewWidthInitialConstant: CGFloat = 0
+    var statusColorLeadingInitialConstant: CGFloat = 0
+    var statusColorWidthInitialConstant: CGFloat = 0
     var fieldsStackViewLeadingInitialConstant: CGFloat = 0
     var fieldsStackViewTrailingInitialConstant: CGFloat = 0
     var textContainerTrailingInitialConstant: CGFloat = 0
@@ -31,8 +31,8 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -
-            statusViewLeadingInitialConstant -
-            statusViewWidthInitialConstant -
+            statusColorLeadingInitialConstant -
+            statusColorWidthInitialConstant -
             fieldsStackViewLeadingInitialConstant -
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
