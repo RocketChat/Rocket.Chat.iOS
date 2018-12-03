@@ -161,9 +161,10 @@
                 <outlet property="readReceiptButton" destination="ewD-2R-aDF" id="5cR-mj-Xpu"/>
                 <outlet property="readReceiptButtonWidthConstraint" destination="7X1-xt-i31" id="yZb-cI-jtG"/>
                 <outlet property="readReceiptTrailingConstraint" destination="ZR0-rq-jWk" id="Anz-5b-j9K"/>
+                <outlet property="statusColor" destination="H6h-hd-Zp9" id="Mpo-9x-wPv"/>
+                <outlet property="statusColorLeadingConstraint" destination="zOJ-hl-yDz" id="Ekt-ET-im6"/>
+                <outlet property="statusColorWidthConstraint" destination="LJl-UE-JPk" id="txb-o2-fIL"/>
                 <outlet property="statusView" destination="JWq-pX-Sem" id="p0J-3C-YX9"/>
-                <outlet property="statusViewLeadingConstraint" destination="zOJ-hl-yDz" id="Ekt-ET-im6"/>
-                <outlet property="statusViewWidthConstraint" destination="LJl-UE-JPk" id="txb-o2-fIL"/>
                 <outlet property="subtitle" destination="mIA-jP-bcW" id="JiJ-nY-dma"/>
                 <outlet property="subtitleTopConstraint" destination="jPC-xW-LLa" id="tv8-Td-nNI"/>
                 <outlet property="textContainer" destination="PGp-Ce-Jx5" id="re2-9K-fLM"/>

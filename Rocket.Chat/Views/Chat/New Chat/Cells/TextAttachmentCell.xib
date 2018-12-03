@@ -105,9 +105,9 @@
                 <outlet property="fieldsStackViewLeadingConstraint" destination="IAr-wP-qdc" id="H8S-dc-n4H"/>
                 <outlet property="fieldsStackViewTopConstraint" destination="ylK-BL-XCn" id="3TC-AX-B2O"/>
                 <outlet property="fieldsStackViewTrailingConstraint" destination="rgW-a0-NEa" id="p06-3e-jaf"/>
-                <outlet property="statusView" destination="cmw-Jo-XRK" id="W9A-xq-Gp4"/>
-                <outlet property="statusViewLeadingConstraint" destination="SMh-5Y-9ye" id="b4Z-fx-8eh"/>
-                <outlet property="statusViewWidthConstraint" destination="hEe-iq-EVc" id="S4l-VX-dgt"/>
+                <outlet property="statusColor" destination="cmw-Jo-XRK" id="jbn-SU-D0S"/>
+                <outlet property="statusColorLeadingConstraint" destination="SMh-5Y-9ye" id="b4Z-fx-8eh"/>
+                <outlet property="statusColorWidthConstraint" destination="hEe-iq-EVc" id="S4l-VX-dgt"/>
                 <outlet property="subtitle" destination="Gbv-W5-I0m" id="ypl-tb-4ZY"/>
                 <outlet property="subtitleTopConstraint" destination="bjK-rF-85x" id="GDY-tK-2fx"/>
                 <outlet property="textContainer" destination="o4N-fB-seu" id="PbO-oR-44i"/>

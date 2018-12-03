@@ -28,13 +28,13 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusColor: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
 
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewLeadingConstraint: NSLayoutConstraint!
@@ -73,8 +73,8 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
         textContainerLeadingInitialConstant = textContainerLeadingConstraint.constant
-        statusViewLeadingInitialConstant = statusViewLeadingConstraint.constant
-        statusViewWidthInitialConstant = statusViewWidthConstraint.constant
+        statusColorLeadingInitialConstant = statusColorLeadingConstraint.constant
+        statusColorWidthInitialConstant = statusColorWidthConstraint.constant
         fieldsStackViewLeadingInitialConstant = fieldsStackViewLeadingConstraint.constant
         fieldsStackViewTrailingInitialConstant = fieldsStackViewTrailingConstraint.constant
         textContainerTrailingInitialConstant = textContainerTrailingConstraint.constant
@@ -94,7 +94,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         if completeRendering {
             let emptyTitle = localized("chat.components.text_attachment.no_title")
             title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
-            configure(statusView: statusView)
+            configure(statusColor: statusColor)
         }
 
         if viewModel.collapsed {
@@ -161,6 +161,6 @@ extension TextAttachmentCell {
         subtitle.textColor = theme.bodyText
         textContainer.layer.borderColor = theme.borderColor.cgColor
 
-        configure(statusView: statusView)
+        configure(statusColor: statusColor)
     }
 }
