@@ -21,13 +21,15 @@ final class MessagesViewModel {
     internal var data: [AnyChatSection] = []
     internal var dataSorted: [AnyChatSection] = [] {
         didSet {
+            let dataSorted = self.dataSorted
+
             recentSendersDataQueue.addOperation { [weak self] in
                 guard let self = self else {
                     return
                 }
 
                 var seen = Set<String>()
-                let senders = self.dataSorted.compactMap { data -> String? in
+                let senders = dataSorted.compactMap { data -> String? in
                     guard
                         let message = data.object.base as? MessageSectionModel,
                         let username = message.message.user?.username
