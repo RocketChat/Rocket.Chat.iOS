@@ -82,7 +82,7 @@ final class AuthTableViewController: BaseTableViewController {
     var shouldRetrieveLoginServices = false
 
     var serverVersion: Version?
-    var serverURL: URL!
+    var serverURL: URL?
     var serverPublicSettings: AuthSettings?
 
     var api: API? {
@@ -125,7 +125,7 @@ final class AuthTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = serverURL.host
+        title = serverURL?.host
         setupTableView()
 
         guard let settings = serverPublicSettings else { return }
