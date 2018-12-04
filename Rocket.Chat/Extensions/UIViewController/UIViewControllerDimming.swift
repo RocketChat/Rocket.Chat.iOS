@@ -19,9 +19,10 @@ extension UIViewController {
 
     var dimView: DimView {
         if let res = view.viewWithTag(dimViewTag) as? DimView {
+            res.frame = view.bounds
             return res
         } else {
-            let dimView = DimView(frame: view.frame)
+            let dimView = DimView(frame: view.bounds)
             dimView.tag = dimViewTag
             dimView.backgroundColor = .black
             dimView.alpha = kDimViewAlpha
