@@ -54,12 +54,15 @@ final class MessagesViewController: RocketChatViewController {
     var emptyStateImageView: UIImageView?
     var documentController: UIDocumentInteractionController?
 
+    var unmanagedSubscription: UnmanagedSubscription?
     var subscription: Subscription! {
         didSet {
             let sub: Subscription? = subscription
+            let unmanaged = sub?.unmanaged
 
             viewModel.subscription = sub
-            viewSubscriptionModel.subscription = sub?.unmanaged
+            viewSubscriptionModel.subscription = unmanaged
+            unmanagedSubscription = unmanaged
 
             recoverDraftMessage()
             updateEmptyState()
@@ -161,6 +164,7 @@ final class MessagesViewController: RocketChatViewController {
 
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
+            self.markAsRead()
         }
 
         viewSubscriptionModel.onDataChanged = { [weak self] in
@@ -389,7 +393,7 @@ final class MessagesViewController: RocketChatViewController {
     // MARK: Reading Status
 
     private func markAsRead() {
-        guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
+        guard let subscription = unmanagedSubscription else { return }
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
