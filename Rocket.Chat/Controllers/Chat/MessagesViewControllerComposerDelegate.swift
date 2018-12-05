@@ -26,6 +26,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
         composerViewModel.didChangeHintPrefixedWord(word: word)
+
+        if word.isEmpty {
+            parent?.stopDimming()
+        } else {
+            parent?.startDimming()
+        }
     }
 
     func hintPrefixes(for composerView: ComposerView) -> [Character] {

@@ -19,7 +19,37 @@ final class MessagesViewModel {
      that are executed after getting the data.
      */
     internal var data: [AnyChatSection] = []
-    internal var dataSorted: [AnyChatSection] = []
+    internal var dataSorted: [AnyChatSection] = [] {
+        didSet {
+            let dataSorted = self.dataSorted
+
+            recentSendersDataQueue.addOperation { [weak self] in
+                guard let self = self else {
+                    return
+                }
+
+                var seen = Set<String>()
+                let senders = dataSorted.compactMap { data -> String? in
+                    guard
+                        let message = data.object.base as? MessageSectionModel,
+                        let username = message.message.user?.username
+                    else {
+                        return nil
+                    }
+
+                    if !seen.contains(username) {
+                        seen.insert(username)
+                        return username
+                    }
+
+                    return nil
+                }
+
+                self.recentSenders = Array(senders[0..<min(senders.count, 5)])
+            }
+        }
+    }
+
     internal var dataNormalized: [ArraySection<AnyChatSection, AnyChatItem>] = []
 
     /**
@@ -32,6 +62,12 @@ final class MessagesViewModel {
             currentTheme = controllerContext?.view.theme ?? .light
         }
     }
+
+    /**
+     A compilation of the 5 last message senders usernames
+     to be used for autocompletion priorization.
+    */
+    var recentSenders = [String]()
 
     internal var subscription: Subscription? {
         didSet {
@@ -84,6 +120,17 @@ final class MessagesViewModel {
      manipulating data that was changed.
      */
     private let updateDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
+
+    /**
+     This OperationQueue responsible for updating the recent
+     usernames that sent messages.
+     */
+    private let recentSendersDataQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         operationQueue.qualityOfService = .userInteractive

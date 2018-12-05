@@ -184,6 +184,10 @@ final class MessagesViewController: RocketChatViewController {
             }
         }
 
+        composerViewModel.getRecentSenders = {
+            return self.viewModel.recentSenders
+        }
+
         startDraftMessage()
         updateJoinedView()
     }
