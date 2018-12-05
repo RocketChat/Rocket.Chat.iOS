@@ -524,8 +524,10 @@ extension MessagesViewController {
 
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = view.theme else { return }
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
 

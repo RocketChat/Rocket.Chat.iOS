@@ -75,8 +75,10 @@ extension UnmanagedMessage {
     static func == (lhs: UnmanagedMessage, rhs: UnmanagedMessage) -> Bool {
         return
             lhs.identifier == rhs.identifier &&
+            lhs.type == rhs.type &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
+            lhs.markedForDeletion == rhs.markedForDeletion &&
             lhs.mentions == rhs.mentions &&
             lhs.channels == rhs.channels &&
             lhs.attachments.elementsEqual(rhs.attachments) &&
