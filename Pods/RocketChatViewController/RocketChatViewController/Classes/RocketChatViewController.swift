@@ -144,7 +144,7 @@ public extension ChatItem where Self: Differentiable {
 public protocol ChatCell {
     var messageWidth: CGFloat { get set }
     var viewModel: AnyChatItem? { get set }
-    func configure(completeRendering: Bool)
+    func configure()
 }
 
 public protocol ChatDataUpdateDelegate: class {
@@ -424,6 +424,10 @@ extension RocketChatViewController {
         let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        
+        guard intersection.height != self.keyboardHeight else {
+            return
+        }
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
             self.keyboardHeight = intersection.height
@@ -434,7 +438,11 @@ extension RocketChatViewController {
             collectionView.contentOffset = contentOffset
 
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { _ in
+            UIView.performWithoutAnimation {
+                self.view.layoutIfNeeded()
+            }
+        })
     }
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -443,4 +451,3 @@ extension RocketChatViewController {
         }
     }
 }
-
