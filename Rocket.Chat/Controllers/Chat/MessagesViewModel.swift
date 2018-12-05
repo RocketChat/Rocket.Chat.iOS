@@ -437,10 +437,12 @@ final class MessagesViewModel {
             if let lastSeen = lastSeen {
                 unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
 
-                if let identifier = unreadMarkerObjectIdentifier {
-                    unreadMarker = identifier == message.identifier
-                } else if unreadMarker {
-                    unreadMarkerObjectIdentifier = message.identifier
+                if unreadMarker {
+                    if let identifier = unreadMarkerObjectIdentifier {
+                        unreadMarker = identifier == message.identifier
+                    } else {
+                        unreadMarkerObjectIdentifier = message.identifier
+                    }
                 }
             }
 
