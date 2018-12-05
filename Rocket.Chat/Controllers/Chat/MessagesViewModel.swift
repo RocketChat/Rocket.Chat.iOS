@@ -437,6 +437,8 @@ final class MessagesViewModel {
             if let lastSeen = lastSeen {
                 unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
 
+                // Unread marker will remain on the same message
+                // all the time until user closes the screen.
                 if unreadMarker {
                     if let identifier = unreadMarkerObjectIdentifier {
                         unreadMarker = identifier == message.identifier
