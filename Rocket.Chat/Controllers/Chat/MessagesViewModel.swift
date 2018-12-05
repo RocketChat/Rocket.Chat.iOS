@@ -36,7 +36,7 @@ final class MessagesViewModel {
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
-            lastSeen = subscription.lastSeen ?? Date()
+            lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
@@ -59,8 +59,9 @@ final class MessagesViewModel {
     /**
      Last time user read the messages from the Subscription from this view model.
      */
-    internal var lastSeen = Date()
+    internal var lastSeen: Date?
     internal var hasUnreadMarker = false
+    internal var unreadMarkerObjectIdentifier: String?
 
     /**
      If the view model is requesting new data from the API.
@@ -431,7 +432,18 @@ final class MessagesViewModel {
 
             let message = messageSection1.message
             let collpsibleItemsState = (object.base as? MessageSection)?.collapsibleItemsState ?? [:]
-            let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
+            var unreadMarker = false
+            if let lastSeen = lastSeen {
+                unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
+                if let identifier = unreadMarkerObjectIdentifier {
+                    unreadMarker = identifier == message.identifier
+                } else if unreadMarker {
+                    unreadMarkerObjectIdentifier = message.identifier
+                }
+            }
+
             var separator: Date?
             var sequential = false
             var loader = false
