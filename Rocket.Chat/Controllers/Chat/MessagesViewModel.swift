@@ -36,7 +36,7 @@ final class MessagesViewModel {
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
-            lastSeen = subscription.lastSeen ?? Date()
+            lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
@@ -59,8 +59,9 @@ final class MessagesViewModel {
     /**
      Last time user read the messages from the Subscription from this view model.
      */
-    internal var lastSeen = Date()
+    internal var lastSeen: Date?
     internal var hasUnreadMarker = false
+    internal var unreadMarkerObjectIdentifier: String?
 
     /**
      If the view model is requesting new data from the API.
@@ -391,6 +392,7 @@ final class MessagesViewModel {
                 self?.cacheDataSorted()
             }
 
+            self?.markUnreadMarkerIfNeeded()
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {
@@ -416,14 +418,38 @@ final class MessagesViewModel {
     }
 
     /**
+     This method will mark the unread marker position
+     for this subscription state and won't change until
+     the user leaves the room.
+     */
+    internal func markUnreadMarkerIfNeeded() {
+        // Unread marker will remain on the same message
+        // all the time until user closes the screen.
+        if unreadMarkerObjectIdentifier == nil {
+            if let lastSeen = lastSeen {
+                for object in dataSorted.reversed() {
+                    guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
+
+                    let message = messageSection1.message
+                    let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
+                    if unreadMarker {
+                        unreadMarkerObjectIdentifier = message.identifier
+                        hasUnreadMarker = true
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      Anything related to the section that refers to sequential messages, day separators
      and unread marks is done on this method. A loop in the whole list of messages
      is executed on every update to make sure that there's no duplicated separators
      and everything looks good to the user on the final result.
      */
     internal func normalizeDataSorted() {
-        hasUnreadMarker = false
-
         let dataSortedMaxIndex = dataSorted.count - 1
 
         for (idx, object) in dataSorted.enumerated() {
@@ -431,7 +457,7 @@ final class MessagesViewModel {
 
             let message = messageSection1.message
             let collpsibleItemsState = (object.base as? MessageSection)?.collapsibleItemsState ?? [:]
-            let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
             var separator: Date?
             var sequential = false
             var loader = false
@@ -449,7 +475,7 @@ final class MessagesViewModel {
                 message: message,
                 daySeparator: separator,
                 sequential: sequential,
-                unreadIndicator: unreadMarker,
+                unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
                 loader: loader,
                 header: header
             )
@@ -469,10 +495,6 @@ final class MessagesViewModel {
             // Cache the processed result of the message text
             // on this loop to avoid doing that in the main thread.
             MessageTextCacheManager.shared.message(for: message, with: currentTheme)
-
-            if unreadMarker {
-                hasUnreadMarker = true
-            }
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })

@@ -115,9 +115,15 @@ final class MessagesViewModelSpec: XCTestCase {
     func testUnreadMarkerPresenceTrue() {
         let model = MessagesViewModel()
 
+        let first = Message.testInstance()
+        first.identifier = "message-identifier-1"
+
+        let second = Message.testInstance()
+        second.identifier = "message-identifier-2"
+
         guard
-            let messageFirst = Message.testInstance().validated()?.unmanaged,
-            var messageSecond = Message.testInstance().validated()?.unmanaged
+            let messageFirst = first.validated()?.unmanaged,
+            var messageSecond = second.validated()?.unmanaged
         else {
             return XCTFail("messages must be created")
         }
@@ -128,6 +134,7 @@ final class MessagesViewModelSpec: XCTestCase {
             model.lastSeen = Date().addingTimeInterval(-500)
             model.data = [section1, section2]
             model.cacheDataSorted()
+            model.markUnreadMarkerIfNeeded()
             model.normalizeDataSorted()
         }
 
