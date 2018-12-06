@@ -10,7 +10,8 @@ extension MessagesViewController {
     func updateSearchMessagesButton() {
         if subscription != nil {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .search,
+                image: UIImage(named: "Search"),
+                style: .done,
                 target: self,
                 action: #selector(showSearchMessages)
             )

@@ -41,6 +41,8 @@ final class MessagesComposerViewModel {
     var hints: [Hint] = []
     var hintPrefixedWord: String = ""
 
+    var getRecentSenders: (() -> [String])?
+
     func didChangeHintPrefixedWord(word: String, realm: Realm? = Realm.current) {
         hints = []
         hintPrefixedWord = word
@@ -55,7 +57,11 @@ final class MessagesComposerViewModel {
         let word = String(word.dropFirst())
 
         if prefix == "@" {
-            hints = User.search(usernameContaining: word, preference: []).compactMap {
+            hints = User.search(
+                usernameContaining: word,
+                preference: getRecentSenders?() ?? [],
+                includeSelf: false
+            ).compactMap {
                 if let user = $0.1 as? User {
                     return Hint.user(user)
                 } else {
