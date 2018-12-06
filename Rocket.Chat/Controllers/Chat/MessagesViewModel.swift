@@ -37,12 +37,17 @@ final class MessagesViewModel {
         didSet {
             guard let subscription = subscription?.validated() else { return }
             lastSeen = subscription.lastSeen ?? Date()
+            rid = subscription.rid
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
             messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
             fetchMessages(from: nil)
         }
     }
+
+    // Thread safe reference to rid. This variable is required to
+    // setup the HeaderSection
+    internal var rid: String = ""
 
     // Variables required to fetch the messages of the Subscription
     // to the view model.
@@ -441,7 +446,7 @@ final class MessagesViewModel {
 
             if idx == dataSortedMaxIndex {
                 loader = hasMoreData || requestingData
-                header = !hasMoreData && !requestingData
+                header = false
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -475,6 +480,22 @@ final class MessagesViewModel {
             if unreadMarker {
                 hasUnreadMarker = true
             }
+        }
+
+        if dataSorted.last?.base as? HeaderSection == nil, !hasMoreData && !requestingData {
+            let headerChatItem = AnyDifferentiable(
+                HeaderChatItem(rid: rid)
+            )
+
+            let headerSection = AnyChatSection(
+                HeaderSection(
+                    object: headerChatItem,
+                    controllerContext: controllerContext
+                )
+            )
+
+            data.append(headerSection)
+            dataSorted.append(headerSection)
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
