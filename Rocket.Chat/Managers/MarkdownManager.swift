@@ -64,18 +64,14 @@ class MarkdownManager {
 
 fileprivate extension RCMarkdownParser {
     func useColorAttributes(_ attributes: MarkdownColorAttributes) {
-        let defaultFontSize = MessageTextFontAttributes.defaultFontSize
-
         let quoteAttributes = [
-            NSAttributedString.Key.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize),
+            NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont,
             NSAttributedString.Key.backgroundColor.rawValue: attributes.quoteBackgroundColor
         ]
 
         var codeAttributes: [String: Any] = [NSAttributedString.Key.backgroundColor.rawValue: attributes.codeBackgroundColor]
         codeAttributes[NSAttributedString.Key.foregroundColor.rawValue] = attributes.codeTextColor
-        if let codeFont = UIFont(name: "Courier New", size: defaultFontSize)?.bold() {
-            codeAttributes[NSAttributedString.Key.font.rawValue] = codeFont
-        }
+        codeAttributes[NSAttributedString.Key.font.rawValue] = MessageTextFontAttributes.monoSpacedFont
 
         let linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: attributes.linkColor]
 
@@ -89,26 +85,22 @@ fileprivate extension RCMarkdownParser {
     static func initWithDefaultAttributes() -> RCMarkdownParser {
         let parser = RCMarkdownParser()
 
-        let defaultFontSize = MessageTextFontAttributes.defaultFontSize
-
-        parser.defaultAttributes = [NSAttributedString.Key.font.rawValue: UIFont.systemFont(ofSize: defaultFontSize)]
+        parser.defaultAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.defaultFont]
         parser.quoteAttributes = [
-            NSAttributedString.Key.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize),
+            NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont,
             NSAttributedString.Key.backgroundColor.rawValue: UIColor.codeBackground
         ]
         parser.quoteBlockAttributes = parser.quoteAttributes
 
         var codeAttributes: [String: Any] = [NSAttributedString.Key.backgroundColor.rawValue: UIColor.codeBackground]
         codeAttributes[NSAttributedString.Key.foregroundColor.rawValue] = UIColor.code
-        if let codeFont = UIFont(name: "Courier New", size: defaultFontSize)?.bold() {
-            codeAttributes[NSAttributedString.Key.font.rawValue] = codeFont
-        }
+        codeAttributes[NSAttributedString.Key.font.rawValue] = MessageTextFontAttributes.monoSpacedFont
 
         parser.inlineCodeAttributes = codeAttributes
         parser.codeAttributes = codeAttributes
 
-        parser.strongAttributes = [NSAttributedString.Key.font.rawValue: UIFont.boldSystemFont(ofSize: defaultFontSize)]
-        parser.italicAttributes = [NSAttributedString.Key.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize)]
+        parser.strongAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.boldFont]
+        parser.italicAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont]
         parser.strikeAttributes = [NSAttributedString.Key.strikethroughStyle.rawValue: NSNumber(value: NSUnderlineStyle.single.rawValue)]
         parser.linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.darkGray]
 
