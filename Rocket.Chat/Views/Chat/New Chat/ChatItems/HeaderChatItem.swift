@@ -11,6 +11,8 @@ import DifferenceKit
 import RocketChatViewController
 
 struct HeaderChatItem: ChatItem, Differentiable {
+    static let globalIdentifier = String(describing: HeaderChatItem.self)
+
     var relatedReuseIdentifier: String {
         return HeaderCell.identifier
     }
@@ -48,10 +50,10 @@ struct HeaderChatItem: ChatItem, Differentiable {
     }
 
     var differenceIdentifier: String {
-        return rid
+        return HeaderChatItem.globalIdentifier
     }
 
     func isContentEqual(to source: HeaderChatItem) -> Bool {
-        return rid == source.rid
+        return differenceIdentifier == source.differenceIdentifier
     }
 }
