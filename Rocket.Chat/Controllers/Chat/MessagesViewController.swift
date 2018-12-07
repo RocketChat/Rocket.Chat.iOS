@@ -11,6 +11,8 @@ import RocketChatViewController
 import RealmSwift
 import DifferenceKit
 
+private typealias NibCellIndentifier = (nib: UINib, cellIdentifier: String)
+
 protocol SizingCell: class {
     static var sizingCell: UICollectionViewCell & ChatCell { get }
     static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize
@@ -119,28 +121,7 @@ final class MessagesViewController: RocketChatViewController {
 
         composerView.delegate = self
 
-        collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
-        collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
-        collectionView.register(LoaderCell.nib, forCellWithReuseIdentifier: LoaderCell.identifier)
-        collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
-        collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
-        collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
-        collectionView.register(AudioMessageCell.nib, forCellWithReuseIdentifier: AudioMessageCell.identifier)
-        collectionView.register(VideoCell.nib, forCellWithReuseIdentifier: VideoCell.identifier)
-        collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
-        collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
-        collectionView.register(FileCell.nib, forCellWithReuseIdentifier: FileCell.identifier)
-        collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
-        collectionView.register(TextAttachmentCell.nib, forCellWithReuseIdentifier: TextAttachmentCell.identifier)
-        collectionView.register(TextAttachmentMessageCell.nib, forCellWithReuseIdentifier: TextAttachmentMessageCell.identifier)
-        collectionView.register(ImageCell.nib, forCellWithReuseIdentifier: ImageCell.identifier)
-        collectionView.register(ImageMessageCell.nib, forCellWithReuseIdentifier: ImageMessageCell.identifier)
-        collectionView.register(QuoteCell.nib, forCellWithReuseIdentifier: QuoteCell.identifier)
-        collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
-        collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
-        collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
-        collectionView.register(HeaderCell.nib, forCellWithReuseIdentifier: HeaderCell.identifier)
-
+        registerCells()
         setupScrollToBottom()
 
         NotificationCenter.default.addObserver(
@@ -248,6 +229,38 @@ final class MessagesViewController: RocketChatViewController {
                     controller.subscription = subscription
                 }
             }
+        }
+    }
+
+    // MARK: Cells
+
+    private func registerCells() {
+        let collectionViewCells: [NibCellIndentifier] = [
+            (nib: BasicMessageCell.nib, cellIdentifier: BasicMessageCell.identifier),
+            (nib: SequentialMessageCell.nib, cellIdentifier: SequentialMessageCell.identifier),
+            (nib: LoaderCell.nib, cellIdentifier: LoaderCell.identifier),
+            (nib: DateSeparatorCell.nib, cellIdentifier: DateSeparatorCell.identifier),
+            (nib: UnreadMarkerCell.nib, cellIdentifier: UnreadMarkerCell.identifier),
+            (nib: AudioCell.nib, cellIdentifier: AudioCell.identifier),
+            (nib: AudioMessageCell.nib, cellIdentifier: AudioMessageCell.identifier),
+            (nib: VideoCell.nib, cellIdentifier: VideoCell.identifier),
+            (nib: VideoMessageCell.nib, cellIdentifier: VideoMessageCell.identifier),
+            (nib: ReactionsCell.nib, cellIdentifier: ReactionsCell.identifier),
+            (nib: FileCell.nib, cellIdentifier: FileCell.identifier),
+            (nib: FileMessageCell.nib, cellIdentifier: FileMessageCell.identifier),
+            (nib: TextAttachmentCell.nib, cellIdentifier: TextAttachmentCell.identifier),
+            (nib: TextAttachmentMessageCell.nib, cellIdentifier: TextAttachmentMessageCell.identifier),
+            (nib: ImageCell.nib, cellIdentifier: ImageCell.identifier),
+            (nib: ImageMessageCell.nib, cellIdentifier: ImageMessageCell.identifier),
+            (nib: QuoteCell.nib, cellIdentifier: QuoteCell.identifier),
+            (nib: QuoteMessageCell.nib, cellIdentifier: QuoteMessageCell.identifier),
+            (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
+            (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
+            (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
+        ]
+
+        collectionViewCells.forEach {
+            collectionView?.register($0.nib, forCellWithReuseIdentifier: $0.cellIdentifier)
         }
     }
 
@@ -530,8 +543,10 @@ extension MessagesViewController {
 
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = view.theme else { return }
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
 

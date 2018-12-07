@@ -53,7 +53,7 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
         usernameLabel = username
 
         date.text = viewModel.dateFormatted
-        username.text = viewModel.message?.alias ?? user.username
+        username.text = viewModel.message?.alias ?? user.displayName
 
         if viewModel.message?.failed == true {
             status.isHidden = false
