@@ -528,8 +528,7 @@ final class MessagesViewModel {
                 daySeparator: separator,
                 sequential: sequential,
                 unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
-                loader: loader,
-                header: header
+                loader: loader
             )
 
             let chatSection = AnyChatSection(MessageSection(
@@ -552,9 +551,9 @@ final class MessagesViewModel {
         let currentHeaderSection = AnyChatSection(
             AnyChatSection(
                 HeaderSection(
-                    object: AnyDifferentiable(
-                        HeaderChatItem(rid: rid)
-                ), controllerContext: nil)
+                    object: AnyDifferentiable(HeaderChatItem(rid: rid)),
+                    controllerContext: nil
+                )
             )
         )
 
