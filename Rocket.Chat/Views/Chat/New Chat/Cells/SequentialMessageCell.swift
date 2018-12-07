@@ -34,7 +34,9 @@ final class SequentialMessageCell: BaseMessageCell, SizingCell {
             textLeadingConstraint.constant -
             textTrailingConstraint.constant -
             readReceiptWidthConstraint.constant -
-            readReceiptTrailingConstraint.constant
+            readReceiptTrailingConstraint.constant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     override var delegate: ChatMessageCellProtocol? {

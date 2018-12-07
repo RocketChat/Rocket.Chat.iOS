@@ -186,7 +186,7 @@ final class ConnectServerViewController: BaseViewController {
         if let controller = segue.destination as? LoginTableViewController {
             controller.shouldShowCreateAccount = true
             controller.serverVersion = infoRequestHandler.version
-            controller.serverURL = url
+            controller.serverURL = infoRequestHandler.url
             controller.serverPublicSettings = serverPublicSettings
 
             if let credentials = deepLinkCredentials {
@@ -198,7 +198,7 @@ final class ConnectServerViewController: BaseViewController {
 
         if let controller = segue.destination as? AuthTableViewController, segue.identifier == "Auth" {
             controller.serverVersion = infoRequestHandler.version
-            controller.serverURL = url
+            controller.serverURL = infoRequestHandler.url
             controller.serverPublicSettings = serverPublicSettings
 
             if let credentials = deepLinkCredentials {
@@ -268,6 +268,7 @@ final class ConnectServerViewController: BaseViewController {
                 if connected {
                     API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
                         self?.stopConnecting()
+
                         if shouldRetrieveLoginServices {
                             self?.performSegue(withIdentifier: "Auth", sender: shouldRetrieveLoginServices)
                         } else {
@@ -346,4 +347,10 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
         }
     }
 
+}
+
+// MARK: Disable Theming
+
+extension ConnectServerViewController {
+    override func applyTheme() { }
 }

@@ -31,7 +31,9 @@ class BaseQuoteMessageCell: BaseMessageCell {
             textTrailingInitialConstant -
             containerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant
+            readReceiptTrailingInitialConstant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     var isCollapsible = false

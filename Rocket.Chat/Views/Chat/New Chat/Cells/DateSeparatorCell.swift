@@ -21,7 +21,13 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     }()
 
     @IBOutlet weak var leftLine: UIView!
-    @IBOutlet weak var date: UILabel!
+
+    @IBOutlet weak var date: UILabel! {
+        didSet {
+            date.font = date.font.bold()
+        }
+    }
+
     @IBOutlet weak var rightLine: UIView!
 
     var messageWidth: CGFloat = 0
@@ -53,8 +59,8 @@ extension DateSeparatorCell {
 
         let theme = self.theme ?? .light
         date.textColor = theme.auxiliaryText
-        leftLine.backgroundColor = theme.auxiliaryText
-        rightLine.backgroundColor = theme.auxiliaryText
+        leftLine.backgroundColor = theme.borderColor
+        rightLine.backgroundColor = theme.borderColor
     }
 
 }

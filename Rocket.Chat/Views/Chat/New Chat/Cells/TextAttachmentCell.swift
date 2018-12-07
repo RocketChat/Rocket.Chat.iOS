@@ -20,16 +20,21 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         return cell
     }()
 
-    @IBOutlet weak var textContainer: UIView!
+    @IBOutlet weak var textContainer: UIView! {
+        didSet {
+            textContainer.layer.borderWidth = 1
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusColor: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
 
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewLeadingConstraint: NSLayoutConstraint!
@@ -68,8 +73,8 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
         subtitleTopInitialConstant = subtitleTopConstraint.constant
         subtitleHeightInitialConstant = subtitleHeightConstraint.constant
         textContainerLeadingInitialConstant = textContainerLeadingConstraint.constant
-        statusViewLeadingInitialConstant = statusViewLeadingConstraint.constant
-        statusViewWidthInitialConstant = statusViewWidthConstraint.constant
+        statusColorLeadingInitialConstant = statusColorLeadingConstraint.constant
+        statusColorWidthInitialConstant = statusColorWidthConstraint.constant
         fieldsStackViewLeadingInitialConstant = fieldsStackViewLeadingConstraint.constant
         fieldsStackViewTrailingInitialConstant = fieldsStackViewTrailingConstraint.constant
         textContainerTrailingInitialConstant = textContainerTrailingConstraint.constant
@@ -86,8 +91,11 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
             return
         }
 
-        title.text = viewModel.title
-        statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+        if completeRendering {
+            let emptyTitle = localized("chat.components.text_attachment.no_title")
+            title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
+            configure(statusColor: statusColor)
+        }
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
@@ -151,5 +159,8 @@ extension TextAttachmentCell {
         fieldsStackView.backgroundColor = .clear
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
+
+        configure(statusColor: statusColor)
     }
 }

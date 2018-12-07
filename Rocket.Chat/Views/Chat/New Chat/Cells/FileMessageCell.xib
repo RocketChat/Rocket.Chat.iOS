@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3R-LJ-LXz">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3R-LJ-LXz">
                         <rect key="frame" x="71" y="10.5" width="43.5" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="8pt-Ht-gpV"/>
@@ -28,11 +28,8 @@
                         <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ny-2K-8d9">
-                        <rect key="frame" x="124.5" y="13" width="52" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="52" id="MTK-YU-32x"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ny-2K-8d9">
+                        <rect key="frame" x="124.5" y="13" width="33" height="16"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -79,10 +76,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="fsg-AS-dXk">
+                        <rect key="frame" x="164.5" y="14" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="Ozg-6b-oQX"/>
+                            <constraint firstAttribute="width" constant="14" id="gHR-6P-h7B"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="7jS-HR-rnx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fsg-AS-dXk" secondAttribute="trailing" constant="8" id="098-Dx-oHO"/>
                 <constraint firstItem="77c-Q0-V4A" firstAttribute="leading" secondItem="Xz9-fC-5sz" secondAttribute="trailing" constant="15" id="1cR-oN-uRb"/>
                 <constraint firstItem="KAE-Yz-N3K" firstAttribute="leading" secondItem="77c-Q0-V4A" secondAttribute="trailing" constant="2" id="3sD-Pn-uQC"/>
                 <constraint firstItem="rbb-bp-51o" firstAttribute="trailing" secondItem="77c-Q0-V4A" secondAttribute="trailing" id="4n9-c9-sr6"/>
@@ -93,11 +98,13 @@
                 <constraint firstItem="2Ny-2K-8d9" firstAttribute="leading" secondItem="G3R-LJ-LXz" secondAttribute="trailing" constant="10" id="EOK-fX-vlK"/>
                 <constraint firstAttribute="bottom" secondItem="rbb-bp-51o" secondAttribute="bottom" constant="10" id="HdQ-zp-yCB"/>
                 <constraint firstItem="2Ny-2K-8d9" firstAttribute="centerY" secondItem="G3R-LJ-LXz" secondAttribute="centerY" id="KkU-VO-5Lg"/>
+                <constraint firstItem="fsg-AS-dXk" firstAttribute="centerY" secondItem="2Ny-2K-8d9" secondAttribute="centerY" id="Mc3-ws-8tt"/>
                 <constraint firstItem="Xz9-fC-5sz" firstAttribute="leading" secondItem="NIc-jT-YTw" secondAttribute="leadingMargin" id="PBw-cK-ciB"/>
                 <constraint firstAttribute="trailingMargin" secondItem="KAE-Yz-N3K" secondAttribute="trailing" id="Upe-uo-J5M"/>
                 <constraint firstItem="KAE-Yz-N3K" firstAttribute="bottom" secondItem="77c-Q0-V4A" secondAttribute="bottom" id="Zh6-Cw-wuf"/>
                 <constraint firstItem="77c-Q0-V4A" firstAttribute="top" secondItem="G3R-LJ-LXz" secondAttribute="bottom" constant="7.5" id="aL4-N0-GGn"/>
                 <constraint firstItem="rbb-bp-51o" firstAttribute="leading" secondItem="77c-Q0-V4A" secondAttribute="leading" id="ef9-TW-Tph"/>
+                <constraint firstItem="fsg-AS-dXk" firstAttribute="leading" secondItem="2Ny-2K-8d9" secondAttribute="trailing" constant="7" id="ewd-h0-CUi"/>
                 <constraint firstItem="G3R-LJ-LXz" firstAttribute="leading" secondItem="Xz9-fC-5sz" secondAttribute="trailing" constant="15" id="kRE-b5-sjW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="7jS-HR-rnx"/>
@@ -109,12 +116,14 @@
                 <outlet property="labelDescription" destination="rbb-bp-51o" id="pZD-h4-INs"/>
                 <outlet property="labelDescriptionTopConstraint" destination="D5c-Xj-uQ2" id="hYc-GL-W1B"/>
                 <outlet property="readReceiptButton" destination="KAE-Yz-N3K" id="RcC-1Q-Ltt"/>
+                <outlet property="statusView" destination="fsg-AS-dXk" id="AqR-E0-94p"/>
                 <outlet property="username" destination="G3R-LJ-LXz" id="Bli-LY-BQq"/>
             </connections>
             <point key="canvasLocation" x="509.60000000000002" y="-279.76011994002999"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Exclamation" width="20" height="20"/>
         <image name="files" width="32" height="32"/>
     </resources>
 </document>

@@ -78,7 +78,7 @@ class LoginTableViewController: BaseTableViewController {
     }
 
     var serverVersion: Version?
-    var serverURL: URL!
+    var serverURL: URL?
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
 
@@ -101,7 +101,7 @@ class LoginTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = serverURL.host
+        navigationItem.title = serverURL?.host
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -309,4 +309,10 @@ extension LoginTableViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+// MARK: Disable Theming
+
+extension LoginTableViewController {
+    override func applyTheme() { }
 }

@@ -30,19 +30,26 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var textContainer: UIView!
+    @IBOutlet weak var statusView: UIImageView!
+    @IBOutlet weak var textContainer: UIView! {
+        didSet {
+            textContainer.layer.borderWidth = 1
+            textContainer.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var fieldsStackView: UIStackView!
     @IBOutlet weak var readReceiptButton: UIButton!
+    @IBOutlet weak var statusColor: UIView!
 
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusColorLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fieldsStackViewLeadingConstraint: NSLayoutConstraint!
@@ -85,8 +92,8 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         avatarLeadingInitialConstant = avatarLeadingConstraint.constant
         avatarWidthInitialConstant = avatarWidthConstraint.constant
         textContainerLeadingInitialConstant = textContainerLeadingConstraint.constant
-        statusViewLeadingInitialConstant = statusViewLeadingConstraint.constant
-        statusViewWidthInitialConstant = statusViewWidthConstraint.constant
+        statusColorLeadingInitialConstant = statusColorLeadingConstraint.constant
+        statusColorWidthInitialConstant = statusColorWidthConstraint.constant
         fieldsStackViewLeadingInitialConstant = fieldsStackViewLeadingConstraint.constant
         fieldsStackViewTrailingInitialConstant = fieldsStackViewTrailingConstraint.constant
         textContainerTrailingInitialConstant = textContainerTrailingConstraint.constant
@@ -108,11 +115,17 @@ final class TextAttachmentMessageCell: BaseTextAttachmentMessageCell, SizingCell
         if completeRendering {
             let emptyTitle = localized("chat.components.text_attachment.no_title")
             title.text = viewModel.title.isEmpty ? emptyTitle : viewModel.title
-            statusView.backgroundColor = viewModel.color != nil ? UIColor(hex: viewModel.color) : .lightGray
+            configure(statusColor: statusColor)
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         if viewModel.collapsed {
             configureCollapsedState(with: viewModel)
@@ -177,5 +190,8 @@ extension TextAttachmentMessageCell {
         date.textColor = theme.auxiliaryText
         title.textColor = theme.controlText
         subtitle.textColor = theme.bodyText
+        textContainer.layer.borderColor = theme.borderColor.cgColor
+
+        configure(statusColor: statusColor)
     }
 }

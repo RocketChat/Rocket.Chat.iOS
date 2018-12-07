@@ -22,6 +22,7 @@ final class UnreadMarkerCell: UICollectionViewCell, ChatCell, SizingCell {
 
     @IBOutlet weak var label: UILabel! {
         didSet {
+            label.font = label.font.bold()
             label.text = localized("chat.unread_separator")
         }
     }

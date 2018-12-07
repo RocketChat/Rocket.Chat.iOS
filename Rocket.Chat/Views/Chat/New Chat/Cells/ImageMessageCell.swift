@@ -32,12 +32,13 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
-            imageView.layer.cornerRadius = 3
-            imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
+            imageView.layer.cornerRadius = 4
             imageView.layer.borderWidth = 1
+            imageView.clipsToBounds = true
         }
     }
 
@@ -57,7 +58,13 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username, completeRendering: completeRendering)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
 
         labelTitle.text = viewModel.title
 
@@ -101,5 +108,6 @@ extension ImageMessageCell {
         date.textColor = theme.auxiliaryText
         labelTitle.textColor = theme.bodyText
         labelDescription.textColor = theme.bodyText
+        imageView.layer.borderColor = theme.borderColor.cgColor
     }
 }

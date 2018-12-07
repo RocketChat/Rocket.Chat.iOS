@@ -14,8 +14,8 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     var avatarLeadingInitialConstant: CGFloat = 0
     var avatarWidthInitialConstant: CGFloat = 0
     var textContainerLeadingInitialConstant: CGFloat = 0
-    var statusViewLeadingInitialConstant: CGFloat = 0
-    var statusViewWidthInitialConstant: CGFloat = 0
+    var statusColorLeadingInitialConstant: CGFloat = 0
+    var statusColorWidthInitialConstant: CGFloat = 0
     var fieldsStackViewLeadingInitialConstant: CGFloat = 0
     var fieldsStackViewTrailingInitialConstant: CGFloat = 0
     var textContainerTrailingInitialConstant: CGFloat = 0
@@ -31,13 +31,15 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -
-            statusViewLeadingInitialConstant -
-            statusViewWidthInitialConstant -
+            statusColorLeadingInitialConstant -
+            statusColorWidthInitialConstant -
             fieldsStackViewLeadingInitialConstant -
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant
+            readReceiptTrailingInitialConstant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     func configure(stackView: UIStackView) -> CGFloat {
@@ -78,6 +80,18 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
         }
 
         return stackViewHeight
+    }
+
+    func configure(statusColor: UIView) {
+        guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
+            return
+        }
+
+        if let color = viewModel.color {
+            statusColor.backgroundColor = SystemMessageColor(rawValue: color).color
+        } else {
+            statusColor.backgroundColor = .lightGray
+        }
     }
 
     func reset(stackView: UIStackView) {
