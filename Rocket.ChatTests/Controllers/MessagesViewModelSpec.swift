@@ -115,9 +115,15 @@ final class MessagesViewModelSpec: XCTestCase {
     func testUnreadMarkerPresenceTrue() {
         let model = MessagesViewModel()
 
+        let first = Message.testInstance()
+        first.identifier = "message-identifier-1"
+
+        let second = Message.testInstance()
+        second.identifier = "message-identifier-2"
+
         guard
-            let messageFirst = Message.testInstance().validated()?.unmanaged,
-            var messageSecond = Message.testInstance().validated()?.unmanaged
+            let messageFirst = first.validated()?.unmanaged,
+            var messageSecond = second.validated()?.unmanaged
         else {
             return XCTFail("messages must be created")
         }
@@ -128,6 +134,7 @@ final class MessagesViewModelSpec: XCTestCase {
             model.lastSeen = Date().addingTimeInterval(-500)
             model.data = [section1, section2]
             model.cacheDataSorted()
+            model.markUnreadMarkerIfNeeded()
             model.normalizeDataSorted()
         }
 
@@ -202,9 +209,7 @@ final class MessagesViewModelSpec: XCTestCase {
         }
 
         XCTAssertFalse(object1.containsLoader)
-        XCTAssertFalse(object1.containsHeader)
         XCTAssertTrue(object2.containsLoader)
-        XCTAssertFalse(object2.containsHeader)
     }
 
     func testLoaderPresenceFalse() {
@@ -225,7 +230,7 @@ final class MessagesViewModelSpec: XCTestCase {
             model.normalizeDataSorted()
         }
 
-        XCTAssertEqual(model.numberOfSections, 2)
+        XCTAssertEqual(model.numberOfSections, 3)
 
         guard
             let object1 = model.dataSorted[0].object.base as? MessageSectionModel,
@@ -235,9 +240,7 @@ final class MessagesViewModelSpec: XCTestCase {
         }
 
         XCTAssertFalse(object1.containsLoader)
-        XCTAssertFalse(object1.containsHeader)
         XCTAssertFalse(object2.containsLoader)
-        XCTAssertTrue(object2.containsHeader)
     }
 
 }

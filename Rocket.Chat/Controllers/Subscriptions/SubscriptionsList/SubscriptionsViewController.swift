@@ -511,6 +511,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
         // When using iPads, we override the detail controller creating
         // a new instance.
         if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
+            guard navigationController?.topViewController == self else {
+                return
+            }
+
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         } else {

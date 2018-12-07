@@ -56,12 +56,15 @@ final class MessagesViewController: RocketChatViewController {
     var emptyStateImageView: UIImageView?
     var documentController: UIDocumentInteractionController?
 
+    var unmanagedSubscription: UnmanagedSubscription?
     var subscription: Subscription! {
         didSet {
             let sub: Subscription? = subscription
+            let unmanaged = sub?.unmanaged
 
             viewModel.subscription = sub
-            viewSubscriptionModel.subscription = sub?.unmanaged
+            viewSubscriptionModel.subscription = unmanaged
+            unmanagedSubscription = unmanaged
 
             recoverDraftMessage()
             updateEmptyState()
@@ -141,8 +144,15 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
 
+            if self.viewModel.dataNormalized.first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
+                self.isInverted = false
+            } else {
+                self.isInverted = true
+            }
+
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
+            self.markAsRead()
         }
 
         viewSubscriptionModel.onDataChanged = { [weak self] in
@@ -160,6 +170,10 @@ final class MessagesViewController: RocketChatViewController {
             DispatchQueue.main.async {
                 self?.chatTitleView?.updateTypingStatus(usernames: usernames)
             }
+        }
+
+        composerViewModel.getRecentSenders = {
+            return self.viewModel.recentSenders
         }
 
         startDraftMessage()
@@ -237,7 +251,8 @@ final class MessagesViewController: RocketChatViewController {
             (nib: QuoteCell.nib, cellIdentifier: QuoteCell.identifier),
             (nib: QuoteMessageCell.nib, cellIdentifier: QuoteMessageCell.identifier),
             (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
-            (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier)
+            (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
+            (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
         ]
 
         collectionViewCells.forEach {
@@ -402,7 +417,7 @@ final class MessagesViewController: RocketChatViewController {
     // MARK: Reading Status
 
     private func markAsRead() {
-        guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
+        guard let subscription = unmanagedSubscription else { return }
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
