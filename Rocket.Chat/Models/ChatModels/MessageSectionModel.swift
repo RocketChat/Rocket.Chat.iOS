@@ -19,12 +19,11 @@ struct MessageSectionModel: Differentiable {
     let isSequential: Bool
 
     let containsLoader: Bool
-    let containsHeader: Bool
     let containsUnreadMessageIndicator: Bool
 
     var containsDateSeparator: Bool { return daySeparator != nil }
 
-    init(message: UnmanagedMessage, daySeparator: Date? = nil, sequential: Bool = false, unreadIndicator: Bool = false, loader: Bool = false, header: Bool = false) {
+    init(message: UnmanagedMessage, daySeparator: Date? = nil, sequential: Bool = false, unreadIndicator: Bool = false, loader: Bool = false) {
         self.identifier = message.identifier
         self.message = message
         self.messageDate = message.createdAt
@@ -32,7 +31,6 @@ struct MessageSectionModel: Differentiable {
         self.isSequential = sequential
         self.containsUnreadMessageIndicator = unreadIndicator
         self.containsLoader = loader
-        self.containsHeader = header
     }
 
     // MARK: Differentiable
@@ -47,7 +45,6 @@ struct MessageSectionModel: Differentiable {
             daySeparator == source.daySeparator &&
             containsUnreadMessageIndicator == source.containsUnreadMessageIndicator &&
             isSequential == source.isSequential &&
-            containsHeader == source.containsHeader &&
             containsLoader == source.containsLoader
     }
 }

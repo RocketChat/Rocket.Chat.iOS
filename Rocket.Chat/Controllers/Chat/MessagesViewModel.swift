@@ -442,11 +442,9 @@ final class MessagesViewModel {
             var separator: Date?
             var sequential = false
             var loader = false
-            var header = false
 
             if idx == dataSortedMaxIndex {
                 loader = hasMoreData || requestingData
-                header = false
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -457,8 +455,7 @@ final class MessagesViewModel {
                 daySeparator: separator,
                 sequential: sequential,
                 unreadIndicator: unreadMarker,
-                loader: loader,
-                header: header
+                loader: loader
             )
 
             let chatSection = AnyChatSection(MessageSection(
