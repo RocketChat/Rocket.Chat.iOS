@@ -75,7 +75,9 @@ final class MessagesViewModel {
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
-            messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
+            messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
+                self?.handleDataUpdates(changes: collectionChanges)
+            })
             fetchMessages(from: nil)
         }
     }
