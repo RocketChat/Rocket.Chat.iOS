@@ -220,7 +220,17 @@ open class RocketChatViewController: UICollectionViewController {
         return operationQueue
     }()
 
-    open var isInverted = true
+    open var isInverted = true {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isInverted != oldValue {
+                    self.collectionView?.transform = self.isInverted ? self.invertedTransform : self.regularTransform
+                    self.collectionView?.reloadData()
+                }
+            }
+        }
+    }
+
     open var isSelfSizing = false
 
     fileprivate let kEmptyCellIdentifier = "kEmptyCellIdentifier"
@@ -228,6 +238,7 @@ open class RocketChatViewController: UICollectionViewController {
     fileprivate var keyboardHeight: CGFloat = 0.0
 
     private let invertedTransform = CGAffineTransform(scaleX: 1, y: -1)
+    private let regularTransform = CGAffineTransform(scaleX: 1, y: 1)
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -382,7 +393,7 @@ extension RocketChatViewController {
     }
 
     open override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.contentView.transform = isInverted ? invertedTransform : cell.contentView.transform
+        cell.contentView.transform = isInverted ? invertedTransform : regularTransform
     }
 }
 

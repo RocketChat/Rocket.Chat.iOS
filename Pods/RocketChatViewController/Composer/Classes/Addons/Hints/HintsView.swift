@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol HintsViewDelegate {
+public protocol HintsViewDelegate: class {
     func numberOfHints(in hintsView: HintsView) -> Int
     func maximumHeight(for hintsView: HintsView) -> CGFloat
     func hintsView(_ hintsView: HintsView, cellForHintAt index: Int) -> UITableViewCell
@@ -42,7 +42,7 @@ private final class HintsViewFallbackDelegate: HintsViewDelegate {
 }
 
 public class HintsView: UITableView {
-    public var hintsDelegate: HintsViewDelegate?
+    public weak var hintsDelegate: HintsViewDelegate?
     private var fallbackDelegate: HintsViewDelegate = HintsViewFallbackDelegate()
 
     private var currentDelegate: HintsViewDelegate {
