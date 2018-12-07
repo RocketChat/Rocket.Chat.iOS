@@ -209,9 +209,7 @@ final class MessagesViewModelSpec: XCTestCase {
         }
 
         XCTAssertFalse(object1.containsLoader)
-        XCTAssertFalse(object1.containsHeader)
         XCTAssertTrue(object2.containsLoader)
-        XCTAssertFalse(object2.containsHeader)
     }
 
     func testLoaderPresenceFalse() {
@@ -242,9 +240,7 @@ final class MessagesViewModelSpec: XCTestCase {
         }
 
         XCTAssertFalse(object1.containsLoader)
-        XCTAssertFalse(object1.containsHeader)
         XCTAssertFalse(object2.containsLoader)
-        XCTAssertTrue(object2.containsHeader)
     }
 
 }
