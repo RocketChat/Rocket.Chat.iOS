@@ -184,7 +184,11 @@ final class MessagesViewController: RocketChatViewController {
             }
         }
 
-        composerViewModel.getRecentSenders = {
+        composerViewModel.getRecentSenders = { [weak self] in
+            guard let self = self else {
+                return []
+            }
+
             return self.viewModel.recentSenders
         }
 
