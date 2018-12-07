@@ -102,7 +102,7 @@ extension NSMutableAttributedString {
         return MarkdownManager.shared.transformAttributedString(self, with: theme)
     }
 
-    func highlightMentions(_ mentions: [Mention], currentUsername: String?) {
+    func highlightMentions(_ mentions: [UnmanagedMention], currentUsername: String?) {
         var handledHighlights: [String] = []
         let shouldUseRealName = AuthSettingsManager.shared.settings?.useUserRealName ?? false
 
@@ -133,8 +133,8 @@ extension NSMutableAttributedString {
                     background = .attention
                     font = .white
                 } else {
-                    background = .clear
-                    font = .link
+                    background = .secondAction
+                    font = .primaryAction
                 }
 
                 let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")
@@ -164,7 +164,7 @@ extension NSMutableAttributedString {
                 for range in ranges {
                     let range = NSRange(range, in: string)
                     setChannel(channel, range: range)
-                    setFontColor(.link, range: range)
+                    setFontColor(.primaryAction, range: range)
                 }
             }
         }

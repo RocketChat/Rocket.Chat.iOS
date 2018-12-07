@@ -207,12 +207,12 @@
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
-"chat.unread_separator" = "novas mensagens";
-"chat.preview.actions.read" = "Mark as read"; // TODO
-"chat.preview.actions.unread" = "Mark as unread"; // TODO
-"chat.preview.actions.favorite" = "Favorite"; // TODO
-"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
-"chat.preview.actions.hide" = "Hide"; // TODO
+"chat.unread_separator" = "Novas Mensagens";
+"chat.preview.actions.read" = "Marcar como lido";
+"chat.preview.actions.unread" = "Marcar como não lido";
+"chat.preview.actions.favorite" = "Favoritar";
+"chat.preview.actions.unfavorite" = "Desfavoritar";
+"chat.preview.actions.hide" = "Esconder";
 
 // Chat Message Actions
 "chat.message.actions.info" = "Informações da Mensagem";
@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Sim, descartar";
 "chat.message.actions.resend" = "Reenviar";
 "chat.message.actions.resend_all" = "Reenviar todas";
-"Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Mensagem reportada";
@@ -269,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Selecionar cor";
 "chat.drawing.settings.color.others" = "Escolha uma cor:";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ estão digitando...";
+"chat.user_is_typing" = "%@ está digitando...";
+"chat.typing" = "digitando...";
+"chat.several_typing" = "muitos usuários estão digitando...";
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
 "chat.message.type.user_added_by" = "Usuário %@ adicionado por %@";
@@ -284,6 +289,11 @@
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
 "chat.message.type.message_pinned" = "Pinou uma mensagem:";
+"chat.message.type.message_snippeted" = "Criou um snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Privacidade da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_topic" = "Tópico da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_announcement" = "Anúncio da sala alterou para \"%@\" por %@";
+"chat.message.type.room_changed_description" = "Descrição da sala alterou para \"%@\" por %@";
 
 // Chat Information
 "chat.info.title" = "Informações";
@@ -330,6 +340,8 @@
 "myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
 "myaccount.settings.language" = "Idioma";
+"myaccount.settings.review" = "Avalie este App";
+"myaccount.settings.share" = "Compartilhe este App";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do servidor: %@";
@@ -483,3 +495,10 @@
 "shortcuts.server_selection_numbers" = "Selecionar servidor 1...9";
 "shortcuts.add_server" = "Adicionar servidor";
 "shortcuts.change_theme" = "Mudar tema";
+"shortcuts.send" = "Enviar";
+"shortcuts.new_line" = "Nova linha";
+
+// Chat Components
+"chat.components.quote.replied" = "Respondido";
+"chat.components.quote.pinned" = "Pinado";
+"chat.components.text_attachment.no_title" = "Sem título";

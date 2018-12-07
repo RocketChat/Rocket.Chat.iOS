@@ -162,9 +162,9 @@ extension UIColor {
 
     // MARK: Colors from Web Version
 
-    static let primaryAction = UIColor(rgb: 0x13679A, alphaVal: 1)
-    static let attention = UIColor(rgb: 0x9C27B0, alphaVal: 1)
-    static let link = UIColor(rgb: 0x2578F1, alphaVal: 1)
+    static let primaryAction = UIColor(rgb: 0x1D74F5, alphaVal: 1)
+    static let secondAction = UIColor(rgb: 0xD3E3FC, alphaVal: 1)
+    static let attention = UIColor(rgb: 0xF5455C, alphaVal: 1)
 
     static var code: UIColor {
         return UIColor(rgb: 0x333333, alphaVal: 1.0)
@@ -197,7 +197,7 @@ extension UIColor {
             return .white
         }
 
-        return .link
+        return .primaryAction
     }
 }
 

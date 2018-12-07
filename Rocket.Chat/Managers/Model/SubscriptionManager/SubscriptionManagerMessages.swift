@@ -9,7 +9,7 @@
 import Foundation
 
 extension SubscriptionManager {
-    static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
+    static func markAsRead(_ subscription: UnmanagedSubscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "readMessages",

@@ -25,20 +25,17 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelUser: UILabel!
     @IBOutlet weak var labelStartConversation: UILabel!
@@ -46,7 +43,7 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        avatarView.user = nil
+        avatarView.username = nil
         labelUser.text = ""
         labelStartConversation.text = ""
     }
@@ -59,7 +56,7 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
         }
 
         labelUser.text = user.displayName()
-        avatarView.user = user
+        avatarView.username = user.username
 
         let startText = localized("chat.dm.start_conversation")
         labelStartConversation.text = String(format: startText, user.displayName())

@@ -102,3 +102,9 @@ extension SAMLViewController: WKNavigationDelegate, Closeable {
         activityIndicator.isHidden = true
     }
 }
+
+// MARK: Disable Theming
+
+extension SAMLViewController {
+    override func applyTheme() { }
+}

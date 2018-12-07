@@ -20,12 +20,11 @@ extension MessageManager {
             guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
 
             let message = Message.getOrCreate(realm: realm, values: JSON(object), updates: { (object) in
-                object?.subscription = detachedSubscription
+                object?.rid = detachedSubscription.rid
             })
 
-            if message.user == nil {
-                let user = User.getOrCreate(realm: realm, values: ["id": "rocket.cat", "username": "rocket.cat"], updates: nil)
-                message.user = user
+            if message.userIdentifier == nil {
+                message.userIdentifier = "rocket.cat"
             }
 
             message.privateMessage = true

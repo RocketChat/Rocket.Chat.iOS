@@ -206,7 +206,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.1.1</string>
+	<string>3.2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -217,12 +217,12 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>rocketchat</string>
-				<string>com.googleusercontent.apps.662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4</string>
+				<string>com.googleusercontent.apps.673693445664-dumairnsk1sbkca5nmsq2b5kdglqpc0a</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>214</string>
+	<string>216</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

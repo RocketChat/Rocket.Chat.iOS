@@ -29,47 +29,10 @@ _(NOTE: Steps 3 and 4 must be executed from project's directory)_
 ```
 git clone https://github.com/RocketChat/Rocket.Chat.iOS
 ```
-2. Install [Bundler](https://bundler.io)
-```
-sudo gem install bundler
-```
-To update _Bundler_ (when there is new version available)
-```
-sudo gem update bundler
-```
-3. Install all gem dependencies
-```
-bundle install (sudo might be required in some cases)
-```
-To update all gem dependencies (usually executed by maintainer) run
-```
-bundle update
-```
-To update pod's repository (in case of having those oudated compared to Podfile.lock and in case of `pod install` failure)
-```
-bundle exec pod repo update
-```
-4. Download library dependencies using the cocoapods dependency manager (and update the same way):
-```
-bundle exec pod install
-```
-5. Do NOT open the Xcode project directly, instead use the Rocket.Chat.xcworkspace file to open the Xcode workspace.
-6. Build the project by ⌘ + R
+2. Use the Rocket.Chat.xcworkspace file to open the Xcode workspace.
+3. Build the project by ⌘ + R
 
 Also refer to [Guidelines](#project.pbxproj) for modifying files.
-
-#### Alternative
-
-You can skip installing Bundler (not recommended) and just install [CocoaPods](https://cocoapods.org/) (note that you will need to install at least Ruby 2.2.3 for this to work). Make sure you have correct version of CocoaPods installed or you might be not able to build project properly.
-```
-sudo gem install cocoapods
-```
-Then you can call all the cocoapods actions without **bundle exe** command.
-
-To update cocoapods (not that often needed, you will be notified during `pod install` when new version is available) run.
-```
-sudo gem update cocoapods
-```
 
 ## Issues needing help
 

@@ -65,16 +65,23 @@ struct SubscriptionManager {
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
-            let msg = response.result["fields"]["args"][0]
+            let msg = response.result["fields"]["args"][0].stringValue
             let object = response.result["fields"]["args"][1]
 
             currentRealm?.execute({ (realm) in
                 guard let auth = AuthManager.isAuthenticated(realm: realm), auth.serverURL == serverURL else { return }
-                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.auth = msg == "removed" ? nil : auth
-                })
 
-                realm.add(subscription, update: true)
+                guard let rid = object["rid"].string, !rid.isEmpty else {
+                    return
+                }
+
+                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+
+                if msg == "removed" {
+                    realm.delete(subscription)
+                } else {
+                    realm.add(subscription, update: true)
+                }
             })
         }
     }

@@ -28,11 +28,15 @@ extension AuthTableViewController {
     }
 
     func presentOAuthViewController(for loginService: LoginService) {
-        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
-            guard let strongSelf = self else { return }
-            strongSelf.startLoading()
+        guard let serverURL = serverURL else {
+            return
+        }
 
-            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
+            guard let self = self else { return }
+            self.startLoading()
+
+            AuthManager.auth(credentials: credentials, completion: self.handleAuthenticationResponse)
         }, failure: { [weak self] in
             self?.alert(
                 title: localized("alert.login_service_error.title"),
@@ -47,9 +51,9 @@ extension AuthTableViewController {
         guard
             let loginUrlString = loginService.loginUrl,
             let loginUrl = URL(string: loginUrlString),
-            let host = serverURL.host,
+            let host = serverURL?.host,
             let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
-            else {
+        else {
                 return
         }
 
@@ -67,7 +71,7 @@ extension AuthTableViewController {
     func presentSAMLViewController(for loginService: LoginService) {
         guard
             let provider = loginService.provider,
-            let host = serverURL.host,
+            let host = serverURL?.host,
             let serverUrl = URL(string: "https://\(host)")
         else {
             return

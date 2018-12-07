@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="o5P-P6-s4x" customClass="FileCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fef-tc-ORb">
+                        <rect key="frame" x="71" y="5" width="288" height="56"/>
+                        <color key="backgroundColor" red="0.88235294117647056" green="0.89803921568627454" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="56" id="gpU-z9-wYR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Button" image="files">
+                            <color key="titleColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="didTapFileButton" destination="o5P-P6-s4x" eventType="touchUpInside" id="1Nh-fb-C6j"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoK-VJ-iAZ">
+                        <rect key="frame" x="71" y="71" width="288" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailingMargin" secondItem="Fef-tc-ORb" secondAttribute="trailing" id="5Rr-g8-poL"/>
+                <constraint firstItem="Fef-tc-ORb" firstAttribute="top" secondItem="o5P-P6-s4x" secondAttribute="top" constant="5" id="MJg-Gf-aH1"/>
+                <constraint firstItem="XoK-VJ-iAZ" firstAttribute="trailing" secondItem="Fef-tc-ORb" secondAttribute="trailing" id="VNh-q4-2Z1"/>
+                <constraint firstItem="XoK-VJ-iAZ" firstAttribute="top" secondItem="Fef-tc-ORb" secondAttribute="bottom" constant="10" id="W2R-W3-KzS"/>
+                <constraint firstItem="XoK-VJ-iAZ" firstAttribute="leading" secondItem="Fef-tc-ORb" secondAttribute="leading" id="bWm-do-NSM"/>
+                <constraint firstItem="Fef-tc-ORb" firstAttribute="leading" secondItem="o5P-P6-s4x" secondAttribute="leadingMargin" constant="55" id="x7N-J2-G8H"/>
+                <constraint firstAttribute="bottom" secondItem="XoK-VJ-iAZ" secondAttribute="bottom" constant="10" id="zlP-2f-A7O"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Jgr-GV-nUi"/>
+            <size key="customSize" width="375" height="114"/>
+            <connections>
+                <outlet property="fileButton" destination="Fef-tc-ORb" id="MCe-oe-aH8"/>
+                <outlet property="labelDescription" destination="XoK-VJ-iAZ" id="j3F-dI-Gis"/>
+                <outlet property="labelDescriptionTopConstraint" destination="W2R-W3-KzS" id="edA-sy-1Jp"/>
+            </connections>
+            <point key="canvasLocation" x="109.59999999999999" y="-27.886056971514247"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="files" width="32" height="32"/>
+    </resources>
+</document>

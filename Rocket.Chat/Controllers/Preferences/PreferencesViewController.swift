@@ -29,20 +29,17 @@ final class PreferencesViewController: BaseTableViewController {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelProfileName: UILabel!
     @IBOutlet weak var labelProfileStatus: UILabel!
@@ -86,6 +83,18 @@ final class PreferencesViewController: BaseTableViewController {
     @IBOutlet weak var labelLanguage: UILabel! {
         didSet {
             labelLanguage.text = viewModel.language
+        }
+    }
+
+    @IBOutlet weak var labelReview: UILabel! {
+        didSet {
+            labelReview.text = viewModel.review
+        }
+    }
+
+    @IBOutlet weak var labelShare: UILabel! {
+        didSet {
+            labelShare.text = viewModel.share
         }
     }
 
@@ -135,6 +144,8 @@ final class PreferencesViewController: BaseTableViewController {
         return super.navigationController as? PreferencesNavigationController
     }
 
+    weak var shareAppCell: UITableViewCell?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.title
@@ -152,7 +163,7 @@ final class PreferencesViewController: BaseTableViewController {
     }
 
     private func updateUserInformation() {
-        avatarView.user = viewModel.user
+        avatarView.username = viewModel.user?.username
         labelProfileName.text = viewModel.userName
         labelProfileStatus.text = viewModel.userStatus.lowercased()
     }
@@ -206,6 +217,8 @@ final class PreferencesViewController: BaseTableViewController {
             return
         }
 
+        AnalyticsManager.log(event: .openAdmin)
+
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {
             controller.url = adminURL
             controller.navigationBar.topItem?.title = viewModel.administration
@@ -223,24 +236,56 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
-    private func cellAppIconDidPressed() {
-        performSegue(withIdentifier: "AppIcon", sender: nil)
-    }
-
     private func cellLanguageDidPressed() {
         performSegue(withIdentifier: "Language", sender: nil)
+    }
+
+    private func cellReviewDidPressed() {
+        guard let url = viewModel.reviewURL else {
+            return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
+    private func cellShareDidPressed() {
+        guard let url = viewModel.shareURL else {
+            return
+        }
+
+        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+
+        if let cell = shareAppCell, UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = .popover
+            controller.popoverPresentationController?.sourceView = shareAppCell
+            controller.popoverPresentationController?.sourceRect = cell.bounds
+        }
+
+        present(controller, animated: true, completion: nil)
+    }
+
+    private func cellAppIconDidPressed() {
+        performSegue(withIdentifier: "AppIcon", sender: nil)
     }
 
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == kSectionSettings {
-            if indexPath.row == 0 {
+            switch indexPath.row {
+            case 0:
                 cellContactDidPressed()
-            } else if indexPath.row == 1 {
+            case 1:
                 cellLanguageDidPressed()
-            } else if indexPath.row == 4 {
+            case 4:
+                cellReviewDidPressed()
+            case 5:
+                shareAppCell = tableView.cellForRow(at: indexPath)
+                cellShareDidPressed()
+            case 6:
                 cellAppIconDidPressed()
+            default:
+                break
             }
         } else if indexPath.section == kSectionInformation {
             if indexPath.row == 0 {

@@ -16,8 +16,8 @@ struct UsersClient: APIClient {
 
         api.fetch(request) { response in
             if case let .resource(resource) = response, let user = resource.user {
-                try? realm?.write {
-                    realm?.add(user, update: true)
+                Realm.executeOnMainThread(realm: realm) { realm in
+                    realm.add(user, update: true)
                 }
             }
 

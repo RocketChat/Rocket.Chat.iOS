@@ -16,6 +16,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
     func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect))
+    func handleReviewRequest()
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -48,20 +49,17 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.cornerRadius = 4
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
+            avatarView.frame = avatarViewContainer.bounds
+            avatarViewContainer.addSubview(avatarView)
         }
     }
 
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
+    lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.layer.cornerRadius = 4
+        avatarView.layer.masksToBounds = true
+        return avatarView
+    }()
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
@@ -248,7 +246,7 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.emoji = message.emoji
-        avatarView.user = message.user
+        avatarView.username = message.user?.username
 
         if let avatar = message.avatar {
             avatarView.avatarURL = URL(string: avatar)
@@ -262,7 +260,11 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessageContent(force: Bool = false) {
-        if let text = force ? MessageTextCacheManager.shared.update(for: message, with: theme) : MessageTextCacheManager.shared.message(for: message, with: theme) {
+        guard let unmanagedMessage = message.unmanaged else {
+            return
+        }
+
+        if let text = force ? MessageTextCacheManager.shared.update(for: unmanagedMessage, with: theme) : MessageTextCacheManager.shared.message(for: unmanagedMessage, with: theme) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if message.failed {
@@ -317,7 +319,11 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 extension ChatMessageCell {
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
-        let attributedString = MessageTextCacheManager.shared.message(for: message, with: nil)
+        guard let unmanagedMessage = message.unmanaged else {
+            return 0
+        }
+
+        let attributedString = MessageTextCacheManager.shared.message(for: unmanagedMessage, with: nil)
 
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {

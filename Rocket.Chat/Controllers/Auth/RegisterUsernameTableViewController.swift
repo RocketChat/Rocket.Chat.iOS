@@ -146,3 +146,9 @@ extension RegisterUsernameTableViewController: UITextFieldDelegate {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension RegisterUsernameTableViewController {
+    override func applyTheme() { }
+}

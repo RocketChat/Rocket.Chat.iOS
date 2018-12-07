@@ -61,7 +61,7 @@ struct AppManager {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
             let nav = appDelegate.window?.rootViewController as? UINavigationController,
-            let chatController = nav.viewControllers.first as? ChatViewController
+            let chatController = nav.viewControllers.first as? MessagesViewController
         else {
             return nil
         }
@@ -190,10 +190,6 @@ extension AppManager {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
-                    if let currentUser = AuthManager.currentUser() {
-                        AnalyticsCoordinator.identifyCrashReports(withUser: currentUser)
-                    }
-
                     WindowManager.open(.subscriptions)
 
                     let server = AuthManager.selectedServerHost()
@@ -224,7 +220,7 @@ extension AppManager {
 extension AppManager {
 
     @discardableResult
-    static func open(room: Subscription, animated: Bool = true) -> ChatViewController? {
+    static func open(room: Subscription, animated: Bool = true) -> MessagesViewController? {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
             let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
@@ -233,7 +229,7 @@ extension AppManager {
         }
 
         if mainViewController.detailViewController as? BaseNavigationController != nil {
-            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {
                 controller.subscription = room
 
                 // Close all presenting controllers, modals & pushed
@@ -244,7 +240,7 @@ extension AppManager {
                 mainViewController.showDetailViewController(nav, sender: self)
                 return controller
             }
-        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {
             controller.subscription = room
 
             if let nav = mainViewController.viewControllers.first as? UINavigationController {

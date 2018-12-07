@@ -238,7 +238,6 @@
 "chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";
@@ -270,6 +269,12 @@
 "chat.drawing.settings.color.selected" = "Selected color"; // TODO
 "chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODOS
+
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
 "chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";
@@ -285,6 +290,11 @@
 "chat.message.type.room_archived" = "Tato místnost byla archivována uživatelem %@";
 "chat.message.type.room_unarchived" = "Tato místnost byla vyndána z archivu uživatelem %@";
 "chat.message.type.message_pinned" = "Pinned a message:"; // TODO
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -331,12 +341,14 @@
 "myaccount.settings.profile" = "Profile"; // TODO
 "myaccount.settings.license" = "License"; // TODO
 "myaccount.settings.language" = "Language"; // TODO
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "Application Icon"; // TODO
 "myaccount.settings.version" = "Version: %@ (%@)"; // TODO
 "myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
-"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identify problems and fix it."; // TODO
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon"; // TODO:
@@ -484,3 +496,10 @@
 "shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
 "shortcuts.add_server" = "Add server"; //TODO
 "shortcuts.change_theme" = "Change theme"; //TODO
+"shortcuts.send" = "Send"; //TODO
+"shortcuts.new_line" = "New line"; //TODO
+
+// Chat Components
+"chat.components.quote.replied" = "Replied"; //TODO
+"chat.components.quote.pinned" = "Pinned"; //TODO
+"chat.components.text_attachment.no_title" = "No title"; //TODO

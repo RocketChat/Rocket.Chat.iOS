@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Dz-xY-guZ" customClass="DateSeparatorCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="402" height="38"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="402" height="38"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsU-BY-HGb">
+                        <rect key="frame" x="182.5" y="10" width="37.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="idZ-Vh-JKI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QV-mv-f4w">
+                        <rect key="frame" x="20" y="18.5" width="146.5" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="cnR-MY-6dR"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxU-P6-BP8">
+                        <rect key="frame" x="228" y="18.5" width="154" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="q2Q-jh-Vl9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="MxU-P6-BP8" firstAttribute="centerY" secondItem="3Dz-xY-guZ" secondAttribute="centerY" id="1Y9-e0-mDE"/>
+                <constraint firstItem="lsU-BY-HGb" firstAttribute="top" secondItem="3Dz-xY-guZ" secondAttribute="top" constant="10" id="3OW-BP-lin"/>
+                <constraint firstItem="lsU-BY-HGb" firstAttribute="leading" secondItem="5QV-mv-f4w" secondAttribute="trailing" constant="16" id="9uF-U2-yTZ"/>
+                <constraint firstItem="lsU-BY-HGb" firstAttribute="centerX" secondItem="3Dz-xY-guZ" secondAttribute="centerX" id="GGp-wf-8cj"/>
+                <constraint firstItem="5QV-mv-f4w" firstAttribute="centerY" secondItem="3Dz-xY-guZ" secondAttribute="centerY" id="MDf-wl-ASQ"/>
+                <constraint firstAttribute="trailingMargin" secondItem="MxU-P6-BP8" secondAttribute="trailing" id="SHL-ap-n5Y"/>
+                <constraint firstItem="MxU-P6-BP8" firstAttribute="leading" secondItem="lsU-BY-HGb" secondAttribute="trailingMargin" constant="16" id="acv-ba-ASw"/>
+                <constraint firstAttribute="bottom" secondItem="lsU-BY-HGb" secondAttribute="bottom" constant="10" id="auR-xG-oT1"/>
+                <constraint firstItem="5QV-mv-f4w" firstAttribute="leading" secondItem="3Dz-xY-guZ" secondAttribute="leadingMargin" id="dZZ-ml-c8T"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="sR8-O8-gZG"/>
+            <size key="customSize" width="402" height="50"/>
+            <connections>
+                <outlet property="date" destination="lsU-BY-HGb" id="jzL-1Q-n1n"/>
+                <outlet property="leftLine" destination="5QV-mv-f4w" id="pTO-uH-Td2"/>
+                <outlet property="rightLine" destination="MxU-P6-BP8" id="2rP-qF-04A"/>
+            </connections>
+            <point key="canvasLocation" x="-113.59999999999999" y="-99.850074962518747"/>
+        </collectionViewCell>
+    </objects>
+</document>

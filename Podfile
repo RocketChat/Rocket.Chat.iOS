@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -29,7 +29,7 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
+  pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'SwipeCellKit'
@@ -51,12 +51,12 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
+  # DiffKit
+  diff_pods
+
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
-
-  # Diffing
-  diff_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
@@ -67,12 +67,10 @@ target 'Rocket.Chat.ShareExtension' do
 end
 
 target 'Rocket.Chat' do
-  # Shared pods
   shared_pods
 end
 
 target 'Rocket.ChatTests' do
-  # Shared pods
   shared_pods
 end
 

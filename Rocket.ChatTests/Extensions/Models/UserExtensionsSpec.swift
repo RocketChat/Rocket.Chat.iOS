@@ -7,31 +7,36 @@
 //
 
 import Foundation
+import RealmSwift
 import XCTest
 
 @testable import Rocket_Chat
 
-class UserExtensionsSpec: XCTestCase, RealmTestCase {
+class UserExtensionsSpec: XCTestCase {
     func testSearchUsernameContaining() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         AuthSettingsManager.settings?.useUserRealName = false
 
         (0..<10).forEach {
             let user = User.testInstance()
             user.identifier = "test_\($0)"
             user.username = user.identifier
-            try? realm.write {
+            realm.execute({ _ in
                 realm.add(user)
-            }
+            })
         }
 
         (0..<3).forEach {
             let user = User.testInstance()
             user.identifier = "testpreference_\($0)"
             user.username = user.identifier
-            try? realm.write {
+            realm.execute({ _ in
                 realm.add(user)
-            }
+            })
         }
 
         var users = User.search(usernameContaining: "test_", preference: [], limit: 5, realm: realm)
