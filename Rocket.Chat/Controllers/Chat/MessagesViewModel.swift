@@ -479,20 +479,22 @@ final class MessagesViewModel {
             }
         }
 
-        if dataSorted.last?.base as? HeaderSection == nil, !hasMoreData && !requestingData {
-            let headerChatItem = AnyDifferentiable(
-                HeaderChatItem(rid: rid)
-            )
-
-            let headerSection = AnyChatSection(
+        let currentHeaderSection = AnyChatSection(
+            AnyChatSection(
                 HeaderSection(
-                    object: headerChatItem,
-                    controllerContext: controllerContext
-                )
+                    object: AnyDifferentiable(
+                        HeaderChatItem(rid: rid)
+                ), controllerContext: nil)
             )
+        )
 
-            data.append(headerSection)
-            dataSorted.append(headerSection)
+        let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
+        if currentHeaderIndex == nil && !hasMoreData && !requestingData {
+            data.append(currentHeaderSection)
+            dataSorted.append(currentHeaderSection)
+        } else if let currentHeaderIndex = currentHeaderIndex {
+            dataSorted.remove(at: currentHeaderIndex)
+            dataSorted.append(currentHeaderSection)
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
