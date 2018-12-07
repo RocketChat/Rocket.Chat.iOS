@@ -230,7 +230,7 @@ final class MessagesViewModelSpec: XCTestCase {
             model.normalizeDataSorted()
         }
 
-        XCTAssertEqual(model.numberOfSections, 2)
+        XCTAssertEqual(model.numberOfSections, 3)
 
         guard
             let object1 = model.dataSorted[0].object.base as? MessageSectionModel,
