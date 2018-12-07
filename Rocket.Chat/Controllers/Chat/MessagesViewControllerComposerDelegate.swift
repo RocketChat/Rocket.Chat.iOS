@@ -27,10 +27,10 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
         composerViewModel.didChangeHintPrefixedWord(word: word)
 
-        if word.isEmpty {
-            parent?.stopDimming()
-        } else {
+        if composerViewModel.hints.count > 0 {
             parent?.startDimming()
+        } else {
+            parent?.stopDimming()
         }
     }
 
