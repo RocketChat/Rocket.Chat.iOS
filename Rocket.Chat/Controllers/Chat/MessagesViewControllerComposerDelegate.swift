@@ -7,7 +7,6 @@
 //
 
 import RocketChatViewController
-import RealmSwift
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
     func viewModel(for replyView: ReplyView) -> ReplyViewModel {
