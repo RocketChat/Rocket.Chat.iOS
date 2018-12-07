@@ -15,7 +15,7 @@ import SimpleImageViewer
 
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
-    var controllerContext: UIViewController?
+    weak var controllerContext: UIViewController?
     var messagesController: MessagesViewController? {
         return controllerContext as? MessagesViewController
     }
