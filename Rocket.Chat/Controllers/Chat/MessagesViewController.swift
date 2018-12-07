@@ -160,6 +160,12 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
 
+            if self.viewModel.dataNormalized.first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
+                self.isInverted = false
+            } else {
+                self.isInverted = true
+            }
+
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
         }
