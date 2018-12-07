@@ -139,6 +139,7 @@ final class MessagesViewController: RocketChatViewController {
         collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
         collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
         collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
+        collectionView.register(HeaderCell.nib, forCellWithReuseIdentifier: HeaderCell.identifier)
 
         setupScrollToBottom()
 
@@ -161,6 +162,12 @@ final class MessagesViewController: RocketChatViewController {
         viewModel.onDataChanged = { [weak self] in
             guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
+
+            if self.viewModel.dataNormalized.first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
+                self.isInverted = false
+            } else {
+                self.isInverted = true
+            }
 
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
