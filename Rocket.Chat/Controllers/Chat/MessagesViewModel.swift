@@ -72,6 +72,7 @@ final class MessagesViewModel {
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
+            rid = subscription.rid
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
@@ -79,6 +80,10 @@ final class MessagesViewModel {
             fetchMessages(from: nil)
         }
     }
+
+    // Thread safe reference to rid. This variable is required to
+    // setup the HeaderSection
+    internal var rid: String = ""
 
     // Variables required to fetch the messages of the Subscription
     // to the view model.
@@ -416,12 +421,14 @@ final class MessagesViewModel {
 
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
-                if let oldest = oldest {
-                    self?.oldestMessageDateFromRemote = oldest
-                }
-
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
+
+                if let oldest = oldest {
+                    self?.oldestMessageDateFromRemote = oldest
+                } else {
+                    self?.updateData()
+                }
             }
         }
     }
@@ -508,11 +515,9 @@ final class MessagesViewModel {
             var separator: Date?
             var sequential = false
             var loader = false
-            var header = false
 
             if idx == dataSortedMaxIndex {
                 loader = hasMoreData || requestingData
-                header = !hasMoreData && !requestingData
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -523,8 +528,7 @@ final class MessagesViewModel {
                 daySeparator: separator,
                 sequential: sequential,
                 unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
-                loader: loader,
-                header: header
+                loader: loader
             )
 
             let chatSection = AnyChatSection(MessageSection(
@@ -542,6 +546,24 @@ final class MessagesViewModel {
             // Cache the processed result of the message text
             // on this loop to avoid doing that in the main thread.
             MessageTextCacheManager.shared.message(for: message, with: currentTheme)
+        }
+
+        let currentHeaderSection = AnyChatSection(
+            AnyChatSection(
+                HeaderSection(
+                    object: AnyDifferentiable(HeaderChatItem(rid: rid)),
+                    controllerContext: nil
+                )
+            )
+        )
+
+        let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
+        if currentHeaderIndex == nil && !hasMoreData && !requestingData {
+            data.append(currentHeaderSection)
+            dataSorted.append(currentHeaderSection)
+        } else if let currentHeaderIndex = currentHeaderIndex {
+            dataSorted.remove(at: currentHeaderIndex)
+            dataSorted.append(currentHeaderSection)
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
