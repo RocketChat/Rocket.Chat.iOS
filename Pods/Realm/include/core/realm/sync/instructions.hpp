@@ -107,7 +107,8 @@ struct Instruction {
     template <class F>
     auto visit(F&& lambda) const;
 
-    template <class T> T& get_as()
+    template <class T>
+    T& get_as()
     {
         REALM_ASSERT(type == GetInstructionType<T>::value);
         return *reinterpret_cast<T*>(&m_storage);
@@ -373,7 +374,7 @@ Instruction::Instruction(T instr): type(GetInstructionType<T>::value)
 }
 
 template <class F>
-auto Instruction::visit(F&& lambda)
+inline auto Instruction::visit(F&& lambda)
 {
     switch (type) {
 #define REALM_VISIT_INSTRUCTION(X) \
