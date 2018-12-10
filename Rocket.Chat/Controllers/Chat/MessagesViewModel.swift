@@ -184,8 +184,7 @@ final class MessagesViewModel {
      messages of the subscription attached to the view model.
      */
     internal func unsubscribe(for subscription: Subscription) {
-        guard let rid = rid else { return }
-
+        guard !rid.isEmpty else { return }
         SocketManager.unsubscribe(eventName: rid)
         SocketManager.unsubscribe(eventName: "\(rid)/deleteMessage")
     }
