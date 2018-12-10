@@ -49,7 +49,11 @@ final class MessagesViewController: RocketChatViewController {
     // TODO: Move to another view model
     let socketHandlerToken = String.random(5)
 
-    var chatTitleView: ChatTitleView?
+    var chatTitleView: ChatTitleView? {
+        didSet {
+            chatTitleView?.updateConnectionState(isRequestingMessages: viewModel.requestingData)
+        }
+    }
 
     var chatPreviewModeView: ChatPreviewModeView?
 
@@ -61,6 +65,10 @@ final class MessagesViewController: RocketChatViewController {
         didSet {
             let sub: Subscription? = subscription
             let unmanaged = sub?.unmanaged
+
+            viewModel.onRequestingDataChanged = { [weak self] requesting in
+                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting)
+            }
 
             viewModel.subscription = sub
             viewSubscriptionModel.subscription = unmanaged
@@ -532,7 +540,6 @@ extension MessagesViewController: UserActionSheetPresenter {
 }
 
 extension MessagesViewController: ChatTitleViewProtocol {
-
     func titleViewChannelButtonPressed() {
         performSegue(withIdentifier: "Channel Actions", sender: nil)
     }
