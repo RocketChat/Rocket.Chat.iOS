@@ -91,6 +91,40 @@ public:
     struct Config {
         Config() {}
 
+        /// An optional custom platform description to be sent to server as part
+        /// of a user agent description (HTTP `User-Agent` header).
+        ///
+        /// If left empty, the platform description will be whatever is returned
+        /// by util::get_platform_info().
+        std::string user_agent_platform_info;
+
+        /// Optional information about the application to be added to the user
+        /// agent description as sent to the server. The intention is that the
+        /// application describes itself using the following (rough) syntax:
+        ///
+        ///     <application info>  ::=  (<space> <layer>)*
+        ///     <layer>             ::=  <name> "/" <version> [<space> <details>]
+        ///     <name>              ::=  (<alnum>)+
+        ///     <version>           ::=  <digit> (<alnum> | "." | "-" | "_")*
+        ///     <details>           ::=  <parentherized>
+        ///     <parentherized>     ::=  "(" (<nonpar> | <parentherized>)* ")"
+        ///
+        /// Where `<space>` is a single space character, `<digit>` is a decimal
+        /// digit, `<alnum>` is any alphanumeric character, and `<nonpar>` is
+        /// any character other than `(` and `)`.
+        ///
+        /// When multiple levels are present, the innermost layer (the one that
+        /// is closest to this API) should appear first.
+        ///
+        /// Example:
+        ///
+        ///     RealmJS/2.13.0 RealmStudio/2.9.0
+        ///
+        /// Note: The user agent description is not intended for machine
+        /// interpretation, but should still follow the specified syntax such
+        /// that it remains easily interpretable by human beings.
+        std::string user_agent_application_info;
+
         /// The maximum number of Realm files that will be kept open
         /// concurrently by this client. The client keeps a cache of open Realm
         /// files for efficiency reasons.
@@ -808,7 +842,8 @@ public:
     /// \brief Refresh the access token associated with this session.
     ///
     /// This causes the REFRESH protocol message to be sent to the server. See
-    /// \ref Protocol.
+    /// \ref Protocol. It is an error to pass a token with a different user
+    /// identity than the token used to initiate the session.
     ///
     /// In an on-going session the application may expect the access token to
     /// expire at a certain time and schedule acquisition of a fresh access

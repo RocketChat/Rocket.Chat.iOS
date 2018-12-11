@@ -30,7 +30,7 @@ namespace sync {
 struct Changeset;
 
 struct InstructionApplier {
-    explicit InstructionApplier(Group& group) noexcept;
+    explicit InstructionApplier(Group& group, TableInfoCache& table_info_cache) noexcept;
 
     /// Throws BadChangesetError if application fails due to a problem with the
     /// changeset.
@@ -53,6 +53,7 @@ protected:
     template<class A> static void apply(A& applier, const Changeset& log, util::Logger* logger);
 
     Group& m_group;
+    TableInfoCache& m_table_info_cache;
 private:
     const Changeset* m_log = nullptr;
     util::Logger* m_logger = nullptr;
@@ -60,7 +61,6 @@ private:
     TableRef m_selected_array;
     LinkViewRef m_selected_link_list;
     TableRef m_link_target_table;
-    TableInfoCache m_table_info;
 
     template <class... Args>
     void log(const char* fmt, Args&&... args)
@@ -80,9 +80,9 @@ private:
 
 // Implementation
 
-inline InstructionApplier::InstructionApplier(Group& group) noexcept:
+inline InstructionApplier::InstructionApplier(Group& group, TableInfoCache& table_info_cache) noexcept:
     m_group(group),
-    m_table_info(m_group)
+    m_table_info_cache(table_info_cache)
 {
 }
 
@@ -110,9 +110,11 @@ inline void InstructionApplier::apply(A& applier, const Changeset& log, util::Lo
         if (!instr)
             continue;
         instr->visit(applier); // Throws
+#if REALM_DEBUG
+        applier.m_table_info_cache.verify();
+#endif
     }
     applier.end_apply();
-
 }
 
 inline void InstructionApplier::apply(const Changeset& log, util::Logger* logger)
