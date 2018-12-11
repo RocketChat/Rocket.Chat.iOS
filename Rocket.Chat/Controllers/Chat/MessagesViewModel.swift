@@ -382,7 +382,7 @@ final class MessagesViewModel {
             return
         }
 
-        self.requestingData = true
+        requestingData = true
 
         queryDataQueue.addOperation { [weak self] in
             guard
