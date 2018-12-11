@@ -32,12 +32,18 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
+    var widthConstriant: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        widthConstriant = contentView.widthAnchor.constraint(equalToConstant: messageWidth)
+        widthConstriant.isActive = true
+
         insertGesturesIfNeeded(with: nil)
     }
 
@@ -45,6 +51,8 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         labelTitle.text = viewModel.title
 
