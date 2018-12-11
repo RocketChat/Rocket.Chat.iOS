@@ -150,10 +150,10 @@ final class SubscriptionsViewController: BaseViewController {
         guard
             let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        else {
-            tableView.contentInset.bottom = 0
-            return
-        }
+            else {
+                tableView.contentInset.bottom = 0
+                return
+            }
 
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
         let animationDuration: TimeInterval = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
@@ -291,9 +291,9 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         guard
             let view = recognizer.view,
             recognizer.state == .ended
-        else {
-            return false
-        }
+            else {
+                return false
+            }
         let tapLocation = recognizer.location(in: view).y
         return tapLocation > inset && tapLocation < view.bounds.height - inset
     }
@@ -387,9 +387,9 @@ extension SubscriptionsViewController: UIViewControllerPreviewingDelegate {
             let indexPath = tableView.indexPathForRow(at: location),
             let cell = tableView.cellForRow(at: indexPath),
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         previewingContext.sourceRect = cell.frame
 
@@ -532,9 +532,9 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
         guard
             let subscription = viewModel.subscriptionForRowAt(indexPath: indexPath)?.managedObject,
             subscription.open
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         switch orientation {
         case .left:
@@ -653,9 +653,9 @@ extension SubscriptionsViewController {
         guard
             let indexPath = viewModel.indexPathForAbsoluteIndex(index),
             indexPath.row >= 0 && indexPath.section >= 0
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
         onSelectRowAt(indexPath)

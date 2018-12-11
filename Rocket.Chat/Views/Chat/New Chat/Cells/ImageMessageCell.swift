@@ -1,3 +1,5 @@
+import FLAnimatedImage
+import RocketChatViewController
 //
 //  ImageMessageCell.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import RocketChatViewController
-import FLAnimatedImage
 
 class ImageMessageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageMessageCell.self)
@@ -91,9 +91,9 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         guard
             let viewModel = viewModel?.base as? ImageMessageChatItem,
             let imageURL = viewModel.imageURL
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
     }

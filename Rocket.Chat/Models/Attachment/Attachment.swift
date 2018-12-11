@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 class AttachmentField: Object {
     @objc dynamic var short: Bool = false
@@ -94,9 +94,9 @@ extension Attachment {
             let userId = auth.userId,
             let token = auth.token,
             let baseURL = auth.baseURL()
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
         return URL(string: urlString)

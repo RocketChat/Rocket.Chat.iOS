@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  UnmanagedSubscription.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 
 struct UnmanagedSubscription: UnmanagedObject, Equatable {
     typealias Object = Subscription

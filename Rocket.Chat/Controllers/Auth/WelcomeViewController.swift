@@ -1,3 +1,4 @@
+import SafariServices
 //
 //  WelcomeViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import SafariServices
 
 final class WelcomeViewController: BaseViewController {
 

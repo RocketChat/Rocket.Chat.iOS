@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  AppDelegate.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 import UserNotifications
 
 @UIApplicationMain
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         if let launchOptions = launchOptions,
-           let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
+            let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
             PushManager.handleNotification(raw: notification)
         }
 

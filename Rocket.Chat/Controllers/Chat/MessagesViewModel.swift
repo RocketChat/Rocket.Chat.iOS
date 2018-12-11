@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  MessagesViewModel.swift
 //  Rocket.Chat
@@ -8,7 +9,6 @@
 
 import Foundation
 import RealmSwift
-import DifferenceKit
 import RocketChatViewController
 
 final class MessagesViewModel {
@@ -33,9 +33,9 @@ final class MessagesViewModel {
                     guard
                         let message = data.object.base as? MessageSectionModel,
                         let username = message.message.user?.username
-                    else {
-                        return nil
-                    }
+                        else {
+                            return nil
+                        }
 
                     if !seen.contains(username) {
                         seen.insert(username)
@@ -45,7 +45,7 @@ final class MessagesViewModel {
                     return nil
                 }
 
-                self.recentSenders = Array(senders[0..<min(senders.count, 5)])
+                self.recentSenders = Array(senders[0 ..< min(senders.count, 5)])
             }
         }
     }
@@ -306,9 +306,9 @@ final class MessagesViewModel {
             guard
                 insertion < messagesQuery.count,
                 let message = messagesQuery[insertion].validated()?.unmanaged
-            else {
-                continue
-            }
+                else {
+                    continue
+                }
 
             let index = data.firstIndex(where: { (section) -> Bool in
                 if let object = section.object.base as? MessageSectionModel {
@@ -334,9 +334,9 @@ final class MessagesViewModel {
             guard
                 modified < messagesQuery.count,
                 let message = messagesQuery[modified].validated()?.unmanaged
-            else {
-                continue
-            }
+                else {
+                    continue
+                }
 
             let index = data.firstIndex(where: { (section) -> Bool in
                 if let object = section.object.base as? MessageSectionModel {
@@ -373,9 +373,9 @@ final class MessagesViewModel {
             hasMoreData || oldestMessage == nil,
             let subscription = subscription?.validated(),
             let subscriptionUnmanaged = subscription.unmanaged
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         requestingData = true
 
@@ -383,9 +383,9 @@ final class MessagesViewModel {
             guard
                 let self = self,
                 let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid)
-            else {
-                return
-            }
+                else {
+                    return
+                }
 
             let pageSize = 30
             let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
@@ -465,9 +465,9 @@ final class MessagesViewModel {
             guard
                 let object1 = section1.object.base as? MessageSectionModel,
                 let object2 = section2.object.base as? MessageSectionModel
-            else {
-                return false
-            }
+                else {
+                    return false
+                }
 
             return object1.messageDate.compare(object2.messageDate) == .orderedDescending
         }

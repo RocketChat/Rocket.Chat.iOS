@@ -8,8 +8,8 @@
 
 import Foundation
 import OAuthSwift
-import UIKit
 import SwiftyJSON
+import UIKit
 
 final class OAuthCredentials {
     let token: String
@@ -40,10 +40,10 @@ final class OAuthManager {
             let authorizeUrl = URL(string: authorizeUrlString),
             let scope = loginService.scope,
             let state = state()
-        else {
-            failure()
-            return false
-        }
+            else {
+                failure()
+                return false
+            }
 
         let userAgent: String? = loginService.type == .google ? "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19" : nil
 
@@ -77,9 +77,9 @@ final class OAuthManager {
         guard
             let host = server.host,
             let callbackPath = loginService.callbackPath ?? loginService.service
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         var portString = ""
         if let port = server.port {
@@ -98,9 +98,9 @@ final class OAuthManager {
             let authorizeUrl = loginService.authorizeUrl,
             let accessTokenUrl = loginService.accessTokenUrl,
             let clientId = loginService.clientId
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return OAuth2Swift(
             consumerKey: clientId,

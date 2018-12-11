@@ -93,9 +93,9 @@ extension String: VersionConvertible {
             let major = Int(dotComponents[0]),
             let minor = Int(dotComponents[1]),
             let patch = Int(dotComponents[2])
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         let identifier: String?
         if hifenComponents.count == 2 {

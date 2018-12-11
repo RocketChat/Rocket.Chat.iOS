@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  QuoteChatItem.swift
 //  Rocket.Chat
@@ -7,9 +8,8 @@
 //
 
 import Foundation
-import DifferenceKit
-import RocketChatViewController
 import RealmSwift
+import RocketChatViewController
 
 final class QuoteChatItem: BaseTextAttachmentChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {

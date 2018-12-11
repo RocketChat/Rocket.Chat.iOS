@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  MessagesListViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 extension RoomMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
@@ -122,7 +122,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
         let request = RoomMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
@@ -144,7 +144,7 @@ class MessagesListViewData {
         guard let subscription = subscription else { return }
 
         isLoadingMoreMessages = true
-        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
         let request = RoomMentionsRequest(roomId: subscription.rid)
         API.current()?.fetch(request, options: options) { [weak self] response in
             switch response {
@@ -229,8 +229,8 @@ class MessagesListViewController: BaseViewController {
 
         if data.cells.count == 0 {
             if data.isSearchingMessages &&
-                    (searchBar.text == nil || searchBar.text == "") ||
-                    data.isLoadingSearchResults {
+                (searchBar.text == nil || searchBar.text == "") ||
+                data.isLoadingSearchResults {
                 label.text = ""
                 return
             }
@@ -381,7 +381,7 @@ extension MessagesListViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == data.cells.count - data.pageSize/3 && !data.isSearchingMessages {
+        if indexPath.row == data.cells.count - data.pageSize / 3 && !data.isSearchingMessages {
             loadMoreMessages()
         }
     }

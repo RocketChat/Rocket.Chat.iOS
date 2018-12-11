@@ -26,9 +26,9 @@ class BaseModel: Object {
         guard
             let realm = Realm.current,
             let object = realm.objects(self).filter("identifier = '\(identifier)'").first
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         realm.delete(object)
 

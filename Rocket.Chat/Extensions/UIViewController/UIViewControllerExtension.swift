@@ -1,3 +1,6 @@
+import MobileCoreServices
+import ObjectiveC
+import Photos
 //
 //  UIViewControllerExtension.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import Photos
-import MobileCoreServices
-import ObjectiveC
 
 private var viewScrollViewAssociatedKey: UInt8 = 0
 
@@ -114,7 +114,7 @@ extension UIViewController {
 
                 scrollView?.contentInset = newInsets
                 scrollView?.scrollIndicatorInsets = newInsets
-        },
+            },
             completion: nil
         )
     }
@@ -132,7 +132,7 @@ extension UIViewController {
                 let insets = UIEdgeInsets.zero
                 scrollView?.contentInset = insets
                 scrollView?.scrollIndicatorInsets = insets
-        },
+            },
             completion: nil
         )
     }

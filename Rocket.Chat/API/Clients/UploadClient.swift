@@ -75,7 +75,7 @@ import Foundation
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         DispatchQueue.main.async { [weak self] in
-            let total = Double(totalBytesSent)/Double(totalBytesExpectedToSend)
+            let total = Double(totalBytesSent) / Double(totalBytesExpectedToSend)
             self?.tasks[task]?.callbacks.progress?(total)
         }
     }

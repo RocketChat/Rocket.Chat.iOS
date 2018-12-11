@@ -36,9 +36,9 @@ extension MessagesViewController {
             let client = API.current()?.client(MessagesClient.self),
             let message = composerViewModel.messageToEdit,
             let text = composerView.textView.text
-        else {
-            return Alert.defaultError.present()
-        }
+            else {
+                return Alert.defaultError.present()
+            }
 
         UIView.animate(withDuration: 0.2) {
             self.editingView?.isHidden = true

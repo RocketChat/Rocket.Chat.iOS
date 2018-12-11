@@ -13,7 +13,7 @@ protocol Asker: class {
 extension UIViewController: Asker {
     func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)], deleteOption: Int8 = -1) {
         let ask = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        for idx in 0..<buttons.count {
+        for idx in 0 ..< buttons.count {
             ask.addAction(UIAlertAction(
                 title: buttons[idx].title,
                 style: deleteOption == idx ? .destructive : .default,

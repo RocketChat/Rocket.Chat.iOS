@@ -26,7 +26,7 @@ extension MessagesViewController {
             let messageList = controller as? MessagesListViewController
             else {
                 return
-        }
+            }
 
         messageList.data.subscription = subscription
         messageList.data.isSearchingMessages = true

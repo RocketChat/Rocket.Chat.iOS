@@ -44,9 +44,9 @@ extension AuthManager {
         guard
             let url = URL(string: auth.serverURL),
             let socketURL = url.socketURL()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         turnAllUsersOffline()
         removeAllPrivateMessages()
@@ -214,7 +214,7 @@ extension AuthManager {
             "msg": "method",
             "method": "sendForgotPasswordEmail",
             "params": [email]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -226,7 +226,7 @@ extension AuthManager {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }

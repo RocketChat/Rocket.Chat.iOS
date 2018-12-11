@@ -51,9 +51,9 @@ extension WebBrowserTableViewController {
         guard
             let indexOfSelectedBrowser = viewModel.browsers.index(of: WebBrowserManager.browser),
             let selectedCell = tableView.cellForRow(at: IndexPath(row: indexOfSelectedBrowser, section: 0))
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if indexOfSelectedBrowser == indexPath.row {
             navigationController?.popViewController(animated: true)

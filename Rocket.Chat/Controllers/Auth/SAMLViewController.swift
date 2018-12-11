@@ -51,10 +51,10 @@ class SAMLViewController: BaseViewController {
     override func viewDidLoad() {
         guard
             let url = URL(string: "\(serverUrl.absoluteString)/_saml/authorize/\(provider)/\(credentialToken)")
-        else {
-            failure?()
-            return
-        }
+            else {
+                failure?()
+                return
+            }
 
         let req = URLRequest(url: url)
         webView.load(req)

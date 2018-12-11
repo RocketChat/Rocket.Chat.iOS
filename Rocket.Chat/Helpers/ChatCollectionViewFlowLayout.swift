@@ -30,9 +30,9 @@ final class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 item.updateAction == .insert,
                 let index = item.indexPathAfterUpdate,
                 let attrs = layoutAttributesForItem(at: index)
-            else {
-                return result
-            }
+                else {
+                    return result
+                }
 
             return result + attrs.frame.height
         }

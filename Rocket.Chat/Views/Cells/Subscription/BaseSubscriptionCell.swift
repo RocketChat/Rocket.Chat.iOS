@@ -1,3 +1,4 @@
+import SwipeCellKit
 //
 //  BaseSubscriptionCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import SwipeCellKit
 
 protocol SubscriptionCellProtocol {
     var subscription: Subscription.UnmanagedType? { get set }

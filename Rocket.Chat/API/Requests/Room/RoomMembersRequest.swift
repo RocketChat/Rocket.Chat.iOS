@@ -1,3 +1,4 @@
+import Foundation
 //
 //  RoomMembersRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import Foundation
 
 fileprivate extension SubscriptionType {
     var path: String {

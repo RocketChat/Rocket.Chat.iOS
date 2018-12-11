@@ -1,3 +1,4 @@
+import FLAnimatedImage
 //
 //  EmojiCollectionViewCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
 
 final class EmojiCollectionViewCell: UICollectionViewCell {
     enum Emoji {

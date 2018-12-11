@@ -104,9 +104,9 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
     @objc func didTapTextContainerView() {
         guard
             let viewModel = viewModel
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }

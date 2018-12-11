@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 import UserNotifications
 
 final class PushManager {
@@ -83,9 +83,9 @@ struct PushNotification {
             let username = json["sender"]?["username"].string,
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         self.host = host
         self.username = username

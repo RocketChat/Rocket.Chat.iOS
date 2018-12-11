@@ -23,9 +23,9 @@ enum DeepLink {
         guard
             isSchemeBased || url.host == "go.rocket.chat",
             let actionString = isSchemeBased ? url.host : url.path.replacingOccurrences(of: "/", with: "")
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         switch actionString {
         case "auth":
@@ -38,9 +38,9 @@ enum DeepLink {
             guard
                 let host = url.queryParameters?["host"],
                 let roomId = url.queryParameters?["rid"]
-            else {
-                return nil
-            }
+                else {
+                    return nil
+                }
 
             self = .room(host: host, roomId: roomId)
         case "mention":

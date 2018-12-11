@@ -66,10 +66,10 @@ final class ChatDirectMessageHeaderCell: UICollectionViewCell {
         guard
             let userId = subscription?.otherUserId,
             !userId.isEmpty
-        else {
-            updateUser()
-            return
-        }
+            else {
+                updateUser()
+                return
+            }
 
         User.fetch(by: .userId(userId), completion: { _ in
             self.updateUser()

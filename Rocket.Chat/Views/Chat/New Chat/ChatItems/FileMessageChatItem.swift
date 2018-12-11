@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  FileMessageChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 final class FileMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {

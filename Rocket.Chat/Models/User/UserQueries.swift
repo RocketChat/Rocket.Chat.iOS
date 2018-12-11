@@ -18,9 +18,9 @@ extension User {
         guard
             let realm = realm,
             let user = realm.objects(User.self).filter("username = %@", username).first
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return user
     }
@@ -29,9 +29,9 @@ extension User {
         guard
             let realm = realm,
             let api = api
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let request: UserInfoRequest
         switch queryParameter {

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 extension MessageURL: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {

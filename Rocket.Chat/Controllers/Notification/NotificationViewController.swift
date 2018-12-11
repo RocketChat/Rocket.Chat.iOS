@@ -1,3 +1,4 @@
+import AudioToolbox
 //
 //  NotificationViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import AudioToolbox
 
 final class NotificationViewController: TopTransparentViewController {
 

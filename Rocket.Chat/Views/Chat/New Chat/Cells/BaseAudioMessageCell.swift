@@ -1,3 +1,6 @@
+import AVFoundation
+import Foundation
+import RocketChatViewController
 //
 //  BaseAudioMessageCell.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import Foundation
-import AVFoundation
-import RocketChatViewController
 
 class BaseAudioMessageCell: BaseMessageCell {
     var updateTimer: Timer?
@@ -23,7 +23,7 @@ class BaseAudioMessageCell: BaseMessageCell {
     }
 
     func setupPlayerTimer(with slider: UISlider, and audioTimeLabel: UILabel) -> Timer {
-        return Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { [weak self] _ in
+        return Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             guard let player = self.player else { return }
 
@@ -34,7 +34,7 @@ class BaseAudioMessageCell: BaseMessageCell {
             }
 
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
-            audioTimeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            audioTimeLabel.text = String(format: "%02d:%02d", (displayTime / 60) % 60, displayTime % 60)
         }
     }
 

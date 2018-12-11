@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  ChatMessageTextView.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 protocol ChatMessageTextViewProtocol: class {
     func viewDidCollapseChange(viewModel: AnyChatItem)

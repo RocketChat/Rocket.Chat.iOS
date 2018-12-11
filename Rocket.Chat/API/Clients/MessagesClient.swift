@@ -116,9 +116,9 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
             switch response {
@@ -135,9 +135,9 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         api.fetch(StarMessageRequest(msgId: id, star: star)) { response in
             switch response {
@@ -154,9 +154,9 @@ struct MessagesClient: APIClient {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         api.fetch(PinMessageRequest(msgId: id, pin: pin)) { response in
             switch response {

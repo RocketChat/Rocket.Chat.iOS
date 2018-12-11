@@ -107,10 +107,10 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
             result.raw != nil,
             let controller = self.delegate?.viewControllerToPresentAlerts,
             let newHost = url.host
-        else {
-            self.delegate?.urlNotValid()
-            return
-        }
+            else {
+                self.delegate?.urlNotValid()
+                return
+            }
 
         let alert = UIAlertController(
             title: localized("connection.server.redirect.alert.title"),

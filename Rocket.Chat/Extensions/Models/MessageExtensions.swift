@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  MessageExtensions.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 extension Message {
 
@@ -26,9 +26,9 @@ extension Message {
             !isSystemMessage(),
             let currentUser = AuthManager.currentUser(realm: realm),
             currentUser.identifier != user?.identifier
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         return true
     }
@@ -36,11 +36,11 @@ extension Message {
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
-            type == .audio ||
-            type == .image ||
-            type == .video ||
-            type == .textAttachment ||
-            type == .url
+                type == .audio ||
+                type == .image ||
+                type == .video ||
+                type == .textAttachment ||
+                type == .url
         )
     }
 
@@ -182,9 +182,9 @@ extension Message {
                 let createdAt = createdAt,
                 let user = user,
                 let format = VOLocalizedString("message.label")
-            else {
-                return nil
-            }
+                else {
+                    return nil
+                }
 
             let formatter = DateFormatter()
             formatter.dateStyle = .short

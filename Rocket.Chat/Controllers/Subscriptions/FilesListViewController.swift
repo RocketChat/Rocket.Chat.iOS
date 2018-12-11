@@ -1,3 +1,8 @@
+import FLAnimatedImage
+import MBProgressHUD
+import MobilePlayer
+import Nuke
+import SimpleImageViewer
 //
 //  FilesListViewController.swift
 //  Rocket.Chat
@@ -7,11 +12,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
-import SimpleImageViewer
-import MBProgressHUD
-import MobilePlayer
-import Nuke
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -42,7 +42,7 @@ class FilesListViewData {
         if let subscription = subscription {
             isLoadingMoreFiles = true
 
-            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
             let filesRequest = RoomFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
             API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
                 switch result {

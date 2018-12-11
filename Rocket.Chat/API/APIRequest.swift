@@ -28,13 +28,13 @@ extension APIRequest {
         return .zero
     }
 
-	var method: HTTPMethod {
+    var method: HTTPMethod {
         return .get
     }
 
-	var contentType: String {
+    var contentType: String {
         return "application/json"
-	}
+    }
 
     var query: String? {
         return nil

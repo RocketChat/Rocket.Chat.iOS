@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 var realmConfiguration: Realm.Configuration?
 let realmTestingConfiguration = Realm.Configuration(

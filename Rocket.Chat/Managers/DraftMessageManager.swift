@@ -22,9 +22,9 @@ struct DraftMessageManager {
         guard
             let servers = DatabaseManager.servers,
             servers.count > selectedIndex
-        else {
-            return ""
-        }
+            else {
+                return ""
+            }
 
         return servers[selectedIndex][ServerPersistKeys.serverURL] ?? ""
     }

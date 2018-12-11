@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  SESubscriptionModelMapping.swift
 //  Rocket.Chat.ShareExtension
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import RealmSwift
 
 extension Subscription {
     static func lastMessageText(lastMessage: Message) -> String {

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 final class MessageReaction: Object {
     @objc dynamic var emoji: String?
@@ -20,6 +20,6 @@ final class MessageReaction: Object {
         self.usernames.removeAll()
         json["usernames"].array?.compactMap {
             $0.string
-        }.forEach(self.usernames.append)
+            }.forEach(self.usernames.append)
     }
 }

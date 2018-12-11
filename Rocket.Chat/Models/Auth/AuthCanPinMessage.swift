@@ -20,9 +20,9 @@ extension Auth {
         guard
             let user = user,
             let settings = settings
-        else {
-            return .unknown
-        }
+            else {
+                return .unknown
+            }
 
         if !message.type.actionable {
             return .notActionable

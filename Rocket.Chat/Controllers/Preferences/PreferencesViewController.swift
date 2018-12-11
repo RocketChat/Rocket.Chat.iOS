@@ -1,3 +1,8 @@
+#if BETA || DEBUG
+import FLEX
+#endif
+import MessageUI
+import SafariServices
 //
 //  PreferencesViewController.swift
 //  Rocket.Chat
@@ -7,12 +12,6 @@
 //
 
 import UIKit
-import MessageUI
-import SafariServices
-
-#if BETA || DEBUG
-import FLEX
-#endif
 
 final class PreferencesViewController: BaseTableViewController {
 
@@ -213,9 +212,9 @@ final class PreferencesViewController: BaseTableViewController {
             let auth = AuthManager.isAuthenticated(),
             let baseURL = auth.settings?.siteURL,
             let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         AnalyticsManager.log(event: .openAdmin)
 

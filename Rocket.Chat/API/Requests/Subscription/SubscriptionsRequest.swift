@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  SubscriptionsRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import RealmSwift
 
 struct SubscriptionsRequest: APIRequest {
     typealias APIResourceType = SubscriptionsResource

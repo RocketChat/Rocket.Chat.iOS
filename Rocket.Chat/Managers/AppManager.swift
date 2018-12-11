@@ -62,9 +62,9 @@ struct AppManager {
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
             let nav = appDelegate.window?.rootViewController as? UINavigationController,
             let chatController = nav.viewControllers.first as? MessagesViewController
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return chatController.subscription?.rid
     }
@@ -154,9 +154,9 @@ extension AppManager {
         guard
             let serverUrl = URL(string: serverHost),
             let index = DatabaseManager.serverIndexForUrl(serverUrl)
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         guard index == DatabaseManager.selectedIndex else {
             changeToServerIfExists(serverUrl: serverUrl, roomId: roomId)
@@ -180,9 +180,9 @@ extension AppManager {
         guard
             let url = URL(string: serverUrl),
             changeToServerIfExists(serverUrl: url, roomId: roomId)
-        else {
-            return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
-        }
+            else {
+                return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
+            }
     }
 
     static func reloadApp(completion: (() -> Void)? = nil) {
@@ -224,9 +224,9 @@ extension AppManager {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
             let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         if mainViewController.detailViewController as? BaseNavigationController != nil {
             if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController {

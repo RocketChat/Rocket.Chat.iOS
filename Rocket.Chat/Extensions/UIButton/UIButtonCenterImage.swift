@@ -12,13 +12,13 @@ extension UIButton {
     func centerImageHorizontally() {
         guard
             let imageViewWidth = imageView?.frame.width
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         imageEdgeInsets = UIEdgeInsets(
             top: imageEdgeInsets.top,
-            left: frame.width/2 - imageViewWidth/2 - 1,
+            left: frame.width / 2 - imageViewWidth / 2 - 1,
             bottom: imageEdgeInsets.bottom,
             right: imageEdgeInsets.right
         )

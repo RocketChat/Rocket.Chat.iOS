@@ -53,9 +53,9 @@ extension AuthTableViewController {
             let loginUrl = URL(string: loginUrlString),
             let host = serverURL?.host,
             let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
-        else {
+            else {
                 return
-        }
+            }
 
         let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
             AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
@@ -73,9 +73,9 @@ extension AuthTableViewController {
             let provider = loginService.provider,
             let host = serverURL?.host,
             let serverUrl = URL(string: "https://\(host)")
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
             AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
 import Realm
+import RealmSwift
 
 /**
  This keys are used to store all servers and
@@ -74,9 +74,9 @@ struct DatabaseManager {
         guard
             let servers = self.servers,
             servers.count > 0
-        else {
-            return -1
-        }
+            else {
+                return -1
+            }
 
         let selectedServer = servers[from]
         let newIndex = createNewDatabaseInstance(serverURL: newURL)
@@ -123,9 +123,9 @@ struct DatabaseManager {
                 server[ServerPersistKeys.serverURL] != nil,
                 let realmConfiguration = databaseConfiguration(index: index),
                 (try? Realm(configuration: realmConfiguration)) != nil
-            else {
-                continue
-            }
+                else {
+                    continue
+                }
 
             validServers.append(server)
         }
@@ -177,9 +177,9 @@ struct DatabaseManager {
             let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName],
             let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup.identifier)
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         #if DEBUG
         Log.debug("Realm path: \(url.appendingPathComponent(databaseName))")

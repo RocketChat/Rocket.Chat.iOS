@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  VideoMessageChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 final class VideoMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {

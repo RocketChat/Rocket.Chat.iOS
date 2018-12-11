@@ -138,9 +138,9 @@ final class ChatMessageCell: UICollectionViewCell {
         guard
             let settings = settings,
             settings.messageReadReceiptStoreUsers
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.handleReadReceiptPress(message, source: (readReceiptButton, readReceiptButton.frame))
     }

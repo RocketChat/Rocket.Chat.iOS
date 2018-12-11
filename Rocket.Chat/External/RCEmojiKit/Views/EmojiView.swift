@@ -1,3 +1,4 @@
+import FLAnimatedImage
 //
 //  EmojiCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
 
 final class EmojiView: UIView {
     @IBOutlet var contentView: UIView!

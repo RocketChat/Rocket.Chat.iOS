@@ -1,3 +1,5 @@
+import FLAnimatedImage
+import Nuke
 //
 //  AvatarView.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
-import Nuke
 
 final class AvatarView: UIView {
     var avatarPlaceholder: UIImage?

@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  LoaderCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class LoaderCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: LoaderCell.self)

@@ -27,9 +27,9 @@ extension Subscription {
         guard
             let userLastMessage = lastMessage.user,
             let lastMessageUnmanaged = lastMessage.unmanaged
-        else {
-            return localized("subscriptions.list.no_message")
-        }
+            else {
+                return localized("subscriptions.list.no_message")
+            }
 
         var text = MessageTextCacheManager.shared.message(for: lastMessageUnmanaged)?.string ?? lastMessage.text
         text = text.components(separatedBy: .newlines)

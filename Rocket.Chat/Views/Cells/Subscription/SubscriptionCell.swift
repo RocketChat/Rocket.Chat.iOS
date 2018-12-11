@@ -59,9 +59,9 @@ final class SubscriptionCell: BaseSubscriptionCell {
         guard
             let theme = theme,
             let subscription = subscription?.managedObject
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if subscription.unread > 0 || subscription.alert {
             labelDate.textColor = theme.tintColor

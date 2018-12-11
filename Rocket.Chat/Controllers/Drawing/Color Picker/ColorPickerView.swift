@@ -19,7 +19,7 @@ final class ColorPickerView: UIView {
     override func draw(_ rect: CGRect) {
         let width = Int(frame.size.width)
         for idx in 0 ..< width {
-            let color = UIColor(hue: CGFloat(idx)/frame.size.width, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+            let color = UIColor(hue: CGFloat(idx) / frame.size.width, saturation: 1.0, brightness: 1.0, alpha: 1.0)
             color.set()
             let rect = CGRect(x: CGFloat(idx), y: 0, width: 1.0, height: frame.size.height)
             UIRectFill(rect)

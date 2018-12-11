@@ -72,9 +72,9 @@ final class MessagesSubscriptionViewModel {
                 let self = self,
                 let username = username,
                 username != loggedUsername
-            else {
-                return
-            }
+                else {
+                    return
+                }
 
             if flag && self.usersTyping.firstIndex(of: username) == nil {
                 self.usersTyping.append(username)

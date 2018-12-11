@@ -205,11 +205,11 @@ extension UIColor {
 
 extension UIColor {
     static var placeholderGray: UIColor {
-        return UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
+        return UIColor(red: 199 / 255, green: 199 / 255, blue: 205 / 255, alpha: 1)
     }
 
     static var backgroundWhite: UIColor {
-        return UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+        return UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
     }
 }
 

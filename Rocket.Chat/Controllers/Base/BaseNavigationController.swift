@@ -28,9 +28,9 @@ class BaseNavigationController: UINavigationController {
 
         viewControllers?.compactMap {
             $0 as? PopPushDelegate
-        }.forEach {
-            $0.willBePopped(animated: animated)
-        }
+            }.forEach {
+                $0.willBePopped(animated: animated)
+            }
 
         return viewControllers
     }

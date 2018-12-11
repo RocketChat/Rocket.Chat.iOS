@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 extension LoginService: ModelHandler {
     func add(_ values: JSON, realm: Realm) {

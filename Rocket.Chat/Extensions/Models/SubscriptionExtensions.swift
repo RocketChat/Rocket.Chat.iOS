@@ -26,9 +26,9 @@ extension Subscription {
             let auth = auth,
             let siteURLString = auth.settings?.siteURL,
             name.count > 0
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         let suffix: String = {
             switch type {

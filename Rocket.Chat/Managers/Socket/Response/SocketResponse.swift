@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import Starscream
+import SwiftyJSON
 
 public struct SocketResponse {
     var socket: WebSocket?

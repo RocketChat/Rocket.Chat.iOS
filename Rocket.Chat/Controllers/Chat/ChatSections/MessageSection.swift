@@ -1,3 +1,5 @@
+import DifferenceKit
+import FLAnimatedImage
 //
 //  MessageSection.swift
 //  Rocket.Chat
@@ -7,10 +9,8 @@
 //
 
 import Foundation
-import DifferenceKit
-import RocketChatViewController
 import MobilePlayer
-import FLAnimatedImage
+import RocketChatViewController
 import SimpleImageViewer
 
 final class MessageSection: ChatSection {
@@ -33,9 +33,9 @@ final class MessageSection: ChatSection {
         guard
             let object = object.base as? MessageSectionModel,
             let user = object.message.user
-        else {
-            return []
-        }
+            else {
+                return []
+            }
 
         // The list is inverted, so we need to add items
         // on the inverse order. What we want to show in the top

@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  MembersListViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class MembersListViewData {
     var subscription: Subscription?
@@ -46,7 +46,7 @@ class MembersListViewData {
         if let subscription = subscription {
             isLoadingMoreMembers = true
 
-            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+            let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
             let client = API.current()?.client(SubscriptionsClient.self)
 
             client?.fetchMembersList(subscription: subscription, options: options) { [weak self] response, users in
@@ -54,9 +54,9 @@ class MembersListViewData {
                     let self = self,
                     let users = users,
                     case let .resource(resource) = response
-                else {
-                    return Alert.defaultError.present()
-                }
+                    else {
+                        return Alert.defaultError.present()
+                    }
 
                 self.membersPages.append(users)
 
@@ -229,7 +229,7 @@ extension MembersListViewController: UITableViewDelegate, UserActionSheetPresent
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == data.members.count - data.pageSize/2 {
+        if indexPath.row == data.members.count - data.pageSize / 2 {
             loadMoreMembers()
         }
     }

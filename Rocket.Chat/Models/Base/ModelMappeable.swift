@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import SwiftyJSON
-import RealmSwift
 import Realm
+import RealmSwift
+import SwiftyJSON
 
 public typealias UpdateBlock<T> = (_ object: T?) -> Void
 

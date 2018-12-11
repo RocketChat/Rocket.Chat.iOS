@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  UnmanagedObject.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import RealmSwift
-import DifferenceKit
 
 protocol UnmanagedObject: Differentiable {
     associatedtype Object: BaseModel & UnmanagedConvertible

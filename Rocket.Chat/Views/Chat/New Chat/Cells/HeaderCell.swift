@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  HeaderCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class HeaderCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: HeaderCell.self)

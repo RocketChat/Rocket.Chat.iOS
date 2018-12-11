@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  FileMessageCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 class FileMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: FileMessageCell.self)

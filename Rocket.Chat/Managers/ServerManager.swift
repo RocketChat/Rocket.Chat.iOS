@@ -30,9 +30,9 @@ struct ServerManager {
             let iconURL = settings.serverFaviconURL,
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         servers[selectedIndex][ServerPersistKeys.serverName] = serverName
         servers[selectedIndex][ServerPersistKeys.serverIconURL] = iconURL
@@ -50,9 +50,9 @@ struct ServerManager {
             let auth = AuthManager.isAuthenticated(),
             let serverURL = URL(string: auth.serverURL),
             let url = serverURL.timestampURL()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let request = URLRequest(url: url)
         let session = URLSession.shared

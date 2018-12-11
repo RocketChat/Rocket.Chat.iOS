@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  BasicMessageCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class BasicMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
@@ -89,9 +89,9 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
         guard
             let viewModel = viewModel?.base as? BasicMessageChatItem,
             let message = viewModel.message
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if let messageText = MessageTextCacheManager.shared.message(for: message, with: theme) {
             if message.temporary {
@@ -109,7 +109,7 @@ final class BasicMessageCell: BaseMessageCell, SizingCell {
 
             textHeightConstraint.constant = text.textView.sizeThatFits(
                 maxSize
-            ).height
+                ).height
         }
     }
 

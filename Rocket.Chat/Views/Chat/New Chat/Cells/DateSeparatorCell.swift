@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  DateSeparatorCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: DateSeparatorCell.self)
@@ -37,9 +37,9 @@ final class DateSeparatorCell: UICollectionViewCell, ChatCell, SizingCell {
         guard
             completeRendering,
             let viewModel = viewModel?.base as? DateSeparatorChatItem
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         date.text = viewModel.dateFormatted
     }

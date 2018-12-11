@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 protocol ModelHandler {
     func add(_ values: JSON, realm: Realm)

@@ -40,7 +40,7 @@ extension StoryboardInitializable {
             case .initial:
                 return storyboard.instantiateInitialViewController()
             }
-            }() as? Self
+        }() as? Self
 
         guard let result = viewController else {
             fatalError("ViewController not found in '\(name)' storyboard: '\(self)'")

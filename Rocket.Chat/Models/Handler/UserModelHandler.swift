@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import SwiftyJSON
-import RealmSwift
 import Realm
+import RealmSwift
+import SwiftyJSON
 
 extension User: ModelHandler {
     func add(_ values: JSON, realm: Realm) {

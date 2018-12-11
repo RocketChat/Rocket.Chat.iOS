@@ -1,3 +1,4 @@
+import Foundation
 //
 //  ReadReceiptsRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import Foundation
 
 final class ReadReceiptsRequest: APIRequest {
     typealias APIResourceType = ReadReceiptsResource

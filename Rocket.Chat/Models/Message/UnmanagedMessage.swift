@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  UnmanagedMessage.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 
 struct UnmanagedMessageURL: Equatable {
     var url: String
@@ -95,13 +95,13 @@ extension UnmanagedMessage {
         guard
             let messageIdentifier = message.identifier,
             let messageCreatedAt = message.createdAt
-        else {
-            #if DEBUG
-            fatalError("message object is not complete")
-            #endif
+            else {
+                #if DEBUG
+                fatalError("message object is not complete")
+                #endif
 
-            return nil
-        }
+                return nil
+            }
 
         identifier = messageIdentifier
         rid = message.rid
@@ -152,9 +152,9 @@ extension UnmanagedMessage {
                 let subtitle = $0.textDescription,
                 let url = $0.targetURL,
                 $0.isValid()
-            else {
-                return nil
-            }
+                else {
+                    return nil
+                }
 
             return UnmanagedMessageURL(
                 url: url,
@@ -189,7 +189,7 @@ extension UnmanagedMessage {
             currentUser.identifier != user?.identifier
             else {
                 return false
-        }
+            }
 
         return true
     }

@@ -1,3 +1,4 @@
+import Realm
 //
 //  AuthManager.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import RealmSwift
-import Realm
 
 struct AuthManager {
 
@@ -33,9 +33,9 @@ struct AuthManager {
             let userId = auth.userId,
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         servers[selectedIndex][ServerPersistKeys.token] = token
         servers[selectedIndex][ServerPersistKeys.userId] = userId
@@ -48,9 +48,9 @@ struct AuthManager {
         guard
             let servers = DatabaseManager.servers,
             servers.count > 0
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         var server: [String: String]?
         if let index = index, index < servers.count {
@@ -71,9 +71,9 @@ struct AuthManager {
             let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL],
             let url = URL(string: serverURL),
             let host = url.host
-        else {
-            return "undefined"
-        }
+            else {
+                return "undefined"
+            }
 
         return host
     }

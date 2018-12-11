@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  RealmAssorter.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import RealmSwift
-import DifferenceKit
 
 typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], modifications: [IndexPath])
 

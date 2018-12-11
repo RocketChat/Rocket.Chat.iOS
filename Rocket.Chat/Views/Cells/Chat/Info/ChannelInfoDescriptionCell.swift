@@ -1,3 +1,4 @@
+import RCMarkdownParser
 //
 //  ChannelInfoDescriptionCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RCMarkdownParser
 
 struct ChannelInfoDescriptionCellData: ChannelInfoCellDataProtocol {
     let cellType = ChannelInfoDescriptionCell.self

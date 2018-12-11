@@ -24,9 +24,9 @@ open class EmojiSearcher {
             }
 
             return nil
-        }.sorted {
-            ($0.suggestion.count - shortname.count) < ($1.suggestion.count - shortname.count)
-        }
+            }.sorted {
+                ($0.suggestion.count - shortname.count) < ($1.suggestion.count - shortname.count)
+            }
     }
 }
 

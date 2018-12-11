@@ -1,3 +1,5 @@
+import Foundation
+import RealmSwift
 //
 //  RoomFilesRequest.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import SwiftyJSON
-import Foundation
-import RealmSwift
 
 fileprivate extension SubscriptionType {
     var path: String {

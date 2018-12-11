@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  AudioMessageChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 class AudioMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {

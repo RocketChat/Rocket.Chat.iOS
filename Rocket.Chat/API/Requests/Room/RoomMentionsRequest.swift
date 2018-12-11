@@ -1,3 +1,4 @@
+import Foundation
 //
 //  RoomMentionsRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import Foundation
 
 final class RoomMentionsRequest: APIRequest {
     typealias APIResourceType = RoomMentionsResource

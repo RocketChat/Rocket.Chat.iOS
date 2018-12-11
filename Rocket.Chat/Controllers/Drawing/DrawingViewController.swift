@@ -16,7 +16,7 @@ final class DrawingViewController: BaseViewController {
     // Drawing variables
     private var lastPoint: CGPoint = .zero
     private var leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
-                               y: CGFloat.greatestFiniteMagnitude)
+                                       y: CGFloat.greatestFiniteMagnitude)
     private var rightBottomPoint: CGPoint = .zero
 
     private var brushColor = DrawingViewModel.defaultBrushColor
@@ -61,7 +61,7 @@ final class DrawingViewController: BaseViewController {
 
         lastPoint = .zero
         leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
-                                   y: CGFloat.greatestFiniteMagnitude)
+                               y: CGFloat.greatestFiniteMagnitude)
         rightBottomPoint = .zero
     }
 

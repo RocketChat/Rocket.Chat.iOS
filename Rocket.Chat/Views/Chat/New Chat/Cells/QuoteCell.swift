@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  QuoteCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class QuoteCell: BaseQuoteMessageCell, SizingCell {
     static let identifier = String(describing: QuoteCell.self)
@@ -87,7 +87,7 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
             arrow.alpha = 1
 
             if viewModel.collapsed {
-                arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
+                arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
                 textHeightConstraint.constant = collapsedTextMaxHeight
             } else {
                 arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")

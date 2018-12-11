@@ -25,10 +25,10 @@ final class NotificationsPreferencesViewModel {
         didSet {
             guard
                 !isModelBinded
-            else {
-                checkIfSaveButtonShouldBeEnabled()
-                return
-            }
+                else {
+                    checkIfSaveButtonShouldBeEnabled()
+                    return
+                }
 
             isModelBinded = true
 
@@ -197,10 +197,10 @@ final class NotificationsPreferencesViewModel {
     }
 
     internal func openPicker(for indexPath: IndexPath) {
-        for section in 0..<settingsCells.count {
+        for section in 0 ..< settingsCells.count {
             let elements = settingsCells[section].elements
 
-            for row in 0..<elements.count {
+            for row in 0 ..< elements.count {
                 setPickerVisible(indexPath.section == section && indexPath.row == row, for: elements[row])
             }
         }
@@ -271,7 +271,7 @@ final class NotificationsPreferencesViewModel {
         }
 
         var indexSetForConditionallyActiveSections = IndexSet()
-        for section in conditionallyActiveSections.startIndex..<conditionallyActiveSections.endIndex {
+        for section in conditionallyActiveSections.startIndex ..< conditionallyActiveSections.endIndex {
             indexSetForConditionallyActiveSections.insert(section + alwaysActiveSections.count)
         }
 

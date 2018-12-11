@@ -1,3 +1,5 @@
+import MBProgressHUD
+import RealmSwift
 //
 //  AuthTableViewController.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import RealmSwift
-import MBProgressHUD
 
 final class AuthTableViewController: BaseTableViewController {
 
@@ -89,9 +89,9 @@ final class AuthTableViewController: BaseTableViewController {
         guard
             let serverURL = serverURL,
             let serverVersion = serverVersion
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return API(host: serverURL, version: serverVersion)
     }
@@ -111,7 +111,7 @@ final class AuthTableViewController: BaseTableViewController {
             return []
         }
 
-        let extraLoginServices = loginServices[kLoginProvidersCollapsedMax...loginServices.count - 1]
+        let extraLoginServices = loginServices[kLoginProvidersCollapsedMax ... loginServices.count - 1]
         var extraLoginServiceIndexPaths: [IndexPath] = []
         for index in extraLoginServices.indices {
             extraLoginServiceIndexPaths.append(IndexPath(row: index, section: 0))
@@ -298,8 +298,8 @@ extension AuthTableViewController {
         switch indexPath.section {
         case kLoginProvidersSection:
             if indexPath.row == kLoginProvidersCollapsedMax &&
-                    loginServices.count > kLoginProvidersCollapsedMax &&
-                    isLoginServicesCollapsed {
+                loginServices.count > kLoginProvidersCollapsedMax &&
+                isLoginServicesCollapsed {
                 return collapsibleAuthSeparatorRow
             } else if indexPath.row == loginServices.count && loginServices.count > kLoginProvidersCollapsedMax {
                 return collapsibleAuthSeparatorRow
@@ -332,8 +332,8 @@ extension AuthTableViewController {
         switch indexPath.section {
         case kLoginProvidersSection:
             if indexPath.row == kLoginProvidersCollapsedMax &&
-                    loginServices.count > kLoginProvidersCollapsedMax &&
-                    isLoginServicesCollapsed {
+                loginServices.count > kLoginProvidersCollapsedMax &&
+                isLoginServicesCollapsed {
                 return ShowMoreSeparatorTableViewCell.rowHeight
             } else if indexPath.row == loginServices.count && loginServices.count > kLoginProvidersCollapsedMax {
                 return ShowMoreSeparatorTableViewCell.rowHeight

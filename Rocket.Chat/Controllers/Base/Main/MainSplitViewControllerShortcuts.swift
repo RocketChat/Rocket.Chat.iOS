@@ -113,37 +113,37 @@ extension MainSplitViewController {
                 action: #selector(shortcutSelectServer(_:)),
                 discoverabilityTitle: localized("shortcuts.add_server")
             )
-            ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
-                UIKeyCommand(
-                    input: input,
-                    modifierFlags: .command,
-                    action: #selector(shortcutSelectRoom(_:))
-                )
-            } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
-                UIKeyCommand(
-                    input: input,
-                    modifierFlags: [.command, .alternate],
-                    action: #selector(shortcutSelectServer(_:))
-                )
-            } + [
-                UIKeyCommand(
-                    input: "t",
-                    modifierFlags: .command,
-                    action: #selector(shortcutChangeTheme(_:)),
-                    discoverabilityTitle: localized("shortcuts.change_theme")
-                ),
-                UIKeyCommand(
-                    input: "\r",
-                    modifierFlags: [],
-                    action: #selector(shortcutSend(_:)),
-                    discoverabilityTitle: localized("shortcuts.send")
-                ),
-                UIKeyCommand(
-                    input: "\r",
-                    modifierFlags: .alternate,
-                    action: #selector(shortcutNewline(_:)),
-                    discoverabilityTitle: localized("shortcuts.new_line")
-                )
+        ] + ((0 ... 9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
+            UIKeyCommand(
+                input: input,
+                modifierFlags: .command,
+                action: #selector(shortcutSelectRoom(_:))
+            )
+        } + ((0 ... 9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
+            UIKeyCommand(
+                input: input,
+                modifierFlags: [.command, .alternate],
+                action: #selector(shortcutSelectServer(_:))
+            )
+        } + [
+            UIKeyCommand(
+                input: "t",
+                modifierFlags: .command,
+                action: #selector(shortcutChangeTheme(_:)),
+                discoverabilityTitle: localized("shortcuts.change_theme")
+            ),
+            UIKeyCommand(
+                input: "\r",
+                modifierFlags: [],
+                action: #selector(shortcutSend(_:)),
+                discoverabilityTitle: localized("shortcuts.send")
+            ),
+            UIKeyCommand(
+                input: "\r",
+                modifierFlags: .alternate,
+                action: #selector(shortcutNewline(_:)),
+                discoverabilityTitle: localized("shortcuts.new_line")
+            )
         ]
     }
 
@@ -151,9 +151,9 @@ extension MainSplitViewController {
         guard
             !isPresenting,
             let textView = chatViewController?.composerView.textView
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if textView.isFirstResponder {
             textView.resignFirstResponder()
@@ -211,9 +211,9 @@ extension MainSplitViewController {
         guard
             let viewController = subscriptionsViewController,
             let input = command.input
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if input != "n" && isPresenting {
             return
@@ -266,9 +266,9 @@ extension MainSplitViewController {
             let offset = chatViewController?.collectionView.contentOffset,
             let maxHeight = chatViewController?.collectionView.contentSize.height,
             let collectionView = chatViewController?.collectionView
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? 50.0 : -50.0
 
@@ -302,9 +302,9 @@ extension MainSplitViewController {
         guard
             !isPresenting,
             let controller = chatViewController
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         controller.sendButtonPressed()
     }

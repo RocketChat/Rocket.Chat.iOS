@@ -1,3 +1,5 @@
+import AVFoundation
+import RocketChatViewController
 //
 //  VideoMessageCell.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import AVFoundation
-import RocketChatViewController
 
 final class VideoCell: BaseVideoMessageCell, SizingCell {
     static let identifier = String(describing: VideoCell.self)

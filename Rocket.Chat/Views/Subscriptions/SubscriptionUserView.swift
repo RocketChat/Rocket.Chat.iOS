@@ -25,9 +25,9 @@ class SubscriptionUserView: UIView {
                 let user = AuthManager.currentUser(),
                 let serverName = AuthManager.isAuthenticated()?.settings?.serverName,
                 let format = VOLocalizedString("subscriptions.main.userview.value")
-            else {
-                return nil
-            }
+                else {
+                    return nil
+                }
 
             return String(format: format, serverName, user.displayName(), user.status.rawValue)
         }

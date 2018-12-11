@@ -10,7 +10,7 @@ import Foundation
 
 func debounce(_ seconds: Double, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
     var lastFireTime = DispatchTime.now()
-    let dispatchDelay = DispatchTimeInterval.nanoseconds(Int(seconds*1000000000))
+    let dispatchDelay = DispatchTimeInterval.nanoseconds(Int(seconds * 1000000000))
 
     return {
         lastFireTime = DispatchTime.now()

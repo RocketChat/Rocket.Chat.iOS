@@ -1,3 +1,5 @@
+import RealmSwift
+import SwiftyJSON
 //
 //  SignupTableViewController.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import SwiftyJSON
-import RealmSwift
 
 final class SignupTableViewController: BaseTableViewController {
 
@@ -163,13 +163,13 @@ final class SignupTableViewController: BaseTableViewController {
             !email.isEmpty,
             !password.isEmpty,
             (hasCustomFields ? !customFields.isEmpty : true)
-        else {
-            Alert(
-                title: localized("error.signup.title"),
-                message: localized("error.signup.empty_input.message")
-            ).present()
-            return
-        }
+            else {
+                Alert(
+                    title: localized("error.signup.title"),
+                    message: localized("error.signup.empty_input.message")
+                ).present()
+                return
+            }
 
         startLoading()
         AuthManager.signup(with: name, email, password, customFields: customFields) { [weak self] response in
@@ -193,10 +193,10 @@ final class SignupTableViewController: BaseTableViewController {
                         guard
                             let viewControllers = self?.navigationController?.viewControllers,
                             let authController = viewControllers.filter({$0 is AuthTableViewController}).first
-                        else {
-                            self?.navigationController?.popViewController(animated: true)
-                            return
-                        }
+                            else {
+                                self?.navigationController?.popViewController(animated: true)
+                                return
+                            }
 
                         self?.navigationController?.popToViewController(authController, animated: true)
                     }
@@ -276,9 +276,9 @@ final class SignupTableViewController: BaseTableViewController {
             let username = textFieldUsername.text,
             let auth = AuthManager.isAuthenticated(),
             !username.isEmpty
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         startLoading()
         AuthManager.resume(auth) { [weak self] response in

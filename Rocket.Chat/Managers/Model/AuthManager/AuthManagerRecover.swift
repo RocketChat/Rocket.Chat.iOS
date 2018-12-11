@@ -27,16 +27,16 @@ extension AuthManager {
             let token = defaults.string(forKey: ServerPersistKeys.token),
             let serverURL = defaults.string(forKey: ServerPersistKeys.serverURL),
             let userId = defaults.string(forKey: ServerPersistKeys.userId)
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let servers = [[
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.token: token,
             ServerPersistKeys.serverURL: serverURL,
             ServerPersistKeys.userId: userId
-            ]]
+        ]]
 
         defaults.set(0, forKey: ServerPersistKeys.selectedIndex)
         defaults.set(servers, forKey: ServerPersistKeys.servers)
@@ -60,9 +60,9 @@ extension AuthManager {
             let token = server[ServerPersistKeys.token],
             let serverURL = server[ServerPersistKeys.serverURL],
             let userId = server[ServerPersistKeys.userId]
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         DatabaseManager.changeDatabaseInstance()
 

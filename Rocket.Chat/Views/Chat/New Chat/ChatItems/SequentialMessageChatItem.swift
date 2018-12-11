@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  SequentialMessageChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 final class SequentialMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
@@ -32,9 +32,9 @@ final class SequentialMessageChatItem: BaseMessageChatItem, ChatItem, Differenti
             let sourceUser = source.user,
             let message = message,
             let sourceMessage = source.message
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         return
             user.name == sourceUser.name &&

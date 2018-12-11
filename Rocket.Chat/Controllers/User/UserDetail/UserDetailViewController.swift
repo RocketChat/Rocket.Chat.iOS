@@ -1,3 +1,4 @@
+import FLAnimatedImage
 //
 //  UserDetailViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
 
 class UserDetailViewController: BaseViewController, StoryboardInitializable {
     static var storyboardName: String = "UserDetail"

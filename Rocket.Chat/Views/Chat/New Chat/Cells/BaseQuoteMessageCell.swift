@@ -43,9 +43,9 @@ class BaseQuoteMessageCell: BaseMessageCell {
             isCollapsible,
             let viewModel = viewModel,
             let chatItem = viewModel.base as? QuoteChatItem
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)

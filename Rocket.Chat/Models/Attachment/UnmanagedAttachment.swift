@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  UnmanagedAttachment.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 
 struct UnmanagedField: Equatable {
     let short: Bool

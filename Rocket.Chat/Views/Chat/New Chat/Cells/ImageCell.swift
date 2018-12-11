@@ -1,3 +1,4 @@
+import FLAnimatedImage
 //
 //  ImageMessageCell.swift
 //  Rocket.Chat
@@ -8,7 +9,6 @@
 
 import Foundation
 import RocketChatViewController
-import FLAnimatedImage
 
 final class ImageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageCell.self)
@@ -71,9 +71,9 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         guard
             let viewModel = viewModel?.base as? ImageMessageChatItem,
             let imageURL = viewModel.imageURL
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
     }
@@ -82,9 +82,9 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }

@@ -1,3 +1,4 @@
+import FLAnimatedImage
 //
 //  ChatMessageImageView.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView)
@@ -102,7 +102,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             guard let imageURL = attachment.fullImageURL() else { return }
 
             Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                 // MainSplitViewController.chatViewController?.openURL(url: imageURL)
+                // MainSplitViewController.chatViewController?.openURL(url: imageURL)
             }).present()
         }
     }

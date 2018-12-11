@@ -1,3 +1,5 @@
+import Crashlytics
+import Firebase
 //
 //  AnalyticsManager.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import Foundation
-import Firebase
-import Crashlytics
 
 enum AnalyticsProvider {
     case fabric

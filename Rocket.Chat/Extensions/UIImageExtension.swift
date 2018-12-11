@@ -38,7 +38,7 @@ extension UIImage {
     }
 
     func resizeWith(width: CGFloat) -> UIImage? {
-        let height = CGFloat(ceil(width/self.size.width * self.size.height))
+        let height = CGFloat(ceil(width / self.size.width * self.size.height))
         let size = CGSize(width: width, height: height)
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: size))
         imageView.contentMode = .scaleAspectFit

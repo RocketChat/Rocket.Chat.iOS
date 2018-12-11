@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  SubscriptionsViewModel.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import RealmSwift
-import DifferenceKit
 
 class SubscriptionsViewModel {
     var subscriptions: Results<Subscription>? {
@@ -79,9 +79,9 @@ class SubscriptionsViewModel {
         guard
             let queryBase = subscriptions,
             let assorter = assorter
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         assorter.willReconstructSections()
 
@@ -168,15 +168,15 @@ extension SubscriptionsViewModel {
     }
 
     func absoluteIndexForIndexPath(_ indexPath: IndexPath) -> Int {
-        return (0..<indexPath.section).reduce(0, { index, section in
+        return (0 ..< indexPath.section).reduce(0, { index, section in
             return index + numberOfRowsInSection(section)
         }) + indexPath.row
     }
 
     func indexPathForAbsoluteIndex(_ index: Int) -> IndexPath? {
         var count = 0
-        let sections = (0..<numberOfSections).map({
-            (0..<numberOfRowsInSection($0))
+        let sections = (0 ..< numberOfSections).map({
+            (0 ..< numberOfRowsInSection($0))
         }).enumerated()
 
         for (section, rows) in sections {
@@ -196,9 +196,9 @@ extension SubscriptionsViewModel {
             indexPath.section >= 0,
             numberOfRowsInSection(indexPath.section) > indexPath.row,
             indexPath.row >= 0
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return assorter?.objectForRowAtIndexPath(indexPath)
     }

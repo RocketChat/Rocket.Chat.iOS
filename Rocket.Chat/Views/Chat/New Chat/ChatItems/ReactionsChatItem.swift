@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  ReactionsChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 struct ReactionsChatItem: ChatItem, Differentiable {
@@ -19,7 +19,7 @@ struct ReactionsChatItem: ChatItem, Differentiable {
     var reactions: [UnmanagedMessageReaction] = []
     var reactionsModels: ReactionListViewModel {
         guard let username = AuthManager.currentUser()?.username else { return
-            ReactionListViewModel(reactionViewModels: [])
+        ReactionListViewModel(reactionViewModels: [])
         }
 
         let models = Array(reactions.map { reaction -> ReactionViewModel in

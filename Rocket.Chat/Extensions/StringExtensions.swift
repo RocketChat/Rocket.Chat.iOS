@@ -84,12 +84,12 @@ extension String {
 
         if strCount < pCount { return [] }
 
-        for idx in 0...(strCount-pCount) {
+        for idx in 0 ... (strCount - pCount) {
             let from = index(self.startIndex, offsetBy: idx)
 
             if let toIdx = index(from, offsetBy: pCount, limitedBy: self.endIndex) {
-                if string == self[from..<toIdx] {
-                    ranges.append(from..<toIdx)
+                if string == self[from ..< toIdx] {
+                    ranges.append(from ..< toIdx)
                 }
             }
         }

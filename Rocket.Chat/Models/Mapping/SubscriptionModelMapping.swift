@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 // swiftlint:disable cyclomatic_complexity
 extension Subscription: ModelMappeable {

@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  BasicMessageChatItem.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 import RocketChatViewController
 
 final class BasicMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable {
@@ -32,9 +32,9 @@ final class BasicMessageChatItem: BaseMessageChatItem, ChatItem, Differentiable 
             let sourceUser = source.user,
             let message = message,
             let sourceMessage = source.message
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         return
             user.name == sourceUser.name &&

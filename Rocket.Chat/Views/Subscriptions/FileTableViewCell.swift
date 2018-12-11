@@ -1,3 +1,6 @@
+import AVFoundation
+import FLAnimatedImage
+import Nuke
 //
 //  FileTableViewCell.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import AVFoundation
-import FLAnimatedImage
-import Nuke
 
 class FileTableViewCell: UITableViewCell {
 

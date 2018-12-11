@@ -1,3 +1,4 @@
+import SwiftyJSON
 //
 //  TwoFactorAuthTableViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 final class TwoFactorAuthTableViewController: BaseTableViewController {
 

@@ -9,7 +9,7 @@
 import Foundation
 
 class CompoundPickerViewDelegate {
-	internal var pickerHandlers: [PickerViewDelegate] = [PickerViewDelegate]()
+    internal var pickerHandlers: [PickerViewDelegate] = [PickerViewDelegate]()
 
     func append(_ handler: PickerViewDelegate) {
         pickerHandlers.append(handler)

@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  ThemeableViews.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 extension UIView: Themeable {
 
@@ -127,7 +127,7 @@ extension UIButton {
             type(of: textField).description() != "UISearchBarTextField"
             else {
                 return
-        }
+            }
 
         self.setImage(self.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.tintColor = theme.titleText
@@ -189,26 +189,6 @@ extension UIRefreshControl {
 }
 
 extension UICollectionView {
-    open override func insertSubview(_ view: UIView, at index: Int) {
-        super.insertSubview(view, at: index)
-        view.applyTheme()
-    }
-
-    open override func addSubview(_ view: UIView) {
-        super.addSubview(view)
-        view.applyTheme()
-    }
-}
-
-extension UITableView {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        backgroundColor = style == .grouped ? theme.auxiliaryBackground : theme.backgroundColor
-        separatorColor = theme.mutedAccent
-        applyThemeFromRuntimeAttributes()
-    }
-
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
         view.applyTheme()
@@ -457,5 +437,25 @@ class ThemeableStackView: UIStackView {
         super.addArrangedSubview(view)
         view.applyTheme()
         applyThemeFromRuntimeAttributes()
+    }
+}
+
+extension UITableView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        backgroundColor = style == .grouped ? theme.auxiliaryBackground : theme.backgroundColor
+        separatorColor = theme.mutedAccent
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme()
+    }
+
+    open override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        view.applyTheme()
     }
 }

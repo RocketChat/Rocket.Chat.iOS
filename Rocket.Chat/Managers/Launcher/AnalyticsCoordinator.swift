@@ -1,3 +1,6 @@
+import Crashlytics
+import Fabric
+import Firebase
 //
 //  AnalyticsCoordinator.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import Foundation
-import Fabric
-import Crashlytics
-import Firebase
 
 let kCrashReportingDisabledKey = "kCrashReportingDisabledKey"
 
@@ -44,9 +44,9 @@ struct AnalyticsCoordinator: LauncherProtocol {
             !isFirebaseInitialized,
             let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
             NSDictionary(contentsOfFile: path) != nil
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         isFirebaseInitialized = true
         FirebaseApp.configure()

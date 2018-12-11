@@ -1,3 +1,4 @@
+import MBProgressHUD
 //
 //  NewPasswordTableViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 
 final class NewPasswordTableViewController: BaseTableViewController {
 
@@ -62,10 +62,10 @@ final class NewPasswordTableViewController: BaseTableViewController {
             let passwordConfirmation = passwordConfirmation.text,
             !newPassword.isEmpty,
             !passwordConfirmation.isEmpty
-        else {
-            Alert(key: "alert.password_empty_fields").present()
-            return
-        }
+            else {
+                Alert(key: "alert.password_empty_fields").present()
+                return
+            }
 
         guard newPassword == passwordConfirmation else {
             Alert(key: "alert.password_mismatch_error").present()

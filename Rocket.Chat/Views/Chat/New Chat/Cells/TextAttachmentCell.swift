@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  TextAttachmentCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     static let identifier = String(describing: TextAttachmentCell.self)
@@ -105,7 +105,7 @@ final class TextAttachmentCell: BaseTextAttachmentMessageCell, SizingCell {
     }
 
     func configureCollapsedState(with viewModel: TextAttachmentChatItem) {
-        arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
+        arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
         subtitleHeightConstraint.isActive = false
         emptySubtitleHeightConstraint.isActive = true
         subtitleTopConstraint.constant = 0

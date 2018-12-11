@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  ChatControllerReplyHandler.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 extension MessagesViewController {
     var replyView: ReplyView? {

@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  SubscriptionsClient.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import RealmSwift
 
 struct SubscriptionsClient: APIClient {
     let api: AnyAPIFetcher
@@ -113,9 +113,9 @@ struct SubscriptionsClient: APIClient {
                         guard
                             let rid = object["_id"].string,
                             let subscription = Subscription.find(rid: rid, realm: realm)
-                        else {
-                            return
-                        }
+                            else {
+                                return
+                            }
 
                         subscription.mapRoom(object, realm: realm)
                         subscriptions.append(subscription)
@@ -244,7 +244,7 @@ struct SubscriptionsClient: APIClient {
             "msg": "method",
             "method": "rooms/get",
             "params": params
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = Realm.current
 
@@ -303,7 +303,7 @@ extension SubscriptionsClient {
             _ response: APIResponse<RoomMembersResource>,
             _ users: [UnmanagedUser]?
         ) -> Void
-    ) {
+        ) {
         let request = RoomMembersRequest(roomId: subscription.rid, type: subscription.type)
         api.fetch(request, options: options) { response in
             switch response {

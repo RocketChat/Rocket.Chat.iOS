@@ -1,3 +1,5 @@
+import DifferenceKit
+import FLAnimatedImage
 //
 //  MessagesViewControllerMessageCellProtocol.swift
 //  Rocket.Chat
@@ -7,12 +9,10 @@
 //
 
 import Foundation
-import DifferenceKit
-import RocketChatViewController
 import MobilePlayer
-import FLAnimatedImage
-import SimpleImageViewer
 import RealmSwift
+import RocketChatViewController
+import SimpleImageViewer
 
 extension MessagesViewController: ChatMessageCellProtocol {
     func handleReviewRequest() {
@@ -255,9 +255,9 @@ extension MessagesViewController {
             let messageUser = message.user,
             let auth = AuthManager.isAuthenticated(),
             let client = API.current()?.client(MessagesClient.self)
-        else {
-            return []
-        }
+            else {
+                return []
+            }
 
         let info = (auth.settings?.messageReadReceiptStoreUsers ?? false) ? UIAlertAction(title: localized("chat.message.actions.info"), style: .default, handler: { _ in
             self.handleReadReceiptPress(message, source: (view, view.frame))
@@ -341,9 +341,9 @@ extension MessagesViewController {
             guard
                 let subscription = self.subscription.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
-            else {
-                return
-            }
+                else {
+                    return
+                }
 
             var messageToResend: (identifier: String, text: String)?
 
@@ -351,9 +351,9 @@ extension MessagesViewController {
                 guard
                     let identifier = message.identifier,
                     let failedMessage = subscription.managedObject?.messages?.filter("identifier = %@", identifier).first
-                else {
-                    return
-                }
+                    else {
+                        return
+                    }
 
                 messageToResend = (identifier: identifier, text: failedMessage.text)
                 realm.delete(failedMessage)
@@ -368,9 +368,9 @@ extension MessagesViewController {
             guard
                 let subscription = self.subscription.unmanaged,
                 let client = API.current()?.client(MessagesClient.self)
-            else {
-                return
-            }
+                else {
+                    return
+                }
 
             var messagesToResend: [(identifier: String, text: String)] = []
 
@@ -378,9 +378,9 @@ extension MessagesViewController {
                 guard
                     let subscription = subscription.managedObject,
                     let failedMessages = subscription.messages?.filter("failed = true")
-                else {
-                    return
-                }
+                    else {
+                        return
+                    }
 
                 messagesToResend = failedMessages.map { (identifier: $0.identifier ?? "", text: $0.text) }
                 realm.delete(failedMessages)

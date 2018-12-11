@@ -45,7 +45,7 @@ struct CustomEmojiManager {
             "msg": "method",
             "method": "listEmojiCustom",
             "params": []
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.send(requestEmojis) { response in

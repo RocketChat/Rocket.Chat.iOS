@@ -144,9 +144,9 @@ extension Subscription {
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
     }

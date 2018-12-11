@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
@@ -104,7 +104,7 @@ extension AuthSettings: ModelMappeable {
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
         let result = object.array?.filter { obj in
             return obj["_id"].string == key
-        }.first
+            }.first
 
         return result?["value"]
     }

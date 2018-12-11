@@ -1,3 +1,4 @@
+import AVFoundation
 //
 //  AudioMessageCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import AVFoundation
 import RocketChatViewController
 
 final class AudioCell: BaseAudioMessageCell, SizingCell {

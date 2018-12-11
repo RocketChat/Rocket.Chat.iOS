@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  UnmanagedUser.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 
 struct UnmanagedUser: UnmanagedObject, Equatable {
     typealias Object = User

@@ -33,15 +33,15 @@ extension SubscriptionManager {
         guard
             let username = AuthManager.currentUser()?.username,
             let subscription = subscription.validated()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let request = [
             "msg": "method",
             "method": "stream-notify-room",
             "params": ["\(subscription.rid)/typing", username, isTyping]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }

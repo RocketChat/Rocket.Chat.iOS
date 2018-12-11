@@ -90,9 +90,9 @@ extension User {
             !isInvalidated,
             let username = username,
             let auth = auth ?? AuthManager.isAuthenticated()
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return User.avatarURL(forUsername: username, auth: auth)
     }
@@ -102,9 +102,9 @@ extension User {
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
             let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
     }

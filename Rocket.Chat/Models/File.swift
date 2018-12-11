@@ -76,7 +76,7 @@ extension File {
             let baseURL = auth.baseURL()
             else {
                 return nil
-        }
+            }
 
         let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
         return URL(string: urlString)

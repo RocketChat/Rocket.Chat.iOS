@@ -1,3 +1,6 @@
+import RealmSwift
+import Starscream
+import SwiftyJSON
 //
 //  SocketManager.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import Starscream
-import SwiftyJSON
-import RealmSwift
 
 public typealias RequestCompletion = (JSON?, Bool) -> Void
 public typealias VoidCompletion = () -> Void
@@ -154,9 +154,9 @@ extension SocketManager {
             let auth = AuthManager.isAuthenticated(),
             let infoClient = API.current()?.client(InfoClient.self),
             let commandsClient = API.current()?.client(CommandsClient.self)
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         sharedInstance.state = .connecting
 

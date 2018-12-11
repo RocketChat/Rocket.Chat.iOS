@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  VideoMessageCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     static let identifier = String(describing: VideoMessageCell.self)

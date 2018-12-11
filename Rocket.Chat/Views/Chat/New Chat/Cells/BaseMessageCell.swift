@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  MessageHeaderCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
     var messageWidth: CGFloat = 0
@@ -42,13 +42,13 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
         status: UIImageView,
         and username: UILabel,
         completeRendering: Bool
-    ) {
+        ) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         usernameLabel = username
 
@@ -79,9 +79,9 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let settings = settings
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if settings.messageReadReceiptEnabled {
             button.isHidden = false
@@ -126,9 +126,9 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
     }
@@ -138,9 +138,9 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let managedObject = viewModel.message?.managedObject?.validated(),
             let username = usernameLabel
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
     }

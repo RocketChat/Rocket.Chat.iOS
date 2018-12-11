@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  ReactionsCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
     static let identifier = String(describing: ReactionsCell.self)
@@ -31,9 +31,9 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
                 guard
                     let viewModel = self.viewModel?.base as? ReactionsChatItem,
                     let message = viewModel.message.managedObject
-                else {
-                    return
-                }
+                    else {
+                        return
+                    }
 
                 let client = API.current()?.client(MessagesClient.self)
                 client?.reactMessage(message, emoji: view.model.emoji)
@@ -54,9 +54,9 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
         guard
             let viewModel = viewModel?.base as? ReactionsChatItem,
             let currentUser = AuthManager.currentUser()?.username
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         if Array(viewModel.reactions).first(where: { $0.emoji == tappedEmoji && $0.usernames.contains(currentUser) }) != nil {
             return false
@@ -69,9 +69,9 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
         guard
             completeRendering,
             let viewModel = viewModel?.base as? ReactionsChatItem
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         reactionsList.model = viewModel.reactionsModels
     }

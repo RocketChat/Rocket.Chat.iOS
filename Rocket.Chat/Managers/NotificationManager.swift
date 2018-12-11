@@ -48,9 +48,9 @@ final class NotificationManager {
             AppManager.currentRoomId != notification.payload.rid,
             !notification.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
             !notification.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let formattedBody = NSMutableAttributedString(string: notification.body)
             .transformMarkdown().string
@@ -71,9 +71,9 @@ final class NotificationManager {
         guard
             let notification = notification,
             let type = notification.payload.type
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         switch type {
         case .channel:

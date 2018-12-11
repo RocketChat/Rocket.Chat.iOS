@@ -1,3 +1,4 @@
+import DifferenceKit
 //
 //  MessageSectionModel.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import Foundation
-import DifferenceKit
 
 struct MessageSectionModel: Differentiable {
     let identifier: String

@@ -1,3 +1,4 @@
+import OnePasswordExtension
 //
 //  LoginTableViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import OnePasswordExtension
 
 class LoginTableViewController: BaseTableViewController {
 
@@ -86,9 +86,9 @@ class LoginTableViewController: BaseTableViewController {
         guard
             let serverURL = serverURL,
             let serverVersion = serverVersion
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return API(host: serverURL, version: serverVersion)
     }

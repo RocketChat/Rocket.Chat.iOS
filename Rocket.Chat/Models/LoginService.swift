@@ -109,9 +109,9 @@ extension LoginService {
         guard
             let serverUrl = serverUrl,
             let authorizePath = authorizePath
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return authorizePath.contains("://") ? authorizePath : "\(serverUrl)\(authorizePath)"
     }
@@ -120,9 +120,9 @@ extension LoginService {
         guard
             let serverUrl = serverUrl,
             let tokenPath = tokenPath
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
     }

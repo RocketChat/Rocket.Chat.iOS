@@ -1,3 +1,5 @@
+import MobileCoreServices
+import Photos
 //
 //  MessagesViewControllerUploading.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import Photos
-import MobileCoreServices
 
 extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func uploadButtonPressed() {
@@ -233,19 +233,19 @@ extension MessagesViewController {
 
         uploadClient?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "", progress: { [weak self] double in
             self?.bannerView?.progressView.setProgress(Float(double), animated: true)
-            }, completion: { [weak self] success in
-                AnalyticsManager.log(
-                    event: .mediaUpload(
-                        mediaType: file.type,
-                        subscriptionType: subscription.type.rawValue
-                    )
+        }, completion: { [weak self] success in
+            AnalyticsManager.log(
+                event: .mediaUpload(
+                    mediaType: file.type,
+                    subscriptionType: subscription.type.rawValue
                 )
+            )
 
-                if success {
-                    self?.hideBanner()
-                } else {
-                    showBanner(failed: true)
-                }
+            if success {
+                self?.hideBanner()
+            } else {
+                showBanner(failed: true)
+            }
         })
     }
 

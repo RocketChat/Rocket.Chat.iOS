@@ -21,9 +21,9 @@ struct WebBrowserManager {
         guard
             let browserRaw = defaults.string(forKey: defaultBrowserKey),
             var browser = WebBrowserApp(rawValue: browserRaw)
-        else {
-            return .inAppSafari
-        }
+            else {
+                return .inAppSafari
+            }
 
         if !browser.isInstalled {
             browser = .inAppSafari
@@ -65,7 +65,7 @@ enum WebBrowserApp: String {
 
     internal enum URLScheme: String {
         case http = "http", https = "https", chrome = "googlechrome",
-            chromeSecure = "googlechromes", opera = "opera-http", firefox = "firefox"
+        chromeSecure = "googlechromes", opera = "opera-http", firefox = "firefox"
     }
 
     var name: String {

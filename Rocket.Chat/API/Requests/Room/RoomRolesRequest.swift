@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  RoomRolesRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import RealmSwift
 
 fileprivate extension SubscriptionType {
     var path: String {

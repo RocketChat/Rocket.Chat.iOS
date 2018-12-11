@@ -70,7 +70,7 @@ extension AuthSettingsManager {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {

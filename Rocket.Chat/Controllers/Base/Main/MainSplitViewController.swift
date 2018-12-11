@@ -70,9 +70,9 @@ final class MainSplitViewController: UISplitViewController {
             let nav = primaryViewController as? UINavigationController,
             let subscriptions = nav.viewControllers.first as? SubscriptionsViewController,
             let subscription = (detailViewController as? MessagesViewController)?.subscription
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         subscriptions.openChat(for: subscription)
     }

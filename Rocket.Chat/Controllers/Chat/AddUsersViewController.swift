@@ -40,7 +40,7 @@ class AddUsersViewData {
         isLoadingMoreUsers = true
 
         let request = DirectoryRequest(text: searchText, type: .users)
-        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
 
         API.current()?.fetch(request, options: options) { [weak self] response in
             guard let self = self else { return }
@@ -153,9 +153,9 @@ extension AddUsersViewController: UITableViewDelegate {
             let roomType = data.subscription?.type,
             let roomName = data.subscription?.displayName(),
             let api = API.current()
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let message = String(format: localized("chat.add_users.confirm.message"), user.displayName, roomName)
 
@@ -188,11 +188,11 @@ extension AddUsersViewController: UITableViewDelegate {
                         break
                     }
                 }
-        })
+            })
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == data.users.count - data.pageSize/2 {
+        if indexPath.row == data.users.count - data.pageSize / 2 {
             loadMoreMembers()
         }
     }

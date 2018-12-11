@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  NewRoomViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 final class NewRoomViewController: BaseViewController {
 
@@ -130,9 +130,9 @@ final class NewRoomViewController: BaseViewController {
             let roomName = setValues["room name"] as? String,
             let publicRoom = setValues["public room"] as? Bool,
             let readOnlyRoom = setValues["read only room"] as? Bool
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         sender.isEnabled = false
 
@@ -162,10 +162,10 @@ final class NewRoomViewController: BaseViewController {
                     let success = resource.success,
                     let name = resource.name, success == true,
                     let auth = AuthManager.isAuthenticated()
-                else {
-                    completion(false, resource.error)
-                    return
-                }
+                    else {
+                        completion(false, resource.error)
+                        return
+                    }
 
                 SubscriptionManager.updateSubscriptions(auth) {
                     if let newRoom = Realm.current?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {

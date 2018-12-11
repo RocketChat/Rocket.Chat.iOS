@@ -8,8 +8,8 @@
 
 import Foundation
 import RealmSwift
-import TagListView
 import SearchTextField
+import TagListView
 
 final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
     static let identifier = "kMentionsTextFieldTableViewCell"
@@ -66,10 +66,10 @@ final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellPr
             let realm = Realm.current,
             let name = textFieldInput.text,
             name.count > 0
-        else {
-            textFieldInput.filterStrings([])
-            return
-        }
+            else {
+                textFieldInput.filterStrings([])
+                return
+            }
 
         let users = realm.objects(User.self).filter(
             NSPredicate(format: "name CONTAINS[cd] %@ OR username CONTAINS[cd] %@", name, name)

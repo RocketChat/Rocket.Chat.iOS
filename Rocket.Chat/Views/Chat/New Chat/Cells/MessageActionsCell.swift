@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  MessageActionsCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 class MessageActionsCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: MessageActionsCell.self)
@@ -40,9 +40,9 @@ class MessageActionsCell: BaseMessageCell, SizingCell {
         guard
             let viewModel = viewModel?.base as? MessageActionsChatItem,
             let message = viewModel.message
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.openReplyMessage(message: message)
     }

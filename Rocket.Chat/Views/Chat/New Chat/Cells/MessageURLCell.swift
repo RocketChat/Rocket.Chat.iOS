@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  MessageURLCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class MessageURLCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: MessageURLCell.self)
@@ -89,9 +89,9 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
         guard
             let viewModel = viewModel,
             let messageURLChatItem = viewModel.base as? MessageURLChatItem
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         delegate?.openURLFromCell(url: messageURLChatItem.url)
     }

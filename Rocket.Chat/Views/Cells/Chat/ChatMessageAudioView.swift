@@ -1,3 +1,4 @@
+import AVFoundation
 //
 //  ChatMessageAudioView.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 final class ChatMessageAudioView: ChatMessageAttachmentView {
     override static var defaultHeight: CGFloat {
@@ -89,7 +89,7 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { _ in
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { _ in
             guard let player = self.player else { return }
 
             self.timeSlider.maximumValue = Float(player.duration)
@@ -99,7 +99,7 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             }
 
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
-            self.timeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            self.timeLabel.text = String(format: "%02d:%02d", (displayTime / 60) % 60, displayTime % 60)
         }
     }
 

@@ -1,3 +1,4 @@
+import SwiftyJSON
 //
 //  RegisterUsernameTableViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 final class RegisterUsernameTableViewController: BaseTableViewController {
 
@@ -119,7 +119,7 @@ final class RegisterUsernameTableViewController: BaseTableViewController {
         startLoading()
         AuthManager.setUsername(textFieldUsername.text ?? "") { [weak self] success, errorMessage in
             DispatchQueue.main.async {
-            self?.stopLoading()
+                self?.stopLoading()
                 if !success {
                     error(errorMessage)
                 } else {

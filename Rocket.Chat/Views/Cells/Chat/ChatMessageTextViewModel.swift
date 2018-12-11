@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  ChatMessageTextViewModel.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol ChatMessageTextViewModelProtocol {
     var color: UIColor? { get }

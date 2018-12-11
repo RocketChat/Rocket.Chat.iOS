@@ -23,9 +23,9 @@ extension Auth {
             let createdAt = message.createdAt,
             let user = user,
             let settings = settings
-        else {
-            return .unknown
-        }
+            else {
+                return .unknown
+            }
 
         if !message.type.actionable {
             return .notActionable
@@ -40,7 +40,7 @@ extension Auth {
                 return false
             }
 
-            return Date.serverDate.timeIntervalSince(createdAt)/60 > Double(settings.messageAllowDeletingBlockDeleteInMinutes)
+            return Date.serverDate.timeIntervalSince(createdAt) / 60 > Double(settings.messageAllowDeletingBlockDeleteInMinutes)
         }
 
         if user.hasPermission(.deleteMessage, realm: self.realm) {

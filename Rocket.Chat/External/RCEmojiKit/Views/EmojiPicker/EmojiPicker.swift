@@ -62,12 +62,12 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         return ([customCategory] + defaultCategories).map {
             let emojis = $0.emojis.filter {
                 $0.name.contains(string) || $0.shortname.contains(string) ||
-                $0.keywords.joined(separator: " ").contains(string) ||
-                $0.alternates.joined(separator: " ").contains(string)
+                    $0.keywords.joined(separator: " ").contains(string) ||
+                    $0.alternates.joined(separator: " ").contains(string)
             }
 
             return (name: $0.name, emojis: emojis)
-        }.filter { !$0.emojis.isEmpty }
+            }.filter { !$0.emojis.isEmpty }
     }
 
     var isSearching: Bool {
@@ -120,7 +120,7 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
 
     @IBOutlet weak var skinToneButton: UIButton! {
         didSet {
-            skinToneButton.layer.cornerRadius = skinToneButton.frame.width/2
+            skinToneButton.layer.cornerRadius = skinToneButton.frame.width / 2
             skinToneButton.backgroundColor = currentSkinTone.color
             skinToneButton.showsTouchWhenHighlighted = true
         }
@@ -328,16 +328,16 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal,
-                               toItem: self, attribute: .leadingMargin,
-                               multiplier: 1.0, constant: -8.0),
+                toItem: self, attribute: .leadingMargin,
+                multiplier: 1.0, constant: -8.0),
 
             NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal,
-                               toItem: self, attribute: .trailingMargin,
-                               multiplier: 1.0, constant: 0.0),
+                toItem: self, attribute: .trailingMargin,
+                multiplier: 1.0, constant: 0.0),
 
             NSLayoutConstraint(item: textLabel, attribute: .height, relatedBy: .equal,
-                               toItem: nil, attribute: .height,
-                               multiplier: 1.0, constant: 36.0)
+                toItem: nil, attribute: .height,
+                multiplier: 1.0, constant: 36.0)
         ])
 
         backgroundColor = .white

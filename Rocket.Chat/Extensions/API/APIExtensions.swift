@@ -13,9 +13,9 @@ extension API {
         guard
             let auth = AuthManager.isAuthenticated(realm: realm),
             let host = auth.apiHost?.httpServerURL() ?? auth.apiHost
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         let api = API(host: host, version: Version(auth.serverVersion) ?? .zero)
         api.userId = auth.userId

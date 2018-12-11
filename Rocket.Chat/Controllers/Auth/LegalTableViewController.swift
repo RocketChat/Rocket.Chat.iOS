@@ -1,3 +1,4 @@
+import SafariServices
 //
 //  LegalTableViewController.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import SafariServices
 
 class LegalTableViewController: UITableViewController {
 

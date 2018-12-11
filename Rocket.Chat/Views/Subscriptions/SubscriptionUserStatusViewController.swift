@@ -166,9 +166,9 @@ final class SubscriptionUserStatusViewController: UIViewController {
             let auth = AuthManager.isAuthenticated(),
             let baseURL = auth.settings?.siteURL,
             let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {
             controller.url = adminURL

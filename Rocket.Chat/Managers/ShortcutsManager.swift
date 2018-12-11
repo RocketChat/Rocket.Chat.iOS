@@ -1,3 +1,4 @@
+import RealmSwift
 //
 //  ShortcutsManager.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 enum ShortcutItemType {
     case server(url: String, index: Int)
@@ -40,9 +40,9 @@ struct ShortcutsManager {
         guard
             servers?.count == 1,
             let server = servers?.first
-        else {
-            return servers
-        }
+            else {
+                return servers
+            }
 
         let serverURL: String?
         switch server.type {

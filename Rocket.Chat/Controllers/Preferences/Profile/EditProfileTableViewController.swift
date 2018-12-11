@@ -1,3 +1,5 @@
+import MBProgressHUD
+import SwiftyJSON
 //
 //  EditProfileTableViewController.swift
 //  Rocket.Chat
@@ -7,8 +9,6 @@
 //
 
 import UIKit
-import MBProgressHUD
-import SwiftyJSON
 
 // swiftlint:disable file_length type_body_length
 final class EditProfileTableViewController: BaseTableViewController, MediaPicker {
@@ -87,12 +87,12 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         guard
             authSettings?.isAllowedToEditProfile ?? false,
             authSettings?.isAllowedToEditAvatar ?? false ||
-            authSettings?.isAllowedToEditName ?? false ||
-            authSettings?.isAllowedToEditUsername ?? false ||
-            authSettings?.isAllowedToEditEmail ?? false
-        else {
-            return false
-        }
+                authSettings?.isAllowedToEditName ?? false ||
+                authSettings?.isAllowedToEditUsername ?? false ||
+                authSettings?.isAllowedToEditEmail ?? false
+            else {
+                return false
+            }
 
         return true
     }
@@ -288,10 +288,10 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
             !name.isEmpty,
             !username.isEmpty,
             !email.isEmpty
-        else {
-            Alert(key: "alert.update_profile_empty_fields").present()
-            return
-        }
+            else {
+                Alert(key: "alert.update_profile_empty_fields").present()
+                return
+            }
 
         guard email.isValidEmail else {
             Alert(key: "alert.update_profile_invalid_email").present()

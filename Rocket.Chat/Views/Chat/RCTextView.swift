@@ -91,8 +91,8 @@ class HighlightLayoutManager: NSLayoutManager {
                     emojiView.applyTheme()
 
                     if let imageUrlData = attachment.contents,
-                            let imageUrlString = String(data: imageUrlData, encoding: .utf8),
-                            let imageUrl = URL(string: imageUrlString) {
+                        let imageUrlString = String(data: imageUrlData, encoding: .utf8),
+                        let imageUrl = URL(string: imageUrlString) {
                         ImageManager.loadImage(with: imageUrl, into: emojiView.emojiImageView)
                         self.customEmojiViews.append(emojiView)
                         self.addSubview(emojiView)
@@ -170,9 +170,9 @@ extension RCTextView: UITextViewDelegate {
                     let start = textView.position(from: textView.beginningOfDocument, offset: characterRange.location),
                     let end = textView.position(from: start, offset: characterRange.length),
                     let range = textView.textRange(from: start, to: end)
-                else {
-                    return false
-                }
+                    else {
+                        return false
+                    }
 
                 MainSplitViewController.chatViewController?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
                 return false

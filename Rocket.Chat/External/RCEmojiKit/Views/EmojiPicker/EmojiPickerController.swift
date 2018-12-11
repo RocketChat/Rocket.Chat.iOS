@@ -78,9 +78,9 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
             let userInfo = notification.userInfo,
             let rect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let convertedRect = view.convert(rect, from: nil)
 
@@ -98,9 +98,9 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         guard
             let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
             if #available(iOS 11, *) {

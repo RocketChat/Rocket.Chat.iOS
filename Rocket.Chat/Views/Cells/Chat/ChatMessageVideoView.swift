@@ -1,3 +1,4 @@
+import AVFoundation
 //
 //  ChatMessageVideoView.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 protocol ChatMessageVideoViewProtocol: class {
     func openVideoFromCell(attachment: UnmanagedAttachment)

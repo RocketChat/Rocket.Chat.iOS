@@ -1,3 +1,6 @@
+import AVFoundation
+import Foundation
+import RocketChatViewController
 //
 //  AudioMessageCell.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import Foundation
-import AVFoundation
-import RocketChatViewController
 
 final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     static let identifier = String(describing: AudioMessageCell.self)

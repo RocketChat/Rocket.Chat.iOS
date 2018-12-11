@@ -1,3 +1,8 @@
+#if BETA || DEBUG
+import FLEX
+#endif
+import MessageUI
+import SafariServices
 //
 //  PreferencesViewController.swift
 //  Rocket.Chat
@@ -7,12 +12,6 @@
 //
 
 import UIKit
-import MessageUI
-import SafariServices
-
-#if BETA || DEBUG
-import FLEX
-#endif
 
 final class PreferencesViewController: UITableViewController {
 

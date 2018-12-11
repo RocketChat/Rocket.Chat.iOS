@@ -28,7 +28,7 @@ final class SaveNotificationRequest: APIRequest {
         var body = JSON([
             "roomId": rid,
             "notifications": [:]
-            ])
+        ])
 
         body["notifications"]["disableNotifications"].string = notificationPreferences.disableNotifications ? "1" : "0"
         body["notifications"]["emailNotifications"].string = notificationPreferences.emailNotifications.rawValue

@@ -1,3 +1,4 @@
+import RocketChatViewController
 //
 //  UnreadMarkerCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import RocketChatViewController
 
 final class UnreadMarkerCell: UICollectionViewCell, ChatCell, SizingCell {
     static let identifier = String(describing: UnreadMarkerCell.self)

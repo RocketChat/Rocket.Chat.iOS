@@ -1,3 +1,4 @@
+import AVFoundation
 //
 //  BaseVideoMessageCell.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class BaseVideoMessageCell: BaseMessageCell {
     var loading = false
@@ -27,9 +27,9 @@ class BaseVideoMessageCell: BaseMessageCell {
             let viewModel = viewModel?.base as? VideoMessageChatItem,
             let thumbURL = viewModel.videoThumbPath,
             let videoURL = viewModel.videoURL
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         if let imageData = try? Data(contentsOf: thumbURL) {
             if let thumbnail = UIImage(data: imageData) {

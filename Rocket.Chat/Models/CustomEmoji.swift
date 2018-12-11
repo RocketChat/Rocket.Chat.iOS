@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 class CustomEmoji: BaseModel {
     @objc dynamic var name: String?
@@ -23,9 +23,9 @@ extension CustomEmoji {
             let ext = ext,
             let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let serverUrl = serverUrl
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
 
         var imageUrl = URL(string: serverUrl)?.httpServerURL()
         imageUrl?.appendPathComponent("emoji-custom")

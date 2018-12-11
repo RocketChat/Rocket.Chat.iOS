@@ -50,9 +50,9 @@ final class MessagesComposerViewModel {
         guard
             let realm = realm,
             let prefix = hintPrefixedWord.first
-        else {
-            return
-        }
+            else {
+                return
+            }
 
         let word = String(word.dropFirst())
 
@@ -61,13 +61,13 @@ final class MessagesComposerViewModel {
                 usernameContaining: word,
                 preference: getRecentSenders?() ?? [],
                 includeSelf: false
-            ).compactMap {
-                if let user = $0.1 as? User {
-                    return Hint.user(user)
-                } else {
-                    return nil
+                ).compactMap {
+                    if let user = $0.1 as? User {
+                        return Hint.user(user)
+                    } else {
+                        return nil
+                    }
                 }
-            }
 
             if "here".contains(word) || word.count == 0 {
                 hints.append(.userGroup("here"))

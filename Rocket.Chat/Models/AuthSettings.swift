@@ -78,9 +78,9 @@ final class AuthSettings: Object {
         guard
             let rawValue = rawRegistrationForm,
             let value = RegistrationFormAccess(rawValue: rawValue)
-        else {
-            return .isPublic
-        }
+            else {
+                return .isPublic
+            }
         return value
     }
 

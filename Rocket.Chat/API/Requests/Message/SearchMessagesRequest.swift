@@ -1,3 +1,4 @@
+import Foundation
 //
 //  SearchMessagesRequest.swift
 //  Rocket.Chat
@@ -7,7 +8,6 @@
 //
 
 import SwiftyJSON
-import Foundation
 
 final class SearchMessagesRequest: APIRequest {
     typealias APIResourceType = SearchMessagesResource

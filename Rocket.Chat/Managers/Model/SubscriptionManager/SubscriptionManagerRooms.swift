@@ -14,7 +14,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "createDirectMessage",
             "params": [username]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -27,7 +27,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "getRoomByTypeAndName",
             "params": ["c", name]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -40,7 +40,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "joinRoom",
             "params": [rid]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }

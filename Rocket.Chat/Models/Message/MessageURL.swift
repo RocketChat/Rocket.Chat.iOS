@@ -20,9 +20,9 @@ final class MessageURL: Object {
         guard
             let titleCount = title?.count,
             let descriptionCount = textDescription?.count
-        else {
-            return false
-        }
+            else {
+                return false
+            }
 
         return titleCount > 0 && descriptionCount > 0
     }

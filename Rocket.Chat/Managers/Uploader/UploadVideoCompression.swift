@@ -1,3 +1,4 @@
+import AVFoundation
 //
 //  UploadVideoCompression.swift
 //  Rocket.Chat
@@ -7,14 +8,13 @@
 //
 
 import UIKit
-import AVFoundation
 
 public typealias CompressionCompletionBlock = (NSData?, Bool) -> Void
 
 struct UploadVideoCompression {
 
     static func toMediumQuality(sourceAsset: AVURLAsset, completion: @escaping CompressionCompletionBlock) {
-        let newPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("mergeVideo\(arc4random()%1000)d").appendingPathExtension("mp4").absoluteString
+        let newPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("mergeVideo\(arc4random() % 1000)d").appendingPathExtension("mp4").absoluteString
         if FileManager.default.fileExists(atPath: newPath) {
             do {
                 try FileManager.default.removeItem(atPath: newPath)

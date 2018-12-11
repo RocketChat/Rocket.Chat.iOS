@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 extension Message: ModelMappeable {
     //swiftlint:disable cyclomatic_complexity function_body_length
@@ -140,7 +140,7 @@ extension Message: ModelMappeable {
                 let reaction = MessageReaction()
                 reaction.map(emoji: $1.key, json: $1.value)
                 return reaction
-            }.forEach(self.reactions.append)
+                }.forEach(self.reactions.append)
         }
     }
 }

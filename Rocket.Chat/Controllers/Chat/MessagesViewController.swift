@@ -1,3 +1,6 @@
+import DifferenceKit
+import RealmSwift
+import RocketChatViewController
 //
 //  MessagesViewController.swift
 //  Rocket.Chat
@@ -7,9 +10,6 @@
 //
 
 import UIKit
-import RocketChatViewController
-import RealmSwift
-import DifferenceKit
 
 private typealias NibCellIndentifier = (nib: UINib, cellIdentifier: String)
 
