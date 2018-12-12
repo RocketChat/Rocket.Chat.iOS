@@ -51,8 +51,14 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
+    var widthConstriant: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        widthConstriant = contentView.widthAnchor.constraint(equalToConstant: messageWidth)
+        widthConstriant.isActive = true
 
         insertGesturesIfNeeded(with: username)
     }
@@ -61,6 +67,8 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description
