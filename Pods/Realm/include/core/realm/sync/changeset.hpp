@@ -23,13 +23,15 @@
 
 #include <realm/sync/instructions.hpp>
 #include <realm/util/optional.hpp>
+#include <realm/util/allocation_metrics.hpp>
+#include <realm/util/metered/vector.hpp>
 
 #include <type_traits>
 
 namespace realm {
 namespace sync {
 
-using InternStrings = std::vector<StringBufferRange>;
+using InternStrings = util::metered::vector<StringBufferRange>;
 
 struct BadChangesetError : ExceptionWithBacktrace<std::exception> {
     const char* m_message;
@@ -46,6 +48,7 @@ struct Changeset {
     using timestamp_type = uint_fast64_t;
     using file_ident_type = uint_fast64_t;
     using version_type = uint_fast64_t; // FIXME: Get from `History`.
+    using StringBuffer = util::BasicStringBuffer<AllocationMetric>;
 
     Changeset();
     struct share_buffers_tag {};
@@ -58,8 +61,8 @@ struct Changeset {
     InternString intern_string(StringData); // Slow!
     StringData string_data() const noexcept;
 
-    util::StringBuffer& string_buffer() noexcept;
-    const util::StringBuffer& string_buffer() const noexcept;
+    StringBuffer& string_buffer() noexcept;
+    const StringBuffer& string_buffer() const noexcept;
     const InternStrings& interned_strings() const noexcept;
     InternStrings& interned_strings() noexcept;
 
@@ -69,6 +72,13 @@ struct Changeset {
     StringData get_string(StringBufferRange) const noexcept;
     StringData get_string(InternString) const noexcept;
     StringBufferRange append_string(StringData);
+
+    /// Mark the changeset as "dirty" (i.e. modified by the merge algorithm).
+    void set_dirty(bool dirty = true) noexcept;
+
+    /// Whether or not the changeset is "dirty" (i.e. has been modified by the
+    /// merge algorithm).
+    bool is_dirty() const noexcept;
 
     // Interface to imitate std::vector:
     template <bool is_const> struct IteratorImpl;
@@ -166,7 +176,7 @@ struct Changeset {
 
 private:
     struct MultiInstruction {
-        std::vector<Instruction> instructions;
+        util::metered::vector<Instruction> instructions;
     };
     static_assert(sizeof(MultiInstruction) <= Instruction::max_instruction_size, "Instruction::max_instruction_size too low");
 
@@ -216,9 +226,10 @@ private:
         const MultiInstruction& get_multi() const noexcept;
     };
 
-    std::vector<InstructionContainer> m_instructions;
-    std::shared_ptr<util::StringBuffer> m_string_buffer;
+    util::metered::vector<InstructionContainer> m_instructions;
+    std::shared_ptr<StringBuffer> m_string_buffer;
     std::shared_ptr<InternStrings> m_strings;
+    bool m_is_dirty = false;
 
     iterator const_iterator_to_iterator(const_iterator);
 };
@@ -232,7 +243,7 @@ private:
 /// empty, and the position is zero, the iterator is pointing to a tombstone.
 template <bool is_const>
 struct Changeset::IteratorImpl {
-    using list_type = std::vector<InstructionContainer>;
+    using list_type = util::metered::vector<InstructionContainer>;
     using inner_iterator_type = std::conditional_t<is_const, list_type::const_iterator, list_type::iterator>;
 
     // reference_type is a pointer because we have no way to create a reference
@@ -250,7 +261,7 @@ struct Changeset::IteratorImpl {
         : m_inner(other.m_inner), m_pos(other.m_pos) {}
     IteratorImpl(inner_iterator_type inner, size_t pos = 0) : m_inner(inner), m_pos(pos) {}
 
-    IteratorImpl& operator++()
+    inline IteratorImpl& operator++()
     {
         ++m_pos;
         if (m_pos >= m_inner->size()) {
@@ -476,12 +487,12 @@ inline const InternStrings& Changeset::interned_strings() const noexcept
     return *m_strings;
 }
 
-inline util::StringBuffer& Changeset::string_buffer() noexcept
+inline auto Changeset::string_buffer() noexcept -> StringBuffer&
 {
     return *m_string_buffer;
 }
 
-inline const util::StringBuffer& Changeset::string_buffer() const noexcept
+inline auto Changeset::string_buffer() const noexcept -> const StringBuffer&
 {
     return *m_string_buffer;
 }
@@ -518,6 +529,16 @@ inline StringBufferRange Changeset::append_string(StringData string)
     size_t offset = m_string_buffer->size();
     m_string_buffer->append(string.data(), string.size());
     return StringBufferRange{uint32_t(offset), uint32_t(string.size())};
+}
+
+inline bool Changeset::is_dirty() const noexcept
+{
+    return m_is_dirty;
+}
+
+inline void Changeset::set_dirty(bool dirty) noexcept
+{
+    m_is_dirty = dirty;
 }
 
 inline Changeset::iterator Changeset::insert(const_iterator pos, Instruction instr)

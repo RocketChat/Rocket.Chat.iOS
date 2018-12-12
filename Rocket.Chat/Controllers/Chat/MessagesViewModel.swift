@@ -162,10 +162,7 @@ final class MessagesViewModel {
 
     deinit {
         messagesQueryToken?.invalidate()
-
-        if let subscription = subscription?.validated() {
-            unsubscribe(for: subscription)
-        }
+        unsubscribe()
     }
 
     // MARK: Subscriptions Control
@@ -183,9 +180,10 @@ final class MessagesViewModel {
      This method will remove all the subscriptions related to
      messages of the subscription attached to the view model.
      */
-    internal func unsubscribe(for subscription: Subscription) {
-        SocketManager.unsubscribe(eventName: subscription.rid)
-        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
+    internal func unsubscribe() {
+        guard !rid.isEmpty else { return }
+        SocketManager.unsubscribe(eventName: rid)
+        SocketManager.unsubscribe(eventName: "\(rid)/deleteMessage")
     }
 
     // MARK: Data

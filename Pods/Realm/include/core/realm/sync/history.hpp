@@ -322,6 +322,8 @@ protected:
 /// changesets to be identical copies of the raw changesets.
 class ClientHistory::ChangesetCooker {
 public:
+    virtual ~ChangesetCooker() {}
+
     /// \brief An opportunity to produce a cooked changeset.
     ///
     /// When the implementation chooses to produce a cooked changeset, it must
