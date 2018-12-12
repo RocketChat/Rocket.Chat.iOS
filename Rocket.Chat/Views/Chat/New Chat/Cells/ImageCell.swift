@@ -35,15 +35,10 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    var widthConstriant: NSLayoutConstraint!
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        widthConstriant = contentView.widthAnchor.constraint(equalToConstant: messageWidth)
-        widthConstriant.isActive = true
-
+        setupWidthConstraint()
         insertGesturesIfNeeded(with: nil)
     }
 
