@@ -47,20 +47,6 @@ final class MessageSection: ChatSection {
             .removingWhitespaces()
             .removingNewLines() ?? ""
 
-        if !object.message.reactions.isEmpty {
-            cells.append(ReactionsChatItem(
-                message: object.message,
-                reactions: object.message.reactions
-            ).wrapped)
-        }
-
-        if object.message.isBroadcastReplyAvailable() {
-            cells.append(MessageActionsChatItem(
-                user: nil,
-                message: object.message
-            ).wrapped)
-        }
-
         object.message.attachments.forEach { attachment in
             switch attachment.type {
             case .audio:
@@ -230,6 +216,20 @@ final class MessageSection: ChatSection {
                 title: messageURL.title,
                 subtitle: messageURL.subtitle,
                 message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if object.message.isBroadcastReplyAvailable() {
+            cells.insert(MessageActionsChatItem(
+                user: nil,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if !object.message.reactions.isEmpty {
+            cells.insert(ReactionsChatItem(
+                message: object.message,
+                reactions: object.message.reactions
             ).wrapped, at: 0)
         }
 
