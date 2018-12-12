@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ps-U9-bJ1">
-                        <rect key="frame" x="71" y="200.5" width="276" height="19.5"/>
+                        <rect key="frame" x="71" y="200.5" width="288" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                         </constraints>
                     </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4r-Ba-z2X">
-                        <rect key="frame" x="71" y="5" width="276" height="19.5"/>
+                        <rect key="frame" x="71" y="5" width="288" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,13 +49,6 @@
                         <connections>
                             <action selector="buttonImageHandlerDidPressed:" destination="ePR-Z1-eHe" eventType="touchUpInside" id="PgC-cc-Ju8"/>
                         </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3O-bF-CHT">
-                        <rect key="frame" x="355" y="170.5" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="9TF-oj-GJx"/>
-                            <constraint firstAttribute="width" constant="20" id="sGD-k5-B8l"/>
-                        </constraints>
                     </button>
                 </subviews>
             </view>
@@ -70,16 +63,14 @@
                 <constraint firstAttribute="bottom" secondItem="0ps-U9-bJ1" secondAttribute="bottom" constant="9" id="RkE-9R-aSK"/>
                 <constraint firstItem="AJQ-rM-usF" firstAttribute="leading" secondItem="ePR-Z1-eHe" secondAttribute="leadingMargin" constant="55" id="SX8-Gg-ZCG"/>
                 <constraint firstItem="o1Z-bL-FYu" firstAttribute="top" secondItem="AJQ-rM-usF" secondAttribute="top" id="UF2-F9-OW3"/>
-                <constraint firstAttribute="trailing" secondItem="F3O-bF-CHT" secondAttribute="trailing" id="Uqk-aY-2Ny"/>
-                <constraint firstItem="J4r-Ba-z2X" firstAttribute="trailing" secondItem="F3O-bF-CHT" secondAttribute="leading" constant="-8" id="XEa-It-C7j"/>
+                <constraint firstAttribute="trailingMargin" secondItem="0ps-U9-bJ1" secondAttribute="trailing" id="Uba-zD-eyo"/>
                 <constraint firstAttribute="trailingMargin" secondItem="AJQ-rM-usF" secondAttribute="trailing" constant="6" id="fPS-5v-vMF"/>
                 <constraint firstItem="AJQ-rM-usF" firstAttribute="top" secondItem="J4r-Ba-z2X" secondAttribute="bottom" id="oCa-dz-V9h"/>
-                <constraint firstItem="0ps-U9-bJ1" firstAttribute="trailing" secondItem="F3O-bF-CHT" secondAttribute="leading" constant="-8" id="q9v-Wt-ujC"/>
                 <constraint firstItem="o1Z-bL-FYu" firstAttribute="trailing" secondItem="AJQ-rM-usF" secondAttribute="trailing" id="ruB-Vo-07g"/>
                 <constraint firstItem="Ihf-eT-Ilj" firstAttribute="centerX" secondItem="AJQ-rM-usF" secondAttribute="centerX" id="s4C-li-Ji9"/>
                 <constraint firstItem="o1Z-bL-FYu" firstAttribute="height" secondItem="AJQ-rM-usF" secondAttribute="height" id="twl-Bj-wjO"/>
-                <constraint firstItem="F3O-bF-CHT" firstAttribute="bottom" secondItem="AJQ-rM-usF" secondAttribute="bottom" id="ufh-D6-9wE"/>
                 <constraint firstItem="J4r-Ba-z2X" firstAttribute="top" secondItem="ePR-Z1-eHe" secondAttribute="top" constant="5" id="vjd-lD-sKL"/>
+                <constraint firstAttribute="trailingMargin" secondItem="J4r-Ba-z2X" secondAttribute="trailing" id="wXf-Me-hO2"/>
                 <constraint firstItem="0ps-U9-bJ1" firstAttribute="leading" secondItem="AJQ-rM-usF" secondAttribute="leading" id="wsO-yZ-R2c"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vg9-ZU-MSK"/>
@@ -90,7 +81,6 @@
                 <outlet property="labelDescription" destination="0ps-U9-bJ1" id="QYK-7o-SSz"/>
                 <outlet property="labelDescriptionTopConstraint" destination="Mfn-ha-gA9" id="IzL-CE-YHk"/>
                 <outlet property="labelTitle" destination="J4r-Ba-z2X" id="8AZ-ZF-HZi"/>
-                <outlet property="readReceiptButton" destination="F3O-bF-CHT" id="jWp-W6-yhu"/>
             </connections>
             <point key="canvasLocation" x="28" y="-204.64767616191907"/>
         </collectionViewCell>

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkP-qc-xhD">
-                        <rect key="frame" x="71" y="181" width="276" height="20"/>
+                        <rect key="frame" x="71" y="181" width="288" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -46,13 +46,6 @@
                             <constraint firstAttribute="width" constant="20" id="5f8-7t-zem"/>
                         </constraints>
                     </activityIndicatorView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23d-n8-ORx">
-                        <rect key="frame" x="355" y="151" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="gBV-MM-gPa"/>
-                            <constraint firstAttribute="height" constant="20" id="gYM-zB-9mi"/>
-                        </constraints>
-                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,12 +58,10 @@
                 <constraint firstAttribute="bottom" secondItem="lkP-qc-xhD" secondAttribute="bottom" constant="9" id="HXK-cg-RFS"/>
                 <constraint firstItem="TD5-bD-C42" firstAttribute="leading" secondItem="lJV-2q-EuX" secondAttribute="leading" id="K9g-kI-cCC"/>
                 <constraint firstItem="Nr4-Rv-usg" firstAttribute="centerX" secondItem="lJV-2q-EuX" secondAttribute="centerX" id="P64-fU-T8Y"/>
-                <constraint firstItem="lkP-qc-xhD" firstAttribute="trailing" secondItem="23d-n8-ORx" secondAttribute="leading" constant="-8" id="TfM-SV-A1G"/>
+                <constraint firstAttribute="trailingMargin" secondItem="lkP-qc-xhD" secondAttribute="trailing" id="TaZ-Sz-iVh"/>
                 <constraint firstItem="Nr4-Rv-usg" firstAttribute="centerY" secondItem="lJV-2q-EuX" secondAttribute="centerY" id="Xho-hV-xD1"/>
                 <constraint firstItem="TD5-bD-C42" firstAttribute="width" secondItem="lJV-2q-EuX" secondAttribute="width" id="emF-6M-fzA"/>
                 <constraint firstItem="lJV-2q-EuX" firstAttribute="width" secondItem="vvK-ye-eha" secondAttribute="width" multiplier="0.752" id="hYU-e0-ISQ"/>
-                <constraint firstAttribute="trailing" secondItem="23d-n8-ORx" secondAttribute="trailing" id="ndK-Ac-7Xa"/>
-                <constraint firstItem="23d-n8-ORx" firstAttribute="bottom" secondItem="lJV-2q-EuX" secondAttribute="bottom" id="ojJ-BG-AYS"/>
                 <constraint firstItem="lkP-qc-xhD" firstAttribute="top" secondItem="lJV-2q-EuX" secondAttribute="bottom" constant="10" id="sfX-NC-J8f"/>
                 <constraint firstItem="lkP-qc-xhD" firstAttribute="leading" secondItem="lJV-2q-EuX" secondAttribute="leading" id="uYg-gd-auC"/>
                 <constraint firstItem="TD5-bD-C42" firstAttribute="trailing" secondItem="lJV-2q-EuX" secondAttribute="trailing" id="xQR-F6-Jx3"/>
@@ -83,7 +74,6 @@
                 <outlet property="imageViewThumb" destination="lJV-2q-EuX" id="Zmd-VY-zLh"/>
                 <outlet property="labelDescription" destination="lkP-qc-xhD" id="suo-Lk-QiI"/>
                 <outlet property="labelDescriptionTopConstraint" destination="sfX-NC-J8f" id="hG7-S4-H2s"/>
-                <outlet property="readReceiptButton" destination="23d-n8-ORx" id="Wua-Gg-GyY"/>
             </connections>
             <point key="canvasLocation" x="28" y="-196.10194902548727"/>
         </collectionViewCell>
