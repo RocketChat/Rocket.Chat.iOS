@@ -123,11 +123,18 @@ struct MessagesClient: APIClient {
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
             switch response {
             case .resource(let resource):
-                guard let message = resource.message else {
+                guard let resourceMessage = resource.message else {
                     return Alert.defaultError.present()
                 }
 
-                if let unmanagedMessage = message.unmanaged {
+                let shouldKeepMessageLocally = AuthManager.isAuthenticated()?.settings?.messageShowDeletedStatus ?? true
+                if !shouldKeepMessageLocally {
+                    Realm.executeOnMainThread(realm: realm) { realm in
+                        realm.delete(message)
+                    }
+                }
+
+                if let unmanagedMessage = resourceMessage.unmanaged {
                     MessageTextCacheManager.shared.update(for: unmanagedMessage)
                 }
             case .error: Alert.defaultError.present()
