@@ -10,7 +10,14 @@ import UIKit
 import AVFoundation
 
 class BaseVideoMessageCell: BaseMessageCell {
+    var widthConstriant: NSLayoutConstraint!
     var loading = false
+
+    func setupWidthConstraint() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        widthConstriant = contentView.widthAnchor.constraint(equalToConstant: messageWidth)
+        widthConstriant.isActive = true
+    }
 
     func updateLoadingState(with buttonPlayer: UIButton, and activityIndicatorView: UIActivityIndicatorView) {
         if loading {

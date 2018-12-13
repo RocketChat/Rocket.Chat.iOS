@@ -32,12 +32,13 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        setupWidthConstraint()
         insertGesturesIfNeeded(with: nil)
     }
 
@@ -45,6 +46,8 @@ final class ImageCell: BaseImageMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         labelTitle.text = viewModel.title
 

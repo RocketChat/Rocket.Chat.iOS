@@ -200,6 +200,10 @@ open class RocketChatViewController: UICollectionViewController {
     open var composerView = ComposerView()
 
     open override var inputAccessoryView: UIView? {
+        guard presentedViewController?.isBeingDismissed != false else {
+            return nil
+        }
+        
         composerView.layoutMargins = view.layoutMargins
         composerView.directionalLayoutMargins = systemMinimumLayoutMargins
         return composerView
@@ -419,6 +423,10 @@ extension RocketChatViewController {
     }
 
     @objc private func _onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification) {
+        guard presentedViewController?.isBeingDismissed != false else {
+            return
+        }
+        
         guard
             let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,

@@ -42,13 +42,14 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        setupWidthConstraint()
         insertGesturesIfNeeded(with: username)
     }
 
@@ -56,6 +57,8 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         configure(readReceipt: readReceiptButton)
         configure(
