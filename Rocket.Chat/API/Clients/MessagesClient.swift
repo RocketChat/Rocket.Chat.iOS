@@ -132,6 +132,13 @@ struct MessagesClient: APIClient {
                     Realm.executeOnMainThread(realm: realm) { realm in
                         realm.delete(message)
                     }
+                } else {
+                    // FA NOTE: Forcing deleted status since the API doesn't returns
+                    // the internalType field after deleting a message
+                    Realm.executeOnMainThread({ realm in
+                        message.internalType = "rm"
+                        realm.add(message, update: true)
+                    })
                 }
 
                 if let unmanagedMessage = resourceMessage.unmanaged {
