@@ -76,6 +76,7 @@ final class MessagesViewModel {
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
+            refreshMessagesQueryOldValues()
             messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
                 self?.handleDataUpdates(changes: collectionChanges)
             })
@@ -90,6 +91,7 @@ final class MessagesViewModel {
     // Variables required to fetch the messages of the Subscription
     // to the view model.
     internal var messagesQueryToken: NotificationToken?
+    internal var messagesQueryOldValues: [AnyHashable] = []
     internal var messagesQuery: Results<Message>?
 
     /**
