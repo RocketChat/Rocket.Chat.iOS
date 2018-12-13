@@ -17,7 +17,7 @@ class PermissionsRequest: APIRequest {
 
 class PermissionsResource: APIResource {
     var permissions: [Permission] {
-        return raw?.arrayValue.map {
+        return raw?["permissions"].arrayValue.map {
             let permission = Permission()
             permission.map($0, realm: nil)
             return permission
