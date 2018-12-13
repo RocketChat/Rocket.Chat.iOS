@@ -122,7 +122,14 @@ struct MessagesClient: APIClient {
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
             switch response {
-            case .resource: break
+            case .resource(let resource):
+                guard let message = resource.message else {
+                    return Alert.defaultError.present()
+                }
+
+                if let unmanagedMessage = message.unmanaged {
+                    MessageTextCacheManager.shared.update(for: unmanagedMessage)
+                }
             case .error: Alert.defaultError.present()
             }
         }
