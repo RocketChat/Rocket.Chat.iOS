@@ -76,6 +76,7 @@ final class MessagesViewModel {
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
+            refreshMessagesQueryOldValues()
             messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
                 self?.handleDataUpdates(changes: collectionChanges)
             })
@@ -90,6 +91,7 @@ final class MessagesViewModel {
     // Variables required to fetch the messages of the Subscription
     // to the view model.
     internal var messagesQueryToken: NotificationToken?
+    internal var messagesQueryOldValues: [AnyHashable] = []
     internal var messagesQuery: Results<Message>?
 
     /**
@@ -282,17 +284,47 @@ final class MessagesViewModel {
             handle(insertions: insertions, on: messagesQuery)
             handle(modifications: modifications, on: messagesQuery)
             updateData()
+            refreshMessagesQueryOldValues()
+
         case .error(let error):
             fatalError("\(error)")
         }
     }
 
     /**
+     Caches the ids of the objects in the messagesQuery before the last update.
+     It's used to identify deletions without having to mirror query
+     indexes on the processed data properties
+     */
+    func refreshMessagesQueryOldValues() {
+        guard let messagesQuery = messagesQuery else {
+            return
+        }
+
+        messagesQueryOldValues = messagesQuery.compactMap({ message -> AnyHashable? in
+            guard let id = message.identifier else {
+                return nil
+            }
+
+            return AnyHashable(id)
+        })
+    }
+
+    /**
      Handle all deletions from Realm observer on the messages query.
      */
     internal func handle(deletions: [Int], on messagesQuery: Results<Message>) {
-        for deletion in deletions where deletion < data.count {
-            data.remove(at: deletion)
+        for deletion in deletions {
+            guard
+                deletion < messagesQueryOldValues.count
+            else {
+                continue
+            }
+
+            let deletionId = messagesQueryOldValues[deletion]
+            if let index = data.firstIndex(where: {$0.differenceIdentifier == deletionId}) {
+                data.remove(at: index)
+            }
         }
     }
 
