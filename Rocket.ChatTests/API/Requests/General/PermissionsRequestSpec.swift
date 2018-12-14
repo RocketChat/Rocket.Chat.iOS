@@ -22,18 +22,20 @@ class PermissionsRequestSpec: APITestCase {
 
     func testProperties() {
         let json = JSON([
-            [
-                "_id": "snippet-message",
-                "roles": [
-                    "owner",
-                    "moderator",
-                    "admin"
-                ]
-            ],
-            [
-                "_id": "access-permissions",
-                "roles": [
-                    "admin"
+            "permissions": [
+                [
+                    "_id": "snippet-message",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "admin"
+                    ]
+                ],
+                [
+                    "_id": "access-permissions",
+                    "roles": [
+                        "admin"
+                    ]
                 ]
             ]
         ])

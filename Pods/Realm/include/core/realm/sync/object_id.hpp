@@ -30,6 +30,9 @@
 #include <realm/util/optional.hpp>
 #include <realm/string_data.hpp>
 #include <realm/data_type.hpp>
+#include <realm/util/metered/map.hpp>
+#include <realm/util/metered/set.hpp>
+#include <realm/util/metered/string.hpp>
 
 // Only set this to one when testing the code paths that exercise object ID
 // hash collisions. It artificially limits the "optimistic" local ID to use
@@ -138,7 +141,7 @@ public:
     bool contains(StringData table, ObjectID object_id) const noexcept;
 
     // A map from table name to a set of object ids.
-    std::map<std::string, std::set<ObjectID>, std::less<>> m_objects;
+    util::metered::map<std::string, util::metered::set<ObjectID>> m_objects;
 };
 
 // FieldSet is a set of fields in tables. A field is defined by a
@@ -153,10 +156,9 @@ public:
 
     // A map from table name to a map from column name to a set of
     // object ids.
-    std::map<
+    util::metered::map<
         std::string,
-        std::map<std::string, std::set<ObjectID>, std::less<>>,
-        std::less<>
+        util::metered::map<std::string, util::metered::set<ObjectID>>
     >  m_fields;
 };
 
@@ -197,7 +199,7 @@ constexpr bool ObjectID::operator!=(const ObjectID& other) const
 
 inline bool GlobalID::operator==(const GlobalID& other) const
 {
-    return table_name == other.table_name && object_id == other.object_id;
+    return object_id == other.object_id && table_name == other.table_name;
 }
 
 inline bool GlobalID::operator!=(const GlobalID& other) const

@@ -1,4 +1,3 @@
-
 /*************************************************************************
  *
  * REALM CONFIDENTIAL
@@ -27,6 +26,9 @@
 #include <realm/sync/instruction_applier.hpp>
 #include <realm/sync/object_id.hpp>
 #include <realm/sync/object.hpp>
+#include <realm/util/metered/map.hpp>
+#include <realm/util/metered/set.hpp>
+#include <realm/util/metered/string.hpp>
 
 #include <realm/table_view.hpp>
 
@@ -78,7 +80,9 @@ void create_permissions_schema(Group&);
 
 /// Set up the basic "everyone" role and default permissions. The default is to
 /// set up some very permissive defaults, where "everyone" can do everything.
-void set_up_basic_permissions(Group&, bool permissive = true);
+void set_up_basic_permissions(Group& group, TableInfoCache& table_info_cache, bool permissive = true);
+// Convenience function that creates a new TableInfoCache.
+void set_up_basic_permissions(Group& group, bool permissive = true);
 
 void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
 
@@ -227,7 +231,8 @@ struct PermissionsCache {
     /// Each element is the index of a row in the `class___Roles` table.
     using RoleList = std::vector<std::size_t>;
 
-    PermissionsCache(const Group& g, StringData user_identity, bool is_admin = false);
+    PermissionsCache(const Group& g, TableInfoCache& table_info_cache,
+                     StringData user_identity, bool is_admin = false);
 
     bool is_admin() const noexcept;
 
@@ -319,11 +324,11 @@ struct PermissionsCache {
 
 private:
     const Group& group;
-    TableInfoCache cache;
+    TableInfoCache& m_table_info_cache;
     std::string user_id;
     bool m_is_admin;
     util::Optional<uint_least32_t> realm_privileges;
-    std::map<GlobalID, uint_least32_t> object_privileges;
+    util::metered::map<GlobalID, uint_least32_t> object_privileges;
     ObjectIDSet created_objects;
 
     // uint_least32_t get_default_object_privileges(ConstTableRef);
@@ -340,8 +345,8 @@ inline bool PermissionsCache::is_admin() const noexcept
 /// sent to the client because the client tried to perform changes to a database
 /// that it wasn't allowed to make.
 struct PermissionCorrections {
-    using TableColumnSet = std::map<std::string, std::set<std::string, std::less<>>, std::less<>>;
-    using TableSet = std::set<std::string, std::less<>>;
+    using TableColumnSet = util::metered::map<std::string, util::metered::set<std::string>>;
+    using TableSet = util::metered::set<std::string>;
 
     // Objects that a client tried to delete without being allowed.
     ObjectIDSet recreate_objects;

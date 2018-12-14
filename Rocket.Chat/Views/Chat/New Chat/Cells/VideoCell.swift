@@ -42,6 +42,8 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        setupWidthConstraint()
         insertGesturesIfNeeded(with: nil)
     }
 
@@ -49,6 +51,8 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description

@@ -122,7 +122,28 @@ struct MessagesClient: APIClient {
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
             switch response {
-            case .resource: break
+            case .resource(let resource):
+                guard let resourceMessage = resource.message else {
+                    return Alert.defaultError.present()
+                }
+
+                let shouldKeepMessageLocally = AuthManager.isAuthenticated()?.settings?.messageShowDeletedStatus ?? true
+                if !shouldKeepMessageLocally {
+                    Realm.executeOnMainThread(realm: realm) { realm in
+                        realm.delete(message)
+                    }
+                } else {
+                    // FA NOTE: Forcing deleted status since the API doesn't returns
+                    // the internalType field after deleting a message
+                    Realm.executeOnMainThread({ realm in
+                        message.internalType = "rm"
+                        realm.add(message, update: true)
+                    })
+                }
+
+                if let unmanagedMessage = resourceMessage.unmanaged {
+                    MessageTextCacheManager.shared.update(for: unmanagedMessage)
+                }
             case .error: Alert.defaultError.present()
             }
         }
