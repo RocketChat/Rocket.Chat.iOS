@@ -173,32 +173,6 @@ extension UIColor {
     static var codeBackground: UIColor {
         return UIColor(rgb: 0xF8F8F8, alphaVal: 1.0)
     }
-
-    // MARK: Mention Color
-
-    static func background(for mention: Mention) -> UIColor {
-        if mention.username == AuthManager.currentUser()?.username {
-            return .primaryAction
-        }
-
-        if mention.username == "all" || mention.username == "here" {
-            return .attention
-        }
-
-        return .white
-    }
-
-    static func font(for mention: Mention) -> UIColor {
-        if mention.username == AuthManager.currentUser()?.username {
-            return .white
-        }
-
-        if mention.username == "all" || mention.username == "here" {
-            return .white
-        }
-
-        return .primaryAction
-    }
 }
 
 // MARK: UIKit default colors

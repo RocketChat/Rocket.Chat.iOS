@@ -400,6 +400,7 @@
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
+		7348231389BE92F6242D968B /* Pods_Rocket_Chat_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2F8E0E1F89998A99E848F9 /* Pods_Rocket_Chat_NotificationServiceExtension.framework */; };
 		7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7758A7631F8FA44400FAA244 /* PickerViewDelegate.swift */; };
 		7798B4151F852B720074B2F4 /* SelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798B4141F852B720074B2F4 /* SelectField.swift */; };
 		7798B4191F852D670074B2F4 /* CustomField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798B4181F852D670074B2F4 /* CustomField.swift */; };
@@ -618,6 +619,12 @@
 		80825F0D207EB2D800C477DE /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA5206D1883005E3369 /* APIResource.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
+		808921F421C3FEA400271A1F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D08E2320BD5EDC008D03EF /* Theme.swift */; };
+		808921F521C3FEF700271A1F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
+		808921F621C3FF1900271A1F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
+		808921F921C3FF6700271A1F /* UIColorMentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808921F821C3FF6700271A1F /* UIColorMentions.swift */; };
+		808921FA21C3FF9600271A1F /* MessageTextFontAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6C41FE17DBB00F010AA /* MessageTextFontAttributes.swift */; };
+		808921FC21C4000400271A1F /* MessageTextFontAttributesColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808921FB21C4000400271A1F /* MessageTextFontAttributesColors.swift */; };
 		80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80213C0D1FE0639E00809E14 /* HTTPMethod.swift */; };
 		80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8751FD6B5E000EE1A4E /* VersionMiddleware.swift */; };
 		80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */; };
@@ -636,6 +643,9 @@
 		809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
 		809D577620EBAE5F0014C364 /* UIButtonCenterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */; };
 		809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */; };
+		80A27F8721C3F853006EC454 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A27F8621C3F853006EC454 /* NotificationService.swift */; };
+		80A27F8B21C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80A27F8421C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		80A27F9121C3FA86006EC454 /* MarkdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C536CB1F688B2F00EBA8D9 /* MarkdownManager.swift */; };
 		80A2A2AB2073BD0800857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2A2AC2073BE3500857DAF /* RealmCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */; };
 		80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */; };
@@ -901,6 +911,13 @@
 			remoteGlobalIDString = 807FB5572046E7DD00E21429;
 			remoteInfo = Rocket.Chat.ShareExtension;
 		};
+		80A27F8921C3F853006EC454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41DF76D71D2C50710028DBF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80A27F8321C3F853006EC454;
+			remoteInfo = Rocket.Chat.NotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -911,6 +928,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				807FB5622046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex in Embed App Extensions */,
+				80A27F8B21C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,6 +936,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08CAF513FB282364027845F3 /* Pods-Rocket.Chat.NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.NotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.NotificationServiceExtension/Pods-Rocket.Chat.NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconCell.swift; sourceTree = "<group>"; };
@@ -1019,6 +1038,8 @@
 		14F8A28F202E65C700175FDC /* Blue-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-29@2x.png"; sourceTree = "<group>"; };
 		14F8A290202E65C700175FDC /* Blue-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-40@3x.png"; sourceTree = "<group>"; };
 		14F8A291202E65C700175FDC /* Blue-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-76@2x.png"; sourceTree = "<group>"; };
+		21985CBF5CF202A76D240ECD /* Pods-Rocket.Chat.NotificationServiceExtension.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.NotificationServiceExtension.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.NotificationServiceExtension/Pods-Rocket.Chat.NotificationServiceExtension.beta.xcconfig"; sourceTree = "<group>"; };
+		31CFA56B020D42AA524AACA5 /* Pods-Rocket.Chat.NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.NotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.NotificationServiceExtension/Pods-Rocket.Chat.NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotificationSpec.swift; sourceTree = "<group>"; };
 		33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerSpec.swift; sourceTree = "<group>"; };
 		33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -1542,6 +1563,8 @@
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
+		808921F821C3FF6700271A1F /* UIColorMentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorMentions.swift; sourceTree = "<group>"; };
+		808921FB21C4000400271A1F /* MessageTextFontAttributesColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextFontAttributesColors.swift; sourceTree = "<group>"; };
 		80977AB5204EEF1E00C41435 /* SelectServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServer.swift; sourceTree = "<group>"; };
 		80977AB8204EFBCC00C41435 /* SENavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigation.swift; sourceTree = "<group>"; };
 		80977ABA204EFC0F00C41435 /* SESceneTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESceneTransition.swift; sourceTree = "<group>"; };
@@ -1556,6 +1579,9 @@
 		809B53151FE3D3DC00833DD2 /* MessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReaction.swift; sourceTree = "<group>"; };
 		809D577520EBAE5F0014C364 /* UIButtonCenterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonCenterImage.swift; sourceTree = "<group>"; };
 		809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerRedrawBar.swift; sourceTree = "<group>"; };
+		80A27F8421C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A27F8621C3F853006EC454 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		80A27F8821C3F853006EC454 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCurrent.swift; sourceTree = "<group>"; };
 		80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcher.swift; sourceTree = "<group>"; };
 		80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiAutocompleteCell.swift; sourceTree = "<group>"; };
@@ -1797,7 +1823,9 @@
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		DE2F8E0E1F89998A99E848F9 /* Pods_Rocket_Chat_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.test.xcconfig"; sourceTree = "<group>"; };
+		F0D943AF6C3B5FEFCBDB7939 /* Pods-Rocket.Chat.NotificationServiceExtension.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.NotificationServiceExtension.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.NotificationServiceExtension/Pods-Rocket.Chat.NotificationServiceExtension.test.xcconfig"; sourceTree = "<group>"; };
 		F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; sourceTree = "<group>"; };
 		FEDACA44BBB1C0633DEA6F3D /* Pods-Rocket.ChatTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1831,6 +1859,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2AC99226FB9C7C9DA45E94 /* Pods_Rocket_Chat_ShareExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80A27F8121C3F853006EC454 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7348231389BE92F6242D968B /* Pods_Rocket_Chat_NotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1892,6 +1928,7 @@
 				0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */,
 				68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */,
 				6787D07A45177F339DB234DD /* Pods_Rocket_Chat_ShareExtension.framework */,
+				DE2F8E0E1F89998A99E848F9 /* Pods_Rocket_Chat_NotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2524,6 +2561,7 @@
 				80E9DBD4209CA8EA00A48CA9 /* UIViewController */,
 				80B2D98D20E54999002F4149 /* UINavigationBar */,
 				809D577720ED069C0014C364 /* UINavigationController */,
+				808921F721C3FF4300271A1F /* UIColor */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
 				1496A87820FA4735005C2E14 /* EnumExtensions.swift */,
@@ -2535,8 +2573,6 @@
 				8076FDA32048533000114F28 /* String+Random.swift */,
 				33F67A43212D8F62004EB4A0 /* DifferenceKitExtension.swift */,
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
-				412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */,
-				4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */,
 				D1C536CD1F688B7100EBA8D9 /* UIFontExtensions.swift */,
 				41494B911D63C6280004F369 /* UIImageExtension.swift */,
 				419205481D52EDE6004EEC5F /* UILabelExtension.swift */,
@@ -2784,6 +2820,7 @@
 				800F38EC2019492D0005CB78 /* DeepLink.swift */,
 				80DC9A6B206BA95600032BE0 /* Localized.swift */,
 				413FB6C41FE17DBB00F010AA /* MessageTextFontAttributes.swift */,
+				808921FB21C4000400271A1F /* MessageTextFontAttributesColors.swift */,
 				35C7D199202B130400B4BE5A /* RCDateFormatter.swift */,
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */,
@@ -2813,6 +2850,7 @@
 		41DF76D61D2C50710028DBF8 = {
 			isa = PBXGroup;
 			children = (
+				80A27F8521C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension */,
 				106DAA428B5BF7289FB70C65 /* Frameworks */,
 				EE693BBD0CC2727847214E2D /* Pods */,
 				41DF76E01D2C50710028DBF8 /* Products */,
@@ -2830,6 +2868,7 @@
 				41DF76F31D2C50720028DBF8 /* Rocket.ChatTests.xctest */,
 				41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */,
 				807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */,
+				80A27F8421C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3440,6 +3479,16 @@
 			path = Servers;
 			sourceTree = "<group>";
 		};
+		808921F721C3FF4300271A1F /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */,
+				4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */,
+				808921F821C3FF6700271A1F /* UIColorMentions.swift */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
 		80977AB7204EFBBB00C41435 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3492,6 +3541,15 @@
 				809D577820ED06E50014C364 /* UINavigationControllerRedrawBar.swift */,
 			);
 			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		80A27F8521C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				80A27F8621C3F853006EC454 /* NotificationService.swift */,
+				80A27F8821C3F853006EC454 /* Info.plist */,
+			);
+			path = Rocket.Chat.NotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		80A97EFD200628A300A2774C /* Views */ = {
@@ -4048,6 +4106,10 @@
 				E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */,
 				14F7905B55B69407BBC02BC5 /* Pods-Rocket.Chat.ShareExtension.test.xcconfig */,
 				931A9FDD60FB42509A0958F5 /* Pods-Rocket.ChatTests.test.xcconfig */,
+				08CAF513FB282364027845F3 /* Pods-Rocket.Chat.NotificationServiceExtension.debug.xcconfig */,
+				F0D943AF6C3B5FEFCBDB7939 /* Pods-Rocket.Chat.NotificationServiceExtension.test.xcconfig */,
+				31CFA56B020D42AA524AACA5 /* Pods-Rocket.Chat.NotificationServiceExtension.release.xcconfig */,
+				21985CBF5CF202A76D240ECD /* Pods-Rocket.Chat.NotificationServiceExtension.beta.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4072,6 +4134,7 @@
 			);
 			dependencies = (
 				807FB5612046E7DD00E21429 /* PBXTargetDependency */,
+				80A27F8A21C3F853006EC454 /* PBXTargetDependency */,
 			);
 			name = Rocket.Chat;
 			productName = Rocket.Chat;
@@ -4136,13 +4199,31 @@
 			productReference = 807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		80A27F8321C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80A27F9021C3F853006EC454 /* Build configuration list for PBXNativeTarget "Rocket.Chat.NotificationServiceExtension" */;
+			buildPhases = (
+				09784DA2121CFAC6C9E358B6 /* [CP] Check Pods Manifest.lock */,
+				80A27F8021C3F853006EC454 /* Sources */,
+				80A27F8121C3F853006EC454 /* Frameworks */,
+				80A27F8221C3F853006EC454 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rocket.Chat.NotificationServiceExtension;
+			productName = Rocket.Chat.NotificationServiceExtension;
+			productReference = 80A27F8421C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		41DF76D71D2C50710028DBF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
@@ -4150,6 +4231,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = S6UPZG7ZR3;
 						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -4191,6 +4273,11 @@
 							};
 						};
 					};
+					80A27F8321C3F853006EC454 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = S6UPZG7ZR3;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 41DF76DA1D2C50710028DBF8 /* Build configuration list for PBXProject "Rocket.Chat" */;
@@ -4221,6 +4308,7 @@
 				807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */,
 				41DF76F21D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF76FD1D2C50720028DBF8 /* Rocket.ChatUITests */,
+				80A27F8321C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -4414,9 +4502,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80A27F8221C3F853006EC454 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09784DA2121CFAC6C9E358B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rocket.Chat.NotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		20AE8DAFB4777EAD4A9DBA91 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4488,12 +4605,12 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
@@ -4515,12 +4632,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobilePlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RocketChatViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
@@ -4585,12 +4702,12 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/RocketChatViewController/RocketChatViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
@@ -4609,12 +4726,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobilePlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RocketChatViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
@@ -4911,11 +5028,13 @@
 				413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
 				41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */,
+				808921F921C3FF6700271A1F /* UIColorMentions.swift in Sources */,
 				41FC9E06209B39FE00FED485 /* SubscriptionLastMessage.swift in Sources */,
 				99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */,
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
 				4124D833209A0517005374CD /* ChatLoaderCell.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
+				808921FC21C4000400271A1F /* MessageTextFontAttributesColors.swift in Sources */,
 				997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */,
 				9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */,
 				80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */,
@@ -5395,6 +5514,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80A27F8021C3F853006EC454 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				808921FA21C3FF9600271A1F /* MessageTextFontAttributes.swift in Sources */,
+				808921F421C3FEA400271A1F /* Theme.swift in Sources */,
+				80A27F9121C3FA86006EC454 /* MarkdownManager.swift in Sources */,
+				808921F621C3FF1900271A1F /* UIColorCSSColorsExtension.swift in Sources */,
+				80A27F8721C3F853006EC454 /* NotificationService.swift in Sources */,
+				808921F521C3FEF700271A1F /* UIColorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -5412,6 +5544,11 @@
 			isa = PBXTargetDependency;
 			target = 807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */;
 			targetProxy = 807FB5602046E7DD00E21429 /* PBXContainerItemProxy */;
+		};
+		80A27F8A21C3F853006EC454 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80A27F8321C3F853006EC454 /* Rocket.Chat.NotificationServiceExtension */;
+			targetProxy = 80A27F8921C3F853006EC454 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5599,6 +5736,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -5609,6 +5747,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -5795,6 +5934,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
@@ -5804,6 +5944,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5820,6 +5961,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
@@ -5829,6 +5971,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_VERSION = 4.2;
 			};
@@ -5959,6 +6102,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
@@ -5968,6 +6112,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_VERSION = 4.2;
 			};
@@ -6088,6 +6233,117 @@
 			};
 			name = Beta;
 		};
+		80A27F8C21C3F853006EC454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08CAF513FB282364027845F3 /* Pods-Rocket.Chat.NotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Rocket.Chat.NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-NotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG EXCLUDE_MARKDOWN_DOWNLOAD";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		80A27F8D21C3F853006EC454 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0D943AF6C3B5FEFCBDB7939 /* Pods-Rocket.Chat.NotificationServiceExtension.test.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Rocket.Chat.NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-NotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = EXCLUDE_MARKDOWN_DOWNLOAD;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
+		80A27F8E21C3F853006EC454 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31CFA56B020D42AA524AACA5 /* Pods-Rocket.Chat.NotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Rocket.Chat.NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-NotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = EXCLUDE_MARKDOWN_DOWNLOAD;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		80A27F8F21C3F853006EC454 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21985CBF5CF202A76D240ECD /* Pods-Rocket.Chat.NotificationServiceExtension.beta.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Rocket.Chat.NotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.ios.Rocket-Chat-NotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = EXCLUDE_MARKDOWN_DOWNLOAD;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Beta;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6142,6 +6398,17 @@
 				33A37DF520EAB7E9004014B6 /* Test */,
 				807FB5642046E7DD00E21429 /* Release */,
 				807FB5652046E7DD00E21429 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80A27F9021C3F853006EC454 /* Build configuration list for PBXNativeTarget "Rocket.Chat.NotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80A27F8C21C3F853006EC454 /* Debug */,
+				80A27F8D21C3F853006EC454 /* Test */,
+				80A27F8E21C3F853006EC454 /* Release */,
+				80A27F8F21C3F853006EC454 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,4 +1,5 @@
-//
+// swiftlint:disable all
+
 //  Color+HexAndCSSColorNames.swift
 //
 //  Created by Norman Basham on 12/8/15.
@@ -308,3 +309,5 @@ public extension UIColor {
         "YELLOWGREEN" : "9ACD32"
     ]
 }
+
+// swiftlint:enable all
