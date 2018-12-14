@@ -37,6 +37,15 @@ final class DeleteMessageRequest: APIRequest {
 }
 
 final class DeleteMessageResource: APIResource {
+    var message: Message? {
+        guard let rawMessage = raw?["message"] else { return nil }
+
+        let message = Message()
+        message.map(rawMessage, realm: nil)
+        message.createdAt = Date()
+        return message
+    }
+
     var success: Bool? {
         return raw?["success"].boolValue
     }
