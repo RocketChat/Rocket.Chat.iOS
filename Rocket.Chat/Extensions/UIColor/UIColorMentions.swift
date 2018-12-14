@@ -13,23 +13,23 @@ extension UIColor {
         if mention.username == AuthManager.currentUser()?.username {
             return .primaryAction
         }
-        
+
         if mention.username == "all" || mention.username == "here" {
             return .attention
         }
-        
+
         return .white
     }
-    
+
     static func font(for mention: Mention) -> UIColor {
         if mention.username == AuthManager.currentUser()?.username {
             return .white
         }
-        
+
         if mention.username == "all" || mention.username == "here" {
             return .white
         }
-        
+
         return .primaryAction
     }
 }
