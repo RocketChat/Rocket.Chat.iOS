@@ -104,7 +104,7 @@ fileprivate extension RCMarkdownParser {
         parser.strikeAttributes = [NSAttributedString.Key.strikethroughStyle.rawValue: NSNumber(value: NSUnderlineStyle.single.rawValue)]
         parser.linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.darkGray]
 
-        #if !EXCLUDE_MARKDOWN_DOWNLOAD
+        #if !ROCKETCHAT_EXCLUDE_MARKDOWN_DOWNLOAD_MEDIA
         parser.downloadImage = { urlString, completion in
             guard let url = URL(string: urlString) else { return }
             guard let filename = DownloadManager.filenameFor(urlString) else { return }
