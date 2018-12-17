@@ -157,8 +157,8 @@
 "subscriptions.list.date.yesterday" = "Ontem";
 "subscriptions.list.actions.read" = "Lido";
 "subscriptions.list.actions.unread" = "Não lido";
-"subscriptions.list.actions.favorite" = "Marcar como favorito";
-"subscriptions.list.actions.unfavorite" = "Desmarcar como favorito";
+"subscriptions.list.actions.favorite" = "Favorito(a)";
+"subscriptions.list.actions.unfavorite" = "Desmarcar favorito(a)";
 "subscriptions.list.actions.hide" = "Fechar";
 
 // Servers
