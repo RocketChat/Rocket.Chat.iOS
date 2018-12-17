@@ -271,7 +271,7 @@
 // Chat Typing
 "chat.users_are_typing" = "%@ estão escrevendo...";
 "chat.user_is_typing" = "%@ está escrevendo...";
-"chat.typing" = "escrvendo...";
+"chat.typing" = "escrevendo...";
 "chat.several_typing" = "vários utilizadores estão escrevendo...";
 
 // Message Types
@@ -500,5 +500,5 @@
 
 // Chat Components
 "chat.components.quote.replied" = "Respondido";
-"chat.components.quote.pinned" = "Pinado";
+"chat.components.quote.pinned" = "Afixado";
 "chat.components.text_attachment.no_title" = "Sem título";
