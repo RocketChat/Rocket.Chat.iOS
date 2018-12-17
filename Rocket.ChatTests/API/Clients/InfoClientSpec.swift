@@ -8,13 +8,13 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class InfoClientSpec: XCTestCase, RealmTestCase {
+class InfoClientSpec: XCTestCase {
     func testFetchInfo() {
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
@@ -24,25 +24,17 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": "true"
         ])
 
-        try? realm.write {
+        Realm.execute({ realm in
             realm.add(Auth.testInstance())
-        }
-
-        client.fetchInfo(realm: realm)
-
-        let expectation = XCTestExpectation(description: "correct info added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-            if AuthManager.isAuthenticated(realm: realm)?.serverVersion == "0.59.3" {
-                expectation.fulfill()
-            }
         })
-        wait(for: [expectation], timeout: 3)
+
+        client.fetchInfo()
+        XCTAssertEqual(AuthManager.isAuthenticated()?.serverVersion, "0.59.3")
     }
 
     //swiftlint:disable function_body_length
     func testFetchLoginServices() {
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
@@ -88,53 +80,44 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
             "success": true
         ])
 
-        try? realm.write {
-            realm.add(Auth.testInstance())
-        }
-
-        client.fetchLoginServices(realm: realm)
-
-        let expectation = XCTestExpectation(description: "login services added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if realm.objects(LoginService.self).count == 2 {
-                expectation.fulfill()
-            }
+        Realm.execute({ realm in
+            realm.add(Auth.testInstance(), update: true)
         })
 
-        wait(for: [expectation], timeout: 3)
+        client.fetchLoginServices()
+        XCTAssertEqual(Realm.current?.objects(LoginService.self).count, 2)
     }
 
     func testFetchPermissions() {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let api = MockAPI()
-        let realm = testRealm()
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
-            [
-                "_id": "snippet-message",
-                "roles": [
-                    "owner",
-                    "moderator",
-                    "admin"
-                ]
-            ],
-            [
-                "_id": "access-permissions",
-                "roles": [
-                    "admin"
+            "permissions": [
+                [
+                    "_id": "snippet-message",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "admin"
+                    ]
+                ],
+                [
+                    "_id": "access-permissions",
+                    "roles": [
+                        "admin"
+                    ]
                 ]
             ]
         ])
 
-        client.fetchPermissions(realm: realm)
-
-        let expectation = XCTestExpectation(description: "permissions added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if realm.objects(Permission.self).count == 2 {
-                expectation.fulfill()
-            }
-        })
-
-        wait(for: [expectation], timeout: 3)
+        client.fetchPermissions()
+        XCTAssertEqual(realm.objects(Rocket_Chat.Permission.self).count, 2)
     }
+
 }

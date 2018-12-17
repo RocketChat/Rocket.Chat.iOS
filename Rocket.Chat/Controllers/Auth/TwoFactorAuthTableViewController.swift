@@ -107,3 +107,9 @@ extension TwoFactorAuthTableViewController: UITextFieldDelegate {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension TwoFactorAuthTableViewController {
+    override func applyTheme() { }
+}

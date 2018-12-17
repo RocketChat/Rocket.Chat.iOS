@@ -99,3 +99,9 @@ extension CASViewController: WKNavigationDelegate, Closeable {
         activityIndicator.isHidden = true
     }
 }
+
+// MARK: Disable Theming
+
+extension CASViewController {
+    override func applyTheme() { }
+}

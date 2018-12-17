@@ -29,7 +29,7 @@ extension CustomEmoji {
     }
 }
 
-class CustomEmojiSpec: XCTestCase, RealmTestCase {
+class CustomEmojiSpec: XCTestCase {
     func testMap() {
         let object = CustomEmoji.testInstance()
 
@@ -60,11 +60,14 @@ class CustomEmojiSpec: XCTestCase, RealmTestCase {
         emojis[0].aliases.append(objectsIn: ["ce0", "c0"])
         emojis[2].aliases.append(objectsIn: ["ce2"])
 
-        let realm = testRealm()
-
-        try? realm.write {
-            realm.add(emojis)
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
         }
+
+        realm.execute({ realm in
+            realm.add(emojis)
+        })
 
         XCTAssert(CustomEmoji.withShortname(":customemoji-0:", realm: realm) == emojis[0])
         XCTAssert(CustomEmoji.withShortname(":customemoji-1:", realm: realm) == emojis[1])

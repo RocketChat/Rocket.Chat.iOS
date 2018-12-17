@@ -9,7 +9,7 @@
 import UIKit
 
 struct ReadReceiptListViewModel {
-    let users: [User]
+    let users: [UnmanagedUser]
     let isLoading: Bool
 
     var title: String {
@@ -36,7 +36,7 @@ struct ReadReceiptListViewModel {
         }
     }
 
-    func user(at indexPath: IndexPath) -> User? {
+    func user(at indexPath: IndexPath) -> UnmanagedUser? {
         if indexPath.section == 0, indexPath.row < users.count {
             return users[indexPath.row]
         } else {
@@ -59,7 +59,7 @@ class ReadReceiptListView: UIView {
         }
     }
 
-    var selectedUser: (User, (UIView?, CGRect?)?) -> Void = { _, _ in }
+    var selectedUser: (UnmanagedUser, (UIView?, CGRect?)?) -> Void = { _, _ in }
 
     var model: ReadReceiptListViewModel = .emptyState {
         didSet {

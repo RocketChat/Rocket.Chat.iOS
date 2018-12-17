@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="pBx-94-78I" customClass="AttachmentFieldView" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neE-9h-mgq">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="sXw-R0-l2h"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oY1-GI-mTG">
+                    <rect key="frame" x="0.0" y="21" width="375" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="trailing" secondItem="pBx-94-78I" secondAttribute="trailing" id="0bt-Si-toS"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="bottom" secondItem="pBx-94-78I" secondAttribute="bottom" id="Csv-qx-WST"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="top" secondItem="neE-9h-mgq" secondAttribute="bottom" constant="5" id="GYS-RE-Bfw"/>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="top" secondItem="pBx-94-78I" secondAttribute="top" id="IR0-w2-W0L"/>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="leading" secondItem="pBx-94-78I" secondAttribute="leading" id="PcF-RT-KaM"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="trailing" secondItem="pBx-94-78I" secondAttribute="trailing" id="jCl-5H-RX5"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="leading" secondItem="pBx-94-78I" secondAttribute="leading" id="y1d-Uo-SWT"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Mk3-3B-Y5v"/>
+            <connections>
+                <outlet property="field" destination="neE-9h-mgq" id="3Dg-Ud-T79"/>
+                <outlet property="fieldHeightConstraint" destination="sXw-R0-l2h" id="paa-Ch-m9s"/>
+                <outlet property="value" destination="oY1-GI-mTG" id="a42-xO-pIO"/>
+                <outlet property="valueTopConstraint" destination="GYS-RE-Bfw" id="I26-jw-dFa"/>
+            </connections>
+            <point key="canvasLocation" x="448.80000000000001" y="-526.23688155922048"/>
+        </view>
+    </objects>
+</document>

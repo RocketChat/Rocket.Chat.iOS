@@ -26,23 +26,12 @@ extension Auth {
 }
 
 // swiftlint:disable type_body_length file_length
-class AuthSpec: XCTestCase, RealmTestCase {
+class AuthSpec: XCTestCase {
 
-    // MARK: Setup
-
-    override func setUp() {
-        super.setUp()
-
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ realm in
-            realm.deleteAll()
-        })
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
     }
-
-    // MARK: Tests
 
     func testAuthObject() {
         let serverURL = "http://foobar.com"
@@ -100,7 +89,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -113,62 +105,62 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         // standard test
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth)
             realm.add(user1)
             realm.add(user2)
 
             auth.settings?.messageAllowDeleting = true
             auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .allowed)
 
         // invalid message
 
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = nil
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .unknown)
 
         // non actionable message type
 
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .notActionable)
 
         // time elapsed
 
-        try? realm.write {
+        realm.execute({ _ in
             message.internalType = MessageType.text.rawValue
             message.createdAt = Date(timeInterval: -1000, since: Date())
             auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 1
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .timeElapsed)
 
         // different user
 
-        try? realm.write {
-            message.user = user2
-        }
+        realm.execute({ _ in
+            message.userIdentifier = user2.identifier
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .differentUser)
 
         // server blocked
 
-        try? realm.write {
+        realm.execute({ _ in
             auth.settings?.messageAllowDeleting = false
-            message.user = user1
-        }
+            message.userIdentifier = user1.identifier
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .serverBlocked)
 
@@ -178,11 +170,11 @@ class AuthSpec: XCTestCase, RealmTestCase {
         forcePermission.identifier = PermissionType.forceDeleteMessage.rawValue
         forcePermission.roles.append("admin")
 
-        try? realm.write {
-            message.user = user2
+        realm.execute({ _ in
+            message.userIdentifier = user2.identifier
             realm.add(forcePermission)
             user1.roles.append("admin")
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .allowed)
 
@@ -192,23 +184,26 @@ class AuthSpec: XCTestCase, RealmTestCase {
         permission.identifier = PermissionType.deleteMessage.rawValue
         permission.roles.append("admin")
 
-        try? realm.write {
+        realm.execute({ _ in
             forcePermission.roles.removeAll()
             realm.add(permission)
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .timeElapsed)
 
-        try? realm.write {
+        realm.execute({ _ in
             auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
-        }
+        })
 
         XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
     // swiftlint:disable function_body_length
     func testCanEditMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -221,62 +216,62 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         // standard test
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth)
             realm.add(user1)
             realm.add(user2)
 
             auth.settings?.messageAllowEditing = true
             auth.settings?.messageAllowEditingBlockEditInMinutes = 0
-        }
+        })
 
         XCTAssert(auth.canEditMessage(message) == .allowed)
 
         // invalid message
 
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = nil
-        }
+        })
 
         XCTAssert(auth.canEditMessage(message) == .unknown)
 
         // non actionable message type
 
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssert(auth.canEditMessage(message) == .notActionable)
 
         // time elapsed
 
-        try? realm.write {
+        realm.execute({ _ in
             message.internalType = MessageType.text.rawValue
             message.createdAt = Date(timeInterval: -1000, since: Date())
             auth.settings?.messageAllowEditingBlockEditInMinutes = 1
-        }
+        })
 
         XCTAssert(auth.canEditMessage(message) == .timeElapsed)
 
         // different user
 
-        try? realm.write {
-            message.user = user2
-        }
+        realm.execute({ _ in
+            message.userIdentifier = user2.identifier
+        })
 
         XCTAssert(auth.canEditMessage(message) == .differentUser)
 
         // server blocked
 
-        try? realm.write {
+        realm.execute({ _ in
             auth.settings?.messageAllowEditing = false
-            message.user = user1
-        }
+            message.userIdentifier = user1.identifier
+        })
 
         XCTAssert(auth.canEditMessage(message) == .serverBlocked)
 
@@ -286,17 +281,20 @@ class AuthSpec: XCTestCase, RealmTestCase {
         permission.identifier = PermissionType.editMessage.rawValue
         permission.roles.append("admin")
 
-        try? realm.write {
+        realm.execute({ _ in
             user1.roles.append("admin")
-            message.user = user2
+            message.userIdentifier = user2.identifier
             realm.add(permission)
-        }
+        })
 
         XCTAssert(auth.canEditMessage(message) == .allowed)
     }
 
     func testCanBlockMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -309,39 +307,42 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user2
+        message.userIdentifier = user2.identifier
 
         // block-message
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(auth)
             realm.add(user1)
             realm.add(user2)
-        }
+        })
 
         XCTAssert(auth.canBlockMessage(message) == .allowed)
 
         // my own message
 
-        try? realm.write {
-            message.user = user1
-        }
+        realm.execute({ _ in
+            message.userIdentifier = user1.identifier
+        })
 
         XCTAssert(auth.canBlockMessage(message) == .myOwn)
 
         // non actionable message type
 
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssert(auth.canBlockMessage(message) == .notActionable)
 
     }
 
     func testCanPinMessage() {
-        let realm = testRealm()
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
 
         let user1 = User.testInstance()
         user1.identifier = "uid1"
@@ -356,46 +357,46 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user1
+        message.userIdentifier = user1.identifier
 
         let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.pinMessage.rawValue
         permission.roles.append("admin")
 
-        try? realm.write {
+        realm.execute({ _ in
             realm.add(permission)
             realm.add(auth)
             realm.add(user1)
             realm.add(user2)
 
             auth.settings?.messageAllowPinning = true
-        }
+        })
 
         // User & Server have permission
         XCTAssertEqual(auth.canPinMessage(message), .allowed)
 
         // Message is not actionable
-        try? realm.write {
+        realm.execute({ _ in
             message.createdAt = Date()
             message.internalType = MessageType.userJoined.rawValue
-        }
+        })
 
         XCTAssertEqual(auth.canPinMessage(message), .notActionable)
 
         // Server permission doesn't allow to pin
-        try? realm.write {
+        realm.execute({ _ in
             auth.settings?.messageAllowPinning = false
-            message.user = user1
+            message.userIdentifier = user1.identifier
             message.internalType = MessageType.text.rawValue
-        }
+        })
 
         XCTAssertEqual(auth.canPinMessage(message), .notAllowed)
 
         // User without the role required but server allows to
-        try? realm.write {
+        realm.execute({ _ in
             user1.roles.removeAll()
             auth.settings?.messageAllowPinning = true
-        }
+        })
 
         XCTAssertEqual(auth.canPinMessage(message), .notAllowed)
     }

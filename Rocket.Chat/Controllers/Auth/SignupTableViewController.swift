@@ -248,9 +248,9 @@ final class SignupTableViewController: BaseTableViewController {
             stopLoading()
             switch response {
             case .resource(let resource):
-                try? realm?.write {
+                Realm.executeOnMainThread(realm: realm) { realm in
                     if let user = resource.user {
-                        realm?.add(user, update: true)
+                        realm.add(user, update: true)
                     }
                 }
 
@@ -334,4 +334,10 @@ extension SignupTableViewController: UITextFieldDelegate {
         let nextTextField = view.viewWithTag(textField.tag + 1) as? UITextField
         nextTextField?.becomeFirstResponder()
     }
+}
+
+// MARK: Disable Theming
+
+extension SignupTableViewController {
+    override func applyTheme() { }
 }

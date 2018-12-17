@@ -41,7 +41,7 @@ class LoginTableViewController: BaseTableViewController {
             let prefix = NSAttributedString(
                 string: localized("auth.login.create_account_prefix"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCTextFieldGray()
                 ]
             )
@@ -49,7 +49,7 @@ class LoginTableViewController: BaseTableViewController {
             let createAccount = NSAttributedString(
                 string: localized("auth.login.create_account"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold),
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                     NSAttributedString.Key.foregroundColor: UIColor.RCSkyBlue()
                 ]
             )
@@ -78,7 +78,7 @@ class LoginTableViewController: BaseTableViewController {
     }
 
     var serverVersion: Version?
-    var serverURL: URL!
+    var serverURL: URL?
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
 
@@ -101,7 +101,7 @@ class LoginTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = serverURL.host
+        navigationItem.title = serverURL?.host
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -120,7 +120,6 @@ class LoginTableViewController: BaseTableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         textFieldUsername.becomeFirstResponder()
     }
 
@@ -172,15 +171,14 @@ class LoginTableViewController: BaseTableViewController {
 
     @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
         let siteURL = serverPublicSettings?.siteURL ?? ""
-        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
-            if login == nil {
-                return
-            }
 
-            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
-            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
-            self?.temporary2FACode = login?[AppExtensionTOTPKey] as? String
-            self?.authenticateWithUsernameOrEmail()
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { (login, error) in
+            guard error == nil, let login = login else { return }
+
+            self.textFieldUsername.text = login[AppExtensionUsernameKey] as? String
+            self.textFieldPassword.text = login[AppExtensionPasswordKey] as? String
+            self.temporary2FACode = login[AppExtensionTOTPKey] as? String
+            self.authenticateWithUsernameOrEmail()
         }
     }
 
@@ -216,6 +214,7 @@ class LoginTableViewController: BaseTableViewController {
             textField.placeholder = "john.appleseed@apple.com"
             textField.textContentType = UITextContentType.emailAddress
             textField.keyboardType = .emailAddress
+            textField.clearButtonMode = .whileEditing
 
             _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
                 sendAction.isEnabled = textField.text?.isValidEmail ?? false
@@ -310,4 +309,10 @@ extension LoginTableViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+// MARK: Disable Theming
+
+extension LoginTableViewController {
+    override func applyTheme() { }
 }

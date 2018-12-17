@@ -129,7 +129,7 @@ class FilesListViewController: BaseViewController {
         guard let fileURL = file.fullFileURL() else { return }
 
         let open: ((Image?) -> Void) = { [weak self] image in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             let configuration = ImageViewerConfiguration { config in
                 if let image = image {
@@ -143,8 +143,8 @@ class FilesListViewController: BaseViewController {
             }
 
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: strongSelf.view, animated: true)
-                strongSelf.present(ImageViewerController(configuration: configuration), animated: false)
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.present(ImageViewerController(configuration: configuration), animated: false)
             }
         }
 
@@ -189,8 +189,8 @@ class FilesListViewController: BaseViewController {
             // Download file and cache it to be used later
             DownloadManager.download(url: fileURL, to: localFileURL) { [weak self] in
                 DispatchQueue.main.async {
-                    guard let strongSelf = self else { return }
-                    MBProgressHUD.hide(for: strongSelf.view, animated: true)
+                    guard let self = self else { return }
+                    MBProgressHUD.hide(for: self.view, animated: true)
                     open()
                 }
             }

@@ -27,6 +27,8 @@ extension Message: ModelMappeable {
         self.pinned = values["pinned"].bool ?? false
         self.unread = values["unread"].bool ?? false
         self.groupable = values["groupable"].bool ?? true
+        self.snippetName = values["snippetName"].string
+        self.snippetId = values["snippetId"].string
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
@@ -45,18 +47,19 @@ extension Message: ModelMappeable {
         }
 
         if let userIdentifier = values["u"]["_id"].string {
+            self.userIdentifier = userIdentifier
+            self.userBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
+
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
-                    self.user = user
+                    user.map(values["u"], realm: realm)
+                    realm.add(user, update: true)
                 } else {
                     let user = User()
                     user.map(values["u"], realm: realm)
-                    self.user = user
+                    realm.add(user, update: true)
                 }
             }
-
-            let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
-            self.userBlocked = isBlocked
         }
 
         // Starred
@@ -70,9 +73,30 @@ extension Message: ModelMappeable {
             self.attachments.removeAll()
 
             attachments.forEach {
-                let obj = Attachment()
-                obj.map($0, realm: realm)
-                self.attachments.append(obj)
+                guard var attachmentValue = try? $0.merged(with: JSON(dictionaryLiteral: ("messageIdentifier", values["_id"].stringValue))) else {
+                    return
+                }
+
+                if let realm = realm {
+                    var obj: Attachment!
+
+                    // FA NOTE: We are not using Object.getOrCreate method here on purpose since
+                    // we have to map the local modifications before mapping the current JSON on the object.
+                    if let primaryKey = attachmentValue.rawString()?.md5(), let existingObj = realm.object(ofType: Attachment.self, forPrimaryKey: primaryKey) {
+                        obj = existingObj
+                        attachmentValue["collapsed"] = JSON(existingObj.collapsed)
+                    } else {
+                        obj = Attachment()
+                    }
+
+                    obj.map(attachmentValue, realm: realm)
+                    realm.add(obj, update: true)
+                    self.attachments.append(obj)
+                } else {
+                    let obj = Attachment()
+                    obj.map(attachmentValue, realm: realm)
+                    self.attachments.append(obj)
+                }
             }
         }
 

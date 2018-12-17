@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlackTextViewController
 
 protocol KeyboardFrameViewDelegate: class {
     func keyboardDidChangeFrame(frame: CGRect?)

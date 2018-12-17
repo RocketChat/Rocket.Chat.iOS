@@ -24,11 +24,14 @@ extension Subscription {
      - returns: the last message text for the Message object, after being processed.
      */
     static func lastMessageText(lastMessage: Message) -> String {
-        guard let userLastMessage = lastMessage.user else {
+        guard
+            let userLastMessage = lastMessage.user,
+            let lastMessageUnmanaged = lastMessage.unmanaged
+        else {
             return localized("subscriptions.list.no_message")
         }
 
-        var text = MessageTextCacheManager.shared.message(for: lastMessage)?.string ?? lastMessage.text
+        var text = MessageTextCacheManager.shared.message(for: lastMessageUnmanaged)?.string ?? lastMessage.text
         text = text.components(separatedBy: .newlines)
             .joined(separator: " ")
             .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)

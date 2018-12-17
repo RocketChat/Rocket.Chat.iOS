@@ -8,13 +8,18 @@
 
 import XCTest
 import SwiftyJSON
+import RealmSwift
 
 @testable import Rocket_Chat
 
-class CommandsClientSpec: XCTestCase, RealmTestCase {
+class CommandsClientSpec: XCTestCase {
     func testFetchCommands() {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let api = MockAPI()
-        let realm = testRealm()
         let client = CommandsClient(api: api)
 
         api.nextResult = JSON([
@@ -31,14 +36,7 @@ class CommandsClientSpec: XCTestCase, RealmTestCase {
         ])
 
         client.fetchCommands(realm: realm)
-
-        let expectation = XCTestExpectation(description: "two commands added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            if realm.objects(Command.self).count == 2 {
-                expectation.fulfill()
-            }
-        })
-        wait(for: [expectation], timeout: 3)
+        XCTAssertEqual(realm.objects(Command.self).count, 2)
     }
 
     func testRunCommand() {

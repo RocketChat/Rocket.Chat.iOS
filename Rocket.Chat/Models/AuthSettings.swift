@@ -21,6 +21,8 @@ struct AuthSettingsDefaults {
 }
 
 final class AuthSettings: Object {
+    @objc dynamic var identifier: String = String.random()
+
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
 
@@ -114,4 +116,8 @@ final class AuthSettings: Object {
 
     // Custom fields
     @objc dynamic var rawCustomFields: String?
+
+    override static func primaryKey() -> String? {
+        return "identifier"
+    }
 }

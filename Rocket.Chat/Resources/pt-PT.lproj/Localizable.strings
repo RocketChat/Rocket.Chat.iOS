@@ -202,12 +202,12 @@
 "chat.read_only" = "Esta sala é apenas de leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
-"chat.unread_separator" = "novas mensagens";
-"chat.preview.actions.read" = "Mark as read"; // TODO
-"chat.preview.actions.unread" = "Mark as unread"; // TODO
-"chat.preview.actions.favorite" = "Favorite"; // TODO
-"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
-"chat.preview.actions.hide" = "Hide"; // TODO
+"chat.unread_separator" = "Novas Mensagens";
+"chat.preview.actions.read" = "Marcar como lido";
+"chat.preview.actions.unread" = "Marcar como não lido";
+"chat.preview.actions.favorite" = "Favoritar";
+"chat.preview.actions.unfavorite" = "Desfavoritar";
+"chat.preview.actions.hide" = "Esconder";
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Lida por";
@@ -237,7 +237,6 @@
 "chat.message.actions.discard.confirm.yes" = "Sim, descartar";
 "chat.message.actions.resend" = "Reeenviar";
 "chat.message.actions.resend_all" = "Reenviar todas";
-"Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Mensagem Relatada";
@@ -269,6 +268,12 @@
 "chat.drawing.settings.color.selected" = "Cor seleccionada";
 "chat.drawing.settings.color.others" = "Escolha uma cor abaixo:";
 
+// Chat Typing
+"chat.users_are_typing" = "%@ are typing..."; // TODO
+"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.typing" = "typing..."; // TODO
+"chat.several_typing" = "several users are typing..."; // TODO
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterado para: %@ por %@";
 "chat.message.type.user_added_by" = "Utilizador %@ adicionado por %@";
@@ -284,6 +289,11 @@
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
 "chat.message.type.message_pinned" = "Fixou uma mensagem:";
+"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
+"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
+"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -330,6 +340,8 @@
 "myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
 "myaccount.settings.language" = "Idioma";
+"myaccount.settings.review" = "Avalie este App";
+"myaccount.settings.share" = "Compartilhe este App";
 "myaccount.settings.appicon" = "Ícone da Aplicação";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.server_version" = "Versão do Servidor: %@";
@@ -467,19 +479,26 @@
 "subscriptions.grouping.unread_top" = "Não lidas no topo";
 
 // Shortcuts
-"shortcuts.type_message" = "Type message"; //TODO
-"shortcuts.preferences" = "Preferences"; //TODO
-"shortcuts.room_search" = "Rooms search"; //TODO
-"shortcuts.room_selection" = "Room selection 1...9"; //TODO
-"shortcuts.next_room" = "Next room"; //TODO
-"shortcuts.previous_room" = "Previous room"; //TODO
-"shortcuts.new_room" = "New room"; //TODO
-"shortcuts.room_actions" = "Room actions"; //TODO
-"shortcuts.upload_room" = "Upload to room"; //TODO
-"shortcuts.search_messages" = "Search messages"; //TODO
-"shortcuts.scroll_messages" = "Scroll messages"; //TODO
-"shortcuts.reply_latest" = "Reply to latest"; //TODO
-"shortcuts.server_selection" = "Server selection"; //TODO
-"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
-"shortcuts.add_server" = "Add server"; //TODO
-"shortcuts.change_theme" = "Change theme"; //TODO
+"shortcuts.type_message" = "Escrever mensagem";
+"shortcuts.preferences" = "Preferências";
+"shortcuts.room_search" = "Buscas canais";
+"shortcuts.room_selection" = "Selecionar canal 1...9";
+"shortcuts.next_room" = "Próximo canal";
+"shortcuts.previous_room" = "Canal anterior";
+"shortcuts.new_room" = "Novo canal";
+"shortcuts.room_actions" = "Ações do canal";
+"shortcuts.upload_room" = "Fazer upload";
+"shortcuts.search_messages" = "Procurar mensagens";
+"shortcuts.scroll_messages" = "Rolar mensagens";
+"shortcuts.reply_latest" = "Responder à última";
+"shortcuts.server_selection" = "Selecionar servidor";
+"shortcuts.server_selection_numbers" = "Selecionar servidor 1...9";
+"shortcuts.add_server" = "Adicionar servidor";
+"shortcuts.change_theme" = "Mudar tema";
+"shortcuts.send" = "Enviar";
+"shortcuts.new_line" = "Nova linha";
+
+// Chat Components
+"chat.components.quote.replied" = "Respondido";
+"chat.components.quote.pinned" = "Pinado";
+"chat.components.text_attachment.no_title" = "No title"; //TODO

@@ -23,7 +23,12 @@ extension User {
     }
 }
 
-class UserSpec: XCTestCase, RealmTestCase {
+class UserSpec: XCTestCase {
+
+    override func tearDown() {
+        super.tearDown()
+        Realm.clearDatabase()
+    }
 
     func testUserObject() {
         let object = User()
@@ -157,6 +162,11 @@ class UserSpec: XCTestCase, RealmTestCase {
     }
 
     func testUserCanViewAdminPanelTrue() throws {
+        guard let realm = Realm.current else {
+            XCTFail("realm could not be instantiated")
+            return
+        }
+
         let user = User.testInstance()
         user.roles.removeAll()
         user.roles.append("admin")
@@ -167,11 +177,10 @@ class UserSpec: XCTestCase, RealmTestCase {
         permission.identifier = permissionType.rawValue
         permission.roles.append("admin")
 
-        let realm = testRealm()
-        try realm.write {
+        realm.execute({ realm in
             realm.add(user)
             realm.add(permission)
-        }
+        })
 
         XCTAssertTrue(user.canViewAdminPanel(realm: realm), "user cannot view admin panel by default")
     }

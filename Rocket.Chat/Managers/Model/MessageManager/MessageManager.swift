@@ -12,7 +12,7 @@ import RealmSwift
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
 struct MessageManager {
-    static let historySize = 60
+    static let historySize = 30
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
@@ -21,7 +21,7 @@ extension MessageManager {
 
     static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
+    static func getHistory(_ subscription: UnmanagedSubscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -45,26 +45,12 @@ extension MessageManager {
             }
 
             let list = response.result["result"]["messages"].array
-            let subscriptionIdentifier = subscription.identifier
 
             currentRealm?.execute({ (realm) in
-                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
-
                 list?.forEach { object in
-                    let mockNewMessage = Message()
-                    mockNewMessage.map(object, realm: realm)
-
-                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: object["identifier"].stringValue) {
-                        if existingMessage.updatedAt?.timeIntervalSince1970 == mockNewMessage.updatedAt?.timeIntervalSince1970 {
-                            return
-                        }
-                    }
-
-                    let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.subscription = detachedSubscription
-                    })
-
+                    let message = Message.getOrCreate(realm: realm, values: object, updates: nil)
                     realm.add(message, update: true)
+
                     lastMessageDate = message.createdAt
                 }
             }, completion: {
@@ -95,7 +81,7 @@ extension MessageManager {
             currentRealm?.execute({ (realm) in
                 guard let detachedSubscription = Subscription.find(rid: subscriptionIdentifier, realm: realm) else { return }
                 let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.subscription = detachedSubscription
+                    object?.rid = detachedSubscription.rid
                 })
 
                 message.temporary = false
@@ -127,7 +113,7 @@ extension MessageManager {
         }
     }
 
-    static func subscribeDeleteMessage(_ subscription: Subscription, completion: @escaping (_ msgId: String) -> Void) {
+    static func subscribeDeleteMessage(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)/deleteMessage"
         let request = [
             "msg": "sub",
@@ -144,7 +130,6 @@ extension MessageManager {
                 currentRealm?.execute({ realm in
                     guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
                     realm.delete(message)
-                    completion(msgId)
                 })
             }
         }

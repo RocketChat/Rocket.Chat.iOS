@@ -128,7 +128,41 @@ extension Message {
             )
 
         case .messagePinned:
-            return localized("chat.message.type.message_pinned")
+            return ""
+
+        case .messageSnippeted:
+            return String(
+                format: localized("chat.message.type.message_snippeted"),
+                self.snippetName ?? ""
+            )
+
+        case .roomChangedPrivacy:
+            return String(
+                format: localized("chat.message.type.room_changed_privacy"),
+                text,
+                self.user?.displayName() ?? ""
+            )
+
+        case .roomChangedTopic:
+            return String(
+                format: localized("chat.message.type.room_changed_topic"),
+                text,
+                self.user?.displayName() ?? ""
+            )
+
+        case .roomChangedAnnouncement:
+            return String(
+                format: localized("chat.message.type.room_changed_announcement"),
+                text,
+                self.user?.displayName() ?? ""
+            )
+
+        case .roomChangedDescription:
+            return String(
+                format: localized("chat.message.type.room_changed_description"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
         default:
             break

@@ -13,17 +13,6 @@ import RealmSwift
 
 class NotificationManagerSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
-        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
-        Realm.Configuration.defaultConfiguration = uniqueConfiguration
-
-        Realm.executeOnMainThread({ (realm) in
-            realm.deleteAll()
-        })
-    }
-
     let notification = ChatNotification(
         title: "#general",
         body: "Hey!",
@@ -66,16 +55,16 @@ class NotificationManagerSpec: XCTestCase {
         WindowManager.open(.chat)
 
         let rid = "UUUUUUUUUU"
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             let object = Subscription()
             object.rid = rid
             realm.add(object, update: true)
-        }
+        })
 
-        var controller: ChatViewController?
+        var controller: MessagesViewController?
         if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {
             if let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController {
-                if let chatController = nav.viewControllers.first as? ChatViewController {
+                if let chatController = nav.viewControllers.first as? MessagesViewController {
                     chatController.subscription = subscription
                     controller = chatController
                 }
@@ -97,11 +86,11 @@ class NotificationManagerSpec: XCTestCase {
         WindowManager.open(.subscriptions)
 
         let rid = "UUUUUUUUUU"
-        Realm.executeOnMainThread { (realm) in
+        Realm.execute({ (realm) in
             let object = Subscription()
             object.rid = rid
             realm.add(object, update: true)
-        }
+        })
 
         if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {
             AppManager.open(room: subscription)
@@ -115,9 +104,11 @@ class NotificationManagerSpec: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
+        Realm.clearDatabase()
         NotificationManager.shared.notification = nil
         NotificationViewController.shared.timer?.fire()
         NotificationViewController.shared.timer = nil
         WindowManager.open(.auth(serverUrl: "", credentials: nil))
     }
+
 }

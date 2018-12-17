@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" id="vvK-ye-eha" customClass="VideoCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkP-qc-xhD">
+                        <rect key="frame" x="71" y="181" width="288" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lJV-2q-EuX">
+                        <rect key="frame" x="71" y="5" width="282" height="166"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="lJV-2q-EuX" secondAttribute="height" multiplier="141:83" id="qn3-oy-ySj"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TD5-bD-C42">
+                        <rect key="frame" x="71" y="5" width="282" height="166"/>
+                        <state key="normal" image="Player Video"/>
+                        <connections>
+                            <action selector="buttonImageHandlerDidPressed:" destination="vvK-ye-eha" eventType="touchUpInside" id="MIU-Qh-bD9"/>
+                            <action selector="buttonPlayDidPressed:" destination="vvK-ye-eha" eventType="touchUpInside" id="owI-CM-xxF"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nr4-Rv-usg">
+                        <rect key="frame" x="202" y="78" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="0Hp-fy-9iv"/>
+                            <constraint firstAttribute="width" constant="20" id="5f8-7t-zem"/>
+                        </constraints>
+                    </activityIndicatorView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="TD5-bD-C42" firstAttribute="height" secondItem="lJV-2q-EuX" secondAttribute="height" id="0I7-lY-32E"/>
+                <constraint firstItem="TD5-bD-C42" firstAttribute="top" secondItem="lJV-2q-EuX" secondAttribute="top" id="2x6-HM-5Xy"/>
+                <constraint firstItem="lJV-2q-EuX" firstAttribute="leading" secondItem="vvK-ye-eha" secondAttribute="leadingMargin" constant="55" id="8bc-FZ-biK"/>
+                <constraint firstAttribute="trailingMargin" secondItem="lJV-2q-EuX" secondAttribute="trailing" constant="6" id="Ggk-nL-wMB"/>
+                <constraint firstItem="lJV-2q-EuX" firstAttribute="top" secondItem="vvK-ye-eha" secondAttribute="top" constant="5" id="H0V-eX-oa1"/>
+                <constraint firstAttribute="bottom" secondItem="lkP-qc-xhD" secondAttribute="bottom" constant="9" id="HXK-cg-RFS"/>
+                <constraint firstItem="TD5-bD-C42" firstAttribute="leading" secondItem="lJV-2q-EuX" secondAttribute="leading" id="K9g-kI-cCC"/>
+                <constraint firstItem="Nr4-Rv-usg" firstAttribute="centerX" secondItem="lJV-2q-EuX" secondAttribute="centerX" id="P64-fU-T8Y"/>
+                <constraint firstAttribute="trailingMargin" secondItem="lkP-qc-xhD" secondAttribute="trailing" id="TaZ-Sz-iVh"/>
+                <constraint firstItem="Nr4-Rv-usg" firstAttribute="centerY" secondItem="lJV-2q-EuX" secondAttribute="centerY" id="Xho-hV-xD1"/>
+                <constraint firstItem="TD5-bD-C42" firstAttribute="width" secondItem="lJV-2q-EuX" secondAttribute="width" id="emF-6M-fzA"/>
+                <constraint firstItem="lJV-2q-EuX" firstAttribute="width" secondItem="vvK-ye-eha" secondAttribute="width" multiplier="0.752" id="hYU-e0-ISQ"/>
+                <constraint firstItem="lkP-qc-xhD" firstAttribute="top" secondItem="lJV-2q-EuX" secondAttribute="bottom" constant="10" id="sfX-NC-J8f"/>
+                <constraint firstItem="lkP-qc-xhD" firstAttribute="leading" secondItem="lJV-2q-EuX" secondAttribute="leading" id="uYg-gd-auC"/>
+                <constraint firstItem="TD5-bD-C42" firstAttribute="trailing" secondItem="lJV-2q-EuX" secondAttribute="trailing" id="xQR-F6-Jx3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="x6W-wy-Pqf"/>
+            <size key="customSize" width="375" height="11"/>
+            <connections>
+                <outlet property="activityIndicatorView" destination="Nr4-Rv-usg" id="ZkT-wr-bwH"/>
+                <outlet property="buttonPlayer" destination="TD5-bD-C42" id="I0X-GE-6bA"/>
+                <outlet property="imageViewThumb" destination="lJV-2q-EuX" id="Zmd-VY-zLh"/>
+                <outlet property="labelDescription" destination="lkP-qc-xhD" id="suo-Lk-QiI"/>
+                <outlet property="labelDescriptionTopConstraint" destination="sfX-NC-J8f" id="hG7-S4-H2s"/>
+            </connections>
+            <point key="canvasLocation" x="28" y="-196.10194902548727"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Player Video" width="54" height="54"/>
+    </resources>
+</document>

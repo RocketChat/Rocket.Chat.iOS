@@ -13,36 +13,144 @@ import UIKit
 extension MainSplitViewController {
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "\t", modifierFlags: [], action: #selector(shortcutFocusOnComposer(_:)), discoverabilityTitle: localized("shortcuts.type_message")),
-            UIKeyCommand(input: "p", modifierFlags: .command, action: #selector(shortcutTogglePreferences(_:)), discoverabilityTitle: localized("shortcuts.preferences")),
-            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(shortcutRoomSearch(_:)), discoverabilityTitle: localized("shortcuts.room_search")),
-            UIKeyCommand(input: "1...9", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.room_selection")),
-            UIKeyCommand(input: "]", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.next_room")),
-            UIKeyCommand(input: "[", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.previous_room")),
-            UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)), discoverabilityTitle: localized("shortcuts.new_room")),
-            UIKeyCommand(input: "i", modifierFlags: .command, action: #selector(shortcutRoomActions(_:)), discoverabilityTitle: localized("shortcuts.room_actions")),
-            UIKeyCommand(input: "u", modifierFlags: .command, action: #selector(shortcutUpload(_:)), discoverabilityTitle: localized("shortcuts.upload_room")),
-            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(shortcutRoomMessageSearch(_:)), discoverabilityTitle: localized("shortcuts.search_messages")),
-            UIKeyCommand(input: "↑ ↓", modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:)), discoverabilityTitle: localized("shortcuts.scroll_messages")),
-            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .alternate, action: #selector(shortcutScrollMessages(_:))),
-            UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(shortcutReplyLatest(_:)), discoverabilityTitle: localized("shortcuts.reply_latest")),
-            UIKeyCommand(input: "`", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection")),
-            UIKeyCommand(input: "1...9", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.server_selection_numbers")),
-            UIKeyCommand(input: "n", modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)), discoverabilityTitle: localized("shortcuts.add_server"))
+            UIKeyCommand(
+                input: "\t",
+                modifierFlags: [],
+                action: #selector(shortcutFocusOnComposer(_:)),
+                discoverabilityTitle: localized("shortcuts.type_message")
+            ),
+            UIKeyCommand(
+                input: "p",
+                modifierFlags: .command,
+                action: #selector(shortcutTogglePreferences(_:)),
+                discoverabilityTitle: localized("shortcuts.preferences")
+            ),
+            UIKeyCommand(
+                input: "f",
+                modifierFlags: [.command, .alternate],
+                action: #selector(shortcutRoomSearch(_:)),
+                discoverabilityTitle: localized("shortcuts.room_search")
+            ),
+            UIKeyCommand(
+                input: "1...9",
+                modifierFlags: .command,
+                action: #selector(shortcutSelectRoom(_:)),
+                discoverabilityTitle: localized("shortcuts.room_selection")
+            ),
+            UIKeyCommand(
+                input: "]",
+                modifierFlags: .command,
+                action: #selector(shortcutSelectRoom(_:)),
+                discoverabilityTitle: localized("shortcuts.next_room")
+            ),
+            UIKeyCommand(
+                input: "[",
+                modifierFlags: .command,
+                action: #selector(shortcutSelectRoom(_:)),
+                discoverabilityTitle: localized("shortcuts.previous_room")
+            ),
+            UIKeyCommand(
+                input: "n",
+                modifierFlags: .command,
+                action: #selector(shortcutSelectRoom(_:)),
+                discoverabilityTitle: localized("shortcuts.new_room")
+            ),
+            UIKeyCommand(
+                input: "i",
+                modifierFlags: .command,
+                action: #selector(shortcutRoomActions(_:)),
+                discoverabilityTitle: localized("shortcuts.room_actions")
+            ),
+            UIKeyCommand(
+                input: "u",
+                modifierFlags: .command,
+                action: #selector(shortcutUpload(_:)),
+                discoverabilityTitle: localized("shortcuts.upload_room")
+            ),
+            UIKeyCommand(
+                input: "f",
+                modifierFlags: .command,
+                action: #selector(shortcutRoomMessageSearch(_:)),
+                discoverabilityTitle: localized("shortcuts.search_messages")
+            ),
+            UIKeyCommand(
+                input: "↑ ↓",
+                modifierFlags: .alternate,
+                action: #selector(shortcutScrollMessages(_:)),
+                discoverabilityTitle: localized("shortcuts.scroll_messages")
+            ),
+            UIKeyCommand(
+                input: UIKeyCommand.inputUpArrow,
+                modifierFlags: .alternate,
+                action: #selector(shortcutScrollMessages(_:))
+            ),
+            UIKeyCommand(
+                input: UIKeyCommand.inputDownArrow,
+                modifierFlags: .alternate,
+                action: #selector(shortcutScrollMessages(_:))
+            ),
+            UIKeyCommand(
+                input: "r",
+                modifierFlags: .command,
+                action: #selector(shortcutReplyLatest(_:)),
+                discoverabilityTitle: localized("shortcuts.reply_latest")
+            ),
+            UIKeyCommand(
+                input: "`",
+                modifierFlags: [.command, .alternate],
+                action: #selector(shortcutSelectServer(_:)),
+                discoverabilityTitle: localized("shortcuts.server_selection")),
+            UIKeyCommand(
+                input: "1...9",
+                modifierFlags: [.command, .alternate],
+                action: #selector(shortcutSelectServer(_:)),
+                discoverabilityTitle: localized("shortcuts.server_selection_numbers")
+            ),
+            UIKeyCommand(
+                input: "n",
+                modifierFlags:
+                [.command, .alternate],
+                action: #selector(shortcutSelectServer(_:)),
+                discoverabilityTitle: localized("shortcuts.add_server")
+            )
             ] + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
-                UIKeyCommand(input: input, modifierFlags: .command, action: #selector(shortcutSelectRoom(_:)))
+                UIKeyCommand(
+                    input: input,
+                    modifierFlags: .command,
+                    action: #selector(shortcutSelectRoom(_:))
+                )
             } + ((0...9).map({ "\($0)" })).map { (input: String) -> UIKeyCommand in
-                UIKeyCommand(input: input, modifierFlags: [.command, .alternate], action: #selector(shortcutSelectServer(_:)))
+                UIKeyCommand(
+                    input: input,
+                    modifierFlags: [.command, .alternate],
+                    action: #selector(shortcutSelectServer(_:))
+                )
             } + [
-                UIKeyCommand(input: "t", modifierFlags: .command, action: #selector(shortcutChangeTheme(_:)), discoverabilityTitle: localized("shortcuts.change_theme"))
+                UIKeyCommand(
+                    input: "t",
+                    modifierFlags: .command,
+                    action: #selector(shortcutChangeTheme(_:)),
+                    discoverabilityTitle: localized("shortcuts.change_theme")
+                ),
+                UIKeyCommand(
+                    input: "\r",
+                    modifierFlags: [],
+                    action: #selector(shortcutSend(_:)),
+                    discoverabilityTitle: localized("shortcuts.send")
+                ),
+                UIKeyCommand(
+                    input: "\r",
+                    modifierFlags: .alternate,
+                    action: #selector(shortcutNewline(_:)),
+                    discoverabilityTitle: localized("shortcuts.new_line")
+                )
         ]
     }
 
     @objc func shortcutFocusOnComposer(_ command: UIKeyCommand) {
         guard
             !isPresenting,
-            let textView = chatViewController?.textInputbar.textView
+            let textView = chatViewController?.composerView.textView
         else {
             return
         }
@@ -52,7 +160,8 @@ extension MainSplitViewController {
         } else {
             textView.becomeFirstResponder()
             subscriptionsViewController?.searchController?.dismiss(animated: true) { [weak self] in
-                self?.chatViewController?.keyboardFrame?.updateFrame()
+                self?.chatViewController?.becomeFirstResponder()
+                textView.becomeFirstResponder()
             }
         }
     }
@@ -154,14 +263,14 @@ extension MainSplitViewController {
         guard
             !isPresenting,
             let input = command.input,
-            let offset = chatViewController?.collectionView?.contentOffset,
-            let maxHeight = chatViewController?.collectionView?.contentSize.height,
+            let offset = chatViewController?.collectionView.contentOffset,
+            let maxHeight = chatViewController?.collectionView.contentSize.height,
             let collectionView = chatViewController?.collectionView
         else {
             return
         }
 
-        let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? -50.0 : 50.0
+        let heightDelta: CGFloat = input == UIKeyCommand.inputUpArrow ? 50.0 : -50.0
 
         UIView.animate(withDuration: 0.1, animations: { [weak collectionView] in
             let offset = min(offset.y + heightDelta, maxHeight)
@@ -187,5 +296,24 @@ extension MainSplitViewController {
                 ThemeManager.theme = ThemeManager.themes.first?.theme ?? .light
             }
         }
+    }
+
+    @objc func shortcutSend(_ command: UIKeyCommand) {
+        guard
+            !isPresenting,
+            let controller = chatViewController
+        else {
+            return
+        }
+
+        controller.sendButtonPressed()
+    }
+
+    @objc func shortcutNewline(_ command: UIKeyCommand) {
+        guard !isPresenting else {
+            return
+        }
+
+        chatViewController?.composerView.textView.text += "\n"
     }
 }

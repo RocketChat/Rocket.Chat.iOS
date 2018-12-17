@@ -10,10 +10,8 @@ import UIKit
 
 struct MessageTextFontAttributes {
 
-    static let defaultFontSize = CGFloat(15)
-
     static func defaultFontColor(for theme: Theme? = nil) -> UIColor {
-        return theme?.controlText ?? ThemeManager.theme.controlText
+        return theme?.bodyText ?? ThemeManager.theme.bodyText
     }
 
     static func systemFontColor(for theme: Theme? = ThemeManager.theme) -> UIColor {
@@ -24,8 +22,72 @@ struct MessageTextFontAttributes {
         return theme?.auxiliaryText ?? ThemeManager.theme.auxiliaryText
     }
 
-    static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)
-    static let italicFont = UIFont.italicSystemFont(ofSize: defaultFontSize)
-    static let boldFont = UIFont.boldSystemFont(ofSize: defaultFontSize)
+    static var defaultFont: UIFont {
+        let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        let font = UIFont(descriptor: defaultFontDescriptor, size: 0)
+
+        if #available(iOS 11.0, *) {
+            return UIFontMetrics.default.scaledFont(for: font)
+        } else {
+            return font
+        }
+    }
+
+    static var italicFont: UIFont {
+        let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        let fontDescriptor = defaultFontDescriptor.withSymbolicTraits(.traitItalic)
+
+        let font: UIFont
+
+        if let fontDescriptor = fontDescriptor {
+            font = UIFont(descriptor: fontDescriptor, size: 0)
+        } else {
+            font = UIFont.italicSystemFont(ofSize: 16)
+        }
+
+        if #available(iOS 11.0, *) {
+            return UIFontMetrics.default.scaledFont(for: font)
+        } else {
+            return font
+        }
+    }
+
+    static var boldFont: UIFont {
+        let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        let fontDescriptor = defaultFontDescriptor.withSymbolicTraits(.traitBold)
+
+        let font: UIFont
+
+        if let fontDescriptor = fontDescriptor {
+            font = UIFont(descriptor: fontDescriptor, size: 0)
+        } else {
+            font = UIFont.italicSystemFont(ofSize: 16)
+        }
+
+        if #available(iOS 11.0, *) {
+            return UIFontMetrics.default.scaledFont(for: font)
+        } else {
+            return font
+        }
+    }
+
+    static var monoSpacedFont: UIFont {
+        let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        let fontDescriptor = defaultFontDescriptor.withSymbolicTraits(.traitMonoSpace)?.withSymbolicTraits(.traitBold)
+
+        let font: UIFont
+
+        if let fontDescriptor = fontDescriptor {
+            font = UIFont(descriptor: fontDescriptor, size: 0)
+        } else {
+            font = UIFont.italicSystemFont(ofSize: 16)
+        }
+
+        if #available(iOS 11.0, *) {
+            return UIFontMetrics.default.scaledFont(for: font)
+        } else {
+            return font
+        }
+    }
 
 }

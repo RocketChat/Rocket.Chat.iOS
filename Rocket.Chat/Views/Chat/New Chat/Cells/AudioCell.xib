@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fPh-Fy-OLx" customClass="AudioCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he5-oi-hGX">
+                        <rect key="frame" x="71" y="5" width="270" height="54"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Rf-vx-LhR">
+                                <rect key="frame" x="10" y="9" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="5en-W7-JkN"/>
+                                    <constraint firstAttribute="width" constant="36" id="vSA-6g-1ke"/>
+                                </constraints>
+                                <state key="normal" image="Player Play"/>
+                                <connections>
+                                    <action selector="didPressPlayButton:" destination="fPh-Fy-OLx" eventType="touchUpInside" id="Ts2-K8-wS1"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nZ2-7t-5TH">
+                                <rect key="frame" x="54" y="12" width="135" height="31"/>
+                                <connections>
+                                    <action selector="didFinishSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchUpInside" id="915-aU-Bs3"/>
+                                    <action selector="didFinishSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchUpOutside" id="VIh-rj-5t9"/>
+                                    <action selector="didStartSlidingSlider:" destination="fPh-Fy-OLx" eventType="touchDragInside" id="RM4-mA-zR0"/>
+                                </connections>
+                            </slider>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="51v-ui-pTq">
+                                <rect key="frame" x="240" y="17" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G3-jd-0vg">
+                                <rect key="frame" x="197" y="19" width="63" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0G3-jd-0vg" secondAttribute="trailing" constant="10" id="1vy-ah-bBm"/>
+                            <constraint firstItem="0Rf-vx-LhR" firstAttribute="leading" secondItem="he5-oi-hGX" secondAttribute="leading" constant="10" id="BnC-mU-ifT"/>
+                            <constraint firstAttribute="width" constant="270" id="IUF-Xm-7ER"/>
+                            <constraint firstItem="nZ2-7t-5TH" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="Ksq-lC-WCy"/>
+                            <constraint firstItem="0G3-jd-0vg" firstAttribute="leading" secondItem="nZ2-7t-5TH" secondAttribute="trailing" constant="10" id="SIF-xW-ufw"/>
+                            <constraint firstItem="51v-ui-pTq" firstAttribute="centerY" secondItem="0Rf-vx-LhR" secondAttribute="centerY" id="es5-Vi-5d1"/>
+                            <constraint firstAttribute="trailing" secondItem="51v-ui-pTq" secondAttribute="trailing" constant="10" id="exn-0y-U4b"/>
+                            <constraint firstItem="0G3-jd-0vg" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="g1Y-t6-Qmm"/>
+                            <constraint firstItem="0Rf-vx-LhR" firstAttribute="centerY" secondItem="he5-oi-hGX" secondAttribute="centerY" id="o1D-AA-iPo"/>
+                            <constraint firstAttribute="height" constant="54" id="poN-fz-jHO"/>
+                            <constraint firstItem="nZ2-7t-5TH" firstAttribute="leading" secondItem="0Rf-vx-LhR" secondAttribute="trailing" constant="10" id="uwl-Ey-VUX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="he5-oi-hGX" secondAttribute="bottom" constant="10" id="SS6-OV-T24"/>
+                <constraint firstItem="he5-oi-hGX" firstAttribute="leading" secondItem="fPh-Fy-OLx" secondAttribute="leadingMargin" constant="55" id="TA1-Oh-acN"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="he5-oi-hGX" secondAttribute="trailing" id="iXh-aU-e9L"/>
+                <constraint firstItem="he5-oi-hGX" firstAttribute="top" secondItem="fPh-Fy-OLx" secondAttribute="top" constant="5" id="uxJ-vg-bHU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Zf4-T5-0UG"/>
+            <size key="customSize" width="375" height="76"/>
+            <connections>
+                <outlet property="activityIndicatorView" destination="51v-ui-pTq" id="deg-5X-VG7"/>
+                <outlet property="buttonPlay" destination="0Rf-vx-LhR" id="cPC-21-pGe"/>
+                <outlet property="labelAudioTime" destination="0G3-jd-0vg" id="wU2-Mz-PU0"/>
+                <outlet property="slider" destination="nZ2-7t-5TH" id="GmR-bP-U1v"/>
+                <outlet property="viewPlayerBackground" destination="he5-oi-hGX" id="H9T-aY-DE7"/>
+            </connections>
+            <point key="canvasLocation" x="109.59999999999999" y="-44.977511244377816"/>
+        </collectionViewCell>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+    <resources>
+        <image name="Player Play" width="36" height="36"/>
+    </resources>
+</document>

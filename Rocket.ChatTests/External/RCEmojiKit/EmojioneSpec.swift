@@ -61,6 +61,7 @@ class EmojioneSpec: XCTestCase {
     func testCatastrophicBacktrackingOfRegex() {
         let string = ":supercalifragilisticexpialidocious,:pneumonoultramicroscopicsilicovolcanoconiosis:smiley:a"
         let expect = expectation(description: "Regex parsing is expected to finish within a minimal amount of time")
+
         DispatchQueue.global(qos: .background).async {
             XCTAssert(Emojione.transform(string: string) == ":supercalifragilisticexpialidocious,:pneumonoultramicroscopicsilicovolcanoconiosis😃a")
             expect.fulfill()

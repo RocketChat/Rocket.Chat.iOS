@@ -86,7 +86,7 @@ final class OAuthManager {
             portString = ":\(port)"
         }
 
-        return URL(string: "https://\(host)\(portString)/_oauth/\(callbackPath)")
+        return URL(string: "https://\(host)\(portString)\(server.path)/_oauth/\(callbackPath)")
     }
 
     static func state() -> String? {

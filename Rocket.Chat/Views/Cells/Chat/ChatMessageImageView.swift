@@ -10,7 +10,8 @@ import UIKit
 import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
-    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView)
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView)
 }
 
 final class ChatMessageImageView: ChatMessageAttachmentView {
@@ -94,12 +95,14 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
 
     @objc func didTapView() {
         if isLoadable {
-            delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+            if let unmanaged = UnmanagedAttachment(attachment) {
+                delegate?.openImageFromCell(attachment: unmanaged, thumbnail: imageView)
+            }
         } else {
             guard let imageURL = attachment.fullImageURL() else { return }
 
             Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                 MainSplitViewController.chatViewController?.openURL(url: imageURL)
+                 // MainSplitViewController.chatViewController?.openURL(url: imageURL)
             }).present()
         }
     }

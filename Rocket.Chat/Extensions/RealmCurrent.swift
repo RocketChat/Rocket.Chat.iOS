@@ -11,8 +11,20 @@ import SwiftyJSON
 import RealmSwift
 
 var realmConfiguration: Realm.Configuration?
+let realmTestingConfiguration = Realm.Configuration(
+    inMemoryIdentifier: "realm-testing-identifier",
+    deleteRealmIfMigrationNeeded: true
+)
 
 extension Realm {
+
+    #if TEST
+    static var current: Realm? {
+        return try? Realm(configuration: realmTestingConfiguration)
+    }
+    #endif
+
+    #if !TEST
     static var current: Realm? {
         if let configuration = realmConfiguration {
             return try? Realm(configuration: configuration)
@@ -24,4 +36,6 @@ extension Realm {
             return try? Realm(configuration: configuration)
         }
     }
+    #endif
+
 }
