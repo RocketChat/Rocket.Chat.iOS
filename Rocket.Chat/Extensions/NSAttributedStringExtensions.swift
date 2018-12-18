@@ -81,13 +81,13 @@ extension NSMutableAttributedString {
         self.insert(NSAttributedString(string: "\u{00a0}"), at: range.location + range.length + 1)
         return NSRange(location: range.location, length: range.length + 2)
     }
-    
+
     func removeAtSymbol(range: NSRange) -> NSRange {
         self.replaceCharacters(
             in: NSRange(location: range.location + 1, length: 1),
             with: ""
         )
-        
+
         return NSRange(location: range.location, length: range.length - 1)
     }
 
