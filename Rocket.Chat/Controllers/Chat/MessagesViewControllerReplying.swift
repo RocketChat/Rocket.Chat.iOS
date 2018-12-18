@@ -18,7 +18,9 @@ extension MessagesViewController {
 
     func reply(to message: Message, onlyQuote: Bool = false) {
         replyView?.nameLabel.text = message.user?.displayName()
-        replyView?.textLabel.text = message.text
+
+        let text = Emojione.transform(string: message.textNormalized())
+        replyView?.textLabel.attributedText = NSMutableAttributedString(string: text).transformMarkdown(with: view.theme)
 
         if let updatedAt = message.updatedAt {
             replyView?.timeLabel.text = RCDateFormatter.time(updatedAt)
