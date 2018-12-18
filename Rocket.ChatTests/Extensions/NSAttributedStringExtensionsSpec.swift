@@ -2,7 +2,7 @@
 //  NSAttributedStringExtensionsSpec.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Martins on 9/11/17.
+//  Created by Matheus Cardoso on 9/11/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
@@ -62,5 +62,23 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         attributedString.setBackgroundColor(color, range: wordRange)
 
         assert(attributedString, has: (NSAttributedString.Key.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
+    }
+
+    func testSetMention() {
+        let string = "Hi @rafael.kellermann , how are you doing? Is everyone @here having a great day? How about you @filipe.alvarenga ? Wish you @all a happy Christmas :) from @matheus.cardoso"
+
+        let attributedString = NSMutableAttributedString(string: string)
+
+        let result = attributedString.highlightMentions([
+                UnmanagedMention(userId: nil, realName: nil, username: "rafael.kellermann"),
+                UnmanagedMention(userId: nil, realName: nil, username: "here"),
+                UnmanagedMention(userId: nil, realName: nil, username: "filipe.alvarenga"),
+                UnmanagedMention(userId: nil, realName: nil, username: "all"),
+                UnmanagedMention(userId: nil, realName: nil, username: "matheus.cardoso")
+            ],
+            currentUsername: "matheus.cardoso"
+        )
+
+        result.
     }
 }
