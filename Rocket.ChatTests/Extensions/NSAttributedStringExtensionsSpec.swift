@@ -18,7 +18,6 @@ private func assert<T: Equatable>(_ attributedString: NSAttributedString,
     })
 }
 
-
 class NSAttributedStringExtensionsSpec: XCTestCase {
     func testTrimCharacters() {
         let attributedString = NSMutableAttributedString(string: "  a  ")
@@ -65,7 +64,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         assert(attributedString, has: (NSAttributedString.Key.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
     }
 
-    func testSetMention() {
+    func testMentionParsing() {
         let string = "Hi @rafael.kellermann, how are you doing? " +
                      "Is everyone @here having a great day? How about you @filipe.alvarenga? Wish you @all a happy Christmas :) from @matheus.cardoso"
 
