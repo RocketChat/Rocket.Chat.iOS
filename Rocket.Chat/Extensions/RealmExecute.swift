@@ -83,14 +83,6 @@ extension Realm {
         }
     }
 
-    #if TEST
-    static func clearDatabase() {
-        Realm.execute({ realm in
-            realm.deleteAll()
-        })
-    }
-    #endif
-
     // MARK: Mutate
 
     // This method will add or update a Realm's object.

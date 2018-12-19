@@ -615,6 +615,7 @@
 		807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */; };
 		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
+		80819DD021C9C98400DCAE91 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DCF21C9C98400DCAE91 /* RealmExtensions.swift */; };
 		80825F0D207EB2D800C477DE /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA5206D1883005E3369 /* APIResource.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
@@ -1540,6 +1541,7 @@
 		807FB57620472B7300E21429 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
+		80819DCF21C9C98400DCAE91 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		80977AB5204EEF1E00C41435 /* SelectServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServer.swift; sourceTree = "<group>"; };
@@ -2860,6 +2862,7 @@
 		41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */ = {
 			isa = PBXGroup;
 			children = (
+				80819DCE21C9C95600DCAE91 /* Meta */,
 				D18675E71F70A55D00406FB4 /* API */,
 				D1DA25261F695AC700DB6ABB /* Controllers */,
 				41DC7A201D386B2C00896FC0 /* Extensions */,
@@ -3440,6 +3443,16 @@
 			path = Servers;
 			sourceTree = "<group>";
 		};
+		80819DCE21C9C95600DCAE91 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				8073719B1F963FA400D53ADF /* APITestCase.swift */,
+				8013F87A1FD6B64400EE1A4E /* MockAPI.swift */,
+				80819DCF21C9C98400DCAE91 /* RealmExtensions.swift */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
 		80977AB7204EFBBB00C41435 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3937,8 +3950,6 @@
 				8013F8771FD6B61400EE1A4E /* Middlewares */,
 				D18675E81F70A56800406FB4 /* Requests */,
 				80A63C561F71D2E400FE5AC4 /* APISpec.swift */,
-				8073719B1F963FA400D53ADF /* APITestCase.swift */,
-				8013F87A1FD6B64400EE1A4E /* MockAPI.swift */,
 				8013F87B1FD6B64400EE1A4E /* VersionSpec.swift */,
 			);
 			path = API;
@@ -5146,6 +5157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */,
+				80819DD021C9C98400DCAE91 /* RealmExtensions.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */,
 				805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */,

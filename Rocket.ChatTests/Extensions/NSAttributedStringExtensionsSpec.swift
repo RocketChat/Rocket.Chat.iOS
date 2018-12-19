@@ -65,11 +65,11 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
     }
 
     func testSetMention() {
-        let string = "Hi @rafael.kellermann , how are you doing? Is everyone @here having a great day? How about you @filipe.alvarenga ? Wish you @all a happy Christmas :) from @matheus.cardoso"
+        let string = "Hi @rafael.kellermann, how are you doing? Is everyone @here having a great day? How about you @filipe.alvarenga? Wish you @all a happy Christmas :) from @matheus.cardoso"
 
-        let attributedString = NSMutableAttributedString(string: string)
+        let result = NSMutableAttributedString(string: string)
 
-        let result = attributedString.highlightMentions([
+        result.highlightMentions([
                 UnmanagedMention(userId: nil, realName: nil, username: "rafael.kellermann"),
                 UnmanagedMention(userId: nil, realName: nil, username: "here"),
                 UnmanagedMention(userId: nil, realName: nil, username: "filipe.alvarenga"),
@@ -79,6 +79,10 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
             currentUsername: "matheus.cardoso"
         )
 
-        result.
+        XCTAssertEqual(
+            result.string,
+            "Hi \u{00a0}rafael.kellermann\u{00a0}, how are you doing? Is everyone \u{00a0}here\u{00a0} having a great day? How about you \u{00a0}filipe.alvarenga\u{00a0}? Wish you \u{00a0}all\u{00a0} a happy Christmas :) from \u{00a0}matheus.cardoso\u{00a0}",
+            "removes at symbols and adds spacing in mentions"
+        )
     }
 }
