@@ -13,9 +13,23 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class SubscriptionPermalinkSpec: XCTestCase {
-    func testPermalink() throws {
-        let realm = try Realm()
+    lazy var realm: Realm = {
+        let configuration = Realm.Configuration(inMemoryIdentifier: "SubscriptionPermalinkSpecRealm")
+        if let realm = try? Realm(configuration: configuration) {
+            return realm
+        }
 
+        fatalError("Could not instantiate test realm")
+    }()
+
+    override func tearDown() {
+        super.tearDown()
+        try? realm.write {
+            realm.deleteAll()
+        }
+    }
+
+    func testPermalink() throws {
         let subscription = Subscription.testInstance()
         subscription.name = "test-channel"
         subscription.type = .channel
@@ -51,7 +65,7 @@ class SubscriptionPermalinkSpec: XCTestCase {
         XCTAssertEqual(
             link2,
             "https://test.rocket.chat/direct/test-channel?msg=message-identifier",
-            "permalink works for channel"
+            "permalink works for dm"
         )
 
         let link3 = subscription.permalink()
@@ -63,7 +77,7 @@ class SubscriptionPermalinkSpec: XCTestCase {
     }
 
     func testCopyPermalink() throws {
-        let realm = try Realm()
+        let realm = try Realm(configuration: Realm.Configuration(inMemoryIdentifier: "testPermalinkSpec"))
 
         let subscription = Subscription.testInstance()
         subscription.name = "test-channel"

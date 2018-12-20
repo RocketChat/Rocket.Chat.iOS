@@ -198,16 +198,6 @@ extension MessageSpec {
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
-
-        Realm.execute({ realm in
-            if let settings = subscription.auth?.settings {
-                settings.siteURL = nil
-                settings.cdnPrefixURL = nil
-                realm.add(settings, update: true)
-            }
-        })
-
-        XCTAssertNil(message.quoteString, "quoteString is nil when there's no siteURL")
     }
 
     func testReplyString() {
