@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "Desfavoritar";
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
+"chat.message.actions.permalink" = "Link permanente";
 "chat.message.actions.delete" = "Deletar mensagem";
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";

@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "Defavorisieren";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "Nachricht löschen";
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Sind Sie sicher, dass Sie diese Nachricht löschen möchten? Sie kann dann nicht wiederhergestellt werden.";

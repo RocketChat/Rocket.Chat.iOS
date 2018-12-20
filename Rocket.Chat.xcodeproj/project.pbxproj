@@ -615,6 +615,8 @@
 		807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */; };
 		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
+		80819DD221CBEC1400DCAE91 /* SubscriptionPermalink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DD121CBEC1400DCAE91 /* SubscriptionPermalink.swift */; };
+		80819DD421CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DD321CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift */; };
 		80825F0D207EB2D800C477DE /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA5206D1883005E3369 /* APIResource.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
@@ -1540,6 +1542,8 @@
 		807FB57620472B7300E21429 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
+		80819DD121CBEC1400DCAE91 /* SubscriptionPermalink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPermalink.swift; sourceTree = "<group>"; };
+		80819DD321CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPermalinkSpec.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		80977AB5204EEF1E00C41435 /* SelectServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServer.swift; sourceTree = "<group>"; };
@@ -2205,6 +2209,7 @@
 				41FC9E09209B3A9800FED485 /* MessageExtensions.swift */,
 				D12D34021F69C76400AED992 /* SubscriptionExtensions.swift */,
 				41FC9E05209B39FE00FED485 /* SubscriptionLastMessage.swift */,
+				80819DD121CBEC1400DCAE91 /* SubscriptionPermalink.swift */,
 				80E99F281FD8B2B800B70B59 /* UserExtensions.swift */,
 				99C29A36212A66EC00521266 /* ObjectExtension.swift */,
 			);
@@ -3648,6 +3653,7 @@
 			isa = PBXGroup;
 			children = (
 				80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */,
+				80819DD321CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift */,
 				80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */,
 			);
 			path = Models;
@@ -5075,6 +5081,7 @@
 				99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				99F8FAED20B66F210025FEEF /* ImageCoordinator.swift in Sources */,
+				80819DD221CBEC1400DCAE91 /* SubscriptionPermalink.swift in Sources */,
 				80F533E62195A33B00B7292E /* MessagesViewControllerSending.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
 				80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */,
@@ -5262,6 +5269,7 @@
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
 				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
 				412DF591216F9EC3005161A4 /* UnmanagedMessageSpec.swift in Sources */,
+				80819DD421CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift in Sources */,
 				33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */,
 				990FF6D8207438D4007B4A53 /* RoomMentionsRequestSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,

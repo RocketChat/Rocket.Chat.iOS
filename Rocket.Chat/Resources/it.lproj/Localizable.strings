@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "Rimuovi Speciale";
 "chat.message.actions.quote" = "Citazione";
 "chat.message.actions.reply" = "Risposta";
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "Cancella messaggio";
 "chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
 "chat.message.actions.delete.confirm.message" = "Sei sicuro di voler cancellare questo messaggio? Questo processo non può essere annullato.";
