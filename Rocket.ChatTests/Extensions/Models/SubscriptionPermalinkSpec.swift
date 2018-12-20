@@ -65,7 +65,7 @@ class SubscriptionPermalinkSpec: XCTestCase {
             "permalink works without message id"
         )
     }
-    
+
     func testCopyPermalink() throws {
         let realm = try Realm()
 
