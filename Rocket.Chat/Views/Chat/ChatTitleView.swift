@@ -65,7 +65,14 @@ final class ChatTitleView: UIView {
         }
     }
 
-    internal func updateConnectionState() {
+    internal func updateConnectionState(isRequestingMessages: Bool = false) {
+        if isRequestingMessages {
+            viewLoading?.isHidden = !isRequestingMessages
+            isTitleHidden = isRequestingMessages
+            labelLoading?.text = localized("chat.loading_messages")
+            return
+        }
+
         if state == .connecting || state == .waitingForNetwork {
             viewLoading?.isHidden = false
             isTitleHidden = true
