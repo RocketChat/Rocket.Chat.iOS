@@ -16,10 +16,6 @@ class SubscriptionPermalinkSpec: XCTestCase {
     func testPermalink() throws {
         let realm = try Realm()
 
-        try realm.write {
-            realm.deleteAll()
-        }
-
         let subscription = Subscription.testInstance()
         subscription.name = "test-channel"
         subscription.type = .channel
@@ -68,10 +64,6 @@ class SubscriptionPermalinkSpec: XCTestCase {
 
     func testCopyPermalink() throws {
         let realm = try Realm()
-
-        try realm.write {
-            realm.deleteAll()
-        }
 
         let subscription = Subscription.testInstance()
         subscription.name = "test-channel"
