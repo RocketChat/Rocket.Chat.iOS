@@ -111,7 +111,12 @@ final class MessagesViewModel {
     /**
      If the view model is requesting new data from the API.
      */
-    internal var requestingData = false
+    internal var onRequestingDataChanged: ((Bool) -> Void)?
+    internal var requestingData = false {
+        didSet {
+            onRequestingDataChanged?(requestingData)
+        }
+    }
 
     /**
      If there's more data to be fetched from the API.
