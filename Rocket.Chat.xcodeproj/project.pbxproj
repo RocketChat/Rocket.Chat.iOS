@@ -3937,9 +3937,9 @@
 				8013F8771FD6B61400EE1A4E /* Middlewares */,
 				D18675E81F70A56800406FB4 /* Requests */,
 				80A63C561F71D2E400FE5AC4 /* APISpec.swift */,
+				8013F87B1FD6B64400EE1A4E /* VersionSpec.swift */,
 				8073719B1F963FA400D53ADF /* APITestCase.swift */,
 				8013F87A1FD6B64400EE1A4E /* MockAPI.swift */,
-				8013F87B1FD6B64400EE1A4E /* VersionSpec.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
