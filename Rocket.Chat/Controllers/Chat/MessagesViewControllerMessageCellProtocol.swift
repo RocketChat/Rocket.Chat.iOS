@@ -279,11 +279,15 @@ extension MessagesViewController {
             self.reply(to: message)
         })
 
+        let permalink = UIAlertAction(title: localized("chat.message.actions.permalink"), style: .default, handler: { _ in
+            self.subscription?.copyPermalink(messageIdentifier: message.identifier ?? "")
+        })
+
         let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { _ in
             self.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [info, react, replyAction, quote, copy, report].compactMap { $0 }
+        var actions = [info, react, replyAction, permalink, quote, copy, report].compactMap { $0 }
 
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")

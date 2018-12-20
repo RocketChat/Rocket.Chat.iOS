@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "Όχι-αστέρι"; 
 "chat.message.actions.quote" = "Επιδείξτε μήνυμα";
 "chat.message.actions.reply" = "Απαντήστε σε μήνυμα";
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "Διαγράψτε μήνυμα";
 "chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";

@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "Enlever le favori";
 "chat.message.actions.quote" = "Citer";
 "chat.message.actions.reply" = "Répondre";
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "Supprimer le message";
 "chat.message.actions.delete.confirm.title" = "Supprimer ce message ?";
 "chat.message.actions.delete.confirm.message" = "Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible";
