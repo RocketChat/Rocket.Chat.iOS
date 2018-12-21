@@ -188,6 +188,7 @@ final class MessagesViewController: RocketChatViewController {
             return self.viewModel.recentSenders
         }
 
+        startTypingHandler()
         startDraftMessage()
         updateJoinedView()
     }

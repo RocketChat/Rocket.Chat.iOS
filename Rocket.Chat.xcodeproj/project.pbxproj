@@ -617,6 +617,7 @@
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
 		80819DD221CBEC1400DCAE91 /* SubscriptionPermalink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DD121CBEC1400DCAE91 /* SubscriptionPermalink.swift */; };
 		80819DD421CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DD321CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift */; };
+		80819DD621CCF3C600DCAE91 /* MessagesViewControllerTyping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80819DD521CCF3C600DCAE91 /* MessagesViewControllerTyping.swift */; };
 		80825F0D207EB2D800C477DE /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA5206D1883005E3369 /* APIResource.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
@@ -1544,6 +1545,7 @@
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
 		80819DD121CBEC1400DCAE91 /* SubscriptionPermalink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPermalink.swift; sourceTree = "<group>"; };
 		80819DD321CBF50D00DCAE91 /* SubscriptionPermalinkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPermalinkSpec.swift; sourceTree = "<group>"; };
+		80819DD521CCF3C600DCAE91 /* MessagesViewControllerTyping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerTyping.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		80977AB5204EEF1E00C41435 /* SelectServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServer.swift; sourceTree = "<group>"; };
@@ -2914,6 +2916,7 @@
 				8020C3D72199F75A00AA7133 /* MessagesViewControllerEmptyState.swift */,
 				8020C3D92199F78800AA7133 /* MessagesViewControllerSearching.swift */,
 				80DF7122219CABAD000F0DA5 /* MessagesViewControllerJoining.swift */,
+				80819DD521CCF3C600DCAE91 /* MessagesViewControllerTyping.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -5084,6 +5087,7 @@
 				80819DD221CBEC1400DCAE91 /* SubscriptionPermalink.swift in Sources */,
 				80F533E62195A33B00B7292E /* MessagesViewControllerSending.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
+				80819DD621CCF3C600DCAE91 /* MessagesViewControllerTyping.swift in Sources */,
 				80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
