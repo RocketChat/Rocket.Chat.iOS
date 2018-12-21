@@ -24,6 +24,7 @@ class NotificationService: UNNotificationServiceExtension {
             // Modify the notification content here...
             let attributedString = NSAttributedString(string: bestAttemptContent.body)
             bestAttemptContent.body = MarkdownManager.shared.transformAttributedString(attributedString).string
+            bestAttemptContent.body = Emojione.transform(string: bestAttemptContent.body)
 
             contentHandler(bestAttemptContent)
         }

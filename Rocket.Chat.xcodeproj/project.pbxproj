@@ -450,6 +450,10 @@
 		801B0EF42114B2A300C0972E /* ShortcutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */; };
 		801B0EF7211895E900C0972E /* MainSplitViewControllerShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
+		80200CCF21CD39FA00D00144 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
+		80200CD021CD3A2A00D00144 /* Emojione.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4199A9881DABCC570035F820 /* Emojione.swift */; };
+		80200CD221CD3A5500D00144 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
+		80200CD321CD3AAE00D00144 /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
 		8020C3D52199DDA400AA7133 /* MessagesViewControllerDrafting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */; };
 		8020C3D82199F75A00AA7133 /* MessagesViewControllerEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D72199F75A00AA7133 /* MessagesViewControllerEmptyState.swift */; };
 		8020C3DA2199F78800AA7133 /* MessagesViewControllerSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D92199F78800AA7133 /* MessagesViewControllerSearching.swift */; };
@@ -5521,9 +5525,13 @@
 				808921FA21C3FF9600271A1F /* MessageTextFontAttributes.swift in Sources */,
 				808921F421C3FEA400271A1F /* Theme.swift in Sources */,
 				80A27F9121C3FA86006EC454 /* MarkdownManager.swift in Sources */,
+				80200CD221CD3A5500D00144 /* Emoji.swift in Sources */,
 				808921F621C3FF1900271A1F /* UIColorCSSColorsExtension.swift in Sources */,
 				80A27F8721C3F853006EC454 /* NotificationService.swift in Sources */,
 				808921F521C3FEF700271A1F /* UIColorExtension.swift in Sources */,
+				80200CD321CD3AAE00D00144 /* NSAttributedString+CustomEmojis.swift in Sources */,
+				80200CCF21CD39FA00D00144 /* Emojione+Transform.swift in Sources */,
+				80200CD021CD3A2A00D00144 /* Emojione.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
