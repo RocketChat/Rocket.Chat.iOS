@@ -46,13 +46,12 @@ final class MessagesSubscriptionViewModel {
         guard
             let self = self,
             let subscription = self.subscription?.managedObject
-            else {
-                return
+        else {
+            return
         }
 
         SubscriptionManager.sendTypingStatus(subscription, isTyping: self.isTyping)
     }
-
 
     // MARK: Life Cycle
 
