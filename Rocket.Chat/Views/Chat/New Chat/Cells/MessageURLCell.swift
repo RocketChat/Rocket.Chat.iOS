@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell, SizingCell {
+final class MessageURLCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: MessageURLCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -20,7 +20,13 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!
@@ -35,13 +41,11 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         return
             messageWidth -
             containerLeadingConstraint.constant -
-            containerTrailingConstraint.constant
+            containerTrailingConstraint.constant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
-    weak var delegate: ChatMessageCellProtocol?
-
-    var messageWidth: CGFloat = 0
-    var viewModel: AnyChatItem?
     var thumbnailHeightInitialConstant: CGFloat = 0
 
     override func awakeFromNib() {
@@ -52,9 +56,11 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: nil)
     }
 
-    func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? MessageURLChatItem else {
             return
         }
@@ -63,9 +69,12 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
 
         if let image = viewModel.imageURL, let imageURL = URL(string: image) {
             thumbnailHeightConstraint.constant = thumbnailHeightInitialConstant
-            activityIndicator.startAnimating()
-            ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
-                self?.activityIndicator.stopAnimating()
+
+            if completeRendering {
+                activityIndicator.startAnimating()
+                ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         } else {
             thumbnailHeightConstraint.constant = 0
@@ -88,12 +97,6 @@ final class MessageURLCell: UICollectionViewCell, BaseMessageCellProtocol, ChatC
     }
 }
 
-extension MessageURLCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-}
-
 extension MessageURLCell {
     override func applyTheme() {
         super.applyTheme()
@@ -103,5 +106,6 @@ extension MessageURLCell {
         host.textColor = theme.auxiliaryText
         title.textColor = theme.actionTintColor
         subtitle.textColor = theme.controlText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

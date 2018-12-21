@@ -29,6 +29,26 @@ extension String {
         return nil
     }
 
+    func md5() -> String {
+        if let stringData = self.data(using: String.Encoding.utf8) {
+            return hexStringFromData(input: md5Digest(stringData: stringData) as NSData)
+        }
+
+        return ""
+    }
+
+    fileprivate func md5Digest(stringData: Data) -> Data {
+        var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
+
+        _ = digestData.withUnsafeMutableBytes { digestBytes in
+            stringData.withUnsafeBytes { stringBytes in
+                CC_MD5(stringBytes, CC_LONG(stringData.count), digestBytes)
+            }
+        }
+
+        return digestData
+    }
+
     func sha256() -> String {
         if let stringData = self.data(using: String.Encoding.utf8) {
             return hexStringFromData(input: digest(input: stringData as NSData))

@@ -22,7 +22,7 @@ extension Attachment: ModelMappeable {
 
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
-            self.identifier = String.random(30)
+            self.identifier = values.rawString()?.md5() ?? String.random(30)
         }
 
         if let authorName = values["author_name"].string {
@@ -37,7 +37,7 @@ extension Attachment: ModelMappeable {
             self.titleLink = titleLink
         }
 
-        self.collapsed = values["collapsed"].bool ?? true
+        self.collapsed = values["collapsed"].bool ?? false
         self.text = values["text"].string
         self.descriptionText = values["description"].string
         self.thumbURL = values["thumb_url"].string

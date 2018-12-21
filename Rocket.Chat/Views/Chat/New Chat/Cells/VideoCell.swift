@@ -31,6 +31,7 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
+            imageViewThumb.layer.borderWidth = 1
             imageViewThumb.layer.cornerRadius = 4
             imageViewThumb.clipsToBounds = true
         }
@@ -39,10 +40,19 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var buttonPlayer: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        setupWidthConstraint()
+        insertGesturesIfNeeded(with: nil)
+    }
+
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description
@@ -52,11 +62,17 @@ final class VideoCell: BaseVideoMessageCell, SizingCell {
             labelDescriptionTopConstraint.constant = 0
         }
 
-        updateVideo(with: imageViewThumb)
+        if completeRendering {
+            updateVideo(with: imageViewThumb)
+        }
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
-        // delegate?.openVideoFromCell(attachment: attachment)
+        guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
+            return
+        }
+
+        delegate?.openVideoFromCell(attachment: viewModel.attachment)
     }
 
     override func prepareForReuse() {
@@ -73,5 +89,6 @@ extension VideoCell {
 
         let theme = self.theme ?? .light
         labelDescription.textColor = theme.controlText
+        imageViewThumb.layer.borderColor = theme.borderColor.cgColor
     }
 }

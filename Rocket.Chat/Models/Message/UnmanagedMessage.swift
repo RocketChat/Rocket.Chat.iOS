@@ -41,7 +41,9 @@ extension Message: UnmanagedConvertible {
 
 struct UnmanagedMessage: UnmanagedObject, Equatable {
     typealias Object = Message
+
     var identifier: String
+    var rid: String
     var text: String
     var type: MessageType
     var attachments: [UnmanagedAttachment]
@@ -62,6 +64,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var emoji: String?
     var role: String
     var avatar: String?
+    var alias: String?
     var snippetName: String?
     var snippetId: String?
 
@@ -74,11 +77,13 @@ extension UnmanagedMessage {
     static func == (lhs: UnmanagedMessage, rhs: UnmanagedMessage) -> Bool {
         return
             lhs.identifier == rhs.identifier &&
+            lhs.type == rhs.type &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
+            lhs.markedForDeletion == rhs.markedForDeletion &&
             lhs.mentions == rhs.mentions &&
             lhs.channels == rhs.channels &&
-            lhs.attachments == rhs.attachments &&
+            lhs.attachments.elementsEqual(rhs.attachments) &&
             lhs.urls == rhs.urls &&
             lhs.reactions == rhs.reactions &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
@@ -99,6 +104,7 @@ extension UnmanagedMessage {
         }
 
         identifier = messageIdentifier
+        rid = message.rid
         text = message.text
         type = message.type
         userIdentifier = message.userIdentifier
@@ -114,6 +120,7 @@ extension UnmanagedMessage {
         emoji = message.emoji
         role = message.role
         avatar = message.avatar
+        alias = message.alias.isEmpty ? nil : message.alias
         snippetName = message.snippetName
         snippetId = message.snippetId
 

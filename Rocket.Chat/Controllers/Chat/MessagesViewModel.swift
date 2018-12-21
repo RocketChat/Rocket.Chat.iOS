@@ -19,7 +19,37 @@ final class MessagesViewModel {
      that are executed after getting the data.
      */
     internal var data: [AnyChatSection] = []
-    internal var dataSorted: [AnyChatSection] = []
+    internal var dataSorted: [AnyChatSection] = [] {
+        didSet {
+            let dataSorted = self.dataSorted
+
+            recentSendersDataQueue.addOperation { [weak self] in
+                guard let self = self else {
+                    return
+                }
+
+                var seen = Set<String>()
+                let senders = dataSorted.compactMap { data -> String? in
+                    guard
+                        let message = data.object.base as? MessageSectionModel,
+                        let username = message.message.user?.username
+                    else {
+                        return nil
+                    }
+
+                    if !seen.contains(username) {
+                        seen.insert(username)
+                        return username
+                    }
+
+                    return nil
+                }
+
+                self.recentSenders = Array(senders[0..<min(senders.count, 5)])
+            }
+        }
+    }
+
     internal var dataNormalized: [ArraySection<AnyChatSection, AnyChatItem>] = []
 
     /**
@@ -33,20 +63,35 @@ final class MessagesViewModel {
         }
     }
 
+    /**
+     A compilation of the 5 last message senders usernames
+     to be used for autocompletion priorization.
+    */
+    var recentSenders = [String]()
+
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
-            lastSeen = subscription.lastSeen ?? Date()
+            rid = subscription.rid
+            lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
             messagesQuery = subscription.fetchMessagesQueryResults()
-            messagesQueryToken = messagesQuery?.observe(handleDataUpdates)
+            refreshMessagesQueryOldValues()
+            messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
+                self?.handleDataUpdates(changes: collectionChanges)
+            })
             fetchMessages(from: nil)
         }
     }
 
+    // Thread safe reference to rid. This variable is required to
+    // setup the HeaderSection
+    internal var rid: String = ""
+
     // Variables required to fetch the messages of the Subscription
     // to the view model.
     internal var messagesQueryToken: NotificationToken?
+    internal var messagesQueryOldValues: [AnyHashable] = []
     internal var messagesQuery: Results<Message>?
 
     /**
@@ -59,13 +104,19 @@ final class MessagesViewModel {
     /**
      Last time user read the messages from the Subscription from this view model.
      */
-    internal var lastSeen = Date()
+    internal var lastSeen: Date?
     internal var hasUnreadMarker = false
+    internal var unreadMarkerObjectIdentifier: String?
 
     /**
      If the view model is requesting new data from the API.
      */
-    internal var requestingData = false
+    internal var onRequestingDataChanged: ((Bool) -> Void)?
+    internal var requestingData = false {
+        didSet {
+            onRequestingDataChanged?(requestingData)
+        }
+    }
 
     /**
      If there's more data to be fetched from the API.
@@ -90,6 +141,17 @@ final class MessagesViewModel {
     }()
 
     /**
+     This OperationQueue responsible for updating the recent
+     usernames that sent messages.
+     */
+    private let recentSendersDataQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
+
+    /**
      The OperationQueue responsible for querying the data from Realm.
      */
     private let queryDataQueue: OperationQueue = {
@@ -107,10 +169,7 @@ final class MessagesViewModel {
 
     deinit {
         messagesQueryToken?.invalidate()
-
-        if let subscription = subscription?.validated() {
-            unsubscribe(for: subscription)
-        }
+        unsubscribe()
     }
 
     // MARK: Subscriptions Control
@@ -128,9 +187,10 @@ final class MessagesViewModel {
      This method will remove all the subscriptions related to
      messages of the subscription attached to the view model.
      */
-    internal func unsubscribe(for subscription: Subscription) {
-        SocketManager.unsubscribe(eventName: subscription.rid)
-        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
+    internal func unsubscribe() {
+        guard !rid.isEmpty else { return }
+        SocketManager.unsubscribe(eventName: rid)
+        SocketManager.unsubscribe(eventName: "\(rid)/deleteMessage")
     }
 
     // MARK: Data
@@ -151,6 +211,23 @@ final class MessagesViewModel {
         data = []
         hasMoreData = true
         requestingData = false
+    }
+
+    func sectionIndex(for item: AnyChatItem) -> Int? {
+        let section = dataSorted.filter({ $0.viewModels().contains(where: { $0.differenceIdentifier == item.differenceIdentifier }) }).first
+        if let section = section {
+            return dataSorted.firstIndex(of: section)
+        }
+
+        return nil
+    }
+
+    func section(for index: Int) -> AnyChatSection? {
+        guard index < dataSorted.count else {
+            return nil
+        }
+
+        return dataSorted[index]
     }
 
     /**
@@ -180,6 +257,14 @@ final class MessagesViewModel {
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
         let messageSectionModel = MessageSectionModel(message: message)
 
+        if let existingSection = dataNormalized.filter({ $0.model.differenceIdentifier == AnyHashable(message.differenceIdentifier) }).first {
+            return AnyChatSection(MessageSection(
+                object: AnyDifferentiable(messageSectionModel),
+                controllerContext: controllerContext,
+                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:]
+            ))
+        }
+
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(messageSectionModel),
             controllerContext: controllerContext,
@@ -204,17 +289,47 @@ final class MessagesViewModel {
             handle(insertions: insertions, on: messagesQuery)
             handle(modifications: modifications, on: messagesQuery)
             updateData()
+            refreshMessagesQueryOldValues()
+
         case .error(let error):
             fatalError("\(error)")
         }
     }
 
     /**
+     Caches the ids of the objects in the messagesQuery before the last update.
+     It's used to identify deletions without having to mirror query
+     indexes on the processed data properties
+     */
+    func refreshMessagesQueryOldValues() {
+        guard let messagesQuery = messagesQuery else {
+            return
+        }
+
+        messagesQueryOldValues = messagesQuery.compactMap({ message -> AnyHashable? in
+            guard let id = message.identifier else {
+                return nil
+            }
+
+            return AnyHashable(id)
+        })
+    }
+
+    /**
      Handle all deletions from Realm observer on the messages query.
      */
     internal func handle(deletions: [Int], on messagesQuery: Results<Message>) {
-        for deletion in deletions where deletion < data.count {
-            data.remove(at: deletion)
+        for deletion in deletions {
+            guard
+                deletion < messagesQueryOldValues.count
+            else {
+                continue
+            }
+
+            let deletionId = messagesQueryOldValues[deletion]
+            if let index = data.firstIndex(where: {$0.differenceIdentifier == deletionId}) {
+                data.remove(at: index)
+            }
         }
     }
 
@@ -343,12 +458,14 @@ final class MessagesViewModel {
 
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
-                if let oldest = oldest {
-                    self?.oldestMessageDateFromRemote = oldest
-                }
-
                 self?.requestingData = false
                 self?.hasMoreData = oldest != nil
+
+                if let oldest = oldest {
+                    self?.oldestMessageDateFromRemote = oldest
+                } else {
+                    self?.updateData()
+                }
             }
         }
     }
@@ -366,6 +483,7 @@ final class MessagesViewModel {
                 self?.cacheDataSorted()
             }
 
+            self?.markUnreadMarkerIfNeeded()
             self?.normalizeDataSorted()
 
             if shouldUpdateUI {
@@ -391,14 +509,38 @@ final class MessagesViewModel {
     }
 
     /**
+     This method will mark the unread marker position
+     for this subscription state and won't change until
+     the user leaves the room.
+     */
+    internal func markUnreadMarkerIfNeeded() {
+        // Unread marker will remain on the same message
+        // all the time until user closes the screen.
+        if unreadMarkerObjectIdentifier == nil {
+            if let lastSeen = lastSeen {
+                for object in dataSorted.reversed() {
+                    guard let messageSection1 = object.object.base as? MessageSectionModel else { continue }
+
+                    let message = messageSection1.message
+                    let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
+                    if unreadMarker {
+                        unreadMarkerObjectIdentifier = message.identifier
+                        hasUnreadMarker = true
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      Anything related to the section that refers to sequential messages, day separators
      and unread marks is done on this method. A loop in the whole list of messages
      is executed on every update to make sure that there's no duplicated separators
      and everything looks good to the user on the final result.
      */
     internal func normalizeDataSorted() {
-        hasUnreadMarker = false
-
         let dataSortedMaxIndex = dataSorted.count - 1
 
         for (idx, object) in dataSorted.enumerated() {
@@ -406,15 +548,13 @@ final class MessagesViewModel {
 
             let message = messageSection1.message
             let collpsibleItemsState = (object.base as? MessageSection)?.collapsibleItemsState ?? [:]
-            let unreadMarker = !hasUnreadMarker && message.createdAt > lastSeen
+
             var separator: Date?
             var sequential = false
             var loader = false
-            var header = false
 
             if idx == dataSortedMaxIndex {
                 loader = hasMoreData || requestingData
-                header = !hasMoreData && !requestingData
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -424,24 +564,43 @@ final class MessagesViewModel {
                 message: message,
                 daySeparator: separator,
                 sequential: sequential,
-                unreadIndicator: unreadMarker,
-                loader: loader,
-                header: header
+                unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
+                loader: loader
             )
 
-            dataSorted[idx] = AnyChatSection(MessageSection(
+            let chatSection = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
                 controllerContext: controllerContext,
                 collapsibleItemsState: collpsibleItemsState
             ))
 
+            dataSorted[idx] = chatSection
+
+            if let indexOfSection = data.firstIndex(of: chatSection) {
+                data[indexOfSection] = chatSection
+            }
+
             // Cache the processed result of the message text
             // on this loop to avoid doing that in the main thread.
             MessageTextCacheManager.shared.message(for: message, with: currentTheme)
+        }
 
-            if unreadMarker {
-                hasUnreadMarker = true
-            }
+        let currentHeaderSection = AnyChatSection(
+            AnyChatSection(
+                HeaderSection(
+                    object: AnyDifferentiable(HeaderChatItem(rid: rid)),
+                    controllerContext: nil
+                )
+            )
+        )
+
+        let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
+        if currentHeaderIndex == nil && !hasMoreData && !requestingData {
+            data.append(currentHeaderSection)
+            dataSorted.append(currentHeaderSection)
+        } else if let currentHeaderIndex = currentHeaderIndex {
+            dataSorted.remove(at: currentHeaderIndex)
+            dataSorted.append(currentHeaderSection)
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
@@ -522,4 +681,10 @@ extension MessagesViewModel {
         client.updateMessage(message, text: text)
     }
 
+}
+
+extension AnyChatSection: Equatable {
+    public static func == (lhs: AnyChatSection, rhs: AnyChatSection) -> Bool {
+        return lhs.differenceIdentifier == rhs.differenceIdentifier
+    }
 }

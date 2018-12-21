@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell {
+final class QuoteMessageCell: BaseQuoteMessageCell, SizingCell {
     static let identifier = String(describing: QuoteMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -30,7 +30,13 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
 
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var statusView: UIImageView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+        }
+    }
+
     @IBOutlet weak var purpose: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
@@ -76,15 +82,23 @@ final class QuoteMessageCell: BaseQuoteMessageCell, BaseMessageCellProtocol, Siz
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: username)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: messageUsername)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: messageUsername,
+            completeRendering: completeRendering
+        )
 
         purpose.text = viewModel.purpose
         purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
@@ -127,5 +141,6 @@ extension QuoteMessageCell {
         purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

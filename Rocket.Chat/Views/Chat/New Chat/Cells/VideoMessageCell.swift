@@ -37,9 +37,11 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageViewThumb: UIImageView! {
         didSet {
+            imageViewThumb.layer.borderWidth = 1
             imageViewThumb.layer.cornerRadius = 4
             imageViewThumb.clipsToBounds = true
         }
@@ -49,10 +51,19 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
     @IBOutlet weak var readReceiptButton: UIButton!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        setupWidthConstraint()
+        insertGesturesIfNeeded(with: username)
+    }
+
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         if let description = viewModel.descriptionText, !description.isEmpty {
             labelDescription.text = description
@@ -63,12 +74,25 @@ final class VideoMessageCell: BaseVideoMessageCell, SizingCell {
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
-        updateVideo(with: imageViewThumb)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
+
+        if completeRendering {
+            updateVideo(with: imageViewThumb)
+        }
     }
 
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
-        // delegate?.openVideoFromCell(attachment: attachment)
+        guard let viewModel = viewModel?.base as? VideoMessageChatItem else {
+            return
+        }
+
+        delegate?.openVideoFromCell(attachment: viewModel.attachment)
     }
 
     override func prepareForReuse() {
@@ -87,5 +111,6 @@ extension VideoMessageCell {
         date.textColor = theme.auxiliaryText
         username.textColor = theme.titleText
         labelDescription.textColor = theme.controlText
+        imageViewThumb.layer.borderColor = theme.borderColor.cgColor
     }
 }

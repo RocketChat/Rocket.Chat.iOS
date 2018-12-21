@@ -9,11 +9,18 @@
 import UIKit
 import RocketChatViewController
 
-class BaseMessageCell: UICollectionViewCell, ChatCell {
+class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
     var messageSection: MessageSection?
 
+    weak var delegate: ChatMessageCellProtocol?
+
+    weak var longPressGesture: UILongPressGestureRecognizer?
+    weak var usernameTapGesture: UITapGestureRecognizer?
+    weak var avatarTapGesture: UITapGestureRecognizer?
+
+    weak var usernameLabel: UILabel!
     lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
@@ -27,9 +34,15 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
         return AuthManager.isAuthenticated()?.settings
     }
 
-    func configure() {}
+    func configure(completeRendering: Bool) {}
 
-    func configure(with avatarView: AvatarView, date: UILabel, and username: UILabel) {
+    func configure(
+        with avatarView: AvatarView,
+        date: UILabel,
+        status: UIImageView,
+        and username: UILabel,
+        completeRendering: Bool
+    ) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
             let user = viewModel.user
@@ -37,15 +50,28 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             return
         }
 
-        date.text = viewModel.dateFormatted
-        username.text = user.username
-        avatarView.emoji = viewModel.emoji
-        avatarView.username = user.username
+        usernameLabel = username
 
-        if let avatar = viewModel.avatar {
-            avatarView.avatarURL = URL(string: avatar)
+        date.text = viewModel.dateFormatted
+        username.text = viewModel.message?.alias ?? user.displayName
+
+        if viewModel.message?.failed == true {
+            status.isHidden = false
+            status.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            status.tintColor = .red
         } else {
-            avatarView.avatarURL = user.avatarURL
+            status.isHidden = true
+        }
+
+        if completeRendering {
+            avatarView.emoji = viewModel.message?.emoji
+            avatarView.username = user.username
+
+            if let avatar = viewModel.message?.avatar {
+                avatarView.avatarURL = URL(string: avatar)
+            } else {
+                avatarView.avatarURL = user.avatarURL
+            }
         }
     }
 
@@ -63,9 +89,70 @@ class BaseMessageCell: UICollectionViewCell, ChatCell {
             button.isHidden = true
             button.changeWidth(to: 0)
             button.changeLeading(to: 0)
+
+            let image = (viewModel.message?.unread ?? false) ? UIImage(named: "Unread") : UIImage(named: "Read")
+            button.setImage(image, for: .normal)
+        }
+    }
+
+    func insertGesturesIfNeeded(with username: UILabel?) {
+        if longPressGesture == nil {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
+            gesture.minimumPressDuration = 0.325
+            gesture.delegate = self
+            addGestureRecognizer(gesture)
+
+            longPressGesture = gesture
         }
 
-        let image = UIImage(named: "Read")?.imageWithTint(viewModel.isUnread ? #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1) : #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1), alpha: 0.0)
-        button.setImage(image, for: .normal)
+        if usernameTapGesture == nil && username != nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            username?.addGestureRecognizer(gesture)
+
+            usernameTapGesture = gesture
+        }
+
+        if avatarTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            avatarView.addGestureRecognizer(gesture)
+
+            avatarTapGesture = gesture
+        }
     }
+
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
+
+    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated(),
+            let username = usernameLabel
+        else {
+            return
+        }
+
+        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
+    }
+
+}
+
+// MARK: UIGestureRecognizerDelegate
+
+extension BaseMessageCell: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+
 }

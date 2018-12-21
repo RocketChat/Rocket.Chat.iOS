@@ -10,7 +10,7 @@ import Foundation
 import RocketChatViewController
 import FLAnimatedImage
 
-final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell {
+final class ImageCell: BaseImageMessageCell, SizingCell {
     static let identifier = String(describing: ImageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -26,20 +26,28 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
 
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
-            imageView.layer.cornerRadius = 3
-            imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
+            imageView.layer.cornerRadius = 4
             imageView.layer.borderWidth = 1
+            imageView.clipsToBounds = true
         }
     }
 
-    @IBOutlet weak var buttonImageHandler: UIButton!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    override func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        setupWidthConstraint()
+        insertGesturesIfNeeded(with: nil)
+    }
+
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
         }
+
+        widthConstriant.constant = messageWidth
 
         labelTitle.text = viewModel.title
 
@@ -51,11 +59,13 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
             labelDescriptionTopConstraint.constant = 0
         }
 
-        loadImage(on: imageView, startLoadingBlock: { [weak self] in
-            self?.activityIndicator.startAnimating()
-        }, stopLoadingBlock: { [weak self] in
-            self?.activityIndicator.stopAnimating()
-        })
+        if completeRendering {
+            loadImage(on: imageView, startLoadingBlock: { [weak self] in
+                self?.activityIndicator.startAnimating()
+            }, stopLoadingBlock: { [weak self] in
+                self?.activityIndicator.stopAnimating()
+            })
+        }
     }
 
     // MARK: IBAction
@@ -70,6 +80,17 @@ final class ImageCell: BaseImageMessageCell, BaseMessageCellProtocol, SizingCell
 
         delegate?.openImageFromCell(url: imageURL, thumbnail: imageView)
     }
+
+    override func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        guard
+            let viewModel = viewModel?.base as? BaseMessageChatItem,
+            let managedObject = viewModel.message?.managedObject?.validated()
+        else {
+            return
+        }
+
+        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
+    }
 }
 
 extension ImageCell {
@@ -79,5 +100,6 @@ extension ImageCell {
         let theme = self.theme ?? .light
         labelTitle.textColor = theme.bodyText
         labelDescription.textColor = theme.bodyText
+        imageView.layer.borderColor = theme.borderColor.cgColor
     }
 }

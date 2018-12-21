@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,13 +34,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="neE-9h-mgq" firstAttribute="trailing" secondItem="Mk3-3B-Y5v" secondAttribute="trailing" id="0bt-Si-toS"/>
-                <constraint firstItem="oY1-GI-mTG" firstAttribute="bottom" secondItem="Mk3-3B-Y5v" secondAttribute="bottom" id="Csv-qx-WST"/>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="trailing" secondItem="pBx-94-78I" secondAttribute="trailing" id="0bt-Si-toS"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="bottom" secondItem="pBx-94-78I" secondAttribute="bottom" id="Csv-qx-WST"/>
                 <constraint firstItem="oY1-GI-mTG" firstAttribute="top" secondItem="neE-9h-mgq" secondAttribute="bottom" constant="5" id="GYS-RE-Bfw"/>
-                <constraint firstItem="neE-9h-mgq" firstAttribute="top" secondItem="Mk3-3B-Y5v" secondAttribute="top" id="IR0-w2-W0L"/>
-                <constraint firstItem="neE-9h-mgq" firstAttribute="leading" secondItem="Mk3-3B-Y5v" secondAttribute="leading" id="PcF-RT-KaM"/>
-                <constraint firstItem="oY1-GI-mTG" firstAttribute="trailing" secondItem="Mk3-3B-Y5v" secondAttribute="trailing" id="jCl-5H-RX5"/>
-                <constraint firstItem="oY1-GI-mTG" firstAttribute="leading" secondItem="Mk3-3B-Y5v" secondAttribute="leading" id="y1d-Uo-SWT"/>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="top" secondItem="pBx-94-78I" secondAttribute="top" id="IR0-w2-W0L"/>
+                <constraint firstItem="neE-9h-mgq" firstAttribute="leading" secondItem="pBx-94-78I" secondAttribute="leading" id="PcF-RT-KaM"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="trailing" secondItem="pBx-94-78I" secondAttribute="trailing" id="jCl-5H-RX5"/>
+                <constraint firstItem="oY1-GI-mTG" firstAttribute="leading" secondItem="pBx-94-78I" secondAttribute="leading" id="y1d-Uo-SWT"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

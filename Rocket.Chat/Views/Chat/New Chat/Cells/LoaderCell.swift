@@ -25,8 +25,10 @@ final class LoaderCell: UICollectionViewCell, ChatCell, SizingCell {
     var messageWidth: CGFloat = 0
     var viewModel: AnyChatItem?
 
-    func configure() {
-        activityIndicator.startAnimating()
+    func configure(completeRendering: Bool) {
+        if completeRendering {
+            activityIndicator.startAnimating()
+        }
     }
 
     override func prepareForReuse() {

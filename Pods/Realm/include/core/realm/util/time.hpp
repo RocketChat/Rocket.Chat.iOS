@@ -53,6 +53,8 @@ std::string format_local_time(std::time_t, const char* format = "%FT%T%z");
 std::string format_utc_time(std::time_t, const char* format = "%FT%T%z");
 /// @}
 
+/// Formatted time stamp of current local time with millisecond precision
+std::string now_format_local_time_milliseconds();
 
 
 

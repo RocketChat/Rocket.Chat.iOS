@@ -227,6 +227,7 @@
 "chat.message.actions.unstar" = "スターを外す";
 "chat.message.actions.quote" = "引用";
 "chat.message.actions.reply" = "返信";
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "メッセージを削除";
 "chat.message.actions.delete.confirm.title" = "このメッセージを削除しますか ?";
 "chat.message.actions.delete.confirm.message" = "このメッセージを削除してもよろしいですか? このプロセスは元に戻すことはできません。";
@@ -341,6 +342,8 @@
 "myaccount.settings.profile" = "プロフィール";
 "myaccount.settings.license" = "ライセンス";
 "myaccount.settings.language" = "言語";
+"myaccount.settings.review" = "Review this App"; // TODO
+"myaccount.settings.share" = "Share this App"; // TODO
 "myaccount.settings.appicon" = "アプリケーションアイコン";
 "myaccount.settings.version" = "バージョン: %@ (%@)";
 "myaccount.settings.server_version" = "サーバーのバージョン: %@";
@@ -494,7 +497,10 @@
 "shortcuts.server_selection_numbers" = "サーバーの選択 1...9";
 "shortcuts.add_server" = "サーバーを追加";
 "shortcuts.change_theme" = "テーマを変更";
+"shortcuts.send" = "Send"; //TODO
+"shortcuts.new_line" = "New line"; //TODO
 
 // Chat Components
 "chat.components.quote.replied" = "Replied"; //TODO
 "chat.components.quote.pinned" = "Pinned"; //TODO
+"chat.components.text_attachment.no_title" = "No title"; //TODO

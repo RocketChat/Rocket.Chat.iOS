@@ -28,14 +28,11 @@ struct UnmanagedUser: UnmanagedObject, Equatable {
 
 extension UnmanagedUser {
     init?(_ user: User) {
-        guard
-            let userUsername = user.username,
-            let userIdentifier = user.identifier
-        else {
+        guard let userUsername = user.username else {
             return nil
         }
 
-        identifier = userIdentifier
+        identifier = user.identifier ?? ""
         username = userUsername
         name = user.name
         privateStatus = user.privateStatus

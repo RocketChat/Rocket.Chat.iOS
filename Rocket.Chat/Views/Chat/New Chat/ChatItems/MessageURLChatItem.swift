@@ -10,7 +10,7 @@ import Foundation
 import DifferenceKit
 import RocketChatViewController
 
-struct MessageURLChatItem: ChatItem, Differentiable {
+final class MessageURLChatItem: BaseMessageChatItem, ChatItem, Differentiable {
     var relatedReuseIdentifier: String {
         return MessageURLCell.identifier
     }
@@ -19,6 +19,15 @@ struct MessageURLChatItem: ChatItem, Differentiable {
     var imageURL: String?
     var title: String
     var subtitle: String
+
+    init(url: String, imageURL: String?, title: String, subtitle: String, message: UnmanagedMessage?) {
+        self.url = url
+        self.imageURL = imageURL
+        self.title = title
+        self.subtitle = subtitle
+
+        super.init(user: nil, message: message)
+    }
 
     var differenceIdentifier: String {
         return url

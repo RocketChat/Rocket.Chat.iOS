@@ -57,7 +57,8 @@ extension UIView: ThemeProvider {
     var theme: Theme? {
         let exemptedInternalViews = [
             "UISwipeActionStandardButton",
-            "_UIAlertControllerView"
+            "_UIAlertControllerView",
+            "UIActivityIndicatorView"
         ]
 
         let exemptedExternalViews = [
@@ -65,9 +66,8 @@ extension UIView: ThemeProvider {
         ]
 
         guard !(exemptedInternalViews + exemptedExternalViews).contains(type(of: self).description()) else { return nil }
-        guard let superview = superview else { return ThemeManager.theme }
         if type(of: self).description() == "_UIPopoverView" { return themeForPopover }
-        return superview.theme
+        return ThemeManager.theme
     }
 
     private var themeForPopover: Theme? {
@@ -80,6 +80,7 @@ extension UIView: ThemeProvider {
             bannerBackground: theme.bannerBackground,
             titleText: theme.titleText,
             bodyText: theme.bodyText,
+            borderColor: theme.borderColor,
             controlText: theme.controlText,
             auxiliaryText: theme.auxiliaryText,
             tintColor: theme.tintColor,

@@ -72,3 +72,9 @@ extension LegalTableViewController {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension LegalTableViewController {
+    override func applyTheme() { }
+}

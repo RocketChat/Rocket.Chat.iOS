@@ -43,16 +43,17 @@ class LoginServiceTableViewCell: UITableViewCell {
             loginServiceButton.buttonColor = defaultButtonColor
             loginServiceButton.applyStyle()
 
+            let font = UIFont.preferredFont(forTextStyle: .body)
             let prefix = NSAttributedString(
                 string: localized("auth.login_service_prefix"),
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .regular)
+                    NSAttributedString.Key.font: font
                 ]
             )
             let service = NSAttributedString(
                 string: loginService.service?.capitalized ?? "",
                 attributes: [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)
+                    NSAttributedString.Key.font: font.bold() ?? font
                 ]
             )
 
@@ -66,12 +67,17 @@ class LoginServiceTableViewCell: UITableViewCell {
             loginServiceButton.textColor = UIColor(hex: loginService.buttonLabelColor)
             loginServiceButton.borderColor = .clear
             loginServiceButton.buttonColor = UIColor(hex: loginService.buttonColor)
-            loginServiceButton.fontSize = 16
-            loginServiceButton.fontWeight = .bold
+            loginServiceButton.fontTraits = .traitBold
             loginServiceButton.applyStyle()
 
             loginServiceButton.setTitle(loginService.buttonLabelText, for: .normal)
         }
     }
 
+}
+
+// MARK: Disable Theming
+
+extension LoginServiceTableViewCell {
+    override func applyTheme() { }
 }

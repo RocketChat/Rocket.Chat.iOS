@@ -20,14 +20,14 @@ public struct ReplyViewModel {
     }
 }
 
-public protocol ReplyViewDelegate {
+public protocol ReplyViewDelegate: class {
     func replyViewDidHide(_ replyView: ReplyView)
     func replyViewDidShow(_ replyView: ReplyView)
 }
 
 public class ReplyView: UIView {
 
-    public var delegate: ReplyViewDelegate?
+    public weak var delegate: ReplyViewDelegate?
 
     public let backgroundView = tap(UIView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -99,6 +99,10 @@ public class ReplyView: UIView {
             3 + 15 + 13
 
         return CGSize(width: super.intrinsicContentSize.width, height: height)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     public init() {

@@ -7,13 +7,8 @@
 //
 
 import RocketChatViewController
-import RealmSwift
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
-    func viewModel(for replyView: ReplyView) -> ReplyViewModel {
-        return ReplyViewModel(nameText: "", timeText: "", text: "")
-    }
-
     func replyViewDidHide(_ replyView: ReplyView) {
         composerViewModel.replyString = ""
     }
@@ -26,6 +21,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
         composerViewModel.didChangeHintPrefixedWord(word: word)
+
+        if composerViewModel.hints.count > 0 {
+            parent?.startDimming()
+        } else {
+            parent?.stopDimming()
+        }
     }
 
     func hintPrefixes(for composerView: ComposerView) -> [Character] {
@@ -129,7 +130,6 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: Return
 
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
-        sendButtonPressed()
-        return false
+        return true
     }
 }

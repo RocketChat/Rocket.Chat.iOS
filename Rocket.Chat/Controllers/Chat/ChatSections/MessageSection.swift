@@ -15,7 +15,7 @@ import SimpleImageViewer
 
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
-    var controllerContext: UIViewController?
+    weak var controllerContext: UIViewController?
     var messagesController: MessagesViewController? {
         return controllerContext as? MessagesViewController
     }
@@ -47,44 +47,32 @@ final class MessageSection: ChatSection {
             .removingWhitespaces()
             .removingNewLines() ?? ""
 
-        if !object.message.reactions.isEmpty {
-            cells.append(ReactionsChatItem(
-                message: object.message,
-                reactions: object.message.reactions
-            ).wrapped)
-        }
-
-        if object.message.isBroadcastReplyAvailable() {
-            cells.append(MessageActionsChatItem(
-                message: object.message
-            ).wrapped)
-        }
-
-        for attachment in object.message.attachments {
+        object.message.attachments.forEach { attachment in
             switch attachment.type {
             case .audio:
                 if sanitizedMessage.isEmpty {
-                    cells.append(AudioMessageChatItem(
+                    cells.insert(AudioMessageChatItem(
                         identifier: attachment.identifier,
                         audioURL: attachment.fullAudioURL,
                         hasText: false,
                         user: user,
                         message: object.message
-                    ).wrapped)
+                    ).wrapped, at: 0)
 
                     shouldAppendMessageHeader = false
                 } else {
-                    cells.append(AudioMessageChatItem(
+                    cells.insert(AudioMessageChatItem(
                         identifier: attachment.identifier,
                         audioURL: attachment.fullAudioURL,
                         hasText: true,
                         user: nil,
-                        message: nil
-                    ).wrapped)
+                        message: object.message
+                    ).wrapped, at: 0)
                 }
             case .video:
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.append(VideoMessageChatItem(
+                    cells.insert(VideoMessageChatItem(
+                        attachment: attachment,
                         identifier: attachment.identifier,
                         descriptionText: attachment.descriptionText,
                         videoURL: attachment.fullFileURL,
@@ -92,25 +80,26 @@ final class MessageSection: ChatSection {
                         hasText: false,
                         user: user,
                         message: object.message
-                    ).wrapped)
+                    ).wrapped, at: 0)
 
                     shouldAppendMessageHeader = false
                 } else {
-                    cells.append(VideoMessageChatItem(
+                    cells.insert(VideoMessageChatItem(
+                        attachment: attachment,
                         identifier: attachment.identifier,
                         descriptionText: attachment.descriptionText,
                         videoURL: attachment.fullFileURL,
                         videoThumbPath: attachment.videoThumbPath,
                         hasText: true,
                         user: nil,
-                        message: nil
-                    ).wrapped)
+                        message: object.message
+                    ).wrapped, at: 0)
                 }
             case .textAttachment where attachment.fields.count > 0:
                 let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
 
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.append(TextAttachmentChatItem(
+                if sanitizedMessage.isEmpty && shouldAppendMessageHeader && attachment.identifier == object.message.attachments.first?.identifier {
+                    cells.insert(TextAttachmentChatItem(
                         identifier: attachment.identifier,
                         fields: attachment.fields,
                         title: attachment.title,
@@ -120,11 +109,11 @@ final class MessageSection: ChatSection {
                         hasText: false,
                         user: user,
                         message: object.message
-                    ).wrapped)
+                    ).wrapped, at: 0)
 
                     shouldAppendMessageHeader = false
                 } else {
-                    cells.append(TextAttachmentChatItem(
+                    cells.insert(TextAttachmentChatItem(
                         identifier: attachment.identifier,
                         fields: attachment.fields,
                         title: attachment.title,
@@ -133,8 +122,8 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
-                    ).wrapped)
+                        message: object.message
+                    ).wrapped, at: 0)
                 }
             case .textAttachment where !attachment.isFile:
                 let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
@@ -149,7 +138,7 @@ final class MessageSection: ChatSection {
                 }
 
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.append(QuoteChatItem(
+                    cells.insert(QuoteChatItem(
                         identifier: attachment.identifier,
                         purpose: purpose,
                         title: attachment.title,
@@ -158,11 +147,11 @@ final class MessageSection: ChatSection {
                         hasText: false,
                         user: user,
                         message: object.message
-                    ).wrapped)
+                    ).wrapped, at: 0)
 
                     shouldAppendMessageHeader = false
                 } else {
-                    cells.append(QuoteChatItem(
+                    cells.insert(QuoteChatItem(
                         identifier: attachment.identifier,
                         purpose: purpose,
                         title: attachment.title,
@@ -170,12 +159,12 @@ final class MessageSection: ChatSection {
                         collapsed: collapsed,
                         hasText: true,
                         user: nil,
-                        message: nil
-                    ).wrapped)
+                        message: object.message
+                    ).wrapped, at: 0)
                 }
             case .image:
                 if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.append(ImageMessageChatItem(
+                    cells.insert(ImageMessageChatItem(
                         identifier: attachment.identifier,
                         title: attachment.title,
                         descriptionText: attachment.descriptionText,
@@ -183,50 +172,65 @@ final class MessageSection: ChatSection {
                         hasText: false,
                         user: user,
                         message: object.message
-                    ).wrapped)
+                    ).wrapped, at: 0)
 
                     shouldAppendMessageHeader = false
                 } else {
-                    cells.append(ImageMessageChatItem(
+                    cells.insert(ImageMessageChatItem(
                         identifier: attachment.identifier,
                         title: attachment.title,
                         descriptionText: attachment.descriptionText,
                         imageURL: attachment.fullImageURL,
                         hasText: true,
                         user: nil,
-                        message: nil
-                    ).wrapped)
+                        message: object.message
+                    ).wrapped, at: 0)
                 }
             default:
                 if attachment.isFile {
                     if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                        cells.append(FileMessageChatItem(
+                        cells.insert(FileMessageChatItem(
                             attachment: attachment,
                             hasText: false,
                             user: user,
                             message: object.message
-                        ).wrapped)
+                        ).wrapped, at: 0)
 
                         shouldAppendMessageHeader = false
                     } else {
-                        cells.append(FileMessageChatItem(
+                        cells.insert(FileMessageChatItem(
                             attachment: attachment,
                             hasText: true,
                             user: nil,
-                            message: nil
-                        ).wrapped)
+                            message: object.message
+                        ).wrapped, at: 0)
                     }
                 }
             }
         }
 
         object.message.urls.forEach { messageURL in
-            cells.append(MessageURLChatItem(
+            cells.insert(MessageURLChatItem(
                 url: messageURL.url,
                 imageURL: messageURL.imageURL,
                 title: messageURL.title,
-                subtitle: messageURL.subtitle
-            ).wrapped)
+                subtitle: messageURL.subtitle,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if object.message.isBroadcastReplyAvailable() {
+            cells.insert(MessageActionsChatItem(
+                user: nil,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if !object.message.reactions.isEmpty {
+            cells.insert(ReactionsChatItem(
+                message: object.message,
+                reactions: object.message.reactions
+            ).wrapped, at: 0)
         }
 
         if !object.isSequential && shouldAppendMessageHeader {
@@ -273,7 +277,7 @@ final class MessageSection: ChatSection {
 
         cell.messageWidth = messagesController?.messageWidth() ?? 0
         cell.viewModel = viewModel
-        cell.configure()
+        cell.configure(completeRendering: true)
         return cell
     }
 }

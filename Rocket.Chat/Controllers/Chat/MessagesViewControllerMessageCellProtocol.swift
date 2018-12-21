@@ -15,6 +15,12 @@ import SimpleImageViewer
 import RealmSwift
 
 extension MessagesViewController: ChatMessageCellProtocol {
+    func handleReviewRequest() {
+        allowResignFirstResponder = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.allowResignFirstResponder = true
+        }
+    }
 
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
         // set up controller
@@ -187,7 +193,29 @@ extension MessagesViewController: ChatMessageCellProtocol {
 
     func viewDidCollapseChange(viewModel: AnyChatItem) {
         viewSizingModel.invalidateLayout(for: viewModel.differenceIdentifier)
-        self.viewModel.updateData()
+
+        var newCollapsedState = true
+
+        if let indexOfSection = self.viewModel.sectionIndex(for: viewModel),
+            let section = self.viewModel.section(for: indexOfSection)?.base as? MessageSection {
+            if let collapsed = section.collapsibleItemsState[viewModel.differenceIdentifier] {
+                newCollapsedState = !collapsed
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = newCollapsedState
+            } else {
+                if let chatItem = viewModel.base as? BaseTextAttachmentChatItem {
+                    newCollapsedState = !chatItem.collapsed
+                }
+
+                section.collapsibleItemsState[viewModel.differenceIdentifier] = newCollapsedState
+            }
+        }
+
+        Realm.executeOnMainThread { realm in
+            if let attachment = realm.objects(Attachment.self).filter("identifier = %@", viewModel.differenceIdentifier.description).first {
+                attachment.collapsed = newCollapsedState
+                realm.add(attachment, update: true)
+            }
+        }
     }
 }
 
@@ -251,11 +279,15 @@ extension MessagesViewController {
             self.reply(to: message)
         })
 
+        let permalink = UIAlertAction(title: localized("chat.message.actions.permalink"), style: .default, handler: { _ in
+            self.subscription?.copyPermalink(messageIdentifier: message.identifier ?? "")
+        })
+
         let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { _ in
             self.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [info, react, replyAction, quote, copy, report].compactMap { $0 }
+        var actions = [info, react, replyAction, permalink, quote, copy, report].compactMap { $0 }
 
         if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")

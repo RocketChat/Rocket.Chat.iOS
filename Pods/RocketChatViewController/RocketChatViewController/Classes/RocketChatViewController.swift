@@ -144,7 +144,7 @@ public extension ChatItem where Self: Differentiable {
 public protocol ChatCell {
     var messageWidth: CGFloat { get set }
     var viewModel: AnyChatItem? { get set }
-    func configure()
+    func configure(completeRendering: Bool)
 }
 
 public protocol ChatDataUpdateDelegate: class {
@@ -200,6 +200,10 @@ open class RocketChatViewController: UICollectionViewController {
     open var composerView = ComposerView()
 
     open override var inputAccessoryView: UIView? {
+        guard presentedViewController?.isBeingDismissed != false else {
+            return nil
+        }
+        
         composerView.layoutMargins = view.layoutMargins
         composerView.directionalLayoutMargins = systemMinimumLayoutMargins
         return composerView
@@ -220,7 +224,17 @@ open class RocketChatViewController: UICollectionViewController {
         return operationQueue
     }()
 
-    open var isInverted = true
+    open var isInverted = true {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isInverted != oldValue {
+                    self.collectionView?.transform = self.isInverted ? self.invertedTransform : self.regularTransform
+                    self.collectionView?.reloadData()
+                }
+            }
+        }
+    }
+
     open var isSelfSizing = false
 
     fileprivate let kEmptyCellIdentifier = "kEmptyCellIdentifier"
@@ -228,6 +242,7 @@ open class RocketChatViewController: UICollectionViewController {
     fileprivate var keyboardHeight: CGFloat = 0.0
 
     private let invertedTransform = CGAffineTransform(scaleX: 1, y: -1)
+    private let regularTransform = CGAffineTransform(scaleX: 1, y: 1)
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -382,7 +397,7 @@ extension RocketChatViewController {
     }
 
     open override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.contentView.transform = isInverted ? invertedTransform : cell.contentView.transform
+        cell.contentView.transform = isInverted ? invertedTransform : regularTransform
     }
 }
 
@@ -408,6 +423,10 @@ extension RocketChatViewController {
     }
 
     @objc private func _onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification) {
+        guard presentedViewController?.isBeingDismissed != false else {
+            return
+        }
+        
         guard
             let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
@@ -424,6 +443,10 @@ extension RocketChatViewController {
         let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        
+        guard intersection.height != self.keyboardHeight else {
+            return
+        }
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
             self.keyboardHeight = intersection.height
@@ -434,7 +457,11 @@ extension RocketChatViewController {
             collectionView.contentOffset = contentOffset
 
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { _ in
+            UIView.performWithoutAnimation {
+                self.view.layoutIfNeeded()
+            }
+        })
     }
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -443,4 +470,3 @@ extension RocketChatViewController {
         }
     }
 }
-

@@ -9,15 +9,13 @@
 import UIKit
 
 class BaseTextAttachmentMessageCell: BaseMessageCell {
-    weak var delegate: ChatMessageCellProtocol?
-
     var subtitleHeightConstraint: NSLayoutConstraint!
     var emptySubtitleHeightConstraint: NSLayoutConstraint!
     var avatarLeadingInitialConstant: CGFloat = 0
     var avatarWidthInitialConstant: CGFloat = 0
     var textContainerLeadingInitialConstant: CGFloat = 0
-    var statusViewLeadingInitialConstant: CGFloat = 0
-    var statusViewWidthInitialConstant: CGFloat = 0
+    var statusColorLeadingInitialConstant: CGFloat = 0
+    var statusColorWidthInitialConstant: CGFloat = 0
     var fieldsStackViewLeadingInitialConstant: CGFloat = 0
     var fieldsStackViewTrailingInitialConstant: CGFloat = 0
     var textContainerTrailingInitialConstant: CGFloat = 0
@@ -33,13 +31,15 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
             avatarLeadingInitialConstant -
             avatarWidthInitialConstant -
             textContainerLeadingInitialConstant -
-            statusViewLeadingInitialConstant -
-            statusViewWidthInitialConstant -
+            statusColorLeadingInitialConstant -
+            statusColorWidthInitialConstant -
             fieldsStackViewLeadingInitialConstant -
             fieldsStackViewTrailingInitialConstant -
             textContainerTrailingInitialConstant -
             readReceiptWidthInitialConstant -
-            readReceiptTrailingInitialConstant
+            readReceiptTrailingInitialConstant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
     func configure(stackView: UIStackView) -> CGFloat {
@@ -82,6 +82,18 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
         return stackViewHeight
     }
 
+    func configure(statusColor: UIView) {
+        guard let viewModel = viewModel?.base as? TextAttachmentChatItem else {
+            return
+        }
+
+        if let color = viewModel.color {
+            statusColor.backgroundColor = SystemMessageColor(rawValue: color).color
+        } else {
+            statusColor.backgroundColor = .lightGray
+        }
+    }
+
     func reset(stackView: UIStackView) {
         stackView.arrangedSubviews.forEach { subview in
             stackView.removeArrangedSubview(subview)
@@ -91,19 +103,11 @@ class BaseTextAttachmentMessageCell: BaseMessageCell {
 
     @objc func didTapTextContainerView() {
         guard
-            let viewModel = viewModel,
-            let chatItem = viewModel.base as? TextAttachmentChatItem
+            let viewModel = viewModel
         else {
             return
         }
 
-        messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
-    }
-}
-
-extension BaseTextAttachmentMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 }

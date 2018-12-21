@@ -28,11 +28,11 @@ final class ReadReceiptsRequest: APIRequest {
 }
 
 class ReadReceiptsResource: APIResource {
-    var users: [User] {
-        return raw?["receipts"].arrayValue.map { $0["user"] }.map {
+    var users: [UnmanagedUser] {
+        return raw?["receipts"].arrayValue.map { $0["user"] }.compactMap {
             let user = User()
             user.map($0, realm: nil)
-            return user
+            return user.unmanaged
         } ?? []
     }
 }

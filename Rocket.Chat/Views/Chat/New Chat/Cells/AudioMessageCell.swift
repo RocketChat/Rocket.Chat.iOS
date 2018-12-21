@@ -32,12 +32,14 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
 
     @IBOutlet weak var viewPlayerBackground: UIView! {
         didSet {
+            viewPlayerBackground.layer.borderWidth = 1
             viewPlayerBackground.layer.cornerRadius = 4
         }
     }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var readReceiptButton: UIButton!
@@ -75,12 +77,22 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
         super.awakeFromNib()
 
         updateTimer = setupPlayerTimer(with: slider, and: labelAudioTime)
+        insertGesturesIfNeeded(with: username)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
-        updateAudio()
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
+
+        if completeRendering {
+            updateAudio()
+        }
     }
 
     override func prepareForReuse() {
@@ -105,7 +117,6 @@ final class AudioMessageCell: BaseAudioMessageCell, SizingCell {
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         pressPlayButton(sender)
     }
-
 }
 
 // MARK: Theming
@@ -120,6 +131,7 @@ extension AudioMessageCell {
         viewPlayerBackground.backgroundColor = theme.chatComponentBackground
         labelAudioTime.textColor = theme.auxiliaryText
         updatePlayingState(with: buttonPlay)
+        viewPlayerBackground.layer.borderColor = theme.borderColor.cgColor
     }
 }
 
@@ -127,6 +139,7 @@ extension AudioMessageCell {
 
 extension AudioMessageCell {
     override func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playing = false
         slider.value = 0.0
     }
 }

@@ -10,23 +10,17 @@ import Foundation
 
 class BaseMessageChatItem {
     let user: UnmanagedUser?
-    let avatar: String?
-    let emoji: String?
-    let date: Date?
-    let isUnread: Bool
+    let message: UnmanagedMessage?
     var dateFormatted: String {
-        guard let date = date else {
+        guard let date = message?.createdAt else {
             return ""
         }
 
         return RCDateFormatter.time(date)
     }
 
-    init(user: UnmanagedUser?, avatar: String?, emoji: String?, date: Date?, isUnread: Bool = false) {
+    init(user: UnmanagedUser?, message: UnmanagedMessage?) {
         self.user = user
-        self.avatar = avatar
-        self.emoji = emoji
-        self.date = date
-        self.isUnread = isUnread
+        self.message = message
     }
 }

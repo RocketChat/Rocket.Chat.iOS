@@ -11,8 +11,17 @@ import Foundation
 class BaseTextAttachmentChatItem: BaseMessageChatItem {
     let collapsed: Bool
 
-    init(collapsed: Bool, user: UnmanagedUser?, avatar: String?, emoji: String?, date: Date?, isUnread: Bool = false) {
+    init(
+        collapsed: Bool,
+        user: UnmanagedUser?,
+        message: UnmanagedMessage?
+        ) {
+
         self.collapsed = collapsed
-        super.init(user: user, avatar: avatar, emoji: emoji, date: date, isUnread: isUnread)
+
+        super.init(
+            user: user,
+            message: message
+        )
     }
 }

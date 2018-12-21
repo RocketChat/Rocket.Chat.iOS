@@ -40,6 +40,7 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
 
                 if self.isAddingReaction(emoji: view.model.emoji) {
                     UserReviewManager.shared.requestReview()
+                    self.delegate?.handleReviewRequest()
                 }
             }
 
@@ -64,8 +65,11 @@ final class ReactionsCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCe
         return true
     }
 
-    func configure() {
-        guard let viewModel = viewModel?.base as? ReactionsChatItem else {
+    func configure(completeRendering: Bool) {
+        guard
+            completeRendering,
+            let viewModel = viewModel?.base as? ReactionsChatItem
+        else {
             return
         }
 

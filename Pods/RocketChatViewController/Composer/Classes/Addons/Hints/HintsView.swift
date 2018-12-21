@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol HintsViewDelegate {
+public protocol HintsViewDelegate: class {
     func numberOfHints(in hintsView: HintsView) -> Int
     func maximumHeight(for hintsView: HintsView) -> CGFloat
     func hintsView(_ hintsView: HintsView, cellForHintAt index: Int) -> UITableViewCell
@@ -42,7 +42,7 @@ private final class HintsViewFallbackDelegate: HintsViewDelegate {
 }
 
 public class HintsView: UITableView {
-    public var hintsDelegate: HintsViewDelegate?
+    public weak var hintsDelegate: HintsViewDelegate?
     private var fallbackDelegate: HintsViewDelegate = HintsViewFallbackDelegate()
 
     private var currentDelegate: HintsViewDelegate {
@@ -110,6 +110,12 @@ public class HintsView: UITableView {
         delegate = self
         rowHeight = UITableViewAutomaticDimension
         estimatedRowHeight = 44
+        separatorInset = UIEdgeInsets(
+            top: 0,
+            left: 8,
+            bottom: 0,
+            right: 0
+        )
 
         register(
             UITableViewHeaderFooterView.self,
@@ -149,7 +155,14 @@ extension HintsView: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return currentDelegate.hintsView(self, cellForHintAt: indexPath.row)
+        let cell = currentDelegate.hintsView(self, cellForHintAt: indexPath.row)
+        cell.separatorInset = UIEdgeInsets(
+            top: 0,
+            left: 54,
+            bottom: 0,
+            right: 0
+        )
+        return cell
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

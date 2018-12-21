@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCell {
+final class BasicMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: BasicMessageCell.self)
 
     // MARK: SizingCell
@@ -32,6 +32,7 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var text: RCTextView!
 
     @IBOutlet weak var readReceiptButton: UIButton!
@@ -51,13 +52,12 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
             readReceiptWidthConstraint.constant -
             readReceiptTrailingConstraint.constant -
             avatarWidthConstraint.constant -
-            avatarLeadingConstraint.constant
+            avatarLeadingConstraint.constant -
+            layoutMargins.left -
+            layoutMargins.right
     }
 
-    weak var longPressGesture: UILongPressGestureRecognizer?
-    weak var usernameTapGesture: UITapGestureRecognizer?
-    weak var avatarTapGesture: UITapGestureRecognizer?
-    weak var delegate: ChatMessageCellProtocol? {
+    override var delegate: ChatMessageCellProtocol? {
         didSet {
             text.delegate = delegate
         }
@@ -69,30 +69,38 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
         super.awakeFromNib()
 
         initialTextHeightConstant = textHeightConstraint.constant
-        insertGesturesIfNeeded()
+        insertGesturesIfNeeded(with: username)
     }
 
-    override func configure() {
-        configure(with: avatarView, date: date, and: username)
+    override func configure(completeRendering: Bool) {
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
+
         configure(readReceipt: readReceiptButton)
         updateText()
     }
 
     func updateText() {
         guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem
+            let viewModel = viewModel?.base as? BasicMessageChatItem,
+            let message = viewModel.message
         else {
             return
         }
 
-        if let message = MessageTextCacheManager.shared.message(for: viewModel.message, with: theme) {
-            if viewModel.message.temporary {
-                message.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
-            } else if viewModel.message.failed {
-                message.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
+        if let messageText = MessageTextCacheManager.shared.message(for: message, with: theme) {
+            if message.temporary {
+                messageText.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
+            } else if message.failed {
+                messageText.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
             }
 
-            text.message = message
+            text.message = messageText
 
             let maxSize = CGSize(
                 width: textWidth,
@@ -113,63 +121,6 @@ final class BasicMessageCell: BaseMessageCell, BaseMessageCellProtocol, SizingCe
         avatarView.prepareForReuse()
         textHeightConstraint.constant = initialTextHeightConstant
     }
-
-    func insertGesturesIfNeeded() {
-        if longPressGesture == nil {
-            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
-            gesture.minimumPressDuration = 0.325
-            gesture.delegate = self
-            addGestureRecognizer(gesture)
-
-            longPressGesture = gesture
-        }
-
-        if usernameTapGesture == nil {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
-            gesture.delegate = self
-            username.addGestureRecognizer(gesture)
-
-            usernameTapGesture = gesture
-        }
-
-        if avatarTapGesture == nil {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
-            gesture.delegate = self
-            avatarView.addGestureRecognizer(gesture)
-
-            avatarTapGesture = gesture
-        }
-    }
-
-    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
-        else {
-            return
-        }
-
-        delegate?.handleLongPressMessageCell(managedObject, view: contentView, recognizer: recognizer)
-    }
-
-    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        guard
-            let viewModel = viewModel?.base as? BasicMessageChatItem,
-            let managedObject = viewModel.message.managedObject
-        else {
-            return
-        }
-
-        delegate?.handleUsernameTapMessageCell(managedObject, view: username, recognizer: recognizer)
-    }
-}
-
-// MARK: UIGestureRecognizerDelegate
-
-extension BasicMessageCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
 }
 
 // MARK: Theming
@@ -184,4 +135,5 @@ extension BasicMessageCell {
         username.textColor = theme.titleText
         updateText()
     }
+
 }

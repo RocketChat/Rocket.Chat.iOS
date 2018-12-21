@@ -21,3 +21,9 @@ class EmailAuthTableViewCell: UITableViewCell {
     }
 
 }
+
+// MARK: Disable Theming
+
+extension EmailAuthTableViewCell {
+    override func applyTheme() { }
+}

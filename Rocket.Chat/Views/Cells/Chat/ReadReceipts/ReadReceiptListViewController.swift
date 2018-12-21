@@ -28,7 +28,9 @@ class ReadReceiptListViewController: UIViewController, UserActionSheetPresenter 
         didSet {
             readReceiptListView.model = model
             readReceiptListView.selectedUser = { [weak self] user, source in
-                self?.presentActionSheetForUser(user, source: source)
+                if let user = user.managedObject {
+                    self?.presentActionSheetForUser(user, source: source)
+                }
             }
         }
     }

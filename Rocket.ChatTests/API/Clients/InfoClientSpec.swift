@@ -98,21 +98,23 @@ class InfoClientSpec: XCTestCase {
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
-            [
-                "_id": "snippet-message",
-                "roles": [
-                    "owner",
-                    "moderator",
-                    "admin"
-                ]
-            ],
-            [
-                "_id": "access-permissions",
-                "roles": [
-                    "admin"
+            "permissions": [
+                [
+                    "_id": "snippet-message",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "admin"
+                    ]
+                ],
+                [
+                    "_id": "access-permissions",
+                    "roles": [
+                        "admin"
+                    ]
                 ]
             ]
-            ])
+        ])
 
         client.fetchPermissions()
         XCTAssertEqual(realm.objects(Rocket_Chat.Permission.self).count, 2)

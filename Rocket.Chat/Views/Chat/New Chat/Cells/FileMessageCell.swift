@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell {
+class FileMessageCell: BaseMessageCell, SizingCell {
     static let identifier = String(describing: FileMessageCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -31,6 +31,7 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
     @IBOutlet weak var labelDescriptionTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var fileButton: UIButton! {
         didSet {
@@ -41,7 +42,12 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
     }
     @IBOutlet weak var readReceiptButton: UIButton!
 
-    override func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        insertGesturesIfNeeded(with: username)
+    }
+
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? FileMessageChatItem else {
             return
         }
@@ -55,7 +61,14 @@ class FileMessageCell: BaseFileMessageCell, BaseMessageCellProtocol, SizingCell 
         }
 
         configure(readReceipt: readReceiptButton)
-        configure(with: avatarView, date: date, and: username)
+        configure(
+            with: avatarView,
+            date: date,
+            status: statusView,
+            and: username,
+            completeRendering: completeRendering
+        )
+
         fileButton.setTitle(viewModel.attachment.title, for: .normal)
     }
 

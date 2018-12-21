@@ -9,7 +9,7 @@
 import UIKit
 import RocketChatViewController
 
-final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell {
+final class QuoteCell: BaseQuoteMessageCell, SizingCell {
     static let identifier = String(describing: QuoteCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
@@ -20,7 +20,12 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         return cell
     }()
 
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView! {
+        didSet {
+            containerView.layer.borderWidth = 1
+            containerView.layer.cornerRadius = 4
+        }
+    }
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var text: UILabel!
@@ -57,9 +62,11 @@ final class QuoteCell: BaseQuoteMessageCell, BaseMessageCellProtocol, SizingCell
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+
+        insertGesturesIfNeeded(with: nil)
     }
 
-    override func configure() {
+    override func configure(completeRendering: Bool) {
         guard let viewModel = viewModel?.base as? QuoteChatItem else {
             return
         }
@@ -103,5 +110,6 @@ extension QuoteCell {
         purpose.textColor = theme.auxiliaryText
         username.textColor = theme.actionTintColor
         text.textColor = theme.bodyText
+        containerView.layer.borderColor = theme.borderColor.cgColor
     }
 }

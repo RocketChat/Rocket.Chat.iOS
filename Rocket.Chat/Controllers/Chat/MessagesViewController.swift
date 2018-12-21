@@ -11,6 +11,8 @@ import RocketChatViewController
 import RealmSwift
 import DifferenceKit
 
+private typealias NibCellIndentifier = (nib: UINib, cellIdentifier: String)
+
 protocol SizingCell: class {
     static var sizingCell: UICollectionViewCell & ChatCell { get }
     static func size(for viewModel: AnyChatItem, with cellWidth: CGFloat) -> CGSize
@@ -22,10 +24,9 @@ extension SizingCell {
         mutableSizingCell.prepareForReuse()
         mutableSizingCell.messageWidth = cellWidth
         mutableSizingCell.viewModel = viewModel
-        mutableSizingCell.configure()
+        mutableSizingCell.configure(completeRendering: false)
         mutableSizingCell.setNeedsLayout()
         mutableSizingCell.layoutIfNeeded()
-
         return mutableSizingCell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }
@@ -48,19 +49,30 @@ final class MessagesViewController: RocketChatViewController {
     // TODO: Move to another view model
     let socketHandlerToken = String.random(5)
 
-    var chatTitleView: ChatTitleView?
+    var chatTitleView: ChatTitleView? {
+        didSet {
+            chatTitleView?.updateConnectionState(isRequestingMessages: viewModel.requestingData)
+        }
+    }
 
     var chatPreviewModeView: ChatPreviewModeView?
 
     var emptyStateImageView: UIImageView?
     var documentController: UIDocumentInteractionController?
 
+    var unmanagedSubscription: UnmanagedSubscription?
     var subscription: Subscription! {
         didSet {
             let sub: Subscription? = subscription
+            let unmanaged = sub?.unmanaged
+
+            viewModel.onRequestingDataChanged = { [weak self] requesting in
+                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting)
+            }
 
             viewModel.subscription = sub
-            viewSubscriptionModel.subscription = sub?.unmanaged
+            viewSubscriptionModel.subscription = unmanaged
+            unmanagedSubscription = unmanaged
 
             recoverDraftMessage()
             updateEmptyState()
@@ -98,6 +110,11 @@ final class MessagesViewController: RocketChatViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
+    var allowResignFirstResponder = true
+    override var canResignFirstResponder: Bool {
+        return allowResignFirstResponder
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -112,27 +129,7 @@ final class MessagesViewController: RocketChatViewController {
 
         composerView.delegate = self
 
-        collectionView.register(BasicMessageCell.nib, forCellWithReuseIdentifier: BasicMessageCell.identifier)
-        collectionView.register(SequentialMessageCell.nib, forCellWithReuseIdentifier: SequentialMessageCell.identifier)
-        collectionView.register(LoaderCell.nib, forCellWithReuseIdentifier: LoaderCell.identifier)
-        collectionView.register(DateSeparatorCell.nib, forCellWithReuseIdentifier: DateSeparatorCell.identifier)
-        collectionView.register(UnreadMarkerCell.nib, forCellWithReuseIdentifier: UnreadMarkerCell.identifier)
-        collectionView.register(AudioCell.nib, forCellWithReuseIdentifier: AudioCell.identifier)
-        collectionView.register(AudioMessageCell.nib, forCellWithReuseIdentifier: AudioMessageCell.identifier)
-        collectionView.register(VideoCell.nib, forCellWithReuseIdentifier: VideoCell.identifier)
-        collectionView.register(VideoMessageCell.nib, forCellWithReuseIdentifier: VideoMessageCell.identifier)
-        collectionView.register(ReactionsCell.nib, forCellWithReuseIdentifier: ReactionsCell.identifier)
-        collectionView.register(FileCell.nib, forCellWithReuseIdentifier: FileCell.identifier)
-        collectionView.register(FileMessageCell.nib, forCellWithReuseIdentifier: FileMessageCell.identifier)
-        collectionView.register(TextAttachmentCell.nib, forCellWithReuseIdentifier: TextAttachmentCell.identifier)
-        collectionView.register(TextAttachmentMessageCell.nib, forCellWithReuseIdentifier: TextAttachmentMessageCell.identifier)
-        collectionView.register(ImageCell.nib, forCellWithReuseIdentifier: ImageCell.identifier)
-        collectionView.register(ImageMessageCell.nib, forCellWithReuseIdentifier: ImageMessageCell.identifier)
-        collectionView.register(QuoteCell.nib, forCellWithReuseIdentifier: QuoteCell.identifier)
-        collectionView.register(QuoteMessageCell.nib, forCellWithReuseIdentifier: QuoteMessageCell.identifier)
-        collectionView.register(MessageURLCell.nib, forCellWithReuseIdentifier: MessageURLCell.identifier)
-        collectionView.register(MessageActionsCell.nib, forCellWithReuseIdentifier: MessageActionsCell.identifier)
-
+        registerCells()
         setupScrollToBottom()
 
         NotificationCenter.default.addObserver(
@@ -155,8 +152,15 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
 
+            if self.viewModel.dataNormalized.first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
+                self.isInverted = false
+            } else {
+                self.isInverted = true
+            }
+
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
+            self.markAsRead()
         }
 
         viewSubscriptionModel.onDataChanged = { [weak self] in
@@ -176,6 +180,14 @@ final class MessagesViewController: RocketChatViewController {
             }
         }
 
+        composerViewModel.getRecentSenders = { [weak self] in
+            guard let self = self else {
+                return []
+            }
+
+            return self.viewModel.recentSenders
+        }
+
         startDraftMessage()
         updateJoinedView()
     }
@@ -183,6 +195,7 @@ final class MessagesViewController: RocketChatViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         markAsRead()
+        becomeFirstResponder()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -224,6 +237,38 @@ final class MessagesViewController: RocketChatViewController {
                     controller.subscription = subscription
                 }
             }
+        }
+    }
+
+    // MARK: Cells
+
+    private func registerCells() {
+        let collectionViewCells: [NibCellIndentifier] = [
+            (nib: BasicMessageCell.nib, cellIdentifier: BasicMessageCell.identifier),
+            (nib: SequentialMessageCell.nib, cellIdentifier: SequentialMessageCell.identifier),
+            (nib: LoaderCell.nib, cellIdentifier: LoaderCell.identifier),
+            (nib: DateSeparatorCell.nib, cellIdentifier: DateSeparatorCell.identifier),
+            (nib: UnreadMarkerCell.nib, cellIdentifier: UnreadMarkerCell.identifier),
+            (nib: AudioCell.nib, cellIdentifier: AudioCell.identifier),
+            (nib: AudioMessageCell.nib, cellIdentifier: AudioMessageCell.identifier),
+            (nib: VideoCell.nib, cellIdentifier: VideoCell.identifier),
+            (nib: VideoMessageCell.nib, cellIdentifier: VideoMessageCell.identifier),
+            (nib: ReactionsCell.nib, cellIdentifier: ReactionsCell.identifier),
+            (nib: FileCell.nib, cellIdentifier: FileCell.identifier),
+            (nib: FileMessageCell.nib, cellIdentifier: FileMessageCell.identifier),
+            (nib: TextAttachmentCell.nib, cellIdentifier: TextAttachmentCell.identifier),
+            (nib: TextAttachmentMessageCell.nib, cellIdentifier: TextAttachmentMessageCell.identifier),
+            (nib: ImageCell.nib, cellIdentifier: ImageCell.identifier),
+            (nib: ImageMessageCell.nib, cellIdentifier: ImageMessageCell.identifier),
+            (nib: QuoteCell.nib, cellIdentifier: QuoteCell.identifier),
+            (nib: QuoteMessageCell.nib, cellIdentifier: QuoteMessageCell.identifier),
+            (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
+            (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
+            (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
+        ]
+
+        collectionViewCells.forEach {
+            collectionView?.register($0.nib, forCellWithReuseIdentifier: $0.cellIdentifier)
         }
     }
 
@@ -384,7 +429,7 @@ final class MessagesViewController: RocketChatViewController {
     // MARK: Reading Status
 
     private func markAsRead() {
-        guard let subscription = viewModel.subscription?.validated()?.unmanaged else { return }
+        guard let subscription = unmanagedSubscription else { return }
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
@@ -425,16 +470,29 @@ extension MessagesViewController {
         if let size = viewSizingModel.size(for: item.differenceIdentifier) {
             return size
         } else {
-            guard let sizingCell = UINib(nibName: item.relatedReuseIdentifier, bundle: nil).instantiate() as? SizingCell else {
+            let identifier = item.relatedReuseIdentifier
+            var sizingCell: Any?
+
+            if let cachedSizingCell = viewSizingModel.view(for: identifier) as? SizingCell {
+                sizingCell = cachedSizingCell
+            } else {
+                sizingCell = UINib(nibName: identifier, bundle: nil).instantiate() as? SizingCell
+
+                if let sizingCell = sizingCell {
+                    viewSizingModel.set(view: sizingCell, for: identifier)
+                }
+            }
+
+            guard let cell = sizingCell as? SizingCell else {
                 fatalError("""
-                            Failed to reference sizing cell instance. Please,
-                            check the relatedReuseIdentifier and make sure all
-                            the chat components conform to SizingCell protocol
-                            """)
+                    Failed to reference sizing cell instance. Please,
+                    check the relatedReuseIdentifier and make sure all
+                    the chat components conform to SizingCell protocol
+                """)
             }
 
             let cellWidth = messageWidth()
-            var size = type(of: sizingCell).size(for: item, with: cellWidth)
+            var size = type(of: cell).size(for: item, with: cellWidth)
             size = CGSize(width: cellWidth, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
             return size
@@ -482,7 +540,6 @@ extension MessagesViewController: UserActionSheetPresenter {
 }
 
 extension MessagesViewController: ChatTitleViewProtocol {
-
     func titleViewChannelButtonPressed() {
         performSegue(withIdentifier: "Channel Actions", sender: nil)
     }
@@ -493,8 +550,10 @@ extension MessagesViewController {
 
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = view.theme else { return }
         let themeName = ThemeManager.themes.first { $0.theme == theme }?.title
+
         let scrollToBottomImageName = "Float Button " + (themeName ?? "light")
         buttonScrollToBottom.setImage(UIImage(named: scrollToBottomImageName), for: .normal)
 

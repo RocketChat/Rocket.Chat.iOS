@@ -23,6 +23,7 @@ final class AudioCell: BaseAudioMessageCell, SizingCell {
 
     @IBOutlet weak var viewPlayerBackground: UIView! {
         didSet {
+            viewPlayerBackground.layer.borderWidth = 1
             viewPlayerBackground.layer.cornerRadius = 4
         }
     }
@@ -63,10 +64,13 @@ final class AudioCell: BaseAudioMessageCell, SizingCell {
         super.awakeFromNib()
 
         updateTimer = setupPlayerTimer(with: slider, and: labelAudioTime)
+        insertGesturesIfNeeded(with: nil)
     }
 
-    override func configure() {
-        updateAudio()
+    override func configure(completeRendering: Bool) {
+        if completeRendering {
+            updateAudio()
+        }
     }
 
     override func prepareForReuse() {
@@ -91,7 +95,6 @@ final class AudioCell: BaseAudioMessageCell, SizingCell {
     @IBAction func didPressPlayButton(_ sender: UIButton) {
         pressPlayButton(sender)
     }
-
 }
 
 // MARK: Theming
@@ -104,6 +107,7 @@ extension AudioCell {
         viewPlayerBackground.backgroundColor = theme.chatComponentBackground
         labelAudioTime.textColor = theme.auxiliaryText
         updatePlayingState(with: buttonPlay)
+        viewPlayerBackground.layer.borderColor = theme.borderColor.cgColor
     }
 }
 
@@ -111,6 +115,7 @@ extension AudioCell {
 
 extension AudioCell {
     override func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playing = false
         slider.value = 0.0
     }
 }
