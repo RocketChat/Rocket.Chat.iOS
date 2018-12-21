@@ -240,6 +240,9 @@
 		414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */; };
 		414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */; };
 		414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */; };
+		414EE62921CD1F98003693D2 /* JistiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62821CD1F98003693D2 /* JistiViewController.swift */; };
+		414EE62E21CD1FEB003693D2 /* JitsiMeet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */; };
+		414EE62F21CD1FEB003693D2 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62D21CD1FEB003693D2 /* WebRTC.framework */; };
 		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
 		415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */; };
 		4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */; };
@@ -1166,6 +1169,9 @@
 		414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTableViewController.swift; sourceTree = "<group>"; };
 		414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRolesRequest.swift; sourceTree = "<group>"; };
+		414EE62821CD1F98003693D2 /* JistiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JistiViewController.swift; sourceTree = "<group>"; };
+		414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JitsiMeet.framework; sourceTree = "<group>"; };
+		414EE62D21CD1FEB003693D2 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
 		415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextCacheManager.swift; sourceTree = "<group>"; };
 		4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1812,6 +1818,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */,
+				414EE62E21CD1FEB003693D2 /* JitsiMeet.framework in Frameworks */,
+				414EE62F21CD1FEB003693D2 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2200,6 +2208,30 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		414EE62721CD1F80003693D2 /* Video Conferencing */ = {
+			isa = PBXGroup;
+			children = (
+				414EE62821CD1F98003693D2 /* JistiViewController.swift */,
+			);
+			path = "Video Conferencing";
+			sourceTree = "<group>";
+		};
+		414EE62A21CD1FEB003693D2 /* JitsiMeet */ = {
+			isa = PBXGroup;
+			children = (
+				414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */,
+			);
+			path = JitsiMeet;
+			sourceTree = "<group>";
+		};
+		414EE62C21CD1FEB003693D2 /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				414EE62D21CD1FEB003693D2 /* WebRTC.framework */,
+			);
+			path = WebRTC;
+			sourceTree = "<group>";
+		};
 		414EFF901E54FE35004F001F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2429,6 +2461,7 @@
 				33F73B2E2073F1FC00F03F29 /* Notification */,
 				4102E3AB1E53272C004BAA82 /* Preferences */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
+				414EE62721CD1F80003693D2 /* Video Conferencing */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
 			);
 			path = Controllers;
@@ -2616,6 +2649,8 @@
 			isa = PBXGroup;
 			children = (
 				4199A9871DABCC570035F820 /* RCEmojiKit */,
+				414EE62A21CD1FEB003693D2 /* JitsiMeet */,
+				414EE62C21CD1FEB003693D2 /* WebRTC */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -4691,6 +4726,7 @@
 				33D08E2E20BD9267008D03EF /* ThemePreferenceController.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
+				414EE62921CD1F98003693D2 /* JistiViewController.swift in Sources */,
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
 				8076FDAB2048549C00114F28 /* AuthSettingsHiddenTypes.swift in Sources */,
 				8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */,
@@ -5609,6 +5645,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rocket.Chat/External/JitsiMeet",
+					"$(PROJECT_DIR)/Rocket.Chat/External/WebRTC",
+				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -5805,6 +5846,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rocket.Chat/External/JitsiMeet",
+					"$(PROJECT_DIR)/Rocket.Chat/External/WebRTC",
+				);
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5830,6 +5876,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rocket.Chat/External/JitsiMeet",
+					"$(PROJECT_DIR)/Rocket.Chat/External/WebRTC",
+				);
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5969,6 +6020,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Rocket.Chat/External/JitsiMeet",
+					"$(PROJECT_DIR)/Rocket.Chat/External/WebRTC",
+				);
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
