@@ -55,6 +55,13 @@ extension AuthSettings: ModelMappeable {
         self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
         self.passwordFieldPlaceholder = objectForKey(object: values, key: "Accounts_PasswordPlaceholder")?.stringValue ?? ""
 
+        // Video Conferencing
+        self.isJitsiEnabled = objectForKey(object: values, key: "Jitsi_Enabled")?.bool ?? false
+        self.isJitsiEnabledForChannels = objectForKey(object: values, key: "Jisti_Enable_Channels")?.bool ?? false
+        self.isJitsiSSL = objectForKey(object: values, key: "Jitsi_SSL")?.bool ?? false
+        self.jitsiDomain = objectForKey(object: values, key: "Jitsi_Domain")?.string ?? ""
+        self.jitsiPrefix = objectForKey(object: values, key: "Jitsi_URL_Room_Prefix")?.string ?? ""
+
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
         self.isAllowedToEditProfile = objectForKey(object: values, key: "Accounts_AllowUserProfileChange")?.bool ?? false

@@ -72,6 +72,13 @@ final class AuthSettings: Object {
     @objc dynamic var isAllowedToEditPassword = false
     @objc dynamic var oauthWordpressServerType = ""
 
+    // Video Conference
+    @objc dynamic var isJitsiEnabled = false
+    @objc dynamic var isJitsiEnabledForChannels = false
+    @objc dynamic var isJitsiSSL = false
+    @objc dynamic var jitsiDomain: String?
+    @objc dynamic var jitsiPrefix: String?
+
     // Registration
     @objc dynamic var rawRegistrationForm: String?
     var registrationForm: RegistrationFormAccess {
