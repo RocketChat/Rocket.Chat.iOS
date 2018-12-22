@@ -74,7 +74,7 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
         purpose.text = viewModel.purpose
         purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
 
-        let attachmentText = viewModel.text ?? ""
+        let attachmentText = Emojione.transform(string: viewModel.text ?? "")
         let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
         username.text = viewModel.title
         text.attributedText = attributedText
