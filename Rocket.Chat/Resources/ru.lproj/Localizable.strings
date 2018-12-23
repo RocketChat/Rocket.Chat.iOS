@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Функция не поддерживается";
 "alert.unsupported_feature.message" = "Версия этого сервера: %@. Эта функция поддерживается только в версиях %@ и выше.";
 
-"alert.push_token_error.title" = "Предупреждение";
-"alert.push_token_error.message" = "Вы все равно можете получать push-уведомления с этого сервера из-за проблемы с серверами версии ниже 0.60.0.";
-
 "alert.upload_error.title" = "Ошибка загрузки";
 "alert.upload_error.message" = "При загрузке файла произошла ошибка. Пожалуйста, попробуйте еще раз.";
 

@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Opcja nie jest wspierana";
 "alert.unsupported_feature.message" = "Wersja serwera to: %@. Ta opcja jest tylko wspierana w wersji %@ lub wyższej.";
 
-"alert.push_token_error.title" = "Ostrzeżenie";
-"alert.push_token_error.message" = "Możesz ciągle otrzymywać powiadomienia z tego serwera z powodu błędu na serwerach w wersji poniżej 0.60.0.";
-
 "alert.upload_error.title" = "Błąd wysyłania";
 "alert.upload_error.message" = "Coś poszło nie tak w trakcie wysyłania pliku. Spróbuj ponownie.";
 

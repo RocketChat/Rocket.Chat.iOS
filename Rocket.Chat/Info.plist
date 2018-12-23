@@ -273,7 +273,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>NSPhotoLibraryUsageDescription</string>
 	<key>RC_MIN_SERVER_VERSION</key>
-	<string>0.54.0</string>
+	<string>0.62.0</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
