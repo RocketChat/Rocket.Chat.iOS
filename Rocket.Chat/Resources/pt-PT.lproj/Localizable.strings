@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Recurso não suportado";
 "alert.unsupported_feature.message" = "A versão deste servidor é: %@. Este recurso é suportado apenas nas versões %@ e superiores.";
 
-"alert.push_token_error.title" = "Aviso";
-"alert.push_token_error.message" = "Você ainda pode receber notificações por push deste servidor devido a um problema com os servidores de versão inferior a 0.60.0.";
-
 "alert.upload_error.title" = "Erro de Envio";
 "alert.upload_error.message" = "Algo errado aconteceu ao fazer o envio do seu arquivo. Por favor, tente novamente.";
 
