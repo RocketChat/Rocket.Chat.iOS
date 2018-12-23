@@ -224,7 +224,7 @@
 "chat.message.actions.unstar" = "Rimuovi Speciale";
 "chat.message.actions.quote" = "Citazione";
 "chat.message.actions.reply" = "Risposta";
-"chat.message.actions.permalink" = "Permalink"; //TODO
+"chat.message.actions.permalink" = "Collegamento Permanente";
 "chat.message.actions.delete" = "Cancella messaggio";
 "chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
 "chat.message.actions.delete.confirm.message" = "Sei sicuro di voler cancellare questo messaggio? Questo processo non può essere annullato.";
@@ -339,8 +339,8 @@
 "myaccount.settings.profile" = "Profilo";
 "myaccount.settings.license" = "Licenza";
 "myaccount.settings.language" = "Lingua";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.review" = "Valuta questa App";
+"myaccount.settings.share" = "Condividi questa App";
 "myaccount.settings.appicon" = "Icona Applicazione";
 "myaccount.settings.version" = "Versione: %@ (%@)";
 "myaccount.settings.server_version" = "Versione Server: %@";
@@ -494,10 +494,10 @@
 "shortcuts.server_selection_numbers" = "Scelta server 1...9";
 "shortcuts.add_server" = "Aggiungi server";
 "shortcuts.change_theme" = "Cambia tema";
-"shortcuts.send" = "Send"; //TODO
-"shortcuts.new_line" = "New line"; //TODO
+"shortcuts.send" = "Spedisci";
+"shortcuts.new_line" = "Nuova Linea";
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.replied" = "Con Risposta";
+"chat.components.quote.pinned" = "Evidenziati";
+"chat.components.text_attachment.no_title" = "Senza Titolo";
