@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Fonction non prise en charge";
 "alert.unsupported_feature.message" = "La version de ce serveur est: %@. Cette fonctionnalité est uniquement prise en charge dans les versions %@ et supérieures.";
 
-"alert.push_token_error.title" = "Attention";
-"alert.push_token_error.message" = "Vous pouvez toujours recevoir des notifications push de ce serveur en raison d'un problème avec les serveurs de la version 0.60.0.";
-
 "alert.upload_error.title" = "Erreur de téléchargement";
 "alert.upload_error.message" = "Une erreur est survenue lors du téléchargement de votre fichier. Veuillez réessayer.";
 

@@ -17,15 +17,6 @@ struct PushClient: APIClient {
     func deletePushToken(token: String? = PushManager.getDeviceToken()) {
         guard let token = token else { return }
 
-        api.fetch(PushTokenDeleteRequest(token: token)) { response in
-            switch response {
-            case .resource:
-                break
-            case .error(let error):
-                if case .version = error {
-                    Alert(key: "alert.push_token_error").present()
-                }
-            }
-        }
+        api.fetch(PushTokenDeleteRequest(token: token), completion: nil)
     }
 }
