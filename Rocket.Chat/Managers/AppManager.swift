@@ -268,17 +268,20 @@ extension AppManager {
             return nil
         }
 
-        if let nav = UIStoryboard(name: "Jitsi", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController {
+        let storyboard = UIStoryboard(name: "Jitsi", bundle: Bundle.main)
+        if let nav = storyboard.instantiateInitialViewController() as? UINavigationController {
             if let controller = nav.viewControllers.first as? JitsiViewController {
                 controller.viewModel.subscription = room
 
                 nav.modalTransitionStyle = .coverVertical
 
-                // Close all presenting controllers, modals & pushed
-                mainNav.presentedViewController?.dismiss(animated: animated, completion: nil)
-                mainNav.popToRootViewController(animated: animated)
-
-                mainNav.present(nav, animated: true, completion: nil)
+                if let presentedViewController = mainNav.presentedViewController {
+                    presentedViewController.dismiss(animated: animated, completion: {
+                        mainNav.present(nav, animated: true, completion: nil)
+                    })
+                } else {
+                    mainNav.present(nav, animated: true, completion: nil)
+                }
 
                 return controller
             }

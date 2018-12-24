@@ -29,7 +29,7 @@ final class JitsiViewController: UIViewController {
                     "name": viewModel.userDisplayName,
                     "avatar": viewModel.userAvatar
                 ],
-                "iss": "rocketchat-ios",
+                "iss": "rocketchat-ios"
             ],
             "url": viewModel.videoCallURL
         ])
