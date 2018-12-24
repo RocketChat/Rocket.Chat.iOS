@@ -241,8 +241,10 @@
 		414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */; };
 		414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */; };
 		414EE62921CD1F98003693D2 /* JistiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62821CD1F98003693D2 /* JistiViewController.swift */; };
-		414EE62E21CD1FEB003693D2 /* JitsiMeet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */; };
-		414EE62F21CD1FEB003693D2 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62D21CD1FEB003693D2 /* WebRTC.framework */; };
+		414EE63021CD2912003693D2 /* JitsiMeet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */; };
+		414EE63121CD2912003693D2 /* JitsiMeet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62B21CD1FEB003693D2 /* JitsiMeet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		414EE63321CD2915003693D2 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62D21CD1FEB003693D2 /* WebRTC.framework */; };
+		414EE63421CD2915003693D2 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 414EE62D21CD1FEB003693D2 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
 		415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */; };
 		4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */; };
@@ -909,6 +911,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		414EE63221CD2912003693D2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				414EE63121CD2912003693D2 /* JitsiMeet.framework in Embed Frameworks */,
+				414EE63421CD2915003693D2 /* WebRTC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		807FB5672046E7DD00E21429 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1818,8 +1832,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */,
-				414EE62E21CD1FEB003693D2 /* JitsiMeet.framework in Frameworks */,
-				414EE62F21CD1FEB003693D2 /* WebRTC.framework in Frameworks */,
+				414EE63021CD2912003693D2 /* JitsiMeet.framework in Frameworks */,
+				414EE63321CD2915003693D2 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4108,6 +4122,7 @@
 				807FB5672046E7DD00E21429 /* Embed App Extensions */,
 				805378D121344458004A3D16 /* Validate Strings */,
 				9590906DA2061D8E1FBCD596 /* [CP] Embed Pods Frameworks */,
+				414EE63221CD2912003693D2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4510,7 +4525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/Scripts/Localize.swift";
+			shellScript = "${SRCROOT}/Scripts/Localize.swift\n";
 		};
 		9590906DA2061D8E1FBCD596 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
