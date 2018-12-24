@@ -38,6 +38,17 @@ final class SendMessageRequest: APIRequest {
 
         if let messageType = messageType {
             body["message"]["t"] = JSON(messageType)
+
+            // Hacky way to work with Jitsi for web clients
+            // this really needs a better way.
+            if messageType == "jitsi_call_started" {
+                body["message"]["actionLinks"] = [[
+                    "icon": "icon-videocam",
+                    "label": localized("chat.message.actions.join_video_call"),
+                    "method_id": "joinJitsiCall",
+                    "params": ""
+                ]]
+            }
         }
 
         return body.rawString()?.data(using: .utf8)

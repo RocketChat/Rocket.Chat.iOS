@@ -99,7 +99,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
             let viewModel = JitsiViewModel()
             viewModel.subscription = unmanaged
-
+            
             client.sendMessage(
                 text: viewModel.videoCallURL,
                 internalType: "jitsi_call_started",
