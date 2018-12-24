@@ -81,17 +81,8 @@ struct MessagesClient: APIClient {
             case .resource(let resource):
                 guard let message = resource.raw?["message"] else { return }
                 updateMessage(json: message)
-            case .error(let error):
-                switch error {
-                case .version:
-                    SubscriptionManager.sendTextMessage(message, completion: { response in
-                        DispatchQueue.main.async {
-                            updateMessage(json: response.result["result"])
-                        }
-                    })
-                default:
-                    setMessageOffline()
-                }
+            case .error:
+                setMessageOffline()
             }
 
         }
@@ -281,22 +272,8 @@ struct MessagesClient: APIClient {
                         subscriptionType: message.subscription?.type.rawValue ?? ""
                     )
                 )
-            case .error(let error):
-                switch error {
-                case .version:
-                    // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in
-                        DispatchQueue.main.async {
-                            AnalyticsManager.log(
-                                event: .reaction(
-                                    subscriptionType: message.subscription?.type.rawValue ?? ""
-                                )
-                            )
-                        }
-                    })
-                default:
-                    Alert.defaultError.present()
-                }
+            case .error:
+                Alert.defaultError.present()
             }
         }
 
