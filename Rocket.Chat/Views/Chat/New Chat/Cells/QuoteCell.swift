@@ -67,37 +67,14 @@ final class QuoteCell: BaseQuoteMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
-        guard let viewModel = viewModel?.base as? QuoteChatItem else {
-            return
-        }
-
-        purpose.text = viewModel.purpose
-        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
-
-        let attachmentText = viewModel.text ?? ""
-        let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
-        username.text = viewModel.title
-        text.attributedText = attributedText
-
-        let maxSize = CGSize(width: textLabelWidth, height: .greatestFiniteMagnitude)
-        let textHeight = text.sizeThatFits(maxSize).height
-
-        if textHeight > collapsedTextMaxHeight {
-            isCollapsible = true
-            arrow.alpha = 1
-
-            if viewModel.collapsed {
-                arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
-                textHeightConstraint.constant = collapsedTextMaxHeight
-            } else {
-                arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
-                textHeightConstraint.constant = textHeight
-            }
-        } else {
-            isCollapsible = false
-            textHeightConstraint.constant = textHeight
-            arrow.alpha = 0
-        }
+        configure(
+            purpose: purpose,
+            purposeHeightConstraint: purposeHeightConstraint,
+            username: username,
+            text: text,
+            textHeightConstraint: textHeightConstraint,
+            arrow: arrow
+        )
     }
 }
 

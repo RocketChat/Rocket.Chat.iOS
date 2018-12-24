@@ -50,4 +50,45 @@ class BaseQuoteMessageCell: BaseMessageCell {
         messageSection?.collapsibleItemsState[viewModel.differenceIdentifier] = !chatItem.collapsed
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
+
+    func configure(
+        purpose: UILabel,
+        purposeHeightConstraint: NSLayoutConstraint,
+        username: UILabel,
+        text: UILabel,
+        textHeightConstraint: NSLayoutConstraint,
+        arrow: UIImageView
+    ) {
+        guard let viewModel = viewModel?.base as? QuoteChatItem else {
+            return
+        }
+
+        purpose.text = viewModel.purpose
+        purposeHeightConstraint.constant = viewModel.purpose.isEmpty ? 0 : purposeHeightInitialConstant
+
+        let attachmentText = Emojione.transform(string: viewModel.text ?? "")
+        let attributedText = NSMutableAttributedString(string: attachmentText).transformMarkdown(with: theme)
+        username.text = viewModel.title
+        text.attributedText = attributedText
+
+        let maxSize = CGSize(width: textLabelWidth, height: .greatestFiniteMagnitude)
+        let textHeight = text.sizeThatFits(maxSize).height
+
+        if textHeight > collapsedTextMaxHeight {
+            isCollapsible = true
+            arrow.alpha = 1
+
+            if viewModel.collapsed {
+                arrow.image = theme == .light ?  #imageLiteral(resourceName: "Attachment Collapsed Light") : #imageLiteral(resourceName: "Attachment Collapsed Dark")
+                textHeightConstraint.constant = collapsedTextMaxHeight
+            } else {
+                arrow.image = theme == .light ? #imageLiteral(resourceName: "Attachment Expanded Light") : #imageLiteral(resourceName: "Attachment Expanded Dark")
+                textHeightConstraint.constant = textHeight
+            }
+        } else {
+            isCollapsible = false
+            textHeightConstraint.constant = textHeight
+            arrow.alpha = 0
+        }
+    }
 }
