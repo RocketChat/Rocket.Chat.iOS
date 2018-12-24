@@ -23,6 +23,10 @@ struct AuthSettingsDefaults {
 final class AuthSettings: Object {
     @objc dynamic var identifier: String = String.random()
 
+    // Unique Identifier
+    @objc dynamic var uniqueIdentifier: String?
+
+    // URLs
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
 
