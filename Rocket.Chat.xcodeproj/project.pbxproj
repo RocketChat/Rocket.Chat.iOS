@@ -299,6 +299,8 @@
 		418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C74421FA3813F00499577 /* CompoundPickerViewDelegate.swift */; };
 		418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C74441FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift */; };
 		41900C271D9FE35400308EF4 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41900C261D9FE35400308EF4 /* Attachment.swift */; };
+		4190693B21D0D8C600FE2573 /* Jitsi.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4190693A21D0D8C600FE2573 /* Jitsi.storyboard */; };
+		4190693D21D0DE0500FE2573 /* JitsiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */; };
 		419095062193DF5600B16084 /* BaseMessageCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419095052193DF5600B16084 /* BaseMessageCellProtocol.swift */; };
 		419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419205481D52EDE6004EEC5F /* UILabelExtension.swift */; };
 		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
@@ -1246,6 +1248,8 @@
 		418C74421FA3813F00499577 /* CompoundPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundPickerViewDelegate.swift; sourceTree = "<group>"; };
 		418C74441FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundPickerViewDelegateSpec.swift; sourceTree = "<group>"; };
 		41900C261D9FE35400308EF4 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		4190693A21D0D8C600FE2573 /* Jitsi.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Jitsi.storyboard; sourceTree = "<group>"; };
+		4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewModel.swift; sourceTree = "<group>"; };
 		419095052193DF5600B16084 /* BaseMessageCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMessageCellProtocol.swift; sourceTree = "<group>"; };
 		419205481D52EDE6004EEC5F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
@@ -2226,6 +2230,7 @@
 			isa = PBXGroup;
 			children = (
 				414EE62821CD1F98003693D2 /* JistiViewController.swift */,
+				4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */,
 			);
 			path = "Video Conferencing";
 			sourceTree = "<group>";
@@ -2487,6 +2492,7 @@
 				1496A88120FA4A92005C2E14 /* NotificationsSettings.storyboard */,
 				4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */,
 				41E2F9FE1D414DE800238DFD /* Chat.storyboard */,
+				4190693A21D0D8C600FE2573 /* Jitsi.storyboard */,
 				140A95E0202F526C003FD564 /* Drawing.storyboard */,
 				41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */,
 				41CD52D420BEFA3B00336892 /* New Room.storyboard */,
@@ -4312,6 +4318,7 @@
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41D3668620C0323100970B99 /* SubscriptionsSortingView.xib in Resources */,
 				4101B02B21A2EF8C00772F7C /* HeaderCell.xib in Resources */,
+				4190693B21D0D8C600FE2573 /* Jitsi.storyboard in Resources */,
 				33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */,
 				14F8A26F202E653E00175FDC /* Grey-83.5@2x.png in Resources */,
 				33A5C9CE206A565800FE1C8F /* people.json in Resources */,
@@ -4919,6 +4926,7 @@
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */,
+				4190693D21D0DE0500FE2573 /* JitsiViewModel.swift in Sources */,
 				33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */,
 				9990751D21766ECE00CAB7C8 /* BaseImageMessageCell.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,

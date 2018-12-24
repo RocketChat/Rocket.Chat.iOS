@@ -107,39 +107,6 @@
             </objects>
             <point key="canvasLocation" x="4253" y="-454"/>
         </scene>
-        <!--Jitsi View Controller-->
-        <scene sceneID="Kg2-QP-YeS">
-            <objects>
-                <viewController storyboardIdentifier="Jitsi" id="iUo-a7-MDw" customClass="JitsiViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Dx-F2-Zwv"/>
-                        <viewControllerLayoutGuide type="bottom" id="JKM-lB-Ono"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tMv-hY-52v">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deb-jc-IIC" customClass="JitsiMeetView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="deb-jc-IIC" secondAttribute="trailing" id="53x-TJ-QBd"/>
-                            <constraint firstItem="deb-jc-IIC" firstAttribute="top" secondItem="2Dx-F2-Zwv" secondAttribute="bottom" id="BEb-yz-rVh"/>
-                            <constraint firstItem="JKM-lB-Ono" firstAttribute="top" secondItem="deb-jc-IIC" secondAttribute="bottom" id="Gd6-Fj-dxN"/>
-                            <constraint firstItem="deb-jc-IIC" firstAttribute="leading" secondItem="tMv-hY-52v" secondAttribute="leading" id="hIF-CE-J6T"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="jitsiMeetView" destination="deb-jc-IIC" id="I7X-jY-fsS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ns3-U7-K7z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5059" y="-454"/>
-        </scene>
         <!--Add Users View Controller-->
         <scene sceneID="RgG-OP-6aq">
             <objects>

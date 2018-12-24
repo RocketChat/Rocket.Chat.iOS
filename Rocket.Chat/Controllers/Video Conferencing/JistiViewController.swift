@@ -11,15 +11,14 @@ import JitsiMeet
 
 final class JitsiViewController: UIViewController {
 
-    @IBOutlet weak var jitsiMeetView: JitsiMeetView?
+    let viewModel = JitsiViewModel()
 
-    var subscription: Subscription?
+    @IBOutlet weak var jitsiMeetView: JitsiMeetView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let user = AuthManager.currentUser()?.unmanaged
-
+        jitsiMeetView?.delegate = self
         jitsiMeetView?.loadURLObject([
             "config": [
                 "startWithAudioMuted": false,
@@ -27,12 +26,26 @@ final class JitsiViewController: UIViewController {
             ],
             "context": [
                 "user": [
-                    "name": user?.displayName ?? "",
-                    "avatar": user?.avatarURL?.absoluteString ?? ""
-                ]
+                    "name": viewModel.userDisplayName,
+                    "avatar": viewModel.userAvatar
+                ],
+                "iss": "rocketchat-ios",
             ],
-            "url": "https://jitsi.rocket.chat/rc-ios-test-jitsi"
+            "url": viewModel.videoCallURL
         ])
+    }
+
+    func close() {
+        jitsiMeetView?.removeFromSuperview()
+        jitsiMeetView = nil
+
+        dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: IBAction
+
+    @IBAction func buttonCloseDidPressed(_ sender: Any) {
+        close()
     }
 
 }
@@ -58,6 +71,7 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     func conferenceLeft(_ data: [AnyHashable: Any]) {
         onJitsiMeetViewDelegateEvent(name: "CONFERENCE_LEFT", data: data)
         print("conference Left log is : \(data)")
+        close()
     }
 
     func conferenceWillJoin(_ data: [AnyHashable: Any]) {

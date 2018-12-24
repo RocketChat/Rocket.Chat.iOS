@@ -262,33 +262,23 @@ extension AppManager {
     static func openVideoCall(room: Subscription, animated: Bool = true) -> JitsiViewController? {
         guard
             let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
-            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
+            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController,
+            let mainNav = mainViewController.viewControllers.first as? UINavigationController
         else {
             return nil
         }
 
-        if mainViewController.detailViewController as? BaseNavigationController != nil {
-            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Jitsi") as? JitsiViewController {
-                controller.subscription = room
+        if let nav = UIStoryboard(name: "Jitsi", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController {
+            if let controller = nav.viewControllers.first as? JitsiViewController {
+                controller.viewModel.subscription = room
+
+                nav.modalTransitionStyle = .coverVertical
 
                 // Close all presenting controllers, modals & pushed
-                mainViewController.presentedViewController?.dismiss(animated: animated, completion: nil)
-                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: animated, completion: nil)
+                mainNav.presentedViewController?.dismiss(animated: animated, completion: nil)
+                mainNav.popToRootViewController(animated: animated)
 
-                let nav = BaseNavigationController(rootViewController: controller)
-                mainViewController.showDetailViewController(nav, sender: self)
-                return controller
-            }
-        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Jitsi") as? JitsiViewController {
-            controller.subscription = room
-
-            if let nav = mainViewController.viewControllers.first as? UINavigationController {
-                // Close all presenting controllers, modals & pushed
-                nav.presentedViewController?.dismiss(animated: animated, completion: nil)
-                nav.popToRootViewController(animated: animated)
-
-                // Push the new controller to the stack
-                nav.pushViewController(controller, animated: animated)
+                mainNav.present(nav, animated: true, completion: nil)
 
                 return controller
             }
