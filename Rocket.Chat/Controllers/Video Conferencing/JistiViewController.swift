@@ -1,5 +1,5 @@
 //
-//  JistiViewController.swift
+//  JitsiViewController.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Streit on 21/12/18.
@@ -9,12 +9,31 @@
 import UIKit
 import JitsiMeet
 
-final class JistiViewController: UIViewController {
+final class JitsiViewController: UIViewController {
 
-    @IBOutlet weak var jistiMeetView: JitsiMeetView?
+    @IBOutlet weak var jitsiMeetView: JitsiMeetView?
+
+    var subscription: Subscription?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let user = AuthManager.currentUser()?.unmanaged
+
+//        jitsiMeetView?.loadURLString("https://jitsi.rocket.chat/rc-ios-test-jitsi")
+        jitsiMeetView?.loadURLObject([
+            "config": [
+                "startWithAudioMuted": false,
+                "startWithVideoMuted": true
+            ],
+            "context": [
+                "user": [
+                    "name": user?.displayName ?? "",
+                    "avatar": user?.avatarURL?.absoluteString ?? ""
+                ]
+            ],
+            "url": "https://jitsi.rocket.chat/rc-ios-test-jitsi"
+        ])
 
 //        let defaults = UserDefaults.standard
 //        defaults.setValue("1", forKey: "isVideoGoing")
@@ -33,7 +52,7 @@ final class JistiViewController: UIViewController {
 //                self.myName1.text = (defaults.value(forKey: "bodyTitle") as? String)!
 //                DispatchQueue.main.async {
 //                    objJitsiMeetView.loadURLString(serverUrlVideoVC as? String)
-//                    //                objJitsiMeetView.loadURLObject(["config": ["startWithAudioMuted": false, "startWithVideoMuted": true], "url": serverUrlVideoVC])
+//                    //                objJitsiMeetView
 //                }
 //
 //                objJitsiMeetView.accessibilityActivate()
@@ -74,7 +93,7 @@ final class JistiViewController: UIViewController {
 
 // MARK: JitsiMeetViewDelegate
 
-extension JistiViewController: JitsiMeetViewDelegate {
+extension JitsiViewController: JitsiMeetViewDelegate {
 
     func onJitsiMeetViewDelegateEvent(name: String, data: [AnyHashable: Any]) {
         print("[\(#file):\(#line)] JitsiMeetViewDelegate \(name) \(data)")

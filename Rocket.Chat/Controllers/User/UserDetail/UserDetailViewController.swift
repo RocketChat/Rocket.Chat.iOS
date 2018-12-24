@@ -83,6 +83,12 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     @IBAction func messageDidPress(_ sender: UIButton) {
         AppManager.openDirectMessage(username: model.username)
     }
+
+    @IBAction func videoDidPress(_ sender: UIButton) {
+        if let subscription = Subscription.find(name: model.username, subscriptionType: [.directMessage]) {
+            AppManager.openVideoCall(room: subscription)
+        }
+    }
 }
 
 extension UserDetailViewController {

@@ -258,6 +258,45 @@ extension AppManager {
         return nil
     }
 
+    @discardableResult
+    static func openVideoCall(room: Subscription, animated: Bool = true) -> JitsiViewController? {
+        guard
+            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
+            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController
+        else {
+            return nil
+        }
+
+        if mainViewController.detailViewController as? BaseNavigationController != nil {
+            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Jitsi") as? JitsiViewController {
+                controller.subscription = room
+
+                // Close all presenting controllers, modals & pushed
+                mainViewController.presentedViewController?.dismiss(animated: animated, completion: nil)
+                mainViewController.detailViewController?.presentedViewController?.dismiss(animated: animated, completion: nil)
+
+                let nav = BaseNavigationController(rootViewController: controller)
+                mainViewController.showDetailViewController(nav, sender: self)
+                return controller
+            }
+        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Jitsi") as? JitsiViewController {
+            controller.subscription = room
+
+            if let nav = mainViewController.viewControllers.first as? UINavigationController {
+                // Close all presenting controllers, modals & pushed
+                nav.presentedViewController?.dismiss(animated: animated, completion: nil)
+                nav.popToRootViewController(animated: animated)
+
+                // Push the new controller to the stack
+                nav.pushViewController(controller, animated: animated)
+
+                return controller
+            }
+        }
+
+        return nil
+    }
+
     static func openDirectMessage(username: String, replyMessageIdentifier: String? = nil, completion: (() -> Void)? = nil) {
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
