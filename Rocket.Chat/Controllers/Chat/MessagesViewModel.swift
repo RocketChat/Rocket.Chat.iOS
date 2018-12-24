@@ -678,8 +678,19 @@ extension MessagesViewModel {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
-        client.sendMessage(text: text, subscription: subscription)
+        if let (command, params) = text.commandAndParams() {
+            guard let client = API.current()?.client(CommandsClient.self) else {
+                return Alert.defaultError.present()
+            }
+
+            client.runCommand(command: command, params: params, roomId: subscription.rid)
+        } else {
+            guard let client = API.current()?.client(MessagesClient.self) else {
+                return Alert.defaultError.present()
+            }
+
+            client.sendMessage(text: text, subscription: subscription)
+        }
     }
 
     func editTextMessage(_ message: Message, text: String) {

@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "サポートされていない機能";
 "alert.unsupported_feature.message" = "このバージョンは %@ です。 この機能はバージョン %@ 以上でサポートされています。";
 
-"alert.push_token_error.title" = "警告";
-"alert.push_token_error.message" = "0.60.0未満のバージョンのサーバーには問題があるため、このサーバーからプッシュ通知を受け取ることがあります。";
-
 "alert.upload_error.title" = "アップロードエラー";
 "alert.upload_error.message" = "ファイルアップロード時に問題が発生しました。もう一度お試しください。";
 
