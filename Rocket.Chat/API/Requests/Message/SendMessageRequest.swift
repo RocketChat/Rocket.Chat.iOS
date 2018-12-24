@@ -18,21 +18,27 @@ final class SendMessageRequest: APIRequest {
     let id: String
     let roomId: String
     let text: String
+    let messageType: String?
 
-    init(id: String, roomId: String, text: String) {
+    init(id: String, roomId: String, text: String, messageType: String? = nil) {
         self.id = id
         self.roomId = roomId
         self.text = text
+        self.messageType = messageType
     }
 
     func body() -> Data? {
-        let body = JSON([
+        var body = JSON([
             "message": [
                 "_id": id,
                 "rid": roomId,
                 "msg": text
             ]
         ])
+
+        if let messageType = messageType {
+            body["message"]["t"] = JSON(messageType)
+        }
 
         return body.rawString()?.data(using: .utf8)
     }

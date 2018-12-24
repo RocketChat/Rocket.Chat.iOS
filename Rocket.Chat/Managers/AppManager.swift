@@ -271,7 +271,7 @@ extension AppManager {
         let storyboard = UIStoryboard(name: "Jitsi", bundle: Bundle.main)
         if let nav = storyboard.instantiateInitialViewController() as? UINavigationController {
             if let controller = nav.viewControllers.first as? JitsiViewController {
-                controller.viewModel.subscription = room
+                controller.viewModel.subscription = room.unmanaged
 
                 nav.modalTransitionStyle = .coverVertical
 

@@ -59,6 +59,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         tableView?.reloadData()
         nameLabel?.text = model.name
         usernameLabel?.text = model.username
+
         if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
             ImageManager.loadImage(with: url, into: avatar)
             ImageManager.loadImage(with: url, into: background)
@@ -66,7 +67,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
         messageButton?.setTitle(model.messageButtonText, for: .normal)
         voiceCallButton?.setTitle(model.voiceCallButtonText, for: .normal)
+
+        videoCallButton?.isHidden = !(AuthSettingsManager.settings?.isJitsiEnabled ?? false)
         videoCallButton?.setTitle(model.videoCallButtonText, for: .normal)
+
         updateButtonsInsets()
     }
 
@@ -86,6 +90,22 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
     @IBAction func videoDidPress(_ sender: UIButton) {
         if let subscription = Subscription.find(name: model.username, subscriptionType: [.directMessage]) {
+            guard
+                let client = API.current()?.client(MessagesClient.self),
+                let unmanaged = subscription.unmanaged
+            else {
+                return Alert.defaultError.present()
+            }
+
+            let viewModel = JitsiViewModel()
+            viewModel.subscription = unmanaged
+
+            client.sendMessage(
+                text: viewModel.videoCallURL,
+                internalType: "jitsi_call_started",
+                subscription: unmanaged
+            )
+
             AppManager.openVideoCall(room: subscription)
         }
     }

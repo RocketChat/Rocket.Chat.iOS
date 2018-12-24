@@ -10,7 +10,7 @@ import Foundation
 
 final class JitsiViewModel {
 
-    internal var subscription: Subscription?
+    internal var subscription: UnmanagedSubscription?
 
     internal var user: UnmanagedUser? {
         return AuthManager.currentUser()?.unmanaged
