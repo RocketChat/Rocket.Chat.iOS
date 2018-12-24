@@ -164,6 +164,12 @@ extension Message {
                 self.user?.displayName() ?? ""
             )
 
+        case .jitsiCallStarted:
+            return String(
+                format: localized("chat.message.type.video_call_started"),
+                self.user?.displayName() ?? ""
+            )
+
         default:
             break
         }

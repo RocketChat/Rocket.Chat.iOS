@@ -301,6 +301,9 @@
 		41900C271D9FE35400308EF4 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41900C261D9FE35400308EF4 /* Attachment.swift */; };
 		4190693B21D0D8C600FE2573 /* Jitsi.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4190693A21D0D8C600FE2573 /* Jitsi.storyboard */; };
 		4190693D21D0DE0500FE2573 /* JitsiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */; };
+		4190693F21D0E7F600FE2573 /* MessageVideoCallChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */; };
+		4190694221D0E82F00FE2573 /* MessageVideoCallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4190694021D0E82E00FE2573 /* MessageVideoCallCell.xib */; };
+		4190694321D0E82F00FE2573 /* MessageVideoCallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190694121D0E82E00FE2573 /* MessageVideoCallCell.swift */; };
 		419095062193DF5600B16084 /* BaseMessageCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419095052193DF5600B16084 /* BaseMessageCellProtocol.swift */; };
 		419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419205481D52EDE6004EEC5F /* UILabelExtension.swift */; };
 		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
@@ -1250,6 +1253,9 @@
 		41900C261D9FE35400308EF4 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		4190693A21D0D8C600FE2573 /* Jitsi.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Jitsi.storyboard; sourceTree = "<group>"; };
 		4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewModel.swift; sourceTree = "<group>"; };
+		4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVideoCallChatItem.swift; sourceTree = "<group>"; };
+		4190694021D0E82E00FE2573 /* MessageVideoCallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageVideoCallCell.xib; sourceTree = "<group>"; };
+		4190694121D0E82E00FE2573 /* MessageVideoCallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageVideoCallCell.swift; sourceTree = "<group>"; };
 		419095052193DF5600B16084 /* BaseMessageCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMessageCellProtocol.swift; sourceTree = "<group>"; };
 		419205481D52EDE6004EEC5F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
@@ -3891,6 +3897,8 @@
 				9914183C2166C626007D2AA2 /* MessageURLCell.swift */,
 				9977D856217E942200FE5EC6 /* MessageActionsCell.xib */,
 				9977D858217E94C400FE5EC6 /* MessageActionsCell.swift */,
+				4190694021D0E82E00FE2573 /* MessageVideoCallCell.xib */,
+				4190694121D0E82E00FE2573 /* MessageVideoCallCell.swift */,
 				4101B02A21A2EF8C00772F7C /* HeaderCell.xib */,
 				4101B02C21A2EF9300772F7C /* HeaderCell.swift */,
 			);
@@ -3916,6 +3924,7 @@
 				99B4A7B3216479CD00C80FF2 /* QuoteChatItem.swift */,
 				9914183E2166CFA4007D2AA2 /* MessageURLChatItem.swift */,
 				9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */,
+				4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */,
 				4101B02821A2EF6B00772F7C /* HeaderChatItem.swift */,
 			);
 			path = ChatItems;
@@ -4429,6 +4438,7 @@
 				80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */,
 				33A5C9D2206A565800FE1C8F /* nature.json in Resources */,
 				14F8A26E202E653E00175FDC /* Grey-76@3x.png in Resources */,
+				4190694221D0E82F00FE2573 /* MessageVideoCallCell.xib in Resources */,
 				802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */,
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
@@ -4763,6 +4773,7 @@
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
+				4190694321D0E82F00FE2573 /* MessageVideoCallCell.swift in Sources */,
 				9987B5992093E526007D277C /* FileTableViewCell.swift in Sources */,
 				99BE4D8A2153162A001A43E2 /* UnmanagedMessage.swift in Sources */,
 				41FC9E0C209B3BAA00FED485 /* UploadMessageRequest.swift in Sources */,
@@ -4853,6 +4864,7 @@
 				991AB00821744E640097AE4C /* BaseAudioMessageCell.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
+				4190693F21D0E7F600FE2573 /* MessageVideoCallChatItem.swift in Sources */,
 				4116CBE720B599E6007E7163 /* StatusViewModel.swift in Sources */,
 				418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */,
 				80235D1B1F74070100A56CA5 /* RoomMembersRequest.swift in Sources */,
