@@ -111,8 +111,14 @@ final class MessagesViewModel {
     /**
      If the view model is requesting new data from the API.
      */
-    internal var onRequestingDataChanged: ((Bool) -> Void)?
-    internal var requestingData = false {
+    enum RequestingDataType {
+        case none
+        case initialRequest
+        case historyRequest
+    }
+
+    internal var onRequestingDataChanged: ((RequestingDataType) -> Void)?
+    internal var requestingData: RequestingDataType = .none {
         didSet {
             onRequestingDataChanged?(requestingData)
         }
@@ -210,7 +216,7 @@ final class MessagesViewModel {
     func clear() {
         data = []
         hasMoreData = true
-        requestingData = false
+        requestingData = .none
     }
 
     func sectionIndex(for item: AnyChatItem) -> Int? {
@@ -404,7 +410,7 @@ final class MessagesViewModel {
      */
     func fetchMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
         guard
-            !requestingData,
+            requestingData == .none,
             hasMoreData || oldestMessage == nil,
             let subscription = subscription?.validated(),
             let subscriptionUnmanaged = subscription.unmanaged
@@ -412,7 +418,7 @@ final class MessagesViewModel {
             return
         }
 
-        requestingData = true
+        requestingData = oldestMessage == nil ? .initialRequest : .historyRequest
 
         queryDataQueue.addOperation { [weak self] in
             guard
@@ -458,7 +464,7 @@ final class MessagesViewModel {
 
         MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
             DispatchQueue.main.async {
-                self?.requestingData = false
+                self?.requestingData = .none
                 self?.hasMoreData = oldest != nil
 
                 if let oldest = oldest {
@@ -554,7 +560,7 @@ final class MessagesViewModel {
             var loader = false
 
             if idx == dataSortedMaxIndex {
-                loader = hasMoreData || requestingData
+                loader = hasMoreData || requestingData != .none
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -595,7 +601,7 @@ final class MessagesViewModel {
         )
 
         let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
-        if currentHeaderIndex == nil && !hasMoreData && !requestingData {
+        if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
             data.append(currentHeaderSection)
             dataSorted.append(currentHeaderSection)
         } else if let currentHeaderIndex = currentHeaderIndex {

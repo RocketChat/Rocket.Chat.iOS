@@ -51,7 +51,7 @@ final class MessagesViewController: RocketChatViewController {
 
     var chatTitleView: ChatTitleView? {
         didSet {
-            chatTitleView?.updateConnectionState(isRequestingMessages: viewModel.requestingData)
+            chatTitleView?.updateConnectionState(isRequestingMessages: viewModel.requestingData == .initialRequest)
         }
     }
 
@@ -67,7 +67,7 @@ final class MessagesViewController: RocketChatViewController {
             let unmanaged = sub?.unmanaged
 
             viewModel.onRequestingDataChanged = { [weak self] requesting in
-                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting)
+                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
             }
 
             viewModel.subscription = sub
@@ -569,7 +569,7 @@ extension MessagesViewController: SocketConnectionHandler {
         chatTitleView?.state = state
 
         if state == .connected {
-            viewModel.requestingData = false
+            viewModel.requestingData = .none
             viewModel.fetchMessages(from: nil)
         }
     }
