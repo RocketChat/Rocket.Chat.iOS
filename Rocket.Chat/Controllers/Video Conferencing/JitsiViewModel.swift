@@ -33,13 +33,14 @@ final class JitsiViewModel {
             return ""
         }
 
+        let uniqueIdentifier = settings.uniqueIdentifier ?? "undefined"
+
         let urlProtocol = settings.isJitsiSSL ? "https://" : "http://"
         let urlDomain = "\(domain)/"
-        let urlPrefix = prefix.isEmpty ? "" : "\(prefix)/"
+        let urlPrefix = prefix.isEmpty ? "" : prefix
         let urlIdentifier = subscription?.rid ?? String.random()
 
-        return urlProtocol + urlDomain + urlIdentifier
-//        return urlProtocol + urlDomain + urlPrefix + urlIdentifier
+        return urlProtocol + urlDomain + urlPrefix + uniqueIdentifier + urlIdentifier
     }
 
 }
