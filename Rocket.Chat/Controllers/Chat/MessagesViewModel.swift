@@ -393,8 +393,7 @@ final class MessagesViewModel {
             let index = data.firstIndex(where: { (section) -> Bool in
                 if let object = section.object.base as? MessageSectionModel {
                     return
-                        object.differenceIdentifier == message.identifier &&
-                        !message.isContentEqual(to: object.message)
+                        object.differenceIdentifier == message.identifier
                 }
 
                 return false
