@@ -25,9 +25,9 @@ final class JitsiViewController: UIViewController {
 
         // Jitsi Update Call needs to be called every 10 seconds to make sure
         // call is not ended and is available to web users.
+        updateJitsiTimeout()
         Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
-            guard let subscription = self?.viewModel.subscription else { return }
-            SubscriptionManager.updateJitsiTimeout(rid: subscription.rid)
+            self?.updateJitsiTimeout()
         }
 
         jitsiMeetView?.delegate = self
@@ -45,6 +45,11 @@ final class JitsiViewController: UIViewController {
             ],
             "url": viewModel.videoCallURL
         ])
+    }
+
+    func updateJitsiTimeout() {
+        guard let subscription = self.viewModel.subscription else { return }
+        SubscriptionManager.updateJitsiTimeout(rid: subscription.rid)
     }
 
     func close() {
@@ -96,6 +101,7 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     func conferenceWillLeave(_ data: [AnyHashable: Any]) {
         onJitsiMeetViewDelegateEvent(name: "CONFERENCE_WILL_LEAVE", data: data)
         print("conference Leave log is : \(data)")
+        close()
     }
 
     func loadConfigError(_ data: [AnyHashable: Any]) {
