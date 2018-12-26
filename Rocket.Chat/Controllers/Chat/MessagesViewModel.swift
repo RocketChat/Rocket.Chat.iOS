@@ -401,7 +401,11 @@ final class MessagesViewModel {
 
             if let index = index {
                 if let newSection = section(for: message) {
+                    MessageTextCacheManager.shared.update(for: message)
                     data[index] = newSection
+                    if let indexOfDataSorted = dataSorted.firstIndex(of: newSection) {
+                        dataSorted[indexOfDataSorted] = newSection
+                    }
                 }
             } else {
                 continue
