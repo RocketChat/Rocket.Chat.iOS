@@ -37,11 +37,11 @@ final class MessagesSubscriptionViewModel {
                 sendTypingStatus()
             }
 
-            debouncedSendTypingStatus()
+            throttledSendTypingStatus()
         }
     }
 
-    internal lazy var debouncedSendTypingStatus = debounce(1, action: sendTypingStatus)
+    internal lazy var throttledSendTypingStatus = throttle(1, action: sendTypingStatus)
     internal lazy var sendTypingStatus = { [weak self] in
         guard
             let self = self,
