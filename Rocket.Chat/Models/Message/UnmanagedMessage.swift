@@ -46,6 +46,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var rid: String
     var text: String
     var type: MessageType
+    var internalType: String
     var attachments: [UnmanagedAttachment]
     var userIdentifier: String?
     var user: UnmanagedUser?
@@ -78,6 +79,7 @@ extension UnmanagedMessage {
         return
             lhs.identifier == rhs.identifier &&
             lhs.type == rhs.type &&
+            lhs.internalType == rhs.internalType &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
             lhs.markedForDeletion == rhs.markedForDeletion &&
@@ -107,6 +109,7 @@ extension UnmanagedMessage {
         rid = message.rid
         text = message.text
         type = message.type
+        internalType = message.internalType
         userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
         subscription = message.subscription?.unmanaged

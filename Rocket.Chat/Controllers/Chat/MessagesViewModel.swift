@@ -261,9 +261,20 @@ final class MessagesViewModel {
      - returns: AnyChatSection instance based on MessageSectionModel.
     */
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
-        let messageSectionModel = MessageSectionModel(message: message)
-
         if let existingSection = dataNormalized.filter({ $0.model.differenceIdentifier == AnyHashable(message.differenceIdentifier) }).first {
+            let messageSectionModel: MessageSectionModel
+            if let existingSectionModel = existingSection.model.base.object.base as? MessageSectionModel {
+                messageSectionModel = MessageSectionModel(
+                    message: message,
+                    daySeparator: existingSectionModel.daySeparator,
+                    sequential: existingSectionModel.isSequential,
+                    unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
+                    loader: existingSectionModel.containsLoader
+                )
+            } else {
+                messageSectionModel = MessageSectionModel(message: message)
+            }
+
             return AnyChatSection(MessageSection(
                 object: AnyDifferentiable(messageSectionModel),
                 controllerContext: controllerContext,
@@ -272,7 +283,7 @@ final class MessagesViewModel {
         }
 
         return AnyChatSection(MessageSection(
-            object: AnyDifferentiable(messageSectionModel),
+            object: AnyDifferentiable(MessageSectionModel(message: message)),
             controllerContext: controllerContext,
             collapsibleItemsState: [:]
         ))
@@ -382,8 +393,7 @@ final class MessagesViewModel {
             let index = data.firstIndex(where: { (section) -> Bool in
                 if let object = section.object.base as? MessageSectionModel {
                     return
-                        object.differenceIdentifier == message.identifier &&
-                        !message.isContentEqual(to: object.message)
+                        object.differenceIdentifier == message.identifier
                 }
 
                 return false
@@ -391,7 +401,11 @@ final class MessagesViewModel {
 
             if let index = index {
                 if let newSection = section(for: message) {
+                    MessageTextCacheManager.shared.update(for: message)
                     data[index] = newSection
+                    if let indexOfDataSorted = dataSorted.firstIndex(of: newSection) {
+                        dataSorted[indexOfDataSorted] = newSection
+                    }
                 }
             } else {
                 continue
