@@ -22,25 +22,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deb-jc-IIC" customClass="JitsiMeetView">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="deb-jc-IIC" firstAttribute="top" secondItem="2Dx-F2-Zwv" secondAttribute="bottom" id="MmM-3Z-b5l"/>
-                            <constraint firstItem="JKM-lB-Ono" firstAttribute="top" secondItem="deb-jc-IIC" secondAttribute="bottom" id="OYZ-al-YOG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="deb-jc-IIC" secondAttribute="trailing" id="Owa-sX-E7N"/>
-                            <constraint firstItem="deb-jc-IIC" firstAttribute="leading" secondItem="tMv-hY-52v" secondAttribute="leadingMargin" id="kcl-e4-0FX"/>
+                            <constraint firstItem="deb-jc-IIC" firstAttribute="leading" secondItem="tMv-hY-52v" secondAttribute="leading" id="7yi-SY-Oa1"/>
+                            <constraint firstAttribute="trailing" secondItem="deb-jc-IIC" secondAttribute="trailing" id="ls3-Lf-EAa"/>
+                            <constraint firstItem="JKM-lB-Ono" firstAttribute="top" secondItem="deb-jc-IIC" secondAttribute="bottom" id="qb2-Zg-6dV"/>
+                            <constraint firstItem="deb-jc-IIC" firstAttribute="top" secondItem="2Dx-F2-Zwv" secondAttribute="bottom" id="vNH-kF-6nz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4qb-Xk-Deh">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="iwB-Qt-Skz">
-                            <connections>
-                                <action selector="buttonCloseDidPressed:" destination="iUo-a7-MDw" id="wWz-eZ-Nxc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="4qb-Xk-Deh"/>
                     <connections>
                         <outlet property="jitsiMeetView" destination="deb-jc-IIC" id="I7X-jY-fsS"/>
                     </connections>
@@ -49,13 +43,13 @@
             </objects>
             <point key="canvasLocation" x="5980" y="-455"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Jitsi Navigation Controller-->
         <scene sceneID="AER-e6-bwA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5n1-XD-vFF" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="5n1-XD-vFF" customClass="JitsiNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rWf-kM-BSL">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

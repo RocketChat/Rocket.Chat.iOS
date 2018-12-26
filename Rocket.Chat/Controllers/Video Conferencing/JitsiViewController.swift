@@ -66,12 +66,6 @@ final class JitsiViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    // MARK: IBAction
-
-    @IBAction func buttonCloseDidPressed(_ sender: Any) {
-        close()
-    }
-
 }
 
 // MARK: JitsiMeetViewDelegate
