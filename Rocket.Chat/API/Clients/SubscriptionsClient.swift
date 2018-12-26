@@ -224,3 +224,47 @@ extension SubscriptionsClient {
         }
     }
 }
+
+// MARK: History
+
+extension SubscriptionHistoryResource {
+    func messages(realm: Realm?) -> [Message]? {
+        return raw?["messages"].arrayValue.map {
+            let message = Message()
+            message.map($0, realm: realm)
+            return message
+        }
+    }
+}
+
+extension SubscriptionsClient {
+    func loadHistory(
+        subscription: Subscription,
+        latest: Date?,
+        count: Int = 60,
+        realm: Realm? = Realm.current,
+        completion: @escaping (_ lastMessageDate: Date?) -> Void
+    ) {
+        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, latest: latest, count: count)
+
+        var lastMessageDate: Date?
+
+        api.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                realm?.execute({ realm in
+                    let messages = resource.messages(realm: Realm.current) ?? []
+
+                    messages.forEach { message in
+                        realm.add(message, update: true)
+                        lastMessageDate = message.createdAt
+                    }
+                }, completion: {
+                    completion(lastMessageDate)
+                })
+            case .error:
+                completion(lastMessageDate)
+            }
+        }
+    }
+}

@@ -666,6 +666,7 @@
 		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
 		80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99620E677D6002F4149 /* UsersClient.swift */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
+		80BFF60321D40EDF00D99771 /* SubscriptionHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
 		80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */; };
@@ -1587,6 +1588,7 @@
 		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
 		80B2D99620E677D6002F4149 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
 		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLViewController.swift; sourceTree = "<group>"; };
+		80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHistoryRequest.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
@@ -3594,6 +3596,7 @@
 				8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */,
 				997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */,
 				997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */,
+				80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -5077,6 +5080,7 @@
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
+				80BFF60321D40EDF00D99771 /* SubscriptionHistoryRequest.swift in Sources */,
 				412AD609219B1B9600EC0486 /* LoaderCell.swift in Sources */,
 				99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
