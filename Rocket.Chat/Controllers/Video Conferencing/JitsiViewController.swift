@@ -23,6 +23,11 @@ final class JitsiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        AnalyticsManager.log(event: .jitsiVideoCall(
+            subscriptionType: viewModel.analyticsSubscriptionType,
+            server: viewModel.analyticsServerURL
+        ))
+
         // Jitsi Update Call needs to be called every 10 seconds to make sure
         // call is not ended and is available to web users.
         updateJitsiTimeout()

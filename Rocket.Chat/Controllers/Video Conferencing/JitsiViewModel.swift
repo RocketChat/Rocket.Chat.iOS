@@ -24,6 +24,14 @@ final class JitsiViewModel {
         return user?.avatarURL?.absoluteString ?? ""
     }
 
+    internal var analyticsSubscriptionType: String {
+        return subscription?.type.rawValue ?? ""
+    }
+
+    internal var analyticsServerURL: String {
+        return AuthManager.selectedServerHost()
+    }
+
     internal var videoCallURL: String {
         guard
             let settings = AuthSettingsManager.settings,
