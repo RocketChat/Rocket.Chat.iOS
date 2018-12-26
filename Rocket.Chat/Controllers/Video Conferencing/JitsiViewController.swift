@@ -12,11 +12,23 @@ import JitsiMeet
 final class JitsiViewController: UIViewController {
 
     let viewModel = JitsiViewModel()
+    let timer = Timer()
 
     @IBOutlet weak var jitsiMeetView: JitsiMeetView?
 
+    deinit {
+        timer.invalidate()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Jitsi Update Call needs to be called every 10 seconds to make sure
+        // call is not ended and is available to web users.
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
+            guard let subscription = self?.viewModel.subscription else { return }
+            SubscriptionManager.updateJitsiTimeout(rid: subscription.rid)
+        }
 
         jitsiMeetView?.delegate = self
         jitsiMeetView?.loadURLObject([
@@ -36,6 +48,8 @@ final class JitsiViewController: UIViewController {
     }
 
     func close() {
+        timer.invalidate()
+
         jitsiMeetView?.removeFromSuperview()
         jitsiMeetView = nil
 

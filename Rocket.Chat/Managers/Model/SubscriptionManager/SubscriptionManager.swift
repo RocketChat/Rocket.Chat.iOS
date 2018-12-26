@@ -132,4 +132,14 @@ struct SubscriptionManager {
             }
         }
     }
+
+    static func updateJitsiTimeout(rid: String) {
+        let request = [
+            "msg": "method",
+            "method": "jitsi:updateTimeout",
+            "params": [rid]
+        ] as [String: Any]
+
+        SocketManager.send(request) { _ in }
+    }
 }
