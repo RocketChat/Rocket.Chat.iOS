@@ -11,4 +11,3 @@ NSCameraUsageDescription = "Para tirar fotos e gravar vídeos";
 NSMicrophoneUsageDescription = "Para gravar e fazer upload de áudio e vídeos";
 NSPhotoLibraryAddUsageDescription = "Para salvar imagens em sua biblioteca";
 NSPhotoLibraryUsageDescription = "Para fazer upload de fotos da sua biblioteca";
-NSCalendarsUsageDescription = "To access your calendar"; // TODO

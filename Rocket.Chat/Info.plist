@@ -264,8 +264,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>NSCalendarsUsageDescription</string>
 	<key>NSCameraUsageDescription</key>
 	<string>NSCameraUsageDescription</string>
 	<key>NSMicrophoneUsageDescription</key>
