@@ -221,6 +221,7 @@
 		4135A64421623F1300C1741A /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64321623F1300C1741A /* ImageCell.swift */; };
 		4135A64621623F2A00C1741A /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A64521623F2A00C1741A /* ImageCell.xib */; };
 		4135A64821623F3600C1741A /* ImageMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64721623F3600C1741A /* ImageMessageChatItem.swift */; };
+		41366B2321D4DAEC00B9D832 /* JitsiViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41366B2221D4DAEC00B9D832 /* JitsiViewModelSpec.swift */; };
 		413996171F3B44500075F96E /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413996161F3B44500075F96E /* UploadHelper.swift */; };
 		413FB6BF1FE17D7D00F010AA /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */; };
 		413FB6C11FE17D7D00F010AA /* UIViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6BC1FE17D7D00F010AA /* UIViewExtentions.swift */; };
@@ -1170,6 +1171,7 @@
 		4136466421A4A25E00BE64B8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		4136466521A4A25E00BE64B8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4136466621A4A25E00BE64B8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		41366B2221D4DAEC00B9D832 /* JitsiViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewModelSpec.swift; sourceTree = "<group>"; };
 		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelper.swift; sourceTree = "<group>"; };
 		413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
 		413FB6BC1FE17D7D00F010AA /* UIViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
@@ -2221,6 +2223,14 @@
 				412DF58D216F8A1F005161A4 /* UnmanagedAttachment.swift */,
 			);
 			path = Attachment;
+			sourceTree = "<group>";
+		};
+		41366B2121D4DADA00B9D832 /* Video Conferencing */ = {
+			isa = PBXGroup;
+			children = (
+				41366B2221D4DAEC00B9D832 /* JitsiViewModelSpec.swift */,
+			);
+			path = "Video Conferencing";
 			sourceTree = "<group>";
 		};
 		414A1FF41D4631F600093E10 /* Response */ = {
@@ -4077,6 +4087,7 @@
 				80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */,
 				41FB713B215B3841002B5187 /* MessagesViewModelSpec.swift */,
 				41FB7139215B0FFA002B5187 /* MessagesSizingViewModelSpec.swift */,
+				41366B2121D4DADA00B9D832 /* Video Conferencing */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -5319,6 +5330,7 @@
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
+				41366B2321D4DAEC00B9D832 /* JitsiViewModelSpec.swift in Sources */,
 				80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */,
 				418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */,
 				80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */,

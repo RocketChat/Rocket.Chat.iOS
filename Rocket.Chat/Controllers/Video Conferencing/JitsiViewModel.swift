@@ -36,7 +36,8 @@ final class JitsiViewModel {
         guard
             let settings = AuthSettingsManager.settings,
             let domain = settings.jitsiDomain,
-            let prefix = settings.jitsiPrefix
+            let prefix = settings.jitsiPrefix,
+            let rid = subscription?.rid
         else {
             return ""
         }
@@ -45,9 +46,8 @@ final class JitsiViewModel {
 
         let urlProtocol = settings.isJitsiSSL ? "https://" : "http://"
         let urlDomain = "\(domain)/"
-        let urlIdentifier = subscription?.rid ?? String.random()
 
-        return urlProtocol + urlDomain + prefix + uniqueIdentifier + urlIdentifier
+        return urlProtocol + urlDomain + prefix + uniqueIdentifier + rid
     }
 
 }
