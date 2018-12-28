@@ -79,7 +79,7 @@ class ChannelActionsViewController: BaseViewController {
             tableView?.contentInsetAdjustmentBehavior = .never
         }
 
-        setupFavoriteButton()
+        setupNavigationBarButtons()
         registerCells()
     }
 
@@ -105,15 +105,37 @@ class ChannelActionsViewController: BaseViewController {
         ), forCellReuseIdentifier: ChannelInfoBasicCell.identifier)
     }
 
-    func setupFavoriteButton() {
+    func setupNavigationBarButtons() {
         if let settings = AuthSettingsManager.settings {
+            var buttons: [UIBarButtonItem] = []
+
             if settings.favoriteRooms {
-                let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
-                let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
-                navigationItem.rightBarButtonItem = buttonFavorite
+                let defaultImage = UIImage(named: "Star")?
+                    .imageWithTint(UIColor.RCGray())
+                    .withRenderingMode(.alwaysOriginal)
+
+                let buttonFavorite = UIBarButtonItem(
+                    image: defaultImage,
+                    style: .plain,
+                    target: self,
+                    action: #selector(buttonFavoriteDidPressed)
+                )
+
+                buttons.append(buttonFavorite)
                 self.buttonFavorite = buttonFavorite
                 updateButtonFavoriteImage()
             }
+
+            if settings.isJitsiEnabled {
+                buttons.append(UIBarButtonItem(
+                    image: UIImage(named: "UserDetail_VideoCall"),
+                    style: .plain,
+                    target: self,
+                    action: #selector(buttonVideoCallDidPressed)
+                ))
+            }
+
+            navigationItem.rightBarButtonItems = buttons
         }
     }
 
@@ -156,6 +178,12 @@ extension ChannelActionsViewController {
 
         self.subscription?.updateFavorite(!subscription.favorite)
         updateButtonFavoriteImage()
+    }
+
+    @objc func buttonVideoCallDidPressed(_ sender: UIButton) {
+        if let subscription = subscription {
+            AppManager.openVideoCall(room: subscription)
+        }
     }
 
 }

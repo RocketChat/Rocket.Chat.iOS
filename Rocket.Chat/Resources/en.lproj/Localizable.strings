@@ -224,6 +224,7 @@
 "chat.message.actions.unstar" = "Unstar";
 "chat.message.actions.quote" = "Quote";
 "chat.message.actions.reply" = "Reply";
+"chat.message.actions.join_video_call" = "Join Video Call";
 "chat.message.actions.permalink" = "Permalink";
 "chat.message.actions.delete" = "Delete message";
 "chat.message.actions.delete.confirm.title" = "Delete this message?";
@@ -292,6 +293,7 @@
 "chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@";
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@";
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@";
+"chat.message.type.video_call_started" = "Video call started by %@";
 
 // Chat Information
 "chat.info.title" = "Info";

@@ -20,6 +20,7 @@ final class PublicSettingsRequest: APIRequest {
     }&query={
         "_id":{
             "$in":[
+                "uniqueID",
                 "Site_Url",
                 "CDN_PREFIX",
                 "Site_Name",
@@ -72,7 +73,12 @@ final class PublicSettingsRequest: APIRequest {
                 "Message_Read_Receipt_Store_Users",
                 "Accounts_CustomFields",
                 "First_Channel_After_Login",
-                "FileUpload_MaxFileSize"
+                "FileUpload_MaxFileSize",
+                "Jitsi_Enabled",
+                "Jisti_Enable_Channels",
+                "Jitsi_SSL",
+                "Jitsi_Domain",
+                "Jitsi_URL_Room_Prefix"
             ]
         }
     }

@@ -30,6 +30,7 @@ enum Event {
     case updatedSubscriptionSorting(sorting: String, grouping: String)
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
+    case jitsiVideoCall(subscriptionType: String, server: String)
 }
 
 enum UserProperty {
@@ -118,6 +119,7 @@ extension Event {
         case .updatedSubscriptionSorting: return "updated_subscriptions_sorting"
         case .updatedWebBrowser: return "updated_web_browser"
         case .updatedTheme: return "updated_theme"
+        case .jitsiVideoCall: return "jitsi_video_call"
         }
     }
 
@@ -139,6 +141,8 @@ extension Event {
             return ["web_browser": browser]
         case let .updatedTheme(theme):
             return ["theme": theme]
+        case let .jitsiVideoCall(subscriptionType, server):
+            return ["subscription_type": subscriptionType, "server": server]
         default:
             return nil
         }
