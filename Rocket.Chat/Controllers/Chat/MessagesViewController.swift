@@ -160,6 +160,7 @@ final class MessagesViewController: RocketChatViewController {
 
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
+            self.markAsRead()
         }
 
         viewSubscriptionModel.onDataChanged = { [weak self] in
