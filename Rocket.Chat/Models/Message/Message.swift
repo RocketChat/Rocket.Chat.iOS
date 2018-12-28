@@ -40,6 +40,8 @@ enum MessageType: String {
     case messagePinned = "message_pinned"
     case messageSnippeted = "message_snippeted"
 
+    case jitsiCallStarted = "jitsi_call_started"
+
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
