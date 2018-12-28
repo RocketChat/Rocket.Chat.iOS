@@ -17,6 +17,10 @@ def diff_pods
   pod 'DifferenceKit/Core'
 end
 
+def text_processing_pods
+  pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
+end
+
 def shared_pods
   # Analytics
   pod 'Firebase/Core'
@@ -36,7 +40,7 @@ def shared_pods
   ui_pods
 
   # Text Processing
-  pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
+  text_processing_pods
 
   # Database
   database_pods
@@ -64,6 +68,10 @@ target 'Rocket.Chat.ShareExtension' do
   database_pods
   ui_pods
   diff_pods
+end
+
+target 'Rocket.Chat.NotificationServiceExtension' do
+    text_processing_pods
 end
 
 target 'Rocket.Chat' do

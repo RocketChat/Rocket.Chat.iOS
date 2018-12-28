@@ -6,7 +6,7 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension NSAttributedString {
     func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {

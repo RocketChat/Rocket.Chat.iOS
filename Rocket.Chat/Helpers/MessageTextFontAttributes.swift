@@ -9,19 +9,6 @@
 import UIKit
 
 struct MessageTextFontAttributes {
-
-    static func defaultFontColor(for theme: Theme? = nil) -> UIColor {
-        return theme?.bodyText ?? ThemeManager.theme.bodyText
-    }
-
-    static func systemFontColor(for theme: Theme? = ThemeManager.theme) -> UIColor {
-        return theme?.auxiliaryText ?? ThemeManager.theme.auxiliaryText
-    }
-
-    static func failedFontColor(for theme: Theme? = ThemeManager.theme) -> UIColor {
-        return theme?.auxiliaryText ?? ThemeManager.theme.auxiliaryText
-    }
-
     static var defaultFont: UIFont {
         let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
         let font = UIFont(descriptor: defaultFontDescriptor, size: 0)
