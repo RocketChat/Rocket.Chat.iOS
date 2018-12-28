@@ -160,7 +160,6 @@ final class MessagesViewController: RocketChatViewController {
 
             // Update dataset with the new data normalized
             self.updateData(with: self.viewModel.dataNormalized)
-            self.markAsRead()
         }
 
         viewSubscriptionModel.onDataChanged = { [weak self] in
@@ -430,7 +429,13 @@ final class MessagesViewController: RocketChatViewController {
     // MARK: Reading Status
 
     private func markAsRead() {
-        guard let subscription = unmanagedSubscription else { return }
+        guard
+            let subscription = unmanagedSubscription,
+            subscription.alert || subscription.unread > 0
+        else {
+            return
+        }
+
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
