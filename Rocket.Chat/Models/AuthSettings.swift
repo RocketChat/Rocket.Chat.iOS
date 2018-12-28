@@ -23,6 +23,10 @@ struct AuthSettingsDefaults {
 final class AuthSettings: Object {
     @objc dynamic var identifier: String = String.random()
 
+    // Unique Identifier
+    @objc dynamic var uniqueIdentifier: String?
+
+    // URLs
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
 
@@ -71,6 +75,13 @@ final class AuthSettings: Object {
     @objc dynamic var isAllowedToEditEmail = false
     @objc dynamic var isAllowedToEditPassword = false
     @objc dynamic var oauthWordpressServerType = ""
+
+    // Video Conference
+    @objc dynamic var isJitsiEnabled = false
+    @objc dynamic var isJitsiEnabledForChannels = false
+    @objc dynamic var isJitsiSSL = false
+    @objc dynamic var jitsiDomain: String?
+    @objc dynamic var jitsiPrefix: String?
 
     // Registration
     @objc dynamic var rawRegistrationForm: String?

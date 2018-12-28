@@ -52,6 +52,8 @@ extension UserDetailViewModel {
     }
 
     func cellForRowAtIndexPath(_ indexPath: IndexPath) -> UserDetailFieldCellModel {
-        return indexPath.section == 0 && indexPath.row < cells.count ? cells[indexPath.row] : .emptyState
+        return
+            indexPath.section == 0 &&
+            indexPath.row < cells.count ? cells[indexPath.row] : .emptyState
     }
 }

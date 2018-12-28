@@ -258,6 +258,38 @@ extension AppManager {
         return nil
     }
 
+    @discardableResult
+    static func openVideoCall(room: Subscription, animated: Bool = true) -> JitsiViewController? {
+        guard
+            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
+            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController,
+            let mainNav = mainViewController.viewControllers.first as? UINavigationController
+        else {
+            return nil
+        }
+
+        let storyboard = UIStoryboard(name: "Jitsi", bundle: Bundle.main)
+        if let nav = storyboard.instantiateInitialViewController() as? UINavigationController {
+            if let controller = nav.viewControllers.first as? JitsiViewController {
+                controller.viewModel.subscription = room.unmanaged
+
+                nav.modalTransitionStyle = .coverVertical
+
+                if let presentedViewController = mainNav.presentedViewController {
+                    presentedViewController.dismiss(animated: animated, completion: {
+                        mainNav.present(nav, animated: true, completion: nil)
+                    })
+                } else {
+                    mainNav.present(nav, animated: true, completion: nil)
+                }
+
+                return controller
+            }
+        }
+
+        return nil
+    }
+
     static func openDirectMessage(username: String, replyMessageIdentifier: String? = nil, completion: (() -> Void)? = nil) {
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
