@@ -666,7 +666,7 @@
 		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
 		80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99620E677D6002F4149 /* UsersClient.swift */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
-		80BFF60321D40EDF00D99771 /* SubscriptionHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */; };
+		80BFF60321D40EDF00D99771 /* RoomHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
 		80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */; };
@@ -710,6 +710,7 @@
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
 		80E9DBD6209CA8FE00A48CA9 /* Closeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */; };
 		80E9DBD8209CB06200A48CA9 /* SubscriptionReadRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E9DBD7209CB06000A48CA9 /* SubscriptionReadRequestSpec.swift */; };
+		80ECE2CE21D81EF10006AAE9 /* RoomHistoryRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ECE2CD21D81EF10006AAE9 /* RoomHistoryRequestSpec.swift */; };
 		80EE865321A82E6100BFEEC8 /* UIViewControllerDimming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EE865221A82E6100BFEEC8 /* UIViewControllerDimming.swift */; };
 		80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
@@ -1588,7 +1589,7 @@
 		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
 		80B2D99620E677D6002F4149 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
 		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLViewController.swift; sourceTree = "<group>"; };
-		80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHistoryRequest.swift; sourceTree = "<group>"; };
+		80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomHistoryRequest.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
@@ -1632,6 +1633,7 @@
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E9DBD5209CA8FE00A48CA9 /* Closeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closeable.swift; sourceTree = "<group>"; };
 		80E9DBD7209CB06000A48CA9 /* SubscriptionReadRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionReadRequestSpec.swift; sourceTree = "<group>"; };
+		80ECE2CD21D81EF10006AAE9 /* RoomHistoryRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomHistoryRequestSpec.swift; sourceTree = "<group>"; };
 		80EE865221A82E6100BFEEC8 /* UIViewControllerDimming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerDimming.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
 		80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownManagerSpec.swift; sourceTree = "<group>"; };
@@ -3125,6 +3127,7 @@
 				414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */,
 				8039441020AF1334002F317A /* RoomKickRequest.swift */,
 				8039442420B330B2002F317A /* RoomInviteRequest.swift */,
+				80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -3141,6 +3144,7 @@
 				41E96C3020B88A0000ACBA92 /* RoomRolesRequestSpec.swift */,
 				8039441220AF17F1002F317A /* RoomKickRequestSpec.swift */,
 				8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */,
+				80ECE2CD21D81EF10006AAE9 /* RoomHistoryRequestSpec.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -3596,7 +3600,6 @@
 				8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */,
 				997FE199210B9D2E000F6836 /* SubscriptionLeaveRequest.swift */,
 				997FE19B210BA5B8000F6836 /* SubscriptionHideRequest.swift */,
-				80BFF60221D40EDF00D99771 /* SubscriptionHistoryRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -5080,7 +5083,7 @@
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
-				80BFF60321D40EDF00D99771 /* SubscriptionHistoryRequest.swift in Sources */,
+				80BFF60321D40EDF00D99771 /* RoomHistoryRequest.swift in Sources */,
 				412AD609219B1B9600EC0486 /* LoaderCell.swift in Sources */,
 				99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
@@ -5231,6 +5234,7 @@
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
 				80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */,
 				418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */,
+				80ECE2CE21D81EF10006AAE9 /* RoomHistoryRequestSpec.swift in Sources */,
 				80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */,
 				140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */,
 				8013F8821FD6B6C600EE1A4E /* InfoClientSpec.swift in Sources */,

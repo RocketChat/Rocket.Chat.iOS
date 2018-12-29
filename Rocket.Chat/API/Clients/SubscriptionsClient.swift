@@ -227,7 +227,7 @@ extension SubscriptionsClient {
 
 // MARK: History
 
-extension SubscriptionHistoryResource {
+extension RoomHistoryResource {
     func messages(realm: Realm?) -> [Message]? {
         return raw?["messages"].arrayValue.map {
             let message = Message()
@@ -245,7 +245,7 @@ extension SubscriptionsClient {
         realm: Realm? = Realm.current,
         completion: @escaping (_ lastMessageDate: Date?) -> Void
     ) {
-        let request = SubscriptionHistoryRequest(
+        let request = RoomHistoryRequest(
             roomType: subscription.type,
             roomId: subscription.rid,
             latest: latest, count:

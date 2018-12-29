@@ -1,5 +1,5 @@
 //
-//  SubscriptionHistoryRequest.swift
+//  RoomHistoryRequest.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 12/26/18.
@@ -30,8 +30,8 @@ fileprivate extension String {
     }
 }
 
-class SubscriptionHistoryRequest: APIRequest {
-    typealias APIResourceType = SubscriptionHistoryResource
+class RoomHistoryRequest: APIRequest {
+    typealias APIResourceType = RoomHistoryResource
 
     var path: String {
         return roomType.path
@@ -84,7 +84,7 @@ class SubscriptionHistoryRequest: APIRequest {
     }
 }
 
-class SubscriptionHistoryResource: APIResource {
+class RoomHistoryResource: APIResource {
     var success: Bool? {
         return raw?["success"].bool
     }
