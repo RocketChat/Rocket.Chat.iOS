@@ -66,12 +66,14 @@ class SubscriptionHistoryRequest: APIRequest {
 
         var query = "roomId=\(roomId)"
 
+        let timeZone = TimeZone(abbreviation: "UTC")
+
         query.appendIfNotNil(latest) {
-            "&latest=\($0.formatted(Date.apiDateFormat, timeZone: TimeZone(abbreviation: "UTC")))"
+            "&latest=\($0.formatted(Date.apiDateFormat, timeZone: timeZone))"
         }
 
         query.appendIfNotNil(oldest) {
-            "&oldest=\($0.formatted(Date.apiDateFormat, timeZone: TimeZone(abbreviation: "UTC")))"
+            "&oldest=\($0.formatted(Date.apiDateFormat, timeZone: timeZone))"
         }
 
         query.appendIfNotNil(inclusive) { "&inclusive=\($0)" }
