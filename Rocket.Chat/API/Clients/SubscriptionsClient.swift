@@ -248,8 +248,8 @@ extension SubscriptionsClient {
         let request = RoomHistoryRequest(
             roomType: subscription.type,
             roomId: subscription.rid,
-            latest: latest, count:
-            count
+            latest: latest,
+            count: count
         )
 
         var lastMessageDate: Date?
