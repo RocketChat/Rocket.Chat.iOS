@@ -245,7 +245,12 @@ extension SubscriptionsClient {
         realm: Realm? = Realm.current,
         completion: @escaping (_ lastMessageDate: Date?) -> Void
     ) {
-        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, latest: latest, count: count)
+        let request = SubscriptionHistoryRequest(
+            roomType: subscription.type,
+            roomId: subscription.rid,
+            latest: latest, count:
+            count
+        )
 
         var lastMessageDate: Date?
 
