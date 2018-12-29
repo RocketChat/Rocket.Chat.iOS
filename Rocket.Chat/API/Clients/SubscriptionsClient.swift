@@ -241,7 +241,7 @@ extension SubscriptionsClient {
     func loadHistory(
         subscription: Subscription,
         latest: Date?,
-        count: Int = 60,
+        count: Int = 30,
         realm: Realm? = Realm.current,
         completion: @escaping (_ lastMessageDate: Date?) -> Void
     ) {
