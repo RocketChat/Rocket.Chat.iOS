@@ -66,8 +66,8 @@ class SubscriptionHistoryRequest: APIRequest {
 
         var query = "roomId=\(roomId)"
 
-        query.appendIfNotNil(latest) { "&latest=\($0.formatted(Date.apiDateFormat))" }
-        query.appendIfNotNil(oldest) { "&oldest=\($0.formatted(Date.apiDateFormat))" }
+        query.appendIfNotNil(latest) { "&latest=\($0.formatted(Date.apiDateFormat, timeZone: TimeZone(abbreviation: "UTC")))" }
+        query.appendIfNotNil(oldest) { "&oldest=\($0.formatted(Date.apiDateFormat, timeZone: TimeZone(abbreviation: "UTC")))" }
         query.appendIfNotNil(inclusive) { "&inclusive=\($0)" }
         query.appendIfNotNil(count) { "&count=\($0)" }
         query.appendIfNotNil(unreads) { "&unreads=\($0)" }

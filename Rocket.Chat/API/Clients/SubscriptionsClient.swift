@@ -253,12 +253,9 @@ extension SubscriptionsClient {
             switch response {
             case .resource(let resource):
                 realm?.execute({ realm in
-                    let messages = resource.messages(realm: Realm.current) ?? []
-
-                    messages.forEach { message in
-                        realm.add(message, update: true)
-                        lastMessageDate = message.createdAt
-                    }
+                    let messages = resource.messages(realm: realm) ?? []
+                    realm.add(messages, update: true)
+                    lastMessageDate = messages.last?.createdAt
                 }, completion: {
                     completion(lastMessageDate)
                 })
