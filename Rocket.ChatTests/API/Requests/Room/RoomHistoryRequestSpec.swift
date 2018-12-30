@@ -17,7 +17,7 @@ class RoomHistoryRequestSpec: APITestCase {
         let latest = Date.dateFromString(latestString)
 
         let oldestString = "2017-04-14T11:34:12.123Z"
-        let oldest = Date.dateFromString(latestString)
+        let oldest = Date.dateFromString(oldestString)
 
         let preRequest = RoomHistoryRequest(
             roomType: .channel,
