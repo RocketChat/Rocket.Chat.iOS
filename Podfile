@@ -77,20 +77,26 @@ end
 post_install do |installer|
   swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
   swift42Targets = ['SwipeCellKit']
+
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '4.1'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['ARCHS'] = 'arm64'
+
       if config.name == 'Debug'
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
       else
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
       end
     end
+
     if swift3Targets.include? target.name
       target.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '3.1'
       end
     end
+
     if swift42Targets.include? target.name
       target.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '4.2'

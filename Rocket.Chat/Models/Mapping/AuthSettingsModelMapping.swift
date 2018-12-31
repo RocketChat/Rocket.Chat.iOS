@@ -13,6 +13,8 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
+        self.uniqueIdentifier = objectForKey(object: values, key: "uniqueID")?.string
+
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string?.removingLastSlashIfNeeded()
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string?.removingLastSlashIfNeeded()
 
@@ -54,6 +56,13 @@ extension AuthSettings: ModelMappeable {
         // Authentication Placeholder Fields
         self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
         self.passwordFieldPlaceholder = objectForKey(object: values, key: "Accounts_PasswordPlaceholder")?.stringValue ?? ""
+
+        // Video Conferencing
+        self.isJitsiEnabled = objectForKey(object: values, key: "Jitsi_Enabled")?.bool ?? false
+        self.isJitsiEnabledForChannels = objectForKey(object: values, key: "Jisti_Enable_Channels")?.bool ?? false
+        self.isJitsiSSL = objectForKey(object: values, key: "Jitsi_SSL")?.bool ?? false
+        self.jitsiDomain = objectForKey(object: values, key: "Jitsi_Domain")?.string ?? ""
+        self.jitsiPrefix = objectForKey(object: values, key: "Jitsi_URL_Room_Prefix")?.string ?? ""
 
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false

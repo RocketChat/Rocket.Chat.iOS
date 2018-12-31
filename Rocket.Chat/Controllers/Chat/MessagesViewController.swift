@@ -188,6 +188,7 @@ final class MessagesViewController: RocketChatViewController {
             return self.viewModel.recentSenders
         }
 
+        startTypingHandler()
         startDraftMessage()
         updateJoinedView()
     }
@@ -264,6 +265,7 @@ final class MessagesViewController: RocketChatViewController {
             (nib: QuoteMessageCell.nib, cellIdentifier: QuoteMessageCell.identifier),
             (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
             (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
+            (nib: MessageVideoCallCell.nib, cellIdentifier: MessageVideoCallCell.identifier),
             (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
         ]
 

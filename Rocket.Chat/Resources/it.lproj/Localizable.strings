@@ -224,6 +224,7 @@
 "chat.message.actions.unstar" = "Rimuovi Speciale";
 "chat.message.actions.quote" = "Citazione";
 "chat.message.actions.reply" = "Risposta";
+"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
 "chat.message.actions.permalink" = "Collegamento Permanente";
 "chat.message.actions.delete" = "Cancella messaggio";
 "chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
@@ -293,6 +294,7 @@
 "chat.message.type.room_changed_topic" = "L'argomento della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
+"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informazioni";
