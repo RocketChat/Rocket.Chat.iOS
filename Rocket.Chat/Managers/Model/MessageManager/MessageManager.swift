@@ -11,13 +11,9 @@ import RealmSwift
 
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
-struct MessageManager {
-    static let historySize = 30
-}
-
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
-extension MessageManager {
+struct MessageManager {
 
     static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
