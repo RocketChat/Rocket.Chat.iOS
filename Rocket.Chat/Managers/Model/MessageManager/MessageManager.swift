@@ -11,53 +11,11 @@ import RealmSwift
 
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
-struct MessageManager {
-    static let historySize = 30
-}
-
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
-extension MessageManager {
+struct MessageManager {
 
     static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
-
-    static func getHistory(_ subscription: UnmanagedSubscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
-        var lastDate: Any!
-
-        if let lastMessageDate = lastMessageDate {
-            lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
-        } else {
-            lastDate = NSNull()
-        }
-
-        let request = [
-            "msg": "method",
-            "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize]
-        ] as [String: Any]
-
-        var lastMessageDate: Date?
-
-        let currentRealm = Realm.current
-        SocketManager.send(request) { response in
-            guard !response.isError() else {
-                return Log.debug(response.result.string)
-            }
-
-            let list = response.result["result"]["messages"].array
-
-            currentRealm?.execute({ (realm) in
-                list?.forEach { object in
-                    let message = Message.getOrCreate(realm: realm, values: object, updates: nil)
-                    realm.add(message, update: true)
-
-                    lastMessageDate = message.createdAt
-                }
-            }, completion: {
-                completion(lastMessageDate)
-            })
-        }
-    }
 
     static func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"

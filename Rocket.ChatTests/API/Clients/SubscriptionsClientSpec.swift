@@ -235,4 +235,104 @@ class SubscriptionsClientSpec: XCTestCase {
         XCTAssertEqual(userObject.rolesInSubscription(subscriptionObject).count, 2)
         XCTAssertEqual(user2Object.rolesInSubscription(subscriptionObject).count, 1)
     }
+
+    func testLoadHistory() {
+        let api = MockAPI()
+        let client = SubscriptionsClient(api: api)
+        let subscription = Subscription.testInstance("test-loadHistory")
+
+        Realm.execute({ realm in
+            realm.add(subscription, update: true)
+        })
+
+        let oldestString = "2016-12-06T17:57:38.635Z"
+        let oldest = Date.dateFromString(oldestString)
+
+        let ids = [
+            "AkzpHAvZpdnuchw2a",
+            "vkLMxcctR4MuTxreF",
+            "bfRW658nEyEBg75rc",
+            "pbuFiGadhRZTKouhB"
+        ]
+
+        api.nextResult = JSON([
+            "messages": [
+                [
+                    "_id": ids[0],
+                    "rid": "ByehQjC44FwMeiLbX",
+                    "msg": "hi",
+                    "ts": "2016-12-09T12:50:51.555Z",
+                    "u": [
+                        "_id": "y65tAmHs93aDChMWu",
+                        "username": "testing"
+                    ],
+                    "_createdAt": "2016-12-09T12:50:51.562Z"
+                ],
+                [
+                    "_id": ids[1],
+                    "t": "uj",
+                    "rid": "ByehQjC44FwMeiLbX",
+                    "ts": "2016-12-08T15:41:37.730Z",
+                    "msg": "testing2",
+                    "u": [
+                        "_id": "bRtgdhzM6PD9F8pSx",
+                        "username": "testing2"
+                    ],
+                    "groupable": false,
+                    "_createdAt": "2016-12-08T16:03:25.235Z"
+                ],
+                [
+                    "_id": ids[2],
+                    "t": "uj",
+                    "rid": "ByehQjC44FwMeiLbX",
+                    "ts": "2016-12-07T15:47:49.099Z",
+                    "msg": "testing",
+                    "u": [
+                        "_id": "nSYqWzZ4GsKTX4dyK",
+                        "username": "testing1"
+                    ],
+                    "groupable": false,
+                    "_createdAt": "2016-12-07T15:47:49.099Z"
+                ],
+                [
+                    "_id": ids[3],
+                    "t": "uj",
+                    "rid": "ByehQjC44FwMeiLbX",
+                    "ts": "2016-12-06T17:57:38.635Z",
+                    "msg": "testing",
+                    "u": [
+                        "_id": "y65tAmHs93aDChMWu",
+                        "username": "testing"
+                    ],
+                    "groupable": false,
+                    "_createdAt": oldestString
+                ]
+            ],
+            "success": true
+        ])
+
+        let oldestDateIsCorrect = XCTestExpectation(description: "oldest date is correct")
+        let messagesAreMapped = XCTestExpectation(description: "messages are mapped correctly")
+
+        client.loadHistory(subscription: subscription, latest: nil, completion: { resultOldest in
+            if oldest == resultOldest {
+                oldestDateIsCorrect.fulfill()
+            }
+
+            let realm = Realm.current
+
+            guard
+                realm?.object(ofType: Message.self, forPrimaryKey: ids[0]) != nil,
+                realm?.object(ofType: Message.self, forPrimaryKey: ids[1]) != nil,
+                realm?.object(ofType: Message.self, forPrimaryKey: ids[2]) != nil,
+                realm?.object(ofType: Message.self, forPrimaryKey: ids[3]) != nil
+            else {
+                return
+            }
+
+            messagesAreMapped.fulfill()
+        })
+
+        wait(for: [oldestDateIsCorrect, messagesAreMapped], timeout: 10)
+    }
 }
