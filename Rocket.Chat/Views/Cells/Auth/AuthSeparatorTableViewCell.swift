@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AuthSeparatorTableViewCell: UITableViewCell {
+final class AuthSeparatorTableViewCell: UITableViewCell {
 
-    static let rowHeight: CGFloat = 31
+    static let rowHeight: CGFloat = 31.0
 
 }
 

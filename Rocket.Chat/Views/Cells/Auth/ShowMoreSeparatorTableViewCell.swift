@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ShowMoreSeparatorTableViewCell: UITableViewCell {
+final class ShowMoreSeparatorTableViewCell: UITableViewCell {
 
-    static let rowHeight: CGFloat = 76
+    static let rowHeight: CGFloat = 76.0
 
     @IBOutlet weak var showMoreButton: UIButton!
 
