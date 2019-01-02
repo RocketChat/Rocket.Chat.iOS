@@ -431,7 +431,13 @@ final class MessagesViewController: RocketChatViewController {
     // MARK: Reading Status
 
     private func markAsRead() {
-        guard let subscription = unmanagedSubscription else { return }
+        guard
+            let subscription = unmanagedSubscription,
+            subscription.alert || subscription.unread > 0
+        else {
+            return
+        }
+
         API.current()?.client(SubscriptionsClient.self).markAsRead(subscription: subscription)
     }
 
