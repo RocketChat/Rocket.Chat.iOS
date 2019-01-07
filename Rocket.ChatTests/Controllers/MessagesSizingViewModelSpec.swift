@@ -26,6 +26,22 @@ final class MessagesSizingViewModelSpec: XCTestCase {
         XCTAssertEqual(model.cache.count, 1)
     }
 
+    func testCacheNegativeValues() {
+        let model = MessagesSizingManager()
+        let identifier = "identifier"
+        model.set(size: CGSize(width: 0, height: -1), for: identifier)
+        XCTAssertNil(model.size(for: identifier))
+        XCTAssertEqual(model.cache.count, 1)
+    }
+
+    func testCacheNotValidValues() {
+        let model = MessagesSizingManager()
+        let identifier = "identifier"
+        model.set(size: CGSize(width: 0.0, height: Double.nan), for: identifier)
+        XCTAssertNil(model.size(for: identifier))
+        XCTAssertEqual(model.cache.count, 1)
+    }
+
     func testClearCache() {
         let model = MessagesSizingManager()
         model.set(size: CGSize(width: 0, height: 150), for: "identifier.1")

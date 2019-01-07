@@ -281,6 +281,7 @@ class LoginTableViewController: BaseTableViewController {
 }
 
 extension LoginTableViewController {
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == createAccountRow && !shouldShowCreateAccount {
             return 0
@@ -288,6 +289,7 @@ extension LoginTableViewController {
 
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
+
 }
 
 extension LoginTableViewController: UITextFieldDelegate {
