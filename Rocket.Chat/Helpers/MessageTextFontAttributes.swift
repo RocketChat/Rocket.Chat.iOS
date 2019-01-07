@@ -24,13 +24,7 @@ struct MessageTextFontAttributes {
 
     static var defaultFont: UIFont {
         let defaultFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
-        let font = UIFont(descriptor: defaultFontDescriptor, size: 0)
-
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            return font
-        }
+        return UIFont(descriptor: defaultFontDescriptor, size: 0)
     }
 
     static var italicFont: UIFont {
@@ -45,11 +39,7 @@ struct MessageTextFontAttributes {
             font = UIFont.italicSystemFont(ofSize: 16)
         }
 
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            return font
-        }
+        return font
     }
 
     static var boldFont: UIFont {
@@ -64,11 +54,7 @@ struct MessageTextFontAttributes {
             font = UIFont.italicSystemFont(ofSize: 16)
         }
 
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            return font
-        }
+        return font
     }
 
     static var monoSpacedFont: UIFont {
@@ -83,11 +69,7 @@ struct MessageTextFontAttributes {
             font = UIFont.italicSystemFont(ofSize: 16)
         }
 
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            return font
-        }
+        return font
     }
 
 }
