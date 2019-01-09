@@ -1,0 +1,25 @@
+/* 
+  VoiceOver.strings
+  Rocket.Chat
+
+  Created by Simon on 01.09.2019
+  Copyright © 2019 Rocket.Chat. All rights reserved.
+*/
+
+// MARK: Auth
+"auth.connect.urlfield.label" = "服务器地址";
+"auth.connect.urlfield.hint" = "插入服务器地址";
+
+"auth.authentication.emailorusername.label" = "邮箱地址或用户名";
+"auth.authentication.emailorusername.hint" = "添加邮箱地址或用户名";
+"auth.authentication.password.label" = "密码";
+"auth.authentication.password.label" = "添加密码";
+
+// MARK: Subscriptions
+"subscriptions.main.userview.label" = "会话信息";
+"subscriptions.main.userview.value" = "服务器: %@. 用户: %@. 状态: %@.";
+"subscriptions.main.userview.hint" = "双击变更状态";
+
+// MARK: Message
+"message.label" = "来自 %@ at %@ 的信息";
+"message.hint" = "反馈: %@";
