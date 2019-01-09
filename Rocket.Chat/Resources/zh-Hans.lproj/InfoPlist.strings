@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  Rocket.Chat
+
+  Created by Artur Simon on 01.09.2019.
+  Copyright © 2019 Rocket.Chat. All rights reserved.
+*/
+
+add-server-shortcut = "添加服务器";
+NSCameraUsageDescription = "拍照和录制视频";
+NSMicrophoneUsageDescription = "录制音频视频并上传";
+NSPhotoLibraryAddUsageDescription = "保存图片到图库";
+NSPhotoLibraryUsageDescription = "上传照片到图库";

@@ -679,8 +679,8 @@
 		80B2D99320E54AD4002F4149 /* UIViewControllerPushOrPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */; };
 		80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D99620E677D6002F4149 /* UsersClient.swift */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
-		80BFF60321D40EDF00D99771 /* RoomHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */; };
 		80BFF60121D40BD500D99771 /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60021D40BD500D99771 /* Throttle.swift */; };
+		80BFF60321D40EDF00D99771 /* RoomHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78CE20DAE334002FBEBC /* SubscriptionsViewModel.swift */; };
 		80CC78D120DD7F99002FBEBC /* RealmAssorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CC78D020DD7F99002FBEBC /* RealmAssorter.swift */; };
@@ -1201,6 +1201,11 @@
 		414EE62D21CD1FEB003693D2 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
 		415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextCacheManager.swift; sourceTree = "<group>"; };
+		41510BBD21E61CBC0095F0F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
+		41510BBE21E61CBC0095F0F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		41510BBF21E61CBC0095F0F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/VoiceOver.strings"; sourceTree = "<group>"; };
+		41510BC021E61CBC0095F0F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		41510BC121E61CBD0095F0F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModelSpec.swift; sourceTree = "<group>"; };
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelHandler.swift; sourceTree = "<group>"; };
 		4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelHandler.swift; sourceTree = "<group>"; };
@@ -1626,8 +1631,8 @@
 		80B2D99220E54AD4002F4149 /* UIViewControllerPushOrPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerPushOrPresent.swift; sourceTree = "<group>"; };
 		80B2D99620E677D6002F4149 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
 		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLViewController.swift; sourceTree = "<group>"; };
-		80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomHistoryRequest.swift; sourceTree = "<group>"; };
 		80BFF60021D40BD500D99771 /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
+		80BFF60221D40EDF00D99771 /* RoomHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomHistoryRequest.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
@@ -4309,6 +4314,7 @@
 				"pt-PT",
 				ja,
 				it,
+				"zh-Hans",
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -5561,6 +5567,7 @@
 				0B92E67520F767FE003DAB5A /* pt-PT */,
 				4119E1C32138242A00CDFB83 /* ja */,
 				4136466521A4A25E00BE64B8 /* it */,
+				41510BC021E61CBC0095F0F8 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -5589,6 +5596,7 @@
 				416772D520EA4CCA009999F8 /* pt-PT */,
 				4119E1C12138242900CDFB83 /* ja */,
 				4136466321A4A25E00BE64B8 /* it */,
+				41510BBE21E61CBC0095F0F8 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -5609,6 +5617,7 @@
 				416772D620EA4CCA009999F8 /* pt-PT */,
 				4119E1C22138242900CDFB83 /* ja */,
 				4136466421A4A25E00BE64B8 /* it */,
+				41510BBF21E61CBC0095F0F8 /* zh-Hans */,
 			);
 			name = VoiceOver.strings;
 			path = .;
@@ -5635,6 +5644,7 @@
 				807FB57020472B6A00E21429 /* pt-BR */,
 				416772D720EA4CCA009999F8 /* pt-PT */,
 				4136466621A4A25E00BE64B8 /* it */,
+				41510BC121E61CBD0095F0F8 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -5654,6 +5664,7 @@
 				416772D420EA4CCA009999F8 /* pt-PT */,
 				4119E1C02138242900CDFB83 /* ja */,
 				4136466221A4A25D00BE64B8 /* it */,
+				41510BBD21E61CBC0095F0F8 /* zh-Hans */,
 			);
 			name = RCEmojiKit.strings;
 			path = .;
