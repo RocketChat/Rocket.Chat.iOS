@@ -30,7 +30,11 @@ public protocol ComposerViewExpandedDelegate: ComposerViewDelegate, HintsViewDel
     func hintPrefixes(for composerView: ComposerView) -> [Character]
     func isHinting(in composerView: ComposerView) -> Bool
 
+
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String)
+    func composerView(_ composerView: ComposerView, didPressSendButton button: UIButton)
+    func composerView(_ composerView: ComposerView, didPressUploadButton button: UIButton)
+    func composerView(_ composerView: ComposerView, didPressRecordAudioButton button: UIButton)
 }
 
 public extension ComposerViewExpandedDelegate {
@@ -57,28 +61,33 @@ public extension ComposerViewExpandedDelegate {
             } else {
                 didChangeHintPrefixedWord("")
             }
-
-            return
+        } else {
+            didChangeHintPrefixedWord("")
         }
 
-        didChangeHintPrefixedWord("")
+        composerView.configureButtons()
+    }
+
+    // MARK: Buttons
+
+    func composerView(_ composerView: ComposerView, willConfigureButton button: ComposerButton) {
+        if button == composerView.rightButton {
+            let image = composerView.textView.text.isEmpty ? ComposerAssets.micButtonImage : ComposerAssets.sendButtonImage
+            button.setBackgroundImage(image, for: .normal)
+        }
     }
 
     func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
-        if button === composerView.leftButton {
-            UIView.animate(withDuration: 0.2) {
-                composerView.editingView?.isHidden = false
-                composerView.layoutIfNeeded()
+        if button === composerView.rightButton {
+            if composerView.textView.text.isEmpty {
+                self.composerView(composerView, didPressRecordAudioButton: button)
+            } else {
+                self.composerView(composerView, didPressSendButton: button)
             }
         }
 
-        if button === composerView.rightButton {
-            UIView.animate(withDuration: 0.2) {
-                composerView.textView.text = ""
-                composerView.replyView?.isHidden = true
-                composerView.editingView?.isHidden = true
-                composerView.layoutIfNeeded()
-            }
+        if button == composerView.leftButton {
+            self.composerView(composerView, didPressUploadButton: button)
         }
     }
 

@@ -29,6 +29,16 @@ public protocol ComposerViewDelegate: class {
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool
 
     /**
+     Tells the delegate that the given button is about to be configured.
+     */
+    func composerView(_ composerView: ComposerView, willConfigureButton button: ComposerButton)
+
+    /**
+     Tells the delegate that the overlay view is about to be configured.
+     */
+    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: UIView)
+
+    /**
      Tells the delegate that the text selection changed in the specified composer view's text view.
      */
     func composerViewDidChangeSelection(_ composerView: ComposerView)
@@ -57,6 +67,8 @@ public extension ComposerViewDelegate {
         return true
     }
 
+    func composerView(_ composerView: ComposerView, willConfigureButton button: ComposerButton) { }
+    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: UIView) { }
     func composerViewDidChangeSelection(_ composerView: ComposerView) { }
     func composerView(_ composerView: ComposerView, didUpdateAddonView view: UIView?, at slot: ComposerAddonSlot, index: UInt) { }
     func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) { }

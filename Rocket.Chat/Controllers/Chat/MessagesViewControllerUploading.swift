@@ -9,9 +9,10 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import RocketChatViewController
 
 extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func uploadButtonPressed() {
+    func composerView(_ composerView: ComposerView, didPressUploadButton button: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         func addAction(_ titleKey: String, image: UIImage, style: UIAlertAction.Style = .default, handler: @escaping (UIAlertAction) -> Void) {
@@ -46,8 +47,8 @@ extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = composerView.leftButton
-            presenter.sourceRect = composerView.leftButton.bounds
+            presenter.sourceView = button
+            presenter.sourceRect =  button.bounds
         }
 
         present(alert, animated: true, completion: nil)
