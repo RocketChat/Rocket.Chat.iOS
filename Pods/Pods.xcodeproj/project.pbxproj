@@ -367,6 +367,7 @@
 		7FD6720D4F07C19EE835CC2385F1E2D5 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = A7F15DF2767A4A492B0D82B9B33CDCB7 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		80092EB425F03FE752C2D91BE4C3EDC2 /* SwipeCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B17275A3113513513343C70851E46 /* SwipeCollectionViewCellDelegate.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		807187386B368B8C99690FE9F2802C1C /* FLEXExplorerToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8D3F3A5DAAAF94F9DF0B5CA3E55728 /* FLEXExplorerToolbar.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		808BFCD721E911EF001E8059 /* PreviewAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FECD5A21E8F84C00E1D57E /* PreviewAudioView.swift */; };
 		80D123EA21E6A810008E3122 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D123E821E6A7E7008E3122 /* OverlayView.swift */; };
 		80E138A3EB8E4A44CA2F4F05D0EB95E2 /* FLEXGlobalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96EB2D2EC377A3F13B1C6550D97A86F /* FLEXGlobalsTableViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		80FECD5921E8B35A00E1D57E /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FECD5621E8AF7B00E1D57E /* AudioRecorder.swift */; };
@@ -1590,6 +1591,7 @@
 		80A50E9380037ACD36CFE1F14D430A9A /* Realm-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Realm-dummy.m"; sourceTree = "<group>"; };
 		80D123E821E6A7E7008E3122 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		80FECD5621E8AF7B00E1D57E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		80FECD5A21E8F84C00E1D57E /* PreviewAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAudioView.swift; sourceTree = "<group>"; };
 		811AB9735D388D0784C4AAF6D4833B48 /* FLEXArgumentInputDateView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputDateView.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputDateView.m; sourceTree = "<group>"; };
 		8177A811D2583BF8BF8389DB12AC5F8E /* OAuthSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OAuthSwift-dummy.m"; sourceTree = "<group>"; };
 		818169B2FE95B93D1D86FCE8F7C9F079 /* FLEXSQLiteDatabaseManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXSQLiteDatabaseManager.m; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXSQLiteDatabaseManager.m; sourceTree = "<group>"; };
@@ -2480,6 +2482,7 @@
 			children = (
 				80D123E821E6A7E7008E3122 /* OverlayView.swift */,
 				9D1E33ACC28E157A4540DA147030E93B /* RecordAudioView.swift */,
+				80FECD5A21E8F84C00E1D57E /* PreviewAudioView.swift */,
 			);
 			name = Overlays;
 			path = Composer/Classes/Overlays;
@@ -5280,6 +5283,7 @@
 				AA023C02C652005A2670CAA83F961EA8 /* ReplyView.swift in Sources */,
 				2C325595C648E0E5BACCBECEFFD2D4B0 /* RocketChatViewController-dummy.m in Sources */,
 				80FECD5921E8B35A00E1D57E /* AudioRecorder.swift in Sources */,
+				808BFCD721E911EF001E8059 /* PreviewAudioView.swift in Sources */,
 				E0172155CCB2C230C0C21F0346F7411C /* RocketChatViewController.swift in Sources */,
 				156DBFE1C24E9D90F8E3F5B1DC2E623D /* Tap.swift in Sources */,
 				2E4F4F5414D1D3CEADFA971C3610F445 /* TextHintCell.swift in Sources */,

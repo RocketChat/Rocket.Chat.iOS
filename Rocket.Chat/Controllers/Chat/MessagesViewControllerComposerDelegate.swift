@@ -9,11 +9,6 @@
 import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
-    func recordAudioView(_ view: RecordAudioView, didProduceFile url: URL) {
-        upload(audioWithURL: url, filename: url.lastPathComponent)
-        composerView.hideOverlay()
-    }
-
     func replyViewDidHide(_ replyView: ReplyView) {
         composerViewModel.replyString = ""
     }
@@ -125,4 +120,23 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
         return true
     }
+
+    // MARK: RecordAudioView
+
+    func recordAudioView(_ view: RecordAudioView, didProduceFile url: URL) {
+        //upload(audioWithURL: url, filename: url.lastPathComponent)
+        //composerView.hideOverlay()
+        composerView.showOverlay(userData: "PreviewAudioView")
+    }
+
+    // MARK: PreviewAudioView
+
+    func previewAudioView(_ view: PreviewAudioView, didConfirmFile url: URL) {
+
+    }
+
+    func previewAudioView(_ view: PreviewAudioView, didDiscardFile url: URL) {
+
+    }
+
 }

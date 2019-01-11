@@ -9,7 +9,5 @@
 import RocketChatViewController
 
 extension MessagesViewController {
-    func composerView(_ composerView: ComposerView, didPressRecordAudioButton button: UIButton) {
-        composerView.showOverlay()
-    }
+    
 }
