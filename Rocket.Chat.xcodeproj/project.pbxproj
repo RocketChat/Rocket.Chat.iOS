@@ -460,7 +460,6 @@
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		801B0EF42114B2A300C0972E /* ShortcutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */; };
 		801B0EF7211895E900C0972E /* MainSplitViewControllerShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */; };
-		801CEECF21E3F45E00E1347D /* MessagesViewControllerAudioRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801CEECE21E3F45E00E1347D /* MessagesViewControllerAudioRecording.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
 		8020C3D52199DDA400AA7133 /* MessagesViewControllerDrafting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */; };
 		8020C3D82199F75A00AA7133 /* MessagesViewControllerEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020C3D72199F75A00AA7133 /* MessagesViewControllerEmptyState.swift */; };
@@ -1433,7 +1432,6 @@
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManagerSpec.swift; sourceTree = "<group>"; };
 		801B0EF32114B2A300C0972E /* ShortcutHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutHelpers.swift; sourceTree = "<group>"; };
 		801B0EF6211895E900C0972E /* MainSplitViewControllerShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewControllerShortcuts.swift; sourceTree = "<group>"; };
-		801CEECE21E3F45E00E1347D /* MessagesViewControllerAudioRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerAudioRecording.swift; sourceTree = "<group>"; };
 		801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserView.swift; sourceTree = "<group>"; };
 		8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerDrafting.swift; sourceTree = "<group>"; };
 		8020C3D72199F75A00AA7133 /* MessagesViewControllerEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerEmptyState.swift; sourceTree = "<group>"; };
@@ -2995,7 +2993,6 @@
 				41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */,
 				802C895D2165393600C6B9B2 /* MessagesViewControllerEditing.swift */,
 				80F533E52195A33B00B7292E /* MessagesViewControllerSending.swift */,
-				801CEECE21E3F45E00E1347D /* MessagesViewControllerAudioRecording.swift */,
 				8020C3D42199DDA400AA7133 /* MessagesViewControllerDrafting.swift */,
 				8020C3D72199F75A00AA7133 /* MessagesViewControllerEmptyState.swift */,
 				8020C3D92199F78800AA7133 /* MessagesViewControllerSearching.swift */,
@@ -5090,7 +5087,6 @@
 				80EE865321A82E6100BFEEC8 /* UIViewControllerDimming.swift in Sources */,
 				999075252177795700CAB7C8 /* QuoteMessageCell.swift in Sources */,
 				809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */,
-				801CEECF21E3F45E00E1347D /* MessagesViewControllerAudioRecording.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResponse.swift in Sources */,
 				8020C3D52199DDA400AA7133 /* MessagesViewControllerDrafting.swift in Sources */,
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,

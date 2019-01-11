@@ -17,6 +17,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         return
     }
 
+    // MARK: Audio
+
+    func composerView(_ composerView: ComposerView, didFinishRecordingAudio url: URL) {
+        upload(audioWithURL: url)
+    }
+
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
@@ -120,23 +126,4 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func composerViewShouldReturn(_ composerView: ComposerView) -> Bool {
         return true
     }
-
-    // MARK: RecordAudioView
-
-    func recordAudioView(_ view: RecordAudioView, didProduceFile url: URL) {
-        //upload(audioWithURL: url, filename: url.lastPathComponent)
-        //composerView.hideOverlay()
-        composerView.showOverlay(userData: "PreviewAudioView")
-    }
-
-    // MARK: PreviewAudioView
-
-    func previewAudioView(_ view: PreviewAudioView, didConfirmFile url: URL) {
-
-    }
-
-    func previewAudioView(_ view: PreviewAudioView, didDiscardFile url: URL) {
-
-    }
-
 }

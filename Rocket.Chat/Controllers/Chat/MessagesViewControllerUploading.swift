@@ -125,7 +125,7 @@ extension MessagesViewController {
             mimeType: "audio/mp4"
         )
 
-        upload(file)
+        upload(file, skipDialog: true)
     }
 
     func upload(videoWithURL videoURL: URL, filename: String) {
@@ -165,10 +165,10 @@ extension MessagesViewController {
         }
     }
 
-    func upload(_ file: FileUpload) {
+    func upload(_ file: FileUpload, skipDialog: Bool = false) {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: self.view, animated: true)
-            self.uploadDialog(file)
+            self.uploadDialog(file, skipDialog: skipDialog)
         }
     }
 }
@@ -270,7 +270,11 @@ extension MessagesViewController {
         })
     }
 
-    func uploadDialog(_ file: FileUpload) {
+    func uploadDialog(_ file: FileUpload, skipDialog: Bool = false) {
+        if skipDialog {
+            return upload(file, fileName: file.name, description: "")
+        }
+
         let alert = UIAlertController(title: localized("alert.upload_dialog.title"), message: "", preferredStyle: .alert)
         var fileName: UITextField?
         var fileDescription: UITextField?
@@ -293,6 +297,7 @@ extension MessagesViewController {
             if fileName?.text?.isEmpty == false {
                 name = fileName?.text ?? file.name
             }
+
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
