@@ -369,6 +369,7 @@
 		807187386B368B8C99690FE9F2802C1C /* FLEXExplorerToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8D3F3A5DAAAF94F9DF0B5CA3E55728 /* FLEXExplorerToolbar.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		80D123EA21E6A810008E3122 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D123E821E6A7E7008E3122 /* OverlayView.swift */; };
 		80E138A3EB8E4A44CA2F4F05D0EB95E2 /* FLEXGlobalsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96EB2D2EC377A3F13B1C6550D97A86F /* FLEXGlobalsTableViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		80FECD5921E8B35A00E1D57E /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FECD5621E8AF7B00E1D57E /* AudioRecorder.swift */; };
 		81688B7DAE561546DF18F41D9792FA84 /* collection_notifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1905CE1C594F8B8DC53F9699F2878 /* collection_notifier.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"3.12.0\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		82388DDE7C489EDF04EE5CC40B73930E /* RLMRealmConfiguration+Sync.h in Headers */ = {isa = PBXBuildFile; fileRef = 35442B5C50C8902CA92D55B5951DCA5E /* RLMRealmConfiguration+Sync.h */; };
 		830B51474BA300A27D2B4FA3766FADFF /* FLEX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C774F45459D7FD83466B4E63DD94871 /* FLEX.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1588,6 +1589,7 @@
 		8091AA528859A7678593676F3E7B0ACF /* AnimatedImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedImage.swift; path = Source/AnimatedImage.swift; sourceTree = "<group>"; };
 		80A50E9380037ACD36CFE1F14D430A9A /* Realm-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Realm-dummy.m"; sourceTree = "<group>"; };
 		80D123E821E6A7E7008E3122 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		80FECD5621E8AF7B00E1D57E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		811AB9735D388D0784C4AAF6D4833B48 /* FLEXArgumentInputDateView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputDateView.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputDateView.m; sourceTree = "<group>"; };
 		8177A811D2583BF8BF8389DB12AC5F8E /* OAuthSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OAuthSwift-dummy.m"; sourceTree = "<group>"; };
 		818169B2FE95B93D1D86FCE8F7C9F079 /* FLEXSQLiteDatabaseManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXSQLiteDatabaseManager.m; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXSQLiteDatabaseManager.m; sourceTree = "<group>"; };
@@ -2699,6 +2701,7 @@
 		49D3F6EDE83B5BD6522CF0B22160F691 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				80FECD5621E8AF7B00E1D57E /* AudioRecorder.swift */,
 				1DAECF10657C9C12E382CDEBF9B18E06 /* ComposerLocalizable.swift */,
 				C2368901ADEE016DAA0831C77D2FAC40 /* Tap.swift */,
 			);
@@ -5276,6 +5279,7 @@
 				D58C04D088DA77483D0D75AE532E35C8 /* RecordAudioView.swift in Sources */,
 				AA023C02C652005A2670CAA83F961EA8 /* ReplyView.swift in Sources */,
 				2C325595C648E0E5BACCBECEFFD2D4B0 /* RocketChatViewController-dummy.m in Sources */,
+				80FECD5921E8B35A00E1D57E /* AudioRecorder.swift in Sources */,
 				E0172155CCB2C230C0C21F0346F7411C /* RocketChatViewController.swift in Sources */,
 				156DBFE1C24E9D90F8E3F5B1DC2E623D /* Tap.swift in Sources */,
 				2E4F4F5414D1D3CEADFA971C3610F445 /* TextHintCell.swift in Sources */,

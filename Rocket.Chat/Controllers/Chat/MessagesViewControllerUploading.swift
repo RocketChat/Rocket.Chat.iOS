@@ -108,6 +108,26 @@ extension MessagesViewController {
         upload(file)
     }
 
+    func upload(audioWithURL url: URL, filename: String? = nil) {
+        var ext = url.pathExtension
+
+        if ext.isEmpty {
+            ext = "m4a"
+        }
+
+        guard let data =  try? Data(contentsOf: url) else {
+            return
+        }
+
+        let file = UploadHelper.file(
+            for: data,
+            name: filename ?? url.lastPathComponent,
+            mimeType: "audio/mp4"
+        )
+
+        upload(file)
+    }
+
     func upload(videoWithURL videoURL: URL, filename: String) {
         let assetURL = AVURLAsset(url: videoURL)
         let semaphore = DispatchSemaphore(value: 0)

@@ -9,6 +9,11 @@
 import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
+    func recordAudioView(_ view: RecordAudioView, didProduceFile url: URL) {
+        upload(audioWithURL: url, filename: url.lastPathComponent)
+        composerView.hideOverlay()
+    }
+
     func replyViewDidHide(_ replyView: ReplyView) {
         composerViewModel.replyString = ""
     }
