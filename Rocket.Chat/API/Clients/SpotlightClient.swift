@@ -34,7 +34,7 @@ struct SpotlightClient: APIClient {
                                 subscriptions.append(subscription)
                             } else {
                                 let subscription = Subscription()
-                                subscription.identifier = String.random()
+                                subscription.identifier = roomIdentifier
                                 subscription.rid = roomIdentifier
                                 subscription.name = object["name"].string ?? ""
 

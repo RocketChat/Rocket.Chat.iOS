@@ -49,9 +49,13 @@ struct SubscriptionsClient: APIClient {
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
                     func queueSubscriptionForUpdate(_ object: JSON) {
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
-                        subscription.auth = auth
-                        subscriptions.append(subscription)
+                        if let rid = object["_id"].string {
+                            let subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                            subscription.auth = auth
+                            subscription.map(object, realm: realm)
+                            subscription.mapRoom(object, realm: realm)
+                            subscriptions.append(subscription)
+                        }
                     }
 
                     resource.list?.forEach(queueSubscriptionForUpdate)
