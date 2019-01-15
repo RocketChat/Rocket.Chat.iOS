@@ -59,7 +59,11 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
-    @IBOutlet weak var textFieldServerURL: UITextField!
+    @IBOutlet weak var textFieldServerURL: UITextField! {
+        didSet {
+            textFieldServerURL.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        }
+    }
 
     lazy var keyboardConstraint: NSLayoutConstraint = {
         var bottomGuide: NSLayoutYAxisAnchor
@@ -294,25 +298,16 @@ final class ConnectServerViewController: BaseViewController {
 
 extension ConnectServerViewController: UITextFieldDelegate {
 
-    func textFieldDidChange() {
-        buttonConnect.isEnabled = !(textFieldServerURL.text?.isEmpty ?? true)
+    @objc func textFieldDidChange() {
+        if !connecting {
+            buttonConnect.isEnabled = !(textFieldServerURL.text?.isEmpty ?? true)
+        }
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         textFieldServerURL.text = ""
         textFieldDidChange()
         return true
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if !connecting {
-            if let text = textField.text, let textRange = Range(range, in: text) {
-                textField.text = text.replacingCharacters(in: textRange, with: string)
-                textFieldDidChange()
-            }
-        }
-
-        return false
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
