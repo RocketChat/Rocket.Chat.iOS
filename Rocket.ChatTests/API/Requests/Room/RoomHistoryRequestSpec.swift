@@ -46,6 +46,7 @@ class RoomHistoryRequestSpec: APITestCase {
         XCTAssertNil(request.httpBody, "body is nil")
     }
 
+    // swiftlint:disable function_body_length
     func testResult() {
         let mockResult = JSON([
             "messages": [

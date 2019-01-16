@@ -13,6 +13,7 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
+// swiftlint:disable type_body_length
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
     weak var controllerContext: UIViewController?

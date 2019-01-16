@@ -64,6 +64,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         assert(attributedString, has: (NSAttributedString.Key.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
     }
 
+    // swiftlint:disable function_body_length
     func testMentionParsing() {
         let string = "Hi @rafael.kellermann, how are you doing? " +
                      "Is everyone @here having a great day? How about you @filipe.alvarenga? Wish you @all a happy Christmas :) from @matheus.cardoso"
@@ -91,7 +92,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let range0 = nsString.range(of: "Hi ")
         let attributes0 = result.attributes(at: range0.location, longestEffectiveRange: nil, in: range0)
         XCTAssertEqual(attributes0.count, 0, "Will have no attributes")
-        
+
         let range1 = nsString.range(of: "\u{00a0}rafael.kellermann\u{00a0}")
         let attributes1 = result.attributes(at: range1.location, longestEffectiveRange: nil, in: range1)
         XCTAssertEqual(attributes1.count, 4, "Will have 4 attributes")

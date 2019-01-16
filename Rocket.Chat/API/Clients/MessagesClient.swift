@@ -222,7 +222,6 @@ struct MessagesClient: APIClient {
         return true
     }
 
-    // swiftlint:disable function_body_length
     @discardableResult
     func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier, let username = user?.username else {

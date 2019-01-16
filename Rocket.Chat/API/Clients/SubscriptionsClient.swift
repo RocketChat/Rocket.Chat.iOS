@@ -52,7 +52,8 @@ struct SubscriptionsClient: APIClient {
                         var subscription: Subscription?
 
                         if let rid = object["rid"].string {
-                            subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                            subscription = Subscription.find(rid: rid, realm: realm) ??
+                                Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         } else {
                             subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         }
@@ -72,7 +73,8 @@ struct SubscriptionsClient: APIClient {
                         var subscription: Subscription?
 
                         if let rid = object["rid"].string {
-                            subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                            subscription = Subscription.find(rid: rid, realm: realm) ??
+                                Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         } else {
                             subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
                         }
