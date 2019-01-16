@@ -12,6 +12,7 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
+// swiftlint:disable type_body_length
 class SubscriptionsClientSpec: XCTestCase {
 
     override func setUp() {
@@ -236,6 +237,7 @@ class SubscriptionsClientSpec: XCTestCase {
         XCTAssertEqual(user2Object.rolesInSubscription(subscriptionObject).count, 1)
     }
 
+    // swiftlint:disable function_body_length
     func testLoadHistory() {
         let api = MockAPI()
         let client = SubscriptionsClient(api: api)

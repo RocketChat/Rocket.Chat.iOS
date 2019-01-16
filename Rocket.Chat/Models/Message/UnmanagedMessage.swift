@@ -93,6 +93,8 @@ extension UnmanagedMessage {
 }
 
 extension UnmanagedMessage {
+
+    // swiftlint:disable function_body_length
     init?(_ message: Message) {
         guard
             let messageIdentifier = message.identifier,

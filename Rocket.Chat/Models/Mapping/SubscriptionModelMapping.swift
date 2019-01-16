@@ -68,6 +68,7 @@ extension Subscription: ModelMappeable {
     func mapNotifications(_ values: JSON) {
         self.disableNotifications = values["disableNotifications"].bool ?? false
         self.hideUnreadStatus = values["hideUnreadStatus"].bool ?? false
+
         if let desktopNotificationsString = values["desktopNotifications"].string {
             self.desktopNotifications = SubscriptionNotificationsStatus(rawValue: desktopNotificationsString) ?? .default
         }
