@@ -12,6 +12,7 @@ enum ResponseMessage: String {
     case ping
     case changed
     case added
+    case inserted
     case updated
     case removed
     case unknown

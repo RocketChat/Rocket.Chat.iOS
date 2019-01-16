@@ -49,8 +49,15 @@ struct SubscriptionsClient: APIClient {
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
                     func queueSubscriptionForUpdate(_ object: JSON) {
-                        if let rid = object["_id"].string {
-                            let subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                        var subscription: Subscription?
+
+                        if let rid = object["rid"].string {
+                            subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                        } else {
+                            subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                        }
+
+                        if let subscription = subscription {
                             subscription.auth = auth
                             subscription.map(object, realm: realm)
                             subscription.mapRoom(object, realm: realm)
@@ -62,11 +69,18 @@ struct SubscriptionsClient: APIClient {
                     resource.update?.forEach(queueSubscriptionForUpdate)
 
                     resource.remove?.forEach { object in
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (obj) in
-                            obj?.auth = nil
-                        })
+                        var subscription: Subscription?
 
-                        subscriptions.append(subscription)
+                        if let rid = object["rid"].string {
+                            subscription = Subscription.find(rid: rid, realm: realm) ?? Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                        } else {
+                            subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                        }
+
+                        if let subscription = subscription {
+                            subscription.auth = nil
+                            subscriptions.append(subscription)
+                        }
                     }
 
                     auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
