@@ -189,10 +189,7 @@ final class AuthTableViewController: BaseTableViewController {
         let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
-
-            Realm.executeOnMainThread({ realm in
-                loginService.serverUrl = url
-            })
+            loginService.serverUrl = url
         }
 
         if loginService.service == "wordpress" {
