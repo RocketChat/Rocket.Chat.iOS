@@ -186,14 +186,11 @@ final class AuthTableViewController: BaseTableViewController {
     }
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard let realm = Realm.current else {
-            return
-        }
-
         let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
-            realm.execute({ _ in
+
+            Realm.executeOnMainThread({ realm in
                 loginService.serverUrl = url
             })
         }
