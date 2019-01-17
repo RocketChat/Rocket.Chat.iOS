@@ -212,7 +212,7 @@ final class AuthTableViewController: BaseTableViewController {
                 loginService.mapWordPress()
             } // missing implementation for wp-oauth-server
 
-            realm.execute({ _ in
+            Realm.executeOnMainThread({ realm in
                 realm.add(loginService, update: true)
             })
         }
