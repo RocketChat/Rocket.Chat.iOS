@@ -112,7 +112,7 @@
 "auth.connect.connecting" = "Connessione in corso. Attendere";
 "auth.email_auth_prefix" = "Entra con ";
 "auth.email_auth" = "e-mail";
-"auth.login_service_prefix" = "Continua con";
+"auth.login_service_prefix" = "Continua con ";
 
 "auth.signup_title" = "Iscrizione";
 "auth.signup.button_register" = "Registrati";
