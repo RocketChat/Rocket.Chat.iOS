@@ -11,11 +11,7 @@ import RealmSwift
 
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
-let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
-
 struct MessageManager {
-
-    static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
     static func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
@@ -118,25 +114,6 @@ struct MessageManager {
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
-    }
-
-    static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
-        guard let userIdentifier = user.identifier else { return }
-
-        var blockedUsers: [String] = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
-        blockedUsers.append(userIdentifier)
-        UserDefaults.group.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
-        self.blockedUsersList = blockedUsers
-
-        Realm.execute({ (realm) in
-            let messages = realm.objects(Message.self).filter("user.identifier = '\(userIdentifier)'")
-
-            for message in messages {
-                message.userBlocked = true
-            }
-
-            realm.add(messages, update: true)
-        }, completion: completion)
     }
 
 }

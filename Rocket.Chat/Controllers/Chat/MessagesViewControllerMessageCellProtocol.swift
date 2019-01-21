@@ -308,16 +308,6 @@ extension MessagesViewController {
             actions.append(star)
         }
 
-        if auth.canBlockMessage(message) == .allowed {
-            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { _ in
-                MessageManager.blockMessagesFrom(messageUser, completion: {
-                    //                    self?.updateSubscriptionInfo()
-                })
-            })
-
-            actions.append(block)
-        }
-
         if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { _ in
                 self.editMessage(message)

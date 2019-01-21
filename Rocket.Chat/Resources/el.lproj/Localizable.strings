@@ -214,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Πληροφορία μηνύματος";
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
-"chat.message.actions.block" = "Φράξτε μηνύματα από χρήστη";
 "chat.message.actions.report" = "Αναφέρατε μήνυμα";
 "chat.message.actions.edit" = "Επεξεργαστείτε μήνυμα";
 "chat.message.actions.copy" = "Αντιγράψτε";
