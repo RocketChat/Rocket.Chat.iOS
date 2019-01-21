@@ -49,12 +49,13 @@
                             <constraint firstAttribute="height" constant="20" id="zQ8-gG-X3N"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nz7-HR-gAg">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nz7-HR-gAg">
                         <rect key="frame" x="339" y="35" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="0MA-1u-JG8"/>
                             <constraint firstAttribute="height" constant="20" id="Kf1-nT-YCg"/>
                         </constraints>
+                        <state key="normal" image="Unread"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="yII-Mp-ySs">
                         <rect key="frame" x="164.5" y="15.5" width="14" height="14"/>
@@ -106,5 +107,6 @@
     </objects>
     <resources>
         <image name="Exclamation" width="20" height="20"/>
+        <image name="Unread" width="15" height="9"/>
     </resources>
 </document>
