@@ -215,7 +215,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Add Reaction"; //TODO
-"chat.message.actions.block" = "Blokovat zprávy od uživatele";
 "chat.message.actions.report" = "Nahlásit zprávu";
 "chat.message.actions.edit" = "Upravit zprávu";
 "chat.message.actions.copy" = "Kopírovat";

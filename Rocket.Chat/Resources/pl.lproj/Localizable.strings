@@ -214,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Informacje o wiadomości";
 "chat.message.actions.react" = "Dodaje reakcję";
-"chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
 "chat.message.actions.edit" = "Edytuj wiadomość";
 "chat.message.actions.copy" = "Kopiuj";
