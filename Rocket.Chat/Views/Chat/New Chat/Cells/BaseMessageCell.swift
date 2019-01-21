@@ -78,20 +78,21 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
     func configure(readReceipt button: UIButton) {
         guard
             let viewModel = viewModel?.base as? BaseMessageChatItem,
-            let settings = settings
+            let settings = settings,
+            let message = viewModel.message
         else {
             return
         }
 
         if settings.messageReadReceiptEnabled {
             button.isHidden = false
+
+            let image = message.unread ? UIImage(named: "Unread") : UIImage(named: "Read")
+            button.setImage(image, for: .normal)
         } else {
             button.isHidden = true
             button.changeWidth(to: 0)
             button.changeLeading(to: 0)
-
-            let image = (viewModel.message?.unread ?? false) ? UIImage(named: "Unread") : UIImage(named: "Read")
-            button.setImage(image, for: .normal)
         }
     }
 
