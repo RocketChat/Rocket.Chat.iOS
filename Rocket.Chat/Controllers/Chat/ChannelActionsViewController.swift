@@ -37,6 +37,7 @@ class ChannelActionsViewController: BaseViewController {
                 header = [ChannelInfoUserCellData(user: subscription.directMessageUser)]
             } else {
                 let hasDescription = !(subscription.roomDescription?.isEmpty ?? true)
+                let hasAnnouncement = !(subscription.roomAnnouncement?.isEmpty ?? true)
                 let hasTopic = !(subscription.roomTopic?.isEmpty ?? true)
 
                 header = [
@@ -44,6 +45,10 @@ class ChannelActionsViewController: BaseViewController {
                     ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.description"),
                         descriptionText: hasDescription ? subscription.roomDescription : localized("chat.info.item.no_description")
+                    ),
+                    ChannelInfoDescriptionCellData(
+                        title: "Announcement",
+                        descriptionText: hasAnnouncement ? subscription.roomAnnouncement : "No announcement"
                     ),
                     ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.topic"),

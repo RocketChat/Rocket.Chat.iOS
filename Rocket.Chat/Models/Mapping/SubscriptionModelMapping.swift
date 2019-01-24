@@ -95,6 +95,7 @@ extension Subscription: ModelMappeable {
 
     func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
+        self.roomAnnouncement = values["announcement"].stringValue
         self.roomTopic = values["topic"].stringValue
 
         if let broadcast = values["broadcast"].bool {
