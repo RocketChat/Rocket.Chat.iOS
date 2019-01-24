@@ -79,6 +79,12 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    lazy var announcementBannerView: UIView = {
+        let announcementBannerView = ChatAnnouncementView()
+        announcementBannerView.subscription = subscription?.unmanaged
+        return announcementBannerView
+    }()
+
     private let buttonScrollToBottomSize = CGFloat(70)
     var keyboardHeight: CGFloat = 0
     var buttonScrollToBottomConstraint: NSLayoutConstraint!
@@ -131,7 +137,7 @@ final class MessagesViewController: RocketChatViewController {
 
         registerCells()
         setupScrollToBottom()
-
+        setupAnnouncementBanner()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(_:)),
@@ -197,6 +203,7 @@ final class MessagesViewController: RocketChatViewController {
         super.viewDidAppear(animated)
         markAsRead()
         becomeFirstResponder()
+        updateAnnouncementBanner()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -271,6 +278,35 @@ final class MessagesViewController: RocketChatViewController {
 
         collectionViewCells.forEach {
             collectionView?.register($0.nib, forCellWithReuseIdentifier: $0.cellIdentifier)
+        }
+    }
+
+    // MARK: Announcement
+
+    func setupAnnouncementBanner() {
+        // Start as invisible first, alpha will be set to 1 if a valid announcement is fetched
+        announcementBannerView.alpha = 0
+
+        view.addSubview(announcementBannerView)
+        view.bringSubviewToFront(announcementBannerView)
+        NSLayoutConstraint.activate([
+            announcementBannerView.topAnchor.constraint(equalTo: view.topAnchor),
+            announcementBannerView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            announcementBannerView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            announcementBannerView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+
+        announcementBannerView.applyTheme()
+    }
+
+    func updateAnnouncementBanner() {
+        guard let announcement = subscription?.unmanaged?.roomAnnouncement else { return }
+        let hasAnnouncement = announcement == "" ? false : true
+
+        if hasAnnouncement {
+            announcementBannerView.alpha = 1
+        } else {
+            announcementBannerView.alpha = 0
         }
     }
 
