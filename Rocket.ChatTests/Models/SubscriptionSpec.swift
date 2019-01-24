@@ -165,7 +165,8 @@ class SubscriptionSpec: XCTestCase {
             "jitsiTimeout": [ "$date": 1480377601 ],
             "ro": true,
             "broadcast": true,
-            "description": "room-description"
+            "description": "room-description",
+            "announcement": "room-announcement"
         ])
 
         let subscription = Subscription()
@@ -174,6 +175,7 @@ class SubscriptionSpec: XCTestCase {
 
         XCTAssertEqual(subscription.roomTopic, "room-topic")
         XCTAssertEqual(subscription.roomDescription, "room-description")
+        XCTAssertEqual(subscription.roomAnnouncement, "room-announcement")
         XCTAssertEqual(subscription.roomReadOnly, true)
         XCTAssertEqual(subscription.roomBroadcast, true)
         XCTAssertEqual(subscription.roomOwnerId, "user-id")
