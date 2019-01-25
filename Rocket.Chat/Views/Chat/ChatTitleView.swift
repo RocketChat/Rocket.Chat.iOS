@@ -16,6 +16,13 @@ final class ChatTitleView: UIView {
 
     weak var delegate: ChatTitleViewProtocol?
 
+    @IBOutlet weak var viewStatus: UIView! {
+        didSet {
+            viewStatus.backgroundColor = .clear
+            viewStatus.layer.cornerRadius = 4.5
+        }
+    }
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var showInfoImage: UIImageView!
@@ -31,6 +38,7 @@ final class ChatTitleView: UIView {
         }
 
         set {
+            viewStatus.isHidden = newValue
             titleLabel.isHidden = newValue
             titleImage.isHidden = newValue
             showInfoImage.isHidden = newValue
@@ -39,6 +47,7 @@ final class ChatTitleView: UIView {
 
     var state: SocketConnectionState = SocketManager.sharedInstance.state {
         didSet {
+            updateTitleState()
             updateConnectionState()
         }
     }
@@ -56,12 +65,28 @@ final class ChatTitleView: UIView {
         didSet {
             guard let subscription = subscription else { return }
             viewModel.subscription = subscription
-            titleLabel.text = viewModel.title
 
+            DispatchQueue.main.async {
+                self.updateTitleState()
+                self.updateConnectionState()
+            }
+        }
+    }
+
+    internal func updateTitleState() {
+        guard let subscription = viewModel.subscription else { return }
+
+        titleLabel.text = viewModel.title
+
+        if subscription.type == .directMessage {
+            titleImage.isHidden = true
+            viewStatus.backgroundColor = viewModel.iconColor
+            viewStatus.isHidden = false
+        } else {
+            titleImage.isHidden = false
             let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
             titleImage.image = image
-
-            updateConnectionState()
+            viewStatus.isHidden = true
         }
     }
 
