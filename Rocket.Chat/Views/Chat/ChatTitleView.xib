@@ -77,14 +77,24 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ah-8t-4MZ" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
+                            <rect key="frame" x="11" y="5.5" width="9" height="9"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="9" id="Fq8-xb-rdo"/>
+                                <constraint firstAttribute="width" constant="9" id="Pj3-2B-aw1"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="4Ah-8t-4MZ" firstAttribute="centerX" secondItem="r2R-yy-EGi" secondAttribute="centerX" id="3Am-Zf-cEY"/>
                         <constraint firstItem="r2R-yy-EGi" firstAttribute="centerY" secondItem="d1M-6e-vj0" secondAttribute="centerY" id="4gI-vW-2zi"/>
                         <constraint firstItem="qdc-h6-oM3" firstAttribute="centerY" secondItem="d1M-6e-vj0" secondAttribute="centerY" id="5OS-tR-6Yv"/>
                         <constraint firstItem="d1M-6e-vj0" firstAttribute="top" secondItem="F2i-rU-dxW" secondAttribute="top" id="7Oa-HK-RhK"/>
                         <constraint firstAttribute="bottom" secondItem="bLg-FB-vXv" secondAttribute="bottom" id="A60-HQ-QRT"/>
                         <constraint firstItem="r2R-yy-EGi" firstAttribute="leading" secondItem="F2i-rU-dxW" secondAttribute="leadingMargin" id="COl-CQ-in6"/>
+                        <constraint firstItem="4Ah-8t-4MZ" firstAttribute="centerY" secondItem="r2R-yy-EGi" secondAttribute="centerY" id="NWV-sz-cVT"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qdc-h6-oM3" secondAttribute="trailing" id="P3U-aA-vZn"/>
                         <constraint firstItem="qdc-h6-oM3" firstAttribute="leading" secondItem="d1M-6e-vj0" secondAttribute="trailing" constant="8" id="SU1-gG-cyt"/>
                         <constraint firstItem="d1M-6e-vj0" firstAttribute="leading" secondItem="r2R-yy-EGi" secondAttribute="trailing" constant="4" id="iVT-QY-FmK"/>
@@ -114,6 +124,7 @@
                 <outlet property="titleLabel" destination="d1M-6e-vj0" id="N3K-Oi-icf"/>
                 <outlet property="typingLabel" destination="bLg-FB-vXv" id="bcb-ji-CuS"/>
                 <outlet property="viewLoading" destination="oSA-hf-f6V" id="Sah-7o-vW8"/>
+                <outlet property="viewStatus" destination="4Ah-8t-4MZ" id="xZe-MG-kNI"/>
                 <outletCollection property="gestureRecognizers" destination="HlR-jW-RHu" appends="YES" id="vTE-rM-sOD"/>
             </connections>
             <point key="canvasLocation" x="-100" y="104.34782608695653"/>
