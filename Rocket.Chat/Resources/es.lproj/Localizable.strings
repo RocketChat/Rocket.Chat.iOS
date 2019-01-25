@@ -301,6 +301,8 @@
 "chat.info.item.no_topic" = "No tema";
 "chat.info.item.description" = "Descripción";
 "chat.info.item.no_description" = "No descripción";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Notificaciones";
 "chat.info.item.members" = "Miembros";
 "chat.info.item.pinned" = "Fijado";

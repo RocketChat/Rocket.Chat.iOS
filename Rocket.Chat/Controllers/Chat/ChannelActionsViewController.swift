@@ -47,8 +47,10 @@ class ChannelActionsViewController: BaseViewController {
                         descriptionText: hasDescription ? subscription.roomDescription : localized("chat.info.item.no_description")
                     ),
                     ChannelInfoDescriptionCellData(
-                        title: "Announcement",
-                        descriptionText: hasAnnouncement ? subscription.roomAnnouncement : "No announcement"
+                        title: localized("chat.info.item.announcement"),
+                        descriptionText: hasAnnouncement ?
+                            subscription.roomAnnouncement :
+                            localized("chat.info.item.no_announcement")
                     ),
                     ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.topic"),

@@ -301,6 +301,8 @@
 "chat.info.item.no_topic" = "Нет темы";
 "chat.info.item.description" = "Описание";
 "chat.info.item.no_description" = "Нет описания";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Уведомления";
 "chat.info.item.members" = "Пользователи";
 "chat.info.item.pinned" = "Прикрепленные";
