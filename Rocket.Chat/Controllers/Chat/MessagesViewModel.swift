@@ -11,6 +11,7 @@ import RealmSwift
 import DifferenceKit
 import RocketChatViewController
 
+// swiftlint:disable type_body_length file_length
 final class MessagesViewModel {
 
     /**
@@ -422,6 +423,7 @@ final class MessagesViewModel {
         - oldestMessage: This is the parameter that will be sent to the server in
             order to get the correct page of data.
      */
+    // swiftlint:disable function_body_length
     func fetchMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
         guard
             requestingData == .none,

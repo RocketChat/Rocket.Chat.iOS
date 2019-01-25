@@ -51,6 +51,7 @@ class BaseQuoteMessageCell: BaseMessageCell {
         delegate?.viewDidCollapseChange(viewModel: viewModel)
     }
 
+    // swiftlint:disable function_parameter_count
     func configure(
         purpose: UILabel,
         purposeHeightConstraint: NSLayoutConstraint,
