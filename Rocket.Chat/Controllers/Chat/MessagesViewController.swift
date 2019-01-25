@@ -244,7 +244,10 @@ final class MessagesViewController: RocketChatViewController {
             guard let self = self else { return }
             Log.debug("[VIEW MODEL] dataChanged with \(self.viewModel.dataNormalized.count) values.")
 
-            if self.viewModel.dataNormalized.first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
+            // If first item is the header (list is empty) then we don't use the inverted mode
+            // because we want the header to appear in the bottom.
+            let first = self.viewModel.dataNormalized.first
+            if first?.model.differenceIdentifier == AnyHashable(HeaderChatItem.globalIdentifier) {
                 self.isInverted = false
             } else {
                 self.isInverted = true
