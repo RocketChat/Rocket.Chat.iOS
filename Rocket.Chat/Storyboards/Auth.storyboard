@@ -623,6 +623,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="forgotPasswordPressed:" destination="w7q-9e-4D3" eventType="touchUpInside" id="NR1-Me-LB8"/>
@@ -710,7 +713,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-Sy-PR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="608.79999999999995" y="18.440779610194905"/>
+            <point key="canvasLocation" x="609" y="18"/>
         </scene>
         <!--Title-->
         <scene sceneID="00e-2E-wLI">
