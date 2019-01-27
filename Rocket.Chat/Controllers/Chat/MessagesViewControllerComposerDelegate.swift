@@ -23,6 +23,10 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         upload(audioWithURL: url)
     }
 
+    func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView) {
+        ThemeManager.addObserver(view)
+    }
+
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
