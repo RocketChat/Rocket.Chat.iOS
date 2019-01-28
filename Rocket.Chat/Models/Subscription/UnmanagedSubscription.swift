@@ -28,6 +28,7 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var lastSeen: Date?
     var roomTopic: String?
     var roomDescription: String?
+    var roomAnnouncement: String?
     var roomReadOnly: Bool
     var roomUpdatedAt: Date?
     var roomLastMessage: Message?
@@ -82,6 +83,7 @@ extension UnmanagedSubscription {
         lastSeen = subscription.lastSeen
         roomTopic = subscription.roomTopic
         roomDescription = subscription.roomDescription
+        roomAnnouncement = subscription.roomAnnouncement
         roomReadOnly = subscription.roomReadOnly
         roomUpdatedAt = subscription.roomUpdatedAt
         roomLastMessage = subscription.roomLastMessage
