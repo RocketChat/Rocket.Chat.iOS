@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+// swiftlint:disable file_length
 extension RoomMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
         var messages = [Message]()

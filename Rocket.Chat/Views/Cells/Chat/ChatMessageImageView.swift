@@ -101,9 +101,11 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         } else {
             guard let imageURL = attachment.fullImageURL() else { return }
 
-            Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                 // MainSplitViewController.chatViewController?.openURL(url: imageURL)
-            }).present()
+            if imageURL.absoluteString.contains("http://") {
+                Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
+                      MainSplitViewController.chatViewController?.openURL(url: imageURL)
+                }).present()
+            }
         }
     }
 }
