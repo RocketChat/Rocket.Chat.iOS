@@ -300,6 +300,8 @@
 "chat.info.item.no_topic" = "No topic";
 "chat.info.item.description" = "Description";
 "chat.info.item.no_description" = "No description";
+"chat.info.item.announcement" = "Announcement";
+"chat.info.item.no_announcement" = "No announcement";
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";

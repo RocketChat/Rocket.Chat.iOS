@@ -300,6 +300,8 @@
 "chat.info.item.no_topic" = "Όχι θέμα";
 "chat.info.item.description" = "Περιγραφή";
 "chat.info.item.no_description" = "Έλλειψη περιγραφής";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Ειδοποιήσεις";
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
