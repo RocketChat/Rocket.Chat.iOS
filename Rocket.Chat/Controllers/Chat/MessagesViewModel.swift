@@ -174,9 +174,13 @@ final class MessagesViewModel {
         self.controllerContext = controllerContext
     }
 
-    deinit {
+    internal func destroy() {
         messagesQueryToken?.invalidate()
         unsubscribe()
+    }
+
+    deinit {
+        destroy()
     }
 
     // MARK: Subscriptions Control
