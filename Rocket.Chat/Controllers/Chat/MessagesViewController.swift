@@ -114,6 +114,9 @@ final class MessagesViewController: RocketChatViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+
+        viewModel.destroy()
+        viewSubscriptionModel.destroy()
     }
 
     var allowResignFirstResponder = true
