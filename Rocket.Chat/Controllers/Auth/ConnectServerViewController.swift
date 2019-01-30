@@ -107,6 +107,9 @@ final class ConnectServerViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
 
+        SocketManager.sharedInstance.socket?.disconnect()
+        DatabaseManager.cleanInvalidDatabases()
+
         if shouldAutoConnect {
             connect()
         }
@@ -114,9 +117,6 @@ final class ConnectServerViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        SocketManager.sharedInstance.socket?.disconnect()
-        DatabaseManager.cleanInvalidDatabases()
 
         if let applicationServerURL = AppManager.applicationServerURL {
             textFieldServerURL.isEnabled = false
