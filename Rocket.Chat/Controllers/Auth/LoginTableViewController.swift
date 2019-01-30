@@ -316,5 +316,7 @@ extension LoginTableViewController: UITextFieldDelegate {
 // MARK: Disable Theming
 
 extension LoginTableViewController {
-    override func applyTheme() { }
+    override func applyTheme() {
+        self.forgotPasswordButton.setTitleColor(UIColor.RCBlue(), for: .normal)
+    }
 }
