@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LoginServiceTableViewCell: UITableViewCell {
+final class LoginServiceTableViewCell: UITableViewCell {
 
     static let identifier = "LoginService"
-    static let rowHeight: CGFloat = 56
-    static let firstRowHeight: CGFloat = 82
-    static let lastRowHeight: CGFloat = 52
+    static let rowHeight: CGFloat = 56.0
+    static let firstRowHeight: CGFloat = 82.0
+    static let lastRowHeight: CGFloat = 52.0
 
     @IBOutlet weak var loginServiceButton: StyledButton!
     @IBOutlet weak var loginServiceBottomConstraint: NSLayoutConstraint!

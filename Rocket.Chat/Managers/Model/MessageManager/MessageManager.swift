@@ -12,52 +12,6 @@ import RealmSwift
 public typealias MessagesHistoryCompletion = (Date?) -> Void
 
 struct MessageManager {
-    static let historySize = 30
-}
-
-let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
-
-extension MessageManager {
-
-    static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
-
-    static func getHistory(_ subscription: UnmanagedSubscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
-        var lastDate: Any!
-
-        if let lastMessageDate = lastMessageDate {
-            lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
-        } else {
-            lastDate = NSNull()
-        }
-
-        let request = [
-            "msg": "method",
-            "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize]
-        ] as [String: Any]
-
-        var lastMessageDate: Date?
-
-        let currentRealm = Realm.current
-        SocketManager.send(request) { response in
-            guard !response.isError() else {
-                return Log.debug(response.result.string)
-            }
-
-            let list = response.result["result"]["messages"].array
-
-            currentRealm?.execute({ (realm) in
-                list?.forEach { object in
-                    let message = Message.getOrCreate(realm: realm, values: object, updates: nil)
-                    realm.add(message, update: true)
-
-                    lastMessageDate = message.createdAt
-                }
-            }, completion: {
-                completion(lastMessageDate)
-            })
-        }
-    }
 
     static func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
@@ -160,25 +114,6 @@ extension MessageManager {
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
-    }
-
-    static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
-        guard let userIdentifier = user.identifier else { return }
-
-        var blockedUsers: [String] = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
-        blockedUsers.append(userIdentifier)
-        UserDefaults.group.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
-        self.blockedUsersList = blockedUsers
-
-        Realm.execute({ (realm) in
-            let messages = realm.objects(Message.self).filter("user.identifier = '\(userIdentifier)'")
-
-            for message in messages {
-                message.userBlocked = true
-            }
-
-            realm.add(messages, update: true)
-        }, completion: completion)
     }
 
 }

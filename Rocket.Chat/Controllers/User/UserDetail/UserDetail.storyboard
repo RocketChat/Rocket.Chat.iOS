@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,10 +26,10 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="cbW-5Y-lku" userLabel="Background Image View" customClass="FLAnimatedImageView">
-                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-B7-HLO">
-                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="375" height="308"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Iq-Kt-zYq">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                             <blurEffect style="light"/>
                                         </visualEffectView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz" customClass="FLAnimatedImageView">
-                                            <rect key="frame" x="147" y="72" width="80" height="80"/>
+                                            <rect key="frame" x="147.66666666666666" y="72.333333333333329" width="80" height="79.999999999999986"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
                                                 <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
@@ -50,19 +50,19 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victoria Anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hs-3q-tIe" userLabel="Name Label">
-                                            <rect key="frame" x="110.99999999999999" y="162" width="151.66666666666663" height="21.666666666666657"/>
+                                            <rect key="frame" x="111.66666666666667" y="162.33333333333334" width="151.66666666666663" height="21.666666666666657"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="victoria.anderson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRy-tb-DvF" userLabel="Username Label">
-                                            <rect key="frame" x="128" y="188" width="118.66666666666669" height="18"/>
+                                            <rect key="frame" x="128.33333333333334" y="188" width="118.66666666666666" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-mn-etl">
-                                            <rect key="frame" x="142.66666666666666" y="212" width="90" height="70"/>
+                                            <rect key="frame" x="88.666666666666686" y="212" width="198" height="70"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-d0-NQx">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="70"/>
@@ -86,7 +86,7 @@
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="G2w-8I-1Td">
-                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
+                                                    <rect key="frame" x="99" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="Bkq-UB-S4J"/>
                                                         <constraint firstAttribute="height" constant="70" id="b6P-w4-aXZ"/>
@@ -103,8 +103,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
-                                                    <rect key="frame" x="-142.66666666666666" y="0.0" width="90" height="70"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="a7c-7i-dcb">
+                                                    <rect key="frame" x="108" y="0.0" width="90" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="6Nu-E2-9AN"/>
                                                         <constraint firstAttribute="width" constant="90" id="xf7-75-bUs"/>
@@ -120,6 +120,9 @@
                                                             <integer key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="videoDidPress:" destination="6OD-GW-L6f" eventType="touchUpInside" id="BKs-Mw-PHP"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Funzionalità non supportata";
 "alert.unsupported_feature.message" = "La versione di questo server è: %@. Questa funzione è supportata solo nelle versioni %@ e successive.";
 
-"alert.push_token_error.title" = "Attenzione";
-"alert.push_token_error.message" = "È ancora possibile che si ricevano notifiche push da questo server a causa di un problema con i server della versione inferiore a 0.60.0.";
-
 "alert.upload_error.title" = "Errore di caricamento";
 "alert.upload_error.message" = "È successo qualcosa di sbagliato durante il caricamento del tuo file. Per favore riprova.";
 
@@ -115,7 +112,7 @@
 "auth.connect.connecting" = "Connessione in corso. Attendere";
 "auth.email_auth_prefix" = "Entra con ";
 "auth.email_auth" = "e-mail";
-"auth.login_service_prefix" = "Continua con";
+"auth.login_service_prefix" = "Continua con ";
 
 "auth.signup_title" = "Iscrizione";
 "auth.signup.button_register" = "Registrati";
@@ -217,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Informazioni messaggio";
 "chat.message.actions.react" = "Aggiungi reazione";
-"chat.message.actions.block" = "Blocca i messaggi dall'utente";
 "chat.message.actions.report" = "Segnala un messaggio";
 "chat.message.actions.edit" = "Modifica";
 "chat.message.actions.copy" = "Copia";
@@ -227,6 +223,8 @@
 "chat.message.actions.unstar" = "Rimuovi Speciale";
 "chat.message.actions.quote" = "Citazione";
 "chat.message.actions.reply" = "Risposta";
+"chat.message.actions.join_video_call" = "Partecipa alla chiamata video";
+"chat.message.actions.permalink" = "Collegamento Permanente";
 "chat.message.actions.delete" = "Cancella messaggio";
 "chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
 "chat.message.actions.delete.confirm.message" = "Sei sicuro di voler cancellare questo messaggio? Questo processo non può essere annullato.";
@@ -295,6 +293,7 @@
 "chat.message.type.room_changed_topic" = "L'argomento della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
+"chat.message.type.video_call_started" = "Chiamata video iniziata da %@";
 
 // Chat Information
 "chat.info.title" = "Informazioni";
@@ -302,6 +301,8 @@
 "chat.info.item.no_topic" = "Nessun argomento";
 "chat.info.item.description" = "Descrizione";
 "chat.info.item.no_description" = "Nessuna descrizione";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.members" = "Componenti";
 "chat.info.item.pinned" = "Evidenziati";
 "chat.info.item.starred" = "Speciali";
@@ -341,8 +342,8 @@
 "myaccount.settings.profile" = "Profilo";
 "myaccount.settings.license" = "Licenza";
 "myaccount.settings.language" = "Lingua";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.review" = "Valuta questa App";
+"myaccount.settings.share" = "Condividi questa App";
 "myaccount.settings.appicon" = "Icona Applicazione";
 "myaccount.settings.version" = "Versione: %@ (%@)";
 "myaccount.settings.server_version" = "Versione Server: %@";
@@ -496,10 +497,10 @@
 "shortcuts.server_selection_numbers" = "Scelta server 1...9";
 "shortcuts.add_server" = "Aggiungi server";
 "shortcuts.change_theme" = "Cambia tema";
-"shortcuts.send" = "Send"; //TODO
-"shortcuts.new_line" = "New line"; //TODO
+"shortcuts.send" = "Spedisci";
+"shortcuts.new_line" = "Nuova Linea";
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.replied" = "Con Risposta";
+"chat.components.quote.pinned" = "Evidenziati";
+"chat.components.text_attachment.no_title" = "Senza Titolo";

@@ -11,6 +11,7 @@ import RealmSwift
 import DifferenceKit
 import RocketChatViewController
 
+// swiftlint:disable type_body_length file_length
 final class MessagesViewModel {
 
     /**
@@ -111,7 +112,18 @@ final class MessagesViewModel {
     /**
      If the view model is requesting new data from the API.
      */
-    internal var requestingData = false
+    enum RequestingDataType {
+        case none
+        case initialRequest
+        case historyRequest
+    }
+
+    internal var onRequestingDataChanged: ((RequestingDataType) -> Void)?
+    internal var requestingData: RequestingDataType = .none {
+        didSet {
+            onRequestingDataChanged?(requestingData)
+        }
+    }
 
     /**
      If there's more data to be fetched from the API.
@@ -162,9 +174,13 @@ final class MessagesViewModel {
         self.controllerContext = controllerContext
     }
 
-    deinit {
+    internal func destroy() {
         messagesQueryToken?.invalidate()
         unsubscribe()
+    }
+
+    deinit {
+        destroy()
     }
 
     // MARK: Subscriptions Control
@@ -205,7 +221,7 @@ final class MessagesViewModel {
     func clear() {
         data = []
         hasMoreData = true
-        requestingData = false
+        requestingData = .none
     }
 
     func sectionIndex(for item: AnyChatItem) -> Int? {
@@ -250,9 +266,20 @@ final class MessagesViewModel {
      - returns: AnyChatSection instance based on MessageSectionModel.
     */
     func section(for message: UnmanagedMessage) -> AnyChatSection? {
-        let messageSectionModel = MessageSectionModel(message: message)
-
         if let existingSection = dataNormalized.filter({ $0.model.differenceIdentifier == AnyHashable(message.differenceIdentifier) }).first {
+            let messageSectionModel: MessageSectionModel
+            if let existingSectionModel = existingSection.model.base.object.base as? MessageSectionModel {
+                messageSectionModel = MessageSectionModel(
+                    message: message,
+                    daySeparator: existingSectionModel.daySeparator,
+                    sequential: existingSectionModel.isSequential,
+                    unreadIndicator: unreadMarkerObjectIdentifier == message.identifier,
+                    loader: existingSectionModel.containsLoader
+                )
+            } else {
+                messageSectionModel = MessageSectionModel(message: message)
+            }
+
             return AnyChatSection(MessageSection(
                 object: AnyDifferentiable(messageSectionModel),
                 controllerContext: controllerContext,
@@ -261,7 +288,7 @@ final class MessagesViewModel {
         }
 
         return AnyChatSection(MessageSection(
-            object: AnyDifferentiable(messageSectionModel),
+            object: AnyDifferentiable(MessageSectionModel(message: message)),
             controllerContext: controllerContext,
             collapsibleItemsState: [:]
         ))
@@ -371,8 +398,7 @@ final class MessagesViewModel {
             let index = data.firstIndex(where: { (section) -> Bool in
                 if let object = section.object.base as? MessageSectionModel {
                     return
-                        object.differenceIdentifier == message.identifier &&
-                        !message.isContentEqual(to: object.message)
+                        object.differenceIdentifier == message.identifier
                 }
 
                 return false
@@ -380,7 +406,11 @@ final class MessagesViewModel {
 
             if let index = index {
                 if let newSection = section(for: message) {
+                    MessageTextCacheManager.shared.update(for: message)
                     data[index] = newSection
+                    if let indexOfDataSorted = dataSorted.firstIndex(of: newSection) {
+                        dataSorted[indexOfDataSorted] = newSection
+                    }
                 }
             } else {
                 continue
@@ -397,9 +427,10 @@ final class MessagesViewModel {
         - oldestMessage: This is the parameter that will be sent to the server in
             order to get the correct page of data.
      */
+    // swiftlint:disable function_body_length
     func fetchMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
         guard
-            !requestingData,
+            requestingData == .none,
             hasMoreData || oldestMessage == nil,
             let subscription = subscription?.validated(),
             let subscriptionUnmanaged = subscription.unmanaged
@@ -407,7 +438,7 @@ final class MessagesViewModel {
             return
         }
 
-        requestingData = true
+        requestingData = oldestMessage == nil ? .initialRequest : .historyRequest
 
         queryDataQueue.addOperation { [weak self] in
             guard
@@ -451,15 +482,23 @@ final class MessagesViewModel {
             }
         }
 
-        MessageManager.getHistory(subscriptionUnmanaged, lastMessageDate: oldestMessage) { [weak self] oldest in
-            DispatchQueue.main.async {
-                self?.requestingData = false
-                self?.hasMoreData = oldest != nil
+        let client = API.current()?.client(SubscriptionsClient.self)
+        client?.loadHistory(
+            subscription: subscription,
+            latest: oldestMessage
+        ) { [weak self] oldest in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+
+                self.requestingData = .none
+                self.hasMoreData = oldest != nil
 
                 if let oldest = oldest {
-                    self?.oldestMessageDateFromRemote = oldest
+                    self.oldestMessageDateFromRemote = oldest
                 } else {
-                    self?.updateData()
+                    self.updateData()
                 }
             }
         }
@@ -549,7 +588,7 @@ final class MessagesViewModel {
             var loader = false
 
             if idx == dataSortedMaxIndex {
-                loader = hasMoreData || requestingData
+                loader = hasMoreData || requestingData != .none
             } else if let messageSection2 = dataSorted[idx + 1].object.base as? MessageSectionModel {
                 separator = daySeparator(message: message, previousMessage: messageSection2.message)
                 sequential = isSequential(message: message, previousMessage: messageSection2.message)
@@ -590,7 +629,7 @@ final class MessagesViewModel {
         )
 
         let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
-        if currentHeaderIndex == nil && !hasMoreData && !requestingData {
+        if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
             data.append(currentHeaderSection)
             dataSorted.append(currentHeaderSection)
         } else if let currentHeaderIndex = currentHeaderIndex {
@@ -667,8 +706,19 @@ extension MessagesViewModel {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
-        client.sendMessage(text: text, subscription: subscription)
+        if let (command, params) = text.commandAndParams() {
+            guard let client = API.current()?.client(CommandsClient.self) else {
+                return Alert.defaultError.present()
+            }
+
+            client.runCommand(command: command, params: params, roomId: subscription.rid)
+        } else {
+            guard let client = API.current()?.client(MessagesClient.self) else {
+                return Alert.defaultError.present()
+            }
+
+            client.sendMessage(text: text, subscription: subscription)
+        }
     }
 
     func editTextMessage(_ message: Message, text: String) {

@@ -75,11 +75,14 @@ struct SubscriptionManager {
                     return
                 }
 
-                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                let subscription = Subscription.find(rid: rid, realm: realm) ??
+                    Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                subscription.map(object, realm: realm)
 
                 if msg == "removed" {
                     realm.delete(subscription)
                 } else {
+                    subscription.auth = auth
                     realm.add(subscription, update: true)
                 }
             })
@@ -131,5 +134,15 @@ struct SubscriptionManager {
                 notification?.post()
             }
         }
+    }
+
+    static func updateJitsiTimeout(rid: String) {
+        let request = [
+            "msg": "method",
+            "method": "jitsi:updateTimeout",
+            "params": [rid]
+        ] as [String: Any]
+
+        SocketManager.send(request) { _ in }
     }
 }

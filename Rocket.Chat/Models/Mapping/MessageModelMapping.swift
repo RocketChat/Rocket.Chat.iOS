@@ -48,7 +48,6 @@ extension Message: ModelMappeable {
 
         if let userIdentifier = values["u"]["_id"].string {
             self.userIdentifier = userIdentifier
-            self.userBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
 
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {

@@ -466,7 +466,11 @@ extension RocketChatViewController {
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object as AnyObject === view, keyPath == "frame" {
-            composerView.containerViewLeadingConstraint.constant = UIScreen.main.bounds.width - view.bounds.width
+            guard let window = UIApplication.shared.keyWindow else {
+                return
+            }
+
+            composerView.containerViewLeadingConstraint.constant = window.bounds.width - view.bounds.width
         }
     }
 }

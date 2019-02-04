@@ -73,7 +73,8 @@ struct MessagesClient: APIClient {
         let request = SendMessageRequest(
             id: id,
             roomId: subscription.rid,
-            text: message.text
+            text: message.text,
+            messageType: message.internalType.isEmpty ? nil : message.internalType
         )
 
         api.fetch(request) { response in
@@ -81,25 +82,16 @@ struct MessagesClient: APIClient {
             case .resource(let resource):
                 guard let message = resource.raw?["message"] else { return }
                 updateMessage(json: message)
-            case .error(let error):
-                switch error {
-                case .version:
-                    SubscriptionManager.sendTextMessage(message, completion: { response in
-                        DispatchQueue.main.async {
-                            updateMessage(json: response.result["result"])
-                        }
-                    })
-                default:
-                    setMessageOffline()
-                }
+            case .error:
+                setMessageOffline()
             }
 
         }
     }
 
-    func sendMessage(text: String, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+    func sendMessage(text: String, internalType: String? = nil, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
         let message = Message()
-        message.internalType = ""
+        message.internalType = internalType ?? ""
         message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
@@ -230,7 +222,6 @@ struct MessagesClient: APIClient {
         return true
     }
 
-    // swiftlint:disable function_body_length
     @discardableResult
     func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier, let username = user?.username else {
@@ -281,22 +272,8 @@ struct MessagesClient: APIClient {
                         subscriptionType: message.subscription?.type.rawValue ?? ""
                     )
                 )
-            case .error(let error):
-                switch error {
-                case .version:
-                    // version fallback
-                    MessageManager.react(message, emoji: emoji, completion: { _ in
-                        DispatchQueue.main.async {
-                            AnalyticsManager.log(
-                                event: .reaction(
-                                    subscriptionType: message.subscription?.type.rawValue ?? ""
-                                )
-                            )
-                        }
-                    })
-                default:
-                    Alert.defaultError.present()
-                }
+            case .error:
+                Alert.defaultError.present()
             }
         }
 

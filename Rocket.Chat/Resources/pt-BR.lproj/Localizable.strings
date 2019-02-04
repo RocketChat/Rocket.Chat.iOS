@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Funcionalidade não disponível";
 "alert.unsupported_feature.message" = "A versão deste servidor é: %@. Esta funcionalidade é disponível apenas nas versões a partir de %@.";
 
-"alert.push_token_error.title" = "Aviso";
-"alert.push_token_error.message" = "Você ainda pode receber notificações deste servidor por causa de um problema com servidores de versão menor que 0.60.0.";
-
 "alert.upload_error.title" = "Erro de Upload";
 "alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
 
@@ -217,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Informações da Mensagem";
 "chat.message.actions.react" = "Adicionar reação";
-"chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
 "chat.message.actions.edit" = "Editar";
 "chat.message.actions.copy" = "Copiar";
@@ -227,6 +223,8 @@
 "chat.message.actions.unstar" = "Desfavoritar";
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
+"chat.message.actions.join_video_call" = "Entrar na Ligação";
+"chat.message.actions.permalink" = "Link permanente";
 "chat.message.actions.delete" = "Deletar mensagem";
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
@@ -294,6 +292,7 @@
 "chat.message.type.room_changed_topic" = "Tópico da sala alterou para \"%@\" por %@";
 "chat.message.type.room_changed_announcement" = "Anúncio da sala alterou para \"%@\" por %@";
 "chat.message.type.room_changed_description" = "Descrição da sala alterou para \"%@\" por %@";
+"chat.message.type.video_call_started" = "Vídeo chamada iniciada por %@";
 
 // Chat Information
 "chat.info.title" = "Informações";
@@ -301,6 +300,8 @@
 "chat.info.item.no_topic" = "Sem tópico";
 "chat.info.item.description" = "Descrição";
 "chat.info.item.no_description" = "Sem descrição";
+"chat.info.item.announcement" = "Anúncio"; // TODO
+"chat.info.item.no_announcement" = "Sem anúncio"; // TODO
 "chat.info.item.notifications" = "Notificações";
 "chat.info.item.members" = "Membros";
 "chat.info.item.pinned" = "Pinadas";

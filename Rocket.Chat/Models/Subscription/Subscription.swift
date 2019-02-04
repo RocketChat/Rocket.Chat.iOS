@@ -67,6 +67,7 @@ final class Subscription: BaseModel {
 
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
+    @objc dynamic var roomAnnouncement: String?
     @objc dynamic var roomReadOnly = false
     @objc dynamic var roomUpdatedAt: Date?
     @objc dynamic var roomLastMessage: Message?

@@ -26,12 +26,13 @@
                             <constraint firstAttribute="height" constant="20" id="Za6-ue-cn4"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prl-FX-Ikw">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prl-FX-Ikw">
                         <rect key="frame" x="339" y="0.0" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="pBg-j1-r96"/>
                             <constraint firstAttribute="width" constant="20" id="ziC-M7-ddE"/>
                         </constraints>
+                        <state key="normal" image="Unread"/>
                     </button>
                 </subviews>
             </view>
@@ -58,4 +59,7 @@
             <point key="canvasLocation" x="509.60000000000002" y="-292.80359820089956"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Unread" width="15" height="9"/>
+    </resources>
 </document>

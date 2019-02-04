@@ -46,6 +46,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var rid: String
     var text: String
     var type: MessageType
+    var internalType: String
     var attachments: [UnmanagedAttachment]
     var userIdentifier: String?
     var user: UnmanagedUser?
@@ -78,6 +79,7 @@ extension UnmanagedMessage {
         return
             lhs.identifier == rhs.identifier &&
             lhs.type == rhs.type &&
+            lhs.internalType == rhs.internalType &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
             lhs.markedForDeletion == rhs.markedForDeletion &&
@@ -91,6 +93,8 @@ extension UnmanagedMessage {
 }
 
 extension UnmanagedMessage {
+
+    // swiftlint:disable function_body_length
     init?(_ message: Message) {
         guard
             let messageIdentifier = message.identifier,
@@ -107,6 +111,7 @@ extension UnmanagedMessage {
         rid = message.rid
         text = message.text
         type = message.type
+        internalType = message.internalType
         userIdentifier = message.userIdentifier
         user = message.user?.unmanaged
         subscription = message.subscription?.unmanaged
@@ -322,6 +327,12 @@ extension UnmanagedMessage {
             return String(
                 format: localized("chat.message.type.room_changed_description"),
                 text,
+                self.user?.displayName ?? ""
+            )
+
+        case .jitsiCallStarted:
+            return String(
+                format: localized("chat.message.type.video_call_started"),
                 self.user?.displayName ?? ""
             )
 

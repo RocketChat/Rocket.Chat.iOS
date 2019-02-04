@@ -10,6 +10,8 @@ import Foundation
 
 extension Date {
 
+    static var apiDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
     public static func dateFromInterval(_ interval: Double) -> Date? {
         return Date(timeIntervalSince1970: interval / 1000)
     }
