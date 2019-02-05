@@ -139,7 +139,7 @@ class ChannelActionsViewController: BaseViewController {
                 updateButtonFavoriteImage()
             }
 
-            if settings.isJitsiEnabled {
+            if settings.isJitsiEnabled && AppManager.isVideoCallAvailable {
                 buttons.append(UIBarButtonItem(
                     image: UIImage(named: "UserDetail_VideoCall"),
                     style: .plain,
