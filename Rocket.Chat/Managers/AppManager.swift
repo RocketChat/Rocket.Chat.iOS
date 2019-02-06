@@ -113,6 +113,12 @@ struct AppManager {
       Default language
     */
     static var defaultLanguage = "en"
+
+    // MARK: Video & Audio Call
+
+    static var isVideoCallAvailable: Bool {
+        return (NSLocale.current as NSLocale).countryCode != "CN"
+    }
 }
 
 extension AppManager {

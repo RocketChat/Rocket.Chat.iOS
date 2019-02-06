@@ -45,6 +45,16 @@ class MessageVideoCallCell: BaseMessageCell, SizingCell {
             return
         }
 
+        if !AppManager.isVideoCallAvailable {
+            let alert = Alert(
+                title: "Video Call Unavailable",
+                message: "Video and Audio calls on your region are not available."
+            )
+
+            alert.present()
+            return
+        }
+
         AppManager.openVideoCall(room: subscription)
     }
 }
