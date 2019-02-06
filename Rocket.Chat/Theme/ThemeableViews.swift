@@ -474,11 +474,19 @@ extension PreviewAudioView {
     @objc override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        separatorView.backgroundColor = theme.focusedBackground
+        separatorView.backgroundColor = theme.borderColor
         backgroundColor = theme.focusedBackground
 
         if theme == Theme.light {
             backgroundColor = theme.backgroundColor
+        }
+
+        if theme == .dark || theme == .black {
+            if let image = discardButton.backgroundImage(for: .normal)?.withRenderingMode(.alwaysTemplate) {
+                discardButton.setBackgroundImage(image, for: .normal)
+            }
+
+            discardButton.tintColor = .white
         }
 
         tintColor = theme.tintColor
@@ -495,8 +503,7 @@ extension AudioView {
     @objc override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        backgroundColor = theme.focusedBackground
-
+        backgroundColor = theme.chatComponentBackground
 
         tintColor = theme.tintColor
         applyThemeFromRuntimeAttributes()
