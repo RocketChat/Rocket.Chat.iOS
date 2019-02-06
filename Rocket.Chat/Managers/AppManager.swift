@@ -113,6 +113,12 @@ struct AppManager {
       Default language
     */
     static var defaultLanguage = "en"
+
+    // MARK: Video & Audio Call
+
+    static var isVideoCallAvailable: Bool {
+        return (NSLocale.current as NSLocale).countryCode != "CN"
+    }
 }
 
 extension AppManager {
@@ -250,6 +256,38 @@ extension AppManager {
 
                 // Push the new controller to the stack
                 nav.pushViewController(controller, animated: animated)
+
+                return controller
+            }
+        }
+
+        return nil
+    }
+
+    @discardableResult
+    static func openVideoCall(room: Subscription, animated: Bool = true) -> JitsiViewController? {
+        guard
+            let appDelegate  = UIApplication.shared.delegate as? AppDelegate,
+            let mainViewController = appDelegate.window?.rootViewController as? MainSplitViewController,
+            let mainNav = mainViewController.viewControllers.first as? UINavigationController
+        else {
+            return nil
+        }
+
+        let storyboard = UIStoryboard(name: "Jitsi", bundle: Bundle.main)
+        if let nav = storyboard.instantiateInitialViewController() as? UINavigationController {
+            if let controller = nav.viewControllers.first as? JitsiViewController {
+                controller.viewModel.subscription = room.unmanaged
+
+                nav.modalTransitionStyle = .coverVertical
+
+                if let presentedViewController = mainNav.presentedViewController {
+                    presentedViewController.dismiss(animated: animated, completion: {
+                        mainNav.present(nav, animated: true, completion: nil)
+                    })
+                } else {
+                    mainNav.present(nav, animated: true, completion: nil)
+                }
 
                 return controller
             }

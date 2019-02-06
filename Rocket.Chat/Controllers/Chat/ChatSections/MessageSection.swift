@@ -13,6 +13,7 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
+// swiftlint:disable type_body_length
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
     weak var controllerContext: UIViewController?
@@ -221,6 +222,13 @@ final class MessageSection: ChatSection {
 
         if object.message.isBroadcastReplyAvailable() {
             cells.insert(MessageActionsChatItem(
+                user: nil,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if object.message.type == .jitsiCallStarted {
+            cells.insert(MessageVideoCallChatItem(
                 user: nil,
                 message: object.message
             ).wrapped, at: 0)

@@ -29,7 +29,15 @@ final class MessagesSizingManager {
      Returns the cached size for the IndexPath.
      */
     func size(for identifier: AnyHashable) -> CGSize? {
-        return cache[identifier]?.cgSizeValue
+        guard
+            let size = cache[identifier]?.cgSizeValue,
+            !size.width.isNaN && size.width >= 0,
+            !size.height.isNaN && size.height >= 0
+        else {
+            return nil
+        }
+
+        return size
     }
 
     /**

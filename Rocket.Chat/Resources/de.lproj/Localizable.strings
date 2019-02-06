@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Funktion nicht unterstützt";
 "alert.unsupported_feature.message" = "Die Version dieses Servers ist: %@. Diese Funktion wird erst ab Version %@ und höher unterstützt.";
 
-"alert.push_token_error.title" = "Warnung";
-"alert.push_token_error.message" = "Möglicherweise erhalten Sie weiterhin Push-Benachrichtigungen von diesem Server, aufgrund eines Problems mit Servern der Version 0.60.0 und älter.";
-
 "alert.upload_error.title" = "Fehler beim Hochladen";
 "alert.upload_error.message" = "Während des Hochladens der Datei ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.";
 
@@ -217,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Nachrichteninfo";
 "chat.message.actions.react" = "Reaktion hinzufügen";
-"chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
 "chat.message.actions.edit" = "Nachricht bearbeiten";
 "chat.message.actions.copy" = "Kopieren";
@@ -227,6 +223,8 @@
 "chat.message.actions.unstar" = "Defavorisieren";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
+"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
+"chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "Nachricht löschen";
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Sind Sie sicher, dass Sie diese Nachricht löschen möchten? Sie kann dann nicht wiederhergestellt werden.";
@@ -294,6 +292,7 @@
 "chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
+"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -301,6 +300,8 @@
 "chat.info.item.no_topic" = "Ohne Thema";
 "chat.info.item.description" = "Beschreibung";
 "chat.info.item.no_description" = "Ohne Beschreibung";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Benachrichtigungen";
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";

@@ -31,7 +31,7 @@ extension ModelHandler where Self: BaseModel {
             }
 
             switch msg {
-            case .added:
+            case .added, .inserted:
                 object.add(values, realm: realm)
             case .changed:
                 object.update(values, realm: realm)

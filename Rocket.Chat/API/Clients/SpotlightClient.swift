@@ -27,6 +27,7 @@ struct SpotlightClient: APIClient {
                     var subscriptions: [Subscription] = []
 
                     resource.rooms.forEach { object in
+                        // Important note: On this API "_id" means "rid"
                         if let roomIdentifier = object["_id"].string {
                             if let subscription = Subscription.find(rid: roomIdentifier, realm: realm) {
                                 subscription.map(object, realm: realm)
@@ -34,7 +35,7 @@ struct SpotlightClient: APIClient {
                                 subscriptions.append(subscription)
                             } else {
                                 let subscription = Subscription()
-                                subscription.identifier = String.random()
+                                subscription.identifier = roomIdentifier
                                 subscription.rid = roomIdentifier
                                 subscription.name = object["name"].string ?? ""
 

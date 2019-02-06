@@ -103,7 +103,7 @@ extension Subscription {
     }
 
     func fetchMessagesQueryResults() -> Results<Message>? {
-        guard var filteredMessages = self.messages?.filter("userBlocked == false AND identifier != NULL AND createdAt != NULL") else {
+        guard var filteredMessages = self.messages?.filter("identifier != NULL AND createdAt != NULL") else {
             return nil
         }
 

@@ -9,10 +9,6 @@
 import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
-    func viewModel(for replyView: ReplyView) -> ReplyViewModel {
-        return ReplyViewModel(nameText: "", timeText: "", text: "")
-    }
-
     func replyViewDidHide(_ replyView: ReplyView) {
         composerViewModel.replyString = ""
     }
@@ -81,7 +77,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
         case .userGroup(let userGroup):
             let cell = hintsView.dequeueReusableCell(withType: TextHintLabelCell.self)
-            cell.prefixView.text = "@"
+            cell.prefixView.text = ""
             cell.valueLabel.text = userGroup
             return cell
         }

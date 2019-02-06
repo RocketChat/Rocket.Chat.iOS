@@ -31,10 +31,35 @@ final class MessagesSubscriptionViewModel {
     internal var onTypingChanged: TypingChangedBlock?
 
     internal var usersTyping: [String] = []
+    internal var isTyping: Bool = false {
+        didSet {
+            if oldValue == true && isTyping == false {
+                sendTypingStatus()
+            }
+
+            throttledSendTypingStatus()
+        }
+    }
+
+    internal lazy var throttledSendTypingStatus = throttle(1, action: sendTypingStatus)
+    internal lazy var sendTypingStatus = { [weak self] in
+        guard
+            let self = self,
+            let subscription = self.subscription?.managedObject
+        else {
+            return
+        }
+
+        SubscriptionManager.sendTypingStatus(subscription, isTyping: self.isTyping)
+    }
 
     // MARK: Life Cycle
 
     deinit {
+        destroy()
+    }
+
+    internal func destroy() {
         subscriptionQueryToken?.invalidate()
 
         if let subscription = subscription {

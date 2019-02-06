@@ -16,7 +16,7 @@ final class MessagesViewModelSpec: XCTestCase {
     func testInitialState() {
         let model = MessagesViewModel()
         XCTAssertEqual(model.data.count, 0)
-        XCTAssertFalse(model.requestingData)
+        XCTAssertTrue(model.requestingData == .none)
         XCTAssertTrue(model.hasMoreData)
     }
 
@@ -224,7 +224,7 @@ final class MessagesViewModelSpec: XCTestCase {
 
         if let section1 = model.section(for: messageFirst), let section2 = model.section(for: messageSecond) {
             model.hasMoreData = false
-            model.requestingData = false
+            model.requestingData = .none
             model.data = [section1, section2]
             model.cacheDataSorted()
             model.normalizeDataSorted()

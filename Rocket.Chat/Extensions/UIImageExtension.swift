@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accelerate
 
 extension UIImage {
 
@@ -37,20 +38,63 @@ extension UIImage {
         return image
     }
 
-    func resizeWith(width: CGFloat) -> UIImage? {
-        let height = CGFloat(ceil(width/self.size.width * self.size.height))
+    func resizeWith(width: Int) -> UIImage? {
+        let height = Int(ceil(CGFloat(width) / self.size.width * self.size.height))
         let size = CGSize(width: width, height: height)
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: size))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
 
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
+        guard let cgImage = self.cgImage else { return nil }
 
-        return result
+        var format = vImage_CGImageFormat(
+            bitsPerComponent: 8,
+            bitsPerPixel: 32,
+            colorSpace: nil,
+            bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue),
+            version: 0,
+            decode: nil,
+            renderingIntent: .defaultIntent
+        )
+
+        var sourceBuffer = vImage_Buffer()
+        defer {
+            sourceBuffer.data.deallocate()
+        }
+
+        var error = vImageBuffer_InitWithCGImage(&sourceBuffer, &format, nil, cgImage, numericCast(kvImageNoFlags))
+        guard error == kvImageNoError else { return nil }
+
+        let bytesPerPixel = cgImage.bitsPerPixel / 8
+        let destBytesPerRow = width * bytesPerPixel
+        let destData = UnsafeMutablePointer<UInt8>.allocate(capacity: height * destBytesPerRow)
+        defer {
+            destData.deallocate()
+        }
+
+        var destBuffer = vImage_Buffer(
+            data: destData,
+            height: vImagePixelCount(height),
+            width: vImagePixelCount(width),
+            rowBytes: destBytesPerRow
+        )
+
+        error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, nil, numericCast(kvImageHighQualityResampling))
+        guard error == kvImageNoError else { return nil }
+
+        let destCGImage = vImageCreateCGImageFromBuffer(
+            &destBuffer,
+            &format,
+            nil,
+            nil,
+            numericCast(kvImageNoFlags),
+            &error
+        )?.takeRetainedValue()
+
+        guard error == kvImageNoError else { return nil }
+
+        let scaledImage = destCGImage.flatMap {
+            UIImage(cgImage: $0, scale: 0.0, orientation: self.imageOrientation)
+        }
+
+        return scaledImage
     }
 
     func resized(withPercentage percentage: CGFloat) -> UIImage? {

@@ -68,11 +68,27 @@ extension NSMutableAttributedString {
     func setMention(_ mention: String, range: NSRange? = nil) {
         let link = "rocketchat://mention?name=\(mention)"
 
-        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
-            self.addAttributes([
-                NSAttributedString.Key.link: link
-            ], range: attributeRange)
-        }
+        let attributeRange = range ?? NSRange(location: 0, length: self.length)
+
+        self.addAttributes([
+            NSAttributedString.Key.link: link
+        ], range: attributeRange)
+    }
+
+    func padLeftAndRight(range: NSRange) -> NSRange {
+        // "\u{00a0}" = non-line-breaking space character
+        self.insert(NSAttributedString(string: "\u{00a0}"), at: range.location)
+        self.insert(NSAttributedString(string: "\u{00a0}"), at: range.location + range.length + 1)
+        return NSRange(location: range.location, length: range.length + 2)
+    }
+
+    func removeAtSymbol(range: NSRange) -> NSRange {
+        self.replaceCharacters(
+            in: NSRange(location: range.location + 1, length: 1),
+            with: ""
+        )
+
+        return NSRange(location: range.location, length: range.length - 1)
     }
 
     func setChannel(_ channel: String, range: NSRange? = nil) {
@@ -138,16 +154,25 @@ extension NSMutableAttributedString {
                 }
 
                 let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")
+
+                var offset = 0
+
                 for range in ranges {
                     let range = NSRange(range, in: string)
+                    var transformedRange = NSRange(location: range.location + offset, length: range.length)
+
+                    transformedRange = padLeftAndRight(range: transformedRange)
+                    transformedRange = removeAtSymbol(range: transformedRange)
 
                     if username != "all" && username != "here" && username != currentUsername {
-                        setMention(username, range: range)
+                        setMention(username, range: transformedRange)
                     }
 
-                    setBackgroundColor(background, range: range)
-                    setFontColor(font, range: range)
-                    setFont(MessageTextFontAttributes.boldFont, range: range)
+                    offset = transformedRange.length - range.length
+
+                    setBackgroundColor(background, range: transformedRange)
+                    setFontColor(font, range: transformedRange)
+                    setFont(MessageTextFontAttributes.boldFont, range: transformedRange)
                 }
             }
         }

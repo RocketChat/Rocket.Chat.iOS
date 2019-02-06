@@ -52,9 +52,6 @@
 "alert.unsupported_feature.title" = "Recurso não suportado";
 "alert.unsupported_feature.message" = "A versão deste servidor é: %@. Este recurso é suportado apenas nas versões %@ e superiores.";
 
-"alert.push_token_error.title" = "Aviso";
-"alert.push_token_error.message" = "Você ainda pode receber notificações por push deste servidor devido a um problema com os servidores de versão inferior a 0.60.0.";
-
 "alert.upload_error.title" = "Erro de Envio";
 "alert.upload_error.message" = "Algo errado aconteceu ao fazer o envio do seu arquivo. Por favor, tente novamente.";
 
@@ -146,7 +143,7 @@
 "subscriptions.unreads" = "Não lidas";
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
-"subscriptions.groups" = "Private Groups"; //TODO
+"subscriptions.groups" = "Grupos Privados";
 "subscriptions.direct_messages" = "Mensagens Diretas";
 "subscriptions.conversations" = "Conversas";
 "subscriptions.you" = "você";
@@ -155,11 +152,11 @@
 "subscriptions.list.no_message" = "Nenhuma mensagem";
 "subscriptions.list.sent_an_attachment" = "enviou um ficheiro";
 "subscriptions.list.date.yesterday" = "Ontem";
-"subscriptions.list.actions.read" = "Lido"; // TODO
-"subscriptions.list.actions.unread" = "Não lido"; // TODO
-"subscriptions.list.actions.favorite" = "Favorite"; // TODO
-"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
-"subscriptions.list.actions.hide" = "Fechar"; // TODO
+"subscriptions.list.actions.read" = "Lido";
+"subscriptions.list.actions.unread" = "Não lido";
+"subscriptions.list.actions.favorite" = "Favorito(a)";
+"subscriptions.list.actions.unfavorite" = "Desmarcar favorito(a)";
+"subscriptions.list.actions.hide" = "Fechar";
 
 // Servers
 "servers.add_new_team" = "Adicionar nova Equipa";
@@ -174,7 +171,7 @@
 "status.online" = "Online";
 "status.away" = "Ausente";
 "status.busy" = "Ocupado";
-"status.offline" = "Offline"; //TODO
+"status.offline" = "Offline";
 "status.invisible" = "Invisível";
 
 // New Room View
@@ -217,16 +214,17 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Informação da mensagem";
 "chat.message.actions.react" = "Adicionar Reação";
-"chat.message.actions.block" = "Bloquear mensagens do utilizador";
 "chat.message.actions.report" = "Relatar mensagem";
 "chat.message.actions.edit" = "Editar";
 "chat.message.actions.copy" = "Copiar";
 "chat.message.actions.pin" = "Afixar";
 "chat.message.actions.unpin" = "Desafixar";
-"chat.message.actions.star" = "Dar estrela"; // TODO
-"chat.message.actions.unstar" = "Retirar estrela"; // TODO
+"chat.message.actions.star" = "Dar estrela";
+"chat.message.actions.unstar" = "Retirar estrela";
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
+"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
+"chat.message.actions.permalink" = "Link permanente";
 "chat.message.actions.delete" = "Apagar mensagem";
 "chat.message.actions.delete.confirm.title" = "Apagar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem a certeza que ddeseja apagar esta mensagem? Esta acção não pode ser desfeita.";
@@ -269,10 +267,10 @@
 "chat.drawing.settings.color.others" = "Escolha uma cor abaixo:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
-"chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.users_are_typing" = "%@ estão escrevendo...";
+"chat.user_is_typing" = "%@ está escrevendo...";
+"chat.typing" = "escrevendo...";
+"chat.several_typing" = "vários utilizadores estão escrevendo...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterado para: %@ por %@";
@@ -289,11 +287,12 @@
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
 "chat.message.type.message_pinned" = "Fixou uma mensagem:";
-"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
+"chat.message.type.message_snippeted" = "Criou um snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Privacidade da sala alterada para \"%@\" by %@";
+"chat.message.type.room_changed_topic" = "Tópico da sala alterado para \"%@\" by %@";
+"chat.message.type.room_changed_announcement" = "Anúncio da sala alterado para \"%@\" by %@";
+"chat.message.type.room_changed_description" = "Descrição da sala alterada para \"%@\" by %@";
+"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -301,6 +300,8 @@
 "chat.info.item.no_topic" = "Sem tópico";
 "chat.info.item.description" = "Descrição";
 "chat.info.item.no_description" = "Sem descrição";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Notificações";
 "chat.info.item.members" = "Membros";
 "chat.info.item.pinned" = "Fixar";
@@ -445,21 +446,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Palavra-passe";
 
 // User Action Sheet
-"user_action_sheet.info" = "Information"; // TODO
+"user_action_sheet.info" = "Informação";
 "user_action_sheet.remove" = "Remover da sala";
 "user_action_sheet.remove_confirm.title" = "Remover este utilizador?";
 "user_action_sheet.remove_confirm.message" = "Você tem certeza que deseja remover '%@' da sala?";
 
 // User Details
-"user_details.status" = "Status"; // TODO
-"user_details.role" = "Role"; // TODO
-"user_details.roles" = "Roles"; // TODO
-"user_details.email" = "Email"; // TODO
-"user_details.emails" = "Emails"; // TODO
-"user_details.timezone" = "Timezone"; // TODO
-"user_details.message_button" = "Message"; // TODO
-"user_details.voice_call_button" = "Voice Call"; // TODO
-"user_details.video_call_button" = "Video Call"; // TODO
+"user_details.status" = "Estado";
+"user_details.role" = "Cargo";
+"user_details.roles" = "Cargos";
+"user_details.email" = "Email";
+"user_details.emails" = "Emails";
+"user_details.timezone" = "Fuso horário";
+"user_details.message_button" = "Mensagem";
+"user_details.voice_call_button" = "Chamada de voz";
+"user_details.video_call_button" = "Video chamada";
 
 // Theme
 "theme.settings.title" = "Tema";
@@ -500,5 +501,5 @@
 
 // Chat Components
 "chat.components.quote.replied" = "Respondido";
-"chat.components.quote.pinned" = "Pinado";
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.pinned" = "Afixado";
+"chat.components.text_attachment.no_title" = "Sem título";

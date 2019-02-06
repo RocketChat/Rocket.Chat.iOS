@@ -272,21 +272,7 @@ final class PreferencesViewController: BaseTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == kSectionSettings {
-            switch indexPath.row {
-            case 0:
-                cellContactDidPressed()
-            case 1:
-                cellLanguageDidPressed()
-            case 4:
-                cellReviewDidPressed()
-            case 5:
-                shareAppCell = tableView.cellForRow(at: indexPath)
-                cellShareDidPressed()
-            case 6:
-                cellAppIconDidPressed()
-            default:
-                break
-            }
+            didSelectSettingsCell(indexPath)
         } else if indexPath.section == kSectionInformation {
             if indexPath.row == 0 {
                 cellTermsOfServiceDidPressed()
@@ -337,6 +323,24 @@ final class PreferencesViewController: BaseTableViewController {
     }
 
     // MARK: IBAction
+
+    fileprivate func didSelectSettingsCell(_ indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            cellContactDidPressed()
+        case 1:
+            cellLanguageDidPressed()
+        case 4:
+            cellReviewDidPressed()
+        case 5:
+            shareAppCell = tableView.cellForRow(at: indexPath)
+            cellShareDidPressed()
+        case 6:
+            cellAppIconDidPressed()
+        default:
+            break
+        }
+    }
 
     @IBAction func crashReportSwitchDidChange(sender: Any) {
         AnalyticsCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
