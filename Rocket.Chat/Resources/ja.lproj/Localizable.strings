@@ -214,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "メッセージ情報";
 "chat.message.actions.react" = "リアクションする";
-"chat.message.actions.block" = "ユーザーからのメッセージをブロックする";
 "chat.message.actions.report" = "レポートメッセージ";
 "chat.message.actions.edit" = "編集";
 "chat.message.actions.copy" = "コピー";
@@ -302,6 +301,8 @@
 "chat.info.item.no_topic" = "トッピックはありません";
 "chat.info.item.description" = "説明";
 "chat.info.item.no_description" = "説明はありません";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.members" = "メンバー";
 "chat.info.item.pinned" = "ピン留め";
 "chat.info.item.starred" = "スター";

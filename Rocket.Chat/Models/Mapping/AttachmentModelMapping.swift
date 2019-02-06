@@ -26,7 +26,7 @@ extension Attachment: ModelMappeable {
         }
 
         if let authorName = values["author_name"].string {
-            self.title = "@\(authorName)"
+            self.title = "\(authorName)"
         }
 
         if let title = values["title"].string {

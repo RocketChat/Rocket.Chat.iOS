@@ -214,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Nachrichteninfo";
 "chat.message.actions.react" = "Reaktion hinzufügen";
-"chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
 "chat.message.actions.edit" = "Nachricht bearbeiten";
 "chat.message.actions.copy" = "Kopieren";
@@ -301,6 +300,8 @@
 "chat.info.item.no_topic" = "Ohne Thema";
 "chat.info.item.description" = "Beschreibung";
 "chat.info.item.no_description" = "Ohne Beschreibung";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Benachrichtigungen";
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";

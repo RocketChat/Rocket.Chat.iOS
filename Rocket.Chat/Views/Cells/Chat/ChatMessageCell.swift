@@ -318,6 +318,7 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 
 extension ChatMessageCell {
 
+    // swiftlint:disable cyclomatic_complexity
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         guard let unmanagedMessage = message.unmanaged else {
             return 0

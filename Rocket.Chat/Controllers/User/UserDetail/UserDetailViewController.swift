@@ -68,7 +68,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
         messageButton?.setTitle(model.messageButtonText, for: .normal)
         voiceCallButton?.setTitle(model.voiceCallButtonText, for: .normal)
 
-        videoCallButton?.isHidden = !(AuthSettingsManager.settings?.isJitsiEnabled ?? false)
+        videoCallButton?.isHidden = !(AuthSettingsManager.settings?.isJitsiEnabled ?? false && AppManager.isVideoCallAvailable)
         videoCallButton?.setTitle(model.videoCallButtonText, for: .normal)
 
         updateButtonsInsets()

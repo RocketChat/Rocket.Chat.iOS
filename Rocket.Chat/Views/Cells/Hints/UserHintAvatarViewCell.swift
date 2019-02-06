@@ -9,7 +9,6 @@
 // This is because we can't extend generic classes with @objc methods
 // Which doesn't allow us to do themes properly.
 // In Swift 5 there's a better workaround:
-// TODO: Make this an empty subclass when Swift 5 is released.
 // class UserHintAvatarViewCell: UserHintCell<AvatarView> { }
 //
 

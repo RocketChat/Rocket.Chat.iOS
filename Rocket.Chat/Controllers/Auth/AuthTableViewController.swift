@@ -186,16 +186,10 @@ final class AuthTableViewController: BaseTableViewController {
     }
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard let realm = Realm.current else {
-            return
-        }
-
         let loginService = LoginService(value: loginServices[button.tag])
         if loginService.service == "gitlab", let url = serverPublicSettings?.gitlabUrl {
             loginServices[button.tag].serverUrl = url
-            realm.execute({ _ in
-                loginService.serverUrl = url
-            })
+            loginService.serverUrl = url
         }
 
         if loginService.service == "wordpress" {
@@ -212,7 +206,7 @@ final class AuthTableViewController: BaseTableViewController {
                 loginService.mapWordPress()
             } // missing implementation for wp-oauth-server
 
-            realm.execute({ _ in
+            Realm.executeOnMainThread({ realm in
                 realm.add(loginService, update: true)
             })
         }

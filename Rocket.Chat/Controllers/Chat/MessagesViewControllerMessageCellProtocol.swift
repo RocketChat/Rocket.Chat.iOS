@@ -14,6 +14,7 @@ import FLAnimatedImage
 import SimpleImageViewer
 import RealmSwift
 
+// swiftlint:disable file_length
 extension MessagesViewController: ChatMessageCellProtocol {
     func handleReviewRequest() {
         allowResignFirstResponder = false
@@ -129,11 +130,7 @@ extension MessagesViewController: ChatMessageCellProtocol {
         AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
-    // TODO: This one can be removed once we remove from the protocol
     func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
-        // TODO: Adjust for our composer
-        //        textView.resignFirstResponder()
-
         if thumbnail.animatedImage != nil || thumbnail.image != nil {
             let configuration = ImageViewerConfiguration { config in
                 config.image = thumbnail.image
@@ -142,8 +139,6 @@ extension MessagesViewController: ChatMessageCellProtocol {
                 config.allowSharing = true
             }
             present(ImageViewerController(configuration: configuration), animated: true)
-        } else {
-            //            openImage(attachment: attachment)
         }
     }
 
@@ -157,8 +152,6 @@ extension MessagesViewController: ChatMessageCellProtocol {
             }
 
             present(ImageViewerController(configuration: configuration), animated: true)
-        } else {
-            //            openImage(attachment: attachment)
         }
     }
 
@@ -252,7 +245,6 @@ extension MessagesViewController {
     // swiftlint:disable function_body_length
     func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
         guard
-            let messageUser = message.user,
             let auth = AuthManager.isAuthenticated(),
             let client = API.current()?.client(MessagesClient.self)
         else {
@@ -306,16 +298,6 @@ extension MessagesViewController {
             })
 
             actions.append(star)
-        }
-
-        if auth.canBlockMessage(message) == .allowed {
-            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { _ in
-                MessageManager.blockMessagesFrom(messageUser, completion: {
-                    //                    self?.updateSubscriptionInfo()
-                })
-            })
-
-            actions.append(block)
         }
 
         if  auth.canEditMessage(message) == .allowed {

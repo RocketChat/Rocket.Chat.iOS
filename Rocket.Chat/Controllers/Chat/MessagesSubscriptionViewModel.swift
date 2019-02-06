@@ -56,6 +56,10 @@ final class MessagesSubscriptionViewModel {
     // MARK: Life Cycle
 
     deinit {
+        destroy()
+    }
+
+    internal func destroy() {
         subscriptionQueryToken?.invalidate()
 
         if let subscription = subscription {

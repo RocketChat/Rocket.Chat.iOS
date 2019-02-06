@@ -17,7 +17,6 @@ class BaseImageMessageCell: BaseMessageCell {
         widthConstriant.isActive = true
     }
 
-
     func loadImage(on imageView: UIImageView, startLoadingBlock: () -> Void, stopLoadingBlock: @escaping () -> Void) {
         guard let viewModel = viewModel?.base as? ImageMessageChatItem else {
             return
@@ -27,11 +26,7 @@ class BaseImageMessageCell: BaseMessageCell {
             startLoadingBlock()
             ImageManager.loadImage(with: imageURL, into: imageView) { _, _ in
                 stopLoadingBlock()
-
-                // TODO: In case of error, show some error placeholder
             }
-        } else {
-            // TODO: Load some error placeholder
         }
     }
 }

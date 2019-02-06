@@ -87,7 +87,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
         case .userGroup(let userGroup):
             let cell = hintsView.dequeueReusableCell(withType: TextHintLabelCell.self)
-            cell.prefixView.text = "@"
+            cell.prefixView.text = ""
             cell.valueLabel.text = userGroup
             return cell
         }

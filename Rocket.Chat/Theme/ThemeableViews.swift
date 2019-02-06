@@ -9,6 +9,7 @@
 import UIKit
 import RocketChatViewController
 
+// swiftlint:disable file_length
 extension UIView: Themeable {
 
     /**

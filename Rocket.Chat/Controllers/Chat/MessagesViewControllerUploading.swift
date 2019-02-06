@@ -105,6 +105,7 @@ extension MessagesViewController {
             name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
             mimeType: "image/jpeg"
         )
+
         upload(file)
     }
 

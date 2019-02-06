@@ -68,6 +68,7 @@ extension Subscription: ModelMappeable {
     func mapNotifications(_ values: JSON) {
         self.disableNotifications = values["disableNotifications"].bool ?? false
         self.hideUnreadStatus = values["hideUnreadStatus"].bool ?? false
+
         if let desktopNotificationsString = values["desktopNotifications"].string {
             self.desktopNotifications = SubscriptionNotificationsStatus(rawValue: desktopNotificationsString) ?? .default
         }
@@ -95,6 +96,7 @@ extension Subscription: ModelMappeable {
 
     func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
+        self.roomAnnouncement = values["announcement"].stringValue
         self.roomTopic = values["topic"].stringValue
 
         if let broadcast = values["broadcast"].bool {

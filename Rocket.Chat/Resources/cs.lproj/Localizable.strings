@@ -215,7 +215,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Message info"; //TODO
 "chat.message.actions.react" = "Add Reaction"; //TODO
-"chat.message.actions.block" = "Blokovat zprávy od uživatele";
 "chat.message.actions.report" = "Nahlásit zprávu";
 "chat.message.actions.edit" = "Upravit zprávu";
 "chat.message.actions.copy" = "Kopírovat";
@@ -302,6 +301,8 @@
 "chat.info.item.no_topic" = "Bez tématu";
 "chat.info.item.description" = "Popis";
 "chat.info.item.no_description" = "Žádný popis";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.notifications" = "Upozornění";
 "chat.info.item.members" = "Členové";
 "chat.info.item.pinned" = "Připnuto";

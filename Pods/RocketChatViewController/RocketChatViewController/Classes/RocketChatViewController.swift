@@ -247,8 +247,17 @@ open class RocketChatViewController: UICollectionViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         setupChatViews()
-        startAvoidingKeyboard()
         registerObservers()
+    }
+
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startObservingKeyboard()
+    }
+
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopObservingKeyboard()
     }
 
     open override func viewWillLayoutSubviews() {
@@ -405,7 +414,7 @@ extension RocketChatViewController: UICollectionViewDelegateFlowLayout {}
 
 
 extension RocketChatViewController {
-    func startAvoidingKeyboard() {
+    func startObservingKeyboard() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(_onKeyboardFrameWillChangeNotificationReceived(_:)),
@@ -414,7 +423,7 @@ extension RocketChatViewController {
         )
     }
 
-    func stopAvoidingKeyboard() {
+    func stopObservingKeyboard() {
         NotificationCenter.default.removeObserver(
             self,
             name: NSNotification.Name.UIKeyboardWillChangeFrame,

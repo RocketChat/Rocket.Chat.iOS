@@ -112,7 +112,7 @@
 "auth.connect.connecting" = "Connessione in corso. Attendere";
 "auth.email_auth_prefix" = "Entra con ";
 "auth.email_auth" = "e-mail";
-"auth.login_service_prefix" = "Continua con";
+"auth.login_service_prefix" = "Continua con ";
 
 "auth.signup_title" = "Iscrizione";
 "auth.signup.button_register" = "Registrati";
@@ -214,7 +214,6 @@
 // Chat Message Actions
 "chat.message.actions.info" = "Informazioni messaggio";
 "chat.message.actions.react" = "Aggiungi reazione";
-"chat.message.actions.block" = "Blocca i messaggi dall'utente";
 "chat.message.actions.report" = "Segnala un messaggio";
 "chat.message.actions.edit" = "Modifica";
 "chat.message.actions.copy" = "Copia";
@@ -224,7 +223,7 @@
 "chat.message.actions.unstar" = "Rimuovi Speciale";
 "chat.message.actions.quote" = "Citazione";
 "chat.message.actions.reply" = "Risposta";
-"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
+"chat.message.actions.join_video_call" = "Partecipa alla chiamata video";
 "chat.message.actions.permalink" = "Collegamento Permanente";
 "chat.message.actions.delete" = "Cancella messaggio";
 "chat.message.actions.delete.confirm.title" = "Vuoi cancellare questo messaggio ?";
@@ -294,7 +293,7 @@
 "chat.message.type.room_changed_topic" = "L'argomento della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
-"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
+"chat.message.type.video_call_started" = "Chiamata video iniziata da %@";
 
 // Chat Information
 "chat.info.title" = "Informazioni";
@@ -302,6 +301,8 @@
 "chat.info.item.no_topic" = "Nessun argomento";
 "chat.info.item.description" = "Descrizione";
 "chat.info.item.no_description" = "Nessuna descrizione";
+"chat.info.item.announcement" = "Announcement"; // TODO
+"chat.info.item.no_announcement" = "No announcement"; // TODO
 "chat.info.item.members" = "Componenti";
 "chat.info.item.pinned" = "Evidenziati";
 "chat.info.item.starred" = "Speciali";

@@ -75,11 +75,14 @@ struct SubscriptionManager {
                     return
                 }
 
-                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                let subscription = Subscription.find(rid: rid, realm: realm) ??
+                    Subscription.getOrCreate(realm: realm, values: object, updates: nil)
+                subscription.map(object, realm: realm)
 
                 if msg == "removed" {
                     realm.delete(subscription)
                 } else {
+                    subscription.auth = auth
                     realm.add(subscription, update: true)
                 }
             })

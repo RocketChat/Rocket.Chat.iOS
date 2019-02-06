@@ -36,7 +36,7 @@ class FileTableViewCell: UITableViewCell {
 
     func updateFileData() {
         name.text = file.name
-        username.text = "@\(file.username)"
+        username.text = "\(file.username)"
         uploadedAt.text = file.uploadedAt?.formatted()
 
         guard let fileURL = file.fullFileURL() else {

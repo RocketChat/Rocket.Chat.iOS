@@ -63,7 +63,6 @@ final class Message: BaseModel {
     @objc dynamic var userIdentifier: String?
     @objc dynamic var text = ""
 
-    @objc dynamic var userBlocked: Bool = false
     @objc dynamic var pinned: Bool = false
     @objc dynamic var unread: Bool = false
 
