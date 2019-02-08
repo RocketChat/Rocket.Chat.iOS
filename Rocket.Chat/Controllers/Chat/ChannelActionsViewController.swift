@@ -42,7 +42,6 @@ class ChannelActionsViewController: BaseViewController {
 
                 header = [ChannelInfoBasicCellData(title: "#\(subscription.name)")]
 
-
                 if hasDescription {
                     header?.append(ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.description"),

@@ -240,6 +240,7 @@
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
 		414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */; };
+		414B81D6220DB67200DD11D2 /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B81D5220DB67200DD11D2 /* DirectoryRequest.swift */; };
 		414D99161EA0E7CB0020F7E9 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */; };
 		414E8A8D20A5DD2200615CE6 /* RoomRolesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */; };
 		414EE62921CD1F98003693D2 /* JitsiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62821CD1F98003693D2 /* JitsiViewController.swift */; };
@@ -497,7 +498,6 @@
 		8039442820B332E8002F317A /* RoomInviteRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */; };
 		8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */; };
 		8039442E20B342BB002F317A /* AddUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442D20B342BB002F317A /* AddUsersViewController.swift */; };
-		8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039442F20B34B12002F317A /* DirectoryRequest.swift */; };
 		8039443220B3988F002F317A /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039443120B3988F002F317A /* PagedResource.swift */; };
 		803D866821062D7E00B1B697 /* SubscriptionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */; };
 		803D866C21062F7400B1B697 /* SEStateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D866B21062F7400B1B697 /* SEStateAPI.swift */; };
@@ -1195,6 +1195,7 @@
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
 		414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		414B81D5220DB67200DD11D2 /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
 		414D99151EA0E7CB0020F7E9 /* SignupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTableViewController.swift; sourceTree = "<group>"; };
 		414E8A8C20A5DD2200615CE6 /* RoomRolesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRolesRequest.swift; sourceTree = "<group>"; };
 		414EE62821CD1F98003693D2 /* JitsiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewController.swift; sourceTree = "<group>"; };
@@ -1480,7 +1481,6 @@
 		8039442720B332E8002F317A /* RoomInviteRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInviteRequestSpec.swift; sourceTree = "<group>"; };
 		8039442B20B33F63002F317A /* SubscriptionCanInviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCanInviteUsers.swift; sourceTree = "<group>"; };
 		8039442D20B342BB002F317A /* AddUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersViewController.swift; sourceTree = "<group>"; };
-		8039442F20B34B12002F317A /* DirectoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryRequest.swift; sourceTree = "<group>"; };
 		8039443120B3988F002F317A /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
 		803D866B21062F7400B1B697 /* SEStateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEStateAPI.swift; sourceTree = "<group>"; };
 		803D86742106333500B1B697 /* SESubscriptionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESubscriptionModelMapping.swift; sourceTree = "<group>"; };
@@ -2257,6 +2257,14 @@
 				414A1FFB1D46395900093E10 /* SocketResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		414B81D4220DB64E00DD11D2 /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				414B81D5220DB67200DD11D2 /* DirectoryRequest.swift */,
+			);
+			path = Directory;
 			sourceTree = "<group>";
 		};
 		414EE62721CD1F80003693D2 /* Video Conferencing */ = {
@@ -3082,7 +3090,6 @@
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
 				807C7C0720751EDB006B600E /* SpotlightRequest.swift */,
 				80D41E062099341C00034D1F /* PermissionsRequest.swift */,
-				8039442F20B34B12002F317A /* DirectoryRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -4084,8 +4091,9 @@
 		D1D535EF1F70863C006625D2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				1496A87A20FA4807005C2E14 /* Notifications */,
 				8045F4CE20D4640600AA0F3C /* Base */,
+				414B81D4220DB64E00DD11D2 /* Directory */,
+				1496A87A20FA4807005C2E14 /* Notifications */,
 				802498EC1F7A82CD005477EC /* Authentication */,
 				8013F8831FD6B74800EE1A4E /* Command */,
 				9977302520725B3A009AF465 /* Emoji */,
@@ -4843,6 +4851,7 @@
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */,
 				9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */,
+				414B81D6220DB67200DD11D2 /* DirectoryRequest.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				80AC400620EECB84005082E1 /* ChatBannerView.swift in Sources */,
 				33FD181D20D253AE00380BEC /* BaseNavigationBar.swift in Sources */,
@@ -5111,7 +5120,6 @@
 				80CCD3BC216235B1002AFE83 /* MessagesComposerViewModel.swift in Sources */,
 				992B5AB6209A14B5009C8123 /* AudioFileViewController.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
-				8039443020B34B12002F317A /* DirectoryRequest.swift in Sources */,
 				99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */,
 				802C8959216314CF00C6B9B2 /* MessagesViewControllerUploading.swift in Sources */,
 				8020C3DA2199F78800AA7133 /* MessagesViewControllerSearching.swift in Sources */,
