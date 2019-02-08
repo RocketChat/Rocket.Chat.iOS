@@ -10,6 +10,7 @@ import UIKit
 
 private typealias ListSegueData = (title: String, query: String?, isListingMentions: Bool)
 
+// swiftlint:disable file_length
 class ChannelActionsViewController: BaseViewController {
 
     internal let kShareRoomSection = 2
@@ -138,7 +139,7 @@ class ChannelActionsViewController: BaseViewController {
                 updateButtonFavoriteImage()
             }
 
-            if settings.isJitsiEnabled {
+            if settings.isJitsiEnabled && AppManager.isVideoCallAvailable {
                 buttons.append(UIBarButtonItem(
                     image: UIImage(named: "UserDetail_VideoCall"),
                     style: .plain,
