@@ -83,7 +83,7 @@ PODS:
   - semver (1.1.0)
   - SimpleImageViewer (1.2.0):
     - FLAnimatedImage
-  - Starscream (2.1.1)
+  - Starscream (3.0.6)
   - SwiftLint (0.27.0)
   - SwiftyJSON (4.2.0)
   - SwipeCellKit (2.5.0)
@@ -106,7 +106,7 @@ DEPENDENCIES:
   - RocketChatViewController (from `https://github.com/RocketChat/RocketChatViewController`)
   - semver
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
-  - Starscream (~> 2)
+  - Starscream (~> 3)
   - SwiftLint
   - SwiftyJSON
   - SwipeCellKit
@@ -189,11 +189,11 @@ SPEC CHECKSUMS:
   RocketChatViewController: d777bcaf9463fc56b7fc7c9ce14873b9cd6b9cfe
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 5de85ce8e162b64ac2f6aa9802ba9d08358506a1
+PODFILE CHECKSUM: 58b05cf22332c7fb75cc86631e658a405e2388e1
 
 COCOAPODS: 1.5.3
