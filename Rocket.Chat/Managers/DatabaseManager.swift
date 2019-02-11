@@ -32,6 +32,10 @@ struct ServerPersistKeys {
     // Display information
     static let serverIconURL = "kServerIconURL"
     static let serverName = "kServerName"
+
+    // Two-way SSL certificate & password
+    static let sslClientCertificatePath = "kSSLClientCertificatePath"
+    static let sslClientCertificatePassword = "kSSLClientCertificatePassword"
 }
 
 struct DatabaseManager {
@@ -64,35 +68,6 @@ struct DatabaseManager {
     static func removeSelectedDatabase() {
         removeDatabase(at: selectedIndex)
         selectDatabase(at: 0)
-    }
-
-    /**
-        Copy a server information with a new URL
-        and remove the old one.
-    */
-    static func copyServerInformation(from: Int, with newURL: String) -> Int {
-        guard
-            let servers = self.servers,
-            servers.count > 0
-        else {
-            return -1
-        }
-
-        let selectedServer = servers[from]
-        let newIndex = createNewDatabaseInstance(serverURL: newURL)
-
-        if var servers = self.servers {
-            var newServer = servers[newIndex]
-            newServer[ServerPersistKeys.userId] = selectedServer[ServerPersistKeys.userId]
-            newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
-            servers[newIndex] = newServer
-
-            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
-
-            removeDatabase(at: from)
-        }
-
-        return newIndex - 1
     }
 
     /**
