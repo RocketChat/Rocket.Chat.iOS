@@ -68,6 +68,7 @@ final class MessagesViewController: RocketChatViewController {
             if subscription.rid.isEmpty {
                 subscription.fetchRoomIdentifier({ [weak self] (subscription) in
                     self?.subscription = subscription
+                    self?.chatTitleView?.subscription = subscription?.unmanaged
                 })
 
                 return

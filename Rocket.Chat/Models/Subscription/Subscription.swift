@@ -130,6 +130,10 @@ final class Subscription: BaseModel {
     static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
         return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
+
+    static func find(name: String, realm: Realm? = Realm.current) -> Subscription? {
+        return realm?.objects(Subscription.self).filter("name == '\(name)'").first
+    }
 }
 
 final class RoomRoles: Object {
