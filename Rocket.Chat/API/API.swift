@@ -89,7 +89,16 @@ final class API: APIFetcher {
             return nil
         }
 
-        var session: URLSession = URLSession.shared
+        let delegate = SessionDelegate()
+
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 30
+
+        var session = URLSession(
+            configuration: configuration,
+            delegate: delegate,
+            delegateQueue: nil
+        )
 
         if let sessionDelegate = sessionDelegate {
             let configuration = URLSessionConfiguration.ephemeral
@@ -172,4 +181,78 @@ final class API: APIFetcher {
 
         return task
     }
+}
+
+public struct IdentityAndTrust {
+    public var identityRef: SecIdentity
+    public var trust: SecTrust
+    public var certArray: NSArray
+}
+
+// swiftlint:disable force_cast
+public func extractIdentity(certData:NSData, certPassword:String) -> IdentityAndTrust {
+
+    var identityAndTrust:IdentityAndTrust!
+    var securityError:OSStatus = errSecSuccess
+
+    var items: CFArray?
+    let certOptions: Dictionary = [ kSecImportExportPassphrase as String : certPassword ];
+    // import certificate to read its entries
+    securityError = SecPKCS12Import(certData, certOptions as CFDictionary, &items);
+    if securityError == errSecSuccess {
+
+        let certItems:CFArray = items as CFArray!;
+        let certItemsArray:Array = certItems as Array
+        let dict:AnyObject? = certItemsArray.first;
+
+        if let certEntry:Dictionary = dict as? Dictionary<String, AnyObject> {
+
+            // grab the identity
+            let identityPointer:AnyObject? = certEntry["identity"];
+            let secIdentityRef:SecIdentity = identityPointer as! SecIdentity!;
+
+            // grab the trust
+            let trustPointer:AnyObject? = certEntry["trust"];
+            let trustRef:SecTrust = trustPointer as! SecTrust;
+
+            // grab the certificate chain
+            var certRef: SecCertificate?
+            SecIdentityCopyCertificate(secIdentityRef, &certRef);
+            let certArray:NSMutableArray = NSMutableArray();
+            certArray.add(certRef as SecCertificate!);
+
+            identityAndTrust = IdentityAndTrust(identityRef: secIdentityRef, trust: trustRef, certArray: certArray);
+        }
+    }
+
+    return identityAndTrust;
+}
+
+
+
+public class SessionDelegate : NSObject, URLSessionDelegate {
+
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if let localCertPath = Bundle.main.url(forResource: "certificate_name", withExtension: "p12"),
+            let localCertData = try?  Data(contentsOf: localCertPath) {
+
+            let identityAndTrust:IdentityAndTrust = extractIdentity(certData: localCertData as NSData, certPassword: "cert_password")
+
+            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodClientCertificate {
+
+                let urlCredential:URLCredential = URLCredential(
+                    identity: identityAndTrust.identityRef,
+                    certificates: identityAndTrust.certArray as [AnyObject],
+                    persistence: URLCredential.Persistence.forSession);
+
+                completionHandler(URLSession.AuthChallengeDisposition.useCredential, urlCredential);
+
+                return
+            }
+        }
+
+        challenge.sender?.cancel(challenge)
+        completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+    }
+
 }
