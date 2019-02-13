@@ -51,6 +51,8 @@ extension Subscription {
     private func fetchDirectMessageIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
         guard let identifier = self.identifier else { return }
 
+        let name = self.name
+
         SubscriptionManager.createDirectMessage(name, completion: { (response) in
             guard !response.isError() else { return }
             guard let rid = response.result["result"]["rid"].string else { return }
@@ -72,8 +74,10 @@ extension Subscription {
                     }
                 }
             }, completion: {
-                if let subscription = Subscription.find(rid: rid) {
-                    completion(subscription)
+                DispatchQueue.main.async {
+                    if let subscription = Subscription.find(name: name) {
+                        completion(subscription)
+                    }
                 }
             })
         })
