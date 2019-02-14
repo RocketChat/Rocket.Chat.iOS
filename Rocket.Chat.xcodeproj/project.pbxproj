@@ -292,6 +292,7 @@
 		41852E891F92BBEC00D1C499 /* MessagesViewControllerReplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */; };
 		41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */; };
 		41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */; };
+		418858E72215D162009014F2 /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418858E62215D162009014F2 /* SecurityManager.swift */; };
 		418BBC4D20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */; };
 		418BBC4F20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */; };
 		418BBC5120D0309400EC09F5 /* ChatTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */; };
@@ -1256,6 +1257,7 @@
 		41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerReplying.swift; sourceTree = "<group>"; };
 		41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerEmbedded.swift; sourceTree = "<group>"; };
 		41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewControllerEmbedded.xib; sourceTree = "<group>"; };
+		418858E62215D162009014F2 /* SecurityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
 		418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManagerConnectionHandlerSpec.swift; sourceTree = "<group>"; };
 		418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleViewSpec.swift; sourceTree = "<group>"; };
 		418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleViewSpec.swift; sourceTree = "<group>"; };
@@ -2593,6 +2595,7 @@
 				597ECBA31E3708B10041C5C5 /* PushManager.swift */,
 				41499C8E1F2A116900790EA7 /* ServerManager.swift */,
 				41DE687A20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift */,
+				418858E62215D162009014F2 /* SecurityManager.swift */,
 				B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */,
 				995FEB2E206286D9004EE38F /* WebBrowserManager.swift */,
 				41B554C61FBF0F9D000510B7 /* WindowManager.swift */,
@@ -5255,6 +5258,7 @@
 				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
 				99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
+				418858E72215D162009014F2 /* SecurityManager.swift in Sources */,
 				996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				1496A87220FA469C005C2E14 /* Dynamic.swift in Sources */,
