@@ -15,7 +15,13 @@ final class SecurityManager {
 
         do {
             let filename = fileURL.pathComponents.last ?? "\(identifier).p12"
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create:false)
+            let documentDirectory = try fileManager.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+            )
+
             let newFileURL = documentDirectory.appendingPathComponent(filename)
 
             let data = try Data(contentsOf: fileURL)

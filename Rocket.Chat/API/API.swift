@@ -182,4 +182,3 @@ final class API: APIFetcher {
         return task
     }
 }
-
