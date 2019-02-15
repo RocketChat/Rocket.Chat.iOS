@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 
+// swiftlint:disable file_length
 final class ConnectServerViewController: BaseViewController {
 
     internal var connecting = false
@@ -40,6 +41,21 @@ final class ConnectServerViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
+    var certificateFilePassowrd: String?
+    var certificateFileURL: URL? {
+        didSet {
+            if let url = certificateFileURL {
+                labelCertificate.text = localized("auth.connect.ssl.certificate.your_certificate")
+                buttonCertificate.setTitle(url.pathComponents.last, for: .normal)
+                imageViewCertificateShield.isHidden = false
+            } else {
+                labelCertificate.text = localized("auth.connect.ssl.certificate.do_you_have")
+                buttonCertificate.setTitle(localized("auth.connect.ssl.certificate.apply"), for: .normal)
+                imageViewCertificateShield.isHidden = true
+            }
+        }
+    }
+
     lazy var buttonClose: UIBarButtonItem = {
         let buttonClose = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(buttonCloseDidPressed))
         return buttonClose
@@ -62,6 +78,23 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var textFieldServerURL: UITextField! {
         didSet {
             textFieldServerURL.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        }
+    }
+
+    @IBOutlet weak var imageViewCertificateShield: UIImageView!
+    @IBOutlet weak var labelCertificate: UILabel! {
+        didSet {
+            labelCertificate.text = localized("auth.connect.ssl.certificate.do_you_have")
+            labelCertificate.textColor = .RCGray()
+        }
+    }
+
+    @IBOutlet weak var buttonCertificate: UIButton! {
+        didSet {
+            buttonCertificate.titleLabel?.font = buttonCertificate.titleLabel?.font.bold()
+            buttonCertificate.setTitle(localized("auth.connect.ssl.certificate.apply"), for: .normal)
+            buttonCertificate.setTitleColor(.RCBlue(), for: .normal)
+            buttonCertificate.setTitleColor(.RCGray(), for: .disabled)
         }
     }
 
@@ -137,10 +170,6 @@ final class ConnectServerViewController: BaseViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-
-        if !shouldAutoConnect {
-            textFieldServerURL.becomeFirstResponder()
-        }
     }
 
     deinit {
@@ -228,6 +257,28 @@ final class ConnectServerViewController: BaseViewController {
     @objc func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         AppManager.changeSelectedServer(index: selectedServer)
+    }
+
+    @IBAction func buttonCertificateDidPressed(_ sender: Any) {
+        if let url = certificateFileURL {
+            let alert = UIAlertController(title: url.pathComponents.last ?? "", message: nil, preferredStyle: .actionSheet)
+
+            if let presenter = alert.popoverPresentationController {
+                presenter.sourceView = buttonCertificate
+                presenter.sourceRect = buttonCertificate.bounds
+            }
+
+            alert.addAction(UIAlertAction(title: "Remover Certificato", style: .destructive, handler: { _ in
+                self.certificateFileURL = nil
+            }))
+
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+
+            return
+        }
+
+        openCertificatesPicker()
     }
 
     func connect() {
@@ -348,4 +399,40 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
 
 extension ConnectServerViewController {
     override func applyTheme() { }
+}
+
+extension ConnectServerViewController: UIDocumentPickerDelegate {
+
+    func openCertificatesPicker() {
+        let controller = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        controller.delegate = self
+        controller.modalPresentationStyle = .pageSheet
+        controller.allowsMultipleSelection = false
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    // MARK: UIDocumentPickerDelegate
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        certificateFileURL = url
+
+        let alert = UIAlertController(
+            title: localized("auth.connect.ssl.certificate.password.title"),
+            message: localized("auth.connect.ssl.certificate.password.message"),
+            preferredStyle: .alert
+        )
+
+        alert.addTextField { textField in
+            textField.isSecureTextEntry = true
+        }
+
+        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
+            if let textField = alert.textFields?.first, let text = textField.text {
+                self.certificateFilePassowrd = text
+            }
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+
 }
