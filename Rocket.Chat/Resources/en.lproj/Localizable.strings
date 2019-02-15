@@ -115,6 +115,7 @@
 "auth.connect.ssl.certificate.your_certificate" = "Your Certificate";
 "auth.connect.ssl.certificate.password.title" = "Certificate Password";
 "auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?";
+"auth.connect.ssl.certificate.remove" = "Remove Certificate";
 "auth.email_auth_prefix" = "Login with ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continue with ";

@@ -268,7 +268,8 @@ final class ConnectServerViewController: BaseViewController {
                 presenter.sourceRect = buttonCertificate.bounds
             }
 
-            alert.addAction(UIAlertAction(title: "Remover Certificato", style: .destructive, handler: { _ in
+            let removeTitle = localized("auth.connect.ssl.certificate.remove")
+            alert.addAction(UIAlertAction(title: removeTitle, style: .destructive, handler: { _ in
                 self.certificateFileURL = nil
             }))
 

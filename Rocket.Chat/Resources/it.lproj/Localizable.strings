@@ -115,6 +115,7 @@
 "auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
 "auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
 "auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "Entra con ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continua con ";
