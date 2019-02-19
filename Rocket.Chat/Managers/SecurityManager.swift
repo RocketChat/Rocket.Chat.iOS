@@ -10,11 +10,11 @@ import Foundation
 
 final class SecurityManager {
 
-    static func save(certificate fileURL: URL, for identifier: String) {
+    static func save(certificate fileURL: URL, for identifier: String) -> URL? {
         let fileManager = FileManager.default
 
         do {
-            let filename = fileURL.pathComponents.last ?? "\(identifier).p12"
+            let filename = "\(identifier).p12"
             let documentDirectory = try fileManager.url(
                 for: .documentDirectory,
                 in: .userDomainMask,
@@ -26,9 +26,12 @@ final class SecurityManager {
 
             let data = try Data(contentsOf: fileURL)
             try data.write(to: newFileURL)
+            return newFileURL
         } catch {
-            print(error)
+            // Do nothing?!
         }
+
+        return nil
     }
 
 }

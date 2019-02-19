@@ -59,7 +59,7 @@ final class SocketManager {
 
     // MARK: Connection
 
-    static func connect(_ url: URL, completion: @escaping SocketCompletion) {
+    static func connect(_ url: URL, sslCertificate: SSLClientCertificate? = nil, completion: @escaping SocketCompletion) {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
@@ -70,10 +70,8 @@ final class SocketManager {
         sharedInstance.socket?.advancedDelegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
 
-        if let localCertPath = Bundle.main.url(forResource: "certname", withExtension: "p12")?.absoluteString {
-            if let certificate = try? SSLClientCertificate(pkcs12Path: localCertPath, password: "password") {
-                sharedInstance.socket?.sslClientCertificate = certificate
-            }
+        if let certificate = sslCertificate {
+            sharedInstance.socket?.sslClientCertificate = certificate
         }
 
         sharedInstance.socket?.connect()

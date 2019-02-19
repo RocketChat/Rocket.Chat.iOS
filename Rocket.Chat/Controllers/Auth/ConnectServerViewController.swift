@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Starscream
 
 // swiftlint:disable file_length
 final class ConnectServerViewController: BaseViewController {
@@ -41,7 +42,7 @@ final class ConnectServerViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
-    var certificateFilePassowrd: String?
+    var certificateFilePassword: String?
     var certificateFileURL: URL? {
         didSet {
             if let url = certificateFileURL {
@@ -296,7 +297,11 @@ final class ConnectServerViewController: BaseViewController {
         }
 
         infoRequestHandler.url = url
-        infoRequestHandler.validate(with: url)
+        infoRequestHandler.validate(
+            with: url,
+            sslCertificatePath: certificateFileURL,
+            sslCertificatePassword: certificateFilePassword ?? ""
+        )
     }
 
     func connectWebSocket() {
@@ -304,7 +309,15 @@ final class ConnectServerViewController: BaseViewController {
         guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
         let serverVersion = infoRequestHandler.version
 
-        SocketManager.connect(socketURL) { [weak self] (_, connected) in
+        var sslClientCertificate: SSLClientCertificate?
+        if let certificateFileURL = certificateFileURL {
+            sslClientCertificate = try? SSLClientCertificate(
+                pkcs12Url: certificateFileURL,
+                password: certificateFilePassword ?? ""
+            )
+        }
+
+        SocketManager.connect(socketURL, sslCertificate: sslClientCertificate) { [weak self] (_, connected) in
             if !connected {
                 self?.stopConnecting()
                 self?.alert(
@@ -318,11 +331,34 @@ final class ConnectServerViewController: BaseViewController {
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: serverURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
 
-            AuthSettingsManager.updatePublicSettings(serverVersion: serverVersion, apiHost: serverURL, nil) { (settings) in
+            if let certificateFileURL = self?.certificateFileURL {
+                if let newFileURL = SecurityManager.save(certificate: certificateFileURL, for: String.random()) {
+                    DatabaseManager.updateSSLClientInformation(
+                        for: index,
+                        path: newFileURL,
+                        password: self?.certificateFilePassword ?? ""
+                    )
+                }
+            }
+
+            AuthSettingsManager.updatePublicSettings(
+                serverVersion: serverVersion,
+                apiHost: serverURL,
+                apiSSLCertificatePath: self?.certificateFileURL,
+                apiSSLCertificatePassword: self?.certificateFilePassword ?? "",
+                nil
+            ) { (settings) in
                 self?.serverPublicSettings = settings
 
                 if connected {
-                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
+                    let api = API(host: serverURL, version: serverVersion ?? .zero)
+
+                    if let sslCertificatePath = self?.certificateFileURL {
+                        api.sslCertificatePath = sslCertificatePath
+                        api.sslCertificatePassword = self?.certificateFilePassword ?? ""
+                    }
+
+                    api.client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
                         self?.stopConnecting()
 
                         if shouldRetrieveLoginServices {
@@ -429,7 +465,7 @@ extension ConnectServerViewController: UIDocumentPickerDelegate {
 
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
             if let textField = alert.textFields?.first, let text = textField.text {
-                self.certificateFilePassowrd = text
+                self.certificateFilePassword = text
             }
         }))
 

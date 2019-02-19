@@ -62,6 +62,26 @@ struct DatabaseManager {
     }
 
     /**
+        - parameter index: The database index that needs to be updated.
+     */
+    static func updateSSLClientInformation(for index: Int, path: URL, password: String) {
+        guard
+            var servers = self.servers,
+            servers.count > index
+        else {
+            return
+        }
+
+        // Update SSL Client Certificate information
+        var server = servers[index]
+        server[ServerPersistKeys.sslClientCertificatePath] = path.absoluteString
+        server[ServerPersistKeys.sslClientCertificatePassword] = password
+        servers[index] = server
+
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
+    }
+
+    /**
         Remove selected server and select the
         first one.
      */

@@ -54,15 +54,22 @@ public func extractIdentity(certificateData: NSData, password: String) -> Identi
 
 final class TwoWaySessionDelegate: NSObject, URLSessionDelegate {
 
+    var sslCertificatePath: URL
+    var sslCertificatePassword: String
+
+    init(certificatePath: URL, password: String) {
+        self.sslCertificatePath = certificatePath
+        self.sslCertificatePassword = password
+    }
+
     func urlSession(
         _ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge,
         completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
         guard
-            let path = Bundle.main.url(forResource: "certificate_name", withExtension: "p12"),
-            let data = try? Data(contentsOf: path) as NSData,
-            let identityAndTrust = extractIdentity(certificateData: data, password: "cert_password")
+            let data = try? Data(contentsOf: sslCertificatePath) as NSData,
+            let identityAndTrust = extractIdentity(certificateData: data, password: sslCertificatePassword)
         else {
             challenge.sender?.cancel(challenge)
             completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
