@@ -25,6 +25,18 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var imageViewDirectory: UIImageView! {
+        didSet {
+            imageViewDirectory.image = imageViewDirectory.image?.imageWithTint(.RCBlue())
+        }
+    }
+
+    @IBOutlet weak var labelDirectory: UILabel! {
+        didSet {
+            labelDirectory.text = localized("directory")
+        }
+    }
+
     weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
