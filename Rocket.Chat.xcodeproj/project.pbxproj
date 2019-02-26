@@ -223,6 +223,9 @@
 		4135A64821623F3600C1741A /* ImageMessageChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4135A64721623F3600C1741A /* ImageMessageChatItem.swift */; };
 		41366B2321D4DAEC00B9D832 /* JitsiViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41366B2221D4DAEC00B9D832 /* JitsiViewModelSpec.swift */; };
 		413996171F3B44500075F96E /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413996161F3B44500075F96E /* UploadHelper.swift */; };
+		413C596C22259A4800466BA5 /* Directory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413C596B22259A4800466BA5 /* Directory.storyboard */; };
+		413C596F22259BC300466BA5 /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413C596E22259BC300466BA5 /* DirectoryViewController.swift */; };
+		413C597122259BCB00466BA5 /* DirectoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413C597022259BCB00466BA5 /* DirectoryViewModel.swift */; };
 		413FB6BF1FE17D7D00F010AA /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */; };
 		413FB6C11FE17D7D00F010AA /* UIViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6BC1FE17D7D00F010AA /* UIViewExtentions.swift */; };
 		413FB6C61FE17DBC00F010AA /* MessageTextFontAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6C41FE17DBB00F010AA /* MessageTextFontAttributes.swift */; };
@@ -1178,6 +1181,9 @@
 		4136466621A4A25E00BE64B8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41366B2221D4DAEC00B9D832 /* JitsiViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewModelSpec.swift; sourceTree = "<group>"; };
 		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelper.swift; sourceTree = "<group>"; };
+		413C596B22259A4800466BA5 /* Directory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Directory.storyboard; sourceTree = "<group>"; };
+		413C596E22259BC300466BA5 /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
+		413C597022259BCB00466BA5 /* DirectoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewModel.swift; sourceTree = "<group>"; };
 		413FB6BA1FE17D7C00F010AA /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
 		413FB6BC1FE17D7D00F010AA /* UIViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
 		413FB6C41FE17DBB00F010AA /* MessageTextFontAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextFontAttributes.swift; sourceTree = "<group>"; };
@@ -2248,6 +2254,15 @@
 			path = "Video Conferencing";
 			sourceTree = "<group>";
 		};
+		413C596D22259BAF00466BA5 /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				413C596E22259BC300466BA5 /* DirectoryViewController.swift */,
+				413C597022259BCB00466BA5 /* DirectoryViewModel.swift */,
+			);
+			path = Directory;
+			sourceTree = "<group>";
+		};
 		414A1FF41D4631F600093E10 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -2522,6 +2537,7 @@
 				33F73B2E2073F1FC00F03F29 /* Notification */,
 				4102E3AB1E53272C004BAA82 /* Preferences */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
+				413C596D22259BAF00466BA5 /* Directory */,
 				414EE62721CD1F80003693D2 /* Video Conferencing */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
 			);
@@ -2540,6 +2556,7 @@
 				41CD52D420BEFA3B00336892 /* New Room.storyboard */,
 				4102E3A91E532323004BAA82 /* Preferences.storyboard */,
 				41E2FA001D414EA100238DFD /* Subscriptions.storyboard */,
+				413C596B22259A4800466BA5 /* Directory.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -4473,6 +4490,7 @@
 				419EB5BF215E6A0C00E591BF /* ReactionsCell.xib in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
 				14F8A256202E64B200175FDC /* BnW-83.5@2x.png in Resources */,
+				413C596C22259A4800466BA5 /* Directory.storyboard in Resources */,
 				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
 				14F8A25B202E64B200175FDC /* BnW-60@2x.png in Resources */,
 				41DE688120C6EBE600AA5EC8 /* SubscriptionSortingCell.xib in Resources */,
@@ -5243,6 +5261,7 @@
 				9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */,
 				334F78EE211DCB79003D0C5A /* UnmanagedObject.swift in Sources */,
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
+				413C597122259BCB00466BA5 /* DirectoryViewModel.swift in Sources */,
 				807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */,
 				4112DC581FFFB9B2005995E1 /* BaseModel.swift in Sources */,
 				33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */,
@@ -5252,6 +5271,7 @@
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
+				413C596F22259BC300466BA5 /* DirectoryViewController.swift in Sources */,
 				4116CBE520B599D9007E7163 /* StatusTableViewController.swift in Sources */,
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,

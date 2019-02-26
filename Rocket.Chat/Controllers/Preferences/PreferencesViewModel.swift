@@ -116,11 +116,7 @@ final class PreferencesViewModel {
     }
 
     internal var canChangeAppIcon: Bool {
-        if #available(iOS 10.3, *) {
-            return UIApplication.shared.supportsAlternateIcons
-        } else {
-            return false
-        }
+        return UIApplication.shared.supportsAlternateIcons
     }
 
     internal var canViewAdministrationPanel: Bool {

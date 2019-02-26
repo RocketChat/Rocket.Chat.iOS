@@ -85,10 +85,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         let convertedRect = view.convert(rect, from: nil)
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = convertedRect.size.height - self.view.safeAreaInsets.bottom
-                self.view.layoutIfNeeded()
-            }
+            self.additionalSafeAreaInsets.bottom = convertedRect.size.height - self.view.safeAreaInsets.bottom
+            self.view.layoutIfNeeded()
         }
     }
 
@@ -103,10 +101,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         }
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = 0
-                self.view.layoutIfNeeded()
-            }
+            self.additionalSafeAreaInsets.bottom = 0
+            self.view.layoutIfNeeded()
         }
     }
 }

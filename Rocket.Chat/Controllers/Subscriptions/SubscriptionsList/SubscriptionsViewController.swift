@@ -202,32 +202,11 @@ final class SubscriptionsViewController: BaseViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
-        if #available(iOS 11.0, *) {
-            searchBar = searchController.searchBar
-            navigationController?.navigationBar.prefersLargeTitles = false
-            navigationItem.largeTitleDisplayMode = .never
-
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = true
-        } else {
-            if let headerView = tableView.tableHeaderView, searchBar == nil {
-                var frame = headerView.frame
-                frame.size.height = 88
-                headerView.frame = frame
-
-                let searchBar = UISearchBar(frame: CGRect(
-                    x: 0,
-                    y: 44,
-                    width: frame.width,
-                    height: 44
-                ))
-
-                headerView.addSubview(searchBar)
-                self.searchBar = searchBar
-
-                tableView.tableHeaderView = headerView
-            }
-        }
+        searchBar = searchController.searchBar
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
 
         self.searchController = searchController
         searchBar?.placeholder = localized("subscriptions.search")
@@ -370,17 +349,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     private var frameForDropDownOverlay: CGRect {
         var frameHeight = view.bounds.height
-        var yOffset: CGFloat = 0.0
-
-        if #available(iOS 11.0, *) {
-            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
-            yOffset = view.safeAreaInsets.top
-        } else {
-            let navBarHeight = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
-            frameHeight -= navBarHeight
-            yOffset = navBarHeight
-        }
-
+        let yOffset = view.safeAreaInsets.top
+        frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
         return CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: view.bounds.height)
     }
 
