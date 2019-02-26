@@ -290,3 +290,26 @@ extension SubscriptionsClient {
         }
     }
 }
+
+// MARK: Open room
+
+extension SubscriptionsClient {
+    func openSubscription(subscription: Subscription) {
+        let roomOpenRequest = RoomOpenRequest(rid: subscription.rid, subscriptionType: subscription.type)
+
+        api.fetch(roomOpenRequest) { result in
+            switch result {
+            case .resource(let resource):
+                guard resource.success == true else {
+                    return
+                }
+                Realm.executeOnMainThread { realm in
+                    subscription.open = true
+                    realm.add(subscription, update: true)
+                }
+            case .error(let error):
+                debugPrint(error)
+            }
+        }
+    }
+}

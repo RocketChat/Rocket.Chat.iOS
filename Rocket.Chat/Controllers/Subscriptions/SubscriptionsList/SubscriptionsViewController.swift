@@ -509,6 +509,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
         }
 
         controller.subscription = subscription
+        openSubscriptionIfNeeded(subscription)
 
         // When using iPads, we override the detail controller creating
         // a new instance.
@@ -675,4 +676,18 @@ extension SubscriptionsViewController {
             selectRoomAt(viewModel.absoluteIndexForIndexPath(indexPath) - 1)
         }
     }
+}
+
+// MARK: - Open room API
+
+extension SubscriptionsViewController {
+  func openSubscriptionIfNeeded(_ subscription: Subscription) {
+    guard subscription.isJoined() && !subscription.open && subscription.type != .directMessage  else {
+      return
+    }
+
+    API.current()?.client(
+      SubscriptionsClient.self).openSubscription(
+        subscription: subscription)
+  }
 }
