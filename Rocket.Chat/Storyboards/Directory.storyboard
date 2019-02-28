@@ -13,13 +13,13 @@
         <!--Directory View Controller-->
         <scene sceneID="Wfw-cg-sd3">
             <objects>
-                <viewController id="wij-rX-ZCv" customClass="DirectoryViewController" sceneMemberID="viewController">
+                <viewController id="wij-rX-ZCv" customClass="DirectoryViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AP4-Dw-bxZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DNS-8K-OBF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="IzD-M6-UAU">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -67,7 +67,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8UN-7u-Qjw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uG8-Ti-bvT"/>
+                    <navigationItem key="navigationItem" id="uG8-Ti-bvT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="st5-r8-vUU">
+                            <connections>
+                                <action selector="buttonCloseDidPressed:" destination="wij-rX-ZCv" id="w3S-OK-HML"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjG-H8-NJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

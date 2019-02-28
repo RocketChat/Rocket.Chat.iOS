@@ -25,6 +25,13 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var viewDirectory: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeDirectoryTapGesture(_:)))
+            viewDirectory.addGestureRecognizer(tapGesture)
+        }
+    }
+
     @IBOutlet weak var imageViewDirectory: UIImageView! {
         didSet {
             imageViewDirectory.image = imageViewDirectory.image?.imageWithTint(.RCBlue())
@@ -285,6 +292,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         else {
             return false
         }
+
         let tapLocation = recognizer.location(in: view).y
         return tapLocation > inset && tapLocation < view.bounds.height - inset
     }
@@ -294,6 +302,19 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     @IBAction func recognizeSortingHeaderTapGesture(_ recognizer: UITapGestureRecognizer) {
         if shouldRespondToTap(recognizer: recognizer, inset: 8) {
             toggleSortingView()
+        }
+    }
+
+    @objc func recognizeDirectoryTapGesture(_ recognizer: UITapGestureRecognizer) {
+        guard let controller = UIStoryboard(name: "Directory", bundle: Bundle.main).instantiateInitialViewController() else { return }
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let nav = BaseNavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .pageSheet
+
+            present(nav, animated: true, completion: nil)
+        } else {
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 

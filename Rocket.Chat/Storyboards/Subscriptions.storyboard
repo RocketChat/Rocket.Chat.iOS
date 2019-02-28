@@ -379,6 +379,7 @@
                         <outlet property="labelDirectory" destination="924-tm-gcf" id="eQH-iq-nDg"/>
                         <outlet property="labelSortingTitleDescription" destination="4ch-xw-I4W" id="0WA-jc-zI3"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
+                        <outlet property="viewDirectory" destination="zAp-Gg-lES" id="Fo4-oj-cll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
