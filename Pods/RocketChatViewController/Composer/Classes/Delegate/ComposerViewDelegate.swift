@@ -36,7 +36,12 @@ public protocol ComposerViewDelegate: class {
     /**
      Tells the delegate that the overlay view is about to be configured.
      */
-    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: UIView)
+    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: OverlayView, with userData: Any?)
+
+    /**
+     Tells the delegate the overlay view has been configured.
+     */
+    func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView)
 
     /**
      Tells the delegate that the text selection changed in the specified composer view's text view.
@@ -49,9 +54,9 @@ public protocol ComposerViewDelegate: class {
     func composerView(_ composerView: ComposerView, didUpdateAddonView view: UIView?, at slot: ComposerAddonSlot, index: UInt)
 
     /**
-     Tells the delegate the button in the slot has been tapped.
+     Tells the delegate some event happened in the button.
      */
-    func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton)
+    func composerView(_ composerView: ComposerView, event: UIEvent, eventType: UIControl.Event, happenedInButton button: ComposerButton)
 }
 
 public extension ComposerViewDelegate {
@@ -68,8 +73,9 @@ public extension ComposerViewDelegate {
     }
 
     func composerView(_ composerView: ComposerView, willConfigureButton button: ComposerButton) { }
-    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: UIView) { }
+    func composerView(_ composerView: ComposerView, willConfigureOverlayView view: OverlayView, with userData: Any?) { }
+    func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView) { }
     func composerViewDidChangeSelection(_ composerView: ComposerView) { }
     func composerView(_ composerView: ComposerView, didUpdateAddonView view: UIView?, at slot: ComposerAddonSlot, index: UInt) { }
-    func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) { }
+    func composerView(_ composerView: ComposerView, event: UIEvent, eventType: UIControl.Event, happenedInButton button: ComposerButton) { }
 }

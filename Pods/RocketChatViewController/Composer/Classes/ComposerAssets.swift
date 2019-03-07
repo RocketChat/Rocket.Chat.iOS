@@ -15,6 +15,14 @@ public struct ComposerAssets {
 
     public static let cancelReplyButtonImage = imageNamed("Cancel Reply Button")
 
+    public static let redMicButtonImage = imageNamed("Red Mic Button")
+    public static let grayArrowLeftButtonImage = imageNamed("Gray Arrow Left")
+
+    public static let playButtonImage = imageNamed("Play Button")
+    public static let pauseButtonImage = imageNamed("Pause Button")
+    public static let sliderThumbImage = imageNamed("Slider Thumb")
+    public static let discardButtonImage = imageNamed("Discard Button")
+
     private static let bundle = Bundle(for: ComposerView.self)
 
     private static func imageNamed(_ name: String) -> UIImage {

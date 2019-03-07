@@ -29,7 +29,7 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'RocketChatViewController', :path => '~/dev/RocketChat/RocketChatViewController' # :git => 'https://github.com/RocketChat/RocketChatViewController'
+  pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController', :branch => 'feat/audio_record'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'SwipeCellKit'

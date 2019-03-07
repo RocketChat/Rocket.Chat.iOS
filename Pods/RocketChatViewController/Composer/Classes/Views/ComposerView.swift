@@ -65,7 +65,11 @@ public class ComposerView: UIView, ComposerLocalizable {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setBackgroundImage(ComposerAssets.addButtonImage, for: .normal)
 
-        $0.addTarget(self, action: #selector(touchUpInside(button:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchUpInsideButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchUpOutsideButton), for: .touchUpOutside)
+        $0.addTarget(self, action: #selector(touchDownInButton), for: .touchDown)
+        $0.addTarget(self, action: #selector(touchDragInsideButton), for: .touchDragInside)
+        $0.addTarget(self, action: #selector(touchDragOutsideButton), for: .touchDragOutside)
 
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
@@ -77,7 +81,11 @@ public class ComposerView: UIView, ComposerLocalizable {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setBackgroundImage(ComposerAssets.sendButtonImage, for: .normal)
 
-        $0.addTarget(self, action: #selector(touchUpInside(button:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchUpInsideButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchUpOutsideButton), for: .touchUpOutside)
+        $0.addTarget(self, action: #selector(touchDownInButton), for: .touchDown)
+        $0.addTarget(self, action: #selector(touchDragInsideButton), for: .touchDragInside)
+        $0.addTarget(self, action: #selector(touchDragOutsideButton), for: .touchDragOutside)
 
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }
@@ -127,10 +135,15 @@ public class ComposerView: UIView, ComposerLocalizable {
     /**
      The view that overlays the composer when showOverlay is called.
      */
-    public let overlayView = tap(ComposerAddonStackView()) {
+    public let overlayView = tap(OverlayView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isHidden = true
     }
+
+    /**
+     A Boolean value that indicates whether text can change in the textView
+     */
+    public var isTextInputEnabled = true
 
     public override var intrinsicContentSize: CGSize {
         return CGSize(width: super.intrinsicContentSize.width, height: containerView.bounds.height)
@@ -142,12 +155,12 @@ public class ComposerView: UIView, ComposerLocalizable {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.commonInit()
+        commonInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInit()
+        commonInit()
     }
 
     /**
@@ -165,8 +178,6 @@ public class ComposerView: UIView, ComposerLocalizable {
 
         addSubviews()
         setupConstraints()
-
-        containerView.backgroundColor = .white
     }
 
     /**
@@ -244,9 +255,9 @@ public class ComposerView: UIView, ComposerLocalizable {
             // overlayView constraints
 
             overlayView.topAnchor.constraint(equalTo: topSeparatorView.bottomAnchor),
-            overlayView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            overlayView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            overlayView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            overlayView.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
 
@@ -270,18 +281,30 @@ public class ComposerView: UIView, ComposerLocalizable {
 
         return false
     }
+
+    
 }
 
 // MARK: Overlay
 
 public extension ComposerView {
-    func showOverlay() {
-        currentDelegate.composerView(self, willConfigureOverlayView: overlayView)
+    func showOverlay(userData: Any? = nil) {
         overlayView.isHidden = false
+
+        leftButton.isUserInteractionEnabled = false
+        rightButton.isUserInteractionEnabled = false
+        isTextInputEnabled = false
+
+        currentDelegate.composerView(self, willConfigureOverlayView: overlayView, with: userData)
+        currentDelegate.composerView(self, didConfigureOverlayView: overlayView)
     }
 
     func hideOverlay() {
         overlayView.isHidden = true
+
+        leftButton.isUserInteractionEnabled = true
+        rightButton.isUserInteractionEnabled = true
+        isTextInputEnabled = true
     }
 }
 
@@ -322,7 +345,7 @@ public extension ComposerView {
     }
 }
 
-// MARK: Observers & Actions
+// MARK: Observers, Gestures & Actions
 
 public extension ComposerView {
     /**
@@ -345,10 +368,38 @@ public extension ComposerView {
     }
 
     /**
-     Called when a touch up inside happens in one of the buttons.
+     Called when a touchUpInside event happens in one of the buttons.
      */
-    @objc private func touchUpInside(button: ComposerButton) {
-        currentDelegate.composerView(self, didTapButton: button)
+    @objc private func touchUpInsideButton(_ button: ComposerButton, _ event: UIEvent) {
+        currentDelegate.composerView(self, event: event, eventType: .touchUpInside, happenedInButton: button)
+    }
+
+    /**
+     Called when a touchUpOutside event happens in one of the buttons.
+     */
+    @objc private func touchUpOutsideButton(_ button: ComposerButton, _ event: UIEvent) {
+        currentDelegate.composerView(self, event: event, eventType: .touchUpOutside, happenedInButton: button)
+    }
+
+    /**
+     Called when a touchDown event happens in one of the buttons.
+     */
+    @objc private func touchDownInButton(_ button: ComposerButton, _ event: UIEvent) {
+        currentDelegate.composerView(self, event: event, eventType: .touchDown, happenedInButton: button)
+    }
+
+    /**
+     Called when a touchDragInside event happens in one of the buttons.
+     */
+    @objc private func touchDragInsideButton(_ button: ComposerButton, _ event: UIEvent) {
+        currentDelegate.composerView(self, event: event, eventType: .touchDragInside, happenedInButton: button)
+    }
+
+    /**
+     Called when a touchDragOutside event happens in one of the buttons.
+     */
+    @objc private func touchDragOutsideButton(_ button: ComposerButton, _ event: UIEvent) {
+        currentDelegate.composerView(self, event: event, eventType: .touchDragOutside, happenedInButton: button)
     }
 }
 
@@ -359,7 +410,11 @@ extension ComposerView: UITextViewDelegate {
         return
     }
 
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard isTextInputEnabled else {
+            return false
+        }
+
         if text == "\n" {
             return currentDelegate.composerViewShouldReturn(self)
         }
