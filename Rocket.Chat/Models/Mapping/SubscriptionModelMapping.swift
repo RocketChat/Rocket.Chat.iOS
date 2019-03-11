@@ -131,7 +131,10 @@ extension Subscription: ModelMappeable {
         if values["lastMessage"].dictionary != nil {
             let user = User()
             user.map(values["lastMessage"]["u"], realm: realm)
-            realm?.add(user, update: true)
+            if let currentUser = AuthManager.currentUser(), let currentUserId = currentUser.identifier, let newUserId = user.identifier, currentUserId == newUserId {
+            } else {
+                realm?.add(user, update: true)
+            }
 
             let message = Message()
             message.map(values["lastMessage"], realm: realm)
