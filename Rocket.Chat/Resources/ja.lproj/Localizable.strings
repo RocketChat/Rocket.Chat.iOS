@@ -250,6 +250,17 @@
 "chat.upload.choose_from_library" = "ライブラリから選択";
 "chat.upload.import_file" = "添付ファイル";
 "chat.upload.draw" = "絵を描く";
+"chat.upload.location" = "Share location"; // TODO
+
+// Location Share
+"location.loading" = "Loading..."; // TODO
+"location.send_location" = "Send this location"; // TODO
+"location.title" = "Location"; // TODO
+"maps.open_external_error" = "Unable to open application"; // TODO
+"maps.choose_application" = "Choose an application"; // TODO
+"maps.me" = "Me"; // TODO
+"location_disabled.title" = "Location Sharing Disabled"; //TODO
+"location_disabled.message" = "Location sharing isn't enabled for RocketChat. Please enable it first on your phone settings."; //TODO
 
 // Chat Download
 "chat.download.downloading_file" = "\"%@\" ダウンロード";

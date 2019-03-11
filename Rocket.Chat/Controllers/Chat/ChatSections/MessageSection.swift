@@ -209,15 +209,24 @@ final class MessageSection: ChatSection {
                 }
             }
         }
-
+        var isLocationMessage: Bool = false
         object.message.urls.forEach { messageURL in
-            cells.insert(MessageURLChatItem(
-                url: messageURL.url,
-                imageURL: messageURL.imageURL,
-                title: messageURL.title,
-                subtitle: messageURL.subtitle,
-                message: object.message
-            ).wrapped, at: 0)
+            if messageURL.url.range(of: "https://maps.google.com/?q=") != nil {
+                isLocationMessage = true
+                cells.insert(LocationChatItem(
+                    url: messageURL.url,
+                    title: object.message.text,
+                    message: object.message
+                    ).wrapped, at: 0)
+            } else {
+                cells.insert(MessageURLChatItem(
+                    url: messageURL.url,
+                    imageURL: messageURL.imageURL,
+                    title: messageURL.title,
+                    subtitle: messageURL.subtitle,
+                    message: object.message
+                    ).wrapped, at: 0)
+            }
         }
 
         if object.message.isBroadcastReplyAvailable() {
@@ -242,15 +251,19 @@ final class MessageSection: ChatSection {
         }
 
         if !object.isSequential && shouldAppendMessageHeader {
-            cells.append(BasicMessageChatItem(
-                user: user,
-                message: object.message
-            ).wrapped)
+            if !isLocationMessage {
+                cells.append(BasicMessageChatItem(
+                    user: user,
+                    message: object.message
+                    ).wrapped)
+            }
         } else if object.isSequential {
-            cells.append(SequentialMessageChatItem(
-                user: user,
-                message: object.message
-            ).wrapped)
+            if !isLocationMessage {
+                cells.append(SequentialMessageChatItem(
+                    user: user,
+                    message: object.message
+                    ).wrapped)
+            }
         }
 
         if let daySeparator = object.daySeparator {

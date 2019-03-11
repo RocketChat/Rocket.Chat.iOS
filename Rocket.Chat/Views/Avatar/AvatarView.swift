@@ -49,6 +49,11 @@ final class AvatarView: UIView {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.size.width / 2
+    }
+
     func updateAvatar() {
         if let emoji = emoji {
             let emojiCharacter = Emojione.transform(string: emoji)

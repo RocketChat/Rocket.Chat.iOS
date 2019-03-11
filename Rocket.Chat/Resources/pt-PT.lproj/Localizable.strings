@@ -249,6 +249,17 @@
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Anexar ficheiros";
 "chat.upload.draw" = "Desenhe algo";
+"chat.upload.location" = "Partilhar localização";
+
+// Location Share
+"location.loading" = "Carregando...";
+"location.send_location" = "Enviar esta localização";
+"location.title" = "Localização";
+"maps.open_external_error" = "Erro ao abrir a aplicação";
+"maps.choose_application" = "Escolha uma aplicação";
+"maps.me" = "Eu";
+"location_disabled.title" = "Serviços de localização desactivados";
+"location_disabled.message" = "Os serviços de localização estão desactivados para o RocketChat. Por favor active-os nas configurações do aparelho.";
 
 // Chat Download
 "chat.download.downloading_file" = "Descarregando \"%@\"";

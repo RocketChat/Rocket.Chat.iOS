@@ -43,6 +43,10 @@ extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, 
             self.openDrawing()
         }
 
+        addAction("chat.upload.location", image: #imageLiteral(resourceName: "Location")) { _ in
+            self.openLocationShare()
+        }
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
@@ -290,4 +294,40 @@ extension MessagesViewController: DrawingControllerDelegate {
         uploadDialog(file)
     }
 
+}
+
+// MARK: Share location
+
+extension MessagesViewController: LocationControllerDelegate {
+
+    func openLocationShare() {
+        let storyboard = UIStoryboard(name: "Location", bundle: Bundle.main)
+
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+
+            if let locationController = controller.viewControllers.first as? LocationViewController {
+                locationController.delegate = self
+            }
+
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+
+    func shareLocation(with coordinates: CLLocationCoordinate2D, address: Address?) {
+
+        let googleString = "https://maps.google.com/?q=\(coordinates.latitude),\(coordinates.longitude)"
+        var finalString = googleString
+
+        if let address = address {
+            if address.completeAddress.isEmpty {
+                finalString = "\(address.placeName)\n\(googleString)"
+            } else {
+                finalString = "\(address.placeName)\n\(address.completeAddress)\n\(googleString)"
+            }
+        }
+
+        DispatchQueue.main.async {
+            self.viewModel.sendTextMessage(text: finalString)
+        }
+    }
 }

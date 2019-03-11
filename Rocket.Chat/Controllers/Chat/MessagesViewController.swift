@@ -304,7 +304,8 @@ final class MessagesViewController: RocketChatViewController {
             (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
             (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
             (nib: MessageVideoCallCell.nib, cellIdentifier: MessageVideoCallCell.identifier),
-            (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
+            (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier),
+            (nib: LocationCell.nib, cellIdentifier: LocationCell.identifier)
         ]
 
         collectionViewCells.forEach {
@@ -649,4 +650,24 @@ extension MessagesViewController: SocketConnectionHandler {
         }
     }
 
+}
+
+extension MessagesViewController {
+    func openSharedLocationMap(for url: String, username: String) {
+        let storyboard = UIStoryboard(name: "Location", bundle: Bundle.main)
+
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+
+        let coordinates = url.getCoordinates()
+        var isSelf: Bool = false
+        if let currentUser = AuthManager.currentUser(), let currentUsername = currentUser.username {
+            isSelf = currentUsername.isContentEqual(to: username)
+        }
+
+        if let controller = storyboard.instantiateViewController(withIdentifier: "SharedLocation") as? SharedLocationViewController {
+            controller.setup(sharedLocation: coordinates, username: username, isSelf: isSelf)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
 }

@@ -537,6 +537,14 @@
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
+		80607DDF2232306800B84D91 /* SharedLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DDB2232306800B84D91 /* SharedLocationViewController.swift */; };
+		80607DE02232306800B84D91 /* LocationShareDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DDC2232306800B84D91 /* LocationShareDelegate.swift */; };
+		80607DE12232306800B84D91 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DDD2232306800B84D91 /* LocationViewController.swift */; };
+		80607DE22232306800B84D91 /* LocationPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DDE2232306800B84D91 /* LocationPopover.swift */; };
+		80607DE4223230B700B84D91 /* Location.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80607DE3223230B700B84D91 /* Location.storyboard */; };
+		80607DE6223230CF00B84D91 /* LocationChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DE5223230CF00B84D91 /* LocationChatItem.swift */; };
+		80607DE9223230E000B84D91 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80607DE7223230E000B84D91 /* LocationCell.xib */; };
+		80607DEA223230E000B84D91 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80607DE8223230E000B84D91 /* LocationCell.swift */; };
 		8062E327209E19BB0044F407 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E326209E19BB0044F407 /* AuthClient.swift */; };
 		8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */; };
 		8062E32C20A1F8100044F407 /* RoomsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32B20A1F8100044F407 /* RoomsRequest.swift */; };
@@ -1508,6 +1516,14 @@
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
+		80607DDB2232306800B84D91 /* SharedLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedLocationViewController.swift; sourceTree = "<group>"; };
+		80607DDC2232306800B84D91 /* LocationShareDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationShareDelegate.swift; sourceTree = "<group>"; };
+		80607DDD2232306800B84D91 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		80607DDE2232306800B84D91 /* LocationPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPopover.swift; sourceTree = "<group>"; };
+		80607DE3223230B700B84D91 /* Location.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Location.storyboard; sourceTree = "<group>"; };
+		80607DE5223230CF00B84D91 /* LocationChatItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationChatItem.swift; sourceTree = "<group>"; };
+		80607DE7223230E000B84D91 /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		80607DE8223230E000B84D91 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		8062E326209E19BB0044F407 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequest.swift; sourceTree = "<group>"; };
 		8062E32B20A1F8100044F407 /* RoomsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequest.swift; sourceTree = "<group>"; };
@@ -2516,6 +2532,7 @@
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				414EE62721CD1F80003693D2 /* Video Conferencing */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
+				80607DDA2232304B00B84D91 /* Location */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2532,6 +2549,7 @@
 				41CD52D420BEFA3B00336892 /* New Room.storyboard */,
 				4102E3A91E532323004BAA82 /* Preferences.storyboard */,
 				41E2FA001D414EA100238DFD /* Subscriptions.storyboard */,
+				80607DE3223230B700B84D91 /* Location.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -3335,6 +3353,17 @@
 			path = UIAlertAction;
 			sourceTree = "<group>";
 		};
+		80607DDA2232304B00B84D91 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				80607DDE2232306800B84D91 /* LocationPopover.swift */,
+				80607DDC2232306800B84D91 /* LocationShareDelegate.swift */,
+				80607DDD2232306800B84D91 /* LocationViewController.swift */,
+				80607DDB2232306800B84D91 /* SharedLocationViewController.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		8062E32F20A3A2A30044F407 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -3934,6 +3963,8 @@
 				4190694121D0E82E00FE2573 /* MessageVideoCallCell.swift */,
 				4101B02A21A2EF8C00772F7C /* HeaderCell.xib */,
 				4101B02C21A2EF9300772F7C /* HeaderCell.swift */,
+				80607DE8223230E000B84D91 /* LocationCell.swift */,
+				80607DE7223230E000B84D91 /* LocationCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3959,6 +3990,7 @@
 				9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */,
 				4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */,
 				4101B02821A2EF6B00772F7C /* HeaderChatItem.swift */,
+				80607DE5223230CF00B84D91 /* LocationChatItem.swift */,
 			);
 			path = ChatItems;
 			sourceTree = "<group>";
@@ -4442,8 +4474,10 @@
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
 				419EB5B3215E3C2200E591BF /* AudioCell.xib in Resources */,
 				333032A02073940800A9514D /* RCEmojiKit.strings in Resources */,
+				80607DE9223230E000B84D91 /* LocationCell.xib in Resources */,
 				9977D857217E942200FE5EC6 /* MessageActionsCell.xib in Resources */,
 				994C90B62174BA5100383AFF /* VideoMessageCell.xib in Resources */,
+				80607DE4223230B700B84D91 /* Location.storyboard in Resources */,
 				41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
 				411D40C920D27A5E001A1035 /* ChannelInfoDescriptionCell.xib in Resources */,
@@ -4822,6 +4856,7 @@
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				41BFA0AA2146D23D008B9611 /* MessageManager.swift in Sources */,
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
+				80607DEA223230E000B84D91 /* LocationCell.swift in Sources */,
 				80B2D98920E5496E002F4149 /* UserDetailFieldCellModel.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
@@ -4969,6 +5004,7 @@
 				419FEAA62181F115000DF2EC /* UnreadMarkerChatItem.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				8013F8711FD6B5B000EE1A4E /* InfoClient.swift in Sources */,
+				80607DE02232306800B84D91 /* LocationShareDelegate.swift in Sources */,
 				994C90B82174BCAF00383AFF /* VideoMessageCell.swift in Sources */,
 				8076FDA02048519D00114F28 /* AuthManagerSocket.swift in Sources */,
 				D32E28241DFD86C300D6019C /* AnalyticsCoordinator.swift in Sources */,
@@ -4996,6 +5032,7 @@
 				80CC78CF20DAE334002FBEBC /* SubscriptionsViewModel.swift in Sources */,
 				4190693D21D0DE0500FE2573 /* JitsiViewModel.swift in Sources */,
 				33E33ED620E0E59B00EF4560 /* AuthNavigationController.swift in Sources */,
+				80607DE22232306800B84D91 /* LocationPopover.swift in Sources */,
 				9990751D21766ECE00CAB7C8 /* BaseImageMessageCell.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
@@ -5095,6 +5132,7 @@
 				41FB7138215B0FD6002B5187 /* MessagesSizingManager.swift in Sources */,
 				995F711A20C7910800B7535F /* AuthTableViewControllerLoginServices.swift in Sources */,
 				80EE865321A82E6100BFEEC8 /* UIViewControllerDimming.swift in Sources */,
+				80607DE6223230CF00B84D91 /* LocationChatItem.swift in Sources */,
 				999075252177795700CAB7C8 /* QuoteMessageCell.swift in Sources */,
 				809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResponse.swift in Sources */,
@@ -5248,6 +5286,7 @@
 				996735D221585CA70049BB63 /* BasicMessageChatItem.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				998E64982161ADE200E7C45A /* TextAttachmentCell.swift in Sources */,
+				80607DDF2232306800B84D91 /* SharedLocationViewController.swift in Sources */,
 				419EB5BD215E69FF00E591BF /* ReactionsCell.swift in Sources */,
 				99BE4D822152D56E001A43E2 /* MessagesViewController.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
@@ -5255,6 +5294,7 @@
 				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
 				99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
+				80607DE12232306800B84D91 /* LocationViewController.swift in Sources */,
 				996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				1496A87220FA469C005C2E14 /* Dynamic.swift in Sources */,

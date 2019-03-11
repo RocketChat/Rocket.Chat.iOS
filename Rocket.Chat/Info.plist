@@ -242,6 +242,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>org-appextension-feature-password-management</string>
+        <string>comgooglemaps</string>
+        <string>waze</string>
 		<string>googlechromes</string>
 		<string>googlechrome</string>
 		<string>opera-http</string>
@@ -272,6 +274,8 @@
 	<string>NSPhotoLibraryAddUsageDescription</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>NSPhotoLibraryUsageDescription</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Location access is needed in order to determine and share your location</string>
 	<key>RC_MIN_SERVER_VERSION</key>
 	<string>0.62.0</string>
 	<key>UIApplicationShortcutItems</key>

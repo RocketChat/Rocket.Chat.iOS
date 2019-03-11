@@ -109,12 +109,20 @@ extension MessagesViewController: ChatMessageCellProtocol {
     }
 
     func openURL(url: URL) {
-        WebBrowserManager.open(url: url)
+        if url.absoluteString.range(of: "https://maps.google.com/?q=") != nil {
+            openSharedLocationMap(for: url.absoluteString, username: "")
+        } else {
+            WebBrowserManager.open(url: url)
+        }
     }
 
-    func openURLFromCell(url: String) {
+    func openURLFromCell(url: String, username: String) {
         guard let destinyURL = URL(string: url) else { return }
-        WebBrowserManager.open(url: destinyURL)
+        if url.range(of: "https://maps.google.com/?q=") != nil {
+            openSharedLocationMap(for: destinyURL.absoluteString, username: username)
+        } else {
+            WebBrowserManager.open(url: destinyURL)
+        }
     }
 
     func openVideoFromCell(attachment: UnmanagedAttachment) {

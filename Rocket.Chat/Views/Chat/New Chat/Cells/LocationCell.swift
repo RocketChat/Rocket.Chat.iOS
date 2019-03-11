@@ -1,20 +1,21 @@
 //
-//  MessageURLCell.swift
+//  LocationCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 04/10/18.
-//  Copyright © 2018 Rocket.Chat. All rights reserved.
+//  Created by Luís Machado on 06/02/2019.
+//  Copyright © 2019 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 import RocketChatViewController
+import MapKit
 
-final class MessageURLCell: BaseMessageCell, SizingCell {
-    static let identifier = String(describing: MessageURLCell.self)
+final class LocationCell: BaseMessageCell, SizingCell {
+    static let identifier = String(describing: LocationCell.self)
 
     static let sizingCell: UICollectionViewCell & ChatCell = {
-        guard let cell = MessageURLCell.instantiateFromNib() else {
-            return MessageURLCell()
+        guard let cell = LocationCell.instantiateFromNib() else {
+            return LocationCell()
         }
 
         return cell
@@ -40,13 +41,20 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
     var containerWidth: CGFloat {
         return
             messageWidth -
-            containerLeadingConstraint.constant -
-            containerTrailingConstraint.constant -
-            layoutMargins.left -
-            layoutMargins.right
+                containerLeadingConstraint.constant -
+                containerTrailingConstraint.constant -
+                layoutMargins.left -
+                layoutMargins.right
     }
 
     var thumbnailHeightInitialConstant: CGFloat = 0
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnail.image = nil
+        host.text = ""
+        subtitle.text = ""
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,50 +69,47 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
-        guard let viewModel = viewModel?.base as? MessageURLChatItem else {
+        guard let viewModel = viewModel?.base as? LocationChatItem else {
             return
         }
 
         containerWidthConstraint.constant = containerWidth
 
-        if let image = viewModel.imageURL, let imageURL = URL(string: image) {
+        // Generate map
+        if viewModel.coordinates.latitude != 0 && viewModel.coordinates.longitude != 0 {
             thumbnailHeightConstraint.constant = thumbnailHeightInitialConstant
-
-            if completeRendering {
-                activityIndicator.startAnimating()
-                ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
-                    self?.activityIndicator.stopAnimating()
-                }
+            activityIndicator.startAnimating()
+            viewModel.generateImage {[weak self] (image) in
+                self?.thumbnail.image = image
+                self?.activityIndicator.stopAnimating()
             }
         } else {
             thumbnailHeightConstraint.constant = 0
         }
 
-        host.text = URL(string: viewModel.url)?.host
-        title.text = viewModel.title
-        subtitle.text = viewModel.subtitle
+        host.text = viewModel.shortAddress
+        subtitle.text = viewModel.longAdress
     }
 
     @objc func didTapContainerView() {
         guard
             let viewModel = viewModel,
-            let messageURLChatItem = viewModel.base as? MessageURLChatItem
-        else {
-            return
+            let locationChatItemItem = viewModel.base as? LocationChatItem
+            else {
+                return
         }
 
-        delegate?.openURLFromCell(url: messageURLChatItem.url, username: "")
+        delegate?.openURLFromCell(url: locationChatItemItem.url, username: locationChatItemItem.message?.user?.username ?? "")
     }
 }
 
-extension MessageURLCell {
+extension LocationCell {
     override func applyTheme() {
         super.applyTheme()
 
         let theme = self.theme ?? .light
         containerView.backgroundColor = theme.chatComponentBackground
         host.textColor = theme.auxiliaryText
-        title.textColor = theme.actionTintColor
         subtitle.textColor = theme.controlText
         containerView.layer.borderColor = theme.borderColor.cgColor
     }
