@@ -30,7 +30,7 @@ public extension NSAttributedString {
         var numberedListIsFirstLine = false
         var previousCharacter: Character?
         enumerateAttributes(in: NSRange(location: 0, length: length), options: []) { attributes, range, shouldStop in
-            if let traits = (attributes[NSFontAttributeName] as? UIFont)?.fontDescriptor.symbolicTraits {
+            if let traits = (attributes[NSAttributedString.Key.font] as? UIFont)?.fontDescriptor.symbolicTraits {
                 let boldChange = FormattingChange.getFormattingChange(stringHasBoldEnabled, after: traits.contains(.traitBold))
                 let italicChange = FormattingChange.getFormattingChange(stringHasItalicEnabled, after: traits.contains(.traitItalic))
                 var formatString = ""
@@ -73,7 +73,7 @@ public extension NSAttributedString {
             }
             
             let preprocessedString = (self.string as NSString).substring(with: range)
-            let processedString = preprocessedString.characters.reduce("") { resultString, character in
+            let processedString = preprocessedString.reduce("") { resultString, character in
                 var stringToAppend = ""
                 
                 switch character {
@@ -82,7 +82,7 @@ public extension NSAttributedString {
                 case "\n", "\u{2028}":
                     stringToAppend = "\(closingString)\(character)"
                     if !characterOnBulletedListLine && !characterOnNumberedListLine {
-                        stringToAppend += String(closingString.characters.reversed())
+                        stringToAppend += String(closingString.reversed())
                     }
                     
                     characterOnBulletedListLine = false
@@ -96,14 +96,14 @@ public extension NSAttributedString {
                     stringToAppend = "\(character)"
                 case bulletCharacter:
                     characterOnBulletedListLine = true
-                    stringToAppend = "+ \(previousCharacter != nil ? String(closingString.characters.reversed()) : markdownString)"
+                    stringToAppend = "+ \(previousCharacter != nil ? String(closingString.reversed()) : markdownString)"
                     markdownString = previousCharacter == nil ? "" : markdownString
                 case ".":
                     if openedNumberedListStarter {
                         openedNumberedListStarter = false
                         characterOnNumberedListLine = true
                         
-                        stringToAppend = "\(character) \(!numberedListIsFirstLine ? String(closingString.characters.reversed()) : markdownString)"
+                        stringToAppend = "\(character) \(!numberedListIsFirstLine ? String(closingString.reversed()) : markdownString)"
                         
                         if numberedListIsFirstLine {
                             markdownString = ""
@@ -120,7 +120,7 @@ public extension NSAttributedString {
                 default:
                     if (previousCharacter == "\n" || previousCharacter == "\u{2028}") && characterOnBulletedListLine {
                         characterOnBulletedListLine = false
-                        stringToAppend = "\(String(closingString.characters.reversed()))\(character)"
+                        stringToAppend = "\(String(closingString.reversed()))\(character)"
                     } else {
                         stringToAppend = "\(character)"
                     }
@@ -137,7 +137,7 @@ public extension NSAttributedString {
         // Help the user because they probably didn't intend to have empty bullets and it will make markdown have a + if we leave them
         markdownString = markdownString.replacingOccurrences(of: "+ \n", with:  "")
         if markdownString.hasSuffix("+ ") {
-            markdownString = (markdownString as NSString).substring(to: markdownString.characters.count - 2)
+            markdownString = (markdownString as NSString).substring(to: markdownString.count - 2)
         }
         
         return markdownString

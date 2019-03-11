@@ -67,7 +67,7 @@ PODS:
     - FLAnimatedImage (~> 1.0)
     - Nuke (~> 7.5)
   - OAuthSwift (1.2.2)
-  - RCMarkdownParser (3.0.6)
+  - RCMarkdownParser (3.0.7)
   - ReachabilitySwift (4.2.1)
   - Realm (3.12.0):
     - Realm/Headers (= 3.12.0)
@@ -154,7 +154,7 @@ CHECKOUT OPTIONS:
     :commit: f8f8abd57aa3ff274d1e401252d6926ad931aec2
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
-    :commit: c34d9ccef689c55b9eae69f3c65283da8d8b0c6c
+    :commit: 7c4ec046817df378b694bebdbcfe3565869ce82e
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   RocketChatViewController:
     :commit: 7e2f461f9409f00b00f2e0a569378de2982570b0
@@ -182,7 +182,7 @@ SPEC CHECKSUMS:
   Nuke: 3814db501e55f17951451839c726ffd91641e9a5
   Nuke-FLAnimatedImage-Plugin: e4c39d13061a08ac0bdcb0cd7a23882f4a43f4a6
   OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
-  RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
+  RCMarkdownParser: f107c58b83065d001e20c988443e6eab9c0a1e26
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
   RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
@@ -194,6 +194,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: 5de85ce8e162b64ac2f6aa9802ba9d08358506a1
+PODFILE CHECKSUM: 6fd9fd3915b6e018de5ac5155286395301ab17a7
 
 COCOAPODS: 1.5.3
