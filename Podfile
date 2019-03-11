@@ -32,7 +32,7 @@ def shared_pods
   pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
-  pod 'SwipeCellKit'
+  pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'xcode_10.2'
   ui_pods
 
   # Text Processing
