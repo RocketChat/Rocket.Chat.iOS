@@ -42,20 +42,11 @@ extension UIViewController: Alerter {
     }
 
     func alertSuccess(title: String, completion: (() -> Void)? = nil) {
-        DispatchQueue.main.async {
-            let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-            successHUD.mode = .customView
-
-            let checkmark = UIImage(named: "Check")?.withRenderingMode(.alwaysTemplate)
-            successHUD.customView = UIImageView(image: checkmark)
-            successHUD.isSquare = true
-            successHUD.label.text = title
-
-            let delay = 1.5
-
-            successHUD.hide(animated: true, afterDelay: delay)
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
-                completion?()
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        let delay = DispatchTime.now() + 1.5
+        DispatchQueue.main.asyncAfter(deadline: delay) {
+            alert.dismiss(animated: true, completion: {() -> Void in
             })
         }
     }
