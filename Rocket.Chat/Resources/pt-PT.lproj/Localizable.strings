@@ -38,7 +38,7 @@
 "alert.feature.wip.message" = "Ainda estamos trabalhando nessa funcionalidade, fique atento!";
 
 "alert.insecure_image.title" = "Recurso inseguro";
-"alert.insecure_image.message" = "O funcionalidade da imagem é inseguro e, portanto, não é carregada. Apenas funcionalidades SSL são permitidos.";
+"alert.insecure_image.message" = "A funcionalidade da imagem é insegura e, portanto, não é carregada. Apenas funcionalidades SSL são permitidos.";
 
 "alert.socket_error.invalid_user.title" = "Sessão expirada";
 "alert.socket_error.invalid_user.message" = "Sua sessão expirou. Por favor faça login novamente.";
