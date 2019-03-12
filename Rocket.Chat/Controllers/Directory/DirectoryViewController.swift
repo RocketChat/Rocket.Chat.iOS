@@ -26,13 +26,14 @@ final class DirectoryViewController: BaseViewController {
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.isActive = false
 
         searchBar = searchController.searchBar
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = true
 
         self.searchController = searchController
         searchBar?.placeholder = localized("subscriptions.search")

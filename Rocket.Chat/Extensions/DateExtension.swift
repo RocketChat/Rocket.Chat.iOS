@@ -18,7 +18,9 @@ extension Date {
 
     public static func dateFromString(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> Date? {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = format
+
         return dateFormatter.date(from: string)
     }
 
@@ -50,6 +52,8 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
         return dateFormatter.string(from: self)
     }
 
