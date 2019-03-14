@@ -10,8 +10,14 @@ import UIKit
 
 final class DirectoryViewController: BaseViewController {
 
+    let viewModel = DirectoryViewModel()
+
+    weak var filtersView: DirectoryFiltersView?
+
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
+
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +27,27 @@ final class DirectoryViewController: BaseViewController {
         }
 
         setupSearchBar()
+        setupHeaderViewGestures()
+    }
+
+    func setupHeaderViewGestures() {
+        if let headerView = tableView.tableHeaderView {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(userDidTappedHeaderView(_:)))
+            headerView.addGestureRecognizer(gesture)
+        }
     }
 
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.isActive = false
 
         searchBar = searchController.searchBar
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.hidesSearchBarWhenScrolling = false
 
         self.searchController = searchController
         searchBar?.placeholder = localized("subscriptions.search")
@@ -47,6 +61,15 @@ final class DirectoryViewController: BaseViewController {
         if let presentingViewController = presentingViewController {
             presentingViewController.dismiss(animated: true, completion: nil)
         }
+    }
+
+    @objc func userDidTappedHeaderView(_ gesture: UIGestureRecognizer) {
+        if let filtersView = filtersView {
+            filtersView.close()
+            return
+        }
+
+        filtersView = DirectoryFiltersView.showIn(self.view)
     }
 
 }

@@ -75,6 +75,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="DNS-8K-OBF" id="Q6k-U9-G1P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjG-H8-NJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

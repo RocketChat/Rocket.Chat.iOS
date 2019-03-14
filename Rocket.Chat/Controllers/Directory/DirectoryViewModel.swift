@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+enum DirectoryViewDataType {
+    case users
+    case channels
+}
+
+final class DirectoryViewModel {
+
+    var type: DirectoryViewDataType = .users
+
+}

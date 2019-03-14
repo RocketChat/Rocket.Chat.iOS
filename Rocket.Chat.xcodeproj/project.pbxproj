@@ -233,6 +233,9 @@
 		413FB6E01FE17EB700F010AA /* SubscriptionsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413FB6DE1FE17EB600F010AA /* SubscriptionsTitleView.xib */; };
 		413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413FB6DF1FE17EB600F010AA /* SubscriptionsTitleView.swift */; };
 		414347F521D3E3130082FA8A /* JitsiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414347F421D3E3130082FA8A /* JitsiNavigationController.swift */; };
+		4146ECEA223A57D9000070EA /* DirectoryFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4146ECE7223A57D9000070EA /* DirectoryFiltersView.xib */; };
+		4146ECEC223A57D9000070EA /* DirectoryFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECE9223A57D9000070EA /* DirectoryFiltersView.swift */; };
+		4146ECEE223A5C3F000070EA /* DirectoryFiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECED223A5C3F000070EA /* DirectoryFiltersViewModel.swift */; };
 		4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */; };
 		4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */; };
 		4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */; };
@@ -1191,6 +1194,9 @@
 		413FB6DE1FE17EB600F010AA /* SubscriptionsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionsTitleView.xib; sourceTree = "<group>"; };
 		413FB6DF1FE17EB600F010AA /* SubscriptionsTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleView.swift; sourceTree = "<group>"; };
 		414347F421D3E3130082FA8A /* JitsiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiNavigationController.swift; sourceTree = "<group>"; };
+		4146ECE7223A57D9000070EA /* DirectoryFiltersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectoryFiltersView.xib; sourceTree = "<group>"; };
+		4146ECE9223A57D9000070EA /* DirectoryFiltersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryFiltersView.swift; sourceTree = "<group>"; };
+		4146ECED223A5C3F000070EA /* DirectoryFiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFiltersViewModel.swift; sourceTree = "<group>"; };
 		4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddServerCell.swift; sourceTree = "<group>"; };
 		4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManagerSpec.swift; sourceTree = "<group>"; };
@@ -2263,6 +2269,16 @@
 			path = Directory;
 			sourceTree = "<group>";
 		};
+		4146ECE6223A57BB000070EA /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				4146ECE9223A57D9000070EA /* DirectoryFiltersView.swift */,
+				4146ECE7223A57D9000070EA /* DirectoryFiltersView.xib */,
+				4146ECED223A5C3F000070EA /* DirectoryFiltersViewModel.swift */,
+			);
+			path = Directory;
+			sourceTree = "<group>";
+		};
 		414A1FF41D4631F600093E10 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -2409,6 +2425,7 @@
 				33FD181B20D252FE00380BEC /* Base */,
 				416133301D46CA3100E09DA2 /* Cells */,
 				41F167E51DAC450200775CCA /* Chat */,
+				4146ECE6223A57BB000070EA /* Directory */,
 				897083CC1F8CF08100233561 /* Form */,
 				41ADDD471E9DBAE90007A458 /* Loader */,
 				33F73B292073BDD800F03F29 /* Notification */,
@@ -2809,9 +2826,9 @@
 				4156250720BEDCD100D20576 /* ServersListViewModel.swift */,
 				41D3668420C0323100970B99 /* SubscriptionsSortingView.swift */,
 				41D3668320C0323000970B99 /* SubscriptionsSortingView.xib */,
+				41D3668520C0323100970B99 /* SubscriptionsSortingViewModel.swift */,
 				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
 				33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */,
-				41D3668520C0323100970B99 /* SubscriptionsSortingViewModel.swift */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -4442,6 +4459,7 @@
 				14F8A297202E65C700175FDC /* Blue-40@2x.png in Resources */,
 				14F8A271202E653E00175FDC /* Grey-40@3x.png in Resources */,
 				0B92E66A20F767F8003DAB5A /* InfoPlist.strings in Resources */,
+				4146ECEA223A57D9000070EA /* DirectoryFiltersView.xib in Resources */,
 				996735CD21581D160049BB63 /* BasicMessageCell.xib in Resources */,
 				14F8A292202E65C700175FDC /* Blue-29@3x.png in Resources */,
 				14F8A294202E65C700175FDC /* Blue-60@3x.png in Resources */,
@@ -5047,6 +5065,7 @@
 				33F67A44212D8F62004EB4A0 /* DifferenceKitExtension.swift in Sources */,
 				41DD613A203D9E6600B02D8A /* UISplitViewControllerExtensions.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
+				4146ECEE223A5C3F000070EA /* DirectoryFiltersViewModel.swift in Sources */,
 				8076FDB92048581F00114F28 /* AuthManagerCurrentUser.swift in Sources */,
 				99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */,
 				8013F86C1FD6B59A00EE1A4E /* APIError.swift in Sources */,
@@ -5076,6 +5095,7 @@
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
 				4124D833209A0517005374CD /* ChatLoaderCell.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
+				4146ECEC223A57D9000070EA /* DirectoryFiltersView.swift in Sources */,
 				997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */,
 				9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */,
 				80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */,
