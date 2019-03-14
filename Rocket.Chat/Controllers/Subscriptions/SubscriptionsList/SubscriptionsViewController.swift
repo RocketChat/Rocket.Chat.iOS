@@ -511,6 +511,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
             return
         }
 
+        controller.subscription = subscription
+
         // When using iPads, we override the detail controller creating
         // a new instance.
         if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
@@ -518,11 +520,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
                 return
             }
 
-            controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         } else {
-            controller.subscription = subscription
-
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
         }
