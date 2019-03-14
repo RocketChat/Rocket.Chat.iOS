@@ -8,5 +8,12 @@
 import UIKit
 
 public class OverlayView: UIView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        clipsToBounds = true
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
