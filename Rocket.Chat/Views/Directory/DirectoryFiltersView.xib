@@ -78,24 +78,23 @@
                             <state key="normal" title="Users"/>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lh3-5n-a4N">
-                            <rect key="frame" x="16" y="108" width="343" height="0.5"/>
+                            <rect key="frame" x="16" y="108" width="343" height="1"/>
                             <color key="backgroundColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="5S9-QF-PWb"/>
-                                <constraint firstAttribute="height" constant="0.5" id="aap-jH-GK9"/>
+                                <constraint firstAttribute="height" constant="1" id="aap-jH-GK9"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlE-Mz-ESQ">
-                            <rect key="frame" x="16" y="116.5" width="286" height="21"/>
+                            <rect key="frame" x="16" y="129" width="286" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTc-jW-aT8">
-                            <rect key="frame" x="310" y="116.5" width="51" height="31"/>
+                            <rect key="frame" x="310" y="129" width="51" height="31"/>
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAB-Ta-R5f">
-                            <rect key="frame" x="16" y="141.5" width="343" height="21"/>
+                            <rect key="frame" x="16" y="154" width="343" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -104,7 +103,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="NdC-hr-rNl" firstAttribute="leading" secondItem="xqI-gP-mhz" secondAttribute="leadingMargin" id="1gY-4M-zyR"/>
-                        <constraint firstItem="DTc-jW-aT8" firstAttribute="top" secondItem="Lh3-5n-a4N" secondAttribute="bottom" constant="8" id="2Qb-RF-gAP"/>
+                        <constraint firstItem="DTc-jW-aT8" firstAttribute="top" secondItem="Lh3-5n-a4N" secondAttribute="bottom" constant="20" id="2Qb-RF-gAP"/>
                         <constraint firstAttribute="height" constant="202" id="4NK-lh-3C3"/>
                         <constraint firstItem="WAB-Ta-R5f" firstAttribute="leading" secondItem="SlE-Mz-ESQ" secondAttribute="leading" id="4mP-hg-52V"/>
                         <constraint firstItem="NdC-hr-rNl" firstAttribute="top" secondItem="xqI-gP-mhz" secondAttribute="top" id="94N-9n-j9W"/>
@@ -149,6 +148,7 @@
                 <outlet property="headerView" destination="ELE-4T-pm3" id="Tq4-Xz-rCj"/>
                 <outlet property="labelTitle" destination="E8U-qO-lbN" id="A4g-Gf-s7l"/>
                 <outlet property="separatorView" destination="Kc6-H2-At2" id="G49-nM-5gz"/>
+                <outlet property="separatorViewFederation" destination="Lh3-5n-a4N" id="lVd-kK-iqY"/>
                 <outlet property="tappableView" destination="hfH-Cs-4wY" id="duc-Uc-RjK"/>
                 <outlet property="viewContent" destination="xqI-gP-mhz" id="iBp-ip-cVw"/>
                 <outlet property="viewTopConstraint" destination="dii-8S-MhV" id="FM1-1L-TJK"/>

@@ -36,6 +36,11 @@ final class DirectoryFiltersView: UIView {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var viewContent: UIView!
 
+    @IBOutlet weak var separatorViewFederation: UIView!
+
+    @IBOutlet weak var label: UILabel!
+
+
     // Start the constraint with negative value (view height + headerView height) so we can
     // animate it later when the view is presented.
     @IBOutlet weak var viewTopConstraint: NSLayoutConstraint! {

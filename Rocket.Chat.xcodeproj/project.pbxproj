@@ -236,6 +236,8 @@
 		4146ECEA223A57D9000070EA /* DirectoryFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4146ECE7223A57D9000070EA /* DirectoryFiltersView.xib */; };
 		4146ECEC223A57D9000070EA /* DirectoryFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECE9223A57D9000070EA /* DirectoryFiltersView.swift */; };
 		4146ECEE223A5C3F000070EA /* DirectoryFiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECED223A5C3F000070EA /* DirectoryFiltersViewModel.swift */; };
+		4146ECF1223A6A81000070EA /* DirectoryUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECF0223A6A81000070EA /* DirectoryUserCell.swift */; };
+		4146ECF3223A6A92000070EA /* DirectoryChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4146ECF2223A6A92000070EA /* DirectoryChannelCell.swift */; };
 		4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */; };
 		4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */; };
 		4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */; };
@@ -1197,6 +1199,8 @@
 		4146ECE7223A57D9000070EA /* DirectoryFiltersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectoryFiltersView.xib; sourceTree = "<group>"; };
 		4146ECE9223A57D9000070EA /* DirectoryFiltersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryFiltersView.swift; sourceTree = "<group>"; };
 		4146ECED223A5C3F000070EA /* DirectoryFiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFiltersViewModel.swift; sourceTree = "<group>"; };
+		4146ECF0223A6A81000070EA /* DirectoryUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryUserCell.swift; sourceTree = "<group>"; };
+		4146ECF2223A6A92000070EA /* DirectoryChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryChannelCell.swift; sourceTree = "<group>"; };
 		4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddServerCell.swift; sourceTree = "<group>"; };
 		4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManagerSpec.swift; sourceTree = "<group>"; };
@@ -2279,6 +2283,15 @@
 			path = Directory;
 			sourceTree = "<group>";
 		};
+		4146ECEF223A6A53000070EA /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				4146ECF0223A6A81000070EA /* DirectoryUserCell.swift */,
+				4146ECF2223A6A92000070EA /* DirectoryChannelCell.swift */,
+			);
+			path = Directory;
+			sourceTree = "<group>";
+		};
 		414A1FF41D4631F600093E10 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -2439,9 +2452,10 @@
 		416133301D46CA3100E09DA2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				80461AC92190F931003F1F32 /* Hints */,
 				995F710C20C7833500B7535F /* Auth */,
 				416133351D46CA7400E09DA2 /* Chat */,
+				4146ECEF223A6A53000070EA /* Directory */,
+				80461AC92190F931003F1F32 /* Hints */,
 				4153E80320504BC800FBC26B /* Preferences */,
 				4192054A1D52F4E7004EEC5F /* Subscription */,
 				80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */,
@@ -5074,6 +5088,7 @@
 				993417F520D1B31F0008B643 /* LegalTableViewController.swift in Sources */,
 				805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */,
 				994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */,
+				4146ECF1223A6A81000070EA /* DirectoryUserCell.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				998E649C2161B4D900E7C45A /* AttachmentFieldView.swift in Sources */,
 				9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */,
@@ -5247,6 +5262,7 @@
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
+				4146ECF3223A6A92000070EA /* DirectoryChannelCell.swift in Sources */,
 				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
