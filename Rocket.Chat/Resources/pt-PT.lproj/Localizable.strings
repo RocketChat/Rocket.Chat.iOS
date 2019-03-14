@@ -63,7 +63,7 @@
 "alert.email_verification.title" = "Verificação de e-mail";
 "alert.email_verification.message" = "Enviamos um e-mail para você confirmar o seu registo. Se você não receber um e-mail em breve, volte e tente novamente.";
 
-"alert.discarding_changes.title" = "Alterações não guardadad";
+"alert.discarding_changes.title" = "Alterações não guardadas";
 "alert.discarding_changes.message" = "As suas alterações não guardadas foram descartadas.";
 "alert.load_profile_error.title" = "Falha ao carregar o seu perfil";
 "alert.load_profile_error.message" = "Algo errado aconteceu ao carregar o seu perfil. Por favor, tente novamente.";
