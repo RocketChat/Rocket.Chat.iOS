@@ -42,11 +42,12 @@ extension UIViewController: Alerter {
     }
 
     func alertSuccess(title: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true, completion: nil)
-        let delay = DispatchTime.now() + 1.5
-        DispatchQueue.main.asyncAfter(deadline: delay) {
-            alert.dismiss(animated: true, completion: {() -> Void in
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: "✔️", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let delay = DispatchTime.now() + 1.5
+            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+                alert.dismiss(animated: true, completion: nil)
             })
         }
     }
