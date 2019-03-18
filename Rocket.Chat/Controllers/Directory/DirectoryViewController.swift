@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DirectoryViewController: BaseViewController {
+final class DirectoryViewController: BaseTableViewController {
 
     let viewModel = DirectoryViewModel()
 
@@ -17,10 +17,28 @@ final class DirectoryViewController: BaseViewController {
     weak var searchController: UISearchController?
     weak var searchBar: UISearchBar?
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var iconFiltering: UIImageView! {
+        didSet {
+            iconFiltering.image = viewModel.typeIcon
+        }
+    }
+
+    @IBOutlet weak var labelFiltering: UILabel! {
+        didSet {
+            labelFiltering.text = viewModel.typeDescription
+        }
+    }
+
+    @IBOutlet weak var iconFilteringDisclosure: UIImageView! {
+        didSet {
+            iconFilteringDisclosure.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = viewModel.title
 
         if navigationController?.viewControllers.first != self {
             navigationItem.leftBarButtonItem = nil
@@ -28,6 +46,15 @@ final class DirectoryViewController: BaseViewController {
 
         setupSearchBar()
         setupHeaderViewGestures()
+        setupTableViewCells()
+
+        loadMoreData()
+    }
+
+    func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
 
     func setupHeaderViewGestures() {
@@ -55,6 +82,49 @@ final class DirectoryViewController: BaseViewController {
         searchBar?.applyTheme()
     }
 
+    func setupTableViewCells() {
+        tableView.register(DirectoryUserCell.nib, forCellReuseIdentifier: DirectoryUserCell.identifier)
+        tableView.register(DirectoryChannelCell.nib, forCellReuseIdentifier: DirectoryChannelCell.identifier)
+    }
+
+    // MARK: Data Management
+
+    func loadMoreData(reload: Bool = false) {
+        let oldValues = viewModel.numberOfObjects
+
+        viewModel.loadMoreObjects { [weak self] in
+            guard let self = self else { return }
+
+            if reload {
+                self.tableView.reloadData()
+                return
+            }
+
+            let newValues = self.viewModel.numberOfObjects
+            var indexPaths: [IndexPath] = []
+
+            for index in oldValues..<newValues {
+                indexPaths.append(IndexPath(row: index, section: 0))
+            }
+
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexPaths, with: .automatic)
+            self.tableView.endUpdates()
+
+            self.refreshControl?.endRefreshing()
+        }
+    }
+
+    @objc func refreshControlDidPull() {
+        refreshControl?.beginRefreshing()
+
+        viewModel.query = ""
+        viewModel.clear()
+        tableView.reloadData()
+
+        loadMoreData(reload: true)
+    }
+
     // MARK: IBAction
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
@@ -70,6 +140,57 @@ final class DirectoryViewController: BaseViewController {
         }
 
         filtersView = DirectoryFiltersView.showIn(self.view)
+        filtersView?.delegate = self
+    }
+
+}
+
+// MARK: UITableViewDataSource
+
+extension DirectoryViewController {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfObjects
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if viewModel.type == .users {
+            let user = viewModel.user(at: indexPath.row)
+            return cellFor(user: user, at: indexPath)
+        }
+
+        let channel = viewModel.channel(at: indexPath.row)
+        return cellFor(channel: channel, at: indexPath)
+    }
+
+    func cellFor(user: UnmanagedUser, at indexPath: IndexPath) -> DirectoryUserCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DirectoryUserCell.identifier, for: indexPath) as? DirectoryUserCell else {
+            fatalError("cell could not be created")
+        }
+
+        cell.user = user
+        return cell
+    }
+
+    func cellFor(channel: UnmanagedSubscription, at indexPath: IndexPath) -> DirectoryChannelCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DirectoryChannelCell.identifier, for: indexPath) as? DirectoryChannelCell else {
+            fatalError("cell could not be created")
+        }
+
+        cell.channel = channel
+        return cell
+    }
+
+}
+
+// MARK: UITableViewDelegate
+
+extension DirectoryViewController {
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfObjects - viewModel.pageSize / 2 {
+            loadMoreData()
+        }
     }
 
 }
@@ -84,13 +205,30 @@ extension DirectoryViewController: UISearchBarDelegate {
         searchBar.setShowsCancelButton(false, animated: true)
     }
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.query = searchBar.text ?? ""
+        tableView.reloadData()
 
+        loadMoreData(reload: true)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+    }
+
+}
+
+extension DirectoryViewController: DirectoryFiltersViewDelegate {
+
+    func userDidChangeFilterOption(selected: DirectoryRequestType) {
+        viewModel.type = selected
+        tableView.reloadData()
+
+        iconFiltering.image = viewModel.typeIcon
+        labelFiltering.text = viewModel.typeDescription
+
+        loadMoreData(reload: true)
     }
 
 }

@@ -338,6 +338,8 @@
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
 		41A79C131D2F09F200A1968E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C121D2F09F200A1968E /* Auth.swift */; };
 		41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
+		41A897F8223FB55F00D2DB22 /* DirectoryChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A897F7223FB55F00D2DB22 /* DirectoryChannelCell.xib */; };
+		41A897FA223FB56C00D2DB22 /* DirectoryUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A897F9223FB56C00D2DB22 /* DirectoryUserCell.xib */; };
 		41A9B708215B0D0700CEB218 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B707215B0D0700CEB218 /* MessagesViewModel.swift */; };
 		41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */; };
 		41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */; };
@@ -1311,6 +1313,8 @@
 		41A79C0E1D2F085F00A1968E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		41A79C121D2F09F200A1968E /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		41A87BAC1DA66E700000EE80 /* AuthSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettings.swift; sourceTree = "<group>"; };
+		41A897F7223FB55F00D2DB22 /* DirectoryChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DirectoryChannelCell.xib; sourceTree = "<group>"; };
+		41A897F9223FB56C00D2DB22 /* DirectoryUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DirectoryUserCell.xib; sourceTree = "<group>"; };
 		41A9B707215B0D0700CEB218 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteCell.xib; sourceTree = "<group>"; };
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteCell.swift; sourceTree = "<group>"; };
@@ -2287,7 +2291,9 @@
 			isa = PBXGroup;
 			children = (
 				4146ECF0223A6A81000070EA /* DirectoryUserCell.swift */,
+				41A897F9223FB56C00D2DB22 /* DirectoryUserCell.xib */,
 				4146ECF2223A6A92000070EA /* DirectoryChannelCell.swift */,
+				41A897F7223FB55F00D2DB22 /* DirectoryChannelCell.xib */,
 			);
 			path = Directory;
 			sourceTree = "<group>";
@@ -4425,6 +4431,7 @@
 				33A5C9CE206A565800FE1C8F /* people.json in Resources */,
 				33A5C9D1206A565800FE1C8F /* activity.json in Resources */,
 				996E741D215DFBDB00842818 /* SequentialMessageCell.xib in Resources */,
+				41A897FA223FB56C00D2DB22 /* DirectoryUserCell.xib in Resources */,
 				14F8A25F202E64B200175FDC /* BnW-40@2x.png in Resources */,
 				14F8A227202E5CBF00175FDC /* Black-83.5@2x.png in Resources */,
 				14F8A23C202E5D0600175FDC /* Red-60@3x.png in Resources */,
@@ -4540,6 +4547,7 @@
 				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
 				14F8A285202E659000175FDC /* White-29@3x.png in Resources */,
 				33A5C9CA206A565800FE1C8F /* symbols.json in Resources */,
+				41A897F8223FB55F00D2DB22 /* DirectoryChannelCell.xib in Resources */,
 				14F8A243202E5D0600175FDC /* Red-40@2x.png in Resources */,
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
 				14F8A226202E5CBF00175FDC /* Black-29@2x.png in Resources */,

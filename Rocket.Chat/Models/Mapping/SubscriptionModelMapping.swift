@@ -62,6 +62,8 @@ extension Subscription: ModelMappeable {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
 
+        self.usersCount = values["usersCount"].int ?? 0
+
         mapNotifications(values)
     }
 

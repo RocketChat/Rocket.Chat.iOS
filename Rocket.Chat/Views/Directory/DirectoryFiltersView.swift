@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DirectoryFiltersViewDelegate: class {
-    func userDidChangeFilterOptions()
+    func userDidChangeFilterOption(selected: DirectoryRequestType)
 }
 
 final class DirectoryFiltersView: UIView {
@@ -27,19 +27,51 @@ final class DirectoryFiltersView: UIView {
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
-//            labelTitle.text = viewModel.sortingTitleDescription
+            labelTitle.text = viewModel.searchBy
         }
     }
 
     @IBOutlet weak var separatorView: UIView!
-    @IBOutlet weak var filterImageView: UIImageView!
+    @IBOutlet weak var filterImageView: UIImageView! {
+        didSet {
+            filterImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2 + Double.pi))
+        }
+    }
+
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var viewContent: UIView!
 
     @IBOutlet weak var separatorViewFederation: UIView!
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var buttonChannels: UIButton! {
+        didSet {
+            buttonChannels.setTitle(viewModel.channels, for: .normal)
 
+            let buttonImage = buttonChannels.image(for: .normal)?.imageWithTint(.RCBlue())
+            buttonChannels.setImage(buttonImage, for: .normal)
+        }
+    }
+
+    @IBOutlet weak var buttonUsers: UIButton! {
+        didSet {
+            buttonUsers.setTitle(viewModel.users, for: .normal)
+
+            let buttonImage = buttonUsers.image(for: .normal)?.imageWithTint(.RCBlue())
+            buttonUsers.setImage(buttonImage, for: .normal)
+        }
+    }
+
+    @IBOutlet weak var labelFederationTitle: UILabel! {
+        didSet {
+            labelFederationTitle.text = viewModel.federationTitle
+        }
+    }
+
+    @IBOutlet weak var labelFederationSubtitle: UILabel! {
+        didSet {
+            labelFederationSubtitle.text = viewModel.federationSubtitle
+        }
+    }
 
     // Start the constraint with negative value (view height + headerView height) so we can
     // animate it later when the view is presented.
@@ -96,6 +128,16 @@ final class DirectoryFiltersView: UIView {
     // MARK: IBAction
 
     @IBAction func recognizeHeaderTapGesture(_ sender: UITapGestureRecognizer) {
+        close()
+    }
+
+    @IBAction func buttonFilterChannelDidPressed(_ sender: Any) {
+        delegate?.userDidChangeFilterOption(selected: .channels)
+        close()
+    }
+
+    @IBAction func buttonFilterUserDidPressed(_ sender: Any) {
+        delegate?.userDidChangeFilterOption(selected: .users)
         close()
     }
 

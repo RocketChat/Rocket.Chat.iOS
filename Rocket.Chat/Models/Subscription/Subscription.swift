@@ -65,6 +65,8 @@ final class Subscription: BaseModel {
     @objc dynamic var createdAt: Date?
     @objc dynamic var lastSeen: Date?
 
+    @objc dynamic var usersCount = 0
+
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomAnnouncement: String?
