@@ -6,10 +6,10 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RocketChatViewController
 
 extension MessagesViewController {
-    func sendButtonPressed() {
+    func composerView(_ composerView: ComposerView, didPressSendButton button: UIButton) {
         if composerViewModel.messageToEdit != nil {
             commitMessageEdit()
         } else {

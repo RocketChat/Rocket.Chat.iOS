@@ -411,7 +411,7 @@ extension EditingView {
 }
 
 extension ComposerView {
-    override func applyTheme() {
+    @objc override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
         layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
@@ -433,7 +433,7 @@ extension ComposerView {
 }
 
 extension ComposerTextView {
-    override func applyTheme() {
+    @objc override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
         placeholderLabel.textColor = theme.auxiliaryText
@@ -444,6 +444,75 @@ extension ComposerTextView {
         }
 
         keyboardAppearance = theme.appearence.keyboardAppearence
+    }
+}
+
+extension RecordAudioView {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        //layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
+        backgroundColor = theme.focusedBackground
+
+        if theme == Theme.light {
+            backgroundColor = theme.backgroundColor
+        }
+
+        tintColor = theme.tintColor
+        swipeIndicatorView.label.textColor = theme.auxiliaryText
+        swipeIndicatorView.imageView.tintColor = theme.auxiliaryText
+        timeLabel.textColor = #colorLiteral(red: 0.9607843137, green: 0.2705882353, blue: 0.3607843137, alpha: 1)
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme()
+    }
+}
+
+extension PreviewAudioView {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        separatorView.backgroundColor = theme.borderColor
+        backgroundColor = theme.focusedBackground
+
+        if theme == Theme.light {
+            backgroundColor = theme.backgroundColor
+        }
+
+        if theme == .dark || theme == .black {
+            if let image = discardButton.backgroundImage(for: .normal)?.withRenderingMode(.alwaysTemplate) {
+                discardButton.setBackgroundImage(image, for: .normal)
+            }
+
+            discardButton.tintColor = .white
+        }
+
+        tintColor = theme.tintColor
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme()
+    }
+}
+
+extension AudioView {
+    @objc override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        backgroundColor = theme.chatComponentBackground
+
+        tintColor = theme.tintColor
+        applyThemeFromRuntimeAttributes()
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme()
     }
 }
 
