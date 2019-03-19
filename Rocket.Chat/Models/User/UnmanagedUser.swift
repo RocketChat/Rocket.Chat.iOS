@@ -20,6 +20,7 @@ struct UnmanagedUser: UnmanagedObject, Equatable {
     var utcOffset: Double
     var avatarURL: URL?
     var displayName: String
+    var federatedServerName: String
 
     var managedObject: User? {
         return User.find(withIdentifier: identifier)?.validated()
@@ -40,6 +41,7 @@ extension UnmanagedUser {
         utcOffset = user.utcOffset
         avatarURL = user.avatarURL()
         displayName = user.displayName()
+        federatedServerName = user.federatedServerName ?? ""
     }
 }
 

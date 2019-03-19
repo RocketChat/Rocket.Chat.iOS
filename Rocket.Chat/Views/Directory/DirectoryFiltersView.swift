@@ -46,18 +46,12 @@ final class DirectoryFiltersView: UIView {
     @IBOutlet weak var buttonChannels: UIButton! {
         didSet {
             buttonChannels.setTitle(viewModel.channels, for: .normal)
-
-            let buttonImage = buttonChannels.image(for: .normal)?.imageWithTint(.RCBlue())
-            buttonChannels.setImage(buttonImage, for: .normal)
         }
     }
 
     @IBOutlet weak var buttonUsers: UIButton! {
         didSet {
             buttonUsers.setTitle(viewModel.users, for: .normal)
-
-            let buttonImage = buttonUsers.image(for: .normal)?.imageWithTint(.RCBlue())
-            buttonUsers.setImage(buttonImage, for: .normal)
         }
     }
 
@@ -148,6 +142,7 @@ final class DirectoryFiltersView: UIView {
 extension DirectoryFiltersView {
     override var theme: Theme? {
         guard let theme = super.theme else { return nil }
+
         return Theme(
             backgroundColor: theme.appearence == .light ? theme.backgroundColor : theme.focusedBackground,
             focusedBackground: theme.focusedBackground,
@@ -175,5 +170,16 @@ extension DirectoryFiltersView {
         labelTitle.textColor = theme.auxiliaryText
         filterImageView.tintColor = theme.auxiliaryText
         separatorView.backgroundColor = theme.mutedAccent
+
+        labelFederationTitle.textColor = theme.bodyText
+        labelFederationSubtitle.textColor = theme.auxiliaryText
+
+        let buttonChannelsImage = buttonChannels.image(for: .normal)?.imageWithTint(theme.controlText)
+        buttonChannels.setImage(buttonChannelsImage, for: .normal)
+        buttonChannels.setTitleColor(theme.controlText, for: .normal)
+
+        let buttonUsersImage = buttonUsers.image(for: .normal)?.imageWithTint(theme.controlText)
+        buttonUsers.setImage(buttonUsersImage, for: .normal)
+        buttonUsers.setTitleColor(theme.controlText, for: .normal)
     }
 }

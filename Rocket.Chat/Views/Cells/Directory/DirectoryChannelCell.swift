@@ -55,7 +55,28 @@ final class DirectoryChannelCell: UITableViewCell {
 
         labelName.text = channel.name
         labelTopic.text = channel.roomTopic
-        labelUsers.text = String(format: "%d users", channel.usersCount)
+
+        if channel.usersCount == 1 {
+            labelUsers.text = localized("directory.users.1_user")
+        } else {
+            labelUsers.text = String(format: localized("directory.users.x_users"), channel.usersCount)
+        }
+    }
+
+}
+
+// MARK: Themeable
+
+extension DirectoryChannelCell {
+
+    override func applyTheme() {
+        super.applyTheme()
+
+        guard let theme = theme else { return }
+
+        labelName.textColor = theme.bodyText
+        labelTopic.textColor = theme.auxiliaryText
+        labelUsers.textColor = theme.auxiliaryText
     }
 
 }

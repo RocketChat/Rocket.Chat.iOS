@@ -76,14 +76,15 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="IBf-MR-AjE" firstAttribute="top" secondItem="J3y-Bd-gkv" secondAttribute="topMargin" constant="1" id="6SU-yH-Vpn"/>
                     <constraint firstItem="8Uu-W9-oPd" firstAttribute="leading" secondItem="DHl-zs-rAa" secondAttribute="trailing" id="9i1-OB-i4T"/>
                     <constraint firstItem="8Uu-W9-oPd" firstAttribute="centerY" secondItem="J3y-Bd-gkv" secondAttribute="centerY" id="CWe-gI-KuB"/>
                     <constraint firstItem="IBf-MR-AjE" firstAttribute="leading" secondItem="J3y-Bd-gkv" secondAttribute="leadingMargin" id="Oad-ST-aqT"/>
                     <constraint firstItem="DHl-zs-rAa" firstAttribute="top" secondItem="J3y-Bd-gkv" secondAttribute="topMargin" id="Q3p-tA-4dT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="DHl-zs-rAa" secondAttribute="bottom" id="UCk-qX-A8R"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Uu-W9-oPd" secondAttribute="trailing" id="b3I-Nq-tdA"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IBf-MR-AjE" secondAttribute="bottom" constant="1" id="i56-Xs-wyk"/>
                     <constraint firstItem="DHl-zs-rAa" firstAttribute="leading" secondItem="IBf-MR-AjE" secondAttribute="trailing" constant="15" id="kD0-tc-Mdz"/>
-                    <constraint firstItem="IBf-MR-AjE" firstAttribute="centerY" secondItem="J3y-Bd-gkv" secondAttribute="centerY" id="lNg-5O-BLT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

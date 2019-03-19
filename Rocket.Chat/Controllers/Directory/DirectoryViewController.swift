@@ -48,13 +48,7 @@ final class DirectoryViewController: BaseTableViewController {
         setupHeaderViewGestures()
         setupTableViewCells()
 
-        loadMoreData()
-    }
-
-    func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        loadMoreData(reload: true)
     }
 
     func setupHeaderViewGestures() {
@@ -92,10 +86,18 @@ final class DirectoryViewController: BaseTableViewController {
     func loadMoreData(reload: Bool = false) {
         let oldValues = viewModel.numberOfObjects
 
+        if reload {
+            let activity = UIActivityIndicatorView(style: .gray)
+            let buttonActivity = UIBarButtonItem(customView: activity)
+            activity.startAnimating()
+            navigationItem.rightBarButtonItem = buttonActivity
+        }
+
         viewModel.loadMoreObjects { [weak self] in
             guard let self = self else { return }
 
             if reload {
+                self.navigationItem.rightBarButtonItem = nil
                 self.tableView.reloadData()
                 return
             }
@@ -115,16 +117,6 @@ final class DirectoryViewController: BaseTableViewController {
         }
     }
 
-    @objc func refreshControlDidPull() {
-        refreshControl?.beginRefreshing()
-
-        viewModel.query = ""
-        viewModel.clear()
-        tableView.reloadData()
-
-        loadMoreData(reload: true)
-    }
-
     // MARK: IBAction
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
@@ -139,8 +131,19 @@ final class DirectoryViewController: BaseTableViewController {
             return
         }
 
+        searchBar?.resignFirstResponder()
+
         filtersView = DirectoryFiltersView.showIn(self.view)
         filtersView?.delegate = self
+    }
+
+    // MARK: UIScrollViewDelegate
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let filtersView = filtersView {
+            filtersView.close()
+            return
+        }
     }
 
 }
@@ -198,6 +201,10 @@ extension DirectoryViewController {
 extension DirectoryViewController: UISearchBarDelegate {
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if let filtersView = filtersView {
+            filtersView.close()
+        }
+
         searchBar.setShowsCancelButton(true, animated: true)
     }
 
@@ -205,10 +212,17 @@ extension DirectoryViewController: UISearchBarDelegate {
         searchBar.setShowsCancelButton(false, animated: true)
     }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" && !viewModel.query.isEmpty {
+            viewModel.query = searchBar.text ?? ""
+            tableView.reloadData()
+            loadMoreData(reload: true)
+        }
+    }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.query = searchBar.text ?? ""
         tableView.reloadData()
-
         loadMoreData(reload: true)
     }
 

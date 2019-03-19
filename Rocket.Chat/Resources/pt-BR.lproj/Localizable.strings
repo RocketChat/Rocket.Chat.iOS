@@ -511,3 +511,5 @@
 "directory.filters.by" = "Buscar por";
 "directory.filters.global.title" = "Busca global de usuários";
 "directory.filters.global.subtitle" = "Se você habilitar esta opção, você buscará também usuários de outros servidores conectados ao seu. ";
+"directory.users.1_user" = "1 usuário";
+"directory.users.x_users" = "%d usuários";

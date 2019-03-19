@@ -44,7 +44,23 @@ final class DirectoryUserCell: UITableViewCell {
 
         labelName.text = user?.name
         labelUsername.text = user?.username
-        labelServer.text = "open.rocket.chat"
+        labelServer.text = user?.federatedServerName
+    }
+
+}
+
+// MARK: Themeable
+
+extension DirectoryUserCell {
+
+    override func applyTheme() {
+        super.applyTheme()
+
+        guard let theme = theme else { return }
+
+        labelName.textColor = theme.bodyText
+        labelUsername.textColor = theme.auxiliaryText
+        labelServer.textColor = theme.auxiliaryText
     }
 
 }
