@@ -21,6 +21,10 @@ extension Subscription: ModelMappeable {
             self.rid = rid
         }
 
+        if let prid = values["prid"].string {
+            self.prid = prid
+        }
+
         self.name = values["name"].stringValue
 
         if let fname = values["fname"].string {

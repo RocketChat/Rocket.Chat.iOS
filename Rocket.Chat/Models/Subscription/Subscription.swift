@@ -46,6 +46,7 @@ final class Subscription: BaseModel {
     }
 
     @objc dynamic var rid = ""
+    @objc dynamic var prid = ""
 
     // Name of the subscription
     @objc dynamic var name = ""
@@ -168,6 +169,10 @@ extension Subscription {
         }
 
         if type != .directMessage {
+            if !prid.isEmpty {
+                return !fname.isEmpty ? fname : name
+            }
+
             return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
         }
 
