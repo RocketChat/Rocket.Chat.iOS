@@ -54,7 +54,12 @@ final class DirectoryChannelCell: UITableViewCell {
         }
 
         labelName.text = channel.name
-        labelTopic.text = channel.roomTopic
+
+        if let topic = channel.roomTopic, !topic.isEmpty {
+            labelTopic.text = topic
+        } else {
+            labelTopic.text = localized("chat.info.item.no_topic")
+        }
 
         if channel.usersCount == 1 {
             labelUsers.text = localized("directory.users.1_user")

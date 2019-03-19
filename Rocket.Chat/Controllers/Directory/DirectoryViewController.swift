@@ -196,6 +196,18 @@ extension DirectoryViewController {
         }
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if viewModel.type == .users {
+            let user = viewModel.user(at: indexPath.row)
+            AppManager.openDirectMessage(username: user.username)
+        }
+
+        if viewModel.type == .channels {
+            let channel = viewModel.channel(at: indexPath.row)
+            AppManager.openRoom(name: channel.name, type: channel.type)
+        }
+    }
+
 }
 
 extension DirectoryViewController: UISearchBarDelegate {
