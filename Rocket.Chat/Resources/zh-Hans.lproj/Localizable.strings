@@ -503,3 +503,13 @@
 "chat.components.quote.replied" = "已回复";
 "chat.components.quote.pinned" = "已固定";
 "chat.components.text_attachment.no_title" = "无标题";
+
+// Directory
+"directory.title" = "Directory"; // TODO
+"directory.filters.channels" = "Channels"; // TODO
+"directory.filters.users" = "Users"; // TODO
+"directory.filters.by" = "Search by"; // TODO
+"directory.filters.global.title" = "Search for global users"; // TODO
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
+"directory.users.1_user" = "1 user"; // TODO
+"directory.users.x_users" = "%@ users"; // TODO

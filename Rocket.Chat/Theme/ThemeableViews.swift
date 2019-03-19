@@ -156,10 +156,8 @@ extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        if #available(iOS 11, *) {
-            barStyle = theme.appearence.barStyle
-        }
 
+        barStyle = theme.appearence.barStyle
         backgroundImage = UIImage()
         textField?.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.1525235445)
         applyThemeFromRuntimeAttributes()

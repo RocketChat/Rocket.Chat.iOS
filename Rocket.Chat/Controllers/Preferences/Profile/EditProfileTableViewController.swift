@@ -337,9 +337,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = localized("myaccount.settings.profile.password_required.placeholder")
-            if #available(iOS 11.0, *) {
-                textField.textContentType = .password
-            }
+            textField.textContentType = .password
             textField.isSecureTextEntry = true
 
             _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in

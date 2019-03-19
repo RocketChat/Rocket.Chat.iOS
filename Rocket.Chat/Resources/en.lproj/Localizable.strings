@@ -503,3 +503,13 @@
 "chat.components.quote.replied" = "Replied";
 "chat.components.quote.pinned" = "Pinned";
 "chat.components.text_attachment.no_title" = "No title";
+
+// Directory
+"directory.title" = "Directory";
+"directory.filters.channels" = "Channels";
+"directory.filters.users" = "Users";
+"directory.filters.by" = "Search by";
+"directory.filters.global.title" = "Search for global users";
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. ";
+"directory.users.1_user" = "1 user";
+"directory.users.x_users" = "%@ users";
