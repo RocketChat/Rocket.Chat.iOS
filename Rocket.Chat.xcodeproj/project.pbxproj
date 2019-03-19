@@ -1829,6 +1829,11 @@
 		B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReviewManager.swift; sourceTree = "<group>"; };
 		B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReviewManagerSpec.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
+		CAC887262240CD1E0079A7AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
+		CAC887272240CD1F0079A7AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CAC887282240CD1F0079A7AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/VoiceOver.strings"; sourceTree = "<group>"; };
+		CAC887292240CD1F0079A7AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CAC8872A2240CD1F0079A7AD /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D10E9C191F643457007F1796 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelModelMapping.swift; sourceTree = "<group>"; };
 		D10E9C211F643616007F1796 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionModelMapping.swift; sourceTree = "<group>"; };
@@ -4318,6 +4323,7 @@
 				ja,
 				it,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -5572,6 +5578,7 @@
 				4119E1C32138242A00CDFB83 /* ja */,
 				4136466521A4A25E00BE64B8 /* it */,
 				41510BC021E61CBC0095F0F8 /* zh-Hans */,
+				CAC887292240CD1F0079A7AD /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -5580,6 +5587,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				41DF76EC1D2C50720028DBF8 /* Base */,
+				CAC887242240CD1E0079A7AD /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			path = .;
@@ -5601,6 +5609,7 @@
 				4119E1C12138242900CDFB83 /* ja */,
 				4136466321A4A25E00BE64B8 /* it */,
 				41510BBE21E61CBC0095F0F8 /* zh-Hans */,
+				CAC887272240CD1F0079A7AD /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -5622,6 +5631,7 @@
 				4119E1C22138242900CDFB83 /* ja */,
 				4136466421A4A25E00BE64B8 /* it */,
 				41510BBF21E61CBC0095F0F8 /* zh-Hans */,
+				CAC887282240CD1F0079A7AD /* zh-Hant */,
 			);
 			name = VoiceOver.strings;
 			path = .;
@@ -5631,6 +5641,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				807FB55D2046E7DD00E21429 /* Base */,
+				CAC887252240CD1E0079A7AD /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			path = .;
@@ -5649,6 +5660,7 @@
 				416772D720EA4CCA009999F8 /* pt-PT */,
 				4136466621A4A25E00BE64B8 /* it */,
 				41510BC121E61CBD0095F0F8 /* zh-Hans */,
+				CAC8872A2240CD1F0079A7AD /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			path = .;
@@ -5669,6 +5681,7 @@
 				4119E1C02138242900CDFB83 /* ja */,
 				4136466221A4A25D00BE64B8 /* it */,
 				41510BBD21E61CBC0095F0F8 /* zh-Hans */,
+				CAC887262240CD1E0079A7AD /* zh-Hant */,
 			);
 			name = RCEmojiKit.strings;
 			path = .;
