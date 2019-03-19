@@ -14,6 +14,11 @@ enum DirectoryRequestType: String {
     case channels
 }
 
+enum DirectoryWorkspaceType: String {
+    case local
+    case all
+}
+
 final class DirectoryRequest: APIRequest {
     typealias APIResourceType = DirectoryResource
 
@@ -22,13 +27,13 @@ final class DirectoryRequest: APIRequest {
 
     let query: String?
 
-    init(query: String, type: DirectoryRequestType) {
+    init(query: String, type: DirectoryRequestType, workspace: DirectoryWorkspaceType) {
         let sort = type == .channels ? "sort={\"usersCount\":-1}&" : "sort={\"username\":1}&"
 
         if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            self.query = "\(sort)query={\"text\": \"\(encodedQuery)\", \"type\": \"\(type)\"}"
+            self.query = "\(sort)query={\"text\": \"\(encodedQuery)\", \"type\": \"\(type)\", \"workspace\": \"\(workspace)\"}"
         } else {
-            self.query = "\(sort)query={\"type\": \"\(type)\"}"
+            self.query = "\(sort)query={\"type\": \"\(type)\", \"workspace\": \"\(workspace)\"}"
         }
     }
 }

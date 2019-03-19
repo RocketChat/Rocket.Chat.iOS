@@ -112,6 +112,9 @@
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTc-jW-aT8">
                             <rect key="frame" x="310" y="116.5" width="51" height="31"/>
+                            <connections>
+                                <action selector="switchWorkspaceDidChange:" destination="iN0-l3-epB" eventType="valueChanged" id="7vt-hJ-qu3"/>
+                            </connections>
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAB-Ta-R5f">
                             <rect key="frame" x="16" y="152.5" width="343" height="16"/>
@@ -173,6 +176,7 @@
                 <outlet property="labelTitle" destination="E8U-qO-lbN" id="A4g-Gf-s7l"/>
                 <outlet property="separatorView" destination="Kc6-H2-At2" id="G49-nM-5gz"/>
                 <outlet property="separatorViewFederation" destination="Lh3-5n-a4N" id="lVd-kK-iqY"/>
+                <outlet property="switchWorkspace" destination="DTc-jW-aT8" id="JbY-xv-3bD"/>
                 <outlet property="tappableView" destination="hfH-Cs-4wY" id="duc-Uc-RjK"/>
                 <outlet property="viewContent" destination="xqI-gP-mhz" id="iBp-ip-cVw"/>
                 <outlet property="viewTopConstraint" destination="dii-8S-MhV" id="FM1-1L-TJK"/>

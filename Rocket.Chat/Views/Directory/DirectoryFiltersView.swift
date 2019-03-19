@@ -8,8 +8,10 @@
 
 import UIKit
 
+let kDirectoryFilterViewWorkspaceLocalKey = "kDirectoryFilterViewWorkspaceLocalKey"
+
 protocol DirectoryFiltersViewDelegate: class {
-    func userDidChangeFilterOption(selected: DirectoryRequestType)
+    func userDidChangeFilterOption(selected: DirectoryRequestType, workspace: DirectoryWorkspaceType)
 }
 
 final class DirectoryFiltersView: UIView {
@@ -42,6 +44,15 @@ final class DirectoryFiltersView: UIView {
     @IBOutlet weak var viewContent: UIView!
 
     @IBOutlet weak var separatorViewFederation: UIView!
+    @IBOutlet weak var switchWorkspace: UISwitch! {
+        didSet {
+            if UserDefaults.standard.bool(forKey: kDirectoryFilterViewWorkspaceLocalKey) {
+                switchWorkspace.isOn = false
+            } else {
+                switchWorkspace.isOn = true
+            }
+        }
+    }
 
     @IBOutlet weak var buttonChannels: UIButton! {
         didSet {
@@ -125,13 +136,33 @@ final class DirectoryFiltersView: UIView {
         close()
     }
 
+    @IBAction func switchWorkspaceDidChange(_ sender: Any) {
+        delegate?.userDidChangeFilterOption(
+            selected: .users,
+            workspace: switchWorkspace.isOn ? .all : .local
+        )
+
+        UserDefaults.standard.set(
+            !switchWorkspace.isOn,
+            forKey: kDirectoryFilterViewWorkspaceLocalKey
+        )
+    }
+
     @IBAction func buttonFilterChannelDidPressed(_ sender: Any) {
-        delegate?.userDidChangeFilterOption(selected: .channels)
+        delegate?.userDidChangeFilterOption(
+            selected: .channels,
+            workspace: switchWorkspace.isOn ? .all : .local
+        )
+
         close()
     }
 
     @IBAction func buttonFilterUserDidPressed(_ sender: Any) {
-        delegate?.userDidChangeFilterOption(selected: .users)
+        delegate?.userDidChangeFilterOption(
+            selected: .users,
+            workspace: switchWorkspace.isOn ? .all : .local
+        )
+
         close()
     }
 

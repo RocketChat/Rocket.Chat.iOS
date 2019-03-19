@@ -247,8 +247,10 @@ extension DirectoryViewController: UISearchBarDelegate {
 
 extension DirectoryViewController: DirectoryFiltersViewDelegate {
 
-    func userDidChangeFilterOption(selected: DirectoryRequestType) {
+    func userDidChangeFilterOption(selected: DirectoryRequestType, workspace: DirectoryWorkspaceType) {
         viewModel.type = selected
+        viewModel.workspace = workspace
+
         tableView.reloadData()
 
         iconFiltering.image = viewModel.typeIcon

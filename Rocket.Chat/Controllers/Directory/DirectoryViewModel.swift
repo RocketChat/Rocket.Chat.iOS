@@ -10,6 +10,12 @@ import Foundation
 
 final class DirectoryViewModel {
 
+    var workspace: DirectoryWorkspaceType = .all {
+        didSet {
+            clear()
+        }
+    }
+
     var type: DirectoryRequestType = .users {
         didSet {
             clear()
@@ -90,7 +96,7 @@ final class DirectoryViewModel {
         isLoadingMore = true
 
         let requestType = self.type
-        let request = DirectoryRequest(query: query, type: requestType)
+        let request = DirectoryRequest(query: query, type: requestType, workspace: workspace)
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
 
         API.current()?.fetch(request, options: options) { [weak self] response in
