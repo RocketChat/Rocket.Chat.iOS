@@ -64,7 +64,7 @@ final class DirectoryChannelCell: UITableViewCell {
         if channel.usersCount == 1 {
             labelUsers.text = localized("directory.users.1_user")
         } else {
-            labelUsers.text = String(format: localized("directory.users.x_users"), channel.usersCount)
+            labelUsers.text = String(format: localized("directory.users.x_users"), channel.usersCount.humanized())
         }
     }
 

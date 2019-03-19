@@ -301,6 +301,7 @@
 		41852E891F92BBEC00D1C499 /* MessagesViewControllerReplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */; };
 		41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */; };
 		41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */; };
+		418A8FA6224114100048A9B6 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A8FA5224114100048A9B6 /* IntExtensions.swift */; };
 		418BBC4D20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */; };
 		418BBC4F20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */; };
 		418BBC5120D0309400EC09F5 /* ChatTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */; };
@@ -1275,6 +1276,7 @@
 		41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerReplying.swift; sourceTree = "<group>"; };
 		41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerEmbedded.swift; sourceTree = "<group>"; };
 		41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewControllerEmbedded.xib; sourceTree = "<group>"; };
+		418A8FA5224114100048A9B6 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManagerConnectionHandlerSpec.swift; sourceTree = "<group>"; };
 		418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleViewSpec.swift; sourceTree = "<group>"; };
 		418BBC5020D0309400EC09F5 /* ChatTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTitleViewSpec.swift; sourceTree = "<group>"; };
@@ -2684,6 +2686,7 @@
 				77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */,
 				33674249213EBBF800E6816E /* ListExtension.swift */,
 				41FC9E07209B3A6300FED485 /* NSAttributedStringExtensions.swift */,
+				418A8FA5224114100048A9B6 /* IntExtensions.swift */,
 				80A2A2AA2073BD0800857DAF /* RealmCurrent.swift */,
 				8076FDA8204853DE00114F28 /* RealmExecute.swift */,
 				8076FDA32048533000114F28 /* String+Random.swift */,
@@ -5243,6 +5246,7 @@
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				99EA7A99219181750023BB63 /* BaseTextAttachmentChatItem.swift in Sources */,
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,
+				418A8FA6224114100048A9B6 /* IntExtensions.swift in Sources */,
 				41D3668820C0323100970B99 /* SubscriptionsSortingViewModel.swift in Sources */,
 				800E22861F8507E400DA84F1 /* RoomMessagesRequest.swift in Sources */,
 				8020C3D82199F75A00AA7133 /* MessagesViewControllerEmptyState.swift in Sources */,

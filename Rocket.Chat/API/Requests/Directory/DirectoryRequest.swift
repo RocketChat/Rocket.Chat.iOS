@@ -23,10 +23,12 @@ final class DirectoryRequest: APIRequest {
     let query: String?
 
     init(query: String, type: DirectoryRequestType) {
+        let sort = type == .channels ? "sort={\"usersCount\":-1}&" : "sort={\"username\":1}&"
+
         if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            self.query = "query={\"text\": \"\(encodedQuery)\", \"type\": \"\(type)\"}"
+            self.query = "\(sort)query={\"text\": \"\(encodedQuery)\", \"type\": \"\(type)\"}"
         } else {
-            self.query = "query={\"type\": \"\(type)\"}"
+            self.query = "\(sort)query={\"type\": \"\(type)\"}"
         }
     }
 }

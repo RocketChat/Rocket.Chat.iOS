@@ -512,4 +512,4 @@
 "directory.filters.global.title" = "Search for global users"; // TODO
 "directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
 "directory.users.1_user" = "1 user"; // TODO
-"directory.users.x_users" = "%d users"; // TODO
+"directory.users.x_users" = "%@ users"; // TODO
