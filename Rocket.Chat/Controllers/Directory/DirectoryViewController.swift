@@ -91,6 +91,11 @@ final class DirectoryViewController: BaseTableViewController {
             let buttonActivity = UIBarButtonItem(customView: activity)
             activity.startAnimating()
             navigationItem.rightBarButtonItem = buttonActivity
+
+            AnalyticsManager.log(event: Event.directory(
+                searchType: viewModel.type.rawValue,
+                workspace: viewModel.workspace.rawValue
+            ))
         }
 
         viewModel.loadMoreObjects { [weak self] in
@@ -226,16 +231,23 @@ extension DirectoryViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" && !viewModel.query.isEmpty {
-            viewModel.query = searchBar.text ?? ""
-            tableView.reloadData()
-            loadMoreData(reload: true)
+            search()
         }
     }
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.query = searchBar.text ?? ""
+    func search() {
+        viewModel.query = searchBar?.text ?? ""
         tableView.reloadData()
         loadMoreData(reload: true)
+    }
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        search()
+        return true
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
