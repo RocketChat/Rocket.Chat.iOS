@@ -107,12 +107,12 @@ final class DirectoryViewModel {
         let request = DirectoryRequest(query: query, type: requestType, workspace: workspace)
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
 
-        let task = API.current()?.fetch(request, options: options) { [weak self] response in
+        self.task = API.current()?.fetch(request, options: options) { [weak self] response in
             guard
                 let self = self,
                 case let .resource(resource) = response
             else {
-                return Alert.defaultError.present()
+                return
             }
 
             if requestType == .users {
