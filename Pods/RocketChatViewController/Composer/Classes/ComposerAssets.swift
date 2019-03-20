@@ -8,40 +8,25 @@
 
 import UIKit
 
-private var bundle = Bundle(for: ComposerView.self)
+public struct ComposerAssets {
+    public static let addButtonImage = imageNamed("Add Button")
+    public static let sendButtonImage = imageNamed("Send Button")
+    public static let micButtonImage = imageNamed("Mic Button")
 
-private func imageNamed(_ name: String) -> ComposerAsset<UIImage> {
-    let image = UIImage(named: name, in: bundle, compatibleWith: nil)
-    return ComposerAsset(image ?? UIImage())
-}
+    public static let cancelReplyButtonImage = imageNamed("Cancel Reply Button")
 
-private var addButtonImage = imageNamed("Add Button")
-private var sendButtonImage = imageNamed("Send Button")
-private var micButtonImage = imageNamed("Mic Button")
+    public static let redMicButtonImage = imageNamed("Red Mic Button")
+    public static let grayArrowLeftButtonImage = imageNamed("Gray Arrow Left")
 
-private var cancelReplyButtonImage = imageNamed("Cancel Reply Button")
+    public static let playButtonImage = imageNamed("Play Button")
+    public static let pauseButtonImage = imageNamed("Pause Button")
+    public static let sliderThumbImage = imageNamed("Slider Thumb")
+    public static let discardButtonImage = imageNamed("Discard Button")
 
-public struct ComposerAsset<T> {
-    let raw: T
-    init(_ raw: T) {
-        self.raw = raw
-    }
-}
+    private static let bundle = Bundle(for: ComposerView.self)
 
-public extension ComposerAsset where T == UIImage {
-    public static var addButton: ComposerAsset<T> {
-        return addButtonImage
-    }
-
-    public static var sendButton: ComposerAsset<T> {
-        return sendButtonImage
-    }
-
-    public static var micButton: ComposerAsset<T> {
-        return micButtonImage
-    }
-
-    public static var cancelReplyButton: ComposerAsset<T> {
-        return cancelReplyButtonImage
+    private static func imageNamed(_ name: String) -> UIImage {
+        let image = UIImage(named: name, in: bundle, compatibleWith: nil)
+        return image ?? UIImage()
     }
 }

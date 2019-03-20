@@ -44,10 +44,7 @@ final class UserReviewManager {
     @discardableResult
     func requestReview() -> Bool {
         if availableForReview {
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
-
+            SKStoreReviewController.requestReview()
             nextDateForReview = calculateNextDateForReview()
             return true
         }

@@ -16,15 +16,7 @@ class UserDetailTableView: UITableView {
     }
 
     private var topInset: CGFloat {
-        let safeAreaInset: CGFloat
-
-        if #available(iOS 11, *) {
-            safeAreaInset = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        } else {
-            safeAreaInset = 0
-        }
-
-        return safeAreaInset
+        return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
     }
 
     private var headerViewHeight: CGFloat {

@@ -28,16 +28,12 @@ final class ChangeAppIconViewController: BaseViewController {
     private func changeIcon(name: String) {
         let iconName = name == "Default" ? nil : name
 
-        if #available(iOS 10.3, *) {
-            UIApplication.shared.setAlternateIconName(iconName) { error in
-                if let error = error {
-                    self.reportError(message: (error as NSError).localizedDescription)
-                }
-
-                self.collectionView.reloadData()
+        UIApplication.shared.setAlternateIconName(iconName) { error in
+            if let error = error {
+                self.reportError(message: (error as NSError).localizedDescription)
             }
-        } else {
-            reportError(message: viewModel.iosVersionMessage)
+
+            self.collectionView.reloadData()
         }
     }
 
@@ -68,12 +64,10 @@ extension ChangeAppIconViewController: UICollectionViewDataSource {
         let iconName = viewModel.availableIcons[indexPath.row]
 
         var isSelected = false
-        if #available(iOS 10.3, *) {
-            if let selectedIcon = UIApplication.shared.alternateIconName {
-                isSelected = iconName == selectedIcon
-            } else {
-                isSelected = indexPath.row == 0
-            }
+        if let selectedIcon = UIApplication.shared.alternateIconName {
+            isSelected = iconName == selectedIcon
+        } else {
+            isSelected = indexPath.row == 0
         }
 
         cell.setIcon(name: iconName, selected: isSelected)

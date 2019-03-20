@@ -17,6 +17,22 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
         return
     }
 
+    // MARK: Audio
+
+    func composerView(_ composerView: ComposerView, didFinishRecordingAudio url: URL) {
+        upload(audioWithURL: url)
+
+        if let subscriptionType = viewModel.subscription?.type {
+            AnalyticsManager.log(
+                event: Event.audioMessage(subscriptionType: subscriptionType.rawValue
+            ))
+        }
+    }
+
+    func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView) {
+        ThemeManager.addObserver(view)
+    }
+
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
@@ -112,18 +128,6 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func editingViewDidShow(_ editingView: EditingView) {
         UIView.animate(withDuration: 0.2) {
             self.composerView.leftButton.hide()
-        }
-    }
-
-    // MARK: Button
-
-    func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
-        if button === composerView.rightButton {
-            sendButtonPressed()
-        }
-
-        if button == composerView.leftButton {
-            uploadButtonPressed()
         }
     }
 

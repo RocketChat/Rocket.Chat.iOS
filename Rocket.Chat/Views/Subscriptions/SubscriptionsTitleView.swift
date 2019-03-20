@@ -67,11 +67,7 @@ final class SubscriptionsTitleView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        if #available(iOS 11.0, *) {
-            return UIView.layoutFittingExpandedSize
-        }
-
-        return UIView.layoutFittingCompressedSize
+        return UIView.layoutFittingExpandedSize
     }
 
 }
@@ -85,13 +81,5 @@ extension SubscriptionsTitleView {
 
         buttonServer.tintColor = theme.tintColor
         buttonServer.setTitleColor(theme.tintColor, for: .normal)
-
-        if #available(iOS 11, *) {
-            // Do nothing
-        } else {
-            if let buttonLabel = buttonServer.subviews.first(where: { $0 is UILabel }) as? UILabel {
-                buttonLabel.textColor = theme.tintColor
-            }
-        }
     }
 }
