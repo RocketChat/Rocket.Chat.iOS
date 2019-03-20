@@ -237,6 +237,8 @@ extension DirectoryViewController: UISearchBarDelegate {
         }
     }
 
+    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.query = searchBar.text ?? ""
         tableView.reloadData()
