@@ -105,12 +105,14 @@ extension User {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
+            let userId = auth.userId,
+            let token = auth.token,
             let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg&rc_uid=\(userId)&rc_token=\(token)")
     }
 
 }
