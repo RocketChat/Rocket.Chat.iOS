@@ -21,6 +21,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, didFinishRecordingAudio url: URL) {
         upload(audioWithURL: url)
+
+        if let subscriptionType = viewModel.subscription?.type {
+            AnalyticsManager.log(
+                event: Event.audioMessage(subscriptionType: subscriptionType.rawValue
+            ))
+        }
     }
 
     func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView) {

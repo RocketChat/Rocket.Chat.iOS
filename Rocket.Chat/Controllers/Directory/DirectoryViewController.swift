@@ -91,6 +91,11 @@ final class DirectoryViewController: BaseTableViewController {
             let buttonActivity = UIBarButtonItem(customView: activity)
             activity.startAnimating()
             navigationItem.rightBarButtonItem = buttonActivity
+
+            AnalyticsManager.log(event: Event.directory(
+                searchType: viewModel.type.rawValue,
+                workspace: viewModel.workspace.rawValue
+            ))
         }
 
         viewModel.loadMoreObjects { [weak self] in
