@@ -16,6 +16,10 @@ public protocol RecordAudioViewDelegate: class {
 public class RecordAudioView: UIView {
     public weak var composerView: ComposerView?
     public weak var delegate: RecordAudioViewDelegate?
+
+    internal let impactFeedbackLight = UIImpactFeedbackGenerator(style: .light)
+    internal let impactFeedbackMedium = UIImpactFeedbackGenerator(style: .medium)
+
     public let audioRecorder = AudioRecorder()
 
     public var timer: Timer?
@@ -166,7 +170,7 @@ public class RecordAudioView: UIView {
      */
     func startRecording() {
         if !audioRecorder.isRecording {
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            impactFeedbackMedium.impactOccurred()
 
             // need to delay the call to prevent the vibration from being recorded
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
@@ -180,6 +184,7 @@ public class RecordAudioView: UIView {
      */
     func stopRecording() {
         if audioRecorder.isRecording {
+            impactFeedbackLight.impactOccurred()
             audioRecorder.stop()
         }
     }
