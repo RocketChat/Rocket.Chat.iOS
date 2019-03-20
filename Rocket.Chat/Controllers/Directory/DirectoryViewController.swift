@@ -231,18 +231,23 @@ extension DirectoryViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" && !viewModel.query.isEmpty {
-            viewModel.query = searchBar.text ?? ""
-            tableView.reloadData()
-            loadMoreData(reload: true)
+            search()
         }
     }
 
-    
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.query = searchBar.text ?? ""
+    func search() {
+        viewModel.query = searchBar?.text ?? ""
         tableView.reloadData()
         loadMoreData(reload: true)
+    }
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        search()
+        return true
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
