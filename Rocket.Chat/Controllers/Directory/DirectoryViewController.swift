@@ -247,9 +247,8 @@ extension DirectoryViewController: UISearchBarDelegate {
 
 extension DirectoryViewController: DirectoryFiltersViewDelegate {
 
-    func userDidChangeFilterOption(selected: DirectoryRequestType, workspace: DirectoryWorkspaceType) {
+    func userDidChangeFilterOption(selected: DirectoryRequestType) {
         viewModel.type = selected
-        viewModel.workspace = workspace
 
         tableView.reloadData()
 

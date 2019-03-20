@@ -10,10 +10,12 @@ import Foundation
 
 final class DirectoryViewModel {
 
-    var workspace: DirectoryWorkspaceType = .all {
-        didSet {
-            clear()
+    var workspace: DirectoryWorkspaceType {
+        if UserDefaults.standard.bool(forKey: kDirectoryFilterViewWorkspaceLocalKey) {
+            return .local
         }
+
+        return .all
     }
 
     var type: DirectoryRequestType = .users {
@@ -52,6 +54,7 @@ final class DirectoryViewModel {
     var showing = 0
     var total = 0
 
+    var task: URLSessionTask?
     var isLoadingMore = false
     var isShowingAllData: Bool {
         return showing >= total
@@ -78,6 +81,9 @@ final class DirectoryViewModel {
         currentPage = 0
         showing = 0
         total = 0
+
+        isLoadingMore = false
+        task?.cancel()
     }
 
     func user(at index: Int) -> UnmanagedUser {
@@ -93,18 +99,20 @@ final class DirectoryViewModel {
             return
         }
 
+        self.task?.cancel()
+
         isLoadingMore = true
 
         let requestType = self.type
         let request = DirectoryRequest(query: query, type: requestType, workspace: workspace)
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
 
-        API.current()?.fetch(request, options: options) { [weak self] response in
+        self.task = API.current()?.fetch(request, options: options) { [weak self] response in
             guard
                 let self = self,
                 case let .resource(resource) = response
             else {
-                return Alert.defaultError.present()
+                return
             }
 
             if requestType == .users {

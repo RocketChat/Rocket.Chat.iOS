@@ -11,7 +11,7 @@ import UIKit
 let kDirectoryFilterViewWorkspaceLocalKey = "kDirectoryFilterViewWorkspaceLocalKey"
 
 protocol DirectoryFiltersViewDelegate: class {
-    func userDidChangeFilterOption(selected: DirectoryRequestType, workspace: DirectoryWorkspaceType)
+    func userDidChangeFilterOption(selected: DirectoryRequestType)
 }
 
 final class DirectoryFiltersView: UIView {
@@ -137,32 +137,21 @@ final class DirectoryFiltersView: UIView {
     }
 
     @IBAction func switchWorkspaceDidChange(_ sender: Any) {
-        delegate?.userDidChangeFilterOption(
-            selected: .users,
-            workspace: switchWorkspace.isOn ? .all : .local
-        )
-
         UserDefaults.standard.set(
             !switchWorkspace.isOn,
             forKey: kDirectoryFilterViewWorkspaceLocalKey
         )
+
+        delegate?.userDidChangeFilterOption(selected: .users)
     }
 
     @IBAction func buttonFilterChannelDidPressed(_ sender: Any) {
-        delegate?.userDidChangeFilterOption(
-            selected: .channels,
-            workspace: switchWorkspace.isOn ? .all : .local
-        )
-
+        delegate?.userDidChangeFilterOption(selected: .channels)
         close()
     }
 
     @IBAction func buttonFilterUserDidPressed(_ sender: Any) {
-        delegate?.userDidChangeFilterOption(
-            selected: .users,
-            workspace: switchWorkspace.isOn ? .all : .local
-        )
-
+        delegate?.userDidChangeFilterOption(selected: .users)
         close()
     }
 
