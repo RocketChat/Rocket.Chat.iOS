@@ -5663,7 +5663,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				41DF76EC1D2C50720028DBF8 /* Base */,
-				CAC887242240CD1E0079A7AD /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			path = .;
@@ -5717,7 +5716,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				807FB55D2046E7DD00E21429 /* Base */,
-				CAC887252240CD1E0079A7AD /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			path = .;
