@@ -36,6 +36,12 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
+
+        // Don't generate hints if it is a slash command and not the first word
+        if word.first == "/" && composerView.textView.text != word {
+            return
+        }
+
         composerViewModel.didChangeHintPrefixedWord(word: word)
 
         if composerViewModel.hints.count > 0 {
