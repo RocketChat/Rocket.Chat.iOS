@@ -510,6 +510,6 @@
 "directory.filters.users" = "Użytkownicy";
 "directory.filters.by" = "Szukaj według";
 "directory.filters.global.title" = "Szukaj globalnych użytkowników";
-"directory.filters.global.subtitle" = "o włączeniu możesz wyszukać dowolnego użytkownika z innych firm lub serwerów.";
+"directory.filters.global.subtitle" = "Po włączeniu możesz wyszukać dowolnego użytkownika z innych firm lub serwerów.";
 "directory.users.1_user" = "1 użytkownik";
 "directory.users.x_users" = "%@ użytkowników";
