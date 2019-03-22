@@ -23,10 +23,11 @@ final class ChatTitleView: UIView {
         }
     }
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var titleImage: UIImageView!
-    @IBOutlet weak var showInfoImage: UIImageView!
-    @IBOutlet weak var typingLabel: UILabel! {
+    @IBOutlet private weak var titleScrollView: UIScrollView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleImage: UIImageView!
+    @IBOutlet private weak var showInfoImage: UIImageView!
+    @IBOutlet private weak var typingLabel: UILabel! {
         didSet {
             typingLabel.text = ""
         }
@@ -39,6 +40,7 @@ final class ChatTitleView: UIView {
 
         set {
             viewStatus.isHidden = newValue
+            titleScrollView.isHidden = newValue
             titleLabel.isHidden = newValue
             titleImage.isHidden = newValue
             showInfoImage.isHidden = newValue
