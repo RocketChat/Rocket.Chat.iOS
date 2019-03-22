@@ -41,10 +41,12 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
 
+        model.value.clearListeners()
         model.value.bindAndFire { [unowned self] value in
             self.valueLabel.text = value.localizedCase
         }
 
+        model.pickerVisible.clearListeners()
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
 
@@ -65,10 +67,12 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
 
+        model.value.clearListeners()
         model.value.bindAndFire { [unowned self] value in
             self.valueLabel.text = value.localizedCase
         }
 
+        model.pickerVisible.clearListeners()
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
 
@@ -89,10 +93,12 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
 
+        model.value.clearListeners()
         model.value.bindAndFire { [unowned self] value in
             self.valueLabel.text = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
         }
 
+        model.pickerVisible.clearListeners()
         model.pickerVisible.bindAndFire { [unowned self] visible in
             self.pickerView.isHidden = !visible
 
