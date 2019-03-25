@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 private extension ComposerView {
     var hintsView: HintsView? {
@@ -91,7 +92,8 @@ public extension ComposerViewExpandedDelegate {
     }
 
     func composerView(_ composerView: ComposerView, event: UIEvent, eventType: UIControl.Event, happenedInButton button: ComposerButton) {
-        var rightButtonIsRecordAudio = composerView.textView.text.isEmpty
+        let rightButtonIsRecordAudio = composerView.textView.text.isEmpty
+
         if eventType == .touchDown {
             if button === composerView.rightButton && rightButtonIsRecordAudio {
                 self.composerView(composerView, didPressRecordAudioButton: button)
