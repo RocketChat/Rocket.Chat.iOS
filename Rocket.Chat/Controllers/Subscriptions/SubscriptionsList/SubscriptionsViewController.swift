@@ -48,7 +48,9 @@ final class SubscriptionsViewController: BaseViewController {
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
-    weak var searchBar: UISearchBar?
+    var searchBar: UISearchBar? {
+        return searchController?.searchBar
+    }
 
     var assigned = false
     var viewModel = SubscriptionsViewModel()
@@ -209,7 +211,6 @@ final class SubscriptionsViewController: BaseViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
-        searchBar = searchController.searchBar
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.searchController = searchController

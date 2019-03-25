@@ -54,7 +54,6 @@ final class ReactorListView: UIView {
         }
     }
 
-    var isPopover = false
     var selectedReactor: (String, CGRect) -> Void = { _, _ in }
     var configureCell: (ReactorCell) -> Void = { _ in }
 
