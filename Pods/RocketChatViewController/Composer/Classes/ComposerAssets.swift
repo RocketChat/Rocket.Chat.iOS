@@ -29,4 +29,14 @@ public struct ComposerAssets {
         let image = UIImage(named: name, in: bundle, compatibleWith: nil)
         return image ?? UIImage()
     }
+
+    // MARK: Sounds
+
+    public static var startAudioRecordSound: URL? {
+        return bundle.url(forResource: "start_audio_record", withExtension: "m4a")
+    }
+
+    public static var cancelAudioRecordSound: URL? {
+        return bundle.url(forResource: "cancel_audio_record", withExtension: "m4a")
+    }
 }

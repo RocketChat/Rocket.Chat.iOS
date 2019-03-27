@@ -516,6 +516,10 @@ extension AudioView {
 
 extension MBProgressHUD {
     override var theme: Theme? { return nil }
+    override func applyTheme() {
+        super.applyTheme()
+        bezelView.color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    }
 }
 
 // MARK: Subclasses

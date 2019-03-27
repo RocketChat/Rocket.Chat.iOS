@@ -17,6 +17,8 @@ public class RecordAudioView: UIView {
     public weak var composerView: ComposerView?
     public weak var delegate: RecordAudioViewDelegate?
 
+    public var soundFeedbacksPlayer: AVAudioPlayer?
+
     internal let impactFeedbackLight = UIImpactFeedbackGenerator(style: .light)
     internal let impactFeedbackMedium = UIImpactFeedbackGenerator(style: .medium)
 
@@ -172,9 +174,12 @@ public class RecordAudioView: UIView {
         if !audioRecorder.isRecording {
             impactFeedbackMedium.impactOccurred()
 
-            // need to delay the call to prevent the vibration from being recorded
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                self?.audioRecorder.record()
+            if let startAudioRecordURL = ComposerAssets.startAudioRecordSound {
+                play(sound: startAudioRecordURL)
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.audioRecorder.record()
             }
         }
     }
@@ -184,8 +189,11 @@ public class RecordAudioView: UIView {
      */
     func stopRecording() {
         if audioRecorder.isRecording {
-            impactFeedbackLight.impactOccurred()
             audioRecorder.stop()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.impactFeedbackLight.impactOccurred()
+            }
         }
     }
 
@@ -193,12 +201,32 @@ public class RecordAudioView: UIView {
      Dismisses the view
      */
     func dismiss() {
+        if let cancelAudioRecordURL = ComposerAssets.cancelAudioRecordSound {
+            play(sound: cancelAudioRecordURL)
+        }
+
         UIView.animate(withDuration: 0.25, animations: {
             self.transform = CGAffineTransform(translationX: -self.frame.width, y: 0)
         }) { _ in
             self.audioRecorder.delegate = nil
             self.audioRecorder.cancel()
             self.delegate?.recordAudioViewDidCancel(self)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.impactFeedbackLight.impactOccurred()
+            }
+        }
+    }
+
+    /**
+     Play UI feedback sound
+     */
+    func play(sound: URL) {
+        do {
+            soundFeedbacksPlayer = try AVAudioPlayer(contentsOf: sound, fileTypeHint: AVFileType.m4a.rawValue)
+            soundFeedbacksPlayer?.play()
+        } catch _ {
+            // Ignore the error
         }
     }
 }

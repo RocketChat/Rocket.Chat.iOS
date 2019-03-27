@@ -67,6 +67,7 @@ class ChatTitleViewSpec: XCTestCase {
         }
 
         instance.isTitleHidden = true
+        XCTAssertTrue(instance.titleScrollView.isHidden, "titleScrollView should be hidden")
         XCTAssertTrue(instance.titleLabel.isHidden, "titleLabel should be hidden")
         XCTAssertTrue(instance.titleImage.isHidden, "titleImage should be hidden")
         XCTAssertTrue(instance.showInfoImage.isHidden, "showInfoImage should be hidden")

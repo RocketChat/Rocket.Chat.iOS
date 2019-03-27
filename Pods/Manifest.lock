@@ -157,7 +157,7 @@ CHECKOUT OPTIONS:
     :commit: c34d9ccef689c55b9eae69f3c65283da8d8b0c6c
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   RocketChatViewController:
-    :commit: 79d79cb2c779c553ea39a07b4c72af129f4d4dfa
+    :commit: 93164faa2437e9a24dfbc4bc603cff2268e87a0b
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
@@ -186,7 +186,7 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
   RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
-  RocketChatViewController: b148da98453900ff5332aec1406ba44573c2ba94
+  RocketChatViewController: 8c9fa96502913d268bcecf6d15830f1ffd711e7b
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
