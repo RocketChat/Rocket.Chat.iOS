@@ -49,6 +49,7 @@ final class SignupTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = SocketManager.sharedInstance.serverURL?.host
+        navigationItem.rightBarButtonItem?.title = localized("auth.more")
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
