@@ -114,8 +114,6 @@
 "auth.email_auth" = "邮箱";
 "auth.login_service_prefix" = "继续";
 
-"auth.more" = "More"; // TODO
-
 "auth.signup_title" = "登录";
 "auth.signup.button_register" = "注册";
 "auth.signup.button_next" = "下一步";

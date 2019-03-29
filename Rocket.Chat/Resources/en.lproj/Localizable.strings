@@ -114,8 +114,6 @@
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continue with ";
 
-"auth.more" = "More";
-
 "auth.signup_title" = "Sign up";
 "auth.signup.button_register" = "Register";
 "auth.signup.button_next" = "Next";

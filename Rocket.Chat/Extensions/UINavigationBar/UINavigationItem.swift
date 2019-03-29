@@ -9,7 +9,7 @@
 import UIKit
 
 extension UINavigationItem {
-    func moreButton() {
-        rightBarButtonItem?.accessibilityLabel = localized("auth.more")
+    func applyMoreButtonAccessibility() {
+        rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
     }
 }

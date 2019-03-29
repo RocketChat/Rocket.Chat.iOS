@@ -114,8 +114,6 @@
 "auth.email_auth" = "ログイン";
 "auth.login_service_prefix" = "Continue with ";
 
-"auth.more" = "もっと";
-
 "auth.signup_title" = "サインアップ";
 "auth.signup.button_register" = "登録";
 "auth.signup.button_next" = "次";

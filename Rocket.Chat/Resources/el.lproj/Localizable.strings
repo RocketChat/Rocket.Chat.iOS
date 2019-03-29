@@ -114,8 +114,6 @@
 "auth.email_auth" = "e-mail"; // TODO
 "auth.login_service_prefix" = "Συνέχεια με ";
 
-"auth.more" = "More"; // TODO
-
 "auth.signup_title" = "Εγγραφή"; 
 "auth.signup.button_register" = "Εγγραφείτε"; 
 "auth.signup.button_next" = "Επόμενο"; 

@@ -10,6 +10,8 @@
 "auth.connect.urlfield.label" = "サーバー URL";
 "auth.connect.urlfield.hint" = "ここにサーバーのURLを入力してください。";
 
+"auth.more.label" = "もっと";
+
 "auth.authentication.emailorusername.label" = "メールアドレスまたはユーザー名";
 "auth.authentication.emailorusername.hint" = "ここにメールアドレスまたはユーザー名を入力してください。";
 "auth.authentication.password.label" = "パスワード";

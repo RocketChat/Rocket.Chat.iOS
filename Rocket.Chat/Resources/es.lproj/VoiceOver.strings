@@ -10,6 +10,8 @@
 "auth.connect.urlfield.label" = "URL del servidor";
 "auth.connect.urlfield.hint" = "Inserta la URL de tu servidor aquí.";
 
+"auth.more.label" = "More"; // TODO
+
 "auth.authentication.emailorusername.label" = "Correo electrónico o nombre de usuario";
 "auth.authentication.emailorusername.hint" = "Inserta tu correo electrónico o nombre de usuario aquí.";
 "auth.authentication.password.label" = "Contraseña";

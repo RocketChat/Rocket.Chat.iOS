@@ -102,7 +102,7 @@ class LoginTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = serverURL?.host
-        navigationItem.moreButton()
+        navigationItem.applyMoreButtonAccessibility()
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)

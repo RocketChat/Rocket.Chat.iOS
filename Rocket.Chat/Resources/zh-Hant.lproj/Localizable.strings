@@ -114,8 +114,6 @@
 "auth.email_auth" = "電子郵件";
 "auth.login_service_prefix" = "使用";// TODO : need to add postfix in chinese
 
-"auth.more" = "More"; // TODO
-
 "auth.signup_title" = "登入";
 "auth.signup.button_register" = "註冊";
 "auth.signup.button_next" = "下一步";

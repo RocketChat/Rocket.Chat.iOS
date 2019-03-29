@@ -47,7 +47,7 @@ class SignupCustomFieldsTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = SocketManager.sharedInstance.serverURL?.host
-        navigationItem.moreButton()
+        navigationItem.applyMoreButtonAccessibility()
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
