@@ -126,6 +126,7 @@ final class AuthTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         title = serverURL?.host
+        navigationItem.moreButton()
         setupTableView()
 
         guard let settings = serverPublicSettings else { return }
