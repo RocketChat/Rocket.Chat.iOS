@@ -12,6 +12,8 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.rightBarButtonItem?.title = localized("auth.more")
+
         ThemeManager.addObserver(self)
 
         self.navigationItem.backBarButtonItem = UIBarButtonItem(

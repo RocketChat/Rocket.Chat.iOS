@@ -114,6 +114,8 @@
 "auth.email_auth" = "e-mail"; // TODO
 "auth.login_service_prefix" = "Continue with "; // TODO
 
+"auth.more" = "More"; // TODO
+
 "auth.signup_title" = "Sign up"; // TODO
 "auth.signup.button_register" = "Register"; // TODO
 "auth.signup.button_next" = "Next"; // TODO
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "Forgot password";
 "auth.login.agree_label" = "By proceeding you are agreeing to our";
 "auth.login.agree_and" = "and";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Terms of Service";
 "auth.login.agree_privacypolicy" = "Privacy Policy";
 

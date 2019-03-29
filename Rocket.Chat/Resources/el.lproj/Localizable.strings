@@ -112,7 +112,9 @@
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
 "auth.email_auth_prefix" = "Σύνδεση με "; 
 "auth.email_auth" = "e-mail"; // TODO
-"auth.login_service_prefix" = "Συνέχεια με "; 
+"auth.login_service_prefix" = "Συνέχεια με ";
+
+"auth.more" = "More"; // TODO
 
 "auth.signup_title" = "Εγγραφή"; 
 "auth.signup.button_register" = "Εγγραφείτε"; 
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
 "auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
 "auth.login.agree_and" = "και";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
 "auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
 

@@ -114,6 +114,8 @@
 "auth.email_auth" = "邮箱";
 "auth.login_service_prefix" = "继续";
 
+"auth.more" = "More"; // TODO
+
 "auth.signup_title" = "登录";
 "auth.signup.button_register" = "注册";
 "auth.signup.button_next" = "下一步";
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "忘记密码";
 "auth.login.agree_label" = "继续表示您同意我们的";
 "auth.login.agree_and" = "和";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "服务条款";
 "auth.login.agree_privacypolicy" = "隐私政策";
 

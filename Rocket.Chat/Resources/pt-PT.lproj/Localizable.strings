@@ -114,6 +114,8 @@
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continuar com ";
 
+"auth.more" = "More"; // TODO
+
 "auth.signup_title" = "Registe-se";
 "auth.signup.button_register" = "Registar";
 "auth.signup.button_next" = "Próximo";
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "Esqueceu a palavra-passe";
 "auth.login.agree_label" = "Ao prosseguir você concorda com o nosso";
 "auth.login.agree_and" = "e";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Termos de Serviço";
 "auth.login.agree_privacypolicy" = "Política de Privacidade";
 

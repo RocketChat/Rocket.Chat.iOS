@@ -114,6 +114,8 @@
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continue with ";
 
+"auth.more" = "More";
+
 "auth.signup_title" = "Sign up";
 "auth.signup.button_register" = "Register";
 "auth.signup.button_next" = "Next";
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "Forgot password";
 "auth.login.agree_label" = "By proceeding you are agreeing to our";
 "auth.login.agree_and" = "and";
+"auth.login.legal" = "Legal";
 "auth.login.agree_termsofservice" = "Terms of Service";
 "auth.login.agree_privacypolicy" = "Privacy Policy";
 

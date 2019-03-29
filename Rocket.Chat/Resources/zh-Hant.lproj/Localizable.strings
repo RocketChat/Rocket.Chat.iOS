@@ -114,6 +114,8 @@
 "auth.email_auth" = "電子郵件";
 "auth.login_service_prefix" = "使用";// TODO : need to add postfix in chinese
 
+"auth.more" = "More"; // TODO
+
 "auth.signup_title" = "登入";
 "auth.signup.button_register" = "註冊";
 "auth.signup.button_next" = "下一步";
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "忘記密碼";
 "auth.login.agree_label" = "繼續表示您同意我們的";
 "auth.login.agree_and" = "和";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "服務條款";
 "auth.login.agree_privacypolicy" = "隱私權政策";
 

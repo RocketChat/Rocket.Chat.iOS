@@ -114,6 +114,8 @@
 "auth.email_auth" = "ログイン";
 "auth.login_service_prefix" = "Continue with ";
 
+"auth.more" = "もっと";
+
 "auth.signup_title" = "サインアップ";
 "auth.signup.button_register" = "登録";
 "auth.signup.button_next" = "次";
@@ -129,6 +131,7 @@
 "auth.login.buttonResetPassword" = "パスワードをお忘れですか?";
 "auth.login.agree_label" = "続けることで、あなたは私達に同意します。";
 "auth.login.agree_and" = "と";
+"auth.login.legal" = "法的";
 "auth.login.agree_termsofservice" = "利用規約";
 "auth.login.agree_privacypolicy" = "個人情報保護方針";
 
