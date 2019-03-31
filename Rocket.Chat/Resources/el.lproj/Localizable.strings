@@ -100,7 +100,7 @@
 "connection.waiting_for_network.banner.message" = "Περιμένετε για το δίκτυο"; 
 
 // Onboarding
-"onboarding.label_welcome" = "Καλώς ορίσατε στο Rocket Chat"; 
+"onboarding.label_welcome" = "Καλωσήρθατε στο Rocket Chat";
 "onboarding.label_subtitle" = "Επικοινωνία Ομάδας";
 "onboarding.button_connect_server" = "Συνδεθείτε σε ένα εξυπηρετητή"; 
 "onboarding.button_create_server" = "Συνδεθείτε σε ένα Χώρο Εργασίας"; 
@@ -342,7 +342,7 @@
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Γλώσσα";
 "myaccount.settings.review" = "Αξιολογήστε την εφαρμογή";
-"myaccount.settings.share" = "Μοιραστήτε την εφαρμογή";
+"myaccount.settings.share" = "Μοιραστείτε την εφαρμογή";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 "myaccount.settings.server_version" = "Έκδοση Εξυπηρετητή: %@"; 
