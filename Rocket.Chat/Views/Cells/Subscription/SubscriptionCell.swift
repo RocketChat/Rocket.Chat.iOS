@@ -42,17 +42,35 @@ final class SubscriptionCell: BaseSubscriptionCell {
 
         super.updateSubscriptionInformation()
 
+        setLastMessageColor()
         setDateColor()
     }
 
     override func updateViewForAlert(with subscription: Subscription) {
         super.updateViewForAlert(with: subscription)
+        labelDate.font = UIFont.systemFont(ofSize: labelDate.font.pointSize, weight: .bold)
         labelLastMessage.font = UIFont.systemFont(ofSize: labelLastMessage.font.pointSize, weight: .medium)
     }
 
     override func updateViewForNoAlert(with subscription: Subscription) {
         super.updateViewForNoAlert(with: subscription)
+        labelDate.font = UIFont.systemFont(ofSize: labelDate.font.pointSize, weight: .regular)
         labelLastMessage.font = UIFont.systemFont(ofSize: labelLastMessage.font.pointSize, weight: .regular)
+    }
+
+    private func setLastMessageColor() {
+        guard
+            let theme = theme,
+            let subscription = subscription?.managedObject
+        else {
+            return
+        }
+
+        if subscription.unread > 0 || subscription.alert {
+            labelLastMessage.textColor = theme.bodyText
+        } else {
+            labelLastMessage.textColor = theme.auxiliaryText
+        }
     }
 
     private func setDateColor() {
@@ -90,9 +108,7 @@ final class SubscriptionCell: BaseSubscriptionCell {
 extension SubscriptionCell {
     override func applyTheme() {
         super.applyTheme()
-        guard let theme = theme else { return }
-
-        labelLastMessage.textColor = theme.auxiliaryText
+        setLastMessageColor()
         setDateColor()
     }
 }
