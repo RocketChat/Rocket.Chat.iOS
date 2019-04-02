@@ -311,7 +311,7 @@ public extension ComposerView {
 // MARK: Buttons
 
 public extension ComposerView {
-    public func configureButtons() {
+    func configureButtons() {
         currentDelegate.composerView(self, willConfigureButton: leftButton)
         currentDelegate.composerView(self, willConfigureButton: rightButton)
     }
@@ -320,7 +320,7 @@ public extension ComposerView {
 // MARK: Addons
 
 public extension ComposerView {
-    public func reloadAddons() {
+    func reloadAddons() {
         [
             (componentStackView, ComposerAddonSlot.component),
             (utilityStackView, ComposerAddonSlot.utility)
@@ -351,7 +351,7 @@ public extension ComposerView {
     /**
      Called when the content size of the text view changes and adjusts the composer height constraint.
      */
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object as AnyObject? === leftButton && keyPath == "bounds" {
             textViewLeadingConstraint.constant = leftButton.isHidden ? 0 : layoutMargins.left
         }
@@ -405,7 +405,7 @@ public extension ComposerView {
 
 // MARK: UITextView Delegate
 extension ComposerView: UITextViewDelegate {
-    @objc func textViewDidChangeSelection(_ textView: UITextView) {
+    public func textViewDidChangeSelection(_ textView: UITextView) {
         currentDelegate.composerViewDidChangeSelection(self)
         return
     }

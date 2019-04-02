@@ -51,9 +51,6 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
-  # DiffKit
-  diff_pods
-
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
