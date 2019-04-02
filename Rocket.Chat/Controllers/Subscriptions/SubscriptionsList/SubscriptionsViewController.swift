@@ -40,7 +40,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var labelDirectory: UILabel! {
         didSet {
-            labelDirectory.text = localized("directory")
+            labelDirectory.text = localized("directory.title")
         }
     }
 
@@ -48,7 +48,9 @@ final class SubscriptionsViewController: BaseViewController {
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
-    weak var searchBar: UISearchBar?
+    var searchBar: UISearchBar? {
+        return searchController?.searchBar
+    }
 
     var assigned = false
     var viewModel = SubscriptionsViewModel()
@@ -209,7 +211,6 @@ final class SubscriptionsViewController: BaseViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
-        searchBar = searchController.searchBar
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.searchController = searchController
@@ -511,6 +512,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
             return
         }
 
+        controller.subscription = subscription
+
         // When using iPads, we override the detail controller creating
         // a new instance.
         if parent?.parent?.traitCollection.horizontalSizeClass == .compact {
@@ -518,11 +521,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
                 return
             }
 
-            controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         } else {
-            controller.subscription = subscription
-
             let nav = BaseNavigationController(rootViewController: controller)
             splitViewController?.showDetailViewController(nav, sender: self)
         }

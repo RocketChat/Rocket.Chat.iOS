@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,13 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="570"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Re-o67">
-                    <rect key="frame" x="0.0" y="64" width="375" height="116"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="116" id="UKt-EM-NqA"/>
-                    </constraints>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELE-4T-pm3">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <subviews>
@@ -33,7 +26,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kc6-H2-At2">
-                            <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="43.5" width="375" height="0.5"/>
                             <color key="backgroundColor" red="0.79607843140000001" green="0.80784313730000001" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="KCj-MP-k11"/>
@@ -65,6 +58,13 @@
                         <outletCollection property="gestureRecognizers" destination="Mfq-tV-8Qg" appends="YES" id="d9r-KG-Cdu"/>
                     </connections>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Re-o67">
+                    <rect key="frame" x="0.0" y="64" width="375" height="116"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="116" id="UKt-EM-NqA"/>
+                    </constraints>
+                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfH-Cs-4wY">
                     <rect key="frame" x="0.0" y="180" width="375" height="390"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,7 +93,7 @@
                 <outlet property="separatorView" destination="Kc6-H2-At2" id="G49-nM-5gz"/>
                 <outlet property="tableView" destination="5e5-Re-o67" id="NGT-Jw-pdf"/>
                 <outlet property="tableViewHeighConstraint" destination="UKt-EM-NqA" id="fC6-cZ-EP7"/>
-                <outlet property="tableViewViewTopConstraint" destination="lds-mS-2r4" id="8ff-59-8GV"/>
+                <outlet property="tableViewViewTopConstraint" destination="dii-8S-MhV" id="ctG-Fw-lfP"/>
                 <outlet property="tappableView" destination="hfH-Cs-4wY" id="duc-Uc-RjK"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="102"/>

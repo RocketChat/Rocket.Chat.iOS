@@ -39,7 +39,7 @@ class AddUsersViewData {
 
         isLoadingMoreUsers = true
 
-        let request = DirectoryRequest(query: searchText, type: .users)
+        let request = DirectoryRequest(query: searchText, type: .users, workspace: .all)
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
         API.current()?.fetch(request, options: options) { [weak self] response in

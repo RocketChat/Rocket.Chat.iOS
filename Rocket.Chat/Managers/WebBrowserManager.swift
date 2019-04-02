@@ -132,21 +132,30 @@ extension WebBrowserApp {
     }
 
     func open(url: URL) {
-        guard let url = appSchemeURL(forURL: url) else { return }
+        func openInBrowser() {
+            guard let browserURL = appSchemeURL(forURL: url) else { return }
 
-        switch self {
-        case .safari, .chrome, .opera, .firefox:
-            UIApplication.shared.open(url)
-        case .inAppSafari:
-            func present() {
-                let controller = SFSafariViewController(url: url)
-                UIWindow.topWindow.rootViewController?.present(controller, animated: true, completion: nil)
+            switch self {
+            case .safari, .chrome, .opera, .firefox:
+                UIApplication.shared.open(browserURL)
+            case .inAppSafari:
+                func present() {
+                    let controller = SFSafariViewController(url: browserURL)
+                    UIWindow.topWindow.rootViewController?.present(controller, animated: true, completion: nil)
+                }
+
+                if Thread.isMainThread {
+                    present()
+                } else {
+                    DispatchQueue.main.async(execute: present)
+                }
             }
+        }
 
-            if Thread.isMainThread {
-                present()
-            } else {
-                DispatchQueue.main.async(execute: present)
+        let options = [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: true]
+        UIApplication.shared.open(url, options: options) { (success) in
+            if !success {
+                openInBrowser()
             }
         }
     }

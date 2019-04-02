@@ -19,6 +19,7 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var name: String
     var fname: String
     var unread: Int
+    var usersCount: Int
     var userMentions: Int
     var groupMentions: Int
     var open: Bool
@@ -74,6 +75,7 @@ extension UnmanagedSubscription {
         name = subscription.name
         fname = subscription.fname
         unread = subscription.unread
+        usersCount = subscription.usersCount
         userMentions = subscription.userMentions
         groupMentions = subscription.groupMentions
         open = subscription.open
