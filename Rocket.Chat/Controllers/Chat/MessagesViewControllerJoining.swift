@@ -20,9 +20,9 @@ extension MessagesViewController {
             view.addSubview(previewView)
 
             NSLayoutConstraint.activate([
-                previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                previewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                previewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
 
             chatPreviewModeView = previewView
