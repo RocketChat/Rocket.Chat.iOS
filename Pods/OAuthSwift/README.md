@@ -10,9 +10,6 @@ Swift based OAuth library for iOS and macOS.
 
 Twitter, Flickr, Github, Instagram, Foursquare, Fitbit, Withings, Linkedin, Dropbox, Dribbble, Salesforce, BitBucket, GoogleDrive, Smugmug, Intuit, Zaim, Tumblr, Slack, Uber, Gitter, Facebook, Spotify, Typetalk, SoundCloud, etc
 
-## Sponsored by Auth0 <span><img src="https://user-images.githubusercontent.com/1801923/31792116-d4fca9ec-b512-11e7-92eb-56e8d3df8e70.png" height="28" align="top"></span>
-If you want to easily add authentication to Swift apps, feel free to check out Auth0's Swift SDK and free plan at [auth0.com/overview](https://auth0.com/overview?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=oauthswift&utm_content=auth)
-
 ## Installation
 
 OAuthSwift is packaged as a Swift framework. Currently this is the simplest way to add it to your app:
@@ -56,7 +53,7 @@ Replace oauth-swift by your application name
 ### Handle URL in AppDelegate
 - On iOS implement `UIApplicationDelegate` method
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey  : Any] = [:]) -> Bool {
   if (url.host == "oauth-callback") {
     OAuthSwift.handle(url: url)
   }
@@ -145,6 +142,39 @@ let handle = oauthswift.authorize(
 )
 
 ```
+
+### Authorize with OAuth2.0 and proof key flow (PKCE)
+```swift
+// create an instance and retain it
+oauthswift = OAuth2Swift(
+    consumerKey:    "********",
+    consumerSecret: "********",
+    authorizeUrl: "https://server.com/oauth/authorize",
+    responseType: "code"
+)
+oauthswift.accessTokenBasicAuthentification = true
+
+let codeVerifier = base64url("abcd...")
+let codeChallenge = codeChallenge(for: codeVerifier)
+
+let handle = oauthswift.authorize(
+    withCallbackURL: URL(string: "myApp://callback/")!,
+    scope: "requestedScope", 
+    state:"State01",
+    codeChallenge: codeChallenge,
+    codeChallengeMethod: "S256",
+    codeVerifier: codeVerifier,
+    success: { credential, response, parameters in
+      print(credential.oauthToken)
+      // Do your request
+    },
+    failure: { error in
+      print(error.localizedDescription)
+    }
+)
+
+```
+
 
 See demo for more examples
 
@@ -259,4 +289,4 @@ OAuthSwift is available under the MIT license. See the LICENSE file for more inf
             )](http://mit-license.org) [![Platform](https://img.shields.io/badge/platform-iOS_OSX_TVOS-lightgrey.svg?style=flat
              )](https://developer.apple.com/resources/) [![Language](https://img.shields.io/badge/language-swift-orange.svg?style=flat
              )](https://developer.apple.com/swift) [![Cocoapod](https://img.shields.io/cocoapods/v/OAuthSwift.svg?style=flat)](http://cocoadocs.org/docsets/OAuthSwift/)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/OAuthSwift/OAuthSwift.svg?branch=master)](https://travis-ci.org/OAuthSwift/OAuthSwift)

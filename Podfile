@@ -42,7 +42,7 @@ def shared_pods
   database_pods
 
   # Network
-  pod 'Nuke', '~> 7.3'
+  pod 'Nuke', :git => 'git@github.com:kean/Nuke.git', :branch => 'master'
   pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 3'
   pod 'ReachabilitySwift'
