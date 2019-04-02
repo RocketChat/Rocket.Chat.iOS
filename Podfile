@@ -31,7 +31,7 @@ def shared_pods
   # UI
   pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
-  pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'SimpleImageViewer', :git => 'https://github.com/RocketChat/SimpleImageViewer.git'
   pod 'SwipeCellKit', :git => 'git@github.com:SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
   ui_pods
 

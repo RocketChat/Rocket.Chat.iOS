@@ -3,7 +3,7 @@ import UIKit
 final class AnimatableImageView: UIView {
     fileprivate let imageView = UIImageView()
     
-    override var contentMode: UIViewContentMode {
+    override var contentMode: UIView.ContentMode {
         didSet { update() }
     }
     
@@ -74,6 +74,9 @@ private extension AnimatableImageView {
         case .bottomRight:
             imageView.bounds = Utilities.rect(forSize: image.size)
             imageView.center = Utilities.bottomRight(forSize: image.size, insideSize: bounds.size)
+        @unknown default:
+            imageView.bounds = Utilities.rect(forSize: bounds.size)
+            imageView.center = Utilities.center(forSize: bounds.size)
         }
     }
 }

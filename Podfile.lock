@@ -81,7 +81,7 @@ PODS:
   - RocketChatViewController/ViewController (1.0.1):
     - DifferenceKit (~> 1.1)
   - semver (1.1.0)
-  - SimpleImageViewer (1.2.0):
+  - SimpleImageViewer (1.2.1):
     - FLAnimatedImage
   - Starscream (3.1.0)
   - SwiftLint (0.31.0)
@@ -105,7 +105,7 @@ DEPENDENCIES:
   - RealmSwift
   - RocketChatViewController (from `https://github.com/RocketChat/RocketChatViewController`)
   - semver
-  - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
+  - SimpleImageViewer (from `https://github.com/RocketChat/SimpleImageViewer.git`)
   - Starscream (~> 3)
   - SwiftLint
   - "SwiftyJSON (from `git@github.com:SwiftyJSON/SwiftyJSON.git`, branch `master`)"
@@ -147,7 +147,7 @@ EXTERNAL SOURCES:
   RocketChatViewController:
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
-    :git: https://github.com/cardoso/SimpleImageViewer.git
+    :git: https://github.com/RocketChat/SimpleImageViewer.git
   SwiftyJSON:
     :branch: master
     :git: "git@github.com:SwiftyJSON/SwiftyJSON.git"
@@ -169,8 +169,8 @@ CHECKOUT OPTIONS:
     :commit: 20b09477f1e15173c10b99a8b67e78b04102546c
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
-    :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
-    :git: https://github.com/cardoso/SimpleImageViewer.git
+    :commit: ca1fec320d4e91285c053842124c8e610c726aa8
+    :git: https://github.com/RocketChat/SimpleImageViewer.git
   SwiftyJSON:
     :commit: e0511293fcdc0a31f585370be8623e745ec34403
     :git: "git@github.com:SwiftyJSON/SwiftyJSON.git"
@@ -203,12 +203,12 @@ SPEC CHECKSUMS:
   RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
   RocketChatViewController: ab532fa2810a165dc4f8e79a337253c09434cce6
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
-  SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
+  SimpleImageViewer: 17d42d8c9598c6323e65feee7ca062d57a4b51a3
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
   SwiftyJSON: 4980513dd816cb376ef027bf36857bea16b89722
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 4380874d48b0a5d371aa9203941f24566def069a
+PODFILE CHECKSUM: 87ee757a190dd096730c2a496cbb6cf211f3edc9
 
 COCOAPODS: 1.5.3

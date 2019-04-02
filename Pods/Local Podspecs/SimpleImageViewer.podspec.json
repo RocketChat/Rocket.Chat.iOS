@@ -5,18 +5,18 @@
   },
   "summary": "A snappy image viewer with zoom and interactive dismissal transition.",
   "requires_arc": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Lucas": "lucas@afrogleap.com"
+    "Mark": "development@afrogleap.com"
   },
   "homepage": "https://github.com/aFrogleap/SimpleImageViewer",
   "source": {
     "git": "https://github.com/aFrogleap/SimpleImageViewer.git",
-    "tag": "1.2.0"
+    "tag": "1.2.1"
   },
   "source_files": "ImageViewer/**/*.{swift}",
   "resources": [
@@ -27,5 +27,6 @@
     "FLAnimatedImage": [
 
     ]
-  }
+  },
+  "swift_version": "5.0"
 }

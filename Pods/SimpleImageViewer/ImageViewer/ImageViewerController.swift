@@ -68,7 +68,7 @@ extension ImageViewerController: UIGestureRecognizerDelegate {
 
 private extension ImageViewerController {
     func setupScrollView() {
-        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
+        scrollView.decelerationRate = UIScrollView.DecelerationRate.fast
         scrollView.alwaysBounceVertical = true
         scrollView.alwaysBounceHorizontal = true
     }
@@ -134,11 +134,21 @@ private extension ImageViewerController {
         }
     }
     
-    @objc func imageViewDoubleTapped() {
+    @objc func imageViewDoubleTapped(recognizer: UITapGestureRecognizer) {
+        func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
+            var zoomRect = CGRect.zero
+            zoomRect.size.height = imageView.frame.size.height / scale
+            zoomRect.size.width  = imageView.frame.size.width  / scale
+            let newCenter = scrollView.convert(center, from: imageView)
+            zoomRect.origin.x = newCenter.x - (zoomRect.size.width / 2.0)
+            zoomRect.origin.y = newCenter.y - (zoomRect.size.height / 2.0)
+            return zoomRect
+        }
+
         if scrollView.zoomScale > scrollView.minimumZoomScale {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
         } else {
-            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+            scrollView.zoom(to: zoomRectForScale(scale: scrollView.maximumZoomScale, center: recognizer.location(in: recognizer.view)), animated: true)
         }
     }
     
