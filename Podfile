@@ -6,7 +6,7 @@ inhibit_all_warnings!
 
 def database_pods
   pod 'RealmSwift'
-  pod 'SwiftyJSON'
+  pod 'SwiftyJSON', :git => 'git@github.com:SwiftyJSON/SwiftyJSON.git', :branch => 'master'
 end
 
 def ui_pods
@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit/Core', '~> 1.0'
+  pod 'DifferenceKit/Core', '~> 1.1'
 end
 
 def shared_pods
@@ -32,7 +32,7 @@ def shared_pods
   pod 'RocketChatViewController', :git => 'https://github.com/RocketChat/RocketChatViewController'
   pod 'MobilePlayer', :git => 'https://github.com/RocketChat/RCiOSMobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
-  pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'xcode_10.2'
+  pod 'SwipeCellKit', :git => 'git@github.com:SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
   ui_pods
 
   # Text Processing
@@ -72,24 +72,15 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift42Targets = ['MobilePlayer', 'RCMarkdownParser', 'SwipeCellKit']
-
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '4.1'
+      config.build_settings['SWIFT_VERSION'] = '5.0'
       config.build_settings['ENABLE_BITCODE'] = 'NO'
-      config.build_settings['ARCHS'] = 'arm64'
 
       if config.name == 'Debug'
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
       else
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
-      end
-    end
-
-    if swift42Targets.include? target.name
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.2'
       end
     end
   end

@@ -84,14 +84,14 @@ PODS:
   - SimpleImageViewer (1.2.0):
     - FLAnimatedImage
   - Starscream (2.1.1)
-  - SwiftLint (0.27.0)
-  - SwiftyJSON (4.2.0)
-  - SwipeCellKit (2.5.1)
+  - SwiftLint (0.31.0)
+  - SwiftyJSON (4.3.0)
+  - SwipeCellKit (2.6.0)
 
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
-  - DifferenceKit/Core (~> 1.0)
+  - DifferenceKit/Core (~> 1.1)
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
@@ -108,8 +108,8 @@ DEPENDENCIES:
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - Starscream (~> 2)
   - SwiftLint
-  - SwiftyJSON
-  - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `xcode_10.2`)
+  - "SwiftyJSON (from `git@github.com:SwiftyJSON/SwiftyJSON.git`, branch `master`)"
+  - "SwipeCellKit (from `git@github.com:SwipeCellKit/SwipeCellKit.git`, branch `develop`)"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -136,7 +136,6 @@ SPEC REPOS:
     - semver
     - Starscream
     - SwiftLint
-    - SwiftyJSON
 
 EXTERNAL SOURCES:
   MobilePlayer:
@@ -147,9 +146,12 @@ EXTERNAL SOURCES:
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
+  SwiftyJSON:
+    :branch: master
+    :git: "git@github.com:SwiftyJSON/SwiftyJSON.git"
   SwipeCellKit:
-    :branch: xcode_10.2
-    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
+    :branch: develop
+    :git: "git@github.com:SwipeCellKit/SwipeCellKit.git"
 
 CHECKOUT OPTIONS:
   MobilePlayer:
@@ -164,9 +166,12 @@ CHECKOUT OPTIONS:
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
     :git: https://github.com/cardoso/SimpleImageViewer.git
+  SwiftyJSON:
+    :commit: e0511293fcdc0a31f585370be8623e745ec34403
+    :git: "git@github.com:SwiftyJSON/SwiftyJSON.git"
   SwipeCellKit:
-    :commit: 9bd4543ebd4d7f104b2c4d732782e330500da220
-    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
+    :commit: b724892f8c4daab931de1b5555de3373107db184
+    :git: "git@github.com:SwipeCellKit/SwipeCellKit.git"
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
@@ -195,10 +200,10 @@ SPEC CHECKSUMS:
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  SwipeCellKit: 30fd6a4f8a8b8ac864ea389c8b4c8bac5ba5471a
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftyJSON: 4980513dd816cb376ef027bf36857bea16b89722
+  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 8513948bbc8df77975e875b9063e6dd124a8ebe3
+PODFILE CHECKSUM: 1c4f66cee2e9f0afbcb63a308223171a1dfe5144
 
 COCOAPODS: 1.5.3
