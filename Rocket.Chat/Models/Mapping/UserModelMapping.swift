@@ -54,6 +54,10 @@ extension User: ModelMappeable {
             self.roles.removeAll()
             self.roles.append(objectsIn: roles)
         }
+
+        if let federation = values["federation"].dictionary {
+            self.federatedServerName = federation["peer"]?.string ?? ""
+        }
     }
 
 }

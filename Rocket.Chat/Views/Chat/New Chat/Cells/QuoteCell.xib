@@ -37,11 +37,10 @@
                                     <constraint firstAttribute="height" constant="23" id="VAA-x8-dEs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIq-TW-qcq">
-                                <rect key="frame" x="15" y="61" width="258" height="36"/>
+                                <rect key="frame" x="15" y="57" width="258" height="40"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +61,7 @@
                             <constraint firstItem="Oyn-h1-OvH" firstAttribute="top" secondItem="B3H-28-ZKR" secondAttribute="top" constant="16" id="M6R-FW-xXh"/>
                             <constraint firstAttribute="trailing" secondItem="Alc-xZ-4VT" secondAttribute="trailing" constant="15" id="fUn-qs-O2E"/>
                             <constraint firstItem="TOv-60-iaq" firstAttribute="leading" secondItem="B3H-28-ZKR" secondAttribute="leading" constant="15" id="j1v-Sb-zqI"/>
-                            <constraint firstItem="xIq-TW-qcq" firstAttribute="top" secondItem="TOv-60-iaq" secondAttribute="bottom" constant="4" id="lhJ-IE-s0Q"/>
+                            <constraint firstItem="xIq-TW-qcq" firstAttribute="top" secondItem="TOv-60-iaq" secondAttribute="bottom" id="lhJ-IE-s0Q"/>
                             <constraint firstItem="Alc-xZ-4VT" firstAttribute="leading" secondItem="TOv-60-iaq" secondAttribute="trailing" constant="8" id="rbc-Rn-vCT"/>
                             <constraint firstItem="Alc-xZ-4VT" firstAttribute="top" secondItem="B3H-28-ZKR" secondAttribute="top" constant="19" id="saI-os-EY4"/>
                             <constraint firstItem="TOv-60-iaq" firstAttribute="top" secondItem="Oyn-h1-OvH" secondAttribute="bottom" id="wb5-Yx-ZIx"/>

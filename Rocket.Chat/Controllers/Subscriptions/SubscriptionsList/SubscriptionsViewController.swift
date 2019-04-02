@@ -25,11 +25,32 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var viewDirectory: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeDirectoryTapGesture(_:)))
+            viewDirectory.addGestureRecognizer(tapGesture)
+        }
+    }
+
+    @IBOutlet weak var imageViewDirectory: UIImageView! {
+        didSet {
+            imageViewDirectory.image = imageViewDirectory.image?.imageWithTint(.RCBlue())
+        }
+    }
+
+    @IBOutlet weak var labelDirectory: UILabel! {
+        didSet {
+            labelDirectory.text = localized("directory.title")
+        }
+    }
+
     weak var sortingView: SubscriptionsSortingView?
     weak var serversView: ServersListView?
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
-    weak var searchBar: UISearchBar?
+    var searchBar: UISearchBar? {
+        return searchController?.searchBar
+    }
 
     var assigned = false
     var viewModel = SubscriptionsViewModel()
@@ -190,32 +211,10 @@ final class SubscriptionsViewController: BaseViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
 
-        if #available(iOS 11.0, *) {
-            searchBar = searchController.searchBar
-            navigationController?.navigationBar.prefersLargeTitles = false
-            navigationItem.largeTitleDisplayMode = .never
-
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = true
-        } else {
-            if let headerView = tableView.tableHeaderView, searchBar == nil {
-                var frame = headerView.frame
-                frame.size.height = 88
-                headerView.frame = frame
-
-                let searchBar = UISearchBar(frame: CGRect(
-                    x: 0,
-                    y: 44,
-                    width: frame.width,
-                    height: 44
-                ))
-
-                headerView.addSubview(searchBar)
-                self.searchBar = searchBar
-
-                tableView.tableHeaderView = headerView
-            }
-        }
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
 
         self.searchController = searchController
         searchBar?.placeholder = localized("subscriptions.search")
@@ -294,6 +293,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         else {
             return false
         }
+
         let tapLocation = recognizer.location(in: view).y
         return tapLocation > inset && tapLocation < view.bounds.height - inset
     }
@@ -303,6 +303,19 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     @IBAction func recognizeSortingHeaderTapGesture(_ recognizer: UITapGestureRecognizer) {
         if shouldRespondToTap(recognizer: recognizer, inset: 8) {
             toggleSortingView()
+        }
+    }
+
+    @objc func recognizeDirectoryTapGesture(_ recognizer: UITapGestureRecognizer) {
+        guard let controller = UIStoryboard(name: "Directory", bundle: Bundle.main).instantiateInitialViewController() else { return }
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let nav = BaseNavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .pageSheet
+
+            present(nav, animated: true, completion: nil)
+        } else {
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 
@@ -358,17 +371,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     private var frameForDropDownOverlay: CGRect {
         var frameHeight = view.bounds.height
-        var yOffset: CGFloat = 0.0
-
-        if #available(iOS 11.0, *) {
-            frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
-            yOffset = view.safeAreaInsets.top
-        } else {
-            let navBarHeight = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
-            frameHeight -= navBarHeight
-            yOffset = navBarHeight
-        }
-
+        let yOffset = view.safeAreaInsets.top
+        frameHeight -= view.safeAreaInsets.top - view.safeAreaInsets.bottom
         return CGRect(x: 0.0, y: yOffset, width: view.bounds.width, height: view.bounds.height)
     }
 

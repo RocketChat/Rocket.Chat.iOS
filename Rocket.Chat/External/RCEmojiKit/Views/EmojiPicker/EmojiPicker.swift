@@ -13,8 +13,6 @@ private typealias EmojiCategory = (name: String, emojis: [Emoji])
 final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
 
-    var isPopover = false
-
     var customEmojis: [Emoji] = []
     var customCategory: (name: String, emojis: [Emoji]) {
         return (name: "custom", emojis: self.customEmojis)
