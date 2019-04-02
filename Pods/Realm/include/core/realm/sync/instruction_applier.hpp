@@ -54,12 +54,12 @@ protected:
 
     Group& m_group;
     TableInfoCache& m_table_info_cache;
+    LinkViewRef m_selected_link_list;
 private:
     const Changeset* m_log = nullptr;
     util::Logger* m_logger = nullptr;
     TableRef m_selected_table;
     TableRef m_selected_array;
-    LinkViewRef m_selected_link_list;
     TableRef m_link_target_table;
 
     template <class... Args>

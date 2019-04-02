@@ -128,6 +128,21 @@ constexpr int get_current_protocol_version() noexcept
 }
 
 
+/// Supported protocol envelopes:
+///
+///                                                             Alternative (*)
+///      Name     Envelope          URL scheme   Default port   default port
+///     ------------------------------------------------------------------------
+///      realm    WebSocket         realm:       7800           80
+///      realms   WebSocket + SSL   realms:      7801           443
+///      ws       WebSocket         ws:          80
+///      wss      WebSocket + SSL   wss:         443
+///
+///       *) When Client::Config::enable_default_port_hack is true
+///
+enum class ProtocolEnvelope { realm, realms, ws, wss };
+
+
 // These integer types are selected so that they accomodate the requirements of
 // the protocol specification (`/doc/protocol.md`).
 using file_ident_type    = std::uint_fast64_t;

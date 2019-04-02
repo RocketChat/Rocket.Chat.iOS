@@ -84,10 +84,9 @@ void set_up_basic_permissions(Group& group, TableInfoCache& table_info_cache, bo
 // Convenience function that creates a new TableInfoCache.
 void set_up_basic_permissions(Group& group, bool permissive = true);
 
-void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
-
 /// Set up some basic permissions for the class. The default is to set up some
 /// very permissive default, where "everyone" can do everything in the class.
+void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
 // void set_up_basic_default_permissions_for_class(Group&, TableRef klass, bool permissive = true);
 
 /// Return the index of the ACL in the class, if one exists. If no ACL column is
@@ -372,6 +371,8 @@ struct PermissionCorrections {
 
     // Tables that were illegally removed by the client.
     TableSet recreate_tables;
+
+    bool empty() const noexcept;
 };
 
 // Function for printing out a permission correction object. Useful for debugging purposes.
@@ -400,6 +401,17 @@ private:
     struct Impl;
     std::unique_ptr<Impl> m_impl;
 };
+
+
+// Implementation:
+
+inline bool PermissionCorrections::empty() const noexcept
+{
+    return recreate_objects.empty() && erase_objects.empty()
+        && reset_fields.empty() && erase_columns.empty()
+        && recreate_columns.empty() && erase_tables.empty()
+        && recreate_tables.empty();
+}
 
 } // namespace sync
 } // namespace realm

@@ -69,11 +69,11 @@ PODS:
   - OAuthSwift (1.3.0)
   - RCMarkdownParser (3.0.7)
   - ReachabilitySwift (4.2.1)
-  - Realm (3.12.0):
-    - Realm/Headers (= 3.12.0)
-  - Realm/Headers (3.12.0)
-  - RealmSwift (3.12.0):
-    - Realm (= 3.12.0)
+  - Realm (3.14.0):
+    - Realm/Headers (= 3.14.0)
+  - Realm/Headers (3.14.0)
+  - RealmSwift (3.14.0):
+    - Realm (= 3.14.0)
   - RocketChatViewController (1.0.1):
     - RocketChatViewController/Composer (= 1.0.1)
     - RocketChatViewController/ViewController (= 1.0.1)
@@ -199,8 +199,8 @@ SPEC CHECKSUMS:
   OAuthSwift: 7ef2f74cb570e1e30e2aeddc58fccc0f3891d057
   RCMarkdownParser: f107c58b83065d001e20c988443e6eab9c0a1e26
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
-  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
-  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
+  Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
+  RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
   RocketChatViewController: ab532fa2810a165dc4f8e79a337253c09434cce6
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
