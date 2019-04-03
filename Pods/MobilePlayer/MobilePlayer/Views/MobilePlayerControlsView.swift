@@ -58,10 +58,11 @@ final class MobilePlayerControlsView: UIView {
 
     override func layoutSubviews() {
 
-        let iPhoneX = UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436
-        let landscape = UIScreen.main.bounds.height != 812
+        let iPhoneX = UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436 || UIScreen.main.nativeBounds.height == 1792 || UIScreen.main.nativeBounds.height == 2688
+        let landscape = UIScreen.main.bounds.height != 812 || UIScreen.main.bounds.height != 896
 
         let size = bounds.size
+
         previewImageView.frame = bounds
         activityIndicatorView.sizeToFit()
         activityIndicatorView.frame.origin = CGPoint(
