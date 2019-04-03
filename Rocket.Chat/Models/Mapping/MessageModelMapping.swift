@@ -141,5 +141,22 @@ extension Message: ModelMappeable {
                 return reaction
             }.forEach(self.reactions.append)
         }
+
+        // Discussions
+        if let discussionRid = values["drid"].string {
+            self.discussionRid = discussionRid
+        }
+
+        if let discussionLastMessage = values["dlm"]["$date"].double {
+            self.discussionLastMessage = Date.dateFromInterval(discussionLastMessage)
+        }
+
+        if let discussionLastMessage = values["dlm"].string {
+            self.discussionLastMessage = Date.dateFromString(discussionLastMessage)
+        }
+
+        if let discussionMessagesCount = values["dcount"].int {
+            self.discussionMessagesCount = discussionMessagesCount
+        }
     }
 }

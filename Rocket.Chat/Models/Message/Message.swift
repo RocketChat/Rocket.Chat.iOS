@@ -42,6 +42,8 @@ enum MessageType: String {
 
     case jitsiCallStarted = "jitsi_call_started"
 
+    case discussionCreated = "discussion-created"
+
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
@@ -81,6 +83,14 @@ final class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    // MARK: Discussion
+
+    @objc dynamic var discussionRid: String?
+    @objc dynamic var discussionLastMessage: Date?
+    @objc dynamic var discussionMessagesCount = 0
+
+    // MARK: Relationships
+
     var starred = List<String>()
     var mentions = List<Mention>()
     var channels = List<Channel>()
@@ -88,6 +98,8 @@ final class Message: BaseModel {
     var urls = List<MessageURL>()
 
     var reactions = List<MessageReaction>()
+
+    // MARK: Getters
 
     var type: MessageType {
         if let type = MessageType(rawValue: internalType) {

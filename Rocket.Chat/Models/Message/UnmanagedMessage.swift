@@ -69,6 +69,10 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var snippetName: String?
     var snippetId: String?
 
+    var discussionRid: String?
+    var discussionLastMessage: Date?
+    var discussionMessagesCount = 0
+
     var managedObject: Message? {
         return Message.find(withIdentifier: identifier)?.validated()
     }
@@ -88,6 +92,9 @@ extension UnmanagedMessage {
             lhs.attachments.elementsEqual(rhs.attachments) &&
             lhs.urls == rhs.urls &&
             lhs.reactions == rhs.reactions &&
+            lhs.discussionRid == rhs.discussionRid &&
+            lhs.discussionLastMessage == rhs.discussionLastMessage &&
+            lhs.discussionMessagesCount == rhs.discussionMessagesCount &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
     }
 }
@@ -128,6 +135,10 @@ extension UnmanagedMessage {
         alias = message.alias.isEmpty ? nil : message.alias
         snippetName = message.snippetName
         snippetId = message.snippetId
+
+        discussionRid = message.discussionRid
+        discussionLastMessage = message.discussionLastMessage
+        discussionMessagesCount = message.discussionMessagesCount
 
         mentions = message.mentions.compactMap {
             return UnmanagedMention(
