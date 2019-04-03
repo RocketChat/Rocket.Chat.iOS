@@ -213,11 +213,11 @@ extension UnmanagedMessage {
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
-                type == .audio ||
-                type == .image ||
-                type == .video ||
-                type == .textAttachment ||
-                type == .url
+            type == .audio ||
+            type == .image ||
+            type == .video ||
+            type == .textAttachment ||
+            type == .url
         )
     }
 
@@ -346,6 +346,9 @@ extension UnmanagedMessage {
                 format: localized("chat.message.type.video_call_started"),
                 self.user?.displayName ?? ""
             )
+
+        case .discussionCreated:
+            return localized("chat.message.type.discussion_created")
 
         default:
             break
