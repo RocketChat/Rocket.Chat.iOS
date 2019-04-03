@@ -57,11 +57,20 @@ final class MobilePlayerControlsView: UIView {
     }
 
     override func layoutSubviews() {
-
-        let iPhoneX = UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436 || UIScreen.main.nativeBounds.height == 1792 || UIScreen.main.nativeBounds.height == 2688
-        let landscape = UIScreen.main.bounds.height != 812 || UIScreen.main.bounds.height != 896
-
         let size = bounds.size
+
+        let iPhoneX = UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436
+        let landscape = UIScreen.main.bounds.height != 812
+
+        var topSafeAreaHeight: CGFloat = 0.0
+        var bottomSafeAreaHeight: CGFloat = 0.0
+
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.windows[0]
+            let safeFrame = window.safeAreaLayoutGuide.layoutFrame
+            topSafeAreaHeight = safeFrame.minY
+            bottomSafeAreaHeight = window.frame.maxY - safeFrame.maxY
+        }
 
         previewImageView.frame = bounds
         activityIndicatorView.sizeToFit()
@@ -71,14 +80,14 @@ final class MobilePlayerControlsView: UIView {
         topBar.sizeToFit()
         topBar.frame = CGRect(
             x: (iPhoneX && landscape) ? 44 : 0,
-            y: controlsHidden ? -topBar.frame.size.height : ((iPhoneX && !landscape) ? 44 : 0),
+            y: controlsHidden ? -topBar.frame.size.height : topSafeAreaHeight,
             width: size.width - ((iPhoneX && landscape) ? 88 : 0),
             height: topBar.frame.size.height)
         topBar.alpha = controlsHidden ? 0 : 1
         bottomBar.sizeToFit()
         bottomBar.frame = CGRect(
             x: (iPhoneX && landscape) ? 44 : 0,
-            y: size.height - (controlsHidden ? 0 : bottomBar.frame.size.height + ((iPhoneX && !landscape) ? 34 : 0)),
+            y: size.height - (controlsHidden ? 0 : bottomBar.frame.size.height + bottomSafeAreaHeight),
             width: size.width - ((iPhoneX && landscape) ? 88 : 0),
             height: bottomBar.frame.size.height)
         bottomBar.alpha = controlsHidden ? 0 : 1
