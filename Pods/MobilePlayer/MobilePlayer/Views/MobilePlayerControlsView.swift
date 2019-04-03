@@ -59,9 +59,8 @@ final class MobilePlayerControlsView: UIView {
     override func layoutSubviews() {
         let size = bounds.size
 
-        let iPhoneX = UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436
-        let landscape = UIScreen.main.bounds.height != 812
-
+        let iPhoneX = UIDevice.current.userInterfaceIdiom == .phone && (UIScreen.main.nativeBounds.height == 2688 || UIScreen.main.nativeBounds.height == 2436 || UIScreen.main.nativeBounds.height == 1792)
+        let landscape = UIDevice.current.orientation.isLandscape
         var topSafeAreaHeight: CGFloat = 0.0
         var bottomSafeAreaHeight: CGFloat = 0.0
 
