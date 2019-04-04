@@ -209,7 +209,7 @@ final class SubscriptionsViewController: BaseViewController {
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom != .pad
+        searchController.hidesNavigationBarDuringPresentation = UIDevice.current.userInterfaceIdiom == .pad
 
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
