@@ -41,7 +41,11 @@ class ChannelActionsViewController: BaseViewController {
                 let hasAnnouncement = !(subscription.roomAnnouncement?.isEmpty ?? true)
                 let hasTopic = !(subscription.roomTopic?.isEmpty ?? true)
 
-                header = [ChannelInfoBasicCellData(title: "#\(subscription.name)")]
+                if subscription.isDiscussion {
+                    header = [ChannelInfoBasicCellData(title: subscription.fname)]
+                } else {
+                    header = [ChannelInfoBasicCellData(title: "#\(subscription.name)")]
+                }
 
                 if hasDescription {
                     header?.append(ChannelInfoDescriptionCellData(
