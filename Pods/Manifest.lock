@@ -56,7 +56,7 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.4):
     - GoogleUtilities/Logger
   - MBProgressHUD (1.1.0)
-  - MobilePlayer (1.2.0)
+  - MobilePlayer (1.4.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -151,7 +151,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MobilePlayer:
-    :commit: c7160990d7b50d34a45514df4535011e64541340
+    :commit: 7ecd958711875a302d3ccfcb2607488b6fbde11b
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
   RCMarkdownParser:
     :commit: c34d9ccef689c55b9eae69f3c65283da8d8b0c6c
@@ -177,7 +177,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  MobilePlayer: 6c1df67588b247f80554ba60e67734215ab31a87
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
   Nuke-FLAnimatedImage-Plugin: e4c39d13061a08ac0bdcb0cd7a23882f4a43f4a6

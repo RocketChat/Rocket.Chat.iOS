@@ -358,6 +358,14 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
       getViewForElementWithIdentifier("action")?.isHidden = isEmpty
     }
   }
+    
+  /// An array of activity types that will be excluded when presenting a `UIActivityViewController`
+  public var excludedActivityTypes: [UIActivity.ActivityType]? = [
+      .assignToContact,
+      .saveToCameraRoll,
+      .postToVimeo,
+      .airDrop
+  ]
 
   /// Method that is called when a control interface button with identifier "action" is tapped. Presents a
   /// `UIActivityViewController` with `activityItems` set as its activity items. If content is playing, it is paused
@@ -372,12 +380,7 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
     let wasPlaying = (state == .playing)
     moviePlayer.pause()
     let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-    activityVC.excludedActivityTypes =  [
-      .assignToContact,
-      .saveToCameraRoll,
-      .postToVimeo,
-      .airDrop
-    ]
+    activityVC.excludedActivityTypes =  excludedActivityTypes
     activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
       if wasPlaying {
         self.moviePlayer.play()
@@ -457,11 +460,11 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
         overlay: overlayViewController))
     } else if overlayViewController.parent == nil {
       overlayViewController.delegate = self
-      addChildViewController(overlayViewController)
+      addChild(overlayViewController)
       overlayViewController.view.clipsToBounds = true
       overlayViewController.view.frame = controlsView.overlayContainerView.bounds
       controlsView.overlayContainerView.addSubview(overlayViewController.view)
-      overlayViewController.didMove(toParentViewController: self)
+      overlayViewController.didMove(toParent: self)
     }
   }
 
@@ -471,7 +474,7 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
       timedOverlayInfo.overlay.dismiss()
     }
     timedOverlays.removeAll()
-    for childViewController in childViewControllers {
+    for childViewController in children {
       if childViewController is WatermarkViewController { continue }
       (childViewController as? MobilePlayerOverlayViewController)?.dismiss()
     }
@@ -612,9 +615,9 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
 extension MobilePlayerViewController: MobilePlayerOverlayViewControllerDelegate {
 
   func dismiss(mobilePlayerOverlayViewController overlayViewController: MobilePlayerOverlayViewController) {
-    overlayViewController.willMove(toParentViewController: nil)
+    overlayViewController.willMove(toParent: nil)
     overlayViewController.view.removeFromSuperview()
-    overlayViewController.removeFromParentViewController()
+    overlayViewController.removeFromParent()
     if overlayViewController == prerollViewController {
       play()
     }
@@ -640,3 +643,4 @@ extension MobilePlayerViewController: SliderDelegate {
     }
   }
 }
+
