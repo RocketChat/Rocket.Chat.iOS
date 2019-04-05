@@ -54,14 +54,19 @@ extension SEComposeHeaderViewModel {
         doneButtonState = showsActivityIndicator ? .cancel : .send
         backButtonEnabled = !showsActivityIndicator
 
-        let symbol: String
-        switch state.currentRoom.type {
-        case .channel, .group:
-            symbol = "#"
-        case .directMessage:
-            symbol = "@"
-        }
+        if state.currentRoom.isDiscussion {
+            destinationText = state.currentRoom.fname
+        } else {
+            let symbol: String
+            switch state.currentRoom.type {
+            case .channel, .group:
+                symbol = "#"
+            case .directMessage:
+                symbol = "@"
+            }
 
-        destinationText = "\(symbol)\(state.currentRoom.name)"
+            destinationText = "\(symbol)\(state.currentRoom.name)"
+        }
     }
+
 }
