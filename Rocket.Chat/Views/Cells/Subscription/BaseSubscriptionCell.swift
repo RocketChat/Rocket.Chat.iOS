@@ -146,7 +146,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
             viewStatus.isHidden = true
 
             if subscription.isDiscussion {
-                iconRoom.image = UIImage(named: "Discussions")
+                iconRoom.image = UIImage(named: "Cell Subscription Discussion")
             } else {
                 if subscription.type == .channel {
                     iconRoom.image = UIImage(named: "Cell Subscription Hashtag")
