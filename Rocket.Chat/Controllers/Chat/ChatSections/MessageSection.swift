@@ -99,8 +99,9 @@ final class MessageSection: ChatSection {
                     }
                 case .textAttachment where attachment.fields.count > 0:
                     let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
+                    let isFirstAttachment = attachment.identifier == object.message.attachments.first?.identifier
 
-                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader && attachment.identifier == object.message.attachments.first?.identifier {
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader && isFirstAttachment {
                         cells.insert(TextAttachmentChatItem(
                             identifier: attachment.identifier,
                             fields: attachment.fields,
