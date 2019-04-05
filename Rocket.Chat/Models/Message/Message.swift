@@ -23,6 +23,7 @@ enum MessageType: String {
     case userRemoved = "ru"
     case userJoined = "uj"
     case userLeft = "ul"
+    case userJoinedConversation = "ut"
     case userMuted = "user-muted"
     case userUnmuted = "user-unmuted"
     case welcome = "wm"

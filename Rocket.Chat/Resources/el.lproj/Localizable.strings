@@ -293,6 +293,8 @@
 "chat.message.type.room_changed_announcement" = "Η αναγγελία του δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.room_changed_description" = "Η περιγραφή του Δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.video_call_started" = "Μια Βεντοκλήση ξεκίνησε από %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";

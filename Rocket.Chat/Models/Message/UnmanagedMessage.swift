@@ -267,6 +267,11 @@ extension UnmanagedMessage {
                 self.user?.displayName ?? ""
             )
 
+        case .userJoinedConversation:
+            return String(
+                format: localized("chat.message.type.user_joined_conversation")
+            )
+
         case .welcome:
             return String(
                 format: localized("chat.message.type.welcome"),

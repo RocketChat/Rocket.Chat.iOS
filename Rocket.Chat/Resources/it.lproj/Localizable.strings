@@ -294,6 +294,8 @@
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
 "chat.message.type.video_call_started" = "Chiamata video iniziata da %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informazioni";

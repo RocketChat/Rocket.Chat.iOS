@@ -293,6 +293,8 @@
 "chat.message.type.room_changed_announcement" = "頻道公告店變更為\"%@\" 由%@操作";
 "chat.message.type.room_changed_description" = "頻道描述變更為\"%@\" 由%@操作";
 "chat.message.type.video_call_started" = "%@開啟視訊";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "訊息";

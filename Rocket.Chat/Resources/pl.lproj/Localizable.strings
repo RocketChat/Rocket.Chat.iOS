@@ -293,6 +293,8 @@
 "chat.message.type.room_changed_announcement" = "Ogłoszenie pokoju zmieniono na \"%@\" przez %@";
 "chat.message.type.room_changed_description" = "Opis pokoju zmieniono na \"%@\" przez %@";
 "chat.message.type.video_call_started" = "Rozmowa wideo rozpoczęta przez %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informacje";
