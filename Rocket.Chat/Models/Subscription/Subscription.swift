@@ -130,6 +130,10 @@ final class Subscription: BaseModel {
         return Realm.current?.objects(Message.self).filter("rid == '\(rid)'")
     }
 
+    var isDiscussion: Bool {
+        return !prid.isEmpty
+    }
+
     static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
         return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }

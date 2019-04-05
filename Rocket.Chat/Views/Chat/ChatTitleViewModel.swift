@@ -41,6 +41,10 @@ final class ChatTitleViewModel {
             return "Channel Small"
         }
 
+        if subscription.isDiscussion {
+            return "Discussions"
+        }
+
         switch subscription.type {
         case .channel: return "Channel Small"
         case .directMessage: return "DM Small"

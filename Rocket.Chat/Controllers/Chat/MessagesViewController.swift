@@ -304,6 +304,7 @@ final class MessagesViewController: RocketChatViewController {
             (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
             (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
             (nib: MessageVideoCallCell.nib, cellIdentifier: MessageVideoCallCell.identifier),
+            (nib: MessageDiscussionCell.nib, cellIdentifier: MessageDiscussionCell.identifier),
             (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
         ]
 

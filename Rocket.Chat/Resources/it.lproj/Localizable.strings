@@ -294,6 +294,8 @@
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
 "chat.message.type.video_call_started" = "Chiamata video iniziata da %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informazioni";
@@ -514,3 +516,8 @@
 "directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
 "directory.users.1_user" = "1 member"; // TODO
 "directory.users.x_users" = "%@ members"; // TODO
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
