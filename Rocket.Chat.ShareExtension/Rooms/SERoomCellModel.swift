@@ -13,6 +13,10 @@ struct SERoomCellModel: SECellModel {
     let avatarBaseUrl: String
 
     var name: String {
+        if room.isDiscussion {
+            return room.fname
+        }
+
         return room.name
     }
 
