@@ -515,3 +515,8 @@
 "directory.filters.global.subtitle" = "Po włączeniu możesz wyszukać dowolnego użytkownika z innych firm lub serwerów.";
 "directory.users.1_user" = "1 użytkownik";
 "directory.users.x_users" = "%@ użytkowników";
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO

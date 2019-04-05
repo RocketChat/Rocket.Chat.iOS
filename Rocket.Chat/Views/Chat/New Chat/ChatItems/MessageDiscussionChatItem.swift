@@ -19,6 +19,58 @@ final class MessageDiscussionChatItem: BaseMessageChatItem, ChatItem, Differenti
         super.init(user: nil, message: message)
     }
 
+    var buttonTitle: String {
+        guard let message = message else { return "" }
+
+        if message.discussionMessagesCount == 0 {
+            return localized("discussion.no_messages")
+        } else if message.discussionMessagesCount == 1 {
+            return localized("discussion.1_message")
+        }
+
+        return String(format: localized("discussion.x_messages"), message.discussionMessagesCount.humanized())
+    }
+
+    var discussionTitle: NSAttributedString {
+        guard let message = message else { return NSAttributedString(string: "") }
+
+        let theme = ThemeManager.theme
+
+        let attributedString = NSMutableAttributedString()
+
+        let iconDiscussions = NSTextAttachment()
+        iconDiscussions.image = UIImage(named: "Discussions")?.imageWithTint(theme.bodyText)
+
+        let iconDiscussionsString = NSAttributedString(attachment: iconDiscussions)
+        attributedString.append(iconDiscussionsString)
+
+        attributedString.append(NSAttributedString(string: " \(message.text)"))
+
+        return attributedString
+    }
+
+    var discussionLastMessageDate: String {
+        if let lastMessageDate = message?.discussionLastMessage {
+            return formatLastMessageDate(lastMessageDate)
+        }
+
+        return ""
+    }
+
+    func formatLastMessageDate(_ date: Date) -> String {
+        let calendar = Calendar.current
+
+        if calendar.isDateInYesterday(date) {
+            return localized("subscriptions.list.date.yesterday")
+        }
+
+        if calendar.isDateInToday(date) {
+            return RCDateFormatter.time(date)
+        }
+
+        return RCDateFormatter.date(date, dateStyle: .short)
+    }
+
     var differenceIdentifier: String {
         return message?.identifier ?? ""
     }

@@ -48,27 +48,18 @@ final class MessageDiscussionCell: BaseMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
-        guard
-            let model = viewModel?.base as? MessageDiscussionChatItem,
-            let message = model.message
-        else {
+        guard let model = viewModel?.base as? MessageDiscussionChatItem else {
             return
         }
 
-        let buttonTitle = String(format: "%d messages", message.discussionMessagesCount)
-        discussionButton.setTitle(buttonTitle, for: .normal)
+        discussionButton.setTitle(model.buttonTitle, for: .normal)
+        labelMessage.attributedText = model.discussionTitle
+        labelDiscussionLastMessage.text = model.discussionLastMessageDate
 
-        labelMessage.text = message.text
         messageTextViewHeightConstraint.constant = labelMessage.sizeThatFits(CGSize(
             width: textWidth,
-            height: .greatestFiniteMagnitude)
-        ).height
-
-        if let lastMessageDate =  message.discussionLastMessage {
-            labelDiscussionLastMessage.text = formatLastMessageDate(lastMessageDate)
-        } else {
-            labelDiscussionLastMessage.text = ""
-        }
+            height: .greatestFiniteMagnitude
+        )).height
     }
 
     @IBAction func buttonDiscussionDidPressed(sender: Any) {
@@ -81,20 +72,6 @@ final class MessageDiscussionCell: BaseMessageCell, SizingCell {
         }
 
         AppManager.open(room: subscription)
-    }
-
-    func formatLastMessageDate(_ date: Date) -> String {
-        let calendar = Calendar.current
-
-        if calendar.isDateInYesterday(date) {
-            return localized("subscriptions.list.date.yesterday")
-        }
-
-        if calendar.isDateInToday(date) {
-            return RCDateFormatter.time(date)
-        }
-
-        return RCDateFormatter.date(date, dateStyle: .short)
     }
 }
 

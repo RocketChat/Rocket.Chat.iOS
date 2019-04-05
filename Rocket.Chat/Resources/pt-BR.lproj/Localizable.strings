@@ -515,3 +515,8 @@
 "directory.filters.global.subtitle" = "Se você habilitar esta opção, você buscará também usuários de outros servidores conectados ao seu. ";
 "directory.users.1_user" = "1 membro";
 "directory.users.x_users" = "%@ membros";
+
+// Discussions
+"discussion.no_messages" = "Nenhuma mensagem";
+"discussion.1_message" = "1 mensagem";
+"discussion.x_messages" = "%@ mensagens";

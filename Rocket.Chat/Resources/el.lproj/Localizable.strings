@@ -515,3 +515,8 @@
 "directory.filters.global.subtitle" = "Αν το ενεργοποιήσετε, θα μπορείτε να αναζητήσετε για οποιοδήποτε χρήστη και από άλλες εταιρίες ή εξυπηρετητές. ";
 "directory.users.1_user" = "1 μέλος";
 "directory.users.x_users" = "%@ μέλη";
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO

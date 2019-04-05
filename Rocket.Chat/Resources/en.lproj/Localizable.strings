@@ -515,3 +515,8 @@
 "directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. ";
 "directory.users.1_user" = "1 member";
 "directory.users.x_users" = "%@ members";
+
+// Discussions
+"discussion.no_messages" = "No messages yet";
+"discussion.1_message" = "1 message";
+"discussion.x_messages" = "%@ messages";
