@@ -65,13 +65,12 @@ final class MessageDiscussionCell: BaseMessageCell, SizingCell {
     @IBAction func buttonDiscussionDidPressed(sender: Any) {
         guard
             let model = viewModel?.base as? MessageDiscussionChatItem,
-            let rid = model.message?.discussionRid,
-            let subscription = Subscription.find(rid: rid)
+            let rid = model.message?.discussionRid
         else {
             return
         }
 
-        AppManager.open(room: subscription)
+        AppManager.openRoom(rid: rid, type: .group)
     }
 }
 

@@ -26,7 +26,7 @@
                             <constraint firstAttribute="height" constant="44" id="g3Z-IK-0za"/>
                             <constraint firstAttribute="width" constant="180" id="rD7-OY-zl1"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Join Video Call" image="UserDetail_VideoCall"/>
