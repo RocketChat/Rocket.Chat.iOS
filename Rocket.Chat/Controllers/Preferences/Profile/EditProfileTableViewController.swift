@@ -533,14 +533,6 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
             )
 
             avatarView.imageView.image = image
-        } else if let image = info[.originalImage] as? UIImage {
-            file = UploadHelper.file(
-                for: image.compressedForUpload,
-                name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
-                mimeType: "image/jpeg"
-            )
-
-            avatarView.imageView.image = image
         }
 
         avatarFile = file
