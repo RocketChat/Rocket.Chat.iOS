@@ -465,4 +465,22 @@ class SubscriptionSpec: XCTestCase {
 
         XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
     }
+
+    func testDiscussionCheckTrue() {
+        let subscription = Subscription()
+        subscription.type = .group
+        subscription.rid = "123"
+        subscription.prid = "parentRid"
+
+        XCTAssertTrue(subscription.isDiscussion, "subscription is a discussion")
+    }
+
+    func testDiscussionCheckFalse() {
+        let subscription = Subscription()
+        subscription.type = .channel
+        subscription.rid = "123"
+        subscription.prid = ""
+
+        XCTAssertFalse(subscription.isDiscussion, "subscription is a discussion")
+    }
 }

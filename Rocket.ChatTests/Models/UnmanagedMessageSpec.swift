@@ -119,4 +119,22 @@ final class UnmanagedMessageSpec: XCTestCase {
         XCTAssertEqual(unmanagedMessage.reactions.first?.usernames.first, "username")
     }
 
+    func testDiscussionMapping() {
+        let discussionDate = Date()
+
+        let testMessage = Message.testInstance()
+        testMessage.discussionRid = "rid"
+        testMessage.discussionLastMessage = discussionDate
+        testMessage.discussionMessagesCount = 100
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertEqual(unmanagedMessage.discussionRid, "rid")
+        XCTAssertEqual(unmanagedMessage.discussionLastMessage, discussionDate)
+        XCTAssertEqual(unmanagedMessage.discussionMessagesCount, 100)
+    }
+
 }

@@ -293,6 +293,8 @@
 "chat.message.type.room_changed_announcement" = "Η αναγγελία του δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.room_changed_description" = "Η περιγραφή του Δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.video_call_started" = "Μια Βεντοκλήση ξεκίνησε από %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";
@@ -513,3 +515,8 @@
 "directory.filters.global.subtitle" = "Αν το ενεργοποιήσετε, θα μπορείτε να αναζητήσετε για οποιοδήποτε χρήστη και από άλλες εταιρίες ή εξυπηρετητές. ";
 "directory.users.1_user" = "1 μέλος";
 "directory.users.x_users" = "%@ μέλη";
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO

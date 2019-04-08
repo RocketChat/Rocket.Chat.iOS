@@ -101,6 +101,27 @@ class MessageSpec: XCTestCase {
         XCTAssert(message.identifier == "message-json-1", "Message object was created with success")
     }
 
+    func testDiscussionMessageObjectFromJSON() {
+        let object = JSON([
+            "_id": "message-json-1",
+            "rid": "123",
+            "msg": "Foo Bar Baz",
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
+            "u": ["_id": "123", "username": "foo"],
+            "drid": "123drid",
+            "dlm": ["$date": 123456789],
+            "dcount": 100
+        ])
+
+        let message = Message()
+        message.map(object, realm: nil)
+
+        XCTAssertEqual(message.discussionRid, "123drid", "discussionRid was mapped correctly")
+        XCTAssertEqual(message.discussionLastMessage, Date.dateFromInterval(123456789), "discussionLastMessage was mapped correctly")
+        XCTAssertEqual(message.discussionMessagesCount, 100, "discussionMessagesCount was mapped correctly")
+    }
+
     func testMessageTypeAttachmentImage() {
         let attachment = Attachment()
         attachment.imageURL = "https://foo.bar"

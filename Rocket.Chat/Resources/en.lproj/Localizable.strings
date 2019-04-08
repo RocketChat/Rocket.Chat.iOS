@@ -293,6 +293,8 @@
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@";
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@";
 "chat.message.type.video_call_started" = "Video call started by %@";
+"chat.message.type.discussion_created" = "Started a discussion:";
+"chat.message.type.user_joined_conversation" = "Has joined the conversation";
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -513,3 +515,8 @@
 "directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. ";
 "directory.users.1_user" = "1 member";
 "directory.users.x_users" = "%@ members";
+
+// Discussions
+"discussion.no_messages" = "No messages yet";
+"discussion.1_message" = "1 message";
+"discussion.x_messages" = "%@ messages";
