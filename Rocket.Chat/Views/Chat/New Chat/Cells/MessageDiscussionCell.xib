@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="u6p-Dz-igp" customClass="MessageDiscussionCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTq-7J-Pgb">
+                        <rect key="frame" x="71" y="30" width="118" height="32"/>
+                        <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="g3Z-IK-0za"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        <state key="normal" title="125 messages"/>
+                        <connections>
+                            <action selector="buttonDiscussionDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="POr-qh-QE5"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g97-7p-jJ7">
+                        <rect key="frame" x="71" y="0.0" width="288" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="oBe-hT-j9C"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsW-iH-go3">
+                        <rect key="frame" x="197" y="38" width="33" height="16"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="pTq-7J-Pgb" firstAttribute="top" secondItem="g97-7p-jJ7" secondAttribute="bottom" constant="10" id="2fl-WI-Hb6"/>
+                <constraint firstItem="XsW-iH-go3" firstAttribute="centerY" secondItem="pTq-7J-Pgb" secondAttribute="centerY" id="KbR-W3-VVK"/>
+                <constraint firstAttribute="trailingMargin" secondItem="g97-7p-jJ7" secondAttribute="trailing" id="MGV-aO-bfh"/>
+                <constraint firstItem="XsW-iH-go3" firstAttribute="leading" secondItem="pTq-7J-Pgb" secondAttribute="trailing" constant="8" id="Ybo-ll-02Q"/>
+                <constraint firstItem="g97-7p-jJ7" firstAttribute="leading" secondItem="u6p-Dz-igp" secondAttribute="leadingMargin" constant="55" id="ZCh-GB-RFk"/>
+                <constraint firstItem="pTq-7J-Pgb" firstAttribute="leading" secondItem="u6p-Dz-igp" secondAttribute="leadingMargin" constant="55" id="ebK-pC-qXy"/>
+                <constraint firstAttribute="bottom" secondItem="pTq-7J-Pgb" secondAttribute="bottom" constant="10" id="ofT-ZI-Ya7"/>
+                <constraint firstItem="g97-7p-jJ7" firstAttribute="top" secondItem="u6p-Dz-igp" secondAttribute="topMargin" id="te4-qL-bWB"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="oHh-zw-8Kd"/>
+            <size key="customSize" width="375" height="73"/>
+            <connections>
+                <outlet property="discussionButton" destination="pTq-7J-Pgb" id="qly-Sg-CbQ"/>
+                <outlet property="labelDiscussionLastMessage" destination="XsW-iH-go3" id="TXV-j3-a7m"/>
+                <outlet property="labelMessage" destination="g97-7p-jJ7" id="Fnb-fD-PNQ"/>
+                <outlet property="messageTextLeadingConstraint" destination="ZCh-GB-RFk" id="sml-Bt-Zbb"/>
+                <outlet property="messageTextTrailingConstraint" destination="MGV-aO-bfh" id="ZKL-FC-Tjw"/>
+                <outlet property="messageTextViewHeightConstraint" destination="oBe-hT-j9C" id="upn-I6-kmf"/>
+            </connections>
+            <point key="canvasLocation" x="111.2" y="-50.824587706146929"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -48,150 +48,14 @@ final class MessageSection: ChatSection {
             .removingWhitespaces()
             .removingNewLines() ?? ""
 
-        object.message.attachments.forEach { attachment in
-            switch attachment.type {
-            case .audio:
-                if sanitizedMessage.isEmpty {
-                    cells.insert(AudioMessageChatItem(
-                        identifier: attachment.identifier,
-                        audioURL: attachment.fullAudioURL,
-                        hasText: false,
-                        user: user,
-                        message: object.message
-                    ).wrapped, at: 0)
-
-                    shouldAppendMessageHeader = false
-                } else {
-                    cells.insert(AudioMessageChatItem(
-                        identifier: attachment.identifier,
-                        audioURL: attachment.fullAudioURL,
-                        hasText: true,
-                        user: nil,
-                        message: object.message
-                    ).wrapped, at: 0)
-                }
-            case .video:
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.insert(VideoMessageChatItem(
-                        attachment: attachment,
-                        identifier: attachment.identifier,
-                        descriptionText: attachment.descriptionText,
-                        videoURL: attachment.fullFileURL,
-                        videoThumbPath: attachment.videoThumbPath,
-                        hasText: false,
-                        user: user,
-                        message: object.message
-                    ).wrapped, at: 0)
-
-                    shouldAppendMessageHeader = false
-                } else {
-                    cells.insert(VideoMessageChatItem(
-                        attachment: attachment,
-                        identifier: attachment.identifier,
-                        descriptionText: attachment.descriptionText,
-                        videoURL: attachment.fullFileURL,
-                        videoThumbPath: attachment.videoThumbPath,
-                        hasText: true,
-                        user: nil,
-                        message: object.message
-                    ).wrapped, at: 0)
-                }
-            case .textAttachment where attachment.fields.count > 0:
-                let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
-
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader && attachment.identifier == object.message.attachments.first?.identifier {
-                    cells.insert(TextAttachmentChatItem(
-                        identifier: attachment.identifier,
-                        fields: attachment.fields,
-                        title: attachment.title,
-                        subtitle: attachment.text,
-                        color: attachment.color,
-                        collapsed: collapsed,
-                        hasText: false,
-                        user: user,
-                        message: object.message
-                    ).wrapped, at: 0)
-
-                    shouldAppendMessageHeader = false
-                } else {
-                    cells.insert(TextAttachmentChatItem(
-                        identifier: attachment.identifier,
-                        fields: attachment.fields,
-                        title: attachment.title,
-                        subtitle: attachment.text,
-                        color: attachment.color,
-                        collapsed: collapsed,
-                        hasText: true,
-                        user: nil,
-                        message: object.message
-                    ).wrapped, at: 0)
-                }
-            case .textAttachment where !attachment.isFile:
-                let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
-                let text = attachment.text ?? attachment.descriptionText
-
-                let purpose: String
-                switch object.message.type {
-                case .messagePinned:
-                    purpose = localized("chat.components.quote.pinned")
-                default:
-                    purpose = ""
-                }
-
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.insert(QuoteChatItem(
-                        identifier: attachment.identifier,
-                        purpose: purpose,
-                        title: attachment.title,
-                        text: text,
-                        collapsed: collapsed,
-                        hasText: false,
-                        user: user,
-                        message: object.message
-                    ).wrapped, at: 0)
-
-                    shouldAppendMessageHeader = false
-                } else {
-                    cells.insert(QuoteChatItem(
-                        identifier: attachment.identifier,
-                        purpose: purpose,
-                        title: attachment.title,
-                        text: text,
-                        collapsed: collapsed,
-                        hasText: true,
-                        user: nil,
-                        message: object.message
-                    ).wrapped, at: 0)
-                }
-            case .image:
-                if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                    cells.insert(ImageMessageChatItem(
-                        identifier: attachment.identifier,
-                        title: attachment.title,
-                        descriptionText: attachment.descriptionText,
-                        imageURL: attachment.fullImageURL,
-                        hasText: false,
-                        user: user,
-                        message: object.message
-                    ).wrapped, at: 0)
-
-                    shouldAppendMessageHeader = false
-                } else {
-                    cells.insert(ImageMessageChatItem(
-                        identifier: attachment.identifier,
-                        title: attachment.title,
-                        descriptionText: attachment.descriptionText,
-                        imageURL: attachment.fullImageURL,
-                        hasText: true,
-                        user: nil,
-                        message: object.message
-                    ).wrapped, at: 0)
-                }
-            default:
-                if attachment.isFile {
-                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
-                        cells.insert(FileMessageChatItem(
-                            attachment: attachment,
+        if !object.message.isSystemMessage() {
+            object.message.attachments.forEach { attachment in
+                switch attachment.type {
+                case .audio:
+                    if sanitizedMessage.isEmpty {
+                        cells.insert(AudioMessageChatItem(
+                            identifier: attachment.identifier,
+                            audioURL: attachment.fullAudioURL,
                             hasText: false,
                             user: user,
                             message: object.message
@@ -199,12 +63,151 @@ final class MessageSection: ChatSection {
 
                         shouldAppendMessageHeader = false
                     } else {
-                        cells.insert(FileMessageChatItem(
-                            attachment: attachment,
+                        cells.insert(AudioMessageChatItem(
+                            identifier: attachment.identifier,
+                            audioURL: attachment.fullAudioURL,
                             hasText: true,
                             user: nil,
                             message: object.message
                         ).wrapped, at: 0)
+                    }
+                case .video:
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                        cells.insert(VideoMessageChatItem(
+                            attachment: attachment,
+                            identifier: attachment.identifier,
+                            descriptionText: attachment.descriptionText,
+                            videoURL: attachment.fullFileURL,
+                            videoThumbPath: attachment.videoThumbPath,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped, at: 0)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.insert(VideoMessageChatItem(
+                            attachment: attachment,
+                            identifier: attachment.identifier,
+                            descriptionText: attachment.descriptionText,
+                            videoURL: attachment.fullFileURL,
+                            videoThumbPath: attachment.videoThumbPath,
+                            hasText: true,
+                            user: nil,
+                            message: object.message
+                        ).wrapped, at: 0)
+                    }
+                case .textAttachment where attachment.fields.count > 0:
+                    let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
+                    let isFirstAttachment = attachment.identifier == object.message.attachments.first?.identifier
+
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader && isFirstAttachment {
+                        cells.insert(TextAttachmentChatItem(
+                            identifier: attachment.identifier,
+                            fields: attachment.fields,
+                            title: attachment.title,
+                            subtitle: attachment.text,
+                            color: attachment.color,
+                            collapsed: collapsed,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped, at: 0)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.insert(TextAttachmentChatItem(
+                            identifier: attachment.identifier,
+                            fields: attachment.fields,
+                            title: attachment.title,
+                            subtitle: attachment.text,
+                            color: attachment.color,
+                            collapsed: collapsed,
+                            hasText: true,
+                            user: nil,
+                            message: object.message
+                        ).wrapped, at: 0)
+                    }
+                case .textAttachment where !attachment.isFile:
+                    let collapsed = collapsibleItemsState[attachment.identifier] ?? attachment.collapsed
+                    let text = attachment.text ?? attachment.descriptionText
+
+                    let purpose: String
+                    switch object.message.type {
+                    case .messagePinned:
+                        purpose = localized("chat.components.quote.pinned")
+                    default:
+                        purpose = ""
+                    }
+
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                        cells.insert(QuoteChatItem(
+                            identifier: attachment.identifier,
+                            purpose: purpose,
+                            title: attachment.title,
+                            text: text,
+                            collapsed: collapsed,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped, at: 0)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.insert(QuoteChatItem(
+                            identifier: attachment.identifier,
+                            purpose: purpose,
+                            title: attachment.title,
+                            text: text,
+                            collapsed: collapsed,
+                            hasText: true,
+                            user: nil,
+                            message: object.message
+                        ).wrapped, at: 0)
+                    }
+                case .image:
+                    if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                        cells.insert(ImageMessageChatItem(
+                            identifier: attachment.identifier,
+                            title: attachment.title,
+                            descriptionText: attachment.descriptionText,
+                            imageURL: attachment.fullImageURL,
+                            hasText: false,
+                            user: user,
+                            message: object.message
+                        ).wrapped, at: 0)
+
+                        shouldAppendMessageHeader = false
+                    } else {
+                        cells.insert(ImageMessageChatItem(
+                            identifier: attachment.identifier,
+                            title: attachment.title,
+                            descriptionText: attachment.descriptionText,
+                            imageURL: attachment.fullImageURL,
+                            hasText: true,
+                            user: nil,
+                            message: object.message
+                        ).wrapped, at: 0)
+                    }
+                default:
+                    if attachment.isFile {
+                        if sanitizedMessage.isEmpty && shouldAppendMessageHeader {
+                            cells.insert(FileMessageChatItem(
+                                attachment: attachment,
+                                hasText: false,
+                                user: user,
+                                message: object.message
+                            ).wrapped, at: 0)
+
+                            shouldAppendMessageHeader = false
+                        } else {
+                            cells.insert(FileMessageChatItem(
+                                attachment: attachment,
+                                hasText: true,
+                                user: nil,
+                                message: object.message
+                            ).wrapped, at: 0)
+                        }
                     }
                 }
             }
@@ -227,6 +230,13 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
+        if !object.message.reactions.isEmpty {
+            cells.insert(ReactionsChatItem(
+                message: object.message,
+                reactions: object.message.reactions
+            ).wrapped, at: 0)
+        }
+
         if object.message.type == .jitsiCallStarted {
             cells.insert(MessageVideoCallChatItem(
                 user: nil,
@@ -234,10 +244,10 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
-        if !object.message.reactions.isEmpty {
-            cells.insert(ReactionsChatItem(
-                message: object.message,
-                reactions: object.message.reactions
+        if object.message.type == .discussionCreated {
+            cells.insert(MessageDiscussionChatItem(
+                user: nil,
+                message: object.message
             ).wrapped, at: 0)
         }
 

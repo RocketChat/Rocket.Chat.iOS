@@ -51,9 +51,6 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
 
-  # DiffKit
-  diff_pods
-
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
@@ -82,7 +79,6 @@ post_install do |installer|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '4.1'
       config.build_settings['ENABLE_BITCODE'] = 'NO'
-      config.build_settings['ARCHS'] = 'arm64'
 
       if config.name == 'Debug'
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
