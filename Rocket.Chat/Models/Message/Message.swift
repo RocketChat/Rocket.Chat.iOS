@@ -84,6 +84,11 @@ final class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    // MARK: Threads
+
+    @objc dynamic var threadMessageId = ""
+    @objc dynamic var threadMessagesCount = 0
+
     // MARK: Discussion
 
     @objc dynamic var discussionRid: String?

@@ -142,6 +142,15 @@ extension Message: ModelMappeable {
             }.forEach(self.reactions.append)
         }
 
+        // Threads
+        if let threadMessageId = values["tmid"].string {
+            self.threadMessageId = threadMessageId
+        }
+
+        if let threadMessagesCount = values["tcount"].int {
+            self.threadMessagesCount = threadMessagesCount
+        }
+
         // Discussions
         if let discussionRid = values["drid"].string {
             self.discussionRid = discussionRid

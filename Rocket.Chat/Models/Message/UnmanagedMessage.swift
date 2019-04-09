@@ -69,6 +69,9 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var snippetName: String?
     var snippetId: String?
 
+    var threadMessageId: String?
+    var threadMessagesCount = 0
+
     var discussionRid: String?
     var discussionLastMessage: Date?
     var discussionMessagesCount = 0
@@ -92,6 +95,8 @@ extension UnmanagedMessage {
             lhs.attachments.elementsEqual(rhs.attachments) &&
             lhs.urls == rhs.urls &&
             lhs.reactions == rhs.reactions &&
+            lhs.threadMessageId == rhs.threadMessageId &&
+            lhs.threadMessagesCount == rhs.threadMessagesCount &&
             lhs.discussionRid == rhs.discussionRid &&
             lhs.discussionLastMessage == rhs.discussionLastMessage &&
             lhs.discussionMessagesCount == rhs.discussionMessagesCount &&
@@ -135,6 +140,9 @@ extension UnmanagedMessage {
         alias = message.alias.isEmpty ? nil : message.alias
         snippetName = message.snippetName
         snippetId = message.snippetId
+
+        threadMessageId = message.threadMessageId
+        threadMessagesCount = message.threadMessagesCount
 
         discussionRid = message.discussionRid
         discussionLastMessage = message.discussionLastMessage
