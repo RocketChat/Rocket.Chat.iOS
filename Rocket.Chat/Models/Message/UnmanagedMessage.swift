@@ -71,6 +71,8 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
 
     var threadMessageId: String?
     var threadMessagesCount = 0
+    var isThreadMainMessage: Bool { return threadMessagesCount > 0 }
+    var isThreadReplyMessage: Bool { return !(threadMessageId?.isEmpty ?? true) }
 
     var discussionRid: String?
     var discussionLastMessage: Date?

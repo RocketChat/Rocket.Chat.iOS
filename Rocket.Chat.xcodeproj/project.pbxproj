@@ -343,6 +343,8 @@
 		41A897FA223FB56C00D2DB22 /* DirectoryUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A897F9223FB56C00D2DB22 /* DirectoryUserCell.xib */; };
 		41A9B708215B0D0700CEB218 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B707215B0D0700CEB218 /* MessagesViewModel.swift */; };
 		41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */; };
+		41B3323A225CD623005BCD9B /* MessageManagerSystemMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B33238225CD623005BCD9B /* MessageManagerSystemMessages.swift */; };
+		41B3323B225CD623005BCD9B /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B33239225CD623005BCD9B /* MessageManager.swift */; };
 		41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */; };
 		41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C61FBF0F9D000510B7 /* WindowManager.swift */; };
 		41B96362207E48260068F1A6 /* MessageTextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B96361207E48260068F1A6 /* MessageTextValidator.swift */; };
@@ -356,8 +358,6 @@
 		41BF4D70215B4CBD00588B35 /* DateSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BF4D6F215B4CBD00588B35 /* DateSeparatorCell.swift */; };
 		41BF4D72215B4CC800588B35 /* DateSeparatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BF4D71215B4CC800588B35 /* DateSeparatorCell.xib */; };
 		41BFA0A72146D0C1008B9611 /* MessageManagerSystemMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A62146D0C1008B9611 /* MessageManagerSystemMessageSpec.swift */; };
-		41BFA0AA2146D23D008B9611 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A82146D23C008B9611 /* MessageManager.swift */; };
-		41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */; };
 		41C275DF1D848005003C88CF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C275DE1D848005003C88CF /* AvatarView.swift */; };
 		41C56D59219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */; };
 		41C56D5A219C7AD40087115F /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
@@ -1324,6 +1324,8 @@
 		41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteCell.xib; sourceTree = "<group>"; };
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteCell.swift; sourceTree = "<group>"; };
 		41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderViewSpec.swift; sourceTree = "<group>"; };
+		41B33238225CD623005BCD9B /* MessageManagerSystemMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSystemMessages.swift; sourceTree = "<group>"; };
+		41B33239225CD623005BCD9B /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensions.swift; sourceTree = "<group>"; };
 		41B554C61FBF0F9D000510B7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		41B96361207E48260068F1A6 /* MessageTextValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextValidator.swift; sourceTree = "<group>"; };
@@ -1337,8 +1339,6 @@
 		41BF4D6F215B4CBD00588B35 /* DateSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorCell.swift; sourceTree = "<group>"; };
 		41BF4D71215B4CC800588B35 /* DateSeparatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSeparatorCell.xib; sourceTree = "<group>"; };
 		41BFA0A62146D0C1008B9611 /* MessageManagerSystemMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManagerSystemMessageSpec.swift; sourceTree = "<group>"; };
-		41BFA0A82146D23C008B9611 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManager.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManager.swift; sourceTree = SOURCE_ROOT; };
-		41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSystemMessages.swift; path = Rocket.Chat/Managers/Model/MessageManager/MessageManagerSystemMessages.swift; sourceTree = SOURCE_ROOT; };
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerPersistencyExtension.swift; sourceTree = "<group>"; };
 		41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageActionButtonsView.swift; sourceTree = "<group>"; };
@@ -2395,7 +2395,7 @@
 			isa = PBXGroup;
 			children = (
 				8076FDB72048580A00114F28 /* AuthManager */,
-				41BFA0A52146CF09008B9611 /* MessageManager */,
+				41B33237225CD623005BCD9B /* MessageManager */,
 				3330329F2073905900A9514D /* SubscriptionManager */,
 				411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */,
 				41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */,
@@ -2875,6 +2875,16 @@
 			path = Loader;
 			sourceTree = "<group>";
 		};
+		41B33237225CD623005BCD9B /* MessageManager */ = {
+			isa = PBXGroup;
+			children = (
+				41B33238225CD623005BCD9B /* MessageManagerSystemMessages.swift */,
+				41B33239225CD623005BCD9B /* MessageManager.swift */,
+			);
+			name = MessageManager;
+			path = Rocket.Chat/Managers/Model/MessageManager;
+			sourceTree = SOURCE_ROOT;
+		};
 		41B96363207E48690068F1A6 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -2921,16 +2931,6 @@
 				4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */,
 			);
 			path = Handler;
-			sourceTree = "<group>";
-		};
-		41BFA0A52146CF09008B9611 /* MessageManager */ = {
-			isa = PBXGroup;
-			children = (
-				41BFA0A82146D23C008B9611 /* MessageManager.swift */,
-				41BFA0A92146D23C008B9611 /* MessageManagerSystemMessages.swift */,
-			);
-			name = MessageManager;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		41C275DD1D847FEE003C88CF /* Avatar */ = {
@@ -4905,7 +4905,6 @@
 				8045F49B20D0599800AA0F3C /* ReadReceiptListView.swift in Sources */,
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
-				41BFA0AA2146D23D008B9611 /* MessageManager.swift in Sources */,
 				994D1EDF205AB945007F29C8 /* UINavigationControllerExtension.swift in Sources */,
 				80B2D98920E5496E002F4149 /* UserDetailFieldCellModel.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
@@ -5131,7 +5130,6 @@
 				332BCB1C20DA6D5F00C8CAD2 /* SubscriptionsSortingHeaderView.swift in Sources */,
 				413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
-				41BFA0AB2146D23D008B9611 /* MessageManagerSystemMessages.swift in Sources */,
 				41FC9E06209B39FE00FED485 /* SubscriptionLastMessage.swift in Sources */,
 				99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */,
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
@@ -5263,6 +5261,7 @@
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				99EA7A99219181750023BB63 /* BaseTextAttachmentChatItem.swift in Sources */,
 				8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */,
+				41B3323A225CD623005BCD9B /* MessageManagerSystemMessages.swift in Sources */,
 				418A8FA6224114100048A9B6 /* IntExtensions.swift in Sources */,
 				41D3668820C0323100970B99 /* SubscriptionsSortingViewModel.swift in Sources */,
 				800E22861F8507E400DA84F1 /* RoomMessagesRequest.swift in Sources */,
@@ -5313,6 +5312,7 @@
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
 				41FC9E02209B38BE00FED485 /* AutocompleteCell.swift in Sources */,
 				41BF4D6E215B4CA100588B35 /* DateSeparatorChatItem.swift in Sources */,
+				41B3323B225CD623005BCD9B /* MessageManager.swift in Sources */,
 				8073719A1F94E83600D53ADF /* SocketError.swift in Sources */,
 				413FB6C11FE17D7D00F010AA /* UIViewExtentions.swift in Sources */,
 				1496A86D20FA4644005C2E14 /* NotificationsChooseCell.swift in Sources */,
