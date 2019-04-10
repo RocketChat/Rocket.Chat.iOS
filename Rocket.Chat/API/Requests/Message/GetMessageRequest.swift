@@ -36,7 +36,7 @@ final class GetMessageResource: APIResource {
         return nil
     }
 
-    var success: Bool? {
-        return raw?["success"].boolValue
+    var success: Bool {
+        return raw?["success"].boolValue ?? false
     }
 }

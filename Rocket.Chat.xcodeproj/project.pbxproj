@@ -375,6 +375,7 @@
 		41D51B0720A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
 		41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */; };
 		41D945FF225E1EEC00AE8FD8 /* GetMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D945FE225E1EEC00AE8FD8 /* GetMessageRequest.swift */; };
+		41D94601225E262D00AE8FD8 /* GetMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D94600225E262D00AE8FD8 /* GetMessageRequestSpec.swift */; };
 		41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93B1D318E280098E068 /* SubscriptionManager.swift */; };
 		41DAE93E1D318F350098E068 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93D1D318F350098E068 /* Subscription.swift */; };
 		41DC7A1B1D38454500896FC0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1A1D38454500896FC0 /* Message.swift */; };
@@ -1360,6 +1361,7 @@
 		41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDirectMessageHeaderCell.xib; sourceTree = "<group>"; };
 		41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelActionsViewController.swift; sourceTree = "<group>"; };
 		41D945FE225E1EEC00AE8FD8 /* GetMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessageRequest.swift; sourceTree = "<group>"; };
+		41D94600225E262D00AE8FD8 /* GetMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessageRequestSpec.swift; sourceTree = "<group>"; };
 		41DAE93B1D318E280098E068 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		41DAE93D1D318F350098E068 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		41DC7A1A1D38454500896FC0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -3451,6 +3453,7 @@
 			isa = PBXGroup;
 			children = (
 				8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */,
+				41D94600225E262D00AE8FD8 /* GetMessageRequestSpec.swift */,
 				806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */,
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
 				80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */,
@@ -5489,6 +5492,7 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				41FB713A215B0FFA002B5187 /* MessagesSizingViewModelSpec.swift in Sources */,
+				41D94601225E262D00AE8FD8 /* GetMessageRequestSpec.swift in Sources */,
 				41BFA0A72146D0C1008B9611 /* MessageManagerSystemMessageSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
 				8045F4A120D14D1C00AA0F3C /* ReadReceiptsRequestSpec.swift in Sources */,
