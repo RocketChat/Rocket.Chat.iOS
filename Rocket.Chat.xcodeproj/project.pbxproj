@@ -374,6 +374,7 @@
 		41D51B0620A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
 		41D51B0720A62DD60073E8E7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D51B0520A62DD60073E8E7 /* Role.swift */; };
 		41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */; };
+		41D945FF225E1EEC00AE8FD8 /* GetMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D945FE225E1EEC00AE8FD8 /* GetMessageRequest.swift */; };
 		41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93B1D318E280098E068 /* SubscriptionManager.swift */; };
 		41DAE93E1D318F350098E068 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93D1D318F350098E068 /* Subscription.swift */; };
 		41DC7A1B1D38454500896FC0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1A1D38454500896FC0 /* Message.swift */; };
@@ -1358,6 +1359,7 @@
 		41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDirectMessageHeaderCell.swift; sourceTree = "<group>"; };
 		41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDirectMessageHeaderCell.xib; sourceTree = "<group>"; };
 		41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelActionsViewController.swift; sourceTree = "<group>"; };
+		41D945FE225E1EEC00AE8FD8 /* GetMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessageRequest.swift; sourceTree = "<group>"; };
 		41DAE93B1D318E280098E068 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		41DAE93D1D318F350098E068 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		41DC7A1A1D38454500896FC0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -3436,6 +3438,7 @@
 				8067DA9A206BC71A005E3369 /* ReactMessageRequest.swift */,
 				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
 				80D41DFC2092378400034D1F /* StarMessageRequest.swift */,
+				41D945FE225E1EEC00AE8FD8 /* GetMessageRequest.swift */,
 				8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */,
 				80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */,
 				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
@@ -5296,6 +5299,7 @@
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				80BFF60321D40EDF00D99771 /* RoomHistoryRequest.swift in Sources */,
+				41D945FF225E1EEC00AE8FD8 /* GetMessageRequest.swift in Sources */,
 				412AD609219B1B9600EC0486 /* LoaderCell.swift in Sources */,
 				99100B6C20CF3B3F000C5FCC /* LoginTableViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
