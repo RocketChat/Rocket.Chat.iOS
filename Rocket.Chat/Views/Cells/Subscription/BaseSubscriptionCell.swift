@@ -109,8 +109,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
                 labelUnread.text =  "\(subscription.unread)"
             }
         } else {
-            viewUnread.isHidden = false
-            labelUnread.text = "!"
+            viewUnread.isHidden = true
         }
     }
 
@@ -146,10 +145,14 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
             iconRoom.isHidden = false
             viewStatus.isHidden = true
 
-            if subscription.type == .channel {
-                iconRoom.image = UIImage(named: "Cell Subscription Hashtag")
+            if subscription.isDiscussion {
+                iconRoom.image = UIImage(named: "Cell Subscription Discussion")
             } else {
-                iconRoom.image = UIImage(named: "Cell Subscription Lock")
+                if subscription.type == .channel {
+                    iconRoom.image = UIImage(named: "Cell Subscription Hashtag")
+                } else {
+                    iconRoom.image = UIImage(named: "Cell Subscription Lock")
+                }
             }
         }
     }

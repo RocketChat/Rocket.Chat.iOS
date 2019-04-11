@@ -299,6 +299,8 @@
 "chat.message.type.room_changed_announcement" = "频道公告变更为\"%@\" 由%@操作";
 "chat.message.type.room_changed_description" = "频道描述变更为\"%@\" 由%@操作";
 "chat.message.type.video_call_started" = "%@开启视频会议";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "信息";
@@ -509,3 +511,18 @@
 "chat.components.quote.replied" = "已回复";
 "chat.components.quote.pinned" = "已固定";
 "chat.components.text_attachment.no_title" = "无标题";
+
+// Directory
+"directory.title" = "Directory"; // TODO
+"directory.filters.channels" = "Channels"; // TODO
+"directory.filters.users" = "Users"; // TODO
+"directory.filters.by" = "Search by"; // TODO
+"directory.filters.global.title" = "Search for global users"; // TODO
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
+"directory.users.1_user" = "1 member"; // TODO
+"directory.users.x_users" = "%@ members"; // TODO
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO

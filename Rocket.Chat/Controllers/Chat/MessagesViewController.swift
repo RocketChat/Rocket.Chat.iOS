@@ -63,14 +63,24 @@ final class MessagesViewController: RocketChatViewController {
     var unmanagedSubscription: UnmanagedSubscription?
     var subscription: Subscription! {
         didSet {
-            let sub: Subscription? = subscription
-            let unmanaged = sub?.unmanaged
+            guard let subscription = subscription else { return }
+
+            if subscription.rid.isEmpty {
+                subscription.fetchRoomIdentifier({ [weak self] (subscription) in
+                    self?.subscription = subscription
+                    self?.chatTitleView?.subscription = subscription?.unmanaged
+                })
+
+                return
+            }
+
+            let unmanaged = subscription.unmanaged
 
             viewModel.onRequestingDataChanged = { [weak self] requesting in
                 self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
             }
 
-            viewModel.subscription = sub
+            viewModel.subscription = subscription
             viewSubscriptionModel.subscription = unmanaged
             unmanagedSubscription = unmanaged
 
@@ -294,6 +304,7 @@ final class MessagesViewController: RocketChatViewController {
             (nib: MessageURLCell.nib, cellIdentifier: MessageURLCell.identifier),
             (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
             (nib: MessageVideoCallCell.nib, cellIdentifier: MessageVideoCallCell.identifier),
+            (nib: MessageDiscussionCell.nib, cellIdentifier: MessageDiscussionCell.identifier),
             (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
         ]
 

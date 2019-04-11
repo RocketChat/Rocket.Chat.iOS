@@ -100,14 +100,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     lazy var keyboardConstraint: NSLayoutConstraint = {
-        var bottomGuide: NSLayoutYAxisAnchor
-
-        if #available(iOS 11.0, *) {
-            bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
-        } else {
-            bottomGuide = view.bottomAnchor
-        }
-
+        let bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
         return buttonConnect.bottomAnchor.constraint(equalTo: bottomGuide, constant: 0)
     }()
 

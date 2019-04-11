@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YC5-ts-L8T">
-                                <rect key="frame" x="15" y="61" width="236" height="14.5"/>
+                                <rect key="frame" x="15" y="57" width="236" height="18.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.047058823530000002" green="0.050980392159999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                             <constraint firstItem="35A-7N-lVK" firstAttribute="top" secondItem="nHB-nk-DRf" secondAttribute="bottom" id="MbD-mt-n1N"/>
                             <constraint firstItem="35A-7N-lVK" firstAttribute="leading" secondItem="VLV-ym-FZM" secondAttribute="leading" constant="15" id="NuK-jg-7Xm"/>
                             <constraint firstItem="YC5-ts-L8T" firstAttribute="leading" secondItem="VLV-ym-FZM" secondAttribute="leading" constant="15" id="W73-Vt-GqB"/>
-                            <constraint firstItem="YC5-ts-L8T" firstAttribute="top" secondItem="35A-7N-lVK" secondAttribute="bottom" constant="4" id="WYI-Yb-8LB"/>
+                            <constraint firstItem="YC5-ts-L8T" firstAttribute="top" secondItem="35A-7N-lVK" secondAttribute="bottom" id="WYI-Yb-8LB"/>
                             <constraint firstAttribute="trailing" secondItem="YC5-ts-L8T" secondAttribute="trailing" constant="15" id="WtL-sW-5eJ"/>
                             <constraint firstAttribute="bottom" secondItem="YC5-ts-L8T" secondAttribute="bottom" constant="15" id="YRp-qV-IU6"/>
                             <constraint firstItem="24j-n8-BYB" firstAttribute="leading" secondItem="35A-7N-lVK" secondAttribute="trailing" constant="8" id="YaK-8n-ymS"/>

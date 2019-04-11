@@ -117,7 +117,7 @@ extension QuoteMessageCell {
         messageUsername.textColor = theme.titleText
         date.textColor = theme.auxiliaryText
         purpose.textColor = theme.auxiliaryText
-        username.textColor = theme.actionTintColor
+        username.textColor = theme.bodyText
         text.textColor = theme.bodyText
         containerView.layer.borderColor = theme.borderColor.cgColor
     }

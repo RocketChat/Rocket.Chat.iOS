@@ -13,52 +13,36 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
     var emojiPicked: ((String) -> Void)?
     var customEmojis: [Emoji] = []
 
-    private var emojiPicker: EmojiPicker! {
-        didSet {
-            emojiPicker.emojiPicked = { emoji in
-                self.emojiPicked?(emoji)
-
-                if self.navigationController?.topViewController == self {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    self.dismiss(animated: true)
-                }
-            }
-
-            emojiPicker.isPopover = presentationController?.presentationStyle == .popover
-
-            emojiPicker.customEmojis = customEmojis
-        }
+    override func loadView() {
+        view = EmojiPicker()
     }
 
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-        emojiPicker = EmojiPicker(frame: view.frame)
-        emojiPicker.translatesAutoresizingMaskIntoConstraints = false
+        ThemeManager.addObserver(view)
 
-        view.addSubview(emojiPicker)
-
-        view.addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": emojiPicker]
-            )
-        )
-        view.addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": emojiPicker]
-            )
-        )
+        guard let picker = view as? EmojiPicker else {
+            fatalError("View should be an instance of EmojiPicker!")
+        }
 
         title = localized("emojipicker.title")
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
+        picker.emojiPicked = { [unowned self] emoji in
+            self.emojiPicked?(emoji)
+
+            if self.navigationController?.topViewController == self {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
+        }
+
+        picker.customEmojis = customEmojis
+
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-        // remove title from back button
 
         if self.navigationController?.topViewController == self {
             navigationController?.navigationBar.topItem?.title = ""
@@ -66,9 +50,13 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        let center = NotificationCenter.default
-        center.removeObserver(self)
-        emojiPicker.endEditing(true)
+        super.viewWillDisappear(animated)
+
+        view.endEditing(true)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func keyboardWillShow(_ notification: Notification) {
@@ -85,10 +73,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         let convertedRect = view.convert(rect, from: nil)
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = convertedRect.size.height - self.view.safeAreaInsets.bottom
-                self.view.layoutIfNeeded()
-            }
+            self.additionalSafeAreaInsets.bottom = convertedRect.size.height - self.view.safeAreaInsets.bottom
+            self.view.layoutIfNeeded()
         }
     }
 
@@ -103,10 +89,8 @@ final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         }
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = 0
-                self.view.layoutIfNeeded()
-            }
+            self.additionalSafeAreaInsets.bottom = 0
+            self.view.layoutIfNeeded()
         }
     }
 }

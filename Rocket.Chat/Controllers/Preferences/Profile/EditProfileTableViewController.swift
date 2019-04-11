@@ -129,8 +129,8 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         fetchUserData()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         updateUserStatus()
     }
 
@@ -337,9 +337,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = localized("myaccount.settings.profile.password_required.placeholder")
-            if #available(iOS 11.0, *) {
-                textField.textContentType = .password
-            }
+            textField.textContentType = .password
             textField.isSecureTextEntry = true
 
             _ = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
@@ -527,7 +525,7 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
         let filename = String.random()
         var file: FileUpload?
 
-        if let image = info[.originalImage] as? UIImage {
+        if let image = info[.editedImage] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",

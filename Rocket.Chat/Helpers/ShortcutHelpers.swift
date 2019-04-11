@@ -112,7 +112,11 @@ extension MessagesViewController {
 
     func openUpload() {
         controller?.doAfterDismissingPresented { [weak self] in
-            self?.uploadButtonPressed()
+            guard let self = self else {
+                return
+            }
+
+            self.composerView(self.composerView, didPressUploadButton: self.composerView.leftButton)
         }
     }
 

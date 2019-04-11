@@ -21,6 +21,10 @@ extension Subscription: ModelMappeable {
             self.rid = rid
         }
 
+        if let prid = values["prid"].string {
+            self.prid = prid
+        }
+
         self.name = values["name"].stringValue
 
         if let fname = values["fname"].string {
@@ -61,6 +65,8 @@ extension Subscription: ModelMappeable {
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
+
+        self.usersCount = values["usersCount"].int ?? 0
 
         mapNotifications(values)
     }
@@ -129,9 +135,18 @@ extension Subscription: ModelMappeable {
         }
 
         if values["lastMessage"].dictionary != nil {
-            let user = User()
-            user.map(values["lastMessage"]["u"], realm: realm)
-            realm?.add(user, update: true)
+            if let userIdentifier = values["lastMessage"]["u"]["_id"].string {
+                if let realm = realm {
+                    if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
+                        user.map(values["u"], realm: realm)
+                        realm.add(user, update: true)
+                    } else {
+                        let user = User()
+                        user.map(values["u"], realm: realm)
+                        realm.add(user, update: true)
+                    }
+                }
+            }
 
             let message = Message()
             message.map(values["lastMessage"], realm: realm)

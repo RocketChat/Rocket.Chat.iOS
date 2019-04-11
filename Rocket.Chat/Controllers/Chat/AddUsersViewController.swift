@@ -39,7 +39,7 @@ class AddUsersViewData {
 
         isLoadingMoreUsers = true
 
-        let request = DirectoryRequest(text: searchText, type: .users)
+        let request = DirectoryRequest(query: searchText, type: .users, workspace: .all)
         let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage*pageSize)]
 
         API.current()?.fetch(request, options: options) { [weak self] response in
@@ -229,39 +229,17 @@ extension AddUsersViewController: UITableViewDataSource {
 
 extension AddUsersViewController {
     func setupSearchBar() {
-        if #available(iOS 11.0, *) {
-            let searchController = UISearchController(searchResultsController: nil)
-            searchController.dimsBackgroundDuringPresentation = false
-            searchController.hidesNavigationBarDuringPresentation = false
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
 
-            navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.prefersLargeTitles = false
 
-            navigationItem.largeTitleDisplayMode = .never
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
 
-            searchBar = searchController.searchBar
-        } else {
-            if let headerView = tableView.tableHeaderView {
-                var frame = headerView.frame
-                frame.size.height = 88
-                headerView.frame = frame
-
-                let searchBar = UISearchBar(frame: CGRect(
-                    x: 0,
-                    y: 44,
-                    width: frame.width,
-                    height: 44
-                ))
-
-                self.searchBar = searchBar
-
-                headerView.addSubview(searchBar)
-
-                tableView.tableHeaderView = headerView
-            }
-        }
-
+        searchBar = searchController.searchBar
         searchBar?.placeholder = localized("subscriptions.search")
         searchBar?.delegate = self
     }

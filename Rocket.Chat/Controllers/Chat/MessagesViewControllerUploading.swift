@@ -9,9 +9,10 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import RocketChatViewController
 
 extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func uploadButtonPressed() {
+    func composerView(_ composerView: ComposerView, didPressUploadButton button: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         func addAction(_ titleKey: String, image: UIImage, style: UIAlertAction.Style = .default, handler: @escaping (UIAlertAction) -> Void) {
@@ -46,8 +47,8 @@ extension MessagesViewController: MediaPicker, UIImagePickerControllerDelegate, 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = composerView.leftButton
-            presenter.sourceRect = composerView.leftButton.bounds
+            presenter.sourceView = button
+            presenter.sourceRect =  button.bounds
         }
 
         present(alert, animated: true, completion: nil)
@@ -108,6 +109,26 @@ extension MessagesViewController {
         upload(file)
     }
 
+    func upload(audioWithURL url: URL, filename: String? = nil) {
+        var ext = url.pathExtension
+
+        if ext.isEmpty {
+            ext = "m4a"
+        }
+
+        guard let data =  try? Data(contentsOf: url) else {
+            return
+        }
+
+        let file = UploadHelper.file(
+            for: data,
+            name: filename ?? url.lastPathComponent,
+            mimeType: "audio/mp4"
+        )
+
+        upload(file, skipDialog: true)
+    }
+
     func upload(videoWithURL videoURL: URL, filename: String) {
         let assetURL = AVURLAsset(url: videoURL)
         let semaphore = DispatchSemaphore(value: 0)
@@ -145,10 +166,10 @@ extension MessagesViewController {
         }
     }
 
-    func upload(_ file: FileUpload) {
+    func upload(_ file: FileUpload, skipDialog: Bool = false) {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: self.view, animated: true)
-            self.uploadDialog(file)
+            self.uploadDialog(file, skipDialog: skipDialog)
         }
     }
 }
@@ -230,7 +251,11 @@ extension MessagesViewController {
         })
     }
 
-    func uploadDialog(_ file: FileUpload) {
+    func uploadDialog(_ file: FileUpload, skipDialog: Bool = false) {
+        if skipDialog {
+            return upload(file, fileName: file.name, description: "")
+        }
+
         let alert = UIAlertController(title: localized("alert.upload_dialog.title"), message: "", preferredStyle: .alert)
         var fileName: UITextField?
         var fileDescription: UITextField?
@@ -253,6 +278,7 @@ extension MessagesViewController {
             if fileName?.text?.isEmpty == false {
                 name = fileName?.text ?? file.name
             }
+
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
