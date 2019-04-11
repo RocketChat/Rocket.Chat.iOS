@@ -79,6 +79,7 @@ final class WelcomeViewController: BaseViewController {
             )
 
             joinCommunityButton.setAttributedTitle(combinedString, for: .normal)
+            joinCommunityButton.accessibilityLabel = "\(title.string), \(serverURL.string)"
         }
     }
 
