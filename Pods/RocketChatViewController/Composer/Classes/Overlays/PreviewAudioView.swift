@@ -172,10 +172,14 @@ public class PreviewAudioView: UIView, ComposerLocalizable {
 // MARK: Events
 
 extension PreviewAudioView {
+
     @objc func touchUpInsideDiscardButton() {
         guard let url = audioView.audioUrl else {
             return
         }
+
+        audioView.player?.stop()
+        audioView.player = nil
 
         delegate?.previewAudioView(self, didDiscardAudio: url)
     }
@@ -185,8 +189,12 @@ extension PreviewAudioView {
             return
         }
 
+        audioView.player?.stop()
+        audioView.player = nil
+
         delegate?.previewAudioView(self, didConfirmAudio: url)
     }
+
 }
 
 // MARK: SwipeIndicatorView
@@ -357,15 +365,18 @@ public class AudioView: UIView {
 // MARK: AVAudioPlayerDelegate
 
 extension AudioView: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+
+    private func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         playing = false
         progressSlider.value = 0.0
     }
+
 }
 
 // MARK: Events
 
 extension AudioView {
+
     @objc func didStartSlidingSlider(_ sender: UISlider) {
         playing = false
     }
@@ -384,4 +395,5 @@ extension AudioView {
     @objc func didPressPlayButton(_ sender: UIButton) {
         playing = !playing
     }
+
 }

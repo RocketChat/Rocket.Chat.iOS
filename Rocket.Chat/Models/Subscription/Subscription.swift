@@ -151,12 +151,14 @@ extension Subscription {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
+            let userId = auth.userId,
+            let token = auth.token,
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
+        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg&rc_uid=\(userId)&rc_token=\(token)")
     }
 }
 

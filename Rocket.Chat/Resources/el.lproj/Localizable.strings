@@ -102,17 +102,17 @@
 // Onboarding
 "onboarding.label_welcome" = "Καλωσήρθατε στο Rocket Chat";
 "onboarding.label_subtitle" = "Επικοινωνία Ομάδας";
-"onboarding.button_connect_server" = "Συνδεθείτε σε ένα εξυπηρετητή";
-"onboarding.button_create_server" = "Συνδεθείτε σε ένα Χώρο Εργασίας";
-"onboarding.button_join_community_prefix" = "Συνδεθείτε με την κοινότητα";
+"onboarding.button_connect_server" = "Συνδεθείτε σε ένα εξυπηρετητή"; 
+"onboarding.button_create_server" = "Συνδεθείτε σε ένα Χώρο Εργασίας"; 
+"onboarding.button_join_community_prefix" = "Συνδεθείτε με την κοινότητα"; 
 
 // Auth
 "auth.connect.button_connect" = "Σύνδεση";
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
-"auth.email_auth_prefix" = "Σύνδεση με ";
+"auth.email_auth_prefix" = "Σύνδεση με "; 
 "auth.email_auth" = "e-mail"; // TODO: maybe should not be translated
-"auth.login_service_prefix" = "Συνέχεια με ";
+"auth.login_service_prefix" = "Συνέχεια με "; 
 
 "auth.signup_title" = "Εγγραφή";
 "auth.signup.button_register" = "Εγγραφείτε";
@@ -294,8 +294,6 @@
 "chat.message.type.room_changed_announcement" = "Η αναγγελία του δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.room_changed_description" = "Η περιγραφή του Δωματίου μεταβλήθηκε σε \"%@\" από %@";
 "chat.message.type.video_call_started" = "Μια Βεντοκλήση ξεκίνησε από %@";
-"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
-"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";
@@ -328,7 +326,7 @@
 "chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
 "chat.messages.mentions.list.title" = "Αναφορές";
-"chat.messages.files.list.title" = "Αρχεία";
+"chat.messages.files.list.title" = "Αρχεία"; 
 "chat.messages.files.list.empty" = "Δεν βρέθηκαν αρχεία";
 
 // Upload Banner
@@ -348,9 +346,9 @@
 "myaccount.settings.share" = "Μοιραστείτε την εφαρμογή";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
-"myaccount.settings.server_version" = "Έκδοση Εξυπηρετητή: %@";
-"myaccount.settings.web_browser" = "Πρόγραμμα Περιήγησης";
-"myaccount.settings.tracking.title" = "Αποστολή Αναφοράς Κατάρευσης";
+"myaccount.settings.server_version" = "Έκδοση Εξυπηρετητή: %@"; 
+"myaccount.settings.web_browser" = "Πρόγραμμα Περιήγησης"; 
+"myaccount.settings.tracking.title" = "Αποστολή Αναφοράς Κατάρευσης"; 
 "myaccount.settings.tracking.footer" = "Δεν καταγράφουμε ποτέ το περιεχόμενο των συνομιλιών σας. Η αναφορά κατάρρευσης περιλαμβάνει μόνο σχετική πληροφορία για μας ώστε να εντοπίσουμε προβλήματα και να τα διορθώσουμε.";
 
 // Change Application Icon
@@ -419,32 +417,32 @@
 "web_browser.chrome.title" = "Chrome";
 "web_browser.opera.title" = "Opera Mini";
 "web_browser.firefox.title" = "Firefox";
-"myaccount.settings.web_browser.title" = "Πρόγραμμα Περιήγησης";
-"myaccount.settings.web_browser.footer" = "Αυτή η εφαρμογή θα χρησιμοποιηθεί για να ανοίξει συνδέσμους στο Rocket Chat.";
+"myaccount.settings.web_browser.title" = "Πρόγραμμα Περιήγησης"; 
+"myaccount.settings.web_browser.footer" = "Αυτή η εφαρμογή θα χρησιμοποιηθεί για να ανοίξει συνδέσμους στο Rocket Chat."; 
 
 // Update Profile
-"myaccount.settings.profile.title" = "Λογαριασμός";
-"myaccount.settings.editing_profile.title" = "Επεξεργασία Λογαριασμού";
-"myaccount.settings.profile.actions.save" = "Αποθήκευση";
-"myaccount.settings.profile.actions.edit" = "Επεξεργασία";
-"myaccount.settings.profile.actions.change_password" = "Αλλάξτε το συνθηματικό σας";
-"myaccount.settings.profile.section.profile" = "Λογαριασμός";
-"myaccount.settings.profile.section.password" = "Συνθηματικό";
-"myaccount.settings.profile.name_placeholder" = "Όνομα";
-"myaccount.settings.profile.username_placeholder" = "Όνομα χρήστη";
+"myaccount.settings.profile.title" = "Λογαριασμός"; 
+"myaccount.settings.editing_profile.title" = "Επεξεργασία Λογαριασμού"; 
+"myaccount.settings.profile.actions.save" = "Αποθήκευση"; 
+"myaccount.settings.profile.actions.edit" = "Επεξεργασία"; 
+"myaccount.settings.profile.actions.change_password" = "Αλλάξτε το συνθηματικό σας"; 
+"myaccount.settings.profile.section.profile" = "Λογαριασμός"; 
+"myaccount.settings.profile.section.password" = "Συνθηματικό"; 
+"myaccount.settings.profile.name_placeholder" = "Όνομα"; 
+"myaccount.settings.profile.username_placeholder" = "Όνομα χρήστη"; 
 "myaccount.settings.profile.email_placeholder" = "E-mail"; //TODO: maybe should not be translated
-"myaccount.settings.profile.status.title" = "Κατάσταση";
-"myaccount.settings.profile.password_required.title" = "Εισάγετε το συνθηματικό σας";
-"myaccount.settings.profile.password_required.message" = "Το συνθηματικό σας είναι απαραίτητο όταν αλλάζετε το e-mail σας.";
-"myaccount.settings.profile.password_required.placeholder" = "Συνθηματικό";
+"myaccount.settings.profile.status.title" = "Κατάσταση"; 
+"myaccount.settings.profile.password_required.title" = "Εισάγετε το συνθηματικό σας"; 
+"myaccount.settings.profile.password_required.message" = "Το συνθηματικό σας είναι απαραίτητο όταν αλλάζετε το e-mail σας."; 
+"myaccount.settings.profile.password_required.placeholder" = "Συνθηματικό"; 
 
 // New Password
-"myaccount.settings.profile.new_password.title" = "Νέο συνθηματικό";
-"myaccount.settings.profile.new_password.section.password" = "Συνθηματικό";
+"myaccount.settings.profile.new_password.title" = "Νέο συνθηματικό"; 
+"myaccount.settings.profile.new_password.section.password" = "Συνθηματικό"; 
 "myaccount.settings.profile.new_password.actions.save" = "Αποθήκευση";
-"myaccount.settings.profile.new_password.password_placeholder" = "Νέο συνθηματικό";
-"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Επιβεβαίωση Συνθηματικού";
-"myaccount.settings.profile.new_password.password_required.title" = "Εισάγετε το συνθηματικό σας";
+"myaccount.settings.profile.new_password.password_placeholder" = "Νέο συνθηματικό"; 
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Επιβεβαίωση Συνθηματικού"; 
+"myaccount.settings.profile.new_password.password_required.title" = "Εισάγετε το συνθηματικό σας"; 
 "myaccount.settings.profile.new_password.password_required.message" = "Το τρέχον συνθηματικό είναι απαραίτητο όταν δημιουργείτε ένα νέο συνθηματικό.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Συνθηματικό";
 

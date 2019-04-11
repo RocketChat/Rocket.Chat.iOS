@@ -109,8 +109,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
                 labelUnread.text =  "\(subscription.unread)"
             }
         } else {
-            viewUnread.isHidden = false
-            labelUnread.text = "!"
+            viewUnread.isHidden = true
         }
     }
 

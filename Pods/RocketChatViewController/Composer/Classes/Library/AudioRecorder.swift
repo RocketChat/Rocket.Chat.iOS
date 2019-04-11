@@ -80,7 +80,7 @@ public class AudioRecorder: NSObject {
     private func setSession(active: Bool) {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setActive(active)
+            try session.setActive(active, with: [.notifyOthersOnDeactivation])
         } catch let error {
             print("Set active error: \(error.localizedDescription).")
         }
