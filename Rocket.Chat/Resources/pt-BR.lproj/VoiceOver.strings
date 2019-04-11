@@ -12,6 +12,8 @@
 
 "auth.more.label" = "More"; // TODO
 "auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
 
 "auth.authentication.emailorusername.label" = "Email ou nome de usuário";
 "auth.authentication.emailorusername.hint" = "Insira aqui o seu email ou nome de usuário.";

@@ -12,6 +12,8 @@
 
 "auth.more.label" = "もっと";
 "auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
 
 "auth.authentication.emailorusername.label" = "メールアドレスまたはユーザー名";
 "auth.authentication.emailorusername.hint" = "ここにメールアドレスまたはユーザー名を入力してください。";

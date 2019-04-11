@@ -12,6 +12,8 @@
 
 "auth.more.label" = "Plus";
 "auth.close.label" = "Fermer";
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
 
 "auth.authentication.emailorusername.label" = "Email or Username";
 "auth.authentication.emailorusername.hint" = "Insert your email or username here.";

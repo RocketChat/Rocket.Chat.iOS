@@ -69,6 +69,7 @@ final class AuthTableViewController: BaseTableViewController {
         }
 
         collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        collapsibleAuthSeparatorRow.showMoreButton.applyShowMoreButtonAccessibility()
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -257,12 +258,14 @@ final class AuthTableViewController: BaseTableViewController {
         if isLoginServicesCollapsed {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                self.collapsibleAuthSeparatorRow.showMoreButton.applyShowMoreButtonAccessibility()
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
+                self.collapsibleAuthSeparatorRow.showMoreButton.applyShowLessButtonAccessibility()
             }
 
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)

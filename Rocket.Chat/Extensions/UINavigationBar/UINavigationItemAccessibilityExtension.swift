@@ -1,5 +1,5 @@
 //
-//  UINavigationItem.swift
+//  UINavigationItemAccessibilityExtension.swift
 //  Rocket.Chat
 //
 //  Created by Rudrank Riyam on 29/03/19.
