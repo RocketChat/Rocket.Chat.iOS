@@ -11,6 +11,7 @@
 "auth.connect.urlfield.hint" = "Geben Sie hier die URL Ihres Servers ein.";
 
 "auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
 
 "auth.authentication.emailorusername.label" = "E-Mail oder Benutzername";
 "auth.authentication.emailorusername.hint" = "Geben Sie hier Ihre E-Mail-Adresse oder Ihren Benutzernamen ein.";

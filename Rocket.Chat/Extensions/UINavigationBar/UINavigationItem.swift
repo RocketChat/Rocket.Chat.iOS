@@ -12,4 +12,8 @@ extension UINavigationItem {
     func applyMoreButtonAccessibility() {
         rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
     }
+
+    func applyCloseButtonAccessibility() {
+        leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
+    }
 }

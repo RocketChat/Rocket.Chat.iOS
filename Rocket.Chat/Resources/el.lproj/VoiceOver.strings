@@ -11,6 +11,7 @@
 "auth.connect.urlfield.hint" = "Εισάγετε εδώ το URL του εξυπηρετητή σας.";
 
 "auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
 
 "auth.authentication.emailorusername.label" = "Email ή Όνομα χρήστη";
 "auth.authentication.emailorusername.hint" = "Εισάγετε εδώ το email ή το Όνομα χρήστη σας.";

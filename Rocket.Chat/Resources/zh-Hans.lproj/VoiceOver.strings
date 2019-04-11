@@ -11,6 +11,7 @@
 "auth.connect.urlfield.hint" = "插入服务器地址";
 
 "auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
 
 "auth.authentication.emailorusername.label" = "邮箱地址或用户名";
 "auth.authentication.emailorusername.hint" = "添加邮箱地址或用户名";
