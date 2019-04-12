@@ -53,7 +53,8 @@ extension LoginTableViewController {
                     Realm.executeOnMainThread(realm: realm) { realm in
                         realm.add(user, update: true)
                     }
-
+                    
+                    print(user)
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()

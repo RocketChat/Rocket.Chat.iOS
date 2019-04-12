@@ -176,7 +176,6 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
                     if self?.canEditAnyInfo ?? false {
                         self?.navigationItem.rightBarButtonItem = self?.editButton
                     }
-
                     self?.tableView.reloadData()
                 }
             case .error:
@@ -576,3 +575,6 @@ extension EditProfileTableViewController {
         }
     }
 }
+
+
+

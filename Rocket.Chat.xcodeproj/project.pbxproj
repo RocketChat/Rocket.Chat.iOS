@@ -910,6 +910,14 @@
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
 		D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */; };
 		DB926AFD21FA0AEE0046F53F /* ChatAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB926AFC21FA0AEE0046F53F /* ChatAnnouncementView.swift */; };
+		E2F312072261195900B16F0F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2F312052261195900B16F0F /* Interface.storyboard */; };
+		E2F312092261195900B16F0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F312082261195900B16F0F /* Assets.xcassets */; };
+		E2F312102261195A00B16F0F /* Rocket.Chat.Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E2F3120F2261195A00B16F0F /* Rocket.Chat.Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E2F312152261195A00B16F0F /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F312142261195A00B16F0F /* InterfaceController.swift */; };
+		E2F312172261195A00B16F0F /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F312162261195A00B16F0F /* ExtensionDelegate.swift */; };
+		E2F312192261195A00B16F0F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F312182261195A00B16F0F /* NotificationController.swift */; };
+		E2F3121B2261195A00B16F0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F3121A2261195A00B16F0F /* Assets.xcassets */; };
+		E2F312202261195A00B16F0F /* Rocket.Chat.Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E2F312032261195900B16F0F /* Rocket.Chat.Watch.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -933,6 +941,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 807FB5572046E7DD00E21429;
 			remoteInfo = Rocket.Chat.ShareExtension;
+		};
+		E2F312112261195A00B16F0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41DF76D71D2C50710028DBF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2F3120E2261195A00B16F0F;
+			remoteInfo = "Rocket.Chat.Watch Extension";
+		};
+		E2F3121E2261195A00B16F0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41DF76D71D2C50710028DBF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2F312022261195900B16F0F;
+			remoteInfo = Rocket.Chat.Watch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -958,6 +980,28 @@
 				807FB5622046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F3122A2261195A00B16F0F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E2F312102261195A00B16F0F /* Rocket.Chat.Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F3122C2261195B00B16F0F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				E2F312202261195A00B16F0F /* Rocket.Chat.Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1884,6 +1928,19 @@
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
 		DB926AFC21FA0AEE0046F53F /* ChatAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAnnouncementView.swift; sourceTree = "<group>"; };
 		E05A718A50D61E3E547007AF /* Pods-Rocket.Chat.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.test.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.test.xcconfig"; sourceTree = "<group>"; };
+		E2F312032261195900B16F0F /* Rocket.Chat.Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2F312062261195900B16F0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		E2F312082261195900B16F0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2F3120A2261195900B16F0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2F3120F2261195A00B16F0F /* Rocket.Chat.Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Rocket.Chat.Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2F312142261195A00B16F0F /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		E2F312162261195A00B16F0F /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		E2F312182261195A00B16F0F /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		E2F3121A2261195A00B16F0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2F3121C2261195A00B16F0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2F3121D2261195A00B16F0F /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		E2F3122D22611C0500B16F0F /* Rocket.Chat.Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Rocket.Chat.Watch Extension.entitlements"; sourceTree = "<group>"; };
+		E2F3122E22611DAE00B16F0F /* Rocket.Chat.Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rocket.Chat.Watch.entitlements; sourceTree = "<group>"; };
 		F87E8221BEB77AF190F06201 /* Pods-Rocket.Chat.ShareExtension.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.beta.xcconfig"; sourceTree = "<group>"; };
 		FEDACA44BBB1C0633DEA6F3D /* Pods-Rocket.ChatTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1919,6 +1976,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2AC99226FB9C7C9DA45E94 /* Pods_Rocket_Chat_ShareExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F3120C2261195A00B16F0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2984,6 +3048,8 @@
 		41DF76D61D2C50710028DBF8 = {
 			isa = PBXGroup;
 			children = (
+				E2F312042261195900B16F0F /* Rocket.Chat.Watch */,
+				E2F312132261195A00B16F0F /* Rocket.Chat.Watch Extension */,
 				106DAA428B5BF7289FB70C65 /* Frameworks */,
 				EE693BBD0CC2727847214E2D /* Pods */,
 				41DF76E01D2C50710028DBF8 /* Products */,
@@ -3001,6 +3067,8 @@
 				41DF76F31D2C50720028DBF8 /* Rocket.ChatTests.xctest */,
 				41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */,
 				807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */,
+				E2F312032261195900B16F0F /* Rocket.Chat.Watch.app */,
+				E2F3120F2261195A00B16F0F /* Rocket.Chat.Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4216,6 +4284,31 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		E2F312042261195900B16F0F /* Rocket.Chat.Watch */ = {
+			isa = PBXGroup;
+			children = (
+				E2F3122E22611DAE00B16F0F /* Rocket.Chat.Watch.entitlements */,
+				E2F312052261195900B16F0F /* Interface.storyboard */,
+				E2F312082261195900B16F0F /* Assets.xcassets */,
+				E2F3120A2261195900B16F0F /* Info.plist */,
+			);
+			path = Rocket.Chat.Watch;
+			sourceTree = "<group>";
+		};
+		E2F312132261195A00B16F0F /* Rocket.Chat.Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E2F3122D22611C0500B16F0F /* Rocket.Chat.Watch Extension.entitlements */,
+				E2F312142261195A00B16F0F /* InterfaceController.swift */,
+				E2F312162261195A00B16F0F /* ExtensionDelegate.swift */,
+				E2F312182261195A00B16F0F /* NotificationController.swift */,
+				E2F3121A2261195A00B16F0F /* Assets.xcassets */,
+				E2F3121C2261195A00B16F0F /* Info.plist */,
+				E2F3121D2261195A00B16F0F /* PushNotificationPayload.apns */,
+			);
+			path = "Rocket.Chat.Watch Extension";
+			sourceTree = "<group>";
+		};
 		EE693BBD0CC2727847214E2D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -4252,11 +4345,13 @@
 				9590906DA2061D8E1FBCD596 /* [CP] Embed Pods Frameworks */,
 				414EE63221CD2912003693D2 /* Embed Frameworks */,
 				41EFB5C721D3AA6F006C10AC /* Remove Simulator architectures from WebRTC and JitsiMeet frameworks */,
+				E2F3122C2261195B00B16F0F /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				807FB5612046E7DD00E21429 /* PBXTargetDependency */,
+				E2F3121F2261195A00B16F0F /* PBXTargetDependency */,
 			);
 			name = Rocket.Chat;
 			productName = Rocket.Chat;
@@ -4321,13 +4416,47 @@
 			productReference = 807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E2F312022261195900B16F0F /* Rocket.Chat.Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2F3122B2261195A00B16F0F /* Build configuration list for PBXNativeTarget "Rocket.Chat.Watch" */;
+			buildPhases = (
+				E2F312012261195900B16F0F /* Resources */,
+				E2F3122A2261195A00B16F0F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E2F312122261195A00B16F0F /* PBXTargetDependency */,
+			);
+			name = Rocket.Chat.Watch;
+			productName = Rocket.Chat.Watch;
+			productReference = E2F312032261195900B16F0F /* Rocket.Chat.Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		E2F3120E2261195A00B16F0F /* Rocket.Chat.Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2F312292261195A00B16F0F /* Build configuration list for PBXNativeTarget "Rocket.Chat.Watch Extension" */;
+			buildPhases = (
+				E2F3120B2261195A00B16F0F /* Sources */,
+				E2F3120C2261195A00B16F0F /* Frameworks */,
+				E2F3120D2261195A00B16F0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Rocket.Chat.Watch Extension";
+			productName = "Rocket.Chat.Watch Extension";
+			productReference = E2F3120F2261195A00B16F0F /* Rocket.Chat.Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		41DF76D71D2C50710028DBF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
@@ -4376,6 +4505,26 @@
 							};
 						};
 					};
+					E2F312022261195900B16F0F = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = 3TVP64ZUPA;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					E2F3120E2261195A00B16F0F = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = 3TVP64ZUPA;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 41DF76DA1D2C50710028DBF8 /* Build configuration list for PBXProject "Rocket.Chat" */;
@@ -4408,6 +4557,8 @@
 				807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */,
 				41DF76F21D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF76FD1D2C50720028DBF8 /* Rocket.ChatUITests */,
+				E2F312022261195900B16F0F /* Rocket.Chat.Watch */,
+				E2F3120E2261195A00B16F0F /* Rocket.Chat.Watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -4605,6 +4756,23 @@
 				80FA90742056C1350069038F /* SEComposeTextCell.xib in Resources */,
 				80D5637220592D32008896D6 /* Assets.xcassets in Resources */,
 				80D0CE5C204FFAA50056B17F /* SEServerCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F312012261195900B16F0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F312092261195900B16F0F /* Assets.xcassets in Resources */,
+				E2F312072261195900B16F0F /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F3120D2261195A00B16F0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F3121B2261195A00B16F0F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5629,6 +5797,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2F3120B2261195A00B16F0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F312192261195A00B16F0F /* NotificationController.swift in Sources */,
+				E2F312172261195A00B16F0F /* ExtensionDelegate.swift in Sources */,
+				E2F312152261195A00B16F0F /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -5646,6 +5824,16 @@
 			isa = PBXTargetDependency;
 			target = 807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */;
 			targetProxy = 807FB5602046E7DD00E21429 /* PBXContainerItemProxy */;
+		};
+		E2F312122261195A00B16F0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E2F3120E2261195A00B16F0F /* Rocket.Chat.Watch Extension */;
+			targetProxy = E2F312112261195A00B16F0F /* PBXContainerItemProxy */;
+		};
+		E2F3121F2261195A00B16F0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E2F312022261195900B16F0F /* Rocket.Chat.Watch */;
+			targetProxy = E2F3121E2261195A00B16F0F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5771,6 +5959,14 @@
 			);
 			name = RCEmojiKit.strings;
 			path = .;
+			sourceTree = "<group>";
+		};
+		E2F312052261195900B16F0F /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E2F312062261195900B16F0F /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -6368,6 +6564,230 @@
 			};
 			name = Beta;
 		};
+		E2F312212261195A00B16F0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat.Watch/Rocket.Chat.Watch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Rocket_Chat_Watch_Extension;
+				INFOPLIST_FILE = Rocket.Chat.Watch/Info.plist;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		E2F312222261195A00B16F0F /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat.Watch/Rocket.Chat.Watch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Rocket_Chat_Watch_Extension;
+				INFOPLIST_FILE = Rocket.Chat.Watch/Info.plist;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Test;
+		};
+		E2F312232261195A00B16F0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat.Watch/Rocket.Chat.Watch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Rocket_Chat_Watch_Extension;
+				INFOPLIST_FILE = Rocket.Chat.Watch/Info.plist;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
+		E2F312242261195A00B16F0F /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Rocket.Chat.Watch/Rocket.Chat.Watch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Rocket_Chat_Watch_Extension;
+				INFOPLIST_FILE = Rocket.Chat.Watch/Info.plist;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Beta;
+		};
+		E2F312252261195A00B16F0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Rocket.Chat.Watch Extension/Rocket.Chat.Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Rocket.Chat.Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		E2F312262261195A00B16F0F /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Rocket.Chat.Watch Extension/Rocket.Chat.Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Rocket.Chat.Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Test;
+		};
+		E2F312272261195A00B16F0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Rocket.Chat.Watch Extension/Rocket.Chat.Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Rocket.Chat.Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
+		E2F312282261195A00B16F0F /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Rocket.Chat.Watch Extension/Rocket.Chat.Watch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3TVP64ZUPA;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Rocket.Chat.Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Beta;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6422,6 +6842,28 @@
 				33A37DF520EAB7E9004014B6 /* Test */,
 				807FB5642046E7DD00E21429 /* Release */,
 				807FB5652046E7DD00E21429 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2F312292261195A00B16F0F /* Build configuration list for PBXNativeTarget "Rocket.Chat.Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2F312252261195A00B16F0F /* Debug */,
+				E2F312262261195A00B16F0F /* Test */,
+				E2F312272261195A00B16F0F /* Release */,
+				E2F312282261195A00B16F0F /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2F3122B2261195A00B16F0F /* Build configuration list for PBXNativeTarget "Rocket.Chat.Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2F312212261195A00B16F0F /* Debug */,
+				E2F312222261195A00B16F0F /* Test */,
+				E2F312232261195A00B16F0F /* Release */,
+				E2F312242261195A00B16F0F /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -9,16 +9,43 @@
 import UIKit
 import RealmSwift
 import UserNotifications
-
+import WatchConnectivity
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if activationState == .activated {
+            print("***Can Communicate")
+        }
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("***Became inactive")
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("***Became Deactivated")
+    }
+        
+    
 
     var window: UIWindow?
     var notificationWindow: TransparentToTouchesWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Setup Watch connection.
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
+        
+        
         Launcher().prepareToLaunch(with: launchOptions)
-
+        
+        
+        
         PushManager.setupNotificationCenter()
         application.registerForRemoteNotifications()
 
