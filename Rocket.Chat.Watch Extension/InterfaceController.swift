@@ -11,21 +11,16 @@ import Foundation
 import WatchConnectivity
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
-    
     @IBOutlet weak var label: WKInterfaceLabel!
-    
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print(message)
         let username = "Hello " + String(describing: message["username"] as? String ?? "Failed")
         label.setText(username)
     }
-    
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if activationState == .activated {
             print("---Can Communicate")
         }
     }
-    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         // Configure interface objects here.
@@ -43,21 +38,4 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

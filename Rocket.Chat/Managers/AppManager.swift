@@ -408,9 +408,7 @@ extension AppManager {
         }
     }
 }
-
 // MARK: Deep Link
-
 extension AppManager {
     static func handleDeepLink(_ url: URL) -> DeepLink? {
         guard let deepLink = DeepLink(url: url) else { return nil }

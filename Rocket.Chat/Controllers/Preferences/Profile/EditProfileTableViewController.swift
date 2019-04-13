@@ -575,6 +575,3 @@ extension EditProfileTableViewController {
         }
     }
 }
-
-
-

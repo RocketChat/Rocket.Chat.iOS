@@ -19,16 +19,13 @@ final class MeRequest: APIRequest {
 final class MeResource: APIResource {
     var user: User? {
         guard let raw = raw else { return nil }
-        
-        
-        
         let user = User()
         user.map(raw, realm: nil)
-        
         let message = [
             "username": user.username
         ]
-        WCSession.default.sendMessage(message as [String : Any], replyHandler: nil) { (error) in
+        WCSession.default.sendMessage(message as [String:Any], replyHandler: nil)
+        { (error) in
             print("Will get an error on the phone : \(error)")
         }
         return user
