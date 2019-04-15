@@ -52,7 +52,7 @@ final class RoomInfoRequest: APIRequest {
 
 final class RoomInfoResource: APIResource {
     var channel: JSON? {
-        return raw?["channel"]
+        return raw?["channel"] ?? raw?["group"]
     }
 
     var usernames: [String]? {
