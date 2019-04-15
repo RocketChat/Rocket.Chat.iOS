@@ -70,6 +70,7 @@ struct UnmanagedMessage: UnmanagedObject, Equatable {
     var snippetId: String?
 
     var threadMessageId: String?
+    var threadLastMessage: Date?
     var threadMessagesCount = 0
     var isThreadMainMessage: Bool { return threadMessagesCount > 0 }
     var isThreadReplyMessage: Bool { return !(threadMessageId?.isEmpty ?? true) }
@@ -98,6 +99,7 @@ extension UnmanagedMessage {
             lhs.urls == rhs.urls &&
             lhs.reactions == rhs.reactions &&
             lhs.threadMessageId == rhs.threadMessageId &&
+            lhs.threadLastMessage == rhs.threadLastMessage &&
             lhs.threadMessagesCount == rhs.threadMessagesCount &&
             lhs.discussionRid == rhs.discussionRid &&
             lhs.discussionLastMessage == rhs.discussionLastMessage &&
@@ -144,6 +146,7 @@ extension UnmanagedMessage {
         snippetId = message.snippetId
 
         threadMessageId = message.threadMessageId
+        threadLastMessage = message.threadLastMessage
         threadMessagesCount = message.threadMessagesCount
 
         discussionRid = message.discussionRid

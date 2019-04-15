@@ -30,6 +30,7 @@ class Theme: NSObject {
     @objc let tintColor: UIColor
     @objc let auxiliaryTintColor: UIColor
     @objc let actionTintColor: UIColor
+    @objc let actionBackgroundColor: UIColor
     @objc let mutedAccent: UIColor
     @objc let strongAccent: UIColor
     let appearence: Appearence
@@ -68,6 +69,7 @@ class Theme: NSObject {
          tintColor: UIColor,
          auxiliaryTintColor: UIColor,
          actionTintColor: UIColor,
+         actionBackgroundColor: UIColor,
          mutedAccent: UIColor,
          strongAccent: UIColor?,
          appearence: Appearence) {
@@ -85,6 +87,7 @@ class Theme: NSObject {
         self.tintColor = tintColor
         self.auxiliaryTintColor = auxiliaryTintColor
         self.actionTintColor = actionTintColor
+        self.actionBackgroundColor = actionBackgroundColor
         self.mutedAccent = mutedAccent
 
         if let strongAccent = strongAccent {
@@ -110,6 +113,7 @@ class Theme: NSObject {
         tintColor: .RCBlue(),
         auxiliaryTintColor: #colorLiteral(red: 0.03921568627, green: 0.2666666667, blue: 0.4117647059, alpha: 1),
         actionTintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        actionBackgroundColor: #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.8, alpha: 1),
         strongAccent: nil,
         appearence: .light
@@ -129,6 +133,7 @@ class Theme: NSObject {
         tintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
         auxiliaryTintColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         actionTintColor: #colorLiteral(red: 0.1137254902, green: 0.4549019608, blue: 0.9607843137, alpha: 1),
+        actionBackgroundColor: #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.1672673633, green: 0.1672673633, blue: 0.1769603646, alpha: 1),
         strongAccent: nil,
         appearence: .dark
@@ -148,6 +153,7 @@ class Theme: NSObject {
         tintColor: #colorLiteral(red: 0.1176470588, green: 0.6078431373, blue: 0.9960784314, alpha: 1),
         auxiliaryTintColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         actionTintColor: #colorLiteral(red: 0.1176470588, green: 0.631372549, blue: 0.9960784314, alpha: 1),
+        actionBackgroundColor: #colorLiteral(red: 0.9098039216, green: 0.9490196078, blue: 1, alpha: 1),
         mutedAccent: #colorLiteral(red: 0.156862745, green: 0.156862745, blue: 0.16, alpha: 1),
         strongAccent: nil,
         appearence: .dark

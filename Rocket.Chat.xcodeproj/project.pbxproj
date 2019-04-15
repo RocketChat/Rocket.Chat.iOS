@@ -343,6 +343,9 @@
 		41A897FA223FB56C00D2DB22 /* DirectoryUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A897F9223FB56C00D2DB22 /* DirectoryUserCell.xib */; };
 		41A9B708215B0D0700CEB218 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B707215B0D0700CEB218 /* MessagesViewModel.swift */; };
 		41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */; };
+		41AE8B372264AF6C0031A99B /* MessageMainThreadChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE8B362264AF6C0031A99B /* MessageMainThreadChatItem.swift */; };
+		41AE8B3A2264B5900031A99B /* MessageMainThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE8B382264B5900031A99B /* MessageMainThreadCell.swift */; };
+		41AE8B3B2264B5900031A99B /* MessageMainThreadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AE8B392264B5900031A99B /* MessageMainThreadCell.xib */; };
 		41B3323A225CD623005BCD9B /* MessageManagerSystemMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B33238225CD623005BCD9B /* MessageManagerSystemMessages.swift */; };
 		41B3323B225CD623005BCD9B /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B33239225CD623005BCD9B /* MessageManager.swift */; };
 		41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */; };
@@ -1326,6 +1329,9 @@
 		41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteCell.xib; sourceTree = "<group>"; };
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteCell.swift; sourceTree = "<group>"; };
 		41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderViewSpec.swift; sourceTree = "<group>"; };
+		41AE8B362264AF6C0031A99B /* MessageMainThreadChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMainThreadChatItem.swift; sourceTree = "<group>"; };
+		41AE8B382264B5900031A99B /* MessageMainThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageMainThreadCell.swift; sourceTree = "<group>"; };
+		41AE8B392264B5900031A99B /* MessageMainThreadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageMainThreadCell.xib; sourceTree = "<group>"; };
 		41B33238225CD623005BCD9B /* MessageManagerSystemMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSystemMessages.swift; sourceTree = "<group>"; };
 		41B33239225CD623005BCD9B /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensions.swift; sourceTree = "<group>"; };
@@ -4015,6 +4021,8 @@
 				4190694121D0E82E00FE2573 /* MessageVideoCallCell.swift */,
 				41D1610C2254E1D300B42274 /* MessageDiscussionCell.xib */,
 				41D1610D2254E1D300B42274 /* MessageDiscussionCell.swift */,
+				41AE8B392264B5900031A99B /* MessageMainThreadCell.xib */,
+				41AE8B382264B5900031A99B /* MessageMainThreadCell.swift */,
 				4101B02A21A2EF8C00772F7C /* HeaderCell.xib */,
 				4101B02C21A2EF9300772F7C /* HeaderCell.swift */,
 			);
@@ -4042,6 +4050,7 @@
 				9977D85A217E999800FE5EC6 /* MessageActionsChatItem.swift */,
 				4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */,
 				41D1610A2254E0B300B42274 /* MessageDiscussionChatItem.swift */,
+				41AE8B362264AF6C0031A99B /* MessageMainThreadChatItem.swift */,
 				4101B02821A2EF6B00772F7C /* HeaderChatItem.swift */,
 			);
 			path = ChatItems;
@@ -4539,6 +4548,7 @@
 				4124FCC81F7A6BF5008ED4C3 /* ChannelInfoUserCell.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				14F8A280202E659000175FDC /* White-76@2x.png in Resources */,
+				41AE8B3B2264B5900031A99B /* MessageMainThreadCell.xib in Resources */,
 				33A5C9CD206A565800FE1C8F /* flags.json in Resources */,
 				333207FF20766E4F00AD3290 /* NotificationViewController.xib in Resources */,
 				14F8A272202E653E00175FDC /* Grey-29@3x.png in Resources */,
@@ -5070,6 +5080,7 @@
 				41DE687B20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
+				41AE8B3A2264B5900031A99B /* MessageMainThreadCell.swift in Sources */,
 				80B2D98F20E5499A002F4149 /* UINavigationBarTransparent.swift in Sources */,
 				33D08E2F20BD9267008D03EF /* ThemePreferenceViewModel.swift in Sources */,
 				419EB5B5215E52BC00E591BF /* VideoMessageChatItem.swift in Sources */,
@@ -5140,6 +5151,7 @@
 				99BE4D85215300FD001A43E2 /* MessageSection.swift in Sources */,
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
 				4124D833209A0517005374CD /* ChatLoaderCell.swift in Sources */,
+				41AE8B372264AF6C0031A99B /* MessageMainThreadChatItem.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
 				4146ECEC223A57D9000070EA /* DirectoryFiltersView.swift in Sources */,
 				997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */,

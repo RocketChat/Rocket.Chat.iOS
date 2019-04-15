@@ -521,3 +521,8 @@
 "discussion.no_messages" = "No messages yet"; // TODO
 "discussion.1_message" = "1 message"; // TODO
 "discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

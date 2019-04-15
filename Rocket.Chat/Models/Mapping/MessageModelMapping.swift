@@ -147,6 +147,14 @@ extension Message: ModelMappeable {
             self.threadMessageId = threadMessageId
         }
 
+        if let threadLastMessage = values["tlm"]["$date"].double {
+            self.threadLastMessage = Date.dateFromInterval(threadLastMessage)
+        }
+
+        if let threadLastMessage = values["tlm"].string {
+            self.threadLastMessage = Date.dateFromString(threadLastMessage)
+        }
+
         if let threadMessagesCount = values["tcount"].int {
             self.threadMessagesCount = threadMessagesCount
         }

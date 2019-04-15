@@ -244,6 +244,13 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
+        if object.message.isThreadMainMessage {
+            cells.insert(MessageMainThreadChatItem(
+                user: nil,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
         if !object.message.reactions.isEmpty {
             cells.insert(ReactionsChatItem(
                 message: object.message,
