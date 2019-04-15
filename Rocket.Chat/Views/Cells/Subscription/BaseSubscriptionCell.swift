@@ -54,7 +54,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
     @IBOutlet weak var labelUnread: UILabel!
     @IBOutlet weak var viewUnread: UIView! {
         didSet {
-            viewUnread.layer.cornerRadius = 4
+            viewUnread.layer.cornerRadius = viewUnread.bounds.size.height / 2
         }
     }
 
@@ -102,12 +102,7 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
 
         if subscription.unread > 0 {
             viewUnread.isHidden = false
-
-            if subscription.groupMentions > 0 || subscription.userMentions > 0 {
-                labelUnread.text =  "@\(subscription.unread)"
-            } else {
-                labelUnread.text =  "\(subscription.unread)"
-            }
+            labelUnread.text =  "\(subscription.unread)"
         } else {
             viewUnread.isHidden = true
         }
@@ -201,13 +196,23 @@ extension BaseSubscriptionCell {
 
     override func applyTheme() {
         super.applyTheme()
+
         guard let theme = theme else { return }
 
         labelName.textColor = theme.titleText
-        viewUnread.backgroundColor = theme.tintColor
-        labelUnread.backgroundColor = theme.tintColor
-        labelUnread.textColor = theme.backgroundColor
         iconRoom.tintColor = theme.auxiliaryText
+
+        if let subscription = subscription {
+            if subscription.groupMentions > 0 || subscription.userMentions > 0 {
+                viewUnread.backgroundColor = theme.tintColor
+                labelUnread.backgroundColor = theme.tintColor
+                labelUnread.textColor = theme.backgroundColor
+            } else {
+                viewUnread.backgroundColor = theme.borderColor
+                labelUnread.backgroundColor = theme.borderColor
+                labelUnread.textColor = theme.bodyText
+            }
+        }
 
         setSelected(isSelected, animated: false)
         setHighlighted(isHighlighted, animated: false)
