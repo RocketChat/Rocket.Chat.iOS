@@ -20,21 +20,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTq-7J-Pgb">
-                        <rect key="frame" x="71" y="0.0" width="115" height="32"/>
-                        <color key="backgroundColor" red="0.1137254902" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="71" y="0.0" width="117" height="32"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="g3Z-IK-0za"/>
                         </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="125 replies" image="Threads"/>
+                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="5" maxY="0.0"/>
+                        <state key="normal" title="125 replies" image="Threads Blue"/>
                         <connections>
                             <action selector="buttonThreadDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="EJI-fn-3Ie"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsW-iH-go3">
-                        <rect key="frame" x="194" y="8" width="33" height="16"/>
+                        <rect key="frame" x="196" y="8" width="33" height="16"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,6 +59,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Threads" width="20" height="20"/>
+        <image name="Threads Blue" width="17" height="16"/>
     </resources>
 </document>

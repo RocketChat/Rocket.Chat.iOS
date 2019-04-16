@@ -139,7 +139,7 @@ final class MessagesViewController: RocketChatViewController {
 
         setupTitleView()
         updateEmptyState()
-        updateSearchMessagesButton()
+        updateNavigationBarButtons()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -470,6 +470,30 @@ final class MessagesViewController: RocketChatViewController {
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
+    }
+
+    // MARK: Navigation Buttons
+
+    private func updateNavigationBarButtons() {
+        if subscription != nil {
+            let search = UIBarButtonItem(
+                image: UIImage(named: "Search"),
+                style: .done,
+                target: self,
+                action: #selector(showSearchMessages)
+            )
+
+            let threads = UIBarButtonItem(
+                image: UIImage(named: "Threads"),
+                style: .done,
+                target: self,
+                action: #selector(showSearchMessages)
+            )
+
+            navigationItem.rightBarButtonItems = [search, threads]
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
     }
 
     // MARK: IBAction
