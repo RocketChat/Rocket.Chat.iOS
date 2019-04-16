@@ -279,6 +279,10 @@
 		415B10F122660461007B684B /* ThreadMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10F022660461007B684B /* ThreadMessagesRequest.swift */; };
 		415B10F322660486007B684B /* ThreadFollowRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10F222660486007B684B /* ThreadFollowRequest.swift */; };
 		415B10F5226604AB007B684B /* ThreadUnfollowRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10F4226604AB007B684B /* ThreadUnfollowRequest.swift */; };
+		415B10F82266051D007B684B /* ThreadsListRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10F72266051D007B684B /* ThreadsListRequestSpec.swift */; };
+		415B10FA22660B24007B684B /* ThreadMessagesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10F922660B24007B684B /* ThreadMessagesRequestSpec.swift */; };
+		415B10FC22660CFA007B684B /* ThreadFollowRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10FB22660CFA007B684B /* ThreadFollowRequestSpec.swift */; };
+		415B10FE22660F31007B684B /* ThreadUnfollowRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B10FD22660F31007B684B /* ThreadUnfollowRequestSpec.swift */; };
 		415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415DC7F51F67F5D30039FB4F /* NetworkManager.swift */; };
 		416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416133311D46CA4E00E09DA2 /* ChatMessageCell.swift */; };
 		416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416133331D46CA7200E09DA2 /* ChatMessageCell.xib */; };
@@ -1260,6 +1264,10 @@
 		415B10F022660461007B684B /* ThreadMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMessagesRequest.swift; sourceTree = "<group>"; };
 		415B10F222660486007B684B /* ThreadFollowRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadFollowRequest.swift; sourceTree = "<group>"; };
 		415B10F4226604AB007B684B /* ThreadUnfollowRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUnfollowRequest.swift; sourceTree = "<group>"; };
+		415B10F72266051D007B684B /* ThreadsListRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsListRequestSpec.swift; sourceTree = "<group>"; };
+		415B10F922660B24007B684B /* ThreadMessagesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadMessagesRequestSpec.swift; sourceTree = "<group>"; };
+		415B10FB22660CFA007B684B /* ThreadFollowRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadFollowRequestSpec.swift; sourceTree = "<group>"; };
+		415B10FD22660F31007B684B /* ThreadUnfollowRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUnfollowRequestSpec.swift; sourceTree = "<group>"; };
 		415D4B8620C57FF700EB72F2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		415D4B8720C57FF700EB72F2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		415DC7F51F67F5D30039FB4F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -2471,6 +2479,17 @@
 				415B10F022660461007B684B /* ThreadMessagesRequest.swift */,
 				415B10F222660486007B684B /* ThreadFollowRequest.swift */,
 				415B10F4226604AB007B684B /* ThreadUnfollowRequest.swift */,
+			);
+			path = Threads;
+			sourceTree = "<group>";
+		};
+		415B10F622660500007B684B /* Threads */ = {
+			isa = PBXGroup;
+			children = (
+				415B10F72266051D007B684B /* ThreadsListRequestSpec.swift */,
+				415B10F922660B24007B684B /* ThreadMessagesRequestSpec.swift */,
+				415B10FB22660CFA007B684B /* ThreadFollowRequestSpec.swift */,
+				415B10FD22660F31007B684B /* ThreadUnfollowRequestSpec.swift */,
 			);
 			path = Threads;
 			sourceTree = "<group>";
@@ -4169,6 +4188,7 @@
 				806C59A31FBB2F3700C32D0A /* Message */,
 				80235D201F7442C100A56CA5 /* Room */,
 				8062E32F20A3A2A30044F407 /* Subscription */,
+				415B10F622660500007B684B /* Threads */,
 				998165C8204EBB5E0059D346 /* User */,
 			);
 			path = Requests;
@@ -5437,6 +5457,7 @@
 				994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */,
 				80AE2540203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift in Sources */,
 				35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */,
+				415B10F82266051D007B684B /* ThreadsListRequestSpec.swift in Sources */,
 				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */,
@@ -5483,6 +5504,7 @@
 				8062E33120A3A2BB0044F407 /* RoomsRequestSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				41B96365207E492C0068F1A6 /* MessageTextValidatorSpec.swift in Sources */,
+				415B10FE22660F31007B684B /* ThreadUnfollowRequestSpec.swift in Sources */,
 				412435CA20CACF1400A3602D /* SubscriptionSortingManagerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* URLExtensionSpec.swift in Sources */,
 				998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */,
@@ -5517,6 +5539,7 @@
 				80213C0B1FDFE35C00809E14 /* UploadMessageRequestSpec.swift in Sources */,
 				80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */,
 				80E9DBD8209CB06200A48CA9 /* SubscriptionReadRequestSpec.swift in Sources */,
+				415B10FC22660CFA007B684B /* ThreadFollowRequestSpec.swift in Sources */,
 				411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */,
 				80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */,
 				8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */,
@@ -5546,6 +5569,7 @@
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */,
+				415B10FA22660B24007B684B /* ThreadMessagesRequestSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
 				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,

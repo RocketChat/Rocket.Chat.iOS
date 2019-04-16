@@ -9,19 +9,24 @@
 // TODO: Add documentation link
 
 import Foundation
+import SwiftyJSON
 
 final class ThreadUnfollowRequest: APIRequest {
     typealias APIResourceType = ThreadUnfollowResource
 
     let requiredVersion = Version(1, 0, 0)
 
-    let method: HTTPMethod = .get
+    let method: HTTPMethod = .post
     var path = "/api/v1/chat.unfollowMessage"
 
-    var query: String?
+    let mid: String
 
     init(mid: String) {
-        self.query = "mid=\(mid)"
+        self.mid = mid
+    }
+
+    func body() -> Data? {
+        return JSON(["mid": mid]).rawString()?.data(using: .utf8)
     }
 
 }

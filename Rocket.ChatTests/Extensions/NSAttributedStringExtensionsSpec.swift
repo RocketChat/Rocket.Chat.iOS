@@ -97,8 +97,8 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let attributes1 = result.attributes(at: range1.location, longestEffectiveRange: nil, in: range1)
         XCTAssertEqual(attributes1.count, 4, "Will have 4 attributes")
         XCTAssertEqual(attributes1[.link] as? String, "rocketchat://mention?name=rafael.kellermann")
-        XCTAssertEqual(attributes1[.backgroundColor] as? UIColor, .secondAction)
-        XCTAssertEqual(attributes1[.foregroundColor] as? UIColor, .primaryAction)
+        XCTAssertEqual(attributes1[.backgroundColor] as? UIColor, Theme.light.actionBackgroundColor)
+        XCTAssertEqual(attributes1[.foregroundColor] as? UIColor, Theme.light.actionTintColor)
         XCTAssertEqual(attributes1[.font] as? UIFont, MessageTextFontAttributes.boldFont)
 
         let range2 = nsString.range(of: ", how are you doing? Is everyone ")
@@ -120,8 +120,8 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let attributes5 = result.attributes(at: range5.location, longestEffectiveRange: nil, in: range5)
         XCTAssertEqual(attributes5.count, 4, "Will have 4 attributes")
         XCTAssertEqual(attributes5[.link] as? String, "rocketchat://mention?name=filipe.alvarenga")
-        XCTAssertEqual(attributes5[.backgroundColor] as? UIColor, .secondAction)
-        XCTAssertEqual(attributes5[.foregroundColor] as? UIColor, .primaryAction)
+        XCTAssertEqual(attributes5[.backgroundColor] as? UIColor, Theme.light.actionBackgroundColor)
+        XCTAssertEqual(attributes5[.foregroundColor] as? UIColor, Theme.light.actionTintColor)
         XCTAssertEqual(attributes5[.font] as? UIFont, MessageTextFontAttributes.boldFont)
 
         let range6 = nsString.range(of: "? Wish you ")
@@ -142,7 +142,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let range9 = nsString.range(of: "\u{00a0}matheus.cardoso\u{00a0}")
         let attributes9 = result.attributes(at: range9.location, longestEffectiveRange: nil, in: range9)
         XCTAssertEqual(attributes9.count, 3, "Will have 3 attributes")
-        XCTAssertEqual(attributes9[.backgroundColor] as? UIColor, .primaryAction)
+        XCTAssertEqual(attributes9[.backgroundColor] as? UIColor, Theme.light.actionTintColor)
         XCTAssertEqual(attributes9[.foregroundColor] as? UIColor, .white)
         XCTAssertEqual(attributes9[.font] as? UIFont, MessageTextFontAttributes.boldFont)
     }
