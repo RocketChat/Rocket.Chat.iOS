@@ -685,6 +685,10 @@ final class MessagesViewModel {
             return false
         }
 
+        if message.isThreadReplyMessage {
+            return false
+        }
+
         let date = message.createdAt
         let prevDate = previousMessage.createdAt
 

@@ -258,6 +258,15 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
+        if object.message.isThreadReplyMessage {
+            cells.append(MessageReplyThreadChatItem(
+                user: user,
+                message: object.message
+            ).wrapped)
+
+            shouldAppendMessageHeader = false
+        }
+
         if !object.isSequential && shouldAppendMessageHeader {
             cells.append(BasicMessageChatItem(
                 user: user,

@@ -201,6 +201,23 @@ extension UnmanagedMessage {
 
 extension UnmanagedMessage {
 
+    internal var mainThreadMessage: String {
+        guard
+            isThreadReplyMessage,
+            let threadMessageId = threadMessageId,
+            !threadMessageId.isEmpty,
+            let mainMessage = Message.find(withIdentifier: threadMessageId)
+        else {
+            return ""
+        }
+
+        return mainMessage.text
+    }
+
+}
+
+extension UnmanagedMessage {
+
     /**
      This method will return if the reply button
      in a broadcast room needs to be displayed or
@@ -216,8 +233,8 @@ extension UnmanagedMessage {
             !isSystemMessage(),
             let currentUser = AuthManager.currentUser(),
             currentUser.identifier != user?.identifier
-            else {
-                return false
+        else {
+            return false
         }
 
         return true
