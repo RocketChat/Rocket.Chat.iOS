@@ -49,6 +49,9 @@ final class API: APIFetcher {
     var userId: String?
     var language: String?
 
+    var sslCertificatePath: URL?
+    var sslCertificatePassword = ""
+
     static let userAgent: String = {
         let info = Bundle.main.infoDictionary
         let appVersion = info?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -89,7 +92,23 @@ final class API: APIFetcher {
             return nil
         }
 
-        var session: URLSession = URLSession.shared
+        var delegate: URLSessionDelegate?
+
+        if let sslCertificatePath = sslCertificatePath {
+            delegate = TwoWaySessionDelegate(
+                certificatePath: sslCertificatePath,
+                password: sslCertificatePassword
+            )
+        }
+
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 30
+
+        var session = URLSession(
+            configuration: configuration,
+            delegate: delegate,
+            delegateQueue: nil
+        )
 
         if let sessionDelegate = sessionDelegate {
             let configuration = URLSessionConfiguration.ephemeral

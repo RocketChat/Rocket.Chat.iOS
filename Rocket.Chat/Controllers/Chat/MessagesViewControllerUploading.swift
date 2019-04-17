@@ -174,40 +174,20 @@ extension MessagesViewController {
     }
 }
 
-// MARK: UIDocumentMenuDelegate
-
-extension MessagesViewController: UIDocumentMenuDelegate {
-
-    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        documentPicker.delegate = self
-
-        if let presenter = documentPicker.popoverPresentationController {
-            presenter.sourceView = composerView.leftButton
-            presenter.sourceRect = composerView.leftButton.bounds
-        }
-
-        present(documentPicker, animated: true, completion: nil)
-    }
-
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-
-}
-
 extension MessagesViewController: UIDocumentPickerDelegate {
 
     func openDocumentPicker() {
-        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.item"], in: .import)
-        importMenu.delegate = self
-        importMenu.modalPresentationStyle = .formSheet
+        let controller = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        controller.delegate = self
+        controller.modalPresentationStyle = .formSheet
+        controller.allowsMultipleSelection = false
 
-        if let presenter = importMenu.popoverPresentationController {
+        if let presenter = controller.popoverPresentationController {
             presenter.sourceView = composerView.leftButton
             presenter.sourceRect = composerView.leftButton.bounds
         }
 
-        self.present(importMenu, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
     }
 
     // MARK: UIDocumentPickerDelegate

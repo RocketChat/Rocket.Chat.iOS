@@ -34,8 +34,16 @@ extension AuthSettingsManager {
         completion?(unmanagedSettings)
     }
 
-    static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
+    static func updatePublicSettings(
+        serverVersion: Version? = nil,
+        apiHost: URL? = nil,
+        apiSSLCertificatePath: URL? = nil,
+        apiSSLCertificatePassword: String = "",
+        _ auth: Auth?,
+        completion: (MessageCompletionObject<AuthSettings>)? = nil) {
+
         let api: API?
+
         if let apiHost = apiHost {
             if let serverVersion = serverVersion {
                 api = API(host: apiHost, version: serverVersion)
@@ -44,6 +52,11 @@ extension AuthSettingsManager {
             }
         } else {
             api = API.current()
+        }
+
+        if let certificatePathURL = apiSSLCertificatePath {
+            api?.sslCertificatePath = certificatePathURL
+            api?.sslCertificatePassword = apiSSLCertificatePassword
         }
 
         let realm = Realm.current

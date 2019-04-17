@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "连接";
 "auth.connect.ssl_required" = "要求您的服务器支持SSL";
 "auth.connect.connecting" = "连接中... 系好安全带";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "登录方式";
 "auth.email_auth" = "邮箱";
 "auth.login_service_prefix" = "继续";
