@@ -44,7 +44,7 @@ def shared_pods
   # Network
   pod 'Nuke', '~> 7.3'
   pod 'Nuke-FLAnimatedImage-Plugin'
-  pod 'Starscream', '~> 2'
+  pod 'Starscream', '~> 3'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs

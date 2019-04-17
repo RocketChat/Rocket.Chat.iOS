@@ -167,6 +167,8 @@
 		4101B02D21A2EF9300772F7C /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101B02C21A2EF9300772F7C /* HeaderCell.swift */; };
 		4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF001F8D0A1700F67E89 /* AppManager.swift */; };
 		4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */; };
+		4104C8752216E08C00576C92 /* APISecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4104C8742216E08C00576C92 /* APISecurity.swift */; };
+		4104C8762216E2A500576C92 /* APISecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4104C8742216E08C00576C92 /* APISecurity.swift */; };
 		410AD84720A9B73B00EAFC64 /* FileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AD84620A9B73B00EAFC64 /* FileSpec.swift */; };
 		411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411119B51F680DB00019854B /* NetworkCoordinator.swift */; };
 		411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411119B71F6825C30019854B /* NetworkManagerSpec.swift */; };
@@ -301,6 +303,7 @@
 		41852E891F92BBEC00D1C499 /* MessagesViewControllerReplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */; };
 		41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */; };
 		41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */; };
+		418858E72215D162009014F2 /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418858E62215D162009014F2 /* SecurityManager.swift */; };
 		418A8FA6224114100048A9B6 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A8FA5224114100048A9B6 /* IntExtensions.swift */; };
 		418BBC4D20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */; };
 		418BBC4F20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */; };
@@ -1130,6 +1133,7 @@
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagerSpec.swift; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		4104C8742216E08C00576C92 /* APISecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISecurity.swift; sourceTree = "<group>"; };
 		410AD84620A9B73B00EAFC64 /* FileSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSpec.swift; sourceTree = "<group>"; };
 		411119B51F680DB00019854B /* NetworkCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCoordinator.swift; sourceTree = "<group>"; };
 		411119B71F6825C30019854B /* NetworkManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerSpec.swift; sourceTree = "<group>"; };
@@ -1279,6 +1283,7 @@
 		41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerReplying.swift; sourceTree = "<group>"; };
 		41865AF11FC8B23400A5E48F /* WebViewControllerEmbedded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerEmbedded.swift; sourceTree = "<group>"; };
 		41865AF31FC8B25100A5E48F /* WebViewControllerEmbedded.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewControllerEmbedded.xib; sourceTree = "<group>"; };
+		418858E62215D162009014F2 /* SecurityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
 		418A8FA5224114100048A9B6 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		418BBC4C20D02E0100EC09F5 /* SocketManagerConnectionHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManagerConnectionHandlerSpec.swift; sourceTree = "<group>"; };
 		418BBC4E20D02FC200EC09F5 /* SubscriptionsTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsTitleViewSpec.swift; sourceTree = "<group>"; };
@@ -2668,6 +2673,7 @@
 				597ECBA31E3708B10041C5C5 /* PushManager.swift */,
 				41499C8E1F2A116900790EA7 /* ServerManager.swift */,
 				41DE687A20C6C52B00AA5EC8 /* SubscriptionsSortingManager.swift */,
+				418858E62215D162009014F2 /* SecurityManager.swift */,
 				B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */,
 				995FEB2E206286D9004EE38F /* WebBrowserManager.swift */,
 				41B554C61FBF0F9D000510B7 /* WindowManager.swift */,
@@ -4148,6 +4154,7 @@
 				8013F8741FD6B5D100EE1A4E /* Middlewares */,
 				D1D535EF1F70863C006625D2 /* Requests */,
 				D1D535EB1F7081FA006625D2 /* API.swift */,
+				4104C8742216E08C00576C92 /* APISecurity.swift */,
 				8013F86A1FD6B59A00EE1A4E /* APIClient.swift */,
 				8013F8691FD6B59900EE1A4E /* APIError.swift */,
 				8062E33420A5ECF50044F407 /* APIRequestOption.swift */,
@@ -5100,6 +5107,7 @@
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				80DF7123219CABAD000F0DA5 /* MessagesViewControllerJoining.swift in Sources */,
 				8039442C20B33F63002F317A /* SubscriptionCanInviteUsers.swift in Sources */,
+				4104C8752216E08C00576C92 /* APISecurity.swift in Sources */,
 				33FB9D3E20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift in Sources */,
 				99BE4D882153013A001A43E2 /* MessageSectionModel.swift in Sources */,
 				995F710B20C7822A00B7535F /* AuthTableViewController.swift in Sources */,
@@ -5349,6 +5357,7 @@
 				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
 				99907513217622A900CAB7C8 /* FileMessageCell.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
+				418858E72215D162009014F2 /* SecurityManager.swift in Sources */,
 				996735CF21582E790049BB63 /* BasicMessageCell.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				1496A87220FA469C005C2E14 /* Dynamic.swift in Sources */,
@@ -5597,6 +5606,7 @@
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
 				33F67A41212C0119004EB4A0 /* UnmanagedUser.swift in Sources */,
+				4104C8762216E2A500576C92 /* APISecurity.swift in Sources */,
 				807C7C022074307F006B600E /* KMPlaceholderTextView.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
 				99C29A38212A6BFA00521266 /* ObjectExtension.swift in Sources */,

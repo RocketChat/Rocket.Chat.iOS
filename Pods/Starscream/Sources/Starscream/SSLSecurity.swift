@@ -19,7 +19,8 @@
 //  limitations under the License.
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
-
+#if os(Linux)
+#else
 import Foundation
 import Security
 
@@ -56,7 +57,8 @@ open class SSLCert {
 
 open class SSLSecurity : SSLTrustValidator {
     public var validatedDN = true //should the domain name be validated?
-    
+    public var validateEntireChain = true //should the entire cert chain be validated
+
     var isReady = false //is the key processing done?
     var certificates: [Data]? //the certificates
     var pubKeys: [SecKey]? //the public keys
@@ -131,7 +133,7 @@ open class SSLSecurity : SSLTrustValidator {
     
     - returns: if the key was successfully validated
     */
-    public func isValid(_ trust: SecTrust, domain: String?) -> Bool {
+    open func isValid(_ trust: SecTrust, domain: String?) -> Bool {
         
         var tries = 0
         while !self.isReady {
@@ -169,6 +171,9 @@ open class SSLSecurity : SSLTrustValidator {
             var result: SecTrustResultType = .unspecified
             SecTrustEvaluate(trust,&result)
             if result == .unspecified || result == .proceed {
+                if !validateEntireChain {
+                    return true
+                }
                 var trustedCount = 0
                 for serverCert in serverCerts {
                     for cert in certs {
@@ -193,7 +198,7 @@ open class SSLSecurity : SSLTrustValidator {
     
     - returns: a public key
     */
-    func extractPublicKey(_ data: Data) -> SecKey? {
+    public func extractPublicKey(_ data: Data) -> SecKey? {
         guard let cert = SecCertificateCreateWithData(nil, data as CFData) else { return nil }
         
         return extractPublicKey(cert, policy: SecPolicyCreateBasicX509())
@@ -206,7 +211,7 @@ open class SSLSecurity : SSLTrustValidator {
     
     - returns: a public key
     */
-    func extractPublicKey(_ cert: SecCertificate, policy: SecPolicy) -> SecKey? {
+    public func extractPublicKey(_ cert: SecCertificate, policy: SecPolicy) -> SecKey? {
         var possibleTrust: SecTrust?
         SecTrustCreateWithCertificates(cert, policy, &possibleTrust)
         
@@ -223,7 +228,7 @@ open class SSLSecurity : SSLTrustValidator {
     
     - returns: the certificate chain for the trust
     */
-    func certificateChain(_ trust: SecTrust) -> [Data] {
+    public func certificateChain(_ trust: SecTrust) -> [Data] {
         let certificates = (0..<SecTrustGetCertificateCount(trust)).reduce([Data]()) { (certificates: [Data], index: Int) -> [Data] in
             var certificates = certificates
             let cert = SecTrustGetCertificateAtIndex(trust, index)
@@ -241,7 +246,7 @@ open class SSLSecurity : SSLTrustValidator {
     
     - returns: the public keys from the certifcate chain for the trust
     */
-    func publicKeyChain(_ trust: SecTrust) -> [SecKey] {
+    public func publicKeyChain(_ trust: SecTrust) -> [SecKey] {
         let policy = SecPolicyCreateBasicX509()
         let keys = (0..<SecTrustGetCertificateCount(trust)).reduce([SecKey]()) { (keys: [SecKey], index: Int) -> [SecKey] in
             var keys = keys
@@ -258,3 +263,4 @@ open class SSLSecurity : SSLTrustValidator {
     
     
 }
+#endif

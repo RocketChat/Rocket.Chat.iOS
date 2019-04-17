@@ -32,6 +32,10 @@ struct ServerPersistKeys {
     // Display information
     static let serverIconURL = "kServerIconURL"
     static let serverName = "kServerName"
+
+    // Two-way SSL certificate & password
+    static let sslClientCertificatePath = "kSSLClientCertificatePath"
+    static let sslClientCertificatePassword = "kSSLClientCertificatePassword"
 }
 
 struct DatabaseManager {
@@ -58,41 +62,32 @@ struct DatabaseManager {
     }
 
     /**
+        - parameter index: The database index that needs to be updated.
+     */
+    static func updateSSLClientInformation(for index: Int, path: URL, password: String) {
+        guard
+            var servers = self.servers,
+            servers.count > index
+        else {
+            return
+        }
+
+        // Update SSL Client Certificate information
+        var server = servers[index]
+        server[ServerPersistKeys.sslClientCertificatePath] = path.absoluteString
+        server[ServerPersistKeys.sslClientCertificatePassword] = password
+        servers[index] = server
+
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
+    }
+
+    /**
         Remove selected server and select the
         first one.
      */
     static func removeSelectedDatabase() {
         removeDatabase(at: selectedIndex)
         selectDatabase(at: 0)
-    }
-
-    /**
-        Copy a server information with a new URL
-        and remove the old one.
-    */
-    static func copyServerInformation(from: Int, with newURL: String) -> Int {
-        guard
-            let servers = self.servers,
-            servers.count > 0
-        else {
-            return -1
-        }
-
-        let selectedServer = servers[from]
-        let newIndex = createNewDatabaseInstance(serverURL: newURL)
-
-        if var servers = self.servers {
-            var newServer = servers[newIndex]
-            newServer[ServerPersistKeys.userId] = selectedServer[ServerPersistKeys.userId]
-            newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
-            servers[newIndex] = newServer
-
-            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
-
-            removeDatabase(at: from)
-        }
-
-        return newIndex - 1
     }
 
     /**
