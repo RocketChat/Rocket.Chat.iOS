@@ -44,7 +44,7 @@ def shared_pods
   # Network
   pod 'Nuke', '~> 7.3'
   pod 'Nuke-FLAnimatedImage-Plugin'
-  pod 'Starscream', '~> 2'
+  pod 'Starscream', '~> 3'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
@@ -69,10 +69,6 @@ end
 
 target 'Rocket.ChatTests' do
   shared_pods
-end
-
-target 'Rocket.Chat.Watch Extension' do
-    platform :watchos, '3.2'
 end
 
 post_install do |installer|
