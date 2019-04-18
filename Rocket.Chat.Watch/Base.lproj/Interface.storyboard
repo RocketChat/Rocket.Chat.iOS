@@ -11,13 +11,78 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Rocket_Chat_Watch" customModuleProvider="target">
+                <controller animationDuration="1" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Rocket_Chat_Watch_Extension">
                     <items>
-                        <label width="136" alignment="left" text="Connect to phone" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.20000000000000001" id="ar2-ii-n0a">
-                            <fontDescription key="font" type="system" pointSize="16"/>
-                        </label>
+                        <group width="1" alignment="left" animationDuration="1" layout="vertical" spacing="10" id="UBt-RF-v4i">
+                            <items>
+                                <group height="45" alignment="left" spacing="2" id="DdY-1G-hTJ">
+                                    <items>
+                                        <imageView width="45" height="45" alignment="left" image="Red-60" contentMode="scaleAspectFill" animationDuration="1" id="IcF-mL-ype"/>
+                                        <label width="102" height="45" alignment="left" text="Connect phone" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="ar2-ii-n0a">
+                                            <color key="textColor" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="15"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" layout="vertical" spacing="6" id="RrU-Qy-oKU">
+                                    <items>
+                                        <label width="136" height="12" alignment="left" text="Channels" textAlignment="left" minimumScaleFactor="0.20000000000000001" id="EcV-vS-xCw">
+                                            <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="15"/>
+                                        </label>
+                                        <table alignment="left" id="cJi-jP-asa">
+                                            <items>
+                                                <tableRow identifier="channelcell" id="9JH-R1-1Kt" customClass="ChannelsTableCell" customModule="Rocket_Chat_Watch_Extension">
+                                                    <group key="rootItem" width="1" height="0.0" alignment="left" animationDuration="1" id="yxQ-4r-V7w">
+                                                        <items>
+                                                            <label alignment="left" text="..." textAlignment="left" numberOfLines="2" minimumScaleFactor="0.20000000000000001" id="uJP-LM-Wqg">
+                                                                <color key="textColor" red="0.42745098040000001" green="0.73725490199999999" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="channelNameLabel" destination="uJP-LM-Wqg" id="59C-FV-LiD"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" animationDuration="1" layout="vertical" spacing="6" id="jEK-qc-c8F">
+                                    <items>
+                                        <label width="136" height="12" alignment="left" text="Direct Messages" textAlignment="left" minimumScaleFactor="0.20000000000000001" id="I1N-K4-FUL">
+                                            <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="15"/>
+                                        </label>
+                                        <table alignment="left" id="Lsc-2n-fgL">
+                                            <items>
+                                                <tableRow identifier="directmessagecell" id="OYn-DY-pPF" customClass="DirectMessagesTableCell" customModule="Rocket_Chat_Watch_Extension">
+                                                    <group key="rootItem" width="1" height="0.0" alignment="left" animationDuration="1" id="zlr-Fc-WhP">
+                                                        <items>
+                                                            <label alignment="left" text="..." textAlignment="left" numberOfLines="2" minimumScaleFactor="0.20000000000000001" id="29O-it-GK8">
+                                                                <color key="textColor" red="0.42745098040000001" green="0.73725490199999999" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="nameLabel" destination="29O-it-GK8" id="nDW-7S-Pmv"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="avatarInterfaceImage" destination="IcF-mL-ype" id="qnB-r2-aPz"/>
+                        <outlet property="channelsLabel" destination="EcV-vS-xCw" id="YqG-io-qPT"/>
+                        <outlet property="channelsTable" destination="cJi-jP-asa" id="MwL-F8-FaX"/>
+                        <outlet property="directMessagesLabel" destination="I1N-K4-FUL" id="O75-3e-Zjd"/>
+                        <outlet property="dmTable" destination="Lsc-2n-fgL" id="82w-2S-FHm"/>
                         <outlet property="label" destination="ar2-ii-n0a" id="aVT-uy-vW0"/>
                     </connections>
                 </controller>

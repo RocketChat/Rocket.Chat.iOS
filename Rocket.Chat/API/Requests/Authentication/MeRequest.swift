@@ -21,11 +21,17 @@ final class MeResource: APIResource {
         guard let raw = raw else { return nil }
         let user = User()
         user.map(raw, realm: nil)
+        let username = String(describing: user.username ?? "")
+        let identifier = String(describing: user.identifier ?? "")
+        let avatarUrl = String(describing: user.avatarURL() ?? URL(fileURLWithPath: ""))
         let message = [
-            "username": user.username
-        ]
-        WCSession.default.sendMessage(message as [String:Any], replyHandler: nil)
-        { (error) in
+            "username": username,
+            "identifier": identifier,
+            "avatarUrl": avatarUrl
+            ]
+        
+        WCSession.default.sendMessage(message as [String: Any], replyHandler: nil)
+        {(error) in
             print("Will get an error on the phone : \(error)")
         }
         return user

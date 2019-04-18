@@ -71,6 +71,10 @@ target 'Rocket.ChatTests' do
   shared_pods
 end
 
+target 'Rocket.Chat.Watch Extension' do
+    platform :watchos, '3.2'
+end
+
 post_install do |installer|
   swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
   swift42Targets = ['SwipeCellKit']
