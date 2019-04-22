@@ -159,6 +159,12 @@ extension Message: ModelMappeable {
             self.threadMessagesCount = threadMessagesCount
         }
 
+        if let threadFollowers = values["replies"].arrayObject as? [String] {
+            if let currentUserId = AuthManager.currentUser()?.identifier {
+                self.threadIsFollowing = threadFollowers.contains(currentUserId)
+            }
+        }
+
         // Discussions
         if let discussionRid = values["drid"].string {
             self.discussionRid = discussionRid
