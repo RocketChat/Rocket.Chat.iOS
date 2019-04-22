@@ -377,6 +377,8 @@
 		41C56D5A219C7AD40087115F /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		41C955FA20A3931C00FC8314 /* ChatMessageActionButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F3705320A3917D00C5449E /* ChatMessageActionButtonsView.xib */; };
 		41C955FC20A3937A00FC8314 /* ChatMessageActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */; };
+		41CA1C81226DE38600295AA8 /* ThreadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA1C80226DE38600295AA8 /* ThreadsViewController.swift */; };
+		41CA1C83226DE38F00295AA8 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA1C82226DE38F00295AA8 /* ThreadsViewModel.swift */; };
 		41CD52D520BEFA3B00336892 /* New Room.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41CD52D420BEFA3B00336892 /* New Room.storyboard */; };
 		41D0DA5820991BAE008649E7 /* UploadMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */; };
 		41D1610B2254E0B300B42274 /* MessageDiscussionChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D1610A2254E0B300B42274 /* MessageDiscussionChatItem.swift */; };
@@ -1374,6 +1376,8 @@
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		41C56D58219C7AC80087115F /* AuthSettingsManagerPersistencyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettingsManagerPersistencyExtension.swift; sourceTree = "<group>"; };
 		41C955FB20A3937A00FC8314 /* ChatMessageActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageActionButtonsView.swift; sourceTree = "<group>"; };
+		41CA1C80226DE38600295AA8 /* ThreadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewController.swift; sourceTree = "<group>"; };
+		41CA1C82226DE38F00295AA8 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
 		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLoaderCell.xib; sourceTree = "<group>"; };
 		41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoaderCell.swift; sourceTree = "<group>"; };
 		41CD52D420BEFA3B00336892 /* New Room.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "New Room.storyboard"; sourceTree = "<group>"; };
@@ -2647,6 +2651,7 @@
 				4102E3AB1E53272C004BAA82 /* Preferences */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				413C596D22259BAF00466BA5 /* Directory */,
+				41CA1C7F226DE37100295AA8 /* Threads */,
 				414EE62721CD1F80003693D2 /* Video Conferencing */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
 			);
@@ -2999,6 +3004,15 @@
 				41C275DE1D848005003C88CF /* AvatarView.swift */,
 			);
 			path = Avatar;
+			sourceTree = "<group>";
+		};
+		41CA1C7F226DE37100295AA8 /* Threads */ = {
+			isa = PBXGroup;
+			children = (
+				41CA1C82226DE38F00295AA8 /* ThreadsViewModel.swift */,
+				41CA1C80226DE38600295AA8 /* ThreadsViewController.swift */,
+			);
+			path = Threads;
 			sourceTree = "<group>";
 		};
 		41D701D41E67103C00FED2EE /* Helpers */ = {
@@ -5204,6 +5218,7 @@
 				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
 				897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
+				41CA1C83226DE38F00295AA8 /* ThreadsViewModel.swift in Sources */,
 				332BCB1C20DA6D5F00C8CAD2 /* SubscriptionsSortingHeaderView.swift in Sources */,
 				413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
@@ -5214,6 +5229,7 @@
 				41AE8B372264AF6C0031A99B /* MessageMainThreadChatItem.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
 				4146ECEC223A57D9000070EA /* DirectoryFiltersView.swift in Sources */,
+				41CA1C81226DE38600295AA8 /* ThreadsViewController.swift in Sources */,
 				997FE19A210B9D2E000F6836 /* SubscriptionLeaveRequest.swift in Sources */,
 				9911CF3420C1CF58001471C3 /* StyledButton.swift in Sources */,
 				80B2D99720E677D6002F4149 /* UsersClient.swift in Sources */,

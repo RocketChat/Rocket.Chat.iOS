@@ -12,12 +12,6 @@ final class SubscriptionCell: BaseSubscriptionCell {
 
     static let identifier = "CellSubscription"
 
-    @IBOutlet weak var labelDateRightSpacingConstraint: NSLayoutConstraint! {
-        didSet {
-            labelDateRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? -8 : 0
-        }
-    }
-
     @IBOutlet weak var labelLastMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
 

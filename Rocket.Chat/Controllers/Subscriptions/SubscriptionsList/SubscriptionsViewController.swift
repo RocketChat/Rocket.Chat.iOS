@@ -438,12 +438,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
         (cell as? SwipeTableViewCell)?.delegate = self
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            cell.accessoryType = .none
-        } else {
-            cell.accessoryType = .disclosureIndicator
-        }
-
+        cell.accessoryType = .none
         return cell
     }
 

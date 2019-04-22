@@ -43,12 +43,6 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         }
     }
 
-    @IBOutlet weak var labelUnreadRightSpacingConstraint: NSLayoutConstraint! {
-        didSet {
-            labelUnreadRightSpacingConstraint.constant = UIDevice.current.userInterfaceIdiom == .pad ? 8 : 0
-        }
-    }
-
     @IBOutlet weak var iconRoom: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelUnread: UILabel!
