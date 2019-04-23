@@ -21,7 +21,6 @@ extension CustomEmoji {
         guard
             let name = name,
             let ext = ext,
-            let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let serverUrl = serverUrl
         else {
             return nil
@@ -29,7 +28,7 @@ extension CustomEmoji {
 
         var imageUrl = URL(string: serverUrl)?.httpServerURL()
         imageUrl?.appendPathComponent("emoji-custom")
-        imageUrl?.appendPathComponent(encodedName)
+        imageUrl?.appendPathComponent("\(name).\(ext)")
         return imageUrl?.absoluteString
     }
 
