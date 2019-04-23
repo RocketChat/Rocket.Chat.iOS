@@ -42,7 +42,7 @@
                             <constraint firstAttribute="width" constant="40" id="nqL-QP-b31"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cr2-8p-eRS" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
+                    <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cr2-8p-eRS" customClass="RCTextView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="71" y="35" width="266" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

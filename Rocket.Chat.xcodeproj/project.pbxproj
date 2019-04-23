@@ -306,6 +306,7 @@
 		4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1B1D2DB2080086DAC8 /* LogManager.swift */; };
 		4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		41778EB920ED4C2C007F72F9 /* SubscriptionCellCondensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */; };
+		41798BC8226F549B00F446C6 /* MessagesListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798BC7226F549B00F446C6 /* MessagesListProtocol.swift */; };
 		417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A70021D47918200FF46EE /* ResponseMessageSpec.swift */; };
 		41833F4E1DEF16B600E54655 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41833F4D1DEF16B600E54655 /* Keys.plist */; };
 		41852E891F92BBEC00D1C499 /* MessagesViewControllerReplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */; };
@@ -1304,6 +1305,7 @@
 		4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat-Bridge.h"; sourceTree = "<group>"; };
 		41778EB820ED4C2C007F72F9 /* SubscriptionCellCondensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellCondensed.swift; sourceTree = "<group>"; };
+		41798BC7226F549B00F446C6 /* MessagesListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListProtocol.swift; sourceTree = "<group>"; };
 		417A70021D47918200FF46EE /* ResponseMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMessageSpec.swift; sourceTree = "<group>"; };
 		41833F4D1DEF16B600E54655 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		41852E881F92BBEC00D1C499 /* MessagesViewControllerReplying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerReplying.swift; sourceTree = "<group>"; };
@@ -2649,6 +2651,7 @@
 				140A95E2202F5321003FD564 /* Drawing */,
 				33F73B2E2073F1FC00F03F29 /* Notification */,
 				4102E3AB1E53272C004BAA82 /* Preferences */,
+				41798BC6226F548200F446C6 /* Protocols */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				413C596D22259BAF00466BA5 /* Directory */,
 				41CA1C7F226DE37100295AA8 /* Threads */,
@@ -2782,6 +2785,14 @@
 				8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		41798BC6226F548200F446C6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				41798BC7226F549B00F446C6 /* MessagesListProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		417A70011D47916C00FF46EE /* Socket */ = {
@@ -5372,6 +5383,7 @@
 				41D51B0620A62DD60073E8E7 /* Role.swift in Sources */,
 				41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
+				41798BC8226F549B00F446C6 /* MessagesListProtocol.swift in Sources */,
 				999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */,
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				419FEAA82181F134000DF2EC /* UnreadMarkerCell.swift in Sources */,

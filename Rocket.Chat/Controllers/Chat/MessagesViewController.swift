@@ -32,7 +32,7 @@ extension SizingCell {
 }
 
 // swiftlint:disable type_body_length file_length
-final class MessagesViewController: RocketChatViewController {
+final class MessagesViewController: RocketChatViewController, MessagesListProtocol {
 
     @objc override var bottomHeight: CGFloat {
         if subscription?.isJoined() ?? true {
@@ -213,6 +213,12 @@ final class MessagesViewController: RocketChatViewController {
                 if let subscription = self.subscription {
                     controller.subscription = subscription
                 }
+            }
+        }
+
+        if segue.identifier == "Threads" {
+            if let controller = segue.destination as? ThreadsViewController {
+                controller.viewModel.subscription = subscription.unmanaged
             }
         }
     }
@@ -488,7 +494,7 @@ final class MessagesViewController: RocketChatViewController {
                 image: UIImage(named: "Threads"),
                 style: .done,
                 target: self,
-                action: #selector(showSearchMessages)
+                action: #selector(buttonThreadsDidPressed)
             )
 
             navigationItem.rightBarButtonItems = [search, threads]
@@ -498,6 +504,10 @@ final class MessagesViewController: RocketChatViewController {
     }
 
     // MARK: IBAction
+
+    @objc func buttonThreadsDidPressed() {
+        performSegue(withIdentifier: "Threads", sender: nil)
+    }
 
     @objc func buttonScrollToBottomDidPressed() {
         scrollToBottom(true)

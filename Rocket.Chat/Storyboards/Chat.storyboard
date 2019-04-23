@@ -342,7 +342,7 @@
                     <navigationItem key="navigationItem" id="Qte-Rg-Iff"/>
                     <connections>
                         <segue destination="hUy-gX-yhf" kind="presentation" identifier="Channel Actions" modalPresentationStyle="formSheet" id="ZRf-Hf-wXn"/>
-                        <segue destination="qXE-FY-lgc" kind="show" id="cWh-cl-jPn"/>
+                        <segue destination="qXE-FY-lgc" kind="show" identifier="Threads" id="cWh-cl-jPn"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzE-eP-wzd" userLabel="First Responder" sceneMemberID="firstResponder"/>

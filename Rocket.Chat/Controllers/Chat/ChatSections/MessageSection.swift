@@ -16,17 +16,20 @@ import SimpleImageViewer
 // swiftlint:disable type_body_length
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
+
     weak var controllerContext: UIViewController?
-    var messagesController: MessagesViewController? {
-        return controllerContext as? MessagesViewController
+    var messagesController: MessagesListProtocol? {
+        return controllerContext as? MessagesListProtocol
     }
 
     var collapsibleItemsState: [AnyHashable: Bool]
+    var isInverted = true
 
-    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool]) {
+    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool], inverted: Bool = true) {
         self.object = object
         self.controllerContext = controllerContext
         self.collapsibleItemsState = collapsibleItemsState
+        self.isInverted = inverted
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -295,21 +298,23 @@ final class MessageSection: ChatSection {
             cells.append(LoaderChatItem().wrapped)
         }
 
-        return cells
+        return isInverted ? cells : cells.reversed()
     }
 
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
 
         if var cell = cell as? BaseMessageCellProtocol {
-            cell.delegate = self.messagesController
+            if let controller = self.messagesController as? ChatMessageCellProtocol {
+                cell.delegate = controller
+            }
         }
 
         if let cell = cell as? BaseMessageCell {
             cell.messageSection = self
         }
 
-        cell.messageWidth = messagesController?.messageWidth() ?? 0
+        cell.messageWidth = messagesController?.messageWidth() ?? CGFloat(0)
         cell.viewModel = viewModel
         cell.configure(completeRendering: true)
         return cell
