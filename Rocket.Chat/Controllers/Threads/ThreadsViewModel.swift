@@ -12,6 +12,8 @@ import RocketChatViewController
 
 final class ThreadsViewModel {
 
+    let title = "Threads"
+
     var controllerContext: UIViewController?
     var subscription: UnmanagedSubscription? {
         didSet {

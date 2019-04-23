@@ -25,6 +25,8 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = viewModel.title
+
         isInverted = false
 
         registerCells()
