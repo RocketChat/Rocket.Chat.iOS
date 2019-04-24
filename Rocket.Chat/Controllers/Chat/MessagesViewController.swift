@@ -501,6 +501,13 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
         } else {
             navigationItem.rightBarButtonItem = nil
         }
+
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
     }
 
     // MARK: IBAction

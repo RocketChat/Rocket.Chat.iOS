@@ -22,6 +22,11 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
         return screenSize.width / screenSize.height > 1 && UIDevice.current.userInterfaceIdiom == .phone
     }
 
+    // We want to remove the composer for this controller
+    public override var inputAccessoryView: UIView? {
+        return nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,8 +35,6 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
         isInverted = false
 
         registerCells()
-        removeComposer()
-
         loadMoreData()
     }
 
@@ -87,11 +90,6 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
         collectionViewCells.forEach {
             collectionView?.register($0.nib, forCellWithReuseIdentifier: $0.cellIdentifier)
         }
-    }
-
-    private func removeComposer() {
-        composerHeightConstraint?.constant = 0
-        composerView.removeFromSuperview()
     }
 
     // MARK: Data Management
