@@ -21,7 +21,7 @@ final class ThreadsViewModel {
         }
     }
 
-    let pageSize = 50
+    let pageSize = 20
 
     var currentPage = 0
     var showing = 0
@@ -78,13 +78,14 @@ final class ThreadsViewModel {
                 self.data.append(self.section(for: thread))
             }
 
+            self.normalizeData()
+
             self.showing += resource.count ?? 0
             self.total = resource.total ?? 0
             self.currentPage += 1
 
             self.isLoadingMore = false
 
-            self.normalizeData()
             completion?()
         }
     }

@@ -123,12 +123,6 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
         return screenSize.width - horizontalMargins
     }
 
-    // MARK: UICollectionViewDataSource
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfObjects
-    }
-
 }
 
 extension ThreadsViewController: ChatDataUpdateDelegate {
@@ -142,6 +136,12 @@ extension ThreadsViewController: ChatDataUpdateDelegate {
 }
 
 extension ThreadsViewController {
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.section == viewModel.numberOfObjects - viewModel.pageSize / 2 {
+            loadMoreData()
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
