@@ -802,8 +802,8 @@ final class MessagesViewModel {
             return false
         }
 
-        if message.isThreadReplyMessage {
-            return false
+        if message.isThreadReplyMessage && previousMessage.isThreadReplyMessage {
+            return message.threadMessageId == previousMessage.threadMessageId
         }
 
         let date = message.createdAt

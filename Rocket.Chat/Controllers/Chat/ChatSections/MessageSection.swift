@@ -59,7 +59,8 @@ final class MessageSection: ChatSection {
         if isCompressedReplyLayout && object.message.isThreadReplyMessage {
             cells.append(MessageReplyThreadChatItem(
                 user: user,
-                message: object.message
+                message: object.message,
+                sequential: object.isSequential
             ).wrapped)
 
             return cells

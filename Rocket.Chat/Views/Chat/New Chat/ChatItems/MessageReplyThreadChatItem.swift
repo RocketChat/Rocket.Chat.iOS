@@ -11,28 +11,26 @@ import DifferenceKit
 import RocketChatViewController
 
 final class MessageReplyThreadChatItem: BaseMessageChatItem, ChatItem, Differentiable {
+    var isSequential: Bool = false
+
     var relatedReuseIdentifier: String {
         return ThreadReplyCollapsedCell.identifier
     }
 
-    override init(user: UnmanagedUser?, message: UnmanagedMessage?) {
+    init(user: UnmanagedUser?, message: UnmanagedMessage?, sequential: Bool = false) {
         super.init(user: user, message: message)
+        isSequential = sequential
     }
 
-    internal var threadName: NSAttributedString {
-        guard let message = message else { return NSAttributedString(string: "") }
+    internal var threadName: String? {
+        guard
+            !isSequential,
+            let message = message
+        else {
+            return nil
+        }
 
-        let theme = ThemeManager.theme
-
-        let attributedString = NSMutableAttributedString()
-
-        let iconDiscussions = NSTextAttachment()
-        iconDiscussions.image = UIImage(named: "Threads")?.imageWithTint(theme.bodyText)
-
-        let iconDiscussionsString = NSAttributedString(attachment: iconDiscussions)
-        attributedString.append(iconDiscussionsString)
-        attributedString.append(NSAttributedString(string: message.mainThreadMessage))
-        return attributedString
+        return message.mainThreadMessage
     }
 
     var differenceIdentifier: String {

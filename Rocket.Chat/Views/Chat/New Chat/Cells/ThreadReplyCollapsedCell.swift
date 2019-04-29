@@ -20,6 +20,7 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
         return cell
     }()
 
+    @IBOutlet weak var iconThread: UIImageView!
     @IBOutlet weak var avatarContainerView: UIView! {
         didSet {
             avatarContainerView.layer.cornerRadius = 4
@@ -28,20 +29,13 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
         }
     }
 
-    @IBOutlet weak var messageUsername: UILabel!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var statusView: UIImageView!
-
     @IBOutlet weak var labelThreadTitle: UILabel!
     @IBOutlet weak var text: RCTextView!
-
-    @IBOutlet weak var readReceiptButton: UIButton!
 
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelTextTopConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,13 +46,11 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
     }
 
     override func configure(completeRendering: Bool) {
-        configure(readReceipt: readReceiptButton)
-
         configure(
             with: avatarView,
-            date: date,
-            status: statusView,
-            and: messageUsername,
+            date: nil,
+            status: nil,
+            and: nil,
             completeRendering: completeRendering
         )
 
@@ -66,7 +58,16 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
             return
         }
 
-        labelThreadTitle.attributedText = model.threadName
+        if model.isSequential {
+            iconThread.isHidden = true
+            labelThreadTitle.text = nil
+            labelTextTopConstraint.constant = 0
+        } else {
+            iconThread.isHidden = false
+            labelThreadTitle.text = model.threadName
+            labelTextTopConstraint.constant = 4
+        }
+
         updateText()
     }
 
@@ -117,9 +118,7 @@ extension ThreadReplyCollapsedCell {
 
         let theme = self.theme ?? .light
 
-        messageUsername.textColor = theme.titleText
-        date.textColor = theme.auxiliaryText
-        labelThreadTitle.textColor = theme.auxiliaryText
+        labelThreadTitle.textColor = theme.actionTintColor
         updateText()
     }
 }
