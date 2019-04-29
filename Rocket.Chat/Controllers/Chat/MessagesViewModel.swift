@@ -810,6 +810,7 @@ final class MessagesViewModel {
         let prevDate = previousMessage.createdAt
 
         let sameUser = message.userIdentifier == previousMessage.userIdentifier
+            && message.alias == previousMessage.alias
 
         var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
         if let settings = AuthSettingsManager.settings {
