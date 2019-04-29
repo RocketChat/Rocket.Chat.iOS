@@ -120,6 +120,10 @@ extension Subscription {
         return filteredMessages.sorted(byKeyPath: "createdAt", ascending: true)
     }
 
+    func fetchMessagesQueryResultsFor(threadIdentifier: String) -> Results<Message>? {
+        return fetchMessagesQueryResults()?.filter("threadMessageId == %@", threadIdentifier)
+    }
+
     func updateFavorite(_ favorite: Bool) {
         Realm.executeOnMainThread({ _ in
             self.favorite = favorite

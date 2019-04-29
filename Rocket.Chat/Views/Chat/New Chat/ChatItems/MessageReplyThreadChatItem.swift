@@ -19,12 +19,20 @@ final class MessageReplyThreadChatItem: BaseMessageChatItem, ChatItem, Different
         super.init(user: user, message: message)
     }
 
-    internal var threadName: String {
-        return message?.mainThreadMessage ?? ""
-    }
+    internal var threadName: NSAttributedString {
+        guard let message = message else { return NSAttributedString(string: "") }
 
-    internal var messageText: String {
-        return message?.text ?? ""
+        let theme = ThemeManager.theme
+
+        let attributedString = NSMutableAttributedString()
+
+        let iconDiscussions = NSTextAttachment()
+        iconDiscussions.image = UIImage(named: "Threads")?.imageWithTint(theme.bodyText)
+
+        let iconDiscussionsString = NSAttributedString(attachment: iconDiscussions)
+        attributedString.append(iconDiscussionsString)
+        attributedString.append(NSAttributedString(string: message.mainThreadMessage))
+        return attributedString
     }
 
     var differenceIdentifier: String {

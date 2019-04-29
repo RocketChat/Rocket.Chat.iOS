@@ -206,12 +206,21 @@ extension UnmanagedMessage {
             isThreadReplyMessage,
             let threadMessageId = threadMessageId,
             !threadMessageId.isEmpty,
-            let mainMessage = Message.find(withIdentifier: threadMessageId)
+            let mainMessage = Message.find(withIdentifier: threadMessageId)?.unmanaged
         else {
             return ""
         }
 
-        return mainMessage.text
+        if mainMessage.text.isEmpty && !mainMessage.attachments.isEmpty {
+            return mainMessage.attachments.first?.title ?? ""
+        }
+
+        var text = MessageTextCacheManager.shared.message(for: mainMessage)?.string ?? mainMessage.text
+        text = text.components(separatedBy: .newlines)
+            .joined(separator: " ")
+            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+
+        return text
     }
 
 }

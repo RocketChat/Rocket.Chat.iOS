@@ -210,6 +210,15 @@ extension MessagesViewController: ChatMessageCellProtocol {
             }
         }
     }
+
+    func openThread(identifier: String) {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController else {
+            return
+        }
+
+        controller.threadIdentifier = identifier
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 extension MessagesViewController {

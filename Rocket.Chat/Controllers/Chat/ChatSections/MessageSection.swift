@@ -24,12 +24,14 @@ final class MessageSection: ChatSection {
 
     var collapsibleItemsState: [AnyHashable: Bool]
     var isInverted = true
+    var isCompressedReplyLayout = true
 
-    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool], inverted: Bool = true) {
+    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool], inverted: Bool = true, compressedLayout: Bool = true) {
         self.object = object
         self.controllerContext = controllerContext
         self.collapsibleItemsState = collapsibleItemsState
         self.isInverted = inverted
+        self.isCompressedReplyLayout = compressedLayout
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -50,6 +52,18 @@ final class MessageSection: ChatSection {
         let sanitizedMessage = MessageTextCacheManager.shared.message(for: object.message)?.string
             .removingWhitespaces()
             .removingNewLines() ?? ""
+
+        // In this case, we want to return the whole cell right now
+        // because the compressed reply component should not present
+        // attachments, reactions, etc.
+        if isCompressedReplyLayout && object.message.isThreadReplyMessage {
+            cells.append(MessageReplyThreadChatItem(
+                user: user,
+                message: object.message
+            ).wrapped)
+
+            return cells
+        }
 
         if !object.message.isSystemMessage() {
             object.message.attachments.forEach { attachment in
@@ -259,15 +273,6 @@ final class MessageSection: ChatSection {
                 message: object.message,
                 reactions: object.message.reactions
             ).wrapped, at: 0)
-        }
-
-        if object.message.isThreadReplyMessage {
-            cells.append(MessageReplyThreadChatItem(
-                user: user,
-                message: object.message
-            ).wrapped)
-
-            shouldAppendMessageHeader = false
         }
 
         if !object.isSequential && shouldAppendMessageHeader {

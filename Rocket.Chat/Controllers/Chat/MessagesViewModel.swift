@@ -70,9 +70,15 @@ final class MessagesViewModel {
     */
     var recentSenders = [String]()
 
+    /**
+     Subscription object to be used in all queries and
+     requests. This value can be nil if the controller is actually
+     presenting a Thread.
+    */
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
+
             rid = subscription.rid
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
@@ -81,6 +87,28 @@ final class MessagesViewModel {
             messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
                 self?.handleDataUpdates(changes: collectionChanges)
             })
+
+            fetchMessages(from: nil)
+        }
+    }
+
+    internal var threadIdentifier: String? {
+        didSet {
+            guard
+                let threadIdentifier = threadIdentifier,
+                let message = Message.find(withIdentifier: threadIdentifier),
+                let subscription = Subscription.find(rid: message.rid)
+            else {
+                return
+            }
+
+            subscribe(for: subscription)
+            messagesQuery = subscription.fetchMessagesQueryResultsFor(threadIdentifier: threadIdentifier)
+            refreshMessagesQueryOldValues()
+            messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
+                self?.handleDataUpdates(changes: collectionChanges)
+            })
+
             fetchMessages(from: nil)
         }
     }
@@ -283,14 +311,16 @@ final class MessagesViewModel {
             return AnyChatSection(MessageSection(
                 object: AnyDifferentiable(messageSectionModel),
                 controllerContext: controllerContext,
-                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:]
+                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:],
+                compressedLayout: threadIdentifier?.isEmpty ?? true
             ))
         }
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(MessageSectionModel(message: message)),
             controllerContext: controllerContext,
-            collapsibleItemsState: [:]
+            collapsibleItemsState: [:],
+            compressedLayout: threadIdentifier?.isEmpty ?? true
         ))
     }
 
@@ -504,6 +534,92 @@ final class MessagesViewModel {
         }
     }
 
+    /**
+     This method requests a new page of messages to the API. If the view model
+     already detected that there's no more data to fetch, or it's currently
+     fetching a new page, the method won't be executed.
+
+     - parameters:
+     - oldestMessage: This is the parameter that will be sent to the server in
+     order to get the correct page of data.
+     */
+    // swiftlint:disable function_body_length
+    func fetchThreadMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
+        guard
+            requestingData == .none,
+            hasMoreData || oldestMessage == nil,
+            let subscription = subscription?.validated(),
+            let subscriptionUnmanaged = subscription.unmanaged
+        else {
+            return
+        }
+
+        requestingData = oldestMessage == nil ? .initialRequest : .historyRequest
+
+        queryDataQueue.addOperation { [weak self] in
+            guard
+                let self = self,
+                let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid)
+            else {
+                return
+            }
+
+            let pageSize = 30
+            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
+            messagesFromDatabase.forEach {
+                guard let message = $0.validated()?.unmanaged else { return }
+
+                let index = self.data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return object.differenceIdentifier == message.identifier
+                    }
+
+                    return false
+                })
+
+                if index != nil {
+                    return
+                } else if let section = self.section(for: message) {
+                    self.data.append(section)
+                }
+            }
+
+            if messagesFromDatabase.count > 0 {
+                self.updateData()
+
+                if prepareAnotherPage {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                        self?.fetchMessages(
+                            from: self?.oldestMessageDateFromRemote,
+                            prepareAnotherPage: false
+                        )
+                    })
+                }
+            }
+        }
+
+        let client = API.current()?.client(SubscriptionsClient.self)
+        client?.loadHistory(
+            subscription: subscription,
+            latest: oldestMessage
+        ) { [weak self] oldest in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+
+                self.requestingData = .none
+                self.hasMoreData = oldest != nil
+
+                if let oldest = oldest {
+                    self.oldestMessageDateFromRemote = oldest
+                } else {
+                    self.updateData()
+                }
+            }
+        }
+    }
+
     // MARK: Data Manipulation
 
     /**
@@ -605,7 +721,8 @@ final class MessagesViewModel {
             let chatSection = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
                 controllerContext: controllerContext,
-                collapsibleItemsState: collpsibleItemsState
+                collapsibleItemsState: collpsibleItemsState,
+                compressedLayout: threadIdentifier?.isEmpty ?? true
             ))
 
             dataSorted[idx] = chatSection

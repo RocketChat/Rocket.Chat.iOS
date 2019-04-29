@@ -89,6 +89,34 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
         }
     }
 
+    var threadIdentifier: String? {
+        didSet {
+            guard let threadIdentifier = threadIdentifier else { return }
+
+//            if subscription.rid.isEmpty {
+//                subscription.fetchRoomIdentifier({ [weak self] (subscription) in
+//                    self?.subscription = subscription
+//                    self?.chatTitleView?.subscription = subscription?.unmanaged
+//                })
+//
+//                return
+//            }
+
+//            let unmanaged = subscription.unmanaged
+
+//            viewModel.onRequestingDataChanged = { [weak self] requesting in
+//                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
+//            }
+
+            viewModel.threadIdentifier = threadIdentifier
+//            viewSubscriptionModel.subscription = unmanaged
+//            unmanagedSubscription = unmanaged
+
+//            recoverDraftMessage()
+            updateEmptyState()
+        }
+    }
+
     lazy var announcementBannerView: UIView = {
         let announcementBannerView = ChatAnnouncementView()
         announcementBannerView.subscription = subscription?.unmanaged

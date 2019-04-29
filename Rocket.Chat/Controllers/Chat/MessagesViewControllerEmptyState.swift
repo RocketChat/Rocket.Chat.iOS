@@ -8,7 +8,7 @@
 
 extension MessagesViewController {
     func updateEmptyState() {
-        if subscription == nil {
+        if subscription == nil && threadIdentifier == nil {
             title = ""
             composerView.isHidden = true
 

@@ -31,40 +31,24 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
     @IBOutlet weak var messageUsername: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var statusView: UIImageView!
-    @IBOutlet weak var containerView: UIView! {
-        didSet {
-            containerView.layer.borderWidth = 1
-        }
-    }
 
-    @IBOutlet weak var labelRepliedOn: UILabel! {
-        didSet {
-            labelRepliedOn.font = labelRepliedOn.font.italic()
-        }
-    }
+    @IBOutlet weak var labelThreadTitle: UILabel!
+    @IBOutlet weak var text: RCTextView!
 
-    @IBOutlet weak var threadTitle: UILabel!
-    @IBOutlet weak var text: UILabel!
-    @IBOutlet weak var arrow: UIImageView!
     @IBOutlet weak var readReceiptButton: UIButton!
 
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var readReceiptWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var readReceiptTrailingConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var purposeHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapContainerView))
         gesture.delegate = self
-        containerView.addGestureRecognizer(gesture)
+        contentView.addGestureRecognizer(gesture)
     }
 
     override func configure(completeRendering: Bool) {
@@ -82,13 +66,47 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
             return
         }
 
-        labelRepliedOn.text = "Replied on:"
-        threadTitle.text = model.threadName
-        text.text = model.messageText
+        labelThreadTitle.attributedText = model.threadName
+        updateText()
+    }
+
+    func updateText() {
+        guard
+            let viewModel = viewModel?.base as? MessageReplyThreadChatItem,
+            let message = viewModel.message
+        else {
+            return
+        }
+
+        if let messageText = MessageTextCacheManager.shared.message(for: message, with: theme) {
+            if message.temporary {
+                messageText.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
+            } else if message.failed {
+                messageText.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
+            }
+
+            if messageText.string.isEmpty, !message.attachments.isEmpty {
+                let systemText = localized("subscriptions.list.sent_an_attachment").capitalizingFirstLetter()
+                let attachmentText = NSMutableAttributedString(string: systemText)
+                attachmentText.setFontColor(MessageTextFontAttributes.defaultFontColor(for: theme))
+                attachmentText.setFont(MessageTextFontAttributes.defaultFont)
+                text.message = attachmentText
+            } else {
+                text.message = messageText
+            }
+        }
     }
 
     @objc func didTapContainerView() {
+        guard
+            let viewModel = viewModel,
+            let model = viewModel.base as? MessageReplyThreadChatItem,
+            let threadIdentifier = model.message?.threadMessageId
+        else {
+            return
+        }
 
+        delegate?.openThread(identifier: threadIdentifier)
     }
 
 }
@@ -98,12 +116,10 @@ extension ThreadReplyCollapsedCell {
         super.applyTheme()
 
         let theme = self.theme ?? .light
-        containerView.backgroundColor = theme.chatComponentBackground
-        labelRepliedOn.textColor = theme.auxiliaryText
+
         messageUsername.textColor = theme.titleText
         date.textColor = theme.auxiliaryText
-        threadTitle.textColor = theme.auxiliaryText
-        text.textColor = theme.bodyText
-        containerView.layer.borderColor = theme.borderColor.cgColor
+        labelThreadTitle.textColor = theme.auxiliaryText
+        updateText()
     }
 }
