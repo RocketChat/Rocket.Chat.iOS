@@ -68,8 +68,8 @@ extension MessageMainThreadCell {
 
         guard let theme = theme else { return }
 
-        threadButton.setTitleColor(theme.actionTintColor, for: .normal)
-        threadButton.backgroundColor = theme.actionBackgroundColor
+        threadButton.setTitleColor(.white, for: .normal)
+        threadButton.backgroundColor = theme.actionTintColor
 
         labelThreadLastMessage.textColor = theme.actionTintColor
     }

@@ -806,6 +806,10 @@ final class MessagesViewModel {
             return message.threadMessageId == previousMessage.threadMessageId
         }
 
+        if previousMessage.isThreadReplyMessage || previousMessage.isThreadMainMessage {
+            return false
+        }
+
         let date = message.createdAt
         let prevDate = previousMessage.createdAt
 

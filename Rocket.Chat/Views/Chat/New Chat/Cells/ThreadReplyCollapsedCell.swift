@@ -30,7 +30,7 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
     }
 
     @IBOutlet weak var labelThreadTitle: UILabel!
-    @IBOutlet weak var text: RCTextView!
+    @IBOutlet weak var labelThreadReply: UILabel!
 
     @IBOutlet weak var avatarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarLeadingConstraint: NSLayoutConstraint!
@@ -79,23 +79,7 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
             return
         }
 
-        if let messageText = MessageTextCacheManager.shared.message(for: message, with: theme) {
-            if message.temporary {
-                messageText.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
-            } else if message.failed {
-                messageText.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
-            }
-
-            if messageText.string.isEmpty, !message.attachments.isEmpty {
-                let systemText = localized("subscriptions.list.sent_an_attachment").capitalizingFirstLetter()
-                let attachmentText = NSMutableAttributedString(string: systemText)
-                attachmentText.setFontColor(MessageTextFontAttributes.defaultFontColor(for: theme))
-                attachmentText.setFont(MessageTextFontAttributes.defaultFont)
-                text.message = attachmentText
-            } else {
-                text.message = messageText
-            }
-        }
+        labelThreadReply.text = message.threadReplyCompressedMessage
     }
 
     @objc func didTapContainerView() {

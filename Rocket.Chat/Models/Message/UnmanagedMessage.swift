@@ -223,6 +223,19 @@ extension UnmanagedMessage {
         return text
     }
 
+    internal var threadReplyCompressedMessage: String {
+        if self.text.isEmpty && !attachments.isEmpty {
+            return attachments.first?.title ?? ""
+        }
+
+        var text = MessageTextCacheManager.shared.message(for: self)?.string ?? ""
+        text = text.components(separatedBy: .newlines)
+            .joined(separator: " ")
+            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+
+        return text
+    }
+
 }
 
 extension UnmanagedMessage {
