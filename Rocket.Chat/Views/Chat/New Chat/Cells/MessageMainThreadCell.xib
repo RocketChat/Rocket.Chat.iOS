@@ -28,7 +28,7 @@
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="10" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="5" maxY="0.0"/>
-                        <state key="normal" title="125 replies" image="Threads Blue"/>
+                        <state key="normal" title="125 replies" image="Threads Small White"/>
                         <connections>
                             <action selector="buttonThreadDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="EJI-fn-3Ie"/>
                         </connections>
@@ -59,6 +59,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Threads Blue" width="17" height="16"/>
+        <image name="Threads Small White" width="17" height="16"/>
     </resources>
 </document>
