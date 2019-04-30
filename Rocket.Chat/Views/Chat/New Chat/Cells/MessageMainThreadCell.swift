@@ -49,13 +49,14 @@ final class MessageMainThreadCell: BaseMessageCell, SizingCell {
 
     @IBAction func buttonThreadDidPressed(sender: Any) {
         guard
-            let model = viewModel?.base as? MessageMainThreadChatItem,
-            let rid = model.message?.discussionRid
+            let viewModel = viewModel,
+            let model = viewModel.base as? MessageMainThreadChatItem,
+            let threadIdentifier = model.message?.threadMessageId
         else {
             return
         }
 
-        AppManager.openRoom(rid: rid, type: .group)
+        delegate?.openThread(identifier: threadIdentifier)
     }
 }
 
