@@ -277,16 +277,41 @@ extension SubscriptionsClient {
         api.fetch(request) { response in
             switch response {
             case .resource(let resource):
-                realm?.execute({ realm in
-                    let messages = resource.messages(realm: realm) ?? []
-                    realm.add(messages, update: true)
-                    lastMessageDate = messages.last?.createdAt
-                }, completion: {
-                    completion(lastMessageDate)
+                self.loadDeletedMessages(subscription: subscription, completion: { (idsMessageDeleted) in
+                    realm?.execute({ realm in
+                        let messages = resource.messages(realm: realm) ?? []
+                        let messagesToDelete = realm.objects(Message.self).filter("identifier IN %@", idsMessageDeleted)
+                        realm.delete(messagesToDelete)
+                        realm.add(messages, update: true)
+                        lastMessageDate = messages.last?.createdAt
+                    }, completion: {
+                        completion(lastMessageDate)
+                    })
                 })
             case .error:
                 completion(lastMessageDate)
             }
         }
+    }
+
+    private func loadDeletedMessages(subscription: Subscription, completion: (([String]) -> Void)? = nil) {
+
+        // TODO: Save latest date? Older messages may have been deleted so we probably should always check up to the oldest
+        // cached message.
+        let request = RoomDeletedMessagesRequest(roomId: subscription.rid, since: Date(timeIntervalSince1970: 0))
+        API.current()?.fetch(request, completion: {response in
+            switch response {
+            case .resource(let resource):
+                let idsDeleted = resource.messages?.compactMap { $0 }
+                completion?(idsDeleted ?? [])
+            case .error(let error):
+                switch error {
+                case .version(available: _, required: _):
+                    completion?([])
+                default:
+                    Alert.defaultError.present()
+                }
+            }
+        })
     }
 }
