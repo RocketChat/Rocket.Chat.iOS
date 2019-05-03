@@ -63,6 +63,22 @@ final class MessageSection: ChatSection {
                 sequential: object.isSequential
             ).wrapped)
 
+            if let daySeparator = object.daySeparator {
+                cells.append(DateSeparatorChatItem(
+                    date: daySeparator
+                ).wrapped)
+            }
+
+            if object.containsUnreadMessageIndicator {
+                cells.append(UnreadMarkerChatItem(
+                    identifier: object.message.identifier
+                ).wrapped)
+            }
+
+            if object.containsLoader {
+                cells.append(LoaderChatItem().wrapped)
+            }
+
             return cells
         }
 
@@ -276,7 +292,7 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
-        if !object.isSequential && shouldAppendMessageHeader {
+        if (object.message.isThreadReplyMessage || !object.isSequential) && shouldAppendMessageHeader {
             cells.append(BasicMessageChatItem(
                 user: user,
                 message: object.message

@@ -51,7 +51,7 @@ final class MessageMainThreadCell: BaseMessageCell, SizingCell {
         guard
             let viewModel = viewModel,
             let model = viewModel.base as? MessageMainThreadChatItem,
-            let threadIdentifier = model.message?.threadMessageId
+            let threadIdentifier = model.message?.identifier
         else {
             return
         }

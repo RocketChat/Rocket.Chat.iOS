@@ -27,7 +27,27 @@ final class ThreadMessagesRequest: APIRequest {
 }
 
 final class ThreadMessagesResource: APIResource {
+    var messages: [UnmanagedMessage] {
+        return raw?["messages"].arrayValue.compactMap {
+            let message = Message()
+            message.map($0, realm: nil)
+            return message.unmanaged
+        } ?? []
+    }
+
     var success: Bool? {
         return raw?["success"].boolValue
+    }
+
+    var count: Int? {
+        return raw?["count"].int
+    }
+
+    var offset: Int? {
+        return raw?["offset"].int
+    }
+
+    var total: Int? {
+        return raw?["total"].int
     }
 }

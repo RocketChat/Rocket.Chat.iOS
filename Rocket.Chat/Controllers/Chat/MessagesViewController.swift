@@ -91,28 +91,24 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
 
     var threadIdentifier: String? {
         didSet {
-            guard let threadIdentifier = threadIdentifier else { return }
+            guard
+                let threadIdentifier = threadIdentifier,
+                let message = Message.find(withIdentifier: threadIdentifier)
+            else {
+                return
+            }
 
-//            if subscription.rid.isEmpty {
-//                subscription.fetchRoomIdentifier({ [weak self] (subscription) in
-//                    self?.subscription = subscription
-//                    self?.chatTitleView?.subscription = subscription?.unmanaged
-//                })
-//
-//                return
-//            }
-
-//            let unmanaged = subscription.unmanaged
-
-//            viewModel.onRequestingDataChanged = { [weak self] requesting in
-//                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
-//            }
+            viewModel.onRequestingDataChanged = { [weak self] requesting in
+                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
+            }
 
             viewModel.threadIdentifier = threadIdentifier
-//            viewSubscriptionModel.subscription = unmanaged
-//            unmanagedSubscription = unmanaged
 
-//            recoverDraftMessage()
+            if let subscription = Subscription.find(rid: message.rid)?.unmanaged {
+                viewSubscriptionModel.subscription = subscription
+                unmanagedSubscription = subscription
+            }
+
             updateEmptyState()
         }
     }
@@ -238,7 +234,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
             if let controller = nav.viewControllers.first as? ChannelActionsViewController {
-                if let subscription = self.subscription {
+                if let subscription = self.unmanagedSubscription?.managedObject {
                     controller.subscription = subscription
                 }
             }
@@ -500,7 +496,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
 
     private func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
-        view?.subscription = subscription?.unmanaged
+        view?.subscription = unmanagedSubscription
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view

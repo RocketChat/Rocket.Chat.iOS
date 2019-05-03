@@ -92,6 +92,17 @@ final class MessagesViewModel {
         }
     }
 
+    // Pagination properties on this view model, currently only
+    // being used to load messages from a thread.
+    internal let pageSize = 30
+    internal var currentPage = 0
+    internal var showing = 0
+    internal var total = 0
+
+    /**
+     Thread identifier that will be used to present all messages
+     related to a thread.
+    */
     internal var threadIdentifier: String? {
         didSet {
             guard
@@ -109,7 +120,7 @@ final class MessagesViewModel {
                 self?.handleDataUpdates(changes: collectionChanges)
             })
 
-            fetchMessages(from: nil)
+            fetchThreadMessages(from: nil)
         }
     }
 
@@ -478,8 +489,7 @@ final class MessagesViewModel {
                 return
             }
 
-            let pageSize = 30
-            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
+            let messagesFromDatabase = subscriptionValid.fetchMessages(self.pageSize, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
 
@@ -535,7 +545,7 @@ final class MessagesViewModel {
     }
 
     /**
-     This method requests a new page of messages to the API. If the view model
+     This method requests a new page of thread messages to the API. If the view model
      already detected that there's no more data to fetch, or it's currently
      fetching a new page, the method won't be executed.
 
@@ -548,8 +558,7 @@ final class MessagesViewModel {
         guard
             requestingData == .none,
             hasMoreData || oldestMessage == nil,
-            let subscription = subscription?.validated(),
-            let subscriptionUnmanaged = subscription.unmanaged
+            let threadIdentifier = threadIdentifier
         else {
             return
         }
@@ -559,13 +568,18 @@ final class MessagesViewModel {
         queryDataQueue.addOperation { [weak self] in
             guard
                 let self = self,
-                let subscriptionValid = Subscription.find(rid: subscriptionUnmanaged.rid)
+                let mainMessage = Message.find(withIdentifier: threadIdentifier),
+                let subscriptionValid = Subscription.find(rid: mainMessage.rid)
             else {
                 return
             }
 
-            let pageSize = 30
-            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
+            let messagesFromDatabase = subscriptionValid.fetchMessages(
+                self.pageSize,
+                lastMessageDate: oldestMessage,
+                threadIdentifier: threadIdentifier
+            )
+
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
 
@@ -598,24 +612,26 @@ final class MessagesViewModel {
             }
         }
 
-        let client = API.current()?.client(SubscriptionsClient.self)
-        client?.loadHistory(
-            subscription: subscription,
-            latest: oldestMessage
-        ) { [weak self] oldest in
+        let request = ThreadMessagesRequest(tmid: threadIdentifier)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
+
+        API.current()?.fetch(request, options: options) { [weak self] response in
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else {
+                guard
+                    let self = self,
+                    case let .resource(resource) = response
+                else {
                     return
                 }
 
-                self.requestingData = .none
-                self.hasMoreData = oldest != nil
+                self.showing += resource.count ?? 0
+                self.total = resource.total ?? 0
+                self.currentPage += 1
 
-                if let oldest = oldest {
-                    self.oldestMessageDateFromRemote = oldest
-                } else {
-                    self.updateData()
-                }
+                self.requestingData = .none
+                self.hasMoreData = self.showing < self.total
+
+                self.updateData()
             }
         }
     }
@@ -745,13 +761,15 @@ final class MessagesViewModel {
             )
         )
 
-        let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
-        if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
-            data.append(currentHeaderSection)
-            dataSorted.append(currentHeaderSection)
-        } else if let currentHeaderIndex = currentHeaderIndex {
-            dataSorted.remove(at: currentHeaderIndex)
-            dataSorted.append(currentHeaderSection)
+        if threadIdentifier == nil {
+            let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
+            if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
+                data.append(currentHeaderSection)
+                dataSorted.append(currentHeaderSection)
+            } else if let currentHeaderIndex = currentHeaderIndex {
+                dataSorted.remove(at: currentHeaderIndex)
+                dataSorted.append(currentHeaderSection)
+            }
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
