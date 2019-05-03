@@ -36,7 +36,9 @@ final class JitsiViewController: UIViewController {
         }
 
         jitsiMeetView?.delegate = self
-        jitsiMeetView?.loadURLObject([
+        jitsiMeetView?.loadURLObject(
+
+            [
             "config": [
                 "startWithAudioMuted": false,
                 "startWithVideoMuted": true

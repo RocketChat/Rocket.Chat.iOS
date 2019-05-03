@@ -9,6 +9,18 @@
 import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
+    func composerView(_ composerView: ComposerView, didPressSendButton button: UIButton) {
+
+    }
+
+    func composerView(_ composerView: ComposerView, didFinishRecordingAudio url: URL) {
+
+    }
+
+    func composerView(_ composerView: ComposerView, didPressUploadButton button: UIButton) {
+
+    }
+    
     func replyViewDidHide(_ replyView: ReplyView) {
         composerViewModel.replyString = ""
     }
@@ -117,7 +129,7 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
 
     // MARK: Button
 
-    func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
+    func composerView(_ composerView: ComposerView, didPressSendButton button: ComposerButton) {
         if button === composerView.rightButton {
             sendButtonPressed()
         }

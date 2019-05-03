@@ -58,22 +58,22 @@ open class RCMarkdownParser: RCBaseParser {
     public typealias RCMarkdownParserFormattingBlock = ((NSMutableAttributedString, NSRange) -> Void)
     public typealias RCMarkdownParserLevelFormattingBlock = ((NSMutableAttributedString, NSRange, Int) -> Void)
 
-    open var headerAttributes = [UInt: [NSAttributedString.Key: Any]]()
-    open var listAttributes = [[NSAttributedString.Key: Any]]()
-    open var numberedListAttributes = [[NSAttributedString.Key: Any]]()
-    open var quoteAttributes = [NSAttributedString.Key: Any]()
-    open var quoteBlockAttributes = [NSAttributedString.Key: Any]()
+    open var headerAttributes = [UInt: [NSAttributedString.Key: NSObject]]()
+    open var listAttributes = [[NSAttributedString.Key: NSObject]]()
+    open var numberedListAttributes = [[NSAttributedString.Key: NSObject]]()
+    open var quoteAttributes = [NSAttributedString.Key: NSObject]()
+    open var quoteBlockAttributes = [NSAttributedString.Key: NSObject]()
 
-    open var imageAttributes = [NSAttributedString.Key: Any]()
-    open var linkAttributes = [NSAttributedString.Key: Any]()
+    open var imageAttributes = [NSAttributedString.Key: NSObject]()
+    open var linkAttributes = [NSAttributedString.Key: NSObject]()
 
-    open var inlineCodeAttributes = [NSAttributedString.Key: Any]()
-    open var codeAttributes = [NSAttributedString.Key: Any]()
+    open var inlineCodeAttributes = [NSAttributedString.Key: NSObject]()
+    open var codeAttributes = [NSAttributedString.Key: NSObject]()
 
-    open var strongAttributes = [NSAttributedString.Key: Any]()
-    open var italicAttributes = [NSAttributedString.Key: Any]()
-    open var strongAndItalicAttributes = [NSAttributedString.Key: Any]()
-    open var strikeAttributes = [NSAttributedString.Key: Any]()
+    open var strongAttributes = [NSAttributedString.Key: NSObject]()
+    open var italicAttributes = [NSAttributedString.Key: NSObject]()
+    open var strongAndItalicAttributes = [NSAttributedString.Key: NSObject]()
+    open var strikeAttributes = [NSAttributedString.Key: NSObject]()
 
     public typealias DownloadImageClosure = (UIImage?)->Void
     open var downloadImage: (_ path: String, _ completion: DownloadImageClosure?) -> Void = {

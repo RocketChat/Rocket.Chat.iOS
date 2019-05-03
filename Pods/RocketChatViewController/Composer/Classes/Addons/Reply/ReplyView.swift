@@ -76,7 +76,7 @@ public class ReplyView: UIView {
             $0.heightAnchor.constraint(equalToConstant: 20)
         ])
 
-        $0.setBackgroundImage(ComposerAsset.cancelReplyButton.raw, for: .normal)
+        $0.setBackgroundImage(ComposerAssets.cancelReplyButtonImage, for: .normal)
         $0.tintColor = #colorLiteral(red: 0.6196078431, green: 0.6352941176, blue: 0.6588235294, alpha: 1)
 
         $0.addTarget(self, action: #selector(didPressCloseButton(_:)), for: .touchUpInside)
@@ -133,7 +133,7 @@ public class ReplyView: UIView {
         clipsToBounds = true
         isHidden = true
 
-        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: nil, using: { [weak self] _ in
             self?.setNeedsLayout()
         })
 

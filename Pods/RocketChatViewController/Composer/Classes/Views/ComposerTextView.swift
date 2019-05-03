@@ -79,7 +79,7 @@ public class ComposerTextView: UITextView {
 
     private func commonInit() {
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(textDidChange), name: .UITextViewTextDidChange, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nil)
 
         placeholderLabel.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
         self.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
@@ -130,7 +130,7 @@ public class ComposerTextView: UITextView {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: nil)
     }
 
 }
@@ -141,7 +141,7 @@ public extension ComposerTextView {
     /**
      Called when the content size of the placeholder label changes and adjusts the content size.
      */
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object as AnyObject? === placeholderLabel && keyPath == "bounds" {
             if text.isEmpty {
                 text = placeholderLabel.text
