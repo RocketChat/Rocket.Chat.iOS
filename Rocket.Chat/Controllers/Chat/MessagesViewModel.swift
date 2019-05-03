@@ -557,7 +557,7 @@ final class MessagesViewModel {
     func fetchThreadMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
         guard
             requestingData == .none,
-            hasMoreData || oldestMessage == nil,
+            hasMoreData,
             let threadIdentifier = threadIdentifier
         else {
             return
@@ -846,7 +846,19 @@ final class MessagesViewModel {
 extension MessagesViewModel {
 
     func sendTextMessage(text: String) {
-        guard let subscription = subscription?.validated()?.unmanaged, text.count > 0 else {
+        var rid: String?
+
+        if let subscription = subscription?.validated()?.unmanaged {
+            rid = subscription.rid
+        } else if let thread = threadIdentifier, let message = Message.find(withIdentifier: thread) {
+            rid = message.rid
+        }
+
+        guard
+            let ridValidated = rid,
+            let subscription = Subscription.find(rid: ridValidated)?.unmanaged,
+            !text.isEmpty
+        else {
             return
         }
 
@@ -861,7 +873,7 @@ extension MessagesViewModel {
                 return Alert.defaultError.present()
             }
 
-            client.sendMessage(text: text, subscription: subscription)
+            client.sendMessage(text: text, subscription: subscription, threadIdentifier: threadIdentifier)
         }
     }
 

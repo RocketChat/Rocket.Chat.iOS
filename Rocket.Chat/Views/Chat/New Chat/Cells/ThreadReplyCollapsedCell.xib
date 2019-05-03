@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PsP-Kd-ppp">
-                        <rect key="frame" x="40" y="49" width="20" height="20"/>
+                        <rect key="frame" x="40" y="46.5" width="20" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="SDE-kf-zNI"/>
@@ -41,7 +41,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SR-ZL-yjJ">
-                        <rect key="frame" x="75" y="29.5" width="317" height="58.5"/>
+                        <rect key="frame" x="75" y="29.5" width="317" height="53.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                 <constraint firstAttribute="trailingMargin" secondItem="1SR-ZL-yjJ" secondAttribute="trailing" id="Efc-tS-cA6"/>
                 <constraint firstItem="RGa-jU-wbo" firstAttribute="top" secondItem="fZs-9i-Ibr" secondAttribute="top" constant="7" id="F4r-2b-o3z"/>
                 <constraint firstItem="1SR-ZL-yjJ" firstAttribute="top" secondItem="X1H-Y8-l9S" secondAttribute="bottom" constant="4" id="IIF-yM-wxe"/>
-                <constraint firstAttribute="bottom" secondItem="1SR-ZL-yjJ" secondAttribute="bottom" id="NSX-YN-svg"/>
+                <constraint firstAttribute="bottom" secondItem="1SR-ZL-yjJ" secondAttribute="bottom" constant="5" id="NSX-YN-svg"/>
                 <constraint firstItem="1SR-ZL-yjJ" firstAttribute="leading" secondItem="PsP-Kd-ppp" secondAttribute="trailing" constant="15" id="Uf7-iM-sak"/>
                 <constraint firstItem="RGa-jU-wbo" firstAttribute="centerX" secondItem="PsP-Kd-ppp" secondAttribute="centerX" id="XHo-P8-Wnc"/>
                 <constraint firstAttribute="trailingMargin" secondItem="X1H-Y8-l9S" secondAttribute="trailing" id="ckQ-JB-fto"/>
