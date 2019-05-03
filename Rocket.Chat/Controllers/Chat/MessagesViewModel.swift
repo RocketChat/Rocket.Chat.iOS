@@ -845,7 +845,7 @@ final class MessagesViewModel {
 
 extension MessagesViewModel {
 
-    func sendTextMessage(text: String) {
+    func sendTextMessage(text: String, replyThreadIdentifier: String) {
         var rid: String?
 
         if let subscription = subscription?.validated()?.unmanaged {
@@ -873,7 +873,8 @@ extension MessagesViewModel {
                 return Alert.defaultError.present()
             }
 
-            client.sendMessage(text: text, subscription: subscription, threadIdentifier: threadIdentifier)
+            let thread = replyThreadIdentifier.isEmpty ? threadIdentifier : replyThreadIdentifier
+            client.sendMessage(text: text, subscription: subscription, threadIdentifier: thread)
         }
     }
 

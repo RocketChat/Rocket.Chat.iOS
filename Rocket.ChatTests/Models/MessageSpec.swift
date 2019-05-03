@@ -188,7 +188,7 @@ class MessageSpec: XCTestCase {
 
 }
 
-// MARK: quoteString & replyString
+// MARK: quoteString
 
 extension MessageSpec {
 
@@ -219,33 +219,6 @@ extension MessageSpec {
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
-    }
-
-    func testReplyString() {
-        let user = User.testInstance()
-        let subscription = Subscription.testInstance()
-
-        let message = Message.testInstance()
-        message.rid = subscription.rid
-
-        Realm.execute({ realm in
-            realm.add(subscription, update: true)
-            realm.add(user, update: true)
-
-            message.userIdentifier = user.identifier
-            realm.add(message, update: true)
-        })
-
-        Realm.execute({ _ in
-            subscription.type = .channel
-            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
-
-            subscription.type = .group
-            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
-
-            subscription.type = .directMessage
-            XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
-        })
     }
 
 }

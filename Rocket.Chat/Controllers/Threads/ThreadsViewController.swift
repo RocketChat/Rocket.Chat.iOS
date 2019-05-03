@@ -9,6 +9,7 @@
 import Foundation
 import DifferenceKit
 import RocketChatViewController
+import FLAnimatedImage
 
 private typealias NibCellIndentifier = (nib: UINib, cellIdentifier: String)
 
@@ -190,6 +191,71 @@ extension ThreadsViewController {
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
             return size
         }
+    }
+
+}
+
+extension ThreadsViewController: ChatMessageCellProtocol {
+
+    func openThread(identifier: String) {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController else {
+            return
+        }
+
+        controller.threadIdentifier = identifier
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func openURL(url: URL) {
+
+    }
+
+    func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+
+    }
+
+    func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+
+    }
+
+    func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
+
+    }
+
+    func handleReadReceiptPress(_ message: Message, source: (UIView, CGRect)) {
+
+    }
+
+    func handleReviewRequest() {
+
+    }
+
+    func openURLFromCell(url: String) {
+
+    }
+
+    func openVideoFromCell(attachment: UnmanagedAttachment) {
+
+    }
+
+    func openImageFromCell(attachment: UnmanagedAttachment, thumbnail: FLAnimatedImageView) {
+
+    }
+
+    func openImageFromCell(url: URL, thumbnail: FLAnimatedImageView) {
+
+    }
+
+    func viewDidCollapseChange(viewModel: AnyChatItem) {
+
+    }
+
+    func openFileFromCell(attachment: UnmanagedAttachment) {
+
+    }
+
+    func openReplyMessage(message: UnmanagedMessage) {
+
     }
 
 }
