@@ -142,6 +142,29 @@ extension Message: ModelMappeable {
             }.forEach(self.reactions.append)
         }
 
+        // Threads
+        if let threadMessageId = values["tmid"].string {
+            self.threadMessageId = threadMessageId
+        }
+
+        if let threadLastMessage = values["tlm"]["$date"].double {
+            self.threadLastMessage = Date.dateFromInterval(threadLastMessage)
+        }
+
+        if let threadLastMessage = values["tlm"].string {
+            self.threadLastMessage = Date.dateFromString(threadLastMessage)
+        }
+
+        if let threadMessagesCount = values["tcount"].int {
+            self.threadMessagesCount = threadMessagesCount
+        }
+
+        if let threadFollowers = values["replies"].arrayObject as? [String] {
+            if let currentUserId = AuthManager.currentUser()?.identifier {
+                self.threadIsFollowing = threadFollowers.contains(currentUserId)
+            }
+        }
+
         // Discussions
         if let discussionRid = values["drid"].string {
             self.discussionRid = discussionRid

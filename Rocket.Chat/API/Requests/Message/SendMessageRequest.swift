@@ -19,12 +19,14 @@ final class SendMessageRequest: APIRequest {
     let roomId: String
     let text: String
     let messageType: String?
+    let threadIdentifier: String?
 
-    init(id: String, roomId: String, text: String, messageType: String? = nil) {
+    init(id: String, roomId: String, text: String, threadIdentifier: String? = nil, messageType: String? = nil) {
         self.id = id
         self.roomId = roomId
         self.text = text
         self.messageType = messageType
+        self.threadIdentifier = threadIdentifier
     }
 
     func body() -> Data? {
@@ -35,6 +37,10 @@ final class SendMessageRequest: APIRequest {
                 "msg": text
             ]
         ])
+
+        if let threadIdentifier = threadIdentifier {
+            body["message"]["tmid"] = JSON(threadIdentifier)
+        }
 
         if let messageType = messageType {
             body["message"]["t"] = JSON(messageType)

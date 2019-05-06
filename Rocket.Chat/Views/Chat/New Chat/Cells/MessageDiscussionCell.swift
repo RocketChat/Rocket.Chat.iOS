@@ -1,9 +1,9 @@
 //
-//  MessageActionsCell.swift
+//  MessageDiscussionCell.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 22/10/18.
-//  Copyright © 2018 Rocket.Chat. All rights reserved.
+//  Created by Rafael Kellermann Streit on 02/04/19.
+//  Copyright © 2019 Rocket.Chat. All rights reserved.
 //
 
 import UIKit

@@ -526,3 +526,9 @@
 "discussion.no_messages" = "Nenhuma mensagem";
 "discussion.1_message" = "1 mensagem";
 "discussion.x_messages" = "%@ mensagens";
+
+// Threads
+"threads.title" = "Tópicos";
+"threads.no_replies" = "Nenhuma resposta";
+"threads.1_reply" = "1 resposta";
+"threads.x_replies" = "%@ respostas";

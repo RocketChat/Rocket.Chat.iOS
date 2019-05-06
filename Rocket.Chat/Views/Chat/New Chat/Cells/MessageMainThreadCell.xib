@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="u6p-Dz-igp" customClass="MessageMainThreadCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTq-7J-Pgb">
+                        <rect key="frame" x="71" y="0.0" width="117" height="32"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="g3Z-IK-0za"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="5" maxY="0.0"/>
+                        <state key="normal" title="125 replies" image="Threads Small White"/>
+                        <connections>
+                            <action selector="buttonThreadDidPressedWithSender:" destination="u6p-Dz-igp" eventType="touchUpInside" id="EJI-fn-3Ie"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsW-iH-go3">
+                        <rect key="frame" x="196" y="8" width="33" height="16"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="XsW-iH-go3" firstAttribute="centerY" secondItem="pTq-7J-Pgb" secondAttribute="centerY" id="KbR-W3-VVK"/>
+                <constraint firstItem="pTq-7J-Pgb" firstAttribute="top" secondItem="u6p-Dz-igp" secondAttribute="top" id="PTh-mR-wQD"/>
+                <constraint firstItem="XsW-iH-go3" firstAttribute="leading" secondItem="pTq-7J-Pgb" secondAttribute="trailing" constant="8" id="Ybo-ll-02Q"/>
+                <constraint firstItem="pTq-7J-Pgb" firstAttribute="leading" secondItem="u6p-Dz-igp" secondAttribute="leadingMargin" constant="55" id="ebK-pC-qXy"/>
+                <constraint firstAttribute="bottom" secondItem="pTq-7J-Pgb" secondAttribute="bottom" constant="10" id="ofT-ZI-Ya7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="oHh-zw-8Kd"/>
+            <size key="customSize" width="375" height="45"/>
+            <connections>
+                <outlet property="labelThreadLastMessage" destination="XsW-iH-go3" id="mfX-Er-GnQ"/>
+                <outlet property="threadButton" destination="pTq-7J-Pgb" id="W3t-sD-kE0"/>
+            </connections>
+            <point key="canvasLocation" x="111.2" y="-63.868065967016499"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Threads Small White" width="17" height="16"/>
+    </resources>
+</document>

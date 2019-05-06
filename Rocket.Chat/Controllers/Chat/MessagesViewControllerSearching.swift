@@ -7,25 +7,13 @@
 //
 
 extension MessagesViewController {
-    func updateSearchMessagesButton() {
-        if subscription != nil {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: UIImage(named: "Search"),
-                style: .done,
-                target: self,
-                action: #selector(showSearchMessages)
-            )
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
-    }
 
     @objc func showSearchMessages() {
         guard
             let controller = storyboard?.instantiateViewController(withIdentifier: "MessagesList"),
             let messageList = controller as? MessagesListViewController
-            else {
-                return
+        else {
+            return
         }
 
         messageList.data.subscription = subscription
@@ -35,4 +23,5 @@ extension MessagesViewController {
         present(searchMessagesNav, animated: true, completion: nil)
 
     }
+
 }
