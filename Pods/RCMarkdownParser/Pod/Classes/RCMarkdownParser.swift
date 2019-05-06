@@ -58,22 +58,22 @@ open class RCMarkdownParser: RCBaseParser {
     public typealias RCMarkdownParserFormattingBlock = ((NSMutableAttributedString, NSRange) -> Void)
     public typealias RCMarkdownParserLevelFormattingBlock = ((NSMutableAttributedString, NSRange, Int) -> Void)
 
-    open var headerAttributes = [UInt: [String: Any]]()
-    open var listAttributes = [[String: Any]]()
-    open var numberedListAttributes = [[String: Any]]()
-    open var quoteAttributes = [String: Any]()
-    open var quoteBlockAttributes = [String: Any]()
+    open var headerAttributes = [UInt: [NSAttributedString.Key: Any]]()
+    open var listAttributes = [[NSAttributedString.Key: Any]]()
+    open var numberedListAttributes = [[NSAttributedString.Key: Any]]()
+    open var quoteAttributes = [NSAttributedString.Key: Any]()
+    open var quoteBlockAttributes = [NSAttributedString.Key: Any]()
 
-    open var imageAttributes = [String: Any]()
-    open var linkAttributes = [String: Any]()
+    open var imageAttributes = [NSAttributedString.Key: Any]()
+    open var linkAttributes = [NSAttributedString.Key: Any]()
 
-    open var inlineCodeAttributes = [String: Any]()
-    open var codeAttributes = [String: Any]()
+    open var inlineCodeAttributes = [NSAttributedString.Key: Any]()
+    open var codeAttributes = [NSAttributedString.Key: Any]()
 
-    open var strongAttributes = [String: Any]()
-    open var italicAttributes = [String: Any]()
-    open var strongAndItalicAttributes = [String: Any]()
-    open var strikeAttributes = [String: Any]()
+    open var strongAttributes = [NSAttributedString.Key: Any]()
+    open var italicAttributes = [NSAttributedString.Key: Any]()
+    open var strongAndItalicAttributes = [NSAttributedString.Key: Any]()
+    open var strikeAttributes = [NSAttributedString.Key: Any]()
 
     public typealias DownloadImageClosure = (UIImage?)->Void
     open var downloadImage: (_ path: String, _ completion: DownloadImageClosure?) -> Void = {
@@ -81,9 +81,9 @@ open class RCMarkdownParser: RCBaseParser {
         completion?(nil)
     }
 
-    open static var standardParser = RCMarkdownParser()
+    public static var standardParser = RCMarkdownParser()
 
-    class func addAttributes(_ attributesArray: [[String: Any]], atIndex level: Int, toString attributedString: NSMutableAttributedString, range: NSRange) {
+    class func addAttributes(_ attributesArray: [[NSAttributedString.Key: Any]], atIndex level: Int, toString attributedString: NSMutableAttributedString, range: NSRange) {
         guard !attributesArray.isEmpty else { return }
 
         guard let newAttributes = level < attributesArray.count && level >= 0 ? attributesArray[level] : attributesArray.last else { return }
@@ -94,15 +94,14 @@ open class RCMarkdownParser: RCBaseParser {
     public init(withDefaultParsing: Bool = true) {
         super.init()
 
-        strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12)]
-        italicAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: 12)]
+        strongAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
+        italicAttributes = [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 12)]
 
         var strongAndItalicFont = UIFont.systemFont(ofSize: 12)
         strongAndItalicFont = UIFont(descriptor: strongAndItalicFont.fontDescriptor.withSymbolicTraits([.traitItalic, .traitBold])!, size: strongAndItalicFont.pointSize)
-        strongAndItalicAttributes = [NSFontAttributeName: strongAndItalicFont]
+        strongAndItalicAttributes = [NSAttributedString.Key.font: strongAndItalicFont]
 
         if withDefaultParsing {
-
             addNumberedListParsingWithLeadFormattingBlock({ (attributedString, range, level) in
                 RCMarkdownParser.addAttributes(self.numberedListAttributes, atIndex: level - 1, toString: attributedString, range: range)
                 let substring = attributedString.attributedSubstring(from: range).string.replacingOccurrences(of: " ", with: "\(nonBreakingSpaceCharacter)")
@@ -147,7 +146,7 @@ open class RCMarkdownParser: RCBaseParser {
 
             addStrongParsingWithFormattingBlock { attributedString, range in
                 attributedString.enumerateAttributes(in: range, options: []) { attributes, range, _ in
-                    if let font = attributes[NSFontAttributeName] as? UIFont, let italicFont = self.italicAttributes[NSFontAttributeName] as? UIFont, font == italicFont {
+                    if let font = attributes[NSAttributedString.Key.font] as? UIFont, let italicFont = self.italicAttributes[NSAttributedString.Key.font] as? UIFont, font == italicFont {
                         attributedString.addAttributes(self.strongAndItalicAttributes, range: range)
                     } else {
                         attributedString.addAttributes(self.strongAttributes, range: range)
@@ -157,7 +156,7 @@ open class RCMarkdownParser: RCBaseParser {
 
             addItalicParsingWithFormattingBlock { attributedString, range in
                 attributedString.enumerateAttributes(in: range, options: []) { attributes, range, _ in
-                    if let font = attributes[NSFontAttributeName] as? UIFont, let boldFont = self.strongAttributes[NSFontAttributeName] as? UIFont, font == boldFont {
+                    if let font = attributes[NSAttributedString.Key.font] as? UIFont, let boldFont = self.strongAttributes[NSAttributedString.Key.font] as? UIFont, font == boldFont {
                         attributedString.addAttributes(self.strongAndItalicAttributes, range: range)
                     } else {
                         attributedString.addAttributes(self.italicAttributes, range: range)
@@ -200,7 +199,7 @@ open class RCMarkdownParser: RCBaseParser {
         guard let codingParsingRegex = RCMarkdownRegex.regexForString(RCMarkdownRegex.CodeEscaping) else { return }
 
         addParsingRuleWithRegularExpression(codingParsingRegex) { match, attributedString in
-            let range = match.rangeAt(2)
+            let range = match.range(at: 2)
             let matchString = attributedString.attributedSubstring(from: range).string as NSString
 
             var escapedString = ""
@@ -221,9 +220,9 @@ open class RCMarkdownParser: RCBaseParser {
         guard let regex = RCMarkdownRegex.regexForString(regexString, options: .anchorsMatchLines) else { return }
 
         addParsingRuleWithRegularExpression(regex) { match, attributedString in
-            let level = match.rangeAt(1).length
-            formattingBlock?(attributedString, match.rangeAt(2), level)
-            leadFormattingBlock(attributedString, NSRange(location: match.rangeAt(1).location, length: match.rangeAt(2).location - match.rangeAt(1).location), level)
+            let level = match.range(at: 1).length
+            formattingBlock?(attributedString, match.range(at: 2), level)
+            leadFormattingBlock(attributedString, NSRange(location: match.range(at: 1).location, length: match.range(at: 2).location - match.range(at: 1).location), level)
         }
     }
 
@@ -261,7 +260,7 @@ open class RCMarkdownParser: RCBaseParser {
             attributedString.replaceCharacters(in: match.range, with: alternativeText)
 
             let alternativeRange = NSRange(location: match.range.location, length: (alternativeText as NSString).length)
-            attributedString.addAttribute(NSLinkAttributeName, value: imagePath, range: alternativeRange)
+            attributedString.addAttribute(NSAttributedString.Key.link, value: imagePath, range: alternativeRange)
             alternateFormattingBlock?(attributedString, alternativeRange)
 
             self.downloadImage(imagePath) { image in
@@ -289,7 +288,7 @@ open class RCMarkdownParser: RCBaseParser {
             attributedString.deleteCharacters(in: NSRange(location: linkRange.location - 1, length: linkRange.length + 2))
 
             if let linkUrlString = self?.unescaped(string: linkUrlString), let url = URL(string: linkUrlString) ?? URL(string: linkUrlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? linkUrlString) {
-                attributedString.addAttribute(NSLinkAttributeName, value: url, range: linkTextRange)
+                attributedString.addAttribute(NSAttributedString.Key.link, value: url, range: linkTextRange)
             }
             formattingBlock(attributedString, linkTextRange)
 
@@ -317,7 +316,7 @@ open class RCMarkdownParser: RCBaseParser {
             attributedString.deleteCharacters(in: NSRange(location: linkRange.location, length: linkRange.length))
 
             if let linkUrlString = self?.unescaped(string: linkUrlString), let url = URL(string: linkUrlString) ?? URL(string: linkUrlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? linkUrlString) {
-                attributedString.addAttribute(NSLinkAttributeName, value: url, range: string().range(of: linkTextString))
+                attributedString.addAttribute(NSAttributedString.Key.link, value: url, range: string().range(of: linkTextString))
             }
 
             attributedString.deleteCharacters(in: string().range(of: ">", options: .backwards))
@@ -328,9 +327,9 @@ open class RCMarkdownParser: RCBaseParser {
         guard let regex = RCMarkdownRegex.regexForString(pattern, options: options) else { return }
 
         addParsingRuleWithRegularExpression(regex) { match, attributedString in
-            attributedString.deleteCharacters(in: match.rangeAt(3))
-            formattingBlock(attributedString, match.rangeAt(2))
-            attributedString.deleteCharacters(in: match.rangeAt(1))
+            attributedString.deleteCharacters(in: match.range(at: 3))
+            formattingBlock(attributedString, match.range(at: 2))
+            attributedString.deleteCharacters(in: match.range(at: 1))
         }
     }
 
@@ -359,7 +358,7 @@ open class RCMarkdownParser: RCBaseParser {
             let linkDataDetector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
             addParsingRuleWithRegularExpression(linkDataDetector) { [weak self] match, attributedString in
                 if let urlString = match.url?.absoluteString.removingPercentEncoding, let unescapedUrlString = self?.unescaped(string: urlString), let url = URL(string: unescapedUrlString) {
-                    attributedString.addAttribute(NSLinkAttributeName, value: url, range: match.range)
+                    attributedString.addAttribute(NSAttributedString.Key.link, value: url, range: match.range)
                 }
                 formattingBlock(attributedString, match.range)
             }
@@ -385,7 +384,7 @@ open class RCMarkdownParser: RCBaseParser {
     }
 
     fileprivate class func stringWithHexaString(_ hexaString: String, atIndex index: Int) -> String {
-        let range = hexaString.characters.index(hexaString.startIndex, offsetBy: index)..<hexaString.characters.index(hexaString.startIndex, offsetBy: index + 4)
+        let range = hexaString.index(hexaString.startIndex, offsetBy: index)..<hexaString.index(hexaString.startIndex, offsetBy: index + 4)
         let sub = hexaString.substring(with: range)
 
         let char = Character(UnicodeScalar(Int(strtoul(sub, nil, 16)))!)

@@ -25,6 +25,8 @@ struct StateHelper {
         return .buffering
       case .seekingForward, .seekingBackward:
         return previousState
-      }
+      @unknown default:
+        return .paused
+    }
   }
 }
