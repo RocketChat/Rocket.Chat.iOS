@@ -65,7 +65,7 @@ public struct Changeset<Collection: Swift.Collection> {
 public extension Changeset {
     /// The number of section changes.
     @inlinable
-    var sectionChangeCount: Int {
+    public var sectionChangeCount: Int {
         return sectionDeleted.count
             + sectionInserted.count
             + sectionUpdated.count
@@ -74,7 +74,7 @@ public extension Changeset {
 
     /// The number of element changes.
     @inlinable
-    var elementChangeCount: Int {
+    public var elementChangeCount: Int {
         return elementDeleted.count
             + elementInserted.count
             + elementUpdated.count
@@ -83,25 +83,25 @@ public extension Changeset {
 
     /// The number of all changes.
     @inlinable
-    var changeCount: Int {
+    public var changeCount: Int {
         return sectionChangeCount + elementChangeCount
     }
 
     /// A Boolean value indicating whether has section changes.
     @inlinable
-    var hasSectionChanges: Bool {
+    public var hasSectionChanges: Bool {
         return sectionChangeCount > 0
     }
 
     /// A Boolean value indicating whether has element changes.
     @inlinable
-    var hasElementChanges: Bool {
+    public var hasElementChanges: Bool {
         return elementChangeCount > 0
     }
 
     /// A Boolean value indicating whether has changes.
     @inlinable
-    var hasChanges: Bool {
+    public var hasChanges: Bool {
         return changeCount > 0
     }
 }

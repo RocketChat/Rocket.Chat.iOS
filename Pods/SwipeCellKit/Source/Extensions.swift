@@ -19,7 +19,7 @@ extension UITableView {
 
 extension UICollectionView {
     var swipeCells: [SwipeCollectionViewCell] {
-        return visibleCells.compactMap({ $0 as? SwipeCollectionViewCell })
+        return visibleCells as? [SwipeCollectionViewCell] ?? []
     }
     
     func hideSwipeCell() {
