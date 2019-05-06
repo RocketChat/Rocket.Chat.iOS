@@ -603,7 +603,7 @@ final class MessagesViewModel {
 
                 if prepareAnotherPage {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
-                        self?.fetchMessages(
+                        self?.fetchThreadMessages(
                             from: self?.oldestMessageDateFromRemote,
                             prepareAnotherPage: false
                         )
@@ -623,6 +623,8 @@ final class MessagesViewModel {
                 else {
                     return
                 }
+
+                self.oldestMessageDateFromRemote = resource.messages.last?.createdAt
 
                 self.showing += resource.count ?? 0
                 self.total = resource.total ?? 0

@@ -201,6 +201,25 @@ extension UnmanagedMessage {
 
 extension UnmanagedMessage {
 
+    internal var mainThreadTitle: String {
+        if text.isEmpty, let attachment = attachments.first {
+            let title = attachment.title
+
+            if title.isEmpty, !attachment.fields.isEmpty {
+                return attachment.fields.first?.title ?? title
+            }
+
+            return title
+        }
+
+        var messageText = MessageTextCacheManager.shared.message(for: self)?.string ?? text
+        messageText = messageText.components(separatedBy: .newlines)
+            .joined(separator: " ")
+            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+
+        return messageText
+    }
+
     internal var mainThreadMessage: String {
         guard
             isThreadReplyMessage,
@@ -211,16 +230,7 @@ extension UnmanagedMessage {
             return ""
         }
 
-        if mainMessage.text.isEmpty && !mainMessage.attachments.isEmpty {
-            return mainMessage.attachments.first?.title ?? ""
-        }
-
-        var text = MessageTextCacheManager.shared.message(for: mainMessage)?.string ?? mainMessage.text
-        text = text.components(separatedBy: .newlines)
-            .joined(separator: " ")
-            .replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
-
-        return text
+        return mainMessage.mainThreadTitle
     }
 
     internal var threadReplyCompressedMessage: String {

@@ -98,6 +98,8 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                 return
             }
 
+            chatTitleView?.mainThreadMessage = message.unmanaged
+
             viewModel.onRequestingDataChanged = { [weak self] requesting in
                 self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
             }
@@ -488,7 +490,11 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
 
         let bottomEdge = collectionView.contentOffset.y + collectionView.frame.size.height
         if bottomEdge >= collectionView.contentSize.height - 200 {
-            viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+            if viewModel.threadIdentifier != nil {
+                viewModel.fetchThreadMessages(from: viewModel.oldestMessageDateFromRemote)
+            } else {
+                viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+            }
         }
     }
 
@@ -497,6 +503,13 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
     private func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
         view?.subscription = unmanagedSubscription
+
+        if let thread = viewModel.threadIdentifier {
+            if let message = Message.find(withIdentifier: thread)?.unmanaged {
+                view?.mainThreadMessage = message
+            }
+        }
+
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
@@ -713,7 +726,12 @@ extension MessagesViewController: SocketConnectionHandler {
 
         if state == .connected {
             viewModel.requestingData = .none
-            viewModel.fetchMessages(from: nil)
+
+            if viewModel.threadIdentifier != nil {
+                viewModel.fetchThreadMessages(from: nil)
+            } else {
+                viewModel.fetchMessages(from: nil)
+            }
         }
     }
 
