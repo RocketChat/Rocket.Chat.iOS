@@ -528,6 +528,7 @@
 "discussion.x_messages" = "%@ messages";
 
 // Threads
+"threads.title" = "Threads";
 "threads.no_replies" = "No replies";
 "threads.1_reply" = "1 reply";
 "threads.x_replies" = "%@ replies";

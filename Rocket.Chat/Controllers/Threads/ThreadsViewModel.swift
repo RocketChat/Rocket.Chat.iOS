@@ -12,7 +12,7 @@ import RocketChatViewController
 
 final class ThreadsViewModel {
 
-    let title = "Threads"
+    let title = localized("threads.title")
 
     var controllerContext: UIViewController?
     var subscription: UnmanagedSubscription? {
