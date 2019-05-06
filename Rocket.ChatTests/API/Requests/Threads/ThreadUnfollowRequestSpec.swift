@@ -35,34 +35,10 @@ class ThreadUnfollowRequestSpec: APITestCase {
     }
 
     func testProperties() {
-        XCTFail("request needs to be updated")
-
-        let jsonString = """
-        {
-            "channel": {
-                "_id": "ByehQjC44FwMeiLbX",
-                "ts": "2016-11-30T21:23:04.737Z",
-                "t": "c",
-                "name": "testing",
-                "usernames": [
-                      "testing",
-                      "testing1",
-                      "testing2"
-                ],
-                "msgs": 1,
-                "default": true,
-                "_updatedAt": "2016-12-09T12:50:51.575Z",
-                "lm": "2016-12-09T12:50:51.555Z"
-            },
-            "success": true
-        }
-        """
-
+        let jsonString = "{ \"success\": true }"
         let json = JSON(parseJSON: jsonString)
+        let result = ThreadUnfollowResource(raw: json)
 
-        let result = RoomInfoResource(raw: json)
-
-        XCTAssertEqual(result.channel, json["channel"])
-        XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])
+        XCTAssertTrue(result.success ?? false)
     }
 }

@@ -27,34 +27,54 @@ class ThreadMessagesRequestSpec: APITestCase {
     }
 
     func testProperties() {
-        XCTFail("request needs to be updated")
-
         let jsonString = """
-        {
-            "channel": {
-                "_id": "ByehQjC44FwMeiLbX",
-                "ts": "2016-11-30T21:23:04.737Z",
-                "t": "c",
-                "name": "testing",
-                "usernames": [
-                      "testing",
-                      "testing1",
-                      "testing2"
-                ],
-                "msgs": 1,
-                "default": true,
-                "_updatedAt": "2016-12-09T12:50:51.575Z",
-                "lm": "2016-12-09T12:50:51.555Z"
-            },
-            "success": true
+         {
+          "count" : 2,
+          "messages" : [{
+              "_updatedAt" : "2019-05-03T15:10:17.863Z",
+              "tmid" : "OxZ0pgHPOEMZgoiEb6",
+              "unread" : true,
+              "msg" : "Yay.",
+              "rid" : "GENERAL",
+              "mentions" : [],
+              "_id" : "zBYXi4WsMmWkrLPFuU",
+              "ts" : "2019-05-03T15:10:17.841Z",
+              "u" : {
+                "username" : "rafael.kellermann",
+                "name" : "Rafael Kellermann Streit",
+                "_id" : "Xx6KW6XQsFkmDPGdE"
+              },
+              "channels" : []
+            }, {
+              "_updatedAt" : "2019-05-03T15:10:45.442Z",
+              "tmid" : "OxZ0pgHPOEMZgoiEb6",
+              "unread" : true,
+              "msg" : "Foobar.",
+              "rid" : "GENERAL",
+              "mentions" : [],
+              "_id" : "3VXsUZuCvXQWOpPt2N",
+              "ts" : "2019-05-03T15:10:45.417Z",
+              "u" : {
+                "username" : "rafael.kellermann",
+                "name" : "Rafael Kellermann Streit",
+                "_id" : "Xx6KW6XQsFkmDPGdE"
+              },
+              "channels" : []
+            }
+          ],
+          "total" : 2,
+          "success" : true,
+          "offset" : 0
         }
         """
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = RoomInfoResource(raw: json)
-
-        XCTAssertEqual(result.channel, json["channel"])
-        XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])
+        let result = ThreadMessagesResource(raw: json)
+        XCTAssertEqual(result.messages.count, 2)
+        XCTAssertEqual(result.count, 2)
+        XCTAssertEqual(result.total, 2)
+        XCTAssertEqual(result.offset, 0)
+        XCTAssertTrue(result.success ?? false)
     }
 }

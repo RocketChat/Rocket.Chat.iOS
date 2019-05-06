@@ -21,40 +21,48 @@ class ThreadsListRequestSpec: APITestCase {
 
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
         XCTAssertEqual(request.url?.path, "/api/v1/chat.getThreadsList", "path is correct")
-        XCTAssertEqual(request.url?.query, "rid=ByehQjC44FwMeiLbX")
+        XCTAssertEqual(request.url?.query, "rid=ByehQjC44FwMeiLbX&sort=%7B%22tlm%22:-1%7D")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
     }
 
     func testProperties() {
-        XCTFail("request needs to be updated")
-
         let jsonString = """
         {
-            "channel": {
-                "_id": "ByehQjC44FwMeiLbX",
-                "ts": "2016-11-30T21:23:04.737Z",
-                "t": "c",
-                "name": "testing",
-                "usernames": [
-                      "testing",
-                      "testing1",
-                      "testing2"
-                ],
-                "msgs": 1,
-                "default": true,
-                "_updatedAt": "2016-12-09T12:50:51.575Z",
-                "lm": "2016-12-09T12:50:51.555Z"
+          "threads" : [{
+            "_updatedAt" : "2019-05-03T15:10:45.793Z",
+            "tcount" : 2,
+            "tlm" : "2019-05-03T15:10:45.417Z",
+            "unread" : true,
+            "msg" : "Teste 1",
+            "rid" : "GENERAL",
+            "mentions" : [],
+            "_id" : "OxZ0pgHPOEMZgoiEb6",
+            "replies" : [
+              "Xx6KW6XQsFkmDPGdE"
+            ],
+            "ts" : "2019-05-03T15:10:13.003Z",
+            "u" : {
+              "username" : "rafael.kellermann",
+              "name" : "Rafael Kellermann Streit",
+              "_id" : "Xx6KW6XQsFkmDPGdE"
             },
-            "success": true
+            "channels" : []
+          }],
+          "count" : 1,
+          "total" : 1,
+          "success" : true,
+          "offset" : 0
         }
         """
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = RoomInfoResource(raw: json)
-
-        XCTAssertEqual(result.channel, json["channel"])
-        XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])
+        let result = ThreadsListResource(raw: json)
+        XCTAssertEqual(result.threads.count, 1)
+        XCTAssertEqual(result.count, 1)
+        XCTAssertEqual(result.total, 1)
+        XCTAssertEqual(result.offset, 0)
+        XCTAssertTrue(result.success ?? false)
     }
 }
