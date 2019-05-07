@@ -54,17 +54,24 @@ final class ThreadReplyCollapsedCell: BaseMessageCell, SizingCell {
             completeRendering: completeRendering
         )
 
-        guard let model = viewModel?.base as? MessageReplyThreadChatItem else {
+        guard
+            let model = viewModel?.base as? MessageReplyThreadChatItem
+        else {
             return
         }
 
-        if model.isSequential {
+        let threadName = model.threadName
+
+        // If thread name is empty, it means we don't have the
+        // main message cell yet or it's not a valid title, so we
+        // can hide the entire header.
+        if model.isSequential || threadName == nil {
             iconThread.isHidden = true
             labelThreadTitle.text = nil
             labelTextTopConstraint.constant = 0
         } else {
             iconThread.isHidden = false
-            labelThreadTitle.text = model.threadName
+            labelThreadTitle.text = threadName
             labelTextTopConstraint.constant = 4
         }
 
