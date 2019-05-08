@@ -349,7 +349,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func openServersList() {
-        guard serversView == nil else {
+        guard
+            serversView == nil &&
+            AppManager.supportsMultiServer
+        else {
             return
         }
 
