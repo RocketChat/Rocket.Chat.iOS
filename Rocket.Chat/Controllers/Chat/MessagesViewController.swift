@@ -32,7 +32,7 @@ extension SizingCell {
 }
 
 // swiftlint:disable type_body_length file_length
-final class MessagesViewController: RocketChatViewController {
+final class MessagesViewController: RocketChatViewController, MessagesListProtocol {
 
     @objc override var bottomHeight: CGFloat {
         if subscription?.isJoined() ?? true {
@@ -89,6 +89,46 @@ final class MessagesViewController: RocketChatViewController {
         }
     }
 
+    var threadIdentifier: String? {
+        didSet {
+            guard let threadIdentifier = threadIdentifier else { return }
+            guard let message = Message.find(withIdentifier: threadIdentifier) else {
+                let realm = Realm.current
+                API.current()?.fetch(GetMessageRequest(msgId: threadIdentifier), completion: { [weak self] response in
+                    switch response {
+                    case .resource(let resource):
+                        if let message = resource.message {
+                            realm?.execute({ realm in
+                                realm.add(message, update: true)
+                            })
+                        }
+
+                        self?.threadIdentifier = threadIdentifier
+                    default:
+                        break
+                    }
+                })
+
+                return
+            }
+
+            chatTitleView?.mainThreadMessage = message.unmanaged
+
+            viewModel.onRequestingDataChanged = { [weak self] requesting in
+                self?.chatTitleView?.updateConnectionState(isRequestingMessages: requesting == .initialRequest)
+            }
+
+            viewModel.threadIdentifier = threadIdentifier
+
+            if let subscription = Subscription.find(rid: message.rid)?.unmanaged {
+                viewSubscriptionModel.subscription = subscription
+                unmanagedSubscription = subscription
+            }
+
+            updateEmptyState()
+        }
+    }
+
     lazy var announcementBannerView: UIView = {
         let announcementBannerView = ChatAnnouncementView()
         announcementBannerView.subscription = subscription?.unmanaged
@@ -139,7 +179,7 @@ final class MessagesViewController: RocketChatViewController {
 
         setupTitleView()
         updateEmptyState()
-        updateSearchMessagesButton()
+        updateNavigationBarButtons()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -210,9 +250,15 @@ final class MessagesViewController: RocketChatViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Channel Actions", let nav = segue.destination as? UINavigationController {
             if let controller = nav.viewControllers.first as? ChannelActionsViewController {
-                if let subscription = self.subscription {
+                if let subscription = self.unmanagedSubscription?.managedObject {
                     controller.subscription = subscription
                 }
+            }
+        }
+
+        if segue.identifier == "Threads" {
+            if let controller = segue.destination as? ThreadsViewController {
+                controller.viewModel.subscription = subscription.unmanaged
             }
         }
     }
@@ -305,6 +351,8 @@ final class MessagesViewController: RocketChatViewController {
             (nib: MessageActionsCell.nib, cellIdentifier: MessageActionsCell.identifier),
             (nib: MessageVideoCallCell.nib, cellIdentifier: MessageVideoCallCell.identifier),
             (nib: MessageDiscussionCell.nib, cellIdentifier: MessageDiscussionCell.identifier),
+            (nib: MessageMainThreadCell.nib, cellIdentifier: MessageMainThreadCell.identifier),
+            (nib: ThreadReplyCollapsedCell.nib, cellIdentifier: ThreadReplyCollapsedCell.identifier),
             (nib: HeaderCell.nib, cellIdentifier: HeaderCell.identifier)
         ]
 
@@ -456,7 +504,11 @@ final class MessagesViewController: RocketChatViewController {
 
         let bottomEdge = collectionView.contentOffset.y + collectionView.frame.size.height
         if bottomEdge >= collectionView.contentSize.height - 200 {
-            viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+            if viewModel.threadIdentifier != nil {
+                viewModel.fetchThreadMessages(from: viewModel.oldestMessageDateFromRemote)
+            } else {
+                viewModel.fetchMessages(from: viewModel.oldestMessageDateFromRemote)
+            }
         }
     }
 
@@ -464,14 +516,56 @@ final class MessagesViewController: RocketChatViewController {
 
     private func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
-        view?.subscription = subscription?.unmanaged
+        view?.subscription = unmanagedSubscription
+
+        if let thread = viewModel.threadIdentifier {
+            if let message = Message.find(withIdentifier: thread)?.unmanaged {
+                view?.mainThreadMessage = message
+            }
+        }
+
         view?.delegate = self
         navigationItem.titleView = view
         chatTitleView = view
         chatTitleView?.applyTheme()
     }
 
+    // MARK: Navigation Buttons
+
+    private func updateNavigationBarButtons() {
+        if subscription != nil {
+            let search = UIBarButtonItem(
+                image: UIImage(named: "Search"),
+                style: .done,
+                target: self,
+                action: #selector(showSearchMessages)
+            )
+
+            let threads = UIBarButtonItem(
+                image: UIImage(named: "Threads"),
+                style: .done,
+                target: self,
+                action: #selector(buttonThreadsDidPressed)
+            )
+
+            navigationItem.rightBarButtonItems = [search, threads]
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+    }
+
     // MARK: IBAction
+
+    @objc func buttonThreadsDidPressed() {
+        performSegue(withIdentifier: "Threads", sender: nil)
+    }
 
     @objc func buttonScrollToBottomDidPressed() {
         scrollToBottom(true)
@@ -646,7 +740,12 @@ extension MessagesViewController: SocketConnectionHandler {
 
         if state == .connected {
             viewModel.requestingData = .none
-            viewModel.fetchMessages(from: nil)
+
+            if viewModel.threadIdentifier != nil {
+                viewModel.fetchThreadMessages(from: nil)
+            } else {
+                viewModel.fetchMessages(from: nil)
+            }
         }
     }
 

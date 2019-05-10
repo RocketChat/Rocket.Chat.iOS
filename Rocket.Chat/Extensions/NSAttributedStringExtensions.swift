@@ -133,6 +133,8 @@ extension NSMutableAttributedString {
             }
         }
 
+        let theme = ThemeManager.theme
+
         mentions.forEach { mention in
             let realName = mention.realName ?? ""
             let username = mention.username ?? ""
@@ -143,14 +145,14 @@ extension NSMutableAttributedString {
                 let background: UIColor
                 let font: UIColor
                 if username == currentUsername {
-                    background = .primaryAction
+                    background = theme.actionTintColor
                     font = .white
                 } else if username == "all" || username == "here" {
                     background = .attention
                     font = .white
                 } else {
-                    background = .secondAction
-                    font = .primaryAction
+                    background = theme.actionBackgroundColor
+                    font = theme.actionTintColor
                 }
 
                 let ranges = string.ranges(of: "@\(shouldUseRealName ? realName : username)")

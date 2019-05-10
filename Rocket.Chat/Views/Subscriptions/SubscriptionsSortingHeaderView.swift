@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubscriptionsSortingHeaderView: UIView {
+final class SubscriptionsSortingHeaderView: UIView {
     override var theme: Theme? {
         guard let theme = super.theme else { return nil }
         return Theme(
@@ -25,6 +25,7 @@ class SubscriptionsSortingHeaderView: UIView {
             tintColor: theme.tintColor,
             auxiliaryTintColor: theme.auxiliaryTintColor,
             actionTintColor: theme.actionTintColor,
+            actionBackgroundColor: theme.actionBackgroundColor,
             mutedAccent: theme.mutedAccent,
             strongAccent: theme.strongAccent,
             appearence: theme.appearence

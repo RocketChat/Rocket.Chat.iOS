@@ -277,12 +277,40 @@ extension SubscriptionsClient {
         api.fetch(request) { response in
             switch response {
             case .resource(let resource):
+                var requestMessageDetails: [String] = []
+
                 realm?.execute({ realm in
                     let messages = resource.messages(realm: realm) ?? []
                     realm.add(messages, update: true)
+
+                    for message in messages where !message.threadMessageId.isEmpty {
+                        if Message.find(withIdentifier: message.threadMessageId) != nil {
+                            // Main message exists, we don't need to do anything
+                        } else {
+                            requestMessageDetails.append(message.threadMessageId)
+                        }
+                    }
+
                     lastMessageDate = messages.last?.createdAt
                 }, completion: {
                     completion(lastMessageDate)
+
+                    // Check for main message of a thread that doesn't exists on the database yet
+                    // and needs to be requested
+                    requestMessageDetails.forEach({ (identifier) in
+                        API.current()?.fetch(GetMessageRequest(msgId: identifier), completion: { response in
+                            switch response {
+                            case .resource(let resource):
+                                if let message = resource.message {
+                                    realm?.execute({ realm in
+                                        realm.add(message, update: true)
+                                    })
+                                }
+                            default:
+                                break
+                            }
+                        })
+                    })
                 })
             case .error:
                 completion(lastMessageDate)

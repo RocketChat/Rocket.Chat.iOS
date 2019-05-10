@@ -59,17 +59,20 @@ final class SocketManager {
 
     // MARK: Connection
 
-    static func connect(_ url: URL, completion: @escaping SocketCompletion) {
+    static func connect(_ url: URL, sslCertificate: SSLClientCertificate? = nil, completion: @escaping SocketCompletion) {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
-        sharedInstance.socket = WebSocket(url: url)
-        sharedInstance.socket?.delegate = sharedInstance
+        var request = URLRequest(url: url)
+        request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
+
+        sharedInstance.socket = WebSocket(request: request)
+        sharedInstance.socket?.advancedDelegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
-        sharedInstance.socket?.headers = [
-            "Host": url.host ?? "",
-            "User-Agent": API.userAgent
-        ]
+
+        if let certificate = sslCertificate {
+            sharedInstance.socket?.sslClientCertificate = certificate
+        }
 
         sharedInstance.socket?.connect()
 
@@ -227,7 +230,7 @@ extension SocketManager {
 
 // MARK: WebSocketDelegate
 
-extension SocketManager: WebSocketDelegate {
+extension SocketManager: WebSocketAdvancedDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("[WebSocket] \(socket.currentURL)\n -  did connect")
@@ -241,7 +244,7 @@ extension SocketManager: WebSocketDelegate {
         SocketManager.send(object)
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    func websocketDidDisconnect(socket: WebSocket, error: Error?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
         if let handler = internalConnectionHandler {
@@ -255,13 +258,13 @@ extension SocketManager: WebSocketDelegate {
         state = .waitingForNetwork
     }
 
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    func websocketDidReceiveData(socket: WebSocket, data: Data, response: WebSocket.WSResponse) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
     static let messageHandlerQueue = DispatchQueue(label: "chat.rocket.websocket.handler", qos: .background)
 
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    func websocketDidReceiveMessage(socket: WebSocket, text: String, response: WebSocket.WSResponse) {
         let json = JSON(parseJSON: text)
 
         // JSON is invalid
@@ -279,13 +282,21 @@ extension SocketManager: WebSocketDelegate {
         }
     }
 
+    func websocketHttpUpgrade(socket: WebSocket, request: String) {
+        Log.debug("[WebSocket] http upgrade request (\(request))")
+    }
+
+    func websocketHttpUpgrade(socket: WebSocket, response: String) {
+        Log.debug("[WebSocket] http upgrade response (\(response))")
+    }
+
 }
 
 // MARK: WebSocketPongDelegate
 
 extension SocketManager: WebSocketPongDelegate {
 
-    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+    func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
 

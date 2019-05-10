@@ -75,12 +75,22 @@ final class ChatTitleView: UIView {
         }
     }
 
-    internal func updateTitleState() {
-        guard let subscription = viewModel.subscription else { return }
+    var mainThreadMessage: UnmanagedMessage? {
+        didSet {
+            guard let mainThreadMessage = mainThreadMessage else { return }
+            viewModel.mainThreadMessage = mainThreadMessage
 
+            DispatchQueue.main.async {
+                self.updateTitleState()
+                self.updateConnectionState()
+            }
+        }
+    }
+
+    internal func updateTitleState() {
         titleLabel.text = viewModel.title
 
-        if subscription.type == .directMessage {
+        if let subscription = viewModel.subscription, subscription.type == .directMessage {
             titleImage.isHidden = true
             viewStatus.backgroundColor = viewModel.iconColor
             viewStatus.isHidden = false

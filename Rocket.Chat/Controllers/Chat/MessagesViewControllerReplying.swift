@@ -34,7 +34,13 @@ extension MessagesViewController {
 
         composerView.textView.becomeFirstResponder()
 
-        composerViewModel.replyString = (onlyQuote ? message.quoteString : message.replyString) ?? ""
+        if onlyQuote {
+            composerViewModel.replyMessageIdentifier = ""
+            composerViewModel.quoteString = message.quoteString ?? ""
+        } else {
+            composerViewModel.replyMessageIdentifier = message.identifier ?? ""
+            composerViewModel.quoteString = ""
+        }
     }
 
     func stopReplying() {
@@ -43,6 +49,7 @@ extension MessagesViewController {
             self.composerView.layoutIfNeeded()
         }
 
-        self.composerViewModel.replyString = ""
+        composerViewModel.replyMessageIdentifier = ""
+        composerViewModel.quoteString = ""
     }
 }

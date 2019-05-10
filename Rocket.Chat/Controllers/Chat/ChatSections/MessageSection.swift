@@ -16,17 +16,22 @@ import SimpleImageViewer
 // swiftlint:disable type_body_length
 final class MessageSection: ChatSection {
     var object: AnyDifferentiable
+
     weak var controllerContext: UIViewController?
-    var messagesController: MessagesViewController? {
-        return controllerContext as? MessagesViewController
+    var messagesController: MessagesListProtocol? {
+        return controllerContext as? MessagesListProtocol
     }
 
     var collapsibleItemsState: [AnyHashable: Bool]
+    var isInverted = true
+    var isCompressedReplyLayout = true
 
-    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool]) {
+    init(object: AnyDifferentiable, controllerContext: UIViewController?, collapsibleItemsState: [AnyHashable: Bool], inverted: Bool = true, compressedLayout: Bool = true) {
         self.object = object
         self.controllerContext = controllerContext
         self.collapsibleItemsState = collapsibleItemsState
+        self.isInverted = inverted
+        self.isCompressedReplyLayout = compressedLayout
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -47,6 +52,35 @@ final class MessageSection: ChatSection {
         let sanitizedMessage = MessageTextCacheManager.shared.message(for: object.message)?.string
             .removingWhitespaces()
             .removingNewLines() ?? ""
+
+        // In this case, we want to return the whole cell right now
+        // because the compressed reply component should not present
+        // attachments, reactions, etc.
+        if isCompressedReplyLayout && object.message.isThreadReplyMessage {
+            cells.append(MessageReplyThreadChatItem(
+                user: user,
+                message: object.message,
+                sequential: object.isSequential
+            ).wrapped)
+
+            if let daySeparator = object.daySeparator {
+                cells.append(DateSeparatorChatItem(
+                    date: daySeparator
+                ).wrapped)
+            }
+
+            if object.containsUnreadMessageIndicator {
+                cells.append(UnreadMarkerChatItem(
+                    identifier: object.message.identifier
+                ).wrapped)
+            }
+
+            if object.containsLoader {
+                cells.append(LoaderChatItem().wrapped)
+            }
+
+            return cells
+        }
 
         if !object.message.isSystemMessage() {
             object.message.attachments.forEach { attachment in
@@ -230,13 +264,6 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
-        if !object.message.reactions.isEmpty {
-            cells.insert(ReactionsChatItem(
-                message: object.message,
-                reactions: object.message.reactions
-            ).wrapped, at: 0)
-        }
-
         if object.message.type == .jitsiCallStarted {
             cells.insert(MessageVideoCallChatItem(
                 user: nil,
@@ -251,7 +278,21 @@ final class MessageSection: ChatSection {
             ).wrapped, at: 0)
         }
 
-        if !object.isSequential && shouldAppendMessageHeader {
+        if object.message.isThreadMainMessage {
+            cells.insert(MessageMainThreadChatItem(
+                user: nil,
+                message: object.message
+            ).wrapped, at: 0)
+        }
+
+        if !object.message.reactions.isEmpty {
+            cells.insert(ReactionsChatItem(
+                message: object.message,
+                reactions: object.message.reactions
+            ).wrapped, at: 0)
+        }
+
+        if (object.message.isThreadReplyMessage || !object.isSequential) && shouldAppendMessageHeader {
             cells.append(BasicMessageChatItem(
                 user: user,
                 message: object.message
@@ -279,21 +320,23 @@ final class MessageSection: ChatSection {
             cells.append(LoaderChatItem().wrapped)
         }
 
-        return cells
+        return isInverted ? cells : cells.reversed()
     }
 
     func cell(for viewModel: AnyChatItem, on collectionView: UICollectionView, at indexPath: IndexPath) -> ChatCell {
         var cell = collectionView.dequeueChatCell(withReuseIdentifier: viewModel.relatedReuseIdentifier, for: indexPath)
 
         if var cell = cell as? BaseMessageCellProtocol {
-            cell.delegate = self.messagesController
+            if let controller = self.messagesController as? ChatMessageCellProtocol {
+                cell.delegate = controller
+            }
         }
 
         if let cell = cell as? BaseMessageCell {
             cell.messageSection = self
         }
 
-        cell.messageWidth = messagesController?.messageWidth() ?? 0
+        cell.messageWidth = messagesController?.messageWidth() ?? CGFloat(0)
         cell.viewModel = viewModel
         cell.configure(completeRendering: true)
         return cell

@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Connect";
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?";
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate";
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate";
+"auth.connect.ssl.certificate.password.title" = "Certificate Password";
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?";
+"auth.connect.ssl.certificate.remove" = "Remove Certificate";
 "auth.email_auth_prefix" = "Login with ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continue with ";
@@ -520,3 +526,9 @@
 "discussion.no_messages" = "No messages yet";
 "discussion.1_message" = "1 message";
 "discussion.x_messages" = "%@ messages";
+
+// Threads
+"threads.title" = "Threads";
+"threads.no_replies" = "No replies";
+"threads.1_reply" = "1 reply";
+"threads.x_replies" = "%@ replies";

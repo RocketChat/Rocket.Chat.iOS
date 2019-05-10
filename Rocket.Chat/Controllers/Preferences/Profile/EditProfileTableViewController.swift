@@ -525,7 +525,7 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
         let filename = String.random()
         var file: FileUpload?
 
-        if let image = info[.originalImage] as? UIImage {
+        if let image = info[.editedImage] as? UIImage {
             file = UploadHelper.file(
                 for: image.compressedForUpload,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",

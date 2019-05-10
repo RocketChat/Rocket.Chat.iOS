@@ -20,7 +20,7 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
     weak var usernameTapGesture: UITapGestureRecognizer?
     weak var avatarTapGesture: UITapGestureRecognizer?
 
-    weak var usernameLabel: UILabel!
+    weak var usernameLabel: UILabel?
     lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
 
@@ -38,9 +38,9 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
 
     func configure(
         with avatarView: AvatarView,
-        date: UILabel,
-        status: UIImageView,
-        and username: UILabel,
+        date: UILabel?,
+        status: UIImageView?,
+        and username: UILabel?,
         completeRendering: Bool
     ) {
         guard
@@ -52,15 +52,15 @@ class BaseMessageCell: UICollectionViewCell, BaseMessageCellProtocol, ChatCell {
 
         usernameLabel = username
 
-        date.text = viewModel.dateFormatted
-        username.text = viewModel.message?.alias ?? user.displayName
+        date?.text = viewModel.dateFormatted
+        username?.text = viewModel.message?.alias ?? user.displayName
 
         if viewModel.message?.failed == true {
-            status.isHidden = false
-            status.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
-            status.tintColor = .red
+            status?.isHidden = false
+            status?.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            status?.tintColor = .red
         } else {
-            status.isHidden = true
+            status?.isHidden = true
         }
 
         if completeRendering {
