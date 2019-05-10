@@ -108,6 +108,10 @@ class LoginTableViewController: BaseTableViewController {
 
         updateFieldsPlaceholders()
         updateUsernameSettings()
+
+        if !AppManager.supportsMultiServer {
+            navigationItem.hidesBackButton = true
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
