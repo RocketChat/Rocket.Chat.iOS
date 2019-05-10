@@ -220,14 +220,14 @@ extension UnmanagedMessage {
         return messageText
     }
 
-    internal var mainThreadMessage: String {
+    internal var mainThreadMessage: String? {
         guard
             isThreadReplyMessage,
             let threadMessageId = threadMessageId,
             !threadMessageId.isEmpty,
             let mainMessage = Message.find(withIdentifier: threadMessageId)?.unmanaged
         else {
-            return ""
+            return nil
         }
 
         return mainMessage.mainThreadTitle

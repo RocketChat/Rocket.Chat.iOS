@@ -323,6 +323,7 @@
 		418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C74421FA3813F00499577 /* CompoundPickerViewDelegate.swift */; };
 		418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C74441FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift */; };
 		41900C271D9FE35400308EF4 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41900C261D9FE35400308EF4 /* Attachment.swift */; };
+		4190511E2281B5AF009BC573 /* SubscriptionsDirectoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190511D2281B5AF009BC573 /* SubscriptionsDirectoryHeaderView.swift */; };
 		4190693B21D0D8C600FE2573 /* Jitsi.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4190693A21D0D8C600FE2573 /* Jitsi.storyboard */; };
 		4190693D21D0DE0500FE2573 /* JitsiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */; };
 		4190693F21D0E7F600FE2573 /* MessageVideoCallChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */; };
@@ -1322,6 +1323,7 @@
 		418C74421FA3813F00499577 /* CompoundPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundPickerViewDelegate.swift; sourceTree = "<group>"; };
 		418C74441FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundPickerViewDelegateSpec.swift; sourceTree = "<group>"; };
 		41900C261D9FE35400308EF4 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		4190511D2281B5AF009BC573 /* SubscriptionsDirectoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsDirectoryHeaderView.swift; sourceTree = "<group>"; };
 		4190693A21D0D8C600FE2573 /* Jitsi.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Jitsi.storyboard; sourceTree = "<group>"; };
 		4190693C21D0DE0500FE2573 /* JitsiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiViewModel.swift; sourceTree = "<group>"; };
 		4190693E21D0E7F600FE2573 /* MessageVideoCallChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVideoCallChatItem.swift; sourceTree = "<group>"; };
@@ -2938,6 +2940,7 @@
 				41D3668320C0323000970B99 /* SubscriptionsSortingView.xib */,
 				41D3668520C0323100970B99 /* SubscriptionsSortingViewModel.swift */,
 				332BCB1B20DA6D5E00C8CAD2 /* SubscriptionsSortingHeaderView.swift */,
+				4190511D2281B5AF009BC573 /* SubscriptionsDirectoryHeaderView.swift */,
 				33FB9D3D20CEF610005AF504 /* SubscriptionsSortingSeparatorView.swift */,
 			);
 			path = Subscriptions;
@@ -5363,6 +5366,7 @@
 				41FBF4E720BC320E0080D00D /* ServersListView.swift in Sources */,
 				334F78EC211DC639003D0C5A /* UnmanagedSubscription.swift in Sources */,
 				80054D001FDB1FA200F5ECF9 /* Alert.swift in Sources */,
+				4190511E2281B5AF009BC573 /* SubscriptionsDirectoryHeaderView.swift in Sources */,
 				809D577920ED06E50014C364 /* UINavigationControllerRedrawBar.swift in Sources */,
 				8032E3E820362EF5009D33CE /* UpdateMessageRequest.swift in Sources */,
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,

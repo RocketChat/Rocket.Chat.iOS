@@ -91,10 +91,24 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
 
     var threadIdentifier: String? {
         didSet {
-            guard
-                let threadIdentifier = threadIdentifier,
-                let message = Message.find(withIdentifier: threadIdentifier)
-            else {
+            guard let threadIdentifier = threadIdentifier else { return }
+            guard let message = Message.find(withIdentifier: threadIdentifier) else {
+                let realm = Realm.current
+                API.current()?.fetch(GetMessageRequest(msgId: threadIdentifier), completion: { [weak self] response in
+                    switch response {
+                    case .resource(let resource):
+                        if let message = resource.message {
+                            realm?.execute({ realm in
+                                realm.add(message, update: true)
+                            })
+                        }
+
+                        self?.threadIdentifier = threadIdentifier
+                    default:
+                        break
+                    }
+                })
+
                 return
             }
 
