@@ -215,8 +215,12 @@ extension AppManager {
                     if AppManager.supportsMultiServer {
                         WindowManager.open(.auth(serverUrl: "", credentials: nil))
                     } else {
-                        WindowManager.open(.auth(serverUrl: "", credentials: nil), viewControllerIdentifier: "ConnectServerNav")
-                    }                }
+                        WindowManager.open(
+                            .auth(serverUrl: "", credentials: nil),
+                            viewControllerIdentifier: "ConnectServerNav"
+                        )
+                    }
+                }
 
                 completion?()
             }
