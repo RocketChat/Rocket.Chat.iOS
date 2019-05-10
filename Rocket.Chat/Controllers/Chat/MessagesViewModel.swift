@@ -553,7 +553,7 @@ final class MessagesViewModel {
      - oldestMessage: This is the parameter that will be sent to the server in
      order to get the correct page of data.
      */
-    // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func fetchThreadMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
         guard
             requestingData == .none,
@@ -633,6 +633,16 @@ final class MessagesViewModel {
                 self.requestingData = .none
                 self.hasMoreData = self.showing < self.total
 
+                // Persist messages in database
+                Realm.current?.execute({ realm in
+                    for message in resource.raw?["messages"].array ?? [] {
+                        let managedMessage = Message()
+                        managedMessage.map(message, realm: realm)
+                        realm.add(managedMessage, update: true)
+                    }
+                })
+
+                // Update data into the UI
                 self.updateData()
             }
         }
@@ -810,6 +820,12 @@ final class MessagesViewModel {
      - returns: If the message is sequential.
      */
     func isSequential(message: UnmanagedMessage, previousMessage: UnmanagedMessage) -> Bool {
+        // Being a reply thread, everything can be sequential if it's just following
+        // the same thread.
+        if message.isThreadReplyMessage && previousMessage.isThreadReplyMessage {
+            return message.threadMessageId == previousMessage.threadMessageId
+        }
+
         guard message.groupable && previousMessage.groupable else {
             return false
         }
@@ -820,10 +836,6 @@ final class MessagesViewModel {
 
         if (message.failed, previousMessage.failed) != (false, false) {
             return false
-        }
-
-        if message.isThreadReplyMessage && previousMessage.isThreadReplyMessage {
-            return message.threadMessageId == previousMessage.threadMessageId
         }
 
         if previousMessage.isThreadReplyMessage || previousMessage.isThreadMainMessage {

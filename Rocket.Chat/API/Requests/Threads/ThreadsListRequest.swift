@@ -6,7 +6,7 @@
 //  Copyright © 2019 Rocket.Chat. All rights reserved.
 //
 
-// TODO: Add documentation link
+// DOCS: https://rocket.chat/docs/developer-guides/rest-api/chat/getthreadslist/
 
 import Foundation
 

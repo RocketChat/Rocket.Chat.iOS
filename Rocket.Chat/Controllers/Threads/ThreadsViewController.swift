@@ -35,6 +35,8 @@ final class ThreadsViewController: RocketChatViewController, MessagesListProtoco
 
         isInverted = false
 
+        ThemeManager.addObserver(self)
+
         registerCells()
         loadMoreData()
     }
