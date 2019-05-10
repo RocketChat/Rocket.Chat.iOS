@@ -438,12 +438,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
         let cell = viewModel.hasLastMessage ? cellForSubscription(at: indexPath) : cellForSubscriptionCondensed(at: indexPath)
         (cell as? SwipeTableViewCell)?.delegate = self
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            cell.accessoryType = .none
-        } else {
-            cell.accessoryType = .disclosureIndicator
-        }
-
+        cell.accessoryType = .none
         return cell
     }
 
@@ -585,6 +580,10 @@ extension SubscriptionsViewController: SwipeTableViewCellDelegate {
         var options = SwipeOptions()
         options.expansionStyle = .selection
         options.transitionStyle = .border
+
+        if orientation == .left {
+            options.backgroundColor = view.theme?.tintColor ?? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        }
         return options
     }
 }

@@ -83,13 +83,17 @@ extension Subscription {
         })
     }
 
-    func fetchMessages(_ limit: Int = 20, lastMessageDate: Date? = nil) -> [Message] {
+    func fetchMessages(_ limit: Int = 20, lastMessageDate: Date? = nil, threadIdentifier: String? = nil) -> [Message] {
         var limitedMessages: [Message] = []
 
         guard var messages = fetchMessagesQueryResults() else { return [] }
 
         if let lastMessageDate = lastMessageDate {
             messages = messages.filter("createdAt < %@", lastMessageDate)
+        }
+
+        if let threadIdentifier = threadIdentifier {
+            messages = messages.filter("identifier == %@ OR threadMessageId == %@", threadIdentifier, threadIdentifier)
         }
 
         let totalMessagesIndexes = messages.count - 1
@@ -118,6 +122,10 @@ extension Subscription {
         }
 
         return filteredMessages.sorted(byKeyPath: "createdAt", ascending: true)
+    }
+
+    func fetchMessagesQueryResultsFor(threadIdentifier: String) -> Results<Message>? {
+        return fetchMessagesQueryResults()?.filter("threadMessageId == %@", threadIdentifier)
     }
 
     func updateFavorite(_ favorite: Bool) {

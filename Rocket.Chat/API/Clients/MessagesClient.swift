@@ -13,7 +13,12 @@ struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
     // swiftlint:disable function_body_length
-    func sendMessage(_ message: Message, subscription: UnmanagedSubscription, realm: Realm? = Realm.current) {
+    func sendMessage(
+        _ message: Message,
+        subscription: UnmanagedSubscription,
+        realm: Realm? = Realm.current,
+        threadIdentifier: String? = nil
+    ) {
         guard let id = message.identifier else { return }
 
         let subscriptionIdentifier = subscription.rid
@@ -74,6 +79,7 @@ struct MessagesClient: APIClient {
             id: id,
             roomId: subscription.rid,
             text: message.text,
+            threadIdentifier: threadIdentifier?.isEmpty ?? true ? nil : threadIdentifier,
             messageType: message.internalType.isEmpty ? nil : message.internalType
         )
 
@@ -89,7 +95,15 @@ struct MessagesClient: APIClient {
         }
     }
 
-    func sendMessage(text: String, internalType: String? = nil, subscription: UnmanagedSubscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
+    func sendMessage(
+        text: String,
+        internalType: String? = nil,
+        subscription: UnmanagedSubscription,
+        threadIdentifier: String? = nil,
+        id: String = String.random(18),
+        user: User? = AuthManager.currentUser(),
+        realm: Realm? = Realm.current
+    ) {
         let message = Message()
         message.internalType = internalType ?? ""
         message.updatedAt = nil
@@ -99,8 +113,9 @@ struct MessagesClient: APIClient {
         message.userIdentifier = user?.identifier
         message.identifier = id
         message.temporary = true
+        message.threadMessageId = threadIdentifier ?? ""
 
-        sendMessage(message, subscription: subscription, realm: realm)
+        sendMessage(message, subscription: subscription, realm: realm, threadIdentifier: threadIdentifier)
     }
 
     @discardableResult

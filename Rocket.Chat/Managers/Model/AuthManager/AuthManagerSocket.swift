@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import Starscream
 
 extension AuthManager {
 
@@ -43,7 +44,8 @@ extension AuthManager {
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard
             let url = URL(string: auth.serverURL),
-            let socketURL = url.socketURL()
+            let socketURL = url.socketURL(),
+            let servers = DatabaseManager.servers
         else {
             return
         }
@@ -51,7 +53,20 @@ extension AuthManager {
         turnAllUsersOffline()
         removeAllPrivateMessages()
 
-        SocketManager.connect(socketURL) { (socket, _) in
+        let selectedIndex = DatabaseManager.selectedIndex
+        let server = servers[selectedIndex]
+
+        var sslClientCertificate: SSLClientCertificate?
+        if let path = server[ServerPersistKeys.sslClientCertificatePath] {
+            let fileURL = URL(fileURLWithPath: path)
+
+            sslClientCertificate = try? SSLClientCertificate(
+                pkcs12Url: fileURL,
+                password: server[ServerPersistKeys.sslClientCertificatePassword] ?? ""
+            )
+        }
+
+        SocketManager.connect(socketURL, sslCertificate: sslClientCertificate) { (socket, _) in
             guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
@@ -214,7 +229,7 @@ extension AuthManager {
             "msg": "method",
             "method": "sendForgotPasswordEmail",
             "params": [email]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }

@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "連接";
 "auth.connect.ssl_required" = "您連線的伺服器必須支援SSL";
 "auth.connect.connecting" = "連接中...請繫好安全帶";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "登入方式";
 "auth.email_auth" = "電子郵件";
 "auth.login_service_prefix" = "使用";// TODO : need to add postfix in chinese
@@ -520,3 +526,9 @@
 "discussion.no_messages" = "No messages yet"; // TODO
 "discussion.1_message" = "1 message"; // TODO
 "discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

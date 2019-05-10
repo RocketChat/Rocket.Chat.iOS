@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "Se requiere que su servidor sea compatible con SSL";
 "auth.connect.connecting" = "Conexión en progreso. Mantener apretado";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "Login with "; // TODO
 "auth.email_auth" = "e-mail"; // TODO
 "auth.login_service_prefix" = "Continue with "; // TODO
@@ -520,3 +526,9 @@
 "discussion.no_messages" = "No messages yet"; // TODO
 "discussion.1_message" = "1 message"; // TODO
 "discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

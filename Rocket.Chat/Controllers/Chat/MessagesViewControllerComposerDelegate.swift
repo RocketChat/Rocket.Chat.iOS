@@ -10,7 +10,7 @@ import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
     func replyViewDidHide(_ replyView: ReplyView) {
-        composerViewModel.replyString = ""
+        composerViewModel.replyMessageIdentifier = ""
     }
 
     func replyViewDidShow(_ replyView: ReplyView) {

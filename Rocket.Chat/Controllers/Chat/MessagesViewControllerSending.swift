@@ -9,11 +9,15 @@
 import RocketChatViewController
 
 extension MessagesViewController {
+
     func composerView(_ composerView: ComposerView, didPressSendButton button: UIButton) {
         if composerViewModel.messageToEdit != nil {
             commitMessageEdit()
         } else {
-            viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
+            viewModel.sendTextMessage(
+                text: composerView.textView.text + composerViewModel.quoteString,
+                replyThreadIdentifier: composerViewModel.replyMessageIdentifier
+            )
         }
 
         composerView.textView.text = ""
@@ -21,4 +25,5 @@ extension MessagesViewController {
         stopReplying()
         updateDraftMessage()
     }
+
 }
