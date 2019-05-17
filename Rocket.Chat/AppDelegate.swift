@@ -34,7 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.subscriptions)
         } else {
-            WindowManager.open(.auth(serverUrl: "", credentials: nil))
+            if AppManager.supportsMultiServer {
+                WindowManager.open(.auth(serverUrl: "", credentials: nil))
+            } else {
+                WindowManager.open(.auth(serverUrl: "", credentials: nil), viewControllerIdentifier: "ConnectServerNav")
+            }
         }
 
         initNotificationWindow()
