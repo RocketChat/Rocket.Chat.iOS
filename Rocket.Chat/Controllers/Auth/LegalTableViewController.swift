@@ -26,6 +26,9 @@ class LegalTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = localized("auth.login.legal")
+        navigationItem.applyCloseButtonAccessibility()
+
         if let nav = navigationController as? AuthNavigationController {
             nav.setGrayTheme()
         }

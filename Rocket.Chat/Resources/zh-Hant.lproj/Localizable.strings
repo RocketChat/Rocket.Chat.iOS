@@ -135,6 +135,7 @@
 "auth.login.buttonResetPassword" = "忘記密碼";
 "auth.login.agree_label" = "繼續表示您同意我們的";
 "auth.login.agree_and" = "和";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "服務條款";
 "auth.login.agree_privacypolicy" = "隱私權政策";
 

@@ -121,6 +121,7 @@ final class ConnectServerViewController: BaseViewController {
             navigationItem.leftBarButtonItem = nil
         } else {
             navigationItem.leftBarButtonItem = buttonClose
+            navigationItem.applyCloseButtonAccessibility()
         }
 
         selectedServer = DatabaseManager.selectedIndex
