@@ -10,6 +10,11 @@
 "auth.connect.urlfield.label" = "Server URL";
 "auth.connect.urlfield.hint" = "Inserisci qui l'URL del tuo server.";
 
+"auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
+
 "auth.authentication.emailorusername.label" = "E-mail o nome utente";
 "auth.authentication.emailorusername.hint" = "Inserisci qui il tuo indirizzo e-mail o il tuo nome utente.";
 "auth.authentication.password.label" = "Password";
