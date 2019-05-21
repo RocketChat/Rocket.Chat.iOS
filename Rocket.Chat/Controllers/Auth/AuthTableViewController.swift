@@ -69,7 +69,7 @@ final class AuthTableViewController: BaseTableViewController {
         }
 
         collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        collapsibleAuthSeparatorRow.showMoreButton.applyShowMoreButtonAccessibility()
+        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_more_options.label")
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -127,7 +127,8 @@ final class AuthTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         title = serverURL?.host
-        navigationItem.applyMoreButtonAccessibility()
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
+
         setupTableView()
 
         guard let settings = serverPublicSettings else { return }
@@ -258,17 +259,15 @@ final class AuthTableViewController: BaseTableViewController {
         if isLoginServicesCollapsed {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-                self.collapsibleAuthSeparatorRow.showMoreButton.applyShowMoreButtonAccessibility()
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_more_options.label")
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
-                self.collapsibleAuthSeparatorRow.showMoreButton.applyShowLessButtonAccessibility()
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_less_options.label")
             }
-            
-
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
     }
@@ -361,14 +360,4 @@ extension AuthTableViewController {
 
 extension AuthTableViewController {
     override func applyTheme() { }
-}
-
-extension UIButton {
-    func applyShowMoreButtonAccessibility() {
-        accessibilityLabel = VOLocalizedString("auth.show_more_options.label")
-    }
-
-    func applyShowLessButtonAccessibility() {
-        accessibilityLabel = VOLocalizedString("auth.show_less_options.label")
-    }
 }

@@ -102,7 +102,7 @@ class LoginTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = serverURL?.host
-        navigationItem.applyMoreButtonAccessibility()
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -323,15 +323,5 @@ extension LoginTableViewController: UITextFieldDelegate {
 extension LoginTableViewController {
     override func applyTheme() {
         self.forgotPasswordButton.setTitleColor(UIColor.RCBlue(), for: .normal)
-    }
-}
-
-extension UINavigationItem {
-    func applyMoreButtonAccessibility() {
-        rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
-    }
-
-    func applyCloseButtonAccessibility() {
-        leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
     }
 }
