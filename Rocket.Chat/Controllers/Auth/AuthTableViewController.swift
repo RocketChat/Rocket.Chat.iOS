@@ -69,7 +69,7 @@ final class AuthTableViewController: BaseTableViewController {
         }
 
         collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_more_options.label")
+        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = applyShowMoreButtonAccessibility()
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -253,20 +253,28 @@ final class AuthTableViewController: BaseTableViewController {
         performSegue(withIdentifier: "Signup", sender: self)
     }
 
+    func applyShowMoreButtonAccessibility() -> String? {
+        if isLoginServicesCollapsed {
+            return VOLocalizedString("auth.show_more_options.label")
+        } else {
+            return VOLocalizedString("auth.show_less_options.label")
+        }
+    }
+
     func showOrHideLoginServices() {
         isLoginServicesCollapsed = !isLoginServicesCollapsed
 
         if isLoginServicesCollapsed {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_more_options.label")
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = self.applyShowMoreButtonAccessibility()
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = VOLocalizedString("auth.show_less_options.label")
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = self.applyShowMoreButtonAccessibility()
             }
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
