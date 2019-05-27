@@ -253,8 +253,8 @@ final class AuthTableViewController: BaseTableViewController {
         performSegue(withIdentifier: "Signup", sender: self)
     }
 
-    func applyShowMoreButtonAccessibility() -> String? {
-        if isLoginServicesCollapsed {
+    var showMoreButtonAccessibilityLabel: String {
+            if isLoginServicesCollapsed {
             return VOLocalizedString("auth.show_more_options.label")
         } else {
             return VOLocalizedString("auth.show_less_options.label")
@@ -267,14 +267,16 @@ final class AuthTableViewController: BaseTableViewController {
         if isLoginServicesCollapsed {
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = self.applyShowMoreButtonAccessibility()
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
+                    self.showMoreButtonAccessibilityLabel
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
             UIView.animate(withDuration: 0.5) {
-                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = self.applyShowMoreButtonAccessibility()
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: pi * 2)
+                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
+                    self.showMoreButtonAccessibilityLabel
             }
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
