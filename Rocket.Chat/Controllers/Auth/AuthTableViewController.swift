@@ -254,7 +254,7 @@ final class AuthTableViewController: BaseTableViewController {
     }
 
     var showMoreButtonAccessibilityLabel: String {
-            if isLoginServicesCollapsed {
+        if isLoginServicesCollapsed {
             return VOLocalizedString("auth.show_more_options.label")
         } else {
             return VOLocalizedString("auth.show_less_options.label")
