@@ -69,7 +69,7 @@ final class AuthTableViewController: BaseTableViewController {
         }
 
         collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = applyShowMoreButtonAccessibility()
+        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showMoreButtonAccessibilityLabel
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -253,7 +253,7 @@ final class AuthTableViewController: BaseTableViewController {
         performSegue(withIdentifier: "Signup", sender: self)
     }
 
-    var showMoreButtonAccessibilityLabel: String {
+    var showMoreButtonAccessibilityLabel: String? {
         if isLoginServicesCollapsed {
             return VOLocalizedString("auth.show_more_options.label")
         } else {
@@ -266,7 +266,7 @@ final class AuthTableViewController: BaseTableViewController {
 
         if isLoginServicesCollapsed {
             UIView.animate(withDuration: 0.5) {
-                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi)
                 self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
                     self.showMoreButtonAccessibilityLabel
             }
@@ -274,7 +274,7 @@ final class AuthTableViewController: BaseTableViewController {
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
             UIView.animate(withDuration: 0.5) {
-                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: pi * 2)
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi * 2)
                 self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
                     self.showMoreButtonAccessibilityLabel
             }
