@@ -121,6 +121,14 @@ final class AuthTableViewController: BaseTableViewController {
         return extraLoginServiceIndexPaths
     }()
 
+    var showMoreButtonAccessibilityLabel: String? {
+        if isLoginServicesCollapsed {
+            return VOLocalizedString("auth.show_more_options.label")
+        } else {
+            return VOLocalizedString("auth.show_less_options.label")
+        }
+    }
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -251,14 +259,6 @@ final class AuthTableViewController: BaseTableViewController {
 
     @objc func showSignup() {
         performSegue(withIdentifier: "Signup", sender: self)
-    }
-
-    var showMoreButtonAccessibilityLabel: String? {
-        if isLoginServicesCollapsed {
-            return VOLocalizedString("auth.show_more_options.label")
-        } else {
-            return VOLocalizedString("auth.show_less_options.label")
-        }
     }
 
     func showOrHideLoginServices() {
