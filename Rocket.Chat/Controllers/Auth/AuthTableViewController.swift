@@ -121,13 +121,10 @@ final class AuthTableViewController: BaseTableViewController {
         return extraLoginServiceIndexPaths
     }()
 
-    var showMoreButtonAccessibilityLabel: String? {
-        if isLoginServicesCollapsed {
-            return VOLocalizedString("auth.show_more_options.label")
-        } else {
-            return VOLocalizedString("auth.show_less_options.label")
-        }
-    }
+    // MARK: Accessibility
+
+    var showMoreButtonAccessibilityLabel: String? = VOLocalizedString("auth.show_more_options.label")
+    var showLessButtonAccessibilityLabel: String? = VOLocalizedString("auth.show_less_options.label")
 
     // MARK: Life Cycle
 
@@ -265,18 +262,16 @@ final class AuthTableViewController: BaseTableViewController {
         isLoginServicesCollapsed = !isLoginServicesCollapsed
 
         if isLoginServicesCollapsed {
+            collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showMoreButtonAccessibilityLabel
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
-                    self.showMoreButtonAccessibilityLabel
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
+            collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showLessButtonAccessibilityLabel
             UIView.animate(withDuration: 0.5) {
                 self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi * 2)
-                self.collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel =
-                    self.showMoreButtonAccessibilityLabel
             }
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
