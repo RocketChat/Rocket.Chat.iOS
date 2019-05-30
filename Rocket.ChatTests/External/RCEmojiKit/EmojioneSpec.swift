@@ -66,7 +66,7 @@ class EmojioneSpec: XCTestCase {
             XCTAssert(Emojione.transform(string: string) == ":supercalifragilisticexpialidocious,:pneumonoultramicroscopicsilicovolcanoconiosis😃a")
             expect.fulfill()
         }
-        waitForExpectations(timeout: 5) { (error) in
+        waitForExpectations(timeout: 10) { (error) in
             if error != nil {
                 XCTFail("The regex parsing took too long, it may have gone through a catastrophic backtracking")
             }

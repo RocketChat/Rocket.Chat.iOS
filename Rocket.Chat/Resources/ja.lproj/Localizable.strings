@@ -135,6 +135,7 @@
 "auth.login.buttonResetPassword" = "パスワードをお忘れですか?";
 "auth.login.agree_label" = "続けることで、あなたは私達に同意します。";
 "auth.login.agree_and" = "と";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "利用規約";
 "auth.login.agree_privacypolicy" = "個人情報保護方針";
 

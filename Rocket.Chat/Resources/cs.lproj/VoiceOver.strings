@@ -10,6 +10,11 @@
 "auth.connect.urlfield.label" = "Server URL";
 "auth.connect.urlfield.hint" = "Insert your server's URL here.";
 
+"auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
+
 "auth.authentication.emailorusername.label" = "Email or Username";
 "auth.authentication.emailorusername.hint" = "Insert your email or username here.";
 "auth.authentication.password.label" = "Password";

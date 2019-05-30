@@ -10,6 +10,11 @@
 "auth.connect.urlfield.label" = "URL-адрес сервера";
 "auth.connect.urlfield.hint" = "Введите URL своего сервера здесь.";
 
+"auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
+
 "auth.authentication.emailorusername.label" = "Электронная почта или имя пользователя";
 "auth.authentication.emailorusername.hint" = "Вставьте свою электронную почту или имя пользователя здесь.";
 "auth.authentication.password.label" = "Пароль";
