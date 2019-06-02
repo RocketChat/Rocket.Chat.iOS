@@ -27,4 +27,9 @@ extension UIFont {
     func boldItalic() -> UIFont? {
         return withTraits(.traitBold, .traitItalic)
     }
+
+    func semibold() -> UIFont? {
+        return UIFont.systemFont(ofSize: self.pointSize, weight: .semibold)
+    }
+
 }

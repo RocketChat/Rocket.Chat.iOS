@@ -119,4 +119,62 @@ final class UnmanagedMessageSpec: XCTestCase {
         XCTAssertEqual(unmanagedMessage.reactions.first?.usernames.first, "username")
     }
 
+    func testDiscussionMapping() {
+        let discussionDate = Date()
+
+        let testMessage = Message.testInstance()
+        testMessage.discussionRid = "rid"
+        testMessage.discussionLastMessage = discussionDate
+        testMessage.discussionMessagesCount = 100
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertEqual(unmanagedMessage.discussionRid, "rid")
+        XCTAssertEqual(unmanagedMessage.discussionLastMessage, discussionDate)
+        XCTAssertEqual(unmanagedMessage.discussionMessagesCount, 100)
+    }
+
+    func testThreadMapping() {
+        let testMessage = Message.testInstance()
+        testMessage.threadMessagesCount = 100
+        testMessage.threadMessageId = "id123"
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertEqual(unmanagedMessage.threadMessagesCount, 100)
+        XCTAssertEqual(unmanagedMessage.threadMessageId, "id123")
+    }
+
+    func testThreadMainMessageCheck() {
+        let testMessage = Message.testInstance()
+        testMessage.threadMessagesCount = 100
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertTrue(unmanagedMessage.isThreadMainMessage)
+        XCTAssertFalse(unmanagedMessage.isThreadReplyMessage)
+    }
+
+    func testThreadReplyMessageCheck() {
+        let testMessage = Message.testInstance()
+        testMessage.threadMessageId = "id123"
+
+        guard let unmanagedMessage = testMessage.unmanaged else {
+            XCTFail("unamanged message was not created")
+            return
+        }
+
+        XCTAssertFalse(unmanagedMessage.isThreadMainMessage)
+        XCTAssertTrue(unmanagedMessage.isThreadReplyMessage)
+    }
+
 }

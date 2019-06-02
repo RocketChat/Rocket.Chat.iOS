@@ -1,0 +1,535 @@
+// Global
+"global.ok" = "OK";
+"global.yes" = "Yes";
+"global.no" = "No";
+"global.cancel" = "取消";
+"global.error" = "錯誤";
+
+// Errors
+"error.socket.default_error.title" = "哎呀!";
+"error.socket.default_error.message" = "發生了一點錯誤>_<，請稍候試試";
+
+"error.login.title" = "哎呀!";
+"error.login.message" = "登入的時候發生了點錯誤";
+
+"error.signup.title" = "哎呀!";
+"error.signup.empty_input.message" = "登入時需要填寫這些欄位";
+
+"error.login_unauthorized.title" = "哎呀!";
+"error.login_unauthorized.message" = "認證被拒絕了！再試一次吧";
+
+// Alerts
+"alert.connection.invalid_url.title" = "哎呀!";
+"alert.connection.invalid_url.message" = "伺服器地址無效。點點這裡再試一次吧!";
+
+"alert.connection.not_secured.title" = "哎呀!";
+"alert.connection.not_secured.message" = "無法與伺服器安全連線，請確認伺服器是否支援SSL";
+
+"alert.connection.socket_error.title" = "哎呀!";
+"alert.connection.socket_error.message" = "無法連接到伺服器!";
+
+"alert.connection.invalid_version.title" = "哎呀!";
+"alert.connection.invalid_version.message" = "您嘗試連接的伺服器不支援目前的應用程式本版： %@.\n\n至少要： %@.";
+
+"alert.settings.set_mail_app.title" = "哎呀!";
+"alert.settings.set_mail_app.message" = "沒有電子信箱。要發送電子郵件必須先設定電子信箱。";
+
+"alert.feature.wip.title" = "哎呀!";
+"alert.feature.wip.message" = "我們正在努力開發這個功能，敬請照帶！";
+
+"alert.insecure_image.title" = "安全警告";
+"alert.insecure_image.message" = "您使用的圖片無法載入，只允許SSL安全連接的資源";
+
+"alert.socket_error.invalid_user.title" = "登入時間已到期";
+"alert.socket_error.invalid_user.message" = "您的登入時間已到期，請重新登入。";
+
+"alert.login_service_error.title" = "認證錯誤";
+"alert.login_service_error.message" = "登入失敗，請重試";
+
+"alert.authorization_error.title" = "認證錯誤";
+"alert.authorization_error.create_channel.description" = "建立新頻道失敗";
+
+"alert.unsupported_feature.title" = "功能不支援";
+"alert.unsupported_feature.message" = "目前伺服器版本：%@. 此功能僅 %@ 及以上版本支援.";
+
+"alert.upload_error.title" = "上傳失敗";
+"alert.upload_error.message" = "上傳檔案時發生錯誤，請重新試試";
+
+"alert.upload_dialog.title" = "上傳檔案";
+"alert.upload_dialog.placeholder.title" = "檔案名稱";
+"alert.upload_dialog.placeholder.description" = "檔案描述";
+"alert.upload_dialog.action.upload" = "上傳";
+
+"alert.email_verification.title" = "驗證電子郵件";
+"alert.email_verification.message" = "我們發送了一封驗證郵件。如果您沒有收到郵件，請回來重試一次。";
+
+"alert.discarding_changes.title" = "修改並保存";
+"alert.discarding_changes.message" = "放棄修改，沒有保存。";
+"alert.load_profile_error.title" = "資料載入失敗";
+"alert.load_profile_error.message" = "載入您的資料時發生錯誤，請重新試試。";
+"alert.password_mismatch_error.title" = "密碼錯誤";
+"alert.password_mismatch_error.message" = "密碼不匹配，請確認並重試";
+"alert.update_profile_error.title" = "更新失敗";
+"alert.update_profile_error.message" = "更新您的資料失敗，請重新試試.";
+"alert.update_password_error.title" = "修改密碼失敗";
+"alert.update_password_error.message" = "修改密碼失敗，請重新試試";
+"alert.update_profile_empty_fields.title" = "請填滿所有欄位";
+"alert.update_profile_empty_fields.message" = "您必須填滿所有欄位";
+"alert.update_profile_invalid_email.title" = "電子信箱無效";
+"alert.update_profile_invalid_email.message" = "電子信箱看起來有點問題，請確認並重新試試";
+"alert.password_empty_fields.title" = "沒有輸入密碼";
+"alert.password_empty_fields.message" = "請填寫密碼和確認密碼";
+"alert.update_profile_success.title" = "資料更新完成";
+"alert.update_password_success.title" = "密碼更新完成";
+
+"alert.logout.confirmation.title" = "從伺服器登出";
+"alert.logout.confirmation.message" = "您確定要從伺服器 \"%@\"登出嗎?";
+"alert.logout.confirmation.confirm" = "登出";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "伺服器重新導向網址";
+"connection.server.redirect.alert.message" = "看起來伺服器網址導向到:\n\n%@\n\n您確認要重新導向嗎?";
+"connection.server.redirect.alert.confirm" = "是的";
+
+// Socket Connection
+"connection.title" = "登入到伺服器";
+"connection.button_connect" = "連接";
+"connection.server_url.placeholder" = "your-company.rocket.chat";
+"connection.offline.banner.message" = "您斷線了，請重新連接";
+"connection.connecting.banner.message" = "連接中...";
+"connection.waiting_for_network.banner.message" = "等待網路";
+
+// Onboarding
+"onboarding.label_welcome" = "歡迎來到Rocket Chat";
+"onboarding.label_subtitle" = "團隊協議";// TODO
+"onboarding.button_connect_server" = "連接到伺服器";
+"onboarding.button_create_server" = "建立新的伺服器";
+"onboarding.button_join_community_prefix" = "加入社群";
+
+// Auth
+"auth.connect.button_connect" = "連接";
+"auth.connect.ssl_required" = "您連線的伺服器必須支援SSL";
+"auth.connect.connecting" = "連接中...請繫好安全帶";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
+"auth.email_auth_prefix" = "登入方式";
+"auth.email_auth" = "電子郵件";
+"auth.login_service_prefix" = "使用";// TODO : need to add postfix in chinese
+
+"auth.signup_title" = "登入";
+"auth.signup.button_register" = "註冊";
+"auth.signup.button_next" = "下一步";
+"auth.signup.custom_fields_title" = "完成註冊";
+
+"auth.login.login_title" = "登入";
+"auth.login.button_login_title" = "登入";
+"auth.login.create_account_prefix" = "沒有帳戶?";
+"auth.login.create_account" = "\n建立帳戶";
+"auth.login.username.placeholder" = "電子郵件或帳戶";
+"auth.login.password.placeholder" = "密碼";
+"auth.login.buttonRegister" = "建立帳戶";
+"auth.login.buttonResetPassword" = "忘記密碼";
+"auth.login.agree_label" = "繼續表示您同意我們的";
+"auth.login.agree_and" = "和";
+"auth.login.legal" = "Legal"; // TODO
+"auth.login.agree_termsofservice" = "服務條款";
+"auth.login.agree_privacypolicy" = "隱私權政策";
+
+"auth.forgot_password.title" = "忘記密碼?";
+"auth.forgot_password.message" = "輸入電子郵件";
+"auth.forgot_password.success" = "如果您透過電子郵件註冊，我們會發送設定密碼的郵件。如果沒有收到郵件，請回來重試一次。";
+
+// Subscriptions
+"subscriptions.search" = "搜尋";
+"subscriptions.search_results" = "搜尋結果";
+"subscriptions.search.load_more_results" = "載入更多結果";
+"subscriptions.unreads" = "未讀";
+"subscriptions.favorites" = "收藏";
+"subscriptions.channels" = "頻道";
+"subscriptions.groups" = "私人頻道";
+"subscriptions.direct_messages" = "私人訊息";
+"subscriptions.conversations" = "對話";
+"subscriptions.you" = "你";
+"subscriptions.messages" = "訊息";
+"subscriptions.list.you_initial" = "你";
+"subscriptions.list.no_message" = "還沒有訊息發送過喔";
+"subscriptions.list.sent_an_attachment" = "發送附件";
+"subscriptions.list.date.yesterday" = "昨天";
+"subscriptions.list.actions.read" = "已讀";
+"subscriptions.list.actions.unread" = "未讀";
+"subscriptions.list.actions.favorite" = "收藏";
+"subscriptions.list.actions.unfavorite" = "取消收藏";
+"subscriptions.list.actions.hide" = "隱藏";
+
+// Servers
+"servers.add_new_team" = "建立新的團隊";
+"servers.title" = "伺服器";
+"servers.add_new_server" = "新增伺服器";
+"servers.action.disconnect" = "斷線";
+"servers.action.disconnect.alert.title" = "從伺服器斷線";
+"servers.action.disconnect.alert.message" = "您想要從伺服器\"%@\" 斷線嗎?";
+"servers.action.disconnect.alert.confirm" = "是的, 斷線！";
+
+// Status
+"status.online" = "線上";
+"status.away" = "離線";
+"status.busy" = "忙碌";
+"status.offline" = "離線";
+"status.invisible" = "隱藏";
+
+// New Room View
+"new_room.title" = "建立頻道";
+"new_room.buttons.create" = "建立";
+"new_room.cell.public_channel.title" = "公開頻道";
+"new_room.cell.public_channel.description" = "任何人都可以進入頻道";
+"new_room.cell.public_channel.description.public_only" = "您只能建立公開頻道";
+"new_room.cell.public_channel.description.private_only" = "您只能建立私人頻道";
+"new_room.cell.read_only.title" = "唯獨頻道";
+"new_room.cell.read_only.description" = "只有成員可以發送訊息";
+"new_room.group.channel.name" = "頻道名稱";
+"new_room.cell.channel_name.title" = "頻道名稱";
+"new_room.group.invite_users" = "邀請成員";
+"new_room.cell.invite_users.placeholder" = "成員列表";
+
+// Notifications
+"notifications.action.reply" = "回覆";
+
+// Chat
+"chat.channel_preview_view.title" = "這是 #%@ 的預覽";
+"chat.channel_preview_view.join" = "加入頻道";
+"chat.dm.start_conversation" = "跟%@開始交談";
+"chat.channel.start_conversation" = "頻道%@開始交談";
+"chat.read_only" = "這是唯讀頻道";
+"chat.muted" = "您被禁言了";
+"chat.loading_messages" = "訊息載入中...";
+"chat.unread_separator" = "新訊息";
+"chat.preview.actions.read" = "標記為未讀";
+"chat.preview.actions.unread" = "標記為已讀";
+"chat.preview.actions.favorite" = "收藏";
+"chat.preview.actions.unfavorite" = "取消收藏";
+"chat.preview.actions.hide" = "隱藏";
+
+// Read Receipts
+"chat.read_receipt_list.title" = "已讀";
+"chat.read_receipt_list.title.loading" = "載入中...";
+"chat.read_receipt_list.title.empty" = "沒有人已讀";
+
+// Chat Message Actions
+"chat.message.actions.info" = "消息通知";
+"chat.message.actions.react" = "增加操作";// TODO
+"chat.message.actions.report" = "報告";
+"chat.message.actions.edit" = "編輯";
+"chat.message.actions.copy" = "複製";
+"chat.message.actions.pin" = "固定";
+"chat.message.actions.unpin" = "取消固定";
+"chat.message.actions.star" = "標記訊息";
+"chat.message.actions.unstar" = "取消標記";
+"chat.message.actions.quote" = "引用";
+"chat.message.actions.reply" = "回覆";
+"chat.message.actions.join_video_call" = "加入視訊";
+"chat.message.actions.permalink" = "永久連結";
+"chat.message.actions.delete" = "刪除訊息";
+"chat.message.actions.delete.confirm.title" = "刪除訊息?";
+"chat.message.actions.delete.confirm.message" = "您卻掉要刪除訊息嗎？刪除後無法復原。";
+"chat.message.actions.delete.confirm.yes" = "是的，删除！";
+"chat.message.actions.discard" = "取消發送";
+"chat.message.actions.discard.confirm.title" = "取消發送訊息?";
+"chat.message.actions.discard.confirm.message" = "這條訊息尚未發送。您確定要取消發送嗎？取消發送後無法恢復訊息。";
+"chat.message.actions.discard.confirm.yes" = "是的，取消發送";
+"chat.message.actions.resend" = "重新發送";
+"chat.message.actions.resend_all" = "重新發送全部訊息";
+
+// Chat Message Report
+"chat.message.report.success.title" = "回報";
+"chat.message.report.success.message" = "回報消息成功，非常感謝您！";
+
+// Chat Upload
+"chat.upload.uploading_image" = "圖片上傳中";
+"chat.upload.uploading_video" = "影片上傳中";
+"chat.upload.uploading_file" = "上傳中\"%@\"";
+"chat.upload.take_photo" = "拍照中";
+"chat.upload.shoot_video" = "錄影中";
+"chat.upload.choose_from_library" = "從相簿中選取";
+"chat.upload.import_file" = "上傳檔案";
+"chat.upload.draw" = "手繪";
+
+// Chat Download
+"chat.download.downloading_file" = "下載中\"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "點擊打開文件";
+"chat.message.open_browser" = "在瀏覽器中打開";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "哎呀!";
+"chat.drawing.messageTitle" = "送出前請先畫點東西";
+"chat.drawing.fileName" = "檔案名稱";
+"chat.drawing.settings.opacity" = "透明度";
+"chat.drawing.settings.width" = "寬度";
+"chat.drawing.settings.color.selected" = "選擇顏色";
+"chat.drawing.settings.color.others" = "從這裡選擇顏色:";
+
+// Chat Typing
+"chat.users_are_typing" = "%@ 正在輸入...";
+"chat.user_is_typing" = "%@ 正在輸入...";
+"chat.typing" = "正在輸入...";
+"chat.several_typing" = "多個成員正在輸入...";
+
+// Message Types
+"chat.message.type.room_name_changed" = "頻道名稱更改為: %@ 由%@操作";
+"chat.message.type.user_added_by" = "新增用户%@ 由%@操作";
+"chat.message.type.user_removed_by" = "移除用戶%@ 由%@操作";
+"chat.message.type.user_left" = "離開了頻到";
+"chat.message.type.user_joined" = "加入了頻道";
+"chat.message.type.user_muted" = "%@被%@禁言";
+"chat.message.type.user_unmuted" = "%@被%@取消禁言";
+"chat.message.type.welcome" = "歡迎%@";
+"chat.message.type.message_removed" = "訊息被移除";
+"chat.message.type.subscription_role_added" = "%@ 設定為%@ 由%@操作";
+"chat.message.type.subscription_role_removed" = "%@ 不再是%@ 由%@操作";
+"chat.message.type.room_archived" = "頻道由%@歸檔";
+"chat.message.type.room_unarchived" = "頻道由%@取消歸檔";
+"chat.message.type.message_pinned" = "固定訊息:";
+"chat.message.type.message_snippeted" = "建立一個片段: \"%@\"";
+"chat.message.type.room_changed_privacy" = "頻道隱私政策變更為\"%@\" 由 %@操作";
+"chat.message.type.room_changed_topic" = "頻道主題變更為\"%@\" 由 %@操作";
+"chat.message.type.room_changed_announcement" = "頻道公告店變更為\"%@\" 由%@操作";
+"chat.message.type.room_changed_description" = "頻道描述變更為\"%@\" 由%@操作";
+"chat.message.type.video_call_started" = "%@開啟視訊";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
+
+// Chat Information
+"chat.info.title" = "訊息";
+"chat.info.item.topic" = "主題";
+"chat.info.item.no_topic" = "沒有主題";
+"chat.info.item.description" = "描述";
+"chat.info.item.no_description" = "沒有描述";
+"chat.info.item.announcement" = "宣布項事項"; // TODO
+"chat.info.item.no_announcement" = "沒有宣布事項"; // TODO
+"chat.info.item.members" = "成員";
+"chat.info.item.pinned" = "固定訊息";
+"chat.info.item.starred" = "標記訊息";
+"chat.info.item.mentions" = "提及";
+"chat.info.item.notifications" = "通知";
+"chat.info.item.files" = "檔案";
+"chat.info.item.share" = "分享";
+
+// Members List
+"chat.members.list.title" = "成員";
+
+// Add Users
+"chat.add_users.title" = "新增成員";
+"chat.add_users.confirm.title" = "新增這個成員?";
+"chat.add_users.confirm.message" = "您確定要把'%@' 新增到'%@'?";
+
+// Messages List
+"chat.messages.list.title" = "訊息";
+"chat.messages.list.empty" = "没有找到訊息";
+"chat.messages.list.search.placeholder" = "搜尋訊息";
+"chat.messages.pinned.list.title" = "釘選的訊息";
+"chat.messages.starred.list.title" = "標記的訊息";
+"chat.messages.mentions.list.title" = "提及";
+"chat.messages.files.list.title" = "檔案";
+"chat.messages.files.list.empty" = "沒有找到檔案";
+
+// Upload Banner
+"chat.banner.upload.uploading" = "上傳%@";
+"chat.banner.upload.error" = "%@上傳失敗";
+"chat.banner.upload.retry" = "重試";
+
+// Settings
+"myaccount.settings.title" = "選項";
+"myaccount.settings.administration" = "管理員";
+"myaccount.settings.logout" = "從%@登出";
+"myaccount.settings.contactus" = "聯絡我們";
+"myaccount.settings.profile" = "個人資料";
+"myaccount.settings.license" = "許可";
+"myaccount.settings.language" = "語言";
+"myaccount.settings.appicon" = "應用程式桌面圖示";
+"myaccount.settings.review" = "撰寫評論";
+"myaccount.settings.share" = "分享這個應用程式";
+"myaccount.settings.version" = "應用程式版本: %@ (%@)";
+"myaccount.settings.server_version" = "伺服器版本: %@";
+"myaccount.settings.web_browser" = "Web瀏覽器";
+"myaccount.settings.tracking.title" = "發送閃退報告給Rocket.Chat";
+"myaccount.settings.tracking.footer" = "請放心，我們不會紀錄您的對話訊息。閃退報告只會紀錄定位和修復軟體的必要訊息。";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "選擇一個圖示";
+"myaccount.settings.changeicon.header" = "您可以選擇您想讓Rocket.Chat在手機桌面上顯示的圖示。請在下方中選擇擇你喜歡的那個";
+"myaccount.settings.changeicon.errortitle" = "變更失敗";
+"myaccount.settings.changeicon.iosversion" = "iOS 10.3以前的版本無法改變App圖示";
+
+// Change Language
+"myaccount.settings.language.title" = "選擇語言";
+"myaccount.settings.language.reset" = "預設語言";
+"myaccount.settings.language.message" = "您已經選擇新的語言，重新啟動App後生效";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "通知選項";
+"myaccount.settings.notifications.save" = "保存";
+
+"myaccount.settings.notifications.receive.title" = "接收通知";
+"myaccount.settings.notifications.receive.footer" = "從%@接收通知";
+"myaccount.settings.notifications.show.title" = "顯示未讀數量";
+"myaccount.settings.notifications.show.footer" = "未讀數量在這頻道右邊顯示";
+
+"myaccount.settings.notifications.inapp" = "在app内";
+"myaccount.settings.notifications.inapp.alerts" = "警告";
+"myaccount.settings.notifications.inapp.footer" = "App打開時在螢幕上方顯示橫幅，在桌面顯示通知.";
+
+"myaccount.settings.notifications.mobile" = "推送通知";
+"myaccount.settings.notifications.mobile.alerts" = "警告";
+"myaccount.settings.notifications.mobile.footer" = "當App沒有打開時會推送通知";
+
+"myaccount.settings.notifications.desktop" = "桌面";
+"myaccount.settings.notifications.desktop.audio" = "音頻";
+"myaccount.settings.notifications.desktop.sound" = "聲音";
+"myaccount.settings.notifications.desktop.duration" = "通知持續時間";
+
+"myaccount.settings.notifications.mail" = "電子郵件";
+"myaccount.settings.notifications.email.alerts" = "警告";
+
+"myaccount.settings.notifications.duration.default" = "預設";
+"myaccount.settings.notifications.duration.seconds" = "秒";
+
+"alert.update_notifications_preferences_success.title" = "儲存選項成功";
+
+"alert.update_notifications_preferences_save_error.title" = "儲存選項失敗";
+"alert.update_notifications_preferences_save_error.message" = "儲存選項時發生錯誤，請重試.";
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "預設";
+"subscription.notifications.status.nothing" = "無";
+"subscription.notifications.status.all" = "全部";
+"subscription.notifications.status.mentions" = "提及";
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "無";
+"subscription.notifications.audio.value.default" = "預設";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "App内置瀏覽器";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Web瀏覽器";
+"myaccount.settings.web_browser.footer" = "用這個瀏覽器來打開Rocket Chat內的連結.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "資料";
+"myaccount.settings.editing_profile.title" = "編輯資料";
+"myaccount.settings.profile.actions.save" = "保存";
+"myaccount.settings.profile.actions.edit" = "編輯";
+"myaccount.settings.profile.actions.change_password" = "更新您的密碼";
+"myaccount.settings.profile.section.profile" = "資料";
+"myaccount.settings.profile.section.password" = "密碼";
+"myaccount.settings.profile.name_placeholder" = "名字";
+"myaccount.settings.profile.username_placeholder" = "用戶名稱";
+"myaccount.settings.profile.email_placeholder" = "電子信箱";
+"myaccount.settings.profile.status.title" = "狀態";
+"myaccount.settings.profile.password_required.title" = "輸入您的密碼";
+"myaccount.settings.profile.password_required.message" = "更改電子郵件需要輸入您的密碼";
+"myaccount.settings.profile.password_required.placeholder" = "密碼";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "新密碼";
+"myaccount.settings.profile.new_password.section.password" = "密碼";
+"myaccount.settings.profile.new_password.actions.save" = "保存";
+"myaccount.settings.profile.new_password.password_placeholder" = "新密碼";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "確認密碼";
+"myaccount.settings.profile.new_password.password_required.title" = "輸入您的密碼";
+"myaccount.settings.profile.new_password.password_required.message" = "更新密碼前需要輸入您的舊密碼";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "密碼";
+
+// User Action Sheet
+"user_action_sheet.info" = "訊息";
+"user_action_sheet.remove" = "從頻道中移除";
+"user_action_sheet.remove_confirm.title" = "移除這個用戶?";
+"user_action_sheet.remove_confirm.message" = "確定要移除 '%@'嗎?";
+
+// User Details
+"user_details.status" = "狀態";
+"user_details.role" = "角色";
+"user_details.roles" = "角色";
+"user_details.email" = "電子信箱";
+"user_details.emails" = "電子信箱";
+"user_details.timezone" = "時區";
+"user_details.message_button" = "訊息";
+"user_details.voice_call_button" = "語音電話";
+"user_details.video_call_button" = "視訊電話";
+
+// Theme
+"theme.settings.title" = "主題";
+"theme.settings.header" = "所有主題";
+"theme.settings.footer" = "套用主圖會改變App的外觀";
+"theme.light" = "淺色";
+"theme.dark" = "深色";
+"theme.black" = "黑色";
+
+// Sorting & Grouping Subscriptions
+"subscriptions.sorting.title.alphabetical" = "按名稱排序";
+"subscriptions.sorting.title.activity" = "按活躍度排序";
+"subscriptions.sorting.alphabetical" = "字母";
+"subscriptions.sorting.activity" = "活躍度";
+"subscriptions.grouping.type" = "按類型歸類";
+"subscriptions.grouping.favorites" = "按蒐藏歸類";
+"subscriptions.grouping.unread_top" = "未讀的放在上方";
+
+// Shortcuts
+"shortcuts.type_message" = "輸入訊息";
+"shortcuts.preferences" = "選項";
+"shortcuts.room_search" = "搜尋頻道";
+"shortcuts.room_selection" = "選擇頻道(1~9)";
+"shortcuts.next_room" = "下一個頻道";
+"shortcuts.previous_room" = "前一個頻道";
+"shortcuts.new_room" = "新頻道";
+"shortcuts.room_actions" = "頻道操作";
+"shortcuts.upload_room" = "上傳到頻道";
+"shortcuts.search_messages" = "搜尋訊息";
+"shortcuts.scroll_messages" = "捲動訊息"; // TODO
+"shortcuts.reply_latest" = "最新回覆";
+"shortcuts.server_selection" = "伺服器選擇";
+"shortcuts.server_selection_numbers" = "伺服器選擇(1~9)";
+"shortcuts.add_server" = "新增伺服器";
+"shortcuts.change_theme" = "更換主題";
+"shortcuts.send" = "發送";
+"shortcuts.new_line" = "新的一行";
+
+// Chat Components
+"chat.components.quote.replied" = "已回覆";
+"chat.components.quote.pinned" = "已釘選";
+"chat.components.text_attachment.no_title" = "無標題";
+
+// Directory
+"directory.title" = "Directory"; // TODO
+"directory.filters.channels" = "Channels"; // TODO
+"directory.filters.users" = "Users"; // TODO
+"directory.filters.by" = "Search by"; // TODO
+"directory.filters.global.title" = "Search for global users"; // TODO
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
+"directory.users.1_user" = "1 member"; // TODO
+"directory.users.x_users" = "%@ members"; // TODO
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

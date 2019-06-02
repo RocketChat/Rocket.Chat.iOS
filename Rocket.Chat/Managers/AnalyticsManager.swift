@@ -22,6 +22,7 @@ enum Event {
     case updateStatus
     case replyNotification
     case openAdmin
+    case directory(searchType: String, workspace: String)
     case screenView(screenName: String)
     case messageSent(subscriptionType: String, server: String)
     case mediaUpload(mediaType: String, subscriptionType: String)
@@ -31,6 +32,7 @@ enum Event {
     case updatedWebBrowser(browser: String)
     case updatedTheme(theme: String)
     case jitsiVideoCall(subscriptionType: String, server: String)
+    case audioMessage(subscriptionType: String)
 }
 
 enum UserProperty {
@@ -115,11 +117,13 @@ extension Event {
         case .messageSent: return "message_sent"
         case .mediaUpload: return "media_upload"
         case .reaction: return "reaction"
+        case .directory: return "directory"
         case .serverSwitch: return "server_switch"
         case .updatedSubscriptionSorting: return "updated_subscriptions_sorting"
         case .updatedWebBrowser: return "updated_web_browser"
         case .updatedTheme: return "updated_theme"
         case .jitsiVideoCall: return "jitsi_video_call"
+        case .audioMessage: return "audio_message"
         }
     }
 
@@ -129,6 +133,8 @@ extension Event {
             return ["screen": screenName]
         case let .reaction(subscriptionType):
             return ["subscription_type": subscriptionType]
+        case let .directory(searchType, workspace):
+            return ["search_type": searchType, "workspace": workspace]
         case let .messageSent(subscriptionType, server):
             return ["subscription_type": subscriptionType, "server": server]
         case let .mediaUpload(mediaType, subscriptionType):
@@ -143,6 +149,8 @@ extension Event {
             return ["theme": theme]
         case let .jitsiVideoCall(subscriptionType, server):
             return ["subscription_type": subscriptionType, "server": server]
+        case let .audioMessage(subscriptionType):
+            return ["subscription_type": subscriptionType]
         default:
             return nil
         }

@@ -102,12 +102,17 @@ class LoginTableViewController: BaseTableViewController {
         super.viewDidLoad()
 
         navigationItem.title = serverURL?.host
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
 
         updateFieldsPlaceholders()
         updateUsernameSettings()
+
+        if !AppManager.supportsMultiServer {
+            navigationItem.hidesBackButton = true
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

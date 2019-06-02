@@ -21,7 +21,13 @@ final class ChatTitleViewModel {
         }
     }
 
+    var mainThreadMessage: UnmanagedMessage?
+
     var title: String {
+        if let mainThreadMessage = mainThreadMessage {
+            return mainThreadMessage.mainThreadTitle
+        }
+
         return subscription?.displayName ?? ""
     }
 
@@ -37,8 +43,16 @@ final class ChatTitleViewModel {
     }
 
     var imageName: String {
+        if mainThreadMessage != nil {
+            return "Threads"
+        }
+
         guard let subscription = subscription else {
             return "Channel Small"
+        }
+
+        if subscription.isDiscussion {
+            return "Discussions"
         }
 
         switch subscription.type {

@@ -33,7 +33,8 @@ enum Hint {
 }
 
 final class MessagesComposerViewModel {
-    var replyString = ""
+    var quoteString = ""
+    var replyMessageIdentifier = ""
     var messageToEdit: Message?
 
     let hintPrefixes: [Character] = ["/", "#", "@", ":"]

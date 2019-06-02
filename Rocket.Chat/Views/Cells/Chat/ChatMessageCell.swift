@@ -12,6 +12,8 @@ import UIKit
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol, ChatMessageActionButtonsViewProtocol {
     func openURL(url: URL)
 
+    func openThread(identifier: String)
+
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)

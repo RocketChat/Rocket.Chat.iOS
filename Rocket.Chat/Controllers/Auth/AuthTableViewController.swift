@@ -69,6 +69,7 @@ final class AuthTableViewController: BaseTableViewController {
         }
 
         collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showMoreButtonAccessibilityLabel
         collapsibleAuthSeparatorRow.showOrHideLoginServices = { [weak self] in
             self?.showOrHideLoginServices()
         }
@@ -120,12 +121,19 @@ final class AuthTableViewController: BaseTableViewController {
         return extraLoginServiceIndexPaths
     }()
 
+    // MARK: Accessibility
+
+    var showMoreButtonAccessibilityLabel: String? = VOLocalizedString("auth.show_more_options.label")
+    var showLessButtonAccessibilityLabel: String? = VOLocalizedString("auth.show_less_options.label")
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = serverURL?.host
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.more.label")
+
         setupTableView()
 
         guard let settings = serverPublicSettings else { return }
@@ -254,16 +262,17 @@ final class AuthTableViewController: BaseTableViewController {
         isLoginServicesCollapsed = !isLoginServicesCollapsed
 
         if isLoginServicesCollapsed {
+            collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showMoreButtonAccessibilityLabel
             UIView.animate(withDuration: 0.5) {
-                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi)
             }
 
             tableView.deleteRows(at: extraLoginServiceIndexPaths, with: .automatic)
         } else {
+            collapsibleAuthSeparatorRow.showMoreButton.accessibilityLabel = showLessButtonAccessibilityLabel
             UIView.animate(withDuration: 0.5) {
-                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
+                self.collapsibleAuthSeparatorRow.showMoreButton.transform = CGAffineTransform(rotationAngle: .pi * 2)
             }
-
             tableView.insertRows(at: extraLoginServiceIndexPaths, with: .automatic)
         }
     }

@@ -101,6 +101,27 @@ class MessageSpec: XCTestCase {
         XCTAssert(message.identifier == "message-json-1", "Message object was created with success")
     }
 
+    func testDiscussionMessageObjectFromJSON() {
+        let object = JSON([
+            "_id": "message-json-1",
+            "rid": "123",
+            "msg": "Foo Bar Baz",
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
+            "u": ["_id": "123", "username": "foo"],
+            "drid": "123drid",
+            "dlm": ["$date": 123456789],
+            "dcount": 100
+        ])
+
+        let message = Message()
+        message.map(object, realm: nil)
+
+        XCTAssertEqual(message.discussionRid, "123drid", "discussionRid was mapped correctly")
+        XCTAssertEqual(message.discussionLastMessage, Date.dateFromInterval(123456789), "discussionLastMessage was mapped correctly")
+        XCTAssertEqual(message.discussionMessagesCount, 100, "discussionMessagesCount was mapped correctly")
+    }
+
     func testMessageTypeAttachmentImage() {
         let attachment = Attachment()
         attachment.imageURL = "https://foo.bar"
@@ -167,7 +188,7 @@ class MessageSpec: XCTestCase {
 
 }
 
-// MARK: quoteString & replyString
+// MARK: quoteString
 
 extension MessageSpec {
 
@@ -198,33 +219,6 @@ extension MessageSpec {
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
-    }
-
-    func testReplyString() {
-        let user = User.testInstance()
-        let subscription = Subscription.testInstance()
-
-        let message = Message.testInstance()
-        message.rid = subscription.rid
-
-        Realm.execute({ realm in
-            realm.add(subscription, update: true)
-            realm.add(user, update: true)
-
-            message.userIdentifier = user.identifier
-            realm.add(message, update: true)
-        })
-
-        Realm.execute({ _ in
-            subscription.type = .channel
-            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
-
-            subscription.type = .group
-            XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
-
-            subscription.type = .directMessage
-            XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
-        })
     }
 
 }

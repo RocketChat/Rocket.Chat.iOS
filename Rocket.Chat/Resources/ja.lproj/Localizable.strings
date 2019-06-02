@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "接続";
 "auth.connect.ssl_required" = "サーバーがSSLをサポートしている必要があります";
 "auth.connect.connecting" = "接続中です。";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "メールアドレスから ";
 "auth.email_auth" = "ログイン";
 "auth.login_service_prefix" = "Continue with ";
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "パスワードをお忘れですか?";
 "auth.login.agree_label" = "続けることで、あなたは私達に同意します。";
 "auth.login.agree_and" = "と";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "利用規約";
 "auth.login.agree_privacypolicy" = "個人情報保護方針";
 
@@ -294,6 +301,8 @@
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
 "chat.message.type.video_call_started" = "Video call started by %@"; // TODO
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "情報";
@@ -504,3 +513,24 @@
 "chat.components.quote.replied" = "Replied"; //TODO
 "chat.components.quote.pinned" = "Pinned"; //TODO
 "chat.components.text_attachment.no_title" = "No title"; //TODO
+
+// Directory
+"directory.title" = "Directory"; // TODO
+"directory.filters.channels" = "Channels"; // TODO
+"directory.filters.users" = "Users"; // TODO
+"directory.filters.by" = "Search by"; // TODO
+"directory.filters.global.title" = "Search for global users"; // TODO
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
+"directory.users.1_user" = "1 member"; // TODO
+"directory.users.x_users" = "%@ members"; // TODO
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

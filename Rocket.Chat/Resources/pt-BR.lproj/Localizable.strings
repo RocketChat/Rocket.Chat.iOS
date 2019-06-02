@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
+"auth.connect.ssl.certificate.do_you_have" = "Você tem um certificado?";
+"auth.connect.ssl.certificate.apply" = "Insira seu Certificado";
+"auth.connect.ssl.certificate.your_certificate" = "Seu Certificado";
+"auth.connect.ssl.certificate.password.title" = "Senha do Certificado";
+"auth.connect.ssl.certificate.password.message" = "Qual é a senha do seu certificado?";
+"auth.connect.ssl.certificate.remove" = "Remover Certificado";
 "auth.email_auth_prefix" = "Entrar com ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continuar com ";
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Esqueci minha senha";
 "auth.login.agree_label" = "Ao proceder você está concordando com os";
 "auth.login.agree_and" = "e";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Termos de Serviço";
 "auth.login.agree_privacypolicy" = "Política de Privacidade";
 
@@ -293,6 +300,8 @@
 "chat.message.type.room_changed_announcement" = "Anúncio da sala alterou para \"%@\" por %@";
 "chat.message.type.room_changed_description" = "Descrição da sala alterou para \"%@\" por %@";
 "chat.message.type.video_call_started" = "Vídeo chamada iniciada por %@";
+"chat.message.type.discussion_created" = "Iniciou uma discussão:";
+"chat.message.type.user_joined_conversation" = "Entrou na conversa";
 
 // Chat Information
 "chat.info.title" = "Informações";
@@ -503,3 +512,24 @@
 "chat.components.quote.replied" = "Respondido";
 "chat.components.quote.pinned" = "Pinado";
 "chat.components.text_attachment.no_title" = "Sem título";
+
+// Directory
+"directory.title" = "Diretório";
+"directory.filters.channels" = "Canais";
+"directory.filters.users" = "Usuários";
+"directory.filters.by" = "Buscar por";
+"directory.filters.global.title" = "Busca global de usuários";
+"directory.filters.global.subtitle" = "Se você habilitar esta opção, você buscará também usuários de outros servidores conectados ao seu. ";
+"directory.users.1_user" = "1 membro";
+"directory.users.x_users" = "%@ membros";
+
+// Discussions
+"discussion.no_messages" = "Nenhuma mensagem";
+"discussion.1_message" = "1 mensagem";
+"discussion.x_messages" = "%@ mensagens";
+
+// Threads
+"threads.title" = "Conversas";
+"threads.no_replies" = "Nenhuma resposta";
+"threads.1_reply" = "1 resposta";
+"threads.x_replies" = "%@ respostas";

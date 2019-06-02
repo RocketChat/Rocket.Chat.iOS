@@ -176,24 +176,6 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertNil(DatabaseManager.serverIndexForUrl(unexisting), "index is nil for unexisting server")
     }
 
-    func testCopyServerInformationNilServers() {
-        DatabaseManager.removeServersKey()
-        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
-        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
-    }
-
-    func testCopyServerInformationNoServers() {
-        DatabaseManager.clearAllServers()
-        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
-        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
-    }
-
-    func testCopyServerInformationValidServer() {
-        DatabaseManager.setupTestServers()
-        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
-        XCTAssertEqual(newIndex, testServers.count - 1, "newIndex is latest server")
-    }
-
     func testRemoveSelectedDatabase() {
         DatabaseManager.setupTestServers()
         DatabaseManager.removeSelectedDatabase()

@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Connect";
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?";
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate";
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate";
+"auth.connect.ssl.certificate.password.title" = "Certificate Password";
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?";
+"auth.connect.ssl.certificate.remove" = "Remove Certificate";
 "auth.email_auth_prefix" = "Login with ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continue with ";
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Forgot password";
 "auth.login.agree_label" = "By proceeding you are agreeing to our";
 "auth.login.agree_and" = "and";
+"auth.login.legal" = "Legal";
 "auth.login.agree_termsofservice" = "Terms of Service";
 "auth.login.agree_privacypolicy" = "Privacy Policy";
 
@@ -293,6 +300,8 @@
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@";
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@";
 "chat.message.type.video_call_started" = "Video call started by %@";
+"chat.message.type.discussion_created" = "Started a discussion:";
+"chat.message.type.user_joined_conversation" = "Has joined the conversation";
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -503,3 +512,24 @@
 "chat.components.quote.replied" = "Replied";
 "chat.components.quote.pinned" = "Pinned";
 "chat.components.text_attachment.no_title" = "No title";
+
+// Directory
+"directory.title" = "Directory";
+"directory.filters.channels" = "Channels";
+"directory.filters.users" = "Users";
+"directory.filters.by" = "Search by";
+"directory.filters.global.title" = "Search for global users";
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. ";
+"directory.users.1_user" = "1 member";
+"directory.users.x_users" = "%@ members";
+
+// Discussions
+"discussion.no_messages" = "No messages yet";
+"discussion.1_message" = "1 message";
+"discussion.x_messages" = "%@ messages";
+
+// Threads
+"threads.title" = "Threads";
+"threads.no_replies" = "No replies";
+"threads.1_reply" = "1 reply";
+"threads.x_replies" = "%@ replies";

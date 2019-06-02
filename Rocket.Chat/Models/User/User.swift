@@ -30,6 +30,7 @@ enum UserStatus: String, CustomStringConvertible {
 final class User: BaseModel {
     @objc dynamic var username: String?
     @objc dynamic var name: String?
+
     var emails = List<Email>()
     var roles = List<String>()
 
@@ -40,6 +41,9 @@ final class User: BaseModel {
     }
 
     @objc dynamic var utcOffset: Double = 0.0
+
+    // Federation
+    @objc dynamic var federatedServerName: String?
 }
 
 extension User {
@@ -101,12 +105,14 @@ extension User {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
+            let userId = auth.userId,
+            let token = auth.token,
             let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg")
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)?format=jpeg&rc_uid=\(userId)&rc_token=\(token)")
     }
 
 }

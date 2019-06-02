@@ -16,9 +16,11 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var privateType: String
     var type: SubscriptionType
     var rid: String
+    var prid: String
     var name: String
     var fname: String
     var unread: Int
+    var usersCount: Int
     var userMentions: Int
     var groupMentions: Int
     var open: Bool
@@ -54,6 +56,8 @@ struct UnmanagedSubscription: UnmanagedObject, Equatable {
     var directMessageUser: UnmanagedUser?
     var displayName: String
 
+    var isDiscussion: Bool
+
     var managedObject: Subscription? {
         return Subscription.find(withIdentifier: identifier)?.validated()
     }
@@ -71,9 +75,11 @@ extension UnmanagedSubscription {
         privateType = subscription.privateType
         type = subscription.type
         rid = subscription.rid
+        prid = subscription.prid
         name = subscription.name
         fname = subscription.fname
         unread = subscription.unread
+        usersCount = subscription.usersCount
         userMentions = subscription.userMentions
         groupMentions = subscription.groupMentions
         open = subscription.open
@@ -108,6 +114,8 @@ extension UnmanagedSubscription {
         privateOtherUserStatus = subscription.privateOtherUserStatus
         directMessageUser = subscription.directMessageUser?.unmanaged
         displayName = subscription.displayName()
+
+        isDiscussion = subscription.isDiscussion
     }
 
 }

@@ -23,6 +23,7 @@ final class ChatTitleView: UIView {
         }
     }
 
+    @IBOutlet weak var titleScrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var showInfoImage: UIImageView!
@@ -39,6 +40,7 @@ final class ChatTitleView: UIView {
 
         set {
             viewStatus.isHidden = newValue
+            titleScrollView.isHidden = newValue
             titleLabel.isHidden = newValue
             titleImage.isHidden = newValue
             showInfoImage.isHidden = newValue
@@ -73,12 +75,22 @@ final class ChatTitleView: UIView {
         }
     }
 
-    internal func updateTitleState() {
-        guard let subscription = viewModel.subscription else { return }
+    var mainThreadMessage: UnmanagedMessage? {
+        didSet {
+            guard let mainThreadMessage = mainThreadMessage else { return }
+            viewModel.mainThreadMessage = mainThreadMessage
 
+            DispatchQueue.main.async {
+                self.updateTitleState()
+                self.updateConnectionState()
+            }
+        }
+    }
+
+    internal func updateTitleState() {
         titleLabel.text = viewModel.title
 
-        if subscription.type == .directMessage {
+        if let subscription = viewModel.subscription, subscription.type == .directMessage {
             titleImage.isHidden = true
             viewStatus.backgroundColor = viewModel.iconColor
             viewStatus.isHidden = false

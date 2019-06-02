@@ -70,9 +70,15 @@ final class MessagesViewModel {
     */
     var recentSenders = [String]()
 
+    /**
+     Subscription object to be used in all queries and
+     requests. This value can be nil if the controller is actually
+     presenting a Thread.
+    */
     internal var subscription: Subscription? {
         didSet {
             guard let subscription = subscription?.validated() else { return }
+
             rid = subscription.rid
             lastSeen = lastSeen == nil ? subscription.lastSeen : lastSeen
             subscribe(for: subscription)
@@ -81,7 +87,40 @@ final class MessagesViewModel {
             messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
                 self?.handleDataUpdates(changes: collectionChanges)
             })
+
             fetchMessages(from: nil)
+        }
+    }
+
+    // Pagination properties on this view model, currently only
+    // being used to load messages from a thread.
+    internal let pageSize = 30
+    internal var currentPage = 0
+    internal var showing = 0
+    internal var total = 0
+
+    /**
+     Thread identifier that will be used to present all messages
+     related to a thread.
+    */
+    internal var threadIdentifier: String? {
+        didSet {
+            guard
+                let threadIdentifier = threadIdentifier,
+                let message = Message.find(withIdentifier: threadIdentifier),
+                let subscription = Subscription.find(rid: message.rid)
+            else {
+                return
+            }
+
+            subscribe(for: subscription)
+            messagesQuery = subscription.fetchMessagesQueryResultsFor(threadIdentifier: threadIdentifier)
+            refreshMessagesQueryOldValues()
+            messagesQueryToken = messagesQuery?.observe({ [weak self] collectionChanges in
+                self?.handleDataUpdates(changes: collectionChanges)
+            })
+
+            fetchThreadMessages(from: nil)
         }
     }
 
@@ -283,14 +322,16 @@ final class MessagesViewModel {
             return AnyChatSection(MessageSection(
                 object: AnyDifferentiable(messageSectionModel),
                 controllerContext: controllerContext,
-                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:]
+                collapsibleItemsState: (existingSection.model.base as? MessageSection)?.collapsibleItemsState ?? [:],
+                compressedLayout: threadIdentifier?.isEmpty ?? true
             ))
         }
 
         return AnyChatSection(MessageSection(
             object: AnyDifferentiable(MessageSectionModel(message: message)),
             controllerContext: controllerContext,
-            collapsibleItemsState: [:]
+            collapsibleItemsState: [:],
+            compressedLayout: threadIdentifier?.isEmpty ?? true
         ))
     }
 
@@ -448,8 +489,7 @@ final class MessagesViewModel {
                 return
             }
 
-            let pageSize = 30
-            let messagesFromDatabase = subscriptionValid.fetchMessages(pageSize, lastMessageDate: oldestMessage)
+            let messagesFromDatabase = subscriptionValid.fetchMessages(self.pageSize, lastMessageDate: oldestMessage)
             messagesFromDatabase.forEach {
                 guard let message = $0.validated()?.unmanaged else { return }
 
@@ -500,6 +540,110 @@ final class MessagesViewModel {
                 } else {
                     self.updateData()
                 }
+            }
+        }
+    }
+
+    /**
+     This method requests a new page of thread messages to the API. If the view model
+     already detected that there's no more data to fetch, or it's currently
+     fetching a new page, the method won't be executed.
+
+     - parameters:
+     - oldestMessage: This is the parameter that will be sent to the server in
+     order to get the correct page of data.
+     */
+    // swiftlint:disable function_body_length cyclomatic_complexity
+    func fetchThreadMessages(from oldestMessage: Date?, prepareAnotherPage: Bool = true) {
+        guard
+            requestingData == .none,
+            hasMoreData,
+            let threadIdentifier = threadIdentifier
+        else {
+            return
+        }
+
+        requestingData = oldestMessage == nil ? .initialRequest : .historyRequest
+
+        queryDataQueue.addOperation { [weak self] in
+            guard
+                let self = self,
+                let mainMessage = Message.find(withIdentifier: threadIdentifier),
+                let subscriptionValid = Subscription.find(rid: mainMessage.rid)
+            else {
+                return
+            }
+
+            let messagesFromDatabase = subscriptionValid.fetchMessages(
+                self.pageSize,
+                lastMessageDate: oldestMessage,
+                threadIdentifier: threadIdentifier
+            )
+
+            messagesFromDatabase.forEach {
+                guard let message = $0.validated()?.unmanaged else { return }
+
+                let index = self.data.firstIndex(where: { (section) -> Bool in
+                    if let object = section.object.base as? MessageSectionModel {
+                        return object.differenceIdentifier == message.identifier
+                    }
+
+                    return false
+                })
+
+                if index != nil {
+                    return
+                } else if let section = self.section(for: message) {
+                    self.data.append(section)
+                }
+            }
+
+            if messagesFromDatabase.count > 0 {
+                self.updateData()
+
+                if prepareAnotherPage {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                        self?.fetchThreadMessages(
+                            from: self?.oldestMessageDateFromRemote,
+                            prepareAnotherPage: false
+                        )
+                    })
+                }
+            }
+        }
+
+        let request = ThreadMessagesRequest(tmid: threadIdentifier)
+        let options: APIRequestOptionSet = [.paginated(count: pageSize, offset: currentPage * pageSize)]
+
+        API.current()?.fetch(request, options: options) { [weak self] response in
+            DispatchQueue.main.async { [weak self] in
+                guard
+                    let self = self,
+                    case let .resource(resource) = response
+                else {
+                    return
+                }
+
+                self.oldestMessageDateFromRemote = resource.messages.last?.createdAt
+
+                self.showing += resource.count ?? 0
+                self.total = resource.total ?? 0
+                self.currentPage += 1
+
+                self.requestingData = .none
+                self.hasMoreData = self.showing < self.total
+
+                // Persist messages in database
+                Realm.current?.execute({ realm in
+                    for message in resource.raw?["messages"].array ?? [] {
+                        let managedMessage = Message()
+                        managedMessage.map(message, realm: realm)
+                        realm.add(managedMessage, update: true)
+                    }
+                })
+
+                // Update data into the UI
+                self.updateData()
             }
         }
     }
@@ -605,7 +749,8 @@ final class MessagesViewModel {
             let chatSection = AnyChatSection(MessageSection(
                 object: AnyDifferentiable(section),
                 controllerContext: controllerContext,
-                collapsibleItemsState: collpsibleItemsState
+                collapsibleItemsState: collpsibleItemsState,
+                compressedLayout: threadIdentifier?.isEmpty ?? true
             ))
 
             dataSorted[idx] = chatSection
@@ -628,13 +773,15 @@ final class MessagesViewModel {
             )
         )
 
-        let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
-        if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
-            data.append(currentHeaderSection)
-            dataSorted.append(currentHeaderSection)
-        } else if let currentHeaderIndex = currentHeaderIndex {
-            dataSorted.remove(at: currentHeaderIndex)
-            dataSorted.append(currentHeaderSection)
+        if threadIdentifier == nil {
+            let currentHeaderIndex = dataSorted.firstIndex(of: currentHeaderSection)
+            if currentHeaderIndex == nil && !hasMoreData && requestingData == .none {
+                data.append(currentHeaderSection)
+                dataSorted.append(currentHeaderSection)
+            } else if let currentHeaderIndex = currentHeaderIndex {
+                dataSorted.remove(at: currentHeaderIndex)
+                dataSorted.append(currentHeaderSection)
+            }
         }
 
         dataNormalized = dataSorted.map({ ArraySection(model: $0, elements: $0.viewModels()) })
@@ -673,6 +820,12 @@ final class MessagesViewModel {
      - returns: If the message is sequential.
      */
     func isSequential(message: UnmanagedMessage, previousMessage: UnmanagedMessage) -> Bool {
+        // Being a reply thread, everything can be sequential if it's just following
+        // the same thread.
+        if message.isThreadReplyMessage && previousMessage.isThreadReplyMessage {
+            return message.threadMessageId == previousMessage.threadMessageId
+        }
+
         guard message.groupable && previousMessage.groupable else {
             return false
         }
@@ -685,10 +838,15 @@ final class MessagesViewModel {
             return false
         }
 
+        if previousMessage.isThreadReplyMessage || previousMessage.isThreadMainMessage {
+            return false
+        }
+
         let date = message.createdAt
         let prevDate = previousMessage.createdAt
 
         let sameUser = message.userIdentifier == previousMessage.userIdentifier
+            && message.alias == previousMessage.alias
 
         var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
         if let settings = AuthSettingsManager.settings {
@@ -701,8 +859,20 @@ final class MessagesViewModel {
 
 extension MessagesViewModel {
 
-    func sendTextMessage(text: String) {
-        guard let subscription = subscription?.validated()?.unmanaged, text.count > 0 else {
+    func sendTextMessage(text: String, replyThreadIdentifier: String) {
+        var rid: String?
+
+        if let subscription = subscription?.validated()?.unmanaged {
+            rid = subscription.rid
+        } else if let thread = threadIdentifier, let message = Message.find(withIdentifier: thread) {
+            rid = message.rid
+        }
+
+        guard
+            let ridValidated = rid,
+            let subscription = Subscription.find(rid: ridValidated)?.unmanaged,
+            !text.isEmpty
+        else {
             return
         }
 
@@ -717,7 +887,8 @@ extension MessagesViewModel {
                 return Alert.defaultError.present()
             }
 
-            client.sendMessage(text: text, subscription: subscription)
+            let thread = replyThreadIdentifier.isEmpty ? threadIdentifier : replyThreadIdentifier
+            client.sendMessage(text: text, subscription: subscription, threadIdentifier: thread)
         }
     }
 

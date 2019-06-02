@@ -210,6 +210,15 @@ extension MessagesViewController: ChatMessageCellProtocol {
             }
         }
     }
+
+    func openThread(identifier: String) {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? MessagesViewController else {
+            return
+        }
+
+        controller.threadIdentifier = identifier
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 extension MessagesViewController {
@@ -391,14 +400,6 @@ extension MessagesViewController {
         self.composerView.resignFirstResponder()
 
         let controller = EmojiPickerController()
-        controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
-
-        if let presenter = controller.popoverPresentationController {
-            presenter.sourceView = view
-            presenter.sourceRect = view.bounds
-            presenter.backgroundColor = view.theme?.focusedBackground
-        }
 
         controller.emojiPicked = { emoji in
             API.current()?.client(MessagesClient.self).reactMessage(message, emoji: emoji)
@@ -406,11 +407,19 @@ extension MessagesViewController {
         }
 
         controller.customEmojis = CustomEmoji.emojis()
-        ThemeManager.addObserver(controller.view)
 
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
+            controller.modalPresentationStyle = .popover
+            controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
+
+            if let presenter = controller.popoverPresentationController {
+                presenter.sourceView = view
+                presenter.sourceRect = view.bounds
+                presenter.backgroundColor = view.theme?.focusedBackground
+            }
+
             self.present(controller, animated: true)
         }
     }

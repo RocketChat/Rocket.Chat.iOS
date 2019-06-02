@@ -212,7 +212,14 @@ extension AppManager {
                         )
                     )
                 } else {
-                    WindowManager.open(.auth(serverUrl: "", credentials: nil))
+                    if AppManager.supportsMultiServer {
+                        WindowManager.open(.auth(serverUrl: "", credentials: nil))
+                    } else {
+                        WindowManager.open(
+                            .auth(serverUrl: "", credentials: nil),
+                            viewControllerIdentifier: "ConnectServerNav"
+                        )
+                    }
                 }
 
                 completion?()
@@ -349,6 +356,43 @@ extension AppManager {
         // If not, fetch it
         let currentRealm = Realm.current
         let request = RoomInfoRequest(roomName: name)
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                DispatchQueue.main.async {
+                    Realm.executeOnMainThread(realm: currentRealm, { realm in
+                        guard let values = resource.channel else { return }
+
+                        let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        realm.add(subscription, update: true)
+                    })
+
+                    _ = openRoom()
+                }
+            case .error:
+                break
+            }
+        }
+    }
+
+    static func openRoom(rid: String, type: SubscriptionType = .channel) {
+        func openRoom() -> Bool {
+            guard let channel = Subscription.find(rid: rid) else { return  false }
+            open(room: channel)
+            return true
+        }
+
+        // Check if we already have this channel
+        if openRoom() == true {
+            return
+        }
+
+        // If not, fetch it
+        let currentRealm = Realm.current
+        let request = RoomInfoRequest(roomId: rid, type: type)
         API.current()?.fetch(request) { response in
             switch response {
             case .resource(let resource):

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCN-DM-NIV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,7 +59,7 @@
                                         <inset key="titleEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Connect to a server"/>
                                         <connections>
-                                            <segue destination="clK-Fu-Ez0" kind="show" id="Ivf-BH-9zE"/>
+                                            <segue destination="clK-Fu-Ez0" kind="show" identifier="ConnectServer" id="Ivf-BH-9zE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1260,6 +1260,27 @@ to mention you in messages</string>
                                     <action selector="buttonConnectDidPressed:" destination="clK-Fu-Ez0" eventType="touchUpInside" id="naf-zh-gOb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BvN-9Q-6L4">
+                                <rect key="frame" x="167" y="579" width="41" height="28"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonCertificateDidPressed:" destination="clK-Fu-Ez0" eventType="touchUpInside" id="Wdj-pt-SAb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cz-px-Qkw">
+                                <rect key="frame" x="171" y="559" width="33" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shield" translatesAutoresizingMaskIntoConstraints="NO" id="Blb-Jp-tOX">
+                                <rect key="frame" x="177.5" y="531" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="nFS-39-3SA"/>
+                                    <constraint firstAttribute="width" constant="20" id="vZB-WV-LVQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1269,20 +1290,29 @@ to mention you in messages</string>
                             <constraint firstItem="gL9-Oa-Vfe" firstAttribute="top" secondItem="0PA-dH-46T" secondAttribute="top" constant="-30" id="91T-pK-brw"/>
                             <constraint firstItem="0ry-Re-0rp" firstAttribute="leading" secondItem="0PA-dH-46T" secondAttribute="leading" priority="999" constant="15" id="J4b-7H-e2x"/>
                             <constraint firstItem="0ry-Re-0rp" firstAttribute="centerX" secondItem="HFb-22-bea" secondAttribute="centerX" id="Jv9-O4-avt"/>
+                            <constraint firstItem="BvN-9Q-6L4" firstAttribute="centerX" secondItem="HFb-22-bea" secondAttribute="centerX" id="K3W-Fd-vPT"/>
+                            <constraint firstItem="1cz-px-Qkw" firstAttribute="top" secondItem="Blb-Jp-tOX" secondAttribute="bottom" constant="8" id="MW5-B2-ss8"/>
                             <constraint firstItem="gL9-Oa-Vfe" firstAttribute="centerX" secondItem="0PA-dH-46T" secondAttribute="centerX" id="PiX-d0-ydg"/>
+                            <constraint firstItem="Blb-Jp-tOX" firstAttribute="centerX" secondItem="1cz-px-Qkw" secondAttribute="centerX" id="Plc-0t-FBJ"/>
                             <constraint firstItem="0ry-Re-0rp" firstAttribute="top" secondItem="9W3-Wb-DIA" secondAttribute="bottom" constant="20" id="Prd-4j-79x"/>
                             <constraint firstItem="0cw-94-7gd" firstAttribute="centerX" secondItem="HFb-22-bea" secondAttribute="centerX" id="TFt-jM-JmF"/>
+                            <constraint firstItem="0PA-dH-46T" firstAttribute="bottom" secondItem="BvN-9Q-6L4" secondAttribute="bottom" constant="60" id="ggm-xl-DIN"/>
                             <constraint firstItem="9W3-Wb-DIA" firstAttribute="centerX" secondItem="0PA-dH-46T" secondAttribute="centerX" id="jnc-Nr-Mlc"/>
+                            <constraint firstItem="1cz-px-Qkw" firstAttribute="centerX" secondItem="BvN-9Q-6L4" secondAttribute="centerX" id="muN-7W-vRp"/>
                             <constraint firstItem="0PA-dH-46T" firstAttribute="trailing" secondItem="0cw-94-7gd" secondAttribute="trailing" priority="999" constant="15" id="nAf-Jb-EPM"/>
                             <constraint firstItem="0cw-94-7gd" firstAttribute="top" secondItem="0ry-Re-0rp" secondAttribute="bottom" constant="20" id="qaJ-rf-vhb"/>
                             <constraint firstItem="0PA-dH-46T" firstAttribute="trailing" secondItem="0ry-Re-0rp" secondAttribute="trailing" priority="999" constant="15" id="tds-uc-6XW"/>
+                            <constraint firstItem="BvN-9Q-6L4" firstAttribute="top" secondItem="1cz-px-Qkw" secondAttribute="bottom" constant="4" id="vwo-Mp-XJR"/>
                             <constraint firstItem="0PA-dH-46T" firstAttribute="trailing" secondItem="9W3-Wb-DIA" secondAttribute="trailing" constant="15" id="yV5-nv-6Iz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0PA-dH-46T"/>
                     </view>
                     <navigationItem key="navigationItem" id="kAP-Jq-h4I"/>
                     <connections>
+                        <outlet property="buttonCertificate" destination="BvN-9Q-6L4" id="SB2-wY-aNI"/>
                         <outlet property="buttonConnect" destination="0cw-94-7gd" id="nUC-fN-vTx"/>
+                        <outlet property="imageViewCertificateShield" destination="Blb-Jp-tOX" id="3jn-3D-XtO"/>
+                        <outlet property="labelCertificate" destination="1cz-px-Qkw" id="P5A-Sk-ubo"/>
                         <outlet property="textFieldServerURL" destination="0ry-Re-0rp" id="Kwl-Nc-paa"/>
                         <outlet property="titleLabel" destination="9W3-Wb-DIA" id="jM2-e5-EHY"/>
                         <segue destination="ueL-n9-tXo" kind="show" identifier="Auth" id="lbH-ae-bNg"/>
@@ -1348,6 +1378,7 @@ to mention you in messages</string>
     </scenes>
     <resources>
         <image name="OnePassword-Button" width="27" height="27"/>
+        <image name="Shield" width="20" height="20"/>
         <image name="connectServer" width="30" height="30"/>
         <image name="disclosureIndicator" width="7" height="14"/>
         <image name="keyBlack" width="20" height="20"/>
@@ -1365,7 +1396,7 @@ to mention you in messages</string>
         <segue reference="Ivf-BH-9zE"/>
         <segue reference="B9E-PP-gIC"/>
         <segue reference="9kY-lU-ad7"/>
-        <segue reference="yUJ-js-l73"/>
+        <segue reference="tMH-P7-q5C"/>
         <segue reference="kz9-vv-nLs"/>
     </inferredMetricsTieBreakers>
 </document>

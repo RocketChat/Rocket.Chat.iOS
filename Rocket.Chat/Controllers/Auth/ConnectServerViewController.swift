@@ -8,7 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import Starscream
 
+// swiftlint:disable file_length
 final class ConnectServerViewController: BaseViewController {
 
     internal var connecting = false
@@ -40,6 +42,21 @@ final class ConnectServerViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
+    var certificateFilePassword: String?
+    var certificateFileURL: URL? {
+        didSet {
+            if let url = certificateFileURL {
+                labelCertificate.text = localized("auth.connect.ssl.certificate.your_certificate")
+                buttonCertificate.setTitle(url.pathComponents.last, for: .normal)
+                imageViewCertificateShield.isHidden = false
+            } else {
+                labelCertificate.text = localized("auth.connect.ssl.certificate.do_you_have")
+                buttonCertificate.setTitle(localized("auth.connect.ssl.certificate.apply"), for: .normal)
+                imageViewCertificateShield.isHidden = true
+            }
+        }
+    }
+
     lazy var buttonClose: UIBarButtonItem = {
         let buttonClose = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(buttonCloseDidPressed))
         return buttonClose
@@ -65,15 +82,25 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
-    lazy var keyboardConstraint: NSLayoutConstraint = {
-        var bottomGuide: NSLayoutYAxisAnchor
-
-        if #available(iOS 11.0, *) {
-            bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
-        } else {
-            bottomGuide = view.bottomAnchor
+    @IBOutlet weak var imageViewCertificateShield: UIImageView!
+    @IBOutlet weak var labelCertificate: UILabel! {
+        didSet {
+            labelCertificate.text = localized("auth.connect.ssl.certificate.do_you_have")
+            labelCertificate.textColor = .RCGray()
         }
+    }
 
+    @IBOutlet weak var buttonCertificate: UIButton! {
+        didSet {
+            buttonCertificate.titleLabel?.font = buttonCertificate.titleLabel?.font.bold()
+            buttonCertificate.setTitle(localized("auth.connect.ssl.certificate.apply"), for: .normal)
+            buttonCertificate.setTitleColor(.RCBlue(), for: .normal)
+            buttonCertificate.setTitleColor(.RCGray(), for: .disabled)
+        }
+    }
+
+    lazy var keyboardConstraint: NSLayoutConstraint = {
+        let bottomGuide = view.safeAreaLayoutGuide.bottomAnchor
         return buttonConnect.bottomAnchor.constraint(equalTo: bottomGuide, constant: 0)
     }()
 
@@ -94,6 +121,7 @@ final class ConnectServerViewController: BaseViewController {
             navigationItem.leftBarButtonItem = nil
         } else {
             navigationItem.leftBarButtonItem = buttonClose
+            navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
         }
 
         selectedServer = DatabaseManager.selectedIndex
@@ -137,10 +165,6 @@ final class ConnectServerViewController: BaseViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-
-        if !shouldAutoConnect {
-            textFieldServerURL.becomeFirstResponder()
-        }
     }
 
     deinit {
@@ -230,6 +254,29 @@ final class ConnectServerViewController: BaseViewController {
         AppManager.changeSelectedServer(index: selectedServer)
     }
 
+    @IBAction func buttonCertificateDidPressed(_ sender: Any) {
+        if let url = certificateFileURL {
+            let alert = UIAlertController(title: url.pathComponents.last ?? "", message: nil, preferredStyle: .actionSheet)
+
+            if let presenter = alert.popoverPresentationController {
+                presenter.sourceView = buttonCertificate
+                presenter.sourceRect = buttonCertificate.bounds
+            }
+
+            let removeTitle = localized("auth.connect.ssl.certificate.remove")
+            alert.addAction(UIAlertAction(title: removeTitle, style: .destructive, handler: { _ in
+                self.certificateFileURL = nil
+            }))
+
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+
+            return
+        }
+
+        openCertificatesPicker()
+    }
+
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
 
@@ -244,7 +291,11 @@ final class ConnectServerViewController: BaseViewController {
         }
 
         infoRequestHandler.url = url
-        infoRequestHandler.validate(with: url)
+        infoRequestHandler.validate(
+            with: url,
+            sslCertificatePath: certificateFileURL,
+            sslCertificatePassword: certificateFilePassword ?? ""
+        )
     }
 
     func connectWebSocket() {
@@ -252,7 +303,15 @@ final class ConnectServerViewController: BaseViewController {
         guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
         let serverVersion = infoRequestHandler.version
 
-        SocketManager.connect(socketURL) { [weak self] (_, connected) in
+        var sslClientCertificate: SSLClientCertificate?
+        if let certificateFileURL = certificateFileURL {
+            sslClientCertificate = try? SSLClientCertificate(
+                pkcs12Url: certificateFileURL,
+                password: certificateFilePassword ?? ""
+            )
+        }
+
+        SocketManager.connect(socketURL, sslCertificate: sslClientCertificate) { [weak self] (_, connected) in
             if !connected {
                 self?.stopConnecting()
                 self?.alert(
@@ -266,11 +325,34 @@ final class ConnectServerViewController: BaseViewController {
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: serverURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
 
-            AuthSettingsManager.updatePublicSettings(serverVersion: serverVersion, apiHost: serverURL, nil) { (settings) in
+            if let certificateFileURL = self?.certificateFileURL {
+                if let newFileURL = SecurityManager.save(certificate: certificateFileURL, for: String.random()) {
+                    DatabaseManager.updateSSLClientInformation(
+                        for: index,
+                        path: newFileURL,
+                        password: self?.certificateFilePassword ?? ""
+                    )
+                }
+            }
+
+            AuthSettingsManager.updatePublicSettings(
+                serverVersion: serverVersion,
+                apiHost: serverURL,
+                apiSSLCertificatePath: self?.certificateFileURL,
+                apiSSLCertificatePassword: self?.certificateFilePassword ?? "",
+                nil
+            ) { (settings) in
                 self?.serverPublicSettings = settings
 
                 if connected {
-                    API(host: serverURL, version: serverVersion ?? .zero).client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
+                    let api = API(host: serverURL, version: serverVersion ?? .zero)
+
+                    if let sslCertificatePath = self?.certificateFileURL {
+                        api.sslCertificatePath = sslCertificatePath
+                        api.sslCertificatePassword = self?.certificateFilePassword ?? ""
+                    }
+
+                    api.client(InfoClient.self).fetchLoginServices(completion: { loginServices, shouldRetrieveLoginServices in
                         self?.stopConnecting()
 
                         if shouldRetrieveLoginServices {
@@ -348,4 +430,40 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
 
 extension ConnectServerViewController {
     override func applyTheme() { }
+}
+
+extension ConnectServerViewController: UIDocumentPickerDelegate {
+
+    func openCertificatesPicker() {
+        let controller = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        controller.delegate = self
+        controller.modalPresentationStyle = .pageSheet
+        controller.allowsMultipleSelection = false
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    // MARK: UIDocumentPickerDelegate
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        certificateFileURL = url
+
+        let alert = UIAlertController(
+            title: localized("auth.connect.ssl.certificate.password.title"),
+            message: localized("auth.connect.ssl.certificate.password.message"),
+            preferredStyle: .alert
+        )
+
+        alert.addTextField { textField in
+            textField.isSecureTextEntry = true
+        }
+
+        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
+            if let textField = alert.textFields?.first, let text = textField.text {
+                self.certificateFilePassword = text
+            }
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+
 }

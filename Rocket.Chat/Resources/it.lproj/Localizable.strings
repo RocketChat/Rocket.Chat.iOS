@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Connetti";
 "auth.connect.ssl_required" = "È necessario che il tuo server supporti SSL";
 "auth.connect.connecting" = "Connessione in corso. Attendere";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "Entra con ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Continua con ";
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Password dimenticata";
 "auth.login.agree_label" = "Procedendo accetti i nostri";
 "auth.login.agree_and" = "e";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Termini di servizio";
 "auth.login.agree_privacypolicy" = "Politica sulla riservatezza";
 
@@ -294,6 +301,8 @@
 "chat.message.type.room_changed_announcement" = "L'annuncio della stanza è stato cambiato in \"%@\" da %@";
 "chat.message.type.room_changed_description" = "La descrizione della stanza è stata cambiata in \"%@\" da %@";
 "chat.message.type.video_call_started" = "Chiamata video iniziata da %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informazioni";
@@ -504,3 +513,24 @@
 "chat.components.quote.replied" = "Con Risposta";
 "chat.components.quote.pinned" = "Evidenziati";
 "chat.components.text_attachment.no_title" = "Senza Titolo";
+
+// Directory
+"directory.title" = "Directory"; // TODO
+"directory.filters.channels" = "Channels"; // TODO
+"directory.filters.users" = "Users"; // TODO
+"directory.filters.by" = "Search by"; // TODO
+"directory.filters.global.title" = "Search for global users"; // TODO
+"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
+"directory.users.1_user" = "1 member"; // TODO
+"directory.users.x_users" = "%@ members"; // TODO
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

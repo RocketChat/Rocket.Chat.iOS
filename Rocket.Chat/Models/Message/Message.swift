@@ -23,6 +23,7 @@ enum MessageType: String {
     case userRemoved = "ru"
     case userJoined = "uj"
     case userLeft = "ul"
+    case userJoinedConversation = "ut"
     case userMuted = "user-muted"
     case userUnmuted = "user-unmuted"
     case welcome = "wm"
@@ -41,6 +42,8 @@ enum MessageType: String {
     case messageSnippeted = "message_snippeted"
 
     case jitsiCallStarted = "jitsi_call_started"
+
+    case discussionCreated = "discussion-created"
 
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
@@ -81,6 +84,21 @@ final class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    // MARK: Threads
+
+    @objc dynamic var threadMessageId = ""
+    @objc dynamic var threadLastMessage: Date?
+    @objc dynamic var threadMessagesCount = 0
+    @objc dynamic var threadIsFollowing = false
+
+    // MARK: Discussion
+
+    @objc dynamic var discussionRid: String?
+    @objc dynamic var discussionLastMessage: Date?
+    @objc dynamic var discussionMessagesCount = 0
+
+    // MARK: Relationships
+
     var starred = List<String>()
     var mentions = List<Mention>()
     var channels = List<Channel>()
@@ -88,6 +106,8 @@ final class Message: BaseModel {
     var urls = List<MessageURL>()
 
     var reactions = List<MessageReaction>()
+
+    // MARK: Getters
 
     var type: MessageType {
         if let type = MessageType(rawValue: internalType) {

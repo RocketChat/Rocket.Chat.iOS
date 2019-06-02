@@ -46,6 +46,7 @@ final class Subscription: BaseModel {
     }
 
     @objc dynamic var rid = ""
+    @objc dynamic var prid = ""
 
     // Name of the subscription
     @objc dynamic var name = ""
@@ -64,6 +65,8 @@ final class Subscription: BaseModel {
 
     @objc dynamic var createdAt: Date?
     @objc dynamic var lastSeen: Date?
+
+    @objc dynamic var usersCount = 0
 
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
@@ -127,6 +130,10 @@ final class Subscription: BaseModel {
         return Realm.current?.objects(Message.self).filter("rid == '\(rid)'")
     }
 
+    var isDiscussion: Bool {
+        return !prid.isEmpty
+    }
+
     static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
         return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
@@ -148,12 +155,14 @@ extension Subscription {
         guard
             let auth = auth ?? AuthManager.isAuthenticated(),
             let baseURL = auth.baseURL(),
+            let userId = auth.userId,
+            let token = auth.token,
             let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         else {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
+        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg&rc_uid=\(userId)&rc_token=\(token)")
     }
 }
 
@@ -166,6 +175,10 @@ extension Subscription {
         }
 
         if type != .directMessage {
+            if !prid.isEmpty {
+                return !fname.isEmpty ? fname : name
+            }
+
             return settings.allowSpecialCharsOnRoomNames && !fname.isEmpty ? fname : name
         }
 

@@ -34,7 +34,7 @@ extension MediaPicker where Self: UIViewController & UIImagePickerControllerDele
     func openPhotosLibrary() {
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         picker.sourceType = .savedPhotosAlbum
 
         if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {

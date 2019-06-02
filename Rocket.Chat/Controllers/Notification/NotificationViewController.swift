@@ -26,11 +26,7 @@ final class NotificationViewController: TopTransparentViewController {
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
 
     var isDeviceWithNotch: Bool {
-        if #available(iOS 11.0, *) {
-            return view.safeAreaInsets.top > 20
-        } else {
-            return false
-        }
+        return view.safeAreaInsets.top > 20
     }
 
     var notificationViewIsHidden: Bool {

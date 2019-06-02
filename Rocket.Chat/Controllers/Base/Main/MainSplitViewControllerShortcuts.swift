@@ -306,7 +306,7 @@ extension MainSplitViewController {
             return
         }
 
-        controller.sendButtonPressed()
+        controller.composerView(controller.composerView, didPressSendButton: controller.composerView.rightButton)
     }
 
     @objc func shortcutNewline(_ command: UIKeyCommand) {

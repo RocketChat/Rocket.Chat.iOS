@@ -22,7 +22,7 @@
 
 "compose.title" = "Udostępnij";
 "compose.send" = "Wyślij";
-"compose.cancel" = "Cancel"; //TODO
+"compose.cancel" = "Anuluj";
 "compose.destination.to" = "Do: ";
 "compose.file.name.placeholder" = "Nazwa pliku";
 "compose.file.description.placeholder" = "Opis pliku";
@@ -31,4 +31,4 @@
 "report.success.message" = "Wybrany plik został poprawnie udostępniony.";
 "report.error.title" = "Błąd";
 "report.error.message" = "Wystąpił błąd w czasie wysyłania pliku.";
-"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
+"report.cancelled.message" = "Anulowano żądanie. Wiadomość nie została wysłana.";

@@ -10,16 +10,38 @@ import RocketChatViewController
 
 extension MessagesViewController: ComposerViewExpandedDelegate {
     func replyViewDidHide(_ replyView: ReplyView) {
-        composerViewModel.replyString = ""
+        composerViewModel.replyMessageIdentifier = ""
     }
 
     func replyViewDidShow(_ replyView: ReplyView) {
         return
     }
 
+    // MARK: Audio
+
+    func composerView(_ composerView: ComposerView, didFinishRecordingAudio url: URL) {
+        upload(audioWithURL: url)
+
+        if let subscriptionType = viewModel.subscription?.type {
+            AnalyticsManager.log(
+                event: Event.audioMessage(subscriptionType: subscriptionType.rawValue
+            ))
+        }
+    }
+
+    func composerView(_ composerView: ComposerView, didConfigureOverlayView view: OverlayView) {
+        ThemeManager.addObserver(view)
+    }
+
     // MARK: Hints
 
     func composerView(_ composerView: ComposerView, didChangeHintPrefixedWord word: String) {
+
+        // Don't generate hints if it is a slash command and not the first word
+        if word.first == "/" && composerView.textView.text != word {
+            return
+        }
+
         composerViewModel.didChangeHintPrefixedWord(word: word)
 
         if composerViewModel.hints.count > 0 {
@@ -112,18 +134,6 @@ extension MessagesViewController: ComposerViewExpandedDelegate {
     func editingViewDidShow(_ editingView: EditingView) {
         UIView.animate(withDuration: 0.2) {
             self.composerView.leftButton.hide()
-        }
-    }
-
-    // MARK: Button
-
-    func composerView(_ composerView: ComposerView, didTapButton button: ComposerButton) {
-        if button === composerView.rightButton {
-            sendButtonPressed()
-        }
-
-        if button == composerView.leftButton {
-            uploadButtonPressed()
         }
     }
 

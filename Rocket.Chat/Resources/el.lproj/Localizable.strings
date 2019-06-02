@@ -3,7 +3,7 @@
 "global.yes" = "Ναι";
 "global.no" = "Όχι";
 "global.cancel" = "Ακύρωση";
-"global.error" = "λάθος";
+"global.error" = "Λάθος";
 
 // Errors
 "error.socket.default_error.title" = "Ωπ!";
@@ -50,7 +50,7 @@
 "alert.authorization_error.create_channel.description" = "Δεν μπορείτε να δημιουργήστετε κανάλια";
 
 "alert.unsupported_feature.title" = "Η λειτουργικότητα δεν υποστηρίζεται";
-"alert.unsupported_feature.message" = "Η έκδοση του εξυπηρετητή είναι: %@. Αητή η λειτουργικότητα υποστηρίζεται μονο σε εκδόσεις %@ και άνω.";
+"alert.unsupported_feature.message" = "Η έκδοση του εξυπηρετητή είναι: %@. Αυτή η λειτουργικότητα υποστηρίζεται μόνο σε εκδόσεις %@ και άνω.";
 
 "alert.upload_error.title" = "Σφάλμα στο ανέβασμα";
 "alert.upload_error.message" = "Συνέβη κάποιο σφάλμα ενώ ανεβάζατε το αρχείο σας. Παρακαλούμε ξαναπροσπαθήστε.";
@@ -94,14 +94,14 @@
 // Socket Connection
 "connection.title" = "Συνδεθείτε στον εξυπηρετητή σας"; 
 "connection.button_connect" = "Σύνδεση";
-"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
+"connection.server_url.placeholder" = "δική-σας-εταιρία.rocket.chat";
 "connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
 "connection.connecting.banner.message" = "Συνδεόμαστε...";
 "connection.waiting_for_network.banner.message" = "Περιμένετε για το δίκτυο"; 
 
 // Onboarding
-"onboarding.label_welcome" = "Καλώς ορίσατε στο Rocket Chat"; 
-"onboarding.label_subtitle" = "Team Communication"; // TODO
+"onboarding.label_welcome" = "Καλωσήρθατε στο Rocket Chat";
+"onboarding.label_subtitle" = "Επικοινωνία Ομάδας";
 "onboarding.button_connect_server" = "Συνδεθείτε σε ένα εξυπηρετητή"; 
 "onboarding.button_create_server" = "Συνδεθείτε σε ένα Χώρο Εργασίας"; 
 "onboarding.button_join_community_prefix" = "Συνδεθείτε με την κοινότητα"; 
@@ -110,8 +110,14 @@
 "auth.connect.button_connect" = "Σύνδεση";
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "Σύνδεση με "; 
-"auth.email_auth" = "e-mail"; // TODO
+"auth.email_auth" = "e-mail"; // TODO: maybe should not be translated
 "auth.login_service_prefix" = "Συνέχεια με "; 
 
 "auth.signup_title" = "Εγγραφή"; 
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
 "auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
 "auth.login.agree_and" = "και";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
 "auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
 
@@ -152,11 +159,11 @@
 "subscriptions.list.no_message" = "Κανένα μήνυμα";
 "subscriptions.list.sent_an_attachment" = "στείλτε ένα συνημμένο";
 "subscriptions.list.date.yesterday" = "Εχθές";
-"subscriptions.list.actions.read" = "Read"; // TODO
-"subscriptions.list.actions.unread" = "Unread"; // TODO
-"subscriptions.list.actions.favorite" = "Favorite"; // TODO
-"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
-"subscriptions.list.actions.hide" = "Hide"; // TODO
+"subscriptions.list.actions.read" = "Αναγνωσμένο";
+"subscriptions.list.actions.unread" = "Αδιάβαστο";
+"subscriptions.list.actions.favorite" = "Αγαπημένο";
+"subscriptions.list.actions.unfavorite" = "Μη αγαπημένο";
+"subscriptions.list.actions.hide" = "Απόκρυψη";
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
@@ -200,11 +207,11 @@
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
 "chat.unread_separator" = "νέα μηνύματα";
-"chat.preview.actions.read" = "Mark as read"; // TODO
-"chat.preview.actions.unread" = "Mark as unread"; // TODO
-"chat.preview.actions.favorite" = "Favorite"; // TODO
-"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
-"chat.preview.actions.hide" = "Hide"; // TODO
+"chat.preview.actions.read" = "Σημαδέψτε σαν αναγνωσμένο";
+"chat.preview.actions.unread" = "Σημαδέψτε σαν μη αναγνωσμένο";
+"chat.preview.actions.favorite" = "Αγαπημένο";
+"chat.preview.actions.unfavorite" = "Μη αγαπημένο";
+"chat.preview.actions.hide" = "Κρυφό";
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Διαβάστηκε από";
@@ -223,8 +230,8 @@
 "chat.message.actions.unstar" = "Όχι-αστέρι"; 
 "chat.message.actions.quote" = "Επιδείξτε μήνυμα";
 "chat.message.actions.reply" = "Απαντήστε σε μήνυμα";
-"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
-"chat.message.actions.permalink" = "Permalink"; //TODO
+"chat.message.actions.join_video_call" = "Συνδεση σε βιντεοκλήση";
+"chat.message.actions.permalink" = "Μόνιμος σύνδεσμος";
 "chat.message.actions.delete" = "Διαγράψτε μήνυμα";
 "chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
@@ -267,10 +274,10 @@
 "chat.drawing.settings.color.others" = "Επιλλέξτε χρώμα:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
-"chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.users_are_typing" = "%@ πληκτρολογούν...";
+"chat.user_is_typing" = "%@ πληκτρολογεί...";
+"chat.typing" = "πληκτρολογεί...";
+"chat.several_typing" = "διαφοροι χρήστες πληκτρολογούν...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Το όνομα του δωματίου άλλαξε σε: %@ by %@";
@@ -287,12 +294,14 @@
 "chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
 "chat.message.type.room_unarchived" = "Αυτό το δωμάτιο αποαρχειοθετήθηκε από %@";
 "chat.message.type.message_pinned" = "Καρφιτσώθηκε ένα μήνυμα:";
-"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
-"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
+"chat.message.type.message_snippeted" = "Δημιουργήστε ένα απόσπασμα: \"%@\"";
+"chat.message.type.room_changed_privacy" = "H Ιδιωτικότητα(απόρρητο) του Δωματίου μεταβλήθηκε σε \"%@\" από %@";
+"chat.message.type.room_changed_topic" = "Το θέμα του δωματίου μεταβλήθηκε σε \"%@\" από %@";
+"chat.message.type.room_changed_announcement" = "Η αναγγελία του δωματίου μεταβλήθηκε σε \"%@\" από %@";
+"chat.message.type.room_changed_description" = "Η περιγραφή του Δωματίου μεταβλήθηκε σε \"%@\" από %@";
+"chat.message.type.video_call_started" = "Μια Βεντοκλήση ξεκίνησε από %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";
@@ -300,13 +309,13 @@
 "chat.info.item.no_topic" = "Όχι θέμα";
 "chat.info.item.description" = "Περιγραφή";
 "chat.info.item.no_description" = "Έλλειψη περιγραφής";
-"chat.info.item.announcement" = "Announcement"; // TODO
-"chat.info.item.no_announcement" = "No announcement"; // TODO
-"chat.info.item.notifications" = "Ειδοποιήσεις";
+"chat.info.item.announcement" = "Αναγγελία";
+"chat.info.item.no_announcement" = "Καμία αναγγελία";
+"chat.info.item.notifications" = "Γνωστοποιήσεις";
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
-"chat.info.item.mentions" = "Αναφέρθηκαν";
+"chat.info.item.mentions" = "Αναφορές";
 "chat.info.item.files" = "Αρχεία";
 "chat.info.item.share" = "Κοινή Χρήση";
 
@@ -324,7 +333,7 @@
 "chat.messages.list.search.placeholder" = "Αναζήτηση μηνυμάτων"; 
 "chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
-"chat.messages.mentions.list.title" = "Αναφέρθηκε"; 
+"chat.messages.mentions.list.title" = "Αναφορές";
 "chat.messages.files.list.title" = "Αρχεία"; 
 "chat.messages.files.list.empty" = "Δεν βρέθηκαν αρχεία";
 
@@ -340,15 +349,15 @@
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
 "myaccount.settings.profile" = "Λογαριασμός"; 
 "myaccount.settings.license" = "Άδεια";
-"myaccount.settings.language" = "Language";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.language" = "Γλώσσα";
+"myaccount.settings.review" = "Αξιολογήστε την εφαρμογή";
+"myaccount.settings.share" = "Μοιραστείτε την εφαρμογή";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 "myaccount.settings.server_version" = "Έκδοση Εξυπηρετητή: %@"; 
 "myaccount.settings.web_browser" = "Πρόγραμμα Περιήγησης"; 
 "myaccount.settings.tracking.title" = "Αποστολή Αναφοράς Κατάρευσης"; 
-"myaccount.settings.tracking.footer" = "Δεν καταγράφουμε ποτέ το περιεχόμενο των συνομιλιών σας. Η αναφορά κατάρευσης πειλαμβάνει μόνο σχετική πληροφορία για μας ώστε να εντοπίσουμε προβλήματα και να τα διορθώσουμε."; 
+"myaccount.settings.tracking.footer" = "Δεν καταγράφουμε ποτέ το περιεχόμενο των συνομιλιών σας. Η αναφορά κατάρρευσης περιλαμβάνει μόνο σχετική πληροφορία για μας ώστε να εντοπίσουμε προβλήματα και να τα διορθώσουμε.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
@@ -362,53 +371,53 @@
 "myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
 
 // Notifications preferences
-"myaccount.settings.notifications.title" = "Notification Preferences"; // TODO
-"myaccount.settings.notifications.save" = "Save"; // TODO
+"myaccount.settings.notifications.title" = "Προτιμήσεις Γνωστοποιήσεων";
+"myaccount.settings.notifications.save" = "Αποθήκευση";
 
-"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
-"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@"; // TODO
-"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
-"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list."; // TODO
+"myaccount.settings.notifications.receive.title" = "Λήψη Γνωστοποιήσεων";
+"myaccount.settings.notifications.receive.footer" = "Λήψη Γνωστοποιήσεων από %@";
+"myaccount.settings.notifications.show.title" = "Εμφάνιση Μετρητή μη αναγνωσμένων";
+"myaccount.settings.notifications.show.footer" = "Ο μετρητής μη αναγνωσμένων εμφανίζεται σαν σήμα στα δεξιά του καναλιού, στη λίστα.";
 
-"myaccount.settings.notifications.inapp" = "In-app and Desktop"; // TODO
-"myaccount.settings.notifications.inapp.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop."; // TODO
+"myaccount.settings.notifications.inapp" = "Εντός-Εφαρμογής και Επιφάνειας Εργασίας";
+"myaccount.settings.notifications.inapp.alerts" = "Συναγερμοί";
+"myaccount.settings.notifications.inapp.footer" = "Εμφανίζει ένα μπάνερ στην κορυφή της οθόνης όταν η εφαρμογή είναι ανοιχτή, και εμφανίζει μια γνωστοποίηση στην επιφάνεια εργασίας.";
 
-"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
-"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open."; // TODO
+"myaccount.settings.notifications.mobile" = "Κινητού";
+"myaccount.settings.notifications.mobile.alerts" = "Συναγερμοί";
+"myaccount.settings.notifications.mobile.footer" = "Αυτές οι γνωστοποιήσεις εμφανίζονται στη συσκευή σας όταν η εφαρμογή δεν είναι ενεργή.";
 
-"myaccount.settings.notifications.desktop" = "Desktop options"; // TODO
-"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
-"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
-"myaccount.settings.notifications.desktop.duration" = "Notification Duration"; // TODO
+"myaccount.settings.notifications.desktop" = "Επιλογές Επιφάνειας";
+"myaccount.settings.notifications.desktop.audio" = "Ακουστική";
+"myaccount.settings.notifications.desktop.sound" = "Ήχος";
+"myaccount.settings.notifications.desktop.duration" = "Διάρκεια Γνωστοποιήσεων";
 
-"myaccount.settings.notifications.mail" = "Email"; // TODO
-"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.mail" = "Email"; // TODO: maybe should not be translated
+"myaccount.settings.notifications.email.alerts" = "Συναγερμοί";
 
-"myaccount.settings.notifications.duration.default" = "Default"; // TODO
-"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+"myaccount.settings.notifications.duration.default" = "Προεπιλογή";
+"myaccount.settings.notifications.duration.seconds" = "δευτερόλεπτα";
 
-"alert.update_notifications_preferences_success.title" = "Preferences saved"; // TODO
+"alert.update_notifications_preferences_success.title" = "Οι Προτιμήσεις αποθηκεύτηκαν";
 
-"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
-"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+"alert.update_notifications_preferences_save_error.title" = "Απέτυχε η ενημέρωση των προτιμήσεων γνωστοποιήσεων";
+"alert.update_notifications_preferences_save_error.message" = "Κάποιο σφάλμα συνέβη κατά την αποθήκευση των προτιμήσεών σας για τις Γνωστοποιήσεις. Παρακαλούμε ξαναπροσπαθήστε.";
 
 // Enum SubscriptionNotificationsStatus
-"subscription.notifications.status.default" = "Default"; // TODO
-"subscription.notifications.status.nothing" = "Nothing"; // TODO
-"subscription.notifications.status.all" = "All"; // TODO
-"subscription.notifications.status.mentions" = "Mentions"; // TODO
+"subscription.notifications.status.default" = "Προεπιλογή";
+"subscription.notifications.status.nothing" = "Καμία";
+"subscription.notifications.status.all" = "Όλες";
+"subscription.notifications.status.mentions" = "Αναφορές";
 
 // Enum SubscriptionNotificationsAudioValue
-"subscription.notifications.audio.value.none" = "None"; // TODO
-"subscription.notifications.audio.value.default" = "Default"; // TODO
-"subscription.notifications.audio.value.beep" = "Beep"; // TODO
+"subscription.notifications.audio.value.none" = "Καμία";
+"subscription.notifications.audio.value.default" = "Προεπιλογή";
+"subscription.notifications.audio.value.beep" = "Μπίπ";
 "subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
-"subscription.notifications.audio.value.ding" = "Ding"; // TODO
-"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
-"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
-"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
+"subscription.notifications.audio.value.ding" = "Κουδούνι";
+"subscription.notifications.audio.value.droplet" = "Σταγόνα";
+"subscription.notifications.audio.value.highbell" = "Καμπάνα";
+"subscription.notifications.audio.value.seasons" = "Εποχές";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -417,7 +426,7 @@
 "web_browser.opera.title" = "Opera Mini";
 "web_browser.firefox.title" = "Firefox";
 "myaccount.settings.web_browser.title" = "Πρόγραμμα Περιήγησης"; 
-"myaccount.settings.web_browser.footer" = "Αυτή η εφαρμογή θα χρησμοποιηθεί για να ανοίξει συνδέσμους στο Rocket Chat."; 
+"myaccount.settings.web_browser.footer" = "Αυτή η εφαρμογή θα χρησιμοποιηθεί για να ανοίξει συνδέσμους στο Rocket Chat."; 
 
 // Update Profile
 "myaccount.settings.profile.title" = "Λογαριασμός"; 
@@ -429,7 +438,7 @@
 "myaccount.settings.profile.section.password" = "Συνθηματικό"; 
 "myaccount.settings.profile.name_placeholder" = "Όνομα"; 
 "myaccount.settings.profile.username_placeholder" = "Όνομα χρήστη"; 
-"myaccount.settings.profile.email_placeholder" = "E-mail"; 
+"myaccount.settings.profile.email_placeholder" = "E-mail"; //TODO: maybe should not be translated
 "myaccount.settings.profile.status.title" = "Κατάσταση"; 
 "myaccount.settings.profile.password_required.title" = "Εισάγετε το συνθηματικό σας"; 
 "myaccount.settings.profile.password_required.message" = "Το συνθηματικό σας είναι απαραίτητο όταν αλλάζετε το e-mail σας."; 
@@ -438,7 +447,7 @@
 // New Password
 "myaccount.settings.profile.new_password.title" = "Νέο συνθηματικό"; 
 "myaccount.settings.profile.new_password.section.password" = "Συνθηματικό"; 
-"myaccount.settings.profile.new_password.actions.save" = "Save"; 
+"myaccount.settings.profile.new_password.actions.save" = "Αποθήκευση";
 "myaccount.settings.profile.new_password.password_placeholder" = "Νέο συνθηματικό"; 
 "myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Επιβεβαίωση Συνθηματικού"; 
 "myaccount.settings.profile.new_password.password_required.title" = "Εισάγετε το συνθηματικό σας"; 
@@ -455,12 +464,12 @@
 "user_details.status" = "Κατάσταση";
 "user_details.role" = "Ρόλος";
 "user_details.roles" = "Ρόλοι";
-"user_details.email" = "Email"; // TODO
-"user_details.emails" = "Emails"; // TODO
+"user_details.email" = "Email"; // TODO: maybe should not be translated
+"user_details.emails" = "Emails"; // TODO: maybe should not be translated
 "user_details.timezone" = "Ζώνη ώρας";
 "user_details.message_button" = "Μήνυμα";
-"user_details.voice_call_button" = "Κλήση Ομιλίας";
-"user_details.video_call_button" = "Κλήση Βίντεο";
+"user_details.voice_call_button" = "Φωνητική κλήση";
+"user_details.video_call_button" = "Βιντεοκλήση";
 
 // Theme
 "theme.settings.title" = "Θέμα"; 
@@ -480,26 +489,47 @@
 "subscriptions.grouping.unread_top" = "Αδιάβαστα στην κορυφή";
 
 // Shortcuts
-"shortcuts.type_message" = "Type message"; //TODO
-"shortcuts.preferences" = "Preferences"; //TODO
-"shortcuts.room_search" = "Rooms search"; //TODO
-"shortcuts.room_selection" = "Room selection 1...9"; //TODO
-"shortcuts.next_room" = "Next room"; //TODO
-"shortcuts.previous_room" = "Previous room"; //TODO
-"shortcuts.new_room" = "New room"; //TODO
-"shortcuts.room_actions" = "Room actions"; //TODO
-"shortcuts.upload_room" = "Upload to room"; //TODO
-"shortcuts.search_messages" = "Search messages"; //TODO
-"shortcuts.scroll_messages" = "Scroll messages"; //TODO
-"shortcuts.reply_latest" = "Reply to latest"; //TODO
-"shortcuts.server_selection" = "Server selection"; //TODO
-"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
-"shortcuts.add_server" = "Add server"; //TODO
-"shortcuts.change_theme" = "Change theme"; //TODO
-"shortcuts.send" = "Send"; //TODO
-"shortcuts.new_line" = "New line"; //TODO
+"shortcuts.type_message" = "Γράψτε μήνυμα";
+"shortcuts.preferences" = "Προτιμήσεις";
+"shortcuts.room_search" = "Αναζήτηση δωματίου";
+"shortcuts.room_selection" = "Επιλογή δωματίου 1...9";
+"shortcuts.next_room" = "Επόμενο δωματιο";
+"shortcuts.previous_room" = "Προηγούμενο δωμάτιο";
+"shortcuts.new_room" = "Νέο δωμάτιο";
+"shortcuts.room_actions" = "Ενέργειες δωματίων";
+"shortcuts.upload_room" = "Μεταφόρτωση στο δωμάτιο";
+"shortcuts.search_messages" = "Αναζήτηση μηνυμάτων";
+"shortcuts.scroll_messages" = "Κοίληση μηνυμάτων";
+"shortcuts.reply_latest" = "Απάντηση στο πιο πρόσφατο";
+"shortcuts.server_selection" = "Επιλογή εξυπηρετητή";
+"shortcuts.server_selection_numbers" = "Επιλογή εξυπηρετητή 1...9";
+"shortcuts.add_server" = "Προσθήκη εξυπηρετητή";
+"shortcuts.change_theme" = "Αλλαγή θέματος";
+"shortcuts.send" = "Αποστολή";
+"shortcuts.new_line" = "Νέα γραμμή";
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.replied" = "Απαντήθηκε";
+"chat.components.quote.pinned" = "Καρφιτσώθηκε";
+"chat.components.text_attachment.no_title" = "Χωρίς Τίτλο";
+
+// Directory
+"directory.title" = "Κατάλογος";
+"directory.filters.channels" = "Κανάλια";
+"directory.filters.users" = "Χρήστες";
+"directory.filters.by" = "Αναζήτηση με";
+"directory.filters.global.title" = "Αναζήτηση για χρήστες παντού";
+"directory.filters.global.subtitle" = "Αν το ενεργοποιήσετε, θα μπορείτε να αναζητήσετε για οποιοδήποτε χρήστη και από άλλες εταιρίες ή εξυπηρετητές. ";
+"directory.users.1_user" = "1 μέλος";
+"directory.users.x_users" = "%@ μέλη";
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

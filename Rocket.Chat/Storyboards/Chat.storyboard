@@ -59,6 +59,31 @@
             </objects>
             <point key="canvasLocation" x="3242" y="329"/>
         </scene>
+        <!--Threads View Controller-->
+        <scene sceneID="J1u-Br-4B6">
+            <objects>
+                <collectionViewController id="qXE-FY-lgc" customClass="ThreadsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="TUE-np-qO3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ac7-3l-gHC">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="qXE-FY-lgc" id="Rpt-ye-th7"/>
+                            <outlet property="delegate" destination="qXE-FY-lgc" id="b9T-jj-Qjp"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSy-7O-Irl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340" y="-454"/>
+        </scene>
         <!--NotificationsSettings-->
         <scene sceneID="hUW-En-nol">
             <objects>
@@ -135,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0Z-yW-kL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5060" y="300"/>
+            <point key="canvasLocation" x="5108" y="331"/>
         </scene>
         <!--Files-->
         <scene sceneID="fgU-3K-p7j">
@@ -276,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4P-ZF-XWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4252.5" y="330.63380281690144"/>
+            <point key="canvasLocation" x="4253" y="331"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="SRb-23-U7N">
@@ -317,6 +342,7 @@
                     <navigationItem key="navigationItem" id="Qte-Rg-Iff"/>
                     <connections>
                         <segue destination="hUy-gX-yhf" kind="presentation" identifier="Channel Actions" modalPresentationStyle="formSheet" id="ZRf-Hf-wXn"/>
+                        <segue destination="qXE-FY-lgc" kind="show" identifier="Threads" id="cWh-cl-jPn"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzE-eP-wzd" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,8 +12,8 @@
 "error.login.title" = "Ups!";
 "error.login.message" = "Wystąpił nieoczekiwany błąd w trakcie logowania.";
 
-"error.signup.title" = "Oops!"; // TODO
-"error.signup.empty_input.message" = "All the fields are required for sign up."; // TODO
+"error.signup.title" = "Ups!";
+"error.signup.empty_input.message" = "Wszystkie pola do rejestracji są wymagane.";
 
 "error.login_unauthorized.title" = "Ups!";
 "error.login_unauthorized.message" = "Twoje dane do logowania zostaly odrzucone. Spróbuj ponownie.";
@@ -84,7 +84,7 @@
 
 "alert.logout.confirmation.title" = "Wyloguj z tego serwera";
 "alert.logout.confirmation.message" = "Czy na pewno chcesz się wylogować z \"%@\"?";
-"alert.logout.confirmation.confirm" = "Tak, wyloguj mnie"; // TODO
+"alert.logout.confirmation.confirm" = "Tak, wyloguj mnie";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Serwer zmienił swój adres";
@@ -94,14 +94,14 @@
 // Socket Connection
 "connection.title" = "Zaloguj się na serwer";
 "connection.button_connect" = "Połącz";
-"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
+"connection.server_url.placeholder" = "twoja-firma.rocket.chat";
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
 "connection.connecting.banner.message" = "Łączenie...";
 "connection.waiting_for_network.banner.message" = "Oczekiwanie na sieć";
 
 // Onboarding
 "onboarding.label_welcome" = "Witamy w Rocket Chat";
-"onboarding.label_subtitle" = "Team Communication"; // TODO
+"onboarding.label_subtitle" = "Komunikacja Zespołowa";
 "onboarding.button_connect_server" = "Połącz z serwerem";
 "onboarding.button_create_server" = "Utwórz nowy obszar roboczy";
 "onboarding.button_join_community_prefix" = "Dołącz do społeczości";
@@ -110,6 +110,12 @@
 "auth.connect.button_connect" = "Połącz";
 "auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
 "auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
+"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
+"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
+"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
+"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
+"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
+"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
 "auth.email_auth_prefix" = "Zaloguj używając ";
 "auth.email_auth" = "e-mail";
 "auth.login_service_prefix" = "Kontynuuj z ";
@@ -129,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Zapomniałem hasła";
 "auth.login.agree_label" = "Kontynuując zgadzasz się na nasze";
 "auth.login.agree_and" = "i";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Warunku Usług";
 "auth.login.agree_privacypolicy" = "Politykę Prywatności";
 
@@ -143,7 +150,7 @@
 "subscriptions.unreads" = "Nieprzeczytane";
 "subscriptions.favorites" = "Ulubione";
 "subscriptions.channels" = "Kanały";
-"subscriptions.groups" = "Private Groups"; //TODO
+"subscriptions.groups" = "Grupy Prywatne";
 "subscriptions.direct_messages" = "Prywatne wiadomości";
 "subscriptions.conversations" = "Rozmowy";
 "subscriptions.you" = "Ty";
@@ -152,11 +159,11 @@
 "subscriptions.list.no_message" = "Brak wiadomości";
 "subscriptions.list.sent_an_attachment" = "wysłano załącznik";
 "subscriptions.list.date.yesterday" = "Wczoraj";
-"subscriptions.list.actions.read" = "Read"; // TODO
-"subscriptions.list.actions.unread" = "Unread"; // TODO
-"subscriptions.list.actions.favorite" = "Favorite"; // TODO
-"subscriptions.list.actions.unfavorite" = "Unfavorite"; // TODO
-"subscriptions.list.actions.hide" = "Hide"; // TODO
+"subscriptions.list.actions.read" = "Przeczytane";
+"subscriptions.list.actions.unread" = "Nieprzeczytane";
+"subscriptions.list.actions.favorite" = "Ulubione";
+"subscriptions.list.actions.unfavorite" = "Usuń z ulub.";
+"subscriptions.list.actions.hide" = "Ukryj";
 
 // Servers
 "servers.add_new_team" = "Dodaj nowy Zespół";
@@ -171,7 +178,7 @@
 "status.online" = "Dostępny";
 "status.away" = "Zaraz wracam";
 "status.busy" = "Zajęty";
-"status.offline" = "Offline"; //TODO
+"status.offline" = "Nieaktywny";
 "status.invisible" = "Ukryty";
 
 // New Room View
@@ -200,11 +207,11 @@
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
 "chat.unread_separator" = "nowe wiadomości";
-"chat.preview.actions.read" = "Mark as read"; // TODO
-"chat.preview.actions.unread" = "Mark as unread"; // TODO
-"chat.preview.actions.favorite" = "Favorite"; // TODO
-"chat.preview.actions.unfavorite" = "Unfavorite"; // TODO
-"chat.preview.actions.hide" = "Hide"; // TODO
+"chat.preview.actions.read" = "Oznacz jako przeczytane";
+"chat.preview.actions.unread" = "Oznacz jako nieprzeczytane";
+"chat.preview.actions.favorite" = "Ulubione";
+"chat.preview.actions.unfavorite" = "Usuń z ulubionych";
+"chat.preview.actions.hide" = "Ukryj";
 
 // Read Receipts
 "chat.read_receipt_list.title" = "Przeczytane przez";
@@ -223,8 +230,8 @@
 "chat.message.actions.unstar" = "Odznacz jako ulubione";
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
-"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
-"chat.message.actions.permalink" = "Permalink"; //TODO
+"chat.message.actions.join_video_call" = "Dołącz do rozmowy wideo";
+"chat.message.actions.permalink" = "Permalink";
 "chat.message.actions.delete" = "Usuń wiadomość";
 "chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
 "chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
@@ -267,10 +274,10 @@
 "chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
-"chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.users_are_typing" = "%@ piszą...";
+"chat.user_is_typing" = "%@ pisze...";
+"chat.typing" = "pisze...";
+"chat.several_typing" = "kilku użytkowników pisze...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
@@ -286,13 +293,15 @@
 "chat.message.type.subscription_role_removed" = "%@ utracił rolę %@ przez %@";
 "chat.message.type.room_archived" = "Kanał został zarchiwizowany przez %@";
 "chat.message.type.room_unarchived" = "Kanał został od archiwizowany przez %@";
-"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
-"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
-"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
+"chat.message.type.message_pinned" = "Przypięto wiadomość:";
+"chat.message.type.message_snippeted" = "Utworzono fragment kodu: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Prywatność pokoju zmieniono na \"%@\" przez %@";
+"chat.message.type.room_changed_topic" = "Temat pokoju zmieniono na \"%@\" przez %@";
+"chat.message.type.room_changed_announcement" = "Ogłoszenie pokoju zmieniono na \"%@\" przez %@";
+"chat.message.type.room_changed_description" = "Opis pokoju zmieniono na \"%@\" przez %@";
+"chat.message.type.video_call_started" = "Rozmowa wideo rozpoczęta przez %@";
+"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
+"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "Informacje";
@@ -300,8 +309,8 @@
 "chat.info.item.no_topic" = "Brak tematu";
 "chat.info.item.description" = "Opis";
 "chat.info.item.no_description" = "Brak opisu";
-"chat.info.item.announcement" = "Announcement"; // TODO
-"chat.info.item.no_announcement" = "No announcement"; // TODO
+"chat.info.item.announcement" = "Ogłoszenie";
+"chat.info.item.no_announcement" = "Brak ogłoszeń";
 "chat.info.item.notifications" = "Powiadomienia";
 "chat.info.item.members" = "Członkowie";
 "chat.info.item.pinned" = "Przypięte";
@@ -329,9 +338,9 @@
 "chat.messages.files.list.empty" = "Nie znaleziono plików";
 
 // Upload Banner
-"chat.banner.upload.uploading" = "Uploading %@"; // TODO
-"chat.banner.upload.error" = "Failed uploading %@"; // TODO
-"chat.banner.upload.retry" = "Try again"; // TODO
+"chat.banner.upload.uploading" = "Przesyłanie %@";
+"chat.banner.upload.error" = "Nie udało się przesłać %@";
+"chat.banner.upload.retry" = "Spróbuj ponownie";
 
 // Settings
 "myaccount.settings.title" = "Preferencje";
@@ -341,8 +350,8 @@
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Licencja";
 "myaccount.settings.language" = "Język";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.review" = "Oceń aplikację";
+"myaccount.settings.share" = "Udostępnij aplikację";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
 "myaccount.settings.server_version" = "Wersja serwera: %@";
@@ -362,53 +371,53 @@
 "myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat aby nowe ustawienia zostały zastosowane.";
 
 // Notifications preferences
-"myaccount.settings.notifications.title" = "Notification Preferences"; // TODO
-"myaccount.settings.notifications.save" = "Save"; // TODO
+"myaccount.settings.notifications.title" = "Preferencje powiadomień";
+"myaccount.settings.notifications.save" = "Zapisz";
 
-"myaccount.settings.notifications.receive.title" = "Receive Notifications"; // TODO
-"myaccount.settings.notifications.receive.footer" = "Receive notifications from %@"; // TODO
-"myaccount.settings.notifications.show.title" = "Show Unread Counter"; // TODO
-"myaccount.settings.notifications.show.footer" = "Unread counter is displayed as a badge on to the right of the channel, in the list."; // TODO
+"myaccount.settings.notifications.receive.title" = "Otrzymuj powiadomieenia";
+"myaccount.settings.notifications.receive.footer" = "Otrzymuj powiadomienia od %@";
+"myaccount.settings.notifications.show.title" = "Pokaż liczbę nieprzeczytanych";
+"myaccount.settings.notifications.show.footer" = "Licznik nieprzeczytanych powiadomień jest wyświetlany na liście jako znaczek po prawej stronie kanału.";
 
-"myaccount.settings.notifications.inapp" = "In-app and Desktop"; // TODO
-"myaccount.settings.notifications.inapp.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.inapp.footer" = "Displays a banner at the top of the screen when the app is open, and displays a notification on desktop."; // TODO
+"myaccount.settings.notifications.inapp" = "W aplikacji i na komputerze";
+"myaccount.settings.notifications.inapp.alerts" = "Alerty";
+"myaccount.settings.notifications.inapp.footer" = "Wyświetla baner w górnej części ekranu, gdy aplikacja jest otwarta, i wyświetla powiadomienie na komputerze.";
 
-"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
-"myaccount.settings.notifications.mobile.alerts" = "Alerts"; // TODO
-"myaccount.settings.notifications.mobile.footer" = "These notifications are delivered to your device when the app is not open."; // TODO
+"myaccount.settings.notifications.mobile" = "Aplikacja mobilna";
+"myaccount.settings.notifications.mobile.alerts" = "Alerty";
+"myaccount.settings.notifications.mobile.footer" = "Powiadomienia są dostarczane na Twoje urządzenia, gdy apliakcja nie jest otwarta.";
 
-"myaccount.settings.notifications.desktop" = "Desktop options"; // TODO
-"myaccount.settings.notifications.desktop.audio" = "Audio"; // TODO
-"myaccount.settings.notifications.desktop.sound" = "Sound"; // TODO
-"myaccount.settings.notifications.desktop.duration" = "Notification Duration"; // TODO
+"myaccount.settings.notifications.desktop" = "Na komputerze";
+"myaccount.settings.notifications.desktop.audio" = "Audio";
+"myaccount.settings.notifications.desktop.sound" = "Dźwięk";
+"myaccount.settings.notifications.desktop.duration" = "Długość powiadomienia";
 
-"myaccount.settings.notifications.mail" = "Email"; // TODO
-"myaccount.settings.notifications.email.alerts" = "Alerts"; // TODO
+"myaccount.settings.notifications.mail" = "Adres email";
+"myaccount.settings.notifications.email.alerts" = "Alerty";
 
-"myaccount.settings.notifications.duration.default" = "Default"; // TODO
-"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+"myaccount.settings.notifications.duration.default" = "Domyślnie";
+"myaccount.settings.notifications.duration.seconds" = "sekund";
 
-"alert.update_notifications_preferences_success.title" = "Preferences saved"; // TODO
+"alert.update_notifications_preferences_success.title" = "Preferencje zostały zapisane";
 
-"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
-"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+"alert.update_notifications_preferences_save_error.title" = "Aktualizacjia preferencji nie powiodła się";
+"alert.update_notifications_preferences_save_error.message" = "Coś poszło nie tak przy zapisywaniu Twoich preferencji powiadomień. Spróbuj ponownie.";
 
 // Enum SubscriptionNotificationsStatus
-"subscription.notifications.status.default" = "Default"; // TODO
-"subscription.notifications.status.nothing" = "Nothing"; // TODO
-"subscription.notifications.status.all" = "All"; // TODO
-"subscription.notifications.status.mentions" = "Mentions"; // TODO
+"subscription.notifications.status.default" = "Domyślnie";
+"subscription.notifications.status.nothing" = "Brak";
+"subscription.notifications.status.all" = "Wszystko";
+"subscription.notifications.status.mentions" = "Wzmianki";
 
 // Enum SubscriptionNotificationsAudioValue
-"subscription.notifications.audio.value.none" = "None"; // TODO
-"subscription.notifications.audio.value.default" = "Default"; // TODO
-"subscription.notifications.audio.value.beep" = "Beep"; // TODO
-"subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
-"subscription.notifications.audio.value.ding" = "Ding"; // TODO
-"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
-"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
-"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
+"subscription.notifications.audio.value.none" = "Brak";
+"subscription.notifications.audio.value.default" = "Domyślnie";
+"subscription.notifications.audio.value.beep" = "Brzęczyk";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Kropelka";
+"subscription.notifications.audio.value.highbell" = "Wysoki dzwon";
+"subscription.notifications.audio.value.seasons" = "Pory roku";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -446,21 +455,21 @@
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Hasło";
 
 // User Action Sheet
-"user_action_sheet.info" = "Information"; // TODO
+"user_action_sheet.info" = "Informacja";
 "user_action_sheet.remove" = "Usuń z pokoju";
 "user_action_sheet.remove_confirm.title" = "Usunąć tego użytkownika?";
 "user_action_sheet.remove_confirm.message" = "Czy na pewno chcesz usunąć '%@' z tego pokoju?";
 
 // User Details
-"user_details.status" = "Status"; // TODO
-"user_details.role" = "Role"; // TODO
-"user_details.roles" = "Roles"; // TODO
-"user_details.email" = "Email"; // TODO
-"user_details.emails" = "Emails"; // TODO
-"user_details.timezone" = "Timezone"; // TODO
-"user_details.message_button" = "Message"; // TODO
-"user_details.voice_call_button" = "Voice Call"; // TODO
-"user_details.video_call_button" = "Video Call"; // TODO
+"user_details.status" = "Status";
+"user_details.role" = "Rola";
+"user_details.roles" = "Role";
+"user_details.email" = "Adres Email";
+"user_details.emails" = "Adresy Email";
+"user_details.timezone" = "Strefa czasowa";
+"user_details.message_button" = "Wiadomość";
+"user_details.voice_call_button" = "Rozmowa głosowa";
+"user_details.video_call_button" = "Rozmowa wideo";
 
 // Theme
 "theme.settings.title" = "Motyw";
@@ -480,26 +489,47 @@
 "subscriptions.grouping.unread_top" = "Nieprzeczytane na górze";
 
 // Shortcuts
-"shortcuts.type_message" = "Type message"; //TODO
-"shortcuts.preferences" = "Preferences"; //TODO
-"shortcuts.room_search" = "Rooms search"; //TODO
-"shortcuts.room_selection" = "Room selection 1...9"; //TODO
-"shortcuts.next_room" = "Next room"; //TODO
-"shortcuts.previous_room" = "Previous room"; //TODO
-"shortcuts.new_room" = "New room"; //TODO
-"shortcuts.room_actions" = "Room actions"; //TODO
-"shortcuts.upload_room" = "Upload to room"; //TODO
-"shortcuts.search_messages" = "Search messages"; //TODO
-"shortcuts.scroll_messages" = "Scroll messages"; //TODO
-"shortcuts.reply_latest" = "Reply to latest"; //TODO
-"shortcuts.server_selection" = "Server selection"; //TODO
-"shortcuts.server_selection_numbers" = "Server selection 1...9"; //TODO
-"shortcuts.add_server" = "Add server"; //TODO
-"shortcuts.change_theme" = "Change theme"; //TODO
-"shortcuts.send" = "Send"; //TODO
-"shortcuts.new_line" = "New line"; //TODO
+"shortcuts.type_message" = "Wpisz wiadomość";
+"shortcuts.preferences" = "Preferencje";
+"shortcuts.room_search" = "Wyszukaj pokoje";
+"shortcuts.room_selection" = "Wybór pokoju 1...9";
+"shortcuts.next_room" = "Następny pokój";
+"shortcuts.previous_room" = "Poprzeedni pokój";
+"shortcuts.new_room" = "Nowy pokój";
+"shortcuts.room_actions" = "Akcje pokoju";
+"shortcuts.upload_room" = "Prześlij do pokoju";
+"shortcuts.search_messages" = "Szukaj wiadomości";
+"shortcuts.scroll_messages" = "Przewiń wiadomości";
+"shortcuts.reply_latest" = "Odpowiedz na najnowsze";
+"shortcuts.server_selection" = "Wybór serwera";
+"shortcuts.server_selection_numbers" = "Wybór serwera 1...9";
+"shortcuts.add_server" = "Dodaj serwer";
+"shortcuts.change_theme" = "Zmień motyw";
+"shortcuts.send" = "Wyślij";
+"shortcuts.new_line" = "Nowa linia";
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.replied" = "Odpowiedział";
+"chat.components.quote.pinned" = "Przypiety";
+"chat.components.text_attachment.no_title" = "Bez tytułu";
+
+// Directory
+"directory.title" = "Katalog";
+"directory.filters.channels" = "Kanały";
+"directory.filters.users" = "Użytkownicy";
+"directory.filters.by" = "Szukaj według";
+"directory.filters.global.title" = "Szukaj globalnych użytkowników";
+"directory.filters.global.subtitle" = "Po włączeniu możesz wyszukać dowolnego użytkownika z innych firm lub serwerów.";
+"directory.users.1_user" = "1 użytkownik";
+"directory.users.x_users" = "%@ użytkowników";
+
+// Discussions
+"discussion.no_messages" = "No messages yet"; // TODO
+"discussion.1_message" = "1 message"; // TODO
+"discussion.x_messages" = "%@ messages"; // TODO
+
+// Threads
+"threads.title" = "Threads"; // TODO
+"threads.no_replies" = "No replies"; // TODO
+"threads.1_reply" = "1 reply"; // TODO
+"threads.x_replies" = "%@ replies"; // TODO

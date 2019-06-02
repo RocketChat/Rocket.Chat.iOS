@@ -6,14 +6,18 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RocketChatViewController
 
 extension MessagesViewController {
-    func sendButtonPressed() {
+
+    func composerView(_ composerView: ComposerView, didPressSendButton button: UIButton) {
         if composerViewModel.messageToEdit != nil {
             commitMessageEdit()
         } else {
-            viewModel.sendTextMessage(text: composerView.textView.text + composerViewModel.replyString)
+            viewModel.sendTextMessage(
+                text: composerView.textView.text + composerViewModel.quoteString,
+                replyThreadIdentifier: composerViewModel.replyMessageIdentifier
+            )
         }
 
         composerView.textView.text = ""
@@ -21,4 +25,5 @@ extension MessagesViewController {
         stopReplying()
         updateDraftMessage()
     }
+
 }
