@@ -94,14 +94,14 @@
 // Socket Connection
 "connection.title" = "Bei Server anmelden";
 "connection.button_connect" = "Verbinden";
-"connection.server_url.placeholder" = "your-company.rocket.chat"; // TODO
+"connection.server_url.placeholder" = "deine-firma.rocket.chat";
 "connection.offline.banner.message" = "Sie sind offline. Versuche neu zu verbinden...";
 "connection.connecting.banner.message" = "Verbinde...";
 "connection.waiting_for_network.banner.message" = "Warte auf Netzwerk";
 
 // Onboarding
 "onboarding.label_welcome" = "Willkommen bei Rocket Chat";
-"onboarding.label_subtitle" = "Team Communication"; // TODO
+"onboarding.label_subtitle" = "Team-Kommunikation";
 "onboarding.button_connect_server" = "Mit einem Server verbinden";
 "onboarding.button_create_server" = "Neuen Server erstellen";
 "onboarding.button_join_community_prefix" = "Der Community beitreten";
@@ -110,12 +110,12 @@
 "auth.connect.button_connect" = "Verbinden";
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Bitte warten Sie kurz!";
-"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
-"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
-"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
-"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
-"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
-"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
+"auth.connect.ssl.certificate.do_you_have" = "Haben Sie ein Zertifikat?";
+"auth.connect.ssl.certificate.apply" = "Wenden Sie Ihr Zertifikat an";
+"auth.connect.ssl.certificate.your_certificate" = "Ihr Zertifikat";
+"auth.connect.ssl.certificate.password.title" = "Zertifikat Passwort";
+"auth.connect.ssl.certificate.password.message" = "Wie lautet das Passwort für Ihr Zertifikat?";
+"auth.connect.ssl.certificate.remove" = "Zertifikat entfernen";
 "auth.email_auth_prefix" = "Einloggen mit ";
 "auth.email_auth" = "E-Mail";
 "auth.login_service_prefix" = "Fortfahren mit ";
@@ -230,8 +230,8 @@
 "chat.message.actions.unstar" = "Defavorisieren";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
-"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
-"chat.message.actions.permalink" = "Permalink"; //TODO
+"chat.message.actions.join_video_call" = "An Videoanruf teilnehmen";
+"chat.message.actions.permalink" = "Permalink";
 "chat.message.actions.delete" = "Nachricht löschen";
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Sind Sie sicher, dass Sie diese Nachricht löschen möchten? Sie kann dann nicht wiederhergestellt werden.";
@@ -274,10 +274,10 @@
 "chat.drawing.settings.color.others" = "Farbe auswählen:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
-"chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.users_are_typing" = "%@ schreiben...";
+"chat.user_is_typing" = "%@ schreibt...";
+"chat.typing" = "schreiben...";
+"chat.several_typing" = "Mehrere Benutzer tippen...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
@@ -294,14 +294,14 @@
 "chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
 "chat.message.type.room_unarchived" = "Dieser Raum wurde wiederhergestellt von %@";
 "chat.message.type.message_pinned" = "hat eine Nachricht fixiert:";
-"chat.message.type.message_snippeted" = "Created a snippet: \"%@\""; // TODO
-"chat.message.type.room_changed_privacy" = "Room privacy changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
-"chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
-"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
-"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
-"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
+"chat.message.type.message_snippeted" = "Erstellt ein Snippet: \"%@\"";
+"chat.message.type.room_changed_privacy" = "Die Privatsphäre des Raums wurde in \"%@\" von  %@ geändert.";
+"chat.message.type.room_changed_topic" = "Raumthema geändert zu \"%@\" von %@";
+"chat.message.type.room_changed_announcement" = "Raumansage geändert zu \"%@\" von %@";
+"chat.message.type.room_changed_description" = "Raumbeschreibung geändert in \"%@\" von %@";
+"chat.message.type.video_call_started" = "Videoanruf gestartet von %@";
+"chat.message.type.discussion_created" = "Diskussion gestartet:";
+"chat.message.type.user_joined_conversation" = "Hat sich dem Gespräch angeschlossen";
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -309,8 +309,8 @@
 "chat.info.item.no_topic" = "Ohne Thema";
 "chat.info.item.description" = "Beschreibung";
 "chat.info.item.no_description" = "Ohne Beschreibung";
-"chat.info.item.announcement" = "Announcement"; // TODO
-"chat.info.item.no_announcement" = "No announcement"; // TODO
+"chat.info.item.announcement" = "Ankündigung";
+"chat.info.item.no_announcement" = "Keine Ankündigung";
 "chat.info.item.notifications" = "Benachrichtigungen";
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";
@@ -350,8 +350,8 @@
 "myaccount.settings.profile" = "Profil";
 "myaccount.settings.license" = "Lizenz";
 "myaccount.settings.language" = "Sprache";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.review" = "Bewerte diese App";
+"myaccount.settings.share" = "Teile diese App";
 "myaccount.settings.appicon" = "App Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.server_version" = "Server Version: %@";
@@ -505,31 +505,31 @@
 "shortcuts.server_selection_numbers" = "Serverauswahl 1...9";
 "shortcuts.add_server" = "Server hinzufügen";
 "shortcuts.change_theme" = "Theme wechseln";
-"shortcuts.send" = "Send"; //TODO
-"shortcuts.new_line" = "New line"; //TODO
+"shortcuts.send" = "Senden";
+"shortcuts.new_line" = "Neue Zeile";
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
-"chat.components.text_attachment.no_title" = "No title"; //TODO
+"chat.components.quote.replied" = "Geantwortet";
+"chat.components.quote.pinned" = "Angehefted";
+"chat.components.text_attachment.no_title" = "Kein Titel";
 
 // Directory
-"directory.title" = "Directory"; // TODO
-"directory.filters.channels" = "Channels"; // TODO
-"directory.filters.users" = "Users"; // TODO
-"directory.filters.by" = "Search by"; // TODO
-"directory.filters.global.title" = "Search for global users"; // TODO
-"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
-"directory.users.1_user" = "1 member"; // TODO
-"directory.users.x_users" = "%@ members"; // TODO
+"directory.title" = "Verzeichnis";
+"directory.filters.channels" = "Kanäle";
+"directory.filters.users" = "Benutzer";
+"directory.filters.by" = "Suche nach";
+"directory.filters.global.title" = "Suche nach globalen Benutzern";
+"directory.filters.global.subtitle" = "Beim Einschalten können Sie nach Benutzern von anderen Unternehmen oder Servern suchen.";
+"directory.users.1_user" = "1 Mitglied";
+"directory.users.x_users" = "%@ Mitglieder";
 
 // Discussions
-"discussion.no_messages" = "No messages yet"; // TODO
-"discussion.1_message" = "1 message"; // TODO
-"discussion.x_messages" = "%@ messages"; // TODO
+"discussion.no_messages" = "Noch keine Nachrichten";
+"discussion.1_message" = "1 Nachricht";
+"discussion.x_messages" = "%@ Nachrichten";
 
 // Threads
-"threads.title" = "Threads"; // TODO
-"threads.no_replies" = "No replies"; // TODO
-"threads.1_reply" = "1 reply"; // TODO
-"threads.x_replies" = "%@ replies"; // TODO
+"threads.title" = "Themen";
+"threads.no_replies" = "Keine Antworten";
+"threads.1_reply" = "1 Antwort";
+"threads.x_replies" = "%@ Antworten";
