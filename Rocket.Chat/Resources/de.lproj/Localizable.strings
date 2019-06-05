@@ -20,7 +20,7 @@
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
-"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
+"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschliessend noch einmal.";
 
 "alert.connection.not_secured.title" = "Ups!";
 "alert.connection.not_secured.message" = "Konnte keine sichere Verbindung zum Server aufbauen. Stellen Sie bitte sicher, dass dieser SSL unterstützt.";
@@ -68,7 +68,7 @@
 "alert.load_profile_error.title" = "Ihr Profil konnte nicht geladen werden";
 "alert.load_profile_error.message" = "Beim abrufen Ihrer Profildaten ist ein Problem aufgetreten. Bitte versuchen Sie es noch einmal.";
 "alert.password_mismatch_error.title" = "Das Passwort stimmt nicht überein";
-"alert.password_mismatch_error.message" = "Die eingegebenen Passwörter stimmen nicht überein. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
+"alert.password_mismatch_error.message" = "Die eingegebenen Passwörter stimmen nicht überein. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschliessend noch einmal.";
 "alert.update_profile_error.title" = "Aktualisieren fehlgeschlagen";
 "alert.update_profile_error.message" = "Beim aktualisieren Ihrer Profildaten ist ein Problem aufgetreten. Bitte versuchen Sie es noch einmal.";
 "alert.update_password_error.title" = "Passwort konnte nicht geändert werden";
@@ -76,7 +76,7 @@
 "alert.update_profile_empty_fields.title" = "Bitte die leeren Felder ausfüllen";
 "alert.update_profile_empty_fields.message" = "Alle Ihre Profilinformationen sind erforderlich und können nicht leer bleiben.";
 "alert.update_profile_invalid_email.title" = "Ungültige E-Mail";
-"alert.update_profile_invalid_email.message" = "Es scheint, dass die von Ihnen eingegebene E-Mail ungültig ist. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschließend noch einmal.";
+"alert.update_profile_invalid_email.message" = "Es scheint, dass die von Ihnen eingegebene E-Mail ungültig ist. Bitte überprüfen Sie Ihre Eingabe und versuchen es anschliessend noch einmal.";
 "alert.password_empty_fields.title" = "Bitte die leeren Felder ausfüllen";
 "alert.password_empty_fields.message" = "Füllen Sie das Passwort- und Bestätigungfeld aus, damit Sie Ihr Passwort aktualisieren können.";
 "alert.update_profile_success.title" = "Profil wurde aktualisiert";
