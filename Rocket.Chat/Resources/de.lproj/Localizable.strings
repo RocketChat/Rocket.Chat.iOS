@@ -4,7 +4,7 @@
 "global.no" = "Nein";
 "global.cancel" = "Abbrechen";
 "global.error" = "Fehler";
-
+chat.message.type.message_snippeted
 // Errors
 "error.socket.default_error.title" = "Ups!";
 "error.socket.default_error.message" = "Es ist ein Problem aufgetreten! Bitte versuchen Sie es noch einmal.";
@@ -296,10 +296,10 @@
 "chat.message.type.message_pinned" = "hat eine Nachricht fixiert:";
 "chat.message.type.message_snippeted" = "Erstellt ein Snippet: \"%@\"";
 "chat.message.type.room_changed_privacy" = "Die Privatsphäre des Raums wurde in \"%@\" von  %@ geändert.";
-"chat.message.type.room_changed_topic" = "Raumthema geändert zu \"%@\" von %@";
-"chat.message.type.room_changed_announcement" = "Raumansage geändert zu \"%@\" von %@";
-"chat.message.type.room_changed_description" = "Raumbeschreibung geändert in \"%@\" von %@";
-"chat.message.type.video_call_started" = "Videoanruf gestartet von %@";
+"chat.message.type.room_changed_topic" = "Raumthema zu \"%@\" von %@ geändert";
+"chat.message.type.room_changed_announcement" = "Raumansage zu \"%@\" von %@ geändert";
+"chat.message.type.room_changed_description" = "Raumbeschreibung in \"%@\" von %@ geändert";
+"chat.message.type.video_call_started" = "Videoanruf von %@ gestartet";
 "chat.message.type.discussion_created" = "Diskussion gestartet:";
 "chat.message.type.user_joined_conversation" = "Hat sich dem Gespräch angeschlossen";
 
