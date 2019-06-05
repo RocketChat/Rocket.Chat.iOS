@@ -11,7 +11,7 @@
 "auth.connect.urlfield.hint" = "Geben Sie hier die URL Ihres Servers ein.";
 
 "auth.more.label" = "Mehr";
-"auth.close.label" = "Schließen";
+"auth.close.label" = "Schliessen";
 "auth.show_more_options.label" = "Zeige mehr Optionen";
 "auth.show_less_options.label" = "Zeige weniger Optionen";
 
