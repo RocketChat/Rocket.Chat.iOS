@@ -4,7 +4,7 @@
 "global.no" = "Nein";
 "global.cancel" = "Abbrechen";
 "global.error" = "Fehler";
-chat.message.type.message_snippeted
+
 // Errors
 "error.socket.default_error.title" = "Ups!";
 "error.socket.default_error.message" = "Es ist ein Problem aufgetreten! Bitte versuchen Sie es noch einmal.";
