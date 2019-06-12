@@ -258,7 +258,7 @@
 "chat.upload.draw" = "Bild malen";
 
 // Chat Download
-"chat.download.downloading_file" = "Wird heruntergeladen \"%@\"";
+"chat.download.downloading_file" = "\"%@\" wird heruntergeladen";
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Antippen zum Öffnen";
