@@ -20,10 +20,17 @@
 "auth.authentication.password.label" = "Пароль";
 "auth.authentication.password.label" = "Введите свой пароль здесь.";
 
+// MARK: Channels
+"channel.new.label" = "Create new channel"; // TODO
+"channel.settings.label" = "Settings"; // TODO
+"channel.actions.favorite.label" = "Favorite"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
+
 // MARK: Subscriptions
-"subscriptions.main.userview.label" = "Информация о сеансе";
-"subscriptions.main.userview.value" = "Сервер: %@. Пользователь: %@. Статус: %@.";
-"subscriptions.main.userview.hint" = "Дважды нажмите, чтобы изменить статус.";
+"subscriptions.main.userview.label" = "Session information";
+"subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
+"subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "Сообщение от %@ в %@.";

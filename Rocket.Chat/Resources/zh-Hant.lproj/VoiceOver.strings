@@ -20,10 +20,17 @@
 "auth.authentication.password.label" = "密碼";
 "auth.authentication.password.label" = "新增密碼";
 
+// MARK: Channels
+"channel.new.label" = "Create new channel"; // TODO
+"channel.settings.label" = "Settings"; // TODO
+"channel.actions.favorite.label" = "Favorite"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
+
 // MARK: Subscriptions
-"subscriptions.main.userview.label" = "聊天訊息";
-"subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
-"subscriptions.main.userview.hint" = "點擊兩下變更狀態";
+"subscriptions.main.userview.label" = "Session information";
+"subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
+"subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "來自 %@ at %@ 的訊息";

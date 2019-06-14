@@ -20,10 +20,17 @@
 "auth.authentication.password.label" = "パスワード";
 "auth.authentication.password.label" = "ここにパスワードを入力してください。";
 
+// MARK: Channels
+"channel.new.label" = "Create new channel"; // TODO
+"channel.settings.label" = "Settings"; // TODO
+"channel.actions.favorite.label" = "Favorite"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
+
 // MARK: Subscriptions
-"subscriptions.main.userview.label" = "セッション情報";
-"subscriptions.main.userview.value" = "サーバー: %@. ユーザー: %@. ステータス: %@.";
-"subscriptions.main.userview.hint" = "ステータスを変更するにはダブルタップしてください。";
+"subscriptions.main.userview.label" = "Session information";
+"subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
+"subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "%@ からのメッセージ %@";

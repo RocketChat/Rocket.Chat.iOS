@@ -79,4 +79,3 @@ class GetMessagesRequestSpec: APISpec {
     }
 
 }
-

@@ -72,7 +72,7 @@ final class SubscriptionsViewController: BaseViewController {
 
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("new_room.title.label")
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("channel.new.label")
         navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("channel.settings.label")
 
         // If the device is not using the SplitView, we want to show
