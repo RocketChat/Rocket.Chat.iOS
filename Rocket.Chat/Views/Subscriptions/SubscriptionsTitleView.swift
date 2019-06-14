@@ -30,6 +30,7 @@ final class SubscriptionsTitleView: UIView {
             buttonServer.semanticContentAttribute = .forceRightToLeft
             buttonServer.layer.cornerRadius = 5
             buttonServer.layer.masksToBounds = true
+            buttonServer.accessibilityHint = VOLocalizedString("subscriptions.server_button.hint")
         }
     }
 

@@ -231,12 +231,8 @@ final class SubscriptionsViewController: BaseViewController {
             titleView.layoutIfNeeded()
             titleView.sizeToFit()
             updateServerInformation()
-
-            // This code can be removed when we drop iOS 10 support.
-            titleView.translatesAutoresizingMaskIntoConstraints = true
             navigationItem.titleView = titleView
             self.titleView = titleView
-
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeTitleViewTapGesture(_:)))
             titleView.addGestureRecognizer(tapGesture)
         }
