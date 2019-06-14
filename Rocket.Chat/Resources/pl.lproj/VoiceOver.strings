@@ -20,10 +20,17 @@
 "auth.authentication.password.label" = "Hasło";
 "auth.authentication.password.label" = "Wpisz tutaj swoje hasło.";
 
+// MARK: Channels
+"new_room.title.label" = "Create new channel"; // TODO
+"channel.settings.label" = "Settings"; // TODO
+"channel.actions.favorite.label" = "Favorite"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Informacje o sesji";
 "subscriptions.main.userview.value" = "Serwer: %@. Użytkownik: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Dotknij dwukrotnie aby zmienić status.";
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "Wiadomość od %@ o %@.";
