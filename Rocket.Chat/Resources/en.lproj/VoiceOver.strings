@@ -20,6 +20,12 @@
 "auth.authentication.password.label" = "Password";
 "auth.authentication.password.label" = "Insert your password here.";
 
+// MARK: Channels
+
+"new_room.title.label" = "Create new channel";
+"channel.actions.favorite.label" = "Favorite";
+"channel.actions.videoCall.label" = "Video Call";
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";

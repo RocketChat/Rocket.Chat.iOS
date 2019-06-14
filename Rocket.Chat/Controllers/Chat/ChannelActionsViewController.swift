@@ -93,6 +93,7 @@ class ChannelActionsViewController: BaseViewController {
         title = "Actions"
 
         tableView?.contentInsetAdjustmentBehavior = .never
+        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
 
         setupNavigationBarButtons()
         registerCells()
@@ -135,19 +136,23 @@ class ChannelActionsViewController: BaseViewController {
                     target: self,
                     action: #selector(buttonFavoriteDidPressed)
                 )
+                buttonFavorite.accessibilityLabel = VOLocalizedString("channel.actions.favorite.label")
 
                 buttons.append(buttonFavorite)
                 self.buttonFavorite = buttonFavorite
+
                 updateButtonFavoriteImage()
             }
 
             if settings.isJitsiEnabled && AppManager.isVideoCallAvailable {
-                buttons.append(UIBarButtonItem(
+                let buttonVideoCall = UIBarButtonItem(
                     image: UIImage(named: "UserDetail_VideoCall"),
                     style: .plain,
                     target: self,
                     action: #selector(buttonVideoCallDidPressed)
-                ))
+                )
+                buttonVideoCall.accessibilityLabel = VOLocalizedString("channel.actions.videoCall.label")
+                buttons.append(buttonVideoCall)
             }
 
             navigationItem.rightBarButtonItems = buttons

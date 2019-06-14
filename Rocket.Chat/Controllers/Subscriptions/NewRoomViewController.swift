@@ -15,6 +15,7 @@ final class NewRoomViewController: BaseViewController {
         super.awakeFromNib()
         title = localized("new_room.title")
         navigationItem.rightBarButtonItem?.title = localized("new_room.buttons.create")
+     //   navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("new_room.title.label")
     }
 
     static var user: User? {
@@ -98,6 +99,8 @@ final class NewRoomViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
