@@ -23,6 +23,7 @@
 // MARK: Channels
 
 "new_room.title.label" = "Create new channel";
+"channel.settings.label" = "Settings";
 "channel.actions.favorite.label" = "Favorite";
 "channel.actions.videoCall.label" = "Video Call";
 

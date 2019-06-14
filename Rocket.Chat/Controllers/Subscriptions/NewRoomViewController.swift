@@ -15,7 +15,6 @@ final class NewRoomViewController: BaseViewController {
         super.awakeFromNib()
         title = localized("new_room.title")
         navigationItem.rightBarButtonItem?.title = localized("new_room.buttons.create")
-     //   navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("new_room.title.label")
     }
 
     static var user: User? {

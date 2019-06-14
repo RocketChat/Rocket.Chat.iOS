@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GCf-VY-VV6">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -358,12 +358,12 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
-                        <barButtonItem key="leftBarButtonItem" image="Icon Settings" id="mF7-JJ-yY1">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" image="Icon Settings" id="mF7-JJ-yY1">
                             <connections>
                                 <segue destination="gmk-4H-3s2" kind="presentation" identifier="Preferences" modalPresentationStyle="formSheet" id="Gqr-Om-cVh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Icon New Channel" id="84L-Iz-PSG">
+                        <barButtonItem key="rightBarButtonItem" title="Create New Channel" image="Icon New Channel" id="84L-Iz-PSG">
                             <connections>
                                 <segue destination="Yv3-wP-OPQ" kind="presentation" identifier="toNewRoom" modalPresentationStyle="formSheet" id="oP3-MP-dDT"/>
                             </connections>
