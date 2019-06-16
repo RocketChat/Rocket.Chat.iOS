@@ -410,7 +410,11 @@ extension RocketChatViewController {
     }
 }
 
-extension RocketChatViewController: UICollectionViewDelegateFlowLayout {}
+extension RocketChatViewController: UICollectionViewDelegateFlowLayout {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .zero
+    }
+}
 
 
 extension RocketChatViewController {
