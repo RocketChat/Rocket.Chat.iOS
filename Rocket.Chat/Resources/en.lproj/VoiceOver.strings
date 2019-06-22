@@ -23,7 +23,8 @@
 // MARK: Channels
 "new_room.title.label" = "Create new channel";
 "channel.settings.label" = "Settings";
-"channel.actions.favorite.label" = "Favorite";
+"channel.actions.star.label" = "Star";
+"channel.actions.unstar.label" = "Unstar";
 "channel.actions.videoCall.label" = "Video Call";
 
 // MARK: Subscriptions

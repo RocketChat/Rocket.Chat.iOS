@@ -136,7 +136,7 @@ class ChannelActionsViewController: BaseViewController {
                     target: self,
                     action: #selector(buttonFavoriteDidPressed)
                 )
-                buttonFavorite.accessibilityLabel = VOLocalizedString("channel.actions.favorite.label")
+                buttonFavorite.accessibilityLabel = favoriteButtonAccessibilityLabel
 
                 buttons.append(buttonFavorite)
                 self.buttonFavorite = buttonFavorite
@@ -159,6 +159,11 @@ class ChannelActionsViewController: BaseViewController {
         }
     }
 
+    // MARK: Accessibility
+
+    var favoriteButtonAccessibilityLabel: String? = VOLocalizedString("channel.actions.star.label")
+    var favoriteSelectedButtonAccessibilityLabel: String? = VOLocalizedString("channel.actions.unstar.label")
+
     func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
         guard let buttonFavorite = self.buttonFavorite else { return }
         let favorite = force ? value : subscription?.favorite ?? false
@@ -166,8 +171,10 @@ class ChannelActionsViewController: BaseViewController {
 
         if favorite {
             image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+            buttonFavorite.accessibilityLabel = favoriteSelectedButtonAccessibilityLabel
         } else {
             image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+            buttonFavorite.accessibilityLabel = favoriteButtonAccessibilityLabel
         }
 
         buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
