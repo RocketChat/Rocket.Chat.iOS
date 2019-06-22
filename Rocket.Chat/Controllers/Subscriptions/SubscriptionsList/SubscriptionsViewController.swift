@@ -234,6 +234,7 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.titleView = titleView
             self.titleView = titleView
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeTitleViewTapGesture(_:)))
+            titleView.isAccessibilityElement = true
             titleView.addGestureRecognizer(tapGesture)
         }
     }

@@ -30,7 +30,7 @@
 "subscriptions.main.userview.label" = "Informazioni Sessione";
 "subscriptions.main.userview.value" = "Server: %@. Utente: %@. Stato: %@.";
 "subscriptions.main.userview.hint" = "Fare doppio clic per cambiare lo stato.";
-"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "Messaggio da %@ a %@.";

@@ -30,7 +30,7 @@
 "subscriptions.main.userview.label" = "Информация о сеансе";
 "subscriptions.main.userview.value" = "Сервер: %@. Пользователь: %@. Статус: %@.";
 "subscriptions.main.userview.hint" = "Дважды нажмите, чтобы изменить статус.";
-"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
 
 // MARK: Message
 "message.label" = "Сообщение от %@ в %@.";
