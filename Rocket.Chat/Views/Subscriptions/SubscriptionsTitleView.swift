@@ -22,6 +22,7 @@ final class SubscriptionsTitleView: UIView {
     @IBOutlet weak var labelMessages: UILabel! {
         didSet {
             labelMessages.text = localized("subscriptions.messages")
+            labelMessages.accessibilityTraits = .header
         }
     }
 
@@ -30,9 +31,8 @@ final class SubscriptionsTitleView: UIView {
             buttonServer.semanticContentAttribute = .forceRightToLeft
             buttonServer.layer.cornerRadius = 5
             buttonServer.isAccessibilityElement = true
-            buttonServer.accessibilityTraits = .allowsDirectInteraction
+            buttonServer.accessibilityTraits = .button
             buttonServer.layer.masksToBounds = true
-            buttonServer.accessibilityHint = VOLocalizedString("subscriptions.server_button.hint")
         }
     }
 
@@ -52,6 +52,7 @@ final class SubscriptionsTitleView: UIView {
                 buttonServer.setImage(rotatedImage, for: .normal)
             } else {
                 buttonServer.setImage(image, for: .normal)
+                buttonServer.accessibilityHint = VOLocalizedString("subscriptions.server_button.hint")
             }
         }
     }
