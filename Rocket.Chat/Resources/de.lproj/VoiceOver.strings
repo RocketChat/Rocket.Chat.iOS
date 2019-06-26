@@ -32,6 +32,7 @@
 "subscriptions.main.userview.value" = "Server: %@. Benutzer: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Klicken Sie doppelt, um den Status zu ändern.";
 "subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
 
 // MARK: Message
 "message.label" = "Nachricht von %@ in %@.";

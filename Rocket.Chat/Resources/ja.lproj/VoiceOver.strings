@@ -32,6 +32,7 @@
 "subscriptions.main.userview.value" = "サーバー: %@. ユーザー: %@. ステータス: %@.";
 "subscriptions.main.userview.hint" = "ステータスを変更するにはダブルタップしてください。";
 "subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
 
 // MARK: Message
 "message.label" = "%@ からのメッセージ %@";

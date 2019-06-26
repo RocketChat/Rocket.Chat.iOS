@@ -32,6 +32,7 @@
 "subscriptions.main.userview.value" = "服务器: %@. 用户: %@. 状态: %@.";
 "subscriptions.main.userview.hint" = "双击变更状态";
 "subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
 
 // MARK: Message
 "message.label" = "来自 %@ at %@ 的信息";

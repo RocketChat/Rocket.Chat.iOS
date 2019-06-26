@@ -32,6 +32,7 @@
 "subscriptions.main.userview.value" = "Εξυπηρετητής: %@. Χρήστης: %@. Κατάσταση: %@.";
 "subscriptions.main.userview.hint" = "Πατήστε δύο φορές για αλλαγή κατάστασης.";
 "subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
 
 // MARK: Message
 "message.label" = "Μήνυμα από %@ at %@.";
