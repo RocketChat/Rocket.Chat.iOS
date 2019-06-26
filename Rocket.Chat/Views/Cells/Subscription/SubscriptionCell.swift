@@ -30,7 +30,9 @@ final class SubscriptionCell: BaseSubscriptionCell {
         labelLastMessage.accessibilityLabel = [VOLocalizedString("subscriptions.list.message.label"), labelLastMessage.text].compactMap {$0}.joined()
 
         if let roomLastMessage = subscription.roomLastMessage?.createdAt {
-            labelDate.text = dateFormatted(date: roomLastMessage)
+            let formattedDate = dateFormatted(date: roomLastMessage)
+            labelDate.text = formattedDate.label
+            labelDate.accessibilityLabel = formattedDate.accessibilityLabel
         } else {
             labelDate.text = nil
         }
@@ -83,18 +85,18 @@ final class SubscriptionCell: BaseSubscriptionCell {
         }
     }
 
-    func dateFormatted(date: Date) -> String {
+    func dateFormatted(date: Date) -> (label: String, accessibilityLabel: String) {
         let calendar = NSCalendar.current
 
         if calendar.isDateInYesterday(date) {
-            return localized("subscriptions.list.date.yesterday")
+            return (localized("subscriptions.list.date.yesterday"), localized("subscriptions.list.date.yesterday"))
         }
 
         if calendar.isDateInToday(date) {
-            return RCDateFormatter.time(date)
+            return (RCDateFormatter.time(date), RCDateFormatter.time(date))
         }
 
-        return RCDateFormatter.date(date, dateStyle: .short)
+        return (RCDateFormatter.date(date, dateStyle: .short), RCDateFormatter.date(date, dateStyle: .medium))
     }
 }
 
