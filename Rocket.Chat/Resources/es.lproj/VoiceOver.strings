@@ -31,7 +31,8 @@
 "subscriptions.main.userview.label" = "Información de la sesión";
 "subscriptions.main.userview.value" = "Servidor: %@. Usuario: %@. Estado: %@.";
 "subscriptions.main.userview.hint" = "Toca dos veces para cambiar el estado";
-"subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 "subscriptions.list.message.label" = "Message: "; // TODO
 "subscriptions.list.notification.label" = "Notification"; //TODO
 "subscriptions.list.notifications.label" = "Notifications"; //TODO

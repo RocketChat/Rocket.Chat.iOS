@@ -31,7 +31,8 @@
 "subscriptions.main.userview.label" = "Πληροφορία Συνόδου";
 "subscriptions.main.userview.value" = "Εξυπηρετητής: %@. Χρήστης: %@. Κατάσταση: %@.";
 "subscriptions.main.userview.hint" = "Πατήστε δύο φορές για αλλαγή κατάστασης.";
-"subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 "subscriptions.list.message.label" = "Message: "; // TODO
 "subscriptions.list.notification.label" = "Notification"; // TODO
 "subscriptions.list.notifications.label" = "Notifications"; // TODO

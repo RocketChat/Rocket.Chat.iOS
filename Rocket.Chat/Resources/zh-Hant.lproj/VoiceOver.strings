@@ -31,7 +31,8 @@
 "subscriptions.main.userview.label" = "聊天訊息";
 "subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
 "subscriptions.main.userview.hint" = "點擊兩下變更狀態";
-"subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 "subscriptions.list.message.label" = "Message: "; // TODO
 "subscriptions.list.notification.label" = "Notification"; //TODO
 "subscriptions.list.notifications.label" = "Notifications"; //TODO

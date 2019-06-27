@@ -31,7 +31,8 @@
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
-"subscriptions.server_button.hint" = "Tap to add or change server";
+"subscriptions.server_button.hint" = "Double tap to add or change server";
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu";
 "subscriptions.list.message.label" = "Message: ";
 "subscriptions.list.notification.label" = "Notification";
 "subscriptions.list.notifications.label" = "Notifications";
