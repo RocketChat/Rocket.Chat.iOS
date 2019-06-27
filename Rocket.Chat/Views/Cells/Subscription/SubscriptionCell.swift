@@ -27,7 +27,8 @@ final class SubscriptionCell: BaseSubscriptionCell {
         guard let subscription = subscription?.managedObject else { return }
 
         labelLastMessage.text = subscription.roomLastMessageText ?? localized("subscriptions.list.no_message")
-        labelLastMessage.accessibilityLabel = [VOLocalizedString("subscriptions.list.message.label"), labelLastMessage.text].compactMap {$0}.joined()
+        labelLastMessage.accessibilityLabel =
+            [VOLocalizedString("subscriptions.list.message.label"), labelLastMessage.text].compactMap {$0}.joined()
 
         if let roomLastMessage = subscription.roomLastMessage?.createdAt {
             let formattedDate = dateFormatted(date: roomLastMessage)

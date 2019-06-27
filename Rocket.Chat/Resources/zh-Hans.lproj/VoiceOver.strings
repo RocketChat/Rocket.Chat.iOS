@@ -33,6 +33,8 @@
 "subscriptions.main.userview.hint" = "双击变更状态";
 "subscriptions.server_button.hint" = "Tap to add or change server"; // TODO
 "subscriptions.list.message.label" = "Message: "; // TODO
+"subscriptions.list.notification.label" = "Notification"; //TODO
+"subscriptions.list.notifications.label" = "Notifications"; //TODO
 
 // MARK: Message
 "message.label" = "来自 %@ at %@ 的信息";
