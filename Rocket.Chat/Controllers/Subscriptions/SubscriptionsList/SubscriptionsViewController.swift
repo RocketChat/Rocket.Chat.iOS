@@ -111,12 +111,16 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
+        serversView?.accessibilityViewIsModal = true
+        sortingView?.accessibilityViewIsModal = true
         serversView?.frame = frameForDropDownOverlay
         sortingView?.frame = frameForDropDownOverlay
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        UIAccessibility.post(notification: .screenChanged, argument: titleView?.labelMessages)
 
         // This method can stay here, since adding a new connection handler
         // will override the existing one if there's already one. This is here
@@ -138,7 +142,6 @@ final class SubscriptionsViewController: BaseViewController {
         if !(searchBar?.text?.isEmpty ?? true) {
             searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
         }
-        UIAccessibility.post(notification: .screenChanged, argument: titleView?.labelMessages)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
