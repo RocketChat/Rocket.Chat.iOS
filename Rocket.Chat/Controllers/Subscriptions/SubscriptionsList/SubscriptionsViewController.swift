@@ -138,7 +138,7 @@ final class SubscriptionsViewController: BaseViewController {
         if !(searchBar?.text?.isEmpty ?? true) {
             searchBar?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
         }
-        UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: titleView?.labelMessages)
+        UIAccessibility.post(notification: .screenChanged, argument: titleView?.labelMessages)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -361,7 +361,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
         titleView?.updateTitleImage(reverse: true)
         serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-        UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: serversView?.labelTitle)
+        UIAccessibility.post(notification: .screenChanged, argument: serversView?.labelTitle)
         serversView?.delegate = self
     }
 
