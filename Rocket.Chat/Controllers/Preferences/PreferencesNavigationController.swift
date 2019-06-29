@@ -28,6 +28,8 @@ class PreferencesNavigationController: BaseNavigationController {
 
         mediumScreenFrame = CGRect(origin: .zero, size: CGSize(width: 540, height: 620))
 
+        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
+
         if let frame = UIApplication.shared.keyWindow?.frame {
             fullScreenFrame = frame
         }

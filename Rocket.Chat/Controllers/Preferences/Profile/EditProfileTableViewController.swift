@@ -143,6 +143,8 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         avatarView.leadingAnchor.constraint(equalTo: avatarButton.leadingAnchor).isActive = true
         avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
 
+        avatarButton.accessibilityLabel = VOLocalizedString("preferences.profile.edit.label")
+
         if let imageView = avatarButton.imageView {
             avatarButton.bringSubviewToFront(imageView)
         }
