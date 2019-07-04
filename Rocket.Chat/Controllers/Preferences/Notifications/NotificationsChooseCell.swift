@@ -118,6 +118,11 @@ extension NotificationsChooseCell: UIPickerViewDelegate {
         return 35
     }
 
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        let width = pickerView.frame.size.width
+        return component == 0 ? (1 / 2.0) * width : (1 / 3.0) * width
+    }
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 
         let title: String
@@ -132,11 +137,17 @@ extension NotificationsChooseCell: UIPickerViewDelegate {
             fatalError("Model not supported")
         }
 
+        self.isAccessibilityElement = false
+        pickerView.isAccessibilityElement = true
+
         let pickerLabel = UILabel()
         pickerLabel.textColor = theme?.titleText ?? .black
         pickerLabel.text = title
         pickerLabel.textAlignment = .center
         pickerLabel.font = UIFont.systemFont(ofSize: 20)
+        pickerLabel.isAccessibilityElement = true
+
+        UIAccessibility.post(notification: .layoutChanged, argument: nil)
 
         return pickerLabel
     }
