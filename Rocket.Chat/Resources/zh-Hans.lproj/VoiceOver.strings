@@ -28,3 +28,5 @@
 // MARK: Message
 "message.label" = "来自 %@ at %@ 的信息";
 "message.hint" = "反馈: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO

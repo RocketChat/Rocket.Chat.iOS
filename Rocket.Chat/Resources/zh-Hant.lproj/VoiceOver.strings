@@ -28,3 +28,5 @@
 // MARK: Message
 "message.label" = "來自 %@ at %@ 的訊息";
 "message.hint" = "回饋: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO

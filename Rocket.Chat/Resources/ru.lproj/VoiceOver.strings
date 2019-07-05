@@ -28,3 +28,5 @@
 // MARK: Message
 "message.label" = "Сообщение от %@ в %@.";
 "message.hint" = "Реакции: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO

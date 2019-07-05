@@ -540,6 +540,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                 target: self,
                 action: #selector(showSearchMessages)
             )
+            search.accessibilityLabel = VOLocalizedString("message.search.label")
 
             let threads = UIBarButtonItem(
                 image: UIImage(named: "Threads"),
@@ -547,6 +548,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                 target: self,
                 action: #selector(buttonThreadsDidPressed)
             )
+            threads.accessibilityLabel = VOLocalizedString("message.threads.label")
 
             navigationItem.rightBarButtonItems = [search, threads]
         } else {

@@ -28,3 +28,5 @@
 // MARK: Message
 "message.label" = "Mensaje de %@ a %@.";
 "message.hint" = "Reacciones: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO

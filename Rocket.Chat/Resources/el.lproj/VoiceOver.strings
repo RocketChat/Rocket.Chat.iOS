@@ -28,3 +28,5 @@
 // MARK: Message
 "message.label" = "Μήνυμα από %@ at %@.";
 "message.hint" = "Αντιδράσεις: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO
