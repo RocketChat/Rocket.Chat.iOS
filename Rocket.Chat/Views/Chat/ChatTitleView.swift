@@ -89,6 +89,7 @@ final class ChatTitleView: UIView {
 
     internal func updateTitleState() {
         titleLabel.text = viewModel.title
+        titleLabel.accessibilityHint = VOLocalizedString("message.chat.title.hint")
 
         if let subscription = viewModel.subscription, subscription.type == .directMessage {
             titleImage.isHidden = true

@@ -24,9 +24,11 @@
 "subscriptions.main.userview.label" = "会话信息";
 "subscriptions.main.userview.value" = "服务器: %@. 用户: %@. 状态: %@.";
 "subscriptions.main.userview.hint" = "双击变更状态";
+"subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
 // MARK: Message
 "message.label" = "来自 %@ at %@ 的信息";
 "message.hint" = "反馈: %@";
 "message.search.label" = "Search"; // TODO
 "message.threads.label" = "Threads"; // TODO
+"message.chat.title.hint" = "Double tap to open channel options"; // TODO
