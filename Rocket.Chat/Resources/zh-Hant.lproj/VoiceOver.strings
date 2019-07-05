@@ -24,7 +24,11 @@
 "subscriptions.main.userview.label" = "聊天訊息";
 "subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
 "subscriptions.main.userview.hint" = "點擊兩下變更狀態";
+"subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
 // MARK: Message
 "message.label" = "來自 %@ at %@ 的訊息";
 "message.hint" = "回饋: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO
+"message.chat.title.hint" = "Double tap to open channel options"; // TODO

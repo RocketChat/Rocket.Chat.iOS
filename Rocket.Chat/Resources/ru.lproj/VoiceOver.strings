@@ -24,7 +24,11 @@
 "subscriptions.main.userview.label" = "Информация о сеансе";
 "subscriptions.main.userview.value" = "Сервер: %@. Пользователь: %@. Статус: %@.";
 "subscriptions.main.userview.hint" = "Дважды нажмите, чтобы изменить статус.";
+"subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
 // MARK: Message
 "message.label" = "Сообщение от %@ в %@.";
 "message.hint" = "Реакции: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO
+"message.chat.title.hint" = "Double tap to open channel options"; // TODO

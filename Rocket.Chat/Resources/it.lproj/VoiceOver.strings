@@ -24,7 +24,11 @@
 "subscriptions.main.userview.label" = "Informazioni Sessione";
 "subscriptions.main.userview.value" = "Server: %@. Utente: %@. Stato: %@.";
 "subscriptions.main.userview.hint" = "Fare doppio clic per cambiare lo stato.";
+"subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
 // MARK: Message
 "message.label" = "Messaggio da %@ a %@.";
 "message.hint" = "Reazioni: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO
+"message.chat.title.hint" = "Double tap to open channel options"; // TODO
