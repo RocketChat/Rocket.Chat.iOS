@@ -26,6 +26,10 @@
 "subscriptions.main.userview.hint" = "Πατήστε δύο φορές για αλλαγή κατάστασης.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture"; // TODO
+"preferences.profile.editing.label" = "Edit the profile picture"; // TODO
+
 // MARK: Message
 "message.label" = "Μήνυμα από %@ at %@.";
 "message.hint" = "Αντιδράσεις: %@";

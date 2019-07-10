@@ -26,6 +26,10 @@
 "subscriptions.main.userview.hint" = "Double tap to change status.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; 
 
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture";
+"preferences.profile.editing.label" = "Edit the profile picture";
+
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
 "message.hint" = "Reactions: %@";

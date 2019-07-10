@@ -26,6 +26,10 @@
 "subscriptions.main.userview.hint" = "双击变更状态";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
 
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture"; // TODO
+"preferences.profile.editing.label" = "Edit the profile picture"; // TODO
+
 // MARK: Message
 "message.label" = "来自 %@ at %@ 的信息";
 "message.hint" = "反馈: %@";
