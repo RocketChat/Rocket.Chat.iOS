@@ -20,6 +20,9 @@
 "auth.authentication.password.label" = "Senha";
 "auth.authentication.password.label" = "Insira aqui a sua senha.";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Informação da sessão";
 "subscriptions.main.userview.value" = "Servidor: %@. Usuário: %@. Status: %@.";

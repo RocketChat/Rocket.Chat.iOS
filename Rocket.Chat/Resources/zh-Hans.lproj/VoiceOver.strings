@@ -20,6 +20,9 @@
 "auth.authentication.password.label" = "密码";
 "auth.authentication.password.label" = "添加密码";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "会话信息";
 "subscriptions.main.userview.value" = "服务器: %@. 用户: %@. 状态: %@.";

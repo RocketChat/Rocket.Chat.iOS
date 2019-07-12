@@ -149,6 +149,8 @@ final class PreferencesViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.title
+
+        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
     }
 
     override func viewWillAppear(_ animated: Bool) {

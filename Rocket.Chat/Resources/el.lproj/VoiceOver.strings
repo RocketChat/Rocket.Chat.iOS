@@ -20,6 +20,9 @@
 "auth.authentication.password.label" = "Συνθηματικό";
 "auth.authentication.password.label" = "Εισάγετε εδώ το Συνθηματικό σας.";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Πληροφορία Συνόδου";
 "subscriptions.main.userview.value" = "Εξυπηρετητής: %@. Χρήστης: %@. Κατάσταση: %@.";

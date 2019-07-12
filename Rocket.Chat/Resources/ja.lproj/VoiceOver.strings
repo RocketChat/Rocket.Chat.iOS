@@ -20,6 +20,9 @@
 "auth.authentication.password.label" = "パスワード";
 "auth.authentication.password.label" = "ここにパスワードを入力してください。";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "セッション情報";
 "subscriptions.main.userview.value" = "サーバー: %@. ユーザー: %@. ステータス: %@.";

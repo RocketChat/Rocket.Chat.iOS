@@ -20,11 +20,15 @@
 "auth.authentication.password.label" = "Password";
 "auth.authentication.password.label" = "Insert your password here.";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO
