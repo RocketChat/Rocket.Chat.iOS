@@ -287,7 +287,6 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
     var avatarButtonAccessibilityLabel: String? = VOLocalizedString("preferences.profile.edit.label")
     var avatarEditingButtonAccessibilityLabel: String? = VOLocalizedString("preferences.profile.editing.label")
 
-
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
