@@ -117,6 +117,11 @@ final class Subscription: BaseModel {
     let usersRoles = List<RoomRoles>()
 
     // MARK: Internal
+
+    //Indicates when deleted messages were last updated.
+    // On new subscription objects our messages are up to date.
+    @objc dynamic var deletedMessagesLastUpdated: Date = Date()
+
     @objc dynamic var privateOtherUserStatus: String?
     var otherUserStatus: UserStatus? {
         if let privateOtherUserStatus = privateOtherUserStatus {

@@ -317,4 +317,34 @@ extension SubscriptionsClient {
             }
         }
     }
+
+    func loadDeletedMessages(subscription: Subscription, realm: Realm? = Realm.current, completion: (([String]) -> Void)? = nil) {
+
+        let request = RoomDeletedMessagesRequest(roomId: subscription.rid, since: subscription.deletedMessagesLastUpdated)
+        let identifier = subscription.identifier ?? ""
+        api.fetch(request, completion: {response in
+            switch response {
+            case .resource(let resource):
+                realm?.execute({ realm in
+                    let deletedIDs = resource.messages?.compactMap { $0 } ?? []
+
+                    if let sub = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
+                        sub.deletedMessagesLastUpdated = Date()
+
+                        let toDelete = sub.messages?.filter({ message in
+                            return deletedIDs.contains(message.identifier ?? "")
+                        })
+
+                        if let toDelete = toDelete {
+                            realm.delete(toDelete)
+                        }
+                        completion?(deletedIDs)
+                    }
+                    completion?([])
+                })
+            case .error:
+                completion?([])
+            }
+        })
+    }
 }

@@ -743,6 +743,8 @@ extension MessagesViewController: SocketConnectionHandler {
         if state == .connected {
             viewModel.requestingData = .none
 
+            viewModel.fetchDeletedMessages()
+
             if viewModel.threadIdentifier != nil {
                 viewModel.fetchThreadMessages(from: nil)
             } else {

@@ -89,6 +89,7 @@ final class MessagesViewModel {
             })
 
             fetchMessages(from: nil)
+            fetchDeletedMessages()
         }
     }
 
@@ -645,6 +646,16 @@ final class MessagesViewModel {
                 // Update data into the UI
                 self.updateData()
             }
+        }
+    }
+
+    func fetchDeletedMessages() {
+        guard let subscription = self.subscription,
+            let client = API.current()?.client(SubscriptionsClient.self) else {
+                return
+        }
+        client.loadDeletedMessages(subscription: subscription) { _ in
+            self.updateData()
         }
     }
 
