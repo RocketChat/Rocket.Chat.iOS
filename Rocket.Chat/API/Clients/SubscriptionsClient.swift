@@ -318,9 +318,12 @@ extension SubscriptionsClient {
         }
     }
 
-    func loadDeletedMessages(subscription: Subscription, realm: Realm? = Realm.current, completion: (([String]) -> Void)? = nil) {
+    func loadDeletedMessages(subscription: Subscription,
+                             realm: Realm? = Realm.current,
+                             completion: (([String]) -> Void)? = nil) {
 
-        let request = RoomDeletedMessagesRequest(roomId: subscription.rid, since: subscription.deletedMessagesLastUpdated)
+        let sinceDate = subscription.deletedMessagesLastUpdated
+        let request = RoomDeletedMessagesRequest(roomId: subscription.rid, since: sinceDate)
         let identifier = subscription.identifier ?? ""
         api.fetch(request, completion: {response in
             switch response {

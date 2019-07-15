@@ -12,7 +12,7 @@ struct RoomDeletedMessagesRequest: APIRequest {
     typealias APIResourceType = RoomDeletedMessagesResource
 
     let path = "/api/v1/chat.getDeletedMessages"
-    let requiredVersion = Version(1,1,0)
+    let requiredVersion = Version(0, 73, 0)
 
     var query: String?
     let roomId: String?
