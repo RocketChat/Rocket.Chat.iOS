@@ -1,9 +1,9 @@
 //
 //  RoomDeletedMessagesRequest.swift
-//  InfinityOne
+//  Rocket.Chat
 //
-//  Created by Adam Uncao on 2019-07-12.
-//  Copyright © 2019 E-MetroTel. All rights reserved.
+//  Created by Luís Machado on 29/03/2019.
+//  Copyright © 2019 Rocket.Chat. All rights reserved.
 //
 
 import SwiftyJSON
