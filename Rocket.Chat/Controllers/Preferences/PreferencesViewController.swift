@@ -140,6 +140,19 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
+    @IBOutlet weak var trackingCell: UITableViewCell! {
+        didSet {
+            // Configuring the switch control for the crash report cell
+            // The switch is being added as an accessory view to enable
+            // control with VoiceOver.
+
+            switchTracking = UISwitch()
+            switchTracking.addTarget(self, action: #selector(crashReportSwitchDidChange(sender:)), for: .valueChanged)
+            switchTracking.accessibilityLabel = ""
+            trackingCell.accessoryView = switchTracking
+        }
+    }
+
     override var navigationController: PreferencesNavigationController? {
         return super.navigationController as? PreferencesNavigationController
     }
@@ -156,21 +169,6 @@ final class PreferencesViewController: BaseTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUserInformation()
-        configureCells()
-    }
-
-    func configureCells() {
-        // Configuring the switch control for the crash report cell
-        // The switch is being added as an accessory view to enable
-        // control with VoiceOver.
-
-        if let trackingCell = tableView.cellForRow(at: IndexPath(row: 0, section: kSectionTracking)) {
-            switchTracking = UISwitch()
-            switchTracking.addTarget(self, action: #selector(crashReportSwitchDidChange(sender:)), for: .valueChanged)
-            switchTracking.accessibilityLabel = ""
-            trackingCell.accessoryView = switchTracking
-        }
-
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {

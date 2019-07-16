@@ -385,6 +385,7 @@
                         <outlet property="labelTracking" destination="evt-2t-Ueh" id="EHK-gb-d8N"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
                         <outlet property="labelWebBrowser" destination="jBR-jx-Kz9" id="vBB-bs-Sti"/>
+                        <outlet property="trackingCell" destination="93i-3u-Cb2" id="dQf-ZV-XOZ"/>
                         <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                         <segue destination="G2F-kh-af5" kind="show" identifier="Language" id="UkX-RM-9MT"/>
                     </connections>
