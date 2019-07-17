@@ -20,11 +20,18 @@
 "auth.authentication.password.label" = "密碼";
 "auth.authentication.password.label" = "新增密碼";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "聊天訊息";
 "subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
 "subscriptions.main.userview.hint" = "點擊兩下變更狀態";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture"; // TODO
+"preferences.profile.editing.label" = "Edit the profile picture"; // TODO
 
 // MARK: Message
 "message.label" = "來自 %@ at %@ 的訊息";

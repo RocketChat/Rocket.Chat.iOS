@@ -20,11 +20,18 @@
 "auth.authentication.password.label" = "Contraseña";
 "auth.authentication.password.label" = "Inserta tu contraseña aquí";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Información de la sesión";
 "subscriptions.main.userview.value" = "Servidor: %@. Usuario: %@. Estado: %@.";
 "subscriptions.main.userview.hint" = "Toca dos veces para cambiar el estado";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture"; // TODO
+"preferences.profile.editing.label" = "Edit the profile picture"; // TODO
 
 // MARK: Message
 "message.label" = "Mensaje de %@ a %@.";
