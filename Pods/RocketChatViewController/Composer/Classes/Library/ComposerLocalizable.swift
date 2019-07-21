@@ -11,6 +11,12 @@ enum ComposerLocalizableKey: String {
     case textViewPlaceholder = "composer.textview.placeholder"
     case editingViewTitle = "composer.editingview.title"
     case swipeIndicatorViewTitle =  "composer.recordaudioview.swipe"
+
+    // Accessibility
+
+    case sendButtonLabel = "composer.sendButton.label"
+    case micButtonLabel = "composer.micButton.label"
+    case addButtonLabel = "composer.addButton.label"
 }
 
 protocol ComposerLocalizable {

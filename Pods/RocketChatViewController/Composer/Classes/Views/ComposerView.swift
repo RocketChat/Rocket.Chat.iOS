@@ -64,6 +64,7 @@ public class ComposerView: UIView, ComposerLocalizable {
     public let leftButton = tap(ComposerButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setBackgroundImage(ComposerAssets.addButtonImage, for: .normal)
+        $0.accessibilityLabel = localized(.addButtonLabel)
 
         $0.addTarget(self, action: #selector(touchUpInsideButton), for: .touchUpInside)
         $0.addTarget(self, action: #selector(touchUpOutsideButton), for: .touchUpOutside)
