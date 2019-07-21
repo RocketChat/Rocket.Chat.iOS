@@ -4,4 +4,6 @@
 
 // Accessibility
 
+"composer.sendButton.label" = "Send";
+"composer.micButton.label" = "Voice message";
 "composer.addButton.label" = "Share media";
