@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6OD-GW-L6f">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,6 +38,9 @@
                                         </visualEffectView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Victoria_Anderson" translatesAutoresizingMaskIntoConstraints="NO" id="pYP-y6-oBz" customClass="FLAnimatedImageView">
                                             <rect key="frame" x="147.66666666666666" y="72.333333333333329" width="80" height="79.999999999999986"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="YES"/>
+                                            </accessibility>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="80" id="4jO-pi-kzE"/>
                                                 <constraint firstAttribute="width" constant="80" id="vZZ-kf-xdH"/>
@@ -183,6 +186,9 @@
                                                 <constraint firstItem="RlQ-w0-4tK" firstAttribute="leading" secondItem="QMZ-pG-8SL" secondAttribute="leading" constant="15" id="cbh-sq-GxI"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="detailLabel" destination="RlQ-w0-4tK" id="YnC-pK-RR5"/>
                                             <outlet property="titleLabel" destination="Ki4-tx-1mt" id="rz0-gd-vp1"/>
