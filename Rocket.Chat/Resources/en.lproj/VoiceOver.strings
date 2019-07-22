@@ -25,9 +25,6 @@
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
 
-// MARK: Preferences
-"preferences.profile.edit.label" = "Edit the profile picture";
-
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
 "message.hint" = "Reactions: %@";
