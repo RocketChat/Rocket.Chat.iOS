@@ -18,9 +18,9 @@ final class ChangeAppIconCell: UICollectionViewCell {
     @IBOutlet private weak var checkImageView: UIImageView!
     @IBOutlet private weak var checkImageViewBackground: UIView!
 
-    func setIcon(name: String, accessibilityName: String, selected: Bool) {
-        iconImageView.image = UIImage(named: name)
-        iconImageView.accessibilityLabel = VOLocalizedString(accessibilityName)
+    func setIcon(name: (String, String), selected: Bool) {
+        iconImageView.image = UIImage(named: name.0)
+        iconImageView.accessibilityLabel = VOLocalizedString(name.1)
 
         if selected {
             iconImageView.layer.borderColor = UIColor.RCBlue().cgColor
@@ -33,6 +33,7 @@ final class ChangeAppIconCell: UICollectionViewCell {
         } else {
             iconImageView.layer.borderColor = UIColor.RCLightGray().cgColor
             iconImageView.layer.borderWidth = 1
+            iconImageView.accessibilityTraits = .image
 
             checkImageView.isHidden = true
             checkImageViewBackground.isHidden = true
