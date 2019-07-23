@@ -96,14 +96,15 @@ public class ComposerView: UIView, ComposerLocalizable {
      */
     public let textView = tap(ComposerTextView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-
         $0.text = ""
+        $0.font = .preferredFont(forTextStyle: .body)
+        $0.adjustsFontForContentSizeCategory = true
+        $0.accessibilityLabel = localized(.textViewPlaceholder)
+
         $0.placeholderLabel.text = localized(.textViewPlaceholder)
         $0.placeholderLabel.font = .preferredFont(forTextStyle: .body)
         $0.placeholderLabel.adjustsFontForContentSizeCategory = true
-
-        $0.font = .preferredFont(forTextStyle: .body)
-        $0.adjustsFontForContentSizeCategory = true
+        $0.placeholderLabel.isAccessibilityElement = false
     }
 
     /**
