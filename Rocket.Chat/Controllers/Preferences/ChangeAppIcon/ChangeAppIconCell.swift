@@ -33,7 +33,7 @@ final class ChangeAppIconCell: UICollectionViewCell {
         } else {
             iconImageView.layer.borderColor = UIColor.RCLightGray().cgColor
             iconImageView.layer.borderWidth = 1
-            iconImageView.accessibilityTraits = .image
+            iconImageView.accessibilityTraits = .none
 
             checkImageView.isHidden = true
             checkImageViewBackground.isHidden = true
