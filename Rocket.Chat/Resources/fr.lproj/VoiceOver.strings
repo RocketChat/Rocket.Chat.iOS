@@ -32,6 +32,13 @@
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO
 "preferences.profile.editing.label" = "Edit the profile picture"; // TODO
+"preferences.icon.default" = "Default icon"; // TODO
+"preferences.icon.black" = "Black icon"; // TODO
+"preferences.icon.red" = "Red icon"; // TODO
+"preferences.icon.bnw" = "Black and White icon"; // TODO
+"preferences.icon.grey" = "Grey icon"; // TODO
+"preferences.icon.white" = "White icon"; // TODO
+"preferences.icon.blue" = "Blue icon"; // TODO
 
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
