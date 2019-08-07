@@ -121,6 +121,7 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
             skinToneButton.layer.cornerRadius = skinToneButton.frame.width/2
             skinToneButton.backgroundColor = currentSkinTone.color
             skinToneButton.showsTouchWhenHighlighted = true
+            skinToneButton.accessibilityLabel = localized("skinTone.label")
         }
     }
 
@@ -128,6 +129,7 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         currentSkinToneIndex += 1
         currentSkinToneIndex = currentSkinToneIndex % skinTones.count
         skinToneButton.backgroundColor = currentSkinTone.color
+        skinToneButton.accessibilityHint = currentSkinTone.name
         emojisCollectionView.reloadData()
     }
 
@@ -180,6 +182,8 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         let categoryItems = currentCategories.map { category -> UITabBarItem in
             let image = UIImage(named: category.name) ?? UIImage(named: "custom")
             let item = UITabBarItem(title: nil, image: image, selectedImage: image)
+            item.isAccessibilityElement = true
+            item.accessibilityLabel = category.name
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
             return item
         }
@@ -230,6 +234,8 @@ extension EmojiPicker: UICollectionViewDataSource {
 
         if let file = emoji.imageUrl {
             cell.emoji = .custom(URL(string: file))
+            cell.emojiImageView.accessibilityLabel = emoji.name
+            cell.emojiImageView.accessibilityTraits = .staticText
         } else {
             var toneModifier = ""
             if emoji.supportsTones, let currentTone = currentSkinTone.name { toneModifier = "_\(currentTone)" }

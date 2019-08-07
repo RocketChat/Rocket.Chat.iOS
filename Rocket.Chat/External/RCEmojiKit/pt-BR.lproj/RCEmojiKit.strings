@@ -21,3 +21,7 @@
 "categories.flags" = "BANDEIRAS";
 
 "reactorlist.title" = "Reações";
+
+// Accessibility
+
+"skinTone.label" = "Change skintone"; //TODO

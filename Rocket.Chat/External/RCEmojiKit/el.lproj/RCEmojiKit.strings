@@ -22,3 +22,6 @@
 
 "reactorlist.title" = "Αντιδράσεις";
 
+// Accessibility
+
+"skinTone.label" = "Change skintone"; //TODO

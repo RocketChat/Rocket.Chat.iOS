@@ -22,3 +22,6 @@
 
 "reactorlist.title" = "Reazioni";
 
+// Accessibility
+
+"skinTone.label" = "Change skintone"; //TODO

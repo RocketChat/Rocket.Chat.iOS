@@ -22,6 +22,7 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
         emojiLabel.baselineAdjustment = .alignCenters
         emojiLabel.font = UIFont.systemFont(ofSize: 32)
         emojiLabel.backgroundColor = UIColor.white
+        emojiLabel.isAccessibilityElement = true
         return emojiLabel
     }()
 
@@ -44,8 +45,10 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
                 guard let url = url else { return }
                 ImageManager.loadImage(with: url, into: emojiImageView)
                 emojiImageView.isHidden = false
+                emojiImageView.isAccessibilityElement = true
             case .standard(let string):
                 emojiLabel.text = string
+                emojiImageView.accessibilityLabel = string
                 emojiLabel.isHidden = false
             }
         }
