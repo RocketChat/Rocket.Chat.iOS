@@ -223,6 +223,7 @@ extension EmojiPicker: UICollectionViewDataSource {
         ) as? EmojiPickerSectionHeaderView else { return UICollectionReusableView() }
 
         headerView.textLabel.text = localized("categories.\(currentCategories[indexPath.section].name)")
+        headerView.textLabel.accessibilityTraits = .header
 
         return headerView
     }
