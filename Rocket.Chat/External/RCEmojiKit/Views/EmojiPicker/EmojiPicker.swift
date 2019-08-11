@@ -129,8 +129,12 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         currentSkinToneIndex += 1
         currentSkinToneIndex = currentSkinToneIndex % skinTones.count
         skinToneButton.backgroundColor = currentSkinTone.color
-        skinToneButton.accessibilityHint = currentSkinTone.name
         emojisCollectionView.reloadData()
+
+        if let currentSkinToneName = currentSkinTone.name {
+        skinToneButton.accessibilityLabel =
+            localized("skinTone.label") + localized("currentSkinTone.label") +  "\(currentSkinToneName))"
+        }
     }
 
     var emojiPicked: ((String) -> Void)?

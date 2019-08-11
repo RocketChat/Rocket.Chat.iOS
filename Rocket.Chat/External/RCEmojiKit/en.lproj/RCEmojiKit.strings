@@ -24,4 +24,5 @@
 
 // Accessibility
 
-"skinTone.label" = "Change skintone";
+"skinTone.label" = "Change skintone.";
+"currentSkinTone.label" = "Current skintone,";
