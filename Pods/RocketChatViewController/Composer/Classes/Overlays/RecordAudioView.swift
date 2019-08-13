@@ -267,6 +267,7 @@ extension RecordAudioView {
 
     @objc func swipeRecognized() {
         dismiss()
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 }
 
@@ -276,8 +277,7 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
     public let imageView = tap(UIImageView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = ComposerAssets.grayArrowLeftButtonImage
-        $0.isAccessibilityElement = true
-        $0.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
+        $0.accessibilityElementsHidden = true
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.imageViewWidth),
@@ -287,6 +287,8 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
 
     public let label = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isAccessibilityElement = true
+        $0.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
 
         $0.text = localized(.swipeIndicatorViewTitle)
         $0.font = .preferredFont(forTextStyle: .body)
