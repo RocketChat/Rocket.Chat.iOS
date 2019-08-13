@@ -297,6 +297,9 @@ public extension ComposerView {
         rightButton.isUserInteractionEnabled = false
         isTextInputEnabled = false
 
+        leftButton.accessibilityElementsHidden = true
+        rightButton.accessibilityElementsHidden = true
+
         currentDelegate.composerView(self, willConfigureOverlayView: overlayView, with: userData)
         currentDelegate.composerView(self, didConfigureOverlayView: overlayView)
     }
@@ -307,6 +310,9 @@ public extension ComposerView {
         leftButton.isUserInteractionEnabled = true
         rightButton.isUserInteractionEnabled = true
         isTextInputEnabled = true
+
+        leftButton.accessibilityElementsHidden = false
+        rightButton.accessibilityElementsHidden = false
     }
 }
 
