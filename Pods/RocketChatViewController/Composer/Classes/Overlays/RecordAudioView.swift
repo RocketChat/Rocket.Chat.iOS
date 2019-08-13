@@ -276,6 +276,8 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
     public let imageView = tap(UIImageView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = ComposerAssets.grayArrowLeftButtonImage
+        $0.isAccessibilityElement = true
+        $0.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.imageViewWidth),
