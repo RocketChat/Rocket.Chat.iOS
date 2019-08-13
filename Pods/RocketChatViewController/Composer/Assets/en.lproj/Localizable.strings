@@ -11,3 +11,4 @@
 "composer.playButton.label" = "Play";
 "composer.pauseButton.label" = "Pause";
 "composer.discardButton.label" = "Discard";
+"composer.duration.label" = "Duration,";

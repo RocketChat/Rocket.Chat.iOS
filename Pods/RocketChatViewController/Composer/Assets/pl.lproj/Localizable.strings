@@ -11,3 +11,4 @@
 "composer.playButton.label" = "Play"; // TODO
 "composer.pauseButton.label" = "Pause"; // TODO
 "composer.discardButton.label" = "Discard"; // TODO
+"composer.duration.label" = "Duration,"; // TODO
