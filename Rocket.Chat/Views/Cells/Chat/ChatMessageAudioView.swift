@@ -73,6 +73,8 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             let pause = #imageLiteral(resourceName: "Player Pause").withRenderingMode(.alwaysTemplate)
             let play = #imageLiteral(resourceName: "Player Play").withRenderingMode(.alwaysTemplate)
             playButton.setImage(playing ? pause : play, for: .normal)
+            playButton.accessibilityLabel = playing ?
+                VOLocalizedString("message.audio.pause.label") : VOLocalizedString("message.audio.play.label")
             applyTheme()
         }
     }
@@ -99,7 +101,11 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             }
 
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
-            self.timeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            let displayFormat = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            self.timeLabel.text = displayFormat
+            if let durationAccessibilityLabel = VOLocalizedString("message.audio.duration.label") {
+               self.timeLabel.accessibilityLabel = durationAccessibilityLabel + displayFormat
+            }
         }
     }
 

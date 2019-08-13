@@ -29,7 +29,9 @@ public class RecordAudioView: UIView, ComposerLocalizable {
         didSet {
             let minutes = Int(time) / 60
             let seconds = time - Double(minutes) * 60
-            timeLabel.text = String(format: "%01i:%02i", minutes, Int(seconds))
+            let displayFormat = String(format: "%01i:%02i", minutes, Int(seconds))
+            timeLabel.text = displayFormat
+            timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + displayFormat
         }
     }
 

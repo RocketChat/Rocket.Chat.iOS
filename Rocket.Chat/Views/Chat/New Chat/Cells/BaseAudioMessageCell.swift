@@ -34,7 +34,11 @@ class BaseAudioMessageCell: BaseMessageCell {
             }
 
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
-            audioTimeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            let displayFormat = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
+            audioTimeLabel.text = displayFormat
+            if let durationAccessibilityLabel = VOLocalizedString("message.audio.duration.label") {
+            audioTimeLabel.accessibilityLabel = durationAccessibilityLabel + displayFormat
+            }
         }
     }
 
@@ -54,11 +58,13 @@ class BaseAudioMessageCell: BaseMessageCell {
         if playing {
             let image = UIImage(named: "Player Pause")?.withRenderingMode(.alwaysTemplate)
             buttonPlay.imageView?.tintColor = theme.actionTintColor
+            buttonPlay.accessibilityLabel = VOLocalizedString("message.audio.pause.label")
             buttonPlay.setImage(image, for: .normal)
             player?.play()
         } else {
             let image = UIImage(named: "Player Play")?.withRenderingMode(.alwaysTemplate)
             buttonPlay.imageView?.tintColor = theme.actionTintColor
+            buttonPlay.accessibilityLabel = VOLocalizedString("message.audio.play.label")
             buttonPlay.setImage(image, for: .normal)
             player?.stop()
         }

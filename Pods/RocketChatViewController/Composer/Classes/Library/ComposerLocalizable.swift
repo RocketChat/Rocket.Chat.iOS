@@ -21,6 +21,7 @@ enum ComposerLocalizableKey: String {
     case playButtonLabel = "composer.playButton.label"
     case pauseButtonLabel = "composer.pauseButton.label"
     case discardButtonLabel = "composer.discardButton.label"
+    case durationLabel = "composer.duration.label"
 }
 
 protocol ComposerLocalizable {
