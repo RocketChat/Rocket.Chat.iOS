@@ -23,6 +23,7 @@ public class PreviewAudioView: UIView, ComposerLocalizable {
 
     public let discardButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.discardButtonLabel)
 
         $0.addConstraints([
             $0.heightAnchor.constraint(equalToConstant: Consts.discardButtonHeight),
@@ -45,6 +46,7 @@ public class PreviewAudioView: UIView, ComposerLocalizable {
 
     public let sendButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.sendButtonLabel)
 
         $0.addConstraints([
             $0.heightAnchor.constraint(equalToConstant: Consts.discardButtonHeight),
@@ -199,10 +201,11 @@ extension PreviewAudioView {
 
 // MARK: SwipeIndicatorView
 
-public class AudioView: UIView {
+public class AudioView: UIView, ComposerLocalizable {
     public let playButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(ComposerAssets.playButtonImage, for: .normal)
+        $0.accessibilityLabel = localized(.playButtonLabel)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.playButtonWidth),
@@ -214,6 +217,7 @@ public class AudioView: UIView {
 
     public let progressSlider = tap(UISlider()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isAccessibilityElement = true
 
         $0.value = 0
         $0.setThumbImage(ComposerAssets.sliderThumbImage, for: .normal)
@@ -263,6 +267,10 @@ public class AudioView: UIView {
             let pause = ComposerAssets.pauseButtonImage
             let play = ComposerAssets.playButtonImage
             playButton.setImage(playing ? pause : play, for: .normal)
+
+            let pauseAccessibilityLabel = ComposerView.localized(.pauseButtonLabel)
+             let playAccessibilityLabel = ComposerView.localized(.playButtonLabel)
+            playButton.accessibilityLabel = playing ? pauseAccessibilityLabel : playAccessibilityLabel
         }
     }
 

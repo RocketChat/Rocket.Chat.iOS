@@ -7,3 +7,7 @@
 "composer.sendButton.label" = "Send";
 "composer.micButton.label" = "Voice message";
 "composer.addButton.label" = "Share media";
+"composer.redMicButton.label" = "Stop recording";
+"composer.playButton.label" = "Play";
+"composer.pauseButton.label" = "Pause";
+"composer.discardButton.label" = "Discard";

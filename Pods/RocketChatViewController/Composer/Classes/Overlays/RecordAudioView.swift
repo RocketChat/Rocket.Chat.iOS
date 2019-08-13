@@ -13,7 +13,7 @@ public protocol RecordAudioViewDelegate: class {
     func recordAudioViewDidCancel(_ view: RecordAudioView)
 }
 
-public class RecordAudioView: UIView {
+public class RecordAudioView: UIView, ComposerLocalizable {
     public weak var composerView: ComposerView?
     public weak var delegate: RecordAudioViewDelegate?
 
@@ -51,6 +51,7 @@ public class RecordAudioView: UIView {
 
     public let micButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.redMicButtonLabel)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: 40),
