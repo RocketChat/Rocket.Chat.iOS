@@ -184,6 +184,7 @@ extension PreviewAudioView {
         audioView.player = nil
 
         delegate?.previewAudioView(self, didDiscardAudio: url)
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 
     @objc func touchUpInsideSendButton() {
@@ -195,6 +196,7 @@ extension PreviewAudioView {
         audioView.player = nil
 
         delegate?.previewAudioView(self, didConfirmAudio: url)
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 
 }

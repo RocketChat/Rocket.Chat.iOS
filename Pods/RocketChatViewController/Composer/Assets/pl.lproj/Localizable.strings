@@ -12,3 +12,6 @@
 "composer.pauseButton.label" = "Pause"; // TODO
 "composer.discardButton.label" = "Discard"; // TODO
 "composer.duration.label" = "Duration,"; // TODO
+"composer.recordaudioview.swipe.label" = "Swipe left to cancel"; // TODO
+
+"composer.recordaudioview.micButton.hint" = "Double tap to record"; // TODO

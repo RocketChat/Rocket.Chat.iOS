@@ -293,6 +293,7 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isAccessibilityElement = true
         $0.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
+        $0.accessibilityLabel = localized(.swipeLabel)
 
         $0.text = localized(.swipeIndicatorViewTitle)
         $0.font = .preferredFont(forTextStyle: .body)
