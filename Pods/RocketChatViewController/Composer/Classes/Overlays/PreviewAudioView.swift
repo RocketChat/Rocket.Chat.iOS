@@ -353,8 +353,16 @@ public class AudioView: UIView, ComposerLocalizable {
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
             let displayFormat = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
             self.timeLabel.text = displayFormat
-            self.timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + displayFormat
+            self.timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + self.timeDuration(displayTime)
         }
+    }
+
+    func timeDuration(_ time: Int) -> String {
+        let timeFormat = DateComponentsFormatter()
+        timeFormat.allowedUnits = [.minute, .second]
+        timeFormat.unitsStyle = .spellOut
+        guard let formattedTime = timeFormat.string(from: Double(time)) else { return "" }
+        return formattedTime
     }
 
     struct Consts {

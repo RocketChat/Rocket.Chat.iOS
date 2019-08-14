@@ -103,8 +103,8 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
             let displayFormat = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
             self.timeLabel.text = displayFormat
-            if let durationAccessibilityLabel = VOLocalizedString("message.audio.duration.label") {
-               self.timeLabel.accessibilityLabel = durationAccessibilityLabel + displayFormat
+            if let durationLabel = VOLocalizedString("message.audio.duration.label") {
+                self.timeLabel.accessibilityLabel = durationLabel + RCDateFormatter.timeDuration(displayTime)
             }
         }
     }

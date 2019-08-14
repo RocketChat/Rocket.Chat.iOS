@@ -36,8 +36,8 @@ class BaseAudioMessageCell: BaseMessageCell {
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
             let displayFormat = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
             audioTimeLabel.text = displayFormat
-            if let durationAccessibilityLabel = VOLocalizedString("message.audio.duration.label") {
-            audioTimeLabel.accessibilityLabel = durationAccessibilityLabel + displayFormat
+            if let durationLabel = VOLocalizedString("message.audio.duration.label") {
+                audioTimeLabel.accessibilityLabel = durationLabel + RCDateFormatter.timeDuration(displayTime)
             }
         }
     }
