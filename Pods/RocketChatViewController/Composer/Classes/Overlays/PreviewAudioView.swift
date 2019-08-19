@@ -219,7 +219,7 @@ public class AudioView: UIView, ComposerLocalizable {
 
     public let progressSlider = tap(UISlider()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.isAccessibilityElement = true
+        $0.accessibilityTraits = UIAccessibilityTraitAdjustable
 
         $0.value = 0
         $0.setThumbImage(ComposerAssets.sliderThumbImage, for: .normal)
@@ -356,6 +356,9 @@ public class AudioView: UIView, ComposerLocalizable {
             let displayFormat = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
             self.timeLabel.text = displayFormat
             self.timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + self.timeDuration(displayTime)
+
+            self.progressSlider.accessibilityValue = ComposerView.localized(.sliderLabelPosition) + self.timeDuration(Int(player.currentTime))
+                + ComposerView.localized(.sliderLabelOf) + self.timeDuration(Int(player.duration))
         }
     }
 
@@ -416,4 +419,31 @@ extension AudioView {
         playing = !playing
     }
 
+}
+
+//  MARK: Accessibility
+
+extension AudioView {
+
+    func valueUpdated() {
+        guard let player = self.player else { return }
+        let displayTime = self.playing ? Int(progressSlider.value) : Int(player.duration)
+        let displayFormat = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
+        timeLabel.text = displayFormat
+        progressSlider.sendActions(for: .valueChanged)
+    }
+
+    override public func accessibilityIncrement() {
+        super.accessibilityIncrement()
+
+        progressSlider.setValue(progressSlider.value + 10, animated: true)
+        valueUpdated()
+    }
+
+    override public func accessibilityDecrement() {
+        super.accessibilityDecrement()
+
+        progressSlider.setValue(progressSlider.value - 10, animated: true)
+        valueUpdated()
+    }
 }
