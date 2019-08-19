@@ -94,6 +94,8 @@ class ChannelActionsViewController: BaseViewController {
 
         tableView?.contentInsetAdjustmentBehavior = .never
 
+        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
+
         setupNavigationBarButtons()
         registerCells()
     }
@@ -135,6 +137,7 @@ class ChannelActionsViewController: BaseViewController {
                     target: self,
                     action: #selector(buttonFavoriteDidPressed)
                 )
+                buttonFavorite.accessibilityLabel = favoriteButtonAccessibilityLabel
 
                 buttons.append(buttonFavorite)
                 self.buttonFavorite = buttonFavorite
@@ -142,17 +145,23 @@ class ChannelActionsViewController: BaseViewController {
             }
 
             if settings.isJitsiEnabled && AppManager.isVideoCallAvailable {
-                buttons.append(UIBarButtonItem(
-                    image: UIImage(named: "UserDetail_VideoCall"),
+                let buttonVideoCall = UIBarButtonItem(image: UIImage(named: "UserDetail_VideoCall"),
                     style: .plain,
                     target: self,
                     action: #selector(buttonVideoCallDidPressed)
-                ))
+                )
+                buttonVideoCall.accessibilityLabel = VOLocalizedString("channel.actions.videoCall.label")
+                buttons.append(buttonVideoCall)
             }
 
             navigationItem.rightBarButtonItems = buttons
         }
     }
+
+    // MARK: Accessibility
+
+    var favoriteButtonAccessibilityLabel: String? = VOLocalizedString("channel.actions.star.label")
+    var favoriteSelectedButtonAccessibilityLabel: String? = VOLocalizedString("channel.actions.unstar.label")
 
     func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
         guard let buttonFavorite = self.buttonFavorite else { return }
@@ -161,8 +170,10 @@ class ChannelActionsViewController: BaseViewController {
 
         if favorite {
             image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+            buttonFavorite.accessibilityLabel = favoriteSelectedButtonAccessibilityLabel
         } else {
             image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+            buttonFavorite.accessibilityLabel = favoriteButtonAccessibilityLabel
         }
 
         buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
