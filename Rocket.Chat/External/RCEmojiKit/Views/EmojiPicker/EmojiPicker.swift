@@ -93,13 +93,13 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
 
     @IBOutlet weak var emojisCollectionView: UICollectionView!
 
-    let skinTones: [(name: String?, color: UIColor)] = [
-        (name: nil, color: #colorLiteral(red: 0.999120295, green: 0.8114234805, blue: 0.06628075987, alpha: 1)),
-        (name: "tone1", color: #colorLiteral(red: 0.982526958, green: 0.8808286786, blue: 0.7670835853, alpha: 1)),
-        (name: "tone2", color: #colorLiteral(red: 0.8934452534, green: 0.7645885944, blue: 0.6247871518, alpha: 1)),
-        (name: "tone3", color: #colorLiteral(red: 0.7776196599, green: 0.6034522057, blue: 0.4516467452, alpha: 1)),
-        (name: "tone4", color: #colorLiteral(red: 0.6469842792, green: 0.4368215203, blue: 0.272474587, alpha: 1)),
-        (name: "tone5", color: #colorLiteral(red: 0.391161263, green: 0.3079459369, blue: 0.2550256848, alpha: 1))
+    let skinTones: [(name: String?, color: UIColor, accessibilityName: String)] = [
+        (name: nil, color: #colorLiteral(red: 0.999120295, green: 0.8114234805, blue: 0.06628075987, alpha: 1), "skinTone.default"),
+        (name: "tone1", color: #colorLiteral(red: 0.982526958, green: 0.8808286786, blue: 0.7670835853, alpha: 1), "skinTone.tone1"),
+        (name: "tone2", color: #colorLiteral(red: 0.8934452534, green: 0.7645885944, blue: 0.6247871518, alpha: 1), "skinTone.tone2"),
+        (name: "tone3", color: #colorLiteral(red: 0.7776196599, green: 0.6034522057, blue: 0.4516467452, alpha: 1), "skinTone.tone3"),
+        (name: "tone4", color: #colorLiteral(red: 0.6469842792, green: 0.4368215203, blue: 0.272474587, alpha: 1), "skinTone.tone4"),
+        (name: "tone5", color: #colorLiteral(red: 0.391161263, green: 0.3079459369, blue: 0.2550256848, alpha: 1), "skinTone.tone5")
     ]
 
     var currentSkinToneIndex: Int {
@@ -112,7 +112,7 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         }
     }
 
-    var currentSkinTone: (name: String?, color: UIColor) {
+    var currentSkinTone: (name: String?, color: UIColor, accessibilityName: String) {
         return skinTones[currentSkinToneIndex]
     }
 
@@ -121,7 +121,9 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
             skinToneButton.layer.cornerRadius = skinToneButton.frame.width/2
             skinToneButton.backgroundColor = currentSkinTone.color
             skinToneButton.showsTouchWhenHighlighted = true
-            skinToneButton.accessibilityLabel = localized("skinTone.label")
+            skinToneButton.accessibilityLabel =
+                localized("skinTone.label") + localized("currentSkinTone.label")
+            skinToneButton.accessibilityValue = localized(currentSkinTone.accessibilityName)
         }
     }
 
@@ -129,12 +131,8 @@ final class EmojiPicker: UIView, RCEmojiKitLocalizable {
         currentSkinToneIndex += 1
         currentSkinToneIndex = currentSkinToneIndex % skinTones.count
         skinToneButton.backgroundColor = currentSkinTone.color
+        skinToneButton.accessibilityValue = localized(currentSkinTone.accessibilityName)
         emojisCollectionView.reloadData()
-
-        if let currentSkinToneName = currentSkinTone.name {
-        skinToneButton.accessibilityLabel =
-            localized("skinTone.label") + localized("currentSkinTone.label") +  "\(currentSkinToneName))"
-        }
     }
 
     var emojiPicked: ((String) -> Void)?

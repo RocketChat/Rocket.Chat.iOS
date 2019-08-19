@@ -50,6 +50,7 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
                 emojiLabel.text = string
                 emojiImageView.accessibilityLabel = string
                 emojiLabel.isHidden = false
+                emojiLabel.accessibilityElementsHidden = false
             }
         }
     }
