@@ -22,6 +22,10 @@
 
 // MARK: Channels
 "channel.preferences.label" = "Preferences"; // TODO
+"new_room.title.label" = "Create new channel"; // TODO
+"channel.actions.star.label" = "Star"; // TODO
+"channel.actions.unstar.label" = "Unstar"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
 
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Информация о сеансе";

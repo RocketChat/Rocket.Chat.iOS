@@ -22,6 +22,10 @@
 
 // MARK: Channels
 "channel.preferences.label" = "Preferences";
+"new_room.title.label" = "Create new channel";
+"channel.actions.star.label" = "Star";
+"channel.actions.unstar.label" = "Unstar";
+"channel.actions.videoCall.label" = "Video Call";
 
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Session information";
