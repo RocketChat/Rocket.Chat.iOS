@@ -31,7 +31,10 @@
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
-"subscriptions.main.channel.hint" = "Double tap to enter"; 
+"subscriptions.main.channel.hint" = "Double tap to enter";
+"subscriptions.list.message.label" = "Message: ";
+"subscriptions.list.notification.label" = "Notification";
+"subscriptions.list.notifications.label" = "Notifications";
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture";

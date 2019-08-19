@@ -32,6 +32,9 @@
 "subscriptions.main.userview.value" = "Servidor: %@. Usuário: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Toque duplo para mudar o status.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
+"subscriptions.list.notification.label" = "Notification"; // TODO
+"subscriptions.list.notifications.label" = "Notifications"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO
