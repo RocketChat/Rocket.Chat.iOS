@@ -28,6 +28,8 @@
 "subscriptions.main.userview.value" = "Сервер: %@. Пользователь: %@. Статус: %@.";
 "subscriptions.main.userview.hint" = "Дважды нажмите, чтобы изменить статус.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO

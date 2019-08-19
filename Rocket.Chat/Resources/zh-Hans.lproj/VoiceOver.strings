@@ -28,6 +28,8 @@
 "subscriptions.main.userview.value" = "服务器: %@. 用户: %@. 状态: %@.";
 "subscriptions.main.userview.hint" = "双击变更状态";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO

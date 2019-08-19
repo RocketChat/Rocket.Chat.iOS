@@ -28,6 +28,8 @@
 "subscriptions.main.userview.value" = "Server: %@. Utente: %@. Stato: %@.";
 "subscriptions.main.userview.hint" = "Fare doppio clic per cambiare lo stato.";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO

@@ -27,7 +27,9 @@
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
-"subscriptions.main.channel.hint" = "Double tap to enter"; 
+"subscriptions.main.channel.hint" = "Double tap to enter";
+"subscriptions.server_button.hint" = "Double tap to add or change server";
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu";
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture";

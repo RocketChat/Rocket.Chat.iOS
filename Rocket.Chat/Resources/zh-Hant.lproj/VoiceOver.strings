@@ -28,6 +28,8 @@
 "subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
 "subscriptions.main.userview.hint" = "點擊兩下變更狀態";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.server_button.hint" = "Double tap to add or change server"; // TODO
+"subscriptions.server_button.close.hint" = "Double tap to close the server menu"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO
