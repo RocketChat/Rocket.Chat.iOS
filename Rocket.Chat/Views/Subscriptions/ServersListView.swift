@@ -21,6 +21,7 @@ final class ServersListView: UIView {
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = viewModel.title
+            labelTitle.accessibilityTraits = .header
         }
     }
 
