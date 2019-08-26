@@ -119,8 +119,6 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        UIAccessibility.post(notification: .screenChanged, argument: titleView?.labelMessages)
-
         // This method can stay here, since adding a new connection handler
         // will override the existing one if there's already one. This is here
         // to prevent that some connection issue removes all the connection handler.
@@ -367,8 +365,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
         titleView?.updateTitleImage(reverse: true)
         serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
-        UIAccessibility.post(notification: .screenChanged, argument: serversView?.labelTitle)
         serversView?.delegate = self
+        UIAccessibility.post(notification: .screenChanged, argument: serversView)
     }
 
     func closeServersList() {
