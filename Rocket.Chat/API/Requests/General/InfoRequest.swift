@@ -17,6 +17,6 @@ final class InfoRequest: APIRequest {
 
 final class InfoResource: APIResource {
     var version: String? {
-        return raw?["info"]["version"].string
+        return raw?["info"]["version"].string ?? raw?["version"].string
     }
 }

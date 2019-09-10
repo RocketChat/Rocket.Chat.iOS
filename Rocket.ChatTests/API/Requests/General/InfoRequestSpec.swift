@@ -20,7 +20,22 @@ class InfoRequestSpec: APITestCase {
         XCTAssertEqual(request1?.httpMethod, "GET", "http method is correct")
     }
 
-    func testProperties() {
+    func testPropertiesUnauthenticated() {
+        let jsonString = """
+        {
+            "version": "2.0.0-rc.3",
+            "success": true
+        }
+        """
+
+        let json = JSON(parseJSON: jsonString)
+
+        let resource = InfoResource(raw: json)
+
+        XCTAssertEqual(resource.version, "2.0.0-rc.3")
+    }
+
+    func testPropertiesAuthenticated() {
         let jsonString = """
         {
           "success": true,
