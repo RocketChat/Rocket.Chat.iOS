@@ -29,13 +29,27 @@ class CustomEmojiRequestSpec: APITestCase {
     func testProperties() {
         let jsonString = """
         {
-            "emojis": [{
-                "_id": "yh3dxDWrJy3J6oMMN",
-                "name": "test",
-                "aliases": [],
-                "extension": "jpg",
-                "_updatedAt": "2018-02-07T14:58:17.319Z"
-            }],
+        "emojis": {
+            "update": [
+                {
+                    "_id": "S5XvYppoLrLd9JvQm",
+                    "name": "teste",
+                    "aliases": [],
+                    "extension": "jpg",
+                    "_updatedAt": "2019-02-18T16:48:35.119Z"
+                },
+                {
+                    "_id": "Ro5HD4wKQiYnrbpbg",
+                    "name": "aaaaaaaa",
+                    "aliases": [
+                        "aaaaaa"
+                    ],
+                    "extension": "png",
+                    "_updatedAt": "2019-02-18T16:49:47.310Z"
+                }
+            ],
+            "remove": []
+            },
             "success": true
         }
         """
