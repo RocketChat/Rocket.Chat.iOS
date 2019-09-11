@@ -63,6 +63,6 @@ class InfoRequestSpec: APITestCase {
 
         let resource = InfoResource(raw: json)
 
-        XCTAssertEqual(resource.version, "1.2.3-develop")
+        XCTAssertEqual(resource.version, "0.47.0-develop")
     }
 }
