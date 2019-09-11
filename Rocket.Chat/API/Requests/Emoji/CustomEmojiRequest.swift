@@ -38,4 +38,3 @@ final class CustomEmojiResource: APIResource {
         return raw?["error"].string
     }
 }
-
