@@ -21,7 +21,7 @@ class CustomEmojiRequestSpec: APITestCase {
 
         let expectedURL = api.host.appendingPathComponent(preRequest.path)
 
-        XCTAssertEqual(preRequest.path, "/api/v1/emoji-custom", "url subpath is correct")
+        XCTAssertEqual(preRequest.path, "/api/v1/emoji-custom.list", "url subpath is correct")
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
@@ -57,7 +57,7 @@ class CustomEmojiRequestSpec: APITestCase {
         let json = JSON(parseJSON: jsonString)
 
         let result = CustomEmojiResource(raw: json)
-        XCTAssertEqual(result.customEmoji.count, 1)
+        XCTAssertEqual(result.customEmoji.count, 2)
         XCTAssertEqual(result.success, true)
 
         let nilResult = CustomEmojiResource(raw: nil)
