@@ -2,11 +2,11 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - Crashlytics (3.11.1):
     - Fabric (~> 1.8.1)
-  - DifferenceKit (1.1.1):
-    - DifferenceKit/Core (= 1.1.1)
-    - DifferenceKit/UIKitExtension (= 1.1.1)
-  - DifferenceKit/Core (1.1.1)
-  - DifferenceKit/UIKitExtension (1.1.1):
+  - DifferenceKit (1.1.3):
+    - DifferenceKit/Core (= 1.1.3)
+    - DifferenceKit/UIKitExtension (= 1.1.3)
+  - DifferenceKit/Core (1.1.3)
+  - DifferenceKit/UIKitExtension (1.1.3):
     - DifferenceKit/Core
   - Fabric (1.8.2)
   - Firebase/Core (5.12.0):
@@ -91,7 +91,7 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
-  - DifferenceKit/Core (~> 1.0)
+  - DifferenceKit (~> 1.0)
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
@@ -166,7 +166,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
-  DifferenceKit: cf1b84e2207ea45c3640381cb229cf46c1647466
+  DifferenceKit: 5018791b6c1fc839921a3c171a0a539ace6ea60c
   Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
   Firebase: 9190018e296139d938b99521cde0c15a6e8d2946
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
@@ -194,6 +194,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 88c750216e4c7a4d2ddbf7ba39d7a8088e2bd89a
+PODFILE CHECKSUM: 5e8b4d7a4a0d585c2085855ac86f7b4bf26230b7
 
 COCOAPODS: 1.6.1

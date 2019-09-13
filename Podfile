@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit/Core', '~> 1.0'
+  pod 'DifferenceKit', '~> 1.0'
 end
 
 def shared_pods
