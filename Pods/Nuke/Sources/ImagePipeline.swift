@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2019 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -17,10 +17,9 @@ public /* final */ class ImageTask: Hashable {
 
     fileprivate weak var delegate: ImageTaskDelegate?
 
-    /// The request with which the task was created. The request might change
-    /// during the exetucion of a task. When you update the priority of the task,
-    /// the request's prir also gets updated.
-    public private(set) var request: ImageRequest
+    /// The original request with which the task was created.
+    public let request: ImageRequest
+    fileprivate var priority: ImageRequest.Priority
 
     /// The number of bytes that the task has received.
     public fileprivate(set) var completedUnitCount: Int64 = 0
@@ -50,23 +49,23 @@ public /* final */ class ImageTask: Hashable {
         self.taskId = taskId
         self.request = request
         self.metrics = ImageTaskMetrics(taskId: taskId, startDate: Date())
+        self.priority = request.priority
     }
 
     // MARK: - Priority
 
     /// Update s priority of the task even if the task is already running.
     public func setPriority(_ priority: ImageRequest.Priority) {
-        request.priority = priority
-        delegate?.imageTask(self, didUpdatePrioity: priority)
+        delegate?.imageTask(self, didUpdatePriority: priority)
     }
 
     // MARK: - Cancellation
 
     fileprivate var isCancelled: Bool {
-        return _wasCancelled == 1
+        return _isCancelled.value
     }
 
-    private var _wasCancelled: Int32 = 0
+    private var _isCancelled = Atomic(false)
 
     /// Marks task as being cancelled.
     ///
@@ -75,25 +74,25 @@ public /* final */ class ImageTask: Hashable {
     /// `ImagePipeline.Configuration.isDeduplicationEnabled` for more info).
     public func cancel() {
         // Make sure that we ignore if `cancel` being called more than once.
-        if OSAtomicCompareAndSwap32Barrier(0, 1, &_wasCancelled) {
+        if _isCancelled.swap(to: true, ifEqual: false) {
             delegate?.imageTaskWasCancelled(self)
         }
     }
 
     // MARK: - Hashable
 
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self).hashValue)
+    }
+    
     public static func == (lhs: ImageTask, rhs: ImageTask) -> Bool {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
     }
 }
 
 protocol ImageTaskDelegate: class {
     func imageTaskWasCancelled(_ task: ImageTask)
-    func imageTask(_ task: ImageTask, didUpdatePrioity: ImageRequest.Priority)
+    func imageTask(_ task: ImageTask, didUpdatePriority: ImageRequest.Priority)
 }
 
 // MARK: - ImageResponse
@@ -130,8 +129,9 @@ public /* final */ class ImagePipeline: ImageTaskDelegate {
     // Image loading sessions. One or more tasks can be handled by the same session.
     private var sessions = [AnyHashable: ImageLoadingSession]()
 
-    private var nextTaskId: Int32 = 0
-    private var nextSessionId: Int32 = 0
+    private var nextTaskId = Atomic<Int>(0)
+    // Unlike `nextTaskId` doesn't need to be atomic because it's accessed only on a queue 
+    private var nextSessionId: Int = 0
 
     private let rateLimiter: RateLimiter
 
@@ -242,7 +242,7 @@ public /* final */ class ImagePipeline: ImageTaskDelegate {
     /// Loads an image for the given request using image loading pipeline.
     @discardableResult
     public func loadImage(with request: ImageRequest, progress: ImageTask.ProgressHandler? = nil, completion: ImageTask.Completion? = nil) -> ImageTask {
-        let task = ImageTask(taskId: Int(OSAtomicIncrement32(&nextTaskId)), request: request)
+        let task = ImageTask(taskId: getNextTaskId(), request: request)
         task.delegate = self
         queue.async {
             // Fast memory cache lookup. We do this asynchronously because we
@@ -260,6 +260,15 @@ public /* final */ class ImagePipeline: ImageTaskDelegate {
             )
         }
         return task
+    }
+
+    private func getNextTaskId() -> Int {
+        return nextTaskId.increment()
+    }
+
+    private func getNextSessionId() -> Int {
+        nextSessionId += 1
+        return nextSessionId
     }
 
     private func _startLoadingImage(for task: ImageTask, handlers: ImageLoadingSession.Handlers) {
@@ -289,9 +298,10 @@ public /* final */ class ImagePipeline: ImageTaskDelegate {
         }
     }
 
-    func imageTask(_ task: ImageTask, didUpdatePrioity: ImageRequest.Priority) {
+    func imageTask(_ task: ImageTask, didUpdatePriority priority: ImageRequest.Priority) {
         queue.async {
             guard let session = task.session else { return }
+            task.priority = priority
             session.updatePriority()
             session.processingSessions[task]?.updatePriority()
         }
@@ -309,7 +319,7 @@ public /* final */ class ImagePipeline: ImageTaskDelegate {
         if let session = sessions[key] {
             return session
         }
-        let session = ImageLoadingSession(sessionId: Int(OSAtomicIncrement32(&nextSessionId)), request: request, key: key)
+        let session = ImageLoadingSession(sessionId: getNextSessionId(), request: request, key: key)
         sessions[key] = session
         _loadImage(for: session) // Start the pipeline
         return session
@@ -881,7 +891,7 @@ struct ImageContainer {
 
 private extension Property where T == ImageRequest.Priority {
     func update<Tasks: Sequence>(with tasks: Tasks) where Tasks.Element == ImageTask {
-        if let newPriority = tasks.map({ $0.request.priority }).max(), self.value != newPriority {
+        if let newPriority = tasks.map({ $0.priority }).max(), self.value != newPriority {
             self.value = newPriority
         }
     }

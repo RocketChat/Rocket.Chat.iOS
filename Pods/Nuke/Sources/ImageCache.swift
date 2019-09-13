@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2019 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 #if !os(macOS)
@@ -26,7 +26,7 @@ public protocol ImageCaching: class {
 /// Convenience subscript.
 public extension ImageCaching {
     /// Accesses the image associated with the given request.
-    public subscript(request: ImageRequest) -> Image? {
+    subscript(request: ImageRequest) -> Image? {
         get {
             return cachedResponse(for: request)?.image
         }
@@ -178,13 +178,8 @@ internal final class _Cache<Key: Hashable, Value> {
         self.costLimit = costLimit
         self.countLimit = countLimit
         #if os(iOS) || os(tvOS)
-        #if swift(>=4.2)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeAll), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        #else
-        NotificationCenter.default.addObserver(self, selector: #selector(removeAll), name: .UIApplicationDidReceiveMemoryWarning, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: .UIApplicationDidEnterBackground, object: nil)
-        #endif
+        NotificationCenter.default.addObserver(self, selector: #selector(removeAll), name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         #endif
     }
 
