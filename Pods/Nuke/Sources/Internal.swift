@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2019 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -120,7 +120,7 @@ internal final class RateLimiter {
 internal final class Operation: Foundation.Operation {
     private var _isExecuting = false
     private var _isFinished = false
-    private var _isFinishCalled: Int32 = 0
+    private var isFinishCalled = Atomic(false)
 
     override var isExecuting: Bool {
         set {
@@ -169,7 +169,7 @@ internal final class Operation: Foundation.Operation {
 
     private func _finish() {
         // Make sure that we ignore if `finish` is called more than once.
-        if OSAtomicCompareAndSwap32Barrier(0, 1, &_isFinishCalled) {
+        if isFinishCalled.swap(to: true, ifEqual: false) {
             isExecuting = false
             isFinished = true
         }
@@ -256,7 +256,7 @@ internal final class LinkedList<Element> {
 internal final class CancellationTokenSource {
     /// Returns `true` if cancellation has been requested.
     var isCancelling: Bool {
-        return _lock.sync { _observers == nil }
+        return lock.sync { observers == nil }
     }
 
     /// Creates a new token associated with the source.
@@ -264,7 +264,8 @@ internal final class CancellationTokenSource {
         return CancellationToken(source: self)
     }
 
-    private var _observers: ContiguousArray<() -> Void>? = []
+    private var lock = NSLock()
+    private var observers: [() -> Void]? = []
 
     /// Initializes the `CancellationTokenSource` instance.
     init() {}
@@ -276,9 +277,11 @@ internal final class CancellationTokenSource {
     }
 
     private func _register(_ closure: @escaping () -> Void) -> Bool {
-        _lock.lock(); defer { _lock.unlock() }
-        _observers?.append(closure)
-        return _observers != nil
+        lock.lock()
+        defer { lock.unlock() }
+
+        observers?.append(closure)
+        return observers != nil
     }
 
     /// Communicates a request for cancellation to the managed tokens.
@@ -288,18 +291,15 @@ internal final class CancellationTokenSource {
         }
     }
 
-    private func _cancel() -> ContiguousArray<() -> Void>? {
-        _lock.lock(); defer { _lock.unlock() }
-        let observers = _observers
-        _observers = nil // transition to `isCancelling` state
+    private func _cancel() -> [() -> Void]? {
+        lock.lock()
+        defer { lock.unlock() }
+
+        let observers = self.observers
+        self.observers = nil // transition to `isCancelling` state
         return observers
     }
 }
-
-// We use the same lock across different tokens because the design of CTS
-// prevents potential issues. For example, closures registered with a token
-// are never executed inside a lock.
-private let _lock = NSLock()
 
 /// Enables cooperative cancellation of operations.
 ///
@@ -537,17 +537,59 @@ final class Property<T> {
     }
 }
 
-// MARK: - Misc
+// MARK: - Atomic
 
-#if !swift(>=4.1)
-extension Sequence {
-    public func compactMap<ElementOfResult>(_ transform: (Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult] {
-        return try flatMap(transform)
+/// A thread-safe value wrapper.
+final class Atomic<T> {
+    private var _value: T
+    private let lock = NSLock()
+
+    init(_ value: T) {
+        self._value = value
+    }
+
+    var value: T {
+        get {
+            lock.lock()
+            let value = _value
+            lock.unlock()
+            return value
+        }
+        set {
+            lock.lock()
+            _value = newValue
+            lock.unlock()
+        }
     }
 }
-#endif
 
-#if swift(>=4.2)
+extension Atomic where T: Equatable {
+    /// "Compare and Swap"
+    func swap(to newValue: T, ifEqual oldValue: T) -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+
+        guard _value == oldValue else {
+            return false
+        }
+        _value = newValue
+        return true
+    }
+}
+
+extension Atomic where T == Int {
+    /// Atomically increments the value and retruns a new incremented value.
+    func increment() -> Int {
+        lock.lock()
+        defer { lock.unlock() }
+
+        _value += 1
+        return _value
+    }
+}
+
+// MARK: - Misc
+
 import CommonCrypto
 
 extension String {
@@ -558,14 +600,21 @@ extension String {
     /// // prints "50334ee0b51600df6397ce93ceed4728c37fee4e"
     /// ```
     var sha1: String? {
-        guard let input = self.data(using: .utf8) else {
-            return nil
+        guard let input = self.data(using: .utf8) else { return nil }
+        
+        #if swift(>=5.0)
+        let hash = input.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+            var hash = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+            CC_SHA1(bytes.baseAddress, CC_LONG(input.count), &hash)
+            return hash
         }
+        #else
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         input.withUnsafeBytes {
             _ = CC_SHA1($0, CC_LONG(input.count), &hash)
         }
+        #endif
+        
         return hash.map({ String(format: "%02x", $0) }).joined()
     }
 }
-#endif

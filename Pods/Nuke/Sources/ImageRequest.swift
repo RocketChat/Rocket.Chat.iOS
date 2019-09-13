@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2019 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -253,7 +253,7 @@ public struct ImageRequest {
 public extension ImageRequest {
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
-    public mutating func process<P: ImageProcessing>(with processor: P) {
+    mutating func process<P: ImageProcessing>(with processor: P) {
         guard let existing = self.processor else {
             self.processor = AnyImageProcessor(processor)
             return
@@ -264,7 +264,7 @@ public extension ImageRequest {
 
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
-    public func processed<P: ImageProcessing>(with processor: P) -> ImageRequest {
+    func processed<P: ImageProcessing>(with processor: P) -> ImageRequest {
         var request = self
         request.process(with: processor)
         return request
@@ -272,13 +272,13 @@ public extension ImageRequest {
 
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
-    public mutating func process<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) {
+    mutating func process<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) {
         process(with: AnonymousImageProcessor<Key>(key, closure))
     }
 
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
-    public func processed<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) -> ImageRequest {
+    func processed<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) -> ImageRequest {
         return processed(with: AnonymousImageProcessor<Key>(key, closure))
     }
 }
@@ -287,11 +287,12 @@ internal extension ImageRequest {
     struct CacheKey: Hashable {
         let request: ImageRequest
 
-        var hashValue: Int {
+        func hash(into hasher: inout Hasher) {
             if let customKey = request._ref.cacheKey {
-                return customKey.hashValue
+                hasher.combine(customKey)
+            } else {
+                hasher.combine(request._ref._urlString?.hashValue ?? 0)
             }
-            return request._ref._urlString?.hashValue ?? 0
         }
 
         static func == (lhs: CacheKey, rhs: CacheKey) -> Bool {
@@ -310,11 +311,12 @@ internal extension ImageRequest {
     struct LoadKey: Hashable {
         let request: ImageRequest
 
-        var hashValue: Int {
+        func hash(into hasher: inout Hasher) {
             if let customKey = request._ref.loadKey {
-                return customKey.hashValue
+                hasher.combine(customKey)
+            } else {
+                hasher.combine(request._ref._urlString?.hashValue ?? 0)
             }
-            return request._ref._urlString?.hashValue ?? 0
         }
 
         static func == (lhs: LoadKey, rhs: LoadKey) -> Bool {

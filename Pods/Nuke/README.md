@@ -9,7 +9,7 @@
 <a href="https://travis-ci.org/kean/Nuke"><img src="https://img.shields.io/travis/kean/Nuke/master.svg"></a>
 </p>
 
-A powerful **image loading** and **caching** system. It makes simple tasks like loading images into views extremely simple, while also supporting advanced features for more demanding apps.
+A powerful **image loading** and **caching** system.
 
 - Fast LRU memory cache, native HTTP disk cache, and custom aggressive LRU disk cache
 - Progressive image loading (progressive JPEG and WebP)
@@ -225,7 +225,6 @@ A custom LRU disk cache can be used for fast and reliable *aggressive* data cach
 
 ```swift
 $0.dataCache = try! DataCache(name: "com.myapp.datacache")
-// On Swift 4.1 and lower you'll also need to provide a `FilenameGenerator`.
 ```
 
 If you enable aggressive disk cache, make sure that you also disable native URL cache (see `DataLoader`), or you might end up storing the same image data twice.
@@ -504,9 +503,10 @@ If you'd like to contribute, please feel free to create a PR.
 <a name="h_requirements"></a>
 # Requirements
 
-- iOS 9.0 / watchOS 2.0 / macOS 10.10 / tvOS 9.0
-- Xcode 9.2 - Xcode 10
-- Swift 4.0 - Swift 4.2
+| Nuke                 | Swift                     | Xcode                | Platforms                                           |
+|------------------    |-----------------------    |------------------    |-------------------------------------------------    |
+| Nuke 7.6             | Swift 4.2 – 5.0           | Xcode 10.1 – 10.2     | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0      |
+| Nuke 7.2 – 7.5.2     | Swift 4.0 – 4.2     | Xcode 9.2 – 10.1     |  iOS 9.0 / watchOS 2.0 / macOS 10.10 / tvOS 9.0     | 
 
 # License
 
