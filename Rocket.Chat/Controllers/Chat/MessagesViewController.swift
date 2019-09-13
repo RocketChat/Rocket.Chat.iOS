@@ -540,6 +540,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                 target: self,
                 action: #selector(showSearchMessages)
             )
+            search.accessibilityLabel = VOLocalizedString("message.search.label")
 
             let threads = UIBarButtonItem(
                 image: UIImage(named: "Threads"),
@@ -547,6 +548,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                 target: self,
                 action: #selector(buttonThreadsDidPressed)
             )
+            threads.accessibilityLabel = VOLocalizedString("message.threads.label")
 
             navigationItem.rightBarButtonItems = [search, threads]
         } else {
@@ -619,7 +621,6 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
 }
 
 extension MessagesViewController {
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
@@ -632,7 +633,7 @@ extension MessagesViewController {
         return .zero
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let item = viewModel.item(for: indexPath) else {
             return .zero
         }
@@ -665,6 +666,7 @@ extension MessagesViewController {
             var size = type(of: cell).size(for: item, with: cellWidth)
             size = CGSize(width: cellWidth, height: size.height)
             viewSizingModel.set(size: size, for: item.differenceIdentifier)
+
             return size
         }
     }

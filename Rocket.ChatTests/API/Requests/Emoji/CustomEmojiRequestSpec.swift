@@ -21,7 +21,7 @@ class CustomEmojiRequestSpec: APITestCase {
 
         let expectedURL = api.host.appendingPathComponent(preRequest.path)
 
-        XCTAssertEqual(preRequest.path, "/api/v1/emoji-custom", "url subpath is correct")
+        XCTAssertEqual(preRequest.path, "/api/v1/emoji-custom.list", "url subpath is correct")
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
@@ -29,13 +29,27 @@ class CustomEmojiRequestSpec: APITestCase {
     func testProperties() {
         let jsonString = """
         {
-            "emojis": [{
-                "_id": "yh3dxDWrJy3J6oMMN",
-                "name": "test",
-                "aliases": [],
-                "extension": "jpg",
-                "_updatedAt": "2018-02-07T14:58:17.319Z"
-            }],
+        "emojis": {
+            "update": [
+                {
+                    "_id": "S5XvYppoLrLd9JvQm",
+                    "name": "teste",
+                    "aliases": [],
+                    "extension": "jpg",
+                    "_updatedAt": "2019-02-18T16:48:35.119Z"
+                },
+                {
+                    "_id": "Ro5HD4wKQiYnrbpbg",
+                    "name": "aaaaaaaa",
+                    "aliases": [
+                        "aaaaaa"
+                    ],
+                    "extension": "png",
+                    "_updatedAt": "2019-02-18T16:49:47.310Z"
+                }
+            ],
+            "remove": []
+            },
             "success": true
         }
         """
@@ -43,7 +57,7 @@ class CustomEmojiRequestSpec: APITestCase {
         let json = JSON(parseJSON: jsonString)
 
         let result = CustomEmojiResource(raw: json)
-        XCTAssertEqual(result.customEmoji.count, 1)
+        XCTAssertEqual(result.customEmoji.count, 2)
         XCTAssertEqual(result.success, true)
 
         let nilResult = CustomEmojiResource(raw: nil)

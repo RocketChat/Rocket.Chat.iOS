@@ -1,3 +1,9 @@
 "composer.textview.placeholder" = "Escreva uma mensagem";
 "composer.editingview.title" = "Editando Mensagem";
 "composer.recordaudioview.swipe" = "Deslize para cancelar";
+
+// Accessibility
+
+"composer.sendButton.label" = "Send"; // TODO
+"composer.micButton.label" = "Voice message"; // TODO
+"composer.addButton.label" = "Share media"; // TODO

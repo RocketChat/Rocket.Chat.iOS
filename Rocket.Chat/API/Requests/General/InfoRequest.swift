@@ -12,11 +12,11 @@ import SwiftyJSON
 final class InfoRequest: APIRequest {
     typealias APIResourceType = InfoResource
 
-    let path = "/api/v1/info"
+    let path = "/api/info"
 }
 
 final class InfoResource: APIResource {
     var version: String? {
-        return raw?["info"]["version"].string
+        return raw?["info"]["version"].string ?? raw?["version"].string
     }
 }

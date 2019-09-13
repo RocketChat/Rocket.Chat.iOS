@@ -193,7 +193,7 @@ extension Message {
             }
 
             let formatter = DateFormatter()
-            formatter.dateStyle = .short
+            formatter.dateStyle = .medium
             formatter.timeStyle = .short
             formatter.doesRelativeDateFormatting = true
             let date = formatter.string(from: createdAt)

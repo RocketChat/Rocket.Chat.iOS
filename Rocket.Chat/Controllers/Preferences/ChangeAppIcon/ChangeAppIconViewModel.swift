@@ -28,13 +28,13 @@ final class ChangeAppIconViewModel {
     }
 
     // Adding more available icons require proper entries in Info.plist file
-    let availableIcons = [
-        "Default",
-        "Black",
-        "Red",
-        "BnW",
-        "Grey",
-        "White",
-        "Blue"
+    let availableIcons: [(iconName: String, iconAccessibilityName: String)] = [
+        ("Default", "preferences.icon.default"),
+        ("Black", "preferences.icon.black"),
+        ("Red", "preferences.icon.red"),
+        ("BnW", "preferences.icon.bnw"),
+        ("Grey", "preferences.icon.grey"),
+        ("White", "preferences.icon.white"),
+        ("Blue", "preferences.icon.blue")
     ]
 }

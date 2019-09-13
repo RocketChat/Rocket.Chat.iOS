@@ -135,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Zapomniałem hasła";
 "auth.login.agree_label" = "Kontynuując zgadzasz się na nasze";
 "auth.login.agree_and" = "i";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Warunku Usług";
 "auth.login.agree_privacypolicy" = "Politykę Prywatności";
 
