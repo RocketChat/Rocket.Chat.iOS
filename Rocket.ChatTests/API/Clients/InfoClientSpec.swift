@@ -18,9 +18,7 @@ class InfoClientSpec: XCTestCase {
         let client = InfoClient(api: api)
 
         api.nextResult = JSON([
-            "info": [
-                "version": "0.59.3"
-            ],
+            "version": "0.59.3",
             "success": "true"
         ])
 

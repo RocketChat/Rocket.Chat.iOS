@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSA-hf-f6V">
+                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSA-hf-f6V">
                     <rect key="frame" x="16" y="0.0" width="343" height="106"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cdS-HW-2AF">
@@ -26,6 +26,10 @@
                                 </activityIndicatorView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mu-Gh-mpc">
                                     <rect key="frame" x="28" y="0.0" width="37.5" height="106"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        <bool key="isElement" value="NO"/>
+                                    </accessibility>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -37,6 +41,9 @@
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
                     <constraints>
                         <constraint firstItem="cdS-HW-2AF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oSA-hf-f6V" secondAttribute="leading" id="0Kp-AX-yIj"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cdS-HW-2AF" secondAttribute="trailing" id="0b5-m5-AGy"/>
@@ -50,6 +57,9 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-yy-EGi">
                             <rect key="frame" x="5" y="2.5" width="15" height="15"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="OkH-Z4-Ytp"/>
                                 <constraint firstAttribute="width" constant="15" id="rzb-e6-Skm"/>
@@ -57,6 +67,9 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Server Selector" translatesAutoresizingMaskIntoConstraints="NO" id="qdc-h6-oM3">
                             <rect key="frame" x="73.5" y="4" width="12" height="12"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="width" constant="12" id="NM8-fR-0on"/>
                                 <constraint firstAttribute="height" constant="12" id="wI9-JE-wuq"/>
@@ -87,6 +100,10 @@
                         </scrollView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLg-FB-vXv">
                             <rect key="frame" x="8" y="19.5" width="327" height="14.5"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                                <bool key="isElement" value="NO"/>
+                            </accessibility>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -94,6 +111,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ah-8t-4MZ" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                             <rect key="frame" x="8" y="5.5" width="9" height="9"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="height" constant="9" id="Fq8-xb-rdo"/>
                                 <constraint firstAttribute="width" constant="9" id="Pj3-2B-aw1"/>
@@ -101,6 +121,9 @@
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
                     <constraints>
                         <constraint firstItem="4Ah-8t-4MZ" firstAttribute="centerX" secondItem="r2R-yy-EGi" secondAttribute="centerX" id="3Am-Zf-cEY"/>
                         <constraint firstItem="ns2-l0-1Px" firstAttribute="leading" secondItem="r2R-yy-EGi" secondAttribute="trailing" constant="4" id="55q-rG-X9b"/>
@@ -118,6 +141,9 @@
                     </constraints>
                 </view>
             </subviews>
+            <accessibility key="accessibilityConfiguration">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="trailingMargin" secondItem="oSA-hf-f6V" secondAttribute="trailing" id="Amo-5O-GY2"/>

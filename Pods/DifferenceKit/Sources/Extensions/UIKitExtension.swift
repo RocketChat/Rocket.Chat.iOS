@@ -23,12 +23,12 @@ public extension UITableView {
         ) {
         reload(
             using: stagedChangeset,
-            deleteSectionsAnimation: animation,
-            insertSectionsAnimation: animation,
-            reloadSectionsAnimation: animation,
-            deleteRowsAnimation: animation,
-            insertRowsAnimation: animation,
-            reloadRowsAnimation: animation,
+            deleteSectionsAnimation: animation(),
+            insertSectionsAnimation: animation(),
+            reloadSectionsAnimation: animation(),
+            deleteRowsAnimation: animation(),
+            insertRowsAnimation: animation(),
+            reloadRowsAnimation: animation(),
             interrupt: interrupt,
             setData: setData
         )
@@ -115,7 +115,8 @@ public extension UITableView {
     private func _performBatchUpdates(_ updates: () -> Void) {
         if #available(iOS 11.0, tvOS 11.0, *) {
             performBatchUpdates(updates)
-        } else {
+        }
+        else {
             beginUpdates()
             updates()
             endUpdates()

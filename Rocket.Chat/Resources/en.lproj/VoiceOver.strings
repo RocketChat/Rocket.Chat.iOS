@@ -10,16 +10,39 @@
 "auth.connect.urlfield.label" = "Server URL";
 "auth.connect.urlfield.hint" = "Insert your server's URL here.";
 
+"auth.more.label" = "More";
+"auth.close.label" = "Close";
+"auth.show_more_options.label" = "Show more options";
+"auth.show_less_options.label" = "Show less options";
+
 "auth.authentication.emailorusername.label" = "Email or Username";
 "auth.authentication.emailorusername.hint" = "Insert your email or username here.";
 "auth.authentication.password.label" = "Password";
 "auth.authentication.password.label" = "Insert your password here.";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences";
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.main.channel.hint" = "Double tap to enter"; 
+
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture";
+"preferences.profile.editing.label" = "Edit the profile picture";
+"preferences.icon.default" = "Default icon";
+"preferences.icon.black" = "Black icon";
+"preferences.icon.red" = "Red icon";
+"preferences.icon.bnw" = "Black and White icon";
+"preferences.icon.grey" = "Grey icon";
+"preferences.icon.white" = "White icon";
+"preferences.icon.blue" = "Blue icon";
 
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
 "message.hint" = "Reactions: %@";
+"message.search.label" = "Search";
+"message.threads.label" = "Threads";
+"message.chat.title.hint" = "Double tap to open channel options";

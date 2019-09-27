@@ -32,4 +32,8 @@ extension MessagesListViewController: UISearchBarDelegate {
             RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
         }
     }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
 }

@@ -135,6 +135,8 @@ class HighlightLayoutManager: NSLayoutManager {
         textView.dataDetectorTypes = .all
         textView.isEditable = false
         textView.delegate = self
+        textView.isAccessibilityElement = true
+        textView.accessibilityTraits = .staticText
     }
 
     override func layoutSubviews() {

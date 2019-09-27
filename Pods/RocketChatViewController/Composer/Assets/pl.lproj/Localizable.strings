@@ -1,3 +1,9 @@
 "composer.textview.placeholder" = "Wpisz wiadomość";
 "composer.editingview.title" = "Edytowanie wiadomości";
 "composer.recordaudioview.swipe" = "Przesuń, aby anulować";
+
+// Accessibility
+
+"composer.sendButton.label" = "Send"; // TODO
+"composer.micButton.label" = "Voice message"; // TODO
+"composer.addButton.label" = "Share media"; // TODO

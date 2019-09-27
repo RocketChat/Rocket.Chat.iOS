@@ -14,7 +14,7 @@ def ui_pods
 end
 
 def diff_pods
-  pod 'DifferenceKit/Core', '~> 1.0'
+  pod 'DifferenceKit', '~> 1.0'
 end
 
 def shared_pods
@@ -42,7 +42,7 @@ def shared_pods
   database_pods
 
   # Network
-  pod 'Nuke', '~> 7.3'
+  pod 'Nuke', '~> 7.6'
   pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 3'
   pod 'ReachabilitySwift'
@@ -72,8 +72,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift3Targets = ['MobilePlayer', 'RCMarkdownParser']
-  swift42Targets = ['SwipeCellKit']
+  swift42Targets = ['RCMarkdownParser', 'MobilePlayer']
 
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
@@ -86,13 +85,6 @@ post_install do |installer|
         config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
       end
     end
-
-    if swift3Targets.include? target.name
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.1'
-      end
-    end
-
     if swift42Targets.include? target.name
       target.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '4.2'

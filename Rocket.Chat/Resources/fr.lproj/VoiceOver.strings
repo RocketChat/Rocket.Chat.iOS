@@ -10,16 +10,39 @@
 "auth.connect.urlfield.label" = "Server URL";
 "auth.connect.urlfield.hint" = "Insert your server's URL here.";
 
+"auth.more.label" = "More"; // TODO
+"auth.close.label" = "Close"; // TODO
+"auth.show_more_options.label" = "Show more options"; // TODO
+"auth.show_less_options.label" = "Show less options"; // TODO
+
 "auth.authentication.emailorusername.label" = "Email or Username";
 "auth.authentication.emailorusername.hint" = "Insert your email or username here.";
 "auth.authentication.password.label" = "Password";
 "auth.authentication.password.label" = "Insert your password here.";
 
+// MARK: Channels
+"channel.preferences.label" = "Preferences"; // TODO
+
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+
+// MARK: Preferences
+"preferences.profile.edit.label" = "Profile picture"; // TODO
+"preferences.profile.editing.label" = "Edit the profile picture"; // TODO
+"preferences.icon.default" = "Default icon"; // TODO
+"preferences.icon.black" = "Black icon"; // TODO
+"preferences.icon.red" = "Red icon"; // TODO
+"preferences.icon.bnw" = "Black and White icon"; // TODO
+"preferences.icon.grey" = "Grey icon"; // TODO
+"preferences.icon.white" = "White icon"; // TODO
+"preferences.icon.blue" = "Blue icon"; // TODO
 
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
 "message.hint" = "Reactions: %@";
+"message.search.label" = "Search"; // TODO
+"message.threads.label" = "Threads"; // TODO
+"message.chat.title.hint" = "Double tap to open channel options"; // TODO

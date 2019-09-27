@@ -20,7 +20,7 @@ class ChangeAppIconViewModelSpec: XCTestCase {
 
     func testAvailableIcons() {
         model.availableIcons.forEach { name in
-            XCTAssertNotNil(UIImage(named: name), "There is no icon named \(name)")
+            XCTAssertNotNil(UIImage(named: name.iconName), "There is no icon named \(name.iconName)")
         }
     }
 

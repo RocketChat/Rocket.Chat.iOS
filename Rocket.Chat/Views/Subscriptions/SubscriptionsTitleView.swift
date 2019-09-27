@@ -38,6 +38,11 @@ final class SubscriptionsTitleView: UIView {
     }
 
     func updateTitleImage(reverse: Bool = false) {
+        guard AppManager.supportsMultiServer else {
+            buttonServer.setImage(nil, for: .normal)
+            return
+        }
+
         if let image = UIImage(named: "Server Selector")?.imageWithTint(theme?.tintColor ?? .RCBlue()) {
             if reverse, let cgImage = image.cgImage {
                 let rotatedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .downMirrored)

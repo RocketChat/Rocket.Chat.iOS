@@ -2,8 +2,8 @@
 //  CustomEmojiRequest.swift
 //  Rocket.Chat
 //
-//  Created by Filipe Alvarenga on 02/04/18.
-//  Copyright © 2018 Rocket.Chat. All rights reserved.
+//  Created by Matheus Cardoso on 9/10/19.
+//  Copyright © 2019 Rocket.Chat. All rights reserved.
 //
 
 import Foundation
@@ -12,14 +12,14 @@ import SwiftyJSON
 final class CustomEmojiRequest: APIRequest {
     typealias APIResourceType = CustomEmojiResource
 
-    let requiredVersion = Version(0, 61, 0)
-    let path = "/api/v1/emoji-custom"
+    let requiredVersion = Version(0, 75, 0)
+    let path = "/api/v1/emoji-custom.list"
 }
 
 final class CustomEmojiResource: APIResource {
     var customEmoji: [CustomEmoji] {
         var customEmoji: [CustomEmoji] = []
-        let customEmojiRaw = raw?["emojis"].array
+        let customEmojiRaw = raw?["emojis"]["update"].array
 
         customEmojiRaw?.forEach({ customEmojiJSON in
             let emoji = CustomEmoji()

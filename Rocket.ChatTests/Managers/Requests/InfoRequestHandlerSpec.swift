@@ -71,7 +71,7 @@ class InfoRequestHandlerSpec: XCTestCase {
     }
 
     func testValidateServerResponseSuccess() {
-        let result = InfoResource(raw: ["info": ["version": "0.54.0"]])
+        let result = InfoResource(raw: ["version": "0.54.0"])
         instance.validateServerResponse(result: result)
         XCTAssertTrue(controller.isServerValid, "server is valid after validation for valid result")
         XCTAssertTrue(controller.isURLValid, "url is valid after validation for valid result")

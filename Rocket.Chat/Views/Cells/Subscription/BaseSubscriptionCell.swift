@@ -88,6 +88,10 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         } else {
             updateViewForNoAlert(with: subscription)
         }
+
+        // MARK: Accessibility
+
+        self.accessibilityHint = VOLocalizedString("subscriptions.main.channel.hint")
     }
 
     func updateViewForAlert(with subscription: Subscription) {
