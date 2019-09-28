@@ -65,15 +65,15 @@ class MarkdownManager {
 fileprivate extension RCMarkdownParser {
     func useColorAttributes(_ attributes: MarkdownColorAttributes) {
         let quoteAttributes = [
-            NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont,
-            NSAttributedString.Key.backgroundColor.rawValue: attributes.quoteBackgroundColor
+            NSAttributedString.Key.font: MessageTextFontAttributes.italicFont,
+            NSAttributedString.Key.backgroundColor: attributes.quoteBackgroundColor
         ]
 
-        var codeAttributes: [String: Any] = [NSAttributedString.Key.backgroundColor.rawValue: attributes.codeBackgroundColor]
-        codeAttributes[NSAttributedString.Key.foregroundColor.rawValue] = attributes.codeTextColor
-        codeAttributes[NSAttributedString.Key.font.rawValue] = MessageTextFontAttributes.monoSpacedFont
+        var codeAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: attributes.codeBackgroundColor]
+        codeAttributes[.foregroundColor] = attributes.codeTextColor
+        codeAttributes[.font] = MessageTextFontAttributes.monoSpacedFont
 
-        let linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: attributes.linkColor]
+        let linkAttributes = [NSAttributedString.Key.foregroundColor: attributes.linkColor]
 
         self.quoteAttributes = quoteAttributes
         self.quoteBlockAttributes = quoteAttributes
@@ -85,24 +85,24 @@ fileprivate extension RCMarkdownParser {
     static func initWithDefaultAttributes() -> RCMarkdownParser {
         let parser = RCMarkdownParser()
 
-        parser.defaultAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.defaultFont]
+        parser.defaultAttributes = [NSAttributedString.Key.font: MessageTextFontAttributes.defaultFont]
         parser.quoteAttributes = [
-            NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont,
-            NSAttributedString.Key.backgroundColor.rawValue: UIColor.codeBackground
+            NSAttributedString.Key.font: MessageTextFontAttributes.italicFont,
+            NSAttributedString.Key.backgroundColor: UIColor.codeBackground
         ]
         parser.quoteBlockAttributes = parser.quoteAttributes
 
-        var codeAttributes: [String: Any] = [NSAttributedString.Key.backgroundColor.rawValue: UIColor.codeBackground]
-        codeAttributes[NSAttributedString.Key.foregroundColor.rawValue] = UIColor.code
-        codeAttributes[NSAttributedString.Key.font.rawValue] = MessageTextFontAttributes.monoSpacedFont
+        var codeAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: UIColor.codeBackground]
+        codeAttributes[.foregroundColor] = UIColor.code
+        codeAttributes[.font] = MessageTextFontAttributes.monoSpacedFont
 
         parser.inlineCodeAttributes = codeAttributes
         parser.codeAttributes = codeAttributes
 
-        parser.strongAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.boldFont]
-        parser.italicAttributes = [NSAttributedString.Key.font.rawValue: MessageTextFontAttributes.italicFont]
-        parser.strikeAttributes = [NSAttributedString.Key.strikethroughStyle.rawValue: NSNumber(value: NSUnderlineStyle.single.rawValue)]
-        parser.linkAttributes = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.darkGray]
+        parser.strongAttributes = [.font: MessageTextFontAttributes.boldFont]
+        parser.italicAttributes = [.font: MessageTextFontAttributes.italicFont]
+        parser.strikeAttributes = [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]
+        parser.linkAttributes = [.foregroundColor: UIColor.darkGray]
 
         parser.downloadImage = { urlString, completion in
             guard let url = URL(string: urlString) else { return }
@@ -129,10 +129,10 @@ fileprivate extension RCMarkdownParser {
         }
 
         parser.headerAttributes = [
-            1: [NSAttributedString.Key.font.rawValue: UIFont.boldSystemFont(ofSize: 26)],
-            2: [NSAttributedString.Key.font.rawValue: UIFont.boldSystemFont(ofSize: 24)],
-            3: [NSAttributedString.Key.font.rawValue: UIFont.boldSystemFont(ofSize: 18)],
-            4: [NSAttributedString.Key.font.rawValue: UIFont.boldSystemFont(ofSize: 16)]
+            1: [.font: UIFont.boldSystemFont(ofSize: 26)],
+            2: [.font: UIFont.boldSystemFont(ofSize: 24)],
+            3: [.font: UIFont.boldSystemFont(ofSize: 18)],
+            4: [.font: UIFont.boldSystemFont(ofSize: 16)]
         ]
 
         return parser

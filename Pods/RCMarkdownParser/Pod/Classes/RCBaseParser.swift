@@ -9,7 +9,7 @@ open class RCBaseParser {
         var block: RCMarkdownParserMatchBlock
     }
     
-    open var defaultAttributes = [String: Any]()
+    open var defaultAttributes = [NSAttributedString.Key: Any]()
     
     fileprivate var parsingPairs = [RCExpressionBlockPair]()
     
@@ -17,7 +17,7 @@ open class RCBaseParser {
         return attributedStringFromMarkdown(markdown, attributes: defaultAttributes)
     }
     
-    open func attributedStringFromMarkdown(_ markdown: String, attributes: [String: Any]?) -> NSAttributedString? {
+    open func attributedStringFromMarkdown(_ markdown: String, attributes: [NSAttributedString.Key: Any]?) -> NSAttributedString? {
         return attributedStringFromAttributedMarkdownString(NSAttributedString(string: markdown, attributes: attributes))
     }
     

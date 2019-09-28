@@ -62,6 +62,7 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
         if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
             ImageManager.loadImage(with: url, into: avatar)
+            avatar.accessibilityLabel = model.name
             ImageManager.loadImage(with: url, into: background)
         }
 

@@ -135,6 +135,7 @@
 "auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
 "auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
 "auth.login.agree_and" = "και";
+"auth.login.legal" = "Legal"; // TODO
 "auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
 "auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
 

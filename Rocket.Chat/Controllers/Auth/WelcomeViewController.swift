@@ -11,7 +11,7 @@ import SafariServices
 
 final class WelcomeViewController: BaseViewController {
 
-    internal var joinCommunitySegue = "JoinCommunity"
+    internal let joinCommunitySegue = "JoinCommunity"
     internal let communityServerURL = "\nopen.rocket.chat"
     internal let createServerURL = "https://cloud.rocket.chat/trial"
 
@@ -79,6 +79,7 @@ final class WelcomeViewController: BaseViewController {
             )
 
             joinCommunityButton.setAttributedTitle(combinedString, for: .normal)
+            joinCommunityButton.accessibilityLabel = "\(title.string), \(serverURL.string)"
         }
     }
 
