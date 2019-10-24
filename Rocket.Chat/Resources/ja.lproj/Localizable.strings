@@ -307,7 +307,7 @@
 // Chat Information
 "chat.info.title" = "情報";
 "chat.info.item.topic" = "トピック";
-"chat.info.item.no_topic" = "トッピックはありません";
+"chat.info.item.no_topic" = "トピックはありません";
 "chat.info.item.description" = "説明";
 "chat.info.item.no_description" = "説明はありません";
 "chat.info.item.announcement" = "Announcement"; // TODO
