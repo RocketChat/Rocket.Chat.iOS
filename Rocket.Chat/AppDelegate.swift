@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationWindow?.rootViewController = NotificationViewController.shared
         notificationWindow?.windowLevel = UIWindow.Level.alert
         notificationWindow?.makeKeyAndVisible()
+        NotificationViewController.shared.notificationViewIsHidden = true
         notificationWindow?.isHidden = true
     }
 
