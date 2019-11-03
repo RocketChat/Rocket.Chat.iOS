@@ -62,7 +62,6 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
 
         if let url = model.avatarUrl, let avatar = avatarImageView, let background = backgroundImageView {
             ImageManager.loadImage(with: url, into: avatar)
-            avatar.accessibilityLabel = model.name
             ImageManager.loadImage(with: url, into: background)
         }
 
@@ -90,9 +89,10 @@ class UserDetailViewController: BaseViewController, StoryboardInitializable {
     }
 
     @IBAction func videoDidPress(_ sender: UIButton) {
-        if let subscription = Subscription.find(name: model.username, subscriptionType: [.directMessage]) {
-            AppManager.openVideoCall(room: subscription)
-        }
+        return
+//        if let subscription = Subscription.find(name: model.username, subscriptionType: [.directMessage]) {
+//            AppManager.openVideoCall(room: subscription)
+//        }
     }
 }
 

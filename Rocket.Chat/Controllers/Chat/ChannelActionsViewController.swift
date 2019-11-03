@@ -196,9 +196,10 @@ extension ChannelActionsViewController {
     }
 
     @objc func buttonVideoCallDidPressed(_ sender: UIButton) {
-        if let subscription = subscription {
-            AppManager.openVideoCall(room: subscription)
-        }
+        return
+//        if let subscription = subscription {
+//            AppManager.openVideoCall(room: subscription)
+//        }
     }
 
 }
