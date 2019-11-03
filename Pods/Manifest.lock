@@ -1,106 +1,120 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Crashlytics (3.11.1):
-    - Fabric (~> 1.8.1)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
   - DifferenceKit (1.1.3):
     - DifferenceKit/Core (= 1.1.3)
     - DifferenceKit/UIKitExtension (= 1.1.3)
   - DifferenceKit/Core (1.1.3)
   - DifferenceKit/UIKitExtension (1.1.3):
     - DifferenceKit/Core
-  - Fabric (1.8.2)
-  - Firebase/Core (5.12.0):
+  - Fabric (1.10.2)
+  - Firebase/Core (6.11.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.3.0)
-  - Firebase/CoreOnly (5.12.0):
-    - FirebaseCore (= 5.1.7)
-  - FirebaseAnalytics (5.3.0):
-    - FirebaseCore (~> 5.1)
-    - FirebaseInstanceID (~> 3.3)
-    - GoogleAppMeasurement (~> 5.3)
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
-    - nanopb (~> 0.3)
-  - FirebaseCore (5.1.7):
-    - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.3.0):
-    - FirebaseCore (~> 5.1)
-    - GoogleUtilities/Environment (~> 5.3)
-    - GoogleUtilities/UserDefaults (~> 5.3)
+    - FirebaseAnalytics (= 6.1.3)
+  - Firebase/CoreOnly (6.11.0):
+    - FirebaseCore (= 6.3.2)
+  - FirebaseAnalytics (6.1.3):
+    - FirebaseCore (~> 6.3)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.1.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3.901)
+  - FirebaseCore (6.3.2):
+    - FirebaseCoreDiagnostics (~> 1.0)
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnostics (1.1.1):
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleDataTransportCCTSupport (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+    - nanopb (~> 0.3.901)
+  - FirebaseCoreDiagnosticsInterop (1.0.0)
+  - FirebaseInstanceID (4.2.6):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
-  - GoogleAppMeasurement (5.3.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
-    - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.4):
+  - GoogleAppMeasurement (6.1.3):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3.901)
+  - GoogleDataTransport (3.0.1)
+  - GoogleDataTransportCCTSupport (1.2.1):
+    - GoogleDataTransport (~> 3.0)
+    - nanopb (~> 0.3.901)
+  - GoogleUtilities/AppDelegateSwizzler (6.3.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.4)
-  - GoogleUtilities/Logger (5.3.4):
+  - GoogleUtilities/Environment (6.3.1)
+  - GoogleUtilities/Logger (6.3.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.4):
+  - GoogleUtilities/MethodSwizzler (6.3.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.4):
+  - GoogleUtilities/Network (6.3.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.4)"
-  - GoogleUtilities/Reachability (5.3.4):
+  - "GoogleUtilities/NSData+zlib (6.3.1)"
+  - GoogleUtilities/Reachability (6.3.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.4):
+  - GoogleUtilities/UserDefaults (6.3.1):
     - GoogleUtilities/Logger
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.4.0)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
   - Nuke (7.6.3)
-  - Nuke-FLAnimatedImage-Plugin (6.0):
+  - Nuke-FLAnimatedImage-Plugin (6.1):
     - FLAnimatedImage (~> 1.0)
     - Nuke (~> 7.5)
-  - OAuthSwift (1.2.2)
-  - RCMarkdownParser (3.0.7)
-  - ReachabilitySwift (4.2.1)
-  - Realm (3.12.0):
-    - Realm/Headers (= 3.12.0)
-  - Realm/Headers (3.12.0)
-  - RealmSwift (3.12.0):
-    - Realm (= 3.12.0)
-  - RocketChatViewController (1.0.0):
-    - RocketChatViewController/Composer (= 1.0.0)
-    - RocketChatViewController/ViewController (= 1.0.0)
-  - RocketChatViewController/Composer (1.0.0)
-  - RocketChatViewController/ViewController (1.0.0):
-    - DifferenceKit (~> 1.0)
+  - OAuthSwift (2.0.0)
+  - RCMarkdownParser (3.0.6)
+  - ReachabilitySwift (5.0.0)
+  - Realm (3.20.0):
+    - Realm/Headers (= 3.20.0)
+  - Realm/Headers (3.20.0)
+  - RealmSwift (3.20.0):
+    - Realm (= 3.20.0)
+  - RocketChatViewController (1.0.1):
+    - RocketChatViewController/Composer (= 1.0.1)
+    - RocketChatViewController/ViewController (= 1.0.1)
+  - RocketChatViewController/Composer (1.0.1)
+  - RocketChatViewController/ViewController (1.0.1):
+    - DifferenceKit (~> 1.1)
   - semver (1.1.0)
   - SimpleImageViewer (1.2.0):
     - FLAnimatedImage
-  - Starscream (3.0.6)
-  - SwiftLint (0.27.0)
-  - SwiftyJSON (4.2.0)
-  - SwipeCellKit (2.6.0)
+  - Starscream (3.1.1)
+  - SwiftLint (0.36.0)
+  - SwiftyJSON (5.0.0)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
-  - DifferenceKit (~> 1.0)
+  - DifferenceKit/Core (~> 1.1.3)
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
   - MBProgressHUD (~> 1.1.0)
   - MobilePlayer (from `https://github.com/RocketChat/RCiOSMobilePlayer`)
-  - Nuke (~> 7.6)
+  - Nuke (~> 7.3)
   - Nuke-FLAnimatedImage-Plugin
   - OAuthSwift
-  - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
+  - RCMarkdownParser
   - ReachabilitySwift
   - RealmSwift
   - RocketChatViewController (from `https://github.com/RocketChat/RocketChatViewController`)
@@ -109,10 +123,10 @@ DEPENDENCIES:
   - Starscream (~> 3)
   - SwiftLint
   - SwiftyJSON
-  - SwipeCellKit
+  - SwipeCellKit (~> 2.7.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - 1PasswordExtension
     - Crashlytics
     - DifferenceKit
@@ -120,16 +134,21 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
     - FLAnimatedImage
     - FLEX
     - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - MBProgressHUD
     - nanopb
     - Nuke
     - Nuke-FLAnimatedImage-Plugin
     - OAuthSwift
+    - RCMarkdownParser
     - ReachabilitySwift
     - Realm
     - RealmSwift
@@ -142,8 +161,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   MobilePlayer:
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
-  RCMarkdownParser:
-    :git: https://github.com/RocketChat/RCMarkdownParser.git
   RocketChatViewController:
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
@@ -153,11 +170,8 @@ CHECKOUT OPTIONS:
   MobilePlayer:
     :commit: 7ecd958711875a302d3ccfcb2607488b6fbde11b
     :git: https://github.com/RocketChat/RCiOSMobilePlayer
-  RCMarkdownParser:
-    :commit: 7c4ec046817df378b694bebdbcfe3565869ce82e
-    :git: https://github.com/RocketChat/RCMarkdownParser.git
   RocketChatViewController:
-    :commit: ff8b2f080e05e10286f1d84304f0713375c3f952
+    :commit: 20b09477f1e15173c10b99a8b67e78b04102546c
     :git: https://github.com/RocketChat/RocketChatViewController
   SimpleImageViewer:
     :commit: 8222c338de0f285ca0c2d556c5d8dedd4a365b52
@@ -165,35 +179,39 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DifferenceKit: 5018791b6c1fc839921a3c171a0a539ace6ea60c
-  Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
-  Firebase: 9190018e296139d938b99521cde0c15a6e8d2946
-  FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
-  FirebaseCore: 027d350adc039aa5483357c6f56556f117c5170e
-  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Firebase: bc9cfc7a96c73268656d5aaab453ff1b4b530e0e
+  FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
+  FirebaseCore: beeff42c07c30ea94702471d99db2089b594fbbd
+  FirebaseCoreDiagnostics: af29e43048607588c050889d19204f4d7b758c9f
+  FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
+  FirebaseInstanceID: d0eafcd8bdbd3447cd694594734078c3e3e77d8b
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
-  GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
+  GoogleAppMeasurement: 434cc7be25e71dc04b8d0e3079125127b330e84a
+  GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
+  GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
+  GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 6c1df67588b247f80554ba60e67734215ab31a87
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
-  Nuke-FLAnimatedImage-Plugin: e4c39d13061a08ac0bdcb0cd7a23882f4a43f4a6
-  OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
-  RCMarkdownParser: f107c58b83065d001e20c988443e6eab9c0a1e26
-  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
-  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
-  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
-  RocketChatViewController: 8c9fa96502913d268bcecf6d15830f1ffd711e7b
+  Nuke-FLAnimatedImage-Plugin: bee60907311da45dd291463f41a176d50de68122
+  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
+  RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
+  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
+  RocketChatViewController: ab532fa2810a165dc4f8e79a337253c09434cce6
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftLint: fc9859e4e1752340664851f667bb1898b9c90114
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 5e8b4d7a4a0d585c2085855ac86f7b4bf26230b7
+PODFILE CHECKSUM: 073c49c07817379e9a38016e18fbd1c604474b9a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

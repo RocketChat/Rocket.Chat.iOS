@@ -391,3 +391,4 @@ open class RCMarkdownParser: RCBaseParser {
         return "\(char)"
     }
 }
+

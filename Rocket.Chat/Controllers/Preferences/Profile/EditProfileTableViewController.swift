@@ -46,11 +46,7 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         }
     }
 
-    @IBOutlet weak var avatarButton: UIButton! {
-    didSet {
-        avatarButton.accessibilityLabel = avatarButtonAccessibilityLabel
-        }
-    }
+    @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
         let avatarView = AvatarView()
@@ -221,7 +217,6 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(editingAvatarImage, for: .normal)
-            avatarButton.accessibilityLabel = avatarEditingButtonAccessibilityLabel
         }
 
         enableUserInteraction()
@@ -238,7 +233,6 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
 
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(nil, for: .normal)
-            avatarButton.accessibilityLabel = avatarButtonAccessibilityLabel
         }
 
         disableUserInteraction()
@@ -281,11 +275,6 @@ final class EditProfileTableViewController: BaseTableViewController, MediaPicker
         username.isEnabled = false
         email.isEnabled = false
     }
-
-    // MARK: Accessibility
-
-    var avatarButtonAccessibilityLabel: String? = VOLocalizedString("preferences.profile.edit.label")
-    var avatarEditingButtonAccessibilityLabel: String? = VOLocalizedString("preferences.profile.editing.label")
 
     // MARK: Actions
 

@@ -83,7 +83,7 @@ public class EditingView: UIView, ComposerLocalizable {
         clipsToBounds = true
         isHidden = true
 
-        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: nil, using: { [weak self] _ in
             self?.setNeedsLayout()
         })
 

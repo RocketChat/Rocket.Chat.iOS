@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import JitsiMeet
+//import JitsiMeet
 
 final class JitsiViewController: UIViewController {
 
     let viewModel = JitsiViewModel()
     let timer = Timer()
 
-    @IBOutlet weak var jitsiMeetView: JitsiMeetView?
+    @IBOutlet weak var jitsiMeetView: UIView?
 
     deinit {
         timer.invalidate()
@@ -35,21 +35,21 @@ final class JitsiViewController: UIViewController {
             self?.updateJitsiTimeout()
         }
 
-        jitsiMeetView?.delegate = self
-        jitsiMeetView?.loadURLObject([
-            "config": [
-                "startWithAudioMuted": false,
-                "startWithVideoMuted": true
-            ],
-            "context": [
-                "user": [
-                    "name": viewModel.userDisplayName,
-                    "avatar": viewModel.userAvatar
-                ],
-                "iss": "rocketchat-ios"
-            ],
-            "url": viewModel.videoCallURL
-        ])
+//        jitsiMeetView?.delegate = self
+//        jitsiMeetView?.loadURLObject([
+//            "config": [
+//                "startWithAudioMuted": false,
+//                "startWithVideoMuted": true
+//            ],
+//            "context": [
+//                "user": [
+//                    "name": viewModel.userDisplayName,
+//                    "avatar": viewModel.userAvatar
+//                ],
+//                "iss": "rocketchat-ios"
+//            ],
+//            "url": viewModel.videoCallURL
+//        ])
     }
 
     func updateJitsiTimeout() {
@@ -70,42 +70,42 @@ final class JitsiViewController: UIViewController {
 
 // MARK: JitsiMeetViewDelegate
 
-extension JitsiViewController: JitsiMeetViewDelegate {
-
-    func onJitsiMeetViewDelegateEvent(name: String, data: [AnyHashable: Any]) {
-        Log.debug("[\(#file):\(#line)] JitsiMeetViewDelegate \(name) \(data)")
-    }
-
-    func conferenceFailed(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_FAILED", data: data)
-        Log.debug("conference Failed log is : \(data)")
-    }
-
-    func conferenceJoined(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_JOINED", data: data)
-        Log.debug("conference Joined log is : \(data)")
-    }
-
-    func conferenceLeft(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_LEFT", data: data)
-        Log.debug("conference Left log is : \(data)")
-        close()
-    }
-
-    func conferenceWillJoin(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_WILL_JOIN", data: data)
-        Log.debug("conference Join log is : \(data)")
-    }
-
-    func conferenceWillLeave(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_WILL_LEAVE", data: data)
-        Log.debug("conference Leave log is : \(data)")
-        close()
-    }
-
-    func loadConfigError(_ data: [AnyHashable: Any]) {
-        onJitsiMeetViewDelegateEvent(name: "LOAD_CONFIG_ERROR", data: data)
-        Log.debug("conference Error log is : \(data)")
-    }
-
-}
+//extension JitsiViewController: JitsiMeetViewDelegate {
+//
+//    func onJitsiMeetViewDelegateEvent(name: String, data: [AnyHashable: Any]) {
+//        Log.debug("[\(#file):\(#line)] JitsiMeetViewDelegate \(name) \(data)")
+//    }
+//
+//    func conferenceFailed(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_FAILED", data: data)
+//        Log.debug("conference Failed log is : \(data)")
+//    }
+//
+//    func conferenceJoined(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_JOINED", data: data)
+//        Log.debug("conference Joined log is : \(data)")
+//    }
+//
+//    func conferenceLeft(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_LEFT", data: data)
+//        Log.debug("conference Left log is : \(data)")
+//        close()
+//    }
+//
+//    func conferenceWillJoin(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_WILL_JOIN", data: data)
+//        Log.debug("conference Join log is : \(data)")
+//    }
+//
+//    func conferenceWillLeave(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_WILL_LEAVE", data: data)
+//        Log.debug("conference Leave log is : \(data)")
+//        close()
+//    }
+//
+//    func loadConfigError(_ data: [AnyHashable: Any]) {
+//        onJitsiMeetViewDelegateEvent(name: "LOAD_CONFIG_ERROR", data: data)
+//        Log.debug("conference Error log is : \(data)")
+//    }
+//
+//}

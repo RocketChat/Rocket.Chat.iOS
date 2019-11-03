@@ -54,9 +54,17 @@ final class OAuthManager {
         oauthSwift.authorizeURLHandler = handler
         self.oauthSwift = oauthSwift
 
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
-            failure()
-        }) != nil
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state) { result in
+            switch result {
+            case .success(_, _, _): break
+//                self.showTokenAlert(name: serviceParameters["name"], credential: credential)
+            case .failure(_):
+                failure()
+            }
+        } != nil
+//        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
+//            failure()
+//        }) != nil
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {

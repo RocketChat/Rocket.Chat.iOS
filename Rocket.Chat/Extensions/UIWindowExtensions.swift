@@ -40,10 +40,14 @@ extension UIWindow {
             newRootViewController.setNeedsStatusBarAppearanceUpdate()
         }
 
-        /// The presenting view controllers view doesn't get removed from the window as its currently transistioning and presenting a view controller
-        if let transitionViewClass = NSClassFromString("UITransitionView") {
-            for subview in subviews where subview.isKind(of: transitionViewClass) {
-                subview.removeFromSuperview()
+        if #available(iOS 13.0, *) {
+
+        } else {
+            /// The presenting view controllers view doesn't get removed from the window as its currently transistioning and presenting a view controller
+            if let transitionViewClass = NSClassFromString("UITransitionView") {
+                for subview in subviews where subview.isKind(of: transitionViewClass) {
+                    subview.removeFromSuperview()
+                }
             }
         }
 

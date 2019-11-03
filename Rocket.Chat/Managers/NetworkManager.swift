@@ -16,14 +16,18 @@ final class NetworkManager {
 
     static var isConnected: Bool {
         if self.shared.reachability != nil {
-            self.shared.reachability = Reachability()
+            do {
+                self.shared.reachability = try Reachability()
+            } catch _ {}
         }
 
         return self.shared.reachability?.connection != .none
     }
 
     func start() {
-        reachability = Reachability()
+        do {
+            reachability = try Reachability()
+        } catch _ {}
 
         reachability?.whenReachable = { reachability in
             if !SocketManager.isConnected() {

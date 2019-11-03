@@ -258,7 +258,7 @@ public:
     size_t find_by_source_ndx(size_t source_ndx) const noexcept;
 
     // Conversion
-    void to_json(std::ostream&) const;
+    void to_json(std::ostream&, size_t link_depth = 0, std::map<std::string, std::string>* renames = nullptr) const;
     void to_string(std::ostream&, size_t limit = 500) const;
     void row_to_string(size_t row_ndx, std::ostream&) const;
 
@@ -301,6 +301,8 @@ public:
     void distinct(size_t column);
     void distinct(DistinctDescriptor columns);
     void limit(LimitDescriptor limit);
+    void include(IncludeDescriptor include_paths);
+    IncludeDescriptor get_include_descriptors();
 
     // Replace the order of sort and distinct operations, bypassing manually
     // calling sort and distinct. This is a convenience method for bindings.

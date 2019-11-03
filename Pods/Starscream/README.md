@@ -311,6 +311,29 @@ To integrate Starscream into your Xcode project using Carthage, specify it in yo
 github "daltoniam/Starscream" >= 3.0.2
 ```
 
+### Accio
+
+Check out the [Accio](https://github.com/JamitLabs/Accio) docs on how to add a install. 
+
+Add the following to your Package.swift:
+
+```swift
+.package(url: "https://github.com/daltoniam/Starscream.git", .upToNextMajor(from: "3.1.0")),
+```
+
+Next, add `Starscream` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "Starscream",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ### Rogue
 
 First see the [installation docs](https://github.com/acmacalister/Rogue) for how to install Rogue.
@@ -384,6 +407,10 @@ func  websocketHttpUpgrade(socket: WebSocketClient, response: CFHTTPMessage) {
 	print("the http response has returned.")
 }
 ```
+
+## Swift versions
+
+* Swift 4.2 - 3.0.6
 
 ## KNOWN ISSUES
 - WatchOS does not have the the CFNetwork String constants to modify the stream's SSL behavior. It will be the default Foundation SSL behavior. This means watchOS CANNOT use `SSLCiphers`,  `disableSSLCertValidation`, or SSL pinning. All these values set on watchOS will do nothing. 
