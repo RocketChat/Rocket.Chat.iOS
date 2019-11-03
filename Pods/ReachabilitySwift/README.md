@@ -2,7 +2,7 @@
 
 Reachability.swift is a replacement for Apple's Reachability sample, re-written in Swift with closures.
 
-It is compatible with **iOS** (8.0 - 11.0), **OSX** (10.9 - 10.13) and **tvOS** (9.0 - 11.0)
+It is compatible with **iOS** (8.0 - 12.0), **OSX** (10.9 - 10.14) and **tvOS** (9.0 - 12.0)
 
 Inspired by https://github.com/tonymillion/Reachability
 
@@ -19,46 +19,6 @@ And don't forget to **★** the repo. This increases its visibility and encourag
 
 Thanks
 Ash
-
-# IMPORTANT
-
-## Version 4.0 breaking changes
-
-### CocoaPods:
-
-If you're adding **Reachability.swift** using CocoaPods, note that the framework name has changed from `ReachabilitySwift` to `Reachability` (for consistency with Carthage)
-
-### Previously:
-
-```swift
-enum NetworkStatus {
-    case notReachable, reachableViaWiFi, reachableViaWWAN
-}
-var currentReachabilityStatus: NetworkStatus
-```
-
-### Now:
-
-```swift
-enum Connection {
-    case none, wifi, cellular
-}
-var connection: Connection
-```
-
-### Other changes:
-
-- `reachableOnWWAN` has been renamed to `allowsCellularConnection`
-
-- `reachability.currentReachabilityString` has been deprecated. Use `"\(reachability.connection)"` instead.
-
-- `isReachable` has been deprecated. Use `connection != .none` instead.
-
-- `isReachableViaWWAN` has been deprecated. Use `connection == .cellular` instead.
-
-- The notification for reachability changes has been renamed from `ReachabilityChangedNotification` to `Notification.Name.reachabilityChanged`
-
-- All closure callbacks and notification are fired on the main queue (including when `startNotifier()` is called)
 
 
 ## Got a problem?
@@ -177,7 +137,7 @@ and
       print("Reachable via WiFi")
   case .cellular:
       print("Reachable via Cellular")
-  case .none:
+  case .unavailable:
     print("Network not reachable")
   }
 }

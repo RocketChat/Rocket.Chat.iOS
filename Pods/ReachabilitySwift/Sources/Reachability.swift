@@ -29,18 +29,18 @@ import SystemConfiguration
 import Foundation
 
 public enum ReachabilityError: Error {
-    case FailedToCreateWithAddress(sockaddr_in)
-    case FailedToCreateWithHostname(String)
-    case UnableToSetCallback
-    case UnableToSetDispatchQueue
-    case UnableToGetInitialFlags
+    case failedToCreateWithAddress(sockaddr, Int32)
+    case failedToCreateWithHostname(String, Int32)
+    case unableToSetCallback(Int32)
+    case unableToSetDispatchQueue(Int32)
+    case unableToGetFlags(Int32)
 }
 
 @available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
 public let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
 
 public extension Notification.Name {
-    public static let reachabilityChanged = Notification.Name("reachabilityChanged")
+    static let reachabilityChanged = Notification.Name("reachabilityChanged")
 }
 
 public class Reachability {
@@ -61,12 +61,15 @@ public class Reachability {
     }
 
     public enum Connection: CustomStringConvertible {
-        case none, wifi, cellular
+        @available(*, deprecated, renamed: "unavailable")
+        case none
+        case unavailable, wifi, cellular
         public var description: String {
             switch self {
             case .cellular: return "Cellular"
             case .wifi: return "WiFi"
-            case .none: return "No Connection"
+            case .unavailable: return "No Connection"
+            case .none: return "unavailable"
             }
         }
     }
@@ -74,7 +77,7 @@ public class Reachability {
     public var whenReachable: NetworkReachable?
     public var whenUnreachable: NetworkUnreachable?
 
-    @available(*, deprecated: 4.0, renamed: "allowsCellularConnection")
+    @available(*, deprecated, renamed: "allowsCellularConnection")
     public let reachableOnWWAN: Bool = true
 
     /// Set to `false` to force Reachability.connection to .none when on cellular connection (default value `true`)
@@ -83,7 +86,7 @@ public class Reachability {
     // The notification center on which "reachability changed" events are being posted
     public var notificationCenter: NotificationCenter = NotificationCenter.default
 
-    @available(*, deprecated: 4.0, renamed: "connection.description")
+    @available(*, deprecated, renamed: "connection.description")
     public var currentReachabilityString: String {
         return "\(connection)"
     }
@@ -99,8 +102,9 @@ public class Reachability {
         }
         
         switch flags?.connection {
-        case .none?, nil: return .none
-        case .cellular?: return allowsCellularConnection ? .cellular : .none
+        case .unavailable?, nil: return .unavailable
+        case .none?: return .unavailable
+        case .cellular?: return allowsCellularConnection ? .cellular : .unavailable
         case .wifi?: return .wifi
         }
     }
@@ -113,35 +117,49 @@ public class Reachability {
         #endif
     }()
 
-    fileprivate var notifierRunning = false
+    fileprivate(set) var notifierRunning = false
     fileprivate let reachabilityRef: SCNetworkReachability
     fileprivate let reachabilitySerialQueue: DispatchQueue
+    fileprivate let notificationQueue: DispatchQueue?
     fileprivate(set) var flags: SCNetworkReachabilityFlags? {
         didSet {
             guard flags != oldValue else { return }
-            reachabilityChanged()
+            notifyReachabilityChanged()
         }
     }
 
-    required public init(reachabilityRef: SCNetworkReachability, queueQoS: DispatchQoS = .default, targetQueue: DispatchQueue? = nil) {
+    required public init(reachabilityRef: SCNetworkReachability,
+                         queueQoS: DispatchQoS = .default,
+                         targetQueue: DispatchQueue? = nil,
+                         notificationQueue: DispatchQueue? = .main) {
         self.allowsCellularConnection = true
         self.reachabilityRef = reachabilityRef
         self.reachabilitySerialQueue = DispatchQueue(label: "uk.co.ashleymills.reachability", qos: queueQoS, target: targetQueue)
+        self.notificationQueue = notificationQueue
     }
 
-    public convenience init?(hostname: String, queueQoS: DispatchQoS = .default, targetQueue: DispatchQueue? = nil) {
-        guard let ref = SCNetworkReachabilityCreateWithName(nil, hostname) else { return nil }
-        self.init(reachabilityRef: ref, queueQoS: queueQoS, targetQueue: targetQueue)
+    public convenience init(hostname: String,
+                            queueQoS: DispatchQoS = .default,
+                            targetQueue: DispatchQueue? = nil,
+                            notificationQueue: DispatchQueue? = .main) throws {
+        guard let ref = SCNetworkReachabilityCreateWithName(nil, hostname) else {
+            throw ReachabilityError.failedToCreateWithHostname(hostname, SCError())
+        }
+        self.init(reachabilityRef: ref, queueQoS: queueQoS, targetQueue: targetQueue, notificationQueue: notificationQueue)
     }
 
-    public convenience init?(queueQoS: DispatchQoS = .default, targetQueue: DispatchQueue? = nil) {
+    public convenience init(queueQoS: DispatchQoS = .default,
+                            targetQueue: DispatchQueue? = nil,
+                            notificationQueue: DispatchQueue? = .main) throws {
         var zeroAddress = sockaddr()
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
 
-        guard let ref = SCNetworkReachabilityCreateWithAddress(nil, &zeroAddress) else { return nil }
+        guard let ref = SCNetworkReachabilityCreateWithAddress(nil, &zeroAddress) else {
+            throw ReachabilityError.failedToCreateWithAddress(zeroAddress, SCError())
+        }
 
-        self.init(reachabilityRef: ref, queueQoS: queueQoS, targetQueue: targetQueue)
+        self.init(reachabilityRef: ref, queueQoS: queueQoS, targetQueue: targetQueue, notificationQueue: notificationQueue)
     }
 
     deinit {
@@ -158,20 +176,46 @@ public extension Reachability {
         let callback: SCNetworkReachabilityCallBack = { (reachability, flags, info) in
             guard let info = info else { return }
 
-            let reachability = Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue()
-            reachability.flags = flags
+            // `weakifiedReachability` is guaranteed to exist by virtue of our
+            // retain/release callbacks which we provided to the `SCNetworkReachabilityContext`.
+            let weakifiedReachability = Unmanaged<ReachabilityWeakifier>.fromOpaque(info).takeUnretainedValue()
+
+            // The weak `reachability` _may_ no longer exist if the `Reachability`
+            // object has since been deallocated but a callback was already in flight.
+            weakifiedReachability.reachability?.flags = flags
         }
 
-        var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
-        context.info = UnsafeMutableRawPointer(Unmanaged<Reachability>.passUnretained(self).toOpaque())
+        let weakifiedReachability = ReachabilityWeakifier(reachability: self)
+        let opaqueWeakifiedReachability = Unmanaged<ReachabilityWeakifier>.passUnretained(weakifiedReachability).toOpaque()
+
+        var context = SCNetworkReachabilityContext(
+            version: 0,
+            info: UnsafeMutableRawPointer(opaqueWeakifiedReachability),
+            retain: { (info: UnsafeRawPointer) -> UnsafeRawPointer in
+                let unmanagedWeakifiedReachability = Unmanaged<ReachabilityWeakifier>.fromOpaque(info)
+                _ = unmanagedWeakifiedReachability.retain()
+                return UnsafeRawPointer(unmanagedWeakifiedReachability.toOpaque())
+            },
+            release: { (info: UnsafeRawPointer) -> Void in
+                let unmanagedWeakifiedReachability = Unmanaged<ReachabilityWeakifier>.fromOpaque(info)
+                unmanagedWeakifiedReachability.release()
+            },
+            copyDescription: { (info: UnsafeRawPointer) -> Unmanaged<CFString> in
+                let unmanagedWeakifiedReachability = Unmanaged<ReachabilityWeakifier>.fromOpaque(info)
+                let weakifiedReachability = unmanagedWeakifiedReachability.takeUnretainedValue()
+                let description = weakifiedReachability.reachability?.description ?? "nil"
+                return Unmanaged.passRetained(description as CFString)
+            }
+        )
+
         if !SCNetworkReachabilitySetCallback(reachabilityRef, callback, &context) {
             stopNotifier()
-            throw ReachabilityError.UnableToSetCallback
+            throw ReachabilityError.unableToSetCallback(SCError())
         }
 
         if !SCNetworkReachabilitySetDispatchQueue(reachabilityRef, reachabilitySerialQueue) {
             stopNotifier()
-            throw ReachabilityError.UnableToSetDispatchQueue
+            throw ReachabilityError.unableToSetDispatchQueue(SCError())
         }
 
         // Perform an initial check
@@ -188,35 +232,24 @@ public extension Reachability {
     }
 
     // MARK: - *** Connection test methods ***
-    @available(*, deprecated: 4.0, message: "Please use `connection != .none`")
+    @available(*, deprecated, message: "Please use `connection != .none`")
     var isReachable: Bool {
-        return connection != .none
+        return connection != .unavailable
     }
 
-    @available(*, deprecated: 4.0, message: "Please use `connection == .cellular`")
+    @available(*, deprecated, message: "Please use `connection == .cellular`")
     var isReachableViaWWAN: Bool {
         // Check we're not on the simulator, we're REACHABLE and check we're on WWAN
         return connection == .cellular
     }
 
-    @available(*, deprecated: 4.0, message: "Please use `connection == .wifi`")
+   @available(*, deprecated, message: "Please use `connection == .wifi`")
     var isReachableViaWiFi: Bool {
         return connection == .wifi
     }
 
     var description: String {
-        guard let flags = flags else { return "unavailable flags" }
-        let W = isRunningOnDevice ? (flags.isOnWWANFlagSet ? "W" : "-") : "X"
-        let R = flags.isReachableFlagSet ? "R" : "-"
-        let c = flags.isConnectionRequiredFlagSet ? "c" : "-"
-        let t = flags.isTransientConnectionFlagSet ? "t" : "-"
-        let i = flags.isInterventionRequiredFlagSet ? "i" : "-"
-        let C = flags.isConnectionOnTrafficFlagSet ? "C" : "-"
-        let D = flags.isConnectionOnDemandFlagSet ? "D" : "-"
-        let l = flags.isLocalAddressFlagSet ? "l" : "-"
-        let d = flags.isDirectFlagSet ? "d" : "-"
-
-        return "\(W)\(R) \(c)\(t)\(i)\(C)\(D)\(l)\(d)"
+        return flags?.description ?? "unavailable flags"
     }
 }
 
@@ -227,21 +260,23 @@ fileprivate extension Reachability {
             var flags = SCNetworkReachabilityFlags()
             if !SCNetworkReachabilityGetFlags(self.reachabilityRef, &flags) {
                 self.stopNotifier()
-                throw ReachabilityError.UnableToGetInitialFlags
+                throw ReachabilityError.unableToGetFlags(SCError())
             }
             
             self.flags = flags
         }
     }
     
-    func reachabilityChanged() {
-        let block = connection != .none ? whenReachable : whenUnreachable
 
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            block?(strongSelf)
-            strongSelf.notificationCenter.post(name: .reachabilityChanged, object: strongSelf)
+    func notifyReachabilityChanged() {
+        let notify = { [weak self] in
+            guard let self = self else { return }
+            self.connection != .unavailable ? self.whenReachable?(self) : self.whenUnreachable?(self)
+            self.notificationCenter.post(name: .reachabilityChanged, object: self)
         }
+
+        // notify on the configured `notificationQueue`, or the caller's (i.e. `reachabilitySerialQueue`)
+        notificationQueue?.async(execute: notify) ?? notify()
     }
 }
 
@@ -250,13 +285,13 @@ extension SCNetworkReachabilityFlags {
     typealias Connection = Reachability.Connection
 
     var connection: Connection {
-        guard isReachableFlagSet else { return .none }
+        guard isReachableFlagSet else { return .unavailable }
 
         // If we're reachable, but not on an iOS device (i.e. simulator), we must be on WiFi
         #if targetEnvironment(simulator)
         return .wifi
         #else
-        var connection = Connection.none
+        var connection = Connection.unavailable
 
         if !isConnectionRequiredFlagSet {
             connection = .wifi
@@ -312,5 +347,60 @@ extension SCNetworkReachabilityFlags {
     }
     var isConnectionRequiredAndTransientFlagSet: Bool {
         return intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]
+    }
+
+    var description: String {
+        let W = isOnWWANFlagSet ? "W" : "-"
+        let R = isReachableFlagSet ? "R" : "-"
+        let c = isConnectionRequiredFlagSet ? "c" : "-"
+        let t = isTransientConnectionFlagSet ? "t" : "-"
+        let i = isInterventionRequiredFlagSet ? "i" : "-"
+        let C = isConnectionOnTrafficFlagSet ? "C" : "-"
+        let D = isConnectionOnDemandFlagSet ? "D" : "-"
+        let l = isLocalAddressFlagSet ? "l" : "-"
+        let d = isDirectFlagSet ? "d" : "-"
+
+        return "\(W)\(R) \(c)\(t)\(i)\(C)\(D)\(l)\(d)"
+    }
+}
+
+/**
+ `ReachabilityWeakifier` weakly wraps the `Reachability` class
+ in order to break retain cycles when interacting with CoreFoundation.
+
+ CoreFoundation callbacks expect a pair of retain/release whenever an
+ opaque `info` parameter is provided. These callbacks exist to guard
+ against memory management race conditions when invoking the callbacks.
+
+ #### Race Condition
+
+ If we passed `SCNetworkReachabilitySetCallback` a direct reference to our
+ `Reachability` class without also providing corresponding retain/release
+ callbacks, then a race condition can lead to crashes when:
+ - `Reachability` is deallocated on thread X
+ - A `SCNetworkReachability` callback(s) is already in flight on thread Y
+
+ #### Retain Cycle
+
+ If we pass `Reachability` to CoreFoundtion while also providing retain/
+ release callbacks, we would create a retain cycle once CoreFoundation
+ retains our `Reachability` class. This fixes the crashes and his how
+ CoreFoundation expects the API to be used, but doesn't play nicely with
+ Swift/ARC. This cycle would only be broken after manually calling
+ `stopNotifier()` — `deinit` would never be called.
+
+ #### ReachabilityWeakifier
+
+ By providing both retain/release callbacks and wrapping `Reachability` in
+ a weak wrapper, we:
+ - interact correctly with CoreFoundation, thereby avoiding a crash.
+ See "Memory Management Programming Guide for Core Foundation".
+ - don't alter the public API of `Reachability.swift` in any way
+ - still allow for automatic stopping of the notifier on `deinit`.
+ */
+private class ReachabilityWeakifier {
+    weak var reachability: Reachability?
+    init(reachability: Reachability) {
+        self.reachability = reachability
     }
 }

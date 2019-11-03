@@ -17,7 +17,7 @@
 #include <asl.h>
 
 #import <GoogleUtilities/GULAppEnvironmentUtil.h>
-#import "Public/GULLoggerLevel.h"
+#import <GoogleUtilities/GULLoggerLevel.h>
 
 /// ASL client facility name used by GULLogger.
 const char *kGULLoggerASLClientFacilityName = "com.google.utilities.logger";
@@ -72,8 +72,9 @@ void GULLoggerInitializeASL(void) {
     dispatch_set_target_queue(sGULClientQueue,
                               dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
 #ifdef DEBUG
-    sMessageCodeRegex =
-        [NSRegularExpression regularExpressionWithPattern:kMessageCodePattern options:0 error:NULL];
+    sMessageCodeRegex = [NSRegularExpression regularExpressionWithPattern:kMessageCodePattern
+                                                                  options:0
+                                                                    error:NULL];
 #endif
   });
 }
@@ -155,14 +156,20 @@ void GULLogBasic(GULLoggerLevel level,
 #ifdef DEBUG
   NSCAssert(messageCode.length == 11, @"Incorrect message code length.");
   NSRange messageCodeRange = NSMakeRange(0, messageCode.length);
-  NSUInteger numberOfMatches =
-      [sMessageCodeRegex numberOfMatchesInString:messageCode options:0 range:messageCodeRange];
+  NSUInteger numberOfMatches = [sMessageCodeRegex numberOfMatchesInString:messageCode
+                                                                  options:0
+                                                                    range:messageCodeRange];
   NSCAssert(numberOfMatches == 1, @"Incorrect message code format.");
 #endif
-  NSString *logMsg = [[NSString alloc] initWithFormat:message arguments:args_ptr];
+  NSString *logMsg;
+  if (args_ptr == NULL) {
+    logMsg = message;
+  } else {
+    logMsg = [[NSString alloc] initWithFormat:message arguments:args_ptr];
+  }
   logMsg = [NSString stringWithFormat:@"%s - %@[%@] %@", sVersion, service, messageCode, logMsg];
   dispatch_async(sGULClientQueue, ^{
-    asl_log(sGULLoggerClient, NULL, level, "%s", logMsg.UTF8String);
+    asl_log(sGULLoggerClient, NULL, (int)level, "%s", logMsg.UTF8String);
   });
 }
 #pragma clang diagnostic pop

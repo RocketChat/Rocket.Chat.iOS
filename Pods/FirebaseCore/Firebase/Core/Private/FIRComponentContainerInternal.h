@@ -31,8 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// protocol wasn't registered, or if the instance couldn't instantiate for the provided app.
 - (nullable id)instanceForProtocol:(Protocol *)protocol NS_SWIFT_NAME(instance(for:));
 
+/// Instantiates all the components that have registered as "eager" after initialization.
+- (void)instantiateEagerComponents;
+
 /// Remove all of the cached instances stored and allow them to clean up after themselves.
 - (void)removeAllCachedInstances;
+
+/// Register a class to provide components for the interoperability system. The class should conform
+/// to `FIRComponentRegistrant` and provide an array of `FIRComponent` objects.
++ (void)registerAsComponentRegistrant:(Class<FIRLibrary>)klass;
 
 @end
 

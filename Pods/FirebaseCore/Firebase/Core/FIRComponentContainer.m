@@ -18,7 +18,7 @@
 
 #import "Private/FIRAppInternal.h"
 #import "Private/FIRComponent.h"
-#import "Private/FIRComponentRegistrant.h"
+#import "Private/FIRLibrary.h"
 #import "Private/FIRLogger.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,49 +32,36 @@ NS_ASSUME_NONNULL_BEGIN
 /// Cached instances of components that requested to be cached.
 @property(nonatomic, strong) NSMutableDictionary<NSString *, id> *cachedInstances;
 
+/// Protocols of components that have requested to be eagerly instantiated.
+@property(nonatomic, strong, nullable) NSMutableArray<Protocol *> *eagerProtocolsToInstantiate;
+
 @end
 
 @implementation FIRComponentContainer
 
 // Collection of all classes that register to provide components.
-static NSMutableSet<Class> *gFIRComponentRegistrants;
+static NSMutableSet<Class> *sFIRComponentRegistrants;
 
 #pragma mark - Public Registration
 
-+ (void)registerAsComponentRegistrant:(Class)klass {
++ (void)registerAsComponentRegistrant:(Class<FIRLibrary>)klass {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    gFIRComponentRegistrants = [[NSMutableSet<Class> alloc] init];
+    sFIRComponentRegistrants = [[NSMutableSet<Class> alloc] init];
   });
 
-  [self registerAsComponentRegistrant:klass inSet:gFIRComponentRegistrants];
+  [self registerAsComponentRegistrant:klass inSet:sFIRComponentRegistrants];
 }
 
-+ (void)registerAsComponentRegistrant:(Class)klass inSet:(NSMutableSet<Class> *)allRegistrants {
-  // Validate the array to store the components is initialized.
-  if (!allRegistrants) {
-    FIRLogWarning(kFIRLoggerCore, @"I-COR000025",
-                  @"Attempted to store registered components in an empty set.");
-    return;
-  }
-
-  // Ensure the class given conforms to the proper protocol.
-  if (![klass conformsToProtocol:@protocol(FIRComponentRegistrant)] ||
-      ![klass respondsToSelector:@selector(componentsToRegister)]) {
-    [NSException raise:NSInvalidArgumentException
-                format:
-                    @"Class %@ attempted to register components, but it does not conform to "
-                    @"`FIRComponentRegistrant` or provide a `componentsToRegister:` method.",
-                    klass];
-  }
-
++ (void)registerAsComponentRegistrant:(Class<FIRLibrary>)klass
+                                inSet:(NSMutableSet<Class> *)allRegistrants {
   [allRegistrants addObject:klass];
 }
 
 #pragma mark - Internal Initialization
 
 - (instancetype)initWithApp:(FIRApp *)app {
-  return [self initWithApp:app registrants:gFIRComponentRegistrants];
+  return [self initWithApp:app registrants:sFIRComponentRegistrants];
 }
 
 - (instancetype)initWithApp:(FIRApp *)app registrants:(NSMutableSet<Class> *)allRegistrants {
@@ -90,8 +77,11 @@ static NSMutableSet<Class> *gFIRComponentRegistrants;
 }
 
 - (void)populateComponentsFromRegisteredClasses:(NSSet<Class> *)classes forApp:(FIRApp *)app {
+  // Keep track of any components that need to eagerly instantiate after all components are added.
+  self.eagerProtocolsToInstantiate = [[NSMutableArray alloc] init];
+
   // Loop through the verified component registrants and populate the components array.
-  for (Class<FIRComponentRegistrant> klass in classes) {
+  for (Class<FIRLibrary> klass in classes) {
     // Loop through all the components being registered and store them as appropriate.
     // Classes which do not provide functionality should use a dummy FIRComponentRegistrant
     // protocol.
@@ -108,14 +98,16 @@ static NSMutableSet<Class> *gFIRComponentRegistrants;
       // Store the creation block for later usage.
       self.components[protocolName] = component.creationBlock;
 
-      // Instantiate the
+      // Queue any protocols that should be eagerly instantiated. Don't instantiate them yet
+      // because they could depend on other components that haven't been added to the components
+      // array yet.
       BOOL shouldInstantiateEager =
           (component.instantiationTiming == FIRInstantiationTimingAlwaysEager);
       BOOL shouldInstantiateDefaultEager =
           (component.instantiationTiming == FIRInstantiationTimingEagerInDefaultApp &&
            [app isDefaultApp]);
       if (shouldInstantiateEager || shouldInstantiateDefaultEager) {
-        [self instantiateInstanceForProtocol:component.protocol withBlock:component.creationBlock];
+        [self.eagerProtocolsToInstantiate addObject:component.protocol];
       }
     }
   }
@@ -123,11 +115,28 @@ static NSMutableSet<Class> *gFIRComponentRegistrants;
 
 #pragma mark - Instance Creation
 
+- (void)instantiateEagerComponents {
+  // After all components are registered, instantiate the ones that are requesting eager
+  // instantiation.
+  @synchronized(self) {
+    for (Protocol *protocol in self.eagerProtocolsToInstantiate) {
+      // Get an instance for the protocol, which will instantiate it since it couldn't have been
+      // cached yet. Ignore the instance coming back since we don't need it.
+      __unused id unusedInstance = [self instanceForProtocol:protocol];
+    }
+
+    // All eager instantiation is complete, clear the stored property now.
+    self.eagerProtocolsToInstantiate = nil;
+  }
+}
+
 /// Instantiate an instance of a class that conforms to the specified protocol.
 /// This will:
 ///   - Call the block to create an instance if possible,
 ///   - Validate that the instance returned conforms to the protocol it claims to,
 ///   - Cache the instance if the block requests it
+///
+/// Note that this method assumes the caller already has @sychronized on self.
 - (nullable id)instantiateInstanceForProtocol:(Protocol *)protocol
                                     withBlock:(FIRComponentCreationBlock)creationBlock {
   if (!creationBlock) {
@@ -163,41 +172,35 @@ static NSMutableSet<Class> *gFIRComponentRegistrants;
 - (nullable id)instanceForProtocol:(Protocol *)protocol {
   // Check if there is a cached instance, and return it if so.
   NSString *protocolName = NSStringFromProtocol(protocol);
-  id cachedInstance = self.cachedInstances[protocolName];
-  if (cachedInstance) {
-    return cachedInstance;
-  }
 
-  // Use the creation block to instantiate an instance and return it.
-  FIRComponentCreationBlock creationBlock = self.components[protocolName];
-  return [self instantiateInstanceForProtocol:protocol withBlock:creationBlock];
+  id cachedInstance;
+  @synchronized(self) {
+    cachedInstance = self.cachedInstances[protocolName];
+    if (!cachedInstance) {
+      // Use the creation block to instantiate an instance and return it.
+      FIRComponentCreationBlock creationBlock = self.components[protocolName];
+      cachedInstance = [self instantiateInstanceForProtocol:protocol withBlock:creationBlock];
+    }
+  }
+  return cachedInstance;
 }
 
 #pragma mark - Lifecycle
 
 - (void)removeAllCachedInstances {
-  // Loop through the cache and notify each instance that is a maintainer to clean up after itself.
-  for (id instance in self.cachedInstances.allValues) {
-    if ([instance conformsToProtocol:@protocol(FIRComponentLifecycleMaintainer)] &&
-        [instance respondsToSelector:@selector(appWillBeDeleted:)]) {
-      [instance appWillBeDeleted:self.app];
+  @synchronized(self) {
+    // Loop through the cache and notify each instance that is a maintainer to clean up after
+    // itself.
+    for (id instance in self.cachedInstances.allValues) {
+      if ([instance conformsToProtocol:@protocol(FIRComponentLifecycleMaintainer)] &&
+          [instance respondsToSelector:@selector(appWillBeDeleted:)]) {
+        [instance appWillBeDeleted:self.app];
+      }
     }
+
+    // Empty the cache.
+    [self.cachedInstances removeAllObjects];
   }
-
-  [self.cachedInstances removeAllObjects];
-}
-
-#pragma mark - Testing Initializers
-
-// TODO(wilsonryan): Set up a testing flag so this only is compiled in with unit tests.
-/// Initialize an instance with an app and existing components.
-- (instancetype)initWithApp:(FIRApp *)app
-                 components:(NSDictionary<NSString *, FIRComponentCreationBlock> *)components {
-  self = [self initWithApp:app registrants:[[NSMutableSet alloc] init]];
-  if (self) {
-    _components = [components mutableCopy];
-  }
-  return self;
 }
 
 @end
