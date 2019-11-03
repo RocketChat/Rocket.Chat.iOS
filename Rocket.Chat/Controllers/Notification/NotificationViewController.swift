@@ -40,7 +40,17 @@ final class NotificationViewController: TopTransparentViewController {
         set {
             visibleConstraint?.isActive = !newValue
             hiddenConstraint?.isActive = newValue
-            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
+            
+            if #available(iOS 13.0, *) {
+                   let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                   // Reference - https://stackoverflow.com/a/57899013/7316675
+                   let statusBar = UIView(frame: window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+                statusBar.alpha = newValue || isDeviceWithNotch ? 1 : 0
+                   window?.addSubview(statusBar)
+            } else {
+                  (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
+            }
+            
         }
     }
 
