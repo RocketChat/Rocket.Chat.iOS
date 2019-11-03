@@ -128,7 +128,7 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
-    var switchTracking: UISwitch! {
+    @IBOutlet weak var switchTracking: UISwitch! {
         didSet {
             switchTracking.isOn = viewModel.trackingValue
         }
@@ -137,19 +137,6 @@ final class PreferencesViewController: BaseTableViewController {
     @IBOutlet weak var labelTracking: UILabel! {
         didSet {
             labelTracking.text = viewModel.trackingTitle
-        }
-    }
-
-    @IBOutlet weak var trackingCell: UITableViewCell! {
-        didSet {
-            // Configuring the switch control for the crash report cell
-            // The switch is being added as an accessory view to enable
-            // control with VoiceOver.
-
-            switchTracking = UISwitch()
-            switchTracking.addTarget(self, action: #selector(crashReportSwitchDidChange(sender:)), for: .valueChanged)
-            switchTracking.accessibilityLabel = ""
-            trackingCell.accessoryView = switchTracking
         }
     }
 
@@ -162,8 +149,6 @@ final class PreferencesViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.title
-
-        navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("auth.close.label")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -357,7 +342,7 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
-    @objc func crashReportSwitchDidChange(sender: Any) {
+    @IBAction func crashReportSwitchDidChange(sender: Any) {
         AnalyticsCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
     }
 

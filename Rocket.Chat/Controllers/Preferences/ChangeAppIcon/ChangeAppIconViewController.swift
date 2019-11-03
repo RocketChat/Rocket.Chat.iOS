@@ -61,16 +61,16 @@ extension ChangeAppIconViewController: UICollectionViewDataSource {
             fatalError("Could not dequeue reuable cell as ChangeAppIconCell")
         }
 
-        let icon = viewModel.availableIcons[indexPath.row]
+        let iconName = viewModel.availableIcons[indexPath.row]
 
         var isSelected = false
         if let selectedIcon = UIApplication.shared.alternateIconName {
-            isSelected = icon.iconName == selectedIcon
+            isSelected = iconName == selectedIcon
         } else {
             isSelected = indexPath.row == 0
         }
 
-        cell.setIcon(name: icon, selected: isSelected)
+        cell.setIcon(name: iconName, selected: isSelected)
         return cell
     }
 
@@ -102,7 +102,7 @@ extension ChangeAppIconViewController: UICollectionViewDelegateFlowLayout {
 extension ChangeAppIconViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        changeIcon(name: viewModel.availableIcons[indexPath.row].iconName)
+        changeIcon(name: viewModel.availableIcons[indexPath.row])
     }
 
 }
