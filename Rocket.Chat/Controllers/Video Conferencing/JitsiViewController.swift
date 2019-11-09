@@ -45,7 +45,8 @@ final class JitsiViewController: UIViewController {
                 andEmail: nil,
                 andAvatar: URL(string: viewModel.userAvatar)
             )
-            $0.serverURL = URL(string: viewModel.videoCallURL)
+            $0.serverURL = URL(string: viewModel.videoCallServerURL)
+            $0.room = viewModel.videoCallRoomId
         })
     }
 
