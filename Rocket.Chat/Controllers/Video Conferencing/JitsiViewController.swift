@@ -36,20 +36,17 @@ final class JitsiViewController: UIViewController {
         }
 
         jitsiMeetView?.delegate = self
-        jitsiMeetView?.loadURLObject([
-            "config": [
-                "startWithAudioMuted": false,
-                "startWithVideoMuted": true
-            ],
-            "context": [
-                "user": [
-                    "name": viewModel.userDisplayName,
-                    "avatar": viewModel.userAvatar
-                ],
-                "iss": "rocketchat-ios"
-            ],
-            "url": viewModel.videoCallURL
-        ])
+
+        jitsiMeetView?.join(.fromBuilder { [viewModel] in
+            $0.audioMuted = false
+            $0.videoMuted = true
+            $0.userInfo = JitsiMeetUserInfo(
+                displayName: viewModel.userDisplayName,
+                andEmail: nil,
+                andAvatar: URL(string: viewModel.userAvatar)
+            )
+            $0.serverURL = URL(string: viewModel.videoCallURL)
+        })
     }
 
     func updateJitsiTimeout() {

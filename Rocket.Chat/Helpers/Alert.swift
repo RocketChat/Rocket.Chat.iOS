@@ -14,21 +14,46 @@ protocol Alerter: class {
     func alertYesNo(title: String, message: String, yesStyle: UIAlertAction.Style, noStyle: UIAlertAction.Style, handler: @escaping (Bool) -> Void)
 }
 
+class AlertController: UIAlertController {
+    var window: UIWindow?
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        window = nil
+    }
+}
+
 extension UIViewController: Alerter {
+    private func present(_ alert: AlertController, completion: (() -> Void)?) {
+        // from iOS 13 onwards, window needs to be
+        // retained to prevent alert from disappearing
+        alert.window = self.view.window
+        present(alert, animated: true, completion: completion)
+    }
+
     func alert(with customActions: [UIAlertAction], title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = AlertController(title: title, message: message, preferredStyle: .alert)
         customActions.forEach {( alert.addAction($0) )}
-        present(alert, animated: true, completion: nil)
+        present(alert, completion: nil)
     }
 
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = AlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
-        present(alert, animated: true, completion: nil)
+        present(alert, completion: nil)
     }
 
     func alertYesNo(title: String, message: String, yesStyle: UIAlertAction.Style = .default, noStyle: UIAlertAction.Style = .cancel, handler: @escaping (Bool) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = AlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
 
         alert.addAction(UIAlertAction(title: localized("global.yes"), style: yesStyle, handler: { _ in
             handler(true)
@@ -38,7 +63,7 @@ extension UIViewController: Alerter {
             handler(false)
         }))
 
-        present(alert, animated: true, completion: nil)
+        present(alert, completion: nil)
     }
 
     func alertSuccess(title: String, completion: (() -> Void)? = nil) {
@@ -80,8 +105,11 @@ struct Alert {
 
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
-            let window = UIWindow.topWindow
-            window.windowLevel = UIWindow.Level.alert + 1
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.rootViewController = UIViewController()
+            window.windowLevel = .alert + 1
+            window.backgroundColor = .clear
+            window.makeKeyAndVisible()
 
             if actions.isEmpty {
                 window.rootViewController?.alert(title: title, message: message, handler: handler)
