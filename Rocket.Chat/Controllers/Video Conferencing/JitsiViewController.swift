@@ -107,8 +107,8 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     }
 
     func conferenceTerminated(_ data: [AnyHashable: Any]!) {
-        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_LEFT", data: data)
-        Log.debug("conference Leave log is : \(data)")
+        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_TERMINATED", data: data)
+        Log.debug("conference Leave log is : \(data?.description ?? "null")")
         close()
     }
 
