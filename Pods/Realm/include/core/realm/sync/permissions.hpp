@@ -84,10 +84,9 @@ void set_up_basic_permissions(Group& group, TableInfoCache& table_info_cache, bo
 // Convenience function that creates a new TableInfoCache.
 void set_up_basic_permissions(Group& group, bool permissive = true);
 
-void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
-
 /// Set up some basic permissions for the class. The default is to set up some
 /// very permissive default, where "everyone" can do everything in the class.
+void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
 // void set_up_basic_default_permissions_for_class(Group&, TableRef klass, bool permissive = true);
 
 /// Return the index of the ACL in the class, if one exists. If no ACL column is
@@ -101,6 +100,32 @@ bool permissions_schema_exist(const Group&);
 
 bool user_exist(const Group&, StringData user_id);
 //@}
+
+
+/// Perform a query as user \a user_id, returning only the results that the
+/// user has access to read. If the user is an admin, there is no need to call
+/// this function, since admins can always read everything.
+///
+/// If the target table of the query does not have object-level permissions,
+/// the query results will be returned without any additional filtering.
+///
+/// If the target table of the query has object-level permissions, but the
+/// permissions schema of this Realm is invalid, an exception of type
+/// `InvalidPermissionsSchema` is thrown.
+///
+/// LIMIT and DISTINCT will be applied *after* permission filters.
+///
+/// The resulting TableView can be used like any other query result.
+///
+/// Note: Class-level and Realm-level permissions are not taken into account in
+/// the resulting TableView, since there is no way to represent this in the
+/// query engine.
+ConstTableView query_with_permissions(Query query, StringData user_id,
+                                      const DescriptorOrdering* ordering = nullptr);
+
+struct InvalidPermissionsSchema : util::runtime_error {
+    using util::runtime_error::runtime_error;
+};
 
 //@{
 /// Convenience function to modify permission data.
@@ -372,6 +397,8 @@ struct PermissionCorrections {
 
     // Tables that were illegally removed by the client.
     TableSet recreate_tables;
+
+    bool empty() const noexcept;
 };
 
 // Function for printing out a permission correction object. Useful for debugging purposes.
@@ -400,6 +427,17 @@ private:
     struct Impl;
     std::unique_ptr<Impl> m_impl;
 };
+
+
+// Implementation:
+
+inline bool PermissionCorrections::empty() const noexcept
+{
+    return recreate_objects.empty() && erase_objects.empty()
+        && reset_fields.empty() && erase_columns.empty()
+        && recreate_columns.empty() && erase_tables.empty()
+        && recreate_tables.empty();
+}
 
 } // namespace sync
 } // namespace realm

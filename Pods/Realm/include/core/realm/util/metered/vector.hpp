@@ -27,7 +27,7 @@ namespace realm {
 namespace util {
 namespace metered {
 /// Vector with metered allocation
-template <class T, class Alloc = MeteredAllocator<T>>
+template <class T, class Alloc = MeteredSTLAllocator<T>>
 using vector = std::vector<T, Alloc>;
 } // namespace metered
 } // namespace util

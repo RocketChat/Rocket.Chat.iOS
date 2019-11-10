@@ -28,7 +28,7 @@ namespace util {
 namespace metered {
 /// Set with metered allocation. Additionally, the default Compare is changed to
 /// `std::less<>` instead of `std::less<K>`, which allows heterogenous lookup.
-template <class T, class Compare = std::less<>, class Alloc = MeteredAllocator<T>>
+template <class T, class Compare = std::less<>, class Alloc = MeteredSTLAllocator<T>>
 using set = std::set<T, Compare, Alloc>;
 } // namespace metered
 } // namespace util

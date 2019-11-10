@@ -41,8 +41,8 @@ namespace sync {
 
 class SyncHistory;
 
-static const char object_id_column_name[] = "!OID";
-static const char array_value_column_name[] = "!ARRAY_VALUE"; // FIXME call Jorgen
+extern const char object_id_column_name[]; // "!OID"
+extern const char array_value_column_name[]; // "!ARRAY_VALUE"
 
 struct TableInfoCache;
 
@@ -113,10 +113,10 @@ void erase_table(Group& g, TableInfoCache& table_info_cache, TableRef);
 /// Create an array column with the specified element type.
 ///
 /// The result will be a column of type type_Table with one subcolumn named
-/// "!ARRAY_VALUE" of the specified element type.
+/// "!ARRAY_VALUE" of the specified element type and nullability.
 ///
 /// Return the column index of the inserted array column.
-size_t add_array_column(Table&, DataType element_type, StringData column_name);
+size_t add_array_column(Table&, DataType element_type, StringData column_name, bool is_nullable = false);
 
 
 //@{

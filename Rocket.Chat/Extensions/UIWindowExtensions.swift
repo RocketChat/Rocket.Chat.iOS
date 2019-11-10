@@ -41,9 +41,13 @@ extension UIWindow {
         }
 
         /// The presenting view controllers view doesn't get removed from the window as its currently transistioning and presenting a view controller
-        if let transitionViewClass = NSClassFromString("UITransitionView") {
-            for subview in subviews where subview.isKind(of: transitionViewClass) {
-                subview.removeFromSuperview()
+        /// In iOS 13 we don't want to remove the transition view as it'll create a blank screen
+        /// TODO: fix leak on iOS 13
+        if #available(iOS 13.0, *) {} else {
+            if let transitionViewClass = NSClassFromString("UITransitionView") {
+                for subview in subviews where subview.isKind(of: transitionViewClass) {
+                    subview.removeFromSuperview()
+                }
             }
         }
 
