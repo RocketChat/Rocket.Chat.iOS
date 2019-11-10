@@ -40,7 +40,12 @@ final class NotificationViewController: TopTransparentViewController {
         set {
             visibleConstraint?.isActive = !newValue
             hiddenConstraint?.isActive = newValue
-            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
+
+            // Avoid crash on iOS 13.
+            //
+            if #available(iOS 13.0, *) {} else {
+                (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
+            }
         }
     }
 
