@@ -43,7 +43,8 @@ final class NotificationViewController: TopTransparentViewController {
 
             // StatusBarWindow is on a different process in iOS 13.0+
             if #available(iOS 13.0, *) {} else {
-                (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
+                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+                statusBarWindow?.alpha = newValue || isDeviceWithNotch ? 1 : 0
             }
         }
     }
