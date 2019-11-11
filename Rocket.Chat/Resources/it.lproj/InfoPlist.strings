@@ -11,3 +11,4 @@ NSCameraUsageDescription = "Per fare foto e video";
 NSMicrophoneUsageDescription = "Per creare e caricare registrazioni audio e video";
 NSPhotoLibraryAddUsageDescription = "Per salvare le foto nella tua libreria";
 NSPhotoLibraryUsageDescription = "Per caricare foto dalla tua libreria";
+NSCalendarsUsageDescription = "To add events to your calendar"; // TODO
