@@ -40,8 +40,8 @@ final class ReactionView: UIView {
         }
     }
 
-    var tapRecognized: (UITapGestureRecognizer) -> Void = { _ in }
-    var longPressRecognized: (UILongPressGestureRecognizer) -> Void = { _ in }
+    var onTapRecognized: (UITapGestureRecognizer) -> Void = { _ in }
+    var onLongPressRecognized: (UILongPressGestureRecognizer) -> Void = { _ in }
 
     var model: ReactionViewModel = .emptyState {
         didSet {
@@ -95,12 +95,12 @@ extension ReactionView {
 // MARK: Gesture Recognizing
 extension ReactionView {
     @objc private func tapRecognized(_ sender: UITapGestureRecognizer) {
-        tapRecognized(sender)
+        onTapRecognized(sender)
     }
 
     @objc private func longPressRecognized(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            longPressRecognized(sender)
+            onLongPressRecognized(sender)
         }
     }
 }
