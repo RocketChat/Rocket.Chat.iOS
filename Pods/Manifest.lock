@@ -55,7 +55,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.4):
     - GoogleUtilities/Logger
-  - JitsiMeetSDK (2.4.1)
+  - JitsiMeetSDK (2.4.2)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.4.0)
   - nanopb (0.3.901):
@@ -179,7 +179,7 @@ SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
-  JitsiMeetSDK: e39fff6416fd6da95a156d63fe7231331e06abe5
+  JitsiMeetSDK: 0111509f659c1d93a1ad09697161136af3122bda
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 6c1df67588b247f80554ba60e67734215ab31a87
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48

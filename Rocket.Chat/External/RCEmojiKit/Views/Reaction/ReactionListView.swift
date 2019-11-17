@@ -51,11 +51,11 @@ final class ReactionListView: UIView {
 
         views.forEach { view in
             reactionsStack.addArrangedSubview(view)
-            view.tapRecognized = { sender in
+            view.onTapRecognized = { sender in
                 self.reactionTapRecognized(view, sender)
             }
 
-            view.longPressRecognized = { sender in
+            view.onLongPressRecognized = { sender in
                 self.reactionLongPressRecognized(view, sender)
             }
         }
