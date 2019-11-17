@@ -11,3 +11,4 @@ NSCameraUsageDescription = "写真やビデオを撮影する方法";
 NSMicrophoneUsageDescription = "音声とビデオを録画してアップロードする方法";
 NSPhotoLibraryAddUsageDescription = "ライブラリに画像を保存する方法";
 NSPhotoLibraryUsageDescription = "ライブラリから写真をアップロードする方法";
+NSCalendarsUsageDescription = "To add events to your calendar"; // TODO

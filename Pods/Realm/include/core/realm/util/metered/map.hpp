@@ -31,7 +31,7 @@ namespace metered {
 template <class K,
           class V,
           class Compare = std::less<>,
-          class Alloc = MeteredAllocator<std::pair<const K, V>>>
+          class Alloc = MeteredSTLAllocator<std::pair<const K, V>>>
 using map = std::map<K, V, Compare, Alloc>;
 } // namespace metered
 } // namespace util

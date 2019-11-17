@@ -245,7 +245,7 @@ public:
 
     /// If the changeset was compacted during download, the size of the original
     /// changeset.
-    size_t original_changeset_size = 0;
+    std::size_t original_changeset_size = 0;
 
     RemoteChangeset() {}
     RemoteChangeset(version_type rv, version_type lv, ChunkedBinaryData d, timestamp_type ot,

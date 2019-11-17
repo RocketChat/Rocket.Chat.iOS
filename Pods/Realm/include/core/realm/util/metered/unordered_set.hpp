@@ -30,7 +30,7 @@ namespace metered {
 template <class T,
           class Hash = std::hash<T>,
           class KeyEqual = std::equal_to<T>,
-          class Alloc = MeteredAllocator<T>>
+          class Alloc = MeteredSTLAllocator<T>>
 using unordered_set = std::unordered_set<T, Hash, KeyEqual, Alloc>;
 } // namespace metered
 } // namespace util

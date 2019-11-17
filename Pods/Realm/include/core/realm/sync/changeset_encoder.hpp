@@ -29,7 +29,7 @@ namespace realm {
 namespace sync {
 
 struct ChangesetEncoder: InstructionHandler {
-    using Buffer = util::AppendBuffer<char, AllocationMetric>;
+    using Buffer = util::AppendBuffer<char, MeteredAllocator>;
 
     Buffer release() noexcept;
     void reset() noexcept;
@@ -61,7 +61,6 @@ private:
     void append_bytes(const void*, size_t);
 
     template<class T> void append_int(T);
-    template<class T> char* encode_int(char* buffer, T value);
     void append_payload(const Instruction::Payload&);
     void append_value(DataType);
     void append_value(bool);
@@ -76,7 +75,7 @@ private:
     void append_value(Timestamp);
 
     Buffer m_buffer;
-    util::metered::unordered_map<std::string, uint32_t> m_intern_strings_rev;
+    util::metered::map<std::string, uint32_t> m_intern_strings_rev;
     StringData m_string_range;
 };
 
@@ -109,10 +108,10 @@ inline StringData ChangesetEncoder::get_string(StringBufferRange range) const no
 }
 
 template <class Allocator>
-void encode_changeset(const Changeset& log, util::AppendBuffer<char, Allocator>& out_buffer)
+void encode_changeset(const Changeset& changeset, util::AppendBuffer<char, Allocator>& out_buffer)
 {
     ChangesetEncoder encoder;
-    encoder.encode_single(log); // Throws
+    encoder.encode_single(changeset); // Throws
     auto& buffer = encoder.buffer();
     out_buffer.append(buffer.data(), buffer.size()); // Throws
 }

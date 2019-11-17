@@ -31,7 +31,7 @@ template <class K,
           class V,
           class Hash = std::hash<K>,
           class KeyEqual = std::equal_to<K>,
-          class Alloc = MeteredAllocator<std::pair<const K, V>>>
+          class Alloc = MeteredSTLAllocator<std::pair<const K, V>>>
 using unordered_map = std::unordered_map<K, V, Hash, KeyEqual, Alloc>;
 } // namespace metered
 } // namespace util
