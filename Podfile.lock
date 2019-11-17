@@ -55,6 +55,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.4):
     - GoogleUtilities/Logger
+  - JitsiMeetSDK (2.4.2)
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.4.0)
   - nanopb (0.3.901):
@@ -69,11 +70,11 @@ PODS:
   - OAuthSwift (1.2.2)
   - RCMarkdownParser (3.0.7)
   - ReachabilitySwift (4.2.1)
-  - Realm (3.12.0):
-    - Realm/Headers (= 3.12.0)
-  - Realm/Headers (3.12.0)
-  - RealmSwift (3.12.0):
-    - Realm (= 3.12.0)
+  - Realm (3.21.0):
+    - Realm/Headers (= 3.21.0)
+  - Realm/Headers (3.21.0)
+  - RealmSwift (3.21.0):
+    - Realm (= 3.21.0)
   - RocketChatViewController (1.0.0):
     - RocketChatViewController/Composer (= 1.0.0)
     - RocketChatViewController/ViewController (= 1.0.0)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core
   - FLEX (~> 2.0)
+  - JitsiMeetSDK
   - MBProgressHUD (~> 1.1.0)
   - MobilePlayer (from `https://github.com/RocketChat/RCiOSMobilePlayer`)
   - Nuke (~> 7.6)
@@ -125,6 +127,7 @@ SPEC REPOS:
     - FLEX
     - GoogleAppMeasurement
     - GoogleUtilities
+    - JitsiMeetSDK
     - MBProgressHUD
     - nanopb
     - Nuke
@@ -176,6 +179,7 @@ SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
+  JitsiMeetSDK: 0111509f659c1d93a1ad09697161136af3122bda
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 6c1df67588b247f80554ba60e67734215ab31a87
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -184,8 +188,8 @@ SPEC CHECKSUMS:
   OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   RCMarkdownParser: f107c58b83065d001e20c988443e6eab9c0a1e26
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
-  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
-  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
+  Realm: 38e9dcb19104b58407167d99f70d4995f7c16023
+  RealmSwift: 3183cc1ad48378fbcd634311b22c0e6c44021152
   RocketChatViewController: 8c9fa96502913d268bcecf6d15830f1ffd711e7b
   semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SimpleImageViewer: 6ed0d2acf7c166a5b4e795bccc7b9ea1b225ff9b
@@ -194,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 5e8b4d7a4a0d585c2085855ac86f7b4bf26230b7
+PODFILE CHECKSUM: d269dc70e4ec3c574e7cd282bba50ba0c4f7a868
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

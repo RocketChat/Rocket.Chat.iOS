@@ -36,20 +36,18 @@ final class JitsiViewController: UIViewController {
         }
 
         jitsiMeetView?.delegate = self
-        jitsiMeetView?.loadURLObject([
-            "config": [
-                "startWithAudioMuted": false,
-                "startWithVideoMuted": true
-            ],
-            "context": [
-                "user": [
-                    "name": viewModel.userDisplayName,
-                    "avatar": viewModel.userAvatar
-                ],
-                "iss": "rocketchat-ios"
-            ],
-            "url": viewModel.videoCallURL
-        ])
+
+        jitsiMeetView?.join(.fromBuilder { [viewModel] in
+            $0.audioMuted = false
+            $0.videoMuted = true
+            $0.userInfo = JitsiMeetUserInfo(
+                displayName: viewModel.userDisplayName,
+                andEmail: nil,
+                andAvatar: URL(string: viewModel.userAvatar)
+            )
+            $0.serverURL = URL(string: viewModel.videoCallServerURL)
+            $0.room = viewModel.videoCallRoomId
+        })
     }
 
     func updateJitsiTimeout() {
@@ -106,6 +104,12 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     func loadConfigError(_ data: [AnyHashable: Any]) {
         onJitsiMeetViewDelegateEvent(name: "LOAD_CONFIG_ERROR", data: data)
         Log.debug("conference Error log is : \(data)")
+    }
+
+    func conferenceTerminated(_ data: [AnyHashable: Any]!) {
+        onJitsiMeetViewDelegateEvent(name: "CONFERENCE_TERMINATED", data: data)
+        Log.debug("conference Leave log is : \(data?.description ?? "null")")
+        close()
     }
 
 }

@@ -32,22 +32,28 @@ final class JitsiViewModel {
         return AuthManager.selectedServerHost()
     }
 
-    internal var videoCallURL: String {
+    internal var videoCallServerURL: String {
         guard
             let settings = AuthSettingsManager.settings,
-            let domain = settings.jitsiDomain,
-            let prefix = settings.jitsiPrefix,
+            let domain = settings.jitsiDomain
+        else {
+            return ""
+        }
+
+        let urlProtocol = settings.isJitsiSSL ? "https://" : "http://"
+        return urlProtocol + domain
+    }
+
+    internal var videoCallRoomId: String {
+        guard
+            let settings = AuthSettingsManager.settings,
             let rid = subscription?.rid
         else {
             return ""
         }
 
         let uniqueIdentifier = settings.uniqueIdentifier ?? "undefined"
-
-        let urlProtocol = settings.isJitsiSSL ? "https://" : "http://"
-        let urlDomain = "\(domain)/"
-
-        return urlProtocol + urlDomain + prefix + uniqueIdentifier + rid
+        return uniqueIdentifier + rid
     }
 
 }

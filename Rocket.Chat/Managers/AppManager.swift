@@ -283,6 +283,10 @@ extension AppManager {
 
         let storyboard = UIStoryboard(name: "Jitsi", bundle: Bundle.main)
         if let nav = storyboard.instantiateInitialViewController() as? UINavigationController {
+            if #available(iOS 13.0, *) {
+                // to prevent interactive dismissal
+                nav.isModalInPresentation = true
+            }
             if let controller = nav.viewControllers.first as? JitsiViewController {
                 controller.viewModel.subscription = room.unmanaged
 

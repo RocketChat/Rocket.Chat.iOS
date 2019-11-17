@@ -17,6 +17,10 @@ def diff_pods
   pod 'DifferenceKit', '~> 1.0'
 end
 
+def jitsi_pods
+  pod 'JitsiMeetSDK'
+end
+
 def shared_pods
   # Analytics
   pod 'Firebase/Core'
@@ -65,6 +69,7 @@ end
 
 target 'Rocket.Chat' do
   shared_pods
+  jitsi_pods
 end
 
 target 'Rocket.ChatTests' do
