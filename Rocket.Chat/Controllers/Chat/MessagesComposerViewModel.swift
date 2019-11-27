@@ -37,7 +37,7 @@ final class MessagesComposerViewModel {
     var replyMessageIdentifier = ""
     var messageToEdit: Message?
 
-    let hintPrefixes: [Character] = ["/", "#", "@", ":"]
+    let hintPrefixes: [Character] = ["/", "#", "@", ":", "+"]
 
     var hints: [Hint] = []
     var hintPrefixedWord: String = ""
@@ -56,6 +56,7 @@ final class MessagesComposerViewModel {
         }
 
         let word = String(word.dropFirst())
+        let subprefix = word.first
 
         if prefix == "@" {
             hints = User.search(
@@ -97,7 +98,7 @@ final class MessagesComposerViewModel {
             commands.forEach {
                 hints.append(.command($0))
             }
-        } else if prefix == ":" {
+        } else if prefix == ":" || (prefix == "+" && subprefix == ":") {
             let emojis = EmojiSearcher.standard.search(shortname: word.lowercased(), custom: CustomEmoji.emojis())
 
             emojis.forEach {

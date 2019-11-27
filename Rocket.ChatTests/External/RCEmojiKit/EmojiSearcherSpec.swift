@@ -38,5 +38,12 @@ class EmojiSearcherSpec: XCTestCase {
         XCTAssert(search3.count == 1)
         XCTAssert(search3[0].emoji.shortname == ":thumbsup:")
         XCTAssert(search3[0].suggestion == ":+1:")
+
+        let search4 = searcher.search(shortname: "")
+        XCTAssert(search4.count == 4)
+        XCTAssert(search4[0].emoji.shortname == ":smiley:")
+        XCTAssert(search4[1].emoji.shortname == ":thumbsup:")
+        XCTAssert(search4[2].emoji.shortname == ":sunglasses:")
+        XCTAssert(search4[3].emoji.shortname == ":radioactive:")
     }
 }
