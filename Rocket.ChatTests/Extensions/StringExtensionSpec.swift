@@ -146,4 +146,23 @@ class StringExtensionSpec: XCTestCase {
 
         XCTAssertNil(string2.commandAndParams())
     }
+    
+    func testReaction() {
+        let string = "+:upside_down:"
+        
+        guard let emoji = string.reaction() else {
+            return XCTFail("string is valid reaction")
+        }
+        
+        XCTAssertEqual(emoji, ":upside_down:")
+        
+        let string2 = ":upside_down:"
+        XCTAssertNil(string2.reaction())
+        
+        let string3 = "+upside_down:"
+        XCTAssertNil(string3.reaction())
+        
+        let string4 = "+:upside_down"
+        XCTAssertNil(string4.reaction())
+    }
 }
