@@ -21,3 +21,14 @@
 "categories.flags" = "FLAGI";
 
 "reactorlist.title" = "Reakcje";
+
+// Accessibility
+
+"skinTone.label" = "Change skintone."; // TODO
+"currentSkinTone.label" = "Current skintone,"; // TODO
+"skinTone.default" = "Default"; // TODO
+"skinTone.tone1" = "Light skin tone"; // TODO
+"skinTone.tone2" = "Medium light skin tone"; // TODO
+"skinTone.tone3" = "Medium skin tone"; // TODO
+"skinTone.tone4" = "Medium dark skin tone"; // TODO
+"skinTone.tone5" = "Dark skin tone"; // TODO

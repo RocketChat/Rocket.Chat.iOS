@@ -44,9 +44,13 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
                 guard let url = url else { return }
                 ImageManager.loadImage(with: url, into: emojiImageView)
                 emojiImageView.isHidden = false
+                emojiImageView.isAccessibilityElement = true
+                emojiLabel.accessibilityElementsHidden = true
             case .standard(let string):
                 emojiLabel.text = string
+                emojiImageView.accessibilityLabel = string
                 emojiLabel.isHidden = false
+                emojiLabel.accessibilityElementsHidden = false
             }
         }
     }
