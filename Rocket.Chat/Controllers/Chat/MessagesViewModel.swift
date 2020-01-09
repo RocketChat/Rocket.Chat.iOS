@@ -882,6 +882,12 @@ extension MessagesViewModel {
             }
 
             client.runCommand(command: command, params: params, roomId: subscription.rid)
+        } else if let lastMessage = subscription.roomLastMessage, let emoji = text.reaction() {
+            guard let client = API.current()?.client(MessagesClient.self) else {
+                return Alert.defaultError.present()
+            }
+
+            client.reactMessage(lastMessage, emoji: emoji)
         } else {
             guard let client = API.current()?.client(MessagesClient.self) else {
                 return Alert.defaultError.present()

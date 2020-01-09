@@ -138,6 +138,15 @@ extension String {
         return (command: command, params: params)
     }
 
+    func reaction() -> String? {
+        guard self.first == "+" && self.count > 1 else { return nil }
+
+        let emoji = String(self.dropFirst())
+        guard emoji.first == ":" && emoji.last == ":" else { return nil }
+
+        return emoji
+    }
+
     var boolValue: Bool {
         return NSString(string: self).boolValue
     }
