@@ -73,6 +73,7 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem?.accessibilityLabel = VOLocalizedString("channel.preferences.label")
+        navigationItem.rightBarButtonItem?.accessibilityLabel = VOLocalizedString("new_room.title.label")
 
         // If the device is not using the SplitView, we want to show
         // the 3D Touch preview for the cells

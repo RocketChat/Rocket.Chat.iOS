@@ -101,6 +101,16 @@ class BaseSubscriptionCell: SwipeTableViewCell, SubscriptionCellProtocol {
         if subscription.unread > 0 {
             viewUnread.isHidden = false
             labelUnread.text =  "\(subscription.unread)"
+
+            if subscription.unread == 1 {
+                labelUnread.accessibilityLabel =
+                    ["\(subscription.unread) ", VOLocalizedString("subscriptions.list.notification.label")]
+                        .compactMap {$0}.joined()
+            } else {
+                labelUnread.accessibilityLabel =
+                    ["\(subscription.unread) ", VOLocalizedString("subscriptions.list.notifications.label")]
+                        .compactMap {$0}.joined()
+            }
         } else {
             viewUnread.isHidden = true
         }

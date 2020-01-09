@@ -22,12 +22,19 @@
 
 // MARK: Channels
 "channel.preferences.label" = "Preferences"; // TODO
+"new_room.title.label" = "Create new channel"; // TODO
+"channel.actions.star.label" = "Star"; // TODO
+"channel.actions.unstar.label" = "Unstar"; // TODO
+"channel.actions.videoCall.label" = "Video Call"; // TODO
 
 // MARK: Subscriptions
 "subscriptions.main.userview.label" = "聊天訊息";
 "subscriptions.main.userview.value" = "伺服器: %@. 訊息: %@. 狀態: %@.";
 "subscriptions.main.userview.hint" = "點擊兩下變更狀態";
 "subscriptions.main.channel.hint" = "Double tap to enter"; // TODO
+"subscriptions.list.message.label" = "Message: "; // TODO
+"subscriptions.list.notification.label" = "Notification"; // TODO
+"subscriptions.list.notifications.label" = "Notifications"; // TODO
 
 // MARK: Preferences
 "preferences.profile.edit.label" = "Profile picture"; // TODO
