@@ -216,7 +216,7 @@
 // Read Receipts
 "chat.read_receipt_list.title" = "読者";
 "chat.read_receipt_list.title.loading" = "読み込み中...";
-"chat.read_receipt_list.title.empty" = "Read by no one";
+"chat.read_receipt_list.title.empty" = "０人が既読";
 
 // Chat Message Actions
 "chat.message.actions.info" = "メッセージ情報";
@@ -230,7 +230,7 @@
 "chat.message.actions.unstar" = "スターを外す";
 "chat.message.actions.quote" = "引用";
 "chat.message.actions.reply" = "返信";
-"chat.message.actions.join_video_call" = "Join Video Call"; // TODO
+"chat.message.actions.join_video_call" = "ビデオコールに加わる";
 "chat.message.actions.permalink" = "Permalink"; //TODO
 "chat.message.actions.delete" = "メッセージを削除";
 "chat.message.actions.delete.confirm.title" = "このメッセージを削除しますか ?";
@@ -275,10 +275,10 @@
 "chat.drawing.settings.color.others" = "色を選択:";
 
 // Chat Typing
-"chat.users_are_typing" = "%@ are typing..."; // TODO
-"chat.user_is_typing" = "%@ is typing..."; // TODO
+"chat.users_are_typing" = "%@ が入力中...";
+"chat.user_is_typing" = "%@ が入力中...";
 "chat.typing" = "typing..."; // TODO
-"chat.several_typing" = "several users are typing..."; // TODO
+"chat.several_typing" = "複数ユーザーが入力中...";
 
 // Message Types
 "chat.message.type.room_name_changed" = "ルーム名を %@ から %@ へ変更しました。";
@@ -300,14 +300,14 @@
 "chat.message.type.room_changed_topic" = "Room topic changed to \"%@\" by %@"; // TODO
 "chat.message.type.room_changed_announcement" = "Room annoucement changed to \"%@\" by %@"; // TODO
 "chat.message.type.room_changed_description" = "Room description changed to \"%@\" by %@"; // TODO
-"chat.message.type.video_call_started" = "Video call started by %@"; // TODO
+"chat.message.type.video_call_started" = "%@　がビデオコールを始めました";
 "chat.message.type.discussion_created" = "Started a discussion:"; // TODO
 "chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
 
 // Chat Information
 "chat.info.title" = "情報";
 "chat.info.item.topic" = "トピック";
-"chat.info.item.no_topic" = "トッピックはありません";
+"chat.info.item.no_topic" = "トピックはありません";
 "chat.info.item.description" = "説明";
 "chat.info.item.no_description" = "説明はありません";
 "chat.info.item.announcement" = "Announcement"; // TODO
@@ -351,8 +351,8 @@
 "myaccount.settings.profile" = "プロフィール";
 "myaccount.settings.license" = "ライセンス";
 "myaccount.settings.language" = "言語";
-"myaccount.settings.review" = "Review this App"; // TODO
-"myaccount.settings.share" = "Share this App"; // TODO
+"myaccount.settings.review" = "このアプリの評価をつける";
+"myaccount.settings.share" = "このアプリをシェアする";
 "myaccount.settings.appicon" = "アプリケーションアイコン";
 "myaccount.settings.version" = "バージョン: %@ (%@)";
 "myaccount.settings.server_version" = "サーバーのバージョン: %@";
@@ -506,18 +506,18 @@
 "shortcuts.server_selection_numbers" = "サーバーの選択 1...9";
 "shortcuts.add_server" = "サーバーを追加";
 "shortcuts.change_theme" = "テーマを変更";
-"shortcuts.send" = "Send"; //TODO
+"shortcuts.send" = "送信";
 "shortcuts.new_line" = "New line"; //TODO
 
 // Chat Components
-"chat.components.quote.replied" = "Replied"; //TODO
-"chat.components.quote.pinned" = "Pinned"; //TODO
+"chat.components.quote.replied" = "返信済み";
+"chat.components.quote.pinned" = "ピン済み";
 "chat.components.text_attachment.no_title" = "No title"; //TODO
 
 // Directory
 "directory.title" = "Directory"; // TODO
-"directory.filters.channels" = "Channels"; // TODO
-"directory.filters.users" = "Users"; // TODO
+"directory.filters.channels" = "チャンネル";
+"directory.filters.users" = "ユーザー";
 "directory.filters.by" = "Search by"; // TODO
 "directory.filters.global.title" = "Search for global users"; // TODO
 "directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
