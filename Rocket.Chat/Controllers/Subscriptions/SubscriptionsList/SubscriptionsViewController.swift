@@ -110,6 +110,8 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
+        serversView?.accessibilityViewIsModal = true
+        sortingView?.accessibilityViewIsModal = true
         serversView?.frame = frameForDropDownOverlay
         sortingView?.frame = frameForDropDownOverlay
     }
@@ -237,6 +239,7 @@ final class SubscriptionsViewController: BaseViewController {
             self.titleView = titleView
 
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(recognizeTitleViewTapGesture(_:)))
+            titleView.isAccessibilityElement = true
             titleView.addGestureRecognizer(tapGesture)
         }
     }
@@ -363,6 +366,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         titleView?.updateTitleImage(reverse: true)
         serversView = ServersListView.showIn(view, frame: frameForDropDownOverlay)
         serversView?.delegate = self
+        UIAccessibility.post(notification: .screenChanged, argument: serversView)
     }
 
     func closeServersList() {

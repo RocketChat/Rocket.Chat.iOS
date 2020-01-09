@@ -30,6 +30,9 @@ final class SubscriptionsTitleView: UIView {
             buttonServer.semanticContentAttribute = .forceRightToLeft
             buttonServer.layer.cornerRadius = 5
             buttonServer.layer.masksToBounds = true
+
+            buttonServer.isAccessibilityElement = true
+            buttonServer.accessibilityTraits = .button
         }
     }
 
@@ -47,8 +50,10 @@ final class SubscriptionsTitleView: UIView {
             if reverse, let cgImage = image.cgImage {
                 let rotatedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .downMirrored)
                 buttonServer.setImage(rotatedImage, for: .normal)
+                buttonServer.accessibilityHint = VOLocalizedString("subscriptions.server_button.close.hint")
             } else {
                 buttonServer.setImage(image, for: .normal)
+                buttonServer.accessibilityHint = VOLocalizedString("subscriptions.server_button.hint")
             }
         }
     }

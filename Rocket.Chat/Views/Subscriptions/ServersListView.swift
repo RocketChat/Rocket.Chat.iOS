@@ -21,6 +21,7 @@ final class ServersListView: UIView {
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = viewModel.title
+            labelTitle.accessibilityTraits = .header
         }
     }
 
@@ -80,6 +81,7 @@ final class ServersListView: UIView {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             instance.headerViewTopConstraint.constant = 0
+            UIAccessibility.post(notification: .screenChanged, argument: self)
 
             instance.animates({
                 instance.backgroundColor = UIColor.black.withAlphaComponent(0.4)
