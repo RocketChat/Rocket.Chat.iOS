@@ -39,6 +39,7 @@ class ImageMessageCell: BaseImageMessageCell, SizingCell {
             imageView.layer.cornerRadius = 4
             imageView.layer.borderWidth = 1
             imageView.clipsToBounds = true
+            imageView.accessibilityTraits = .image
         }
     }
 

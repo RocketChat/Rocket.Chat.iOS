@@ -528,14 +528,19 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
     }
     if let currentTimeLabel = getViewForElementWithIdentifier("currentTime") as? Label {
       currentTimeLabel.text = textForPlaybackTime(time: moviePlayer.currentPlaybackTime)
+      currentTimeLabel.accessibilityHint = textForPlaybackTime(time: moviePlayer.currentPlaybackTime)
+
       currentTimeLabel.superview?.setNeedsLayout()
     }
     if let remainingTimeLabel = getViewForElementWithIdentifier("remainingTime") as? Label {
       remainingTimeLabel.text = "-\(textForPlaybackTime(time: moviePlayer.duration - moviePlayer.currentPlaybackTime))"
+      remainingTimeLabel.accessibilityHint =
+        "-\(textForPlaybackTime(time: moviePlayer.duration - moviePlayer.currentPlaybackTime))"
       remainingTimeLabel.superview?.setNeedsLayout()
     }
     if let durationLabel = getViewForElementWithIdentifier("duration") as? Label {
       durationLabel.text = textForPlaybackTime(time: moviePlayer.duration)
+      durationLabel.accessibilityHint = textForPlaybackTime(time: moviePlayer.duration)
       durationLabel.superview?.setNeedsLayout()
     }
     updateShownTimedOverlays()
