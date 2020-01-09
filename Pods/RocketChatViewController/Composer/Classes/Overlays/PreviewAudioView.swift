@@ -23,6 +23,7 @@ public class PreviewAudioView: UIView, ComposerLocalizable {
 
     public let discardButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.discardButtonLabel)
 
         $0.addConstraints([
             $0.heightAnchor.constraint(equalToConstant: Consts.discardButtonHeight),
@@ -45,6 +46,7 @@ public class PreviewAudioView: UIView, ComposerLocalizable {
 
     public let sendButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.sendButtonLabel)
 
         $0.addConstraints([
             $0.heightAnchor.constraint(equalToConstant: Consts.discardButtonHeight),
@@ -182,6 +184,7 @@ extension PreviewAudioView {
         audioView.player = nil
 
         delegate?.previewAudioView(self, didDiscardAudio: url)
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 
     @objc func touchUpInsideSendButton() {
@@ -193,16 +196,18 @@ extension PreviewAudioView {
         audioView.player = nil
 
         delegate?.previewAudioView(self, didConfirmAudio: url)
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 
 }
 
 // MARK: SwipeIndicatorView
 
-public class AudioView: UIView {
+public class AudioView: UIView, ComposerLocalizable {
     public let playButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(ComposerAssets.playButtonImage, for: .normal)
+        $0.accessibilityLabel = localized(.playButtonLabel)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.playButtonWidth),
@@ -214,6 +219,7 @@ public class AudioView: UIView {
 
     public let progressSlider = tap(UISlider()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityTraits = UIAccessibilityTraitAdjustable
 
         $0.value = 0
         $0.setThumbImage(ComposerAssets.sliderThumbImage, for: .normal)
@@ -263,6 +269,10 @@ public class AudioView: UIView {
             let pause = ComposerAssets.pauseButtonImage
             let play = ComposerAssets.playButtonImage
             playButton.setImage(playing ? pause : play, for: .normal)
+
+            let pauseAccessibilityLabel = ComposerView.localized(.pauseButtonLabel)
+             let playAccessibilityLabel = ComposerView.localized(.playButtonLabel)
+            playButton.accessibilityLabel = playing ? pauseAccessibilityLabel : playAccessibilityLabel
         }
     }
 
@@ -343,8 +353,21 @@ public class AudioView: UIView {
             }
 
             let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
-            self.timeLabel.text = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
+            let displayFormat = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
+            self.timeLabel.text = displayFormat
+            self.timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + self.timeDuration(displayTime)
+
+            self.progressSlider.accessibilityValue = ComposerView.localized(.sliderLabelPosition) + self.timeDuration(Int(player.currentTime))
+                + ComposerView.localized(.sliderLabelOf) + self.timeDuration(Int(player.duration))
         }
+    }
+
+    func timeDuration(_ time: Int) -> String {
+        let timeFormat = DateComponentsFormatter()
+        timeFormat.allowedUnits = [.minute, .second]
+        timeFormat.unitsStyle = .spellOut
+        guard let formattedTime = timeFormat.string(from: Double(time)) else { return "" }
+        return formattedTime
     }
 
     struct Consts {
@@ -396,4 +419,31 @@ extension AudioView {
         playing = !playing
     }
 
+}
+
+//  MARK: Accessibility
+
+extension AudioView {
+
+    func valueUpdated() {
+        guard let player = self.player else { return }
+        let displayTime = self.playing ? Int(progressSlider.value) : Int(player.duration)
+        let displayFormat = String(format: "%01d:%02d", (displayTime/60) % 60, displayTime % 60)
+        timeLabel.text = displayFormat
+        progressSlider.sendActions(for: .valueChanged)
+    }
+
+    override public func accessibilityIncrement() {
+        super.accessibilityIncrement()
+
+        progressSlider.setValue(progressSlider.value + 10, animated: true)
+        valueUpdated()
+    }
+
+    override public func accessibilityDecrement() {
+        super.accessibilityDecrement()
+
+        progressSlider.setValue(progressSlider.value - 10, animated: true)
+        valueUpdated()
+    }
 }

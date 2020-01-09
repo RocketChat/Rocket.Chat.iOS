@@ -28,4 +28,12 @@ final class RCDateFormatter {
         dateFormatter.timeStyle = timeStyle
         return self.dateFormatter.string(from: date)
     }
+
+    static func timeDuration(_ time: Int) -> String {
+        let timeFormat = DateComponentsFormatter()
+        timeFormat.allowedUnits = [.minute, .second]
+        timeFormat.unitsStyle = .spellOut
+        guard let formattedTime = timeFormat.string(from: Double(time)) else { return "" }
+        return formattedTime
+    }
 }

@@ -7,3 +7,13 @@
 "composer.sendButton.label" = "Send"; // TODO
 "composer.micButton.label" = "Voice message"; // TODO
 "composer.addButton.label" = "Share media"; // TODO
+"composer.redMicButton.label" = "Stop recording"; // TODO
+"composer.playButton.label" = "Play"; // TODO
+"composer.pauseButton.label" = "Pause"; // TODO
+"composer.discardButton.label" = "Discard"; // TODO
+"composer.duration.label" = "Duration,"; // TODO
+"composer.recordaudioview.swipe.label" = "Swipe left to cancel"; // TODO
+"composer.slider.position.label" = "Position, "; // TODO
+"composer.slider.of.label" = " of "; // TODO
+
+"composer.recordaudioview.micButton.hint" = "Double tap to record"; // TODO

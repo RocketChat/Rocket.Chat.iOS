@@ -149,6 +149,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
         let button = UIButton()
         button.frame = CGRect(x: .greatestFiniteMagnitude, y: .greatestFiniteMagnitude, width: buttonScrollToBottomSize, height: buttonScrollToBottomSize)
         button.setImage(UIImage(named: "Float Button light"), for: .normal)
+        button.accessibilityElementsHidden = true
         button.addTarget(self, action: #selector(buttonScrollToBottomDidPressed), for: .touchUpInside)
         return button
     }()

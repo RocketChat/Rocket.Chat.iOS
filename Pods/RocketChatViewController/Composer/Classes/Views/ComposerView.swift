@@ -104,7 +104,7 @@ public class ComposerView: UIView, ComposerLocalizable {
         $0.placeholderLabel.text = localized(.textViewPlaceholder)
         $0.placeholderLabel.font = .preferredFont(forTextStyle: .body)
         $0.placeholderLabel.adjustsFontForContentSizeCategory = true
-        $0.placeholderLabel.isAccessibilityElement = false
+        $0.placeholderLabel.accessibilityElementsHidden = true
     }
 
     /**
@@ -297,6 +297,10 @@ public extension ComposerView {
         rightButton.isUserInteractionEnabled = false
         isTextInputEnabled = false
 
+        leftButton.accessibilityElementsHidden = true
+        rightButton.accessibilityElementsHidden = true
+        textView.accessibilityElementsHidden = true
+
         currentDelegate.composerView(self, willConfigureOverlayView: overlayView, with: userData)
         currentDelegate.composerView(self, didConfigureOverlayView: overlayView)
     }
@@ -307,6 +311,10 @@ public extension ComposerView {
         leftButton.isUserInteractionEnabled = true
         rightButton.isUserInteractionEnabled = true
         isTextInputEnabled = true
+
+        leftButton.accessibilityElementsHidden = false
+        rightButton.accessibilityElementsHidden = false
+        textView.accessibilityElementsHidden = false
     }
 }
 

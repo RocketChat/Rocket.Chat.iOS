@@ -85,12 +85,15 @@ public extension ComposerViewExpandedDelegate {
 
     func composerView(_ composerView: ComposerView, willConfigureButton button: ComposerButton) {
         if button == composerView.rightButton {
-            let composerButtonAccessibilityLabel = composerView.textView.text.isEmpty
-                ? ComposerView.localized(.micButtonLabel) : ComposerView.localized(.sendButtonLabel)
-            button.accessibilityLabel = composerButtonAccessibilityLabel
-            let image = composerView.textView.text.isEmpty
-                ? ComposerAssets.micButtonImage : ComposerAssets.sendButtonImage
-            button.setBackgroundImage(image, for: .normal)
+            if composerView.textView.text.isEmpty {
+                button.accessibilityLabel = ComposerView.localized(.micButtonLabel)
+                button.accessibilityHint = ComposerView.localized(.micButtonHint)
+                button.setBackgroundImage(ComposerAssets.micButtonImage, for: .normal)
+            } else {
+                button.accessibilityLabel = ComposerView.localized(.sendButtonLabel)
+                button.accessibilityHint = nil
+                button.setBackgroundImage(ComposerAssets.sendButtonImage, for: .normal)
+            }
         }
     }
 

@@ -46,3 +46,6 @@
 "message.search.label" = "Search"; // TODO
 "message.threads.label" = "Threads"; // TODO
 "message.chat.title.hint" = "Double tap to open channel options"; // TODO
+"message.audio.play.label" = "Play"; // TODO
+"message.audio.pause.label" = "Pause"; // TODO
+"message.audio.duration.label" = "Duration,"; // TODO

@@ -13,7 +13,7 @@ public protocol RecordAudioViewDelegate: class {
     func recordAudioViewDidCancel(_ view: RecordAudioView)
 }
 
-public class RecordAudioView: UIView {
+public class RecordAudioView: UIView, ComposerLocalizable {
     public weak var composerView: ComposerView?
     public weak var delegate: RecordAudioViewDelegate?
 
@@ -25,11 +25,15 @@ public class RecordAudioView: UIView {
 
     public var timer: Timer?
 
+    public let audioView = AudioView()
+
     public var time: TimeInterval = 0 {
         didSet {
             let minutes = Int(time) / 60
             let seconds = time - Double(minutes) * 60
-            timeLabel.text = String(format: "%01i:%02i", minutes, Int(seconds))
+            let displayFormat = String(format: "%01i:%02i", minutes, Int(seconds))
+            timeLabel.text = displayFormat
+            timeLabel.accessibilityLabel = ComposerView.localized(.durationLabel) + audioView.timeDuration(Int(time))
         }
     }
 
@@ -51,6 +55,7 @@ public class RecordAudioView: UIView {
 
     public let micButton = tap(UIButton()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.accessibilityLabel = localized(.redMicButtonLabel)
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: 40),
@@ -266,6 +271,7 @@ extension RecordAudioView {
 
     @objc func swipeRecognized() {
         dismiss()
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, composerView?.rightButton)
     }
 }
 
@@ -275,6 +281,7 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
     public let imageView = tap(UIImageView()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = ComposerAssets.grayArrowLeftButtonImage
+        $0.accessibilityElementsHidden = true
 
         NSLayoutConstraint.activate([
             $0.widthAnchor.constraint(equalToConstant: Consts.imageViewWidth),
@@ -284,6 +291,9 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
 
     public let label = tap(UILabel()) {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isAccessibilityElement = true
+        $0.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
+        $0.accessibilityLabel = localized(.swipeLabel)
 
         $0.text = localized(.swipeIndicatorViewTitle)
         $0.font = .preferredFont(forTextStyle: .body)
