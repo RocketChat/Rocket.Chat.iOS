@@ -72,6 +72,7 @@ class SubscriptionsViewModel {
 
     func buildSections() {
         if let realm = realm, assorter == nil {
+            // TODO: Make this realm instance in another thread
             assorter = RealmAssorter<Subscription>(realm: realm)
             assorter?.didUpdateIndexPaths = didUpdateIndexPaths
         }

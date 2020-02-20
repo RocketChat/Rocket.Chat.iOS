@@ -12,6 +12,7 @@ import DifferenceKit
 typealias IndexPathsChanges = (deletions: [IndexPath], insertions: [IndexPath], modifications: [IndexPath])
 
 let subscriptionUpdatesHandlerQueue = DispatchQueue(label: "chat.rocket.subscription.updates.handler", qos: .background)
+let sectionBuildingQueue = DispatchQueue(label: "chat.rocket.section.building", qos: .background)
 
 class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
     typealias IndexPathsChangesEvent = (StagedChangeset<[ArraySection<String, Object.UnmanagedType>]>, (_ newData: [ArraySection<String, Object.UnmanagedType>]) -> Void) -> Void
@@ -20,8 +21,30 @@ class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
         let name: String
         var objects: Results<Object>
 
-        var section: ArraySection<String, Object.UnmanagedType> {
-            return ArraySection(model: name, elements: objects.compactMap { $0.unmanaged })
+        func buildSection(completion: @escaping (ArraySection<String, Object.UnmanagedType>) -> Void) {
+            let objectIds: [String] = objects.compactMap {
+                return $0.value(forKeyPath: "identifier") as? String
+            }
+
+            sectionBuildingQueue.async {
+                guard
+                    let configuration = self.objects.realm?.configuration,
+                    let realm = try? Realm(configuration: configuration)
+                else {
+                    return
+                }
+
+                let unmanagedObjects = objectIds.compactMap {
+                    realm.object(ofType: Object.self, forPrimaryKey: $0)?.unmanaged
+                }
+
+                completion(
+                    ArraySection(
+                        model: self.name,
+                        elements: unmanagedObjects
+                    )
+                )
+            }
         }
     }
 
@@ -62,7 +85,19 @@ class RealmAssorter<Object: RealmSwift.Object & UnmanagedConvertible> {
         self.model?.invalidate()
         self.model = model.observe { _ in
             let oldValue = self.sections
-            let newValue = self.results.map { $0.section }
+            var newValue: [ArraySection<String, Object.UnmanagedType>] = []
+            let dispatchGroup = DispatchGroup()
+
+            for result in self.results {
+                dispatchGroup.enter()
+
+                result.buildSection(completion: { (section) in
+                    newValue.append(section)
+                    dispatchGroup.leave()
+                })
+            }
+
+            dispatchGroup.wait()
 
             let changes = StagedChangeset(source: oldValue, target: newValue)
 
