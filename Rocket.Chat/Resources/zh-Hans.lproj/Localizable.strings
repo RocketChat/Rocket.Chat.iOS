@@ -13,7 +13,7 @@
 "error.login.message" = "你登录的时候发生了点错误";
 
 "error.signup.title" = "哎呀!";
-"error.signup.empty_input.message" = "All the fields are required for sign up.";
+"error.signup.empty_input.message" = "您必须填满所有空格."; //Translated 2020-04-15
 
 "error.login_unauthorized.title" = "哎呀!";
 "error.login_unauthorized.message" = "认证被拒绝了！再试一次吧";
@@ -110,12 +110,12 @@
 "auth.connect.button_connect" = "连接";
 "auth.connect.ssl_required" = "要求您的服务器支持SSL";
 "auth.connect.connecting" = "连接中... 系好安全带";
-"auth.connect.ssl.certificate.do_you_have" = "Do you have a certificate?"; // TODO
-"auth.connect.ssl.certificate.apply" = "Apply Your Certificate"; // TODO
-"auth.connect.ssl.certificate.your_certificate" = "Your Certificate"; // TODO
-"auth.connect.ssl.certificate.password.title" = "Certificate Password"; // TODO
-"auth.connect.ssl.certificate.password.message" = "What's the password for your certificate?"; // TODO
-"auth.connect.ssl.certificate.remove" = "Remove Certificate"; // TODO
+"auth.connect.ssl.certificate.do_you_have" = "您是否拥有证书?"; //Translated 2020-04-15
+"auth.connect.ssl.certificate.apply" = "申请证书"; //Translated 2020-04-15
+"auth.connect.ssl.certificate.your_certificate" = "您的证书"; //Translated 2020-04-15
+"auth.connect.ssl.certificate.password.title" = "证书密码"; //Translated 2020-04-15
+"auth.connect.ssl.certificate.password.message" = "您的证书密码?"; //Translated 2020-04-15
+"auth.connect.ssl.certificate.remove" = "移除证书"; //Translated 2020-04-15
 "auth.email_auth_prefix" = "登录方式";
 "auth.email_auth" = "邮箱";
 "auth.login_service_prefix" = "继续";
@@ -135,7 +135,7 @@
 "auth.login.buttonResetPassword" = "忘记密码";
 "auth.login.agree_label" = "继续表示您同意我们的";
 "auth.login.agree_and" = "和";
-"auth.login.legal" = "Legal"; // TODO
+"auth.login.legal" = "合法条款"; //Translated 2020-04-15
 "auth.login.agree_termsofservice" = "服务条款";
 "auth.login.agree_privacypolicy" = "隐私政策";
 
@@ -300,8 +300,8 @@
 "chat.message.type.room_changed_announcement" = "频道公告变更为\"%@\" 由%@操作";
 "chat.message.type.room_changed_description" = "频道描述变更为\"%@\" 由%@操作";
 "chat.message.type.video_call_started" = "%@开启视频会议";
-"chat.message.type.discussion_created" = "Started a discussion:"; // TODO
-"chat.message.type.user_joined_conversation" = "Has joined the conversation"; // TODO
+"chat.message.type.discussion_created" = "开始讨论:"; //Translated 2020-04-15
+"chat.message.type.user_joined_conversation" = "已加入对话"; //Translated 2020-04-15
 
 // Chat Information
 "chat.info.title" = "信息";
@@ -309,8 +309,8 @@
 "chat.info.item.no_topic" = "没有话题";
 "chat.info.item.description" = "描述";
 "chat.info.item.no_description" = "没有描述";
-"chat.info.item.announcement" = "Announcement"; // TODO
-"chat.info.item.no_announcement" = "No announcement"; // TODO
+"chat.info.item.announcement" = "公告"; //Translated 2020-04-15
+"chat.info.item.no_announcement" = "无公告"; //Translated 2020-04-15
 "chat.info.item.members" = "成员";
 "chat.info.item.pinned" = "固定信息";
 "chat.info.item.starred" = "标记信息";
@@ -367,7 +367,7 @@
 
 // Change Language
 "myaccount.settings.language.title" = "选择语言";
-"myaccount.settings.language.reset" = "Reset to Default";
+"myaccount.settings.language.reset" = "默认重置"; //Translated 2020-04-15
 "myaccount.settings.language.message" = "您已经选择新的语言，请重启App使新语言生效.";
 
 // Notifications preferences
@@ -514,22 +514,22 @@
 "chat.components.text_attachment.no_title" = "无标题";
 
 // Directory
-"directory.title" = "Directory"; // TODO
-"directory.filters.channels" = "Channels"; // TODO
-"directory.filters.users" = "Users"; // TODO
-"directory.filters.by" = "Search by"; // TODO
-"directory.filters.global.title" = "Search for global users"; // TODO
-"directory.filters.global.subtitle" = "If you turn-on, you can search for any user from others companies or servers. "; // TODO
-"directory.users.1_user" = "1 member"; // TODO
-"directory.users.x_users" = "%@ members"; // TODO
+"directory.title" = "目录"; //Translated 2020-04-15
+"directory.filters.channels" = "频道"; //Translated 2020-04-15
+"directory.filters.users" = "用户"; //Translated 2020-04-15
+"directory.filters.by" = "搜索"; //Translated 2020-04-15
+"directory.filters.global.title" = "搜索全局用户"; //Translated 2020-04-15
+"directory.filters.global.subtitle" = "如果开启，您可以搜索所有公司或其他服务器的用户. "; //Translated 2020-04-15
+"directory.users.1_user" = "1 个成员"; //Translated 2020-04-15
+"directory.users.x_users" = "%@ 个成员"; //Translated 2020-04-15
 
 // Discussions
-"discussion.no_messages" = "No messages yet"; // TODO
-"discussion.1_message" = "1 message"; // TODO
-"discussion.x_messages" = "%@ messages"; // TODO
+"discussion.no_messages" = "尚无信息"; //Translated 2020-04-15
+"discussion.1_message" = "1 条信息"; //Translated 2020-04-15
+"discussion.x_messages" = "%@ 条信息"; //Translated 2020-04-15
 
 // Threads
-"threads.title" = "Threads"; // TODO
-"threads.no_replies" = "No replies"; // TODO
-"threads.1_reply" = "1 reply"; // TODO
-"threads.x_replies" = "%@ replies"; // TODO
+"threads.title" = "主题"; //Translated 2020-04-15
+"threads.no_replies" = "尚无回复"; //Translated 2020-04-15
+"threads.1_reply" = "1 条回复"; //Translated 2020-04-15
+"threads.x_replies" = "%@ 条回复"; //Translated 2020-04-15
