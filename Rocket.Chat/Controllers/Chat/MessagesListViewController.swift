@@ -389,7 +389,9 @@ extension MessagesListViewController: UICollectionViewDelegate {
 }
 
 extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.size.width
 
         guard indexPath.row < data.cells.count else { return CGSize(width: fullWidth, height: 50) }
