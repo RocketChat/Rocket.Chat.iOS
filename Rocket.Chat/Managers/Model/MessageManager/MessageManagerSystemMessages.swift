@@ -28,7 +28,7 @@ extension MessageManager {
             }
 
             message.privateMessage = true
-            realm.add(message, update: true)
+            realm.add(message, update: .all)
         })
     }
 

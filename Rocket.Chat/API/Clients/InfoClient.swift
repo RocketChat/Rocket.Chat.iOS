@@ -31,7 +31,7 @@ struct InfoClient: APIClient {
             case .resource(let res):
                 completion?(res.loginServices, false)
                 realm?.execute({ realm in
-                    realm.add(res.loginServices, update: true)
+                    realm.add(res.loginServices, update: .all)
                 })
             case .error(let error):
                 switch error {
@@ -52,7 +52,7 @@ struct InfoClient: APIClient {
             switch response {
             case .resource(let res):
                 realm?.execute({ realm in
-                    realm.add(res.permissions, update: true)
+                    realm.add(res.permissions, update: .all)
                 })
             case .error(let error):
                 switch error {

@@ -72,7 +72,7 @@ final class MessageURLCell: BaseMessageCell, SizingCell {
 
             if completeRendering {
                 activityIndicator.startAnimating()
-                ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _, _ in
+                ImageManager.loadImage(with: imageURL, into: thumbnail) { [weak self] _ in
                     self?.activityIndicator.stopAnimating()
                 }
             }

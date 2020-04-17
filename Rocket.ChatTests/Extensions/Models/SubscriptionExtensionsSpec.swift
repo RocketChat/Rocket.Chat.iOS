@@ -23,8 +23,8 @@ class SubscriptionExtensionsSpec: XCTestCase {
         let sub2 = Subscription.testInstance("sub2")
 
         realm.execute({ realm in
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
+            realm.add(sub1, update: .all)
+            realm.add(sub2, update: .all)
         })
 
         let objects = realm.objects(Subscription.self).filterBy(name: "sub1")
@@ -54,10 +54,10 @@ class SubscriptionExtensionsSpec: XCTestCase {
         sub3.open = false
 
         realm?.execute({ realm in
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
-            realm.add(sub3, update: true)
-            realm.add(auth, update: true)
+            realm.add(sub1, update: .all)
+            realm.add(sub2, update: .all)
+            realm.add(sub3, update: .all)
+            realm.add(auth, update: .all)
         })
 
         guard let subscriptions = Subscription.all() else {

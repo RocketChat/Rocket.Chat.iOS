@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
-// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name JitsiMeet
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name JitsiMeet
 import AVKit
 import CallKit
 import Foundation
@@ -40,7 +40,7 @@ public class PiPViewCoordinator {
   open func configureExitPiPButton(target: Any, action: ObjectiveC.Selector) -> UIKit.UIButton
   @objc deinit
 }
-@objc final public class JMCallKitProxy : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class JMCallKitProxy : ObjectiveC.NSObject {
   @objc public static var enabled: Swift.Bool {
     @objc get
     @objc set

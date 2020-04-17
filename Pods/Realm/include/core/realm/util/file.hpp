@@ -33,6 +33,7 @@
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER >= 1900 // compiling with at least Visual Studio 2015
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING // switch to <filesystem> once we switch to C++17
 #include <experimental/filesystem>
 namespace std {
     namespace filesystem = std::experimental::filesystem::v1;
@@ -1109,7 +1110,10 @@ inline void File::MapBase::remap(const File& f, AccessMode a, size_t size, int m
 {
     REALM_ASSERT(m_addr);
 
-    m_addr = f.remap(m_addr, m_size, a, size, map_flags);
+    //m_addr = f.remap(m_addr, m_size, a, size, map_flags);
+    // missing sync() here?
+    unmap();
+    map(f, a, size, map_flags);
     m_size = size;
     m_fd = f.m_fd;
 }

@@ -58,7 +58,7 @@ class NotificationManagerSpec: XCTestCase {
         Realm.execute({ (realm) in
             let object = Subscription()
             object.rid = rid
-            realm.add(object, update: true)
+            realm.add(object, update: .all)
         })
 
         var controller: MessagesViewController?
@@ -89,7 +89,7 @@ class NotificationManagerSpec: XCTestCase {
         Realm.execute({ (realm) in
             let object = Subscription()
             object.rid = rid
-            realm.add(object, update: true)
+            realm.add(object, update: .all)
         })
 
         if let subscription = Realm.current?.objects(Subscription.self).filter("rid = '\(rid)'").first {

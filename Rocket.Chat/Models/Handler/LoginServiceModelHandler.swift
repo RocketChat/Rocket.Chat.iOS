@@ -13,12 +13,12 @@ import RealmSwift
 extension LoginService: ModelHandler {
     func add(_ values: JSON, realm: Realm) {
         map(values, realm: realm)
-        realm.add(self, update: true)
+        realm.add(self, update: .all)
     }
 
     func update(_ values: JSON, realm: Realm) {
         map(values, realm: realm)
-        realm.add(self, update: true)
+        realm.add(self, update: .all)
     }
 
     func remove(_ values: JSON, realm: Realm) {

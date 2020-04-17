@@ -41,7 +41,7 @@ class UserSpec: XCTestCase {
         object.emails.append(email)
 
         Realm.execute({ realm in
-            realm.add(object, update: true)
+            realm.add(object, update: .all)
 
             let results = realm.objects(User.self)
             let first = results.first

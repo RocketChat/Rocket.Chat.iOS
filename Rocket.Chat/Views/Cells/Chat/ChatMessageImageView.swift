@@ -88,7 +88,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
         }
 
         activityIndicatorImageView.startAnimating()
-        ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, _ in
+        ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _ in
             self?.activityIndicatorImageView.stopAnimating()
         }
     }

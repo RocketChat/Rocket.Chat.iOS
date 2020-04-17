@@ -39,7 +39,7 @@ final class DirectoryUserCell: UITableViewCell {
 
     func updateUserInformation() {
         if let avatarURL = user?.avatarURL {
-            ImageManager.loadImage(with: avatarURL, into: imageViewAvatar) { _, _ in }
+            ImageManager.loadImage(with: avatarURL, into: imageViewAvatar) { _ in }
         }
 
         labelName.text = user?.name

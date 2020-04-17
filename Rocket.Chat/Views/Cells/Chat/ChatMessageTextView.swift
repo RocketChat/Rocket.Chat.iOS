@@ -72,9 +72,12 @@ final class ChatMessageTextView: UIView {
         }
 
         if let thumbURL = viewModel?.thumbURL {
-            ImageManager.loadImage(with: thumbURL, into: imageViewThumb) { _, error in
-                let width = error != nil ? 0 : ChatMessageTextView.imageViewDefaultWidth
-                updateConstraint(width)
+            ImageManager.loadImage(with: thumbURL, into: imageViewThumb) { result in
+                if case let .success(resp) = result {
+                    updateConstraint(ChatMessageTextView.imageViewDefaultWidth)
+                } else {
+                    updateConstraint(0)
+                }
             }
         } else {
             updateConstraint(0)

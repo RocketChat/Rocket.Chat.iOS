@@ -25,11 +25,11 @@ struct CustomEmojiManager {
 
                     let emoji = List<CustomEmoji>()
                     resource.customEmoji.forEach({ customEmoji in
-                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: true)
+                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: .all)
                         emoji.append(realmCustomEmoji)
                     })
 
-                    realm.add(emoji, update: true)
+                    realm.add(emoji, update: .all)
                 })
 
             case .error(let error):
@@ -58,11 +58,11 @@ struct CustomEmojiManager {
 
                     let emoji = List<CustomEmoji>()
                     resource.customEmoji.forEach({ customEmoji in
-                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: true)
+                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: .all)
                         emoji.append(realmCustomEmoji)
                     })
 
-                    realm.add(emoji, update: true)
+                    realm.add(emoji, update: .all)
                 })
             }
         }

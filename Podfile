@@ -10,11 +10,11 @@ def database_pods
 end
 
 def ui_pods
-  pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'MBProgressHUD'
 end
 
 def diff_pods
-  pod 'DifferenceKit', '~> 1.0'
+  pod 'DifferenceKit'
 end
 
 def jitsi_pods
@@ -46,13 +46,13 @@ def shared_pods
   database_pods
 
   # Network
-  pod 'Nuke', '~> 7.6'
+  pod 'Nuke'
   pod 'Nuke-FLAnimatedImage-Plugin'
   pod 'Starscream', '~> 3'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
-  pod 'OAuthSwift'
+  pod 'OAuthSwift', '1.2.2'
   pod '1PasswordExtension'
 
   # Debugging
@@ -81,7 +81,6 @@ post_install do |installer|
 
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '4.1'
       config.build_settings['ENABLE_BITCODE'] = 'NO'
 
       if config.name == 'Debug'

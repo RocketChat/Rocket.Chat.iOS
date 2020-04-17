@@ -215,7 +215,7 @@ final class AuthTableViewController: BaseTableViewController {
             } // missing implementation for wp-oauth-server
 
             Realm.executeOnMainThread({ realm in
-                realm.add(loginService, update: true)
+                realm.add(loginService, update: .all)
             })
         }
 

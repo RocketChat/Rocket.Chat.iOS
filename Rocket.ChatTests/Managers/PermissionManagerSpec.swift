@@ -49,7 +49,7 @@ class PermissionManagerSpec: XCTestCase {
         permission.roles.append(objectsIn: ["admin", "user"])
 
         realm.execute({ realm in
-            realm.add(permission, update: true)
+            realm.add(permission, update: .all)
         })
 
         let user = User()

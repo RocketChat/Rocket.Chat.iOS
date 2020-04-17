@@ -139,18 +139,24 @@ public:
     virtual void set_client_file_ident(SaltedFileIdent client_file_ident,
                                        bool fix_up_object_ids) = 0;
 
-    /// Stores the SyncProgress progress in the associated Realm file in a way
-    /// that makes it available via get_status() during future synchronization
-    /// sessions. Progress is reported by the server in the DOWNLOAD message.
+    /// Stores the synchronization progress in the associated Realm file in a
+    /// way that makes it available via get_status() during future
+    /// synchronization sessions. Progress is reported by the server in the
+    /// DOWNLOAD message.
     ///
-    /// See struct SyncProgress for a description of \param progress.
+    /// See struct SyncProgress for a description of \a progress.
+    ///
+    /// \param downloadable_bytes If specified, and if the implementation cares
+    /// about byte-level progress, this function updates the persistent record
+    /// of the estimate of the number of remaining bytes to be downloaded.
     ///
     /// \throw InconsistentUseOfCookedHistory If a changeset cooker has been
     /// attached to this history object, and the Realm file does not have a
     /// cooked history, and a cooked history can no longer be added because some
     /// synchronization has already happened. Or if no changeset cooker has been
     /// attached, and the Realm file does have a cooked history.
-    virtual void set_sync_progress(const SyncProgress& progress, VersionInfo&) = 0;
+    virtual void set_sync_progress(const SyncProgress& progress,
+                                   const std::uint_fast64_t* downloadable_bytes, VersionInfo&) = 0;
 
     struct UploadChangeset {
         timestamp_type origin_timestamp;
@@ -235,8 +241,13 @@ public:
     /// deemed valid, this function updates \a version_info to reflect the new
     /// version produced by the transaction.
     ///
-    /// \param progress is the SyncProgress received in the download message.
-    /// Progress will be persisted along with the changesets.
+    /// \param progress The synchronization progress is what was received in the
+    /// DOWNLOAD message along with the specified changesets. The progress will
+    /// be persisted along with the changesets.
+    ///
+    /// \param downloadable_bytes If specified, and if the implementation cares
+    /// about byte-level progress, this function updates the persistent record
+    /// of the estimate of the number of remaining bytes to be downloaded.
     ///
     /// \param num_changesets The number of passed changesets. Must be non-zero.
     ///
@@ -250,6 +261,7 @@ public:
     /// synchronization has already happened. Or if no changeset cooker has been
     /// attached, and the Realm file does have a cooked history.
     virtual bool integrate_server_changesets(const SyncProgress& progress,
+                                             const std::uint_fast64_t* downloadable_bytes,
                                              const RemoteChangeset* changesets,
                                              std::size_t num_changesets, VersionInfo& new_version,
                                              IntegrationError& integration_error, util::Logger&,

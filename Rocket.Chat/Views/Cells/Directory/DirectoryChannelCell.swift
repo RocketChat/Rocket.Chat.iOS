@@ -44,7 +44,7 @@ final class DirectoryChannelCell: UITableViewCell {
         guard let channel = channel else { return }
 
         if let avatarURL = Subscription.avatarURL(for: channel.name) {
-            ImageManager.loadImage(with: avatarURL, into: imageViewAvatar) { _, _ in }
+            ImageManager.loadImage(with: avatarURL, into: imageViewAvatar) { _ in }
         }
 
         if channel.type == .channel {

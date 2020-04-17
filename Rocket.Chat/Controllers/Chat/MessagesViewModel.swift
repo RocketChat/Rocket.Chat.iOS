@@ -638,7 +638,7 @@ final class MessagesViewModel {
                     for message in resource.raw?["messages"].array ?? [] {
                         let managedMessage = Message()
                         managedMessage.map(message, realm: realm)
-                        realm.add(managedMessage, update: true)
+                        realm.add(managedMessage, update: .all)
                     }
                 })
 

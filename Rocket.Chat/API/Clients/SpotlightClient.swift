@@ -66,7 +66,7 @@ struct SpotlightClient: APIClient {
                         }
                     }
 
-                    realm.add(subscriptions, update: true)
+                    realm.add(subscriptions, update: .all)
                 }, completion: {
                     completion(resource.raw, false)
                 })

@@ -75,10 +75,10 @@ class MessageSpec: XCTestCase {
         message.rid = subscription.rid
 
         Realm.execute({ realm in
-            realm.add(auth, update: true)
-            realm.add(subscription, update: true)
-            realm.add(user, update: true)
-            realm.add(message, update: true)
+            realm.add(auth, update: .all)
+            realm.add(subscription, update: .all)
+            realm.add(user, update: .all)
+            realm.add(message, update: .all)
         })
 
         XCTAssertEqual(message.identifier, "message-object-1", "Message relationship with Subscription is OK")
@@ -200,22 +200,22 @@ extension MessageSpec {
 
         Realm.execute({ realm in
             subscription.type = .channel
-            realm.add(subscription, update: true)
-            realm.add(message, update: true)
+            realm.add(subscription, update: .all)
+            realm.add(message, update: .all)
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel quoteString is correct")
 
         Realm.execute({ realm in
             subscription.type = .group
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group quoteString is correct")
 
         Realm.execute({ realm in
             subscription.type = .directMessage
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
@@ -261,8 +261,8 @@ extension MessageSpec {
         message.userIdentifier = userOther.identifier
 
         Realm.execute({ realm in
-            realm.add(subscription, update: true)
-            realm.add(message, update: true)
+            realm.add(subscription, update: .all)
+            realm.add(message, update: .all)
         })
 
         XCTAssertTrue(message.isBroadcastReplyAvailable(realm: realm))

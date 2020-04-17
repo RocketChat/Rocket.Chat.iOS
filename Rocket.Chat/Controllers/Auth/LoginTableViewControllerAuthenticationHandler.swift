@@ -51,7 +51,7 @@ extension LoginTableViewController {
                 if let user = resource.user {
                     let realm = Realm.current
                     Realm.executeOnMainThread(realm: realm) { realm in
-                        realm.add(user, update: true)
+                        realm.add(user, update: .all)
                     }
 
                     if user.username != nil {

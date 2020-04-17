@@ -24,7 +24,7 @@ class BaseImageMessageCell: BaseMessageCell {
 
         if let imageURL = viewModel.imageURL {
             startLoadingBlock()
-            ImageManager.loadImage(with: imageURL, into: imageView) { _, _ in
+            ImageManager.loadImage(with: imageURL, into: imageView) { _ in
                 stopLoadingBlock()
             }
         }

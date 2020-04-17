@@ -41,8 +41,8 @@ class SubscriptionLastMessageSpec: XCTestCase {
         message.userIdentifier = user.identifier
 
         Realm.execute({ realm in
-            realm.add(user, update: true)
-            realm.add(message, update: true)
+            realm.add(user, update: .all)
+            realm.add(message, update: .all)
         })
 
         let lastMessage = Subscription.lastMessageText(lastMessage: message)

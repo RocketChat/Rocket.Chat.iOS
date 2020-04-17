@@ -39,7 +39,7 @@ struct MessageManager {
                 })
 
                 message.temporary = false
-                realm.add(message, update: true)
+                realm.add(message, update: .all)
             })
         }
     }

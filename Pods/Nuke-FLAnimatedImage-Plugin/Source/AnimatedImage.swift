@@ -1,13 +1,13 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2016-2018 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2016-2019 Alexander Grebenyuk (github.com/kean).
 
 import UIKit
 import FLAnimatedImage
 import Nuke
 
 extension FLAnimatedImageView {
-    @objc open override func display(image: Image?) {
+    @objc open override func nuke_display(image: Image?) {
         guard image != nil else {
             self.animatedImage = nil
             self.image = nil

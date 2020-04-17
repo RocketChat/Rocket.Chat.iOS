@@ -29,7 +29,7 @@ class SubscriptionsClientSpec: XCTestCase {
         let auth = Auth.testInstance()
 
         Realm.execute({ realm in
-            realm.add(auth, update: true)
+            realm.add(auth, update: .all)
         })
 
         api.nextResult = JSON([
@@ -71,8 +71,8 @@ class SubscriptionsClientSpec: XCTestCase {
         subscription.auth = auth
 
         Realm.execute({ realm in
-            realm.add(auth, update: true)
-            realm.add(subscription, update: true)
+            realm.add(auth, update: .all)
+            realm.add(subscription, update: .all)
         })
 
         api.nextResult = JSON([
@@ -116,8 +116,8 @@ class SubscriptionsClientSpec: XCTestCase {
         subscription.auth = auth
 
         Realm.execute({ realm in
-            realm.add(auth, update: true)
-            realm.add(subscription, update: true)
+            realm.add(auth, update: .all)
+            realm.add(subscription, update: .all)
         })
 
         api.nextResult = JSON([
@@ -154,8 +154,8 @@ class SubscriptionsClientSpec: XCTestCase {
         subscription.auth = auth
 
         Realm.execute({ realm in
-            realm.add(auth, update: true)
-            realm.add(subscription, update: true)
+            realm.add(auth, update: .all)
+            realm.add(subscription, update: .all)
         })
 
         api.nextResult = JSON([
@@ -192,9 +192,9 @@ class SubscriptionsClientSpec: XCTestCase {
         let user2 = User.testInstance("test-user2")
 
         Realm.execute({ realm in
-            realm.add(user, update: true)
-            realm.add(user2, update: true)
-            realm.add(subscription, update: true)
+            realm.add(user, update: .all)
+            realm.add(user2, update: .all)
+            realm.add(subscription, update: .all)
         })
 
         api.nextResult = JSON([
@@ -244,7 +244,7 @@ class SubscriptionsClientSpec: XCTestCase {
         let subscription = Subscription.testInstance("test-loadHistory")
 
         Realm.execute({ realm in
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         let oldestString = "2016-12-06T17:57:38.635Z"

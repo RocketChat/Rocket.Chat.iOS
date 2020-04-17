@@ -99,7 +99,7 @@ final class MessagesViewController: RocketChatViewController, MessagesListProtoc
                     case .resource(let resource):
                         if let message = resource.message {
                             realm?.execute({ realm in
-                                realm.add(message, update: true)
+                                realm.add(message, update: .all)
                             })
                         }
 
@@ -633,7 +633,7 @@ extension MessagesViewController {
         return .zero
     }
 
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let item = viewModel.item(for: indexPath) else {
             return .zero
         }

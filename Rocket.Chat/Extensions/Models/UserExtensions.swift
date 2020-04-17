@@ -15,7 +15,7 @@ extension User {
         Realm.execute({ (realm) in
             if let identifier = userIdentifier, let user = User.find(withIdentifier: identifier) {
                 user.status = status
-                realm.add(user, update: true)
+                realm.add(user, update: .all)
             }
         })
     }
