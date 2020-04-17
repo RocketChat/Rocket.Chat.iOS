@@ -28,8 +28,8 @@ class SubscriptionManagerQueriesSpec: XCTestCase {
         sub2.rid = "sub2-rid"
 
         Realm.current?.execute({ realm in
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
+            realm.add(sub1, update: .all)
+            realm.add(sub2, update: .all)
         })
 
         XCTAssertEqual(Subscription.find(rid: "sub2-rid"), sub2)
@@ -48,8 +48,8 @@ class SubscriptionManagerQueriesSpec: XCTestCase {
         sub2.type = .channel
 
         Realm.current?.execute({ realm in
-            realm.add(sub1, update: true)
-            realm.add(sub2, update: true)
+            realm.add(sub1, update: .all)
+            realm.add(sub2, update: .all)
         })
 
         XCTAssertEqual(Subscription.find(name: "sub1-name", subscriptionType: [.directMessage]), sub1)
@@ -73,10 +73,10 @@ class SubscriptionManagerQueriesSpec: XCTestCase {
         msg2.userIdentifier = user.identifier
 
         Realm.current?.execute({ realm in
-            realm.add(user, update: true)
-            realm.add(sub, update: true)
-            realm.add(msg1, update: true)
-            realm.add(msg2, update: true)
+            realm.add(user, update: .all)
+            realm.add(sub, update: .all)
+            realm.add(msg1, update: .all)
+            realm.add(msg2, update: .all)
         })
 
         sub.setTemporaryMessagesFailed(user: user)

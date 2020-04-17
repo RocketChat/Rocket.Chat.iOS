@@ -47,8 +47,10 @@
     },
     "chat": {
         "error": "Error: your message was not sent. Reason: {{error}}",
+        "fieldPlaceHolder": "Type your message here",
         "messagebox": "Type a message",
         "messageTo": "Private message to {{recipient}}",
+        "noMessagesMessage": "There are no messages in the meeting yet. Start a conversation here!",
         "nickname": {
             "popover": "Choose a nickname",
             "title": "Enter a nickname to use chat"
@@ -56,6 +58,11 @@
         "privateNotice": "Private message to {{recipient}}",
         "title": "Chat",
         "you": "you"
+    },
+    "chromeExtensionBanner": {
+        "installExtensionText": "Install the extension for Google Calendar and Office 365 integration",
+        "buttonText": "Install Chrome Extension",
+        "dontShowAgain": "Don’t show me this again"
     },
     "connectingOverlay": {
         "joiningRoom": "Connecting you to your meeting..."
@@ -73,9 +80,7 @@
         "FETCH_SESSION_ID": "Obtaining session-id...",
         "GET_SESSION_ID_ERROR": "Get session-id error: {{code}}",
         "GOT_SESSION_ID": "Obtaining session-id... Done",
-        "LOW_BANDWIDTH": "Video for {{displayName}} has been turned off to save bandwidth",
-        "RECONNECTING": "A network problem occurred. Reconnecting...",
-        "USER_CONNECTION_INTERRUPTED": "{{displayName}} is having connectivity issues..."
+        "LOW_BANDWIDTH": "Video for {{displayName}} has been turned off to save bandwidth"
     },
     "connectionindicator": {
         "address": "Address:",
@@ -204,12 +209,18 @@
         "micNotSendingDataTitle": "Your mic is muted by your system settings",
         "micPermissionDeniedError": "You have not granted permission to use your microphone. You can still join the conference but others won't hear you. Use the camera button in the address bar to fix this.",
         "micUnknownError": "Cannot use microphone for an unknown reason.",
+        "muteEveryoneElseDialog": "Once muted, you won't be able to unmute them, but they can unmute themselves at any time.",
+        "muteEveryoneElseTitle": "Mute everyone except {{whom}}?",
+        "muteEveryoneDialog": "Are you sure you want to mute everyone? You won't be able to unmute them, but they can unmute themselves at any time.",
+        "muteEveryoneTitle": "Mute everyone?",
+        "muteEveryoneSelf": "yourself",
+        "muteEveryoneStartMuted": "Everyone starts muted from now on",
         "muteParticipantBody": "You won't be able to unmute them, but they can unmute themselves at any time.",
         "muteParticipantButton": "Mute",
         "muteParticipantDialog": "Are you sure you want to mute this participant? You won't be able to unmute them, but they can unmute themselves at any time.",
         "muteParticipantTitle": "Mute this participant?",
         "Ok": "Ok",
-        "passwordLabel": "$t(lockRoomPasswordUppercase)",
+        "passwordLabel": "The meeting has been locked by a participant. Please enter the $t(lockRoomPassword) to join.",
         "passwordNotSupported": "Setting a meeting $t(lockRoomPassword) is not supported.",
         "passwordNotSupportedTitle": "$t(lockRoomPasswordUppercase) not supported",
         "passwordRequired": "$t(lockRoomPasswordUppercase) required",
@@ -233,6 +244,7 @@
         "reservationError": "Reservation system error",
         "reservationErrorMsg": "Error code: {{code}}, message: {{msg}}",
         "retry": "Retry",
+        "screenSharingAudio": "Share audio",
         "screenSharingFailedToInstall": "Oops! Your screen sharing extension failed to install.",
         "screenSharingFailedToInstallTitle": "Screen sharing extension failed to install",
         "screenSharingFirefoxPermissionDeniedError": "Something went wrong while we were trying to share your screen. Please make sure that you have given us permission to do so. ",
@@ -275,7 +287,7 @@
     "dialOut": {
         "statusMessage": "is now {{status}}"
     },
-    "documentSharing" : {
+    "documentSharing": {
         "title": "Shared Document"
     },
     "feedback": {
@@ -383,7 +395,9 @@
         "signOut": "Sign out",
         "start": "Start a live stream",
         "streamIdHelp": "What's this?",
-        "unavailableTitle": "Live Streaming unavailable"
+        "unavailableTitle": "Live Streaming unavailable",
+        "youtubeTerms": "YouTube terms of services",
+        "googlePrivacyPolicy": "Google Privacy Policy"
     },
     "localRecording": {
         "clientState": {
@@ -446,7 +460,11 @@
         "unmute": "Unmute",
         "newDeviceCameraTitle": "New camera detected",
         "newDeviceAudioTitle": "New audio device detected",
-        "newDeviceAction": "Use"
+        "newDeviceAction": "Use",
+        "OldElectronAPPTitle": "Security vulnerability!",
+        "oldElectronClientDescription1": "You appear to be using an old verion of the Jitsi Meet client which has known security vulnerabilities. Please make sure you update to our ",
+        "oldElectronClientDescription2": "latest build",
+        "oldElectronClientDescription3": " now!"
     },
     "passwordSetRemotely": "set by another participant",
     "passwordDigitsOnly": "Up to {{number}} digits",
@@ -514,6 +532,7 @@
         "followMe": "Everyone follows me",
         "language": "Language",
         "loggedIn": "Logged in as {{name}}",
+        "microphones": "Microphones",
         "moderator": "Moderator",
         "more": "More",
         "name": "Name",
@@ -521,6 +540,7 @@
         "selectAudioOutput": "Audio output",
         "selectCamera": "Camera",
         "selectMic": "Microphone",
+        "speakers": "Speakers",
         "startAudioMuted": "Everyone starts muted",
         "startVideoMuted": "Everyone starts hidden",
         "title": "Settings"
@@ -585,7 +605,9 @@
             "lockRoom": "Toggle meeting password",
             "moreActions": "Toggle more actions menu",
             "moreActionsMenu": "More actions menu",
+            "moreOptions": "Show more options",
             "mute": "Toggle mute audio",
+            "muteEveryone": "Mute everyone",
             "pip": "Toggle Picture-in-Picture mode",
             "privateMessage": "Send private message",
             "profile": "Edit your profile",
@@ -601,6 +623,7 @@
             "speakerStats": "Toggle speaker statistics",
             "tileView": "Toggle tile view",
             "toggleCamera": "Toggle camera",
+            "toggleFilmstrip": "Toggle filmstrip",
             "videomute": "Toggle mute video",
             "videoblur": "Toggle video blur"
         },
@@ -627,7 +650,16 @@
         "logout": "Logout",
         "lowerYourHand": "Lower your hand",
         "moreActions": "More actions",
+        "moreOptions": "More options",
         "mute": "Mute / Unmute",
+        "muteEveryone": "Mute everyone",
+        "noAudioSignalTitle": "There is no input coming from your mic!",
+        "noAudioSignalDesc": "If you did not purposely mute it from system settings or hardware, consider switching the device.",
+        "noAudioSignalDescSuggestion": "If you did not purposely mute it from system settings or hardware, consider switching to the suggested device.",
+        "noAudioSignalDialInDesc": "You can also dial-in using:",
+        "noAudioSignalDialInLinkDesc": "Dial-in numbers",
+        "noisyAudioInputTitle": "Your microphone appears to be noisy!",
+        "noisyAudioInputDesc": "It sounds like your microphone is making noise, please consider muting or changing the device.",
         "openChat": "Open chat",
         "pip": "Enter Picture-in-Picture mode",
         "privateMessage": "Send private message",
@@ -708,12 +740,13 @@
     },
     "videothumbnail": {
         "domute": "Mute",
+        "domuteOthers": "Mute everyone else",
         "flip": "Flip",
         "kick": "Kick out",
         "moderator": "Moderator",
         "mute": "Participant is muted",
         "muted": "Muted",
-        "remoteControl": "Remote control",
+        "remoteControl": "Start / Stop remote control",
         "show": "Show on stage",
         "videomute": "Participant has stopped the camera"
     },
@@ -731,10 +764,11 @@
         "connectCalendarButton": "Connect your calendar",
         "connectCalendarText": "Connect your calendar to view all your meetings in {{app}}. Plus, add {{provider}} meetings to your calendar and start them with one click.",
         "enterRoomTitle": "Start a new meeting",
+        "getHelp": "Get help",
         "roomNameAllowedChars": "Meeting name should not contain any of these characters: ?, &, :, ', \", %, #.",
         "go": "GO",
         "goSmall": "GO",
-        "join": "JOIN",
+        "join": "CREATE / JOIN",
         "info": "Info",
         "privacy": "Privacy",
         "recentList": "Recent",
@@ -746,5 +780,12 @@
         "sendFeedback": "Send feedback",
         "terms": "Terms",
         "title": "Secure, fully featured, and completely free video conferencing"
+    },
+    "lonelyMeetingExperience": {
+        "button": "Invite others",
+        "youAreAlone": "You are the only one in the meeting"
+    },
+    "helpView": {
+        "header": "Help centre"
     }
 }

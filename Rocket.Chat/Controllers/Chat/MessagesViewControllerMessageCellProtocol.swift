@@ -206,7 +206,7 @@ extension MessagesViewController: ChatMessageCellProtocol {
         Realm.executeOnMainThread { realm in
             if let attachment = realm.objects(Attachment.self).filter("identifier = %@", viewModel.differenceIdentifier.description).first {
                 attachment.collapsed = newCollapsedState
-                realm.add(attachment, update: true)
+                realm.add(attachment, update: .all)
             }
         }
     }

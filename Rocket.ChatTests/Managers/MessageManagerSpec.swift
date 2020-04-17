@@ -38,7 +38,7 @@ class MessageManagerSpec: XCTestCase {
             message2.rid = subscription2.rid
             message2.createdAt = Date()
 
-            realm.add([subscription1, subscription2, message1, message2], update: true)
+            realm.add([subscription1, subscription2, message1, message2], update: .all)
 
             let messages1 = subscription1.fetchMessages()
             let messages2 = subscription2.fetchMessages()

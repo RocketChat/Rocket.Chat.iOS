@@ -48,7 +48,7 @@ extension User {
 
                 realm.execute({ realm in
                     let user = user
-                    realm.add(user, update: true)
+                    realm.add(user, update: .all)
                 })
 
                 completion(user)

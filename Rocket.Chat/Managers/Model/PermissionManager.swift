@@ -26,7 +26,7 @@ struct PermissionManager {
 
             currentRealm?.execute({ (realm) in
                 let permission = Permission.getOrCreate(realm: realm, values: object, updates: { _ in })
-                realm.add(permission, update: true)
+                realm.add(permission, update: .all)
             })
         }
     }
@@ -67,7 +67,7 @@ struct PermissionManager {
                     permissions.append(permission)
                 }
 
-                realm.add(permissions, update: true)
+                realm.add(permissions, update: .all)
             })
         }
     }

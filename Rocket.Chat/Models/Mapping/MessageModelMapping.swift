@@ -52,11 +52,11 @@ extension Message: ModelMappeable {
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
                     user.map(values["u"], realm: realm)
-                    realm.add(user, update: true)
+                    realm.add(user, update: .all)
                 } else {
                     let user = User()
                     user.map(values["u"], realm: realm)
-                    realm.add(user, update: true)
+                    realm.add(user, update: .all)
                 }
             }
         }
@@ -89,7 +89,7 @@ extension Message: ModelMappeable {
                     }
 
                     obj.map(attachmentValue, realm: realm)
-                    realm.add(obj, update: true)
+                    realm.add(obj, update: .all)
                     self.attachments.append(obj)
                 } else {
                     let obj = Attachment()

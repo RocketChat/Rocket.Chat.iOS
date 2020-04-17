@@ -105,14 +105,14 @@ extension Realm {
     // This method will add or update a Realm's object.
     static func update(_ object: Object) {
         self.execute({ realm in
-            realm.add(object, update: true)
+            realm.add(object, update: .all)
         })
     }
 
     // This method will add or update a list of some Realm's object.
     static func update<S: Sequence>(_ objects: S) where S.Iterator.Element: Object {
         self.execute({ realm in
-            realm.add(objects, update: true)
+            realm.add(objects, update: .all)
         })
     }
 }

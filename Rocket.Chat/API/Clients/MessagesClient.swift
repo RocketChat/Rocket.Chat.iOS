@@ -28,10 +28,10 @@ struct MessagesClient: APIClient {
                 subscriptionMutable.roomLastMessage = message
                 subscriptionMutable.roomLastMessageDate = message.createdAt
                 subscriptionMutable.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)
-                realm.add(subscriptionMutable, update: true)
+                realm.add(subscriptionMutable, update: .all)
             }
 
-            realm.add(message, update: true)
+            realm.add(message, update: .all)
         }
 
         func updateMessage(json: JSON) {
@@ -48,7 +48,7 @@ struct MessagesClient: APIClient {
                 message.failed = false
                 message.updatedAt = Date()
                 message.map(json, realm: realm)
-                realm.add(message, update: true)
+                realm.add(message, update: .all)
             }
 
             if let unmanagedMessage = message.unmanaged {
@@ -66,7 +66,7 @@ struct MessagesClient: APIClient {
                     message.temporary = false
                     message.failed = true
                     message.updatedAt = Date()
-                    realm.add(message, update: true)
+                    realm.add(message, update: .all)
                 }
 
                 if let unmanagedMessage = message.unmanaged {
@@ -144,7 +144,7 @@ struct MessagesClient: APIClient {
                     // the internalType field after deleting a message
                     Realm.executeOnMainThread({ realm in
                         message.internalType = "rm"
-                        realm.add(message, update: true)
+                        realm.add(message, update: .all)
                     })
                 }
 
@@ -209,7 +209,7 @@ struct MessagesClient: APIClient {
             message.updatedAt = Date()
             message.temporary = true
             message.text = text
-            realm.add(message, update: true)
+            realm.add(message, update: .all)
         }
 
         // send request
@@ -224,7 +224,7 @@ struct MessagesClient: APIClient {
                 }
 
                 Realm.executeOnMainThread(realm: realm) { realm in
-                    realm.add(message, update: true)
+                    realm.add(message, update: .all)
                 }
 
                 if let unmanagedMessage = message.unmanaged {
@@ -276,7 +276,7 @@ struct MessagesClient: APIClient {
         message.updatedAt = Date()
 
         Realm.executeOnMainThread(realm: realm) { realm in
-            realm.add(message, update: true)
+            realm.add(message, update: .all)
         }
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in

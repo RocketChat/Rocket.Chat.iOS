@@ -25,7 +25,7 @@ struct SubscriptionsClient: APIClient {
                 subscription.unread = 0
                 subscription.userMentions = 0
                 subscription.groupMentions = 0
-                realm.add(subscription, update: true)
+                realm.add(subscription, update: .all)
             }
         })
 
@@ -87,8 +87,8 @@ struct SubscriptionsClient: APIClient {
 
                     auth.lastSubscriptionFetchWithLastMessage = Date.serverDate
 
-                    realm.add(subscriptions, update: true)
-                    realm.add(auth, update: true)
+                    realm.add(subscriptions, update: .all)
+                    realm.add(auth, update: .all)
                 }, completion: completion)
             case .error:
                 completion?()
@@ -110,7 +110,7 @@ struct SubscriptionsClient: APIClient {
                 realm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
                     auth.lastRoomFetchWithLastMessage = Date.serverDate
-                    realm.add(auth, update: true)
+                    realm.add(auth, update: .all)
                 })
 
                 let subscriptions = List<Subscription>()
@@ -130,7 +130,7 @@ struct SubscriptionsClient: APIClient {
 
                     resource.list?.forEach(queueRoomValuesForUpdate)
                     resource.update?.forEach(queueRoomValuesForUpdate)
-                    realm.add(subscriptions, update: true)
+                    realm.add(subscriptions, update: .all)
                 }, completion: completion)
             case .error:
                 completion?()
@@ -156,7 +156,7 @@ struct SubscriptionsClient: APIClient {
                             subscriptionCopy.usersRoles.append(role)
                         }
 
-                        currentRealm?.add(subscriptionCopy, update: true)
+                        currentRealm?.add(subscriptionCopy, update: .all)
                     }
 
                     completion?()
@@ -190,7 +190,7 @@ extension SubscriptionsClient {
                 realm?.execute({ realm in
                     resource.members?.forEach { member in
                         let user = User.getOrCreate(realm: realm, values: member, updates: nil)
-                        realm.add(user, update: true)
+                        realm.add(user, update: .all)
 
                         if let unmanaged = user.unmanaged {
                             users.append(unmanaged)
@@ -281,7 +281,7 @@ extension SubscriptionsClient {
 
                 realm?.execute({ realm in
                     let messages = resource.messages(realm: realm) ?? []
-                    realm.add(messages, update: true)
+                    realm.add(messages, update: .all)
 
                     for message in messages where !message.threadMessageId.isEmpty {
                         if Message.find(withIdentifier: message.threadMessageId) != nil {
@@ -303,7 +303,7 @@ extension SubscriptionsClient {
                             case .resource(let resource):
                                 if let message = resource.message {
                                     realm?.execute({ realm in
-                                        realm.add(message, update: true)
+                                        realm.add(message, update: .all)
                                     })
                                 }
                             default:

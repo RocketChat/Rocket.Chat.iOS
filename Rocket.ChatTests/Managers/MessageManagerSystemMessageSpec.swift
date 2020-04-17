@@ -61,7 +61,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase {
         subscription.rid = subscriptionIdentifier
 
         realm.execute({ realm in
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         let messageIdentifier = "systemMessageBasic_2"
@@ -104,7 +104,7 @@ final class MessageManagerSystemMessageSpec: XCTestCase {
         user.username = userIdentifier
 
         realm.execute({ realm in
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         let messageIdentifier = "systemMessageBasic_2"

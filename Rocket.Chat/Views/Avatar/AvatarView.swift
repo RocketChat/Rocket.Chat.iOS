@@ -15,11 +15,11 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] _, error in
-                    guard error == nil else { return }
-
-                    self?.labelInitials.text = nil
-                    self?.backgroundColor = UIColor.clear
+                ImageManager.loadImage(with: imageURL, into: imageView) { [weak self] result in
+                    if case let .success(response) = result {
+                        self?.labelInitials.text = nil
+                        self?.backgroundColor = UIColor.clear
+                    }
                 }
             }
         }

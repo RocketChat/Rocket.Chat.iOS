@@ -371,7 +371,7 @@ extension AppManager {
                             object?.rid = object?.identifier ?? ""
                         })
 
-                        realm.add(subscription, update: true)
+                        realm.add(subscription, update: .all)
                     })
 
                     _ = openRoom()
@@ -408,7 +408,7 @@ extension AppManager {
                             object?.rid = object?.identifier ?? ""
                         })
 
-                        realm.add(subscription, update: true)
+                        realm.add(subscription, update: .all)
                     })
 
                     _ = openRoom()

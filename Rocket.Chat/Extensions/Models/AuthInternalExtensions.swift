@@ -15,7 +15,7 @@ extension Auth {
     func setFirstChannelOpened() {
         Realm.executeOnMainThread({ (realm) in
             self.internalFirstChannelOpened = true
-            realm.add(self, update: true)
+            realm.add(self, update: .all)
         })
     }
 

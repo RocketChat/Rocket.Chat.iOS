@@ -121,7 +121,7 @@ public class RecordAudioView: UIView {
             repeats: true
         )
 
-        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: nil, using: { [weak self] _ in
             self?.setNeedsLayout()
         })
 
@@ -317,7 +317,7 @@ public class SwipeIndicatorView: UIView, ComposerLocalizable {
     private func commonInit() {
         clipsToBounds = true
 
-        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: nil, using: { [weak self] _ in
             self?.setNeedsLayout()
         })
 

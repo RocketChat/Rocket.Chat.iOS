@@ -22,7 +22,7 @@ struct CommandsClient: APIClient {
                         commands.append(command)
                     }
 
-                    realm.add(commands, update: true)
+                    realm.add(commands, update: .all)
                 })
             case .error:
                 break

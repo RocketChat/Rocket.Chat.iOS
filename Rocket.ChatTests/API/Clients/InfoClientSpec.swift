@@ -79,7 +79,7 @@ class InfoClientSpec: XCTestCase {
         ])
 
         Realm.execute({ realm in
-            realm.add(Auth.testInstance(), update: true)
+            realm.add(Auth.testInstance(), update: .all)
         })
 
         client.fetchLoginServices()

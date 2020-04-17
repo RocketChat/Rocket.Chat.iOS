@@ -38,7 +38,7 @@ extension Subscription {
                 if let obj = Subscription.find(withIdentifier: identifier) {
                     obj.rid = rid
                     obj.update(result, realm: realm)
-                    realm.add(obj, update: true)
+                    realm.add(obj, update: .all)
                 }
             }, completion: {
                 if let subscription = Subscription.find(rid: rid) {
@@ -64,13 +64,13 @@ extension Subscription {
                 // before this block is executed.
                 if let existingObject = Subscription.find(rid: rid, realm: realm) {
                     if let obj = Subscription.find(withIdentifier: identifier) {
-                        realm.add(existingObject, update: true)
+                        realm.add(existingObject, update: .all)
                         realm.delete(obj)
                     }
                 } else {
                     if let obj = Subscription.find(withIdentifier: identifier) {
                         obj.rid = rid
-                        realm.add(obj, update: true)
+                        realm.add(obj, update: .all)
                     }
                 }
             }, completion: {
@@ -150,7 +150,7 @@ extension Subscription {
             }).forEach {
                 $0.temporary = false
                 $0.failed = true
-                realm.add($0, update: true)
+                realm.add($0, update: .all)
             }
         }
     }

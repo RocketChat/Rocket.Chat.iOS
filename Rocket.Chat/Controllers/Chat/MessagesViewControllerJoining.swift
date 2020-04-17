@@ -62,7 +62,7 @@ extension MessagesViewController: ChatPreviewModeViewProtocol {
         Realm.executeOnMainThread({ realm in
             subscription.auth = auth
             subscription.open = true
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         self.subscription = subscription

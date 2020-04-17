@@ -149,8 +149,12 @@ class FilesListViewController: BaseViewController {
         }
 
         MBProgressHUD.showAdded(to: view, animated: true)
-        ImagePipeline.shared.loadImage(with: fileURL) { response, _ in
-            open(response?.image)
+        ImagePipeline.shared.loadImage(with: fileURL) { result in
+            if case let .success(response) = result {
+                open(response.image)
+            } else {
+                open(nil)
+            }
         }
     }
 

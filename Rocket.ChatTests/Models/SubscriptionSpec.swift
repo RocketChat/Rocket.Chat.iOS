@@ -51,7 +51,7 @@ class SubscriptionSpec: XCTestCase {
             object.createdAt = Date()
             object.lastSeen = Date()
 
-            realm.add(object, update: true)
+            realm.add(object, update: .all)
 
             let results = realm.objects(Subscription.self)
             let first = results.first
@@ -82,7 +82,7 @@ class SubscriptionSpec: XCTestCase {
             subscription.map(object, realm: realm)
             subscription.auth = auth
 
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
 
             let results = realm.objects(Subscription.self)
             let first = results.first
@@ -258,7 +258,7 @@ class SubscriptionSpec: XCTestCase {
 
         Realm.execute({ (realm) in
             subscription.mapRoom(object, realm: realm)
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         })
 
         XCTAssertEqual(subscription.roomLastMessageDate, Date.dateFromInterval(messageDateInterval))

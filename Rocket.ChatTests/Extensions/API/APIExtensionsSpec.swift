@@ -32,7 +32,7 @@ class APIExtensionsSpec: XCTestCase {
 
         Realm.execute({ realm in
             auth.serverVersion = "invalid"
-            realm.add(auth, update: true)
+            realm.add(auth, update: .all)
         })
 
         api = API.current(realm: realm)

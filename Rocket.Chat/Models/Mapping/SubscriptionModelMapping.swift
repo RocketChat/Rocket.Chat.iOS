@@ -139,11 +139,11 @@ extension Subscription: ModelMappeable {
                 if let realm = realm {
                     if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
                         user.map(values["u"], realm: realm)
-                        realm.add(user, update: true)
+                        realm.add(user, update: .all)
                     } else {
                         let user = User()
                         user.map(values["u"], realm: realm)
-                        realm.add(user, update: true)
+                        realm.add(user, update: .all)
                     }
                 }
             }
@@ -153,7 +153,7 @@ extension Subscription: ModelMappeable {
             message.rid = rid
 
             if !(self.roomLastMessage == message) {
-                realm?.add(message, update: true)
+                realm?.add(message, update: .all)
 
                 self.roomLastMessage = message
                 self.roomLastMessageText = Subscription.lastMessageText(lastMessage: message)

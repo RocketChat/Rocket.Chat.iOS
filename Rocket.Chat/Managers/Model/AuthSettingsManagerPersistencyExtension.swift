@@ -26,7 +26,7 @@ extension AuthSettingsManager {
 
             if let auth = AuthManager.isAuthenticated(realm: realm) {
                 auth.settings = settings
-                realm.add(auth, update: true)
+                realm.add(auth, update: .all)
             }
         })
 

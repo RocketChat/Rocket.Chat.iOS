@@ -251,7 +251,7 @@ final class SignupTableViewController: BaseTableViewController {
             case .resource(let resource):
                 Realm.executeOnMainThread(realm: realm) { realm in
                     if let user = resource.user {
-                        realm.add(user, update: true)
+                        realm.add(user, update: .all)
                     }
                 }
 

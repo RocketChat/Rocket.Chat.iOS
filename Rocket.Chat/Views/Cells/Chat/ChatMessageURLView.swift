@@ -48,10 +48,14 @@ final class ChatMessageURLView: UIView {
         labelURLDescription.text = url.textDescription
 
         if let imageURL = URL(string: url.imageURL ?? "") {
-            ImageManager.loadImage(with: imageURL, into: imageViewURL) { [weak self] _, error in
-                let width = error != nil ? 0 : ChatMessageURLView.imageViewDefaultWidth
-                self?.imageViewURLWidthConstraint.constant = width
-                self?.layoutSubviews()
+            ImageManager.loadImage(with: imageURL, into: imageViewURL) { [weak self] result in
+                if case let .success(resp)  = result {
+                    self?.imageViewURLWidthConstraint.constant = ChatMessageURLView.imageViewDefaultWidth
+                    self?.layoutSubviews()
+                } else {
+                    self?.imageViewURLWidthConstraint.constant = 0
+                    self?.layoutSubviews()
+                }
             }
         } else {
             imageViewURLWidthConstraint.constant = 0

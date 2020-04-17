@@ -83,7 +83,7 @@ struct SubscriptionManager {
                     realm.delete(subscription)
                 } else {
                     subscription.auth = auth
-                    realm.add(subscription, update: true)
+                    realm.add(subscription, update: .all)
                 }
             })
         }
@@ -109,7 +109,7 @@ struct SubscriptionManager {
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
                         subscription.mapRoom(object, realm: realm)
-                        realm.add(subscription, update: true)
+                        realm.add(subscription, update: .all)
                     }
                 }
             })

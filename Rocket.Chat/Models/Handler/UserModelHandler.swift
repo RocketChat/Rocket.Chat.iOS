@@ -14,30 +14,30 @@ import Realm
 extension User: ModelHandler {
     func add(_ values: JSON, realm: Realm) {
         map(values, realm: realm)
-        realm.add(self, update: true)
+        realm.add(self, update: .all)
 
         guard let identifier = self.identifier else { return }
         if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
             subscription.otherUserId = identifier
             subscription.privateOtherUserStatus = privateStatus
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         }
     }
 
     func update(_ values: JSON, realm: Realm) {
         map(values, realm: realm)
-        realm.add(self, update: true)
+        realm.add(self, update: .all)
 
         guard let identifier = self.identifier else { return }
         if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
             subscription.otherUserId = identifier
-            realm.add(subscription, update: true)
+            realm.add(subscription, update: .all)
         }
     }
 
     func remove(_ values: JSON, realm: Realm) {
         self.map(values, realm: realm)
         self.status = .offline
-        realm.add(self, update: true)
+        realm.add(self, update: .all)
     }
 }
